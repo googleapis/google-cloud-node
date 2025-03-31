@@ -27,6 +27,7 @@ import type {
 
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
+import {loggingUtils as logging} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -52,6 +53,8 @@ export class BusinessIdentityServiceClient {
   private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
+  private _log = logging.log('accounts');
+
   auth: gax.GoogleAuth;
   descriptors: Descriptors = {
     page: {},
@@ -86,7 +89,7 @@ export class BusinessIdentityServiceClient {
    *     Developer's Console, e.g. 'grape-spaceship-123'. We will also check
    *     the environment variable GCLOUD_PROJECT for your project ID. If your
    *     app is running in an environment which supports
-   *     {@link https://developers.google.com/identity/protocols/application-default-credentials Application Default Credentials},
+   *     {@link https://cloud.google.com/docs/authentication/application-default-credentials Application Default Credentials},
    *     your project ID will be detected automatically.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
@@ -210,6 +213,9 @@ export class BusinessIdentityServiceClient {
       ),
       autofeedSettingsPathTemplate: new this._gaxModule.PathTemplate(
         'accounts/{account}/autofeedSettings'
+      ),
+      automaticImprovementsPathTemplate: new this._gaxModule.PathTemplate(
+        'accounts/{account}/automaticImprovements'
       ),
       businessIdentityPathTemplate: new this._gaxModule.PathTemplate(
         'accounts/{account}/businessIdentity'
@@ -508,8 +514,39 @@ export class BusinessIdentityServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.getBusinessIdentity(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('getBusinessIdentity request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.shopping.merchant.accounts.v1beta.IBusinessIdentity,
+          | protos.google.shopping.merchant.accounts.v1beta.IGetBusinessIdentityRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getBusinessIdentity response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getBusinessIdentity(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.shopping.merchant.accounts.v1beta.IBusinessIdentity,
+          (
+            | protos.google.shopping.merchant.accounts.v1beta.IGetBusinessIdentityRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getBusinessIdentity response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Updates the business identity of an account. Executing this method requires
@@ -607,12 +644,39 @@ export class BusinessIdentityServiceClient {
       this._gaxModule.routingHeader.fromParams({
         'business_identity.name': request.businessIdentity!.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.updateBusinessIdentity(
-      request,
-      options,
-      callback
-    );
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('updateBusinessIdentity request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.shopping.merchant.accounts.v1beta.IBusinessIdentity,
+          | protos.google.shopping.merchant.accounts.v1beta.IUpdateBusinessIdentityRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('updateBusinessIdentity response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .updateBusinessIdentity(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.shopping.merchant.accounts.v1beta.IBusinessIdentity,
+          (
+            | protos.google.shopping.merchant.accounts.v1beta.IUpdateBusinessIdentityRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('updateBusinessIdentity response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
 
   // --------------------
@@ -739,6 +803,31 @@ export class BusinessIdentityServiceClient {
   matchAccountFromAutofeedSettingsName(autofeedSettingsName: string) {
     return this.pathTemplates.autofeedSettingsPathTemplate.match(
       autofeedSettingsName
+    ).account;
+  }
+
+  /**
+   * Return a fully-qualified automaticImprovements resource name string.
+   *
+   * @param {string} account
+   * @returns {string} Resource name string.
+   */
+  automaticImprovementsPath(account: string) {
+    return this.pathTemplates.automaticImprovementsPathTemplate.render({
+      account: account,
+    });
+  }
+
+  /**
+   * Parse the account from AutomaticImprovements resource.
+   *
+   * @param {string} automaticImprovementsName
+   *   A fully-qualified path representing AutomaticImprovements resource.
+   * @returns {string} A string representing the account.
+   */
+  matchAccountFromAutomaticImprovementsName(automaticImprovementsName: string) {
+    return this.pathTemplates.automaticImprovementsPathTemplate.match(
+      automaticImprovementsName
     ).account;
   }
 
@@ -1105,6 +1194,7 @@ export class BusinessIdentityServiceClient {
   close(): Promise<void> {
     if (this.businessIdentityServiceStub && !this._terminated) {
       return this.businessIdentityServiceStub.then(stub => {
+        this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
       });

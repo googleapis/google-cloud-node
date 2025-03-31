@@ -31,6 +31,7 @@ import type {
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
+import {loggingUtils as logging} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -58,6 +59,8 @@ export class OsConfigZonalServiceClient {
   private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
+  private _log = logging.log('os-config');
+
   auth: gax.GoogleAuth;
   descriptors: Descriptors = {
     page: {},
@@ -93,7 +96,7 @@ export class OsConfigZonalServiceClient {
    *     Developer's Console, e.g. 'grape-spaceship-123'. We will also check
    *     the environment variable GCLOUD_PROJECT for your project ID. If your
    *     app is running in an environment which supports
-   *     {@link https://developers.google.com/identity/protocols/application-default-credentials Application Default Credentials},
+   *     {@link https://cloud.google.com/docs/authentication/application-default-credentials Application Default Credentials},
    *     your project ID will be detected automatically.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
@@ -615,8 +618,39 @@ export class OsConfigZonalServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.getOsPolicyAssignment(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('getOSPolicyAssignment request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.osconfig.v1alpha.IOSPolicyAssignment,
+          | protos.google.cloud.osconfig.v1alpha.IGetOSPolicyAssignmentRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getOSPolicyAssignment response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getOsPolicyAssignment(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.osconfig.v1alpha.IOSPolicyAssignment,
+          (
+            | protos.google.cloud.osconfig.v1alpha.IGetOSPolicyAssignmentRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getOSPolicyAssignment response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Get OS policies compliance data for the specified Compute Engine VM
@@ -721,17 +755,50 @@ export class OsConfigZonalServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this.warn(
       'DEP$OsConfigZonalService-$GetInstanceOSPoliciesCompliance',
       'GetInstanceOSPoliciesCompliance is deprecated and may be removed in a future version.',
       'DeprecationWarning'
     );
-    return this.innerApiCalls.getInstanceOsPoliciesCompliance(
-      request,
-      options,
-      callback
-    );
+    this._log.info('getInstanceOSPoliciesCompliance request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.osconfig.v1alpha.IInstanceOSPoliciesCompliance,
+          | protos.google.cloud.osconfig.v1alpha.IGetInstanceOSPoliciesComplianceRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info(
+            'getInstanceOSPoliciesCompliance response %j',
+            response
+          );
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getInstanceOsPoliciesCompliance(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.osconfig.v1alpha.IInstanceOSPoliciesCompliance,
+          (
+            | protos.google.cloud.osconfig.v1alpha.IGetInstanceOSPoliciesComplianceRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info(
+            'getInstanceOSPoliciesCompliance response %j',
+            response
+          );
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Get the OS policy asssignment report for the specified Compute Engine VM
@@ -835,12 +902,39 @@ export class OsConfigZonalServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.getOsPolicyAssignmentReport(
-      request,
-      options,
-      callback
-    );
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('getOSPolicyAssignmentReport request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.osconfig.v1alpha.IOSPolicyAssignmentReport,
+          | protos.google.cloud.osconfig.v1alpha.IGetOSPolicyAssignmentReportRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getOSPolicyAssignmentReport response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getOsPolicyAssignmentReport(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.osconfig.v1alpha.IOSPolicyAssignmentReport,
+          (
+            | protos.google.cloud.osconfig.v1alpha.IGetOSPolicyAssignmentReportRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getOSPolicyAssignmentReport response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Get inventory data for the specified VM instance. If the VM has no
@@ -940,8 +1034,36 @@ export class OsConfigZonalServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.getInventory(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('getInventory request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.osconfig.v1alpha.IInventory,
+          | protos.google.cloud.osconfig.v1alpha.IGetInventoryRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getInventory response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getInventory(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.osconfig.v1alpha.IInventory,
+          protos.google.cloud.osconfig.v1alpha.IGetInventoryRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getInventory response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Gets the vulnerability report for the specified VM instance. Only VMs with
@@ -1044,12 +1166,39 @@ export class OsConfigZonalServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.getVulnerabilityReport(
-      request,
-      options,
-      callback
-    );
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('getVulnerabilityReport request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.osconfig.v1alpha.IVulnerabilityReport,
+          | protos.google.cloud.osconfig.v1alpha.IGetVulnerabilityReportRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getVulnerabilityReport response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getVulnerabilityReport(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.osconfig.v1alpha.IVulnerabilityReport,
+          (
+            | protos.google.cloud.osconfig.v1alpha.IGetVulnerabilityReportRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getVulnerabilityReport response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
 
   /**
@@ -1171,12 +1320,40 @@ export class OsConfigZonalServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.createOsPolicyAssignment(
-      request,
-      options,
-      callback
-    );
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.osconfig.v1alpha.IOSPolicyAssignment,
+            protos.google.cloud.osconfig.v1alpha.IOSPolicyAssignmentOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('createOSPolicyAssignment response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('createOSPolicyAssignment request %j', request);
+    return this.innerApiCalls
+      .createOsPolicyAssignment(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.osconfig.v1alpha.IOSPolicyAssignment,
+            protos.google.cloud.osconfig.v1alpha.IOSPolicyAssignmentOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createOSPolicyAssignment response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `createOSPolicyAssignment()`.
@@ -1197,6 +1374,7 @@ export class OsConfigZonalServiceClient {
       protos.google.cloud.osconfig.v1alpha.OSPolicyAssignmentOperationMetadata
     >
   > {
+    this._log.info('createOSPolicyAssignment long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -1321,12 +1499,40 @@ export class OsConfigZonalServiceClient {
       this._gaxModule.routingHeader.fromParams({
         'os_policy_assignment.name': request.osPolicyAssignment!.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.updateOsPolicyAssignment(
-      request,
-      options,
-      callback
-    );
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.osconfig.v1alpha.IOSPolicyAssignment,
+            protos.google.cloud.osconfig.v1alpha.IOSPolicyAssignmentOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('updateOSPolicyAssignment response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('updateOSPolicyAssignment request %j', request);
+    return this.innerApiCalls
+      .updateOsPolicyAssignment(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.osconfig.v1alpha.IOSPolicyAssignment,
+            protos.google.cloud.osconfig.v1alpha.IOSPolicyAssignmentOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('updateOSPolicyAssignment response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `updateOSPolicyAssignment()`.
@@ -1347,6 +1553,7 @@ export class OsConfigZonalServiceClient {
       protos.google.cloud.osconfig.v1alpha.OSPolicyAssignmentOperationMetadata
     >
   > {
+    this._log.info('updateOSPolicyAssignment long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -1472,12 +1679,40 @@ export class OsConfigZonalServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.deleteOsPolicyAssignment(
-      request,
-      options,
-      callback
-    );
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.osconfig.v1alpha.IOSPolicyAssignmentOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('deleteOSPolicyAssignment response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('deleteOSPolicyAssignment request %j', request);
+    return this.innerApiCalls
+      .deleteOsPolicyAssignment(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.osconfig.v1alpha.IOSPolicyAssignmentOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteOSPolicyAssignment response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `deleteOSPolicyAssignment()`.
@@ -1498,6 +1733,7 @@ export class OsConfigZonalServiceClient {
       protos.google.cloud.osconfig.v1alpha.OSPolicyAssignmentOperationMetadata
     >
   > {
+    this._log.info('deleteOSPolicyAssignment long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -1611,16 +1847,40 @@ export class OsConfigZonalServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.listOsPolicyAssignments(
-      request,
-      options,
-      callback
-    );
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.osconfig.v1alpha.IListOSPolicyAssignmentsRequest,
+          | protos.google.cloud.osconfig.v1alpha.IListOSPolicyAssignmentsResponse
+          | null
+          | undefined,
+          protos.google.cloud.osconfig.v1alpha.IOSPolicyAssignment
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listOSPolicyAssignments values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listOSPolicyAssignments request %j', request);
+    return this.innerApiCalls
+      .listOsPolicyAssignments(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.osconfig.v1alpha.IOSPolicyAssignment[],
+          protos.google.cloud.osconfig.v1alpha.IListOSPolicyAssignmentsRequest | null,
+          protos.google.cloud.osconfig.v1alpha.IListOSPolicyAssignmentsResponse,
+        ]) => {
+          this._log.info('listOSPolicyAssignments values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listOSPolicyAssignments`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
@@ -1656,7 +1916,10 @@ export class OsConfigZonalServiceClient {
       });
     const defaultCallSettings = this._defaults['listOsPolicyAssignments'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listOSPolicyAssignments stream %j', request);
     return this.descriptors.page.listOSPolicyAssignments.createStream(
       this.innerApiCalls.listOsPolicyAssignments as GaxCall,
       request,
@@ -1704,7 +1967,10 @@ export class OsConfigZonalServiceClient {
       });
     const defaultCallSettings = this._defaults['listOsPolicyAssignments'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listOSPolicyAssignments iterate %j', request);
     return this.descriptors.page.listOSPolicyAssignments.asyncIterate(
       this.innerApiCalls['listOsPolicyAssignments'] as GaxCall,
       request as {},
@@ -1807,16 +2073,40 @@ export class OsConfigZonalServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.listOsPolicyAssignmentRevisions(
-      request,
-      options,
-      callback
-    );
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.osconfig.v1alpha.IListOSPolicyAssignmentRevisionsRequest,
+          | protos.google.cloud.osconfig.v1alpha.IListOSPolicyAssignmentRevisionsResponse
+          | null
+          | undefined,
+          protos.google.cloud.osconfig.v1alpha.IOSPolicyAssignment
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listOSPolicyAssignmentRevisions values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listOSPolicyAssignmentRevisions request %j', request);
+    return this.innerApiCalls
+      .listOsPolicyAssignmentRevisions(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.osconfig.v1alpha.IOSPolicyAssignment[],
+          protos.google.cloud.osconfig.v1alpha.IListOSPolicyAssignmentRevisionsRequest | null,
+          protos.google.cloud.osconfig.v1alpha.IListOSPolicyAssignmentRevisionsResponse,
+        ]) => {
+          this._log.info('listOSPolicyAssignmentRevisions values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listOSPolicyAssignmentRevisions`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
@@ -1853,7 +2143,10 @@ export class OsConfigZonalServiceClient {
     const defaultCallSettings =
       this._defaults['listOsPolicyAssignmentRevisions'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listOSPolicyAssignmentRevisions stream %j', request);
     return this.descriptors.page.listOSPolicyAssignmentRevisions.createStream(
       this.innerApiCalls.listOsPolicyAssignmentRevisions as GaxCall,
       request,
@@ -1902,7 +2195,10 @@ export class OsConfigZonalServiceClient {
     const defaultCallSettings =
       this._defaults['listOsPolicyAssignmentRevisions'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listOSPolicyAssignmentRevisions iterate %j', request);
     return this.descriptors.page.listOSPolicyAssignmentRevisions.asyncIterate(
       this.innerApiCalls['listOsPolicyAssignmentRevisions'] as GaxCall,
       request as {},
@@ -2015,21 +2311,48 @@ export class OsConfigZonalServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this.warn(
       'DEP$OsConfigZonalService-$ListInstanceOSPoliciesCompliances',
       'ListInstanceOSPoliciesCompliances is deprecated and may be removed in a future version.',
       'DeprecationWarning'
     );
-    return this.innerApiCalls.listInstanceOsPoliciesCompliances(
-      request,
-      options,
-      callback
-    );
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.osconfig.v1alpha.IListInstanceOSPoliciesCompliancesRequest,
+          | protos.google.cloud.osconfig.v1alpha.IListInstanceOSPoliciesCompliancesResponse
+          | null
+          | undefined,
+          protos.google.cloud.osconfig.v1alpha.IInstanceOSPoliciesCompliance
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listInstanceOSPoliciesCompliances values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listInstanceOSPoliciesCompliances request %j', request);
+    return this.innerApiCalls
+      .listInstanceOsPoliciesCompliances(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.osconfig.v1alpha.IInstanceOSPoliciesCompliance[],
+          protos.google.cloud.osconfig.v1alpha.IListInstanceOSPoliciesCompliancesRequest | null,
+          protos.google.cloud.osconfig.v1alpha.IListInstanceOSPoliciesCompliancesResponse,
+        ]) => {
+          this._log.info(
+            'listInstanceOSPoliciesCompliances values %j',
+            response
+          );
+          return [response, input, output];
+        }
+      );
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listInstanceOSPoliciesCompliances`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
@@ -2075,12 +2398,15 @@ export class OsConfigZonalServiceClient {
     const defaultCallSettings =
       this._defaults['listInstanceOsPoliciesCompliances'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this.warn(
       'DEP$OsConfigZonalService-$ListInstanceOSPoliciesCompliances',
       'ListInstanceOSPoliciesCompliances is deprecated and may be removed in a future version.',
       'DeprecationWarning'
     );
+    this._log.info('listInstanceOSPoliciesCompliances stream %j', request);
     return this.descriptors.page.listInstanceOSPoliciesCompliances.createStream(
       this.innerApiCalls.listInstanceOsPoliciesCompliances as GaxCall,
       request,
@@ -2138,12 +2464,15 @@ export class OsConfigZonalServiceClient {
     const defaultCallSettings =
       this._defaults['listInstanceOsPoliciesCompliances'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this.warn(
       'DEP$OsConfigZonalService-$ListInstanceOSPoliciesCompliances',
       'ListInstanceOSPoliciesCompliances is deprecated and may be removed in a future version.',
       'DeprecationWarning'
     );
+    this._log.info('listInstanceOSPoliciesCompliances iterate %j', request);
     return this.descriptors.page.listInstanceOSPoliciesCompliances.asyncIterate(
       this.innerApiCalls['listInstanceOsPoliciesCompliances'] as GaxCall,
       request as {},
@@ -2270,16 +2599,40 @@ export class OsConfigZonalServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.listOsPolicyAssignmentReports(
-      request,
-      options,
-      callback
-    );
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.osconfig.v1alpha.IListOSPolicyAssignmentReportsRequest,
+          | protos.google.cloud.osconfig.v1alpha.IListOSPolicyAssignmentReportsResponse
+          | null
+          | undefined,
+          protos.google.cloud.osconfig.v1alpha.IOSPolicyAssignmentReport
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listOSPolicyAssignmentReports values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listOSPolicyAssignmentReports request %j', request);
+    return this.innerApiCalls
+      .listOsPolicyAssignmentReports(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.osconfig.v1alpha.IOSPolicyAssignmentReport[],
+          protos.google.cloud.osconfig.v1alpha.IListOSPolicyAssignmentReportsRequest | null,
+          protos.google.cloud.osconfig.v1alpha.IListOSPolicyAssignmentReportsResponse,
+        ]) => {
+          this._log.info('listOSPolicyAssignmentReports values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listOSPolicyAssignmentReports`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
@@ -2338,7 +2691,10 @@ export class OsConfigZonalServiceClient {
       });
     const defaultCallSettings = this._defaults['listOsPolicyAssignmentReports'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listOSPolicyAssignmentReports stream %j', request);
     return this.descriptors.page.listOSPolicyAssignmentReports.createStream(
       this.innerApiCalls.listOsPolicyAssignmentReports as GaxCall,
       request,
@@ -2409,7 +2765,10 @@ export class OsConfigZonalServiceClient {
       });
     const defaultCallSettings = this._defaults['listOsPolicyAssignmentReports'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listOSPolicyAssignmentReports iterate %j', request);
     return this.descriptors.page.listOSPolicyAssignmentReports.asyncIterate(
       this.innerApiCalls['listOsPolicyAssignmentReports'] as GaxCall,
       request as {},
@@ -2522,12 +2881,40 @@ export class OsConfigZonalServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.listInventories(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.osconfig.v1alpha.IListInventoriesRequest,
+          | protos.google.cloud.osconfig.v1alpha.IListInventoriesResponse
+          | null
+          | undefined,
+          protos.google.cloud.osconfig.v1alpha.IInventory
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listInventories values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listInventories request %j', request);
+    return this.innerApiCalls
+      .listInventories(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.osconfig.v1alpha.IInventory[],
+          protos.google.cloud.osconfig.v1alpha.IListInventoriesRequest | null,
+          protos.google.cloud.osconfig.v1alpha.IListInventoriesResponse,
+        ]) => {
+          this._log.info('listInventories values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listInventories`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
@@ -2573,7 +2960,10 @@ export class OsConfigZonalServiceClient {
       });
     const defaultCallSettings = this._defaults['listInventories'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listInventories stream %j', request);
     return this.descriptors.page.listInventories.createStream(
       this.innerApiCalls.listInventories as GaxCall,
       request,
@@ -2631,7 +3021,10 @@ export class OsConfigZonalServiceClient {
       });
     const defaultCallSettings = this._defaults['listInventories'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listInventories iterate %j', request);
     return this.descriptors.page.listInventories.asyncIterate(
       this.innerApiCalls['listInventories'] as GaxCall,
       request as {},
@@ -2741,16 +3134,40 @@ export class OsConfigZonalServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.listVulnerabilityReports(
-      request,
-      options,
-      callback
-    );
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.osconfig.v1alpha.IListVulnerabilityReportsRequest,
+          | protos.google.cloud.osconfig.v1alpha.IListVulnerabilityReportsResponse
+          | null
+          | undefined,
+          protos.google.cloud.osconfig.v1alpha.IVulnerabilityReport
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listVulnerabilityReports values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listVulnerabilityReports request %j', request);
+    return this.innerApiCalls
+      .listVulnerabilityReports(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.osconfig.v1alpha.IVulnerabilityReport[],
+          protos.google.cloud.osconfig.v1alpha.IListVulnerabilityReportsRequest | null,
+          protos.google.cloud.osconfig.v1alpha.IListVulnerabilityReportsResponse,
+        ]) => {
+          this._log.info('listVulnerabilityReports values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listVulnerabilityReports`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
@@ -2793,7 +3210,10 @@ export class OsConfigZonalServiceClient {
       });
     const defaultCallSettings = this._defaults['listVulnerabilityReports'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listVulnerabilityReports stream %j', request);
     return this.descriptors.page.listVulnerabilityReports.createStream(
       this.innerApiCalls.listVulnerabilityReports as GaxCall,
       request,
@@ -2848,7 +3268,10 @@ export class OsConfigZonalServiceClient {
       });
     const defaultCallSettings = this._defaults['listVulnerabilityReports'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listVulnerabilityReports iterate %j', request);
     return this.descriptors.page.listVulnerabilityReports.asyncIterate(
       this.innerApiCalls['listVulnerabilityReports'] as GaxCall,
       request as {},
@@ -3184,6 +3607,7 @@ export class OsConfigZonalServiceClient {
   close(): Promise<void> {
     if (this.osConfigZonalServiceStub && !this._terminated) {
       return this.osConfigZonalServiceStub.then(stub => {
+        this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
         this.operationsClient.close();

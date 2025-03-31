@@ -29,6 +29,7 @@ import type {
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
+import {loggingUtils as logging} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -53,6 +54,8 @@ export class RoleServiceClient {
   private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
+  private _log = logging.log('admanager');
+
   auth: gax.GoogleAuth;
   descriptors: Descriptors = {
     page: {},
@@ -87,7 +90,7 @@ export class RoleServiceClient {
    *     Developer's Console, e.g. 'grape-spaceship-123'. We will also check
    *     the environment variable GCLOUD_PROJECT for your project ID. If your
    *     app is running in an environment which supports
-   *     {@link https://developers.google.com/identity/protocols/application-default-credentials Application Default Credentials},
+   *     {@link https://cloud.google.com/docs/authentication/application-default-credentials Application Default Credentials},
    *     your project ID will be detected automatically.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
@@ -509,8 +512,34 @@ export class RoleServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.getRole(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('getRole request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.ads.admanager.v1.IRole,
+          protos.google.ads.admanager.v1.IGetRoleRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getRole response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getRole(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.ads.admanager.v1.IRole,
+          protos.google.ads.admanager.v1.IGetRoleRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getRole response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
 
   /**
@@ -616,8 +645,34 @@ export class RoleServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.listRoles(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.ads.admanager.v1.IListRolesRequest,
+          protos.google.ads.admanager.v1.IListRolesResponse | null | undefined,
+          protos.google.ads.admanager.v1.IRole
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listRoles values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listRoles request %j', request);
+    return this.innerApiCalls
+      .listRoles(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.ads.admanager.v1.IRole[],
+          protos.google.ads.admanager.v1.IListRolesRequest | null,
+          protos.google.ads.admanager.v1.IListRolesResponse,
+        ]) => {
+          this._log.info('listRoles values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -672,7 +727,10 @@ export class RoleServiceClient {
       });
     const defaultCallSettings = this._defaults['listRoles'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listRoles stream %j', request);
     return this.descriptors.page.listRoles.createStream(
       this.innerApiCalls.listRoles as GaxCall,
       request,
@@ -735,7 +793,10 @@ export class RoleServiceClient {
       });
     const defaultCallSettings = this._defaults['listRoles'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listRoles iterate %j', request);
     return this.descriptors.page.listRoles.asyncIterate(
       this.innerApiCalls['listRoles'] as GaxCall,
       request as {},
@@ -1372,6 +1433,7 @@ export class RoleServiceClient {
   close(): Promise<void> {
     if (this.roleServiceStub && !this._terminated) {
       return this.roleServiceStub.then(stub => {
+        this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
       });

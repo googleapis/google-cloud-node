@@ -236,6 +236,7 @@
   * [Instances.list_referrers](#instances.list_referrers)
   * [Instances.perform_maintenance](#instances.perform_maintenance)
   * [Instances.remove_resource_policies](#instances.remove_resource_policies)
+  * [Instances.report_host_as_faulty](#instances.report_host_as_faulty)
   * [Instances.reset](#instances.reset)
   * [Instances.resume](#instances.resume)
   * [Instances.send_diagnostic_interrupt](#instances.send_diagnostic_interrupt)
@@ -335,6 +336,7 @@
   * [Network_endpoint_groups.list_network_endpoints](#network_endpoint_groups.list_network_endpoints)
   * [Network_endpoint_groups.test_iam_permissions](#network_endpoint_groups.test_iam_permissions)
   * [Network_firewall_policies.add_association](#network_firewall_policies.add_association)
+  * [Network_firewall_policies.add_packet_mirroring_rule](#network_firewall_policies.add_packet_mirroring_rule)
   * [Network_firewall_policies.add_rule](#network_firewall_policies.add_rule)
   * [Network_firewall_policies.aggregated_list](#network_firewall_policies.aggregated_list)
   * [Network_firewall_policies.clone_rules](#network_firewall_policies.clone_rules)
@@ -342,12 +344,15 @@
   * [Network_firewall_policies.get](#network_firewall_policies.get)
   * [Network_firewall_policies.get_association](#network_firewall_policies.get_association)
   * [Network_firewall_policies.get_iam_policy](#network_firewall_policies.get_iam_policy)
+  * [Network_firewall_policies.get_packet_mirroring_rule](#network_firewall_policies.get_packet_mirroring_rule)
   * [Network_firewall_policies.get_rule](#network_firewall_policies.get_rule)
   * [Network_firewall_policies.insert](#network_firewall_policies.insert)
   * [Network_firewall_policies.list](#network_firewall_policies.list)
   * [Network_firewall_policies.patch](#network_firewall_policies.patch)
+  * [Network_firewall_policies.patch_packet_mirroring_rule](#network_firewall_policies.patch_packet_mirroring_rule)
   * [Network_firewall_policies.patch_rule](#network_firewall_policies.patch_rule)
   * [Network_firewall_policies.remove_association](#network_firewall_policies.remove_association)
+  * [Network_firewall_policies.remove_packet_mirroring_rule](#network_firewall_policies.remove_packet_mirroring_rule)
   * [Network_firewall_policies.remove_rule](#network_firewall_policies.remove_rule)
   * [Network_firewall_policies.set_iam_policy](#network_firewall_policies.set_iam_policy)
   * [Network_firewall_policies.test_iam_permissions](#network_firewall_policies.test_iam_permissions)
@@ -618,15 +623,21 @@
   * [Resource_policies.test_iam_permissions](#resource_policies.test_iam_permissions)
   * [Routers.aggregated_list](#routers.aggregated_list)
   * [Routers.delete](#routers.delete)
+  * [Routers.delete_route_policy](#routers.delete_route_policy)
   * [Routers.get](#routers.get)
   * [Routers.get_nat_ip_info](#routers.get_nat_ip_info)
   * [Routers.get_nat_mapping_info](#routers.get_nat_mapping_info)
+  * [Routers.get_route_policy](#routers.get_route_policy)
   * [Routers.get_router_status](#routers.get_router_status)
   * [Routers.insert](#routers.insert)
   * [Routers.list](#routers.list)
+  * [Routers.list_bgp_routes](#routers.list_bgp_routes)
+  * [Routers.list_route_policies](#routers.list_route_policies)
   * [Routers.patch](#routers.patch)
+  * [Routers.patch_route_policy](#routers.patch_route_policy)
   * [Routers.preview](#routers.preview)
   * [Routers.update](#routers.update)
+  * [Routers.update_route_policy](#routers.update_route_policy)
   * [Routes.delete](#routes.delete)
   * [Routes.get](#routes.get)
   * [Routes.insert](#routes.insert)
@@ -4622,6 +4633,23 @@ __Usage:__
 
 
 
+### Instances.report_host_as_faulty
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1/instances.report_host_as_faulty.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-compute/samples/generated/v1/instances.report_host_as_faulty.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-compute/samples/generated/v1/instances.report_host_as_faulty.js`
+
+
+-----
+
+
+
+
 ### Instances.reset
 
 View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1/instances.reset.js).
@@ -6305,6 +6333,23 @@ __Usage:__
 
 
 
+### Network_firewall_policies.add_packet_mirroring_rule
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1/network_firewall_policies.add_packet_mirroring_rule.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-compute/samples/generated/v1/network_firewall_policies.add_packet_mirroring_rule.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-compute/samples/generated/v1/network_firewall_policies.add_packet_mirroring_rule.js`
+
+
+-----
+
+
+
+
 ### Network_firewall_policies.add_rule
 
 View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1/network_firewall_policies.add_rule.js).
@@ -6424,6 +6469,23 @@ __Usage:__
 
 
 
+### Network_firewall_policies.get_packet_mirroring_rule
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1/network_firewall_policies.get_packet_mirroring_rule.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-compute/samples/generated/v1/network_firewall_policies.get_packet_mirroring_rule.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-compute/samples/generated/v1/network_firewall_policies.get_packet_mirroring_rule.js`
+
+
+-----
+
+
+
+
 ### Network_firewall_policies.get_rule
 
 View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1/network_firewall_policies.get_rule.js).
@@ -6492,6 +6554,23 @@ __Usage:__
 
 
 
+### Network_firewall_policies.patch_packet_mirroring_rule
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1/network_firewall_policies.patch_packet_mirroring_rule.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-compute/samples/generated/v1/network_firewall_policies.patch_packet_mirroring_rule.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-compute/samples/generated/v1/network_firewall_policies.patch_packet_mirroring_rule.js`
+
+
+-----
+
+
+
+
 ### Network_firewall_policies.patch_rule
 
 View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1/network_firewall_policies.patch_rule.js).
@@ -6519,6 +6598,23 @@ __Usage:__
 
 
 `node packages/google-cloud-compute/samples/generated/v1/network_firewall_policies.remove_association.js`
+
+
+-----
+
+
+
+
+### Network_firewall_policies.remove_packet_mirroring_rule
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1/network_firewall_policies.remove_packet_mirroring_rule.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-compute/samples/generated/v1/network_firewall_policies.remove_packet_mirroring_rule.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-compute/samples/generated/v1/network_firewall_policies.remove_packet_mirroring_rule.js`
 
 
 -----
@@ -11116,6 +11212,23 @@ __Usage:__
 
 
 
+### Routers.delete_route_policy
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1/routers.delete_route_policy.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-compute/samples/generated/v1/routers.delete_route_policy.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-compute/samples/generated/v1/routers.delete_route_policy.js`
+
+
+-----
+
+
+
+
 ### Routers.get
 
 View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1/routers.get.js).
@@ -11160,6 +11273,23 @@ __Usage:__
 
 
 `node packages/google-cloud-compute/samples/generated/v1/routers.get_nat_mapping_info.js`
+
+
+-----
+
+
+
+
+### Routers.get_route_policy
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1/routers.get_route_policy.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-compute/samples/generated/v1/routers.get_route_policy.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-compute/samples/generated/v1/routers.get_route_policy.js`
 
 
 -----
@@ -11218,6 +11348,40 @@ __Usage:__
 
 
 
+### Routers.list_bgp_routes
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1/routers.list_bgp_routes.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-compute/samples/generated/v1/routers.list_bgp_routes.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-compute/samples/generated/v1/routers.list_bgp_routes.js`
+
+
+-----
+
+
+
+
+### Routers.list_route_policies
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1/routers.list_route_policies.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-compute/samples/generated/v1/routers.list_route_policies.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-compute/samples/generated/v1/routers.list_route_policies.js`
+
+
+-----
+
+
+
+
 ### Routers.patch
 
 View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1/routers.patch.js).
@@ -11228,6 +11392,23 @@ __Usage:__
 
 
 `node packages/google-cloud-compute/samples/generated/v1/routers.patch.js`
+
+
+-----
+
+
+
+
+### Routers.patch_route_policy
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1/routers.patch_route_policy.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-compute/samples/generated/v1/routers.patch_route_policy.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-compute/samples/generated/v1/routers.patch_route_policy.js`
 
 
 -----
@@ -11262,6 +11443,23 @@ __Usage:__
 
 
 `node packages/google-cloud-compute/samples/generated/v1/routers.update.js`
+
+
+-----
+
+
+
+
+### Routers.update_route_policy
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1/routers.update_route_policy.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-compute/samples/generated/v1/routers.update_route_policy.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-compute/samples/generated/v1/routers.update_route_policy.js`
 
 
 -----

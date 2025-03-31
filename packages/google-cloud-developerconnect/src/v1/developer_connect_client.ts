@@ -33,6 +33,7 @@ import type {
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
+import {loggingUtils as logging} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -57,6 +58,8 @@ export class DeveloperConnectClient {
   private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
+  private _log = logging.log('developerconnect');
+
   auth: gax.GoogleAuth;
   descriptors: Descriptors = {
     page: {},
@@ -93,7 +96,7 @@ export class DeveloperConnectClient {
    *     Developer's Console, e.g. 'grape-spaceship-123'. We will also check
    *     the environment variable GCLOUD_PROJECT for your project ID. If your
    *     app is running in an environment which supports
-   *     {@link https://developers.google.com/identity/protocols/application-default-credentials Application Default Credentials},
+   *     {@link https://cloud.google.com/docs/authentication/application-default-credentials Application Default Credentials},
    *     your project ID will be detected automatically.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
@@ -635,8 +638,39 @@ export class DeveloperConnectClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.getConnection(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('getConnection request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.developerconnect.v1.IConnection,
+          | protos.google.cloud.developerconnect.v1.IGetConnectionRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getConnection response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getConnection(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.developerconnect.v1.IConnection,
+          (
+            | protos.google.cloud.developerconnect.v1.IGetConnectionRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getConnection response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Gets details of a single GitRepositoryLink.
@@ -731,8 +765,39 @@ export class DeveloperConnectClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.getGitRepositoryLink(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('getGitRepositoryLink request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.developerconnect.v1.IGitRepositoryLink,
+          | protos.google.cloud.developerconnect.v1.IGetGitRepositoryLinkRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getGitRepositoryLink response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getGitRepositoryLink(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.developerconnect.v1.IGitRepositoryLink,
+          (
+            | protos.google.cloud.developerconnect.v1.IGetGitRepositoryLinkRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getGitRepositoryLink response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Fetches read/write token of a given gitRepositoryLink.
@@ -828,8 +893,39 @@ export class DeveloperConnectClient {
       this._gaxModule.routingHeader.fromParams({
         git_repository_link: request.gitRepositoryLink ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.fetchReadWriteToken(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('fetchReadWriteToken request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.developerconnect.v1.IFetchReadWriteTokenResponse,
+          | protos.google.cloud.developerconnect.v1.IFetchReadWriteTokenRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('fetchReadWriteToken response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .fetchReadWriteToken(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.developerconnect.v1.IFetchReadWriteTokenResponse,
+          (
+            | protos.google.cloud.developerconnect.v1.IFetchReadWriteTokenRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('fetchReadWriteToken response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Fetches read token of a given gitRepositoryLink.
@@ -925,8 +1021,39 @@ export class DeveloperConnectClient {
       this._gaxModule.routingHeader.fromParams({
         git_repository_link: request.gitRepositoryLink ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.fetchReadToken(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('fetchReadToken request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.developerconnect.v1.IFetchReadTokenResponse,
+          | protos.google.cloud.developerconnect.v1.IFetchReadTokenRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('fetchReadToken response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .fetchReadToken(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.developerconnect.v1.IFetchReadTokenResponse,
+          (
+            | protos.google.cloud.developerconnect.v1.IFetchReadTokenRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('fetchReadToken response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * FetchGitHubInstallations returns the list of GitHub Installations that
@@ -1025,12 +1152,39 @@ export class DeveloperConnectClient {
       this._gaxModule.routingHeader.fromParams({
         connection: request.connection ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.fetchGitHubInstallations(
-      request,
-      options,
-      callback
-    );
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('fetchGitHubInstallations request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.developerconnect.v1.IFetchGitHubInstallationsResponse,
+          | protos.google.cloud.developerconnect.v1.IFetchGitHubInstallationsRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('fetchGitHubInstallations response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .fetchGitHubInstallations(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.developerconnect.v1.IFetchGitHubInstallationsResponse,
+          (
+            | protos.google.cloud.developerconnect.v1.IFetchGitHubInstallationsRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('fetchGitHubInstallations response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
 
   /**
@@ -1154,8 +1308,40 @@ export class DeveloperConnectClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.createConnection(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.developerconnect.v1.IConnection,
+            protos.google.cloud.developerconnect.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('createConnection response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('createConnection request %j', request);
+    return this.innerApiCalls
+      .createConnection(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.developerconnect.v1.IConnection,
+            protos.google.cloud.developerconnect.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createConnection response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `createConnection()`.
@@ -1176,6 +1362,7 @@ export class DeveloperConnectClient {
       protos.google.cloud.developerconnect.v1.OperationMetadata
     >
   > {
+    this._log.info('createConnection long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -1318,8 +1505,40 @@ export class DeveloperConnectClient {
       this._gaxModule.routingHeader.fromParams({
         'connection.name': request.connection!.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.updateConnection(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.developerconnect.v1.IConnection,
+            protos.google.cloud.developerconnect.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('updateConnection response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('updateConnection request %j', request);
+    return this.innerApiCalls
+      .updateConnection(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.developerconnect.v1.IConnection,
+            protos.google.cloud.developerconnect.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('updateConnection response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `updateConnection()`.
@@ -1340,6 +1559,7 @@ export class DeveloperConnectClient {
       protos.google.cloud.developerconnect.v1.OperationMetadata
     >
   > {
+    this._log.info('updateConnection long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -1474,8 +1694,40 @@ export class DeveloperConnectClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.deleteConnection(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.developerconnect.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('deleteConnection response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('deleteConnection request %j', request);
+    return this.innerApiCalls
+      .deleteConnection(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.developerconnect.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteConnection response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `deleteConnection()`.
@@ -1496,6 +1748,7 @@ export class DeveloperConnectClient {
       protos.google.cloud.developerconnect.v1.OperationMetadata
     >
   > {
+    this._log.info('deleteConnection long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -1637,12 +1890,40 @@ export class DeveloperConnectClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.createGitRepositoryLink(
-      request,
-      options,
-      callback
-    );
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.developerconnect.v1.IGitRepositoryLink,
+            protos.google.cloud.developerconnect.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('createGitRepositoryLink response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('createGitRepositoryLink request %j', request);
+    return this.innerApiCalls
+      .createGitRepositoryLink(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.developerconnect.v1.IGitRepositoryLink,
+            protos.google.cloud.developerconnect.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createGitRepositoryLink response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `createGitRepositoryLink()`.
@@ -1663,6 +1944,7 @@ export class DeveloperConnectClient {
       protos.google.cloud.developerconnect.v1.OperationMetadata
     >
   > {
+    this._log.info('createGitRepositoryLink long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -1797,12 +2079,40 @@ export class DeveloperConnectClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.deleteGitRepositoryLink(
-      request,
-      options,
-      callback
-    );
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.developerconnect.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('deleteGitRepositoryLink response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('deleteGitRepositoryLink request %j', request);
+    return this.innerApiCalls
+      .deleteGitRepositoryLink(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.developerconnect.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteGitRepositoryLink response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `deleteGitRepositoryLink()`.
@@ -1823,6 +2133,7 @@ export class DeveloperConnectClient {
       protos.google.cloud.developerconnect.v1.OperationMetadata
     >
   > {
+    this._log.info('deleteGitRepositoryLink long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -1937,12 +2248,40 @@ export class DeveloperConnectClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.listConnections(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.developerconnect.v1.IListConnectionsRequest,
+          | protos.google.cloud.developerconnect.v1.IListConnectionsResponse
+          | null
+          | undefined,
+          protos.google.cloud.developerconnect.v1.IConnection
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listConnections values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listConnections request %j', request);
+    return this.innerApiCalls
+      .listConnections(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.developerconnect.v1.IConnection[],
+          protos.google.cloud.developerconnect.v1.IListConnectionsRequest | null,
+          protos.google.cloud.developerconnect.v1.IListConnectionsResponse,
+        ]) => {
+          this._log.info('listConnections values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listConnections`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
@@ -1981,7 +2320,10 @@ export class DeveloperConnectClient {
       });
     const defaultCallSettings = this._defaults['listConnections'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listConnections stream %j', request);
     return this.descriptors.page.listConnections.createStream(
       this.innerApiCalls.listConnections as GaxCall,
       request,
@@ -2032,7 +2374,10 @@ export class DeveloperConnectClient {
       });
     const defaultCallSettings = this._defaults['listConnections'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listConnections iterate %j', request);
     return this.descriptors.page.listConnections.asyncIterate(
       this.innerApiCalls['listConnections'] as GaxCall,
       request as {},
@@ -2138,16 +2483,40 @@ export class DeveloperConnectClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.listGitRepositoryLinks(
-      request,
-      options,
-      callback
-    );
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.developerconnect.v1.IListGitRepositoryLinksRequest,
+          | protos.google.cloud.developerconnect.v1.IListGitRepositoryLinksResponse
+          | null
+          | undefined,
+          protos.google.cloud.developerconnect.v1.IGitRepositoryLink
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listGitRepositoryLinks values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listGitRepositoryLinks request %j', request);
+    return this.innerApiCalls
+      .listGitRepositoryLinks(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.developerconnect.v1.IGitRepositoryLink[],
+          protos.google.cloud.developerconnect.v1.IListGitRepositoryLinksRequest | null,
+          protos.google.cloud.developerconnect.v1.IListGitRepositoryLinksResponse,
+        ]) => {
+          this._log.info('listGitRepositoryLinks values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listGitRepositoryLinks`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
@@ -2186,7 +2555,10 @@ export class DeveloperConnectClient {
       });
     const defaultCallSettings = this._defaults['listGitRepositoryLinks'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listGitRepositoryLinks stream %j', request);
     return this.descriptors.page.listGitRepositoryLinks.createStream(
       this.innerApiCalls.listGitRepositoryLinks as GaxCall,
       request,
@@ -2237,7 +2609,10 @@ export class DeveloperConnectClient {
       });
     const defaultCallSettings = this._defaults['listGitRepositoryLinks'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listGitRepositoryLinks iterate %j', request);
     return this.descriptors.page.listGitRepositoryLinks.asyncIterate(
       this.innerApiCalls['listGitRepositoryLinks'] as GaxCall,
       request as {},
@@ -2340,16 +2715,40 @@ export class DeveloperConnectClient {
       this._gaxModule.routingHeader.fromParams({
         connection: request.connection ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.fetchLinkableGitRepositories(
-      request,
-      options,
-      callback
-    );
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.developerconnect.v1.IFetchLinkableGitRepositoriesRequest,
+          | protos.google.cloud.developerconnect.v1.IFetchLinkableGitRepositoriesResponse
+          | null
+          | undefined,
+          protos.google.cloud.developerconnect.v1.ILinkableGitRepository
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('fetchLinkableGitRepositories values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('fetchLinkableGitRepositories request %j', request);
+    return this.innerApiCalls
+      .fetchLinkableGitRepositories(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.developerconnect.v1.ILinkableGitRepository[],
+          protos.google.cloud.developerconnect.v1.IFetchLinkableGitRepositoriesRequest | null,
+          protos.google.cloud.developerconnect.v1.IFetchLinkableGitRepositoriesResponse,
+        ]) => {
+          this._log.info('fetchLinkableGitRepositories values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `fetchLinkableGitRepositories`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.connection
@@ -2384,7 +2783,10 @@ export class DeveloperConnectClient {
       });
     const defaultCallSettings = this._defaults['fetchLinkableGitRepositories'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('fetchLinkableGitRepositories stream %j', request);
     return this.descriptors.page.fetchLinkableGitRepositories.createStream(
       this.innerApiCalls.fetchLinkableGitRepositories as GaxCall,
       request,
@@ -2431,7 +2833,10 @@ export class DeveloperConnectClient {
       });
     const defaultCallSettings = this._defaults['fetchLinkableGitRepositories'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('fetchLinkableGitRepositories iterate %j', request);
     return this.descriptors.page.fetchLinkableGitRepositories.asyncIterate(
       this.innerApiCalls['fetchLinkableGitRepositories'] as GaxCall,
       request as {},
@@ -2535,12 +2940,40 @@ export class DeveloperConnectClient {
       this._gaxModule.routingHeader.fromParams({
         git_repository_link: request.gitRepositoryLink ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.fetchGitRefs(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.developerconnect.v1.IFetchGitRefsRequest,
+          | protos.google.cloud.developerconnect.v1.IFetchGitRefsResponse
+          | null
+          | undefined,
+          string
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('fetchGitRefs values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('fetchGitRefs request %j', request);
+    return this.innerApiCalls
+      .fetchGitRefs(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          string[],
+          protos.google.cloud.developerconnect.v1.IFetchGitRefsRequest | null,
+          protos.google.cloud.developerconnect.v1.IFetchGitRefsResponse,
+        ]) => {
+          this._log.info('fetchGitRefs values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `fetchGitRefs`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.gitRepositoryLink
@@ -2577,7 +3010,10 @@ export class DeveloperConnectClient {
       });
     const defaultCallSettings = this._defaults['fetchGitRefs'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('fetchGitRefs stream %j', request);
     return this.descriptors.page.fetchGitRefs.createStream(
       this.innerApiCalls.fetchGitRefs as GaxCall,
       request,
@@ -2626,7 +3062,10 @@ export class DeveloperConnectClient {
       });
     const defaultCallSettings = this._defaults['fetchGitRefs'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('fetchGitRefs iterate %j', request);
     return this.descriptors.page.fetchGitRefs.asyncIterate(
       this.innerApiCalls['fetchGitRefs'] as GaxCall,
       request as {},
@@ -2743,7 +3182,7 @@ export class DeveloperConnectClient {
    */
   getOperation(
     request: protos.google.longrunning.GetOperationRequest,
-    options?:
+    optionsOrCallback?:
       | gax.CallOptions
       | Callback<
           protos.google.longrunning.Operation,
@@ -2756,6 +3195,20 @@ export class DeveloperConnectClient {
       {} | null | undefined
     >
   ): Promise<[protos.google.longrunning.Operation]> {
+    let options: gax.CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as gax.CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.getOperation(request, options, callback);
   }
   /**
@@ -2791,7 +3244,14 @@ export class DeveloperConnectClient {
   listOperationsAsync(
     request: protos.google.longrunning.ListOperationsRequest,
     options?: gax.CallOptions
-  ): AsyncIterable<protos.google.longrunning.ListOperationsResponse> {
+  ): AsyncIterable<protos.google.longrunning.IOperation> {
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.listOperationsAsync(request, options);
   }
   /**
@@ -2827,11 +3287,11 @@ export class DeveloperConnectClient {
    */
   cancelOperation(
     request: protos.google.longrunning.CancelOperationRequest,
-    options?:
+    optionsOrCallback?:
       | gax.CallOptions
       | Callback<
-          protos.google.protobuf.Empty,
           protos.google.longrunning.CancelOperationRequest,
+          protos.google.protobuf.Empty,
           {} | undefined | null
         >,
     callback?: Callback<
@@ -2840,6 +3300,20 @@ export class DeveloperConnectClient {
       {} | undefined | null
     >
   ): Promise<protos.google.protobuf.Empty> {
+    let options: gax.CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as gax.CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.cancelOperation(request, options, callback);
   }
 
@@ -2870,7 +3344,7 @@ export class DeveloperConnectClient {
    */
   deleteOperation(
     request: protos.google.longrunning.DeleteOperationRequest,
-    options?:
+    optionsOrCallback?:
       | gax.CallOptions
       | Callback<
           protos.google.protobuf.Empty,
@@ -2883,6 +3357,20 @@ export class DeveloperConnectClient {
       {} | null | undefined
     >
   ): Promise<protos.google.protobuf.Empty> {
+    let options: gax.CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as gax.CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.deleteOperation(request, options, callback);
   }
 
@@ -3277,6 +3765,7 @@ export class DeveloperConnectClient {
   close(): Promise<void> {
     if (this.developerConnectStub && !this._terminated) {
       return this.developerConnectStub.then(stub => {
+        this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
         this.locationsClient.close();

@@ -285,7 +285,9 @@ describe('v1.SimulatorClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      client.initialize().catch(err => {
+        throw err;
+      });
       assert(client.simulatorStub);
       client.close().then(() => {
         done();
@@ -344,7 +346,7 @@ describe('v1.SimulatorClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.policysimulator.v1.GetReplayRequest()
       );
@@ -375,7 +377,7 @@ describe('v1.SimulatorClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.policysimulator.v1.GetReplayRequest()
       );
@@ -422,7 +424,7 @@ describe('v1.SimulatorClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.policysimulator.v1.GetReplayRequest()
       );
@@ -450,7 +452,7 @@ describe('v1.SimulatorClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.policysimulator.v1.GetReplayRequest()
       );
@@ -471,7 +473,7 @@ describe('v1.SimulatorClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.policysimulator.v1.CreateReplayRequest()
       );
@@ -503,7 +505,7 @@ describe('v1.SimulatorClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.policysimulator.v1.CreateReplayRequest()
       );
@@ -557,7 +559,7 @@ describe('v1.SimulatorClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.policysimulator.v1.CreateReplayRequest()
       );
@@ -588,7 +590,7 @@ describe('v1.SimulatorClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.policysimulator.v1.CreateReplayRequest()
       );
@@ -621,7 +623,7 @@ describe('v1.SimulatorClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -643,7 +645,7 @@ describe('v1.SimulatorClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -661,7 +663,7 @@ describe('v1.SimulatorClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.policysimulator.v1.ListReplayResultsRequest()
       );
@@ -700,7 +702,7 @@ describe('v1.SimulatorClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.policysimulator.v1.ListReplayResultsRequest()
       );
@@ -757,7 +759,7 @@ describe('v1.SimulatorClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.policysimulator.v1.ListReplayResultsRequest()
       );
@@ -788,7 +790,7 @@ describe('v1.SimulatorClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.policysimulator.v1.ListReplayResultsRequest()
       );
@@ -849,7 +851,7 @@ describe('v1.SimulatorClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.policysimulator.v1.ListReplayResultsRequest()
       );
@@ -899,7 +901,7 @@ describe('v1.SimulatorClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.policysimulator.v1.ListReplayResultsRequest()
       );
@@ -949,7 +951,7 @@ describe('v1.SimulatorClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.policysimulator.v1.ListReplayResultsRequest()
       );
@@ -991,7 +993,7 @@ describe('v1.SimulatorClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new operationsProtos.google.longrunning.GetOperationRequest()
       );
@@ -1070,7 +1072,7 @@ describe('v1.SimulatorClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new operationsProtos.google.longrunning.CancelOperationRequest()
       );
@@ -1150,7 +1152,7 @@ describe('v1.SimulatorClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new operationsProtos.google.longrunning.DeleteOperationRequest()
       );
@@ -1246,8 +1248,7 @@ describe('v1.SimulatorClient', () => {
       ];
       client.operationsClient.descriptor.listOperations.asyncIterate =
         stubAsyncIterationCall(expectedResponse);
-      const responses: operationsProtos.google.longrunning.ListOperationsResponse[] =
-        [];
+      const responses: operationsProtos.google.longrunning.IOperation[] = [];
       const iterable = client.operationsClient.listOperationsAsync(request);
       for await (const resource of iterable) {
         responses.push(resource!);
@@ -1266,7 +1267,7 @@ describe('v1.SimulatorClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new operationsProtos.google.longrunning.ListOperationsRequest()
       );
@@ -1275,8 +1276,7 @@ describe('v1.SimulatorClient', () => {
         stubAsyncIterationCall(undefined, expectedError);
       const iterable = client.operationsClient.listOperationsAsync(request);
       await assert.rejects(async () => {
-        const responses: operationsProtos.google.longrunning.ListOperationsResponse[] =
-          [];
+        const responses: operationsProtos.google.longrunning.IOperation[] = [];
         for await (const resource of iterable) {
           responses.push(resource!);
         }
@@ -1292,7 +1292,7 @@ describe('v1.SimulatorClient', () => {
   });
 
   describe('Path templates', () => {
-    describe('folderLocationReplay', () => {
+    describe('folderLocationReplay', async () => {
       const fakePath = '/rendered/path/folderLocationReplay';
       const expectedParameters = {
         folder: 'folderValue',
@@ -1303,7 +1303,7 @@ describe('v1.SimulatorClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.folderLocationReplayPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -1369,7 +1369,7 @@ describe('v1.SimulatorClient', () => {
       });
     });
 
-    describe('folderLocationReplayReplayResult', () => {
+    describe('folderLocationReplayReplayResult', async () => {
       const fakePath = '/rendered/path/folderLocationReplayReplayResult';
       const expectedParameters = {
         folder: 'folderValue',
@@ -1381,7 +1381,7 @@ describe('v1.SimulatorClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.folderLocationReplayReplayResultPathTemplate.render =
         sinon.stub().returns(fakePath);
       client.pathTemplates.folderLocationReplayReplayResultPathTemplate.match =
@@ -1466,7 +1466,7 @@ describe('v1.SimulatorClient', () => {
       });
     });
 
-    describe('organizationLocationReplay', () => {
+    describe('organizationLocationReplay', async () => {
       const fakePath = '/rendered/path/organizationLocationReplay';
       const expectedParameters = {
         organization: 'organizationValue',
@@ -1477,7 +1477,7 @@ describe('v1.SimulatorClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.organizationLocationReplayPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -1545,7 +1545,7 @@ describe('v1.SimulatorClient', () => {
       });
     });
 
-    describe('organizationLocationReplayReplayResult', () => {
+    describe('organizationLocationReplayReplayResult', async () => {
       const fakePath = '/rendered/path/organizationLocationReplayReplayResult';
       const expectedParameters = {
         organization: 'organizationValue',
@@ -1557,7 +1557,7 @@ describe('v1.SimulatorClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.organizationLocationReplayReplayResultPathTemplate.render =
         sinon.stub().returns(fakePath);
       client.pathTemplates.organizationLocationReplayReplayResultPathTemplate.match =
@@ -1651,7 +1651,7 @@ describe('v1.SimulatorClient', () => {
       });
     });
 
-    describe('projectLocationReplay', () => {
+    describe('projectLocationReplay', async () => {
       const fakePath = '/rendered/path/projectLocationReplay';
       const expectedParameters = {
         project: 'projectValue',
@@ -1662,7 +1662,7 @@ describe('v1.SimulatorClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectLocationReplayPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -1730,7 +1730,7 @@ describe('v1.SimulatorClient', () => {
       });
     });
 
-    describe('projectLocationReplayReplayResult', () => {
+    describe('projectLocationReplayReplayResult', async () => {
       const fakePath = '/rendered/path/projectLocationReplayReplayResult';
       const expectedParameters = {
         project: 'projectValue',
@@ -1742,7 +1742,7 @@ describe('v1.SimulatorClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectLocationReplayReplayResultPathTemplate.render =
         sinon.stub().returns(fakePath);
       client.pathTemplates.projectLocationReplayReplayResultPathTemplate.match =

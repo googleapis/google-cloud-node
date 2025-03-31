@@ -31,6 +31,7 @@ import type {
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
+import {loggingUtils as logging} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -56,6 +57,8 @@ export class AnswerRecordsClient {
   private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
+  private _log = logging.log('dialogflow');
+
   auth: gax.GoogleAuth;
   descriptors: Descriptors = {
     page: {},
@@ -91,7 +94,7 @@ export class AnswerRecordsClient {
    *     Developer's Console, e.g. 'grape-spaceship-123'. We will also check
    *     the environment variable GCLOUD_PROJECT for your project ID. If your
    *     app is running in an environment which supports
-   *     {@link https://developers.google.com/identity/protocols/application-default-credentials Application Default Credentials},
+   *     {@link https://cloud.google.com/docs/authentication/application-default-credentials Application Default Credentials},
    *     your project ID will be detected automatically.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
@@ -335,6 +338,12 @@ export class AnswerRecordsClient {
         new this._gaxModule.PathTemplate(
           'projects/{project}/locations/{location}/knowledgeBases/{knowledge_base}/documents/{document}'
         ),
+      projectLocationPhoneNumberPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/phoneNumbers/{phone_number}'
+      ),
+      projectPhoneNumberPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/phoneNumbers/{phone_number}'
+      ),
       sipTrunkPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/sipTrunks/{siptrunk}'
       ),
@@ -618,13 +627,44 @@ export class AnswerRecordsClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this.warn(
       'DEP$AnswerRecords-$GetAnswerRecord',
       'GetAnswerRecord is deprecated and may be removed in a future version.',
       'DeprecationWarning'
     );
-    return this.innerApiCalls.getAnswerRecord(request, options, callback);
+    this._log.info('getAnswerRecord request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.dialogflow.v2beta1.IAnswerRecord,
+          | protos.google.cloud.dialogflow.v2beta1.IGetAnswerRecordRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getAnswerRecord response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getAnswerRecord(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.dialogflow.v2beta1.IAnswerRecord,
+          (
+            | protos.google.cloud.dialogflow.v2beta1.IGetAnswerRecordRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getAnswerRecord response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Updates the specified answer record.
@@ -721,8 +761,39 @@ export class AnswerRecordsClient {
       this._gaxModule.routingHeader.fromParams({
         'answer_record.name': request.answerRecord!.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.updateAnswerRecord(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('updateAnswerRecord request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.dialogflow.v2beta1.IAnswerRecord,
+          | protos.google.cloud.dialogflow.v2beta1.IUpdateAnswerRecordRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('updateAnswerRecord response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .updateAnswerRecord(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.dialogflow.v2beta1.IAnswerRecord,
+          (
+            | protos.google.cloud.dialogflow.v2beta1.IUpdateAnswerRecordRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('updateAnswerRecord response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
 
   /**
@@ -736,7 +807,19 @@ export class AnswerRecordsClient {
    *   chronological order. Format: `projects/<Project ID>/locations/<Location
    *   ID>`.
    * @param {string} [request.filter]
-   *   Optional. Filters to restrict results to specific answer records.
+   *   Optional. Filters to restrict results to specific answer records. The
+   *   expression has the following syntax:
+   *
+   *     <field> <operator> <value> [AND <field> <operator> <value>] ...
+   *
+   *   The following fields and operators are supported:
+   *   * conversation_id with equals(=) operator
+   *
+   *   Examples:
+   *
+   *   * "conversation_id=bar" matches answer records in the
+   *     projects/foo/locations/global/conversations/bar conversation
+   *     (assuming the parent is projects/foo/locations/global).
    *
    *   For more information about filtering, see
    *   [API Filtering](https://aip.dev/160).
@@ -832,12 +915,40 @@ export class AnswerRecordsClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.listAnswerRecords(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.dialogflow.v2beta1.IListAnswerRecordsRequest,
+          | protos.google.cloud.dialogflow.v2beta1.IListAnswerRecordsResponse
+          | null
+          | undefined,
+          protos.google.cloud.dialogflow.v2beta1.IAnswerRecord
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listAnswerRecords values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listAnswerRecords request %j', request);
+    return this.innerApiCalls
+      .listAnswerRecords(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.dialogflow.v2beta1.IAnswerRecord[],
+          protos.google.cloud.dialogflow.v2beta1.IListAnswerRecordsRequest | null,
+          protos.google.cloud.dialogflow.v2beta1.IListAnswerRecordsResponse,
+        ]) => {
+          this._log.info('listAnswerRecords values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listAnswerRecords`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
@@ -845,7 +956,19 @@ export class AnswerRecordsClient {
    *   chronological order. Format: `projects/<Project ID>/locations/<Location
    *   ID>`.
    * @param {string} [request.filter]
-   *   Optional. Filters to restrict results to specific answer records.
+   *   Optional. Filters to restrict results to specific answer records. The
+   *   expression has the following syntax:
+   *
+   *     <field> <operator> <value> [AND <field> <operator> <value>] ...
+   *
+   *   The following fields and operators are supported:
+   *   * conversation_id with equals(=) operator
+   *
+   *   Examples:
+   *
+   *   * "conversation_id=bar" matches answer records in the
+   *     projects/foo/locations/global/conversations/bar conversation
+   *     (assuming the parent is projects/foo/locations/global).
    *
    *   For more information about filtering, see
    *   [API Filtering](https://aip.dev/160).
@@ -883,7 +1006,10 @@ export class AnswerRecordsClient {
       });
     const defaultCallSettings = this._defaults['listAnswerRecords'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listAnswerRecords stream %j', request);
     return this.descriptors.page.listAnswerRecords.createStream(
       this.innerApiCalls.listAnswerRecords as GaxCall,
       request,
@@ -902,7 +1028,19 @@ export class AnswerRecordsClient {
    *   chronological order. Format: `projects/<Project ID>/locations/<Location
    *   ID>`.
    * @param {string} [request.filter]
-   *   Optional. Filters to restrict results to specific answer records.
+   *   Optional. Filters to restrict results to specific answer records. The
+   *   expression has the following syntax:
+   *
+   *     <field> <operator> <value> [AND <field> <operator> <value>] ...
+   *
+   *   The following fields and operators are supported:
+   *   * conversation_id with equals(=) operator
+   *
+   *   Examples:
+   *
+   *   * "conversation_id=bar" matches answer records in the
+   *     projects/foo/locations/global/conversations/bar conversation
+   *     (assuming the parent is projects/foo/locations/global).
    *
    *   For more information about filtering, see
    *   [API Filtering](https://aip.dev/160).
@@ -941,7 +1079,10 @@ export class AnswerRecordsClient {
       });
     const defaultCallSettings = this._defaults['listAnswerRecords'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listAnswerRecords iterate %j', request);
     return this.descriptors.page.listAnswerRecords.asyncIterate(
       this.innerApiCalls['listAnswerRecords'] as GaxCall,
       request as {},
@@ -3347,6 +3488,111 @@ export class AnswerRecordsClient {
   }
 
   /**
+   * Return a fully-qualified projectLocationPhoneNumber resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} phone_number
+   * @returns {string} Resource name string.
+   */
+  projectLocationPhoneNumberPath(
+    project: string,
+    location: string,
+    phoneNumber: string
+  ) {
+    return this.pathTemplates.projectLocationPhoneNumberPathTemplate.render({
+      project: project,
+      location: location,
+      phone_number: phoneNumber,
+    });
+  }
+
+  /**
+   * Parse the project from ProjectLocationPhoneNumber resource.
+   *
+   * @param {string} projectLocationPhoneNumberName
+   *   A fully-qualified path representing project_location_phone_number resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectLocationPhoneNumberName(
+    projectLocationPhoneNumberName: string
+  ) {
+    return this.pathTemplates.projectLocationPhoneNumberPathTemplate.match(
+      projectLocationPhoneNumberName
+    ).project;
+  }
+
+  /**
+   * Parse the location from ProjectLocationPhoneNumber resource.
+   *
+   * @param {string} projectLocationPhoneNumberName
+   *   A fully-qualified path representing project_location_phone_number resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromProjectLocationPhoneNumberName(
+    projectLocationPhoneNumberName: string
+  ) {
+    return this.pathTemplates.projectLocationPhoneNumberPathTemplate.match(
+      projectLocationPhoneNumberName
+    ).location;
+  }
+
+  /**
+   * Parse the phone_number from ProjectLocationPhoneNumber resource.
+   *
+   * @param {string} projectLocationPhoneNumberName
+   *   A fully-qualified path representing project_location_phone_number resource.
+   * @returns {string} A string representing the phone_number.
+   */
+  matchPhoneNumberFromProjectLocationPhoneNumberName(
+    projectLocationPhoneNumberName: string
+  ) {
+    return this.pathTemplates.projectLocationPhoneNumberPathTemplate.match(
+      projectLocationPhoneNumberName
+    ).phone_number;
+  }
+
+  /**
+   * Return a fully-qualified projectPhoneNumber resource name string.
+   *
+   * @param {string} project
+   * @param {string} phone_number
+   * @returns {string} Resource name string.
+   */
+  projectPhoneNumberPath(project: string, phoneNumber: string) {
+    return this.pathTemplates.projectPhoneNumberPathTemplate.render({
+      project: project,
+      phone_number: phoneNumber,
+    });
+  }
+
+  /**
+   * Parse the project from ProjectPhoneNumber resource.
+   *
+   * @param {string} projectPhoneNumberName
+   *   A fully-qualified path representing project_phone_number resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectPhoneNumberName(projectPhoneNumberName: string) {
+    return this.pathTemplates.projectPhoneNumberPathTemplate.match(
+      projectPhoneNumberName
+    ).project;
+  }
+
+  /**
+   * Parse the phone_number from ProjectPhoneNumber resource.
+   *
+   * @param {string} projectPhoneNumberName
+   *   A fully-qualified path representing project_phone_number resource.
+   * @returns {string} A string representing the phone_number.
+   */
+  matchPhoneNumberFromProjectPhoneNumberName(projectPhoneNumberName: string) {
+    return this.pathTemplates.projectPhoneNumberPathTemplate.match(
+      projectPhoneNumberName
+    ).phone_number;
+  }
+
+  /**
    * Return a fully-qualified sipTrunk resource name string.
    *
    * @param {string} project
@@ -3404,6 +3650,7 @@ export class AnswerRecordsClient {
   close(): Promise<void> {
     if (this.answerRecordsStub && !this._terminated) {
       return this.answerRecordsStub.then(stub => {
+        this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
         this.locationsClient.close();

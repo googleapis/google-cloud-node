@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -292,7 +292,9 @@ describe('v1.DocumentServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      client.initialize().catch(err => {
+        throw err;
+      });
       assert(client.documentServiceStub);
       client.close().then(() => {
         done();
@@ -351,7 +353,7 @@ describe('v1.DocumentServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.discoveryengine.v1.GetDocumentRequest()
       );
@@ -360,7 +362,7 @@ describe('v1.DocumentServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.discoveryengine.v1.Document()
       );
@@ -382,7 +384,7 @@ describe('v1.DocumentServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.discoveryengine.v1.GetDocumentRequest()
       );
@@ -391,7 +393,7 @@ describe('v1.DocumentServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.discoveryengine.v1.Document()
       );
@@ -429,7 +431,7 @@ describe('v1.DocumentServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.discoveryengine.v1.GetDocumentRequest()
       );
@@ -438,7 +440,7 @@ describe('v1.DocumentServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getDocument = stubSimpleCall(
         undefined,
@@ -460,7 +462,7 @@ describe('v1.DocumentServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.discoveryengine.v1.GetDocumentRequest()
       );
@@ -481,7 +483,7 @@ describe('v1.DocumentServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.discoveryengine.v1.CreateDocumentRequest()
       );
@@ -490,7 +492,7 @@ describe('v1.DocumentServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.discoveryengine.v1.Document()
       );
@@ -512,7 +514,7 @@ describe('v1.DocumentServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.discoveryengine.v1.CreateDocumentRequest()
       );
@@ -521,7 +523,7 @@ describe('v1.DocumentServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.discoveryengine.v1.Document()
       );
@@ -559,7 +561,7 @@ describe('v1.DocumentServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.discoveryengine.v1.CreateDocumentRequest()
       );
@@ -568,7 +570,7 @@ describe('v1.DocumentServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createDocument = stubSimpleCall(
         undefined,
@@ -590,7 +592,7 @@ describe('v1.DocumentServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.discoveryengine.v1.CreateDocumentRequest()
       );
@@ -611,7 +613,7 @@ describe('v1.DocumentServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.discoveryengine.v1.UpdateDocumentRequest()
       );
@@ -621,7 +623,7 @@ describe('v1.DocumentServiceClient', () => {
         ['document', 'name']
       );
       request.document.name = defaultValue1;
-      const expectedHeaderRequestParams = `document.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `document.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.discoveryengine.v1.Document()
       );
@@ -643,7 +645,7 @@ describe('v1.DocumentServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.discoveryengine.v1.UpdateDocumentRequest()
       );
@@ -653,7 +655,7 @@ describe('v1.DocumentServiceClient', () => {
         ['document', 'name']
       );
       request.document.name = defaultValue1;
-      const expectedHeaderRequestParams = `document.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `document.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.discoveryengine.v1.Document()
       );
@@ -691,7 +693,7 @@ describe('v1.DocumentServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.discoveryengine.v1.UpdateDocumentRequest()
       );
@@ -701,7 +703,7 @@ describe('v1.DocumentServiceClient', () => {
         ['document', 'name']
       );
       request.document.name = defaultValue1;
-      const expectedHeaderRequestParams = `document.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `document.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateDocument = stubSimpleCall(
         undefined,
@@ -723,7 +725,7 @@ describe('v1.DocumentServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.discoveryengine.v1.UpdateDocumentRequest()
       );
@@ -745,7 +747,7 @@ describe('v1.DocumentServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.discoveryengine.v1.DeleteDocumentRequest()
       );
@@ -754,7 +756,7 @@ describe('v1.DocumentServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -776,7 +778,7 @@ describe('v1.DocumentServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.discoveryengine.v1.DeleteDocumentRequest()
       );
@@ -785,7 +787,7 @@ describe('v1.DocumentServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -823,7 +825,7 @@ describe('v1.DocumentServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.discoveryengine.v1.DeleteDocumentRequest()
       );
@@ -832,7 +834,7 @@ describe('v1.DocumentServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteDocument = stubSimpleCall(
         undefined,
@@ -854,7 +856,7 @@ describe('v1.DocumentServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.discoveryengine.v1.DeleteDocumentRequest()
       );
@@ -875,7 +877,7 @@ describe('v1.DocumentServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.discoveryengine.v1.BatchGetDocumentsMetadataRequest()
       );
@@ -884,7 +886,7 @@ describe('v1.DocumentServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.discoveryengine.v1.BatchGetDocumentsMetadataResponse()
       );
@@ -907,7 +909,7 @@ describe('v1.DocumentServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.discoveryengine.v1.BatchGetDocumentsMetadataRequest()
       );
@@ -916,7 +918,7 @@ describe('v1.DocumentServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.discoveryengine.v1.BatchGetDocumentsMetadataResponse()
       );
@@ -954,7 +956,7 @@ describe('v1.DocumentServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.discoveryengine.v1.BatchGetDocumentsMetadataRequest()
       );
@@ -963,7 +965,7 @@ describe('v1.DocumentServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.batchGetDocumentsMetadata = stubSimpleCall(
         undefined,
@@ -988,7 +990,7 @@ describe('v1.DocumentServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.discoveryengine.v1.BatchGetDocumentsMetadataRequest()
       );
@@ -1012,7 +1014,7 @@ describe('v1.DocumentServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.discoveryengine.v1.ImportDocumentsRequest()
       );
@@ -1021,7 +1023,7 @@ describe('v1.DocumentServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1045,7 +1047,7 @@ describe('v1.DocumentServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.discoveryengine.v1.ImportDocumentsRequest()
       );
@@ -1054,7 +1056,7 @@ describe('v1.DocumentServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1099,7 +1101,7 @@ describe('v1.DocumentServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.discoveryengine.v1.ImportDocumentsRequest()
       );
@@ -1108,7 +1110,7 @@ describe('v1.DocumentServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.importDocuments = stubLongRunningCall(
         undefined,
@@ -1130,7 +1132,7 @@ describe('v1.DocumentServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.discoveryengine.v1.ImportDocumentsRequest()
       );
@@ -1139,7 +1141,7 @@ describe('v1.DocumentServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.importDocuments = stubLongRunningCall(
         undefined,
@@ -1163,7 +1165,7 @@ describe('v1.DocumentServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -1185,7 +1187,7 @@ describe('v1.DocumentServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -1206,7 +1208,7 @@ describe('v1.DocumentServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.discoveryengine.v1.PurgeDocumentsRequest()
       );
@@ -1215,7 +1217,7 @@ describe('v1.DocumentServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1239,7 +1241,7 @@ describe('v1.DocumentServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.discoveryengine.v1.PurgeDocumentsRequest()
       );
@@ -1248,7 +1250,7 @@ describe('v1.DocumentServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1293,7 +1295,7 @@ describe('v1.DocumentServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.discoveryengine.v1.PurgeDocumentsRequest()
       );
@@ -1302,7 +1304,7 @@ describe('v1.DocumentServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.purgeDocuments = stubLongRunningCall(
         undefined,
@@ -1324,7 +1326,7 @@ describe('v1.DocumentServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.discoveryengine.v1.PurgeDocumentsRequest()
       );
@@ -1333,7 +1335,7 @@ describe('v1.DocumentServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.purgeDocuments = stubLongRunningCall(
         undefined,
@@ -1357,7 +1359,7 @@ describe('v1.DocumentServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -1379,7 +1381,7 @@ describe('v1.DocumentServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -1400,7 +1402,7 @@ describe('v1.DocumentServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.discoveryengine.v1.ListDocumentsRequest()
       );
@@ -1409,7 +1411,7 @@ describe('v1.DocumentServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.discoveryengine.v1.Document()
@@ -1439,7 +1441,7 @@ describe('v1.DocumentServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.discoveryengine.v1.ListDocumentsRequest()
       );
@@ -1448,7 +1450,7 @@ describe('v1.DocumentServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.discoveryengine.v1.Document()
@@ -1494,7 +1496,7 @@ describe('v1.DocumentServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.discoveryengine.v1.ListDocumentsRequest()
       );
@@ -1503,7 +1505,7 @@ describe('v1.DocumentServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listDocuments = stubSimpleCall(
         undefined,
@@ -1525,7 +1527,7 @@ describe('v1.DocumentServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.discoveryengine.v1.ListDocumentsRequest()
       );
@@ -1534,7 +1536,7 @@ describe('v1.DocumentServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.discoveryengine.v1.Document()
@@ -1585,7 +1587,7 @@ describe('v1.DocumentServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.discoveryengine.v1.ListDocumentsRequest()
       );
@@ -1594,7 +1596,7 @@ describe('v1.DocumentServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listDocuments.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -1634,7 +1636,7 @@ describe('v1.DocumentServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.discoveryengine.v1.ListDocumentsRequest()
       );
@@ -1643,7 +1645,7 @@ describe('v1.DocumentServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.discoveryengine.v1.Document()
@@ -1683,7 +1685,7 @@ describe('v1.DocumentServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.discoveryengine.v1.ListDocumentsRequest()
       );
@@ -1692,7 +1694,7 @@ describe('v1.DocumentServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listDocuments.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -1725,7 +1727,7 @@ describe('v1.DocumentServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.GetLocationRequest()
       );
@@ -1755,7 +1757,7 @@ describe('v1.DocumentServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.GetLocationRequest()
       );
@@ -1799,7 +1801,7 @@ describe('v1.DocumentServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.GetLocationRequest()
       );
@@ -1834,7 +1836,7 @@ describe('v1.DocumentServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.ListLocationsRequest()
       );
@@ -1882,7 +1884,7 @@ describe('v1.DocumentServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.ListLocationsRequest()
       );
@@ -1923,7 +1925,7 @@ describe('v1.DocumentServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new operationsProtos.google.longrunning.GetOperationRequest()
       );
@@ -2002,7 +2004,7 @@ describe('v1.DocumentServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new operationsProtos.google.longrunning.CancelOperationRequest()
       );
@@ -2082,7 +2084,7 @@ describe('v1.DocumentServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new operationsProtos.google.longrunning.DeleteOperationRequest()
       );
@@ -2178,8 +2180,7 @@ describe('v1.DocumentServiceClient', () => {
       ];
       client.operationsClient.descriptor.listOperations.asyncIterate =
         stubAsyncIterationCall(expectedResponse);
-      const responses: operationsProtos.google.longrunning.ListOperationsResponse[] =
-        [];
+      const responses: operationsProtos.google.longrunning.IOperation[] = [];
       const iterable = client.operationsClient.listOperationsAsync(request);
       for await (const resource of iterable) {
         responses.push(resource!);
@@ -2198,7 +2199,7 @@ describe('v1.DocumentServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new operationsProtos.google.longrunning.ListOperationsRequest()
       );
@@ -2207,8 +2208,7 @@ describe('v1.DocumentServiceClient', () => {
         stubAsyncIterationCall(undefined, expectedError);
       const iterable = client.operationsClient.listOperationsAsync(request);
       await assert.rejects(async () => {
-        const responses: operationsProtos.google.longrunning.ListOperationsResponse[] =
-          [];
+        const responses: operationsProtos.google.longrunning.IOperation[] = [];
         for await (const resource of iterable) {
           responses.push(resource!);
         }
@@ -2224,7 +2224,7 @@ describe('v1.DocumentServiceClient', () => {
   });
 
   describe('Path templates', () => {
-    describe('engine', () => {
+    describe('engine', async () => {
       const fakePath = '/rendered/path/engine';
       const expectedParameters = {
         project: 'projectValue',
@@ -2236,7 +2236,7 @@ describe('v1.DocumentServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.enginePathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -2300,7 +2300,7 @@ describe('v1.DocumentServiceClient', () => {
       });
     });
 
-    describe('project', () => {
+    describe('project', async () => {
       const fakePath = '/rendered/path/project';
       const expectedParameters = {
         project: 'projectValue',
@@ -2309,7 +2309,7 @@ describe('v1.DocumentServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -2338,7 +2338,7 @@ describe('v1.DocumentServiceClient', () => {
       });
     });
 
-    describe('projectLocationCollectionDataStore', () => {
+    describe('projectLocationCollectionDataStore', async () => {
       const fakePath = '/rendered/path/projectLocationCollectionDataStore';
       const expectedParameters = {
         project: 'projectValue',
@@ -2350,7 +2350,7 @@ describe('v1.DocumentServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectLocationCollectionDataStorePathTemplate.render =
         sinon.stub().returns(fakePath);
       client.pathTemplates.projectLocationCollectionDataStorePathTemplate.match =
@@ -2439,7 +2439,7 @@ describe('v1.DocumentServiceClient', () => {
       });
     });
 
-    describe('projectLocationCollectionDataStoreBranch', () => {
+    describe('projectLocationCollectionDataStoreBranch', async () => {
       const fakePath =
         '/rendered/path/projectLocationCollectionDataStoreBranch';
       const expectedParameters = {
@@ -2453,7 +2453,7 @@ describe('v1.DocumentServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectLocationCollectionDataStoreBranchPathTemplate.render =
         sinon.stub().returns(fakePath);
       client.pathTemplates.projectLocationCollectionDataStoreBranchPathTemplate.match =
@@ -2565,7 +2565,7 @@ describe('v1.DocumentServiceClient', () => {
       });
     });
 
-    describe('projectLocationCollectionDataStoreBranchDocument', () => {
+    describe('projectLocationCollectionDataStoreBranchDocument', async () => {
       const fakePath =
         '/rendered/path/projectLocationCollectionDataStoreBranchDocument';
       const expectedParameters = {
@@ -2580,7 +2580,7 @@ describe('v1.DocumentServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectLocationCollectionDataStoreBranchDocumentPathTemplate.render =
         sinon.stub().returns(fakePath);
       client.pathTemplates.projectLocationCollectionDataStoreBranchDocumentPathTemplate.match =
@@ -2711,7 +2711,7 @@ describe('v1.DocumentServiceClient', () => {
       });
     });
 
-    describe('projectLocationCollectionDataStoreBranchDocumentChunk', () => {
+    describe('projectLocationCollectionDataStoreBranchDocumentChunk', async () => {
       const fakePath =
         '/rendered/path/projectLocationCollectionDataStoreBranchDocumentChunk';
       const expectedParameters = {
@@ -2727,7 +2727,7 @@ describe('v1.DocumentServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectLocationCollectionDataStoreBranchDocumentChunkPathTemplate.render =
         sinon.stub().returns(fakePath);
       client.pathTemplates.projectLocationCollectionDataStoreBranchDocumentChunkPathTemplate.match =
@@ -2876,7 +2876,7 @@ describe('v1.DocumentServiceClient', () => {
       });
     });
 
-    describe('projectLocationCollectionDataStoreControl', () => {
+    describe('projectLocationCollectionDataStoreControl', async () => {
       const fakePath =
         '/rendered/path/projectLocationCollectionDataStoreControl';
       const expectedParameters = {
@@ -2890,7 +2890,7 @@ describe('v1.DocumentServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectLocationCollectionDataStoreControlPathTemplate.render =
         sinon.stub().returns(fakePath);
       client.pathTemplates.projectLocationCollectionDataStoreControlPathTemplate.match =
@@ -3002,7 +3002,7 @@ describe('v1.DocumentServiceClient', () => {
       });
     });
 
-    describe('projectLocationCollectionDataStoreConversation', () => {
+    describe('projectLocationCollectionDataStoreConversation', async () => {
       const fakePath =
         '/rendered/path/projectLocationCollectionDataStoreConversation';
       const expectedParameters = {
@@ -3016,7 +3016,7 @@ describe('v1.DocumentServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectLocationCollectionDataStoreConversationPathTemplate.render =
         sinon.stub().returns(fakePath);
       client.pathTemplates.projectLocationCollectionDataStoreConversationPathTemplate.match =
@@ -3129,7 +3129,7 @@ describe('v1.DocumentServiceClient', () => {
       });
     });
 
-    describe('projectLocationCollectionDataStoreCustomTuningModel', () => {
+    describe('projectLocationCollectionDataStoreCustomTuningModel', async () => {
       const fakePath =
         '/rendered/path/projectLocationCollectionDataStoreCustomTuningModel';
       const expectedParameters = {
@@ -3143,7 +3143,7 @@ describe('v1.DocumentServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectLocationCollectionDataStoreCustomTuningModelPathTemplate.render =
         sinon.stub().returns(fakePath);
       client.pathTemplates.projectLocationCollectionDataStoreCustomTuningModelPathTemplate.match =
@@ -3256,7 +3256,7 @@ describe('v1.DocumentServiceClient', () => {
       });
     });
 
-    describe('projectLocationCollectionDataStoreDocumentProcessingConfig', () => {
+    describe('projectLocationCollectionDataStoreDocumentProcessingConfig', async () => {
       const fakePath =
         '/rendered/path/projectLocationCollectionDataStoreDocumentProcessingConfig';
       const expectedParameters = {
@@ -3269,7 +3269,7 @@ describe('v1.DocumentServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectLocationCollectionDataStoreDocumentProcessingConfigPathTemplate.render =
         sinon.stub().returns(fakePath);
       client.pathTemplates.projectLocationCollectionDataStoreDocumentProcessingConfigPathTemplate.match =
@@ -3364,7 +3364,7 @@ describe('v1.DocumentServiceClient', () => {
       });
     });
 
-    describe('projectLocationCollectionDataStoreSchema', () => {
+    describe('projectLocationCollectionDataStoreSchema', async () => {
       const fakePath =
         '/rendered/path/projectLocationCollectionDataStoreSchema';
       const expectedParameters = {
@@ -3378,7 +3378,7 @@ describe('v1.DocumentServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectLocationCollectionDataStoreSchemaPathTemplate.render =
         sinon.stub().returns(fakePath);
       client.pathTemplates.projectLocationCollectionDataStoreSchemaPathTemplate.match =
@@ -3490,7 +3490,134 @@ describe('v1.DocumentServiceClient', () => {
       });
     });
 
-    describe('projectLocationCollectionDataStoreSession', () => {
+    describe('projectLocationCollectionDataStoreServingConfig', async () => {
+      const fakePath =
+        '/rendered/path/projectLocationCollectionDataStoreServingConfig';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        collection: 'collectionValue',
+        data_store: 'dataStoreValue',
+        serving_config: 'servingConfigValue',
+      };
+      const client = new documentserviceModule.v1.DocumentServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      client.pathTemplates.projectLocationCollectionDataStoreServingConfigPathTemplate.render =
+        sinon.stub().returns(fakePath);
+      client.pathTemplates.projectLocationCollectionDataStoreServingConfigPathTemplate.match =
+        sinon.stub().returns(expectedParameters);
+
+      it('projectLocationCollectionDataStoreServingConfigPath', () => {
+        const result =
+          client.projectLocationCollectionDataStoreServingConfigPath(
+            'projectValue',
+            'locationValue',
+            'collectionValue',
+            'dataStoreValue',
+            'servingConfigValue'
+          );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates
+              .projectLocationCollectionDataStoreServingConfigPathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromProjectLocationCollectionDataStoreServingConfigName', () => {
+        const result =
+          client.matchProjectFromProjectLocationCollectionDataStoreServingConfigName(
+            fakePath
+          );
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (
+            client.pathTemplates
+              .projectLocationCollectionDataStoreServingConfigPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromProjectLocationCollectionDataStoreServingConfigName', () => {
+        const result =
+          client.matchLocationFromProjectLocationCollectionDataStoreServingConfigName(
+            fakePath
+          );
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (
+            client.pathTemplates
+              .projectLocationCollectionDataStoreServingConfigPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchCollectionFromProjectLocationCollectionDataStoreServingConfigName', () => {
+        const result =
+          client.matchCollectionFromProjectLocationCollectionDataStoreServingConfigName(
+            fakePath
+          );
+        assert.strictEqual(result, 'collectionValue');
+        assert(
+          (
+            client.pathTemplates
+              .projectLocationCollectionDataStoreServingConfigPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchDataStoreFromProjectLocationCollectionDataStoreServingConfigName', () => {
+        const result =
+          client.matchDataStoreFromProjectLocationCollectionDataStoreServingConfigName(
+            fakePath
+          );
+        assert.strictEqual(result, 'dataStoreValue');
+        assert(
+          (
+            client.pathTemplates
+              .projectLocationCollectionDataStoreServingConfigPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchServingConfigFromProjectLocationCollectionDataStoreServingConfigName', () => {
+        const result =
+          client.matchServingConfigFromProjectLocationCollectionDataStoreServingConfigName(
+            fakePath
+          );
+        assert.strictEqual(result, 'servingConfigValue');
+        assert(
+          (
+            client.pathTemplates
+              .projectLocationCollectionDataStoreServingConfigPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('projectLocationCollectionDataStoreSession', async () => {
       const fakePath =
         '/rendered/path/projectLocationCollectionDataStoreSession';
       const expectedParameters = {
@@ -3504,7 +3631,7 @@ describe('v1.DocumentServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectLocationCollectionDataStoreSessionPathTemplate.render =
         sinon.stub().returns(fakePath);
       client.pathTemplates.projectLocationCollectionDataStoreSessionPathTemplate.match =
@@ -3616,7 +3743,7 @@ describe('v1.DocumentServiceClient', () => {
       });
     });
 
-    describe('projectLocationCollectionDataStoreSessionAnswer', () => {
+    describe('projectLocationCollectionDataStoreSessionAnswer', async () => {
       const fakePath =
         '/rendered/path/projectLocationCollectionDataStoreSessionAnswer';
       const expectedParameters = {
@@ -3631,7 +3758,7 @@ describe('v1.DocumentServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectLocationCollectionDataStoreSessionAnswerPathTemplate.render =
         sinon.stub().returns(fakePath);
       client.pathTemplates.projectLocationCollectionDataStoreSessionAnswerPathTemplate.match =
@@ -3762,7 +3889,7 @@ describe('v1.DocumentServiceClient', () => {
       });
     });
 
-    describe('projectLocationCollectionDataStoreSiteSearchEngine', () => {
+    describe('projectLocationCollectionDataStoreSiteSearchEngine', async () => {
       const fakePath =
         '/rendered/path/projectLocationCollectionDataStoreSiteSearchEngine';
       const expectedParameters = {
@@ -3775,7 +3902,7 @@ describe('v1.DocumentServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectLocationCollectionDataStoreSiteSearchEnginePathTemplate.render =
         sinon.stub().returns(fakePath);
       client.pathTemplates.projectLocationCollectionDataStoreSiteSearchEnginePathTemplate.match =
@@ -3870,7 +3997,134 @@ describe('v1.DocumentServiceClient', () => {
       });
     });
 
-    describe('projectLocationCollectionDataStoreSiteSearchEngineTargetSite', () => {
+    describe('projectLocationCollectionDataStoreSiteSearchEngineSitemap', async () => {
+      const fakePath =
+        '/rendered/path/projectLocationCollectionDataStoreSiteSearchEngineSitemap';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        collection: 'collectionValue',
+        data_store: 'dataStoreValue',
+        sitemap: 'sitemapValue',
+      };
+      const client = new documentserviceModule.v1.DocumentServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      client.pathTemplates.projectLocationCollectionDataStoreSiteSearchEngineSitemapPathTemplate.render =
+        sinon.stub().returns(fakePath);
+      client.pathTemplates.projectLocationCollectionDataStoreSiteSearchEngineSitemapPathTemplate.match =
+        sinon.stub().returns(expectedParameters);
+
+      it('projectLocationCollectionDataStoreSiteSearchEngineSitemapPath', () => {
+        const result =
+          client.projectLocationCollectionDataStoreSiteSearchEngineSitemapPath(
+            'projectValue',
+            'locationValue',
+            'collectionValue',
+            'dataStoreValue',
+            'sitemapValue'
+          );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates
+              .projectLocationCollectionDataStoreSiteSearchEngineSitemapPathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromProjectLocationCollectionDataStoreSiteSearchEngineSitemapName', () => {
+        const result =
+          client.matchProjectFromProjectLocationCollectionDataStoreSiteSearchEngineSitemapName(
+            fakePath
+          );
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (
+            client.pathTemplates
+              .projectLocationCollectionDataStoreSiteSearchEngineSitemapPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromProjectLocationCollectionDataStoreSiteSearchEngineSitemapName', () => {
+        const result =
+          client.matchLocationFromProjectLocationCollectionDataStoreSiteSearchEngineSitemapName(
+            fakePath
+          );
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (
+            client.pathTemplates
+              .projectLocationCollectionDataStoreSiteSearchEngineSitemapPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchCollectionFromProjectLocationCollectionDataStoreSiteSearchEngineSitemapName', () => {
+        const result =
+          client.matchCollectionFromProjectLocationCollectionDataStoreSiteSearchEngineSitemapName(
+            fakePath
+          );
+        assert.strictEqual(result, 'collectionValue');
+        assert(
+          (
+            client.pathTemplates
+              .projectLocationCollectionDataStoreSiteSearchEngineSitemapPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchDataStoreFromProjectLocationCollectionDataStoreSiteSearchEngineSitemapName', () => {
+        const result =
+          client.matchDataStoreFromProjectLocationCollectionDataStoreSiteSearchEngineSitemapName(
+            fakePath
+          );
+        assert.strictEqual(result, 'dataStoreValue');
+        assert(
+          (
+            client.pathTemplates
+              .projectLocationCollectionDataStoreSiteSearchEngineSitemapPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchSitemapFromProjectLocationCollectionDataStoreSiteSearchEngineSitemapName', () => {
+        const result =
+          client.matchSitemapFromProjectLocationCollectionDataStoreSiteSearchEngineSitemapName(
+            fakePath
+          );
+        assert.strictEqual(result, 'sitemapValue');
+        assert(
+          (
+            client.pathTemplates
+              .projectLocationCollectionDataStoreSiteSearchEngineSitemapPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('projectLocationCollectionDataStoreSiteSearchEngineTargetSite', async () => {
       const fakePath =
         '/rendered/path/projectLocationCollectionDataStoreSiteSearchEngineTargetSite';
       const expectedParameters = {
@@ -3884,7 +4138,7 @@ describe('v1.DocumentServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectLocationCollectionDataStoreSiteSearchEngineTargetSitePathTemplate.render =
         sinon.stub().returns(fakePath);
       client.pathTemplates.projectLocationCollectionDataStoreSiteSearchEngineTargetSitePathTemplate.match =
@@ -3997,7 +4251,7 @@ describe('v1.DocumentServiceClient', () => {
       });
     });
 
-    describe('projectLocationCollectionEngineControl', () => {
+    describe('projectLocationCollectionEngineControl', async () => {
       const fakePath = '/rendered/path/projectLocationCollectionEngineControl';
       const expectedParameters = {
         project: 'projectValue',
@@ -4010,7 +4264,7 @@ describe('v1.DocumentServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectLocationCollectionEngineControlPathTemplate.render =
         sinon.stub().returns(fakePath);
       client.pathTemplates.projectLocationCollectionEngineControlPathTemplate.match =
@@ -4122,7 +4376,7 @@ describe('v1.DocumentServiceClient', () => {
       });
     });
 
-    describe('projectLocationCollectionEngineConversation', () => {
+    describe('projectLocationCollectionEngineConversation', async () => {
       const fakePath =
         '/rendered/path/projectLocationCollectionEngineConversation';
       const expectedParameters = {
@@ -4136,7 +4390,7 @@ describe('v1.DocumentServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectLocationCollectionEngineConversationPathTemplate.render =
         sinon.stub().returns(fakePath);
       client.pathTemplates.projectLocationCollectionEngineConversationPathTemplate.match =
@@ -4248,7 +4502,133 @@ describe('v1.DocumentServiceClient', () => {
       });
     });
 
-    describe('projectLocationCollectionEngineSession', () => {
+    describe('projectLocationCollectionEngineServingConfig', async () => {
+      const fakePath =
+        '/rendered/path/projectLocationCollectionEngineServingConfig';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        collection: 'collectionValue',
+        engine: 'engineValue',
+        serving_config: 'servingConfigValue',
+      };
+      const client = new documentserviceModule.v1.DocumentServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      client.pathTemplates.projectLocationCollectionEngineServingConfigPathTemplate.render =
+        sinon.stub().returns(fakePath);
+      client.pathTemplates.projectLocationCollectionEngineServingConfigPathTemplate.match =
+        sinon.stub().returns(expectedParameters);
+
+      it('projectLocationCollectionEngineServingConfigPath', () => {
+        const result = client.projectLocationCollectionEngineServingConfigPath(
+          'projectValue',
+          'locationValue',
+          'collectionValue',
+          'engineValue',
+          'servingConfigValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates
+              .projectLocationCollectionEngineServingConfigPathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromProjectLocationCollectionEngineServingConfigName', () => {
+        const result =
+          client.matchProjectFromProjectLocationCollectionEngineServingConfigName(
+            fakePath
+          );
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (
+            client.pathTemplates
+              .projectLocationCollectionEngineServingConfigPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromProjectLocationCollectionEngineServingConfigName', () => {
+        const result =
+          client.matchLocationFromProjectLocationCollectionEngineServingConfigName(
+            fakePath
+          );
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (
+            client.pathTemplates
+              .projectLocationCollectionEngineServingConfigPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchCollectionFromProjectLocationCollectionEngineServingConfigName', () => {
+        const result =
+          client.matchCollectionFromProjectLocationCollectionEngineServingConfigName(
+            fakePath
+          );
+        assert.strictEqual(result, 'collectionValue');
+        assert(
+          (
+            client.pathTemplates
+              .projectLocationCollectionEngineServingConfigPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchEngineFromProjectLocationCollectionEngineServingConfigName', () => {
+        const result =
+          client.matchEngineFromProjectLocationCollectionEngineServingConfigName(
+            fakePath
+          );
+        assert.strictEqual(result, 'engineValue');
+        assert(
+          (
+            client.pathTemplates
+              .projectLocationCollectionEngineServingConfigPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchServingConfigFromProjectLocationCollectionEngineServingConfigName', () => {
+        const result =
+          client.matchServingConfigFromProjectLocationCollectionEngineServingConfigName(
+            fakePath
+          );
+        assert.strictEqual(result, 'servingConfigValue');
+        assert(
+          (
+            client.pathTemplates
+              .projectLocationCollectionEngineServingConfigPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('projectLocationCollectionEngineSession', async () => {
       const fakePath = '/rendered/path/projectLocationCollectionEngineSession';
       const expectedParameters = {
         project: 'projectValue',
@@ -4261,7 +4641,7 @@ describe('v1.DocumentServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectLocationCollectionEngineSessionPathTemplate.render =
         sinon.stub().returns(fakePath);
       client.pathTemplates.projectLocationCollectionEngineSessionPathTemplate.match =
@@ -4373,7 +4753,7 @@ describe('v1.DocumentServiceClient', () => {
       });
     });
 
-    describe('projectLocationCollectionEngineSessionAnswer', () => {
+    describe('projectLocationCollectionEngineSessionAnswer', async () => {
       const fakePath =
         '/rendered/path/projectLocationCollectionEngineSessionAnswer';
       const expectedParameters = {
@@ -4388,7 +4768,7 @@ describe('v1.DocumentServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectLocationCollectionEngineSessionAnswerPathTemplate.render =
         sinon.stub().returns(fakePath);
       client.pathTemplates.projectLocationCollectionEngineSessionAnswerPathTemplate.match =
@@ -4518,7 +4898,7 @@ describe('v1.DocumentServiceClient', () => {
       });
     });
 
-    describe('projectLocationDataStore', () => {
+    describe('projectLocationDataStore', async () => {
       const fakePath = '/rendered/path/projectLocationDataStore';
       const expectedParameters = {
         project: 'projectValue',
@@ -4529,7 +4909,7 @@ describe('v1.DocumentServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectLocationDataStorePathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -4597,7 +4977,7 @@ describe('v1.DocumentServiceClient', () => {
       });
     });
 
-    describe('projectLocationDataStoreBranch', () => {
+    describe('projectLocationDataStoreBranch', async () => {
       const fakePath = '/rendered/path/projectLocationDataStoreBranch';
       const expectedParameters = {
         project: 'projectValue',
@@ -4609,7 +4989,7 @@ describe('v1.DocumentServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectLocationDataStoreBranchPathTemplate.render =
         sinon.stub().returns(fakePath);
       client.pathTemplates.projectLocationDataStoreBranchPathTemplate.match =
@@ -4690,7 +5070,7 @@ describe('v1.DocumentServiceClient', () => {
       });
     });
 
-    describe('projectLocationDataStoreBranchDocument', () => {
+    describe('projectLocationDataStoreBranchDocument', async () => {
       const fakePath = '/rendered/path/projectLocationDataStoreBranchDocument';
       const expectedParameters = {
         project: 'projectValue',
@@ -4703,7 +5083,7 @@ describe('v1.DocumentServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectLocationDataStoreBranchDocumentPathTemplate.render =
         sinon.stub().returns(fakePath);
       client.pathTemplates.projectLocationDataStoreBranchDocumentPathTemplate.match =
@@ -4815,7 +5195,7 @@ describe('v1.DocumentServiceClient', () => {
       });
     });
 
-    describe('projectLocationDataStoreBranchDocumentChunk', () => {
+    describe('projectLocationDataStoreBranchDocumentChunk', async () => {
       const fakePath =
         '/rendered/path/projectLocationDataStoreBranchDocumentChunk';
       const expectedParameters = {
@@ -4830,7 +5210,7 @@ describe('v1.DocumentServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectLocationDataStoreBranchDocumentChunkPathTemplate.render =
         sinon.stub().returns(fakePath);
       client.pathTemplates.projectLocationDataStoreBranchDocumentChunkPathTemplate.match =
@@ -4960,7 +5340,7 @@ describe('v1.DocumentServiceClient', () => {
       });
     });
 
-    describe('projectLocationDataStoreControl', () => {
+    describe('projectLocationDataStoreControl', async () => {
       const fakePath = '/rendered/path/projectLocationDataStoreControl';
       const expectedParameters = {
         project: 'projectValue',
@@ -4972,7 +5352,7 @@ describe('v1.DocumentServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectLocationDataStoreControlPathTemplate.render =
         sinon.stub().returns(fakePath);
       client.pathTemplates.projectLocationDataStoreControlPathTemplate.match =
@@ -5055,7 +5435,7 @@ describe('v1.DocumentServiceClient', () => {
       });
     });
 
-    describe('projectLocationDataStoreConversation', () => {
+    describe('projectLocationDataStoreConversation', async () => {
       const fakePath = '/rendered/path/projectLocationDataStoreConversation';
       const expectedParameters = {
         project: 'projectValue',
@@ -5067,7 +5447,7 @@ describe('v1.DocumentServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectLocationDataStoreConversationPathTemplate.render =
         sinon.stub().returns(fakePath);
       client.pathTemplates.projectLocationDataStoreConversationPathTemplate.match =
@@ -5161,7 +5541,7 @@ describe('v1.DocumentServiceClient', () => {
       });
     });
 
-    describe('projectLocationDataStoreCustomTuningModel', () => {
+    describe('projectLocationDataStoreCustomTuningModel', async () => {
       const fakePath =
         '/rendered/path/projectLocationDataStoreCustomTuningModel';
       const expectedParameters = {
@@ -5174,7 +5554,7 @@ describe('v1.DocumentServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectLocationDataStoreCustomTuningModelPathTemplate.render =
         sinon.stub().returns(fakePath);
       client.pathTemplates.projectLocationDataStoreCustomTuningModelPathTemplate.match =
@@ -5268,7 +5648,7 @@ describe('v1.DocumentServiceClient', () => {
       });
     });
 
-    describe('projectLocationDataStoreDocumentProcessingConfig', () => {
+    describe('projectLocationDataStoreDocumentProcessingConfig', async () => {
       const fakePath =
         '/rendered/path/projectLocationDataStoreDocumentProcessingConfig';
       const expectedParameters = {
@@ -5280,7 +5660,7 @@ describe('v1.DocumentServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectLocationDataStoreDocumentProcessingConfigPathTemplate.render =
         sinon.stub().returns(fakePath);
       client.pathTemplates.projectLocationDataStoreDocumentProcessingConfigPathTemplate.match =
@@ -5357,7 +5737,7 @@ describe('v1.DocumentServiceClient', () => {
       });
     });
 
-    describe('projectLocationDataStoreSchema', () => {
+    describe('projectLocationDataStoreSchema', async () => {
       const fakePath = '/rendered/path/projectLocationDataStoreSchema';
       const expectedParameters = {
         project: 'projectValue',
@@ -5369,7 +5749,7 @@ describe('v1.DocumentServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectLocationDataStoreSchemaPathTemplate.render =
         sinon.stub().returns(fakePath);
       client.pathTemplates.projectLocationDataStoreSchemaPathTemplate.match =
@@ -5450,7 +5830,113 @@ describe('v1.DocumentServiceClient', () => {
       });
     });
 
-    describe('projectLocationDataStoreSession', () => {
+    describe('projectLocationDataStoreServingConfig', async () => {
+      const fakePath = '/rendered/path/projectLocationDataStoreServingConfig';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        data_store: 'dataStoreValue',
+        serving_config: 'servingConfigValue',
+      };
+      const client = new documentserviceModule.v1.DocumentServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      client.pathTemplates.projectLocationDataStoreServingConfigPathTemplate.render =
+        sinon.stub().returns(fakePath);
+      client.pathTemplates.projectLocationDataStoreServingConfigPathTemplate.match =
+        sinon.stub().returns(expectedParameters);
+
+      it('projectLocationDataStoreServingConfigPath', () => {
+        const result = client.projectLocationDataStoreServingConfigPath(
+          'projectValue',
+          'locationValue',
+          'dataStoreValue',
+          'servingConfigValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates
+              .projectLocationDataStoreServingConfigPathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromProjectLocationDataStoreServingConfigName', () => {
+        const result =
+          client.matchProjectFromProjectLocationDataStoreServingConfigName(
+            fakePath
+          );
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (
+            client.pathTemplates
+              .projectLocationDataStoreServingConfigPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromProjectLocationDataStoreServingConfigName', () => {
+        const result =
+          client.matchLocationFromProjectLocationDataStoreServingConfigName(
+            fakePath
+          );
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (
+            client.pathTemplates
+              .projectLocationDataStoreServingConfigPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchDataStoreFromProjectLocationDataStoreServingConfigName', () => {
+        const result =
+          client.matchDataStoreFromProjectLocationDataStoreServingConfigName(
+            fakePath
+          );
+        assert.strictEqual(result, 'dataStoreValue');
+        assert(
+          (
+            client.pathTemplates
+              .projectLocationDataStoreServingConfigPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchServingConfigFromProjectLocationDataStoreServingConfigName', () => {
+        const result =
+          client.matchServingConfigFromProjectLocationDataStoreServingConfigName(
+            fakePath
+          );
+        assert.strictEqual(result, 'servingConfigValue');
+        assert(
+          (
+            client.pathTemplates
+              .projectLocationDataStoreServingConfigPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('projectLocationDataStoreSession', async () => {
       const fakePath = '/rendered/path/projectLocationDataStoreSession';
       const expectedParameters = {
         project: 'projectValue',
@@ -5462,7 +5948,7 @@ describe('v1.DocumentServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectLocationDataStoreSessionPathTemplate.render =
         sinon.stub().returns(fakePath);
       client.pathTemplates.projectLocationDataStoreSessionPathTemplate.match =
@@ -5545,7 +6031,7 @@ describe('v1.DocumentServiceClient', () => {
       });
     });
 
-    describe('projectLocationDataStoreSessionAnswer', () => {
+    describe('projectLocationDataStoreSessionAnswer', async () => {
       const fakePath = '/rendered/path/projectLocationDataStoreSessionAnswer';
       const expectedParameters = {
         project: 'projectValue',
@@ -5558,7 +6044,7 @@ describe('v1.DocumentServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectLocationDataStoreSessionAnswerPathTemplate.render =
         sinon.stub().returns(fakePath);
       client.pathTemplates.projectLocationDataStoreSessionAnswerPathTemplate.match =
@@ -5670,7 +6156,7 @@ describe('v1.DocumentServiceClient', () => {
       });
     });
 
-    describe('projectLocationDataStoreSiteSearchEngine', () => {
+    describe('projectLocationDataStoreSiteSearchEngine', async () => {
       const fakePath =
         '/rendered/path/projectLocationDataStoreSiteSearchEngine';
       const expectedParameters = {
@@ -5682,7 +6168,7 @@ describe('v1.DocumentServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectLocationDataStoreSiteSearchEnginePathTemplate.render =
         sinon.stub().returns(fakePath);
       client.pathTemplates.projectLocationDataStoreSiteSearchEnginePathTemplate.match =
@@ -5758,7 +6244,115 @@ describe('v1.DocumentServiceClient', () => {
       });
     });
 
-    describe('projectLocationDataStoreSiteSearchEngineTargetSite', () => {
+    describe('projectLocationDataStoreSiteSearchEngineSitemap', async () => {
+      const fakePath =
+        '/rendered/path/projectLocationDataStoreSiteSearchEngineSitemap';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        data_store: 'dataStoreValue',
+        sitemap: 'sitemapValue',
+      };
+      const client = new documentserviceModule.v1.DocumentServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      client.pathTemplates.projectLocationDataStoreSiteSearchEngineSitemapPathTemplate.render =
+        sinon.stub().returns(fakePath);
+      client.pathTemplates.projectLocationDataStoreSiteSearchEngineSitemapPathTemplate.match =
+        sinon.stub().returns(expectedParameters);
+
+      it('projectLocationDataStoreSiteSearchEngineSitemapPath', () => {
+        const result =
+          client.projectLocationDataStoreSiteSearchEngineSitemapPath(
+            'projectValue',
+            'locationValue',
+            'dataStoreValue',
+            'sitemapValue'
+          );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates
+              .projectLocationDataStoreSiteSearchEngineSitemapPathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromProjectLocationDataStoreSiteSearchEngineSitemapName', () => {
+        const result =
+          client.matchProjectFromProjectLocationDataStoreSiteSearchEngineSitemapName(
+            fakePath
+          );
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (
+            client.pathTemplates
+              .projectLocationDataStoreSiteSearchEngineSitemapPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromProjectLocationDataStoreSiteSearchEngineSitemapName', () => {
+        const result =
+          client.matchLocationFromProjectLocationDataStoreSiteSearchEngineSitemapName(
+            fakePath
+          );
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (
+            client.pathTemplates
+              .projectLocationDataStoreSiteSearchEngineSitemapPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchDataStoreFromProjectLocationDataStoreSiteSearchEngineSitemapName', () => {
+        const result =
+          client.matchDataStoreFromProjectLocationDataStoreSiteSearchEngineSitemapName(
+            fakePath
+          );
+        assert.strictEqual(result, 'dataStoreValue');
+        assert(
+          (
+            client.pathTemplates
+              .projectLocationDataStoreSiteSearchEngineSitemapPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchSitemapFromProjectLocationDataStoreSiteSearchEngineSitemapName', () => {
+        const result =
+          client.matchSitemapFromProjectLocationDataStoreSiteSearchEngineSitemapName(
+            fakePath
+          );
+        assert.strictEqual(result, 'sitemapValue');
+        assert(
+          (
+            client.pathTemplates
+              .projectLocationDataStoreSiteSearchEngineSitemapPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('projectLocationDataStoreSiteSearchEngineTargetSite', async () => {
       const fakePath =
         '/rendered/path/projectLocationDataStoreSiteSearchEngineTargetSite';
       const expectedParameters = {
@@ -5771,7 +6365,7 @@ describe('v1.DocumentServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectLocationDataStoreSiteSearchEngineTargetSitePathTemplate.render =
         sinon.stub().returns(fakePath);
       client.pathTemplates.projectLocationDataStoreSiteSearchEngineTargetSitePathTemplate.match =

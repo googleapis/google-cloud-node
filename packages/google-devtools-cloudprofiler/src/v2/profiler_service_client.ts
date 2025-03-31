@@ -27,6 +27,7 @@ import type {
 
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
+import {loggingUtils as logging} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -55,6 +56,8 @@ export class ProfilerServiceClient {
   private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
+  private _log = logging.log('cloudprofiler');
+
   auth: gax.GoogleAuth;
   descriptors: Descriptors = {
     page: {},
@@ -89,7 +92,7 @@ export class ProfilerServiceClient {
    *     Developer's Console, e.g. 'grape-spaceship-123'. We will also check
    *     the environment variable GCLOUD_PROJECT for your project ID. If your
    *     app is running in an environment which supports
-   *     {@link https://developers.google.com/identity/protocols/application-default-credentials Application Default Credentials},
+   *     {@link https://cloud.google.com/docs/authentication/application-default-credentials Application Default Credentials},
    *     your project ID will be detected automatically.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
@@ -490,8 +493,39 @@ export class ProfilerServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.createProfile(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('createProfile request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.devtools.cloudprofiler.v2.IProfile,
+          | protos.google.devtools.cloudprofiler.v2.ICreateProfileRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('createProfile response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .createProfile(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.devtools.cloudprofiler.v2.IProfile,
+          (
+            | protos.google.devtools.cloudprofiler.v2.ICreateProfileRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('createProfile response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * CreateOfflineProfile creates a new profile resource in the offline
@@ -595,8 +629,39 @@ export class ProfilerServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.createOfflineProfile(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('createOfflineProfile request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.devtools.cloudprofiler.v2.IProfile,
+          | protos.google.devtools.cloudprofiler.v2.ICreateOfflineProfileRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('createOfflineProfile response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .createOfflineProfile(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.devtools.cloudprofiler.v2.IProfile,
+          (
+            | protos.google.devtools.cloudprofiler.v2.ICreateOfflineProfileRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('createOfflineProfile response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * UpdateProfile updates the profile bytes and labels on the profile resource
@@ -698,8 +763,39 @@ export class ProfilerServiceClient {
       this._gaxModule.routingHeader.fromParams({
         'profile.name': request.profile!.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.updateProfile(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('updateProfile request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.devtools.cloudprofiler.v2.IProfile,
+          | protos.google.devtools.cloudprofiler.v2.IUpdateProfileRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('updateProfile response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .updateProfile(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.devtools.cloudprofiler.v2.IProfile,
+          (
+            | protos.google.devtools.cloudprofiler.v2.IUpdateProfileRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('updateProfile response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
 
   // --------------------
@@ -774,6 +870,7 @@ export class ProfilerServiceClient {
   close(): Promise<void> {
     if (this.profilerServiceStub && !this._terminated) {
       return this.profilerServiceStub.then(stub => {
+        this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
       });

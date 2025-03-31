@@ -29,6 +29,7 @@ import type {
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
+import {loggingUtils as logging} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -53,6 +54,8 @@ export class RecaptchaEnterpriseServiceClient {
   private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
+  private _log = logging.log('recaptcha-enterprise');
+
   auth: gax.GoogleAuth;
   descriptors: Descriptors = {
     page: {},
@@ -87,7 +90,7 @@ export class RecaptchaEnterpriseServiceClient {
    *     Developer's Console, e.g. 'grape-spaceship-123'. We will also check
    *     the environment variable GCLOUD_PROJECT for your project ID. If your
    *     app is running in an environment which supports
-   *     {@link https://developers.google.com/identity/protocols/application-default-credentials Application Default Credentials},
+   *     {@link https://cloud.google.com/docs/authentication/application-default-credentials Application Default Credentials},
    *     your project ID will be detected automatically.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
@@ -543,8 +546,39 @@ export class RecaptchaEnterpriseServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.createAssessment(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('createAssessment request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.recaptchaenterprise.v1.IAssessment,
+          | protos.google.cloud.recaptchaenterprise.v1.ICreateAssessmentRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('createAssessment response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .createAssessment(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.recaptchaenterprise.v1.IAssessment,
+          (
+            | protos.google.cloud.recaptchaenterprise.v1.ICreateAssessmentRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('createAssessment response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Annotates a previously created Assessment to provide additional information
@@ -659,8 +693,39 @@ export class RecaptchaEnterpriseServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.annotateAssessment(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('annotateAssessment request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.recaptchaenterprise.v1.IAnnotateAssessmentResponse,
+          | protos.google.cloud.recaptchaenterprise.v1.IAnnotateAssessmentRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('annotateAssessment response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .annotateAssessment(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.recaptchaenterprise.v1.IAnnotateAssessmentResponse,
+          (
+            | protos.google.cloud.recaptchaenterprise.v1.IAnnotateAssessmentRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('annotateAssessment response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Creates a new reCAPTCHA Enterprise key.
@@ -752,8 +817,39 @@ export class RecaptchaEnterpriseServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.createKey(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('createKey request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.recaptchaenterprise.v1.IKey,
+          | protos.google.cloud.recaptchaenterprise.v1.ICreateKeyRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('createKey response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .createKey(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.recaptchaenterprise.v1.IKey,
+          (
+            | protos.google.cloud.recaptchaenterprise.v1.ICreateKeyRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('createKey response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Returns the secret key related to the specified public key.
@@ -851,12 +947,39 @@ export class RecaptchaEnterpriseServiceClient {
       this._gaxModule.routingHeader.fromParams({
         key: request.key ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.retrieveLegacySecretKey(
-      request,
-      options,
-      callback
-    );
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('retrieveLegacySecretKey request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.recaptchaenterprise.v1.IRetrieveLegacySecretKeyResponse,
+          | protos.google.cloud.recaptchaenterprise.v1.IRetrieveLegacySecretKeyRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('retrieveLegacySecretKey response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .retrieveLegacySecretKey(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.recaptchaenterprise.v1.IRetrieveLegacySecretKeyResponse,
+          (
+            | protos.google.cloud.recaptchaenterprise.v1.IRetrieveLegacySecretKeyRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('retrieveLegacySecretKey response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Returns the specified key.
@@ -946,8 +1069,36 @@ export class RecaptchaEnterpriseServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.getKey(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('getKey request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.recaptchaenterprise.v1.IKey,
+          | protos.google.cloud.recaptchaenterprise.v1.IGetKeyRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getKey response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getKey(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.recaptchaenterprise.v1.IKey,
+          protos.google.cloud.recaptchaenterprise.v1.IGetKeyRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getKey response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Updates the specified key.
@@ -1039,8 +1190,39 @@ export class RecaptchaEnterpriseServiceClient {
       this._gaxModule.routingHeader.fromParams({
         'key.name': request.key!.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.updateKey(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('updateKey request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.recaptchaenterprise.v1.IKey,
+          | protos.google.cloud.recaptchaenterprise.v1.IUpdateKeyRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('updateKey response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .updateKey(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.recaptchaenterprise.v1.IKey,
+          (
+            | protos.google.cloud.recaptchaenterprise.v1.IUpdateKeyRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('updateKey response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Deletes the specified key.
@@ -1130,8 +1312,39 @@ export class RecaptchaEnterpriseServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.deleteKey(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('deleteKey request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.cloud.recaptchaenterprise.v1.IDeleteKeyRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('deleteKey response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .deleteKey(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.protobuf.IEmpty,
+          (
+            | protos.google.cloud.recaptchaenterprise.v1.IDeleteKeyRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteKey response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Migrates an existing key from reCAPTCHA to reCAPTCHA Enterprise.
@@ -1235,8 +1448,39 @@ export class RecaptchaEnterpriseServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.migrateKey(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('migrateKey request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.recaptchaenterprise.v1.IKey,
+          | protos.google.cloud.recaptchaenterprise.v1.IMigrateKeyRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('migrateKey response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .migrateKey(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.recaptchaenterprise.v1.IKey,
+          (
+            | protos.google.cloud.recaptchaenterprise.v1.IMigrateKeyRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('migrateKey response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Adds an IP override to a key. The following restrictions hold:
@@ -1337,8 +1581,39 @@ export class RecaptchaEnterpriseServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.addIpOverride(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('addIpOverride request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.recaptchaenterprise.v1.IAddIpOverrideResponse,
+          | protos.google.cloud.recaptchaenterprise.v1.IAddIpOverrideRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('addIpOverride response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .addIpOverride(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.recaptchaenterprise.v1.IAddIpOverrideResponse,
+          (
+            | protos.google.cloud.recaptchaenterprise.v1.IAddIpOverrideRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('addIpOverride response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Removes an IP override from a key. The following restrictions hold:
@@ -1440,8 +1715,39 @@ export class RecaptchaEnterpriseServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.removeIpOverride(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('removeIpOverride request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.recaptchaenterprise.v1.IRemoveIpOverrideResponse,
+          | protos.google.cloud.recaptchaenterprise.v1.IRemoveIpOverrideRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('removeIpOverride response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .removeIpOverride(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.recaptchaenterprise.v1.IRemoveIpOverrideResponse,
+          (
+            | protos.google.cloud.recaptchaenterprise.v1.IRemoveIpOverrideRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('removeIpOverride response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Get some aggregated metrics for a Key. This data can be used to build
@@ -1532,8 +1838,39 @@ export class RecaptchaEnterpriseServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.getMetrics(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('getMetrics request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.recaptchaenterprise.v1.IMetrics,
+          | protos.google.cloud.recaptchaenterprise.v1.IGetMetricsRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getMetrics response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getMetrics(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.recaptchaenterprise.v1.IMetrics,
+          (
+            | protos.google.cloud.recaptchaenterprise.v1.IGetMetricsRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getMetrics response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Creates a new FirewallPolicy, specifying conditions at which reCAPTCHA
@@ -1633,8 +1970,39 @@ export class RecaptchaEnterpriseServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.createFirewallPolicy(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('createFirewallPolicy request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.recaptchaenterprise.v1.IFirewallPolicy,
+          | protos.google.cloud.recaptchaenterprise.v1.ICreateFirewallPolicyRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('createFirewallPolicy response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .createFirewallPolicy(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.recaptchaenterprise.v1.IFirewallPolicy,
+          (
+            | protos.google.cloud.recaptchaenterprise.v1.ICreateFirewallPolicyRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('createFirewallPolicy response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Returns the specified firewall policy.
@@ -1730,8 +2098,39 @@ export class RecaptchaEnterpriseServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.getFirewallPolicy(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('getFirewallPolicy request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.recaptchaenterprise.v1.IFirewallPolicy,
+          | protos.google.cloud.recaptchaenterprise.v1.IGetFirewallPolicyRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getFirewallPolicy response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getFirewallPolicy(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.recaptchaenterprise.v1.IFirewallPolicy,
+          (
+            | protos.google.cloud.recaptchaenterprise.v1.IGetFirewallPolicyRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getFirewallPolicy response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Updates the specified firewall policy.
@@ -1829,8 +2228,39 @@ export class RecaptchaEnterpriseServiceClient {
       this._gaxModule.routingHeader.fromParams({
         'firewall_policy.name': request.firewallPolicy!.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.updateFirewallPolicy(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('updateFirewallPolicy request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.recaptchaenterprise.v1.IFirewallPolicy,
+          | protos.google.cloud.recaptchaenterprise.v1.IUpdateFirewallPolicyRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('updateFirewallPolicy response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .updateFirewallPolicy(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.recaptchaenterprise.v1.IFirewallPolicy,
+          (
+            | protos.google.cloud.recaptchaenterprise.v1.IUpdateFirewallPolicyRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('updateFirewallPolicy response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Deletes the specified firewall policy.
@@ -1926,8 +2356,39 @@ export class RecaptchaEnterpriseServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.deleteFirewallPolicy(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('deleteFirewallPolicy request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.cloud.recaptchaenterprise.v1.IDeleteFirewallPolicyRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('deleteFirewallPolicy response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .deleteFirewallPolicy(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.protobuf.IEmpty,
+          (
+            | protos.google.cloud.recaptchaenterprise.v1.IDeleteFirewallPolicyRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteFirewallPolicy response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Reorders all firewall policies.
@@ -2026,12 +2487,39 @@ export class RecaptchaEnterpriseServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.reorderFirewallPolicies(
-      request,
-      options,
-      callback
-    );
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('reorderFirewallPolicies request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.recaptchaenterprise.v1.IReorderFirewallPoliciesResponse,
+          | protos.google.cloud.recaptchaenterprise.v1.IReorderFirewallPoliciesRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('reorderFirewallPolicies response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .reorderFirewallPolicies(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.recaptchaenterprise.v1.IReorderFirewallPoliciesResponse,
+          (
+            | protos.google.cloud.recaptchaenterprise.v1.IReorderFirewallPoliciesRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('reorderFirewallPolicies response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
 
   /**
@@ -2131,12 +2619,40 @@ export class RecaptchaEnterpriseServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.listKeys(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.recaptchaenterprise.v1.IListKeysRequest,
+          | protos.google.cloud.recaptchaenterprise.v1.IListKeysResponse
+          | null
+          | undefined,
+          protos.google.cloud.recaptchaenterprise.v1.IKey
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listKeys values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listKeys request %j', request);
+    return this.innerApiCalls
+      .listKeys(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.recaptchaenterprise.v1.IKey[],
+          protos.google.cloud.recaptchaenterprise.v1.IListKeysRequest | null,
+          protos.google.cloud.recaptchaenterprise.v1.IListKeysResponse,
+        ]) => {
+          this._log.info('listKeys values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listKeys`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
@@ -2173,7 +2689,10 @@ export class RecaptchaEnterpriseServiceClient {
       });
     const defaultCallSettings = this._defaults['listKeys'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listKeys stream %j', request);
     return this.descriptors.page.listKeys.createStream(
       this.innerApiCalls.listKeys as GaxCall,
       request,
@@ -2222,7 +2741,10 @@ export class RecaptchaEnterpriseServiceClient {
       });
     const defaultCallSettings = this._defaults['listKeys'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listKeys iterate %j', request);
     return this.descriptors.page.listKeys.asyncIterate(
       this.innerApiCalls['listKeys'] as GaxCall,
       request as {},
@@ -2328,12 +2850,40 @@ export class RecaptchaEnterpriseServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.listIpOverrides(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.recaptchaenterprise.v1.IListIpOverridesRequest,
+          | protos.google.cloud.recaptchaenterprise.v1.IListIpOverridesResponse
+          | null
+          | undefined,
+          protos.google.cloud.recaptchaenterprise.v1.IIpOverrideData
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listIpOverrides values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listIpOverrides request %j', request);
+    return this.innerApiCalls
+      .listIpOverrides(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.recaptchaenterprise.v1.IIpOverrideData[],
+          protos.google.cloud.recaptchaenterprise.v1.IListIpOverridesRequest | null,
+          protos.google.cloud.recaptchaenterprise.v1.IListIpOverridesResponse,
+        ]) => {
+          this._log.info('listIpOverrides values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listIpOverrides`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
@@ -2372,7 +2922,10 @@ export class RecaptchaEnterpriseServiceClient {
       });
     const defaultCallSettings = this._defaults['listIpOverrides'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listIpOverrides stream %j', request);
     return this.descriptors.page.listIpOverrides.createStream(
       this.innerApiCalls.listIpOverrides as GaxCall,
       request,
@@ -2423,7 +2976,10 @@ export class RecaptchaEnterpriseServiceClient {
       });
     const defaultCallSettings = this._defaults['listIpOverrides'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listIpOverrides iterate %j', request);
     return this.descriptors.page.listIpOverrides.asyncIterate(
       this.innerApiCalls['listIpOverrides'] as GaxCall,
       request as {},
@@ -2527,12 +3083,40 @@ export class RecaptchaEnterpriseServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.listFirewallPolicies(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.recaptchaenterprise.v1.IListFirewallPoliciesRequest,
+          | protos.google.cloud.recaptchaenterprise.v1.IListFirewallPoliciesResponse
+          | null
+          | undefined,
+          protos.google.cloud.recaptchaenterprise.v1.IFirewallPolicy
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listFirewallPolicies values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listFirewallPolicies request %j', request);
+    return this.innerApiCalls
+      .listFirewallPolicies(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.recaptchaenterprise.v1.IFirewallPolicy[],
+          protos.google.cloud.recaptchaenterprise.v1.IListFirewallPoliciesRequest | null,
+          protos.google.cloud.recaptchaenterprise.v1.IListFirewallPoliciesResponse,
+        ]) => {
+          this._log.info('listFirewallPolicies values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listFirewallPolicies`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
@@ -2569,7 +3153,10 @@ export class RecaptchaEnterpriseServiceClient {
       });
     const defaultCallSettings = this._defaults['listFirewallPolicies'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listFirewallPolicies stream %j', request);
     return this.descriptors.page.listFirewallPolicies.createStream(
       this.innerApiCalls.listFirewallPolicies as GaxCall,
       request,
@@ -2618,7 +3205,10 @@ export class RecaptchaEnterpriseServiceClient {
       });
     const defaultCallSettings = this._defaults['listFirewallPolicies'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listFirewallPolicies iterate %j', request);
     return this.descriptors.page.listFirewallPolicies.asyncIterate(
       this.innerApiCalls['listFirewallPolicies'] as GaxCall,
       request as {},
@@ -2727,16 +3317,40 @@ export class RecaptchaEnterpriseServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.listRelatedAccountGroups(
-      request,
-      options,
-      callback
-    );
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.recaptchaenterprise.v1.IListRelatedAccountGroupsRequest,
+          | protos.google.cloud.recaptchaenterprise.v1.IListRelatedAccountGroupsResponse
+          | null
+          | undefined,
+          protos.google.cloud.recaptchaenterprise.v1.IRelatedAccountGroup
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listRelatedAccountGroups values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listRelatedAccountGroups request %j', request);
+    return this.innerApiCalls
+      .listRelatedAccountGroups(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.recaptchaenterprise.v1.IRelatedAccountGroup[],
+          protos.google.cloud.recaptchaenterprise.v1.IListRelatedAccountGroupsRequest | null,
+          protos.google.cloud.recaptchaenterprise.v1.IListRelatedAccountGroupsResponse,
+        ]) => {
+          this._log.info('listRelatedAccountGroups values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listRelatedAccountGroups`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
@@ -2778,7 +3392,10 @@ export class RecaptchaEnterpriseServiceClient {
       });
     const defaultCallSettings = this._defaults['listRelatedAccountGroups'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listRelatedAccountGroups stream %j', request);
     return this.descriptors.page.listRelatedAccountGroups.createStream(
       this.innerApiCalls.listRelatedAccountGroups as GaxCall,
       request,
@@ -2832,7 +3449,10 @@ export class RecaptchaEnterpriseServiceClient {
       });
     const defaultCallSettings = this._defaults['listRelatedAccountGroups'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listRelatedAccountGroups iterate %j', request);
     return this.descriptors.page.listRelatedAccountGroups.asyncIterate(
       this.innerApiCalls['listRelatedAccountGroups'] as GaxCall,
       request as {},
@@ -2941,16 +3561,46 @@ export class RecaptchaEnterpriseServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.listRelatedAccountGroupMemberships(
-      request,
-      options,
-      callback
-    );
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.recaptchaenterprise.v1.IListRelatedAccountGroupMembershipsRequest,
+          | protos.google.cloud.recaptchaenterprise.v1.IListRelatedAccountGroupMembershipsResponse
+          | null
+          | undefined,
+          protos.google.cloud.recaptchaenterprise.v1.IRelatedAccountGroupMembership
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info(
+            'listRelatedAccountGroupMemberships values %j',
+            values
+          );
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listRelatedAccountGroupMemberships request %j', request);
+    return this.innerApiCalls
+      .listRelatedAccountGroupMemberships(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.recaptchaenterprise.v1.IRelatedAccountGroupMembership[],
+          protos.google.cloud.recaptchaenterprise.v1.IListRelatedAccountGroupMembershipsRequest | null,
+          protos.google.cloud.recaptchaenterprise.v1.IListRelatedAccountGroupMembershipsResponse,
+        ]) => {
+          this._log.info(
+            'listRelatedAccountGroupMemberships values %j',
+            response
+          );
+          return [response, input, output];
+        }
+      );
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listRelatedAccountGroupMemberships`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
@@ -2993,7 +3643,10 @@ export class RecaptchaEnterpriseServiceClient {
     const defaultCallSettings =
       this._defaults['listRelatedAccountGroupMemberships'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listRelatedAccountGroupMemberships stream %j', request);
     return this.descriptors.page.listRelatedAccountGroupMemberships.createStream(
       this.innerApiCalls.listRelatedAccountGroupMemberships as GaxCall,
       request,
@@ -3048,7 +3701,10 @@ export class RecaptchaEnterpriseServiceClient {
     const defaultCallSettings =
       this._defaults['listRelatedAccountGroupMemberships'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listRelatedAccountGroupMemberships iterate %j', request);
     return this.descriptors.page.listRelatedAccountGroupMemberships.asyncIterate(
       this.innerApiCalls['listRelatedAccountGroupMemberships'] as GaxCall,
       request as {},
@@ -3170,16 +3826,46 @@ export class RecaptchaEnterpriseServiceClient {
       this._gaxModule.routingHeader.fromParams({
         project: request.project ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.searchRelatedAccountGroupMemberships(
-      request,
-      options,
-      callback
-    );
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.recaptchaenterprise.v1.ISearchRelatedAccountGroupMembershipsRequest,
+          | protos.google.cloud.recaptchaenterprise.v1.ISearchRelatedAccountGroupMembershipsResponse
+          | null
+          | undefined,
+          protos.google.cloud.recaptchaenterprise.v1.IRelatedAccountGroupMembership
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info(
+            'searchRelatedAccountGroupMemberships values %j',
+            values
+          );
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('searchRelatedAccountGroupMemberships request %j', request);
+    return this.innerApiCalls
+      .searchRelatedAccountGroupMemberships(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.recaptchaenterprise.v1.IRelatedAccountGroupMembership[],
+          protos.google.cloud.recaptchaenterprise.v1.ISearchRelatedAccountGroupMembershipsRequest | null,
+          protos.google.cloud.recaptchaenterprise.v1.ISearchRelatedAccountGroupMembershipsResponse,
+        ]) => {
+          this._log.info(
+            'searchRelatedAccountGroupMemberships values %j',
+            response
+          );
+          return [response, input, output];
+        }
+      );
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `searchRelatedAccountGroupMemberships`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.project
@@ -3235,7 +3921,10 @@ export class RecaptchaEnterpriseServiceClient {
     const defaultCallSettings =
       this._defaults['searchRelatedAccountGroupMemberships'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('searchRelatedAccountGroupMemberships stream %j', request);
     return this.descriptors.page.searchRelatedAccountGroupMemberships.createStream(
       this.innerApiCalls.searchRelatedAccountGroupMemberships as GaxCall,
       request,
@@ -3303,7 +3992,10 @@ export class RecaptchaEnterpriseServiceClient {
     const defaultCallSettings =
       this._defaults['searchRelatedAccountGroupMemberships'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('searchRelatedAccountGroupMemberships iterate %j', request);
     return this.descriptors.page.searchRelatedAccountGroupMemberships.asyncIterate(
       this.innerApiCalls['searchRelatedAccountGroupMemberships'] as GaxCall,
       request as {},
@@ -3603,6 +4295,7 @@ export class RecaptchaEnterpriseServiceClient {
   close(): Promise<void> {
     if (this.recaptchaEnterpriseServiceStub && !this._terminated) {
       return this.recaptchaEnterpriseServiceStub.then(stub => {
+        this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
       });

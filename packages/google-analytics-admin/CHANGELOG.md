@@ -1,5 +1,29 @@
 # Changelog
 
+## [8.1.0](https://github.com/googleapis/google-cloud-node/compare/admin-v8.0.0...admin-v8.1.0) (2025-03-19)
+
+
+### Features
+
+* [Many APIs] await/catch promises, and update listOperationsAsync return type ([#6182](https://github.com/googleapis/google-cloud-node/issues/6182)) ([c41ff07](https://github.com/googleapis/google-cloud-node/commit/c41ff0729b65a1207978b4029d6369cc0552e0bf))
+
+## [8.0.0](https://github.com/googleapis/google-cloud-node/compare/admin-v7.6.0...admin-v8.0.0) (2025-03-18)
+
+
+### ⚠ BREAKING CHANGES
+
+* upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096))
+
+### Features
+
+* [analytics-admin] added support for KeyEvents AdminAPI ChangeHistory ([#6113](https://github.com/googleapis/google-cloud-node/issues/6113)) ([beba36b](https://github.com/googleapis/google-cloud-node/commit/beba36b9f0ef1655bef50d1c063b5f1b54e15a93))
+* [Many APIs] add request/response debug logging to gapics, update templates to gax 5  ([54a73fe](https://github.com/googleapis/google-cloud-node/commit/54a73fe74eab0675c006f24d5f1e4574c44d829b))
+
+
+### Miscellaneous Chores
+
+* Upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096)) ([eadae64](https://github.com/googleapis/google-cloud-node/commit/eadae64d54e07aa2c65097ea52e65008d4e87436))
+
 ## [7.6.0](https://github.com/googleapis/google-cloud-node/compare/admin-v7.5.0...admin-v7.6.0) (2024-08-09)
 
 

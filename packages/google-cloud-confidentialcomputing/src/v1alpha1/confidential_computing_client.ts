@@ -29,6 +29,7 @@ import type {
 
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
+import {loggingUtils as logging} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -53,6 +54,8 @@ export class ConfidentialComputingClient {
   private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
+  private _log = logging.log('confidentialcomputing');
+
   auth: gax.GoogleAuth;
   descriptors: Descriptors = {
     page: {},
@@ -88,7 +91,7 @@ export class ConfidentialComputingClient {
    *     Developer's Console, e.g. 'grape-spaceship-123'. We will also check
    *     the environment variable GCLOUD_PROJECT for your project ID. If your
    *     app is running in an environment which supports
-   *     {@link https://developers.google.com/identity/protocols/application-default-credentials Application Default Credentials},
+   *     {@link https://cloud.google.com/docs/authentication/application-default-credentials Application Default Credentials},
    *     your project ID will be detected automatically.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
@@ -477,8 +480,39 @@ export class ConfidentialComputingClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.createChallenge(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('createChallenge request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.confidentialcomputing.v1alpha1.IChallenge,
+          | protos.google.cloud.confidentialcomputing.v1alpha1.ICreateChallengeRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('createChallenge response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .createChallenge(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.confidentialcomputing.v1alpha1.IChallenge,
+          (
+            | protos.google.cloud.confidentialcomputing.v1alpha1.ICreateChallengeRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('createChallenge response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Verifies the provided attestation info, returning a signed OIDC token.
@@ -581,8 +615,39 @@ export class ConfidentialComputingClient {
       this._gaxModule.routingHeader.fromParams({
         challenge: request.challenge ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.verifyAttestation(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('verifyAttestation request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.confidentialcomputing.v1alpha1.IVerifyAttestationResponse,
+          | protos.google.cloud.confidentialcomputing.v1alpha1.IVerifyAttestationRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('verifyAttestation response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .verifyAttestation(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.confidentialcomputing.v1alpha1.IVerifyAttestationResponse,
+          (
+            | protos.google.cloud.confidentialcomputing.v1alpha1.IVerifyAttestationRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('verifyAttestation response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
 
   /**
@@ -763,6 +828,7 @@ export class ConfidentialComputingClient {
   close(): Promise<void> {
     if (this.confidentialComputingStub && !this._terminated) {
       return this.confidentialComputingStub.then(stub => {
+        this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
         this.locationsClient.close();

@@ -33,6 +33,7 @@ import type {
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
+import {loggingUtils as logging} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -68,6 +69,8 @@ export class ModelServiceClient {
   private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
+  private _log = logging.log('retail');
+
   auth: gax.GoogleAuth;
   descriptors: Descriptors = {
     page: {},
@@ -104,7 +107,7 @@ export class ModelServiceClient {
    *     Developer's Console, e.g. 'grape-spaceship-123'. We will also check
    *     the environment variable GCLOUD_PROJECT for your project ID. If your
    *     app is running in an environment which supports
-   *     {@link https://developers.google.com/identity/protocols/application-default-credentials Application Default Credentials},
+   *     {@link https://cloud.google.com/docs/authentication/application-default-credentials Application Default Credentials},
    *     your project ID will be detected automatically.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
@@ -591,8 +594,36 @@ export class ModelServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.getModel(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('getModel request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.retail.v2alpha.IModel,
+          | protos.google.cloud.retail.v2alpha.IGetModelRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getModel response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getModel(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.retail.v2alpha.IModel,
+          protos.google.cloud.retail.v2alpha.IGetModelRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getModel response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Pauses the training of an existing model.
@@ -677,8 +708,36 @@ export class ModelServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.pauseModel(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('pauseModel request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.retail.v2alpha.IModel,
+          | protos.google.cloud.retail.v2alpha.IPauseModelRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('pauseModel response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .pauseModel(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.retail.v2alpha.IModel,
+          protos.google.cloud.retail.v2alpha.IPauseModelRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('pauseModel response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Resumes the training of an existing model.
@@ -763,8 +822,36 @@ export class ModelServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.resumeModel(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('resumeModel request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.retail.v2alpha.IModel,
+          | protos.google.cloud.retail.v2alpha.IResumeModelRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('resumeModel response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .resumeModel(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.retail.v2alpha.IModel,
+          protos.google.cloud.retail.v2alpha.IResumeModelRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('resumeModel response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Deletes an existing model.
@@ -849,8 +936,36 @@ export class ModelServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.deleteModel(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('deleteModel request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.cloud.retail.v2alpha.IDeleteModelRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('deleteModel response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .deleteModel(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.protobuf.IEmpty,
+          protos.google.cloud.retail.v2alpha.IDeleteModelRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteModel response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Update of model metadata. Only fields that
@@ -940,8 +1055,36 @@ export class ModelServiceClient {
       this._gaxModule.routingHeader.fromParams({
         'model.name': request.model!.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.updateModel(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('updateModel request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.retail.v2alpha.IModel,
+          | protos.google.cloud.retail.v2alpha.IUpdateModelRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('updateModel response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .updateModel(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.retail.v2alpha.IModel,
+          protos.google.cloud.retail.v2alpha.IUpdateModelRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('updateModel response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
 
   /**
@@ -1050,8 +1193,40 @@ export class ModelServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.createModel(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.retail.v2alpha.IModel,
+            protos.google.cloud.retail.v2alpha.ICreateModelMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('createModel response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('createModel request %j', request);
+    return this.innerApiCalls
+      .createModel(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.retail.v2alpha.IModel,
+            protos.google.cloud.retail.v2alpha.ICreateModelMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createModel response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `createModel()`.
@@ -1072,6 +1247,7 @@ export class ModelServiceClient {
       protos.google.cloud.retail.v2alpha.CreateModelMetadata
     >
   > {
+    this._log.info('createModel long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -1188,8 +1364,40 @@ export class ModelServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.tuneModel(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.retail.v2alpha.ITuneModelResponse,
+            protos.google.cloud.retail.v2alpha.ITuneModelMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('tuneModel response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('tuneModel request %j', request);
+    return this.innerApiCalls
+      .tuneModel(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.retail.v2alpha.ITuneModelResponse,
+            protos.google.cloud.retail.v2alpha.ITuneModelMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('tuneModel response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `tuneModel()`.
@@ -1210,6 +1418,7 @@ export class ModelServiceClient {
       protos.google.cloud.retail.v2alpha.TuneModelMetadata
     >
   > {
+    this._log.info('tuneModel long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -1317,8 +1526,36 @@ export class ModelServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.listModels(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.retail.v2alpha.IListModelsRequest,
+          | protos.google.cloud.retail.v2alpha.IListModelsResponse
+          | null
+          | undefined,
+          protos.google.cloud.retail.v2alpha.IModel
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listModels values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listModels request %j', request);
+    return this.innerApiCalls
+      .listModels(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.retail.v2alpha.IModel[],
+          protos.google.cloud.retail.v2alpha.IListModelsRequest | null,
+          protos.google.cloud.retail.v2alpha.IListModelsResponse,
+        ]) => {
+          this._log.info('listModels values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -1360,7 +1597,10 @@ export class ModelServiceClient {
       });
     const defaultCallSettings = this._defaults['listModels'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listModels stream %j', request);
     return this.descriptors.page.listModels.createStream(
       this.innerApiCalls.listModels as GaxCall,
       request,
@@ -1410,7 +1650,10 @@ export class ModelServiceClient {
       });
     const defaultCallSettings = this._defaults['listModels'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listModels iterate %j', request);
     return this.descriptors.page.listModels.asyncIterate(
       this.innerApiCalls['listModels'] as GaxCall,
       request as {},
@@ -1589,7 +1832,7 @@ export class ModelServiceClient {
   listOperationsAsync(
     request: protos.google.longrunning.ListOperationsRequest,
     options?: gax.CallOptions
-  ): AsyncIterable<protos.google.longrunning.ListOperationsResponse> {
+  ): AsyncIterable<protos.google.longrunning.IOperation> {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
@@ -2394,6 +2637,7 @@ export class ModelServiceClient {
   close(): Promise<void> {
     if (this.modelServiceStub && !this._terminated) {
       return this.modelServiceStub.then(stub => {
+        this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
         this.locationsClient.close();

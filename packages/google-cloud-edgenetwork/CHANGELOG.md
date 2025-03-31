@@ -1,5 +1,28 @@
 # Changelog
 
+## [0.7.1](https://github.com/googleapis/google-cloud-node/compare/edgenetwork-v0.7.0...edgenetwork-v0.7.1) (2025-03-21)
+
+
+### Bug Fixes
+
+* [Many APIs] await/catch promises, and update listOperationsAsync return type ([#6185](https://github.com/googleapis/google-cloud-node/issues/6185)) ([ab30412](https://github.com/googleapis/google-cloud-node/commit/ab304122e3e825c9a76af7d6b0ef4ddc9aa6e906))
+
+## [0.7.0](https://github.com/googleapis/google-cloud-node/compare/edgenetwork-v0.6.0...edgenetwork-v0.7.0) (2025-03-18)
+
+
+### ⚠ BREAKING CHANGES
+
+* upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096))
+
+### Features
+
+* [Many APIs] add request/response debug logging to gapics ([afcb5c0](https://github.com/googleapis/google-cloud-node/commit/afcb5c07e82bc8349b9677766cd880f69a97f77f))
+
+
+### Miscellaneous Chores
+
+* Upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096)) ([eadae64](https://github.com/googleapis/google-cloud-node/commit/eadae64d54e07aa2c65097ea52e65008d4e87436))
+
 ## [0.6.0](https://github.com/googleapis/google-cloud-node/compare/edgenetwork-v0.5.0...edgenetwork-v0.6.0) (2024-06-26)
 
 

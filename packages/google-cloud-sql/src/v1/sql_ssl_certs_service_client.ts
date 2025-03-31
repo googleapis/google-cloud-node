@@ -29,6 +29,7 @@ import type {
 
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
+import {loggingUtils as logging} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -53,6 +54,8 @@ export class SqlSslCertsServiceClient {
   private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
+  private _log = logging.log('sql');
+
   auth: gax.GoogleAuth;
   descriptors: Descriptors = {
     page: {},
@@ -87,7 +90,7 @@ export class SqlSslCertsServiceClient {
    *     Developer's Console, e.g. 'grape-spaceship-123'. We will also check
    *     the environment variable GCLOUD_PROJECT for your project ID. If your
    *     app is running in an environment which supports
-   *     {@link https://developers.google.com/identity/protocols/application-default-credentials Application Default Credentials},
+   *     {@link https://cloud.google.com/docs/authentication/application-default-credentials Application Default Credentials},
    *     your project ID will be detected automatically.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
@@ -453,8 +456,36 @@ export class SqlSslCertsServiceClient {
         instance: request.instance ?? '',
         sha1_fingerprint: request.sha1Fingerprint ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.delete(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('delete request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.sql.v1.IOperation,
+          | protos.google.cloud.sql.v1.ISqlSslCertsDeleteRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('delete response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .delete(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.sql.v1.IOperation,
+          protos.google.cloud.sql.v1.ISqlSslCertsDeleteRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('delete response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Retrieves a particular SSL certificate.  Does not include the private key
@@ -543,8 +574,34 @@ export class SqlSslCertsServiceClient {
         instance: request.instance ?? '',
         sha1_fingerprint: request.sha1Fingerprint ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.get(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('get request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.sql.v1.ISslCert,
+          protos.google.cloud.sql.v1.ISqlSslCertsGetRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('get response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .get(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.sql.v1.ISslCert,
+          protos.google.cloud.sql.v1.ISqlSslCertsGetRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('get response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Creates an SSL certificate and returns it along with the private key and
@@ -633,8 +690,36 @@ export class SqlSslCertsServiceClient {
         project: request.project ?? '',
         instance: request.instance ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.insert(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('insert request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.sql.v1.ISslCertsInsertResponse,
+          | protos.google.cloud.sql.v1.ISqlSslCertsInsertRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('insert response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .insert(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.sql.v1.ISslCertsInsertResponse,
+          protos.google.cloud.sql.v1.ISqlSslCertsInsertRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('insert response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Lists all of the current SSL certificates for the instance.
@@ -718,8 +803,34 @@ export class SqlSslCertsServiceClient {
         project: request.project ?? '',
         instance: request.instance ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.list(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('list request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.sql.v1.ISslCertsListResponse,
+          protos.google.cloud.sql.v1.ISqlSslCertsListRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('list response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .list(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.sql.v1.ISslCertsListResponse,
+          protos.google.cloud.sql.v1.ISqlSslCertsListRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('list response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
 
   /**
@@ -809,6 +920,7 @@ export class SqlSslCertsServiceClient {
   close(): Promise<void> {
     if (this.sqlSslCertsServiceStub && !this._terminated) {
       return this.sqlSslCertsServiceStub.then(stub => {
+        this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
         this.locationsClient.close();

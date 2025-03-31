@@ -31,6 +31,7 @@ import type {
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
+import {loggingUtils as logging} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -55,6 +56,8 @@ export class StreetViewPublishServiceClient {
   private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
+  private _log = logging.log('streetview-publish');
+
   auth: gax.GoogleAuth;
   descriptors: Descriptors = {
     page: {},
@@ -89,7 +92,7 @@ export class StreetViewPublishServiceClient {
    *     Developer's Console, e.g. 'grape-spaceship-123'. We will also check
    *     the environment variable GCLOUD_PROJECT for your project ID. If your
    *     app is running in an environment which supports
-   *     {@link https://developers.google.com/identity/protocols/application-default-credentials Application Default Credentials},
+   *     {@link https://cloud.google.com/docs/authentication/application-default-credentials Application Default Credentials},
    *     your project ID will be detected automatically.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
@@ -529,8 +532,34 @@ export class StreetViewPublishServiceClient {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    this.initialize();
-    return this.innerApiCalls.startUpload(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('startUpload request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.streetview.publish.v1.IUploadRef,
+          protos.google.protobuf.IEmpty | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('startUpload response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .startUpload(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.streetview.publish.v1.IUploadRef,
+          protos.google.protobuf.IEmpty | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('startUpload response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * After the client finishes uploading the photo with the returned
@@ -634,8 +663,36 @@ export class StreetViewPublishServiceClient {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    this.initialize();
-    return this.innerApiCalls.createPhoto(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('createPhoto request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.streetview.publish.v1.IPhoto,
+          | protos.google.streetview.publish.v1.ICreatePhotoRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('createPhoto response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .createPhoto(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.streetview.publish.v1.IPhoto,
+          protos.google.streetview.publish.v1.ICreatePhotoRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createPhoto response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Gets the metadata of the specified
@@ -739,8 +796,36 @@ export class StreetViewPublishServiceClient {
       this._gaxModule.routingHeader.fromParams({
         photo_id: request.photoId ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.getPhoto(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('getPhoto request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.streetview.publish.v1.IPhoto,
+          | protos.google.streetview.publish.v1.IGetPhotoRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getPhoto response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getPhoto(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.streetview.publish.v1.IPhoto,
+          protos.google.streetview.publish.v1.IGetPhotoRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getPhoto response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Gets the metadata of the specified
@@ -851,8 +936,39 @@ export class StreetViewPublishServiceClient {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    this.initialize();
-    return this.innerApiCalls.batchGetPhotos(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('batchGetPhotos request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.streetview.publish.v1.IBatchGetPhotosResponse,
+          | protos.google.streetview.publish.v1.IBatchGetPhotosRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('batchGetPhotos response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .batchGetPhotos(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.streetview.publish.v1.IBatchGetPhotosResponse,
+          (
+            | protos.google.streetview.publish.v1.IBatchGetPhotosRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('batchGetPhotos response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Updates the metadata of a {@link protos.google.streetview.publish.v1.Photo|Photo}, such
@@ -988,8 +1104,36 @@ export class StreetViewPublishServiceClient {
       this._gaxModule.routingHeader.fromParams({
         'photo.photo_id.id': request.photo!.photoId!.id ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.updatePhoto(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('updatePhoto request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.streetview.publish.v1.IPhoto,
+          | protos.google.streetview.publish.v1.IUpdatePhotoRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('updatePhoto response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .updatePhoto(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.streetview.publish.v1.IPhoto,
+          protos.google.streetview.publish.v1.IUpdatePhotoRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('updatePhoto response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Updates the metadata of {@link protos.google.streetview.publish.v1.Photo|Photos}, such
@@ -1107,8 +1251,39 @@ export class StreetViewPublishServiceClient {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    this.initialize();
-    return this.innerApiCalls.batchUpdatePhotos(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('batchUpdatePhotos request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.streetview.publish.v1.IBatchUpdatePhotosResponse,
+          | protos.google.streetview.publish.v1.IBatchUpdatePhotosRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('batchUpdatePhotos response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .batchUpdatePhotos(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.streetview.publish.v1.IBatchUpdatePhotosResponse,
+          (
+            | protos.google.streetview.publish.v1.IBatchUpdatePhotosRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('batchUpdatePhotos response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Deletes a {@link protos.google.streetview.publish.v1.Photo|Photo} and its metadata.
@@ -1204,8 +1379,36 @@ export class StreetViewPublishServiceClient {
       this._gaxModule.routingHeader.fromParams({
         photo_id: request.photoId ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.deletePhoto(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('deletePhoto request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.streetview.publish.v1.IDeletePhotoRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('deletePhoto response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .deletePhoto(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.protobuf.IEmpty,
+          protos.google.streetview.publish.v1.IDeletePhotoRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deletePhoto response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Deletes a list of {@link protos.google.streetview.publish.v1.Photo|Photos} and their
@@ -1307,8 +1510,39 @@ export class StreetViewPublishServiceClient {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    this.initialize();
-    return this.innerApiCalls.batchDeletePhotos(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('batchDeletePhotos request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.streetview.publish.v1.IBatchDeletePhotosResponse,
+          | protos.google.streetview.publish.v1.IBatchDeletePhotosRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('batchDeletePhotos response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .batchDeletePhotos(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.streetview.publish.v1.IBatchDeletePhotosResponse,
+          (
+            | protos.google.streetview.publish.v1.IBatchDeletePhotosRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('batchDeletePhotos response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Creates an upload session to start uploading photo sequence data.
@@ -1392,12 +1626,34 @@ export class StreetViewPublishServiceClient {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    this.initialize();
-    return this.innerApiCalls.startPhotoSequenceUpload(
-      request,
-      options,
-      callback
-    );
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('startPhotoSequenceUpload request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.streetview.publish.v1.IUploadRef,
+          protos.google.protobuf.IEmpty | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('startPhotoSequenceUpload response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .startPhotoSequenceUpload(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.streetview.publish.v1.IUploadRef,
+          protos.google.protobuf.IEmpty | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('startPhotoSequenceUpload response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Deletes a {@link protos.google.streetview.publish.v1.PhotoSequence|PhotoSequence} and
@@ -1503,8 +1759,39 @@ export class StreetViewPublishServiceClient {
       this._gaxModule.routingHeader.fromParams({
         sequence_id: request.sequenceId ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.deletePhotoSequence(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('deletePhotoSequence request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.streetview.publish.v1.IDeletePhotoSequenceRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('deletePhotoSequence response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .deletePhotoSequence(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.protobuf.IEmpty,
+          (
+            | protos.google.streetview.publish.v1.IDeletePhotoSequenceRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('deletePhotoSequence response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
 
   /**
@@ -1623,8 +1910,40 @@ export class StreetViewPublishServiceClient {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    this.initialize();
-    return this.innerApiCalls.createPhotoSequence(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.streetview.publish.v1.IPhotoSequence,
+            protos.google.protobuf.IEmpty
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('createPhotoSequence response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('createPhotoSequence request %j', request);
+    return this.innerApiCalls
+      .createPhotoSequence(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.streetview.publish.v1.IPhotoSequence,
+            protos.google.protobuf.IEmpty
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createPhotoSequence response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `createPhotoSequence()`.
@@ -1645,6 +1964,7 @@ export class StreetViewPublishServiceClient {
       protos.google.protobuf.Empty
     >
   > {
+    this._log.info('createPhotoSequence long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -1790,8 +2110,40 @@ export class StreetViewPublishServiceClient {
       this._gaxModule.routingHeader.fromParams({
         sequence_id: request.sequenceId ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.getPhotoSequence(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.streetview.publish.v1.IPhotoSequence,
+            protos.google.protobuf.IEmpty
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('getPhotoSequence response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('getPhotoSequence request %j', request);
+    return this.innerApiCalls
+      .getPhotoSequence(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.streetview.publish.v1.IPhotoSequence,
+            protos.google.protobuf.IEmpty
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getPhotoSequence response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `getPhotoSequence()`.
@@ -1812,6 +2164,7 @@ export class StreetViewPublishServiceClient {
       protos.google.protobuf.Empty
     >
   > {
+    this._log.info('getPhotoSequence long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -1943,12 +2296,40 @@ export class StreetViewPublishServiceClient {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    this.initialize();
-    return this.innerApiCalls.listPhotos(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.streetview.publish.v1.IListPhotosRequest,
+          | protos.google.streetview.publish.v1.IListPhotosResponse
+          | null
+          | undefined,
+          protos.google.streetview.publish.v1.IPhoto
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listPhotos values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listPhotos request %j', request);
+    return this.innerApiCalls
+      .listPhotos(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.streetview.publish.v1.IPhoto[],
+          protos.google.streetview.publish.v1.IListPhotosRequest | null,
+          protos.google.streetview.publish.v1.IListPhotosResponse,
+        ]) => {
+          this._log.info('listPhotos values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listPhotos`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {google.streetview.publish.v1.PhotoView} request.view
@@ -2000,7 +2381,10 @@ export class StreetViewPublishServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     const defaultCallSettings = this._defaults['listPhotos'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listPhotos stream %j', request);
     return this.descriptors.page.listPhotos.createStream(
       this.innerApiCalls.listPhotos as GaxCall,
       request,
@@ -2064,7 +2448,10 @@ export class StreetViewPublishServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     const defaultCallSettings = this._defaults['listPhotos'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listPhotos iterate %j', request);
     return this.descriptors.page.listPhotos.asyncIterate(
       this.innerApiCalls['listPhotos'] as GaxCall,
       request as {},
@@ -2179,12 +2566,40 @@ export class StreetViewPublishServiceClient {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    this.initialize();
-    return this.innerApiCalls.listPhotoSequences(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.streetview.publish.v1.IListPhotoSequencesRequest,
+          | protos.google.streetview.publish.v1.IListPhotoSequencesResponse
+          | null
+          | undefined,
+          protos.google.longrunning.IOperation
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listPhotoSequences values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listPhotoSequences request %j', request);
+    return this.innerApiCalls
+      .listPhotoSequences(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.longrunning.IOperation[],
+          protos.google.streetview.publish.v1.IListPhotoSequencesRequest | null,
+          protos.google.streetview.publish.v1.IListPhotoSequencesResponse,
+        ]) => {
+          this._log.info('listPhotoSequences values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listPhotoSequences`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {number} [request.pageSize]
@@ -2231,7 +2646,10 @@ export class StreetViewPublishServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     const defaultCallSettings = this._defaults['listPhotoSequences'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listPhotoSequences stream %j', request);
     return this.descriptors.page.listPhotoSequences.createStream(
       this.innerApiCalls.listPhotoSequences as GaxCall,
       request,
@@ -2290,7 +2708,10 @@ export class StreetViewPublishServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     const defaultCallSettings = this._defaults['listPhotoSequences'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listPhotoSequences iterate %j', request);
     return this.descriptors.page.listPhotoSequences.asyncIterate(
       this.innerApiCalls['listPhotoSequences'] as GaxCall,
       request as {},
@@ -2307,6 +2728,7 @@ export class StreetViewPublishServiceClient {
   close(): Promise<void> {
     if (this.streetViewPublishServiceStub && !this._terminated) {
       return this.streetViewPublishServiceStub.then(stub => {
+        this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
         this.operationsClient.close();

@@ -35,6 +35,7 @@ import type {
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
+import {loggingUtils as logging} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -59,6 +60,8 @@ export class NetworkServicesClient {
   private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
+  private _log = logging.log('networkservices');
+
   auth: gax.GoogleAuth;
   descriptors: Descriptors = {
     page: {},
@@ -96,7 +99,7 @@ export class NetworkServicesClient {
    *     Developer's Console, e.g. 'grape-spaceship-123'. We will also check
    *     the environment variable GCLOUD_PROJECT for your project ID. If your
    *     app is running in an environment which supports
-   *     {@link https://developers.google.com/identity/protocols/application-default-credentials Application Default Credentials},
+   *     {@link https://cloud.google.com/docs/authentication/application-default-credentials Application Default Credentials},
    *     your project ID will be detected automatically.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
@@ -976,8 +979,39 @@ export class NetworkServicesClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.getEndpointPolicy(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('getEndpointPolicy request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.networkservices.v1.IEndpointPolicy,
+          | protos.google.cloud.networkservices.v1.IGetEndpointPolicyRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getEndpointPolicy response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getEndpointPolicy(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.networkservices.v1.IEndpointPolicy,
+          (
+            | protos.google.cloud.networkservices.v1.IGetEndpointPolicyRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getEndpointPolicy response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Gets details of a single Gateway.
@@ -1067,8 +1101,36 @@ export class NetworkServicesClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.getGateway(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('getGateway request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.networkservices.v1.IGateway,
+          | protos.google.cloud.networkservices.v1.IGetGatewayRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getGateway response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getGateway(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.networkservices.v1.IGateway,
+          protos.google.cloud.networkservices.v1.IGetGatewayRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getGateway response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Gets details of a single GrpcRoute.
@@ -1158,8 +1220,39 @@ export class NetworkServicesClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.getGrpcRoute(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('getGrpcRoute request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.networkservices.v1.IGrpcRoute,
+          | protos.google.cloud.networkservices.v1.IGetGrpcRouteRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getGrpcRoute response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getGrpcRoute(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.networkservices.v1.IGrpcRoute,
+          (
+            | protos.google.cloud.networkservices.v1.IGetGrpcRouteRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getGrpcRoute response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Gets details of a single HttpRoute.
@@ -1249,8 +1342,39 @@ export class NetworkServicesClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.getHttpRoute(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('getHttpRoute request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.networkservices.v1.IHttpRoute,
+          | protos.google.cloud.networkservices.v1.IGetHttpRouteRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getHttpRoute response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getHttpRoute(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.networkservices.v1.IHttpRoute,
+          (
+            | protos.google.cloud.networkservices.v1.IGetHttpRouteRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getHttpRoute response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Gets details of a single TcpRoute.
@@ -1340,8 +1464,39 @@ export class NetworkServicesClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.getTcpRoute(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('getTcpRoute request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.networkservices.v1.ITcpRoute,
+          | protos.google.cloud.networkservices.v1.IGetTcpRouteRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getTcpRoute response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getTcpRoute(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.networkservices.v1.ITcpRoute,
+          (
+            | protos.google.cloud.networkservices.v1.IGetTcpRouteRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getTcpRoute response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Gets details of a single TlsRoute.
@@ -1431,8 +1586,39 @@ export class NetworkServicesClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.getTlsRoute(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('getTlsRoute request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.networkservices.v1.ITlsRoute,
+          | protos.google.cloud.networkservices.v1.IGetTlsRouteRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getTlsRoute response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getTlsRoute(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.networkservices.v1.ITlsRoute,
+          (
+            | protos.google.cloud.networkservices.v1.IGetTlsRouteRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getTlsRoute response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Gets details of a single ServiceBinding.
@@ -1528,8 +1714,39 @@ export class NetworkServicesClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.getServiceBinding(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('getServiceBinding request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.networkservices.v1.IServiceBinding,
+          | protos.google.cloud.networkservices.v1.IGetServiceBindingRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getServiceBinding response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getServiceBinding(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.networkservices.v1.IServiceBinding,
+          (
+            | protos.google.cloud.networkservices.v1.IGetServiceBindingRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getServiceBinding response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Gets details of a single Mesh.
@@ -1613,8 +1830,36 @@ export class NetworkServicesClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.getMesh(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('getMesh request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.networkservices.v1.IMesh,
+          | protos.google.cloud.networkservices.v1.IGetMeshRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getMesh response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getMesh(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.networkservices.v1.IMesh,
+          protos.google.cloud.networkservices.v1.IGetMeshRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getMesh response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
 
   /**
@@ -1722,8 +1967,40 @@ export class NetworkServicesClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.createEndpointPolicy(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.networkservices.v1.IEndpointPolicy,
+            protos.google.cloud.networkservices.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('createEndpointPolicy response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('createEndpointPolicy request %j', request);
+    return this.innerApiCalls
+      .createEndpointPolicy(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.networkservices.v1.IEndpointPolicy,
+            protos.google.cloud.networkservices.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createEndpointPolicy response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `createEndpointPolicy()`.
@@ -1744,6 +2021,7 @@ export class NetworkServicesClient {
       protos.google.cloud.networkservices.v1.OperationMetadata
     >
   > {
+    this._log.info('createEndpointPolicy long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -1864,8 +2142,40 @@ export class NetworkServicesClient {
       this._gaxModule.routingHeader.fromParams({
         'endpoint_policy.name': request.endpointPolicy!.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.updateEndpointPolicy(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.networkservices.v1.IEndpointPolicy,
+            protos.google.cloud.networkservices.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('updateEndpointPolicy response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('updateEndpointPolicy request %j', request);
+    return this.innerApiCalls
+      .updateEndpointPolicy(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.networkservices.v1.IEndpointPolicy,
+            protos.google.cloud.networkservices.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('updateEndpointPolicy response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `updateEndpointPolicy()`.
@@ -1886,6 +2196,7 @@ export class NetworkServicesClient {
       protos.google.cloud.networkservices.v1.OperationMetadata
     >
   > {
+    this._log.info('updateEndpointPolicy long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -2001,8 +2312,40 @@ export class NetworkServicesClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.deleteEndpointPolicy(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.networkservices.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('deleteEndpointPolicy response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('deleteEndpointPolicy request %j', request);
+    return this.innerApiCalls
+      .deleteEndpointPolicy(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.networkservices.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteEndpointPolicy response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `deleteEndpointPolicy()`.
@@ -2023,6 +2366,7 @@ export class NetworkServicesClient {
       protos.google.cloud.networkservices.v1.OperationMetadata
     >
   > {
+    this._log.info('deleteEndpointPolicy long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -2142,8 +2486,40 @@ export class NetworkServicesClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.createGateway(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.networkservices.v1.IGateway,
+            protos.google.cloud.networkservices.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('createGateway response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('createGateway request %j', request);
+    return this.innerApiCalls
+      .createGateway(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.networkservices.v1.IGateway,
+            protos.google.cloud.networkservices.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createGateway response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `createGateway()`.
@@ -2164,6 +2540,7 @@ export class NetworkServicesClient {
       protos.google.cloud.networkservices.v1.OperationMetadata
     >
   > {
+    this._log.info('createGateway long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -2284,8 +2661,40 @@ export class NetworkServicesClient {
       this._gaxModule.routingHeader.fromParams({
         'gateway.name': request.gateway!.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.updateGateway(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.networkservices.v1.IGateway,
+            protos.google.cloud.networkservices.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('updateGateway response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('updateGateway request %j', request);
+    return this.innerApiCalls
+      .updateGateway(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.networkservices.v1.IGateway,
+            protos.google.cloud.networkservices.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('updateGateway response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `updateGateway()`.
@@ -2306,6 +2715,7 @@ export class NetworkServicesClient {
       protos.google.cloud.networkservices.v1.OperationMetadata
     >
   > {
+    this._log.info('updateGateway long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -2421,8 +2831,40 @@ export class NetworkServicesClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.deleteGateway(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.networkservices.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('deleteGateway response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('deleteGateway request %j', request);
+    return this.innerApiCalls
+      .deleteGateway(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.networkservices.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteGateway response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `deleteGateway()`.
@@ -2443,6 +2885,7 @@ export class NetworkServicesClient {
       protos.google.cloud.networkservices.v1.OperationMetadata
     >
   > {
+    this._log.info('deleteGateway long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -2562,8 +3005,40 @@ export class NetworkServicesClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.createGrpcRoute(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.networkservices.v1.IGrpcRoute,
+            protos.google.cloud.networkservices.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('createGrpcRoute response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('createGrpcRoute request %j', request);
+    return this.innerApiCalls
+      .createGrpcRoute(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.networkservices.v1.IGrpcRoute,
+            protos.google.cloud.networkservices.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createGrpcRoute response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `createGrpcRoute()`.
@@ -2584,6 +3059,7 @@ export class NetworkServicesClient {
       protos.google.cloud.networkservices.v1.OperationMetadata
     >
   > {
+    this._log.info('createGrpcRoute long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -2704,8 +3180,40 @@ export class NetworkServicesClient {
       this._gaxModule.routingHeader.fromParams({
         'grpc_route.name': request.grpcRoute!.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.updateGrpcRoute(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.networkservices.v1.IGrpcRoute,
+            protos.google.cloud.networkservices.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('updateGrpcRoute response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('updateGrpcRoute request %j', request);
+    return this.innerApiCalls
+      .updateGrpcRoute(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.networkservices.v1.IGrpcRoute,
+            protos.google.cloud.networkservices.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('updateGrpcRoute response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `updateGrpcRoute()`.
@@ -2726,6 +3234,7 @@ export class NetworkServicesClient {
       protos.google.cloud.networkservices.v1.OperationMetadata
     >
   > {
+    this._log.info('updateGrpcRoute long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -2841,8 +3350,40 @@ export class NetworkServicesClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.deleteGrpcRoute(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.networkservices.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('deleteGrpcRoute response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('deleteGrpcRoute request %j', request);
+    return this.innerApiCalls
+      .deleteGrpcRoute(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.networkservices.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteGrpcRoute response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `deleteGrpcRoute()`.
@@ -2863,6 +3404,7 @@ export class NetworkServicesClient {
       protos.google.cloud.networkservices.v1.OperationMetadata
     >
   > {
+    this._log.info('deleteGrpcRoute long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -2982,8 +3524,40 @@ export class NetworkServicesClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.createHttpRoute(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.networkservices.v1.IHttpRoute,
+            protos.google.cloud.networkservices.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('createHttpRoute response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('createHttpRoute request %j', request);
+    return this.innerApiCalls
+      .createHttpRoute(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.networkservices.v1.IHttpRoute,
+            protos.google.cloud.networkservices.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createHttpRoute response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `createHttpRoute()`.
@@ -3004,6 +3578,7 @@ export class NetworkServicesClient {
       protos.google.cloud.networkservices.v1.OperationMetadata
     >
   > {
+    this._log.info('createHttpRoute long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -3124,8 +3699,40 @@ export class NetworkServicesClient {
       this._gaxModule.routingHeader.fromParams({
         'http_route.name': request.httpRoute!.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.updateHttpRoute(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.networkservices.v1.IHttpRoute,
+            protos.google.cloud.networkservices.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('updateHttpRoute response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('updateHttpRoute request %j', request);
+    return this.innerApiCalls
+      .updateHttpRoute(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.networkservices.v1.IHttpRoute,
+            protos.google.cloud.networkservices.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('updateHttpRoute response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `updateHttpRoute()`.
@@ -3146,6 +3753,7 @@ export class NetworkServicesClient {
       protos.google.cloud.networkservices.v1.OperationMetadata
     >
   > {
+    this._log.info('updateHttpRoute long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -3261,8 +3869,40 @@ export class NetworkServicesClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.deleteHttpRoute(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.networkservices.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('deleteHttpRoute response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('deleteHttpRoute request %j', request);
+    return this.innerApiCalls
+      .deleteHttpRoute(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.networkservices.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteHttpRoute response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `deleteHttpRoute()`.
@@ -3283,6 +3923,7 @@ export class NetworkServicesClient {
       protos.google.cloud.networkservices.v1.OperationMetadata
     >
   > {
+    this._log.info('deleteHttpRoute long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -3402,8 +4043,40 @@ export class NetworkServicesClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.createTcpRoute(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.networkservices.v1.ITcpRoute,
+            protos.google.cloud.networkservices.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('createTcpRoute response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('createTcpRoute request %j', request);
+    return this.innerApiCalls
+      .createTcpRoute(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.networkservices.v1.ITcpRoute,
+            protos.google.cloud.networkservices.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createTcpRoute response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `createTcpRoute()`.
@@ -3424,6 +4097,7 @@ export class NetworkServicesClient {
       protos.google.cloud.networkservices.v1.OperationMetadata
     >
   > {
+    this._log.info('createTcpRoute long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -3544,8 +4218,40 @@ export class NetworkServicesClient {
       this._gaxModule.routingHeader.fromParams({
         'tcp_route.name': request.tcpRoute!.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.updateTcpRoute(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.networkservices.v1.ITcpRoute,
+            protos.google.cloud.networkservices.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('updateTcpRoute response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('updateTcpRoute request %j', request);
+    return this.innerApiCalls
+      .updateTcpRoute(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.networkservices.v1.ITcpRoute,
+            protos.google.cloud.networkservices.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('updateTcpRoute response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `updateTcpRoute()`.
@@ -3566,6 +4272,7 @@ export class NetworkServicesClient {
       protos.google.cloud.networkservices.v1.OperationMetadata
     >
   > {
+    this._log.info('updateTcpRoute long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -3681,8 +4388,40 @@ export class NetworkServicesClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.deleteTcpRoute(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.networkservices.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('deleteTcpRoute response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('deleteTcpRoute request %j', request);
+    return this.innerApiCalls
+      .deleteTcpRoute(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.networkservices.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteTcpRoute response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `deleteTcpRoute()`.
@@ -3703,6 +4442,7 @@ export class NetworkServicesClient {
       protos.google.cloud.networkservices.v1.OperationMetadata
     >
   > {
+    this._log.info('deleteTcpRoute long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -3822,8 +4562,40 @@ export class NetworkServicesClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.createTlsRoute(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.networkservices.v1.ITlsRoute,
+            protos.google.cloud.networkservices.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('createTlsRoute response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('createTlsRoute request %j', request);
+    return this.innerApiCalls
+      .createTlsRoute(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.networkservices.v1.ITlsRoute,
+            protos.google.cloud.networkservices.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createTlsRoute response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `createTlsRoute()`.
@@ -3844,6 +4616,7 @@ export class NetworkServicesClient {
       protos.google.cloud.networkservices.v1.OperationMetadata
     >
   > {
+    this._log.info('createTlsRoute long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -3964,8 +4737,40 @@ export class NetworkServicesClient {
       this._gaxModule.routingHeader.fromParams({
         'tls_route.name': request.tlsRoute!.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.updateTlsRoute(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.networkservices.v1.ITlsRoute,
+            protos.google.cloud.networkservices.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('updateTlsRoute response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('updateTlsRoute request %j', request);
+    return this.innerApiCalls
+      .updateTlsRoute(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.networkservices.v1.ITlsRoute,
+            protos.google.cloud.networkservices.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('updateTlsRoute response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `updateTlsRoute()`.
@@ -3986,6 +4791,7 @@ export class NetworkServicesClient {
       protos.google.cloud.networkservices.v1.OperationMetadata
     >
   > {
+    this._log.info('updateTlsRoute long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -4101,8 +4907,40 @@ export class NetworkServicesClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.deleteTlsRoute(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.networkservices.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('deleteTlsRoute response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('deleteTlsRoute request %j', request);
+    return this.innerApiCalls
+      .deleteTlsRoute(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.networkservices.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteTlsRoute response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `deleteTlsRoute()`.
@@ -4123,6 +4961,7 @@ export class NetworkServicesClient {
       protos.google.cloud.networkservices.v1.OperationMetadata
     >
   > {
+    this._log.info('deleteTlsRoute long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -4242,8 +5081,40 @@ export class NetworkServicesClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.createServiceBinding(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.networkservices.v1.IServiceBinding,
+            protos.google.cloud.networkservices.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('createServiceBinding response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('createServiceBinding request %j', request);
+    return this.innerApiCalls
+      .createServiceBinding(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.networkservices.v1.IServiceBinding,
+            protos.google.cloud.networkservices.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createServiceBinding response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `createServiceBinding()`.
@@ -4264,6 +5135,7 @@ export class NetworkServicesClient {
       protos.google.cloud.networkservices.v1.OperationMetadata
     >
   > {
+    this._log.info('createServiceBinding long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -4379,8 +5251,40 @@ export class NetworkServicesClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.deleteServiceBinding(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.networkservices.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('deleteServiceBinding response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('deleteServiceBinding request %j', request);
+    return this.innerApiCalls
+      .deleteServiceBinding(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.networkservices.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteServiceBinding response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `deleteServiceBinding()`.
@@ -4401,6 +5305,7 @@ export class NetworkServicesClient {
       protos.google.cloud.networkservices.v1.OperationMetadata
     >
   > {
+    this._log.info('deleteServiceBinding long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -4520,8 +5425,40 @@ export class NetworkServicesClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.createMesh(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.networkservices.v1.IMesh,
+            protos.google.cloud.networkservices.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('createMesh response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('createMesh request %j', request);
+    return this.innerApiCalls
+      .createMesh(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.networkservices.v1.IMesh,
+            protos.google.cloud.networkservices.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createMesh response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `createMesh()`.
@@ -4542,6 +5479,7 @@ export class NetworkServicesClient {
       protos.google.cloud.networkservices.v1.OperationMetadata
     >
   > {
+    this._log.info('createMesh long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -4662,8 +5600,40 @@ export class NetworkServicesClient {
       this._gaxModule.routingHeader.fromParams({
         'mesh.name': request.mesh!.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.updateMesh(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.networkservices.v1.IMesh,
+            protos.google.cloud.networkservices.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('updateMesh response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('updateMesh request %j', request);
+    return this.innerApiCalls
+      .updateMesh(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.networkservices.v1.IMesh,
+            protos.google.cloud.networkservices.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('updateMesh response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `updateMesh()`.
@@ -4684,6 +5654,7 @@ export class NetworkServicesClient {
       protos.google.cloud.networkservices.v1.OperationMetadata
     >
   > {
+    this._log.info('updateMesh long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -4799,8 +5770,40 @@ export class NetworkServicesClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.deleteMesh(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.networkservices.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('deleteMesh response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('deleteMesh request %j', request);
+    return this.innerApiCalls
+      .deleteMesh(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.networkservices.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteMesh response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `deleteMesh()`.
@@ -4821,6 +5824,7 @@ export class NetworkServicesClient {
       protos.google.cloud.networkservices.v1.OperationMetadata
     >
   > {
+    this._log.info('deleteMesh long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -4934,8 +5938,36 @@ export class NetworkServicesClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.listEndpointPolicies(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.networkservices.v1.IListEndpointPoliciesRequest,
+          | protos.google.cloud.networkservices.v1.IListEndpointPoliciesResponse
+          | null
+          | undefined,
+          protos.google.cloud.networkservices.v1.IEndpointPolicy
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listEndpointPolicies values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listEndpointPolicies request %j', request);
+    return this.innerApiCalls
+      .listEndpointPolicies(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.networkservices.v1.IEndpointPolicy[],
+          protos.google.cloud.networkservices.v1.IListEndpointPoliciesRequest | null,
+          protos.google.cloud.networkservices.v1.IListEndpointPoliciesResponse,
+        ]) => {
+          this._log.info('listEndpointPolicies values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -4977,7 +6009,10 @@ export class NetworkServicesClient {
       });
     const defaultCallSettings = this._defaults['listEndpointPolicies'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listEndpointPolicies stream %j', request);
     return this.descriptors.page.listEndpointPolicies.createStream(
       this.innerApiCalls.listEndpointPolicies as GaxCall,
       request,
@@ -5027,7 +6062,10 @@ export class NetworkServicesClient {
       });
     const defaultCallSettings = this._defaults['listEndpointPolicies'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listEndpointPolicies iterate %j', request);
     return this.descriptors.page.listEndpointPolicies.asyncIterate(
       this.innerApiCalls['listEndpointPolicies'] as GaxCall,
       request as {},
@@ -5131,8 +6169,36 @@ export class NetworkServicesClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.listGateways(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.networkservices.v1.IListGatewaysRequest,
+          | protos.google.cloud.networkservices.v1.IListGatewaysResponse
+          | null
+          | undefined,
+          protos.google.cloud.networkservices.v1.IGateway
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listGateways values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listGateways request %j', request);
+    return this.innerApiCalls
+      .listGateways(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.networkservices.v1.IGateway[],
+          protos.google.cloud.networkservices.v1.IListGatewaysRequest | null,
+          protos.google.cloud.networkservices.v1.IListGatewaysResponse,
+        ]) => {
+          this._log.info('listGateways values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -5173,7 +6239,10 @@ export class NetworkServicesClient {
       });
     const defaultCallSettings = this._defaults['listGateways'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listGateways stream %j', request);
     return this.descriptors.page.listGateways.createStream(
       this.innerApiCalls.listGateways as GaxCall,
       request,
@@ -5222,7 +6291,10 @@ export class NetworkServicesClient {
       });
     const defaultCallSettings = this._defaults['listGateways'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listGateways iterate %j', request);
     return this.descriptors.page.listGateways.asyncIterate(
       this.innerApiCalls['listGateways'] as GaxCall,
       request as {},
@@ -5326,8 +6398,36 @@ export class NetworkServicesClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.listGrpcRoutes(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.networkservices.v1.IListGrpcRoutesRequest,
+          | protos.google.cloud.networkservices.v1.IListGrpcRoutesResponse
+          | null
+          | undefined,
+          protos.google.cloud.networkservices.v1.IGrpcRoute
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listGrpcRoutes values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listGrpcRoutes request %j', request);
+    return this.innerApiCalls
+      .listGrpcRoutes(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.networkservices.v1.IGrpcRoute[],
+          protos.google.cloud.networkservices.v1.IListGrpcRoutesRequest | null,
+          protos.google.cloud.networkservices.v1.IListGrpcRoutesResponse,
+        ]) => {
+          this._log.info('listGrpcRoutes values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -5368,7 +6468,10 @@ export class NetworkServicesClient {
       });
     const defaultCallSettings = this._defaults['listGrpcRoutes'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listGrpcRoutes stream %j', request);
     return this.descriptors.page.listGrpcRoutes.createStream(
       this.innerApiCalls.listGrpcRoutes as GaxCall,
       request,
@@ -5417,7 +6520,10 @@ export class NetworkServicesClient {
       });
     const defaultCallSettings = this._defaults['listGrpcRoutes'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listGrpcRoutes iterate %j', request);
     return this.descriptors.page.listGrpcRoutes.asyncIterate(
       this.innerApiCalls['listGrpcRoutes'] as GaxCall,
       request as {},
@@ -5521,8 +6627,36 @@ export class NetworkServicesClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.listHttpRoutes(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.networkservices.v1.IListHttpRoutesRequest,
+          | protos.google.cloud.networkservices.v1.IListHttpRoutesResponse
+          | null
+          | undefined,
+          protos.google.cloud.networkservices.v1.IHttpRoute
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listHttpRoutes values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listHttpRoutes request %j', request);
+    return this.innerApiCalls
+      .listHttpRoutes(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.networkservices.v1.IHttpRoute[],
+          protos.google.cloud.networkservices.v1.IListHttpRoutesRequest | null,
+          protos.google.cloud.networkservices.v1.IListHttpRoutesResponse,
+        ]) => {
+          this._log.info('listHttpRoutes values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -5563,7 +6697,10 @@ export class NetworkServicesClient {
       });
     const defaultCallSettings = this._defaults['listHttpRoutes'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listHttpRoutes stream %j', request);
     return this.descriptors.page.listHttpRoutes.createStream(
       this.innerApiCalls.listHttpRoutes as GaxCall,
       request,
@@ -5612,7 +6749,10 @@ export class NetworkServicesClient {
       });
     const defaultCallSettings = this._defaults['listHttpRoutes'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listHttpRoutes iterate %j', request);
     return this.descriptors.page.listHttpRoutes.asyncIterate(
       this.innerApiCalls['listHttpRoutes'] as GaxCall,
       request as {},
@@ -5716,8 +6856,36 @@ export class NetworkServicesClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.listTcpRoutes(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.networkservices.v1.IListTcpRoutesRequest,
+          | protos.google.cloud.networkservices.v1.IListTcpRoutesResponse
+          | null
+          | undefined,
+          protos.google.cloud.networkservices.v1.ITcpRoute
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listTcpRoutes values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listTcpRoutes request %j', request);
+    return this.innerApiCalls
+      .listTcpRoutes(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.networkservices.v1.ITcpRoute[],
+          protos.google.cloud.networkservices.v1.IListTcpRoutesRequest | null,
+          protos.google.cloud.networkservices.v1.IListTcpRoutesResponse,
+        ]) => {
+          this._log.info('listTcpRoutes values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -5758,7 +6926,10 @@ export class NetworkServicesClient {
       });
     const defaultCallSettings = this._defaults['listTcpRoutes'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listTcpRoutes stream %j', request);
     return this.descriptors.page.listTcpRoutes.createStream(
       this.innerApiCalls.listTcpRoutes as GaxCall,
       request,
@@ -5807,7 +6978,10 @@ export class NetworkServicesClient {
       });
     const defaultCallSettings = this._defaults['listTcpRoutes'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listTcpRoutes iterate %j', request);
     return this.descriptors.page.listTcpRoutes.asyncIterate(
       this.innerApiCalls['listTcpRoutes'] as GaxCall,
       request as {},
@@ -5911,8 +7085,36 @@ export class NetworkServicesClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.listTlsRoutes(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.networkservices.v1.IListTlsRoutesRequest,
+          | protos.google.cloud.networkservices.v1.IListTlsRoutesResponse
+          | null
+          | undefined,
+          protos.google.cloud.networkservices.v1.ITlsRoute
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listTlsRoutes values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listTlsRoutes request %j', request);
+    return this.innerApiCalls
+      .listTlsRoutes(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.networkservices.v1.ITlsRoute[],
+          protos.google.cloud.networkservices.v1.IListTlsRoutesRequest | null,
+          protos.google.cloud.networkservices.v1.IListTlsRoutesResponse,
+        ]) => {
+          this._log.info('listTlsRoutes values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -5953,7 +7155,10 @@ export class NetworkServicesClient {
       });
     const defaultCallSettings = this._defaults['listTlsRoutes'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listTlsRoutes stream %j', request);
     return this.descriptors.page.listTlsRoutes.createStream(
       this.innerApiCalls.listTlsRoutes as GaxCall,
       request,
@@ -6002,7 +7207,10 @@ export class NetworkServicesClient {
       });
     const defaultCallSettings = this._defaults['listTlsRoutes'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listTlsRoutes iterate %j', request);
     return this.descriptors.page.listTlsRoutes.asyncIterate(
       this.innerApiCalls['listTlsRoutes'] as GaxCall,
       request as {},
@@ -6106,8 +7314,36 @@ export class NetworkServicesClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.listServiceBindings(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.networkservices.v1.IListServiceBindingsRequest,
+          | protos.google.cloud.networkservices.v1.IListServiceBindingsResponse
+          | null
+          | undefined,
+          protos.google.cloud.networkservices.v1.IServiceBinding
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listServiceBindings values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listServiceBindings request %j', request);
+    return this.innerApiCalls
+      .listServiceBindings(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.networkservices.v1.IServiceBinding[],
+          protos.google.cloud.networkservices.v1.IListServiceBindingsRequest | null,
+          protos.google.cloud.networkservices.v1.IListServiceBindingsResponse,
+        ]) => {
+          this._log.info('listServiceBindings values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -6148,7 +7384,10 @@ export class NetworkServicesClient {
       });
     const defaultCallSettings = this._defaults['listServiceBindings'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listServiceBindings stream %j', request);
     return this.descriptors.page.listServiceBindings.createStream(
       this.innerApiCalls.listServiceBindings as GaxCall,
       request,
@@ -6197,7 +7436,10 @@ export class NetworkServicesClient {
       });
     const defaultCallSettings = this._defaults['listServiceBindings'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listServiceBindings iterate %j', request);
     return this.descriptors.page.listServiceBindings.asyncIterate(
       this.innerApiCalls['listServiceBindings'] as GaxCall,
       request as {},
@@ -6301,8 +7543,36 @@ export class NetworkServicesClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.listMeshes(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.networkservices.v1.IListMeshesRequest,
+          | protos.google.cloud.networkservices.v1.IListMeshesResponse
+          | null
+          | undefined,
+          protos.google.cloud.networkservices.v1.IMesh
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listMeshes values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listMeshes request %j', request);
+    return this.innerApiCalls
+      .listMeshes(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.networkservices.v1.IMesh[],
+          protos.google.cloud.networkservices.v1.IListMeshesRequest | null,
+          protos.google.cloud.networkservices.v1.IListMeshesResponse,
+        ]) => {
+          this._log.info('listMeshes values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -6343,7 +7613,10 @@ export class NetworkServicesClient {
       });
     const defaultCallSettings = this._defaults['listMeshes'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listMeshes stream %j', request);
     return this.descriptors.page.listMeshes.createStream(
       this.innerApiCalls.listMeshes as GaxCall,
       request,
@@ -6392,7 +7665,10 @@ export class NetworkServicesClient {
       });
     const defaultCallSettings = this._defaults['listMeshes'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listMeshes iterate %j', request);
     return this.descriptors.page.listMeshes.asyncIterate(
       this.innerApiCalls['listMeshes'] as GaxCall,
       request as {},
@@ -6709,7 +7985,7 @@ export class NetworkServicesClient {
   listOperationsAsync(
     request: protos.google.longrunning.ListOperationsRequest,
     options?: gax.CallOptions
-  ): AsyncIterable<protos.google.longrunning.ListOperationsResponse> {
+  ): AsyncIterable<protos.google.longrunning.IOperation> {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
@@ -7392,6 +8668,7 @@ export class NetworkServicesClient {
   close(): Promise<void> {
     if (this.networkServicesStub && !this._terminated) {
       return this.networkServicesStub.then(stub => {
+        this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
         this.iamClient.close();

@@ -1438,6 +1438,26 @@
                 "deleteTool"
               ]
             },
+            "CreateToolVersion": {
+              "methods": [
+                "createToolVersion"
+              ]
+            },
+            "GetToolVersion": {
+              "methods": [
+                "getToolVersion"
+              ]
+            },
+            "DeleteToolVersion": {
+              "methods": [
+                "deleteToolVersion"
+              ]
+            },
+            "RestoreToolVersion": {
+              "methods": [
+                "restoreToolVersion"
+              ]
+            },
             "ExportTools": {
               "methods": [
                 "exportTools"
@@ -1448,6 +1468,13 @@
                 "listTools",
                 "listToolsStream",
                 "listToolsAsync"
+              ]
+            },
+            "ListToolVersions": {
+              "methods": [
+                "listToolVersions",
+                "listToolVersionsStream",
+                "listToolVersionsAsync"
               ]
             }
           }
@@ -1475,6 +1502,26 @@
                 "deleteTool"
               ]
             },
+            "CreateToolVersion": {
+              "methods": [
+                "createToolVersion"
+              ]
+            },
+            "GetToolVersion": {
+              "methods": [
+                "getToolVersion"
+              ]
+            },
+            "DeleteToolVersion": {
+              "methods": [
+                "deleteToolVersion"
+              ]
+            },
+            "RestoreToolVersion": {
+              "methods": [
+                "restoreToolVersion"
+              ]
+            },
             "ExportTools": {
               "methods": [
                 "exportTools"
@@ -1485,6 +1532,13 @@
                 "listTools",
                 "listToolsStream",
                 "listToolsAsync"
+              ]
+            },
+            "ListToolVersions": {
+              "methods": [
+                "listToolVersions",
+                "listToolVersionsStream",
+                "listToolVersionsAsync"
               ]
             }
           }

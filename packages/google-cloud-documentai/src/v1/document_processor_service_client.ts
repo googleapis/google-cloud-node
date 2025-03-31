@@ -33,6 +33,7 @@ import type {
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
+import {loggingUtils as logging} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -60,6 +61,8 @@ export class DocumentProcessorServiceClient {
   private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
+  private _log = logging.log('documentai');
+
   auth: gax.GoogleAuth;
   descriptors: Descriptors = {
     page: {},
@@ -96,7 +99,7 @@ export class DocumentProcessorServiceClient {
    *     Developer's Console, e.g. 'grape-spaceship-123'. We will also check
    *     the environment variable GCLOUD_PROJECT for your project ID. If your
    *     app is running in an environment which supports
-   *     {@link https://developers.google.com/identity/protocols/application-default-credentials Application Default Credentials},
+   *     {@link https://cloud.google.com/docs/authentication/application-default-credentials Application Default Credentials},
    *     your project ID will be detected automatically.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
@@ -768,8 +771,34 @@ export class DocumentProcessorServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.processDocument(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('processDocument request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.documentai.v1.IProcessResponse,
+          protos.google.cloud.documentai.v1.IProcessRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('processDocument response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .processDocument(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.documentai.v1.IProcessResponse,
+          protos.google.cloud.documentai.v1.IProcessRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('processDocument response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Fetches processor types. Note that we don't use
@@ -861,8 +890,39 @@ export class DocumentProcessorServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.fetchProcessorTypes(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('fetchProcessorTypes request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.documentai.v1.IFetchProcessorTypesResponse,
+          | protos.google.cloud.documentai.v1.IFetchProcessorTypesRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('fetchProcessorTypes response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .fetchProcessorTypes(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.documentai.v1.IFetchProcessorTypesResponse,
+          (
+            | protos.google.cloud.documentai.v1.IFetchProcessorTypesRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('fetchProcessorTypes response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Gets a processor type detail.
@@ -951,8 +1011,39 @@ export class DocumentProcessorServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.getProcessorType(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('getProcessorType request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.documentai.v1.IProcessorType,
+          | protos.google.cloud.documentai.v1.IGetProcessorTypeRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getProcessorType response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getProcessorType(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.documentai.v1.IProcessorType,
+          (
+            | protos.google.cloud.documentai.v1.IGetProcessorTypeRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getProcessorType response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Gets a processor detail.
@@ -1035,8 +1126,36 @@ export class DocumentProcessorServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.getProcessor(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('getProcessor request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.documentai.v1.IProcessor,
+          | protos.google.cloud.documentai.v1.IGetProcessorRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getProcessor response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getProcessor(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.documentai.v1.IProcessor,
+          protos.google.cloud.documentai.v1.IGetProcessorRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getProcessor response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Gets a processor version detail.
@@ -1125,8 +1244,39 @@ export class DocumentProcessorServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.getProcessorVersion(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('getProcessorVersion request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.documentai.v1.IProcessorVersion,
+          | protos.google.cloud.documentai.v1.IGetProcessorVersionRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getProcessorVersion response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getProcessorVersion(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.documentai.v1.IProcessorVersion,
+          (
+            | protos.google.cloud.documentai.v1.IGetProcessorVersionRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getProcessorVersion response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Creates a processor from the
@@ -1229,8 +1379,36 @@ export class DocumentProcessorServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.createProcessor(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('createProcessor request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.documentai.v1.IProcessor,
+          | protos.google.cloud.documentai.v1.ICreateProcessorRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('createProcessor response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .createProcessor(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.documentai.v1.IProcessor,
+          protos.google.cloud.documentai.v1.ICreateProcessorRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createProcessor response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Retrieves a specific evaluation.
@@ -1321,8 +1499,36 @@ export class DocumentProcessorServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.getEvaluation(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('getEvaluation request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.documentai.v1.IEvaluation,
+          | protos.google.cloud.documentai.v1.IGetEvaluationRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getEvaluation response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getEvaluation(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.documentai.v1.IEvaluation,
+          protos.google.cloud.documentai.v1.IGetEvaluationRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getEvaluation response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
 
   /**
@@ -1450,8 +1656,40 @@ export class DocumentProcessorServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.batchProcessDocuments(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.documentai.v1.IBatchProcessResponse,
+            protos.google.cloud.documentai.v1.IBatchProcessMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('batchProcessDocuments response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('batchProcessDocuments request %j', request);
+    return this.innerApiCalls
+      .batchProcessDocuments(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.documentai.v1.IBatchProcessResponse,
+            protos.google.cloud.documentai.v1.IBatchProcessMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('batchProcessDocuments response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `batchProcessDocuments()`.
@@ -1472,6 +1710,7 @@ export class DocumentProcessorServiceClient {
       protos.google.cloud.documentai.v1.BatchProcessMetadata
     >
   > {
+    this._log.info('batchProcessDocuments long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -1605,8 +1844,40 @@ export class DocumentProcessorServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.trainProcessorVersion(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.documentai.v1.ITrainProcessorVersionResponse,
+            protos.google.cloud.documentai.v1.ITrainProcessorVersionMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('trainProcessorVersion response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('trainProcessorVersion request %j', request);
+    return this.innerApiCalls
+      .trainProcessorVersion(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.documentai.v1.ITrainProcessorVersionResponse,
+            protos.google.cloud.documentai.v1.ITrainProcessorVersionMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('trainProcessorVersion response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `trainProcessorVersion()`.
@@ -1627,6 +1898,7 @@ export class DocumentProcessorServiceClient {
       protos.google.cloud.documentai.v1.TrainProcessorVersionMetadata
     >
   > {
+    this._log.info('trainProcessorVersion long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -1742,12 +2014,40 @@ export class DocumentProcessorServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.deleteProcessorVersion(
-      request,
-      options,
-      callback
-    );
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.documentai.v1.IDeleteProcessorVersionMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('deleteProcessorVersion response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('deleteProcessorVersion request %j', request);
+    return this.innerApiCalls
+      .deleteProcessorVersion(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.documentai.v1.IDeleteProcessorVersionMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteProcessorVersion response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `deleteProcessorVersion()`.
@@ -1768,6 +2068,7 @@ export class DocumentProcessorServiceClient {
       protos.google.cloud.documentai.v1.DeleteProcessorVersionMetadata
     >
   > {
+    this._log.info('deleteProcessorVersion long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -1882,12 +2183,40 @@ export class DocumentProcessorServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.deployProcessorVersion(
-      request,
-      options,
-      callback
-    );
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.documentai.v1.IDeployProcessorVersionResponse,
+            protos.google.cloud.documentai.v1.IDeployProcessorVersionMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('deployProcessorVersion response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('deployProcessorVersion request %j', request);
+    return this.innerApiCalls
+      .deployProcessorVersion(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.documentai.v1.IDeployProcessorVersionResponse,
+            protos.google.cloud.documentai.v1.IDeployProcessorVersionMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deployProcessorVersion response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `deployProcessorVersion()`.
@@ -1908,6 +2237,7 @@ export class DocumentProcessorServiceClient {
       protos.google.cloud.documentai.v1.DeployProcessorVersionMetadata
     >
   > {
+    this._log.info('deployProcessorVersion long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -2022,12 +2352,40 @@ export class DocumentProcessorServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.undeployProcessorVersion(
-      request,
-      options,
-      callback
-    );
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.documentai.v1.IUndeployProcessorVersionResponse,
+            protos.google.cloud.documentai.v1.IUndeployProcessorVersionMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('undeployProcessorVersion response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('undeployProcessorVersion request %j', request);
+    return this.innerApiCalls
+      .undeployProcessorVersion(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.documentai.v1.IUndeployProcessorVersionResponse,
+            protos.google.cloud.documentai.v1.IUndeployProcessorVersionMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('undeployProcessorVersion response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `undeployProcessorVersion()`.
@@ -2048,6 +2406,7 @@ export class DocumentProcessorServiceClient {
       protos.google.cloud.documentai.v1.UndeployProcessorVersionMetadata
     >
   > {
+    this._log.info('undeployProcessorVersion long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -2163,8 +2522,40 @@ export class DocumentProcessorServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.deleteProcessor(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.documentai.v1.IDeleteProcessorMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('deleteProcessor response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('deleteProcessor request %j', request);
+    return this.innerApiCalls
+      .deleteProcessor(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.documentai.v1.IDeleteProcessorMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteProcessor response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `deleteProcessor()`.
@@ -2185,6 +2576,7 @@ export class DocumentProcessorServiceClient {
       protos.google.cloud.documentai.v1.DeleteProcessorMetadata
     >
   > {
+    this._log.info('deleteProcessor long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -2299,8 +2691,40 @@ export class DocumentProcessorServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.enableProcessor(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.documentai.v1.IEnableProcessorResponse,
+            protos.google.cloud.documentai.v1.IEnableProcessorMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('enableProcessor response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('enableProcessor request %j', request);
+    return this.innerApiCalls
+      .enableProcessor(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.documentai.v1.IEnableProcessorResponse,
+            protos.google.cloud.documentai.v1.IEnableProcessorMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('enableProcessor response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `enableProcessor()`.
@@ -2321,6 +2745,7 @@ export class DocumentProcessorServiceClient {
       protos.google.cloud.documentai.v1.EnableProcessorMetadata
     >
   > {
+    this._log.info('enableProcessor long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -2435,8 +2860,40 @@ export class DocumentProcessorServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.disableProcessor(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.documentai.v1.IDisableProcessorResponse,
+            protos.google.cloud.documentai.v1.IDisableProcessorMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('disableProcessor response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('disableProcessor request %j', request);
+    return this.innerApiCalls
+      .disableProcessor(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.documentai.v1.IDisableProcessorResponse,
+            protos.google.cloud.documentai.v1.IDisableProcessorMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('disableProcessor response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `disableProcessor()`.
@@ -2457,6 +2914,7 @@ export class DocumentProcessorServiceClient {
       protos.google.cloud.documentai.v1.DisableProcessorMetadata
     >
   > {
+    this._log.info('disableProcessor long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -2582,12 +3040,40 @@ export class DocumentProcessorServiceClient {
       this._gaxModule.routingHeader.fromParams({
         processor: request.processor ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.setDefaultProcessorVersion(
-      request,
-      options,
-      callback
-    );
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.documentai.v1.ISetDefaultProcessorVersionResponse,
+            protos.google.cloud.documentai.v1.ISetDefaultProcessorVersionMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('setDefaultProcessorVersion response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('setDefaultProcessorVersion request %j', request);
+    return this.innerApiCalls
+      .setDefaultProcessorVersion(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.documentai.v1.ISetDefaultProcessorVersionResponse,
+            protos.google.cloud.documentai.v1.ISetDefaultProcessorVersionMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('setDefaultProcessorVersion response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `setDefaultProcessorVersion()`.
@@ -2608,6 +3094,7 @@ export class DocumentProcessorServiceClient {
       protos.google.cloud.documentai.v1.SetDefaultProcessorVersionMetadata
     >
   > {
+    this._log.info('setDefaultProcessorVersion long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -2733,8 +3220,40 @@ export class DocumentProcessorServiceClient {
       this._gaxModule.routingHeader.fromParams({
         human_review_config: request.humanReviewConfig ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.reviewDocument(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.documentai.v1.IReviewDocumentResponse,
+            protos.google.cloud.documentai.v1.IReviewDocumentOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('reviewDocument response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('reviewDocument request %j', request);
+    return this.innerApiCalls
+      .reviewDocument(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.documentai.v1.IReviewDocumentResponse,
+            protos.google.cloud.documentai.v1.IReviewDocumentOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('reviewDocument response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `reviewDocument()`.
@@ -2755,6 +3274,7 @@ export class DocumentProcessorServiceClient {
       protos.google.cloud.documentai.v1.ReviewDocumentOperationMetadata
     >
   > {
+    this._log.info('reviewDocument long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -2876,12 +3396,40 @@ export class DocumentProcessorServiceClient {
       this._gaxModule.routingHeader.fromParams({
         processor_version: request.processorVersion ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.evaluateProcessorVersion(
-      request,
-      options,
-      callback
-    );
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.documentai.v1.IEvaluateProcessorVersionResponse,
+            protos.google.cloud.documentai.v1.IEvaluateProcessorVersionMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('evaluateProcessorVersion response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('evaluateProcessorVersion request %j', request);
+    return this.innerApiCalls
+      .evaluateProcessorVersion(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.documentai.v1.IEvaluateProcessorVersionResponse,
+            protos.google.cloud.documentai.v1.IEvaluateProcessorVersionMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('evaluateProcessorVersion response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `evaluateProcessorVersion()`.
@@ -2902,6 +3450,7 @@ export class DocumentProcessorServiceClient {
       protos.google.cloud.documentai.v1.EvaluateProcessorVersionMetadata
     >
   > {
+    this._log.info('evaluateProcessorVersion long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -3014,8 +3563,36 @@ export class DocumentProcessorServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.listProcessorTypes(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.documentai.v1.IListProcessorTypesRequest,
+          | protos.google.cloud.documentai.v1.IListProcessorTypesResponse
+          | null
+          | undefined,
+          protos.google.cloud.documentai.v1.IProcessorType
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listProcessorTypes values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listProcessorTypes request %j', request);
+    return this.innerApiCalls
+      .listProcessorTypes(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.documentai.v1.IProcessorType[],
+          protos.google.cloud.documentai.v1.IListProcessorTypesRequest | null,
+          protos.google.cloud.documentai.v1.IListProcessorTypesResponse,
+        ]) => {
+          this._log.info('listProcessorTypes values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -3056,7 +3633,10 @@ export class DocumentProcessorServiceClient {
       });
     const defaultCallSettings = this._defaults['listProcessorTypes'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listProcessorTypes stream %j', request);
     return this.descriptors.page.listProcessorTypes.createStream(
       this.innerApiCalls.listProcessorTypes as GaxCall,
       request,
@@ -3105,7 +3685,10 @@ export class DocumentProcessorServiceClient {
       });
     const defaultCallSettings = this._defaults['listProcessorTypes'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listProcessorTypes iterate %j', request);
     return this.descriptors.page.listProcessorTypes.asyncIterate(
       this.innerApiCalls['listProcessorTypes'] as GaxCall,
       request as {},
@@ -3210,8 +3793,36 @@ export class DocumentProcessorServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.listProcessors(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.documentai.v1.IListProcessorsRequest,
+          | protos.google.cloud.documentai.v1.IListProcessorsResponse
+          | null
+          | undefined,
+          protos.google.cloud.documentai.v1.IProcessor
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listProcessors values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listProcessors request %j', request);
+    return this.innerApiCalls
+      .listProcessors(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.documentai.v1.IProcessor[],
+          protos.google.cloud.documentai.v1.IListProcessorsRequest | null,
+          protos.google.cloud.documentai.v1.IListProcessorsResponse,
+        ]) => {
+          this._log.info('listProcessors values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -3253,7 +3864,10 @@ export class DocumentProcessorServiceClient {
       });
     const defaultCallSettings = this._defaults['listProcessors'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listProcessors stream %j', request);
     return this.descriptors.page.listProcessors.createStream(
       this.innerApiCalls.listProcessors as GaxCall,
       request,
@@ -3303,7 +3917,10 @@ export class DocumentProcessorServiceClient {
       });
     const defaultCallSettings = this._defaults['listProcessors'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listProcessors iterate %j', request);
     return this.descriptors.page.listProcessors.asyncIterate(
       this.innerApiCalls['listProcessors'] as GaxCall,
       request as {},
@@ -3409,8 +4026,36 @@ export class DocumentProcessorServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.listProcessorVersions(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.documentai.v1.IListProcessorVersionsRequest,
+          | protos.google.cloud.documentai.v1.IListProcessorVersionsResponse
+          | null
+          | undefined,
+          protos.google.cloud.documentai.v1.IProcessorVersion
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listProcessorVersions values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listProcessorVersions request %j', request);
+    return this.innerApiCalls
+      .listProcessorVersions(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.documentai.v1.IProcessorVersion[],
+          protos.google.cloud.documentai.v1.IListProcessorVersionsRequest | null,
+          protos.google.cloud.documentai.v1.IListProcessorVersionsResponse,
+        ]) => {
+          this._log.info('listProcessorVersions values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -3453,7 +4098,10 @@ export class DocumentProcessorServiceClient {
       });
     const defaultCallSettings = this._defaults['listProcessorVersions'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listProcessorVersions stream %j', request);
     return this.descriptors.page.listProcessorVersions.createStream(
       this.innerApiCalls.listProcessorVersions as GaxCall,
       request,
@@ -3504,7 +4152,10 @@ export class DocumentProcessorServiceClient {
       });
     const defaultCallSettings = this._defaults['listProcessorVersions'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listProcessorVersions iterate %j', request);
     return this.descriptors.page.listProcessorVersions.asyncIterate(
       this.innerApiCalls['listProcessorVersions'] as GaxCall,
       request as {},
@@ -3611,8 +4262,36 @@ export class DocumentProcessorServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.listEvaluations(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.documentai.v1.IListEvaluationsRequest,
+          | protos.google.cloud.documentai.v1.IListEvaluationsResponse
+          | null
+          | undefined,
+          protos.google.cloud.documentai.v1.IEvaluation
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listEvaluations values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listEvaluations request %j', request);
+    return this.innerApiCalls
+      .listEvaluations(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.documentai.v1.IEvaluation[],
+          protos.google.cloud.documentai.v1.IListEvaluationsRequest | null,
+          protos.google.cloud.documentai.v1.IListEvaluationsResponse,
+        ]) => {
+          this._log.info('listEvaluations values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -3656,7 +4335,10 @@ export class DocumentProcessorServiceClient {
       });
     const defaultCallSettings = this._defaults['listEvaluations'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listEvaluations stream %j', request);
     return this.descriptors.page.listEvaluations.createStream(
       this.innerApiCalls.listEvaluations as GaxCall,
       request,
@@ -3708,7 +4390,10 @@ export class DocumentProcessorServiceClient {
       });
     const defaultCallSettings = this._defaults['listEvaluations'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listEvaluations iterate %j', request);
     return this.descriptors.page.listEvaluations.asyncIterate(
       this.innerApiCalls['listEvaluations'] as GaxCall,
       request as {},
@@ -3887,7 +4572,7 @@ export class DocumentProcessorServiceClient {
   listOperationsAsync(
     request: protos.google.longrunning.ListOperationsRequest,
     options?: gax.CallOptions
-  ): AsyncIterable<protos.google.longrunning.ListOperationsResponse> {
+  ): AsyncIterable<protos.google.longrunning.IOperation> {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
@@ -4409,6 +5094,7 @@ export class DocumentProcessorServiceClient {
   close(): Promise<void> {
     if (this.documentProcessorServiceStub && !this._terminated) {
       return this.documentProcessorServiceStub.then(stub => {
+        this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
         this.locationsClient.close();

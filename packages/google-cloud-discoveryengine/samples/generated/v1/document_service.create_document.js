@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -51,7 +51,7 @@ function main(parent, document, documentId) {
    *  parent google.cloud.discoveryengine.v1.CreateDocumentRequest.parent.
    *  Otherwise, an `ALREADY_EXISTS` error is returned.
    *  This field must conform to RFC-1034 (https://tools.ietf.org/html/rfc1034)
-   *  standard with a length limit of 63 characters. Otherwise, an
+   *  standard with a length limit of 128 characters. Otherwise, an
    *  `INVALID_ARGUMENT` error is returned.
    */
   // const documentId = 'abc123'

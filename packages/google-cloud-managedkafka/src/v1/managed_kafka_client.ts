@@ -33,6 +33,7 @@ import type {
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
+import {loggingUtils as logging} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -58,6 +59,8 @@ export class ManagedKafkaClient {
   private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
+  private _log = logging.log('managedkafka');
+
   auth: gax.GoogleAuth;
   descriptors: Descriptors = {
     page: {},
@@ -94,7 +97,7 @@ export class ManagedKafkaClient {
    *     Developer's Console, e.g. 'grape-spaceship-123'. We will also check
    *     the environment variable GCLOUD_PROJECT for your project ID. If your
    *     app is running in an environment which supports
-   *     {@link https://developers.google.com/identity/protocols/application-default-credentials Application Default Credentials},
+   *     {@link https://cloud.google.com/docs/authentication/application-default-credentials Application Default Credentials},
    *     your project ID will be detected automatically.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
@@ -212,6 +215,12 @@ export class ManagedKafkaClient {
     this.pathTemplates = {
       clusterPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/clusters/{cluster}'
+      ),
+      connectClusterPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/connectClusters/{connect_cluster}'
+      ),
+      connectorPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/connectClusters/{connect_cluster}/connectors/{connector}'
       ),
       consumerGroupPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/clusters/{cluster}/consumerGroups/{consumer_group}'
@@ -588,8 +597,36 @@ export class ManagedKafkaClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.getCluster(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('getCluster request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.managedkafka.v1.ICluster,
+          | protos.google.cloud.managedkafka.v1.IGetClusterRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getCluster response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getCluster(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.managedkafka.v1.ICluster,
+          protos.google.cloud.managedkafka.v1.IGetClusterRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getCluster response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Returns the properties of a single topic.
@@ -674,8 +711,36 @@ export class ManagedKafkaClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.getTopic(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('getTopic request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.managedkafka.v1.ITopic,
+          | protos.google.cloud.managedkafka.v1.IGetTopicRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getTopic response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getTopic(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.managedkafka.v1.ITopic,
+          protos.google.cloud.managedkafka.v1.IGetTopicRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getTopic response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Creates a new topic in a given project and location.
@@ -774,8 +839,36 @@ export class ManagedKafkaClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.createTopic(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('createTopic request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.managedkafka.v1.ITopic,
+          | protos.google.cloud.managedkafka.v1.ICreateTopicRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('createTopic response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .createTopic(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.managedkafka.v1.ITopic,
+          protos.google.cloud.managedkafka.v1.ICreateTopicRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createTopic response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Updates the properties of a single topic.
@@ -870,8 +963,36 @@ export class ManagedKafkaClient {
       this._gaxModule.routingHeader.fromParams({
         'topic.name': request.topic!.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.updateTopic(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('updateTopic request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.managedkafka.v1.ITopic,
+          | protos.google.cloud.managedkafka.v1.IUpdateTopicRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('updateTopic response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .updateTopic(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.managedkafka.v1.ITopic,
+          protos.google.cloud.managedkafka.v1.IUpdateTopicRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('updateTopic response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Deletes a single topic.
@@ -961,8 +1082,36 @@ export class ManagedKafkaClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.deleteTopic(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('deleteTopic request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.cloud.managedkafka.v1.IDeleteTopicRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('deleteTopic response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .deleteTopic(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.protobuf.IEmpty,
+          protos.google.cloud.managedkafka.v1.IDeleteTopicRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteTopic response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Returns the properties of a single consumer group.
@@ -1052,8 +1201,39 @@ export class ManagedKafkaClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.getConsumerGroup(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('getConsumerGroup request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.managedkafka.v1.IConsumerGroup,
+          | protos.google.cloud.managedkafka.v1.IGetConsumerGroupRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getConsumerGroup response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getConsumerGroup(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.managedkafka.v1.IConsumerGroup,
+          (
+            | protos.google.cloud.managedkafka.v1.IGetConsumerGroupRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getConsumerGroup response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Updates the properties of a single consumer group.
@@ -1154,8 +1334,39 @@ export class ManagedKafkaClient {
       this._gaxModule.routingHeader.fromParams({
         'consumer_group.name': request.consumerGroup!.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.updateConsumerGroup(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('updateConsumerGroup request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.managedkafka.v1.IConsumerGroup,
+          | protos.google.cloud.managedkafka.v1.IUpdateConsumerGroupRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('updateConsumerGroup response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .updateConsumerGroup(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.managedkafka.v1.IConsumerGroup,
+          (
+            | protos.google.cloud.managedkafka.v1.IUpdateConsumerGroupRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('updateConsumerGroup response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Deletes a single consumer group.
@@ -1251,8 +1462,39 @@ export class ManagedKafkaClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.deleteConsumerGroup(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('deleteConsumerGroup request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.cloud.managedkafka.v1.IDeleteConsumerGroupRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('deleteConsumerGroup response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .deleteConsumerGroup(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.protobuf.IEmpty,
+          (
+            | protos.google.cloud.managedkafka.v1.IDeleteConsumerGroupRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteConsumerGroup response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
 
   /**
@@ -1380,8 +1622,40 @@ export class ManagedKafkaClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.createCluster(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.managedkafka.v1.ICluster,
+            protos.google.cloud.managedkafka.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('createCluster response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('createCluster request %j', request);
+    return this.innerApiCalls
+      .createCluster(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.managedkafka.v1.ICluster,
+            protos.google.cloud.managedkafka.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createCluster response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `createCluster()`.
@@ -1402,6 +1676,7 @@ export class ManagedKafkaClient {
       protos.google.cloud.managedkafka.v1.OperationMetadata
     >
   > {
+    this._log.info('createCluster long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -1537,8 +1812,40 @@ export class ManagedKafkaClient {
       this._gaxModule.routingHeader.fromParams({
         'cluster.name': request.cluster!.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.updateCluster(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.managedkafka.v1.ICluster,
+            protos.google.cloud.managedkafka.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('updateCluster response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('updateCluster request %j', request);
+    return this.innerApiCalls
+      .updateCluster(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.managedkafka.v1.ICluster,
+            protos.google.cloud.managedkafka.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('updateCluster response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `updateCluster()`.
@@ -1559,6 +1866,7 @@ export class ManagedKafkaClient {
       protos.google.cloud.managedkafka.v1.OperationMetadata
     >
   > {
+    this._log.info('updateCluster long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -1688,8 +1996,40 @@ export class ManagedKafkaClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.deleteCluster(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.managedkafka.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('deleteCluster response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('deleteCluster request %j', request);
+    return this.innerApiCalls
+      .deleteCluster(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.managedkafka.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteCluster response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `deleteCluster()`.
@@ -1710,6 +2050,7 @@ export class ManagedKafkaClient {
       protos.google.cloud.managedkafka.v1.OperationMetadata
     >
   > {
+    this._log.info('deleteCluster long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -1830,8 +2171,36 @@ export class ManagedKafkaClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.listClusters(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.managedkafka.v1.IListClustersRequest,
+          | protos.google.cloud.managedkafka.v1.IListClustersResponse
+          | null
+          | undefined,
+          protos.google.cloud.managedkafka.v1.ICluster
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listClusters values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listClusters request %j', request);
+    return this.innerApiCalls
+      .listClusters(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.managedkafka.v1.ICluster[],
+          protos.google.cloud.managedkafka.v1.IListClustersRequest | null,
+          protos.google.cloud.managedkafka.v1.IListClustersResponse,
+        ]) => {
+          this._log.info('listClusters values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -1880,7 +2249,10 @@ export class ManagedKafkaClient {
       });
     const defaultCallSettings = this._defaults['listClusters'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listClusters stream %j', request);
     return this.descriptors.page.listClusters.createStream(
       this.innerApiCalls.listClusters as GaxCall,
       request,
@@ -1937,7 +2309,10 @@ export class ManagedKafkaClient {
       });
     const defaultCallSettings = this._defaults['listClusters'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listClusters iterate %j', request);
     return this.descriptors.page.listClusters.asyncIterate(
       this.innerApiCalls['listClusters'] as GaxCall,
       request as {},
@@ -2045,8 +2420,36 @@ export class ManagedKafkaClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.listTopics(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.managedkafka.v1.IListTopicsRequest,
+          | protos.google.cloud.managedkafka.v1.IListTopicsResponse
+          | null
+          | undefined,
+          protos.google.cloud.managedkafka.v1.ITopic
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listTopics values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listTopics request %j', request);
+    return this.innerApiCalls
+      .listTopics(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.managedkafka.v1.ITopic[],
+          protos.google.cloud.managedkafka.v1.IListTopicsRequest | null,
+          protos.google.cloud.managedkafka.v1.IListTopicsResponse,
+        ]) => {
+          this._log.info('listTopics values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -2091,7 +2494,10 @@ export class ManagedKafkaClient {
       });
     const defaultCallSettings = this._defaults['listTopics'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listTopics stream %j', request);
     return this.descriptors.page.listTopics.createStream(
       this.innerApiCalls.listTopics as GaxCall,
       request,
@@ -2144,7 +2550,10 @@ export class ManagedKafkaClient {
       });
     const defaultCallSettings = this._defaults['listTopics'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listTopics iterate %j', request);
     return this.descriptors.page.listTopics.asyncIterate(
       this.innerApiCalls['listTopics'] as GaxCall,
       request as {},
@@ -2253,8 +2662,36 @@ export class ManagedKafkaClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.listConsumerGroups(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.managedkafka.v1.IListConsumerGroupsRequest,
+          | protos.google.cloud.managedkafka.v1.IListConsumerGroupsResponse
+          | null
+          | undefined,
+          protos.google.cloud.managedkafka.v1.IConsumerGroup
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listConsumerGroups values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listConsumerGroups request %j', request);
+    return this.innerApiCalls
+      .listConsumerGroups(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.managedkafka.v1.IConsumerGroup[],
+          protos.google.cloud.managedkafka.v1.IListConsumerGroupsRequest | null,
+          protos.google.cloud.managedkafka.v1.IListConsumerGroupsResponse,
+        ]) => {
+          this._log.info('listConsumerGroups values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -2300,7 +2737,10 @@ export class ManagedKafkaClient {
       });
     const defaultCallSettings = this._defaults['listConsumerGroups'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listConsumerGroups stream %j', request);
     return this.descriptors.page.listConsumerGroups.createStream(
       this.innerApiCalls.listConsumerGroups as GaxCall,
       request,
@@ -2354,7 +2794,10 @@ export class ManagedKafkaClient {
       });
     const defaultCallSettings = this._defaults['listConsumerGroups'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listConsumerGroups iterate %j', request);
     return this.descriptors.page.listConsumerGroups.asyncIterate(
       this.innerApiCalls['listConsumerGroups'] as GaxCall,
       request as {},
@@ -2533,7 +2976,7 @@ export class ManagedKafkaClient {
   listOperationsAsync(
     request: protos.google.longrunning.ListOperationsRequest,
     options?: gax.CallOptions
-  ): AsyncIterable<protos.google.longrunning.ListOperationsResponse> {
+  ): AsyncIterable<protos.google.longrunning.IOperation> {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
@@ -2714,6 +3157,136 @@ export class ManagedKafkaClient {
    */
   matchClusterFromClusterName(clusterName: string) {
     return this.pathTemplates.clusterPathTemplate.match(clusterName).cluster;
+  }
+
+  /**
+   * Return a fully-qualified connectCluster resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} connect_cluster
+   * @returns {string} Resource name string.
+   */
+  connectClusterPath(
+    project: string,
+    location: string,
+    connectCluster: string
+  ) {
+    return this.pathTemplates.connectClusterPathTemplate.render({
+      project: project,
+      location: location,
+      connect_cluster: connectCluster,
+    });
+  }
+
+  /**
+   * Parse the project from ConnectCluster resource.
+   *
+   * @param {string} connectClusterName
+   *   A fully-qualified path representing ConnectCluster resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromConnectClusterName(connectClusterName: string) {
+    return this.pathTemplates.connectClusterPathTemplate.match(
+      connectClusterName
+    ).project;
+  }
+
+  /**
+   * Parse the location from ConnectCluster resource.
+   *
+   * @param {string} connectClusterName
+   *   A fully-qualified path representing ConnectCluster resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromConnectClusterName(connectClusterName: string) {
+    return this.pathTemplates.connectClusterPathTemplate.match(
+      connectClusterName
+    ).location;
+  }
+
+  /**
+   * Parse the connect_cluster from ConnectCluster resource.
+   *
+   * @param {string} connectClusterName
+   *   A fully-qualified path representing ConnectCluster resource.
+   * @returns {string} A string representing the connect_cluster.
+   */
+  matchConnectClusterFromConnectClusterName(connectClusterName: string) {
+    return this.pathTemplates.connectClusterPathTemplate.match(
+      connectClusterName
+    ).connect_cluster;
+  }
+
+  /**
+   * Return a fully-qualified connector resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} connect_cluster
+   * @param {string} connector
+   * @returns {string} Resource name string.
+   */
+  connectorPath(
+    project: string,
+    location: string,
+    connectCluster: string,
+    connector: string
+  ) {
+    return this.pathTemplates.connectorPathTemplate.render({
+      project: project,
+      location: location,
+      connect_cluster: connectCluster,
+      connector: connector,
+    });
+  }
+
+  /**
+   * Parse the project from Connector resource.
+   *
+   * @param {string} connectorName
+   *   A fully-qualified path representing Connector resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromConnectorName(connectorName: string) {
+    return this.pathTemplates.connectorPathTemplate.match(connectorName)
+      .project;
+  }
+
+  /**
+   * Parse the location from Connector resource.
+   *
+   * @param {string} connectorName
+   *   A fully-qualified path representing Connector resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromConnectorName(connectorName: string) {
+    return this.pathTemplates.connectorPathTemplate.match(connectorName)
+      .location;
+  }
+
+  /**
+   * Parse the connect_cluster from Connector resource.
+   *
+   * @param {string} connectorName
+   *   A fully-qualified path representing Connector resource.
+   * @returns {string} A string representing the connect_cluster.
+   */
+  matchConnectClusterFromConnectorName(connectorName: string) {
+    return this.pathTemplates.connectorPathTemplate.match(connectorName)
+      .connect_cluster;
+  }
+
+  /**
+   * Parse the connector from Connector resource.
+   *
+   * @param {string} connectorName
+   *   A fully-qualified path representing Connector resource.
+   * @returns {string} A string representing the connector.
+   */
+  matchConnectorFromConnectorName(connectorName: string) {
+    return this.pathTemplates.connectorPathTemplate.match(connectorName)
+      .connector;
   }
 
   /**
@@ -2917,6 +3490,7 @@ export class ManagedKafkaClient {
   close(): Promise<void> {
     if (this.managedKafkaStub && !this._terminated) {
       return this.managedKafkaStub.then(stub => {
+        this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
         this.locationsClient.close();

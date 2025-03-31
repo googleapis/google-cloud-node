@@ -33,6 +33,7 @@ import type {
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
+import {loggingUtils as logging} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -58,6 +59,8 @@ export class EdgeContainerClient {
   private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
+  private _log = logging.log('edgecontainer');
+
   auth: gax.GoogleAuth;
   descriptors: Descriptors = {
     page: {},
@@ -94,7 +97,7 @@ export class EdgeContainerClient {
    *     Developer's Console, e.g. 'grape-spaceship-123'. We will also check
    *     the environment variable GCLOUD_PROJECT for your project ID. If your
    *     app is running in an environment which supports
-   *     {@link https://developers.google.com/identity/protocols/application-default-credentials Application Default Credentials},
+   *     {@link https://cloud.google.com/docs/authentication/application-default-credentials Application Default Credentials},
    *     your project ID will be detected automatically.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
@@ -674,8 +677,36 @@ export class EdgeContainerClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.getCluster(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('getCluster request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.edgecontainer.v1.ICluster,
+          | protos.google.cloud.edgecontainer.v1.IGetClusterRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getCluster response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getCluster(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.edgecontainer.v1.ICluster,
+          protos.google.cloud.edgecontainer.v1.IGetClusterRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getCluster response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Generates an access token for a Cluster.
@@ -770,8 +801,39 @@ export class EdgeContainerClient {
       this._gaxModule.routingHeader.fromParams({
         cluster: request.cluster ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.generateAccessToken(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('generateAccessToken request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.edgecontainer.v1.IGenerateAccessTokenResponse,
+          | protos.google.cloud.edgecontainer.v1.IGenerateAccessTokenRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('generateAccessToken response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .generateAccessToken(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.edgecontainer.v1.IGenerateAccessTokenResponse,
+          (
+            | protos.google.cloud.edgecontainer.v1.IGenerateAccessTokenRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('generateAccessToken response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Generates an offline credential for a Cluster.
@@ -866,12 +928,39 @@ export class EdgeContainerClient {
       this._gaxModule.routingHeader.fromParams({
         cluster: request.cluster ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.generateOfflineCredential(
-      request,
-      options,
-      callback
-    );
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('generateOfflineCredential request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.edgecontainer.v1.IGenerateOfflineCredentialResponse,
+          | protos.google.cloud.edgecontainer.v1.IGenerateOfflineCredentialRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('generateOfflineCredential response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .generateOfflineCredential(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.edgecontainer.v1.IGenerateOfflineCredentialResponse,
+          (
+            | protos.google.cloud.edgecontainer.v1.IGenerateOfflineCredentialRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('generateOfflineCredential response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Gets details of a single NodePool.
@@ -960,8 +1049,36 @@ export class EdgeContainerClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.getNodePool(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('getNodePool request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.edgecontainer.v1.INodePool,
+          | protos.google.cloud.edgecontainer.v1.IGetNodePoolRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getNodePool response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getNodePool(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.edgecontainer.v1.INodePool,
+          protos.google.cloud.edgecontainer.v1.IGetNodePoolRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getNodePool response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Gets details of a single Machine.
@@ -1050,8 +1167,36 @@ export class EdgeContainerClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.getMachine(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('getMachine request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.edgecontainer.v1.IMachine,
+          | protos.google.cloud.edgecontainer.v1.IGetMachineRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getMachine response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getMachine(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.edgecontainer.v1.IMachine,
+          protos.google.cloud.edgecontainer.v1.IGetMachineRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getMachine response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Gets details of a single VPN connection.
@@ -1140,8 +1285,39 @@ export class EdgeContainerClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.getVpnConnection(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('getVpnConnection request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.edgecontainer.v1.IVpnConnection,
+          | protos.google.cloud.edgecontainer.v1.IGetVpnConnectionRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getVpnConnection response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getVpnConnection(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.edgecontainer.v1.IVpnConnection,
+          (
+            | protos.google.cloud.edgecontainer.v1.IGetVpnConnectionRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getVpnConnection response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Gets the server config.
@@ -1231,8 +1407,39 @@ export class EdgeContainerClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.getServerConfig(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('getServerConfig request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.edgecontainer.v1.IServerConfig,
+          | protos.google.cloud.edgecontainer.v1.IGetServerConfigRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getServerConfig response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getServerConfig(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.edgecontainer.v1.IServerConfig,
+          (
+            | protos.google.cloud.edgecontainer.v1.IGetServerConfigRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getServerConfig response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
 
   /**
@@ -1342,8 +1549,40 @@ export class EdgeContainerClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.createCluster(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.edgecontainer.v1.ICluster,
+            protos.google.cloud.edgecontainer.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('createCluster response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('createCluster request %j', request);
+    return this.innerApiCalls
+      .createCluster(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.edgecontainer.v1.ICluster,
+            protos.google.cloud.edgecontainer.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createCluster response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `createCluster()`.
@@ -1364,6 +1603,7 @@ export class EdgeContainerClient {
       protos.google.cloud.edgecontainer.v1.OperationMetadata
     >
   > {
+    this._log.info('createCluster long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -1488,8 +1728,40 @@ export class EdgeContainerClient {
       this._gaxModule.routingHeader.fromParams({
         'cluster.name': request.cluster!.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.updateCluster(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.edgecontainer.v1.ICluster,
+            protos.google.cloud.edgecontainer.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('updateCluster response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('updateCluster request %j', request);
+    return this.innerApiCalls
+      .updateCluster(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.edgecontainer.v1.ICluster,
+            protos.google.cloud.edgecontainer.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('updateCluster response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `updateCluster()`.
@@ -1510,6 +1782,7 @@ export class EdgeContainerClient {
       protos.google.cloud.edgecontainer.v1.OperationMetadata
     >
   > {
+    this._log.info('updateCluster long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -1632,8 +1905,40 @@ export class EdgeContainerClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.upgradeCluster(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.edgecontainer.v1.ICluster,
+            protos.google.cloud.edgecontainer.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('upgradeCluster response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('upgradeCluster request %j', request);
+    return this.innerApiCalls
+      .upgradeCluster(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.edgecontainer.v1.ICluster,
+            protos.google.cloud.edgecontainer.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('upgradeCluster response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `upgradeCluster()`.
@@ -1654,6 +1959,7 @@ export class EdgeContainerClient {
       protos.google.cloud.edgecontainer.v1.OperationMetadata
     >
   > {
+    this._log.info('upgradeCluster long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -1772,8 +2078,40 @@ export class EdgeContainerClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.deleteCluster(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.edgecontainer.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('deleteCluster response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('deleteCluster request %j', request);
+    return this.innerApiCalls
+      .deleteCluster(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.edgecontainer.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteCluster response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `deleteCluster()`.
@@ -1794,6 +2132,7 @@ export class EdgeContainerClient {
       protos.google.cloud.edgecontainer.v1.OperationMetadata
     >
   > {
+    this._log.info('deleteCluster long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -1916,8 +2255,40 @@ export class EdgeContainerClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.createNodePool(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.edgecontainer.v1.INodePool,
+            protos.google.cloud.edgecontainer.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('createNodePool response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('createNodePool request %j', request);
+    return this.innerApiCalls
+      .createNodePool(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.edgecontainer.v1.INodePool,
+            protos.google.cloud.edgecontainer.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createNodePool response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `createNodePool()`.
@@ -1938,6 +2309,7 @@ export class EdgeContainerClient {
       protos.google.cloud.edgecontainer.v1.OperationMetadata
     >
   > {
+    this._log.info('createNodePool long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -2062,8 +2434,40 @@ export class EdgeContainerClient {
       this._gaxModule.routingHeader.fromParams({
         'node_pool.name': request.nodePool!.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.updateNodePool(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.edgecontainer.v1.INodePool,
+            protos.google.cloud.edgecontainer.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('updateNodePool response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('updateNodePool request %j', request);
+    return this.innerApiCalls
+      .updateNodePool(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.edgecontainer.v1.INodePool,
+            protos.google.cloud.edgecontainer.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('updateNodePool response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `updateNodePool()`.
@@ -2084,6 +2488,7 @@ export class EdgeContainerClient {
       protos.google.cloud.edgecontainer.v1.OperationMetadata
     >
   > {
+    this._log.info('updateNodePool long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -2202,8 +2607,40 @@ export class EdgeContainerClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.deleteNodePool(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.edgecontainer.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('deleteNodePool response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('deleteNodePool request %j', request);
+    return this.innerApiCalls
+      .deleteNodePool(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.edgecontainer.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteNodePool response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `deleteNodePool()`.
@@ -2224,6 +2661,7 @@ export class EdgeContainerClient {
       protos.google.cloud.edgecontainer.v1.OperationMetadata
     >
   > {
+    this._log.info('deleteNodePool long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -2346,8 +2784,40 @@ export class EdgeContainerClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.createVpnConnection(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.edgecontainer.v1.IVpnConnection,
+            protos.google.cloud.edgecontainer.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('createVpnConnection response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('createVpnConnection request %j', request);
+    return this.innerApiCalls
+      .createVpnConnection(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.edgecontainer.v1.IVpnConnection,
+            protos.google.cloud.edgecontainer.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createVpnConnection response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `createVpnConnection()`.
@@ -2368,6 +2838,7 @@ export class EdgeContainerClient {
       protos.google.cloud.edgecontainer.v1.OperationMetadata
     >
   > {
+    this._log.info('createVpnConnection long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -2486,8 +2957,40 @@ export class EdgeContainerClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.deleteVpnConnection(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.edgecontainer.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('deleteVpnConnection response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('deleteVpnConnection request %j', request);
+    return this.innerApiCalls
+      .deleteVpnConnection(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.edgecontainer.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteVpnConnection response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `deleteVpnConnection()`.
@@ -2508,6 +3011,7 @@ export class EdgeContainerClient {
       protos.google.cloud.edgecontainer.v1.OperationMetadata
     >
   > {
+    this._log.info('deleteVpnConnection long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -2622,12 +3126,40 @@ export class EdgeContainerClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.listClusters(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.edgecontainer.v1.IListClustersRequest,
+          | protos.google.cloud.edgecontainer.v1.IListClustersResponse
+          | null
+          | undefined,
+          protos.google.cloud.edgecontainer.v1.ICluster
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listClusters values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listClusters request %j', request);
+    return this.innerApiCalls
+      .listClusters(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.edgecontainer.v1.ICluster[],
+          protos.google.cloud.edgecontainer.v1.IListClustersRequest | null,
+          protos.google.cloud.edgecontainer.v1.IListClustersResponse,
+        ]) => {
+          this._log.info('listClusters values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listClusters`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
@@ -2666,7 +3198,10 @@ export class EdgeContainerClient {
       });
     const defaultCallSettings = this._defaults['listClusters'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listClusters stream %j', request);
     return this.descriptors.page.listClusters.createStream(
       this.innerApiCalls.listClusters as GaxCall,
       request,
@@ -2717,7 +3252,10 @@ export class EdgeContainerClient {
       });
     const defaultCallSettings = this._defaults['listClusters'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listClusters iterate %j', request);
     return this.descriptors.page.listClusters.asyncIterate(
       this.innerApiCalls['listClusters'] as GaxCall,
       request as {},
@@ -2822,12 +3360,40 @@ export class EdgeContainerClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.listNodePools(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.edgecontainer.v1.IListNodePoolsRequest,
+          | protos.google.cloud.edgecontainer.v1.IListNodePoolsResponse
+          | null
+          | undefined,
+          protos.google.cloud.edgecontainer.v1.INodePool
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listNodePools values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listNodePools request %j', request);
+    return this.innerApiCalls
+      .listNodePools(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.edgecontainer.v1.INodePool[],
+          protos.google.cloud.edgecontainer.v1.IListNodePoolsRequest | null,
+          protos.google.cloud.edgecontainer.v1.IListNodePoolsResponse,
+        ]) => {
+          this._log.info('listNodePools values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listNodePools`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
@@ -2865,7 +3431,10 @@ export class EdgeContainerClient {
       });
     const defaultCallSettings = this._defaults['listNodePools'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listNodePools stream %j', request);
     return this.descriptors.page.listNodePools.createStream(
       this.innerApiCalls.listNodePools as GaxCall,
       request,
@@ -2915,7 +3484,10 @@ export class EdgeContainerClient {
       });
     const defaultCallSettings = this._defaults['listNodePools'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listNodePools iterate %j', request);
     return this.descriptors.page.listNodePools.asyncIterate(
       this.innerApiCalls['listNodePools'] as GaxCall,
       request as {},
@@ -3020,12 +3592,40 @@ export class EdgeContainerClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.listMachines(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.edgecontainer.v1.IListMachinesRequest,
+          | protos.google.cloud.edgecontainer.v1.IListMachinesResponse
+          | null
+          | undefined,
+          protos.google.cloud.edgecontainer.v1.IMachine
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listMachines values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listMachines request %j', request);
+    return this.innerApiCalls
+      .listMachines(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.edgecontainer.v1.IMachine[],
+          protos.google.cloud.edgecontainer.v1.IListMachinesRequest | null,
+          protos.google.cloud.edgecontainer.v1.IListMachinesResponse,
+        ]) => {
+          this._log.info('listMachines values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listMachines`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
@@ -3063,7 +3663,10 @@ export class EdgeContainerClient {
       });
     const defaultCallSettings = this._defaults['listMachines'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listMachines stream %j', request);
     return this.descriptors.page.listMachines.createStream(
       this.innerApiCalls.listMachines as GaxCall,
       request,
@@ -3113,7 +3716,10 @@ export class EdgeContainerClient {
       });
     const defaultCallSettings = this._defaults['listMachines'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listMachines iterate %j', request);
     return this.descriptors.page.listMachines.asyncIterate(
       this.innerApiCalls['listMachines'] as GaxCall,
       request as {},
@@ -3219,12 +3825,40 @@ export class EdgeContainerClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.listVpnConnections(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.edgecontainer.v1.IListVpnConnectionsRequest,
+          | protos.google.cloud.edgecontainer.v1.IListVpnConnectionsResponse
+          | null
+          | undefined,
+          protos.google.cloud.edgecontainer.v1.IVpnConnection
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listVpnConnections values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listVpnConnections request %j', request);
+    return this.innerApiCalls
+      .listVpnConnections(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.edgecontainer.v1.IVpnConnection[],
+          protos.google.cloud.edgecontainer.v1.IListVpnConnectionsRequest | null,
+          protos.google.cloud.edgecontainer.v1.IListVpnConnectionsResponse,
+        ]) => {
+          this._log.info('listVpnConnections values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listVpnConnections`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
@@ -3263,7 +3897,10 @@ export class EdgeContainerClient {
       });
     const defaultCallSettings = this._defaults['listVpnConnections'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listVpnConnections stream %j', request);
     return this.descriptors.page.listVpnConnections.createStream(
       this.innerApiCalls.listVpnConnections as GaxCall,
       request,
@@ -3314,7 +3951,10 @@ export class EdgeContainerClient {
       });
     const defaultCallSettings = this._defaults['listVpnConnections'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listVpnConnections iterate %j', request);
     return this.descriptors.page.listVpnConnections.asyncIterate(
       this.innerApiCalls['listVpnConnections'] as GaxCall,
       request as {},
@@ -3431,7 +4071,7 @@ export class EdgeContainerClient {
    */
   getOperation(
     request: protos.google.longrunning.GetOperationRequest,
-    options?:
+    optionsOrCallback?:
       | gax.CallOptions
       | Callback<
           protos.google.longrunning.Operation,
@@ -3444,6 +4084,20 @@ export class EdgeContainerClient {
       {} | null | undefined
     >
   ): Promise<[protos.google.longrunning.Operation]> {
+    let options: gax.CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as gax.CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.getOperation(request, options, callback);
   }
   /**
@@ -3479,7 +4133,14 @@ export class EdgeContainerClient {
   listOperationsAsync(
     request: protos.google.longrunning.ListOperationsRequest,
     options?: gax.CallOptions
-  ): AsyncIterable<protos.google.longrunning.ListOperationsResponse> {
+  ): AsyncIterable<protos.google.longrunning.IOperation> {
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.listOperationsAsync(request, options);
   }
   /**
@@ -3515,11 +4176,11 @@ export class EdgeContainerClient {
    */
   cancelOperation(
     request: protos.google.longrunning.CancelOperationRequest,
-    options?:
+    optionsOrCallback?:
       | gax.CallOptions
       | Callback<
-          protos.google.protobuf.Empty,
           protos.google.longrunning.CancelOperationRequest,
+          protos.google.protobuf.Empty,
           {} | undefined | null
         >,
     callback?: Callback<
@@ -3528,6 +4189,20 @@ export class EdgeContainerClient {
       {} | undefined | null
     >
   ): Promise<protos.google.protobuf.Empty> {
+    let options: gax.CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as gax.CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.cancelOperation(request, options, callback);
   }
 
@@ -3558,7 +4233,7 @@ export class EdgeContainerClient {
    */
   deleteOperation(
     request: protos.google.longrunning.DeleteOperationRequest,
-    options?:
+    optionsOrCallback?:
       | gax.CallOptions
       | Callback<
           protos.google.protobuf.Empty,
@@ -3571,6 +4246,20 @@ export class EdgeContainerClient {
       {} | null | undefined
     >
   ): Promise<protos.google.protobuf.Empty> {
+    let options: gax.CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as gax.CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.deleteOperation(request, options, callback);
   }
 
@@ -3864,6 +4553,7 @@ export class EdgeContainerClient {
   close(): Promise<void> {
     if (this.edgeContainerStub && !this._terminated) {
       return this.edgeContainerStub.then(stub => {
+        this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
         this.locationsClient.close();

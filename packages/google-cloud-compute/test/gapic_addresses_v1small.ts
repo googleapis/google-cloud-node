@@ -263,7 +263,9 @@ describe('v1small.AddressesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      client.initialize().catch(err => {
+        throw err;
+      });
       assert(client.addressesStub);
       client.close().then(() => {
         done();
@@ -322,7 +324,7 @@ describe('v1small.AddressesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1small.DeleteAddressRequest()
       );
@@ -363,7 +365,7 @@ describe('v1small.AddressesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1small.DeleteAddressRequest()
       );
@@ -420,7 +422,7 @@ describe('v1small.AddressesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1small.DeleteAddressRequest()
       );
@@ -458,7 +460,7 @@ describe('v1small.AddressesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1small.DeleteAddressRequest()
       );
@@ -489,7 +491,7 @@ describe('v1small.AddressesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1small.InsertAddressRequest()
       );
@@ -525,7 +527,7 @@ describe('v1small.AddressesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1small.InsertAddressRequest()
       );
@@ -577,7 +579,7 @@ describe('v1small.AddressesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1small.InsertAddressRequest()
       );
@@ -610,7 +612,7 @@ describe('v1small.AddressesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1small.InsertAddressRequest()
       );
@@ -636,7 +638,7 @@ describe('v1small.AddressesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1small.AggregatedListAddressesRequest()
       );
@@ -696,7 +698,7 @@ describe('v1small.AddressesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1small.AggregatedListAddressesRequest()
       );
@@ -740,7 +742,7 @@ describe('v1small.AddressesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1small.ListAddressesRequest()
       );
@@ -783,7 +785,7 @@ describe('v1small.AddressesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1small.ListAddressesRequest()
       );
@@ -841,7 +843,7 @@ describe('v1small.AddressesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1small.ListAddressesRequest()
       );
@@ -873,7 +875,7 @@ describe('v1small.AddressesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1small.ListAddressesRequest()
       );
@@ -938,7 +940,7 @@ describe('v1small.AddressesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1small.ListAddressesRequest()
       );
@@ -994,7 +996,7 @@ describe('v1small.AddressesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1small.ListAddressesRequest()
       );
@@ -1047,7 +1049,7 @@ describe('v1small.AddressesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1small.ListAddressesRequest()
       );

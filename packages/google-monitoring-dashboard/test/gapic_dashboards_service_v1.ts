@@ -253,7 +253,9 @@ describe('v1.DashboardsServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      client.initialize().catch(err => {
+        throw err;
+      });
       assert(client.dashboardsServiceStub);
       client.close().then(() => {
         done();
@@ -312,7 +314,7 @@ describe('v1.DashboardsServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.monitoring.dashboard.v1.CreateDashboardRequest()
       );
@@ -321,7 +323,7 @@ describe('v1.DashboardsServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.monitoring.dashboard.v1.Dashboard()
       );
@@ -343,7 +345,7 @@ describe('v1.DashboardsServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.monitoring.dashboard.v1.CreateDashboardRequest()
       );
@@ -352,7 +354,7 @@ describe('v1.DashboardsServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.monitoring.dashboard.v1.Dashboard()
       );
@@ -390,7 +392,7 @@ describe('v1.DashboardsServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.monitoring.dashboard.v1.CreateDashboardRequest()
       );
@@ -399,7 +401,7 @@ describe('v1.DashboardsServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createDashboard = stubSimpleCall(
         undefined,
@@ -421,7 +423,7 @@ describe('v1.DashboardsServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.monitoring.dashboard.v1.CreateDashboardRequest()
       );
@@ -442,7 +444,7 @@ describe('v1.DashboardsServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.monitoring.dashboard.v1.GetDashboardRequest()
       );
@@ -451,7 +453,7 @@ describe('v1.DashboardsServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.monitoring.dashboard.v1.Dashboard()
       );
@@ -473,7 +475,7 @@ describe('v1.DashboardsServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.monitoring.dashboard.v1.GetDashboardRequest()
       );
@@ -482,7 +484,7 @@ describe('v1.DashboardsServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.monitoring.dashboard.v1.Dashboard()
       );
@@ -520,7 +522,7 @@ describe('v1.DashboardsServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.monitoring.dashboard.v1.GetDashboardRequest()
       );
@@ -529,7 +531,7 @@ describe('v1.DashboardsServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getDashboard = stubSimpleCall(
         undefined,
@@ -551,7 +553,7 @@ describe('v1.DashboardsServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.monitoring.dashboard.v1.GetDashboardRequest()
       );
@@ -572,7 +574,7 @@ describe('v1.DashboardsServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.monitoring.dashboard.v1.DeleteDashboardRequest()
       );
@@ -581,7 +583,7 @@ describe('v1.DashboardsServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -603,7 +605,7 @@ describe('v1.DashboardsServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.monitoring.dashboard.v1.DeleteDashboardRequest()
       );
@@ -612,7 +614,7 @@ describe('v1.DashboardsServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -650,7 +652,7 @@ describe('v1.DashboardsServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.monitoring.dashboard.v1.DeleteDashboardRequest()
       );
@@ -659,7 +661,7 @@ describe('v1.DashboardsServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteDashboard = stubSimpleCall(
         undefined,
@@ -681,7 +683,7 @@ describe('v1.DashboardsServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.monitoring.dashboard.v1.DeleteDashboardRequest()
       );
@@ -702,7 +704,7 @@ describe('v1.DashboardsServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.monitoring.dashboard.v1.UpdateDashboardRequest()
       );
@@ -712,7 +714,7 @@ describe('v1.DashboardsServiceClient', () => {
         ['dashboard', 'name']
       );
       request.dashboard.name = defaultValue1;
-      const expectedHeaderRequestParams = `dashboard.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `dashboard.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.monitoring.dashboard.v1.Dashboard()
       );
@@ -734,7 +736,7 @@ describe('v1.DashboardsServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.monitoring.dashboard.v1.UpdateDashboardRequest()
       );
@@ -744,7 +746,7 @@ describe('v1.DashboardsServiceClient', () => {
         ['dashboard', 'name']
       );
       request.dashboard.name = defaultValue1;
-      const expectedHeaderRequestParams = `dashboard.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `dashboard.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.monitoring.dashboard.v1.Dashboard()
       );
@@ -782,7 +784,7 @@ describe('v1.DashboardsServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.monitoring.dashboard.v1.UpdateDashboardRequest()
       );
@@ -792,7 +794,7 @@ describe('v1.DashboardsServiceClient', () => {
         ['dashboard', 'name']
       );
       request.dashboard.name = defaultValue1;
-      const expectedHeaderRequestParams = `dashboard.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `dashboard.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateDashboard = stubSimpleCall(
         undefined,
@@ -814,7 +816,7 @@ describe('v1.DashboardsServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.monitoring.dashboard.v1.UpdateDashboardRequest()
       );
@@ -836,7 +838,7 @@ describe('v1.DashboardsServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.monitoring.dashboard.v1.ListDashboardsRequest()
       );
@@ -845,7 +847,7 @@ describe('v1.DashboardsServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.monitoring.dashboard.v1.Dashboard()
@@ -875,7 +877,7 @@ describe('v1.DashboardsServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.monitoring.dashboard.v1.ListDashboardsRequest()
       );
@@ -884,7 +886,7 @@ describe('v1.DashboardsServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.monitoring.dashboard.v1.Dashboard()
@@ -930,7 +932,7 @@ describe('v1.DashboardsServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.monitoring.dashboard.v1.ListDashboardsRequest()
       );
@@ -939,7 +941,7 @@ describe('v1.DashboardsServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listDashboards = stubSimpleCall(
         undefined,
@@ -961,7 +963,7 @@ describe('v1.DashboardsServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.monitoring.dashboard.v1.ListDashboardsRequest()
       );
@@ -970,7 +972,7 @@ describe('v1.DashboardsServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.monitoring.dashboard.v1.Dashboard()
@@ -1021,7 +1023,7 @@ describe('v1.DashboardsServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.monitoring.dashboard.v1.ListDashboardsRequest()
       );
@@ -1030,7 +1032,7 @@ describe('v1.DashboardsServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listDashboards.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -1070,7 +1072,7 @@ describe('v1.DashboardsServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.monitoring.dashboard.v1.ListDashboardsRequest()
       );
@@ -1079,7 +1081,7 @@ describe('v1.DashboardsServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.monitoring.dashboard.v1.Dashboard()
@@ -1119,7 +1121,7 @@ describe('v1.DashboardsServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.monitoring.dashboard.v1.ListDashboardsRequest()
       );
@@ -1128,7 +1130,7 @@ describe('v1.DashboardsServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listDashboards.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -1157,7 +1159,7 @@ describe('v1.DashboardsServiceClient', () => {
   });
 
   describe('Path templates', () => {
-    describe('alertPolicy', () => {
+    describe('alertPolicy', async () => {
       const fakePath = '/rendered/path/alertPolicy';
       const expectedParameters = {
         project: 'projectValue',
@@ -1167,7 +1169,7 @@ describe('v1.DashboardsServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.alertPolicyPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -1209,7 +1211,7 @@ describe('v1.DashboardsServiceClient', () => {
       });
     });
 
-    describe('dashboard', () => {
+    describe('dashboard', async () => {
       const fakePath = '/rendered/path/dashboard';
       const expectedParameters = {
         project: 'projectValue',
@@ -1219,7 +1221,7 @@ describe('v1.DashboardsServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.dashboardPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -1258,7 +1260,7 @@ describe('v1.DashboardsServiceClient', () => {
       });
     });
 
-    describe('project', () => {
+    describe('project', async () => {
       const fakePath = '/rendered/path/project';
       const expectedParameters = {
         project: 'projectValue',
@@ -1267,7 +1269,7 @@ describe('v1.DashboardsServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectPathTemplate.render = sinon
         .stub()
         .returns(fakePath);

@@ -29,6 +29,7 @@ import type {
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
+import {loggingUtils as logging} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -53,6 +54,8 @@ export class PermissionServiceClient {
   private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
+  private _log = logging.log('generativelanguage');
+
   auth: gax.GoogleAuth;
   descriptors: Descriptors = {
     page: {},
@@ -87,7 +90,7 @@ export class PermissionServiceClient {
    *     Developer's Console, e.g. 'grape-spaceship-123'. We will also check
    *     the environment variable GCLOUD_PROJECT for your project ID. If your
    *     app is running in an environment which supports
-   *     {@link https://developers.google.com/identity/protocols/application-default-credentials Application Default Credentials},
+   *     {@link https://cloud.google.com/docs/authentication/application-default-credentials Application Default Credentials},
    *     your project ID will be detected automatically.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
@@ -502,8 +505,39 @@ export class PermissionServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.createPermission(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('createPermission request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.ai.generativelanguage.v1alpha.IPermission,
+          | protos.google.ai.generativelanguage.v1alpha.ICreatePermissionRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('createPermission response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .createPermission(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.ai.generativelanguage.v1alpha.IPermission,
+          (
+            | protos.google.ai.generativelanguage.v1alpha.ICreatePermissionRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('createPermission response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Gets information about a specific Permission.
@@ -602,8 +636,39 @@ export class PermissionServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.getPermission(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('getPermission request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.ai.generativelanguage.v1alpha.IPermission,
+          | protos.google.ai.generativelanguage.v1alpha.IGetPermissionRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getPermission response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getPermission(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.ai.generativelanguage.v1alpha.IPermission,
+          (
+            | protos.google.ai.generativelanguage.v1alpha.IGetPermissionRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getPermission response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Updates the permission.
@@ -703,8 +768,39 @@ export class PermissionServiceClient {
       this._gaxModule.routingHeader.fromParams({
         'permission.name': request.permission!.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.updatePermission(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('updatePermission request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.ai.generativelanguage.v1alpha.IPermission,
+          | protos.google.ai.generativelanguage.v1alpha.IUpdatePermissionRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('updatePermission response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .updatePermission(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.ai.generativelanguage.v1alpha.IPermission,
+          (
+            | protos.google.ai.generativelanguage.v1alpha.IUpdatePermissionRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('updatePermission response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Deletes the permission.
@@ -802,8 +898,39 @@ export class PermissionServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.deletePermission(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('deletePermission request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.ai.generativelanguage.v1alpha.IDeletePermissionRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('deletePermission response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .deletePermission(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.protobuf.IEmpty,
+          (
+            | protos.google.ai.generativelanguage.v1alpha.IDeletePermissionRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('deletePermission response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Transfers ownership of the tuned model.
@@ -905,8 +1032,39 @@ export class PermissionServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.transferOwnership(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('transferOwnership request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.ai.generativelanguage.v1alpha.ITransferOwnershipResponse,
+          | protos.google.ai.generativelanguage.v1alpha.ITransferOwnershipRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('transferOwnership response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .transferOwnership(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.ai.generativelanguage.v1alpha.ITransferOwnershipResponse,
+          (
+            | protos.google.ai.generativelanguage.v1alpha.ITransferOwnershipRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('transferOwnership response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
 
   /**
@@ -1017,8 +1175,36 @@ export class PermissionServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.listPermissions(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.ai.generativelanguage.v1alpha.IListPermissionsRequest,
+          | protos.google.ai.generativelanguage.v1alpha.IListPermissionsResponse
+          | null
+          | undefined,
+          protos.google.ai.generativelanguage.v1alpha.IPermission
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listPermissions values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listPermissions request %j', request);
+    return this.innerApiCalls
+      .listPermissions(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.ai.generativelanguage.v1alpha.IPermission[],
+          protos.google.ai.generativelanguage.v1alpha.IListPermissionsRequest | null,
+          protos.google.ai.generativelanguage.v1alpha.IListPermissionsResponse,
+        ]) => {
+          this._log.info('listPermissions values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -1070,7 +1256,10 @@ export class PermissionServiceClient {
       });
     const defaultCallSettings = this._defaults['listPermissions'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listPermissions stream %j', request);
     return this.descriptors.page.listPermissions.createStream(
       this.innerApiCalls.listPermissions as GaxCall,
       request,
@@ -1130,7 +1319,10 @@ export class PermissionServiceClient {
       });
     const defaultCallSettings = this._defaults['listPermissions'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listPermissions iterate %j', request);
     return this.descriptors.page.listPermissions.asyncIterate(
       this.innerApiCalls['listPermissions'] as GaxCall,
       request as {},
@@ -1436,6 +1628,7 @@ export class PermissionServiceClient {
   close(): Promise<void> {
     if (this.permissionServiceStub && !this._terminated) {
       return this.permissionServiceStub.then(stub => {
+        this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
       });

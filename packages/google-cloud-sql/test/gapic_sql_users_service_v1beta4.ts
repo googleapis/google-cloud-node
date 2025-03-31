@@ -214,7 +214,9 @@ describe('v1beta4.SqlUsersServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      client.initialize().catch(err => {
+        throw err;
+      });
       assert(client.sqlUsersServiceStub);
       client.close().then(() => {
         done();
@@ -273,7 +275,7 @@ describe('v1beta4.SqlUsersServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.sql.v1beta4.SqlUsersDeleteRequest()
       );
@@ -287,7 +289,7 @@ describe('v1beta4.SqlUsersServiceClient', () => {
         ['instance']
       );
       request.instance = defaultValue2;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&instance=${defaultValue2}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&instance=${defaultValue2 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.sql.v1beta4.Operation()
       );
@@ -309,7 +311,7 @@ describe('v1beta4.SqlUsersServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.sql.v1beta4.SqlUsersDeleteRequest()
       );
@@ -323,7 +325,7 @@ describe('v1beta4.SqlUsersServiceClient', () => {
         ['instance']
       );
       request.instance = defaultValue2;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&instance=${defaultValue2}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&instance=${defaultValue2 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.sql.v1beta4.Operation()
       );
@@ -361,7 +363,7 @@ describe('v1beta4.SqlUsersServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.sql.v1beta4.SqlUsersDeleteRequest()
       );
@@ -375,7 +377,7 @@ describe('v1beta4.SqlUsersServiceClient', () => {
         ['instance']
       );
       request.instance = defaultValue2;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&instance=${defaultValue2}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&instance=${defaultValue2 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.delete = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.delete(request), expectedError);
@@ -394,7 +396,7 @@ describe('v1beta4.SqlUsersServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.sql.v1beta4.SqlUsersDeleteRequest()
       );
@@ -420,7 +422,7 @@ describe('v1beta4.SqlUsersServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.sql.v1beta4.SqlUsersGetRequest()
       );
@@ -439,7 +441,7 @@ describe('v1beta4.SqlUsersServiceClient', () => {
         ['name']
       );
       request.name = defaultValue3;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&instance=${defaultValue2}&name=${defaultValue3}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&instance=${defaultValue2 ?? ''}&name=${defaultValue3 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.sql.v1beta4.User()
       );
@@ -460,7 +462,7 @@ describe('v1beta4.SqlUsersServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.sql.v1beta4.SqlUsersGetRequest()
       );
@@ -479,7 +481,7 @@ describe('v1beta4.SqlUsersServiceClient', () => {
         ['name']
       );
       request.name = defaultValue3;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&instance=${defaultValue2}&name=${defaultValue3}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&instance=${defaultValue2 ?? ''}&name=${defaultValue3 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.sql.v1beta4.User()
       );
@@ -515,7 +517,7 @@ describe('v1beta4.SqlUsersServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.sql.v1beta4.SqlUsersGetRequest()
       );
@@ -534,7 +536,7 @@ describe('v1beta4.SqlUsersServiceClient', () => {
         ['name']
       );
       request.name = defaultValue3;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&instance=${defaultValue2}&name=${defaultValue3}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&instance=${defaultValue2 ?? ''}&name=${defaultValue3 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.get = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.get(request), expectedError);
@@ -552,7 +554,7 @@ describe('v1beta4.SqlUsersServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.sql.v1beta4.SqlUsersGetRequest()
       );
@@ -583,7 +585,7 @@ describe('v1beta4.SqlUsersServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.sql.v1beta4.SqlUsersInsertRequest()
       );
@@ -597,7 +599,7 @@ describe('v1beta4.SqlUsersServiceClient', () => {
         ['instance']
       );
       request.instance = defaultValue2;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&instance=${defaultValue2}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&instance=${defaultValue2 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.sql.v1beta4.Operation()
       );
@@ -619,7 +621,7 @@ describe('v1beta4.SqlUsersServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.sql.v1beta4.SqlUsersInsertRequest()
       );
@@ -633,7 +635,7 @@ describe('v1beta4.SqlUsersServiceClient', () => {
         ['instance']
       );
       request.instance = defaultValue2;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&instance=${defaultValue2}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&instance=${defaultValue2 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.sql.v1beta4.Operation()
       );
@@ -671,7 +673,7 @@ describe('v1beta4.SqlUsersServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.sql.v1beta4.SqlUsersInsertRequest()
       );
@@ -685,7 +687,7 @@ describe('v1beta4.SqlUsersServiceClient', () => {
         ['instance']
       );
       request.instance = defaultValue2;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&instance=${defaultValue2}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&instance=${defaultValue2 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.insert = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.insert(request), expectedError);
@@ -704,7 +706,7 @@ describe('v1beta4.SqlUsersServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.sql.v1beta4.SqlUsersInsertRequest()
       );
@@ -730,7 +732,7 @@ describe('v1beta4.SqlUsersServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.sql.v1beta4.SqlUsersListRequest()
       );
@@ -744,7 +746,7 @@ describe('v1beta4.SqlUsersServiceClient', () => {
         ['instance']
       );
       request.instance = defaultValue2;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&instance=${defaultValue2}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&instance=${defaultValue2 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.sql.v1beta4.UsersListResponse()
       );
@@ -765,7 +767,7 @@ describe('v1beta4.SqlUsersServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.sql.v1beta4.SqlUsersListRequest()
       );
@@ -779,7 +781,7 @@ describe('v1beta4.SqlUsersServiceClient', () => {
         ['instance']
       );
       request.instance = defaultValue2;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&instance=${defaultValue2}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&instance=${defaultValue2 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.sql.v1beta4.UsersListResponse()
       );
@@ -815,7 +817,7 @@ describe('v1beta4.SqlUsersServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.sql.v1beta4.SqlUsersListRequest()
       );
@@ -829,7 +831,7 @@ describe('v1beta4.SqlUsersServiceClient', () => {
         ['instance']
       );
       request.instance = defaultValue2;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&instance=${defaultValue2}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&instance=${defaultValue2 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.list = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.list(request), expectedError);
@@ -847,7 +849,7 @@ describe('v1beta4.SqlUsersServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.sql.v1beta4.SqlUsersListRequest()
       );
@@ -873,7 +875,7 @@ describe('v1beta4.SqlUsersServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.sql.v1beta4.SqlUsersUpdateRequest()
       );
@@ -887,7 +889,7 @@ describe('v1beta4.SqlUsersServiceClient', () => {
         ['instance']
       );
       request.instance = defaultValue2;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&instance=${defaultValue2}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&instance=${defaultValue2 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.sql.v1beta4.Operation()
       );
@@ -909,7 +911,7 @@ describe('v1beta4.SqlUsersServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.sql.v1beta4.SqlUsersUpdateRequest()
       );
@@ -923,7 +925,7 @@ describe('v1beta4.SqlUsersServiceClient', () => {
         ['instance']
       );
       request.instance = defaultValue2;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&instance=${defaultValue2}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&instance=${defaultValue2 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.sql.v1beta4.Operation()
       );
@@ -961,7 +963,7 @@ describe('v1beta4.SqlUsersServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.sql.v1beta4.SqlUsersUpdateRequest()
       );
@@ -975,7 +977,7 @@ describe('v1beta4.SqlUsersServiceClient', () => {
         ['instance']
       );
       request.instance = defaultValue2;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&instance=${defaultValue2}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&instance=${defaultValue2 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.update = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.update(request), expectedError);
@@ -994,7 +996,7 @@ describe('v1beta4.SqlUsersServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.sql.v1beta4.SqlUsersUpdateRequest()
       );
@@ -1019,7 +1021,7 @@ describe('v1beta4.SqlUsersServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.GetLocationRequest()
       );
@@ -1049,7 +1051,7 @@ describe('v1beta4.SqlUsersServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.GetLocationRequest()
       );
@@ -1093,7 +1095,7 @@ describe('v1beta4.SqlUsersServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.GetLocationRequest()
       );
@@ -1128,7 +1130,7 @@ describe('v1beta4.SqlUsersServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.ListLocationsRequest()
       );
@@ -1176,7 +1178,7 @@ describe('v1beta4.SqlUsersServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.ListLocationsRequest()
       );

@@ -300,7 +300,9 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      client.initialize().catch(err => {
+        throw err;
+      });
       assert(client.contactCenterInsightsStub);
       client.close().then(() => {
         done();
@@ -363,7 +365,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.CreateConversationRequest()
       );
@@ -372,7 +374,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.Conversation()
       );
@@ -396,7 +398,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.CreateConversationRequest()
       );
@@ -405,7 +407,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.Conversation()
       );
@@ -444,7 +446,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.CreateConversationRequest()
       );
@@ -453,7 +455,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createConversation = stubSimpleCall(
         undefined,
@@ -476,7 +478,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.CreateConversationRequest()
       );
@@ -498,7 +500,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.UpdateConversationRequest()
       );
@@ -508,7 +510,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['conversation', 'name']
       );
       request.conversation.name = defaultValue1;
-      const expectedHeaderRequestParams = `conversation.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `conversation.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.Conversation()
       );
@@ -532,7 +534,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.UpdateConversationRequest()
       );
@@ -542,7 +544,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['conversation', 'name']
       );
       request.conversation.name = defaultValue1;
-      const expectedHeaderRequestParams = `conversation.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `conversation.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.Conversation()
       );
@@ -581,7 +583,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.UpdateConversationRequest()
       );
@@ -591,7 +593,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['conversation', 'name']
       );
       request.conversation.name = defaultValue1;
-      const expectedHeaderRequestParams = `conversation.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `conversation.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateConversation = stubSimpleCall(
         undefined,
@@ -614,7 +616,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.UpdateConversationRequest()
       );
@@ -637,7 +639,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.GetConversationRequest()
       );
@@ -646,7 +648,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.Conversation()
       );
@@ -669,7 +671,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.GetConversationRequest()
       );
@@ -678,7 +680,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.Conversation()
       );
@@ -717,7 +719,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.GetConversationRequest()
       );
@@ -726,7 +728,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getConversation = stubSimpleCall(
         undefined,
@@ -749,7 +751,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.GetConversationRequest()
       );
@@ -771,7 +773,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.DeleteConversationRequest()
       );
@@ -780,7 +782,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -804,7 +806,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.DeleteConversationRequest()
       );
@@ -813,7 +815,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -852,7 +854,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.DeleteConversationRequest()
       );
@@ -861,7 +863,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteConversation = stubSimpleCall(
         undefined,
@@ -884,7 +886,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.DeleteConversationRequest()
       );
@@ -906,7 +908,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.GetAnalysisRequest()
       );
@@ -915,7 +917,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.Analysis()
       );
@@ -938,7 +940,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.GetAnalysisRequest()
       );
@@ -947,7 +949,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.Analysis()
       );
@@ -986,7 +988,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.GetAnalysisRequest()
       );
@@ -995,7 +997,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getAnalysis = stubSimpleCall(
         undefined,
@@ -1018,7 +1020,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.GetAnalysisRequest()
       );
@@ -1040,7 +1042,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.DeleteAnalysisRequest()
       );
@@ -1049,7 +1051,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -1072,7 +1074,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.DeleteAnalysisRequest()
       );
@@ -1081,7 +1083,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -1120,7 +1122,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.DeleteAnalysisRequest()
       );
@@ -1129,7 +1131,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteAnalysis = stubSimpleCall(
         undefined,
@@ -1152,7 +1154,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.DeleteAnalysisRequest()
       );
@@ -1174,7 +1176,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.UpdateIssueModelRequest()
       );
@@ -1184,7 +1186,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['issueModel', 'name']
       );
       request.issueModel.name = defaultValue1;
-      const expectedHeaderRequestParams = `issue_model.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `issue_model.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.IssueModel()
       );
@@ -1207,7 +1209,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.UpdateIssueModelRequest()
       );
@@ -1217,7 +1219,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['issueModel', 'name']
       );
       request.issueModel.name = defaultValue1;
-      const expectedHeaderRequestParams = `issue_model.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `issue_model.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.IssueModel()
       );
@@ -1256,7 +1258,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.UpdateIssueModelRequest()
       );
@@ -1266,7 +1268,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['issueModel', 'name']
       );
       request.issueModel.name = defaultValue1;
-      const expectedHeaderRequestParams = `issue_model.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `issue_model.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateIssueModel = stubSimpleCall(
         undefined,
@@ -1289,7 +1291,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.UpdateIssueModelRequest()
       );
@@ -1312,7 +1314,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.GetIssueModelRequest()
       );
@@ -1321,7 +1323,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.IssueModel()
       );
@@ -1344,7 +1346,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.GetIssueModelRequest()
       );
@@ -1353,7 +1355,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.IssueModel()
       );
@@ -1392,7 +1394,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.GetIssueModelRequest()
       );
@@ -1401,7 +1403,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getIssueModel = stubSimpleCall(
         undefined,
@@ -1424,7 +1426,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.GetIssueModelRequest()
       );
@@ -1446,7 +1448,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.ListIssueModelsRequest()
       );
@@ -1455,7 +1457,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.ListIssueModelsResponse()
       );
@@ -1478,7 +1480,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.ListIssueModelsRequest()
       );
@@ -1487,7 +1489,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.ListIssueModelsResponse()
       );
@@ -1526,7 +1528,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.ListIssueModelsRequest()
       );
@@ -1535,7 +1537,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listIssueModels = stubSimpleCall(
         undefined,
@@ -1558,7 +1560,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.ListIssueModelsRequest()
       );
@@ -1580,7 +1582,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.GetIssueRequest()
       );
@@ -1589,7 +1591,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.Issue()
       );
@@ -1612,7 +1614,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.GetIssueRequest()
       );
@@ -1621,7 +1623,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.Issue()
       );
@@ -1660,7 +1662,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.GetIssueRequest()
       );
@@ -1669,7 +1671,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getIssue = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.getIssue(request), expectedError);
@@ -1689,7 +1691,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.GetIssueRequest()
       );
@@ -1711,7 +1713,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.ListIssuesRequest()
       );
@@ -1720,7 +1722,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.ListIssuesResponse()
       );
@@ -1743,7 +1745,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.ListIssuesRequest()
       );
@@ -1752,7 +1754,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.ListIssuesResponse()
       );
@@ -1791,7 +1793,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.ListIssuesRequest()
       );
@@ -1800,7 +1802,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listIssues = stubSimpleCall(
         undefined,
@@ -1823,7 +1825,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.ListIssuesRequest()
       );
@@ -1845,7 +1847,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.UpdateIssueRequest()
       );
@@ -1855,7 +1857,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['issue', 'name']
       );
       request.issue.name = defaultValue1;
-      const expectedHeaderRequestParams = `issue.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `issue.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.Issue()
       );
@@ -1878,7 +1880,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.UpdateIssueRequest()
       );
@@ -1888,7 +1890,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['issue', 'name']
       );
       request.issue.name = defaultValue1;
-      const expectedHeaderRequestParams = `issue.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `issue.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.Issue()
       );
@@ -1927,7 +1929,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.UpdateIssueRequest()
       );
@@ -1937,7 +1939,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['issue', 'name']
       );
       request.issue.name = defaultValue1;
-      const expectedHeaderRequestParams = `issue.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `issue.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateIssue = stubSimpleCall(
         undefined,
@@ -1960,7 +1962,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.UpdateIssueRequest()
       );
@@ -1983,7 +1985,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.DeleteIssueRequest()
       );
@@ -1992,7 +1994,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -2015,7 +2017,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.DeleteIssueRequest()
       );
@@ -2024,7 +2026,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -2063,7 +2065,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.DeleteIssueRequest()
       );
@@ -2072,7 +2074,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteIssue = stubSimpleCall(
         undefined,
@@ -2095,7 +2097,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.DeleteIssueRequest()
       );
@@ -2117,7 +2119,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.CalculateIssueModelStatsRequest()
       );
@@ -2126,7 +2128,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['issueModel']
       );
       request.issueModel = defaultValue1;
-      const expectedHeaderRequestParams = `issue_model=${defaultValue1}`;
+      const expectedHeaderRequestParams = `issue_model=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.CalculateIssueModelStatsResponse()
       );
@@ -2150,7 +2152,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.CalculateIssueModelStatsRequest()
       );
@@ -2159,7 +2161,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['issueModel']
       );
       request.issueModel = defaultValue1;
-      const expectedHeaderRequestParams = `issue_model=${defaultValue1}`;
+      const expectedHeaderRequestParams = `issue_model=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.CalculateIssueModelStatsResponse()
       );
@@ -2198,7 +2200,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.CalculateIssueModelStatsRequest()
       );
@@ -2207,7 +2209,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['issueModel']
       );
       request.issueModel = defaultValue1;
-      const expectedHeaderRequestParams = `issue_model=${defaultValue1}`;
+      const expectedHeaderRequestParams = `issue_model=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.calculateIssueModelStats = stubSimpleCall(
         undefined,
@@ -2233,7 +2235,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.CalculateIssueModelStatsRequest()
       );
@@ -2258,7 +2260,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.CreatePhraseMatcherRequest()
       );
@@ -2267,7 +2269,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.PhraseMatcher()
       );
@@ -2291,7 +2293,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.CreatePhraseMatcherRequest()
       );
@@ -2300,7 +2302,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.PhraseMatcher()
       );
@@ -2339,7 +2341,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.CreatePhraseMatcherRequest()
       );
@@ -2348,7 +2350,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createPhraseMatcher = stubSimpleCall(
         undefined,
@@ -2371,7 +2373,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.CreatePhraseMatcherRequest()
       );
@@ -2393,7 +2395,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.GetPhraseMatcherRequest()
       );
@@ -2402,7 +2404,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.PhraseMatcher()
       );
@@ -2425,7 +2427,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.GetPhraseMatcherRequest()
       );
@@ -2434,7 +2436,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.PhraseMatcher()
       );
@@ -2473,7 +2475,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.GetPhraseMatcherRequest()
       );
@@ -2482,7 +2484,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getPhraseMatcher = stubSimpleCall(
         undefined,
@@ -2505,7 +2507,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.GetPhraseMatcherRequest()
       );
@@ -2527,7 +2529,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.DeletePhraseMatcherRequest()
       );
@@ -2536,7 +2538,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -2560,7 +2562,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.DeletePhraseMatcherRequest()
       );
@@ -2569,7 +2571,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -2608,7 +2610,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.DeletePhraseMatcherRequest()
       );
@@ -2617,7 +2619,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deletePhraseMatcher = stubSimpleCall(
         undefined,
@@ -2640,7 +2642,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.DeletePhraseMatcherRequest()
       );
@@ -2662,7 +2664,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.UpdatePhraseMatcherRequest()
       );
@@ -2672,7 +2674,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['phraseMatcher', 'name']
       );
       request.phraseMatcher.name = defaultValue1;
-      const expectedHeaderRequestParams = `phrase_matcher.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `phrase_matcher.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.PhraseMatcher()
       );
@@ -2696,7 +2698,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.UpdatePhraseMatcherRequest()
       );
@@ -2706,7 +2708,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['phraseMatcher', 'name']
       );
       request.phraseMatcher.name = defaultValue1;
-      const expectedHeaderRequestParams = `phrase_matcher.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `phrase_matcher.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.PhraseMatcher()
       );
@@ -2745,7 +2747,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.UpdatePhraseMatcherRequest()
       );
@@ -2755,7 +2757,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['phraseMatcher', 'name']
       );
       request.phraseMatcher.name = defaultValue1;
-      const expectedHeaderRequestParams = `phrase_matcher.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `phrase_matcher.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updatePhraseMatcher = stubSimpleCall(
         undefined,
@@ -2778,7 +2780,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.UpdatePhraseMatcherRequest()
       );
@@ -2801,7 +2803,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.CalculateStatsRequest()
       );
@@ -2810,7 +2812,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['location']
       );
       request.location = defaultValue1;
-      const expectedHeaderRequestParams = `location=${defaultValue1}`;
+      const expectedHeaderRequestParams = `location=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.CalculateStatsResponse()
       );
@@ -2833,7 +2835,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.CalculateStatsRequest()
       );
@@ -2842,7 +2844,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['location']
       );
       request.location = defaultValue1;
-      const expectedHeaderRequestParams = `location=${defaultValue1}`;
+      const expectedHeaderRequestParams = `location=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.CalculateStatsResponse()
       );
@@ -2881,7 +2883,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.CalculateStatsRequest()
       );
@@ -2890,7 +2892,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['location']
       );
       request.location = defaultValue1;
-      const expectedHeaderRequestParams = `location=${defaultValue1}`;
+      const expectedHeaderRequestParams = `location=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.calculateStats = stubSimpleCall(
         undefined,
@@ -2913,7 +2915,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.CalculateStatsRequest()
       );
@@ -2935,7 +2937,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.GetSettingsRequest()
       );
@@ -2944,7 +2946,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.Settings()
       );
@@ -2967,7 +2969,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.GetSettingsRequest()
       );
@@ -2976,7 +2978,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.Settings()
       );
@@ -3015,7 +3017,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.GetSettingsRequest()
       );
@@ -3024,7 +3026,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getSettings = stubSimpleCall(
         undefined,
@@ -3047,7 +3049,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.GetSettingsRequest()
       );
@@ -3069,7 +3071,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.UpdateSettingsRequest()
       );
@@ -3079,7 +3081,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['settings', 'name']
       );
       request.settings.name = defaultValue1;
-      const expectedHeaderRequestParams = `settings.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `settings.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.Settings()
       );
@@ -3102,7 +3104,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.UpdateSettingsRequest()
       );
@@ -3112,7 +3114,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['settings', 'name']
       );
       request.settings.name = defaultValue1;
-      const expectedHeaderRequestParams = `settings.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `settings.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.Settings()
       );
@@ -3151,7 +3153,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.UpdateSettingsRequest()
       );
@@ -3161,7 +3163,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['settings', 'name']
       );
       request.settings.name = defaultValue1;
-      const expectedHeaderRequestParams = `settings.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `settings.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateSettings = stubSimpleCall(
         undefined,
@@ -3184,7 +3186,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.UpdateSettingsRequest()
       );
@@ -3207,7 +3209,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.CreateAnalysisRuleRequest()
       );
@@ -3216,7 +3218,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.AnalysisRule()
       );
@@ -3240,7 +3242,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.CreateAnalysisRuleRequest()
       );
@@ -3249,7 +3251,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.AnalysisRule()
       );
@@ -3288,7 +3290,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.CreateAnalysisRuleRequest()
       );
@@ -3297,7 +3299,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createAnalysisRule = stubSimpleCall(
         undefined,
@@ -3320,7 +3322,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.CreateAnalysisRuleRequest()
       );
@@ -3342,7 +3344,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.GetAnalysisRuleRequest()
       );
@@ -3351,7 +3353,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.AnalysisRule()
       );
@@ -3374,7 +3376,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.GetAnalysisRuleRequest()
       );
@@ -3383,7 +3385,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.AnalysisRule()
       );
@@ -3422,7 +3424,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.GetAnalysisRuleRequest()
       );
@@ -3431,7 +3433,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getAnalysisRule = stubSimpleCall(
         undefined,
@@ -3454,7 +3456,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.GetAnalysisRuleRequest()
       );
@@ -3476,7 +3478,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.UpdateAnalysisRuleRequest()
       );
@@ -3486,7 +3488,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['analysisRule', 'name']
       );
       request.analysisRule.name = defaultValue1;
-      const expectedHeaderRequestParams = `analysis_rule.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `analysis_rule.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.AnalysisRule()
       );
@@ -3510,7 +3512,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.UpdateAnalysisRuleRequest()
       );
@@ -3520,7 +3522,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['analysisRule', 'name']
       );
       request.analysisRule.name = defaultValue1;
-      const expectedHeaderRequestParams = `analysis_rule.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `analysis_rule.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.AnalysisRule()
       );
@@ -3559,7 +3561,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.UpdateAnalysisRuleRequest()
       );
@@ -3569,7 +3571,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['analysisRule', 'name']
       );
       request.analysisRule.name = defaultValue1;
-      const expectedHeaderRequestParams = `analysis_rule.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `analysis_rule.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateAnalysisRule = stubSimpleCall(
         undefined,
@@ -3592,7 +3594,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.UpdateAnalysisRuleRequest()
       );
@@ -3615,7 +3617,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.DeleteAnalysisRuleRequest()
       );
@@ -3624,7 +3626,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -3648,7 +3650,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.DeleteAnalysisRuleRequest()
       );
@@ -3657,7 +3659,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -3696,7 +3698,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.DeleteAnalysisRuleRequest()
       );
@@ -3705,7 +3707,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteAnalysisRule = stubSimpleCall(
         undefined,
@@ -3728,7 +3730,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.DeleteAnalysisRuleRequest()
       );
@@ -3750,7 +3752,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.GetEncryptionSpecRequest()
       );
@@ -3759,7 +3761,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.EncryptionSpec()
       );
@@ -3782,7 +3784,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.GetEncryptionSpecRequest()
       );
@@ -3791,7 +3793,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.EncryptionSpec()
       );
@@ -3830,7 +3832,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.GetEncryptionSpecRequest()
       );
@@ -3839,7 +3841,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getEncryptionSpec = stubSimpleCall(
         undefined,
@@ -3862,7 +3864,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.GetEncryptionSpecRequest()
       );
@@ -3884,7 +3886,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.CreateViewRequest()
       );
@@ -3893,7 +3895,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.View()
       );
@@ -3916,7 +3918,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.CreateViewRequest()
       );
@@ -3925,7 +3927,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.View()
       );
@@ -3964,7 +3966,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.CreateViewRequest()
       );
@@ -3973,7 +3975,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createView = stubSimpleCall(
         undefined,
@@ -3996,7 +3998,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.CreateViewRequest()
       );
@@ -4018,7 +4020,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.GetViewRequest()
       );
@@ -4027,7 +4029,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.View()
       );
@@ -4050,7 +4052,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.GetViewRequest()
       );
@@ -4059,7 +4061,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.View()
       );
@@ -4098,7 +4100,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.GetViewRequest()
       );
@@ -4107,7 +4109,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getView = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.getView(request), expectedError);
@@ -4127,7 +4129,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.GetViewRequest()
       );
@@ -4149,7 +4151,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.UpdateViewRequest()
       );
@@ -4159,7 +4161,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['view', 'name']
       );
       request.view.name = defaultValue1;
-      const expectedHeaderRequestParams = `view.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `view.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.View()
       );
@@ -4182,7 +4184,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.UpdateViewRequest()
       );
@@ -4192,7 +4194,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['view', 'name']
       );
       request.view.name = defaultValue1;
-      const expectedHeaderRequestParams = `view.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `view.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.View()
       );
@@ -4231,7 +4233,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.UpdateViewRequest()
       );
@@ -4241,7 +4243,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['view', 'name']
       );
       request.view.name = defaultValue1;
-      const expectedHeaderRequestParams = `view.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `view.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateView = stubSimpleCall(
         undefined,
@@ -4264,7 +4266,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.UpdateViewRequest()
       );
@@ -4287,7 +4289,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.DeleteViewRequest()
       );
@@ -4296,7 +4298,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -4319,7 +4321,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.DeleteViewRequest()
       );
@@ -4328,7 +4330,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -4367,7 +4369,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.DeleteViewRequest()
       );
@@ -4376,7 +4378,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteView = stubSimpleCall(
         undefined,
@@ -4399,7 +4401,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.DeleteViewRequest()
       );
@@ -4421,7 +4423,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.CreateQaQuestionRequest()
       );
@@ -4430,7 +4432,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.QaQuestion()
       );
@@ -4453,7 +4455,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.CreateQaQuestionRequest()
       );
@@ -4462,7 +4464,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.QaQuestion()
       );
@@ -4501,7 +4503,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.CreateQaQuestionRequest()
       );
@@ -4510,7 +4512,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createQaQuestion = stubSimpleCall(
         undefined,
@@ -4533,7 +4535,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.CreateQaQuestionRequest()
       );
@@ -4555,7 +4557,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.GetQaQuestionRequest()
       );
@@ -4564,7 +4566,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.QaQuestion()
       );
@@ -4587,7 +4589,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.GetQaQuestionRequest()
       );
@@ -4596,7 +4598,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.QaQuestion()
       );
@@ -4635,7 +4637,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.GetQaQuestionRequest()
       );
@@ -4644,7 +4646,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getQaQuestion = stubSimpleCall(
         undefined,
@@ -4667,7 +4669,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.GetQaQuestionRequest()
       );
@@ -4689,7 +4691,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.UpdateQaQuestionRequest()
       );
@@ -4699,7 +4701,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['qaQuestion', 'name']
       );
       request.qaQuestion.name = defaultValue1;
-      const expectedHeaderRequestParams = `qa_question.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `qa_question.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.QaQuestion()
       );
@@ -4722,7 +4724,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.UpdateQaQuestionRequest()
       );
@@ -4732,7 +4734,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['qaQuestion', 'name']
       );
       request.qaQuestion.name = defaultValue1;
-      const expectedHeaderRequestParams = `qa_question.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `qa_question.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.QaQuestion()
       );
@@ -4771,7 +4773,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.UpdateQaQuestionRequest()
       );
@@ -4781,7 +4783,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['qaQuestion', 'name']
       );
       request.qaQuestion.name = defaultValue1;
-      const expectedHeaderRequestParams = `qa_question.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `qa_question.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateQaQuestion = stubSimpleCall(
         undefined,
@@ -4804,7 +4806,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.UpdateQaQuestionRequest()
       );
@@ -4827,7 +4829,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.DeleteQaQuestionRequest()
       );
@@ -4836,7 +4838,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -4859,7 +4861,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.DeleteQaQuestionRequest()
       );
@@ -4868,7 +4870,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -4907,7 +4909,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.DeleteQaQuestionRequest()
       );
@@ -4916,7 +4918,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteQaQuestion = stubSimpleCall(
         undefined,
@@ -4939,7 +4941,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.DeleteQaQuestionRequest()
       );
@@ -4961,7 +4963,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.CreateQaScorecardRequest()
       );
@@ -4970,7 +4972,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.QaScorecard()
       );
@@ -4993,7 +4995,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.CreateQaScorecardRequest()
       );
@@ -5002,7 +5004,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.QaScorecard()
       );
@@ -5041,7 +5043,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.CreateQaScorecardRequest()
       );
@@ -5050,7 +5052,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createQaScorecard = stubSimpleCall(
         undefined,
@@ -5073,7 +5075,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.CreateQaScorecardRequest()
       );
@@ -5095,7 +5097,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.GetQaScorecardRequest()
       );
@@ -5104,7 +5106,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.QaScorecard()
       );
@@ -5127,7 +5129,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.GetQaScorecardRequest()
       );
@@ -5136,7 +5138,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.QaScorecard()
       );
@@ -5175,7 +5177,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.GetQaScorecardRequest()
       );
@@ -5184,7 +5186,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getQaScorecard = stubSimpleCall(
         undefined,
@@ -5207,7 +5209,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.GetQaScorecardRequest()
       );
@@ -5229,7 +5231,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.UpdateQaScorecardRequest()
       );
@@ -5239,7 +5241,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['qaScorecard', 'name']
       );
       request.qaScorecard.name = defaultValue1;
-      const expectedHeaderRequestParams = `qa_scorecard.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `qa_scorecard.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.QaScorecard()
       );
@@ -5262,7 +5264,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.UpdateQaScorecardRequest()
       );
@@ -5272,7 +5274,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['qaScorecard', 'name']
       );
       request.qaScorecard.name = defaultValue1;
-      const expectedHeaderRequestParams = `qa_scorecard.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `qa_scorecard.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.QaScorecard()
       );
@@ -5311,7 +5313,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.UpdateQaScorecardRequest()
       );
@@ -5321,7 +5323,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['qaScorecard', 'name']
       );
       request.qaScorecard.name = defaultValue1;
-      const expectedHeaderRequestParams = `qa_scorecard.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `qa_scorecard.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateQaScorecard = stubSimpleCall(
         undefined,
@@ -5344,7 +5346,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.UpdateQaScorecardRequest()
       );
@@ -5367,7 +5369,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.DeleteQaScorecardRequest()
       );
@@ -5376,7 +5378,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -5399,7 +5401,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.DeleteQaScorecardRequest()
       );
@@ -5408,7 +5410,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -5447,7 +5449,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.DeleteQaScorecardRequest()
       );
@@ -5456,7 +5458,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteQaScorecard = stubSimpleCall(
         undefined,
@@ -5479,7 +5481,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.DeleteQaScorecardRequest()
       );
@@ -5501,7 +5503,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.CreateQaScorecardRevisionRequest()
       );
@@ -5510,7 +5512,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.QaScorecardRevision()
       );
@@ -5534,7 +5536,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.CreateQaScorecardRevisionRequest()
       );
@@ -5543,7 +5545,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.QaScorecardRevision()
       );
@@ -5582,7 +5584,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.CreateQaScorecardRevisionRequest()
       );
@@ -5591,7 +5593,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createQaScorecardRevision = stubSimpleCall(
         undefined,
@@ -5617,7 +5619,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.CreateQaScorecardRevisionRequest()
       );
@@ -5642,7 +5644,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.GetQaScorecardRevisionRequest()
       );
@@ -5651,7 +5653,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.QaScorecardRevision()
       );
@@ -5675,7 +5677,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.GetQaScorecardRevisionRequest()
       );
@@ -5684,7 +5686,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.QaScorecardRevision()
       );
@@ -5723,7 +5725,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.GetQaScorecardRevisionRequest()
       );
@@ -5732,7 +5734,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getQaScorecardRevision = stubSimpleCall(
         undefined,
@@ -5758,7 +5760,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.GetQaScorecardRevisionRequest()
       );
@@ -5783,7 +5785,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.DeployQaScorecardRevisionRequest()
       );
@@ -5792,7 +5794,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.QaScorecardRevision()
       );
@@ -5816,7 +5818,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.DeployQaScorecardRevisionRequest()
       );
@@ -5825,7 +5827,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.QaScorecardRevision()
       );
@@ -5864,7 +5866,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.DeployQaScorecardRevisionRequest()
       );
@@ -5873,7 +5875,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deployQaScorecardRevision = stubSimpleCall(
         undefined,
@@ -5899,7 +5901,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.DeployQaScorecardRevisionRequest()
       );
@@ -5924,7 +5926,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.UndeployQaScorecardRevisionRequest()
       );
@@ -5933,7 +5935,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.QaScorecardRevision()
       );
@@ -5957,7 +5959,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.UndeployQaScorecardRevisionRequest()
       );
@@ -5966,7 +5968,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.QaScorecardRevision()
       );
@@ -6005,7 +6007,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.UndeployQaScorecardRevisionRequest()
       );
@@ -6014,7 +6016,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.undeployQaScorecardRevision = stubSimpleCall(
         undefined,
@@ -6040,7 +6042,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.UndeployQaScorecardRevisionRequest()
       );
@@ -6065,7 +6067,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.DeleteQaScorecardRevisionRequest()
       );
@@ -6074,7 +6076,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -6098,7 +6100,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.DeleteQaScorecardRevisionRequest()
       );
@@ -6107,7 +6109,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -6146,7 +6148,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.DeleteQaScorecardRevisionRequest()
       );
@@ -6155,7 +6157,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteQaScorecardRevision = stubSimpleCall(
         undefined,
@@ -6181,7 +6183,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.DeleteQaScorecardRevisionRequest()
       );
@@ -6206,7 +6208,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.CreateFeedbackLabelRequest()
       );
@@ -6215,7 +6217,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.FeedbackLabel()
       );
@@ -6239,7 +6241,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.CreateFeedbackLabelRequest()
       );
@@ -6248,7 +6250,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.FeedbackLabel()
       );
@@ -6287,7 +6289,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.CreateFeedbackLabelRequest()
       );
@@ -6296,7 +6298,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createFeedbackLabel = stubSimpleCall(
         undefined,
@@ -6319,7 +6321,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.CreateFeedbackLabelRequest()
       );
@@ -6341,7 +6343,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.GetFeedbackLabelRequest()
       );
@@ -6350,7 +6352,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.FeedbackLabel()
       );
@@ -6373,7 +6375,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.GetFeedbackLabelRequest()
       );
@@ -6382,7 +6384,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.FeedbackLabel()
       );
@@ -6421,7 +6423,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.GetFeedbackLabelRequest()
       );
@@ -6430,7 +6432,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getFeedbackLabel = stubSimpleCall(
         undefined,
@@ -6453,7 +6455,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.GetFeedbackLabelRequest()
       );
@@ -6475,7 +6477,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.UpdateFeedbackLabelRequest()
       );
@@ -6485,7 +6487,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['feedbackLabel', 'name']
       );
       request.feedbackLabel.name = defaultValue1;
-      const expectedHeaderRequestParams = `feedback_label.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `feedback_label.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.FeedbackLabel()
       );
@@ -6509,7 +6511,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.UpdateFeedbackLabelRequest()
       );
@@ -6519,7 +6521,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['feedbackLabel', 'name']
       );
       request.feedbackLabel.name = defaultValue1;
-      const expectedHeaderRequestParams = `feedback_label.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `feedback_label.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.FeedbackLabel()
       );
@@ -6558,7 +6560,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.UpdateFeedbackLabelRequest()
       );
@@ -6568,7 +6570,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['feedbackLabel', 'name']
       );
       request.feedbackLabel.name = defaultValue1;
-      const expectedHeaderRequestParams = `feedback_label.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `feedback_label.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateFeedbackLabel = stubSimpleCall(
         undefined,
@@ -6591,7 +6593,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.UpdateFeedbackLabelRequest()
       );
@@ -6614,7 +6616,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.DeleteFeedbackLabelRequest()
       );
@@ -6623,7 +6625,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -6647,7 +6649,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.DeleteFeedbackLabelRequest()
       );
@@ -6656,7 +6658,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -6695,7 +6697,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.DeleteFeedbackLabelRequest()
       );
@@ -6704,7 +6706,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteFeedbackLabel = stubSimpleCall(
         undefined,
@@ -6727,7 +6729,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.DeleteFeedbackLabelRequest()
       );
@@ -6749,7 +6751,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.UploadConversationRequest()
       );
@@ -6758,7 +6760,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -6783,7 +6785,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.UploadConversationRequest()
       );
@@ -6792,7 +6794,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -6838,7 +6840,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.UploadConversationRequest()
       );
@@ -6847,7 +6849,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.uploadConversation = stubLongRunningCall(
         undefined,
@@ -6870,7 +6872,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.UploadConversationRequest()
       );
@@ -6879,7 +6881,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.uploadConversation = stubLongRunningCall(
         undefined,
@@ -6904,7 +6906,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -6927,7 +6929,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -6949,7 +6951,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.CreateAnalysisRequest()
       );
@@ -6958,7 +6960,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -6983,7 +6985,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.CreateAnalysisRequest()
       );
@@ -6992,7 +6994,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -7038,7 +7040,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.CreateAnalysisRequest()
       );
@@ -7047,7 +7049,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createAnalysis = stubLongRunningCall(
         undefined,
@@ -7070,7 +7072,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.CreateAnalysisRequest()
       );
@@ -7079,7 +7081,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createAnalysis = stubLongRunningCall(
         undefined,
@@ -7104,7 +7106,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -7127,7 +7129,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -7149,7 +7151,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.BulkAnalyzeConversationsRequest()
       );
@@ -7158,7 +7160,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -7183,7 +7185,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.BulkAnalyzeConversationsRequest()
       );
@@ -7192,7 +7194,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -7238,7 +7240,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.BulkAnalyzeConversationsRequest()
       );
@@ -7247,7 +7249,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.bulkAnalyzeConversations = stubLongRunningCall(
         undefined,
@@ -7273,7 +7275,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.BulkAnalyzeConversationsRequest()
       );
@@ -7282,7 +7284,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.bulkAnalyzeConversations = stubLongRunningCall(
         undefined,
@@ -7307,7 +7309,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -7331,7 +7333,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -7353,7 +7355,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.BulkDeleteConversationsRequest()
       );
@@ -7362,7 +7364,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -7387,7 +7389,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.BulkDeleteConversationsRequest()
       );
@@ -7396,7 +7398,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -7442,7 +7444,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.BulkDeleteConversationsRequest()
       );
@@ -7451,7 +7453,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.bulkDeleteConversations = stubLongRunningCall(
         undefined,
@@ -7477,7 +7479,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.BulkDeleteConversationsRequest()
       );
@@ -7486,7 +7488,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.bulkDeleteConversations = stubLongRunningCall(
         undefined,
@@ -7511,7 +7513,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -7535,7 +7537,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -7557,7 +7559,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.IngestConversationsRequest()
       );
@@ -7566,7 +7568,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -7591,7 +7593,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.IngestConversationsRequest()
       );
@@ -7600,7 +7602,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -7646,7 +7648,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.IngestConversationsRequest()
       );
@@ -7655,7 +7657,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.ingestConversations = stubLongRunningCall(
         undefined,
@@ -7678,7 +7680,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.IngestConversationsRequest()
       );
@@ -7687,7 +7689,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.ingestConversations = stubLongRunningCall(
         undefined,
@@ -7712,7 +7714,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -7735,7 +7737,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -7757,7 +7759,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.ExportInsightsDataRequest()
       );
@@ -7766,7 +7768,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -7791,7 +7793,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.ExportInsightsDataRequest()
       );
@@ -7800,7 +7802,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -7846,7 +7848,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.ExportInsightsDataRequest()
       );
@@ -7855,7 +7857,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.exportInsightsData = stubLongRunningCall(
         undefined,
@@ -7878,7 +7880,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.ExportInsightsDataRequest()
       );
@@ -7887,7 +7889,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.exportInsightsData = stubLongRunningCall(
         undefined,
@@ -7912,7 +7914,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -7935,7 +7937,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -7957,7 +7959,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.CreateIssueModelRequest()
       );
@@ -7966,7 +7968,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -7991,7 +7993,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.CreateIssueModelRequest()
       );
@@ -8000,7 +8002,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -8046,7 +8048,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.CreateIssueModelRequest()
       );
@@ -8055,7 +8057,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createIssueModel = stubLongRunningCall(
         undefined,
@@ -8078,7 +8080,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.CreateIssueModelRequest()
       );
@@ -8087,7 +8089,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createIssueModel = stubLongRunningCall(
         undefined,
@@ -8112,7 +8114,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -8135,7 +8137,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -8157,7 +8159,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.DeleteIssueModelRequest()
       );
@@ -8166,7 +8168,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -8191,7 +8193,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.DeleteIssueModelRequest()
       );
@@ -8200,7 +8202,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -8246,7 +8248,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.DeleteIssueModelRequest()
       );
@@ -8255,7 +8257,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteIssueModel = stubLongRunningCall(
         undefined,
@@ -8278,7 +8280,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.DeleteIssueModelRequest()
       );
@@ -8287,7 +8289,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteIssueModel = stubLongRunningCall(
         undefined,
@@ -8312,7 +8314,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -8335,7 +8337,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -8357,7 +8359,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.DeployIssueModelRequest()
       );
@@ -8366,7 +8368,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -8391,7 +8393,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.DeployIssueModelRequest()
       );
@@ -8400,7 +8402,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -8446,7 +8448,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.DeployIssueModelRequest()
       );
@@ -8455,7 +8457,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deployIssueModel = stubLongRunningCall(
         undefined,
@@ -8478,7 +8480,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.DeployIssueModelRequest()
       );
@@ -8487,7 +8489,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deployIssueModel = stubLongRunningCall(
         undefined,
@@ -8512,7 +8514,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -8535,7 +8537,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -8557,7 +8559,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.UndeployIssueModelRequest()
       );
@@ -8566,7 +8568,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -8591,7 +8593,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.UndeployIssueModelRequest()
       );
@@ -8600,7 +8602,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -8646,7 +8648,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.UndeployIssueModelRequest()
       );
@@ -8655,7 +8657,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.undeployIssueModel = stubLongRunningCall(
         undefined,
@@ -8678,7 +8680,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.UndeployIssueModelRequest()
       );
@@ -8687,7 +8689,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.undeployIssueModel = stubLongRunningCall(
         undefined,
@@ -8712,7 +8714,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -8735,7 +8737,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -8757,7 +8759,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.ExportIssueModelRequest()
       );
@@ -8766,7 +8768,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -8791,7 +8793,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.ExportIssueModelRequest()
       );
@@ -8800,7 +8802,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -8846,7 +8848,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.ExportIssueModelRequest()
       );
@@ -8855,7 +8857,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.exportIssueModel = stubLongRunningCall(
         undefined,
@@ -8878,7 +8880,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.ExportIssueModelRequest()
       );
@@ -8887,7 +8889,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.exportIssueModel = stubLongRunningCall(
         undefined,
@@ -8912,7 +8914,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -8935,7 +8937,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -8957,7 +8959,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.ImportIssueModelRequest()
       );
@@ -8966,7 +8968,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -8991,7 +8993,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.ImportIssueModelRequest()
       );
@@ -9000,7 +9002,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -9046,7 +9048,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.ImportIssueModelRequest()
       );
@@ -9055,7 +9057,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.importIssueModel = stubLongRunningCall(
         undefined,
@@ -9078,7 +9080,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.ImportIssueModelRequest()
       );
@@ -9087,7 +9089,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.importIssueModel = stubLongRunningCall(
         undefined,
@@ -9112,7 +9114,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -9135,7 +9137,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -9157,7 +9159,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.InitializeEncryptionSpecRequest()
       );
@@ -9167,7 +9169,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['encryptionSpec', 'name']
       );
       request.encryptionSpec.name = defaultValue1;
-      const expectedHeaderRequestParams = `encryption_spec.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `encryption_spec.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -9192,7 +9194,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.InitializeEncryptionSpecRequest()
       );
@@ -9202,7 +9204,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['encryptionSpec', 'name']
       );
       request.encryptionSpec.name = defaultValue1;
-      const expectedHeaderRequestParams = `encryption_spec.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `encryption_spec.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -9248,7 +9250,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.InitializeEncryptionSpecRequest()
       );
@@ -9258,7 +9260,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['encryptionSpec', 'name']
       );
       request.encryptionSpec.name = defaultValue1;
-      const expectedHeaderRequestParams = `encryption_spec.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `encryption_spec.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.initializeEncryptionSpec = stubLongRunningCall(
         undefined,
@@ -9284,7 +9286,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.InitializeEncryptionSpecRequest()
       );
@@ -9294,7 +9296,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['encryptionSpec', 'name']
       );
       request.encryptionSpec.name = defaultValue1;
-      const expectedHeaderRequestParams = `encryption_spec.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `encryption_spec.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.initializeEncryptionSpec = stubLongRunningCall(
         undefined,
@@ -9319,7 +9321,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -9343,7 +9345,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -9365,7 +9367,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.QueryMetricsRequest()
       );
@@ -9374,7 +9376,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['location']
       );
       request.location = defaultValue1;
-      const expectedHeaderRequestParams = `location=${defaultValue1}`;
+      const expectedHeaderRequestParams = `location=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -9398,7 +9400,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.QueryMetricsRequest()
       );
@@ -9407,7 +9409,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['location']
       );
       request.location = defaultValue1;
-      const expectedHeaderRequestParams = `location=${defaultValue1}`;
+      const expectedHeaderRequestParams = `location=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -9453,7 +9455,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.QueryMetricsRequest()
       );
@@ -9462,7 +9464,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['location']
       );
       request.location = defaultValue1;
-      const expectedHeaderRequestParams = `location=${defaultValue1}`;
+      const expectedHeaderRequestParams = `location=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.queryMetrics = stubLongRunningCall(
         undefined,
@@ -9485,7 +9487,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.QueryMetricsRequest()
       );
@@ -9494,7 +9496,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['location']
       );
       request.location = defaultValue1;
-      const expectedHeaderRequestParams = `location=${defaultValue1}`;
+      const expectedHeaderRequestParams = `location=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.queryMetrics = stubLongRunningCall(
         undefined,
@@ -9519,7 +9521,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -9542,7 +9544,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -9561,7 +9563,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.TuneQaScorecardRevisionRequest()
       );
@@ -9570,7 +9572,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -9595,7 +9597,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.TuneQaScorecardRevisionRequest()
       );
@@ -9604,7 +9606,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -9650,7 +9652,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.TuneQaScorecardRevisionRequest()
       );
@@ -9659,7 +9661,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.tuneQaScorecardRevision = stubLongRunningCall(
         undefined,
@@ -9685,7 +9687,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.TuneQaScorecardRevisionRequest()
       );
@@ -9694,7 +9696,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.tuneQaScorecardRevision = stubLongRunningCall(
         undefined,
@@ -9719,7 +9721,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -9743,7 +9745,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -9765,7 +9767,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.BulkUploadFeedbackLabelsRequest()
       );
@@ -9774,7 +9776,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -9799,7 +9801,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.BulkUploadFeedbackLabelsRequest()
       );
@@ -9808,7 +9810,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -9854,7 +9856,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.BulkUploadFeedbackLabelsRequest()
       );
@@ -9863,7 +9865,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.bulkUploadFeedbackLabels = stubLongRunningCall(
         undefined,
@@ -9889,7 +9891,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.BulkUploadFeedbackLabelsRequest()
       );
@@ -9898,7 +9900,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.bulkUploadFeedbackLabels = stubLongRunningCall(
         undefined,
@@ -9923,7 +9925,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -9947,7 +9949,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -9969,7 +9971,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.BulkDownloadFeedbackLabelsRequest()
       );
@@ -9978,7 +9980,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -10003,7 +10005,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.BulkDownloadFeedbackLabelsRequest()
       );
@@ -10012,7 +10014,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -10058,7 +10060,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.BulkDownloadFeedbackLabelsRequest()
       );
@@ -10067,7 +10069,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.bulkDownloadFeedbackLabels = stubLongRunningCall(
         undefined,
@@ -10093,7 +10095,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.BulkDownloadFeedbackLabelsRequest()
       );
@@ -10102,7 +10104,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.bulkDownloadFeedbackLabels = stubLongRunningCall(
         undefined,
@@ -10127,7 +10129,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -10151,7 +10153,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -10173,7 +10175,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.ListConversationsRequest()
       );
@@ -10182,7 +10184,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.contactcenterinsights.v1.Conversation()
@@ -10213,7 +10215,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.ListConversationsRequest()
       );
@@ -10222,7 +10224,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.contactcenterinsights.v1.Conversation()
@@ -10271,7 +10273,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.ListConversationsRequest()
       );
@@ -10280,7 +10282,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listConversations = stubSimpleCall(
         undefined,
@@ -10303,7 +10305,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.ListConversationsRequest()
       );
@@ -10312,7 +10314,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.contactcenterinsights.v1.Conversation()
@@ -10367,7 +10369,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.ListConversationsRequest()
       );
@@ -10376,7 +10378,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listConversations.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -10420,7 +10422,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.ListConversationsRequest()
       );
@@ -10429,7 +10431,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.contactcenterinsights.v1.Conversation()
@@ -10471,7 +10473,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.ListConversationsRequest()
       );
@@ -10480,7 +10482,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listConversations.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -10515,7 +10517,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.ListAnalysesRequest()
       );
@@ -10524,7 +10526,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.contactcenterinsights.v1.Analysis()
@@ -10555,7 +10557,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.ListAnalysesRequest()
       );
@@ -10564,7 +10566,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.contactcenterinsights.v1.Analysis()
@@ -10613,7 +10615,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.ListAnalysesRequest()
       );
@@ -10622,7 +10624,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listAnalyses = stubSimpleCall(
         undefined,
@@ -10645,7 +10647,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.ListAnalysesRequest()
       );
@@ -10654,7 +10656,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.contactcenterinsights.v1.Analysis()
@@ -10707,7 +10709,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.ListAnalysesRequest()
       );
@@ -10716,7 +10718,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listAnalyses.createStream = stubPageStreamingCall(
         undefined,
@@ -10760,7 +10762,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.ListAnalysesRequest()
       );
@@ -10769,7 +10771,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.contactcenterinsights.v1.Analysis()
@@ -10811,7 +10813,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.ListAnalysesRequest()
       );
@@ -10820,7 +10822,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listAnalyses.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -10855,7 +10857,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.ListPhraseMatchersRequest()
       );
@@ -10864,7 +10866,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.contactcenterinsights.v1.PhraseMatcher()
@@ -10896,7 +10898,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.ListPhraseMatchersRequest()
       );
@@ -10905,7 +10907,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.contactcenterinsights.v1.PhraseMatcher()
@@ -10954,7 +10956,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.ListPhraseMatchersRequest()
       );
@@ -10963,7 +10965,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listPhraseMatchers = stubSimpleCall(
         undefined,
@@ -10986,7 +10988,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.ListPhraseMatchersRequest()
       );
@@ -10995,7 +10997,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.contactcenterinsights.v1.PhraseMatcher()
@@ -11050,7 +11052,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.ListPhraseMatchersRequest()
       );
@@ -11059,7 +11061,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listPhraseMatchers.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -11103,7 +11105,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.ListPhraseMatchersRequest()
       );
@@ -11112,7 +11114,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.contactcenterinsights.v1.PhraseMatcher()
@@ -11154,7 +11156,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.ListPhraseMatchersRequest()
       );
@@ -11163,7 +11165,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listPhraseMatchers.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -11198,7 +11200,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.ListAnalysisRulesRequest()
       );
@@ -11207,7 +11209,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.contactcenterinsights.v1.AnalysisRule()
@@ -11238,7 +11240,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.ListAnalysisRulesRequest()
       );
@@ -11247,7 +11249,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.contactcenterinsights.v1.AnalysisRule()
@@ -11296,7 +11298,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.ListAnalysisRulesRequest()
       );
@@ -11305,7 +11307,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listAnalysisRules = stubSimpleCall(
         undefined,
@@ -11328,7 +11330,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.ListAnalysisRulesRequest()
       );
@@ -11337,7 +11339,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.contactcenterinsights.v1.AnalysisRule()
@@ -11392,7 +11394,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.ListAnalysisRulesRequest()
       );
@@ -11401,7 +11403,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listAnalysisRules.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -11445,7 +11447,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.ListAnalysisRulesRequest()
       );
@@ -11454,7 +11456,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.contactcenterinsights.v1.AnalysisRule()
@@ -11496,7 +11498,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.ListAnalysisRulesRequest()
       );
@@ -11505,7 +11507,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listAnalysisRules.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -11540,7 +11542,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.ListViewsRequest()
       );
@@ -11549,7 +11551,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.contactcenterinsights.v1.View()
@@ -11580,7 +11582,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.ListViewsRequest()
       );
@@ -11589,7 +11591,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.contactcenterinsights.v1.View()
@@ -11636,7 +11638,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.ListViewsRequest()
       );
@@ -11645,7 +11647,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listViews = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.listViews(request), expectedError);
@@ -11665,7 +11667,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.ListViewsRequest()
       );
@@ -11674,7 +11676,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.contactcenterinsights.v1.View()
@@ -11727,7 +11729,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.ListViewsRequest()
       );
@@ -11736,7 +11738,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listViews.createStream = stubPageStreamingCall(
         undefined,
@@ -11780,7 +11782,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.ListViewsRequest()
       );
@@ -11789,7 +11791,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.contactcenterinsights.v1.View()
@@ -11830,7 +11832,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.ListViewsRequest()
       );
@@ -11839,7 +11841,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listViews.asyncIterate = stubAsyncIterationCall(
         undefined,
@@ -11875,7 +11877,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.ListQaQuestionsRequest()
       );
@@ -11884,7 +11886,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.contactcenterinsights.v1.QaQuestion()
@@ -11915,7 +11917,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.ListQaQuestionsRequest()
       );
@@ -11924,7 +11926,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.contactcenterinsights.v1.QaQuestion()
@@ -11973,7 +11975,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.ListQaQuestionsRequest()
       );
@@ -11982,7 +11984,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listQaQuestions = stubSimpleCall(
         undefined,
@@ -12005,7 +12007,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.ListQaQuestionsRequest()
       );
@@ -12014,7 +12016,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.contactcenterinsights.v1.QaQuestion()
@@ -12069,7 +12071,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.ListQaQuestionsRequest()
       );
@@ -12078,7 +12080,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listQaQuestions.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -12122,7 +12124,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.ListQaQuestionsRequest()
       );
@@ -12131,7 +12133,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.contactcenterinsights.v1.QaQuestion()
@@ -12173,7 +12175,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.ListQaQuestionsRequest()
       );
@@ -12182,7 +12184,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listQaQuestions.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -12217,7 +12219,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.ListQaScorecardsRequest()
       );
@@ -12226,7 +12228,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.contactcenterinsights.v1.QaScorecard()
@@ -12257,7 +12259,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.ListQaScorecardsRequest()
       );
@@ -12266,7 +12268,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.contactcenterinsights.v1.QaScorecard()
@@ -12315,7 +12317,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.ListQaScorecardsRequest()
       );
@@ -12324,7 +12326,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listQaScorecards = stubSimpleCall(
         undefined,
@@ -12347,7 +12349,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.ListQaScorecardsRequest()
       );
@@ -12356,7 +12358,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.contactcenterinsights.v1.QaScorecard()
@@ -12411,7 +12413,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.ListQaScorecardsRequest()
       );
@@ -12420,7 +12422,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listQaScorecards.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -12464,7 +12466,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.ListQaScorecardsRequest()
       );
@@ -12473,7 +12475,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.contactcenterinsights.v1.QaScorecard()
@@ -12515,7 +12517,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.ListQaScorecardsRequest()
       );
@@ -12524,7 +12526,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listQaScorecards.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -12559,7 +12561,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.ListQaScorecardRevisionsRequest()
       );
@@ -12568,7 +12570,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.contactcenterinsights.v1.QaScorecardRevision()
@@ -12600,7 +12602,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.ListQaScorecardRevisionsRequest()
       );
@@ -12609,7 +12611,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.contactcenterinsights.v1.QaScorecardRevision()
@@ -12658,7 +12660,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.ListQaScorecardRevisionsRequest()
       );
@@ -12667,7 +12669,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listQaScorecardRevisions = stubSimpleCall(
         undefined,
@@ -12693,7 +12695,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.ListQaScorecardRevisionsRequest()
       );
@@ -12702,7 +12704,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.contactcenterinsights.v1.QaScorecardRevision()
@@ -12763,7 +12765,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.ListQaScorecardRevisionsRequest()
       );
@@ -12772,7 +12774,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listQaScorecardRevisions.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -12822,7 +12824,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.ListQaScorecardRevisionsRequest()
       );
@@ -12831,7 +12833,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.contactcenterinsights.v1.QaScorecardRevision()
@@ -12877,7 +12879,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.ListQaScorecardRevisionsRequest()
       );
@@ -12886,7 +12888,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listQaScorecardRevisions.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -12925,7 +12927,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.ListFeedbackLabelsRequest()
       );
@@ -12934,7 +12936,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.contactcenterinsights.v1.FeedbackLabel()
@@ -12966,7 +12968,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.ListFeedbackLabelsRequest()
       );
@@ -12975,7 +12977,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.contactcenterinsights.v1.FeedbackLabel()
@@ -13024,7 +13026,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.ListFeedbackLabelsRequest()
       );
@@ -13033,7 +13035,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listFeedbackLabels = stubSimpleCall(
         undefined,
@@ -13056,7 +13058,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.ListFeedbackLabelsRequest()
       );
@@ -13065,7 +13067,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.contactcenterinsights.v1.FeedbackLabel()
@@ -13120,7 +13122,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.ListFeedbackLabelsRequest()
       );
@@ -13129,7 +13131,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listFeedbackLabels.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -13173,7 +13175,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.ListFeedbackLabelsRequest()
       );
@@ -13182,7 +13184,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.contactcenterinsights.v1.FeedbackLabel()
@@ -13224,7 +13226,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.ListFeedbackLabelsRequest()
       );
@@ -13233,7 +13235,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listFeedbackLabels.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -13268,7 +13270,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.ListAllFeedbackLabelsRequest()
       );
@@ -13277,7 +13279,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.contactcenterinsights.v1.FeedbackLabel()
@@ -13309,7 +13311,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.ListAllFeedbackLabelsRequest()
       );
@@ -13318,7 +13320,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.contactcenterinsights.v1.FeedbackLabel()
@@ -13367,7 +13369,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.ListAllFeedbackLabelsRequest()
       );
@@ -13376,7 +13378,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listAllFeedbackLabels = stubSimpleCall(
         undefined,
@@ -13402,7 +13404,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.ListAllFeedbackLabelsRequest()
       );
@@ -13411,7 +13413,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.contactcenterinsights.v1.FeedbackLabel()
@@ -13472,7 +13474,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.ListAllFeedbackLabelsRequest()
       );
@@ -13481,7 +13483,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listAllFeedbackLabels.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -13531,7 +13533,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.ListAllFeedbackLabelsRequest()
       );
@@ -13540,7 +13542,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.contactcenterinsights.v1.FeedbackLabel()
@@ -13586,7 +13588,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.ListAllFeedbackLabelsRequest()
       );
@@ -13595,7 +13597,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listAllFeedbackLabels.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -13633,7 +13635,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new IamProtos.google.iam.v1.GetIamPolicyRequest()
       );
@@ -13664,7 +13666,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new IamProtos.google.iam.v1.GetIamPolicyRequest()
       );
@@ -13709,7 +13711,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new IamProtos.google.iam.v1.GetIamPolicyRequest()
       );
@@ -13742,7 +13744,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new IamProtos.google.iam.v1.SetIamPolicyRequest()
       );
@@ -13773,7 +13775,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new IamProtos.google.iam.v1.SetIamPolicyRequest()
       );
@@ -13818,7 +13820,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new IamProtos.google.iam.v1.SetIamPolicyRequest()
       );
@@ -13851,7 +13853,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new IamProtos.google.iam.v1.TestIamPermissionsRequest()
       );
@@ -13885,7 +13887,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new IamProtos.google.iam.v1.TestIamPermissionsRequest()
       );
@@ -13930,7 +13932,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new IamProtos.google.iam.v1.TestIamPermissionsRequest()
       );
@@ -13966,7 +13968,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new operationsProtos.google.longrunning.GetOperationRequest()
       );
@@ -14048,7 +14050,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new operationsProtos.google.longrunning.CancelOperationRequest()
       );
@@ -14131,7 +14133,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new operationsProtos.google.longrunning.DeleteOperationRequest()
       );
@@ -14230,8 +14232,7 @@ describe('v1.ContactCenterInsightsClient', () => {
       ];
       client.operationsClient.descriptor.listOperations.asyncIterate =
         stubAsyncIterationCall(expectedResponse);
-      const responses: operationsProtos.google.longrunning.ListOperationsResponse[] =
-        [];
+      const responses: operationsProtos.google.longrunning.IOperation[] = [];
       const iterable = client.operationsClient.listOperationsAsync(request);
       for await (const resource of iterable) {
         responses.push(resource!);
@@ -14251,7 +14252,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new operationsProtos.google.longrunning.ListOperationsRequest()
       );
@@ -14260,8 +14261,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         stubAsyncIterationCall(undefined, expectedError);
       const iterable = client.operationsClient.listOperationsAsync(request);
       await assert.rejects(async () => {
-        const responses: operationsProtos.google.longrunning.ListOperationsResponse[] =
-          [];
+        const responses: operationsProtos.google.longrunning.IOperation[] = [];
         for await (const resource of iterable) {
           responses.push(resource!);
         }
@@ -14277,7 +14277,7 @@ describe('v1.ContactCenterInsightsClient', () => {
   });
 
   describe('Path templates', () => {
-    describe('analysisRule', () => {
+    describe('analysisRule', async () => {
       const fakePath = '/rendered/path/analysisRule';
       const expectedParameters = {
         project: 'projectValue',
@@ -14289,7 +14289,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.analysisRulePathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -14342,7 +14342,7 @@ describe('v1.ContactCenterInsightsClient', () => {
       });
     });
 
-    describe('encryptionSpec', () => {
+    describe('encryptionSpec', async () => {
       const fakePath = '/rendered/path/encryptionSpec';
       const expectedParameters = {
         project: 'projectValue',
@@ -14353,7 +14353,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.encryptionSpecPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -14395,7 +14395,7 @@ describe('v1.ContactCenterInsightsClient', () => {
       });
     });
 
-    describe('issue', () => {
+    describe('issue', async () => {
       const fakePath = '/rendered/path/issue';
       const expectedParameters = {
         project: 'projectValue',
@@ -14408,7 +14408,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.issuePathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -14472,7 +14472,7 @@ describe('v1.ContactCenterInsightsClient', () => {
       });
     });
 
-    describe('issueModel', () => {
+    describe('issueModel', async () => {
       const fakePath = '/rendered/path/issueModel';
       const expectedParameters = {
         project: 'projectValue',
@@ -14484,7 +14484,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.issueModelPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -14537,7 +14537,7 @@ describe('v1.ContactCenterInsightsClient', () => {
       });
     });
 
-    describe('location', () => {
+    describe('location', async () => {
       const fakePath = '/rendered/path/location';
       const expectedParameters = {
         project: 'projectValue',
@@ -14548,7 +14548,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.locationPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -14587,7 +14587,7 @@ describe('v1.ContactCenterInsightsClient', () => {
       });
     });
 
-    describe('phraseMatcher', () => {
+    describe('phraseMatcher', async () => {
       const fakePath = '/rendered/path/phraseMatcher';
       const expectedParameters = {
         project: 'projectValue',
@@ -14599,7 +14599,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.phraseMatcherPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -14652,7 +14652,7 @@ describe('v1.ContactCenterInsightsClient', () => {
       });
     });
 
-    describe('projectLocationAuthorizedViewSetAuthorizedViewConversation', () => {
+    describe('projectLocationAuthorizedViewSetAuthorizedViewConversation', async () => {
       const fakePath =
         '/rendered/path/projectLocationAuthorizedViewSetAuthorizedViewConversation';
       const expectedParameters = {
@@ -14667,7 +14667,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectLocationAuthorizedViewSetAuthorizedViewConversationPathTemplate.render =
         sinon.stub().returns(fakePath);
       client.pathTemplates.projectLocationAuthorizedViewSetAuthorizedViewConversationPathTemplate.match =
@@ -14780,7 +14780,7 @@ describe('v1.ContactCenterInsightsClient', () => {
       });
     });
 
-    describe('projectLocationAuthorizedViewSetAuthorizedViewConversationAnalysis', () => {
+    describe('projectLocationAuthorizedViewSetAuthorizedViewConversationAnalysis', async () => {
       const fakePath =
         '/rendered/path/projectLocationAuthorizedViewSetAuthorizedViewConversationAnalysis';
       const expectedParameters = {
@@ -14796,7 +14796,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectLocationAuthorizedViewSetAuthorizedViewConversationAnalysisPathTemplate.render =
         sinon.stub().returns(fakePath);
       client.pathTemplates.projectLocationAuthorizedViewSetAuthorizedViewConversationAnalysisPathTemplate.match =
@@ -14927,7 +14927,7 @@ describe('v1.ContactCenterInsightsClient', () => {
       });
     });
 
-    describe('projectLocationAuthorizedViewSetAuthorizedViewConversationFeedbackLabel', () => {
+    describe('projectLocationAuthorizedViewSetAuthorizedViewConversationFeedbackLabel', async () => {
       const fakePath =
         '/rendered/path/projectLocationAuthorizedViewSetAuthorizedViewConversationFeedbackLabel';
       const expectedParameters = {
@@ -14943,7 +14943,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectLocationAuthorizedViewSetAuthorizedViewConversationFeedbackLabelPathTemplate.render =
         sinon.stub().returns(fakePath);
       client.pathTemplates.projectLocationAuthorizedViewSetAuthorizedViewConversationFeedbackLabelPathTemplate.match =
@@ -15074,7 +15074,7 @@ describe('v1.ContactCenterInsightsClient', () => {
       });
     });
 
-    describe('projectLocationConversation', () => {
+    describe('projectLocationConversation', async () => {
       const fakePath = '/rendered/path/projectLocationConversation';
       const expectedParameters = {
         project: 'projectValue',
@@ -15086,7 +15086,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectLocationConversationPathTemplate.render =
         sinon.stub().returns(fakePath);
       client.pathTemplates.projectLocationConversationPathTemplate.match = sinon
@@ -15153,7 +15153,7 @@ describe('v1.ContactCenterInsightsClient', () => {
       });
     });
 
-    describe('projectLocationConversationAnalysis', () => {
+    describe('projectLocationConversationAnalysis', async () => {
       const fakePath = '/rendered/path/projectLocationConversationAnalysis';
       const expectedParameters = {
         project: 'projectValue',
@@ -15166,7 +15166,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectLocationConversationAnalysisPathTemplate.render =
         sinon.stub().returns(fakePath);
       client.pathTemplates.projectLocationConversationAnalysisPathTemplate.match =
@@ -15255,7 +15255,7 @@ describe('v1.ContactCenterInsightsClient', () => {
       });
     });
 
-    describe('projectLocationConversationFeedbackLabel', () => {
+    describe('projectLocationConversationFeedbackLabel', async () => {
       const fakePath =
         '/rendered/path/projectLocationConversationFeedbackLabel';
       const expectedParameters = {
@@ -15269,7 +15269,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectLocationConversationFeedbackLabelPathTemplate.render =
         sinon.stub().returns(fakePath);
       client.pathTemplates.projectLocationConversationFeedbackLabelPathTemplate.match =
@@ -15363,7 +15363,7 @@ describe('v1.ContactCenterInsightsClient', () => {
       });
     });
 
-    describe('qaQuestion', () => {
+    describe('qaQuestion', async () => {
       const fakePath = '/rendered/path/qaQuestion';
       const expectedParameters = {
         project: 'projectValue',
@@ -15377,7 +15377,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.qaQuestionPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -15452,7 +15452,7 @@ describe('v1.ContactCenterInsightsClient', () => {
       });
     });
 
-    describe('qaScorecard', () => {
+    describe('qaScorecard', async () => {
       const fakePath = '/rendered/path/qaScorecard';
       const expectedParameters = {
         project: 'projectValue',
@@ -15464,7 +15464,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.qaScorecardPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -15517,7 +15517,7 @@ describe('v1.ContactCenterInsightsClient', () => {
       });
     });
 
-    describe('qaScorecardResult', () => {
+    describe('qaScorecardResult', async () => {
       const fakePath = '/rendered/path/qaScorecardResult';
       const expectedParameters = {
         project: 'projectValue',
@@ -15529,7 +15529,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.qaScorecardResultPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -15595,7 +15595,7 @@ describe('v1.ContactCenterInsightsClient', () => {
       });
     });
 
-    describe('qaScorecardRevision', () => {
+    describe('qaScorecardRevision', async () => {
       const fakePath = '/rendered/path/qaScorecardRevision';
       const expectedParameters = {
         project: 'projectValue',
@@ -15608,7 +15608,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.qaScorecardRevisionPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -15690,7 +15690,7 @@ describe('v1.ContactCenterInsightsClient', () => {
       });
     });
 
-    describe('settings', () => {
+    describe('settings', async () => {
       const fakePath = '/rendered/path/settings';
       const expectedParameters = {
         project: 'projectValue',
@@ -15701,7 +15701,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.settingsPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -15740,7 +15740,7 @@ describe('v1.ContactCenterInsightsClient', () => {
       });
     });
 
-    describe('view', () => {
+    describe('view', async () => {
       const fakePath = '/rendered/path/view';
       const expectedParameters = {
         project: 'projectValue',
@@ -15752,7 +15752,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.viewPathTemplate.render = sinon
         .stub()
         .returns(fakePath);

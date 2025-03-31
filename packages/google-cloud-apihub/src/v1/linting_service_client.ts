@@ -29,6 +29,7 @@ import type {
 
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
+import {loggingUtils as logging} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -53,6 +54,8 @@ export class LintingServiceClient {
   private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
+  private _log = logging.log('apihub');
+
   auth: gax.GoogleAuth;
   descriptors: Descriptors = {
     page: {},
@@ -88,7 +91,7 @@ export class LintingServiceClient {
    *     Developer's Console, e.g. 'grape-spaceship-123'. We will also check
    *     the environment variable GCLOUD_PROJECT for your project ID. If your
    *     app is running in an environment which supports
-   *     {@link https://developers.google.com/identity/protocols/application-default-credentials Application Default Credentials},
+   *     {@link https://cloud.google.com/docs/authentication/application-default-credentials Application Default Credentials},
    *     your project ID will be detected automatically.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
@@ -505,8 +508,36 @@ export class LintingServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.getStyleGuide(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('getStyleGuide request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.apihub.v1.IStyleGuide,
+          | protos.google.cloud.apihub.v1.IGetStyleGuideRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getStyleGuide response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getStyleGuide(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.apihub.v1.IStyleGuide,
+          protos.google.cloud.apihub.v1.IGetStyleGuideRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getStyleGuide response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Update the styleGuide to be used for liniting in by API hub.
@@ -591,8 +622,36 @@ export class LintingServiceClient {
       this._gaxModule.routingHeader.fromParams({
         'style_guide.name': request.styleGuide!.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.updateStyleGuide(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('updateStyleGuide request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.apihub.v1.IStyleGuide,
+          | protos.google.cloud.apihub.v1.IUpdateStyleGuideRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('updateStyleGuide response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .updateStyleGuide(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.apihub.v1.IStyleGuide,
+          protos.google.cloud.apihub.v1.IUpdateStyleGuideRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('updateStyleGuide response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Get the contents of the style guide.
@@ -684,8 +743,39 @@ export class LintingServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.getStyleGuideContents(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('getStyleGuideContents request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.apihub.v1.IStyleGuideContents,
+          | protos.google.cloud.apihub.v1.IGetStyleGuideContentsRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getStyleGuideContents response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getStyleGuideContents(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.apihub.v1.IStyleGuideContents,
+          (
+            | protos.google.cloud.apihub.v1.IGetStyleGuideContentsRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getStyleGuideContents response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Lints the requested spec and updates the corresponding API Spec with the
@@ -770,8 +860,34 @@ export class LintingServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.lintSpec(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('lintSpec request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.cloud.apihub.v1.ILintSpecRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('lintSpec response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .lintSpec(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.protobuf.IEmpty,
+          protos.google.cloud.apihub.v1.ILintSpecRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('lintSpec response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
 
   /**
@@ -1726,6 +1842,7 @@ export class LintingServiceClient {
   close(): Promise<void> {
     if (this.lintingServiceStub && !this._terminated) {
       return this.lintingServiceStub.then(stub => {
+        this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
         this.locationsClient.close();

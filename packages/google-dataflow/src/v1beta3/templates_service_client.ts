@@ -27,6 +27,7 @@ import type {
 
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
+import {loggingUtils as logging} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -51,6 +52,8 @@ export class TemplatesServiceClient {
   private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
+  private _log = logging.log('dataflow');
+
   auth: gax.GoogleAuth;
   descriptors: Descriptors = {
     page: {},
@@ -84,7 +87,7 @@ export class TemplatesServiceClient {
    *     Developer's Console, e.g. 'grape-spaceship-123'. We will also check
    *     the environment variable GCLOUD_PROJECT for your project ID. If your
    *     app is running in an environment which supports
-   *     {@link https://developers.google.com/identity/protocols/application-default-credentials Application Default Credentials},
+   *     {@link https://cloud.google.com/docs/authentication/application-default-credentials Application Default Credentials},
    *     your project ID will be detected automatically.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
@@ -466,8 +469,39 @@ export class TemplatesServiceClient {
         project_id: request.projectId ?? '',
         location: request.location ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.createJobFromTemplate(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('createJobFromTemplate request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.dataflow.v1beta3.IJob,
+          | protos.google.dataflow.v1beta3.ICreateJobFromTemplateRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('createJobFromTemplate response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .createJobFromTemplate(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.dataflow.v1beta3.IJob,
+          (
+            | protos.google.dataflow.v1beta3.ICreateJobFromTemplateRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('createJobFromTemplate response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Launch a template.
@@ -567,8 +601,36 @@ export class TemplatesServiceClient {
         project_id: request.projectId ?? '',
         location: request.location ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.launchTemplate(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('launchTemplate request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.dataflow.v1beta3.ILaunchTemplateResponse,
+          | protos.google.dataflow.v1beta3.ILaunchTemplateRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('launchTemplate response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .launchTemplate(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.dataflow.v1beta3.ILaunchTemplateResponse,
+          protos.google.dataflow.v1beta3.ILaunchTemplateRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('launchTemplate response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Get the template associated with a template.
@@ -660,8 +722,34 @@ export class TemplatesServiceClient {
         project_id: request.projectId ?? '',
         location: request.location ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.getTemplate(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('getTemplate request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.dataflow.v1beta3.IGetTemplateResponse,
+          protos.google.dataflow.v1beta3.IGetTemplateRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getTemplate response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getTemplate(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.dataflow.v1beta3.IGetTemplateResponse,
+          protos.google.dataflow.v1beta3.IGetTemplateRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getTemplate response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
 
   /**
@@ -673,6 +761,7 @@ export class TemplatesServiceClient {
   close(): Promise<void> {
     if (this.templatesServiceStub && !this._terminated) {
       return this.templatesServiceStub.then(stub => {
+        this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
       });

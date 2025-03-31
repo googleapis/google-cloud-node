@@ -31,6 +31,7 @@ import type {
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
+import {loggingUtils as logging} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -55,6 +56,8 @@ export class StorageControlClient {
   private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
+  private _log = logging.log('storage-control');
+
   auth: gax.GoogleAuth;
   descriptors: Descriptors = {
     page: {},
@@ -90,7 +93,7 @@ export class StorageControlClient {
    *     Developer's Console, e.g. 'grape-spaceship-123'. We will also check
    *     the environment variable GCLOUD_PROJECT for your project ID. If your
    *     app is running in an environment which supports
-   *     {@link https://developers.google.com/identity/protocols/application-default-credentials Application Default Credentials},
+   *     {@link https://cloud.google.com/docs/authentication/application-default-credentials Application Default Credentials},
    *     your project ID will be detected automatically.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
@@ -560,8 +563,36 @@ export class StorageControlClient {
     }
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams(routingParameter);
-    this.initialize();
-    return this.innerApiCalls.createFolder(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('createFolder request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.storage.control.v2.IFolder,
+          | protos.google.storage.control.v2.ICreateFolderRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('createFolder response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .createFolder(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.storage.control.v2.IFolder,
+          protos.google.storage.control.v2.ICreateFolderRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createFolder response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Permanently deletes an empty folder. This operation is only applicable to a
@@ -669,8 +700,36 @@ export class StorageControlClient {
     }
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams(routingParameter);
-    this.initialize();
-    return this.innerApiCalls.deleteFolder(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('deleteFolder request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.storage.control.v2.IDeleteFolderRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('deleteFolder response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .deleteFolder(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.protobuf.IEmpty,
+          protos.google.storage.control.v2.IDeleteFolderRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteFolder response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Returns metadata for the specified folder. This operation is only
@@ -776,8 +835,34 @@ export class StorageControlClient {
     }
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams(routingParameter);
-    this.initialize();
-    return this.innerApiCalls.getFolder(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('getFolder request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.storage.control.v2.IFolder,
+          protos.google.storage.control.v2.IGetFolderRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getFolder response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getFolder(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.storage.control.v2.IFolder,
+          protos.google.storage.control.v2.IGetFolderRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getFolder response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Returns the storage layout configuration for a given bucket.
@@ -887,8 +972,36 @@ export class StorageControlClient {
     }
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams(routingParameter);
-    this.initialize();
-    return this.innerApiCalls.getStorageLayout(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('getStorageLayout request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.storage.control.v2.IStorageLayout,
+          | protos.google.storage.control.v2.IGetStorageLayoutRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getStorageLayout response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getStorageLayout(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.storage.control.v2.IStorageLayout,
+          protos.google.storage.control.v2.IGetStorageLayoutRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getStorageLayout response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Creates a new managed folder.
@@ -1000,8 +1113,39 @@ export class StorageControlClient {
     }
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams(routingParameter);
-    this.initialize();
-    return this.innerApiCalls.createManagedFolder(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('createManagedFolder request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.storage.control.v2.IManagedFolder,
+          | protos.google.storage.control.v2.ICreateManagedFolderRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('createManagedFolder response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .createManagedFolder(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.storage.control.v2.IManagedFolder,
+          (
+            | protos.google.storage.control.v2.ICreateManagedFolderRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('createManagedFolder response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Permanently deletes an empty managed folder.
@@ -1120,8 +1264,39 @@ export class StorageControlClient {
     }
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams(routingParameter);
-    this.initialize();
-    return this.innerApiCalls.deleteManagedFolder(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('deleteManagedFolder request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.storage.control.v2.IDeleteManagedFolderRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('deleteManagedFolder response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .deleteManagedFolder(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.protobuf.IEmpty,
+          (
+            | protos.google.storage.control.v2.IDeleteManagedFolderRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteManagedFolder response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Returns metadata for the specified managed folder.
@@ -1235,8 +1410,36 @@ export class StorageControlClient {
     }
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams(routingParameter);
-    this.initialize();
-    return this.innerApiCalls.getManagedFolder(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('getManagedFolder request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.storage.control.v2.IManagedFolder,
+          | protos.google.storage.control.v2.IGetManagedFolderRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getManagedFolder response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getManagedFolder(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.storage.control.v2.IManagedFolder,
+          protos.google.storage.control.v2.IGetManagedFolderRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getManagedFolder response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
 
   /**
@@ -1368,8 +1571,40 @@ export class StorageControlClient {
     }
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams(routingParameter);
-    this.initialize();
-    return this.innerApiCalls.renameFolder(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.storage.control.v2.IFolder,
+            protos.google.storage.control.v2.IRenameFolderMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('renameFolder response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('renameFolder request %j', request);
+    return this.innerApiCalls
+      .renameFolder(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.storage.control.v2.IFolder,
+            protos.google.storage.control.v2.IRenameFolderMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('renameFolder response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `renameFolder()`.
@@ -1390,6 +1625,7 @@ export class StorageControlClient {
       protos.google.storage.control.v2.RenameFolderMetadata
     >
   > {
+    this._log.info('renameFolder long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -1526,8 +1762,36 @@ export class StorageControlClient {
     }
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams(routingParameter);
-    this.initialize();
-    return this.innerApiCalls.listFolders(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.storage.control.v2.IListFoldersRequest,
+          | protos.google.storage.control.v2.IListFoldersResponse
+          | null
+          | undefined,
+          protos.google.storage.control.v2.IFolder
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listFolders values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listFolders request %j', request);
+    return this.innerApiCalls
+      .listFolders(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.storage.control.v2.IFolder[],
+          protos.google.storage.control.v2.IListFoldersRequest | null,
+          protos.google.storage.control.v2.IListFoldersResponse,
+        ]) => {
+          this._log.info('listFolders values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -1597,7 +1861,10 @@ export class StorageControlClient {
       this._gaxModule.routingHeader.fromParams(routingParameter);
     const defaultCallSettings = this._defaults['listFolders'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listFolders stream %j', request);
     return this.descriptors.page.listFolders.createStream(
       this.innerApiCalls.listFolders as GaxCall,
       request,
@@ -1675,7 +1942,10 @@ export class StorageControlClient {
       this._gaxModule.routingHeader.fromParams(routingParameter);
     const defaultCallSettings = this._defaults['listFolders'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listFolders iterate %j', request);
     return this.descriptors.page.listFolders.asyncIterate(
       this.innerApiCalls['listFolders'] as GaxCall,
       request as {},
@@ -1796,8 +2066,36 @@ export class StorageControlClient {
     }
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams(routingParameter);
-    this.initialize();
-    return this.innerApiCalls.listManagedFolders(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.storage.control.v2.IListManagedFoldersRequest,
+          | protos.google.storage.control.v2.IListManagedFoldersResponse
+          | null
+          | undefined,
+          protos.google.storage.control.v2.IManagedFolder
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listManagedFolders values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listManagedFolders request %j', request);
+    return this.innerApiCalls
+      .listManagedFolders(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.storage.control.v2.IManagedFolder[],
+          protos.google.storage.control.v2.IListManagedFoldersRequest | null,
+          protos.google.storage.control.v2.IListManagedFoldersResponse,
+        ]) => {
+          this._log.info('listManagedFolders values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -1855,7 +2153,10 @@ export class StorageControlClient {
       this._gaxModule.routingHeader.fromParams(routingParameter);
     const defaultCallSettings = this._defaults['listManagedFolders'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listManagedFolders stream %j', request);
     return this.descriptors.page.listManagedFolders.createStream(
       this.innerApiCalls.listManagedFolders as GaxCall,
       request,
@@ -1921,7 +2222,10 @@ export class StorageControlClient {
       this._gaxModule.routingHeader.fromParams(routingParameter);
     const defaultCallSettings = this._defaults['listManagedFolders'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listManagedFolders iterate %j', request);
     return this.descriptors.page.listManagedFolders.asyncIterate(
       this.innerApiCalls['listManagedFolders'] as GaxCall,
       request as {},
@@ -2022,7 +2326,7 @@ export class StorageControlClient {
   listOperationsAsync(
     request: protos.google.longrunning.ListOperationsRequest,
     options?: gax.CallOptions
-  ): AsyncIterable<protos.google.longrunning.ListOperationsResponse> {
+  ): AsyncIterable<protos.google.longrunning.IOperation> {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
@@ -2363,6 +2667,7 @@ export class StorageControlClient {
   close(): Promise<void> {
     if (this.storageControlStub && !this._terminated) {
       return this.storageControlStub.then(stub => {
+        this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
         this.operationsClient.close();

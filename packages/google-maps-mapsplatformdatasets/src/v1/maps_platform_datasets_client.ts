@@ -29,6 +29,7 @@ import type {
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
+import {loggingUtils as logging} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -53,6 +54,8 @@ export class MapsPlatformDatasetsClient {
   private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
+  private _log = logging.log('maps-platform-datasets');
+
   auth: gax.GoogleAuth;
   descriptors: Descriptors = {
     page: {},
@@ -87,7 +90,7 @@ export class MapsPlatformDatasetsClient {
    *     Developer's Console, e.g. 'grape-spaceship-123'. We will also check
    *     the environment variable GCLOUD_PROJECT for your project ID. If your
    *     app is running in an environment which supports
-   *     {@link https://developers.google.com/identity/protocols/application-default-credentials Application Default Credentials},
+   *     {@link https://cloud.google.com/docs/authentication/application-default-credentials Application Default Credentials},
    *     your project ID will be detected automatically.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
@@ -487,8 +490,39 @@ export class MapsPlatformDatasetsClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.createDataset(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('createDataset request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.maps.mapsplatformdatasets.v1.IDataset,
+          | protos.google.maps.mapsplatformdatasets.v1.ICreateDatasetRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('createDataset response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .createDataset(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.maps.mapsplatformdatasets.v1.IDataset,
+          (
+            | protos.google.maps.mapsplatformdatasets.v1.ICreateDatasetRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('createDataset response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Updates the metadata for the dataset.
@@ -588,8 +622,39 @@ export class MapsPlatformDatasetsClient {
       this._gaxModule.routingHeader.fromParams({
         'dataset.name': request.dataset!.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.updateDatasetMetadata(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('updateDatasetMetadata request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.maps.mapsplatformdatasets.v1.IDataset,
+          | protos.google.maps.mapsplatformdatasets.v1.IUpdateDatasetMetadataRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('updateDatasetMetadata response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .updateDatasetMetadata(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.maps.mapsplatformdatasets.v1.IDataset,
+          (
+            | protos.google.maps.mapsplatformdatasets.v1.IUpdateDatasetMetadataRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('updateDatasetMetadata response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Gets the dataset.
@@ -686,8 +751,39 @@ export class MapsPlatformDatasetsClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.getDataset(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('getDataset request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.maps.mapsplatformdatasets.v1.IDataset,
+          | protos.google.maps.mapsplatformdatasets.v1.IGetDatasetRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getDataset response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getDataset(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.maps.mapsplatformdatasets.v1.IDataset,
+          (
+            | protos.google.maps.mapsplatformdatasets.v1.IGetDatasetRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getDataset response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Deletes the specified dataset.
@@ -783,8 +879,39 @@ export class MapsPlatformDatasetsClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.deleteDataset(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('deleteDataset request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.maps.mapsplatformdatasets.v1.IDeleteDatasetRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('deleteDataset response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .deleteDataset(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.protobuf.IEmpty,
+          (
+            | protos.google.maps.mapsplatformdatasets.v1.IDeleteDatasetRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteDataset response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
 
   /**
@@ -887,12 +1014,40 @@ export class MapsPlatformDatasetsClient {
       this._gaxModule.routingHeader.fromParams({
         dataset: request.dataset ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.fetchDatasetErrors(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.maps.mapsplatformdatasets.v1.IFetchDatasetErrorsRequest,
+          | protos.google.maps.mapsplatformdatasets.v1.IFetchDatasetErrorsResponse
+          | null
+          | undefined,
+          protos.google.rpc.IStatus
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('fetchDatasetErrors values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('fetchDatasetErrors request %j', request);
+    return this.innerApiCalls
+      .fetchDatasetErrors(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.rpc.IStatus[],
+          protos.google.maps.mapsplatformdatasets.v1.IFetchDatasetErrorsRequest | null,
+          protos.google.maps.mapsplatformdatasets.v1.IFetchDatasetErrorsResponse,
+        ]) => {
+          this._log.info('fetchDatasetErrors values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `fetchDatasetErrors`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.dataset
@@ -932,7 +1087,10 @@ export class MapsPlatformDatasetsClient {
       });
     const defaultCallSettings = this._defaults['fetchDatasetErrors'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('fetchDatasetErrors stream %j', request);
     return this.descriptors.page.fetchDatasetErrors.createStream(
       this.innerApiCalls.fetchDatasetErrors as GaxCall,
       request,
@@ -984,7 +1142,10 @@ export class MapsPlatformDatasetsClient {
       });
     const defaultCallSettings = this._defaults['fetchDatasetErrors'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('fetchDatasetErrors iterate %j', request);
     return this.descriptors.page.fetchDatasetErrors.asyncIterate(
       this.innerApiCalls['fetchDatasetErrors'] as GaxCall,
       request as {},
@@ -1099,12 +1260,40 @@ export class MapsPlatformDatasetsClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.listDatasets(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.maps.mapsplatformdatasets.v1.IListDatasetsRequest,
+          | protos.google.maps.mapsplatformdatasets.v1.IListDatasetsResponse
+          | null
+          | undefined,
+          protos.google.maps.mapsplatformdatasets.v1.IDataset
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listDatasets values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listDatasets request %j', request);
+    return this.innerApiCalls
+      .listDatasets(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.maps.mapsplatformdatasets.v1.IDataset[],
+          protos.google.maps.mapsplatformdatasets.v1.IListDatasetsRequest | null,
+          protos.google.maps.mapsplatformdatasets.v1.IListDatasetsResponse,
+        ]) => {
+          this._log.info('listDatasets values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listDatasets`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
@@ -1152,7 +1341,10 @@ export class MapsPlatformDatasetsClient {
       });
     const defaultCallSettings = this._defaults['listDatasets'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listDatasets stream %j', request);
     return this.descriptors.page.listDatasets.createStream(
       this.innerApiCalls.listDatasets as GaxCall,
       request,
@@ -1212,7 +1404,10 @@ export class MapsPlatformDatasetsClient {
       });
     const defaultCallSettings = this._defaults['listDatasets'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listDatasets iterate %j', request);
     return this.descriptors.page.listDatasets.asyncIterate(
       this.innerApiCalls['listDatasets'] as GaxCall,
       request as {},
@@ -1268,6 +1463,7 @@ export class MapsPlatformDatasetsClient {
   close(): Promise<void> {
     if (this.mapsPlatformDatasetsStub && !this._terminated) {
       return this.mapsPlatformDatasetsStub.then(stub => {
+        this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
       });

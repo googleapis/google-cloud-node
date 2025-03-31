@@ -31,6 +31,7 @@ import type {
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
+import {loggingUtils as logging} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -56,6 +57,8 @@ export class AzureClustersClient {
   private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
+  private _log = logging.log('gkemulticloud');
+
   auth: gax.GoogleAuth;
   descriptors: Descriptors = {
     page: {},
@@ -91,7 +94,7 @@ export class AzureClustersClient {
    *     Developer's Console, e.g. 'grape-spaceship-123'. We will also check
    *     the environment variable GCLOUD_PROJECT for your project ID. If your
    *     app is running in an environment which supports
-   *     {@link https://developers.google.com/identity/protocols/application-default-credentials Application Default Credentials},
+   *     {@link https://cloud.google.com/docs/authentication/application-default-credentials Application Default Credentials},
    *     your project ID will be detected automatically.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
@@ -664,8 +667,39 @@ export class AzureClustersClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.getAzureClient(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('getAzureClient request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.gkemulticloud.v1.IAzureClient,
+          | protos.google.cloud.gkemulticloud.v1.IGetAzureClientRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getAzureClient response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getAzureClient(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.gkemulticloud.v1.IAzureClient,
+          (
+            | protos.google.cloud.gkemulticloud.v1.IGetAzureClientRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getAzureClient response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Describes a specific
@@ -763,8 +797,39 @@ export class AzureClustersClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.getAzureCluster(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('getAzureCluster request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.gkemulticloud.v1.IAzureCluster,
+          | protos.google.cloud.gkemulticloud.v1.IGetAzureClusterRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getAzureCluster response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getAzureCluster(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.gkemulticloud.v1.IAzureCluster,
+          (
+            | protos.google.cloud.gkemulticloud.v1.IGetAzureClusterRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getAzureCluster response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Generates an access token for a cluster agent.
@@ -877,12 +942,45 @@ export class AzureClustersClient {
       this._gaxModule.routingHeader.fromParams({
         azure_cluster: request.azureCluster ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.generateAzureClusterAgentToken(
-      request,
-      options,
-      callback
-    );
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('generateAzureClusterAgentToken request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.gkemulticloud.v1.IGenerateAzureClusterAgentTokenResponse,
+          | protos.google.cloud.gkemulticloud.v1.IGenerateAzureClusterAgentTokenRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info(
+            'generateAzureClusterAgentToken response %j',
+            response
+          );
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .generateAzureClusterAgentToken(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.gkemulticloud.v1.IGenerateAzureClusterAgentTokenResponse,
+          (
+            | protos.google.cloud.gkemulticloud.v1.IGenerateAzureClusterAgentTokenRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info(
+            'generateAzureClusterAgentToken response %j',
+            response
+          );
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Generates a short-lived access token to authenticate to a given
@@ -986,12 +1084,39 @@ export class AzureClustersClient {
       this._gaxModule.routingHeader.fromParams({
         azure_cluster: request.azureCluster ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.generateAzureAccessToken(
-      request,
-      options,
-      callback
-    );
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('generateAzureAccessToken request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.gkemulticloud.v1.IGenerateAzureAccessTokenResponse,
+          | protos.google.cloud.gkemulticloud.v1.IGenerateAzureAccessTokenRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('generateAzureAccessToken response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .generateAzureAccessToken(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.gkemulticloud.v1.IGenerateAzureAccessTokenResponse,
+          (
+            | protos.google.cloud.gkemulticloud.v1.IGenerateAzureAccessTokenRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('generateAzureAccessToken response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Describes a specific
@@ -1089,8 +1214,39 @@ export class AzureClustersClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.getAzureNodePool(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('getAzureNodePool request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.gkemulticloud.v1.IAzureNodePool,
+          | protos.google.cloud.gkemulticloud.v1.IGetAzureNodePoolRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getAzureNodePool response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getAzureNodePool(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.gkemulticloud.v1.IAzureNodePool,
+          (
+            | protos.google.cloud.gkemulticloud.v1.IGetAzureNodePoolRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getAzureNodePool response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Gets the OIDC discovery document for the cluster.
@@ -1191,8 +1347,39 @@ export class AzureClustersClient {
       this._gaxModule.routingHeader.fromParams({
         azure_cluster: request.azureCluster ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.getAzureOpenIdConfig(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('getAzureOpenIdConfig request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.gkemulticloud.v1.IAzureOpenIdConfig,
+          | protos.google.cloud.gkemulticloud.v1.IGetAzureOpenIdConfigRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getAzureOpenIdConfig response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getAzureOpenIdConfig(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.gkemulticloud.v1.IAzureOpenIdConfig,
+          (
+            | protos.google.cloud.gkemulticloud.v1.IGetAzureOpenIdConfigRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getAzureOpenIdConfig response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Gets the public component of the cluster signing keys in
@@ -1290,8 +1477,39 @@ export class AzureClustersClient {
       this._gaxModule.routingHeader.fromParams({
         azure_cluster: request.azureCluster ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.getAzureJsonWebKeys(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('getAzureJsonWebKeys request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.gkemulticloud.v1.IAzureJsonWebKeys,
+          | protos.google.cloud.gkemulticloud.v1.IGetAzureJsonWebKeysRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getAzureJsonWebKeys response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getAzureJsonWebKeys(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.gkemulticloud.v1.IAzureJsonWebKeys,
+          (
+            | protos.google.cloud.gkemulticloud.v1.IGetAzureJsonWebKeysRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getAzureJsonWebKeys response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Returns information, such as supported Azure regions and Kubernetes
@@ -1395,8 +1613,39 @@ export class AzureClustersClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.getAzureServerConfig(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('getAzureServerConfig request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.gkemulticloud.v1.IAzureServerConfig,
+          | protos.google.cloud.gkemulticloud.v1.IGetAzureServerConfigRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getAzureServerConfig response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getAzureServerConfig(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.gkemulticloud.v1.IAzureServerConfig,
+          (
+            | protos.google.cloud.gkemulticloud.v1.IGetAzureServerConfigRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getAzureServerConfig response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
 
   /**
@@ -1529,8 +1778,40 @@ export class AzureClustersClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.createAzureClient(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.gkemulticloud.v1.IAzureClient,
+            protos.google.cloud.gkemulticloud.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('createAzureClient response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('createAzureClient request %j', request);
+    return this.innerApiCalls
+      .createAzureClient(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.gkemulticloud.v1.IAzureClient,
+            protos.google.cloud.gkemulticloud.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createAzureClient response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `createAzureClient()`.
@@ -1551,6 +1832,7 @@ export class AzureClustersClient {
       protos.google.cloud.gkemulticloud.v1.OperationMetadata
     >
   > {
+    this._log.info('createAzureClient long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -1690,8 +1972,40 @@ export class AzureClustersClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.deleteAzureClient(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.gkemulticloud.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('deleteAzureClient response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('deleteAzureClient request %j', request);
+    return this.innerApiCalls
+      .deleteAzureClient(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.gkemulticloud.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteAzureClient response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `deleteAzureClient()`.
@@ -1712,6 +2026,7 @@ export class AzureClustersClient {
       protos.google.cloud.gkemulticloud.v1.OperationMetadata
     >
   > {
+    this._log.info('deleteAzureClient long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -1853,8 +2168,40 @@ export class AzureClustersClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.createAzureCluster(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.gkemulticloud.v1.IAzureCluster,
+            protos.google.cloud.gkemulticloud.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('createAzureCluster response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('createAzureCluster request %j', request);
+    return this.innerApiCalls
+      .createAzureCluster(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.gkemulticloud.v1.IAzureCluster,
+            protos.google.cloud.gkemulticloud.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createAzureCluster response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `createAzureCluster()`.
@@ -1875,6 +2222,7 @@ export class AzureClustersClient {
       protos.google.cloud.gkemulticloud.v1.OperationMetadata
     >
   > {
+    this._log.info('createAzureCluster long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -2014,8 +2362,40 @@ export class AzureClustersClient {
       this._gaxModule.routingHeader.fromParams({
         'azure_cluster.name': request.azureCluster!.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.updateAzureCluster(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.gkemulticloud.v1.IAzureCluster,
+            protos.google.cloud.gkemulticloud.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('updateAzureCluster response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('updateAzureCluster request %j', request);
+    return this.innerApiCalls
+      .updateAzureCluster(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.gkemulticloud.v1.IAzureCluster,
+            protos.google.cloud.gkemulticloud.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('updateAzureCluster response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `updateAzureCluster()`.
@@ -2036,6 +2416,7 @@ export class AzureClustersClient {
       protos.google.cloud.gkemulticloud.v1.OperationMetadata
     >
   > {
+    this._log.info('updateAzureCluster long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -2187,8 +2568,40 @@ export class AzureClustersClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.deleteAzureCluster(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.gkemulticloud.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('deleteAzureCluster response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('deleteAzureCluster request %j', request);
+    return this.innerApiCalls
+      .deleteAzureCluster(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.gkemulticloud.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteAzureCluster response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `deleteAzureCluster()`.
@@ -2209,6 +2622,7 @@ export class AzureClustersClient {
       protos.google.cloud.gkemulticloud.v1.OperationMetadata
     >
   > {
+    this._log.info('deleteAzureCluster long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -2352,8 +2766,40 @@ export class AzureClustersClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.createAzureNodePool(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.gkemulticloud.v1.IAzureNodePool,
+            protos.google.cloud.gkemulticloud.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('createAzureNodePool response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('createAzureNodePool request %j', request);
+    return this.innerApiCalls
+      .createAzureNodePool(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.gkemulticloud.v1.IAzureNodePool,
+            protos.google.cloud.gkemulticloud.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createAzureNodePool response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `createAzureNodePool()`.
@@ -2374,6 +2820,7 @@ export class AzureClustersClient {
       protos.google.cloud.gkemulticloud.v1.OperationMetadata
     >
   > {
+    this._log.info('createAzureNodePool long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -2503,8 +2950,40 @@ export class AzureClustersClient {
       this._gaxModule.routingHeader.fromParams({
         'azure_node_pool.name': request.azureNodePool!.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.updateAzureNodePool(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.gkemulticloud.v1.IAzureNodePool,
+            protos.google.cloud.gkemulticloud.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('updateAzureNodePool response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('updateAzureNodePool request %j', request);
+    return this.innerApiCalls
+      .updateAzureNodePool(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.gkemulticloud.v1.IAzureNodePool,
+            protos.google.cloud.gkemulticloud.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('updateAzureNodePool response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `updateAzureNodePool()`.
@@ -2525,6 +3004,7 @@ export class AzureClustersClient {
       protos.google.cloud.gkemulticloud.v1.OperationMetadata
     >
   > {
+    this._log.info('updateAzureNodePool long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -2675,8 +3155,40 @@ export class AzureClustersClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.deleteAzureNodePool(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.gkemulticloud.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('deleteAzureNodePool response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('deleteAzureNodePool request %j', request);
+    return this.innerApiCalls
+      .deleteAzureNodePool(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.gkemulticloud.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteAzureNodePool response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `deleteAzureNodePool()`.
@@ -2697,6 +3209,7 @@ export class AzureClustersClient {
       protos.google.cloud.gkemulticloud.v1.OperationMetadata
     >
   > {
+    this._log.info('deleteAzureNodePool long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -2821,8 +3334,36 @@ export class AzureClustersClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.listAzureClients(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.gkemulticloud.v1.IListAzureClientsRequest,
+          | protos.google.cloud.gkemulticloud.v1.IListAzureClientsResponse
+          | null
+          | undefined,
+          protos.google.cloud.gkemulticloud.v1.IAzureClient
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listAzureClients values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listAzureClients request %j', request);
+    return this.innerApiCalls
+      .listAzureClients(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.gkemulticloud.v1.IAzureClient[],
+          protos.google.cloud.gkemulticloud.v1.IListAzureClientsRequest | null,
+          protos.google.cloud.gkemulticloud.v1.IListAzureClientsResponse,
+        ]) => {
+          this._log.info('listAzureClients values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -2874,7 +3415,10 @@ export class AzureClustersClient {
       });
     const defaultCallSettings = this._defaults['listAzureClients'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listAzureClients stream %j', request);
     return this.descriptors.page.listAzureClients.createStream(
       this.innerApiCalls.listAzureClients as GaxCall,
       request,
@@ -2934,7 +3478,10 @@ export class AzureClustersClient {
       });
     const defaultCallSettings = this._defaults['listAzureClients'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listAzureClients iterate %j', request);
     return this.descriptors.page.listAzureClients.asyncIterate(
       this.innerApiCalls['listAzureClients'] as GaxCall,
       request as {},
@@ -3050,8 +3597,36 @@ export class AzureClustersClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.listAzureClusters(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.gkemulticloud.v1.IListAzureClustersRequest,
+          | protos.google.cloud.gkemulticloud.v1.IListAzureClustersResponse
+          | null
+          | undefined,
+          protos.google.cloud.gkemulticloud.v1.IAzureCluster
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listAzureClusters values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listAzureClusters request %j', request);
+    return this.innerApiCalls
+      .listAzureClusters(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.gkemulticloud.v1.IAzureCluster[],
+          protos.google.cloud.gkemulticloud.v1.IListAzureClustersRequest | null,
+          protos.google.cloud.gkemulticloud.v1.IListAzureClustersResponse,
+        ]) => {
+          this._log.info('listAzureClusters values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -3103,7 +3678,10 @@ export class AzureClustersClient {
       });
     const defaultCallSettings = this._defaults['listAzureClusters'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listAzureClusters stream %j', request);
     return this.descriptors.page.listAzureClusters.createStream(
       this.innerApiCalls.listAzureClusters as GaxCall,
       request,
@@ -3163,7 +3741,10 @@ export class AzureClustersClient {
       });
     const defaultCallSettings = this._defaults['listAzureClusters'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listAzureClusters iterate %j', request);
     return this.descriptors.page.listAzureClusters.asyncIterate(
       this.innerApiCalls['listAzureClusters'] as GaxCall,
       request as {},
@@ -3281,8 +3862,36 @@ export class AzureClustersClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.listAzureNodePools(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.gkemulticloud.v1.IListAzureNodePoolsRequest,
+          | protos.google.cloud.gkemulticloud.v1.IListAzureNodePoolsResponse
+          | null
+          | undefined,
+          protos.google.cloud.gkemulticloud.v1.IAzureNodePool
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listAzureNodePools values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listAzureNodePools request %j', request);
+    return this.innerApiCalls
+      .listAzureNodePools(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.gkemulticloud.v1.IAzureNodePool[],
+          protos.google.cloud.gkemulticloud.v1.IListAzureNodePoolsRequest | null,
+          protos.google.cloud.gkemulticloud.v1.IListAzureNodePoolsResponse,
+        ]) => {
+          this._log.info('listAzureNodePools values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -3335,7 +3944,10 @@ export class AzureClustersClient {
       });
     const defaultCallSettings = this._defaults['listAzureNodePools'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listAzureNodePools stream %j', request);
     return this.descriptors.page.listAzureNodePools.createStream(
       this.innerApiCalls.listAzureNodePools as GaxCall,
       request,
@@ -3396,7 +4008,10 @@ export class AzureClustersClient {
       });
     const defaultCallSettings = this._defaults['listAzureNodePools'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listAzureNodePools iterate %j', request);
     return this.descriptors.page.listAzureNodePools.asyncIterate(
       this.innerApiCalls['listAzureNodePools'] as GaxCall,
       request as {},
@@ -3497,7 +4112,7 @@ export class AzureClustersClient {
   listOperationsAsync(
     request: protos.google.longrunning.ListOperationsRequest,
     options?: gax.CallOptions
-  ): AsyncIterable<protos.google.longrunning.ListOperationsResponse> {
+  ): AsyncIterable<protos.google.longrunning.IOperation> {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
@@ -4176,6 +4791,7 @@ export class AzureClustersClient {
   close(): Promise<void> {
     if (this.azureClustersStub && !this._terminated) {
       return this.azureClustersStub.then(stub => {
+        this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
         this.operationsClient.close();

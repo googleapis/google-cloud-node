@@ -1,7 +1,4 @@
 {
-  "options": {
-    "syntax": "proto3"
-  },
   "nested": {
     "google": {
       "nested": {
@@ -86,6 +83,34 @@
                             {
                               "(google.longrunning.operation_info)": {
                                 "response_type": "google.protobuf.Empty",
+                                "metadata_type": "google.cloud.batch.v1.OperationMetadata"
+                              }
+                            }
+                          ]
+                        },
+                        "CancelJob": {
+                          "requestType": "CancelJobRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).post": "/v1/{name=projects/*/locations/*/jobs/*}:cancel",
+                            "(google.api.http).body": "*",
+                            "(google.api.method_signature)": "name",
+                            "(google.longrunning.operation_info).response_type": "google.cloud.batch.v1.CancelJobResponse",
+                            "(google.longrunning.operation_info).metadata_type": "google.cloud.batch.v1.OperationMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{name=projects/*/locations/*/jobs/*}:cancel",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "google.cloud.batch.v1.CancelJobResponse",
                                 "metadata_type": "google.cloud.batch.v1.OperationMetadata"
                               }
                             }
@@ -210,6 +235,29 @@
                           }
                         }
                       }
+                    },
+                    "CancelJobRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "batch.googleapis.com/Job"
+                          }
+                        },
+                        "requestId": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_info).format": "UUID4",
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "CancelJobResponse": {
+                      "fields": {}
                     },
                     "ListJobsRequest": {
                       "fields": {
@@ -539,7 +587,9 @@
                             "RUNNING": 3,
                             "SUCCEEDED": 4,
                             "FAILED": 5,
-                            "DELETION_IN_PROGRESS": 6
+                            "DELETION_IN_PROGRESS": 6,
+                            "CANCELLATION_IN_PROGRESS": 7,
+                            "CANCELLED": 8
                           }
                         }
                       }

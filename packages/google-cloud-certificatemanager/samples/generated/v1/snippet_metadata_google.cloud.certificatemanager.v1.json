@@ -1,7 +1,7 @@
 {
     "clientLibrary": {
         "name": "nodejs-certificatemanager",
-        "version": "1.4.0",
+        "version": "2.0.1",
         "language": "TYPESCRIPT",
         "apis": [
             {

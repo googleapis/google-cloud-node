@@ -282,7 +282,9 @@ describe('v1.LineageClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      client.initialize().catch(err => {
+        throw err;
+      });
       assert(client.lineageStub);
       client.close().then(() => {
         done();
@@ -341,7 +343,7 @@ describe('v1.LineageClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.lineage.v1.ProcessOpenLineageRunEventRequest()
       );
@@ -350,7 +352,7 @@ describe('v1.LineageClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.datacatalog.lineage.v1.ProcessOpenLineageRunEventResponse()
       );
@@ -373,7 +375,7 @@ describe('v1.LineageClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.lineage.v1.ProcessOpenLineageRunEventRequest()
       );
@@ -382,7 +384,7 @@ describe('v1.LineageClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.datacatalog.lineage.v1.ProcessOpenLineageRunEventResponse()
       );
@@ -420,7 +422,7 @@ describe('v1.LineageClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.lineage.v1.ProcessOpenLineageRunEventRequest()
       );
@@ -429,7 +431,7 @@ describe('v1.LineageClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.processOpenLineageRunEvent = stubSimpleCall(
         undefined,
@@ -454,7 +456,7 @@ describe('v1.LineageClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.lineage.v1.ProcessOpenLineageRunEventRequest()
       );
@@ -478,7 +480,7 @@ describe('v1.LineageClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.lineage.v1.CreateProcessRequest()
       );
@@ -487,7 +489,7 @@ describe('v1.LineageClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.datacatalog.lineage.v1.Process()
       );
@@ -509,7 +511,7 @@ describe('v1.LineageClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.lineage.v1.CreateProcessRequest()
       );
@@ -518,7 +520,7 @@ describe('v1.LineageClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.datacatalog.lineage.v1.Process()
       );
@@ -556,7 +558,7 @@ describe('v1.LineageClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.lineage.v1.CreateProcessRequest()
       );
@@ -565,7 +567,7 @@ describe('v1.LineageClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createProcess = stubSimpleCall(
         undefined,
@@ -587,7 +589,7 @@ describe('v1.LineageClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.lineage.v1.CreateProcessRequest()
       );
@@ -608,7 +610,7 @@ describe('v1.LineageClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.lineage.v1.UpdateProcessRequest()
       );
@@ -618,7 +620,7 @@ describe('v1.LineageClient', () => {
         ['process', 'name']
       );
       request.process.name = defaultValue1;
-      const expectedHeaderRequestParams = `process.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `process.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.datacatalog.lineage.v1.Process()
       );
@@ -640,7 +642,7 @@ describe('v1.LineageClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.lineage.v1.UpdateProcessRequest()
       );
@@ -650,7 +652,7 @@ describe('v1.LineageClient', () => {
         ['process', 'name']
       );
       request.process.name = defaultValue1;
-      const expectedHeaderRequestParams = `process.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `process.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.datacatalog.lineage.v1.Process()
       );
@@ -688,7 +690,7 @@ describe('v1.LineageClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.lineage.v1.UpdateProcessRequest()
       );
@@ -698,7 +700,7 @@ describe('v1.LineageClient', () => {
         ['process', 'name']
       );
       request.process.name = defaultValue1;
-      const expectedHeaderRequestParams = `process.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `process.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateProcess = stubSimpleCall(
         undefined,
@@ -720,7 +722,7 @@ describe('v1.LineageClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.lineage.v1.UpdateProcessRequest()
       );
@@ -742,7 +744,7 @@ describe('v1.LineageClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.lineage.v1.GetProcessRequest()
       );
@@ -751,7 +753,7 @@ describe('v1.LineageClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.datacatalog.lineage.v1.Process()
       );
@@ -773,7 +775,7 @@ describe('v1.LineageClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.lineage.v1.GetProcessRequest()
       );
@@ -782,7 +784,7 @@ describe('v1.LineageClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.datacatalog.lineage.v1.Process()
       );
@@ -820,7 +822,7 @@ describe('v1.LineageClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.lineage.v1.GetProcessRequest()
       );
@@ -829,7 +831,7 @@ describe('v1.LineageClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getProcess = stubSimpleCall(
         undefined,
@@ -851,7 +853,7 @@ describe('v1.LineageClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.lineage.v1.GetProcessRequest()
       );
@@ -872,7 +874,7 @@ describe('v1.LineageClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.lineage.v1.CreateRunRequest()
       );
@@ -881,7 +883,7 @@ describe('v1.LineageClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.datacatalog.lineage.v1.Run()
       );
@@ -903,7 +905,7 @@ describe('v1.LineageClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.lineage.v1.CreateRunRequest()
       );
@@ -912,7 +914,7 @@ describe('v1.LineageClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.datacatalog.lineage.v1.Run()
       );
@@ -950,7 +952,7 @@ describe('v1.LineageClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.lineage.v1.CreateRunRequest()
       );
@@ -959,7 +961,7 @@ describe('v1.LineageClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createRun = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.createRun(request), expectedError);
@@ -978,7 +980,7 @@ describe('v1.LineageClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.lineage.v1.CreateRunRequest()
       );
@@ -999,7 +1001,7 @@ describe('v1.LineageClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.lineage.v1.UpdateRunRequest()
       );
@@ -1009,7 +1011,7 @@ describe('v1.LineageClient', () => {
         ['run', 'name']
       );
       request.run.name = defaultValue1;
-      const expectedHeaderRequestParams = `run.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `run.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.datacatalog.lineage.v1.Run()
       );
@@ -1031,7 +1033,7 @@ describe('v1.LineageClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.lineage.v1.UpdateRunRequest()
       );
@@ -1041,7 +1043,7 @@ describe('v1.LineageClient', () => {
         ['run', 'name']
       );
       request.run.name = defaultValue1;
-      const expectedHeaderRequestParams = `run.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `run.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.datacatalog.lineage.v1.Run()
       );
@@ -1079,7 +1081,7 @@ describe('v1.LineageClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.lineage.v1.UpdateRunRequest()
       );
@@ -1089,7 +1091,7 @@ describe('v1.LineageClient', () => {
         ['run', 'name']
       );
       request.run.name = defaultValue1;
-      const expectedHeaderRequestParams = `run.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `run.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateRun = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.updateRun(request), expectedError);
@@ -1108,7 +1110,7 @@ describe('v1.LineageClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.lineage.v1.UpdateRunRequest()
       );
@@ -1130,7 +1132,7 @@ describe('v1.LineageClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.lineage.v1.GetRunRequest()
       );
@@ -1139,7 +1141,7 @@ describe('v1.LineageClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.datacatalog.lineage.v1.Run()
       );
@@ -1161,7 +1163,7 @@ describe('v1.LineageClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.lineage.v1.GetRunRequest()
       );
@@ -1170,7 +1172,7 @@ describe('v1.LineageClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.datacatalog.lineage.v1.Run()
       );
@@ -1208,7 +1210,7 @@ describe('v1.LineageClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.lineage.v1.GetRunRequest()
       );
@@ -1217,7 +1219,7 @@ describe('v1.LineageClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getRun = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.getRun(request), expectedError);
@@ -1236,7 +1238,7 @@ describe('v1.LineageClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.lineage.v1.GetRunRequest()
       );
@@ -1257,7 +1259,7 @@ describe('v1.LineageClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.lineage.v1.CreateLineageEventRequest()
       );
@@ -1266,7 +1268,7 @@ describe('v1.LineageClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.datacatalog.lineage.v1.LineageEvent()
       );
@@ -1289,7 +1291,7 @@ describe('v1.LineageClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.lineage.v1.CreateLineageEventRequest()
       );
@@ -1298,7 +1300,7 @@ describe('v1.LineageClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.datacatalog.lineage.v1.LineageEvent()
       );
@@ -1336,7 +1338,7 @@ describe('v1.LineageClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.lineage.v1.CreateLineageEventRequest()
       );
@@ -1345,7 +1347,7 @@ describe('v1.LineageClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createLineageEvent = stubSimpleCall(
         undefined,
@@ -1367,7 +1369,7 @@ describe('v1.LineageClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.lineage.v1.CreateLineageEventRequest()
       );
@@ -1388,7 +1390,7 @@ describe('v1.LineageClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.lineage.v1.GetLineageEventRequest()
       );
@@ -1397,7 +1399,7 @@ describe('v1.LineageClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.datacatalog.lineage.v1.LineageEvent()
       );
@@ -1419,7 +1421,7 @@ describe('v1.LineageClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.lineage.v1.GetLineageEventRequest()
       );
@@ -1428,7 +1430,7 @@ describe('v1.LineageClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.datacatalog.lineage.v1.LineageEvent()
       );
@@ -1466,7 +1468,7 @@ describe('v1.LineageClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.lineage.v1.GetLineageEventRequest()
       );
@@ -1475,7 +1477,7 @@ describe('v1.LineageClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getLineageEvent = stubSimpleCall(
         undefined,
@@ -1497,7 +1499,7 @@ describe('v1.LineageClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.lineage.v1.GetLineageEventRequest()
       );
@@ -1518,7 +1520,7 @@ describe('v1.LineageClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.lineage.v1.DeleteLineageEventRequest()
       );
@@ -1527,7 +1529,7 @@ describe('v1.LineageClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -1550,7 +1552,7 @@ describe('v1.LineageClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.lineage.v1.DeleteLineageEventRequest()
       );
@@ -1559,7 +1561,7 @@ describe('v1.LineageClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -1597,7 +1599,7 @@ describe('v1.LineageClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.lineage.v1.DeleteLineageEventRequest()
       );
@@ -1606,7 +1608,7 @@ describe('v1.LineageClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteLineageEvent = stubSimpleCall(
         undefined,
@@ -1628,7 +1630,7 @@ describe('v1.LineageClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.lineage.v1.DeleteLineageEventRequest()
       );
@@ -1649,7 +1651,7 @@ describe('v1.LineageClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.lineage.v1.DeleteProcessRequest()
       );
@@ -1658,7 +1660,7 @@ describe('v1.LineageClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1682,7 +1684,7 @@ describe('v1.LineageClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.lineage.v1.DeleteProcessRequest()
       );
@@ -1691,7 +1693,7 @@ describe('v1.LineageClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1736,7 +1738,7 @@ describe('v1.LineageClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.lineage.v1.DeleteProcessRequest()
       );
@@ -1745,7 +1747,7 @@ describe('v1.LineageClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteProcess = stubLongRunningCall(
         undefined,
@@ -1767,7 +1769,7 @@ describe('v1.LineageClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.lineage.v1.DeleteProcessRequest()
       );
@@ -1776,7 +1778,7 @@ describe('v1.LineageClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteProcess = stubLongRunningCall(
         undefined,
@@ -1800,7 +1802,7 @@ describe('v1.LineageClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -1822,7 +1824,7 @@ describe('v1.LineageClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -1843,7 +1845,7 @@ describe('v1.LineageClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.lineage.v1.DeleteRunRequest()
       );
@@ -1852,7 +1854,7 @@ describe('v1.LineageClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1875,7 +1877,7 @@ describe('v1.LineageClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.lineage.v1.DeleteRunRequest()
       );
@@ -1884,7 +1886,7 @@ describe('v1.LineageClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1929,7 +1931,7 @@ describe('v1.LineageClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.lineage.v1.DeleteRunRequest()
       );
@@ -1938,7 +1940,7 @@ describe('v1.LineageClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteRun = stubLongRunningCall(
         undefined,
@@ -1960,7 +1962,7 @@ describe('v1.LineageClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.lineage.v1.DeleteRunRequest()
       );
@@ -1969,7 +1971,7 @@ describe('v1.LineageClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteRun = stubLongRunningCall(
         undefined,
@@ -1993,7 +1995,7 @@ describe('v1.LineageClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -2015,7 +2017,7 @@ describe('v1.LineageClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -2033,7 +2035,7 @@ describe('v1.LineageClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.lineage.v1.ListProcessesRequest()
       );
@@ -2042,7 +2044,7 @@ describe('v1.LineageClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.datacatalog.lineage.v1.Process()
@@ -2072,7 +2074,7 @@ describe('v1.LineageClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.lineage.v1.ListProcessesRequest()
       );
@@ -2081,7 +2083,7 @@ describe('v1.LineageClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.datacatalog.lineage.v1.Process()
@@ -2129,7 +2131,7 @@ describe('v1.LineageClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.lineage.v1.ListProcessesRequest()
       );
@@ -2138,7 +2140,7 @@ describe('v1.LineageClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listProcesses = stubSimpleCall(
         undefined,
@@ -2160,7 +2162,7 @@ describe('v1.LineageClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.lineage.v1.ListProcessesRequest()
       );
@@ -2169,7 +2171,7 @@ describe('v1.LineageClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.datacatalog.lineage.v1.Process()
@@ -2221,7 +2223,7 @@ describe('v1.LineageClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.lineage.v1.ListProcessesRequest()
       );
@@ -2230,7 +2232,7 @@ describe('v1.LineageClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listProcesses.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -2271,7 +2273,7 @@ describe('v1.LineageClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.lineage.v1.ListProcessesRequest()
       );
@@ -2280,7 +2282,7 @@ describe('v1.LineageClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.datacatalog.lineage.v1.Process()
@@ -2321,7 +2323,7 @@ describe('v1.LineageClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.lineage.v1.ListProcessesRequest()
       );
@@ -2330,7 +2332,7 @@ describe('v1.LineageClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listProcesses.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -2364,7 +2366,7 @@ describe('v1.LineageClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.lineage.v1.ListRunsRequest()
       );
@@ -2373,7 +2375,7 @@ describe('v1.LineageClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.datacatalog.lineage.v1.Run()
@@ -2403,7 +2405,7 @@ describe('v1.LineageClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.lineage.v1.ListRunsRequest()
       );
@@ -2412,7 +2414,7 @@ describe('v1.LineageClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.datacatalog.lineage.v1.Run()
@@ -2458,7 +2460,7 @@ describe('v1.LineageClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.lineage.v1.ListRunsRequest()
       );
@@ -2467,7 +2469,7 @@ describe('v1.LineageClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listRuns = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.listRuns(request), expectedError);
@@ -2486,7 +2488,7 @@ describe('v1.LineageClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.lineage.v1.ListRunsRequest()
       );
@@ -2495,7 +2497,7 @@ describe('v1.LineageClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.datacatalog.lineage.v1.Run()
@@ -2546,7 +2548,7 @@ describe('v1.LineageClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.lineage.v1.ListRunsRequest()
       );
@@ -2555,7 +2557,7 @@ describe('v1.LineageClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listRuns.createStream = stubPageStreamingCall(
         undefined,
@@ -2597,7 +2599,7 @@ describe('v1.LineageClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.lineage.v1.ListRunsRequest()
       );
@@ -2606,7 +2608,7 @@ describe('v1.LineageClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.datacatalog.lineage.v1.Run()
@@ -2645,7 +2647,7 @@ describe('v1.LineageClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.lineage.v1.ListRunsRequest()
       );
@@ -2654,7 +2656,7 @@ describe('v1.LineageClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listRuns.asyncIterate = stubAsyncIterationCall(
         undefined,
@@ -2688,7 +2690,7 @@ describe('v1.LineageClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.lineage.v1.ListLineageEventsRequest()
       );
@@ -2697,7 +2699,7 @@ describe('v1.LineageClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.datacatalog.lineage.v1.LineageEvent()
@@ -2727,7 +2729,7 @@ describe('v1.LineageClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.lineage.v1.ListLineageEventsRequest()
       );
@@ -2736,7 +2738,7 @@ describe('v1.LineageClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.datacatalog.lineage.v1.LineageEvent()
@@ -2784,7 +2786,7 @@ describe('v1.LineageClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.lineage.v1.ListLineageEventsRequest()
       );
@@ -2793,7 +2795,7 @@ describe('v1.LineageClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listLineageEvents = stubSimpleCall(
         undefined,
@@ -2815,7 +2817,7 @@ describe('v1.LineageClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.lineage.v1.ListLineageEventsRequest()
       );
@@ -2824,7 +2826,7 @@ describe('v1.LineageClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.datacatalog.lineage.v1.LineageEvent()
@@ -2878,7 +2880,7 @@ describe('v1.LineageClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.lineage.v1.ListLineageEventsRequest()
       );
@@ -2887,7 +2889,7 @@ describe('v1.LineageClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listLineageEvents.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -2930,7 +2932,7 @@ describe('v1.LineageClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.lineage.v1.ListLineageEventsRequest()
       );
@@ -2939,7 +2941,7 @@ describe('v1.LineageClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.datacatalog.lineage.v1.LineageEvent()
@@ -2980,7 +2982,7 @@ describe('v1.LineageClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.lineage.v1.ListLineageEventsRequest()
       );
@@ -2989,7 +2991,7 @@ describe('v1.LineageClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listLineageEvents.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -3023,7 +3025,7 @@ describe('v1.LineageClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.lineage.v1.SearchLinksRequest()
       );
@@ -3032,7 +3034,7 @@ describe('v1.LineageClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.datacatalog.lineage.v1.Link()
@@ -3062,7 +3064,7 @@ describe('v1.LineageClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.lineage.v1.SearchLinksRequest()
       );
@@ -3071,7 +3073,7 @@ describe('v1.LineageClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.datacatalog.lineage.v1.Link()
@@ -3117,7 +3119,7 @@ describe('v1.LineageClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.lineage.v1.SearchLinksRequest()
       );
@@ -3126,7 +3128,7 @@ describe('v1.LineageClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.searchLinks = stubSimpleCall(
         undefined,
@@ -3148,7 +3150,7 @@ describe('v1.LineageClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.lineage.v1.SearchLinksRequest()
       );
@@ -3157,7 +3159,7 @@ describe('v1.LineageClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.datacatalog.lineage.v1.Link()
@@ -3208,7 +3210,7 @@ describe('v1.LineageClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.lineage.v1.SearchLinksRequest()
       );
@@ -3217,7 +3219,7 @@ describe('v1.LineageClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.searchLinks.createStream = stubPageStreamingCall(
         undefined,
@@ -3259,7 +3261,7 @@ describe('v1.LineageClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.lineage.v1.SearchLinksRequest()
       );
@@ -3268,7 +3270,7 @@ describe('v1.LineageClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.datacatalog.lineage.v1.Link()
@@ -3308,7 +3310,7 @@ describe('v1.LineageClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.lineage.v1.SearchLinksRequest()
       );
@@ -3317,7 +3319,7 @@ describe('v1.LineageClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.searchLinks.asyncIterate = stubAsyncIterationCall(
         undefined,
@@ -3353,7 +3355,7 @@ describe('v1.LineageClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.lineage.v1.BatchSearchLinkProcessesRequest()
       );
@@ -3362,7 +3364,7 @@ describe('v1.LineageClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.datacatalog.lineage.v1.ProcessLinks()
@@ -3393,7 +3395,7 @@ describe('v1.LineageClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.lineage.v1.BatchSearchLinkProcessesRequest()
       );
@@ -3402,7 +3404,7 @@ describe('v1.LineageClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.datacatalog.lineage.v1.ProcessLinks()
@@ -3450,7 +3452,7 @@ describe('v1.LineageClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.lineage.v1.BatchSearchLinkProcessesRequest()
       );
@@ -3459,7 +3461,7 @@ describe('v1.LineageClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.batchSearchLinkProcesses = stubSimpleCall(
         undefined,
@@ -3484,7 +3486,7 @@ describe('v1.LineageClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.lineage.v1.BatchSearchLinkProcessesRequest()
       );
@@ -3493,7 +3495,7 @@ describe('v1.LineageClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.datacatalog.lineage.v1.ProcessLinks()
@@ -3553,7 +3555,7 @@ describe('v1.LineageClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.lineage.v1.BatchSearchLinkProcessesRequest()
       );
@@ -3562,7 +3564,7 @@ describe('v1.LineageClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.batchSearchLinkProcesses.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -3611,7 +3613,7 @@ describe('v1.LineageClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.lineage.v1.BatchSearchLinkProcessesRequest()
       );
@@ -3620,7 +3622,7 @@ describe('v1.LineageClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.datacatalog.lineage.v1.ProcessLinks()
@@ -3665,7 +3667,7 @@ describe('v1.LineageClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.lineage.v1.BatchSearchLinkProcessesRequest()
       );
@@ -3674,7 +3676,7 @@ describe('v1.LineageClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.batchSearchLinkProcesses.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -3711,7 +3713,7 @@ describe('v1.LineageClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new operationsProtos.google.longrunning.GetOperationRequest()
       );
@@ -3790,7 +3792,7 @@ describe('v1.LineageClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new operationsProtos.google.longrunning.CancelOperationRequest()
       );
@@ -3870,7 +3872,7 @@ describe('v1.LineageClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new operationsProtos.google.longrunning.DeleteOperationRequest()
       );
@@ -3966,8 +3968,7 @@ describe('v1.LineageClient', () => {
       ];
       client.operationsClient.descriptor.listOperations.asyncIterate =
         stubAsyncIterationCall(expectedResponse);
-      const responses: operationsProtos.google.longrunning.ListOperationsResponse[] =
-        [];
+      const responses: operationsProtos.google.longrunning.IOperation[] = [];
       const iterable = client.operationsClient.listOperationsAsync(request);
       for await (const resource of iterable) {
         responses.push(resource!);
@@ -3986,7 +3987,7 @@ describe('v1.LineageClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new operationsProtos.google.longrunning.ListOperationsRequest()
       );
@@ -3995,8 +3996,7 @@ describe('v1.LineageClient', () => {
         stubAsyncIterationCall(undefined, expectedError);
       const iterable = client.operationsClient.listOperationsAsync(request);
       await assert.rejects(async () => {
-        const responses: operationsProtos.google.longrunning.ListOperationsResponse[] =
-          [];
+        const responses: operationsProtos.google.longrunning.IOperation[] = [];
         for await (const resource of iterable) {
           responses.push(resource!);
         }
@@ -4012,7 +4012,7 @@ describe('v1.LineageClient', () => {
   });
 
   describe('Path templates', () => {
-    describe('lineageEvent', () => {
+    describe('lineageEvent', async () => {
       const fakePath = '/rendered/path/lineageEvent';
       const expectedParameters = {
         project: 'projectValue',
@@ -4025,7 +4025,7 @@ describe('v1.LineageClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.lineageEventPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -4100,7 +4100,7 @@ describe('v1.LineageClient', () => {
       });
     });
 
-    describe('location', () => {
+    describe('location', async () => {
       const fakePath = '/rendered/path/location';
       const expectedParameters = {
         project: 'projectValue',
@@ -4110,7 +4110,7 @@ describe('v1.LineageClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.locationPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -4149,7 +4149,7 @@ describe('v1.LineageClient', () => {
       });
     });
 
-    describe('process', () => {
+    describe('process', async () => {
       const fakePath = '/rendered/path/process';
       const expectedParameters = {
         project: 'projectValue',
@@ -4160,7 +4160,7 @@ describe('v1.LineageClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.processPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -4213,7 +4213,7 @@ describe('v1.LineageClient', () => {
       });
     });
 
-    describe('project', () => {
+    describe('project', async () => {
       const fakePath = '/rendered/path/project';
       const expectedParameters = {
         project: 'projectValue',
@@ -4222,7 +4222,7 @@ describe('v1.LineageClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -4251,7 +4251,7 @@ describe('v1.LineageClient', () => {
       });
     });
 
-    describe('run', () => {
+    describe('run', async () => {
       const fakePath = '/rendered/path/run';
       const expectedParameters = {
         project: 'projectValue',
@@ -4263,7 +4263,7 @@ describe('v1.LineageClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.runPathTemplate.render = sinon
         .stub()
         .returns(fakePath);

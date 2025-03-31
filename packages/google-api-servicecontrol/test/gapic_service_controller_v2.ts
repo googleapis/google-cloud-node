@@ -193,7 +193,9 @@ describe('v2.ServiceControllerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      client.initialize().catch(err => {
+        throw err;
+      });
       assert(client.serviceControllerStub);
       client.close().then(() => {
         done();
@@ -252,7 +254,7 @@ describe('v2.ServiceControllerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.api.servicecontrol.v2.CheckRequest()
       );
@@ -261,7 +263,7 @@ describe('v2.ServiceControllerClient', () => {
         ['serviceName']
       );
       request.serviceName = defaultValue1;
-      const expectedHeaderRequestParams = `service_name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `service_name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.api.servicecontrol.v2.CheckResponse()
       );
@@ -282,7 +284,7 @@ describe('v2.ServiceControllerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.api.servicecontrol.v2.CheckRequest()
       );
@@ -291,7 +293,7 @@ describe('v2.ServiceControllerClient', () => {
         ['serviceName']
       );
       request.serviceName = defaultValue1;
-      const expectedHeaderRequestParams = `service_name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `service_name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.api.servicecontrol.v2.CheckResponse()
       );
@@ -327,7 +329,7 @@ describe('v2.ServiceControllerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.api.servicecontrol.v2.CheckRequest()
       );
@@ -336,7 +338,7 @@ describe('v2.ServiceControllerClient', () => {
         ['serviceName']
       );
       request.serviceName = defaultValue1;
-      const expectedHeaderRequestParams = `service_name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `service_name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.check = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.check(request), expectedError);
@@ -354,7 +356,7 @@ describe('v2.ServiceControllerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.api.servicecontrol.v2.CheckRequest()
       );
@@ -375,7 +377,7 @@ describe('v2.ServiceControllerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.api.servicecontrol.v2.ReportRequest()
       );
@@ -384,7 +386,7 @@ describe('v2.ServiceControllerClient', () => {
         ['serviceName']
       );
       request.serviceName = defaultValue1;
-      const expectedHeaderRequestParams = `service_name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `service_name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.api.servicecontrol.v2.ReportResponse()
       );
@@ -406,7 +408,7 @@ describe('v2.ServiceControllerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.api.servicecontrol.v2.ReportRequest()
       );
@@ -415,7 +417,7 @@ describe('v2.ServiceControllerClient', () => {
         ['serviceName']
       );
       request.serviceName = defaultValue1;
-      const expectedHeaderRequestParams = `service_name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `service_name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.api.servicecontrol.v2.ReportResponse()
       );
@@ -453,7 +455,7 @@ describe('v2.ServiceControllerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.api.servicecontrol.v2.ReportRequest()
       );
@@ -462,7 +464,7 @@ describe('v2.ServiceControllerClient', () => {
         ['serviceName']
       );
       request.serviceName = defaultValue1;
-      const expectedHeaderRequestParams = `service_name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `service_name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.report = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.report(request), expectedError);
@@ -481,7 +483,7 @@ describe('v2.ServiceControllerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.api.servicecontrol.v2.ReportRequest()
       );

@@ -29,6 +29,7 @@ import type {
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
+import {loggingUtils as logging} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -63,6 +64,8 @@ export class ProgramsServiceClient {
   private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
+  private _log = logging.log('accounts');
+
   auth: gax.GoogleAuth;
   descriptors: Descriptors = {
     page: {},
@@ -97,7 +100,7 @@ export class ProgramsServiceClient {
    *     Developer's Console, e.g. 'grape-spaceship-123'. We will also check
    *     the environment variable GCLOUD_PROJECT for your project ID. If your
    *     app is running in an environment which supports
-   *     {@link https://developers.google.com/identity/protocols/application-default-credentials Application Default Credentials},
+   *     {@link https://cloud.google.com/docs/authentication/application-default-credentials Application Default Credentials},
    *     your project ID will be detected automatically.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
@@ -220,6 +223,9 @@ export class ProgramsServiceClient {
       ),
       autofeedSettingsPathTemplate: new this._gaxModule.PathTemplate(
         'accounts/{account}/autofeedSettings'
+      ),
+      automaticImprovementsPathTemplate: new this._gaxModule.PathTemplate(
+        'accounts/{account}/automaticImprovements'
       ),
       businessIdentityPathTemplate: new this._gaxModule.PathTemplate(
         'accounts/{account}/businessIdentity'
@@ -531,8 +537,39 @@ export class ProgramsServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.getProgram(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('getProgram request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.shopping.merchant.accounts.v1beta.IProgram,
+          | protos.google.shopping.merchant.accounts.v1beta.IGetProgramRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getProgram response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getProgram(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.shopping.merchant.accounts.v1beta.IProgram,
+          (
+            | protos.google.shopping.merchant.accounts.v1beta.IGetProgramRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getProgram response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Enable participation in the specified program for the account. Executing
@@ -629,8 +666,39 @@ export class ProgramsServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.enableProgram(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('enableProgram request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.shopping.merchant.accounts.v1beta.IProgram,
+          | protos.google.shopping.merchant.accounts.v1beta.IEnableProgramRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('enableProgram response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .enableProgram(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.shopping.merchant.accounts.v1beta.IProgram,
+          (
+            | protos.google.shopping.merchant.accounts.v1beta.IEnableProgramRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('enableProgram response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Disable participation in the specified program for the account. Executing
@@ -727,8 +795,39 @@ export class ProgramsServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.disableProgram(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('disableProgram request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.shopping.merchant.accounts.v1beta.IProgram,
+          | protos.google.shopping.merchant.accounts.v1beta.IDisableProgramRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('disableProgram response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .disableProgram(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.shopping.merchant.accounts.v1beta.IProgram,
+          (
+            | protos.google.shopping.merchant.accounts.v1beta.IDisableProgramRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('disableProgram response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
 
   /**
@@ -829,12 +928,40 @@ export class ProgramsServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.listPrograms(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.shopping.merchant.accounts.v1beta.IListProgramsRequest,
+          | protos.google.shopping.merchant.accounts.v1beta.IListProgramsResponse
+          | null
+          | undefined,
+          protos.google.shopping.merchant.accounts.v1beta.IProgram
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listPrograms values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listPrograms request %j', request);
+    return this.innerApiCalls
+      .listPrograms(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.shopping.merchant.accounts.v1beta.IProgram[],
+          protos.google.shopping.merchant.accounts.v1beta.IListProgramsRequest | null,
+          protos.google.shopping.merchant.accounts.v1beta.IListProgramsResponse,
+        ]) => {
+          this._log.info('listPrograms values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listPrograms`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
@@ -872,7 +999,10 @@ export class ProgramsServiceClient {
       });
     const defaultCallSettings = this._defaults['listPrograms'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listPrograms stream %j', request);
     return this.descriptors.page.listPrograms.createStream(
       this.innerApiCalls.listPrograms as GaxCall,
       request,
@@ -922,7 +1052,10 @@ export class ProgramsServiceClient {
       });
     const defaultCallSettings = this._defaults['listPrograms'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listPrograms iterate %j', request);
     return this.descriptors.page.listPrograms.asyncIterate(
       this.innerApiCalls['listPrograms'] as GaxCall,
       request as {},
@@ -1053,6 +1186,31 @@ export class ProgramsServiceClient {
   matchAccountFromAutofeedSettingsName(autofeedSettingsName: string) {
     return this.pathTemplates.autofeedSettingsPathTemplate.match(
       autofeedSettingsName
+    ).account;
+  }
+
+  /**
+   * Return a fully-qualified automaticImprovements resource name string.
+   *
+   * @param {string} account
+   * @returns {string} Resource name string.
+   */
+  automaticImprovementsPath(account: string) {
+    return this.pathTemplates.automaticImprovementsPathTemplate.render({
+      account: account,
+    });
+  }
+
+  /**
+   * Parse the account from AutomaticImprovements resource.
+   *
+   * @param {string} automaticImprovementsName
+   *   A fully-qualified path representing AutomaticImprovements resource.
+   * @returns {string} A string representing the account.
+   */
+  matchAccountFromAutomaticImprovementsName(automaticImprovementsName: string) {
+    return this.pathTemplates.automaticImprovementsPathTemplate.match(
+      automaticImprovementsName
     ).account;
   }
 
@@ -1419,6 +1577,7 @@ export class ProgramsServiceClient {
   close(): Promise<void> {
     if (this.programsServiceStub && !this._terminated) {
       return this.programsServiceStub.then(stub => {
+        this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
       });

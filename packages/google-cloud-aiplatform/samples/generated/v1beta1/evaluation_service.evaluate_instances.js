@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -127,6 +127,15 @@ function main(location) {
    */
   // const toolParameterKvMatchInput = {}
   /**
+   *  Translation metrics.
+   *  Input for Comet metric.
+   */
+  // const cometInput = {}
+  /**
+   *  Input for Metricx metric.
+   */
+  // const metricxInput = {}
+  /**
    *  Input for trajectory exact match metric.
    */
   // const trajectoryExactMatchInput = {}
@@ -155,6 +164,10 @@ function main(location) {
    *  Format: `projects/{project}/locations/{location}`
    */
   // const location = 'abc123'
+  /**
+   *  Optional. Autorater config used for evaluation.
+   */
+  // const autoraterConfig = {}
 
   // Imports the Aiplatform library
   const {EvaluationServiceClient} = require('@google-cloud/aiplatform').v1beta1;

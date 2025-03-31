@@ -1,5 +1,28 @@
 # Changelog
 
+## [2.1.0](https://github.com/googleapis/google-cloud-node/compare/advisorynotifications-v2.0.0...advisorynotifications-v2.1.0) (2025-03-19)
+
+
+### Features
+
+* [Many APIs] await/catch promises, and update listOperationsAsync return type ([#6182](https://github.com/googleapis/google-cloud-node/issues/6182)) ([c41ff07](https://github.com/googleapis/google-cloud-node/commit/c41ff0729b65a1207978b4029d6369cc0552e0bf))
+
+## [2.0.0](https://github.com/googleapis/google-cloud-node/compare/advisorynotifications-v1.4.0...advisorynotifications-v2.0.0) (2025-03-18)
+
+
+### ⚠ BREAKING CHANGES
+
+* upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096))
+
+### Features
+
+* [Many APIs] add request/response debug logging to gapics, update templates to gax 5  ([54a73fe](https://github.com/googleapis/google-cloud-node/commit/54a73fe74eab0675c006f24d5f1e4574c44d829b))
+
+
+### Miscellaneous Chores
+
+* Upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096)) ([eadae64](https://github.com/googleapis/google-cloud-node/commit/eadae64d54e07aa2c65097ea52e65008d4e87436))
+
 ## [1.4.0](https://github.com/googleapis/google-cloud-node/compare/advisorynotifications-v1.3.0...advisorynotifications-v1.4.0) (2024-05-21)
 
 

@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -78,9 +78,9 @@ function main(servingConfig, userEvent) {
    *  If `attributeFilteringSyntax` is set to true under the `params` field, then
    *  attribute-based expressions are expected instead of the above described
    *  tag-based syntax. Examples:
-   *   * (launguage: ANY("en", "es")) AND NOT (categories: ANY("Movie"))
+   *   * (language: ANY("en", "es")) AND NOT (categories: ANY("Movie"))
    *   * (available: true) AND
-   *     (launguage: ANY("en", "es")) OR (categories: ANY("Movie"))
+   *     (language: ANY("en", "es")) OR (categories: ANY("Movie"))
    *  If your filter blocks all results, the API returns generic
    *  (unfiltered) popular Documents. If you only want results strictly matching
    *  the filters, set `strictFiltering` to `true` in

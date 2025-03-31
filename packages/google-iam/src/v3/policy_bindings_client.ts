@@ -33,6 +33,7 @@ import type {
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
+import {loggingUtils as logging} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -58,6 +59,8 @@ export class PolicyBindingsClient {
   private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
+  private _log = logging.log('iam');
+
   auth: gax.GoogleAuth;
   descriptors: Descriptors = {
     page: {},
@@ -94,7 +97,7 @@ export class PolicyBindingsClient {
    *     Developer's Console, e.g. 'grape-spaceship-123'. We will also check
    *     the environment variable GCLOUD_PROJECT for your project ID. If your
    *     app is running in an environment which supports
-   *     {@link https://developers.google.com/identity/protocols/application-default-credentials Application Default Credentials},
+   *     {@link https://cloud.google.com/docs/authentication/application-default-credentials Application Default Credentials},
    *     your project ID will be detected automatically.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
@@ -569,8 +572,34 @@ export class PolicyBindingsClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.getPolicyBinding(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('getPolicyBinding request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.iam.v3.IPolicyBinding,
+          protos.google.iam.v3.IGetPolicyBindingRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getPolicyBinding response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getPolicyBinding(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.iam.v3.IPolicyBinding,
+          protos.google.iam.v3.IGetPolicyBindingRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getPolicyBinding response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
 
   /**
@@ -695,8 +724,40 @@ export class PolicyBindingsClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.createPolicyBinding(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.iam.v3.IPolicyBinding,
+            protos.google.iam.v3.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('createPolicyBinding response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('createPolicyBinding request %j', request);
+    return this.innerApiCalls
+      .createPolicyBinding(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.iam.v3.IPolicyBinding,
+            protos.google.iam.v3.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createPolicyBinding response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `createPolicyBinding()`.
@@ -717,6 +778,7 @@ export class PolicyBindingsClient {
       protos.google.iam.v3.OperationMetadata
     >
   > {
+    this._log.info('createPolicyBinding long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -843,8 +905,40 @@ export class PolicyBindingsClient {
       this._gaxModule.routingHeader.fromParams({
         'policy_binding.name': request.policyBinding!.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.updatePolicyBinding(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.iam.v3.IPolicyBinding,
+            protos.google.iam.v3.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('updatePolicyBinding response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('updatePolicyBinding request %j', request);
+    return this.innerApiCalls
+      .updatePolicyBinding(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.iam.v3.IPolicyBinding,
+            protos.google.iam.v3.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('updatePolicyBinding response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `updatePolicyBinding()`.
@@ -865,6 +959,7 @@ export class PolicyBindingsClient {
       protos.google.iam.v3.OperationMetadata
     >
   > {
+    this._log.info('updatePolicyBinding long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -994,8 +1089,40 @@ export class PolicyBindingsClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.deletePolicyBinding(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.iam.v3.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('deletePolicyBinding response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('deletePolicyBinding request %j', request);
+    return this.innerApiCalls
+      .deletePolicyBinding(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.iam.v3.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deletePolicyBinding response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `deletePolicyBinding()`.
@@ -1016,6 +1143,7 @@ export class PolicyBindingsClient {
       protos.google.iam.v3.OperationMetadata
     >
   > {
+    this._log.info('deletePolicyBinding long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -1147,8 +1275,34 @@ export class PolicyBindingsClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.listPolicyBindings(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.iam.v3.IListPolicyBindingsRequest,
+          protos.google.iam.v3.IListPolicyBindingsResponse | null | undefined,
+          protos.google.iam.v3.IPolicyBinding
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listPolicyBindings values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listPolicyBindings request %j', request);
+    return this.innerApiCalls
+      .listPolicyBindings(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.iam.v3.IPolicyBinding[],
+          protos.google.iam.v3.IListPolicyBindingsRequest | null,
+          protos.google.iam.v3.IListPolicyBindingsResponse,
+        ]) => {
+          this._log.info('listPolicyBindings values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -1216,7 +1370,10 @@ export class PolicyBindingsClient {
       });
     const defaultCallSettings = this._defaults['listPolicyBindings'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listPolicyBindings stream %j', request);
     return this.descriptors.page.listPolicyBindings.createStream(
       this.innerApiCalls.listPolicyBindings as GaxCall,
       request,
@@ -1292,7 +1449,10 @@ export class PolicyBindingsClient {
       });
     const defaultCallSettings = this._defaults['listPolicyBindings'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listPolicyBindings iterate %j', request);
     return this.descriptors.page.listPolicyBindings.asyncIterate(
       this.innerApiCalls['listPolicyBindings'] as GaxCall,
       request as {},
@@ -1424,12 +1584,36 @@ export class PolicyBindingsClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.searchTargetPolicyBindings(
-      request,
-      options,
-      callback
-    );
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.iam.v3.ISearchTargetPolicyBindingsRequest,
+          | protos.google.iam.v3.ISearchTargetPolicyBindingsResponse
+          | null
+          | undefined,
+          protos.google.iam.v3.IPolicyBinding
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('searchTargetPolicyBindings values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('searchTargetPolicyBindings request %j', request);
+    return this.innerApiCalls
+      .searchTargetPolicyBindings(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.iam.v3.IPolicyBinding[],
+          protos.google.iam.v3.ISearchTargetPolicyBindingsRequest | null,
+          protos.google.iam.v3.ISearchTargetPolicyBindingsResponse,
+        ]) => {
+          this._log.info('searchTargetPolicyBindings values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -1497,7 +1681,10 @@ export class PolicyBindingsClient {
       });
     const defaultCallSettings = this._defaults['searchTargetPolicyBindings'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('searchTargetPolicyBindings stream %j', request);
     return this.descriptors.page.searchTargetPolicyBindings.createStream(
       this.innerApiCalls.searchTargetPolicyBindings as GaxCall,
       request,
@@ -1573,7 +1760,10 @@ export class PolicyBindingsClient {
       });
     const defaultCallSettings = this._defaults['searchTargetPolicyBindings'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('searchTargetPolicyBindings iterate %j', request);
     return this.descriptors.page.searchTargetPolicyBindings.asyncIterate(
       this.innerApiCalls['searchTargetPolicyBindings'] as GaxCall,
       request as {},
@@ -1752,7 +1942,7 @@ export class PolicyBindingsClient {
   listOperationsAsync(
     request: protos.google.longrunning.ListOperationsRequest,
     options?: gax.CallOptions
-  ): AsyncIterable<protos.google.longrunning.ListOperationsResponse> {
+  ): AsyncIterable<protos.google.longrunning.IOperation> {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
@@ -2223,6 +2413,7 @@ export class PolicyBindingsClient {
   close(): Promise<void> {
     if (this.policyBindingsStub && !this._terminated) {
       return this.policyBindingsStub.then(stub => {
+        this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
         this.locationsClient.close();

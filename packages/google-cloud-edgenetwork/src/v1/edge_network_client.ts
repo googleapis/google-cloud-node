@@ -33,6 +33,7 @@ import type {
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
+import {loggingUtils as logging} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -60,6 +61,8 @@ export class EdgeNetworkClient {
   private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
+  private _log = logging.log('edgenetwork');
+
   auth: gax.GoogleAuth;
   descriptors: Descriptors = {
     page: {},
@@ -96,7 +99,7 @@ export class EdgeNetworkClient {
    *     Developer's Console, e.g. 'grape-spaceship-123'. We will also check
    *     the environment variable GCLOUD_PROJECT for your project ID. If your
    *     app is running in an environment which supports
-   *     {@link https://developers.google.com/identity/protocols/application-default-credentials Application Default Credentials},
+   *     {@link https://cloud.google.com/docs/authentication/application-default-credentials Application Default Credentials},
    *     your project ID will be detected automatically.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
@@ -717,8 +720,36 @@ export class EdgeNetworkClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.initializeZone(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('initializeZone request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.edgenetwork.v1.IInitializeZoneResponse,
+          | protos.google.cloud.edgenetwork.v1.IInitializeZoneRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('initializeZone response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .initializeZone(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.edgenetwork.v1.IInitializeZoneResponse,
+          protos.google.cloud.edgenetwork.v1.IInitializeZoneRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('initializeZone response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Deprecated: not implemented.
@@ -801,13 +832,39 @@ export class EdgeNetworkClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this.warn(
       'DEP$EdgeNetwork-$GetZone',
       'GetZone is deprecated and may be removed in a future version.',
       'DeprecationWarning'
     );
-    return this.innerApiCalls.getZone(request, options, callback);
+    this._log.info('getZone request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.edgenetwork.v1.IZone,
+          protos.google.cloud.edgenetwork.v1.IGetZoneRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getZone response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getZone(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.edgenetwork.v1.IZone,
+          protos.google.cloud.edgenetwork.v1.IGetZoneRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getZone response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Gets details of a single Network.
@@ -890,8 +947,36 @@ export class EdgeNetworkClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.getNetwork(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('getNetwork request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.edgenetwork.v1.INetwork,
+          | protos.google.cloud.edgenetwork.v1.IGetNetworkRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getNetwork response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getNetwork(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.edgenetwork.v1.INetwork,
+          protos.google.cloud.edgenetwork.v1.IGetNetworkRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getNetwork response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Get the diagnostics of a single network resource.
@@ -980,8 +1065,39 @@ export class EdgeNetworkClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.diagnoseNetwork(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('diagnoseNetwork request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.edgenetwork.v1.IDiagnoseNetworkResponse,
+          | protos.google.cloud.edgenetwork.v1.IDiagnoseNetworkRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('diagnoseNetwork response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .diagnoseNetwork(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.edgenetwork.v1.IDiagnoseNetworkResponse,
+          (
+            | protos.google.cloud.edgenetwork.v1.IDiagnoseNetworkRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('diagnoseNetwork response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Gets details of a single Subnet.
@@ -1064,8 +1180,36 @@ export class EdgeNetworkClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.getSubnet(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('getSubnet request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.edgenetwork.v1.ISubnet,
+          | protos.google.cloud.edgenetwork.v1.IGetSubnetRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getSubnet response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getSubnet(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.edgenetwork.v1.ISubnet,
+          protos.google.cloud.edgenetwork.v1.IGetSubnetRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getSubnet response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Gets details of a single Interconnect.
@@ -1154,8 +1298,39 @@ export class EdgeNetworkClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.getInterconnect(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('getInterconnect request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.edgenetwork.v1.IInterconnect,
+          | protos.google.cloud.edgenetwork.v1.IGetInterconnectRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getInterconnect response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getInterconnect(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.edgenetwork.v1.IInterconnect,
+          (
+            | protos.google.cloud.edgenetwork.v1.IGetInterconnectRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getInterconnect response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Get the diagnostics of a single interconnect resource.
@@ -1250,8 +1425,39 @@ export class EdgeNetworkClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.diagnoseInterconnect(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('diagnoseInterconnect request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.edgenetwork.v1.IDiagnoseInterconnectResponse,
+          | protos.google.cloud.edgenetwork.v1.IDiagnoseInterconnectRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('diagnoseInterconnect response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .diagnoseInterconnect(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.edgenetwork.v1.IDiagnoseInterconnectResponse,
+          (
+            | protos.google.cloud.edgenetwork.v1.IDiagnoseInterconnectRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('diagnoseInterconnect response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Gets details of a single InterconnectAttachment.
@@ -1346,12 +1552,39 @@ export class EdgeNetworkClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.getInterconnectAttachment(
-      request,
-      options,
-      callback
-    );
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('getInterconnectAttachment request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.edgenetwork.v1.IInterconnectAttachment,
+          | protos.google.cloud.edgenetwork.v1.IGetInterconnectAttachmentRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getInterconnectAttachment response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getInterconnectAttachment(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.edgenetwork.v1.IInterconnectAttachment,
+          (
+            | protos.google.cloud.edgenetwork.v1.IGetInterconnectAttachmentRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getInterconnectAttachment response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Gets details of a single Router.
@@ -1434,8 +1667,36 @@ export class EdgeNetworkClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.getRouter(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('getRouter request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.edgenetwork.v1.IRouter,
+          | protos.google.cloud.edgenetwork.v1.IGetRouterRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getRouter response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getRouter(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.edgenetwork.v1.IRouter,
+          protos.google.cloud.edgenetwork.v1.IGetRouterRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getRouter response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Get the diagnostics of a single router resource.
@@ -1524,8 +1785,36 @@ export class EdgeNetworkClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.diagnoseRouter(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('diagnoseRouter request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.edgenetwork.v1.IDiagnoseRouterResponse,
+          | protos.google.cloud.edgenetwork.v1.IDiagnoseRouterRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('diagnoseRouter response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .diagnoseRouter(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.edgenetwork.v1.IDiagnoseRouterResponse,
+          protos.google.cloud.edgenetwork.v1.IDiagnoseRouterRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('diagnoseRouter response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
 
   /**
@@ -1647,8 +1936,40 @@ export class EdgeNetworkClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.createNetwork(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.edgenetwork.v1.INetwork,
+            protos.google.cloud.edgenetwork.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('createNetwork response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('createNetwork request %j', request);
+    return this.innerApiCalls
+      .createNetwork(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.edgenetwork.v1.INetwork,
+            protos.google.cloud.edgenetwork.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createNetwork response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `createNetwork()`.
@@ -1669,6 +1990,7 @@ export class EdgeNetworkClient {
       protos.google.cloud.edgenetwork.v1.OperationMetadata
     >
   > {
+    this._log.info('createNetwork long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -1797,8 +2119,40 @@ export class EdgeNetworkClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.deleteNetwork(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.edgenetwork.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('deleteNetwork response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('deleteNetwork request %j', request);
+    return this.innerApiCalls
+      .deleteNetwork(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.edgenetwork.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteNetwork response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `deleteNetwork()`.
@@ -1819,6 +2173,7 @@ export class EdgeNetworkClient {
       protos.google.cloud.edgenetwork.v1.OperationMetadata
     >
   > {
+    this._log.info('deleteNetwork long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -1953,8 +2308,40 @@ export class EdgeNetworkClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.createSubnet(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.edgenetwork.v1.ISubnet,
+            protos.google.cloud.edgenetwork.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('createSubnet response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('createSubnet request %j', request);
+    return this.innerApiCalls
+      .createSubnet(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.edgenetwork.v1.ISubnet,
+            protos.google.cloud.edgenetwork.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createSubnet response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `createSubnet()`.
@@ -1975,6 +2362,7 @@ export class EdgeNetworkClient {
       protos.google.cloud.edgenetwork.v1.OperationMetadata
     >
   > {
+    this._log.info('createSubnet long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -2109,8 +2497,40 @@ export class EdgeNetworkClient {
       this._gaxModule.routingHeader.fromParams({
         'subnet.name': request.subnet!.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.updateSubnet(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.edgenetwork.v1.ISubnet,
+            protos.google.cloud.edgenetwork.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('updateSubnet response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('updateSubnet request %j', request);
+    return this.innerApiCalls
+      .updateSubnet(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.edgenetwork.v1.ISubnet,
+            protos.google.cloud.edgenetwork.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('updateSubnet response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `updateSubnet()`.
@@ -2131,6 +2551,7 @@ export class EdgeNetworkClient {
       protos.google.cloud.edgenetwork.v1.OperationMetadata
     >
   > {
+    this._log.info('updateSubnet long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -2259,8 +2680,40 @@ export class EdgeNetworkClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.deleteSubnet(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.edgenetwork.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('deleteSubnet response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('deleteSubnet request %j', request);
+    return this.innerApiCalls
+      .deleteSubnet(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.edgenetwork.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteSubnet response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `deleteSubnet()`.
@@ -2281,6 +2734,7 @@ export class EdgeNetworkClient {
       protos.google.cloud.edgenetwork.v1.OperationMetadata
     >
   > {
+    this._log.info('deleteSubnet long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -2415,12 +2869,46 @@ export class EdgeNetworkClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.createInterconnectAttachment(
-      request,
-      options,
-      callback
-    );
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.edgenetwork.v1.IInterconnectAttachment,
+            protos.google.cloud.edgenetwork.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info(
+            'createInterconnectAttachment response %j',
+            rawResponse
+          );
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('createInterconnectAttachment request %j', request);
+    return this.innerApiCalls
+      .createInterconnectAttachment(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.edgenetwork.v1.IInterconnectAttachment,
+            protos.google.cloud.edgenetwork.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info(
+            'createInterconnectAttachment response %j',
+            rawResponse
+          );
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `createInterconnectAttachment()`.
@@ -2441,6 +2929,7 @@ export class EdgeNetworkClient {
       protos.google.cloud.edgenetwork.v1.OperationMetadata
     >
   > {
+    this._log.info('createInterconnectAttachment long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -2569,12 +3058,46 @@ export class EdgeNetworkClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.deleteInterconnectAttachment(
-      request,
-      options,
-      callback
-    );
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.edgenetwork.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info(
+            'deleteInterconnectAttachment response %j',
+            rawResponse
+          );
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('deleteInterconnectAttachment request %j', request);
+    return this.innerApiCalls
+      .deleteInterconnectAttachment(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.edgenetwork.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info(
+            'deleteInterconnectAttachment response %j',
+            rawResponse
+          );
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `deleteInterconnectAttachment()`.
@@ -2595,6 +3118,7 @@ export class EdgeNetworkClient {
       protos.google.cloud.edgenetwork.v1.OperationMetadata
     >
   > {
+    this._log.info('deleteInterconnectAttachment long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -2729,8 +3253,40 @@ export class EdgeNetworkClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.createRouter(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.edgenetwork.v1.IRouter,
+            protos.google.cloud.edgenetwork.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('createRouter response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('createRouter request %j', request);
+    return this.innerApiCalls
+      .createRouter(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.edgenetwork.v1.IRouter,
+            protos.google.cloud.edgenetwork.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createRouter response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `createRouter()`.
@@ -2751,6 +3307,7 @@ export class EdgeNetworkClient {
       protos.google.cloud.edgenetwork.v1.OperationMetadata
     >
   > {
+    this._log.info('createRouter long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -2885,8 +3442,40 @@ export class EdgeNetworkClient {
       this._gaxModule.routingHeader.fromParams({
         'router.name': request.router!.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.updateRouter(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.edgenetwork.v1.IRouter,
+            protos.google.cloud.edgenetwork.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('updateRouter response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('updateRouter request %j', request);
+    return this.innerApiCalls
+      .updateRouter(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.edgenetwork.v1.IRouter,
+            protos.google.cloud.edgenetwork.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('updateRouter response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `updateRouter()`.
@@ -2907,6 +3496,7 @@ export class EdgeNetworkClient {
       protos.google.cloud.edgenetwork.v1.OperationMetadata
     >
   > {
+    this._log.info('updateRouter long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -3035,8 +3625,40 @@ export class EdgeNetworkClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.deleteRouter(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.edgenetwork.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('deleteRouter response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('deleteRouter request %j', request);
+    return this.innerApiCalls
+      .deleteRouter(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.edgenetwork.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteRouter response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `deleteRouter()`.
@@ -3057,6 +3679,7 @@ export class EdgeNetworkClient {
       protos.google.cloud.edgenetwork.v1.OperationMetadata
     >
   > {
+    this._log.info('deleteRouter long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -3167,17 +3790,45 @@ export class EdgeNetworkClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this.warn(
       'DEP$EdgeNetwork-$ListZones',
       'ListZones is deprecated and may be removed in a future version.',
       'DeprecationWarning'
     );
-    return this.innerApiCalls.listZones(request, options, callback);
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.edgenetwork.v1.IListZonesRequest,
+          | protos.google.cloud.edgenetwork.v1.IListZonesResponse
+          | null
+          | undefined,
+          protos.google.cloud.edgenetwork.v1.IZone
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listZones values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listZones request %j', request);
+    return this.innerApiCalls
+      .listZones(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.edgenetwork.v1.IZone[],
+          protos.google.cloud.edgenetwork.v1.IListZonesRequest | null,
+          protos.google.cloud.edgenetwork.v1.IListZonesResponse,
+        ]) => {
+          this._log.info('listZones values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listZones`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
@@ -3217,12 +3868,15 @@ export class EdgeNetworkClient {
       });
     const defaultCallSettings = this._defaults['listZones'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this.warn(
       'DEP$EdgeNetwork-$ListZones',
       'ListZones is deprecated and may be removed in a future version.',
       'DeprecationWarning'
     );
+    this._log.info('listZones stream %j', request);
     return this.descriptors.page.listZones.createStream(
       this.innerApiCalls.listZones as GaxCall,
       request,
@@ -3274,12 +3928,15 @@ export class EdgeNetworkClient {
       });
     const defaultCallSettings = this._defaults['listZones'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this.warn(
       'DEP$EdgeNetwork-$ListZones',
       'ListZones is deprecated and may be removed in a future version.',
       'DeprecationWarning'
     );
+    this._log.info('listZones iterate %j', request);
     return this.descriptors.page.listZones.asyncIterate(
       this.innerApiCalls['listZones'] as GaxCall,
       request as {},
@@ -3385,12 +4042,40 @@ export class EdgeNetworkClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.listNetworks(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.edgenetwork.v1.IListNetworksRequest,
+          | protos.google.cloud.edgenetwork.v1.IListNetworksResponse
+          | null
+          | undefined,
+          protos.google.cloud.edgenetwork.v1.INetwork
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listNetworks values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listNetworks request %j', request);
+    return this.innerApiCalls
+      .listNetworks(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.edgenetwork.v1.INetwork[],
+          protos.google.cloud.edgenetwork.v1.IListNetworksRequest | null,
+          protos.google.cloud.edgenetwork.v1.IListNetworksResponse,
+        ]) => {
+          this._log.info('listNetworks values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listNetworks`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
@@ -3429,7 +4114,10 @@ export class EdgeNetworkClient {
       });
     const defaultCallSettings = this._defaults['listNetworks'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listNetworks stream %j', request);
     return this.descriptors.page.listNetworks.createStream(
       this.innerApiCalls.listNetworks as GaxCall,
       request,
@@ -3480,7 +4168,10 @@ export class EdgeNetworkClient {
       });
     const defaultCallSettings = this._defaults['listNetworks'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listNetworks iterate %j', request);
     return this.descriptors.page.listNetworks.asyncIterate(
       this.innerApiCalls['listNetworks'] as GaxCall,
       request as {},
@@ -3586,12 +4277,40 @@ export class EdgeNetworkClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.listSubnets(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.edgenetwork.v1.IListSubnetsRequest,
+          | protos.google.cloud.edgenetwork.v1.IListSubnetsResponse
+          | null
+          | undefined,
+          protos.google.cloud.edgenetwork.v1.ISubnet
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listSubnets values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listSubnets request %j', request);
+    return this.innerApiCalls
+      .listSubnets(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.edgenetwork.v1.ISubnet[],
+          protos.google.cloud.edgenetwork.v1.IListSubnetsRequest | null,
+          protos.google.cloud.edgenetwork.v1.IListSubnetsResponse,
+        ]) => {
+          this._log.info('listSubnets values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listSubnets`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
@@ -3630,7 +4349,10 @@ export class EdgeNetworkClient {
       });
     const defaultCallSettings = this._defaults['listSubnets'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listSubnets stream %j', request);
     return this.descriptors.page.listSubnets.createStream(
       this.innerApiCalls.listSubnets as GaxCall,
       request,
@@ -3681,7 +4403,10 @@ export class EdgeNetworkClient {
       });
     const defaultCallSettings = this._defaults['listSubnets'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listSubnets iterate %j', request);
     return this.descriptors.page.listSubnets.asyncIterate(
       this.innerApiCalls['listSubnets'] as GaxCall,
       request as {},
@@ -3787,12 +4512,40 @@ export class EdgeNetworkClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.listInterconnects(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.edgenetwork.v1.IListInterconnectsRequest,
+          | protos.google.cloud.edgenetwork.v1.IListInterconnectsResponse
+          | null
+          | undefined,
+          protos.google.cloud.edgenetwork.v1.IInterconnect
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listInterconnects values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listInterconnects request %j', request);
+    return this.innerApiCalls
+      .listInterconnects(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.edgenetwork.v1.IInterconnect[],
+          protos.google.cloud.edgenetwork.v1.IListInterconnectsRequest | null,
+          protos.google.cloud.edgenetwork.v1.IListInterconnectsResponse,
+        ]) => {
+          this._log.info('listInterconnects values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listInterconnects`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
@@ -3831,7 +4584,10 @@ export class EdgeNetworkClient {
       });
     const defaultCallSettings = this._defaults['listInterconnects'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listInterconnects stream %j', request);
     return this.descriptors.page.listInterconnects.createStream(
       this.innerApiCalls.listInterconnects as GaxCall,
       request,
@@ -3882,7 +4638,10 @@ export class EdgeNetworkClient {
       });
     const defaultCallSettings = this._defaults['listInterconnects'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listInterconnects iterate %j', request);
     return this.descriptors.page.listInterconnects.asyncIterate(
       this.innerApiCalls['listInterconnects'] as GaxCall,
       request as {},
@@ -3988,16 +4747,40 @@ export class EdgeNetworkClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.listInterconnectAttachments(
-      request,
-      options,
-      callback
-    );
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.edgenetwork.v1.IListInterconnectAttachmentsRequest,
+          | protos.google.cloud.edgenetwork.v1.IListInterconnectAttachmentsResponse
+          | null
+          | undefined,
+          protos.google.cloud.edgenetwork.v1.IInterconnectAttachment
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listInterconnectAttachments values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listInterconnectAttachments request %j', request);
+    return this.innerApiCalls
+      .listInterconnectAttachments(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.edgenetwork.v1.IInterconnectAttachment[],
+          protos.google.cloud.edgenetwork.v1.IListInterconnectAttachmentsRequest | null,
+          protos.google.cloud.edgenetwork.v1.IListInterconnectAttachmentsResponse,
+        ]) => {
+          this._log.info('listInterconnectAttachments values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listInterconnectAttachments`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
@@ -4036,7 +4819,10 @@ export class EdgeNetworkClient {
       });
     const defaultCallSettings = this._defaults['listInterconnectAttachments'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listInterconnectAttachments stream %j', request);
     return this.descriptors.page.listInterconnectAttachments.createStream(
       this.innerApiCalls.listInterconnectAttachments as GaxCall,
       request,
@@ -4087,7 +4873,10 @@ export class EdgeNetworkClient {
       });
     const defaultCallSettings = this._defaults['listInterconnectAttachments'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listInterconnectAttachments iterate %j', request);
     return this.descriptors.page.listInterconnectAttachments.asyncIterate(
       this.innerApiCalls['listInterconnectAttachments'] as GaxCall,
       request as {},
@@ -4193,12 +4982,40 @@ export class EdgeNetworkClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.listRouters(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.edgenetwork.v1.IListRoutersRequest,
+          | protos.google.cloud.edgenetwork.v1.IListRoutersResponse
+          | null
+          | undefined,
+          protos.google.cloud.edgenetwork.v1.IRouter
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listRouters values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listRouters request %j', request);
+    return this.innerApiCalls
+      .listRouters(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.edgenetwork.v1.IRouter[],
+          protos.google.cloud.edgenetwork.v1.IListRoutersRequest | null,
+          protos.google.cloud.edgenetwork.v1.IListRoutersResponse,
+        ]) => {
+          this._log.info('listRouters values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listRouters`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
@@ -4237,7 +5054,10 @@ export class EdgeNetworkClient {
       });
     const defaultCallSettings = this._defaults['listRouters'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listRouters stream %j', request);
     return this.descriptors.page.listRouters.createStream(
       this.innerApiCalls.listRouters as GaxCall,
       request,
@@ -4288,7 +5108,10 @@ export class EdgeNetworkClient {
       });
     const defaultCallSettings = this._defaults['listRouters'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listRouters iterate %j', request);
     return this.descriptors.page.listRouters.asyncIterate(
       this.innerApiCalls['listRouters'] as GaxCall,
       request as {},
@@ -4405,7 +5228,7 @@ export class EdgeNetworkClient {
    */
   getOperation(
     request: protos.google.longrunning.GetOperationRequest,
-    options?:
+    optionsOrCallback?:
       | gax.CallOptions
       | Callback<
           protos.google.longrunning.Operation,
@@ -4418,6 +5241,20 @@ export class EdgeNetworkClient {
       {} | null | undefined
     >
   ): Promise<[protos.google.longrunning.Operation]> {
+    let options: gax.CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as gax.CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.getOperation(request, options, callback);
   }
   /**
@@ -4453,7 +5290,14 @@ export class EdgeNetworkClient {
   listOperationsAsync(
     request: protos.google.longrunning.ListOperationsRequest,
     options?: gax.CallOptions
-  ): AsyncIterable<protos.google.longrunning.ListOperationsResponse> {
+  ): AsyncIterable<protos.google.longrunning.IOperation> {
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.listOperationsAsync(request, options);
   }
   /**
@@ -4489,11 +5333,11 @@ export class EdgeNetworkClient {
    */
   cancelOperation(
     request: protos.google.longrunning.CancelOperationRequest,
-    options?:
+    optionsOrCallback?:
       | gax.CallOptions
       | Callback<
-          protos.google.protobuf.Empty,
           protos.google.longrunning.CancelOperationRequest,
+          protos.google.protobuf.Empty,
           {} | undefined | null
         >,
     callback?: Callback<
@@ -4502,6 +5346,20 @@ export class EdgeNetworkClient {
       {} | undefined | null
     >
   ): Promise<protos.google.protobuf.Empty> {
+    let options: gax.CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as gax.CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.cancelOperation(request, options, callback);
   }
 
@@ -4532,7 +5390,7 @@ export class EdgeNetworkClient {
    */
   deleteOperation(
     request: protos.google.longrunning.DeleteOperationRequest,
-    options?:
+    optionsOrCallback?:
       | gax.CallOptions
       | Callback<
           protos.google.protobuf.Empty,
@@ -4545,6 +5403,20 @@ export class EdgeNetworkClient {
       {} | null | undefined
     >
   ): Promise<protos.google.protobuf.Empty> {
+    let options: gax.CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as gax.CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.deleteOperation(request, options, callback);
   }
 
@@ -5012,6 +5884,7 @@ export class EdgeNetworkClient {
   close(): Promise<void> {
     if (this.edgeNetworkStub && !this._terminated) {
       return this.edgeNetworkStub.then(stub => {
+        this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
         this.locationsClient.close();

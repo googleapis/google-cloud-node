@@ -93,7 +93,6 @@
     "packages/google-cloud-networksecurity": {},
     "packages/google-cloud-networkservices": {},
     "packages/google-cloud-notebooks": {},
-    "packages/google-cloud-optimization": {},
     "packages/google-cloud-orchestration-airflow-service": {},
     "packages/google-cloud-orgpolicy": {},
     "packages/google-cloud-osconfig": {},
@@ -196,12 +195,15 @@
     "packages/google-ads-admanager": {},
     "packages/google-shopping-merchant-reviews": {},
     "packages/google-cloud-memorystore": {},
-    "packages/google-cloud-parametermanager": {}
+    "packages/google-cloud-parametermanager": {},
+    "packages/google-cloud-modelarmor": {},
+    "packages/google-maps-areainsights": {}
   },
   "plugins": [
     {
       "type": "sentence-case"
     }
   ],
+  "bump-minor-pre-major": true,
   "release-type": "node"
 }

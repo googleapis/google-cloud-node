@@ -31,6 +31,7 @@ import type {
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
+import {loggingUtils as logging} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -55,6 +56,8 @@ export class DomainMappingsClient {
   private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
+  private _log = logging.log('appengine-admin');
+
   auth: gax.GoogleAuth;
   descriptors: Descriptors = {
     page: {},
@@ -90,7 +93,7 @@ export class DomainMappingsClient {
    *     Developer's Console, e.g. 'grape-spaceship-123'. We will also check
    *     the environment variable GCLOUD_PROJECT for your project ID. If your
    *     app is running in an environment which supports
-   *     {@link https://developers.google.com/identity/protocols/application-default-credentials Application Default Credentials},
+   *     {@link https://cloud.google.com/docs/authentication/application-default-credentials Application Default Credentials},
    *     your project ID will be detected automatically.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
@@ -545,8 +548,36 @@ export class DomainMappingsClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.getDomainMapping(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('getDomainMapping request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.appengine.v1.IDomainMapping,
+          | protos.google.appengine.v1.IGetDomainMappingRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getDomainMapping response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getDomainMapping(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.appengine.v1.IDomainMapping,
+          protos.google.appengine.v1.IGetDomainMappingRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getDomainMapping response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
 
   /**
@@ -655,8 +686,40 @@ export class DomainMappingsClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.createDomainMapping(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.appengine.v1.IDomainMapping,
+            protos.google.appengine.v1.IOperationMetadataV1
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('createDomainMapping response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('createDomainMapping request %j', request);
+    return this.innerApiCalls
+      .createDomainMapping(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.appengine.v1.IDomainMapping,
+            protos.google.appengine.v1.IOperationMetadataV1
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createDomainMapping response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `createDomainMapping()`.
@@ -677,6 +740,7 @@ export class DomainMappingsClient {
       protos.google.appengine.v1.OperationMetadataV1
     >
   > {
+    this._log.info('createDomainMapping long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -800,8 +864,40 @@ export class DomainMappingsClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.updateDomainMapping(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.appengine.v1.IDomainMapping,
+            protos.google.appengine.v1.IOperationMetadataV1
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('updateDomainMapping response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('updateDomainMapping request %j', request);
+    return this.innerApiCalls
+      .updateDomainMapping(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.appengine.v1.IDomainMapping,
+            protos.google.appengine.v1.IOperationMetadataV1
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('updateDomainMapping response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `updateDomainMapping()`.
@@ -822,6 +918,7 @@ export class DomainMappingsClient {
       protos.google.appengine.v1.OperationMetadataV1
     >
   > {
+    this._log.info('updateDomainMapping long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -939,8 +1036,40 @@ export class DomainMappingsClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.deleteDomainMapping(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.appengine.v1.IOperationMetadataV1
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('deleteDomainMapping response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('deleteDomainMapping request %j', request);
+    return this.innerApiCalls
+      .deleteDomainMapping(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.appengine.v1.IOperationMetadataV1
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteDomainMapping response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `deleteDomainMapping()`.
@@ -961,6 +1090,7 @@ export class DomainMappingsClient {
       protos.google.appengine.v1.OperationMetadataV1
     >
   > {
+    this._log.info('deleteDomainMapping long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -1064,12 +1194,40 @@ export class DomainMappingsClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.listDomainMappings(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.appengine.v1.IListDomainMappingsRequest,
+          | protos.google.appengine.v1.IListDomainMappingsResponse
+          | null
+          | undefined,
+          protos.google.appengine.v1.IDomainMapping
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listDomainMappings values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listDomainMappings request %j', request);
+    return this.innerApiCalls
+      .listDomainMappings(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.appengine.v1.IDomainMapping[],
+          protos.google.appengine.v1.IListDomainMappingsRequest | null,
+          protos.google.appengine.v1.IListDomainMappingsResponse,
+        ]) => {
+          this._log.info('listDomainMappings values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listDomainMappings`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
@@ -1103,7 +1261,10 @@ export class DomainMappingsClient {
       });
     const defaultCallSettings = this._defaults['listDomainMappings'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listDomainMappings stream %j', request);
     return this.descriptors.page.listDomainMappings.createStream(
       this.innerApiCalls.listDomainMappings as GaxCall,
       request,
@@ -1149,7 +1310,10 @@ export class DomainMappingsClient {
       });
     const defaultCallSettings = this._defaults['listDomainMappings'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listDomainMappings iterate %j', request);
     return this.descriptors.page.listDomainMappings.asyncIterate(
       this.innerApiCalls['listDomainMappings'] as GaxCall,
       request as {},
@@ -1236,6 +1400,7 @@ export class DomainMappingsClient {
   close(): Promise<void> {
     if (this.domainMappingsStub && !this._terminated) {
       return this.domainMappingsStub.then(stub => {
+        this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
         this.operationsClient.close();

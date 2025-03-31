@@ -29,6 +29,7 @@ import type {
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
+import {loggingUtils as logging} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -53,6 +54,8 @@ export class CustomTargetingValueServiceClient {
   private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
+  private _log = logging.log('admanager');
+
   auth: gax.GoogleAuth;
   descriptors: Descriptors = {
     page: {},
@@ -87,7 +90,7 @@ export class CustomTargetingValueServiceClient {
    *     Developer's Console, e.g. 'grape-spaceship-123'. We will also check
    *     the environment variable GCLOUD_PROJECT for your project ID. If your
    *     app is running in an environment which supports
-   *     {@link https://developers.google.com/identity/protocols/application-default-credentials Application Default Credentials},
+   *     {@link https://cloud.google.com/docs/authentication/application-default-credentials Application Default Credentials},
    *     your project ID will be detected automatically.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
@@ -529,12 +532,39 @@ export class CustomTargetingValueServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.getCustomTargetingValue(
-      request,
-      options,
-      callback
-    );
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('getCustomTargetingValue request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.ads.admanager.v1.ICustomTargetingValue,
+          | protos.google.ads.admanager.v1.IGetCustomTargetingValueRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getCustomTargetingValue response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getCustomTargetingValue(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.ads.admanager.v1.ICustomTargetingValue,
+          (
+            | protos.google.ads.admanager.v1.IGetCustomTargetingValueRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getCustomTargetingValue response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
 
   /**
@@ -652,12 +682,36 @@ export class CustomTargetingValueServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.listCustomTargetingValues(
-      request,
-      options,
-      callback
-    );
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.ads.admanager.v1.IListCustomTargetingValuesRequest,
+          | protos.google.ads.admanager.v1.IListCustomTargetingValuesResponse
+          | null
+          | undefined,
+          protos.google.ads.admanager.v1.ICustomTargetingValue
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listCustomTargetingValues values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listCustomTargetingValues request %j', request);
+    return this.innerApiCalls
+      .listCustomTargetingValues(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.ads.admanager.v1.ICustomTargetingValue[],
+          protos.google.ads.admanager.v1.IListCustomTargetingValuesRequest | null,
+          protos.google.ads.admanager.v1.IListCustomTargetingValuesResponse,
+        ]) => {
+          this._log.info('listCustomTargetingValues values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -716,7 +770,10 @@ export class CustomTargetingValueServiceClient {
       });
     const defaultCallSettings = this._defaults['listCustomTargetingValues'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listCustomTargetingValues stream %j', request);
     return this.descriptors.page.listCustomTargetingValues.createStream(
       this.innerApiCalls.listCustomTargetingValues as GaxCall,
       request,
@@ -783,7 +840,10 @@ export class CustomTargetingValueServiceClient {
       });
     const defaultCallSettings = this._defaults['listCustomTargetingValues'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listCustomTargetingValues iterate %j', request);
     return this.descriptors.page.listCustomTargetingValues.asyncIterate(
       this.innerApiCalls['listCustomTargetingValues'] as GaxCall,
       request as {},
@@ -1420,6 +1480,7 @@ export class CustomTargetingValueServiceClient {
   close(): Promise<void> {
     if (this.customTargetingValueServiceStub && !this._terminated) {
       return this.customTargetingValueServiceStub.then(stub => {
+        this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
       });

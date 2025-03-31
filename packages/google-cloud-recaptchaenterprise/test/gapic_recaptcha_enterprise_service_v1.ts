@@ -274,7 +274,9 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      client.initialize().catch(err => {
+        throw err;
+      });
       assert(client.recaptchaEnterpriseServiceStub);
       client.close().then(() => {
         done();
@@ -345,7 +347,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.recaptchaenterprise.v1.CreateAssessmentRequest()
       );
@@ -354,7 +356,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.recaptchaenterprise.v1.Assessment()
       );
@@ -379,7 +381,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.recaptchaenterprise.v1.CreateAssessmentRequest()
       );
@@ -388,7 +390,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.recaptchaenterprise.v1.Assessment()
       );
@@ -429,7 +431,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.recaptchaenterprise.v1.CreateAssessmentRequest()
       );
@@ -438,7 +440,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createAssessment = stubSimpleCall(
         undefined,
@@ -463,7 +465,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.recaptchaenterprise.v1.CreateAssessmentRequest()
       );
@@ -487,7 +489,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.recaptchaenterprise.v1.AnnotateAssessmentRequest()
       );
@@ -496,7 +498,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.recaptchaenterprise.v1.AnnotateAssessmentResponse()
       );
@@ -522,7 +524,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.recaptchaenterprise.v1.AnnotateAssessmentRequest()
       );
@@ -531,7 +533,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.recaptchaenterprise.v1.AnnotateAssessmentResponse()
       );
@@ -572,7 +574,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.recaptchaenterprise.v1.AnnotateAssessmentRequest()
       );
@@ -581,7 +583,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.annotateAssessment = stubSimpleCall(
         undefined,
@@ -606,7 +608,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.recaptchaenterprise.v1.AnnotateAssessmentRequest()
       );
@@ -630,7 +632,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.recaptchaenterprise.v1.CreateKeyRequest()
       );
@@ -639,7 +641,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.recaptchaenterprise.v1.Key()
       );
@@ -664,7 +666,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.recaptchaenterprise.v1.CreateKeyRequest()
       );
@@ -673,7 +675,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.recaptchaenterprise.v1.Key()
       );
@@ -714,7 +716,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.recaptchaenterprise.v1.CreateKeyRequest()
       );
@@ -723,7 +725,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createKey = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.createKey(request), expectedError);
@@ -745,7 +747,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.recaptchaenterprise.v1.CreateKeyRequest()
       );
@@ -769,7 +771,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.recaptchaenterprise.v1.RetrieveLegacySecretKeyRequest()
       );
@@ -778,7 +780,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
         ['key']
       );
       request.key = defaultValue1;
-      const expectedHeaderRequestParams = `key=${defaultValue1}`;
+      const expectedHeaderRequestParams = `key=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.recaptchaenterprise.v1.RetrieveLegacySecretKeyResponse()
       );
@@ -804,7 +806,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.recaptchaenterprise.v1.RetrieveLegacySecretKeyRequest()
       );
@@ -813,7 +815,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
         ['key']
       );
       request.key = defaultValue1;
-      const expectedHeaderRequestParams = `key=${defaultValue1}`;
+      const expectedHeaderRequestParams = `key=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.recaptchaenterprise.v1.RetrieveLegacySecretKeyResponse()
       );
@@ -854,7 +856,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.recaptchaenterprise.v1.RetrieveLegacySecretKeyRequest()
       );
@@ -863,7 +865,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
         ['key']
       );
       request.key = defaultValue1;
-      const expectedHeaderRequestParams = `key=${defaultValue1}`;
+      const expectedHeaderRequestParams = `key=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.retrieveLegacySecretKey = stubSimpleCall(
         undefined,
@@ -891,7 +893,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.recaptchaenterprise.v1.RetrieveLegacySecretKeyRequest()
       );
@@ -918,7 +920,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.recaptchaenterprise.v1.GetKeyRequest()
       );
@@ -927,7 +929,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.recaptchaenterprise.v1.Key()
       );
@@ -952,7 +954,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.recaptchaenterprise.v1.GetKeyRequest()
       );
@@ -961,7 +963,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.recaptchaenterprise.v1.Key()
       );
@@ -1002,7 +1004,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.recaptchaenterprise.v1.GetKeyRequest()
       );
@@ -1011,7 +1013,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getKey = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.getKey(request), expectedError);
@@ -1033,7 +1035,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.recaptchaenterprise.v1.GetKeyRequest()
       );
@@ -1057,7 +1059,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.recaptchaenterprise.v1.UpdateKeyRequest()
       );
@@ -1067,7 +1069,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
         ['key', 'name']
       );
       request.key.name = defaultValue1;
-      const expectedHeaderRequestParams = `key.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `key.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.recaptchaenterprise.v1.Key()
       );
@@ -1092,7 +1094,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.recaptchaenterprise.v1.UpdateKeyRequest()
       );
@@ -1102,7 +1104,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
         ['key', 'name']
       );
       request.key.name = defaultValue1;
-      const expectedHeaderRequestParams = `key.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `key.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.recaptchaenterprise.v1.Key()
       );
@@ -1143,7 +1145,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.recaptchaenterprise.v1.UpdateKeyRequest()
       );
@@ -1153,7 +1155,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
         ['key', 'name']
       );
       request.key.name = defaultValue1;
-      const expectedHeaderRequestParams = `key.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `key.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateKey = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.updateKey(request), expectedError);
@@ -1175,7 +1177,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.recaptchaenterprise.v1.UpdateKeyRequest()
       );
@@ -1200,7 +1202,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.recaptchaenterprise.v1.DeleteKeyRequest()
       );
@@ -1209,7 +1211,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -1234,7 +1236,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.recaptchaenterprise.v1.DeleteKeyRequest()
       );
@@ -1243,7 +1245,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -1284,7 +1286,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.recaptchaenterprise.v1.DeleteKeyRequest()
       );
@@ -1293,7 +1295,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteKey = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.deleteKey(request), expectedError);
@@ -1315,7 +1317,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.recaptchaenterprise.v1.DeleteKeyRequest()
       );
@@ -1339,7 +1341,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.recaptchaenterprise.v1.MigrateKeyRequest()
       );
@@ -1348,7 +1350,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.recaptchaenterprise.v1.Key()
       );
@@ -1373,7 +1375,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.recaptchaenterprise.v1.MigrateKeyRequest()
       );
@@ -1382,7 +1384,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.recaptchaenterprise.v1.Key()
       );
@@ -1423,7 +1425,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.recaptchaenterprise.v1.MigrateKeyRequest()
       );
@@ -1432,7 +1434,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.migrateKey = stubSimpleCall(
         undefined,
@@ -1457,7 +1459,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.recaptchaenterprise.v1.MigrateKeyRequest()
       );
@@ -1481,7 +1483,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.recaptchaenterprise.v1.AddIpOverrideRequest()
       );
@@ -1490,7 +1492,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.recaptchaenterprise.v1.AddIpOverrideResponse()
       );
@@ -1515,7 +1517,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.recaptchaenterprise.v1.AddIpOverrideRequest()
       );
@@ -1524,7 +1526,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.recaptchaenterprise.v1.AddIpOverrideResponse()
       );
@@ -1565,7 +1567,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.recaptchaenterprise.v1.AddIpOverrideRequest()
       );
@@ -1574,7 +1576,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.addIpOverride = stubSimpleCall(
         undefined,
@@ -1599,7 +1601,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.recaptchaenterprise.v1.AddIpOverrideRequest()
       );
@@ -1623,7 +1625,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.recaptchaenterprise.v1.RemoveIpOverrideRequest()
       );
@@ -1632,7 +1634,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.recaptchaenterprise.v1.RemoveIpOverrideResponse()
       );
@@ -1657,7 +1659,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.recaptchaenterprise.v1.RemoveIpOverrideRequest()
       );
@@ -1666,7 +1668,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.recaptchaenterprise.v1.RemoveIpOverrideResponse()
       );
@@ -1707,7 +1709,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.recaptchaenterprise.v1.RemoveIpOverrideRequest()
       );
@@ -1716,7 +1718,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.removeIpOverride = stubSimpleCall(
         undefined,
@@ -1741,7 +1743,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.recaptchaenterprise.v1.RemoveIpOverrideRequest()
       );
@@ -1765,7 +1767,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.recaptchaenterprise.v1.GetMetricsRequest()
       );
@@ -1774,7 +1776,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.recaptchaenterprise.v1.Metrics()
       );
@@ -1799,7 +1801,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.recaptchaenterprise.v1.GetMetricsRequest()
       );
@@ -1808,7 +1810,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.recaptchaenterprise.v1.Metrics()
       );
@@ -1849,7 +1851,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.recaptchaenterprise.v1.GetMetricsRequest()
       );
@@ -1858,7 +1860,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getMetrics = stubSimpleCall(
         undefined,
@@ -1883,7 +1885,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.recaptchaenterprise.v1.GetMetricsRequest()
       );
@@ -1907,7 +1909,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.recaptchaenterprise.v1.CreateFirewallPolicyRequest()
       );
@@ -1916,7 +1918,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.recaptchaenterprise.v1.FirewallPolicy()
       );
@@ -1942,7 +1944,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.recaptchaenterprise.v1.CreateFirewallPolicyRequest()
       );
@@ -1951,7 +1953,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.recaptchaenterprise.v1.FirewallPolicy()
       );
@@ -1992,7 +1994,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.recaptchaenterprise.v1.CreateFirewallPolicyRequest()
       );
@@ -2001,7 +2003,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createFirewallPolicy = stubSimpleCall(
         undefined,
@@ -2026,7 +2028,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.recaptchaenterprise.v1.CreateFirewallPolicyRequest()
       );
@@ -2050,7 +2052,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.recaptchaenterprise.v1.GetFirewallPolicyRequest()
       );
@@ -2059,7 +2061,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.recaptchaenterprise.v1.FirewallPolicy()
       );
@@ -2084,7 +2086,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.recaptchaenterprise.v1.GetFirewallPolicyRequest()
       );
@@ -2093,7 +2095,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.recaptchaenterprise.v1.FirewallPolicy()
       );
@@ -2134,7 +2136,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.recaptchaenterprise.v1.GetFirewallPolicyRequest()
       );
@@ -2143,7 +2145,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getFirewallPolicy = stubSimpleCall(
         undefined,
@@ -2168,7 +2170,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.recaptchaenterprise.v1.GetFirewallPolicyRequest()
       );
@@ -2192,7 +2194,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.recaptchaenterprise.v1.UpdateFirewallPolicyRequest()
       );
@@ -2202,7 +2204,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
         ['firewallPolicy', 'name']
       );
       request.firewallPolicy.name = defaultValue1;
-      const expectedHeaderRequestParams = `firewall_policy.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `firewall_policy.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.recaptchaenterprise.v1.FirewallPolicy()
       );
@@ -2228,7 +2230,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.recaptchaenterprise.v1.UpdateFirewallPolicyRequest()
       );
@@ -2238,7 +2240,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
         ['firewallPolicy', 'name']
       );
       request.firewallPolicy.name = defaultValue1;
-      const expectedHeaderRequestParams = `firewall_policy.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `firewall_policy.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.recaptchaenterprise.v1.FirewallPolicy()
       );
@@ -2279,7 +2281,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.recaptchaenterprise.v1.UpdateFirewallPolicyRequest()
       );
@@ -2289,7 +2291,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
         ['firewallPolicy', 'name']
       );
       request.firewallPolicy.name = defaultValue1;
-      const expectedHeaderRequestParams = `firewall_policy.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `firewall_policy.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateFirewallPolicy = stubSimpleCall(
         undefined,
@@ -2314,7 +2316,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.recaptchaenterprise.v1.UpdateFirewallPolicyRequest()
       );
@@ -2339,7 +2341,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.recaptchaenterprise.v1.DeleteFirewallPolicyRequest()
       );
@@ -2348,7 +2350,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -2374,7 +2376,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.recaptchaenterprise.v1.DeleteFirewallPolicyRequest()
       );
@@ -2383,7 +2385,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -2424,7 +2426,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.recaptchaenterprise.v1.DeleteFirewallPolicyRequest()
       );
@@ -2433,7 +2435,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteFirewallPolicy = stubSimpleCall(
         undefined,
@@ -2458,7 +2460,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.recaptchaenterprise.v1.DeleteFirewallPolicyRequest()
       );
@@ -2482,7 +2484,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.recaptchaenterprise.v1.ReorderFirewallPoliciesRequest()
       );
@@ -2491,7 +2493,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.recaptchaenterprise.v1.ReorderFirewallPoliciesResponse()
       );
@@ -2517,7 +2519,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.recaptchaenterprise.v1.ReorderFirewallPoliciesRequest()
       );
@@ -2526,7 +2528,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.recaptchaenterprise.v1.ReorderFirewallPoliciesResponse()
       );
@@ -2567,7 +2569,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.recaptchaenterprise.v1.ReorderFirewallPoliciesRequest()
       );
@@ -2576,7 +2578,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.reorderFirewallPolicies = stubSimpleCall(
         undefined,
@@ -2604,7 +2606,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.recaptchaenterprise.v1.ReorderFirewallPoliciesRequest()
       );
@@ -2631,7 +2633,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.recaptchaenterprise.v1.ListKeysRequest()
       );
@@ -2640,7 +2642,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.recaptchaenterprise.v1.Key()
@@ -2673,7 +2675,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.recaptchaenterprise.v1.ListKeysRequest()
       );
@@ -2682,7 +2684,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.recaptchaenterprise.v1.Key()
@@ -2731,7 +2733,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.recaptchaenterprise.v1.ListKeysRequest()
       );
@@ -2740,7 +2742,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listKeys = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.listKeys(request), expectedError);
@@ -2762,7 +2764,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.recaptchaenterprise.v1.ListKeysRequest()
       );
@@ -2771,7 +2773,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.recaptchaenterprise.v1.Key()
@@ -2825,7 +2827,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.recaptchaenterprise.v1.ListKeysRequest()
       );
@@ -2834,7 +2836,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listKeys.createStream = stubPageStreamingCall(
         undefined,
@@ -2879,7 +2881,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.recaptchaenterprise.v1.ListKeysRequest()
       );
@@ -2888,7 +2890,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.recaptchaenterprise.v1.Key()
@@ -2930,7 +2932,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.recaptchaenterprise.v1.ListKeysRequest()
       );
@@ -2939,7 +2941,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listKeys.asyncIterate = stubAsyncIterationCall(
         undefined,
@@ -2976,7 +2978,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.recaptchaenterprise.v1.ListIpOverridesRequest()
       );
@@ -2985,7 +2987,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.recaptchaenterprise.v1.IpOverrideData()
@@ -3018,7 +3020,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.recaptchaenterprise.v1.ListIpOverridesRequest()
       );
@@ -3027,7 +3029,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.recaptchaenterprise.v1.IpOverrideData()
@@ -3078,7 +3080,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.recaptchaenterprise.v1.ListIpOverridesRequest()
       );
@@ -3087,7 +3089,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listIpOverrides = stubSimpleCall(
         undefined,
@@ -3112,7 +3114,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.recaptchaenterprise.v1.ListIpOverridesRequest()
       );
@@ -3121,7 +3123,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.recaptchaenterprise.v1.IpOverrideData()
@@ -3178,7 +3180,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.recaptchaenterprise.v1.ListIpOverridesRequest()
       );
@@ -3187,7 +3189,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listIpOverrides.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -3233,7 +3235,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.recaptchaenterprise.v1.ListIpOverridesRequest()
       );
@@ -3242,7 +3244,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.recaptchaenterprise.v1.IpOverrideData()
@@ -3286,7 +3288,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.recaptchaenterprise.v1.ListIpOverridesRequest()
       );
@@ -3295,7 +3297,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listIpOverrides.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -3332,7 +3334,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.recaptchaenterprise.v1.ListFirewallPoliciesRequest()
       );
@@ -3341,7 +3343,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.recaptchaenterprise.v1.FirewallPolicy()
@@ -3375,7 +3377,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.recaptchaenterprise.v1.ListFirewallPoliciesRequest()
       );
@@ -3384,7 +3386,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.recaptchaenterprise.v1.FirewallPolicy()
@@ -3435,7 +3437,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.recaptchaenterprise.v1.ListFirewallPoliciesRequest()
       );
@@ -3444,7 +3446,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listFirewallPolicies = stubSimpleCall(
         undefined,
@@ -3469,7 +3471,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.recaptchaenterprise.v1.ListFirewallPoliciesRequest()
       );
@@ -3478,7 +3480,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.recaptchaenterprise.v1.FirewallPolicy()
@@ -3535,7 +3537,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.recaptchaenterprise.v1.ListFirewallPoliciesRequest()
       );
@@ -3544,7 +3546,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listFirewallPolicies.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -3590,7 +3592,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.recaptchaenterprise.v1.ListFirewallPoliciesRequest()
       );
@@ -3599,7 +3601,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.recaptchaenterprise.v1.FirewallPolicy()
@@ -3643,7 +3645,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.recaptchaenterprise.v1.ListFirewallPoliciesRequest()
       );
@@ -3652,7 +3654,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listFirewallPolicies.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -3689,7 +3691,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.recaptchaenterprise.v1.ListRelatedAccountGroupsRequest()
       );
@@ -3698,7 +3700,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.recaptchaenterprise.v1.RelatedAccountGroup()
@@ -3732,7 +3734,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.recaptchaenterprise.v1.ListRelatedAccountGroupsRequest()
       );
@@ -3741,7 +3743,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.recaptchaenterprise.v1.RelatedAccountGroup()
@@ -3792,7 +3794,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.recaptchaenterprise.v1.ListRelatedAccountGroupsRequest()
       );
@@ -3801,7 +3803,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listRelatedAccountGroups = stubSimpleCall(
         undefined,
@@ -3829,7 +3831,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.recaptchaenterprise.v1.ListRelatedAccountGroupsRequest()
       );
@@ -3838,7 +3840,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.recaptchaenterprise.v1.RelatedAccountGroup()
@@ -3901,7 +3903,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.recaptchaenterprise.v1.ListRelatedAccountGroupsRequest()
       );
@@ -3910,7 +3912,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listRelatedAccountGroups.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -3962,7 +3964,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.recaptchaenterprise.v1.ListRelatedAccountGroupsRequest()
       );
@@ -3971,7 +3973,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.recaptchaenterprise.v1.RelatedAccountGroup()
@@ -4019,7 +4021,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.recaptchaenterprise.v1.ListRelatedAccountGroupsRequest()
       );
@@ -4028,7 +4030,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listRelatedAccountGroups.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -4069,7 +4071,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.recaptchaenterprise.v1.ListRelatedAccountGroupMembershipsRequest()
       );
@@ -4078,7 +4080,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.recaptchaenterprise.v1.RelatedAccountGroupMembership()
@@ -4113,7 +4115,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.recaptchaenterprise.v1.ListRelatedAccountGroupMembershipsRequest()
       );
@@ -4122,7 +4124,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.recaptchaenterprise.v1.RelatedAccountGroupMembership()
@@ -4173,7 +4175,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.recaptchaenterprise.v1.ListRelatedAccountGroupMembershipsRequest()
       );
@@ -4182,7 +4184,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listRelatedAccountGroupMemberships = stubSimpleCall(
         undefined,
@@ -4210,7 +4212,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.recaptchaenterprise.v1.ListRelatedAccountGroupMembershipsRequest()
       );
@@ -4219,7 +4221,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.recaptchaenterprise.v1.RelatedAccountGroupMembership()
@@ -4285,7 +4287,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.recaptchaenterprise.v1.ListRelatedAccountGroupMembershipsRequest()
       );
@@ -4294,7 +4296,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listRelatedAccountGroupMemberships.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -4349,7 +4351,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.recaptchaenterprise.v1.ListRelatedAccountGroupMembershipsRequest()
       );
@@ -4358,7 +4360,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.recaptchaenterprise.v1.RelatedAccountGroupMembership()
@@ -4406,7 +4408,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.recaptchaenterprise.v1.ListRelatedAccountGroupMembershipsRequest()
       );
@@ -4415,7 +4417,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listRelatedAccountGroupMemberships.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -4456,7 +4458,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.recaptchaenterprise.v1.SearchRelatedAccountGroupMembershipsRequest()
       );
@@ -4465,7 +4467,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
         ['project']
       );
       request.project = defaultValue1;
-      const expectedHeaderRequestParams = `project=${defaultValue1}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.recaptchaenterprise.v1.RelatedAccountGroupMembership()
@@ -4500,7 +4502,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.recaptchaenterprise.v1.SearchRelatedAccountGroupMembershipsRequest()
       );
@@ -4509,7 +4511,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
         ['project']
       );
       request.project = defaultValue1;
-      const expectedHeaderRequestParams = `project=${defaultValue1}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.recaptchaenterprise.v1.RelatedAccountGroupMembership()
@@ -4560,7 +4562,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.recaptchaenterprise.v1.SearchRelatedAccountGroupMembershipsRequest()
       );
@@ -4569,7 +4571,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
         ['project']
       );
       request.project = defaultValue1;
-      const expectedHeaderRequestParams = `project=${defaultValue1}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.searchRelatedAccountGroupMemberships =
         stubSimpleCall(undefined, expectedError);
@@ -4595,7 +4597,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.recaptchaenterprise.v1.SearchRelatedAccountGroupMembershipsRequest()
       );
@@ -4604,7 +4606,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
         ['project']
       );
       request.project = defaultValue1;
-      const expectedHeaderRequestParams = `project=${defaultValue1}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.recaptchaenterprise.v1.RelatedAccountGroupMembership()
@@ -4670,7 +4672,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.recaptchaenterprise.v1.SearchRelatedAccountGroupMembershipsRequest()
       );
@@ -4679,7 +4681,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
         ['project']
       );
       request.project = defaultValue1;
-      const expectedHeaderRequestParams = `project=${defaultValue1}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.searchRelatedAccountGroupMemberships.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -4734,7 +4736,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.recaptchaenterprise.v1.SearchRelatedAccountGroupMembershipsRequest()
       );
@@ -4743,7 +4745,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
         ['project']
       );
       request.project = defaultValue1;
-      const expectedHeaderRequestParams = `project=${defaultValue1}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.recaptchaenterprise.v1.RelatedAccountGroupMembership()
@@ -4792,7 +4794,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.recaptchaenterprise.v1.SearchRelatedAccountGroupMembershipsRequest()
       );
@@ -4801,7 +4803,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
         ['project']
       );
       request.project = defaultValue1;
-      const expectedHeaderRequestParams = `project=${defaultValue1}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.searchRelatedAccountGroupMemberships.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -4835,7 +4837,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
   });
 
   describe('Path templates', () => {
-    describe('assessment', () => {
+    describe('assessment', async () => {
       const fakePath = '/rendered/path/assessment';
       const expectedParameters = {
         project: 'projectValue',
@@ -4848,7 +4850,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.assessmentPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -4887,7 +4889,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
       });
     });
 
-    describe('firewallPolicy', () => {
+    describe('firewallPolicy', async () => {
       const fakePath = '/rendered/path/firewallPolicy';
       const expectedParameters = {
         project: 'projectValue',
@@ -4900,7 +4902,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.firewallPolicyPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -4943,7 +4945,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
       });
     });
 
-    describe('key', () => {
+    describe('key', async () => {
       const fakePath = '/rendered/path/key';
       const expectedParameters = {
         project: 'projectValue',
@@ -4956,7 +4958,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.keyPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -4995,7 +4997,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
       });
     });
 
-    describe('metrics', () => {
+    describe('metrics', async () => {
       const fakePath = '/rendered/path/metrics';
       const expectedParameters = {
         project: 'projectValue',
@@ -5008,7 +5010,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.metricsPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -5047,7 +5049,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
       });
     });
 
-    describe('project', () => {
+    describe('project', async () => {
       const fakePath = '/rendered/path/project';
       const expectedParameters = {
         project: 'projectValue',
@@ -5059,7 +5061,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -5088,7 +5090,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
       });
     });
 
-    describe('relatedAccountGroup', () => {
+    describe('relatedAccountGroup', async () => {
       const fakePath = '/rendered/path/relatedAccountGroup';
       const expectedParameters = {
         project: 'projectValue',
@@ -5101,7 +5103,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.relatedAccountGroupPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -5153,7 +5155,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
       });
     });
 
-    describe('relatedAccountGroupMembership', () => {
+    describe('relatedAccountGroupMembership', async () => {
       const fakePath = '/rendered/path/relatedAccountGroupMembership';
       const expectedParameters = {
         project: 'projectValue',
@@ -5167,7 +5169,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.relatedAccountGroupMembershipPathTemplate.render =
         sinon.stub().returns(fakePath);
       client.pathTemplates.relatedAccountGroupMembershipPathTemplate.match =

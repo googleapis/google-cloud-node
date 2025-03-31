@@ -39,6 +39,10 @@
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },
+        "ListModelVersionCheckpoints": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
         "UpdateModel": {
           "timeout_millis": 5000,
           "retry_codes_name": "non_idempotent",

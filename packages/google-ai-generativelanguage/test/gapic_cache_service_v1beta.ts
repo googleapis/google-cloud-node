@@ -255,7 +255,9 @@ describe('v1beta.CacheServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      client.initialize().catch(err => {
+        throw err;
+      });
       assert(client.cacheServiceStub);
       client.close().then(() => {
         done();
@@ -314,7 +316,7 @@ describe('v1beta.CacheServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.ai.generativelanguage.v1beta.CreateCachedContentRequest()
       );
@@ -332,7 +334,7 @@ describe('v1beta.CacheServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.ai.generativelanguage.v1beta.CreateCachedContentRequest()
       );
@@ -365,7 +367,7 @@ describe('v1beta.CacheServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.ai.generativelanguage.v1beta.CreateCachedContentRequest()
       );
@@ -382,7 +384,7 @@ describe('v1beta.CacheServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.ai.generativelanguage.v1beta.CreateCachedContentRequest()
       );
@@ -398,7 +400,7 @@ describe('v1beta.CacheServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.ai.generativelanguage.v1beta.GetCachedContentRequest()
       );
@@ -429,7 +431,7 @@ describe('v1beta.CacheServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.ai.generativelanguage.v1beta.GetCachedContentRequest()
       );
@@ -476,7 +478,7 @@ describe('v1beta.CacheServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.ai.generativelanguage.v1beta.GetCachedContentRequest()
       );
@@ -507,7 +509,7 @@ describe('v1beta.CacheServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.ai.generativelanguage.v1beta.GetCachedContentRequest()
       );
@@ -528,7 +530,7 @@ describe('v1beta.CacheServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.ai.generativelanguage.v1beta.UpdateCachedContentRequest()
       );
@@ -561,7 +563,7 @@ describe('v1beta.CacheServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.ai.generativelanguage.v1beta.UpdateCachedContentRequest()
       );
@@ -609,7 +611,7 @@ describe('v1beta.CacheServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.ai.generativelanguage.v1beta.UpdateCachedContentRequest()
       );
@@ -641,7 +643,7 @@ describe('v1beta.CacheServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.ai.generativelanguage.v1beta.UpdateCachedContentRequest()
       );
@@ -663,7 +665,7 @@ describe('v1beta.CacheServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.ai.generativelanguage.v1beta.DeleteCachedContentRequest()
       );
@@ -695,7 +697,7 @@ describe('v1beta.CacheServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.ai.generativelanguage.v1beta.DeleteCachedContentRequest()
       );
@@ -742,7 +744,7 @@ describe('v1beta.CacheServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.ai.generativelanguage.v1beta.DeleteCachedContentRequest()
       );
@@ -773,7 +775,7 @@ describe('v1beta.CacheServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.ai.generativelanguage.v1beta.DeleteCachedContentRequest()
       );
@@ -794,7 +796,7 @@ describe('v1beta.CacheServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.ai.generativelanguage.v1beta.ListCachedContentsRequest()
       );
@@ -820,7 +822,7 @@ describe('v1beta.CacheServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.ai.generativelanguage.v1beta.ListCachedContentsRequest()
       );
@@ -863,7 +865,7 @@ describe('v1beta.CacheServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.ai.generativelanguage.v1beta.ListCachedContentsRequest()
       );
@@ -880,7 +882,7 @@ describe('v1beta.CacheServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.ai.generativelanguage.v1beta.ListCachedContentsRequest()
       );
@@ -930,7 +932,7 @@ describe('v1beta.CacheServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.ai.generativelanguage.v1beta.ListCachedContentsRequest()
       );
@@ -969,7 +971,7 @@ describe('v1beta.CacheServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.ai.generativelanguage.v1beta.ListCachedContentsRequest()
       );
@@ -1006,7 +1008,7 @@ describe('v1beta.CacheServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.ai.generativelanguage.v1beta.ListCachedContentsRequest()
       );
@@ -1031,7 +1033,7 @@ describe('v1beta.CacheServiceClient', () => {
   });
 
   describe('Path templates', () => {
-    describe('cachedContent', () => {
+    describe('cachedContent', async () => {
       const fakePath = '/rendered/path/cachedContent';
       const expectedParameters = {
         id: 'idValue',
@@ -1040,7 +1042,7 @@ describe('v1beta.CacheServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.cachedContentPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -1069,7 +1071,7 @@ describe('v1beta.CacheServiceClient', () => {
       });
     });
 
-    describe('chunk', () => {
+    describe('chunk', async () => {
       const fakePath = '/rendered/path/chunk';
       const expectedParameters = {
         corpus: 'corpusValue',
@@ -1080,7 +1082,7 @@ describe('v1beta.CacheServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.chunkPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -1133,7 +1135,7 @@ describe('v1beta.CacheServiceClient', () => {
       });
     });
 
-    describe('corpus', () => {
+    describe('corpus', async () => {
       const fakePath = '/rendered/path/corpus';
       const expectedParameters = {
         corpus: 'corpusValue',
@@ -1142,7 +1144,7 @@ describe('v1beta.CacheServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.corpusPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -1171,7 +1173,7 @@ describe('v1beta.CacheServiceClient', () => {
       });
     });
 
-    describe('corpusPermission', () => {
+    describe('corpusPermission', async () => {
       const fakePath = '/rendered/path/corpusPermission';
       const expectedParameters = {
         corpus: 'corpusValue',
@@ -1181,7 +1183,7 @@ describe('v1beta.CacheServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.corpusPermissionPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -1226,7 +1228,7 @@ describe('v1beta.CacheServiceClient', () => {
       });
     });
 
-    describe('document', () => {
+    describe('document', async () => {
       const fakePath = '/rendered/path/document';
       const expectedParameters = {
         corpus: 'corpusValue',
@@ -1236,7 +1238,7 @@ describe('v1beta.CacheServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.documentPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -1275,7 +1277,7 @@ describe('v1beta.CacheServiceClient', () => {
       });
     });
 
-    describe('file', () => {
+    describe('file', async () => {
       const fakePath = '/rendered/path/file';
       const expectedParameters = {
         file: 'fileValue',
@@ -1284,7 +1286,7 @@ describe('v1beta.CacheServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.filePathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -1313,7 +1315,7 @@ describe('v1beta.CacheServiceClient', () => {
       });
     });
 
-    describe('model', () => {
+    describe('model', async () => {
       const fakePath = '/rendered/path/model';
       const expectedParameters = {
         model: 'modelValue',
@@ -1322,7 +1324,7 @@ describe('v1beta.CacheServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.modelPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -1351,7 +1353,7 @@ describe('v1beta.CacheServiceClient', () => {
       });
     });
 
-    describe('tunedModel', () => {
+    describe('tunedModel', async () => {
       const fakePath = '/rendered/path/tunedModel';
       const expectedParameters = {
         tuned_model: 'tunedModelValue',
@@ -1360,7 +1362,7 @@ describe('v1beta.CacheServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.tunedModelPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -1389,7 +1391,7 @@ describe('v1beta.CacheServiceClient', () => {
       });
     });
 
-    describe('tunedModelPermission', () => {
+    describe('tunedModelPermission', async () => {
       const fakePath = '/rendered/path/tunedModelPermission';
       const expectedParameters = {
         tuned_model: 'tunedModelValue',
@@ -1399,7 +1401,7 @@ describe('v1beta.CacheServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.tunedModelPermissionPathTemplate.render = sinon
         .stub()
         .returns(fakePath);

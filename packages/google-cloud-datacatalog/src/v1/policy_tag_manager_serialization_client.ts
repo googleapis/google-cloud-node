@@ -27,6 +27,7 @@ import type {
 
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
+import {loggingUtils as logging} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -54,6 +55,8 @@ export class PolicyTagManagerSerializationClient {
   private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
+  private _log = logging.log('datacatalog');
+
   auth: gax.GoogleAuth;
   descriptors: Descriptors = {
     page: {},
@@ -88,7 +91,7 @@ export class PolicyTagManagerSerializationClient {
    *     Developer's Console, e.g. 'grape-spaceship-123'. We will also check
    *     the environment variable GCLOUD_PROJECT for your project ID. If your
    *     app is running in an environment which supports
-   *     {@link https://developers.google.com/identity/protocols/application-default-credentials Application Default Credentials},
+   *     {@link https://cloud.google.com/docs/authentication/application-default-credentials Application Default Credentials},
    *     your project ID will be detected automatically.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
@@ -496,8 +499,39 @@ export class PolicyTagManagerSerializationClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.replaceTaxonomy(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('replaceTaxonomy request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.datacatalog.v1.ITaxonomy,
+          | protos.google.cloud.datacatalog.v1.IReplaceTaxonomyRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('replaceTaxonomy response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .replaceTaxonomy(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.datacatalog.v1.ITaxonomy,
+          (
+            | protos.google.cloud.datacatalog.v1.IReplaceTaxonomyRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('replaceTaxonomy response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Creates new taxonomies (including their policy tags) in a given project
@@ -598,8 +632,39 @@ export class PolicyTagManagerSerializationClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.importTaxonomies(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('importTaxonomies request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.datacatalog.v1.IImportTaxonomiesResponse,
+          | protos.google.cloud.datacatalog.v1.IImportTaxonomiesRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('importTaxonomies response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .importTaxonomies(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.datacatalog.v1.IImportTaxonomiesResponse,
+          (
+            | protos.google.cloud.datacatalog.v1.IImportTaxonomiesRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('importTaxonomies response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Exports taxonomies in the requested type and returns them,
@@ -699,8 +764,39 @@ export class PolicyTagManagerSerializationClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.exportTaxonomies(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('exportTaxonomies request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.datacatalog.v1.IExportTaxonomiesResponse,
+          | protos.google.cloud.datacatalog.v1.IExportTaxonomiesRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('exportTaxonomies response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .exportTaxonomies(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.datacatalog.v1.IExportTaxonomiesResponse,
+          (
+            | protos.google.cloud.datacatalog.v1.IExportTaxonomiesRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('exportTaxonomies response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
 
   // --------------------
@@ -1222,6 +1318,7 @@ export class PolicyTagManagerSerializationClient {
   close(): Promise<void> {
     if (this.policyTagManagerSerializationStub && !this._terminated) {
       return this.policyTagManagerSerializationStub.then(stub => {
+        this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
       });

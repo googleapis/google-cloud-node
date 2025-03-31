@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -30,12 +30,12 @@ function main(rankingConfig, records) {
    */
   /**
    *  Required. The resource name of the rank service config, such as
-   *  `projects/{project_num}/locations/{location_id}/rankingConfigs/default_ranking_config`.
+   *  `projects/{project_num}/locations/{location}/rankingConfigs/default_ranking_config`.
    */
   // const rankingConfig = 'abc123'
   /**
    *  The identifier of the model to use. It is one of:
-   *  * `semantic-ranker-512@latest`: Semantic ranking model with maxiumn input
+   *  * `semantic-ranker-512@latest`: Semantic ranking model with maximum input
    *  token size 512.
    *  It is set to `semantic-ranker-512@latest` by default if unspecified.
    */

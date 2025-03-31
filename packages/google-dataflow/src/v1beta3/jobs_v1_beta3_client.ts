@@ -29,6 +29,7 @@ import type {
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
+import {loggingUtils as logging} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -54,6 +55,8 @@ export class JobsV1Beta3Client {
   private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
+  private _log = logging.log('dataflow');
+
   auth: gax.GoogleAuth;
   descriptors: Descriptors = {
     page: {},
@@ -87,7 +90,7 @@ export class JobsV1Beta3Client {
    *     Developer's Console, e.g. 'grape-spaceship-123'. We will also check
    *     the environment variable GCLOUD_PROJECT for your project ID. If your
    *     app is running in an environment which supports
-   *     {@link https://developers.google.com/identity/protocols/application-default-credentials Application Default Credentials},
+   *     {@link https://cloud.google.com/docs/authentication/application-default-credentials Application Default Credentials},
    *     your project ID will be detected automatically.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
@@ -483,8 +486,34 @@ export class JobsV1Beta3Client {
         project_id: request.projectId ?? '',
         location: request.location ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.createJob(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('createJob request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.dataflow.v1beta3.IJob,
+          protos.google.dataflow.v1beta3.ICreateJobRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('createJob response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .createJob(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.dataflow.v1beta3.IJob,
+          protos.google.dataflow.v1beta3.ICreateJobRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createJob response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Gets the state of the specified Cloud Dataflow job.
@@ -581,8 +610,34 @@ export class JobsV1Beta3Client {
         location: request.location ?? '',
         job_id: request.jobId ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.getJob(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('getJob request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.dataflow.v1beta3.IJob,
+          protos.google.dataflow.v1beta3.IGetJobRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getJob response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getJob(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.dataflow.v1beta3.IJob,
+          protos.google.dataflow.v1beta3.IGetJobRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getJob response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Updates the state of an existing Cloud Dataflow job.
@@ -680,8 +735,34 @@ export class JobsV1Beta3Client {
         location: request.location ?? '',
         job_id: request.jobId ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.updateJob(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('updateJob request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.dataflow.v1beta3.IJob,
+          protos.google.dataflow.v1beta3.IUpdateJobRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('updateJob response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .updateJob(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.dataflow.v1beta3.IJob,
+          protos.google.dataflow.v1beta3.IUpdateJobRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('updateJob response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Check for existence of active jobs in the given project across all regions.
@@ -760,8 +841,36 @@ export class JobsV1Beta3Client {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    this.initialize();
-    return this.innerApiCalls.checkActiveJobs(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('checkActiveJobs request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.dataflow.v1beta3.ICheckActiveJobsResponse,
+          | protos.google.dataflow.v1beta3.ICheckActiveJobsRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('checkActiveJobs response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .checkActiveJobs(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.dataflow.v1beta3.ICheckActiveJobsResponse,
+          protos.google.dataflow.v1beta3.ICheckActiveJobsRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('checkActiveJobs response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Snapshot the state of a streaming job.
@@ -854,8 +963,34 @@ export class JobsV1Beta3Client {
         location: request.location ?? '',
         job_id: request.jobId ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.snapshotJob(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('snapshotJob request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.dataflow.v1beta3.ISnapshot,
+          protos.google.dataflow.v1beta3.ISnapshotJobRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('snapshotJob response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .snapshotJob(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.dataflow.v1beta3.ISnapshot,
+          protos.google.dataflow.v1beta3.ISnapshotJobRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('snapshotJob response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
 
   /**
@@ -964,12 +1099,38 @@ export class JobsV1Beta3Client {
         project_id: request.projectId ?? '',
         location: request.location ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.listJobs(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.dataflow.v1beta3.IListJobsRequest,
+          protos.google.dataflow.v1beta3.IListJobsResponse | null | undefined,
+          protos.google.dataflow.v1beta3.IJob
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listJobs values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listJobs request %j', request);
+    return this.innerApiCalls
+      .listJobs(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.dataflow.v1beta3.IJob[],
+          protos.google.dataflow.v1beta3.IListJobsRequest | null,
+          protos.google.dataflow.v1beta3.IListJobsResponse,
+        ]) => {
+          this._log.info('listJobs values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listJobs`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {google.dataflow.v1beta3.ListJobsRequest.Filter} request.filter
@@ -1016,7 +1177,10 @@ export class JobsV1Beta3Client {
       });
     const defaultCallSettings = this._defaults['listJobs'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listJobs stream %j', request);
     return this.descriptors.page.listJobs.createStream(
       this.innerApiCalls.listJobs as GaxCall,
       request,
@@ -1075,7 +1239,10 @@ export class JobsV1Beta3Client {
       });
     const defaultCallSettings = this._defaults['listJobs'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listJobs iterate %j', request);
     return this.descriptors.page.listJobs.asyncIterate(
       this.innerApiCalls['listJobs'] as GaxCall,
       request as {},
@@ -1180,12 +1347,38 @@ export class JobsV1Beta3Client {
       this._gaxModule.routingHeader.fromParams({
         project_id: request.projectId ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.aggregatedListJobs(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.dataflow.v1beta3.IListJobsRequest,
+          protos.google.dataflow.v1beta3.IListJobsResponse | null | undefined,
+          protos.google.dataflow.v1beta3.IJob
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('aggregatedListJobs values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('aggregatedListJobs request %j', request);
+    return this.innerApiCalls
+      .aggregatedListJobs(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.dataflow.v1beta3.IJob[],
+          protos.google.dataflow.v1beta3.IListJobsRequest | null,
+          protos.google.dataflow.v1beta3.IListJobsResponse,
+        ]) => {
+          this._log.info('aggregatedListJobs values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `aggregatedListJobs`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {google.dataflow.v1beta3.ListJobsRequest.Filter} request.filter
@@ -1231,7 +1424,10 @@ export class JobsV1Beta3Client {
       });
     const defaultCallSettings = this._defaults['aggregatedListJobs'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('aggregatedListJobs stream %j', request);
     return this.descriptors.page.aggregatedListJobs.createStream(
       this.innerApiCalls.aggregatedListJobs as GaxCall,
       request,
@@ -1289,7 +1485,10 @@ export class JobsV1Beta3Client {
       });
     const defaultCallSettings = this._defaults['aggregatedListJobs'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('aggregatedListJobs iterate %j', request);
     return this.descriptors.page.aggregatedListJobs.asyncIterate(
       this.innerApiCalls['aggregatedListJobs'] as GaxCall,
       request as {},
@@ -1306,6 +1505,7 @@ export class JobsV1Beta3Client {
   close(): Promise<void> {
     if (this.jobsV1Beta3Stub && !this._terminated) {
       return this.jobsV1Beta3Stub.then(stub => {
+        this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
       });

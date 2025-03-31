@@ -263,7 +263,9 @@ describe('v1.AccountLabelsServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      client.initialize().catch(err => {
+        throw err;
+      });
       assert(client.accountLabelsServiceStub);
       client.close().then(() => {
         done();
@@ -326,7 +328,7 @@ describe('v1.AccountLabelsServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.shopping.css.v1.CreateAccountLabelRequest()
       );
@@ -335,7 +337,7 @@ describe('v1.AccountLabelsServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.shopping.css.v1.AccountLabel()
       );
@@ -359,7 +361,7 @@ describe('v1.AccountLabelsServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.shopping.css.v1.CreateAccountLabelRequest()
       );
@@ -368,7 +370,7 @@ describe('v1.AccountLabelsServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.shopping.css.v1.AccountLabel()
       );
@@ -407,7 +409,7 @@ describe('v1.AccountLabelsServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.shopping.css.v1.CreateAccountLabelRequest()
       );
@@ -416,7 +418,7 @@ describe('v1.AccountLabelsServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createAccountLabel = stubSimpleCall(
         undefined,
@@ -439,7 +441,7 @@ describe('v1.AccountLabelsServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.shopping.css.v1.CreateAccountLabelRequest()
       );
@@ -461,7 +463,7 @@ describe('v1.AccountLabelsServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.shopping.css.v1.UpdateAccountLabelRequest()
       );
@@ -471,7 +473,7 @@ describe('v1.AccountLabelsServiceClient', () => {
         ['accountLabel', 'name']
       );
       request.accountLabel.name = defaultValue1;
-      const expectedHeaderRequestParams = `account_label.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `account_label.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.shopping.css.v1.AccountLabel()
       );
@@ -495,7 +497,7 @@ describe('v1.AccountLabelsServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.shopping.css.v1.UpdateAccountLabelRequest()
       );
@@ -505,7 +507,7 @@ describe('v1.AccountLabelsServiceClient', () => {
         ['accountLabel', 'name']
       );
       request.accountLabel.name = defaultValue1;
-      const expectedHeaderRequestParams = `account_label.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `account_label.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.shopping.css.v1.AccountLabel()
       );
@@ -544,7 +546,7 @@ describe('v1.AccountLabelsServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.shopping.css.v1.UpdateAccountLabelRequest()
       );
@@ -554,7 +556,7 @@ describe('v1.AccountLabelsServiceClient', () => {
         ['accountLabel', 'name']
       );
       request.accountLabel.name = defaultValue1;
-      const expectedHeaderRequestParams = `account_label.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `account_label.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateAccountLabel = stubSimpleCall(
         undefined,
@@ -577,7 +579,7 @@ describe('v1.AccountLabelsServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.shopping.css.v1.UpdateAccountLabelRequest()
       );
@@ -600,7 +602,7 @@ describe('v1.AccountLabelsServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.shopping.css.v1.DeleteAccountLabelRequest()
       );
@@ -609,7 +611,7 @@ describe('v1.AccountLabelsServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -633,7 +635,7 @@ describe('v1.AccountLabelsServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.shopping.css.v1.DeleteAccountLabelRequest()
       );
@@ -642,7 +644,7 @@ describe('v1.AccountLabelsServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -681,7 +683,7 @@ describe('v1.AccountLabelsServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.shopping.css.v1.DeleteAccountLabelRequest()
       );
@@ -690,7 +692,7 @@ describe('v1.AccountLabelsServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteAccountLabel = stubSimpleCall(
         undefined,
@@ -713,7 +715,7 @@ describe('v1.AccountLabelsServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.shopping.css.v1.DeleteAccountLabelRequest()
       );
@@ -735,7 +737,7 @@ describe('v1.AccountLabelsServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.shopping.css.v1.ListAccountLabelsRequest()
       );
@@ -744,7 +746,7 @@ describe('v1.AccountLabelsServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.shopping.css.v1.AccountLabel()),
         generateSampleMessage(new protos.google.shopping.css.v1.AccountLabel()),
@@ -769,7 +771,7 @@ describe('v1.AccountLabelsServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.shopping.css.v1.ListAccountLabelsRequest()
       );
@@ -778,7 +780,7 @@ describe('v1.AccountLabelsServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.shopping.css.v1.AccountLabel()),
         generateSampleMessage(new protos.google.shopping.css.v1.AccountLabel()),
@@ -819,7 +821,7 @@ describe('v1.AccountLabelsServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.shopping.css.v1.ListAccountLabelsRequest()
       );
@@ -828,7 +830,7 @@ describe('v1.AccountLabelsServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listAccountLabels = stubSimpleCall(
         undefined,
@@ -851,7 +853,7 @@ describe('v1.AccountLabelsServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.shopping.css.v1.ListAccountLabelsRequest()
       );
@@ -860,7 +862,7 @@ describe('v1.AccountLabelsServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.shopping.css.v1.AccountLabel()),
         generateSampleMessage(new protos.google.shopping.css.v1.AccountLabel()),
@@ -906,7 +908,7 @@ describe('v1.AccountLabelsServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.shopping.css.v1.ListAccountLabelsRequest()
       );
@@ -915,7 +917,7 @@ describe('v1.AccountLabelsServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listAccountLabels.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -956,7 +958,7 @@ describe('v1.AccountLabelsServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.shopping.css.v1.ListAccountLabelsRequest()
       );
@@ -965,7 +967,7 @@ describe('v1.AccountLabelsServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.shopping.css.v1.AccountLabel()),
         generateSampleMessage(new protos.google.shopping.css.v1.AccountLabel()),
@@ -1000,7 +1002,7 @@ describe('v1.AccountLabelsServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.shopping.css.v1.ListAccountLabelsRequest()
       );
@@ -1009,7 +1011,7 @@ describe('v1.AccountLabelsServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listAccountLabels.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -1037,7 +1039,7 @@ describe('v1.AccountLabelsServiceClient', () => {
   });
 
   describe('Path templates', () => {
-    describe('account', () => {
+    describe('account', async () => {
       const fakePath = '/rendered/path/account';
       const expectedParameters = {
         account: 'accountValue',
@@ -1047,7 +1049,7 @@ describe('v1.AccountLabelsServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.accountPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -1076,7 +1078,7 @@ describe('v1.AccountLabelsServiceClient', () => {
       });
     });
 
-    describe('accountLabel', () => {
+    describe('accountLabel', async () => {
       const fakePath = '/rendered/path/accountLabel';
       const expectedParameters = {
         account: 'accountValue',
@@ -1087,7 +1089,7 @@ describe('v1.AccountLabelsServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.accountLabelPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -1126,7 +1128,7 @@ describe('v1.AccountLabelsServiceClient', () => {
       });
     });
 
-    describe('cssProduct', () => {
+    describe('cssProduct', async () => {
       const fakePath = '/rendered/path/cssProduct';
       const expectedParameters = {
         account: 'accountValue',
@@ -1137,7 +1139,7 @@ describe('v1.AccountLabelsServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.cssProductPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -1176,7 +1178,7 @@ describe('v1.AccountLabelsServiceClient', () => {
       });
     });
 
-    describe('cssProductInput', () => {
+    describe('cssProductInput', async () => {
       const fakePath = '/rendered/path/cssProductInput';
       const expectedParameters = {
         account: 'accountValue',
@@ -1187,7 +1189,7 @@ describe('v1.AccountLabelsServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.cssProductInputPathTemplate.render = sinon
         .stub()
         .returns(fakePath);

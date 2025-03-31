@@ -29,6 +29,7 @@ import type {
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
+import {loggingUtils as logging} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -53,6 +54,8 @@ export class AccountsServiceClient {
   private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
+  private _log = logging.log('accounts');
+
   auth: gax.GoogleAuth;
   descriptors: Descriptors = {
     page: {},
@@ -87,7 +90,7 @@ export class AccountsServiceClient {
    *     Developer's Console, e.g. 'grape-spaceship-123'. We will also check
    *     the environment variable GCLOUD_PROJECT for your project ID. If your
    *     app is running in an environment which supports
-   *     {@link https://developers.google.com/identity/protocols/application-default-credentials Application Default Credentials},
+   *     {@link https://cloud.google.com/docs/authentication/application-default-credentials Application Default Credentials},
    *     your project ID will be detected automatically.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
@@ -210,6 +213,9 @@ export class AccountsServiceClient {
       ),
       autofeedSettingsPathTemplate: new this._gaxModule.PathTemplate(
         'accounts/{account}/autofeedSettings'
+      ),
+      automaticImprovementsPathTemplate: new this._gaxModule.PathTemplate(
+        'accounts/{account}/automaticImprovements'
       ),
       businessIdentityPathTemplate: new this._gaxModule.PathTemplate(
         'accounts/{account}/businessIdentity'
@@ -530,8 +536,39 @@ export class AccountsServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.getAccount(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('getAccount request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.shopping.merchant.accounts.v1beta.IAccount,
+          | protos.google.shopping.merchant.accounts.v1beta.IGetAccountRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getAccount response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getAccount(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.shopping.merchant.accounts.v1beta.IAccount,
+          (
+            | protos.google.shopping.merchant.accounts.v1beta.IGetAccountRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getAccount response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Creates a standalone Merchant Center account with additional configuration.
@@ -635,12 +672,39 @@ export class AccountsServiceClient {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    this.initialize();
-    return this.innerApiCalls.createAndConfigureAccount(
-      request,
-      options,
-      callback
-    );
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('createAndConfigureAccount request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.shopping.merchant.accounts.v1beta.IAccount,
+          | protos.google.shopping.merchant.accounts.v1beta.ICreateAndConfigureAccountRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('createAndConfigureAccount response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .createAndConfigureAccount(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.shopping.merchant.accounts.v1beta.IAccount,
+          (
+            | protos.google.shopping.merchant.accounts.v1beta.ICreateAndConfigureAccountRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('createAndConfigureAccount response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Deletes the specified account regardless of its type: standalone, MCA or
@@ -744,8 +808,39 @@ export class AccountsServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.deleteAccount(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('deleteAccount request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.shopping.merchant.accounts.v1beta.IDeleteAccountRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('deleteAccount response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .deleteAccount(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.protobuf.IEmpty,
+          (
+            | protos.google.shopping.merchant.accounts.v1beta.IDeleteAccountRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteAccount response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Updates an account regardless of its type: standalone, MCA or sub-account.
@@ -843,8 +938,39 @@ export class AccountsServiceClient {
       this._gaxModule.routingHeader.fromParams({
         'account.name': request.account!.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.updateAccount(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('updateAccount request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.shopping.merchant.accounts.v1beta.IAccount,
+          | protos.google.shopping.merchant.accounts.v1beta.IUpdateAccountRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('updateAccount response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .updateAccount(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.shopping.merchant.accounts.v1beta.IAccount,
+          (
+            | protos.google.shopping.merchant.accounts.v1beta.IUpdateAccountRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('updateAccount response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
 
   /**
@@ -951,12 +1077,40 @@ export class AccountsServiceClient {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    this.initialize();
-    return this.innerApiCalls.listAccounts(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.shopping.merchant.accounts.v1beta.IListAccountsRequest,
+          | protos.google.shopping.merchant.accounts.v1beta.IListAccountsResponse
+          | null
+          | undefined,
+          protos.google.shopping.merchant.accounts.v1beta.IAccount
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listAccounts values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listAccounts request %j', request);
+    return this.innerApiCalls
+      .listAccounts(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.shopping.merchant.accounts.v1beta.IAccount[],
+          protos.google.shopping.merchant.accounts.v1beta.IListAccountsRequest | null,
+          protos.google.shopping.merchant.accounts.v1beta.IListAccountsResponse,
+        ]) => {
+          this._log.info('listAccounts values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listAccounts`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {number} [request.pageSize]
@@ -995,7 +1149,10 @@ export class AccountsServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     const defaultCallSettings = this._defaults['listAccounts'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listAccounts stream %j', request);
     return this.descriptors.page.listAccounts.createStream(
       this.innerApiCalls.listAccounts as GaxCall,
       request,
@@ -1046,7 +1203,10 @@ export class AccountsServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     const defaultCallSettings = this._defaults['listAccounts'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listAccounts iterate %j', request);
     return this.descriptors.page.listAccounts.asyncIterate(
       this.innerApiCalls['listAccounts'] as GaxCall,
       request as {},
@@ -1158,12 +1318,40 @@ export class AccountsServiceClient {
       this._gaxModule.routingHeader.fromParams({
         provider: request.provider ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.listSubAccounts(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.shopping.merchant.accounts.v1beta.IListSubAccountsRequest,
+          | protos.google.shopping.merchant.accounts.v1beta.IListSubAccountsResponse
+          | null
+          | undefined,
+          protos.google.shopping.merchant.accounts.v1beta.IAccount
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listSubAccounts values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listSubAccounts request %j', request);
+    return this.innerApiCalls
+      .listSubAccounts(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.shopping.merchant.accounts.v1beta.IAccount[],
+          protos.google.shopping.merchant.accounts.v1beta.IListSubAccountsRequest | null,
+          protos.google.shopping.merchant.accounts.v1beta.IListSubAccountsResponse,
+        ]) => {
+          this._log.info('listSubAccounts values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listSubAccounts`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.provider
@@ -1204,7 +1392,10 @@ export class AccountsServiceClient {
       });
     const defaultCallSettings = this._defaults['listSubAccounts'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listSubAccounts stream %j', request);
     return this.descriptors.page.listSubAccounts.createStream(
       this.innerApiCalls.listSubAccounts as GaxCall,
       request,
@@ -1257,7 +1448,10 @@ export class AccountsServiceClient {
       });
     const defaultCallSettings = this._defaults['listSubAccounts'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listSubAccounts iterate %j', request);
     return this.descriptors.page.listSubAccounts.asyncIterate(
       this.innerApiCalls['listSubAccounts'] as GaxCall,
       request as {},
@@ -1388,6 +1582,31 @@ export class AccountsServiceClient {
   matchAccountFromAutofeedSettingsName(autofeedSettingsName: string) {
     return this.pathTemplates.autofeedSettingsPathTemplate.match(
       autofeedSettingsName
+    ).account;
+  }
+
+  /**
+   * Return a fully-qualified automaticImprovements resource name string.
+   *
+   * @param {string} account
+   * @returns {string} Resource name string.
+   */
+  automaticImprovementsPath(account: string) {
+    return this.pathTemplates.automaticImprovementsPathTemplate.render({
+      account: account,
+    });
+  }
+
+  /**
+   * Parse the account from AutomaticImprovements resource.
+   *
+   * @param {string} automaticImprovementsName
+   *   A fully-qualified path representing AutomaticImprovements resource.
+   * @returns {string} A string representing the account.
+   */
+  matchAccountFromAutomaticImprovementsName(automaticImprovementsName: string) {
+    return this.pathTemplates.automaticImprovementsPathTemplate.match(
+      automaticImprovementsName
     ).account;
   }
 
@@ -1754,6 +1973,7 @@ export class AccountsServiceClient {
   close(): Promise<void> {
     if (this.accountsServiceStub && !this._terminated) {
       return this.accountsServiceStub.then(stub => {
+        this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
       });

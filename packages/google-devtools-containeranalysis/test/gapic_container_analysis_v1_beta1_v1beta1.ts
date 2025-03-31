@@ -211,7 +211,9 @@ describe('v1beta1.ContainerAnalysisV1Beta1Client', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      client.initialize().catch(err => {
+        throw err;
+      });
       assert(client.containerAnalysisV1Beta1Stub);
       client.close().then(() => {
         done();
@@ -282,7 +284,7 @@ describe('v1beta1.ContainerAnalysisV1Beta1Client', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.iam.v1.SetIamPolicyRequest()
       );
@@ -291,7 +293,7 @@ describe('v1beta1.ContainerAnalysisV1Beta1Client', () => {
         ['resource']
       );
       request.resource = defaultValue1;
-      const expectedHeaderRequestParams = `resource=${defaultValue1}`;
+      const expectedHeaderRequestParams = `resource=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.iam.v1.Policy()
       );
@@ -316,7 +318,7 @@ describe('v1beta1.ContainerAnalysisV1Beta1Client', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.iam.v1.SetIamPolicyRequest()
       );
@@ -325,7 +327,7 @@ describe('v1beta1.ContainerAnalysisV1Beta1Client', () => {
         ['resource']
       );
       request.resource = defaultValue1;
-      const expectedHeaderRequestParams = `resource=${defaultValue1}`;
+      const expectedHeaderRequestParams = `resource=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.iam.v1.Policy()
       );
@@ -366,7 +368,7 @@ describe('v1beta1.ContainerAnalysisV1Beta1Client', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.iam.v1.SetIamPolicyRequest()
       );
@@ -375,7 +377,7 @@ describe('v1beta1.ContainerAnalysisV1Beta1Client', () => {
         ['resource']
       );
       request.resource = defaultValue1;
-      const expectedHeaderRequestParams = `resource=${defaultValue1}`;
+      const expectedHeaderRequestParams = `resource=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.setIamPolicy = stubSimpleCall(
         undefined,
@@ -400,7 +402,7 @@ describe('v1beta1.ContainerAnalysisV1Beta1Client', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.iam.v1.SetIamPolicyRequest()
       );
@@ -424,7 +426,7 @@ describe('v1beta1.ContainerAnalysisV1Beta1Client', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.iam.v1.GetIamPolicyRequest()
       );
@@ -433,7 +435,7 @@ describe('v1beta1.ContainerAnalysisV1Beta1Client', () => {
         ['resource']
       );
       request.resource = defaultValue1;
-      const expectedHeaderRequestParams = `resource=${defaultValue1}`;
+      const expectedHeaderRequestParams = `resource=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.iam.v1.Policy()
       );
@@ -458,7 +460,7 @@ describe('v1beta1.ContainerAnalysisV1Beta1Client', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.iam.v1.GetIamPolicyRequest()
       );
@@ -467,7 +469,7 @@ describe('v1beta1.ContainerAnalysisV1Beta1Client', () => {
         ['resource']
       );
       request.resource = defaultValue1;
-      const expectedHeaderRequestParams = `resource=${defaultValue1}`;
+      const expectedHeaderRequestParams = `resource=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.iam.v1.Policy()
       );
@@ -508,7 +510,7 @@ describe('v1beta1.ContainerAnalysisV1Beta1Client', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.iam.v1.GetIamPolicyRequest()
       );
@@ -517,7 +519,7 @@ describe('v1beta1.ContainerAnalysisV1Beta1Client', () => {
         ['resource']
       );
       request.resource = defaultValue1;
-      const expectedHeaderRequestParams = `resource=${defaultValue1}`;
+      const expectedHeaderRequestParams = `resource=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getIamPolicy = stubSimpleCall(
         undefined,
@@ -542,7 +544,7 @@ describe('v1beta1.ContainerAnalysisV1Beta1Client', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.iam.v1.GetIamPolicyRequest()
       );
@@ -566,7 +568,7 @@ describe('v1beta1.ContainerAnalysisV1Beta1Client', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.iam.v1.TestIamPermissionsRequest()
       );
@@ -575,7 +577,7 @@ describe('v1beta1.ContainerAnalysisV1Beta1Client', () => {
         ['resource']
       );
       request.resource = defaultValue1;
-      const expectedHeaderRequestParams = `resource=${defaultValue1}`;
+      const expectedHeaderRequestParams = `resource=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.iam.v1.TestIamPermissionsResponse()
       );
@@ -601,7 +603,7 @@ describe('v1beta1.ContainerAnalysisV1Beta1Client', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.iam.v1.TestIamPermissionsRequest()
       );
@@ -610,7 +612,7 @@ describe('v1beta1.ContainerAnalysisV1Beta1Client', () => {
         ['resource']
       );
       request.resource = defaultValue1;
-      const expectedHeaderRequestParams = `resource=${defaultValue1}`;
+      const expectedHeaderRequestParams = `resource=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.iam.v1.TestIamPermissionsResponse()
       );
@@ -651,7 +653,7 @@ describe('v1beta1.ContainerAnalysisV1Beta1Client', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.iam.v1.TestIamPermissionsRequest()
       );
@@ -660,7 +662,7 @@ describe('v1beta1.ContainerAnalysisV1Beta1Client', () => {
         ['resource']
       );
       request.resource = defaultValue1;
-      const expectedHeaderRequestParams = `resource=${defaultValue1}`;
+      const expectedHeaderRequestParams = `resource=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.testIamPermissions = stubSimpleCall(
         undefined,
@@ -685,7 +687,7 @@ describe('v1beta1.ContainerAnalysisV1Beta1Client', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.iam.v1.TestIamPermissionsRequest()
       );
@@ -709,7 +711,7 @@ describe('v1beta1.ContainerAnalysisV1Beta1Client', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.devtools.containeranalysis.v1beta1.GeneratePackagesSummaryRequest()
       );
@@ -718,7 +720,7 @@ describe('v1beta1.ContainerAnalysisV1Beta1Client', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.devtools.containeranalysis.v1beta1.PackagesSummaryResponse()
       );
@@ -744,7 +746,7 @@ describe('v1beta1.ContainerAnalysisV1Beta1Client', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.devtools.containeranalysis.v1beta1.GeneratePackagesSummaryRequest()
       );
@@ -753,7 +755,7 @@ describe('v1beta1.ContainerAnalysisV1Beta1Client', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.devtools.containeranalysis.v1beta1.PackagesSummaryResponse()
       );
@@ -794,7 +796,7 @@ describe('v1beta1.ContainerAnalysisV1Beta1Client', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.devtools.containeranalysis.v1beta1.GeneratePackagesSummaryRequest()
       );
@@ -803,7 +805,7 @@ describe('v1beta1.ContainerAnalysisV1Beta1Client', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.generatePackagesSummary = stubSimpleCall(
         undefined,
@@ -831,7 +833,7 @@ describe('v1beta1.ContainerAnalysisV1Beta1Client', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.devtools.containeranalysis.v1beta1.GeneratePackagesSummaryRequest()
       );
@@ -858,7 +860,7 @@ describe('v1beta1.ContainerAnalysisV1Beta1Client', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.devtools.containeranalysis.v1beta1.ExportSBOMRequest()
       );
@@ -867,7 +869,7 @@ describe('v1beta1.ContainerAnalysisV1Beta1Client', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.devtools.containeranalysis.v1beta1.ExportSBOMResponse()
       );
@@ -892,7 +894,7 @@ describe('v1beta1.ContainerAnalysisV1Beta1Client', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.devtools.containeranalysis.v1beta1.ExportSBOMRequest()
       );
@@ -901,7 +903,7 @@ describe('v1beta1.ContainerAnalysisV1Beta1Client', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.devtools.containeranalysis.v1beta1.ExportSBOMResponse()
       );
@@ -942,7 +944,7 @@ describe('v1beta1.ContainerAnalysisV1Beta1Client', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.devtools.containeranalysis.v1beta1.ExportSBOMRequest()
       );
@@ -951,7 +953,7 @@ describe('v1beta1.ContainerAnalysisV1Beta1Client', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.exportSboM = stubSimpleCall(
         undefined,
@@ -976,7 +978,7 @@ describe('v1beta1.ContainerAnalysisV1Beta1Client', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.devtools.containeranalysis.v1beta1.ExportSBOMRequest()
       );

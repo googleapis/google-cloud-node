@@ -250,7 +250,9 @@ describe('v2.OrgPolicyClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      client.initialize().catch(err => {
+        throw err;
+      });
       assert(client.orgPolicyStub);
       client.close().then(() => {
         done();
@@ -309,7 +311,7 @@ describe('v2.OrgPolicyClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.orgpolicy.v2.GetPolicyRequest()
       );
@@ -318,7 +320,7 @@ describe('v2.OrgPolicyClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.orgpolicy.v2.Policy()
       );
@@ -340,7 +342,7 @@ describe('v2.OrgPolicyClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.orgpolicy.v2.GetPolicyRequest()
       );
@@ -349,7 +351,7 @@ describe('v2.OrgPolicyClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.orgpolicy.v2.Policy()
       );
@@ -387,7 +389,7 @@ describe('v2.OrgPolicyClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.orgpolicy.v2.GetPolicyRequest()
       );
@@ -396,7 +398,7 @@ describe('v2.OrgPolicyClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getPolicy = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.getPolicy(request), expectedError);
@@ -415,7 +417,7 @@ describe('v2.OrgPolicyClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.orgpolicy.v2.GetPolicyRequest()
       );
@@ -436,7 +438,7 @@ describe('v2.OrgPolicyClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.orgpolicy.v2.GetEffectivePolicyRequest()
       );
@@ -445,7 +447,7 @@ describe('v2.OrgPolicyClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.orgpolicy.v2.Policy()
       );
@@ -468,7 +470,7 @@ describe('v2.OrgPolicyClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.orgpolicy.v2.GetEffectivePolicyRequest()
       );
@@ -477,7 +479,7 @@ describe('v2.OrgPolicyClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.orgpolicy.v2.Policy()
       );
@@ -515,7 +517,7 @@ describe('v2.OrgPolicyClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.orgpolicy.v2.GetEffectivePolicyRequest()
       );
@@ -524,7 +526,7 @@ describe('v2.OrgPolicyClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getEffectivePolicy = stubSimpleCall(
         undefined,
@@ -546,7 +548,7 @@ describe('v2.OrgPolicyClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.orgpolicy.v2.GetEffectivePolicyRequest()
       );
@@ -567,7 +569,7 @@ describe('v2.OrgPolicyClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.orgpolicy.v2.CreatePolicyRequest()
       );
@@ -576,7 +578,7 @@ describe('v2.OrgPolicyClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.orgpolicy.v2.Policy()
       );
@@ -598,7 +600,7 @@ describe('v2.OrgPolicyClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.orgpolicy.v2.CreatePolicyRequest()
       );
@@ -607,7 +609,7 @@ describe('v2.OrgPolicyClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.orgpolicy.v2.Policy()
       );
@@ -645,7 +647,7 @@ describe('v2.OrgPolicyClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.orgpolicy.v2.CreatePolicyRequest()
       );
@@ -654,7 +656,7 @@ describe('v2.OrgPolicyClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createPolicy = stubSimpleCall(
         undefined,
@@ -676,7 +678,7 @@ describe('v2.OrgPolicyClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.orgpolicy.v2.CreatePolicyRequest()
       );
@@ -697,7 +699,7 @@ describe('v2.OrgPolicyClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.orgpolicy.v2.UpdatePolicyRequest()
       );
@@ -707,7 +709,7 @@ describe('v2.OrgPolicyClient', () => {
         ['policy', 'name']
       );
       request.policy.name = defaultValue1;
-      const expectedHeaderRequestParams = `policy.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `policy.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.orgpolicy.v2.Policy()
       );
@@ -729,7 +731,7 @@ describe('v2.OrgPolicyClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.orgpolicy.v2.UpdatePolicyRequest()
       );
@@ -739,7 +741,7 @@ describe('v2.OrgPolicyClient', () => {
         ['policy', 'name']
       );
       request.policy.name = defaultValue1;
-      const expectedHeaderRequestParams = `policy.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `policy.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.orgpolicy.v2.Policy()
       );
@@ -777,7 +779,7 @@ describe('v2.OrgPolicyClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.orgpolicy.v2.UpdatePolicyRequest()
       );
@@ -787,7 +789,7 @@ describe('v2.OrgPolicyClient', () => {
         ['policy', 'name']
       );
       request.policy.name = defaultValue1;
-      const expectedHeaderRequestParams = `policy.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `policy.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updatePolicy = stubSimpleCall(
         undefined,
@@ -809,7 +811,7 @@ describe('v2.OrgPolicyClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.orgpolicy.v2.UpdatePolicyRequest()
       );
@@ -831,7 +833,7 @@ describe('v2.OrgPolicyClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.orgpolicy.v2.DeletePolicyRequest()
       );
@@ -840,7 +842,7 @@ describe('v2.OrgPolicyClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -862,7 +864,7 @@ describe('v2.OrgPolicyClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.orgpolicy.v2.DeletePolicyRequest()
       );
@@ -871,7 +873,7 @@ describe('v2.OrgPolicyClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -909,7 +911,7 @@ describe('v2.OrgPolicyClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.orgpolicy.v2.DeletePolicyRequest()
       );
@@ -918,7 +920,7 @@ describe('v2.OrgPolicyClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deletePolicy = stubSimpleCall(
         undefined,
@@ -940,7 +942,7 @@ describe('v2.OrgPolicyClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.orgpolicy.v2.DeletePolicyRequest()
       );
@@ -961,7 +963,7 @@ describe('v2.OrgPolicyClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.orgpolicy.v2.CreateCustomConstraintRequest()
       );
@@ -970,7 +972,7 @@ describe('v2.OrgPolicyClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.orgpolicy.v2.CustomConstraint()
       );
@@ -993,7 +995,7 @@ describe('v2.OrgPolicyClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.orgpolicy.v2.CreateCustomConstraintRequest()
       );
@@ -1002,7 +1004,7 @@ describe('v2.OrgPolicyClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.orgpolicy.v2.CustomConstraint()
       );
@@ -1040,7 +1042,7 @@ describe('v2.OrgPolicyClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.orgpolicy.v2.CreateCustomConstraintRequest()
       );
@@ -1049,7 +1051,7 @@ describe('v2.OrgPolicyClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createCustomConstraint = stubSimpleCall(
         undefined,
@@ -1074,7 +1076,7 @@ describe('v2.OrgPolicyClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.orgpolicy.v2.CreateCustomConstraintRequest()
       );
@@ -1098,7 +1100,7 @@ describe('v2.OrgPolicyClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.orgpolicy.v2.UpdateCustomConstraintRequest()
       );
@@ -1108,7 +1110,7 @@ describe('v2.OrgPolicyClient', () => {
         ['customConstraint', 'name']
       );
       request.customConstraint.name = defaultValue1;
-      const expectedHeaderRequestParams = `custom_constraint.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `custom_constraint.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.orgpolicy.v2.CustomConstraint()
       );
@@ -1131,7 +1133,7 @@ describe('v2.OrgPolicyClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.orgpolicy.v2.UpdateCustomConstraintRequest()
       );
@@ -1141,7 +1143,7 @@ describe('v2.OrgPolicyClient', () => {
         ['customConstraint', 'name']
       );
       request.customConstraint.name = defaultValue1;
-      const expectedHeaderRequestParams = `custom_constraint.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `custom_constraint.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.orgpolicy.v2.CustomConstraint()
       );
@@ -1179,7 +1181,7 @@ describe('v2.OrgPolicyClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.orgpolicy.v2.UpdateCustomConstraintRequest()
       );
@@ -1189,7 +1191,7 @@ describe('v2.OrgPolicyClient', () => {
         ['customConstraint', 'name']
       );
       request.customConstraint.name = defaultValue1;
-      const expectedHeaderRequestParams = `custom_constraint.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `custom_constraint.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateCustomConstraint = stubSimpleCall(
         undefined,
@@ -1214,7 +1216,7 @@ describe('v2.OrgPolicyClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.orgpolicy.v2.UpdateCustomConstraintRequest()
       );
@@ -1239,7 +1241,7 @@ describe('v2.OrgPolicyClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.orgpolicy.v2.GetCustomConstraintRequest()
       );
@@ -1248,7 +1250,7 @@ describe('v2.OrgPolicyClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.orgpolicy.v2.CustomConstraint()
       );
@@ -1271,7 +1273,7 @@ describe('v2.OrgPolicyClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.orgpolicy.v2.GetCustomConstraintRequest()
       );
@@ -1280,7 +1282,7 @@ describe('v2.OrgPolicyClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.orgpolicy.v2.CustomConstraint()
       );
@@ -1318,7 +1320,7 @@ describe('v2.OrgPolicyClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.orgpolicy.v2.GetCustomConstraintRequest()
       );
@@ -1327,7 +1329,7 @@ describe('v2.OrgPolicyClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getCustomConstraint = stubSimpleCall(
         undefined,
@@ -1349,7 +1351,7 @@ describe('v2.OrgPolicyClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.orgpolicy.v2.GetCustomConstraintRequest()
       );
@@ -1370,7 +1372,7 @@ describe('v2.OrgPolicyClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.orgpolicy.v2.DeleteCustomConstraintRequest()
       );
@@ -1379,7 +1381,7 @@ describe('v2.OrgPolicyClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -1402,7 +1404,7 @@ describe('v2.OrgPolicyClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.orgpolicy.v2.DeleteCustomConstraintRequest()
       );
@@ -1411,7 +1413,7 @@ describe('v2.OrgPolicyClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -1449,7 +1451,7 @@ describe('v2.OrgPolicyClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.orgpolicy.v2.DeleteCustomConstraintRequest()
       );
@@ -1458,7 +1460,7 @@ describe('v2.OrgPolicyClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteCustomConstraint = stubSimpleCall(
         undefined,
@@ -1483,7 +1485,7 @@ describe('v2.OrgPolicyClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.orgpolicy.v2.DeleteCustomConstraintRequest()
       );
@@ -1507,7 +1509,7 @@ describe('v2.OrgPolicyClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.orgpolicy.v2.ListConstraintsRequest()
       );
@@ -1516,7 +1518,7 @@ describe('v2.OrgPolicyClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.orgpolicy.v2.Constraint()
@@ -1546,7 +1548,7 @@ describe('v2.OrgPolicyClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.orgpolicy.v2.ListConstraintsRequest()
       );
@@ -1555,7 +1557,7 @@ describe('v2.OrgPolicyClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.orgpolicy.v2.Constraint()
@@ -1601,7 +1603,7 @@ describe('v2.OrgPolicyClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.orgpolicy.v2.ListConstraintsRequest()
       );
@@ -1610,7 +1612,7 @@ describe('v2.OrgPolicyClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listConstraints = stubSimpleCall(
         undefined,
@@ -1632,7 +1634,7 @@ describe('v2.OrgPolicyClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.orgpolicy.v2.ListConstraintsRequest()
       );
@@ -1641,7 +1643,7 @@ describe('v2.OrgPolicyClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.orgpolicy.v2.Constraint()
@@ -1692,7 +1694,7 @@ describe('v2.OrgPolicyClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.orgpolicy.v2.ListConstraintsRequest()
       );
@@ -1701,7 +1703,7 @@ describe('v2.OrgPolicyClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listConstraints.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -1741,7 +1743,7 @@ describe('v2.OrgPolicyClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.orgpolicy.v2.ListConstraintsRequest()
       );
@@ -1750,7 +1752,7 @@ describe('v2.OrgPolicyClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.orgpolicy.v2.Constraint()
@@ -1790,7 +1792,7 @@ describe('v2.OrgPolicyClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.orgpolicy.v2.ListConstraintsRequest()
       );
@@ -1799,7 +1801,7 @@ describe('v2.OrgPolicyClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listConstraints.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -1832,7 +1834,7 @@ describe('v2.OrgPolicyClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.orgpolicy.v2.ListPoliciesRequest()
       );
@@ -1841,7 +1843,7 @@ describe('v2.OrgPolicyClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.orgpolicy.v2.Policy()),
         generateSampleMessage(new protos.google.cloud.orgpolicy.v2.Policy()),
@@ -1865,7 +1867,7 @@ describe('v2.OrgPolicyClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.orgpolicy.v2.ListPoliciesRequest()
       );
@@ -1874,7 +1876,7 @@ describe('v2.OrgPolicyClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.orgpolicy.v2.Policy()),
         generateSampleMessage(new protos.google.cloud.orgpolicy.v2.Policy()),
@@ -1914,7 +1916,7 @@ describe('v2.OrgPolicyClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.orgpolicy.v2.ListPoliciesRequest()
       );
@@ -1923,7 +1925,7 @@ describe('v2.OrgPolicyClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listPolicies = stubSimpleCall(
         undefined,
@@ -1945,7 +1947,7 @@ describe('v2.OrgPolicyClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.orgpolicy.v2.ListPoliciesRequest()
       );
@@ -1954,7 +1956,7 @@ describe('v2.OrgPolicyClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.orgpolicy.v2.Policy()),
         generateSampleMessage(new protos.google.cloud.orgpolicy.v2.Policy()),
@@ -1999,7 +2001,7 @@ describe('v2.OrgPolicyClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.orgpolicy.v2.ListPoliciesRequest()
       );
@@ -2008,7 +2010,7 @@ describe('v2.OrgPolicyClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listPolicies.createStream = stubPageStreamingCall(
         undefined,
@@ -2050,7 +2052,7 @@ describe('v2.OrgPolicyClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.orgpolicy.v2.ListPoliciesRequest()
       );
@@ -2059,7 +2061,7 @@ describe('v2.OrgPolicyClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.orgpolicy.v2.Policy()),
         generateSampleMessage(new protos.google.cloud.orgpolicy.v2.Policy()),
@@ -2093,7 +2095,7 @@ describe('v2.OrgPolicyClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.orgpolicy.v2.ListPoliciesRequest()
       );
@@ -2102,7 +2104,7 @@ describe('v2.OrgPolicyClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listPolicies.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -2135,7 +2137,7 @@ describe('v2.OrgPolicyClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.orgpolicy.v2.ListCustomConstraintsRequest()
       );
@@ -2144,7 +2146,7 @@ describe('v2.OrgPolicyClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.orgpolicy.v2.CustomConstraint()
@@ -2175,7 +2177,7 @@ describe('v2.OrgPolicyClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.orgpolicy.v2.ListCustomConstraintsRequest()
       );
@@ -2184,7 +2186,7 @@ describe('v2.OrgPolicyClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.orgpolicy.v2.CustomConstraint()
@@ -2230,7 +2232,7 @@ describe('v2.OrgPolicyClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.orgpolicy.v2.ListCustomConstraintsRequest()
       );
@@ -2239,7 +2241,7 @@ describe('v2.OrgPolicyClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listCustomConstraints = stubSimpleCall(
         undefined,
@@ -2264,7 +2266,7 @@ describe('v2.OrgPolicyClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.orgpolicy.v2.ListCustomConstraintsRequest()
       );
@@ -2273,7 +2275,7 @@ describe('v2.OrgPolicyClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.orgpolicy.v2.CustomConstraint()
@@ -2331,7 +2333,7 @@ describe('v2.OrgPolicyClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.orgpolicy.v2.ListCustomConstraintsRequest()
       );
@@ -2340,7 +2342,7 @@ describe('v2.OrgPolicyClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listCustomConstraints.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -2387,7 +2389,7 @@ describe('v2.OrgPolicyClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.orgpolicy.v2.ListCustomConstraintsRequest()
       );
@@ -2396,7 +2398,7 @@ describe('v2.OrgPolicyClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.orgpolicy.v2.CustomConstraint()
@@ -2441,7 +2443,7 @@ describe('v2.OrgPolicyClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.orgpolicy.v2.ListCustomConstraintsRequest()
       );
@@ -2450,7 +2452,7 @@ describe('v2.OrgPolicyClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listCustomConstraints.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -2483,7 +2485,7 @@ describe('v2.OrgPolicyClient', () => {
   });
 
   describe('Path templates', () => {
-    describe('customConstraint', () => {
+    describe('customConstraint', async () => {
       const fakePath = '/rendered/path/customConstraint';
       const expectedParameters = {
         organization: 'organizationValue',
@@ -2493,7 +2495,7 @@ describe('v2.OrgPolicyClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.customConstraintPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -2540,7 +2542,7 @@ describe('v2.OrgPolicyClient', () => {
       });
     });
 
-    describe('folderConstraint', () => {
+    describe('folderConstraint', async () => {
       const fakePath = '/rendered/path/folderConstraint';
       const expectedParameters = {
         folder: 'folderValue',
@@ -2550,7 +2552,7 @@ describe('v2.OrgPolicyClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.folderConstraintPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -2595,7 +2597,7 @@ describe('v2.OrgPolicyClient', () => {
       });
     });
 
-    describe('folderPolicy', () => {
+    describe('folderPolicy', async () => {
       const fakePath = '/rendered/path/folderPolicy';
       const expectedParameters = {
         folder: 'folderValue',
@@ -2605,7 +2607,7 @@ describe('v2.OrgPolicyClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.folderPolicyPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -2644,7 +2646,7 @@ describe('v2.OrgPolicyClient', () => {
       });
     });
 
-    describe('organization', () => {
+    describe('organization', async () => {
       const fakePath = '/rendered/path/organization';
       const expectedParameters = {
         organization: 'organizationValue',
@@ -2653,7 +2655,7 @@ describe('v2.OrgPolicyClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.organizationPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -2682,7 +2684,7 @@ describe('v2.OrgPolicyClient', () => {
       });
     });
 
-    describe('organizationConstraint', () => {
+    describe('organizationConstraint', async () => {
       const fakePath = '/rendered/path/organizationConstraint';
       const expectedParameters = {
         organization: 'organizationValue',
@@ -2692,7 +2694,7 @@ describe('v2.OrgPolicyClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.organizationConstraintPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -2745,7 +2747,7 @@ describe('v2.OrgPolicyClient', () => {
       });
     });
 
-    describe('organizationPolicy', () => {
+    describe('organizationPolicy', async () => {
       const fakePath = '/rendered/path/organizationPolicy';
       const expectedParameters = {
         organization: 'organizationValue',
@@ -2755,7 +2757,7 @@ describe('v2.OrgPolicyClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.organizationPolicyPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -2807,7 +2809,7 @@ describe('v2.OrgPolicyClient', () => {
       });
     });
 
-    describe('project', () => {
+    describe('project', async () => {
       const fakePath = '/rendered/path/project';
       const expectedParameters = {
         project: 'projectValue',
@@ -2816,7 +2818,7 @@ describe('v2.OrgPolicyClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -2845,7 +2847,7 @@ describe('v2.OrgPolicyClient', () => {
       });
     });
 
-    describe('projectConstraint', () => {
+    describe('projectConstraint', async () => {
       const fakePath = '/rendered/path/projectConstraint';
       const expectedParameters = {
         project: 'projectValue',
@@ -2855,7 +2857,7 @@ describe('v2.OrgPolicyClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectConstraintPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -2907,7 +2909,7 @@ describe('v2.OrgPolicyClient', () => {
       });
     });
 
-    describe('projectPolicy', () => {
+    describe('projectPolicy', async () => {
       const fakePath = '/rendered/path/projectPolicy';
       const expectedParameters = {
         project: 'projectValue',
@@ -2917,7 +2919,7 @@ describe('v2.OrgPolicyClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectPolicyPathTemplate.render = sinon
         .stub()
         .returns(fakePath);

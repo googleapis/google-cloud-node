@@ -282,7 +282,9 @@ describe('v1alpha.GkeHubClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      client.initialize().catch(err => {
+        throw err;
+      });
       assert(client.gkeHubStub);
       client.close().then(() => {
         done();
@@ -341,7 +343,7 @@ describe('v1alpha.GkeHubClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.gkehub.v1alpha.GetFeatureRequest()
       );
@@ -372,7 +374,7 @@ describe('v1alpha.GkeHubClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.gkehub.v1alpha.GetFeatureRequest()
       );
@@ -419,7 +421,7 @@ describe('v1alpha.GkeHubClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.gkehub.v1alpha.GetFeatureRequest()
       );
@@ -450,7 +452,7 @@ describe('v1alpha.GkeHubClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.gkehub.v1alpha.GetFeatureRequest()
       );
@@ -471,7 +473,7 @@ describe('v1alpha.GkeHubClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.gkehub.v1alpha.CreateFeatureRequest()
       );
@@ -504,7 +506,7 @@ describe('v1alpha.GkeHubClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.gkehub.v1alpha.CreateFeatureRequest()
       );
@@ -558,7 +560,7 @@ describe('v1alpha.GkeHubClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.gkehub.v1alpha.CreateFeatureRequest()
       );
@@ -589,7 +591,7 @@ describe('v1alpha.GkeHubClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.gkehub.v1alpha.CreateFeatureRequest()
       );
@@ -622,7 +624,7 @@ describe('v1alpha.GkeHubClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -644,7 +646,7 @@ describe('v1alpha.GkeHubClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -665,7 +667,7 @@ describe('v1alpha.GkeHubClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.gkehub.v1alpha.DeleteFeatureRequest()
       );
@@ -698,7 +700,7 @@ describe('v1alpha.GkeHubClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.gkehub.v1alpha.DeleteFeatureRequest()
       );
@@ -752,7 +754,7 @@ describe('v1alpha.GkeHubClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.gkehub.v1alpha.DeleteFeatureRequest()
       );
@@ -783,7 +785,7 @@ describe('v1alpha.GkeHubClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.gkehub.v1alpha.DeleteFeatureRequest()
       );
@@ -816,7 +818,7 @@ describe('v1alpha.GkeHubClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -838,7 +840,7 @@ describe('v1alpha.GkeHubClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -859,7 +861,7 @@ describe('v1alpha.GkeHubClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.gkehub.v1alpha.UpdateFeatureRequest()
       );
@@ -892,7 +894,7 @@ describe('v1alpha.GkeHubClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.gkehub.v1alpha.UpdateFeatureRequest()
       );
@@ -946,7 +948,7 @@ describe('v1alpha.GkeHubClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.gkehub.v1alpha.UpdateFeatureRequest()
       );
@@ -977,7 +979,7 @@ describe('v1alpha.GkeHubClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.gkehub.v1alpha.UpdateFeatureRequest()
       );
@@ -1010,7 +1012,7 @@ describe('v1alpha.GkeHubClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -1032,7 +1034,7 @@ describe('v1alpha.GkeHubClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -1053,7 +1055,7 @@ describe('v1alpha.GkeHubClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.gkehub.v1alpha.ListFeaturesRequest()
       );
@@ -1086,7 +1088,7 @@ describe('v1alpha.GkeHubClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.gkehub.v1alpha.ListFeaturesRequest()
       );
@@ -1135,7 +1137,7 @@ describe('v1alpha.GkeHubClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.gkehub.v1alpha.ListFeaturesRequest()
       );
@@ -1166,7 +1168,7 @@ describe('v1alpha.GkeHubClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.gkehub.v1alpha.ListFeaturesRequest()
       );
@@ -1220,7 +1222,7 @@ describe('v1alpha.GkeHubClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.gkehub.v1alpha.ListFeaturesRequest()
       );
@@ -1271,7 +1273,7 @@ describe('v1alpha.GkeHubClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.gkehub.v1alpha.ListFeaturesRequest()
       );
@@ -1314,7 +1316,7 @@ describe('v1alpha.GkeHubClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.gkehub.v1alpha.ListFeaturesRequest()
       );
@@ -1351,7 +1353,7 @@ describe('v1alpha.GkeHubClient', () => {
   });
 
   describe('Path templates', () => {
-    describe('feature', () => {
+    describe('feature', async () => {
       const fakePath = '/rendered/path/feature';
       const expectedParameters = {
         project: 'projectValue',
@@ -1362,7 +1364,7 @@ describe('v1alpha.GkeHubClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.featurePathTemplate.render = sinon
         .stub()
         .returns(fakePath);

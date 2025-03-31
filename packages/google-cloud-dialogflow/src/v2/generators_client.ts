@@ -31,6 +31,7 @@ import type {
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
+import {loggingUtils as logging} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -59,6 +60,8 @@ export class GeneratorsClient {
   private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
+  private _log = logging.log('dialogflow');
+
   auth: gax.GoogleAuth;
   descriptors: Descriptors = {
     page: {},
@@ -94,7 +97,7 @@ export class GeneratorsClient {
    *     Developer's Console, e.g. 'grape-spaceship-123'. We will also check
    *     the environment variable GCLOUD_PROJECT for your project ID. If your
    *     app is running in an environment which supports
-   *     {@link https://developers.google.com/identity/protocols/application-default-credentials Application Default Credentials},
+   *     {@link https://cloud.google.com/docs/authentication/application-default-credentials Application Default Credentials},
    *     your project ID will be detected automatically.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
@@ -642,8 +645,36 @@ export class GeneratorsClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.createGenerator(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('createGenerator request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.dialogflow.v2.IGenerator,
+          | protos.google.cloud.dialogflow.v2.ICreateGeneratorRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('createGenerator response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .createGenerator(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.dialogflow.v2.IGenerator,
+          protos.google.cloud.dialogflow.v2.ICreateGeneratorRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createGenerator response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Retrieves a generator.
@@ -727,8 +758,36 @@ export class GeneratorsClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.getGenerator(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('getGenerator request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.dialogflow.v2.IGenerator,
+          | protos.google.cloud.dialogflow.v2.IGetGeneratorRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getGenerator response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getGenerator(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.dialogflow.v2.IGenerator,
+          protos.google.cloud.dialogflow.v2.IGetGeneratorRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getGenerator response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Deletes a generator.
@@ -818,8 +877,36 @@ export class GeneratorsClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.deleteGenerator(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('deleteGenerator request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.cloud.dialogflow.v2.IDeleteGeneratorRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('deleteGenerator response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .deleteGenerator(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.protobuf.IEmpty,
+          protos.google.cloud.dialogflow.v2.IDeleteGeneratorRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteGenerator response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Updates a generator.
@@ -911,8 +998,36 @@ export class GeneratorsClient {
       this._gaxModule.routingHeader.fromParams({
         'generator.name': request.generator!.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.updateGenerator(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('updateGenerator request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.dialogflow.v2.IGenerator,
+          | protos.google.cloud.dialogflow.v2.IUpdateGeneratorRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('updateGenerator response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .updateGenerator(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.dialogflow.v2.IGenerator,
+          protos.google.cloud.dialogflow.v2.IUpdateGeneratorRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('updateGenerator response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
 
   /**
@@ -1011,12 +1126,40 @@ export class GeneratorsClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.listGenerators(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.dialogflow.v2.IListGeneratorsRequest,
+          | protos.google.cloud.dialogflow.v2.IListGeneratorsResponse
+          | null
+          | undefined,
+          protos.google.cloud.dialogflow.v2.IGenerator
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listGenerators values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listGenerators request %j', request);
+    return this.innerApiCalls
+      .listGenerators(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.dialogflow.v2.IGenerator[],
+          protos.google.cloud.dialogflow.v2.IListGeneratorsRequest | null,
+          protos.google.cloud.dialogflow.v2.IListGeneratorsResponse,
+        ]) => {
+          this._log.info('listGenerators values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listGenerators`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
@@ -1052,7 +1195,10 @@ export class GeneratorsClient {
       });
     const defaultCallSettings = this._defaults['listGenerators'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listGenerators stream %j', request);
     return this.descriptors.page.listGenerators.createStream(
       this.innerApiCalls.listGenerators as GaxCall,
       request,
@@ -1100,7 +1246,10 @@ export class GeneratorsClient {
       });
     const defaultCallSettings = this._defaults['listGenerators'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listGenerators iterate %j', request);
     return this.descriptors.page.listGenerators.asyncIterate(
       this.innerApiCalls['listGenerators'] as GaxCall,
       request as {},
@@ -3838,6 +3987,7 @@ export class GeneratorsClient {
   close(): Promise<void> {
     if (this.generatorsStub && !this._terminated) {
       return this.generatorsStub.then(stub => {
+        this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
         this.locationsClient.close();

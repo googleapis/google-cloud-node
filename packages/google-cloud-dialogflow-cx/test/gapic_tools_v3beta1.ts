@@ -287,7 +287,9 @@ describe('v3beta1.ToolsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      client.initialize().catch(err => {
+        throw err;
+      });
       assert(client.toolsStub);
       client.close().then(() => {
         done();
@@ -346,7 +348,7 @@ describe('v3beta1.ToolsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3beta1.CreateToolRequest()
       );
@@ -355,7 +357,7 @@ describe('v3beta1.ToolsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3beta1.Tool()
       );
@@ -377,7 +379,7 @@ describe('v3beta1.ToolsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3beta1.CreateToolRequest()
       );
@@ -386,7 +388,7 @@ describe('v3beta1.ToolsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3beta1.Tool()
       );
@@ -424,7 +426,7 @@ describe('v3beta1.ToolsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3beta1.CreateToolRequest()
       );
@@ -433,7 +435,7 @@ describe('v3beta1.ToolsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createTool = stubSimpleCall(
         undefined,
@@ -455,7 +457,7 @@ describe('v3beta1.ToolsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3beta1.CreateToolRequest()
       );
@@ -476,7 +478,7 @@ describe('v3beta1.ToolsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3beta1.GetToolRequest()
       );
@@ -485,7 +487,7 @@ describe('v3beta1.ToolsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3beta1.Tool()
       );
@@ -507,7 +509,7 @@ describe('v3beta1.ToolsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3beta1.GetToolRequest()
       );
@@ -516,7 +518,7 @@ describe('v3beta1.ToolsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3beta1.Tool()
       );
@@ -554,7 +556,7 @@ describe('v3beta1.ToolsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3beta1.GetToolRequest()
       );
@@ -563,7 +565,7 @@ describe('v3beta1.ToolsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getTool = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.getTool(request), expectedError);
@@ -582,7 +584,7 @@ describe('v3beta1.ToolsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3beta1.GetToolRequest()
       );
@@ -603,7 +605,7 @@ describe('v3beta1.ToolsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3beta1.UpdateToolRequest()
       );
@@ -613,7 +615,7 @@ describe('v3beta1.ToolsClient', () => {
         ['tool', 'name']
       );
       request.tool.name = defaultValue1;
-      const expectedHeaderRequestParams = `tool.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `tool.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3beta1.Tool()
       );
@@ -635,7 +637,7 @@ describe('v3beta1.ToolsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3beta1.UpdateToolRequest()
       );
@@ -645,7 +647,7 @@ describe('v3beta1.ToolsClient', () => {
         ['tool', 'name']
       );
       request.tool.name = defaultValue1;
-      const expectedHeaderRequestParams = `tool.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `tool.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3beta1.Tool()
       );
@@ -683,7 +685,7 @@ describe('v3beta1.ToolsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3beta1.UpdateToolRequest()
       );
@@ -693,7 +695,7 @@ describe('v3beta1.ToolsClient', () => {
         ['tool', 'name']
       );
       request.tool.name = defaultValue1;
-      const expectedHeaderRequestParams = `tool.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `tool.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateTool = stubSimpleCall(
         undefined,
@@ -715,7 +717,7 @@ describe('v3beta1.ToolsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3beta1.UpdateToolRequest()
       );
@@ -737,7 +739,7 @@ describe('v3beta1.ToolsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3beta1.DeleteToolRequest()
       );
@@ -746,7 +748,7 @@ describe('v3beta1.ToolsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -768,7 +770,7 @@ describe('v3beta1.ToolsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3beta1.DeleteToolRequest()
       );
@@ -777,7 +779,7 @@ describe('v3beta1.ToolsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -815,7 +817,7 @@ describe('v3beta1.ToolsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3beta1.DeleteToolRequest()
       );
@@ -824,7 +826,7 @@ describe('v3beta1.ToolsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteTool = stubSimpleCall(
         undefined,
@@ -846,7 +848,7 @@ describe('v3beta1.ToolsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3beta1.DeleteToolRequest()
       );
@@ -861,13 +863,534 @@ describe('v3beta1.ToolsClient', () => {
     });
   });
 
+  describe('createToolVersion', () => {
+    it('invokes createToolVersion without error', async () => {
+      const client = new toolsModule.v3beta1.ToolsClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.dialogflow.cx.v3beta1.CreateToolVersionRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.cx.v3beta1.CreateToolVersionRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.dialogflow.cx.v3beta1.ToolVersion()
+      );
+      client.innerApiCalls.createToolVersion = stubSimpleCall(expectedResponse);
+      const [response] = await client.createToolVersion(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.createToolVersion as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createToolVersion as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes createToolVersion without error using callback', async () => {
+      const client = new toolsModule.v3beta1.ToolsClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.dialogflow.cx.v3beta1.CreateToolVersionRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.cx.v3beta1.CreateToolVersionRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.dialogflow.cx.v3beta1.ToolVersion()
+      );
+      client.innerApiCalls.createToolVersion =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.createToolVersion(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.dialogflow.cx.v3beta1.IToolVersion | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.createToolVersion as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createToolVersion as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes createToolVersion with error', async () => {
+      const client = new toolsModule.v3beta1.ToolsClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.dialogflow.cx.v3beta1.CreateToolVersionRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.cx.v3beta1.CreateToolVersionRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.createToolVersion = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.createToolVersion(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.createToolVersion as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createToolVersion as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes createToolVersion with closed client', async () => {
+      const client = new toolsModule.v3beta1.ToolsClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.dialogflow.cx.v3beta1.CreateToolVersionRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.cx.v3beta1.CreateToolVersionRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.createToolVersion(request), expectedError);
+    });
+  });
+
+  describe('getToolVersion', () => {
+    it('invokes getToolVersion without error', async () => {
+      const client = new toolsModule.v3beta1.ToolsClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.dialogflow.cx.v3beta1.GetToolVersionRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.cx.v3beta1.GetToolVersionRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.dialogflow.cx.v3beta1.ToolVersion()
+      );
+      client.innerApiCalls.getToolVersion = stubSimpleCall(expectedResponse);
+      const [response] = await client.getToolVersion(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.getToolVersion as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getToolVersion as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getToolVersion without error using callback', async () => {
+      const client = new toolsModule.v3beta1.ToolsClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.dialogflow.cx.v3beta1.GetToolVersionRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.cx.v3beta1.GetToolVersionRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.dialogflow.cx.v3beta1.ToolVersion()
+      );
+      client.innerApiCalls.getToolVersion =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.getToolVersion(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.dialogflow.cx.v3beta1.IToolVersion | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.getToolVersion as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getToolVersion as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getToolVersion with error', async () => {
+      const client = new toolsModule.v3beta1.ToolsClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.dialogflow.cx.v3beta1.GetToolVersionRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.cx.v3beta1.GetToolVersionRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.getToolVersion = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.getToolVersion(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.getToolVersion as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getToolVersion as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getToolVersion with closed client', async () => {
+      const client = new toolsModule.v3beta1.ToolsClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.dialogflow.cx.v3beta1.GetToolVersionRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.cx.v3beta1.GetToolVersionRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.getToolVersion(request), expectedError);
+    });
+  });
+
+  describe('deleteToolVersion', () => {
+    it('invokes deleteToolVersion without error', async () => {
+      const client = new toolsModule.v3beta1.ToolsClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.dialogflow.cx.v3beta1.DeleteToolVersionRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.cx.v3beta1.DeleteToolVersionRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.protobuf.Empty()
+      );
+      client.innerApiCalls.deleteToolVersion = stubSimpleCall(expectedResponse);
+      const [response] = await client.deleteToolVersion(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.deleteToolVersion as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteToolVersion as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes deleteToolVersion without error using callback', async () => {
+      const client = new toolsModule.v3beta1.ToolsClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.dialogflow.cx.v3beta1.DeleteToolVersionRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.cx.v3beta1.DeleteToolVersionRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.protobuf.Empty()
+      );
+      client.innerApiCalls.deleteToolVersion =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.deleteToolVersion(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.protobuf.IEmpty | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.deleteToolVersion as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteToolVersion as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes deleteToolVersion with error', async () => {
+      const client = new toolsModule.v3beta1.ToolsClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.dialogflow.cx.v3beta1.DeleteToolVersionRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.cx.v3beta1.DeleteToolVersionRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.deleteToolVersion = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.deleteToolVersion(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.deleteToolVersion as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteToolVersion as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes deleteToolVersion with closed client', async () => {
+      const client = new toolsModule.v3beta1.ToolsClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.dialogflow.cx.v3beta1.DeleteToolVersionRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.cx.v3beta1.DeleteToolVersionRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.deleteToolVersion(request), expectedError);
+    });
+  });
+
+  describe('restoreToolVersion', () => {
+    it('invokes restoreToolVersion without error', async () => {
+      const client = new toolsModule.v3beta1.ToolsClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.dialogflow.cx.v3beta1.RestoreToolVersionRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.cx.v3beta1.RestoreToolVersionRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.dialogflow.cx.v3beta1.RestoreToolVersionResponse()
+      );
+      client.innerApiCalls.restoreToolVersion =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.restoreToolVersion(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.restoreToolVersion as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.restoreToolVersion as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes restoreToolVersion without error using callback', async () => {
+      const client = new toolsModule.v3beta1.ToolsClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.dialogflow.cx.v3beta1.RestoreToolVersionRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.cx.v3beta1.RestoreToolVersionRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.dialogflow.cx.v3beta1.RestoreToolVersionResponse()
+      );
+      client.innerApiCalls.restoreToolVersion =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.restoreToolVersion(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.dialogflow.cx.v3beta1.IRestoreToolVersionResponse | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.restoreToolVersion as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.restoreToolVersion as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes restoreToolVersion with error', async () => {
+      const client = new toolsModule.v3beta1.ToolsClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.dialogflow.cx.v3beta1.RestoreToolVersionRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.cx.v3beta1.RestoreToolVersionRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.restoreToolVersion = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.restoreToolVersion(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.restoreToolVersion as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.restoreToolVersion as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes restoreToolVersion with closed client', async () => {
+      const client = new toolsModule.v3beta1.ToolsClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.dialogflow.cx.v3beta1.RestoreToolVersionRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.cx.v3beta1.RestoreToolVersionRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.restoreToolVersion(request), expectedError);
+    });
+  });
+
   describe('exportTools', () => {
     it('invokes exportTools without error', async () => {
       const client = new toolsModule.v3beta1.ToolsClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3beta1.ExportToolsRequest()
       );
@@ -876,7 +1399,7 @@ describe('v3beta1.ToolsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -899,7 +1422,7 @@ describe('v3beta1.ToolsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3beta1.ExportToolsRequest()
       );
@@ -908,7 +1431,7 @@ describe('v3beta1.ToolsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -953,7 +1476,7 @@ describe('v3beta1.ToolsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3beta1.ExportToolsRequest()
       );
@@ -962,7 +1485,7 @@ describe('v3beta1.ToolsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.exportTools = stubLongRunningCall(
         undefined,
@@ -984,7 +1507,7 @@ describe('v3beta1.ToolsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3beta1.ExportToolsRequest()
       );
@@ -993,7 +1516,7 @@ describe('v3beta1.ToolsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.exportTools = stubLongRunningCall(
         undefined,
@@ -1017,7 +1540,7 @@ describe('v3beta1.ToolsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -1039,7 +1562,7 @@ describe('v3beta1.ToolsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -1057,7 +1580,7 @@ describe('v3beta1.ToolsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3beta1.ListToolsRequest()
       );
@@ -1066,7 +1589,7 @@ describe('v3beta1.ToolsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.dialogflow.cx.v3beta1.Tool()
@@ -1096,7 +1619,7 @@ describe('v3beta1.ToolsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3beta1.ListToolsRequest()
       );
@@ -1105,7 +1628,7 @@ describe('v3beta1.ToolsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.dialogflow.cx.v3beta1.Tool()
@@ -1151,7 +1674,7 @@ describe('v3beta1.ToolsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3beta1.ListToolsRequest()
       );
@@ -1160,7 +1683,7 @@ describe('v3beta1.ToolsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listTools = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.listTools(request), expectedError);
@@ -1179,7 +1702,7 @@ describe('v3beta1.ToolsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3beta1.ListToolsRequest()
       );
@@ -1188,7 +1711,7 @@ describe('v3beta1.ToolsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.dialogflow.cx.v3beta1.Tool()
@@ -1239,7 +1762,7 @@ describe('v3beta1.ToolsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3beta1.ListToolsRequest()
       );
@@ -1248,7 +1771,7 @@ describe('v3beta1.ToolsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listTools.createStream = stubPageStreamingCall(
         undefined,
@@ -1290,7 +1813,7 @@ describe('v3beta1.ToolsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3beta1.ListToolsRequest()
       );
@@ -1299,7 +1822,7 @@ describe('v3beta1.ToolsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.dialogflow.cx.v3beta1.Tool()
@@ -1338,7 +1861,7 @@ describe('v3beta1.ToolsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3beta1.ListToolsRequest()
       );
@@ -1347,7 +1870,7 @@ describe('v3beta1.ToolsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listTools.asyncIterate = stubAsyncIterationCall(
         undefined,
@@ -1374,13 +1897,344 @@ describe('v3beta1.ToolsClient', () => {
       );
     });
   });
+
+  describe('listToolVersions', () => {
+    it('invokes listToolVersions without error', async () => {
+      const client = new toolsModule.v3beta1.ToolsClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.dialogflow.cx.v3beta1.ListToolVersionsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.cx.v3beta1.ListToolVersionsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.dialogflow.cx.v3beta1.ToolVersion()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.dialogflow.cx.v3beta1.ToolVersion()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.dialogflow.cx.v3beta1.ToolVersion()
+        ),
+      ];
+      client.innerApiCalls.listToolVersions = stubSimpleCall(expectedResponse);
+      const [response] = await client.listToolVersions(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.listToolVersions as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listToolVersions as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listToolVersions without error using callback', async () => {
+      const client = new toolsModule.v3beta1.ToolsClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.dialogflow.cx.v3beta1.ListToolVersionsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.cx.v3beta1.ListToolVersionsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.dialogflow.cx.v3beta1.ToolVersion()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.dialogflow.cx.v3beta1.ToolVersion()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.dialogflow.cx.v3beta1.ToolVersion()
+        ),
+      ];
+      client.innerApiCalls.listToolVersions =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.listToolVersions(
+          request,
+          (
+            err?: Error | null,
+            result?:
+              | protos.google.cloud.dialogflow.cx.v3beta1.IToolVersion[]
+              | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.listToolVersions as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listToolVersions as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listToolVersions with error', async () => {
+      const client = new toolsModule.v3beta1.ToolsClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.dialogflow.cx.v3beta1.ListToolVersionsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.cx.v3beta1.ListToolVersionsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.listToolVersions = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.listToolVersions(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.listToolVersions as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listToolVersions as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listToolVersionsStream without error', async () => {
+      const client = new toolsModule.v3beta1.ToolsClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.dialogflow.cx.v3beta1.ListToolVersionsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.cx.v3beta1.ListToolVersionsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.dialogflow.cx.v3beta1.ToolVersion()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.dialogflow.cx.v3beta1.ToolVersion()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.dialogflow.cx.v3beta1.ToolVersion()
+        ),
+      ];
+      client.descriptors.page.listToolVersions.createStream =
+        stubPageStreamingCall(expectedResponse);
+      const stream = client.listToolVersionsStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.cloud.dialogflow.cx.v3beta1.ToolVersion[] =
+          [];
+        stream.on(
+          'data',
+          (response: protos.google.cloud.dialogflow.cx.v3beta1.ToolVersion) => {
+            responses.push(response);
+          }
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      const responses = await promise;
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert(
+        (client.descriptors.page.listToolVersions.createStream as SinonStub)
+          .getCall(0)
+          .calledWith(client.innerApiCalls.listToolVersions, request)
+      );
+      assert(
+        (client.descriptors.page.listToolVersions.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
+      );
+    });
+
+    it('invokes listToolVersionsStream with error', async () => {
+      const client = new toolsModule.v3beta1.ToolsClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.dialogflow.cx.v3beta1.ListToolVersionsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.cx.v3beta1.ListToolVersionsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.descriptors.page.listToolVersions.createStream =
+        stubPageStreamingCall(undefined, expectedError);
+      const stream = client.listToolVersionsStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.cloud.dialogflow.cx.v3beta1.ToolVersion[] =
+          [];
+        stream.on(
+          'data',
+          (response: protos.google.cloud.dialogflow.cx.v3beta1.ToolVersion) => {
+            responses.push(response);
+          }
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      await assert.rejects(promise, expectedError);
+      assert(
+        (client.descriptors.page.listToolVersions.createStream as SinonStub)
+          .getCall(0)
+          .calledWith(client.innerApiCalls.listToolVersions, request)
+      );
+      assert(
+        (client.descriptors.page.listToolVersions.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
+      );
+    });
+
+    it('uses async iteration with listToolVersions without error', async () => {
+      const client = new toolsModule.v3beta1.ToolsClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.dialogflow.cx.v3beta1.ListToolVersionsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.cx.v3beta1.ListToolVersionsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.dialogflow.cx.v3beta1.ToolVersion()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.dialogflow.cx.v3beta1.ToolVersion()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.dialogflow.cx.v3beta1.ToolVersion()
+        ),
+      ];
+      client.descriptors.page.listToolVersions.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
+      const responses: protos.google.cloud.dialogflow.cx.v3beta1.IToolVersion[] =
+        [];
+      const iterable = client.listToolVersionsAsync(request);
+      for await (const resource of iterable) {
+        responses.push(resource!);
+      }
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.listToolVersions.asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request
+      );
+      assert(
+        (client.descriptors.page.listToolVersions.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
+      );
+    });
+
+    it('uses async iteration with listToolVersions with error', async () => {
+      const client = new toolsModule.v3beta1.ToolsClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.dialogflow.cx.v3beta1.ListToolVersionsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.cx.v3beta1.ListToolVersionsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.descriptors.page.listToolVersions.asyncIterate =
+        stubAsyncIterationCall(undefined, expectedError);
+      const iterable = client.listToolVersionsAsync(request);
+      await assert.rejects(async () => {
+        const responses: protos.google.cloud.dialogflow.cx.v3beta1.IToolVersion[] =
+          [];
+        for await (const resource of iterable) {
+          responses.push(resource!);
+        }
+      });
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.listToolVersions.asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request
+      );
+      assert(
+        (client.descriptors.page.listToolVersions.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
+      );
+    });
+  });
   describe('getLocation', () => {
     it('invokes getLocation without error', async () => {
       const client = new toolsModule.v3beta1.ToolsClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.GetLocationRequest()
       );
@@ -1410,7 +2264,7 @@ describe('v3beta1.ToolsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.GetLocationRequest()
       );
@@ -1454,7 +2308,7 @@ describe('v3beta1.ToolsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.GetLocationRequest()
       );
@@ -1489,7 +2343,7 @@ describe('v3beta1.ToolsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.ListLocationsRequest()
       );
@@ -1537,7 +2391,7 @@ describe('v3beta1.ToolsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.ListLocationsRequest()
       );
@@ -1578,7 +2432,7 @@ describe('v3beta1.ToolsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new operationsProtos.google.longrunning.GetOperationRequest()
       );
@@ -1657,7 +2511,7 @@ describe('v3beta1.ToolsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new operationsProtos.google.longrunning.CancelOperationRequest()
       );
@@ -1737,7 +2591,7 @@ describe('v3beta1.ToolsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new operationsProtos.google.longrunning.DeleteOperationRequest()
       );
@@ -1833,8 +2687,7 @@ describe('v3beta1.ToolsClient', () => {
       ];
       client.operationsClient.descriptor.listOperations.asyncIterate =
         stubAsyncIterationCall(expectedResponse);
-      const responses: operationsProtos.google.longrunning.ListOperationsResponse[] =
-        [];
+      const responses: operationsProtos.google.longrunning.IOperation[] = [];
       const iterable = client.operationsClient.listOperationsAsync(request);
       for await (const resource of iterable) {
         responses.push(resource!);
@@ -1853,7 +2706,7 @@ describe('v3beta1.ToolsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new operationsProtos.google.longrunning.ListOperationsRequest()
       );
@@ -1862,8 +2715,7 @@ describe('v3beta1.ToolsClient', () => {
         stubAsyncIterationCall(undefined, expectedError);
       const iterable = client.operationsClient.listOperationsAsync(request);
       await assert.rejects(async () => {
-        const responses: operationsProtos.google.longrunning.ListOperationsResponse[] =
-          [];
+        const responses: operationsProtos.google.longrunning.IOperation[] = [];
         for await (const resource of iterable) {
           responses.push(resource!);
         }
@@ -1879,7 +2731,7 @@ describe('v3beta1.ToolsClient', () => {
   });
 
   describe('Path templates', () => {
-    describe('agent', () => {
+    describe('agent', async () => {
       const fakePath = '/rendered/path/agent';
       const expectedParameters = {
         project: 'projectValue',
@@ -1890,7 +2742,7 @@ describe('v3beta1.ToolsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.agentPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -1943,7 +2795,7 @@ describe('v3beta1.ToolsClient', () => {
       });
     });
 
-    describe('agentGenerativeSettings', () => {
+    describe('agentGenerativeSettings', async () => {
       const fakePath = '/rendered/path/agentGenerativeSettings';
       const expectedParameters = {
         project: 'projectValue',
@@ -1954,7 +2806,7 @@ describe('v3beta1.ToolsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.agentGenerativeSettingsPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -2022,7 +2874,7 @@ describe('v3beta1.ToolsClient', () => {
       });
     });
 
-    describe('agentValidationResult', () => {
+    describe('agentValidationResult', async () => {
       const fakePath = '/rendered/path/agentValidationResult';
       const expectedParameters = {
         project: 'projectValue',
@@ -2033,7 +2885,7 @@ describe('v3beta1.ToolsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.agentValidationResultPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -2100,7 +2952,7 @@ describe('v3beta1.ToolsClient', () => {
       });
     });
 
-    describe('changelog', () => {
+    describe('changelog', async () => {
       const fakePath = '/rendered/path/changelog';
       const expectedParameters = {
         project: 'projectValue',
@@ -2112,7 +2964,7 @@ describe('v3beta1.ToolsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.changelogPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -2176,7 +3028,7 @@ describe('v3beta1.ToolsClient', () => {
       });
     });
 
-    describe('continuousTestResult', () => {
+    describe('continuousTestResult', async () => {
       const fakePath = '/rendered/path/continuousTestResult';
       const expectedParameters = {
         project: 'projectValue',
@@ -2189,7 +3041,7 @@ describe('v3beta1.ToolsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.continuousTestResultPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -2288,7 +3140,7 @@ describe('v3beta1.ToolsClient', () => {
       });
     });
 
-    describe('conversation', () => {
+    describe('conversation', async () => {
       const fakePath = '/rendered/path/conversation';
       const expectedParameters = {
         project: 'projectValue',
@@ -2300,7 +3152,7 @@ describe('v3beta1.ToolsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.conversationPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -2364,7 +3216,7 @@ describe('v3beta1.ToolsClient', () => {
       });
     });
 
-    describe('deployment', () => {
+    describe('deployment', async () => {
       const fakePath = '/rendered/path/deployment';
       const expectedParameters = {
         project: 'projectValue',
@@ -2377,7 +3229,7 @@ describe('v3beta1.ToolsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.deploymentPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -2452,7 +3304,7 @@ describe('v3beta1.ToolsClient', () => {
       });
     });
 
-    describe('entityType', () => {
+    describe('entityType', async () => {
       const fakePath = '/rendered/path/entityType';
       const expectedParameters = {
         project: 'projectValue',
@@ -2464,7 +3316,7 @@ describe('v3beta1.ToolsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.entityTypePathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -2528,7 +3380,7 @@ describe('v3beta1.ToolsClient', () => {
       });
     });
 
-    describe('environment', () => {
+    describe('environment', async () => {
       const fakePath = '/rendered/path/environment';
       const expectedParameters = {
         project: 'projectValue',
@@ -2540,7 +3392,7 @@ describe('v3beta1.ToolsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.environmentPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -2604,7 +3456,7 @@ describe('v3beta1.ToolsClient', () => {
       });
     });
 
-    describe('example', () => {
+    describe('example', async () => {
       const fakePath = '/rendered/path/example';
       const expectedParameters = {
         project: 'projectValue',
@@ -2617,7 +3469,7 @@ describe('v3beta1.ToolsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.examplePathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -2692,7 +3544,7 @@ describe('v3beta1.ToolsClient', () => {
       });
     });
 
-    describe('experiment', () => {
+    describe('experiment', async () => {
       const fakePath = '/rendered/path/experiment';
       const expectedParameters = {
         project: 'projectValue',
@@ -2705,7 +3557,7 @@ describe('v3beta1.ToolsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.experimentPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -2780,7 +3632,7 @@ describe('v3beta1.ToolsClient', () => {
       });
     });
 
-    describe('flow', () => {
+    describe('flow', async () => {
       const fakePath = '/rendered/path/flow';
       const expectedParameters = {
         project: 'projectValue',
@@ -2792,7 +3644,7 @@ describe('v3beta1.ToolsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.flowPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -2856,7 +3708,7 @@ describe('v3beta1.ToolsClient', () => {
       });
     });
 
-    describe('flowValidationResult', () => {
+    describe('flowValidationResult', async () => {
       const fakePath = '/rendered/path/flowValidationResult';
       const expectedParameters = {
         project: 'projectValue',
@@ -2868,7 +3720,7 @@ describe('v3beta1.ToolsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.flowValidationResultPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -2949,7 +3801,7 @@ describe('v3beta1.ToolsClient', () => {
       });
     });
 
-    describe('generator', () => {
+    describe('generator', async () => {
       const fakePath = '/rendered/path/generator';
       const expectedParameters = {
         project: 'projectValue',
@@ -2961,7 +3813,7 @@ describe('v3beta1.ToolsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.generatorPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -3025,7 +3877,7 @@ describe('v3beta1.ToolsClient', () => {
       });
     });
 
-    describe('intent', () => {
+    describe('intent', async () => {
       const fakePath = '/rendered/path/intent';
       const expectedParameters = {
         project: 'projectValue',
@@ -3037,7 +3889,7 @@ describe('v3beta1.ToolsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.intentPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -3101,7 +3953,7 @@ describe('v3beta1.ToolsClient', () => {
       });
     });
 
-    describe('location', () => {
+    describe('location', async () => {
       const fakePath = '/rendered/path/location';
       const expectedParameters = {
         project: 'projectValue',
@@ -3111,7 +3963,7 @@ describe('v3beta1.ToolsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.locationPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -3150,7 +4002,7 @@ describe('v3beta1.ToolsClient', () => {
       });
     });
 
-    describe('page', () => {
+    describe('page', async () => {
       const fakePath = '/rendered/path/page';
       const expectedParameters = {
         project: 'projectValue',
@@ -3163,7 +4015,7 @@ describe('v3beta1.ToolsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.pagePathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -3238,7 +4090,7 @@ describe('v3beta1.ToolsClient', () => {
       });
     });
 
-    describe('playbook', () => {
+    describe('playbook', async () => {
       const fakePath = '/rendered/path/playbook';
       const expectedParameters = {
         project: 'projectValue',
@@ -3250,7 +4102,7 @@ describe('v3beta1.ToolsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.playbookPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -3314,7 +4166,7 @@ describe('v3beta1.ToolsClient', () => {
       });
     });
 
-    describe('playbookVersion', () => {
+    describe('playbookVersion', async () => {
       const fakePath = '/rendered/path/playbookVersion';
       const expectedParameters = {
         project: 'projectValue',
@@ -3327,7 +4179,7 @@ describe('v3beta1.ToolsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.playbookVersionPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -3402,7 +4254,7 @@ describe('v3beta1.ToolsClient', () => {
       });
     });
 
-    describe('project', () => {
+    describe('project', async () => {
       const fakePath = '/rendered/path/project';
       const expectedParameters = {
         project: 'projectValue',
@@ -3411,7 +4263,7 @@ describe('v3beta1.ToolsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -3440,7 +4292,7 @@ describe('v3beta1.ToolsClient', () => {
       });
     });
 
-    describe('projectLocationAgentEnvironmentSessionEntityType', () => {
+    describe('projectLocationAgentEnvironmentSessionEntityType', async () => {
       const fakePath =
         '/rendered/path/projectLocationAgentEnvironmentSessionEntityType';
       const expectedParameters = {
@@ -3455,7 +4307,7 @@ describe('v3beta1.ToolsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectLocationAgentEnvironmentSessionEntityTypePathTemplate.render =
         sinon.stub().returns(fakePath);
       client.pathTemplates.projectLocationAgentEnvironmentSessionEntityTypePathTemplate.match =
@@ -3586,7 +4438,7 @@ describe('v3beta1.ToolsClient', () => {
       });
     });
 
-    describe('projectLocationAgentFlowTransitionRouteGroup', () => {
+    describe('projectLocationAgentFlowTransitionRouteGroup', async () => {
       const fakePath =
         '/rendered/path/projectLocationAgentFlowTransitionRouteGroup';
       const expectedParameters = {
@@ -3600,7 +4452,7 @@ describe('v3beta1.ToolsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectLocationAgentFlowTransitionRouteGroupPathTemplate.render =
         sinon.stub().returns(fakePath);
       client.pathTemplates.projectLocationAgentFlowTransitionRouteGroupPathTemplate.match =
@@ -3712,7 +4564,7 @@ describe('v3beta1.ToolsClient', () => {
       });
     });
 
-    describe('projectLocationAgentSessionEntityType', () => {
+    describe('projectLocationAgentSessionEntityType', async () => {
       const fakePath = '/rendered/path/projectLocationAgentSessionEntityType';
       const expectedParameters = {
         project: 'projectValue',
@@ -3725,7 +4577,7 @@ describe('v3beta1.ToolsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectLocationAgentSessionEntityTypePathTemplate.render =
         sinon.stub().returns(fakePath);
       client.pathTemplates.projectLocationAgentSessionEntityTypePathTemplate.match =
@@ -3837,7 +4689,7 @@ describe('v3beta1.ToolsClient', () => {
       });
     });
 
-    describe('projectLocationAgentTransitionRouteGroup', () => {
+    describe('projectLocationAgentTransitionRouteGroup', async () => {
       const fakePath =
         '/rendered/path/projectLocationAgentTransitionRouteGroup';
       const expectedParameters = {
@@ -3850,7 +4702,7 @@ describe('v3beta1.ToolsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectLocationAgentTransitionRouteGroupPathTemplate.render =
         sinon.stub().returns(fakePath);
       client.pathTemplates.projectLocationAgentTransitionRouteGroupPathTemplate.match =
@@ -3944,7 +4796,7 @@ describe('v3beta1.ToolsClient', () => {
       });
     });
 
-    describe('securitySettings', () => {
+    describe('securitySettings', async () => {
       const fakePath = '/rendered/path/securitySettings';
       const expectedParameters = {
         project: 'projectValue',
@@ -3955,7 +4807,7 @@ describe('v3beta1.ToolsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.securitySettingsPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -4012,7 +4864,7 @@ describe('v3beta1.ToolsClient', () => {
       });
     });
 
-    describe('testCase', () => {
+    describe('testCase', async () => {
       const fakePath = '/rendered/path/testCase';
       const expectedParameters = {
         project: 'projectValue',
@@ -4024,7 +4876,7 @@ describe('v3beta1.ToolsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.testCasePathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -4088,7 +4940,7 @@ describe('v3beta1.ToolsClient', () => {
       });
     });
 
-    describe('testCaseResult', () => {
+    describe('testCaseResult', async () => {
       const fakePath = '/rendered/path/testCaseResult';
       const expectedParameters = {
         project: 'projectValue',
@@ -4101,7 +4953,7 @@ describe('v3beta1.ToolsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.testCaseResultPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -4176,7 +5028,7 @@ describe('v3beta1.ToolsClient', () => {
       });
     });
 
-    describe('tool', () => {
+    describe('tool', async () => {
       const fakePath = '/rendered/path/tool';
       const expectedParameters = {
         project: 'projectValue',
@@ -4188,7 +5040,7 @@ describe('v3beta1.ToolsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.toolPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -4252,7 +5104,95 @@ describe('v3beta1.ToolsClient', () => {
       });
     });
 
-    describe('version', () => {
+    describe('toolVersion', async () => {
+      const fakePath = '/rendered/path/toolVersion';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        agent: 'agentValue',
+        tool: 'toolValue',
+        version: 'versionValue',
+      };
+      const client = new toolsModule.v3beta1.ToolsClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      client.pathTemplates.toolVersionPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.toolVersionPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('toolVersionPath', () => {
+        const result = client.toolVersionPath(
+          'projectValue',
+          'locationValue',
+          'agentValue',
+          'toolValue',
+          'versionValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.toolVersionPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromToolVersionName', () => {
+        const result = client.matchProjectFromToolVersionName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.toolVersionPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromToolVersionName', () => {
+        const result = client.matchLocationFromToolVersionName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.toolVersionPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchAgentFromToolVersionName', () => {
+        const result = client.matchAgentFromToolVersionName(fakePath);
+        assert.strictEqual(result, 'agentValue');
+        assert(
+          (client.pathTemplates.toolVersionPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchToolFromToolVersionName', () => {
+        const result = client.matchToolFromToolVersionName(fakePath);
+        assert.strictEqual(result, 'toolValue');
+        assert(
+          (client.pathTemplates.toolVersionPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchVersionFromToolVersionName', () => {
+        const result = client.matchVersionFromToolVersionName(fakePath);
+        assert.strictEqual(result, 'versionValue');
+        assert(
+          (client.pathTemplates.toolVersionPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('version', async () => {
       const fakePath = '/rendered/path/version';
       const expectedParameters = {
         project: 'projectValue',
@@ -4265,7 +5205,7 @@ describe('v3beta1.ToolsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.versionPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -4340,7 +5280,7 @@ describe('v3beta1.ToolsClient', () => {
       });
     });
 
-    describe('webhook', () => {
+    describe('webhook', async () => {
       const fakePath = '/rendered/path/webhook';
       const expectedParameters = {
         project: 'projectValue',
@@ -4352,7 +5292,7 @@ describe('v3beta1.ToolsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.webhookPathTemplate.render = sinon
         .stub()
         .returns(fakePath);

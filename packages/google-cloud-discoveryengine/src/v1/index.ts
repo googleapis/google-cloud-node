@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -29,5 +29,6 @@ export {RecommendationServiceClient} from './recommendation_service_client';
 export {SchemaServiceClient} from './schema_service_client';
 export {SearchServiceClient} from './search_service_client';
 export {SearchTuningServiceClient} from './search_tuning_service_client';
+export {ServingConfigServiceClient} from './serving_config_service_client';
 export {SiteSearchEngineServiceClient} from './site_search_engine_service_client';
 export {UserEventServiceClient} from './user_event_service_client';

@@ -255,7 +255,9 @@ describe('v1.GSuiteAddOnsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      client.initialize().catch(err => {
+        throw err;
+      });
       assert(client.gSuiteAddOnsStub);
       client.close().then(() => {
         done();
@@ -314,7 +316,7 @@ describe('v1.GSuiteAddOnsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.gsuiteaddons.v1.GetAuthorizationRequest()
       );
@@ -323,7 +325,7 @@ describe('v1.GSuiteAddOnsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.gsuiteaddons.v1.Authorization()
       );
@@ -345,7 +347,7 @@ describe('v1.GSuiteAddOnsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.gsuiteaddons.v1.GetAuthorizationRequest()
       );
@@ -354,7 +356,7 @@ describe('v1.GSuiteAddOnsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.gsuiteaddons.v1.Authorization()
       );
@@ -392,7 +394,7 @@ describe('v1.GSuiteAddOnsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.gsuiteaddons.v1.GetAuthorizationRequest()
       );
@@ -401,7 +403,7 @@ describe('v1.GSuiteAddOnsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getAuthorization = stubSimpleCall(
         undefined,
@@ -423,7 +425,7 @@ describe('v1.GSuiteAddOnsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.gsuiteaddons.v1.GetAuthorizationRequest()
       );
@@ -444,7 +446,7 @@ describe('v1.GSuiteAddOnsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.gsuiteaddons.v1.CreateDeploymentRequest()
       );
@@ -453,7 +455,7 @@ describe('v1.GSuiteAddOnsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.gsuiteaddons.v1.Deployment()
       );
@@ -475,7 +477,7 @@ describe('v1.GSuiteAddOnsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.gsuiteaddons.v1.CreateDeploymentRequest()
       );
@@ -484,7 +486,7 @@ describe('v1.GSuiteAddOnsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.gsuiteaddons.v1.Deployment()
       );
@@ -522,7 +524,7 @@ describe('v1.GSuiteAddOnsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.gsuiteaddons.v1.CreateDeploymentRequest()
       );
@@ -531,7 +533,7 @@ describe('v1.GSuiteAddOnsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createDeployment = stubSimpleCall(
         undefined,
@@ -553,7 +555,7 @@ describe('v1.GSuiteAddOnsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.gsuiteaddons.v1.CreateDeploymentRequest()
       );
@@ -574,7 +576,7 @@ describe('v1.GSuiteAddOnsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.gsuiteaddons.v1.ReplaceDeploymentRequest()
       );
@@ -584,7 +586,7 @@ describe('v1.GSuiteAddOnsClient', () => {
         ['deployment', 'name']
       );
       request.deployment.name = defaultValue1;
-      const expectedHeaderRequestParams = `deployment.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `deployment.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.gsuiteaddons.v1.Deployment()
       );
@@ -606,7 +608,7 @@ describe('v1.GSuiteAddOnsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.gsuiteaddons.v1.ReplaceDeploymentRequest()
       );
@@ -616,7 +618,7 @@ describe('v1.GSuiteAddOnsClient', () => {
         ['deployment', 'name']
       );
       request.deployment.name = defaultValue1;
-      const expectedHeaderRequestParams = `deployment.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `deployment.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.gsuiteaddons.v1.Deployment()
       );
@@ -654,7 +656,7 @@ describe('v1.GSuiteAddOnsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.gsuiteaddons.v1.ReplaceDeploymentRequest()
       );
@@ -664,7 +666,7 @@ describe('v1.GSuiteAddOnsClient', () => {
         ['deployment', 'name']
       );
       request.deployment.name = defaultValue1;
-      const expectedHeaderRequestParams = `deployment.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `deployment.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.replaceDeployment = stubSimpleCall(
         undefined,
@@ -686,7 +688,7 @@ describe('v1.GSuiteAddOnsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.gsuiteaddons.v1.ReplaceDeploymentRequest()
       );
@@ -708,7 +710,7 @@ describe('v1.GSuiteAddOnsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.gsuiteaddons.v1.GetDeploymentRequest()
       );
@@ -717,7 +719,7 @@ describe('v1.GSuiteAddOnsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.gsuiteaddons.v1.Deployment()
       );
@@ -739,7 +741,7 @@ describe('v1.GSuiteAddOnsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.gsuiteaddons.v1.GetDeploymentRequest()
       );
@@ -748,7 +750,7 @@ describe('v1.GSuiteAddOnsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.gsuiteaddons.v1.Deployment()
       );
@@ -786,7 +788,7 @@ describe('v1.GSuiteAddOnsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.gsuiteaddons.v1.GetDeploymentRequest()
       );
@@ -795,7 +797,7 @@ describe('v1.GSuiteAddOnsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getDeployment = stubSimpleCall(
         undefined,
@@ -817,7 +819,7 @@ describe('v1.GSuiteAddOnsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.gsuiteaddons.v1.GetDeploymentRequest()
       );
@@ -838,7 +840,7 @@ describe('v1.GSuiteAddOnsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.gsuiteaddons.v1.DeleteDeploymentRequest()
       );
@@ -847,7 +849,7 @@ describe('v1.GSuiteAddOnsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -869,7 +871,7 @@ describe('v1.GSuiteAddOnsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.gsuiteaddons.v1.DeleteDeploymentRequest()
       );
@@ -878,7 +880,7 @@ describe('v1.GSuiteAddOnsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -916,7 +918,7 @@ describe('v1.GSuiteAddOnsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.gsuiteaddons.v1.DeleteDeploymentRequest()
       );
@@ -925,7 +927,7 @@ describe('v1.GSuiteAddOnsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteDeployment = stubSimpleCall(
         undefined,
@@ -947,7 +949,7 @@ describe('v1.GSuiteAddOnsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.gsuiteaddons.v1.DeleteDeploymentRequest()
       );
@@ -968,7 +970,7 @@ describe('v1.GSuiteAddOnsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.gsuiteaddons.v1.InstallDeploymentRequest()
       );
@@ -977,7 +979,7 @@ describe('v1.GSuiteAddOnsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -999,7 +1001,7 @@ describe('v1.GSuiteAddOnsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.gsuiteaddons.v1.InstallDeploymentRequest()
       );
@@ -1008,7 +1010,7 @@ describe('v1.GSuiteAddOnsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -1046,7 +1048,7 @@ describe('v1.GSuiteAddOnsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.gsuiteaddons.v1.InstallDeploymentRequest()
       );
@@ -1055,7 +1057,7 @@ describe('v1.GSuiteAddOnsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.installDeployment = stubSimpleCall(
         undefined,
@@ -1077,7 +1079,7 @@ describe('v1.GSuiteAddOnsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.gsuiteaddons.v1.InstallDeploymentRequest()
       );
@@ -1098,7 +1100,7 @@ describe('v1.GSuiteAddOnsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.gsuiteaddons.v1.UninstallDeploymentRequest()
       );
@@ -1107,7 +1109,7 @@ describe('v1.GSuiteAddOnsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -1130,7 +1132,7 @@ describe('v1.GSuiteAddOnsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.gsuiteaddons.v1.UninstallDeploymentRequest()
       );
@@ -1139,7 +1141,7 @@ describe('v1.GSuiteAddOnsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -1177,7 +1179,7 @@ describe('v1.GSuiteAddOnsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.gsuiteaddons.v1.UninstallDeploymentRequest()
       );
@@ -1186,7 +1188,7 @@ describe('v1.GSuiteAddOnsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.uninstallDeployment = stubSimpleCall(
         undefined,
@@ -1208,7 +1210,7 @@ describe('v1.GSuiteAddOnsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.gsuiteaddons.v1.UninstallDeploymentRequest()
       );
@@ -1229,7 +1231,7 @@ describe('v1.GSuiteAddOnsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.gsuiteaddons.v1.GetInstallStatusRequest()
       );
@@ -1238,7 +1240,7 @@ describe('v1.GSuiteAddOnsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.gsuiteaddons.v1.InstallStatus()
       );
@@ -1260,7 +1262,7 @@ describe('v1.GSuiteAddOnsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.gsuiteaddons.v1.GetInstallStatusRequest()
       );
@@ -1269,7 +1271,7 @@ describe('v1.GSuiteAddOnsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.gsuiteaddons.v1.InstallStatus()
       );
@@ -1307,7 +1309,7 @@ describe('v1.GSuiteAddOnsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.gsuiteaddons.v1.GetInstallStatusRequest()
       );
@@ -1316,7 +1318,7 @@ describe('v1.GSuiteAddOnsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getInstallStatus = stubSimpleCall(
         undefined,
@@ -1338,7 +1340,7 @@ describe('v1.GSuiteAddOnsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.gsuiteaddons.v1.GetInstallStatusRequest()
       );
@@ -1359,7 +1361,7 @@ describe('v1.GSuiteAddOnsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.gsuiteaddons.v1.ListDeploymentsRequest()
       );
@@ -1368,7 +1370,7 @@ describe('v1.GSuiteAddOnsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.gsuiteaddons.v1.Deployment()
@@ -1398,7 +1400,7 @@ describe('v1.GSuiteAddOnsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.gsuiteaddons.v1.ListDeploymentsRequest()
       );
@@ -1407,7 +1409,7 @@ describe('v1.GSuiteAddOnsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.gsuiteaddons.v1.Deployment()
@@ -1453,7 +1455,7 @@ describe('v1.GSuiteAddOnsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.gsuiteaddons.v1.ListDeploymentsRequest()
       );
@@ -1462,7 +1464,7 @@ describe('v1.GSuiteAddOnsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listDeployments = stubSimpleCall(
         undefined,
@@ -1484,7 +1486,7 @@ describe('v1.GSuiteAddOnsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.gsuiteaddons.v1.ListDeploymentsRequest()
       );
@@ -1493,7 +1495,7 @@ describe('v1.GSuiteAddOnsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.gsuiteaddons.v1.Deployment()
@@ -1544,7 +1546,7 @@ describe('v1.GSuiteAddOnsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.gsuiteaddons.v1.ListDeploymentsRequest()
       );
@@ -1553,7 +1555,7 @@ describe('v1.GSuiteAddOnsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listDeployments.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -1593,7 +1595,7 @@ describe('v1.GSuiteAddOnsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.gsuiteaddons.v1.ListDeploymentsRequest()
       );
@@ -1602,7 +1604,7 @@ describe('v1.GSuiteAddOnsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.gsuiteaddons.v1.Deployment()
@@ -1642,7 +1644,7 @@ describe('v1.GSuiteAddOnsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.gsuiteaddons.v1.ListDeploymentsRequest()
       );
@@ -1651,7 +1653,7 @@ describe('v1.GSuiteAddOnsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listDeployments.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -1679,7 +1681,7 @@ describe('v1.GSuiteAddOnsClient', () => {
   });
 
   describe('Path templates', () => {
-    describe('authorization', () => {
+    describe('authorization', async () => {
       const fakePath = '/rendered/path/authorization';
       const expectedParameters = {
         project: 'projectValue',
@@ -1688,7 +1690,7 @@ describe('v1.GSuiteAddOnsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.authorizationPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -1717,7 +1719,7 @@ describe('v1.GSuiteAddOnsClient', () => {
       });
     });
 
-    describe('deployment', () => {
+    describe('deployment', async () => {
       const fakePath = '/rendered/path/deployment';
       const expectedParameters = {
         project: 'projectValue',
@@ -1727,7 +1729,7 @@ describe('v1.GSuiteAddOnsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.deploymentPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -1766,7 +1768,7 @@ describe('v1.GSuiteAddOnsClient', () => {
       });
     });
 
-    describe('installStatus', () => {
+    describe('installStatus', async () => {
       const fakePath = '/rendered/path/installStatus';
       const expectedParameters = {
         project: 'projectValue',
@@ -1776,7 +1778,7 @@ describe('v1.GSuiteAddOnsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.installStatusPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -1818,7 +1820,7 @@ describe('v1.GSuiteAddOnsClient', () => {
       });
     });
 
-    describe('project', () => {
+    describe('project', async () => {
       const fakePath = '/rendered/path/project';
       const expectedParameters = {
         project: 'projectValue',
@@ -1827,7 +1829,7 @@ describe('v1.GSuiteAddOnsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectPathTemplate.render = sinon
         .stub()
         .returns(fakePath);

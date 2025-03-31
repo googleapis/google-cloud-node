@@ -266,7 +266,9 @@ describe('v1.DocumentLinkServiceClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      client.initialize().catch(err => {
+        throw err;
+      });
       assert(client.documentLinkServiceStub);
       client.close().then(() => {
         done();
@@ -333,7 +335,7 @@ describe('v1.DocumentLinkServiceClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contentwarehouse.v1.ListLinkedTargetsRequest()
       );
@@ -342,7 +344,7 @@ describe('v1.DocumentLinkServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.contentwarehouse.v1.ListLinkedTargetsResponse()
       );
@@ -366,7 +368,7 @@ describe('v1.DocumentLinkServiceClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contentwarehouse.v1.ListLinkedTargetsRequest()
       );
@@ -375,7 +377,7 @@ describe('v1.DocumentLinkServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.contentwarehouse.v1.ListLinkedTargetsResponse()
       );
@@ -415,7 +417,7 @@ describe('v1.DocumentLinkServiceClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contentwarehouse.v1.ListLinkedTargetsRequest()
       );
@@ -424,7 +426,7 @@ describe('v1.DocumentLinkServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listLinkedTargets = stubSimpleCall(
         undefined,
@@ -448,7 +450,7 @@ describe('v1.DocumentLinkServiceClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contentwarehouse.v1.ListLinkedTargetsRequest()
       );
@@ -471,7 +473,7 @@ describe('v1.DocumentLinkServiceClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contentwarehouse.v1.CreateDocumentLinkRequest()
       );
@@ -480,7 +482,7 @@ describe('v1.DocumentLinkServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.contentwarehouse.v1.DocumentLink()
       );
@@ -505,7 +507,7 @@ describe('v1.DocumentLinkServiceClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contentwarehouse.v1.CreateDocumentLinkRequest()
       );
@@ -514,7 +516,7 @@ describe('v1.DocumentLinkServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.contentwarehouse.v1.DocumentLink()
       );
@@ -554,7 +556,7 @@ describe('v1.DocumentLinkServiceClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contentwarehouse.v1.CreateDocumentLinkRequest()
       );
@@ -563,7 +565,7 @@ describe('v1.DocumentLinkServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createDocumentLink = stubSimpleCall(
         undefined,
@@ -587,7 +589,7 @@ describe('v1.DocumentLinkServiceClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contentwarehouse.v1.CreateDocumentLinkRequest()
       );
@@ -610,7 +612,7 @@ describe('v1.DocumentLinkServiceClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contentwarehouse.v1.DeleteDocumentLinkRequest()
       );
@@ -619,7 +621,7 @@ describe('v1.DocumentLinkServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -644,7 +646,7 @@ describe('v1.DocumentLinkServiceClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contentwarehouse.v1.DeleteDocumentLinkRequest()
       );
@@ -653,7 +655,7 @@ describe('v1.DocumentLinkServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -693,7 +695,7 @@ describe('v1.DocumentLinkServiceClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contentwarehouse.v1.DeleteDocumentLinkRequest()
       );
@@ -702,7 +704,7 @@ describe('v1.DocumentLinkServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteDocumentLink = stubSimpleCall(
         undefined,
@@ -726,7 +728,7 @@ describe('v1.DocumentLinkServiceClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contentwarehouse.v1.DeleteDocumentLinkRequest()
       );
@@ -749,7 +751,7 @@ describe('v1.DocumentLinkServiceClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contentwarehouse.v1.ListLinkedSourcesRequest()
       );
@@ -758,7 +760,7 @@ describe('v1.DocumentLinkServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.contentwarehouse.v1.DocumentLink()
@@ -790,7 +792,7 @@ describe('v1.DocumentLinkServiceClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contentwarehouse.v1.ListLinkedSourcesRequest()
       );
@@ -799,7 +801,7 @@ describe('v1.DocumentLinkServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.contentwarehouse.v1.DocumentLink()
@@ -849,7 +851,7 @@ describe('v1.DocumentLinkServiceClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contentwarehouse.v1.ListLinkedSourcesRequest()
       );
@@ -858,7 +860,7 @@ describe('v1.DocumentLinkServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listLinkedSources = stubSimpleCall(
         undefined,
@@ -882,7 +884,7 @@ describe('v1.DocumentLinkServiceClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contentwarehouse.v1.ListLinkedSourcesRequest()
       );
@@ -891,7 +893,7 @@ describe('v1.DocumentLinkServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.contentwarehouse.v1.DocumentLink()
@@ -945,7 +947,7 @@ describe('v1.DocumentLinkServiceClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contentwarehouse.v1.ListLinkedSourcesRequest()
       );
@@ -954,7 +956,7 @@ describe('v1.DocumentLinkServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listLinkedSources.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -997,7 +999,7 @@ describe('v1.DocumentLinkServiceClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contentwarehouse.v1.ListLinkedSourcesRequest()
       );
@@ -1006,7 +1008,7 @@ describe('v1.DocumentLinkServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.contentwarehouse.v1.DocumentLink()
@@ -1049,7 +1051,7 @@ describe('v1.DocumentLinkServiceClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contentwarehouse.v1.ListLinkedSourcesRequest()
       );
@@ -1058,7 +1060,7 @@ describe('v1.DocumentLinkServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listLinkedSources.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -1087,7 +1089,7 @@ describe('v1.DocumentLinkServiceClient', () => {
   });
 
   describe('Path templates', () => {
-    describe('documentLink', () => {
+    describe('documentLink', async () => {
       const fakePath = '/rendered/path/documentLink';
       const expectedParameters = {
         project: 'projectValue',
@@ -1101,7 +1103,7 @@ describe('v1.DocumentLinkServiceClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.documentLinkPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -1165,7 +1167,7 @@ describe('v1.DocumentLinkServiceClient', () => {
       });
     });
 
-    describe('documentSchema', () => {
+    describe('documentSchema', async () => {
       const fakePath = '/rendered/path/documentSchema';
       const expectedParameters = {
         project: 'projectValue',
@@ -1178,7 +1180,7 @@ describe('v1.DocumentLinkServiceClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.documentSchemaPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -1232,7 +1234,7 @@ describe('v1.DocumentLinkServiceClient', () => {
       });
     });
 
-    describe('projectLocationDocument', () => {
+    describe('projectLocationDocument', async () => {
       const fakePath = '/rendered/path/projectLocationDocument';
       const expectedParameters = {
         project: 'projectValue',
@@ -1245,7 +1247,7 @@ describe('v1.DocumentLinkServiceClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectLocationDocumentPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -1313,7 +1315,7 @@ describe('v1.DocumentLinkServiceClient', () => {
       });
     });
 
-    describe('projectLocationDocumentsReferenceId', () => {
+    describe('projectLocationDocumentsReferenceId', async () => {
       const fakePath = '/rendered/path/projectLocationDocumentsReferenceId';
       const expectedParameters = {
         project: 'projectValue',
@@ -1326,7 +1328,7 @@ describe('v1.DocumentLinkServiceClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectLocationDocumentsReferenceIdPathTemplate.render =
         sinon.stub().returns(fakePath);
       client.pathTemplates.projectLocationDocumentsReferenceIdPathTemplate.match =
@@ -1398,7 +1400,7 @@ describe('v1.DocumentLinkServiceClient', () => {
       });
     });
 
-    describe('ruleSet', () => {
+    describe('ruleSet', async () => {
       const fakePath = '/rendered/path/ruleSet';
       const expectedParameters = {
         project: 'projectValue',
@@ -1411,7 +1413,7 @@ describe('v1.DocumentLinkServiceClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.ruleSetPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -1464,7 +1466,7 @@ describe('v1.DocumentLinkServiceClient', () => {
       });
     });
 
-    describe('synonymSet', () => {
+    describe('synonymSet', async () => {
       const fakePath = '/rendered/path/synonymSet';
       const expectedParameters = {
         project: 'projectValue',
@@ -1477,7 +1479,7 @@ describe('v1.DocumentLinkServiceClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.synonymSetPathTemplate.render = sinon
         .stub()
         .returns(fakePath);

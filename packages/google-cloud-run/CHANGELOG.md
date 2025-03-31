@@ -1,5 +1,35 @@
 # Changelog
 
+## [2.0.1](https://github.com/googleapis/google-cloud-node/compare/run-v2.0.0...run-v2.0.1) (2025-03-19)
+
+
+### Bug Fixes
+
+* [Many APIs] await/catch promises, and update listOperationsAsync return type ([#6188](https://github.com/googleapis/google-cloud-node/issues/6188)) ([a73cdbf](https://github.com/googleapis/google-cloud-node/commit/a73cdbfe33d5ba9952f0c87cb9d5d12ee8753dd2))
+
+## [2.0.0](https://github.com/googleapis/google-cloud-node/compare/run-v1.5.1...run-v2.0.0) (2025-03-18)
+
+
+### ⚠ BREAKING CHANGES
+
+* upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096))
+
+### Features
+
+* [Many APIs] add request/response debug logging to gapics ([b99c5f8](https://github.com/googleapis/google-cloud-node/commit/b99c5f8269a8401c72e9c913971c7e90467209e2))
+
+
+### Miscellaneous Chores
+
+* Upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096)) ([eadae64](https://github.com/googleapis/google-cloud-node/commit/eadae64d54e07aa2c65097ea52e65008d4e87436))
+
+## [1.5.1](https://github.com/googleapis/google-cloud-node/compare/run-v1.5.0...run-v1.5.1) (2025-02-12)
+
+
+### Bug Fixes
+
+* [run] finalize fixing typings for headers in generator ([#6016](https://github.com/googleapis/google-cloud-node/issues/6016)) ([34bda26](https://github.com/googleapis/google-cloud-node/commit/34bda26d89163c60fdb602b6e81bd8c263148709))
+
 ## [1.5.0](https://github.com/googleapis/google-cloud-node/compare/run-v1.4.0...run-v1.5.0) (2024-11-21)
 
 

@@ -29,6 +29,7 @@ import type {
 
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
+import {loggingUtils as logging} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -53,6 +54,8 @@ export class SqlInstancesServiceClient {
   private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
+  private _log = logging.log('sql');
+
   auth: gax.GoogleAuth;
   descriptors: Descriptors = {
     page: {},
@@ -87,7 +90,7 @@ export class SqlInstancesServiceClient {
    *     Developer's Console, e.g. 'grape-spaceship-123'. We will also check
    *     the environment variable GCLOUD_PROJECT for your project ID. If your
    *     app is running in an environment which supports
-   *     {@link https://developers.google.com/identity/protocols/application-default-credentials Application Default Credentials},
+   *     {@link https://cloud.google.com/docs/authentication/application-default-credentials Application Default Credentials},
    *     your project ID will be detected automatically.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
@@ -496,8 +499,39 @@ export class SqlInstancesServiceClient {
         project: request.project ?? '',
         instance: request.instance ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.addServerCa(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('addServerCa request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.sql.v1.IOperation,
+          | protos.google.cloud.sql.v1.ISqlInstancesAddServerCaRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('addServerCa response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .addServerCa(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.sql.v1.IOperation,
+          (
+            | protos.google.cloud.sql.v1.ISqlInstancesAddServerCaRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('addServerCa response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Creates a Cloud SQL instance as a clone of the source instance. Using this
@@ -586,8 +620,36 @@ export class SqlInstancesServiceClient {
         project: request.project ?? '',
         instance: request.instance ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.clone(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('clone request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.sql.v1.IOperation,
+          | protos.google.cloud.sql.v1.ISqlInstancesCloneRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('clone response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .clone(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.sql.v1.IOperation,
+          protos.google.cloud.sql.v1.ISqlInstancesCloneRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('clone response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Deletes a Cloud SQL instance.
@@ -673,8 +735,36 @@ export class SqlInstancesServiceClient {
         project: request.project ?? '',
         instance: request.instance ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.delete(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('delete request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.sql.v1.IOperation,
+          | protos.google.cloud.sql.v1.ISqlInstancesDeleteRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('delete response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .delete(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.sql.v1.IOperation,
+          protos.google.cloud.sql.v1.ISqlInstancesDeleteRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('delete response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Demotes the stand-alone instance to be a Cloud SQL read replica for an
@@ -768,8 +858,39 @@ export class SqlInstancesServiceClient {
         project: request.project ?? '',
         instance: request.instance ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.demoteMaster(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('demoteMaster request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.sql.v1.IOperation,
+          | protos.google.cloud.sql.v1.ISqlInstancesDemoteMasterRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('demoteMaster response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .demoteMaster(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.sql.v1.IOperation,
+          (
+            | protos.google.cloud.sql.v1.ISqlInstancesDemoteMasterRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('demoteMaster response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Demotes an existing standalone instance to be a Cloud SQL read replica
@@ -858,8 +979,36 @@ export class SqlInstancesServiceClient {
         project: request.project ?? '',
         instance: request.instance ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.demote(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('demote request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.sql.v1.IOperation,
+          | protos.google.cloud.sql.v1.ISqlInstancesDemoteRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('demote response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .demote(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.sql.v1.IOperation,
+          protos.google.cloud.sql.v1.ISqlInstancesDemoteRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('demote response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Exports data from a Cloud SQL instance to a Cloud Storage bucket as a SQL
@@ -947,8 +1096,36 @@ export class SqlInstancesServiceClient {
         project: request.project ?? '',
         instance: request.instance ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.export(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('export request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.sql.v1.IOperation,
+          | protos.google.cloud.sql.v1.ISqlInstancesExportRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('export response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .export(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.sql.v1.IOperation,
+          protos.google.cloud.sql.v1.ISqlInstancesExportRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('export response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Initiates a manual failover of a high availability (HA) primary instance
@@ -1048,8 +1225,36 @@ export class SqlInstancesServiceClient {
         project: request.project ?? '',
         instance: request.instance ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.failover(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('failover request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.sql.v1.IOperation,
+          | protos.google.cloud.sql.v1.ISqlInstancesFailoverRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('failover response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .failover(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.sql.v1.IOperation,
+          protos.google.cloud.sql.v1.ISqlInstancesFailoverRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('failover response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Reencrypt CMEK instance with latest key version.
@@ -1143,8 +1348,36 @@ export class SqlInstancesServiceClient {
         project: request.project ?? '',
         instance: request.instance ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.reencrypt(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('reencrypt request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.sql.v1.IOperation,
+          | protos.google.cloud.sql.v1.ISqlInstancesReencryptRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('reencrypt response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .reencrypt(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.sql.v1.IOperation,
+          protos.google.cloud.sql.v1.ISqlInstancesReencryptRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('reencrypt response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Retrieves a resource containing information about a Cloud SQL instance.
@@ -1228,8 +1461,34 @@ export class SqlInstancesServiceClient {
         project: request.project ?? '',
         instance: request.instance ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.get(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('get request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.sql.v1.IDatabaseInstance,
+          protos.google.cloud.sql.v1.ISqlInstancesGetRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('get response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .get(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.sql.v1.IDatabaseInstance,
+          protos.google.cloud.sql.v1.ISqlInstancesGetRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('get response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Imports data into a Cloud SQL instance from a SQL dump  or CSV file in
@@ -1317,8 +1576,36 @@ export class SqlInstancesServiceClient {
         project: request.project ?? '',
         instance: request.instance ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.import(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('import request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.sql.v1.IOperation,
+          | protos.google.cloud.sql.v1.ISqlInstancesImportRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('import response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .import(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.sql.v1.IOperation,
+          protos.google.cloud.sql.v1.ISqlInstancesImportRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('import response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Creates a new Cloud SQL instance.
@@ -1403,8 +1690,36 @@ export class SqlInstancesServiceClient {
       this._gaxModule.routingHeader.fromParams({
         project: request.project ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.insert(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('insert request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.sql.v1.IOperation,
+          | protos.google.cloud.sql.v1.ISqlInstancesInsertRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('insert response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .insert(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.sql.v1.IOperation,
+          protos.google.cloud.sql.v1.ISqlInstancesInsertRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('insert response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Lists instances under a given project.
@@ -1505,8 +1820,36 @@ export class SqlInstancesServiceClient {
       this._gaxModule.routingHeader.fromParams({
         project: request.project ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.list(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('list request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.sql.v1.IInstancesListResponse,
+          | protos.google.cloud.sql.v1.ISqlInstancesListRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('list response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .list(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.sql.v1.IInstancesListResponse,
+          protos.google.cloud.sql.v1.ISqlInstancesListRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('list response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Lists all of the trusted Certificate Authorities (CAs) for the specified
@@ -1602,8 +1945,39 @@ export class SqlInstancesServiceClient {
         project: request.project ?? '',
         instance: request.instance ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.listServerCas(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listServerCas request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.sql.v1.IInstancesListServerCasResponse,
+          | protos.google.cloud.sql.v1.ISqlInstancesListServerCasRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('listServerCas response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .listServerCas(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.sql.v1.IInstancesListServerCasResponse,
+          (
+            | protos.google.cloud.sql.v1.ISqlInstancesListServerCasRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('listServerCas response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Partially updates settings of a Cloud SQL instance by merging the request
@@ -1691,8 +2065,36 @@ export class SqlInstancesServiceClient {
         project: request.project ?? '',
         instance: request.instance ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.patch(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('patch request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.sql.v1.IOperation,
+          | protos.google.cloud.sql.v1.ISqlInstancesPatchRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('patch response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .patch(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.sql.v1.IOperation,
+          protos.google.cloud.sql.v1.ISqlInstancesPatchRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('patch response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Promotes the read replica instance to be an independent Cloud SQL
@@ -1794,8 +2196,39 @@ export class SqlInstancesServiceClient {
         project: request.project ?? '',
         instance: request.instance ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.promoteReplica(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('promoteReplica request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.sql.v1.IOperation,
+          | protos.google.cloud.sql.v1.ISqlInstancesPromoteReplicaRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('promoteReplica response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .promoteReplica(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.sql.v1.IOperation,
+          (
+            | protos.google.cloud.sql.v1.ISqlInstancesPromoteReplicaRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('promoteReplica response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Switches over from the primary instance to the designated DR replica
@@ -1892,8 +2325,36 @@ export class SqlInstancesServiceClient {
         project: request.project ?? '',
         instance: request.instance ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.switchover(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('switchover request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.sql.v1.IOperation,
+          | protos.google.cloud.sql.v1.ISqlInstancesSwitchoverRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('switchover response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .switchover(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.sql.v1.IOperation,
+          protos.google.cloud.sql.v1.ISqlInstancesSwitchoverRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('switchover response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Deletes all client certificates and generates a new server SSL certificate
@@ -1986,8 +2447,39 @@ export class SqlInstancesServiceClient {
         project: request.project ?? '',
         instance: request.instance ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.resetSslConfig(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('resetSslConfig request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.sql.v1.IOperation,
+          | protos.google.cloud.sql.v1.ISqlInstancesResetSslConfigRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('resetSslConfig response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .resetSslConfig(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.sql.v1.IOperation,
+          (
+            | protos.google.cloud.sql.v1.ISqlInstancesResetSslConfigRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('resetSslConfig response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Restarts a Cloud SQL instance.
@@ -2073,8 +2565,36 @@ export class SqlInstancesServiceClient {
         project: request.project ?? '',
         instance: request.instance ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.restart(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('restart request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.sql.v1.IOperation,
+          | protos.google.cloud.sql.v1.ISqlInstancesRestartRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('restart response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .restart(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.sql.v1.IOperation,
+          protos.google.cloud.sql.v1.ISqlInstancesRestartRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('restart response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Restores a backup of a Cloud SQL instance. Using this operation might cause
@@ -2168,8 +2688,39 @@ export class SqlInstancesServiceClient {
         project: request.project ?? '',
         instance: request.instance ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.restoreBackup(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('restoreBackup request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.sql.v1.IOperation,
+          | protos.google.cloud.sql.v1.ISqlInstancesRestoreBackupRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('restoreBackup response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .restoreBackup(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.sql.v1.IOperation,
+          (
+            | protos.google.cloud.sql.v1.ISqlInstancesRestoreBackupRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('restoreBackup response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Rotates the server certificate to one signed by the Certificate Authority
@@ -2265,8 +2816,39 @@ export class SqlInstancesServiceClient {
         project: request.project ?? '',
         instance: request.instance ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.rotateServerCa(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('rotateServerCa request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.sql.v1.IOperation,
+          | protos.google.cloud.sql.v1.ISqlInstancesRotateServerCaRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('rotateServerCa response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .rotateServerCa(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.sql.v1.IOperation,
+          (
+            | protos.google.cloud.sql.v1.ISqlInstancesRotateServerCaRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('rotateServerCa response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Starts the replication in the read replica instance.
@@ -2358,8 +2940,39 @@ export class SqlInstancesServiceClient {
         project: request.project ?? '',
         instance: request.instance ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.startReplica(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('startReplica request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.sql.v1.IOperation,
+          | protos.google.cloud.sql.v1.ISqlInstancesStartReplicaRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('startReplica response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .startReplica(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.sql.v1.IOperation,
+          (
+            | protos.google.cloud.sql.v1.ISqlInstancesStartReplicaRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('startReplica response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Stops the replication in the read replica instance.
@@ -2451,8 +3064,39 @@ export class SqlInstancesServiceClient {
         project: request.project ?? '',
         instance: request.instance ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.stopReplica(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('stopReplica request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.sql.v1.IOperation,
+          | protos.google.cloud.sql.v1.ISqlInstancesStopReplicaRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('stopReplica response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .stopReplica(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.sql.v1.IOperation,
+          (
+            | protos.google.cloud.sql.v1.ISqlInstancesStopReplicaRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('stopReplica response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Truncate MySQL general and slow query log tables
@@ -2546,8 +3190,39 @@ export class SqlInstancesServiceClient {
         project: request.project ?? '',
         instance: request.instance ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.truncateLog(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('truncateLog request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.sql.v1.IOperation,
+          | protos.google.cloud.sql.v1.ISqlInstancesTruncateLogRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('truncateLog response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .truncateLog(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.sql.v1.IOperation,
+          (
+            | protos.google.cloud.sql.v1.ISqlInstancesTruncateLogRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('truncateLog response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Updates settings of a Cloud SQL instance. Using this operation might cause
@@ -2635,8 +3310,36 @@ export class SqlInstancesServiceClient {
         project: request.project ?? '',
         instance: request.instance ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.update(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('update request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.sql.v1.IOperation,
+          | protos.google.cloud.sql.v1.ISqlInstancesUpdateRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('update response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .update(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.sql.v1.IOperation,
+          protos.google.cloud.sql.v1.ISqlInstancesUpdateRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('update response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Generates a short-lived X509 certificate containing the provided public key
@@ -2738,8 +3441,39 @@ export class SqlInstancesServiceClient {
         project: request.project ?? '',
         instance: request.instance ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.createEphemeral(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('createEphemeral request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.sql.v1.ISslCert,
+          | protos.google.cloud.sql.v1.ISqlInstancesCreateEphemeralCertRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('createEphemeral response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .createEphemeral(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.sql.v1.ISslCert,
+          (
+            | protos.google.cloud.sql.v1.ISqlInstancesCreateEphemeralCertRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('createEphemeral response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Reschedules the maintenance on the given instance.
@@ -2838,8 +3572,39 @@ export class SqlInstancesServiceClient {
         project: request.project ?? '',
         instance: request.instance ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.rescheduleMaintenance(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('rescheduleMaintenance request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.sql.v1.IOperation,
+          | protos.google.cloud.sql.v1.ISqlInstancesRescheduleMaintenanceRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('rescheduleMaintenance response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .rescheduleMaintenance(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.sql.v1.IOperation,
+          (
+            | protos.google.cloud.sql.v1.ISqlInstancesRescheduleMaintenanceRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('rescheduleMaintenance response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Verify External primary instance external sync settings.
@@ -2952,12 +3717,39 @@ export class SqlInstancesServiceClient {
         project: request.project ?? '',
         instance: request.instance ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.verifyExternalSyncSettings(
-      request,
-      options,
-      callback
-    );
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('verifyExternalSyncSettings request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.sql.v1.ISqlInstancesVerifyExternalSyncSettingsResponse,
+          | protos.google.cloud.sql.v1.ISqlInstancesVerifyExternalSyncSettingsRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('verifyExternalSyncSettings response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .verifyExternalSyncSettings(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.sql.v1.ISqlInstancesVerifyExternalSyncSettingsResponse,
+          (
+            | protos.google.cloud.sql.v1.ISqlInstancesVerifyExternalSyncSettingsRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('verifyExternalSyncSettings response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Start External primary instance migration.
@@ -3068,8 +3860,39 @@ export class SqlInstancesServiceClient {
         project: request.project ?? '',
         instance: request.instance ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.startExternalSync(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('startExternalSync request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.sql.v1.IOperation,
+          | protos.google.cloud.sql.v1.ISqlInstancesStartExternalSyncRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('startExternalSync response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .startExternalSync(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.sql.v1.IOperation,
+          (
+            | protos.google.cloud.sql.v1.ISqlInstancesStartExternalSyncRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('startExternalSync response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Perform Disk Shrink on primary instance.
@@ -3169,8 +3992,39 @@ export class SqlInstancesServiceClient {
         project: request.project ?? '',
         instance: request.instance ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.performDiskShrink(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('performDiskShrink request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.sql.v1.IOperation,
+          | protos.google.cloud.sql.v1.ISqlInstancesPerformDiskShrinkRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('performDiskShrink response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .performDiskShrink(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.sql.v1.IOperation,
+          (
+            | protos.google.cloud.sql.v1.ISqlInstancesPerformDiskShrinkRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('performDiskShrink response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Get Disk Shrink Config for a given instance.
@@ -3268,8 +4122,39 @@ export class SqlInstancesServiceClient {
         project: request.project ?? '',
         instance: request.instance ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.getDiskShrinkConfig(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('getDiskShrinkConfig request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.sql.v1.ISqlInstancesGetDiskShrinkConfigResponse,
+          | protos.google.cloud.sql.v1.ISqlInstancesGetDiskShrinkConfigRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getDiskShrinkConfig response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getDiskShrinkConfig(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.sql.v1.ISqlInstancesGetDiskShrinkConfigResponse,
+          (
+            | protos.google.cloud.sql.v1.ISqlInstancesGetDiskShrinkConfigRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getDiskShrinkConfig response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Reset Replica Size to primary instance disk size.
@@ -3367,8 +4252,39 @@ export class SqlInstancesServiceClient {
         project: request.project ?? '',
         instance: request.instance ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.resetReplicaSize(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('resetReplicaSize request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.sql.v1.IOperation,
+          | protos.google.cloud.sql.v1.ISqlInstancesResetReplicaSizeRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('resetReplicaSize response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .resetReplicaSize(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.sql.v1.IOperation,
+          (
+            | protos.google.cloud.sql.v1.ISqlInstancesResetReplicaSizeRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('resetReplicaSize response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Get Latest Recovery Time for a given instance.
@@ -3466,8 +4382,39 @@ export class SqlInstancesServiceClient {
         project: request.project ?? '',
         instance: request.instance ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.getLatestRecoveryTime(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('getLatestRecoveryTime request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.sql.v1.ISqlInstancesGetLatestRecoveryTimeResponse,
+          | protos.google.cloud.sql.v1.ISqlInstancesGetLatestRecoveryTimeRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getLatestRecoveryTime response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getLatestRecoveryTime(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.sql.v1.ISqlInstancesGetLatestRecoveryTimeResponse,
+          (
+            | protos.google.cloud.sql.v1.ISqlInstancesGetLatestRecoveryTimeRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getLatestRecoveryTime response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Acquire a lease for the setup of SQL Server Reporting Services (SSRS).
@@ -3571,8 +4518,39 @@ export class SqlInstancesServiceClient {
         project: request.project ?? '',
         instance: request.instance ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.acquireSsrsLease(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('acquireSsrsLease request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.sql.v1.ISqlInstancesAcquireSsrsLeaseResponse,
+          | protos.google.cloud.sql.v1.ISqlInstancesAcquireSsrsLeaseRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('acquireSsrsLease response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .acquireSsrsLease(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.sql.v1.ISqlInstancesAcquireSsrsLeaseResponse,
+          (
+            | protos.google.cloud.sql.v1.ISqlInstancesAcquireSsrsLeaseRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('acquireSsrsLease response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Release a lease for the setup of SQL Server Reporting Services (SSRS).
@@ -3673,8 +4651,39 @@ export class SqlInstancesServiceClient {
         project: request.project ?? '',
         instance: request.instance ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.releaseSsrsLease(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('releaseSsrsLease request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.sql.v1.ISqlInstancesReleaseSsrsLeaseResponse,
+          | protos.google.cloud.sql.v1.ISqlInstancesReleaseSsrsLeaseRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('releaseSsrsLease response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .releaseSsrsLease(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.sql.v1.ISqlInstancesReleaseSsrsLeaseResponse,
+          (
+            | protos.google.cloud.sql.v1.ISqlInstancesReleaseSsrsLeaseRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('releaseSsrsLease response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
 
   /**
@@ -3764,6 +4773,7 @@ export class SqlInstancesServiceClient {
   close(): Promise<void> {
     if (this.sqlInstancesServiceStub && !this._terminated) {
       return this.sqlInstancesServiceStub.then(stub => {
+        this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
         this.locationsClient.close();

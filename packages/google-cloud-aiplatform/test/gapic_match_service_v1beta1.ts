@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -280,7 +280,7 @@ describe('v1beta1.MatchServiceClient', () => {
         ['indexEndpoint']
       );
       request.indexEndpoint = defaultValue1;
-      const expectedHeaderRequestParams = `index_endpoint=${defaultValue1}`;
+      const expectedHeaderRequestParams = `index_endpoint=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.FindNeighborsResponse()
       );
@@ -311,7 +311,7 @@ describe('v1beta1.MatchServiceClient', () => {
         ['indexEndpoint']
       );
       request.indexEndpoint = defaultValue1;
-      const expectedHeaderRequestParams = `index_endpoint=${defaultValue1}`;
+      const expectedHeaderRequestParams = `index_endpoint=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.FindNeighborsResponse()
       );
@@ -358,7 +358,7 @@ describe('v1beta1.MatchServiceClient', () => {
         ['indexEndpoint']
       );
       request.indexEndpoint = defaultValue1;
-      const expectedHeaderRequestParams = `index_endpoint=${defaultValue1}`;
+      const expectedHeaderRequestParams = `index_endpoint=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.findNeighbors = stubSimpleCall(
         undefined,
@@ -410,7 +410,7 @@ describe('v1beta1.MatchServiceClient', () => {
         ['indexEndpoint']
       );
       request.indexEndpoint = defaultValue1;
-      const expectedHeaderRequestParams = `index_endpoint=${defaultValue1}`;
+      const expectedHeaderRequestParams = `index_endpoint=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.ReadIndexDatapointsResponse()
       );
@@ -442,7 +442,7 @@ describe('v1beta1.MatchServiceClient', () => {
         ['indexEndpoint']
       );
       request.indexEndpoint = defaultValue1;
-      const expectedHeaderRequestParams = `index_endpoint=${defaultValue1}`;
+      const expectedHeaderRequestParams = `index_endpoint=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.ReadIndexDatapointsResponse()
       );
@@ -489,7 +489,7 @@ describe('v1beta1.MatchServiceClient', () => {
         ['indexEndpoint']
       );
       request.indexEndpoint = defaultValue1;
-      const expectedHeaderRequestParams = `index_endpoint=${defaultValue1}`;
+      const expectedHeaderRequestParams = `index_endpoint=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.readIndexDatapoints = stubSimpleCall(
         undefined,

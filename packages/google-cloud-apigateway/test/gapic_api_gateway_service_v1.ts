@@ -285,7 +285,9 @@ describe('v1.ApiGatewayServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      client.initialize().catch(err => {
+        throw err;
+      });
       assert(client.apiGatewayServiceStub);
       client.close().then(() => {
         done();
@@ -344,7 +346,7 @@ describe('v1.ApiGatewayServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apigateway.v1.GetGatewayRequest()
       );
@@ -353,7 +355,7 @@ describe('v1.ApiGatewayServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.apigateway.v1.Gateway()
       );
@@ -375,7 +377,7 @@ describe('v1.ApiGatewayServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apigateway.v1.GetGatewayRequest()
       );
@@ -384,7 +386,7 @@ describe('v1.ApiGatewayServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.apigateway.v1.Gateway()
       );
@@ -422,7 +424,7 @@ describe('v1.ApiGatewayServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apigateway.v1.GetGatewayRequest()
       );
@@ -431,7 +433,7 @@ describe('v1.ApiGatewayServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getGateway = stubSimpleCall(
         undefined,
@@ -453,7 +455,7 @@ describe('v1.ApiGatewayServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apigateway.v1.GetGatewayRequest()
       );
@@ -474,7 +476,7 @@ describe('v1.ApiGatewayServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apigateway.v1.GetApiRequest()
       );
@@ -483,7 +485,7 @@ describe('v1.ApiGatewayServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.apigateway.v1.Api()
       );
@@ -505,7 +507,7 @@ describe('v1.ApiGatewayServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apigateway.v1.GetApiRequest()
       );
@@ -514,7 +516,7 @@ describe('v1.ApiGatewayServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.apigateway.v1.Api()
       );
@@ -552,7 +554,7 @@ describe('v1.ApiGatewayServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apigateway.v1.GetApiRequest()
       );
@@ -561,7 +563,7 @@ describe('v1.ApiGatewayServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getApi = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.getApi(request), expectedError);
@@ -580,7 +582,7 @@ describe('v1.ApiGatewayServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apigateway.v1.GetApiRequest()
       );
@@ -601,7 +603,7 @@ describe('v1.ApiGatewayServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apigateway.v1.GetApiConfigRequest()
       );
@@ -610,7 +612,7 @@ describe('v1.ApiGatewayServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.apigateway.v1.ApiConfig()
       );
@@ -632,7 +634,7 @@ describe('v1.ApiGatewayServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apigateway.v1.GetApiConfigRequest()
       );
@@ -641,7 +643,7 @@ describe('v1.ApiGatewayServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.apigateway.v1.ApiConfig()
       );
@@ -679,7 +681,7 @@ describe('v1.ApiGatewayServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apigateway.v1.GetApiConfigRequest()
       );
@@ -688,7 +690,7 @@ describe('v1.ApiGatewayServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getApiConfig = stubSimpleCall(
         undefined,
@@ -710,7 +712,7 @@ describe('v1.ApiGatewayServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apigateway.v1.GetApiConfigRequest()
       );
@@ -731,7 +733,7 @@ describe('v1.ApiGatewayServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apigateway.v1.CreateGatewayRequest()
       );
@@ -740,7 +742,7 @@ describe('v1.ApiGatewayServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -764,7 +766,7 @@ describe('v1.ApiGatewayServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apigateway.v1.CreateGatewayRequest()
       );
@@ -773,7 +775,7 @@ describe('v1.ApiGatewayServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -818,7 +820,7 @@ describe('v1.ApiGatewayServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apigateway.v1.CreateGatewayRequest()
       );
@@ -827,7 +829,7 @@ describe('v1.ApiGatewayServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createGateway = stubLongRunningCall(
         undefined,
@@ -849,7 +851,7 @@ describe('v1.ApiGatewayServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apigateway.v1.CreateGatewayRequest()
       );
@@ -858,7 +860,7 @@ describe('v1.ApiGatewayServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createGateway = stubLongRunningCall(
         undefined,
@@ -882,7 +884,7 @@ describe('v1.ApiGatewayServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -904,7 +906,7 @@ describe('v1.ApiGatewayServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -925,7 +927,7 @@ describe('v1.ApiGatewayServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apigateway.v1.UpdateGatewayRequest()
       );
@@ -935,7 +937,7 @@ describe('v1.ApiGatewayServiceClient', () => {
         ['gateway', 'name']
       );
       request.gateway.name = defaultValue1;
-      const expectedHeaderRequestParams = `gateway.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `gateway.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -959,7 +961,7 @@ describe('v1.ApiGatewayServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apigateway.v1.UpdateGatewayRequest()
       );
@@ -969,7 +971,7 @@ describe('v1.ApiGatewayServiceClient', () => {
         ['gateway', 'name']
       );
       request.gateway.name = defaultValue1;
-      const expectedHeaderRequestParams = `gateway.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `gateway.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1014,7 +1016,7 @@ describe('v1.ApiGatewayServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apigateway.v1.UpdateGatewayRequest()
       );
@@ -1024,7 +1026,7 @@ describe('v1.ApiGatewayServiceClient', () => {
         ['gateway', 'name']
       );
       request.gateway.name = defaultValue1;
-      const expectedHeaderRequestParams = `gateway.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `gateway.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateGateway = stubLongRunningCall(
         undefined,
@@ -1046,7 +1048,7 @@ describe('v1.ApiGatewayServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apigateway.v1.UpdateGatewayRequest()
       );
@@ -1056,7 +1058,7 @@ describe('v1.ApiGatewayServiceClient', () => {
         ['gateway', 'name']
       );
       request.gateway.name = defaultValue1;
-      const expectedHeaderRequestParams = `gateway.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `gateway.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateGateway = stubLongRunningCall(
         undefined,
@@ -1080,7 +1082,7 @@ describe('v1.ApiGatewayServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -1102,7 +1104,7 @@ describe('v1.ApiGatewayServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -1123,7 +1125,7 @@ describe('v1.ApiGatewayServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apigateway.v1.DeleteGatewayRequest()
       );
@@ -1132,7 +1134,7 @@ describe('v1.ApiGatewayServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1156,7 +1158,7 @@ describe('v1.ApiGatewayServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apigateway.v1.DeleteGatewayRequest()
       );
@@ -1165,7 +1167,7 @@ describe('v1.ApiGatewayServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1210,7 +1212,7 @@ describe('v1.ApiGatewayServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apigateway.v1.DeleteGatewayRequest()
       );
@@ -1219,7 +1221,7 @@ describe('v1.ApiGatewayServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteGateway = stubLongRunningCall(
         undefined,
@@ -1241,7 +1243,7 @@ describe('v1.ApiGatewayServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apigateway.v1.DeleteGatewayRequest()
       );
@@ -1250,7 +1252,7 @@ describe('v1.ApiGatewayServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteGateway = stubLongRunningCall(
         undefined,
@@ -1274,7 +1276,7 @@ describe('v1.ApiGatewayServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -1296,7 +1298,7 @@ describe('v1.ApiGatewayServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -1317,7 +1319,7 @@ describe('v1.ApiGatewayServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apigateway.v1.CreateApiRequest()
       );
@@ -1326,7 +1328,7 @@ describe('v1.ApiGatewayServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1349,7 +1351,7 @@ describe('v1.ApiGatewayServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apigateway.v1.CreateApiRequest()
       );
@@ -1358,7 +1360,7 @@ describe('v1.ApiGatewayServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1403,7 +1405,7 @@ describe('v1.ApiGatewayServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apigateway.v1.CreateApiRequest()
       );
@@ -1412,7 +1414,7 @@ describe('v1.ApiGatewayServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createApi = stubLongRunningCall(
         undefined,
@@ -1434,7 +1436,7 @@ describe('v1.ApiGatewayServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apigateway.v1.CreateApiRequest()
       );
@@ -1443,7 +1445,7 @@ describe('v1.ApiGatewayServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createApi = stubLongRunningCall(
         undefined,
@@ -1467,7 +1469,7 @@ describe('v1.ApiGatewayServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -1489,7 +1491,7 @@ describe('v1.ApiGatewayServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -1507,7 +1509,7 @@ describe('v1.ApiGatewayServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apigateway.v1.UpdateApiRequest()
       );
@@ -1517,7 +1519,7 @@ describe('v1.ApiGatewayServiceClient', () => {
         ['api', 'name']
       );
       request.api.name = defaultValue1;
-      const expectedHeaderRequestParams = `api.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `api.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1540,7 +1542,7 @@ describe('v1.ApiGatewayServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apigateway.v1.UpdateApiRequest()
       );
@@ -1550,7 +1552,7 @@ describe('v1.ApiGatewayServiceClient', () => {
         ['api', 'name']
       );
       request.api.name = defaultValue1;
-      const expectedHeaderRequestParams = `api.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `api.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1595,7 +1597,7 @@ describe('v1.ApiGatewayServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apigateway.v1.UpdateApiRequest()
       );
@@ -1605,7 +1607,7 @@ describe('v1.ApiGatewayServiceClient', () => {
         ['api', 'name']
       );
       request.api.name = defaultValue1;
-      const expectedHeaderRequestParams = `api.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `api.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateApi = stubLongRunningCall(
         undefined,
@@ -1627,7 +1629,7 @@ describe('v1.ApiGatewayServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apigateway.v1.UpdateApiRequest()
       );
@@ -1637,7 +1639,7 @@ describe('v1.ApiGatewayServiceClient', () => {
         ['api', 'name']
       );
       request.api.name = defaultValue1;
-      const expectedHeaderRequestParams = `api.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `api.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateApi = stubLongRunningCall(
         undefined,
@@ -1661,7 +1663,7 @@ describe('v1.ApiGatewayServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -1683,7 +1685,7 @@ describe('v1.ApiGatewayServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -1701,7 +1703,7 @@ describe('v1.ApiGatewayServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apigateway.v1.DeleteApiRequest()
       );
@@ -1710,7 +1712,7 @@ describe('v1.ApiGatewayServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1733,7 +1735,7 @@ describe('v1.ApiGatewayServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apigateway.v1.DeleteApiRequest()
       );
@@ -1742,7 +1744,7 @@ describe('v1.ApiGatewayServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1787,7 +1789,7 @@ describe('v1.ApiGatewayServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apigateway.v1.DeleteApiRequest()
       );
@@ -1796,7 +1798,7 @@ describe('v1.ApiGatewayServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteApi = stubLongRunningCall(
         undefined,
@@ -1818,7 +1820,7 @@ describe('v1.ApiGatewayServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apigateway.v1.DeleteApiRequest()
       );
@@ -1827,7 +1829,7 @@ describe('v1.ApiGatewayServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteApi = stubLongRunningCall(
         undefined,
@@ -1851,7 +1853,7 @@ describe('v1.ApiGatewayServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -1873,7 +1875,7 @@ describe('v1.ApiGatewayServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -1891,7 +1893,7 @@ describe('v1.ApiGatewayServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apigateway.v1.CreateApiConfigRequest()
       );
@@ -1900,7 +1902,7 @@ describe('v1.ApiGatewayServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1924,7 +1926,7 @@ describe('v1.ApiGatewayServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apigateway.v1.CreateApiConfigRequest()
       );
@@ -1933,7 +1935,7 @@ describe('v1.ApiGatewayServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1978,7 +1980,7 @@ describe('v1.ApiGatewayServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apigateway.v1.CreateApiConfigRequest()
       );
@@ -1987,7 +1989,7 @@ describe('v1.ApiGatewayServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createApiConfig = stubLongRunningCall(
         undefined,
@@ -2009,7 +2011,7 @@ describe('v1.ApiGatewayServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apigateway.v1.CreateApiConfigRequest()
       );
@@ -2018,7 +2020,7 @@ describe('v1.ApiGatewayServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createApiConfig = stubLongRunningCall(
         undefined,
@@ -2042,7 +2044,7 @@ describe('v1.ApiGatewayServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -2064,7 +2066,7 @@ describe('v1.ApiGatewayServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -2085,7 +2087,7 @@ describe('v1.ApiGatewayServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apigateway.v1.UpdateApiConfigRequest()
       );
@@ -2095,7 +2097,7 @@ describe('v1.ApiGatewayServiceClient', () => {
         ['apiConfig', 'name']
       );
       request.apiConfig.name = defaultValue1;
-      const expectedHeaderRequestParams = `api_config.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `api_config.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2119,7 +2121,7 @@ describe('v1.ApiGatewayServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apigateway.v1.UpdateApiConfigRequest()
       );
@@ -2129,7 +2131,7 @@ describe('v1.ApiGatewayServiceClient', () => {
         ['apiConfig', 'name']
       );
       request.apiConfig.name = defaultValue1;
-      const expectedHeaderRequestParams = `api_config.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `api_config.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2174,7 +2176,7 @@ describe('v1.ApiGatewayServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apigateway.v1.UpdateApiConfigRequest()
       );
@@ -2184,7 +2186,7 @@ describe('v1.ApiGatewayServiceClient', () => {
         ['apiConfig', 'name']
       );
       request.apiConfig.name = defaultValue1;
-      const expectedHeaderRequestParams = `api_config.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `api_config.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateApiConfig = stubLongRunningCall(
         undefined,
@@ -2206,7 +2208,7 @@ describe('v1.ApiGatewayServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apigateway.v1.UpdateApiConfigRequest()
       );
@@ -2216,7 +2218,7 @@ describe('v1.ApiGatewayServiceClient', () => {
         ['apiConfig', 'name']
       );
       request.apiConfig.name = defaultValue1;
-      const expectedHeaderRequestParams = `api_config.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `api_config.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateApiConfig = stubLongRunningCall(
         undefined,
@@ -2240,7 +2242,7 @@ describe('v1.ApiGatewayServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -2262,7 +2264,7 @@ describe('v1.ApiGatewayServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -2283,7 +2285,7 @@ describe('v1.ApiGatewayServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apigateway.v1.DeleteApiConfigRequest()
       );
@@ -2292,7 +2294,7 @@ describe('v1.ApiGatewayServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2316,7 +2318,7 @@ describe('v1.ApiGatewayServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apigateway.v1.DeleteApiConfigRequest()
       );
@@ -2325,7 +2327,7 @@ describe('v1.ApiGatewayServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2370,7 +2372,7 @@ describe('v1.ApiGatewayServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apigateway.v1.DeleteApiConfigRequest()
       );
@@ -2379,7 +2381,7 @@ describe('v1.ApiGatewayServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteApiConfig = stubLongRunningCall(
         undefined,
@@ -2401,7 +2403,7 @@ describe('v1.ApiGatewayServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apigateway.v1.DeleteApiConfigRequest()
       );
@@ -2410,7 +2412,7 @@ describe('v1.ApiGatewayServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteApiConfig = stubLongRunningCall(
         undefined,
@@ -2434,7 +2436,7 @@ describe('v1.ApiGatewayServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -2456,7 +2458,7 @@ describe('v1.ApiGatewayServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -2477,7 +2479,7 @@ describe('v1.ApiGatewayServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apigateway.v1.ListGatewaysRequest()
       );
@@ -2486,7 +2488,7 @@ describe('v1.ApiGatewayServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.apigateway.v1.Gateway()),
         generateSampleMessage(new protos.google.cloud.apigateway.v1.Gateway()),
@@ -2510,7 +2512,7 @@ describe('v1.ApiGatewayServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apigateway.v1.ListGatewaysRequest()
       );
@@ -2519,7 +2521,7 @@ describe('v1.ApiGatewayServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.apigateway.v1.Gateway()),
         generateSampleMessage(new protos.google.cloud.apigateway.v1.Gateway()),
@@ -2559,7 +2561,7 @@ describe('v1.ApiGatewayServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apigateway.v1.ListGatewaysRequest()
       );
@@ -2568,7 +2570,7 @@ describe('v1.ApiGatewayServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listGateways = stubSimpleCall(
         undefined,
@@ -2590,7 +2592,7 @@ describe('v1.ApiGatewayServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apigateway.v1.ListGatewaysRequest()
       );
@@ -2599,7 +2601,7 @@ describe('v1.ApiGatewayServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.apigateway.v1.Gateway()),
         generateSampleMessage(new protos.google.cloud.apigateway.v1.Gateway()),
@@ -2644,7 +2646,7 @@ describe('v1.ApiGatewayServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apigateway.v1.ListGatewaysRequest()
       );
@@ -2653,7 +2655,7 @@ describe('v1.ApiGatewayServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listGateways.createStream = stubPageStreamingCall(
         undefined,
@@ -2695,7 +2697,7 @@ describe('v1.ApiGatewayServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apigateway.v1.ListGatewaysRequest()
       );
@@ -2704,7 +2706,7 @@ describe('v1.ApiGatewayServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.apigateway.v1.Gateway()),
         generateSampleMessage(new protos.google.cloud.apigateway.v1.Gateway()),
@@ -2738,7 +2740,7 @@ describe('v1.ApiGatewayServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apigateway.v1.ListGatewaysRequest()
       );
@@ -2747,7 +2749,7 @@ describe('v1.ApiGatewayServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listGateways.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -2780,7 +2782,7 @@ describe('v1.ApiGatewayServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apigateway.v1.ListApisRequest()
       );
@@ -2789,7 +2791,7 @@ describe('v1.ApiGatewayServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.apigateway.v1.Api()),
         generateSampleMessage(new protos.google.cloud.apigateway.v1.Api()),
@@ -2813,7 +2815,7 @@ describe('v1.ApiGatewayServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apigateway.v1.ListApisRequest()
       );
@@ -2822,7 +2824,7 @@ describe('v1.ApiGatewayServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.apigateway.v1.Api()),
         generateSampleMessage(new protos.google.cloud.apigateway.v1.Api()),
@@ -2862,7 +2864,7 @@ describe('v1.ApiGatewayServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apigateway.v1.ListApisRequest()
       );
@@ -2871,7 +2873,7 @@ describe('v1.ApiGatewayServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listApis = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.listApis(request), expectedError);
@@ -2890,7 +2892,7 @@ describe('v1.ApiGatewayServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apigateway.v1.ListApisRequest()
       );
@@ -2899,7 +2901,7 @@ describe('v1.ApiGatewayServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.apigateway.v1.Api()),
         generateSampleMessage(new protos.google.cloud.apigateway.v1.Api()),
@@ -2941,7 +2943,7 @@ describe('v1.ApiGatewayServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apigateway.v1.ListApisRequest()
       );
@@ -2950,7 +2952,7 @@ describe('v1.ApiGatewayServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listApis.createStream = stubPageStreamingCall(
         undefined,
@@ -2989,7 +2991,7 @@ describe('v1.ApiGatewayServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apigateway.v1.ListApisRequest()
       );
@@ -2998,7 +3000,7 @@ describe('v1.ApiGatewayServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.apigateway.v1.Api()),
         generateSampleMessage(new protos.google.cloud.apigateway.v1.Api()),
@@ -3031,7 +3033,7 @@ describe('v1.ApiGatewayServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apigateway.v1.ListApisRequest()
       );
@@ -3040,7 +3042,7 @@ describe('v1.ApiGatewayServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listApis.asyncIterate = stubAsyncIterationCall(
         undefined,
@@ -3074,7 +3076,7 @@ describe('v1.ApiGatewayServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apigateway.v1.ListApiConfigsRequest()
       );
@@ -3083,7 +3085,7 @@ describe('v1.ApiGatewayServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.apigateway.v1.ApiConfig()
@@ -3113,7 +3115,7 @@ describe('v1.ApiGatewayServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apigateway.v1.ListApiConfigsRequest()
       );
@@ -3122,7 +3124,7 @@ describe('v1.ApiGatewayServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.apigateway.v1.ApiConfig()
@@ -3168,7 +3170,7 @@ describe('v1.ApiGatewayServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apigateway.v1.ListApiConfigsRequest()
       );
@@ -3177,7 +3179,7 @@ describe('v1.ApiGatewayServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listApiConfigs = stubSimpleCall(
         undefined,
@@ -3199,7 +3201,7 @@ describe('v1.ApiGatewayServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apigateway.v1.ListApiConfigsRequest()
       );
@@ -3208,7 +3210,7 @@ describe('v1.ApiGatewayServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.apigateway.v1.ApiConfig()
@@ -3259,7 +3261,7 @@ describe('v1.ApiGatewayServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apigateway.v1.ListApiConfigsRequest()
       );
@@ -3268,7 +3270,7 @@ describe('v1.ApiGatewayServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listApiConfigs.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -3308,7 +3310,7 @@ describe('v1.ApiGatewayServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apigateway.v1.ListApiConfigsRequest()
       );
@@ -3317,7 +3319,7 @@ describe('v1.ApiGatewayServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.apigateway.v1.ApiConfig()
@@ -3357,7 +3359,7 @@ describe('v1.ApiGatewayServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apigateway.v1.ListApiConfigsRequest()
       );
@@ -3366,7 +3368,7 @@ describe('v1.ApiGatewayServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listApiConfigs.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -3394,7 +3396,7 @@ describe('v1.ApiGatewayServiceClient', () => {
   });
 
   describe('Path templates', () => {
-    describe('api', () => {
+    describe('api', async () => {
       const fakePath = '/rendered/path/api';
       const expectedParameters = {
         project: 'projectValue',
@@ -3404,7 +3406,7 @@ describe('v1.ApiGatewayServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.apiPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -3443,7 +3445,7 @@ describe('v1.ApiGatewayServiceClient', () => {
       });
     });
 
-    describe('apiConfig', () => {
+    describe('apiConfig', async () => {
       const fakePath = '/rendered/path/apiConfig';
       const expectedParameters = {
         project: 'projectValue',
@@ -3454,7 +3456,7 @@ describe('v1.ApiGatewayServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.apiConfigPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -3507,7 +3509,7 @@ describe('v1.ApiGatewayServiceClient', () => {
       });
     });
 
-    describe('gateway', () => {
+    describe('gateway', async () => {
       const fakePath = '/rendered/path/gateway';
       const expectedParameters = {
         project: 'projectValue',
@@ -3518,7 +3520,7 @@ describe('v1.ApiGatewayServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.gatewayPathTemplate.render = sinon
         .stub()
         .returns(fakePath);

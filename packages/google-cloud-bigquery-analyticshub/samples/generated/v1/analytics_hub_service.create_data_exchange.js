@@ -35,9 +35,7 @@ function main(parent, dataExchangeId, dataExchange) {
   // const parent = 'abc123'
   /**
    *  Required. The ID of the data exchange.
-   *  Must contain only Unicode letters, numbers (0-9), underscores (_).
-   *  Should not use characters that require URL-escaping, or characters
-   *  outside of ASCII, spaces.
+   *  Must contain only ASCII letters, numbers (0-9), underscores (_).
    *  Max length: 100 bytes.
    */
   // const dataExchangeId = 'abc123'

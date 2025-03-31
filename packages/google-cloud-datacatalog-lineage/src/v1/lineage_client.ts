@@ -31,6 +31,7 @@ import type {
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
+import {loggingUtils as logging} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -58,6 +59,8 @@ export class LineageClient {
   private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
+  private _log = logging.log('lineage');
+
   auth: gax.GoogleAuth;
   descriptors: Descriptors = {
     page: {},
@@ -93,7 +96,7 @@ export class LineageClient {
    *     Developer's Console, e.g. 'grape-spaceship-123'. We will also check
    *     the environment variable GCLOUD_PROJECT for your project ID. If your
    *     app is running in an environment which supports
-   *     {@link https://developers.google.com/identity/protocols/application-default-credentials Application Default Credentials},
+   *     {@link https://cloud.google.com/docs/authentication/application-default-credentials Application Default Credentials},
    *     your project ID will be detected automatically.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
@@ -600,12 +603,39 @@ export class LineageClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.processOpenLineageRunEvent(
-      request,
-      options,
-      callback
-    );
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('processOpenLineageRunEvent request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.datacatalog.lineage.v1.IProcessOpenLineageRunEventResponse,
+          | protos.google.cloud.datacatalog.lineage.v1.IProcessOpenLineageRunEventRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('processOpenLineageRunEvent response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .processOpenLineageRunEvent(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.datacatalog.lineage.v1.IProcessOpenLineageRunEventResponse,
+          (
+            | protos.google.cloud.datacatalog.lineage.v1.IProcessOpenLineageRunEventRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('processOpenLineageRunEvent response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Creates a new process.
@@ -707,8 +737,39 @@ export class LineageClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.createProcess(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('createProcess request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.datacatalog.lineage.v1.IProcess,
+          | protos.google.cloud.datacatalog.lineage.v1.ICreateProcessRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('createProcess response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .createProcess(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.datacatalog.lineage.v1.IProcess,
+          (
+            | protos.google.cloud.datacatalog.lineage.v1.ICreateProcessRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('createProcess response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Updates a process.
@@ -810,8 +871,39 @@ export class LineageClient {
       this._gaxModule.routingHeader.fromParams({
         'process.name': request.process!.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.updateProcess(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('updateProcess request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.datacatalog.lineage.v1.IProcess,
+          | protos.google.cloud.datacatalog.lineage.v1.IUpdateProcessRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('updateProcess response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .updateProcess(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.datacatalog.lineage.v1.IProcess,
+          (
+            | protos.google.cloud.datacatalog.lineage.v1.IUpdateProcessRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('updateProcess response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Gets the details of the specified process.
@@ -900,8 +992,39 @@ export class LineageClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.getProcess(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('getProcess request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.datacatalog.lineage.v1.IProcess,
+          | protos.google.cloud.datacatalog.lineage.v1.IGetProcessRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getProcess response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getProcess(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.datacatalog.lineage.v1.IProcess,
+          (
+            | protos.google.cloud.datacatalog.lineage.v1.IGetProcessRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getProcess response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Creates a new run.
@@ -996,8 +1119,39 @@ export class LineageClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.createRun(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('createRun request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.datacatalog.lineage.v1.IRun,
+          | protos.google.cloud.datacatalog.lineage.v1.ICreateRunRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('createRun response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .createRun(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.datacatalog.lineage.v1.IRun,
+          (
+            | protos.google.cloud.datacatalog.lineage.v1.ICreateRunRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('createRun response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Updates a run.
@@ -1096,8 +1250,39 @@ export class LineageClient {
       this._gaxModule.routingHeader.fromParams({
         'run.name': request.run!.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.updateRun(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('updateRun request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.datacatalog.lineage.v1.IRun,
+          | protos.google.cloud.datacatalog.lineage.v1.IUpdateRunRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('updateRun response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .updateRun(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.datacatalog.lineage.v1.IRun,
+          (
+            | protos.google.cloud.datacatalog.lineage.v1.IUpdateRunRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('updateRun response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Gets the details of the specified run.
@@ -1186,8 +1371,36 @@ export class LineageClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.getRun(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('getRun request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.datacatalog.lineage.v1.IRun,
+          | protos.google.cloud.datacatalog.lineage.v1.IGetRunRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getRun response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getRun(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.datacatalog.lineage.v1.IRun,
+          protos.google.cloud.datacatalog.lineage.v1.IGetRunRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getRun response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Creates a new lineage event.
@@ -1288,8 +1501,39 @@ export class LineageClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.createLineageEvent(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('createLineageEvent request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.datacatalog.lineage.v1.ILineageEvent,
+          | protos.google.cloud.datacatalog.lineage.v1.ICreateLineageEventRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('createLineageEvent response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .createLineageEvent(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.datacatalog.lineage.v1.ILineageEvent,
+          (
+            | protos.google.cloud.datacatalog.lineage.v1.ICreateLineageEventRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('createLineageEvent response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Gets details of a specified lineage event.
@@ -1384,8 +1628,39 @@ export class LineageClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.getLineageEvent(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('getLineageEvent request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.datacatalog.lineage.v1.ILineageEvent,
+          | protos.google.cloud.datacatalog.lineage.v1.IGetLineageEventRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getLineageEvent response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getLineageEvent(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.datacatalog.lineage.v1.ILineageEvent,
+          (
+            | protos.google.cloud.datacatalog.lineage.v1.IGetLineageEventRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getLineageEvent response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Deletes the lineage event with the specified name.
@@ -1483,8 +1758,39 @@ export class LineageClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.deleteLineageEvent(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('deleteLineageEvent request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.cloud.datacatalog.lineage.v1.IDeleteLineageEventRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('deleteLineageEvent response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .deleteLineageEvent(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.protobuf.IEmpty,
+          (
+            | protos.google.cloud.datacatalog.lineage.v1.IDeleteLineageEventRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteLineageEvent response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
 
   /**
@@ -1589,8 +1895,40 @@ export class LineageClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.deleteProcess(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.datacatalog.lineage.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('deleteProcess response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('deleteProcess request %j', request);
+    return this.innerApiCalls
+      .deleteProcess(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.datacatalog.lineage.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteProcess response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `deleteProcess()`.
@@ -1611,6 +1949,7 @@ export class LineageClient {
       protos.google.cloud.datacatalog.lineage.v1.OperationMetadata
     >
   > {
+    this._log.info('deleteProcess long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -1728,8 +2067,40 @@ export class LineageClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.deleteRun(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.datacatalog.lineage.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('deleteRun response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('deleteRun request %j', request);
+    return this.innerApiCalls
+      .deleteRun(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.datacatalog.lineage.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteRun response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `deleteRun()`.
@@ -1750,6 +2121,7 @@ export class LineageClient {
       protos.google.cloud.datacatalog.lineage.v1.OperationMetadata
     >
   > {
+    this._log.info('deleteRun long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -1868,12 +2240,40 @@ export class LineageClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.listProcesses(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.datacatalog.lineage.v1.IListProcessesRequest,
+          | protos.google.cloud.datacatalog.lineage.v1.IListProcessesResponse
+          | null
+          | undefined,
+          protos.google.cloud.datacatalog.lineage.v1.IProcess
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listProcesses values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listProcesses request %j', request);
+    return this.innerApiCalls
+      .listProcesses(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.datacatalog.lineage.v1.IProcess[],
+          protos.google.cloud.datacatalog.lineage.v1.IListProcessesRequest | null,
+          protos.google.cloud.datacatalog.lineage.v1.IListProcessesResponse,
+        ]) => {
+          this._log.info('listProcesses values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listProcesses`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
@@ -1915,7 +2315,10 @@ export class LineageClient {
       });
     const defaultCallSettings = this._defaults['listProcesses'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listProcesses stream %j', request);
     return this.descriptors.page.listProcesses.createStream(
       this.innerApiCalls.listProcesses as GaxCall,
       request,
@@ -1969,7 +2372,10 @@ export class LineageClient {
       });
     const defaultCallSettings = this._defaults['listProcesses'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listProcesses iterate %j', request);
     return this.descriptors.page.listProcesses.asyncIterate(
       this.innerApiCalls['listProcesses'] as GaxCall,
       request as {},
@@ -2078,12 +2484,40 @@ export class LineageClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.listRuns(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.datacatalog.lineage.v1.IListRunsRequest,
+          | protos.google.cloud.datacatalog.lineage.v1.IListRunsResponse
+          | null
+          | undefined,
+          protos.google.cloud.datacatalog.lineage.v1.IRun
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listRuns values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listRuns request %j', request);
+    return this.innerApiCalls
+      .listRuns(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.datacatalog.lineage.v1.IRun[],
+          protos.google.cloud.datacatalog.lineage.v1.IListRunsRequest | null,
+          protos.google.cloud.datacatalog.lineage.v1.IListRunsResponse,
+        ]) => {
+          this._log.info('listRuns values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listRuns`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
@@ -2124,7 +2558,10 @@ export class LineageClient {
       });
     const defaultCallSettings = this._defaults['listRuns'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listRuns stream %j', request);
     return this.descriptors.page.listRuns.createStream(
       this.innerApiCalls.listRuns as GaxCall,
       request,
@@ -2177,7 +2614,10 @@ export class LineageClient {
       });
     const defaultCallSettings = this._defaults['listRuns'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listRuns iterate %j', request);
     return this.descriptors.page.listRuns.asyncIterate(
       this.innerApiCalls['listRuns'] as GaxCall,
       request as {},
@@ -2288,12 +2728,40 @@ export class LineageClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.listLineageEvents(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.datacatalog.lineage.v1.IListLineageEventsRequest,
+          | protos.google.cloud.datacatalog.lineage.v1.IListLineageEventsResponse
+          | null
+          | undefined,
+          protos.google.cloud.datacatalog.lineage.v1.ILineageEvent
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listLineageEvents values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listLineageEvents request %j', request);
+    return this.innerApiCalls
+      .listLineageEvents(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.datacatalog.lineage.v1.ILineageEvent[],
+          protos.google.cloud.datacatalog.lineage.v1.IListLineageEventsRequest | null,
+          protos.google.cloud.datacatalog.lineage.v1.IListLineageEventsResponse,
+        ]) => {
+          this._log.info('listLineageEvents values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listLineageEvents`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
@@ -2336,7 +2804,10 @@ export class LineageClient {
       });
     const defaultCallSettings = this._defaults['listLineageEvents'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listLineageEvents stream %j', request);
     return this.descriptors.page.listLineageEvents.createStream(
       this.innerApiCalls.listLineageEvents as GaxCall,
       request,
@@ -2391,7 +2862,10 @@ export class LineageClient {
       });
     const defaultCallSettings = this._defaults['listLineageEvents'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listLineageEvents iterate %j', request);
     return this.descriptors.page.listLineageEvents.asyncIterate(
       this.innerApiCalls['listLineageEvents'] as GaxCall,
       request as {},
@@ -2515,12 +2989,40 @@ export class LineageClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.searchLinks(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.datacatalog.lineage.v1.ISearchLinksRequest,
+          | protos.google.cloud.datacatalog.lineage.v1.ISearchLinksResponse
+          | null
+          | undefined,
+          protos.google.cloud.datacatalog.lineage.v1.ILink
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('searchLinks values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('searchLinks request %j', request);
+    return this.innerApiCalls
+      .searchLinks(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.datacatalog.lineage.v1.ILink[],
+          protos.google.cloud.datacatalog.lineage.v1.ISearchLinksRequest | null,
+          protos.google.cloud.datacatalog.lineage.v1.ISearchLinksResponse,
+        ]) => {
+          this._log.info('searchLinks values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `searchLinks`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
@@ -2569,7 +3071,10 @@ export class LineageClient {
       });
     const defaultCallSettings = this._defaults['searchLinks'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('searchLinks stream %j', request);
     return this.descriptors.page.searchLinks.createStream(
       this.innerApiCalls.searchLinks as GaxCall,
       request,
@@ -2630,7 +3135,10 @@ export class LineageClient {
       });
     const defaultCallSettings = this._defaults['searchLinks'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('searchLinks iterate %j', request);
     return this.descriptors.page.searchLinks.asyncIterate(
       this.innerApiCalls['searchLinks'] as GaxCall,
       request as {},
@@ -2758,16 +3266,40 @@ export class LineageClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.batchSearchLinkProcesses(
-      request,
-      options,
-      callback
-    );
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.datacatalog.lineage.v1.IBatchSearchLinkProcessesRequest,
+          | protos.google.cloud.datacatalog.lineage.v1.IBatchSearchLinkProcessesResponse
+          | null
+          | undefined,
+          protos.google.cloud.datacatalog.lineage.v1.IProcessLinks
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('batchSearchLinkProcesses values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('batchSearchLinkProcesses request %j', request);
+    return this.innerApiCalls
+      .batchSearchLinkProcesses(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.datacatalog.lineage.v1.IProcessLinks[],
+          protos.google.cloud.datacatalog.lineage.v1.IBatchSearchLinkProcessesRequest | null,
+          protos.google.cloud.datacatalog.lineage.v1.IBatchSearchLinkProcessesResponse,
+        ]) => {
+          this._log.info('batchSearchLinkProcesses values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `batchSearchLinkProcesses`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
@@ -2815,7 +3347,10 @@ export class LineageClient {
       });
     const defaultCallSettings = this._defaults['batchSearchLinkProcesses'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('batchSearchLinkProcesses stream %j', request);
     return this.descriptors.page.batchSearchLinkProcesses.createStream(
       this.innerApiCalls.batchSearchLinkProcesses as GaxCall,
       request,
@@ -2875,7 +3410,10 @@ export class LineageClient {
       });
     const defaultCallSettings = this._defaults['batchSearchLinkProcesses'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('batchSearchLinkProcesses iterate %j', request);
     return this.descriptors.page.batchSearchLinkProcesses.asyncIterate(
       this.innerApiCalls['batchSearchLinkProcesses'] as GaxCall,
       request as {},
@@ -2914,7 +3452,7 @@ export class LineageClient {
    */
   getOperation(
     request: protos.google.longrunning.GetOperationRequest,
-    options?:
+    optionsOrCallback?:
       | gax.CallOptions
       | Callback<
           protos.google.longrunning.Operation,
@@ -2927,6 +3465,20 @@ export class LineageClient {
       {} | null | undefined
     >
   ): Promise<[protos.google.longrunning.Operation]> {
+    let options: gax.CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as gax.CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.getOperation(request, options, callback);
   }
   /**
@@ -2962,7 +3514,14 @@ export class LineageClient {
   listOperationsAsync(
     request: protos.google.longrunning.ListOperationsRequest,
     options?: gax.CallOptions
-  ): AsyncIterable<protos.google.longrunning.ListOperationsResponse> {
+  ): AsyncIterable<protos.google.longrunning.IOperation> {
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.listOperationsAsync(request, options);
   }
   /**
@@ -2998,11 +3557,11 @@ export class LineageClient {
    */
   cancelOperation(
     request: protos.google.longrunning.CancelOperationRequest,
-    options?:
+    optionsOrCallback?:
       | gax.CallOptions
       | Callback<
-          protos.google.protobuf.Empty,
           protos.google.longrunning.CancelOperationRequest,
+          protos.google.protobuf.Empty,
           {} | undefined | null
         >,
     callback?: Callback<
@@ -3011,6 +3570,20 @@ export class LineageClient {
       {} | undefined | null
     >
   ): Promise<protos.google.protobuf.Empty> {
+    let options: gax.CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as gax.CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.cancelOperation(request, options, callback);
   }
 
@@ -3041,7 +3614,7 @@ export class LineageClient {
    */
   deleteOperation(
     request: protos.google.longrunning.DeleteOperationRequest,
-    options?:
+    optionsOrCallback?:
       | gax.CallOptions
       | Callback<
           protos.google.protobuf.Empty,
@@ -3054,6 +3627,20 @@ export class LineageClient {
       {} | null | undefined
     >
   ): Promise<protos.google.protobuf.Empty> {
+    let options: gax.CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as gax.CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.deleteOperation(request, options, callback);
   }
 
@@ -3326,6 +3913,7 @@ export class LineageClient {
   close(): Promise<void> {
     if (this.lineageStub && !this._terminated) {
       return this.lineageStub.then(stub => {
+        this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
         this.operationsClient.close();

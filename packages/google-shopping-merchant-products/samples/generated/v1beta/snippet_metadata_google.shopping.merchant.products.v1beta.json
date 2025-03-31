@@ -1,7 +1,7 @@
 {
     "clientLibrary": {
         "name": "nodejs-products",
-        "version": "0.1.1",
+        "version": "0.3.0",
         "language": "TYPESCRIPT",
         "apis": [
             {
@@ -22,7 +22,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 67,
+                    "end": 68,
                     "type": "FULL"
                 }
             ],
@@ -52,6 +52,54 @@
                 "method": {
                     "shortName": "InsertProductInput",
                     "fullName": "google.shopping.merchant.products.v1beta.ProductInputsService.InsertProductInput",
+                    "service": {
+                        "shortName": "ProductInputsService",
+                        "fullName": "google.shopping.merchant.products.v1beta.ProductInputsService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "merchantapi_v1beta_generated_ProductInputsService_UpdateProductInput_async",
+            "title": "ProductInputsService updateProductInput Sample",
+            "origin": "API_DEFINITION",
+            "description": " Updates the existing product input in your Merchant Center account. After inserting, updating, or deleting a product input, it may take several minutes before the processed product can be retrieved.",
+            "canonical": true,
+            "file": "product_inputs_service.update_product_input.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 75,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "UpdateProductInput",
+                "fullName": "google.shopping.merchant.products.v1beta.ProductInputsService.UpdateProductInput",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "product_input",
+                        "type": ".google.shopping.merchant.products.v1beta.ProductInput"
+                    },
+                    {
+                        "name": "update_mask",
+                        "type": ".google.protobuf.FieldMask"
+                    },
+                    {
+                        "name": "data_source",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.shopping.merchant.products.v1beta.ProductInput",
+                "client": {
+                    "shortName": "ProductInputsServiceClient",
+                    "fullName": "google.shopping.merchant.products.v1beta.ProductInputsServiceClient"
+                },
+                "method": {
+                    "shortName": "UpdateProductInput",
+                    "fullName": "google.shopping.merchant.products.v1beta.ProductInputsService.UpdateProductInput",
                     "service": {
                         "shortName": "ProductInputsService",
                         "fullName": "google.shopping.merchant.products.v1beta.ProductInputsService"

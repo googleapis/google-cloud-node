@@ -29,6 +29,7 @@ import type {
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
+import {loggingUtils as logging} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -73,6 +74,8 @@ export class PrivateCatalogClient {
   private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
+  private _log = logging.log('private-catalog');
+
   auth: gax.GoogleAuth;
   descriptors: Descriptors = {
     page: {},
@@ -107,7 +110,7 @@ export class PrivateCatalogClient {
    *     Developer's Console, e.g. 'grape-spaceship-123'. We will also check
    *     the environment variable GCLOUD_PROJECT for your project ID. If your
    *     app is running in an environment which supports
-   *     {@link https://developers.google.com/identity/protocols/application-default-credentials Application Default Credentials},
+   *     {@link https://cloud.google.com/docs/authentication/application-default-credentials Application Default Credentials},
    *     your project ID will be detected automatically.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
@@ -524,12 +527,40 @@ export class PrivateCatalogClient {
       this._gaxModule.routingHeader.fromParams({
         resource: request.resource ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.searchCatalogs(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.privatecatalog.v1beta1.ISearchCatalogsRequest,
+          | protos.google.cloud.privatecatalog.v1beta1.ISearchCatalogsResponse
+          | null
+          | undefined,
+          protos.google.cloud.privatecatalog.v1beta1.ICatalog
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('searchCatalogs values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('searchCatalogs request %j', request);
+    return this.innerApiCalls
+      .searchCatalogs(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.privatecatalog.v1beta1.ICatalog[],
+          protos.google.cloud.privatecatalog.v1beta1.ISearchCatalogsRequest | null,
+          protos.google.cloud.privatecatalog.v1beta1.ISearchCatalogsResponse,
+        ]) => {
+          this._log.info('searchCatalogs values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `searchCatalogs`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.resource
@@ -572,7 +603,10 @@ export class PrivateCatalogClient {
       });
     const defaultCallSettings = this._defaults['searchCatalogs'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('searchCatalogs stream %j', request);
     return this.descriptors.page.searchCatalogs.createStream(
       this.innerApiCalls.searchCatalogs as GaxCall,
       request,
@@ -627,7 +661,10 @@ export class PrivateCatalogClient {
       });
     const defaultCallSettings = this._defaults['searchCatalogs'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('searchCatalogs iterate %j', request);
     return this.descriptors.page.searchCatalogs.asyncIterate(
       this.innerApiCalls['searchCatalogs'] as GaxCall,
       request as {},
@@ -739,12 +776,40 @@ export class PrivateCatalogClient {
       this._gaxModule.routingHeader.fromParams({
         resource: request.resource ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.searchProducts(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.privatecatalog.v1beta1.ISearchProductsRequest,
+          | protos.google.cloud.privatecatalog.v1beta1.ISearchProductsResponse
+          | null
+          | undefined,
+          protos.google.cloud.privatecatalog.v1beta1.IProduct
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('searchProducts values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('searchProducts request %j', request);
+    return this.innerApiCalls
+      .searchProducts(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.privatecatalog.v1beta1.IProduct[],
+          protos.google.cloud.privatecatalog.v1beta1.ISearchProductsRequest | null,
+          protos.google.cloud.privatecatalog.v1beta1.ISearchProductsResponse,
+        ]) => {
+          this._log.info('searchProducts values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `searchProducts`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.resource
@@ -788,7 +853,10 @@ export class PrivateCatalogClient {
       });
     const defaultCallSettings = this._defaults['searchProducts'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('searchProducts stream %j', request);
     return this.descriptors.page.searchProducts.createStream(
       this.innerApiCalls.searchProducts as GaxCall,
       request,
@@ -844,7 +912,10 @@ export class PrivateCatalogClient {
       });
     const defaultCallSettings = this._defaults['searchProducts'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('searchProducts iterate %j', request);
     return this.descriptors.page.searchProducts.asyncIterate(
       this.innerApiCalls['searchProducts'] as GaxCall,
       request as {},
@@ -956,12 +1027,40 @@ export class PrivateCatalogClient {
       this._gaxModule.routingHeader.fromParams({
         resource: request.resource ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.searchVersions(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.privatecatalog.v1beta1.ISearchVersionsRequest,
+          | protos.google.cloud.privatecatalog.v1beta1.ISearchVersionsResponse
+          | null
+          | undefined,
+          protos.google.cloud.privatecatalog.v1beta1.IVersion
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('searchVersions values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('searchVersions request %j', request);
+    return this.innerApiCalls
+      .searchVersions(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.privatecatalog.v1beta1.IVersion[],
+          protos.google.cloud.privatecatalog.v1beta1.ISearchVersionsRequest | null,
+          protos.google.cloud.privatecatalog.v1beta1.ISearchVersionsResponse,
+        ]) => {
+          this._log.info('searchVersions values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `searchVersions`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.resource
@@ -1005,7 +1104,10 @@ export class PrivateCatalogClient {
       });
     const defaultCallSettings = this._defaults['searchVersions'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('searchVersions stream %j', request);
     return this.descriptors.page.searchVersions.createStream(
       this.innerApiCalls.searchVersions as GaxCall,
       request,
@@ -1061,7 +1163,10 @@ export class PrivateCatalogClient {
       });
     const defaultCallSettings = this._defaults['searchVersions'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('searchVersions iterate %j', request);
     return this.descriptors.page.searchVersions.asyncIterate(
       this.innerApiCalls['searchVersions'] as GaxCall,
       request as {},
@@ -1176,6 +1281,7 @@ export class PrivateCatalogClient {
   close(): Promise<void> {
     if (this.privateCatalogStub && !this._terminated) {
       return this.privateCatalogStub.then(stub => {
+        this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
       });

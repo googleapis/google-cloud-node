@@ -35,6 +35,7 @@ import type {
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
+import {loggingUtils as logging} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -61,6 +62,8 @@ export class CertificateAuthorityServiceClient {
   private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
+  private _log = logging.log('security-private-ca');
+
   auth: gax.GoogleAuth;
   descriptors: Descriptors = {
     page: {},
@@ -98,7 +101,7 @@ export class CertificateAuthorityServiceClient {
    *     Developer's Console, e.g. 'grape-spaceship-123'. We will also check
    *     the environment variable GCLOUD_PROJECT for your project ID. If your
    *     app is running in an environment which supports
-   *     {@link https://developers.google.com/identity/protocols/application-default-credentials Application Default Credentials},
+   *     {@link https://cloud.google.com/docs/authentication/application-default-credentials Application Default Credentials},
    *     your project ID will be detected automatically.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
@@ -901,8 +904,39 @@ export class CertificateAuthorityServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.createCertificate(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('createCertificate request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.security.privateca.v1.ICertificate,
+          | protos.google.cloud.security.privateca.v1.ICreateCertificateRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('createCertificate response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .createCertificate(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.security.privateca.v1.ICertificate,
+          (
+            | protos.google.cloud.security.privateca.v1.ICreateCertificateRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('createCertificate response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Returns a {@link protos.google.cloud.security.privateca.v1.Certificate|Certificate}.
@@ -999,8 +1033,39 @@ export class CertificateAuthorityServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.getCertificate(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('getCertificate request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.security.privateca.v1.ICertificate,
+          | protos.google.cloud.security.privateca.v1.IGetCertificateRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getCertificate response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getCertificate(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.security.privateca.v1.ICertificate,
+          (
+            | protos.google.cloud.security.privateca.v1.IGetCertificateRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getCertificate response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Revoke a {@link protos.google.cloud.security.privateca.v1.Certificate|Certificate}.
@@ -1115,8 +1180,39 @@ export class CertificateAuthorityServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.revokeCertificate(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('revokeCertificate request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.security.privateca.v1.ICertificate,
+          | protos.google.cloud.security.privateca.v1.IRevokeCertificateRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('revokeCertificate response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .revokeCertificate(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.security.privateca.v1.ICertificate,
+          (
+            | protos.google.cloud.security.privateca.v1.IRevokeCertificateRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('revokeCertificate response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Update a {@link protos.google.cloud.security.privateca.v1.Certificate|Certificate}.
@@ -1230,8 +1326,39 @@ export class CertificateAuthorityServiceClient {
       this._gaxModule.routingHeader.fromParams({
         'certificate.name': request.certificate!.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.updateCertificate(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('updateCertificate request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.security.privateca.v1.ICertificate,
+          | protos.google.cloud.security.privateca.v1.IUpdateCertificateRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('updateCertificate response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .updateCertificate(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.security.privateca.v1.ICertificate,
+          (
+            | protos.google.cloud.security.privateca.v1.IUpdateCertificateRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('updateCertificate response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Fetch a certificate signing request (CSR) from a
@@ -1338,12 +1465,39 @@ export class CertificateAuthorityServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.fetchCertificateAuthorityCsr(
-      request,
-      options,
-      callback
-    );
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('fetchCertificateAuthorityCsr request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.security.privateca.v1.IFetchCertificateAuthorityCsrResponse,
+          | protos.google.cloud.security.privateca.v1.IFetchCertificateAuthorityCsrRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('fetchCertificateAuthorityCsr response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .fetchCertificateAuthorityCsr(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.security.privateca.v1.IFetchCertificateAuthorityCsrResponse,
+          (
+            | protos.google.cloud.security.privateca.v1.IFetchCertificateAuthorityCsrRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('fetchCertificateAuthorityCsr response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Returns a
@@ -1442,12 +1596,39 @@ export class CertificateAuthorityServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.getCertificateAuthority(
-      request,
-      options,
-      callback
-    );
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('getCertificateAuthority request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.security.privateca.v1.ICertificateAuthority,
+          | protos.google.cloud.security.privateca.v1.IGetCertificateAuthorityRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getCertificateAuthority response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getCertificateAuthority(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.security.privateca.v1.ICertificateAuthority,
+          (
+            | protos.google.cloud.security.privateca.v1.IGetCertificateAuthorityRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getCertificateAuthority response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Returns a {@link protos.google.cloud.security.privateca.v1.CaPool|CaPool}.
@@ -1537,8 +1718,39 @@ export class CertificateAuthorityServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.getCaPool(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('getCaPool request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.security.privateca.v1.ICaPool,
+          | protos.google.cloud.security.privateca.v1.IGetCaPoolRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getCaPool response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getCaPool(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.security.privateca.v1.ICaPool,
+          (
+            | protos.google.cloud.security.privateca.v1.IGetCaPoolRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getCaPool response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * FetchCaCerts returns the current trust anchor for the
@@ -1652,8 +1864,39 @@ export class CertificateAuthorityServiceClient {
       this._gaxModule.routingHeader.fromParams({
         ca_pool: request.caPool ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.fetchCaCerts(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('fetchCaCerts request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.security.privateca.v1.IFetchCaCertsResponse,
+          | protos.google.cloud.security.privateca.v1.IFetchCaCertsRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('fetchCaCerts response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .fetchCaCerts(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.security.privateca.v1.IFetchCaCertsResponse,
+          (
+            | protos.google.cloud.security.privateca.v1.IFetchCaCertsRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('fetchCaCerts response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Returns a
@@ -1753,12 +1996,39 @@ export class CertificateAuthorityServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.getCertificateRevocationList(
-      request,
-      options,
-      callback
-    );
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('getCertificateRevocationList request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.security.privateca.v1.ICertificateRevocationList,
+          | protos.google.cloud.security.privateca.v1.IGetCertificateRevocationListRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getCertificateRevocationList response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getCertificateRevocationList(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.security.privateca.v1.ICertificateRevocationList,
+          (
+            | protos.google.cloud.security.privateca.v1.IGetCertificateRevocationListRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getCertificateRevocationList response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Returns a
@@ -1857,12 +2127,39 @@ export class CertificateAuthorityServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.getCertificateTemplate(
-      request,
-      options,
-      callback
-    );
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('getCertificateTemplate request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.security.privateca.v1.ICertificateTemplate,
+          | protos.google.cloud.security.privateca.v1.IGetCertificateTemplateRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getCertificateTemplate response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getCertificateTemplate(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.security.privateca.v1.ICertificateTemplate,
+          (
+            | protos.google.cloud.security.privateca.v1.IGetCertificateTemplateRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getCertificateTemplate response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
 
   /**
@@ -1995,12 +2292,46 @@ export class CertificateAuthorityServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.activateCertificateAuthority(
-      request,
-      options,
-      callback
-    );
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.security.privateca.v1.ICertificateAuthority,
+            protos.google.cloud.security.privateca.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info(
+            'activateCertificateAuthority response %j',
+            rawResponse
+          );
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('activateCertificateAuthority request %j', request);
+    return this.innerApiCalls
+      .activateCertificateAuthority(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.security.privateca.v1.ICertificateAuthority,
+            protos.google.cloud.security.privateca.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info(
+            'activateCertificateAuthority response %j',
+            rawResponse
+          );
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `activateCertificateAuthority()`.
@@ -2021,6 +2352,7 @@ export class CertificateAuthorityServiceClient {
       protos.google.cloud.security.privateca.v1.OperationMetadata
     >
   > {
+    this._log.info('activateCertificateAuthority long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -2161,12 +2493,40 @@ export class CertificateAuthorityServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.createCertificateAuthority(
-      request,
-      options,
-      callback
-    );
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.security.privateca.v1.ICertificateAuthority,
+            protos.google.cloud.security.privateca.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('createCertificateAuthority response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('createCertificateAuthority request %j', request);
+    return this.innerApiCalls
+      .createCertificateAuthority(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.security.privateca.v1.ICertificateAuthority,
+            protos.google.cloud.security.privateca.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createCertificateAuthority response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `createCertificateAuthority()`.
@@ -2187,6 +2547,7 @@ export class CertificateAuthorityServiceClient {
       protos.google.cloud.security.privateca.v1.OperationMetadata
     >
   > {
+    this._log.info('createCertificateAuthority long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -2323,12 +2684,46 @@ export class CertificateAuthorityServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.disableCertificateAuthority(
-      request,
-      options,
-      callback
-    );
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.security.privateca.v1.ICertificateAuthority,
+            protos.google.cloud.security.privateca.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info(
+            'disableCertificateAuthority response %j',
+            rawResponse
+          );
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('disableCertificateAuthority request %j', request);
+    return this.innerApiCalls
+      .disableCertificateAuthority(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.security.privateca.v1.ICertificateAuthority,
+            protos.google.cloud.security.privateca.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info(
+            'disableCertificateAuthority response %j',
+            rawResponse
+          );
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `disableCertificateAuthority()`.
@@ -2349,6 +2744,7 @@ export class CertificateAuthorityServiceClient {
       protos.google.cloud.security.privateca.v1.OperationMetadata
     >
   > {
+    this._log.info('disableCertificateAuthority long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -2480,12 +2876,40 @@ export class CertificateAuthorityServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.enableCertificateAuthority(
-      request,
-      options,
-      callback
-    );
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.security.privateca.v1.ICertificateAuthority,
+            protos.google.cloud.security.privateca.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('enableCertificateAuthority response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('enableCertificateAuthority request %j', request);
+    return this.innerApiCalls
+      .enableCertificateAuthority(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.security.privateca.v1.ICertificateAuthority,
+            protos.google.cloud.security.privateca.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('enableCertificateAuthority response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `enableCertificateAuthority()`.
@@ -2506,6 +2930,7 @@ export class CertificateAuthorityServiceClient {
       protos.google.cloud.security.privateca.v1.OperationMetadata
     >
   > {
+    this._log.info('enableCertificateAuthority long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -2638,12 +3063,46 @@ export class CertificateAuthorityServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.undeleteCertificateAuthority(
-      request,
-      options,
-      callback
-    );
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.security.privateca.v1.ICertificateAuthority,
+            protos.google.cloud.security.privateca.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info(
+            'undeleteCertificateAuthority response %j',
+            rawResponse
+          );
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('undeleteCertificateAuthority request %j', request);
+    return this.innerApiCalls
+      .undeleteCertificateAuthority(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.security.privateca.v1.ICertificateAuthority,
+            protos.google.cloud.security.privateca.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info(
+            'undeleteCertificateAuthority response %j',
+            rawResponse
+          );
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `undeleteCertificateAuthority()`.
@@ -2664,6 +3123,7 @@ export class CertificateAuthorityServiceClient {
       protos.google.cloud.security.privateca.v1.OperationMetadata
     >
   > {
+    this._log.info('undeleteCertificateAuthority long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -2807,12 +3267,40 @@ export class CertificateAuthorityServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.deleteCertificateAuthority(
-      request,
-      options,
-      callback
-    );
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.security.privateca.v1.ICertificateAuthority,
+            protos.google.cloud.security.privateca.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('deleteCertificateAuthority response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('deleteCertificateAuthority request %j', request);
+    return this.innerApiCalls
+      .deleteCertificateAuthority(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.security.privateca.v1.ICertificateAuthority,
+            protos.google.cloud.security.privateca.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteCertificateAuthority response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `deleteCertificateAuthority()`.
@@ -2833,6 +3321,7 @@ export class CertificateAuthorityServiceClient {
       protos.google.cloud.security.privateca.v1.OperationMetadata
     >
   > {
+    this._log.info('deleteCertificateAuthority long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -2966,12 +3455,40 @@ export class CertificateAuthorityServiceClient {
       this._gaxModule.routingHeader.fromParams({
         'certificate_authority.name': request.certificateAuthority!.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.updateCertificateAuthority(
-      request,
-      options,
-      callback
-    );
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.security.privateca.v1.ICertificateAuthority,
+            protos.google.cloud.security.privateca.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('updateCertificateAuthority response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('updateCertificateAuthority request %j', request);
+    return this.innerApiCalls
+      .updateCertificateAuthority(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.security.privateca.v1.ICertificateAuthority,
+            protos.google.cloud.security.privateca.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('updateCertificateAuthority response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `updateCertificateAuthority()`.
@@ -2992,6 +3509,7 @@ export class CertificateAuthorityServiceClient {
       protos.google.cloud.security.privateca.v1.OperationMetadata
     >
   > {
+    this._log.info('updateCertificateAuthority long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -3128,8 +3646,40 @@ export class CertificateAuthorityServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.createCaPool(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.security.privateca.v1.ICaPool,
+            protos.google.cloud.security.privateca.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('createCaPool response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('createCaPool request %j', request);
+    return this.innerApiCalls
+      .createCaPool(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.security.privateca.v1.ICaPool,
+            protos.google.cloud.security.privateca.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createCaPool response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `createCaPool()`.
@@ -3150,6 +3700,7 @@ export class CertificateAuthorityServiceClient {
       protos.google.cloud.security.privateca.v1.OperationMetadata
     >
   > {
+    this._log.info('createCaPool long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -3281,8 +3832,40 @@ export class CertificateAuthorityServiceClient {
       this._gaxModule.routingHeader.fromParams({
         'ca_pool.name': request.caPool!.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.updateCaPool(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.security.privateca.v1.ICaPool,
+            protos.google.cloud.security.privateca.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('updateCaPool response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('updateCaPool request %j', request);
+    return this.innerApiCalls
+      .updateCaPool(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.security.privateca.v1.ICaPool,
+            protos.google.cloud.security.privateca.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('updateCaPool response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `updateCaPool()`.
@@ -3303,6 +3886,7 @@ export class CertificateAuthorityServiceClient {
       protos.google.cloud.security.privateca.v1.OperationMetadata
     >
   > {
+    this._log.info('updateCaPool long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -3438,8 +4022,40 @@ export class CertificateAuthorityServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.deleteCaPool(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.security.privateca.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('deleteCaPool response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('deleteCaPool request %j', request);
+    return this.innerApiCalls
+      .deleteCaPool(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.security.privateca.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteCaPool response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `deleteCaPool()`.
@@ -3460,6 +4076,7 @@ export class CertificateAuthorityServiceClient {
       protos.google.cloud.security.privateca.v1.OperationMetadata
     >
   > {
+    this._log.info('deleteCaPool long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -3594,12 +4211,46 @@ export class CertificateAuthorityServiceClient {
         'certificate_revocation_list.name':
           request.certificateRevocationList!.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.updateCertificateRevocationList(
-      request,
-      options,
-      callback
-    );
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.security.privateca.v1.ICertificateRevocationList,
+            protos.google.cloud.security.privateca.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info(
+            'updateCertificateRevocationList response %j',
+            rawResponse
+          );
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('updateCertificateRevocationList request %j', request);
+    return this.innerApiCalls
+      .updateCertificateRevocationList(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.security.privateca.v1.ICertificateRevocationList,
+            protos.google.cloud.security.privateca.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info(
+            'updateCertificateRevocationList response %j',
+            rawResponse
+          );
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `updateCertificateRevocationList()`.
@@ -3620,6 +4271,7 @@ export class CertificateAuthorityServiceClient {
       protos.google.cloud.security.privateca.v1.OperationMetadata
     >
   > {
+    this._log.info('updateCertificateRevocationList long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -3759,12 +4411,40 @@ export class CertificateAuthorityServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.createCertificateTemplate(
-      request,
-      options,
-      callback
-    );
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.security.privateca.v1.ICertificateTemplate,
+            protos.google.cloud.security.privateca.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('createCertificateTemplate response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('createCertificateTemplate request %j', request);
+    return this.innerApiCalls
+      .createCertificateTemplate(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.security.privateca.v1.ICertificateTemplate,
+            protos.google.cloud.security.privateca.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createCertificateTemplate response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `createCertificateTemplate()`.
@@ -3785,6 +4465,7 @@ export class CertificateAuthorityServiceClient {
       protos.google.cloud.security.privateca.v1.OperationMetadata
     >
   > {
+    this._log.info('createCertificateTemplate long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -3916,12 +4597,40 @@ export class CertificateAuthorityServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.deleteCertificateTemplate(
-      request,
-      options,
-      callback
-    );
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.security.privateca.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('deleteCertificateTemplate response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('deleteCertificateTemplate request %j', request);
+    return this.innerApiCalls
+      .deleteCertificateTemplate(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.security.privateca.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteCertificateTemplate response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `deleteCertificateTemplate()`.
@@ -3942,6 +4651,7 @@ export class CertificateAuthorityServiceClient {
       protos.google.cloud.security.privateca.v1.OperationMetadata
     >
   > {
+    this._log.info('deleteCertificateTemplate long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -4075,12 +4785,40 @@ export class CertificateAuthorityServiceClient {
       this._gaxModule.routingHeader.fromParams({
         'certificate_template.name': request.certificateTemplate!.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.updateCertificateTemplate(
-      request,
-      options,
-      callback
-    );
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.security.privateca.v1.ICertificateTemplate,
+            protos.google.cloud.security.privateca.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('updateCertificateTemplate response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('updateCertificateTemplate request %j', request);
+    return this.innerApiCalls
+      .updateCertificateTemplate(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.security.privateca.v1.ICertificateTemplate,
+            protos.google.cloud.security.privateca.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('updateCertificateTemplate response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `updateCertificateTemplate()`.
@@ -4101,6 +4839,7 @@ export class CertificateAuthorityServiceClient {
       protos.google.cloud.security.privateca.v1.OperationMetadata
     >
   > {
+    this._log.info('updateCertificateTemplate long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -4228,8 +4967,36 @@ export class CertificateAuthorityServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.listCertificates(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.security.privateca.v1.IListCertificatesRequest,
+          | protos.google.cloud.security.privateca.v1.IListCertificatesResponse
+          | null
+          | undefined,
+          protos.google.cloud.security.privateca.v1.ICertificate
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listCertificates values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listCertificates request %j', request);
+    return this.innerApiCalls
+      .listCertificates(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.security.privateca.v1.ICertificate[],
+          protos.google.cloud.security.privateca.v1.IListCertificatesRequest | null,
+          protos.google.cloud.security.privateca.v1.IListCertificatesResponse,
+        ]) => {
+          this._log.info('listCertificates values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -4285,7 +5052,10 @@ export class CertificateAuthorityServiceClient {
       });
     const defaultCallSettings = this._defaults['listCertificates'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listCertificates stream %j', request);
     return this.descriptors.page.listCertificates.createStream(
       this.innerApiCalls.listCertificates as GaxCall,
       request,
@@ -4349,7 +5119,10 @@ export class CertificateAuthorityServiceClient {
       });
     const defaultCallSettings = this._defaults['listCertificates'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listCertificates iterate %j', request);
     return this.descriptors.page.listCertificates.asyncIterate(
       this.innerApiCalls['listCertificates'] as GaxCall,
       request as {},
@@ -4466,12 +5239,36 @@ export class CertificateAuthorityServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.listCertificateAuthorities(
-      request,
-      options,
-      callback
-    );
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.security.privateca.v1.IListCertificateAuthoritiesRequest,
+          | protos.google.cloud.security.privateca.v1.IListCertificateAuthoritiesResponse
+          | null
+          | undefined,
+          protos.google.cloud.security.privateca.v1.ICertificateAuthority
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listCertificateAuthorities values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listCertificateAuthorities request %j', request);
+    return this.innerApiCalls
+      .listCertificateAuthorities(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.security.privateca.v1.ICertificateAuthority[],
+          protos.google.cloud.security.privateca.v1.IListCertificateAuthoritiesRequest | null,
+          protos.google.cloud.security.privateca.v1.IListCertificateAuthoritiesResponse,
+        ]) => {
+          this._log.info('listCertificateAuthorities values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -4524,7 +5321,10 @@ export class CertificateAuthorityServiceClient {
       });
     const defaultCallSettings = this._defaults['listCertificateAuthorities'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listCertificateAuthorities stream %j', request);
     return this.descriptors.page.listCertificateAuthorities.createStream(
       this.innerApiCalls.listCertificateAuthorities as GaxCall,
       request,
@@ -4585,7 +5385,10 @@ export class CertificateAuthorityServiceClient {
       });
     const defaultCallSettings = this._defaults['listCertificateAuthorities'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listCertificateAuthorities iterate %j', request);
     return this.descriptors.page.listCertificateAuthorities.asyncIterate(
       this.innerApiCalls['listCertificateAuthorities'] as GaxCall,
       request as {},
@@ -4699,8 +5502,36 @@ export class CertificateAuthorityServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.listCaPools(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.security.privateca.v1.IListCaPoolsRequest,
+          | protos.google.cloud.security.privateca.v1.IListCaPoolsResponse
+          | null
+          | undefined,
+          protos.google.cloud.security.privateca.v1.ICaPool
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listCaPools values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listCaPools request %j', request);
+    return this.innerApiCalls
+      .listCaPools(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.security.privateca.v1.ICaPool[],
+          protos.google.cloud.security.privateca.v1.IListCaPoolsRequest | null,
+          protos.google.cloud.security.privateca.v1.IListCaPoolsResponse,
+        ]) => {
+          this._log.info('listCaPools values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -4751,7 +5582,10 @@ export class CertificateAuthorityServiceClient {
       });
     const defaultCallSettings = this._defaults['listCaPools'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listCaPools stream %j', request);
     return this.descriptors.page.listCaPools.createStream(
       this.innerApiCalls.listCaPools as GaxCall,
       request,
@@ -4810,7 +5644,10 @@ export class CertificateAuthorityServiceClient {
       });
     const defaultCallSettings = this._defaults['listCaPools'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listCaPools iterate %j', request);
     return this.descriptors.page.listCaPools.asyncIterate(
       this.innerApiCalls['listCaPools'] as GaxCall,
       request as {},
@@ -4926,12 +5763,36 @@ export class CertificateAuthorityServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.listCertificateRevocationLists(
-      request,
-      options,
-      callback
-    );
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.security.privateca.v1.IListCertificateRevocationListsRequest,
+          | protos.google.cloud.security.privateca.v1.IListCertificateRevocationListsResponse
+          | null
+          | undefined,
+          protos.google.cloud.security.privateca.v1.ICertificateRevocationList
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listCertificateRevocationLists values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listCertificateRevocationLists request %j', request);
+    return this.innerApiCalls
+      .listCertificateRevocationLists(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.security.privateca.v1.ICertificateRevocationList[],
+          protos.google.cloud.security.privateca.v1.IListCertificateRevocationListsRequest | null,
+          protos.google.cloud.security.privateca.v1.IListCertificateRevocationListsResponse,
+        ]) => {
+          this._log.info('listCertificateRevocationLists values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -4984,7 +5845,10 @@ export class CertificateAuthorityServiceClient {
     const defaultCallSettings =
       this._defaults['listCertificateRevocationLists'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listCertificateRevocationLists stream %j', request);
     return this.descriptors.page.listCertificateRevocationLists.createStream(
       this.innerApiCalls.listCertificateRevocationLists as GaxCall,
       request,
@@ -5045,7 +5909,10 @@ export class CertificateAuthorityServiceClient {
     const defaultCallSettings =
       this._defaults['listCertificateRevocationLists'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listCertificateRevocationLists iterate %j', request);
     return this.descriptors.page.listCertificateRevocationLists.asyncIterate(
       this.innerApiCalls['listCertificateRevocationLists'] as GaxCall,
       request as {},
@@ -5161,12 +6028,36 @@ export class CertificateAuthorityServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.listCertificateTemplates(
-      request,
-      options,
-      callback
-    );
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.security.privateca.v1.IListCertificateTemplatesRequest,
+          | protos.google.cloud.security.privateca.v1.IListCertificateTemplatesResponse
+          | null
+          | undefined,
+          protos.google.cloud.security.privateca.v1.ICertificateTemplate
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listCertificateTemplates values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listCertificateTemplates request %j', request);
+    return this.innerApiCalls
+      .listCertificateTemplates(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.security.privateca.v1.ICertificateTemplate[],
+          protos.google.cloud.security.privateca.v1.IListCertificateTemplatesRequest | null,
+          protos.google.cloud.security.privateca.v1.IListCertificateTemplatesResponse,
+        ]) => {
+          this._log.info('listCertificateTemplates values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -5218,7 +6109,10 @@ export class CertificateAuthorityServiceClient {
       });
     const defaultCallSettings = this._defaults['listCertificateTemplates'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listCertificateTemplates stream %j', request);
     return this.descriptors.page.listCertificateTemplates.createStream(
       this.innerApiCalls.listCertificateTemplates as GaxCall,
       request,
@@ -5278,7 +6172,10 @@ export class CertificateAuthorityServiceClient {
       });
     const defaultCallSettings = this._defaults['listCertificateTemplates'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listCertificateTemplates iterate %j', request);
     return this.descriptors.page.listCertificateTemplates.asyncIterate(
       this.innerApiCalls['listCertificateTemplates'] as GaxCall,
       request as {},
@@ -5595,7 +6492,7 @@ export class CertificateAuthorityServiceClient {
   listOperationsAsync(
     request: protos.google.longrunning.ListOperationsRequest,
     options?: gax.CallOptions
-  ): AsyncIterable<protos.google.longrunning.ListOperationsResponse> {
+  ): AsyncIterable<protos.google.longrunning.IOperation> {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
@@ -6133,6 +7030,7 @@ export class CertificateAuthorityServiceClient {
   close(): Promise<void> {
     if (this.certificateAuthorityServiceStub && !this._terminated) {
       return this.certificateAuthorityServiceStub.then(stub => {
+        this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
         this.iamClient.close();

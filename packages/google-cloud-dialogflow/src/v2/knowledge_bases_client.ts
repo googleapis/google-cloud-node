@@ -31,6 +31,7 @@ import type {
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
+import {loggingUtils as logging} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -56,6 +57,8 @@ export class KnowledgeBasesClient {
   private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
+  private _log = logging.log('dialogflow');
+
   auth: gax.GoogleAuth;
   descriptors: Descriptors = {
     page: {},
@@ -91,7 +94,7 @@ export class KnowledgeBasesClient {
    *     Developer's Console, e.g. 'grape-spaceship-123'. We will also check
    *     the environment variable GCLOUD_PROJECT for your project ID. If your
    *     app is running in an environment which supports
-   *     {@link https://developers.google.com/identity/protocols/application-default-credentials Application Default Credentials},
+   *     {@link https://cloud.google.com/docs/authentication/application-default-credentials Application Default Credentials},
    *     your project ID will be detected automatically.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
@@ -627,8 +630,39 @@ export class KnowledgeBasesClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.getKnowledgeBase(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('getKnowledgeBase request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.dialogflow.v2.IKnowledgeBase,
+          | protos.google.cloud.dialogflow.v2.IGetKnowledgeBaseRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getKnowledgeBase response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getKnowledgeBase(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.dialogflow.v2.IKnowledgeBase,
+          (
+            | protos.google.cloud.dialogflow.v2.IGetKnowledgeBaseRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getKnowledgeBase response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Creates a knowledge base.
@@ -720,8 +754,39 @@ export class KnowledgeBasesClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.createKnowledgeBase(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('createKnowledgeBase request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.dialogflow.v2.IKnowledgeBase,
+          | protos.google.cloud.dialogflow.v2.ICreateKnowledgeBaseRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('createKnowledgeBase response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .createKnowledgeBase(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.dialogflow.v2.IKnowledgeBase,
+          (
+            | protos.google.cloud.dialogflow.v2.ICreateKnowledgeBaseRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('createKnowledgeBase response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Deletes the specified knowledge base.
@@ -815,8 +880,39 @@ export class KnowledgeBasesClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.deleteKnowledgeBase(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('deleteKnowledgeBase request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.cloud.dialogflow.v2.IDeleteKnowledgeBaseRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('deleteKnowledgeBase response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .deleteKnowledgeBase(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.protobuf.IEmpty,
+          (
+            | protos.google.cloud.dialogflow.v2.IDeleteKnowledgeBaseRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteKnowledgeBase response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Updates the specified knowledge base.
@@ -909,8 +1005,39 @@ export class KnowledgeBasesClient {
       this._gaxModule.routingHeader.fromParams({
         'knowledge_base.name': request.knowledgeBase!.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.updateKnowledgeBase(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('updateKnowledgeBase request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.dialogflow.v2.IKnowledgeBase,
+          | protos.google.cloud.dialogflow.v2.IUpdateKnowledgeBaseRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('updateKnowledgeBase response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .updateKnowledgeBase(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.dialogflow.v2.IKnowledgeBase,
+          (
+            | protos.google.cloud.dialogflow.v2.IUpdateKnowledgeBaseRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('updateKnowledgeBase response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
 
   /**
@@ -1036,12 +1163,40 @@ export class KnowledgeBasesClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.listKnowledgeBases(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.dialogflow.v2.IListKnowledgeBasesRequest,
+          | protos.google.cloud.dialogflow.v2.IListKnowledgeBasesResponse
+          | null
+          | undefined,
+          protos.google.cloud.dialogflow.v2.IKnowledgeBase
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listKnowledgeBases values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listKnowledgeBases request %j', request);
+    return this.innerApiCalls
+      .listKnowledgeBases(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.dialogflow.v2.IKnowledgeBase[],
+          protos.google.cloud.dialogflow.v2.IListKnowledgeBasesRequest | null,
+          protos.google.cloud.dialogflow.v2.IListKnowledgeBasesResponse,
+        ]) => {
+          this._log.info('listKnowledgeBases values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listKnowledgeBases`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
@@ -1104,7 +1259,10 @@ export class KnowledgeBasesClient {
       });
     const defaultCallSettings = this._defaults['listKnowledgeBases'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listKnowledgeBases stream %j', request);
     return this.descriptors.page.listKnowledgeBases.createStream(
       this.innerApiCalls.listKnowledgeBases as GaxCall,
       request,
@@ -1179,7 +1337,10 @@ export class KnowledgeBasesClient {
       });
     const defaultCallSettings = this._defaults['listKnowledgeBases'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listKnowledgeBases iterate %j', request);
     return this.descriptors.page.listKnowledgeBases.asyncIterate(
       this.innerApiCalls['listKnowledgeBases'] as GaxCall,
       request as {},
@@ -3917,6 +4078,7 @@ export class KnowledgeBasesClient {
   close(): Promise<void> {
     if (this.knowledgeBasesStub && !this._terminated) {
       return this.knowledgeBasesStub.then(stub => {
+        this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
         this.locationsClient.close();

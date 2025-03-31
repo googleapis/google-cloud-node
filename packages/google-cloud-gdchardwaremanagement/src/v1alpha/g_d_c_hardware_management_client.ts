@@ -33,6 +33,7 @@ import type {
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
+import {loggingUtils as logging} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -57,6 +58,8 @@ export class GDCHardwareManagementClient {
   private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
+  private _log = logging.log('gdchardwaremanagement');
+
   auth: gax.GoogleAuth;
   descriptors: Descriptors = {
     page: {},
@@ -93,7 +96,7 @@ export class GDCHardwareManagementClient {
    *     Developer's Console, e.g. 'grape-spaceship-123'. We will also check
    *     the environment variable GCLOUD_PROJECT for your project ID. If your
    *     app is running in an environment which supports
-   *     {@link https://developers.google.com/identity/protocols/application-default-credentials Application Default Credentials},
+   *     {@link https://cloud.google.com/docs/authentication/application-default-credentials Application Default Credentials},
    *     your project ID will be detected automatically.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
@@ -827,8 +830,39 @@ export class GDCHardwareManagementClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.getOrder(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('getOrder request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.gdchardwaremanagement.v1alpha.IOrder,
+          | protos.google.cloud.gdchardwaremanagement.v1alpha.IGetOrderRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getOrder response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getOrder(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.gdchardwaremanagement.v1alpha.IOrder,
+          (
+            | protos.google.cloud.gdchardwaremanagement.v1alpha.IGetOrderRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getOrder response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Gets details of a site.
@@ -924,8 +958,39 @@ export class GDCHardwareManagementClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.getSite(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('getSite request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.gdchardwaremanagement.v1alpha.ISite,
+          | protos.google.cloud.gdchardwaremanagement.v1alpha.IGetSiteRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getSite response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getSite(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.gdchardwaremanagement.v1alpha.ISite,
+          (
+            | protos.google.cloud.gdchardwaremanagement.v1alpha.IGetSiteRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getSite response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Gets details of a hardware group.
@@ -1022,8 +1087,39 @@ export class GDCHardwareManagementClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.getHardwareGroup(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('getHardwareGroup request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.gdchardwaremanagement.v1alpha.IHardwareGroup,
+          | protos.google.cloud.gdchardwaremanagement.v1alpha.IGetHardwareGroupRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getHardwareGroup response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getHardwareGroup(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.gdchardwaremanagement.v1alpha.IHardwareGroup,
+          (
+            | protos.google.cloud.gdchardwaremanagement.v1alpha.IGetHardwareGroupRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getHardwareGroup response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Gets hardware details.
@@ -1119,8 +1215,39 @@ export class GDCHardwareManagementClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.getHardware(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('getHardware request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.gdchardwaremanagement.v1alpha.IHardware,
+          | protos.google.cloud.gdchardwaremanagement.v1alpha.IGetHardwareRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getHardware response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getHardware(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.gdchardwaremanagement.v1alpha.IHardware,
+          (
+            | protos.google.cloud.gdchardwaremanagement.v1alpha.IGetHardwareRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getHardware response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Gets the content of a comment.
@@ -1217,8 +1344,39 @@ export class GDCHardwareManagementClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.getComment(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('getComment request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.gdchardwaremanagement.v1alpha.IComment,
+          | protos.google.cloud.gdchardwaremanagement.v1alpha.IGetCommentRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getComment response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getComment(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.gdchardwaremanagement.v1alpha.IComment,
+          (
+            | protos.google.cloud.gdchardwaremanagement.v1alpha.IGetCommentRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getComment response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Record Action on a Comment. If the Action specified in the request is READ,
@@ -1320,8 +1478,39 @@ export class GDCHardwareManagementClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.recordActionOnComment(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('recordActionOnComment request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.gdchardwaremanagement.v1alpha.IComment,
+          | protos.google.cloud.gdchardwaremanagement.v1alpha.IRecordActionOnCommentRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('recordActionOnComment response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .recordActionOnComment(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.gdchardwaremanagement.v1alpha.IComment,
+          (
+            | protos.google.cloud.gdchardwaremanagement.v1alpha.IRecordActionOnCommentRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('recordActionOnComment response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Gets details of a change to an order.
@@ -1418,8 +1607,39 @@ export class GDCHardwareManagementClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.getChangeLogEntry(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('getChangeLogEntry request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.gdchardwaremanagement.v1alpha.IChangeLogEntry,
+          | protos.google.cloud.gdchardwaremanagement.v1alpha.IGetChangeLogEntryRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getChangeLogEntry response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getChangeLogEntry(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.gdchardwaremanagement.v1alpha.IChangeLogEntry,
+          (
+            | protos.google.cloud.gdchardwaremanagement.v1alpha.IGetChangeLogEntryRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getChangeLogEntry response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Gets details of an SKU.
@@ -1515,8 +1735,39 @@ export class GDCHardwareManagementClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.getSku(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('getSku request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.gdchardwaremanagement.v1alpha.ISku,
+          | protos.google.cloud.gdchardwaremanagement.v1alpha.IGetSkuRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getSku response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getSku(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.gdchardwaremanagement.v1alpha.ISku,
+          (
+            | protos.google.cloud.gdchardwaremanagement.v1alpha.IGetSkuRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getSku response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Gets details of a zone.
@@ -1612,8 +1863,39 @@ export class GDCHardwareManagementClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.getZone(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('getZone request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.gdchardwaremanagement.v1alpha.IZone,
+          | protos.google.cloud.gdchardwaremanagement.v1alpha.IGetZoneRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getZone response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getZone(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.gdchardwaremanagement.v1alpha.IZone,
+          (
+            | protos.google.cloud.gdchardwaremanagement.v1alpha.IGetZoneRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getZone response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
 
   /**
@@ -1730,8 +2012,40 @@ export class GDCHardwareManagementClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.createOrder(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.gdchardwaremanagement.v1alpha.IOrder,
+            protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('createOrder response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('createOrder request %j', request);
+    return this.innerApiCalls
+      .createOrder(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.gdchardwaremanagement.v1alpha.IOrder,
+            protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createOrder response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `createOrder()`.
@@ -1752,6 +2066,7 @@ export class GDCHardwareManagementClient {
       protos.google.cloud.gdchardwaremanagement.v1alpha.OperationMetadata
     >
   > {
+    this._log.info('createOrder long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -1874,8 +2189,40 @@ export class GDCHardwareManagementClient {
       this._gaxModule.routingHeader.fromParams({
         'order.name': request.order!.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.updateOrder(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.gdchardwaremanagement.v1alpha.IOrder,
+            protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('updateOrder response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('updateOrder request %j', request);
+    return this.innerApiCalls
+      .updateOrder(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.gdchardwaremanagement.v1alpha.IOrder,
+            protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('updateOrder response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `updateOrder()`.
@@ -1896,6 +2243,7 @@ export class GDCHardwareManagementClient {
       protos.google.cloud.gdchardwaremanagement.v1alpha.OperationMetadata
     >
   > {
+    this._log.info('updateOrder long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -2019,8 +2367,40 @@ export class GDCHardwareManagementClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.deleteOrder(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('deleteOrder response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('deleteOrder request %j', request);
+    return this.innerApiCalls
+      .deleteOrder(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteOrder response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `deleteOrder()`.
@@ -2041,6 +2421,7 @@ export class GDCHardwareManagementClient {
       protos.google.cloud.gdchardwaremanagement.v1alpha.OperationMetadata
     >
   > {
+    this._log.info('deleteOrder long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -2162,8 +2543,40 @@ export class GDCHardwareManagementClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.submitOrder(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.gdchardwaremanagement.v1alpha.IOrder,
+            protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('submitOrder response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('submitOrder request %j', request);
+    return this.innerApiCalls
+      .submitOrder(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.gdchardwaremanagement.v1alpha.IOrder,
+            protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('submitOrder response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `submitOrder()`.
@@ -2184,6 +2597,7 @@ export class GDCHardwareManagementClient {
       protos.google.cloud.gdchardwaremanagement.v1alpha.OperationMetadata
     >
   > {
+    this._log.info('submitOrder long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -2313,8 +2727,40 @@ export class GDCHardwareManagementClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.createSite(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.gdchardwaremanagement.v1alpha.ISite,
+            protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('createSite response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('createSite request %j', request);
+    return this.innerApiCalls
+      .createSite(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.gdchardwaremanagement.v1alpha.ISite,
+            protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createSite response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `createSite()`.
@@ -2335,6 +2781,7 @@ export class GDCHardwareManagementClient {
       protos.google.cloud.gdchardwaremanagement.v1alpha.OperationMetadata
     >
   > {
+    this._log.info('createSite long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -2457,8 +2904,40 @@ export class GDCHardwareManagementClient {
       this._gaxModule.routingHeader.fromParams({
         'site.name': request.site!.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.updateSite(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.gdchardwaremanagement.v1alpha.ISite,
+            protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('updateSite response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('updateSite request %j', request);
+    return this.innerApiCalls
+      .updateSite(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.gdchardwaremanagement.v1alpha.ISite,
+            protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('updateSite response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `updateSite()`.
@@ -2479,6 +2958,7 @@ export class GDCHardwareManagementClient {
       protos.google.cloud.gdchardwaremanagement.v1alpha.OperationMetadata
     >
   > {
+    this._log.info('updateSite long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -2597,8 +3077,40 @@ export class GDCHardwareManagementClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.deleteSite(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('deleteSite response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('deleteSite request %j', request);
+    return this.innerApiCalls
+      .deleteSite(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteSite response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `deleteSite()`.
@@ -2619,6 +3131,7 @@ export class GDCHardwareManagementClient {
       protos.google.cloud.gdchardwaremanagement.v1alpha.OperationMetadata
     >
   > {
+    this._log.info('deleteSite long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -2748,8 +3261,40 @@ export class GDCHardwareManagementClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.createHardwareGroup(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.gdchardwaremanagement.v1alpha.IHardwareGroup,
+            protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('createHardwareGroup response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('createHardwareGroup request %j', request);
+    return this.innerApiCalls
+      .createHardwareGroup(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.gdchardwaremanagement.v1alpha.IHardwareGroup,
+            protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createHardwareGroup response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `createHardwareGroup()`.
@@ -2770,6 +3315,7 @@ export class GDCHardwareManagementClient {
       protos.google.cloud.gdchardwaremanagement.v1alpha.OperationMetadata
     >
   > {
+    this._log.info('createHardwareGroup long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -2893,8 +3439,40 @@ export class GDCHardwareManagementClient {
       this._gaxModule.routingHeader.fromParams({
         'hardware_group.name': request.hardwareGroup!.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.updateHardwareGroup(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.gdchardwaremanagement.v1alpha.IHardwareGroup,
+            protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('updateHardwareGroup response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('updateHardwareGroup request %j', request);
+    return this.innerApiCalls
+      .updateHardwareGroup(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.gdchardwaremanagement.v1alpha.IHardwareGroup,
+            protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('updateHardwareGroup response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `updateHardwareGroup()`.
@@ -2915,6 +3493,7 @@ export class GDCHardwareManagementClient {
       protos.google.cloud.gdchardwaremanagement.v1alpha.OperationMetadata
     >
   > {
+    this._log.info('updateHardwareGroup long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -3034,8 +3613,40 @@ export class GDCHardwareManagementClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.deleteHardwareGroup(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('deleteHardwareGroup response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('deleteHardwareGroup request %j', request);
+    return this.innerApiCalls
+      .deleteHardwareGroup(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteHardwareGroup response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `deleteHardwareGroup()`.
@@ -3056,6 +3667,7 @@ export class GDCHardwareManagementClient {
       protos.google.cloud.gdchardwaremanagement.v1alpha.OperationMetadata
     >
   > {
+    this._log.info('deleteHardwareGroup long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -3182,8 +3794,40 @@ export class GDCHardwareManagementClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.createHardware(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.gdchardwaremanagement.v1alpha.IHardware,
+            protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('createHardware response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('createHardware request %j', request);
+    return this.innerApiCalls
+      .createHardware(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.gdchardwaremanagement.v1alpha.IHardware,
+            protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createHardware response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `createHardware()`.
@@ -3204,6 +3848,7 @@ export class GDCHardwareManagementClient {
       protos.google.cloud.gdchardwaremanagement.v1alpha.OperationMetadata
     >
   > {
+    this._log.info('createHardware long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -3326,8 +3971,40 @@ export class GDCHardwareManagementClient {
       this._gaxModule.routingHeader.fromParams({
         'hardware.name': request.hardware!.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.updateHardware(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.gdchardwaremanagement.v1alpha.IHardware,
+            protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('updateHardware response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('updateHardware request %j', request);
+    return this.innerApiCalls
+      .updateHardware(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.gdchardwaremanagement.v1alpha.IHardware,
+            protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('updateHardware response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `updateHardware()`.
@@ -3348,6 +4025,7 @@ export class GDCHardwareManagementClient {
       protos.google.cloud.gdchardwaremanagement.v1alpha.OperationMetadata
     >
   > {
+    this._log.info('updateHardware long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -3466,8 +4144,40 @@ export class GDCHardwareManagementClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.deleteHardware(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('deleteHardware response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('deleteHardware request %j', request);
+    return this.innerApiCalls
+      .deleteHardware(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteHardware response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `deleteHardware()`.
@@ -3488,6 +4198,7 @@ export class GDCHardwareManagementClient {
       protos.google.cloud.gdchardwaremanagement.v1alpha.OperationMetadata
     >
   > {
+    this._log.info('deleteHardware long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -3617,8 +4328,40 @@ export class GDCHardwareManagementClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.createComment(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.gdchardwaremanagement.v1alpha.IComment,
+            protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('createComment response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('createComment request %j', request);
+    return this.innerApiCalls
+      .createComment(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.gdchardwaremanagement.v1alpha.IComment,
+            protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createComment response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `createComment()`.
@@ -3639,6 +4382,7 @@ export class GDCHardwareManagementClient {
       protos.google.cloud.gdchardwaremanagement.v1alpha.OperationMetadata
     >
   > {
+    this._log.info('createComment long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -3768,8 +4512,40 @@ export class GDCHardwareManagementClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.createZone(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.gdchardwaremanagement.v1alpha.IZone,
+            protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('createZone response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('createZone request %j', request);
+    return this.innerApiCalls
+      .createZone(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.gdchardwaremanagement.v1alpha.IZone,
+            protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createZone response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `createZone()`.
@@ -3790,6 +4566,7 @@ export class GDCHardwareManagementClient {
       protos.google.cloud.gdchardwaremanagement.v1alpha.OperationMetadata
     >
   > {
+    this._log.info('createZone long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -3912,8 +4689,40 @@ export class GDCHardwareManagementClient {
       this._gaxModule.routingHeader.fromParams({
         'zone.name': request.zone!.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.updateZone(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.gdchardwaremanagement.v1alpha.IZone,
+            protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('updateZone response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('updateZone request %j', request);
+    return this.innerApiCalls
+      .updateZone(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.gdchardwaremanagement.v1alpha.IZone,
+            protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('updateZone response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `updateZone()`.
@@ -3934,6 +4743,7 @@ export class GDCHardwareManagementClient {
       protos.google.cloud.gdchardwaremanagement.v1alpha.OperationMetadata
     >
   > {
+    this._log.info('updateZone long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -4052,8 +4862,40 @@ export class GDCHardwareManagementClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.deleteZone(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('deleteZone response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('deleteZone request %j', request);
+    return this.innerApiCalls
+      .deleteZone(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteZone response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `deleteZone()`.
@@ -4074,6 +4916,7 @@ export class GDCHardwareManagementClient {
       protos.google.cloud.gdchardwaremanagement.v1alpha.OperationMetadata
     >
   > {
+    this._log.info('deleteZone long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -4198,8 +5041,40 @@ export class GDCHardwareManagementClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.signalZoneState(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.gdchardwaremanagement.v1alpha.IZone,
+            protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('signalZoneState response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('signalZoneState request %j', request);
+    return this.innerApiCalls
+      .signalZoneState(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.gdchardwaremanagement.v1alpha.IZone,
+            protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('signalZoneState response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `signalZoneState()`.
@@ -4220,6 +5095,7 @@ export class GDCHardwareManagementClient {
       protos.google.cloud.gdchardwaremanagement.v1alpha.OperationMetadata
     >
   > {
+    this._log.info('signalZoneState long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -4339,8 +5215,36 @@ export class GDCHardwareManagementClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.listOrders(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.gdchardwaremanagement.v1alpha.IListOrdersRequest,
+          | protos.google.cloud.gdchardwaremanagement.v1alpha.IListOrdersResponse
+          | null
+          | undefined,
+          protos.google.cloud.gdchardwaremanagement.v1alpha.IOrder
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listOrders values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listOrders request %j', request);
+    return this.innerApiCalls
+      .listOrders(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.gdchardwaremanagement.v1alpha.IOrder[],
+          protos.google.cloud.gdchardwaremanagement.v1alpha.IListOrdersRequest | null,
+          protos.google.cloud.gdchardwaremanagement.v1alpha.IListOrdersResponse,
+        ]) => {
+          this._log.info('listOrders values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -4388,7 +5292,10 @@ export class GDCHardwareManagementClient {
       });
     const defaultCallSettings = this._defaults['listOrders'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listOrders stream %j', request);
     return this.descriptors.page.listOrders.createStream(
       this.innerApiCalls.listOrders as GaxCall,
       request,
@@ -4444,7 +5351,10 @@ export class GDCHardwareManagementClient {
       });
     const defaultCallSettings = this._defaults['listOrders'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listOrders iterate %j', request);
     return this.descriptors.page.listOrders.asyncIterate(
       this.innerApiCalls['listOrders'] as GaxCall,
       request as {},
@@ -4555,8 +5465,36 @@ export class GDCHardwareManagementClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.listSites(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.gdchardwaremanagement.v1alpha.IListSitesRequest,
+          | protos.google.cloud.gdchardwaremanagement.v1alpha.IListSitesResponse
+          | null
+          | undefined,
+          protos.google.cloud.gdchardwaremanagement.v1alpha.ISite
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listSites values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listSites request %j', request);
+    return this.innerApiCalls
+      .listSites(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.gdchardwaremanagement.v1alpha.ISite[],
+          protos.google.cloud.gdchardwaremanagement.v1alpha.IListSitesRequest | null,
+          protos.google.cloud.gdchardwaremanagement.v1alpha.IListSitesResponse,
+        ]) => {
+          this._log.info('listSites values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -4604,7 +5542,10 @@ export class GDCHardwareManagementClient {
       });
     const defaultCallSettings = this._defaults['listSites'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listSites stream %j', request);
     return this.descriptors.page.listSites.createStream(
       this.innerApiCalls.listSites as GaxCall,
       request,
@@ -4660,7 +5601,10 @@ export class GDCHardwareManagementClient {
       });
     const defaultCallSettings = this._defaults['listSites'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listSites iterate %j', request);
     return this.descriptors.page.listSites.asyncIterate(
       this.innerApiCalls['listSites'] as GaxCall,
       request as {},
@@ -4767,8 +5711,36 @@ export class GDCHardwareManagementClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.listHardwareGroups(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.gdchardwaremanagement.v1alpha.IListHardwareGroupsRequest,
+          | protos.google.cloud.gdchardwaremanagement.v1alpha.IListHardwareGroupsResponse
+          | null
+          | undefined,
+          protos.google.cloud.gdchardwaremanagement.v1alpha.IHardwareGroup
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listHardwareGroups values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listHardwareGroups request %j', request);
+    return this.innerApiCalls
+      .listHardwareGroups(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.gdchardwaremanagement.v1alpha.IHardwareGroup[],
+          protos.google.cloud.gdchardwaremanagement.v1alpha.IListHardwareGroupsRequest | null,
+          protos.google.cloud.gdchardwaremanagement.v1alpha.IListHardwareGroupsResponse,
+        ]) => {
+          this._log.info('listHardwareGroups values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -4812,7 +5784,10 @@ export class GDCHardwareManagementClient {
       });
     const defaultCallSettings = this._defaults['listHardwareGroups'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listHardwareGroups stream %j', request);
     return this.descriptors.page.listHardwareGroups.createStream(
       this.innerApiCalls.listHardwareGroups as GaxCall,
       request,
@@ -4864,7 +5839,10 @@ export class GDCHardwareManagementClient {
       });
     const defaultCallSettings = this._defaults['listHardwareGroups'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listHardwareGroups iterate %j', request);
     return this.descriptors.page.listHardwareGroups.asyncIterate(
       this.innerApiCalls['listHardwareGroups'] as GaxCall,
       request as {},
@@ -4975,8 +5953,36 @@ export class GDCHardwareManagementClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.listHardware(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.gdchardwaremanagement.v1alpha.IListHardwareRequest,
+          | protos.google.cloud.gdchardwaremanagement.v1alpha.IListHardwareResponse
+          | null
+          | undefined,
+          protos.google.cloud.gdchardwaremanagement.v1alpha.IHardware
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listHardware values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listHardware request %j', request);
+    return this.innerApiCalls
+      .listHardware(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.gdchardwaremanagement.v1alpha.IHardware[],
+          protos.google.cloud.gdchardwaremanagement.v1alpha.IListHardwareRequest | null,
+          protos.google.cloud.gdchardwaremanagement.v1alpha.IListHardwareResponse,
+        ]) => {
+          this._log.info('listHardware values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -5024,7 +6030,10 @@ export class GDCHardwareManagementClient {
       });
     const defaultCallSettings = this._defaults['listHardware'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listHardware stream %j', request);
     return this.descriptors.page.listHardware.createStream(
       this.innerApiCalls.listHardware as GaxCall,
       request,
@@ -5080,7 +6089,10 @@ export class GDCHardwareManagementClient {
       });
     const defaultCallSettings = this._defaults['listHardware'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listHardware iterate %j', request);
     return this.descriptors.page.listHardware.asyncIterate(
       this.innerApiCalls['listHardware'] as GaxCall,
       request as {},
@@ -5187,8 +6199,36 @@ export class GDCHardwareManagementClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.listComments(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.gdchardwaremanagement.v1alpha.IListCommentsRequest,
+          | protos.google.cloud.gdchardwaremanagement.v1alpha.IListCommentsResponse
+          | null
+          | undefined,
+          protos.google.cloud.gdchardwaremanagement.v1alpha.IComment
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listComments values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listComments request %j', request);
+    return this.innerApiCalls
+      .listComments(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.gdchardwaremanagement.v1alpha.IComment[],
+          protos.google.cloud.gdchardwaremanagement.v1alpha.IListCommentsRequest | null,
+          protos.google.cloud.gdchardwaremanagement.v1alpha.IListCommentsResponse,
+        ]) => {
+          this._log.info('listComments values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -5232,7 +6272,10 @@ export class GDCHardwareManagementClient {
       });
     const defaultCallSettings = this._defaults['listComments'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listComments stream %j', request);
     return this.descriptors.page.listComments.createStream(
       this.innerApiCalls.listComments as GaxCall,
       request,
@@ -5284,7 +6327,10 @@ export class GDCHardwareManagementClient {
       });
     const defaultCallSettings = this._defaults['listComments'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listComments iterate %j', request);
     return this.descriptors.page.listComments.asyncIterate(
       this.innerApiCalls['listComments'] as GaxCall,
       request as {},
@@ -5391,8 +6437,36 @@ export class GDCHardwareManagementClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.listChangeLogEntries(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.gdchardwaremanagement.v1alpha.IListChangeLogEntriesRequest,
+          | protos.google.cloud.gdchardwaremanagement.v1alpha.IListChangeLogEntriesResponse
+          | null
+          | undefined,
+          protos.google.cloud.gdchardwaremanagement.v1alpha.IChangeLogEntry
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listChangeLogEntries values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listChangeLogEntries request %j', request);
+    return this.innerApiCalls
+      .listChangeLogEntries(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.gdchardwaremanagement.v1alpha.IChangeLogEntry[],
+          protos.google.cloud.gdchardwaremanagement.v1alpha.IListChangeLogEntriesRequest | null,
+          protos.google.cloud.gdchardwaremanagement.v1alpha.IListChangeLogEntriesResponse,
+        ]) => {
+          this._log.info('listChangeLogEntries values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -5436,7 +6510,10 @@ export class GDCHardwareManagementClient {
       });
     const defaultCallSettings = this._defaults['listChangeLogEntries'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listChangeLogEntries stream %j', request);
     return this.descriptors.page.listChangeLogEntries.createStream(
       this.innerApiCalls.listChangeLogEntries as GaxCall,
       request,
@@ -5488,7 +6565,10 @@ export class GDCHardwareManagementClient {
       });
     const defaultCallSettings = this._defaults['listChangeLogEntries'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listChangeLogEntries iterate %j', request);
     return this.descriptors.page.listChangeLogEntries.asyncIterate(
       this.innerApiCalls['listChangeLogEntries'] as GaxCall,
       request as {},
@@ -5599,8 +6679,36 @@ export class GDCHardwareManagementClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.listSkus(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.gdchardwaremanagement.v1alpha.IListSkusRequest,
+          | protos.google.cloud.gdchardwaremanagement.v1alpha.IListSkusResponse
+          | null
+          | undefined,
+          protos.google.cloud.gdchardwaremanagement.v1alpha.ISku
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listSkus values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listSkus request %j', request);
+    return this.innerApiCalls
+      .listSkus(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.gdchardwaremanagement.v1alpha.ISku[],
+          protos.google.cloud.gdchardwaremanagement.v1alpha.IListSkusRequest | null,
+          protos.google.cloud.gdchardwaremanagement.v1alpha.IListSkusResponse,
+        ]) => {
+          this._log.info('listSkus values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -5648,7 +6756,10 @@ export class GDCHardwareManagementClient {
       });
     const defaultCallSettings = this._defaults['listSkus'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listSkus stream %j', request);
     return this.descriptors.page.listSkus.createStream(
       this.innerApiCalls.listSkus as GaxCall,
       request,
@@ -5704,7 +6815,10 @@ export class GDCHardwareManagementClient {
       });
     const defaultCallSettings = this._defaults['listSkus'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listSkus iterate %j', request);
     return this.descriptors.page.listSkus.asyncIterate(
       this.innerApiCalls['listSkus'] as GaxCall,
       request as {},
@@ -5815,8 +6929,36 @@ export class GDCHardwareManagementClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.listZones(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.gdchardwaremanagement.v1alpha.IListZonesRequest,
+          | protos.google.cloud.gdchardwaremanagement.v1alpha.IListZonesResponse
+          | null
+          | undefined,
+          protos.google.cloud.gdchardwaremanagement.v1alpha.IZone
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listZones values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listZones request %j', request);
+    return this.innerApiCalls
+      .listZones(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.gdchardwaremanagement.v1alpha.IZone[],
+          protos.google.cloud.gdchardwaremanagement.v1alpha.IListZonesRequest | null,
+          protos.google.cloud.gdchardwaremanagement.v1alpha.IListZonesResponse,
+        ]) => {
+          this._log.info('listZones values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -5864,7 +7006,10 @@ export class GDCHardwareManagementClient {
       });
     const defaultCallSettings = this._defaults['listZones'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listZones stream %j', request);
     return this.descriptors.page.listZones.createStream(
       this.innerApiCalls.listZones as GaxCall,
       request,
@@ -5920,7 +7065,10 @@ export class GDCHardwareManagementClient {
       });
     const defaultCallSettings = this._defaults['listZones'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listZones iterate %j', request);
     return this.descriptors.page.listZones.asyncIterate(
       this.innerApiCalls['listZones'] as GaxCall,
       request as {},
@@ -6099,7 +7247,7 @@ export class GDCHardwareManagementClient {
   listOperationsAsync(
     request: protos.google.longrunning.ListOperationsRequest,
     options?: gax.CallOptions
-  ): AsyncIterable<protos.google.longrunning.ListOperationsResponse> {
+  ): AsyncIterable<protos.google.longrunning.IOperation> {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
@@ -6759,6 +7907,7 @@ export class GDCHardwareManagementClient {
   close(): Promise<void> {
     if (this.gDCHardwareManagementStub && !this._terminated) {
       return this.gDCHardwareManagementStub.then(stub => {
+        this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
         this.locationsClient.close();

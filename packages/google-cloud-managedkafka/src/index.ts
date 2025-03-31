@@ -20,8 +20,10 @@ import * as v1 from './v1';
 
 const ManagedKafkaClient = v1.ManagedKafkaClient;
 type ManagedKafkaClient = v1.ManagedKafkaClient;
+const ManagedKafkaConnectClient = v1.ManagedKafkaConnectClient;
+type ManagedKafkaConnectClient = v1.ManagedKafkaConnectClient;
 
-export {v1, ManagedKafkaClient};
-export default {v1, ManagedKafkaClient};
+export {v1, ManagedKafkaClient, ManagedKafkaConnectClient};
+export default {v1, ManagedKafkaClient, ManagedKafkaConnectClient};
 import * as protos from '../protos/protos';
 export {protos};

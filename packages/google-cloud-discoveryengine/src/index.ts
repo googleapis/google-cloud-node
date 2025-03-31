@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -46,6 +46,8 @@ const SearchServiceClient = v1.SearchServiceClient;
 type SearchServiceClient = v1.SearchServiceClient;
 const SearchTuningServiceClient = v1.SearchTuningServiceClient;
 type SearchTuningServiceClient = v1.SearchTuningServiceClient;
+const ServingConfigServiceClient = v1.ServingConfigServiceClient;
+type ServingConfigServiceClient = v1.ServingConfigServiceClient;
 const SiteSearchEngineServiceClient = v1.SiteSearchEngineServiceClient;
 type SiteSearchEngineServiceClient = v1.SiteSearchEngineServiceClient;
 const UserEventServiceClient = v1.UserEventServiceClient;
@@ -68,6 +70,7 @@ export {
   SchemaServiceClient,
   SearchServiceClient,
   SearchTuningServiceClient,
+  ServingConfigServiceClient,
   SiteSearchEngineServiceClient,
   UserEventServiceClient,
 };
@@ -88,6 +91,7 @@ export default {
   SchemaServiceClient,
   SearchServiceClient,
   SearchTuningServiceClient,
+  ServingConfigServiceClient,
   SiteSearchEngineServiceClient,
   UserEventServiceClient,
 };

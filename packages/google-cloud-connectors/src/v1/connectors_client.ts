@@ -35,6 +35,7 @@ import type {
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
+import {loggingUtils as logging} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -59,6 +60,8 @@ export class ConnectorsClient {
   private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
+  private _log = logging.log('connectors');
+
   auth: gax.GoogleAuth;
   descriptors: Descriptors = {
     page: {},
@@ -96,7 +99,7 @@ export class ConnectorsClient {
    *     Developer's Console, e.g. 'grape-spaceship-123'. We will also check
    *     the environment variable GCLOUD_PROJECT for your project ID. If your
    *     app is running in an environment which supports
-   *     {@link https://developers.google.com/identity/protocols/application-default-credentials Application Default Credentials},
+   *     {@link https://cloud.google.com/docs/authentication/application-default-credentials Application Default Credentials},
    *     your project ID will be detected automatically.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
@@ -673,8 +676,36 @@ export class ConnectorsClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.getConnection(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('getConnection request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.connectors.v1.IConnection,
+          | protos.google.cloud.connectors.v1.IGetConnectionRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getConnection response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getConnection(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.connectors.v1.IConnection,
+          protos.google.cloud.connectors.v1.IGetConnectionRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getConnection response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Gets details of a provider.
@@ -759,8 +790,36 @@ export class ConnectorsClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.getProvider(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('getProvider request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.connectors.v1.IProvider,
+          | protos.google.cloud.connectors.v1.IGetProviderRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getProvider response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getProvider(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.connectors.v1.IProvider,
+          protos.google.cloud.connectors.v1.IGetProviderRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getProvider response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Gets details of a single Connector.
@@ -845,8 +904,36 @@ export class ConnectorsClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.getConnector(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('getConnector request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.connectors.v1.IConnector,
+          | protos.google.cloud.connectors.v1.IGetConnectorRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getConnector response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getConnector(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.connectors.v1.IConnector,
+          protos.google.cloud.connectors.v1.IGetConnectorRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getConnector response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Gets details of a single connector version.
@@ -940,8 +1027,39 @@ export class ConnectorsClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.getConnectorVersion(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('getConnectorVersion request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.connectors.v1.IConnectorVersion,
+          | protos.google.cloud.connectors.v1.IGetConnectorVersionRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getConnectorVersion response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getConnectorVersion(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.connectors.v1.IConnectorVersion,
+          (
+            | protos.google.cloud.connectors.v1.IGetConnectorVersionRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getConnectorVersion response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Gets schema metadata of a connection.
@@ -1039,12 +1157,39 @@ export class ConnectorsClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.getConnectionSchemaMetadata(
-      request,
-      options,
-      callback
-    );
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('getConnectionSchemaMetadata request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.connectors.v1.IConnectionSchemaMetadata,
+          | protos.google.cloud.connectors.v1.IGetConnectionSchemaMetadataRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getConnectionSchemaMetadata response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getConnectionSchemaMetadata(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.connectors.v1.IConnectionSchemaMetadata,
+          (
+            | protos.google.cloud.connectors.v1.IGetConnectionSchemaMetadataRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getConnectionSchemaMetadata response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Gets the runtimeConfig of a location.
@@ -1135,8 +1280,39 @@ export class ConnectorsClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.getRuntimeConfig(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('getRuntimeConfig request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.connectors.v1.IRuntimeConfig,
+          | protos.google.cloud.connectors.v1.IGetRuntimeConfigRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getRuntimeConfig response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getRuntimeConfig(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.connectors.v1.IRuntimeConfig,
+          (
+            | protos.google.cloud.connectors.v1.IGetRuntimeConfigRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getRuntimeConfig response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * GetGlobalSettings gets settings of a project.
@@ -1226,8 +1402,39 @@ export class ConnectorsClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.getGlobalSettings(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('getGlobalSettings request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.connectors.v1.ISettings,
+          | protos.google.cloud.connectors.v1.IGetGlobalSettingsRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getGlobalSettings response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getGlobalSettings(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.connectors.v1.ISettings,
+          (
+            | protos.google.cloud.connectors.v1.IGetGlobalSettingsRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getGlobalSettings response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
 
   /**
@@ -1335,8 +1542,40 @@ export class ConnectorsClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.createConnection(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.connectors.v1.IConnection,
+            protos.google.cloud.connectors.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('createConnection response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('createConnection request %j', request);
+    return this.innerApiCalls
+      .createConnection(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.connectors.v1.IConnection,
+            protos.google.cloud.connectors.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createConnection response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `createConnection()`.
@@ -1357,6 +1596,7 @@ export class ConnectorsClient {
       protos.google.cloud.connectors.v1.OperationMetadata
     >
   > {
+    this._log.info('createConnection long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -1488,8 +1728,40 @@ export class ConnectorsClient {
       this._gaxModule.routingHeader.fromParams({
         'connection.name': request.connection!.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.updateConnection(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.connectors.v1.IConnection,
+            protos.google.cloud.connectors.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('updateConnection response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('updateConnection request %j', request);
+    return this.innerApiCalls
+      .updateConnection(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.connectors.v1.IConnection,
+            protos.google.cloud.connectors.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('updateConnection response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `updateConnection()`.
@@ -1510,6 +1782,7 @@ export class ConnectorsClient {
       protos.google.cloud.connectors.v1.OperationMetadata
     >
   > {
+    this._log.info('updateConnection long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -1625,8 +1898,40 @@ export class ConnectorsClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.deleteConnection(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.connectors.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('deleteConnection response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('deleteConnection request %j', request);
+    return this.innerApiCalls
+      .deleteConnection(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.connectors.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteConnection response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `deleteConnection()`.
@@ -1647,6 +1952,7 @@ export class ConnectorsClient {
       protos.google.cloud.connectors.v1.OperationMetadata
     >
   > {
+    this._log.info('deleteConnection long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -1763,12 +2069,46 @@ export class ConnectorsClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.refreshConnectionSchemaMetadata(
-      request,
-      options,
-      callback
-    );
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.connectors.v1.IConnectionSchemaMetadata,
+            protos.google.cloud.connectors.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info(
+            'refreshConnectionSchemaMetadata response %j',
+            rawResponse
+          );
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('refreshConnectionSchemaMetadata request %j', request);
+    return this.innerApiCalls
+      .refreshConnectionSchemaMetadata(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.connectors.v1.IConnectionSchemaMetadata,
+            protos.google.cloud.connectors.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info(
+            'refreshConnectionSchemaMetadata response %j',
+            rawResponse
+          );
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `refreshConnectionSchemaMetadata()`.
@@ -1789,6 +2129,7 @@ export class ConnectorsClient {
       protos.google.cloud.connectors.v1.OperationMetadata
     >
   > {
+    this._log.info('refreshConnectionSchemaMetadata long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -1906,12 +2247,40 @@ export class ConnectorsClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.listConnections(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.connectors.v1.IListConnectionsRequest,
+          | protos.google.cloud.connectors.v1.IListConnectionsResponse
+          | null
+          | undefined,
+          protos.google.cloud.connectors.v1.IConnection
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listConnections values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listConnections request %j', request);
+    return this.innerApiCalls
+      .listConnections(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.connectors.v1.IConnection[],
+          protos.google.cloud.connectors.v1.IListConnectionsRequest | null,
+          protos.google.cloud.connectors.v1.IListConnectionsResponse,
+        ]) => {
+          this._log.info('listConnections values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listConnections`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
@@ -1953,7 +2322,10 @@ export class ConnectorsClient {
       });
     const defaultCallSettings = this._defaults['listConnections'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listConnections stream %j', request);
     return this.descriptors.page.listConnections.createStream(
       this.innerApiCalls.listConnections as GaxCall,
       request,
@@ -2007,7 +2379,10 @@ export class ConnectorsClient {
       });
     const defaultCallSettings = this._defaults['listConnections'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listConnections iterate %j', request);
     return this.descriptors.page.listConnections.asyncIterate(
       this.innerApiCalls['listConnections'] as GaxCall,
       request as {},
@@ -2110,12 +2485,40 @@ export class ConnectorsClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.listProviders(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.connectors.v1.IListProvidersRequest,
+          | protos.google.cloud.connectors.v1.IListProvidersResponse
+          | null
+          | undefined,
+          protos.google.cloud.connectors.v1.IProvider
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listProviders values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listProviders request %j', request);
+    return this.innerApiCalls
+      .listProviders(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.connectors.v1.IProvider[],
+          protos.google.cloud.connectors.v1.IListProvidersRequest | null,
+          protos.google.cloud.connectors.v1.IListProvidersResponse,
+        ]) => {
+          this._log.info('listProviders values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listProviders`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
@@ -2151,7 +2554,10 @@ export class ConnectorsClient {
       });
     const defaultCallSettings = this._defaults['listProviders'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listProviders stream %j', request);
     return this.descriptors.page.listProviders.createStream(
       this.innerApiCalls.listProviders as GaxCall,
       request,
@@ -2199,7 +2605,10 @@ export class ConnectorsClient {
       });
     const defaultCallSettings = this._defaults['listProviders'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listProviders iterate %j', request);
     return this.descriptors.page.listProviders.asyncIterate(
       this.innerApiCalls['listProviders'] as GaxCall,
       request as {},
@@ -2302,12 +2711,40 @@ export class ConnectorsClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.listConnectors(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.connectors.v1.IListConnectorsRequest,
+          | protos.google.cloud.connectors.v1.IListConnectorsResponse
+          | null
+          | undefined,
+          protos.google.cloud.connectors.v1.IConnector
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listConnectors values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listConnectors request %j', request);
+    return this.innerApiCalls
+      .listConnectors(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.connectors.v1.IConnector[],
+          protos.google.cloud.connectors.v1.IListConnectorsRequest | null,
+          protos.google.cloud.connectors.v1.IListConnectorsResponse,
+        ]) => {
+          this._log.info('listConnectors values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listConnectors`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
@@ -2343,7 +2780,10 @@ export class ConnectorsClient {
       });
     const defaultCallSettings = this._defaults['listConnectors'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listConnectors stream %j', request);
     return this.descriptors.page.listConnectors.createStream(
       this.innerApiCalls.listConnectors as GaxCall,
       request,
@@ -2391,7 +2831,10 @@ export class ConnectorsClient {
       });
     const defaultCallSettings = this._defaults['listConnectors'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listConnectors iterate %j', request);
     return this.descriptors.page.listConnectors.asyncIterate(
       this.innerApiCalls['listConnectors'] as GaxCall,
       request as {},
@@ -2497,12 +2940,40 @@ export class ConnectorsClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.listConnectorVersions(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.connectors.v1.IListConnectorVersionsRequest,
+          | protos.google.cloud.connectors.v1.IListConnectorVersionsResponse
+          | null
+          | undefined,
+          protos.google.cloud.connectors.v1.IConnectorVersion
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listConnectorVersions values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listConnectorVersions request %j', request);
+    return this.innerApiCalls
+      .listConnectorVersions(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.connectors.v1.IConnectorVersion[],
+          protos.google.cloud.connectors.v1.IListConnectorVersionsRequest | null,
+          protos.google.cloud.connectors.v1.IListConnectorVersionsResponse,
+        ]) => {
+          this._log.info('listConnectorVersions values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listConnectorVersions`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
@@ -2541,7 +3012,10 @@ export class ConnectorsClient {
       });
     const defaultCallSettings = this._defaults['listConnectorVersions'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listConnectorVersions stream %j', request);
     return this.descriptors.page.listConnectorVersions.createStream(
       this.innerApiCalls.listConnectorVersions as GaxCall,
       request,
@@ -2592,7 +3066,10 @@ export class ConnectorsClient {
       });
     const defaultCallSettings = this._defaults['listConnectorVersions'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listConnectorVersions iterate %j', request);
     return this.descriptors.page.listConnectorVersions.asyncIterate(
       this.innerApiCalls['listConnectorVersions'] as GaxCall,
       request as {},
@@ -2702,16 +3179,40 @@ export class ConnectorsClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.listRuntimeEntitySchemas(
-      request,
-      options,
-      callback
-    );
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.connectors.v1.IListRuntimeEntitySchemasRequest,
+          | protos.google.cloud.connectors.v1.IListRuntimeEntitySchemasResponse
+          | null
+          | undefined,
+          protos.google.cloud.connectors.v1.IRuntimeEntitySchema
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listRuntimeEntitySchemas values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listRuntimeEntitySchemas request %j', request);
+    return this.innerApiCalls
+      .listRuntimeEntitySchemas(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.connectors.v1.IRuntimeEntitySchema[],
+          protos.google.cloud.connectors.v1.IListRuntimeEntitySchemasRequest | null,
+          protos.google.cloud.connectors.v1.IListRuntimeEntitySchemasResponse,
+        ]) => {
+          this._log.info('listRuntimeEntitySchemas values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listRuntimeEntitySchemas`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
@@ -2754,7 +3255,10 @@ export class ConnectorsClient {
       });
     const defaultCallSettings = this._defaults['listRuntimeEntitySchemas'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listRuntimeEntitySchemas stream %j', request);
     return this.descriptors.page.listRuntimeEntitySchemas.createStream(
       this.innerApiCalls.listRuntimeEntitySchemas as GaxCall,
       request,
@@ -2809,7 +3313,10 @@ export class ConnectorsClient {
       });
     const defaultCallSettings = this._defaults['listRuntimeEntitySchemas'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listRuntimeEntitySchemas iterate %j', request);
     return this.descriptors.page.listRuntimeEntitySchemas.asyncIterate(
       this.innerApiCalls['listRuntimeEntitySchemas'] as GaxCall,
       request as {},
@@ -2919,16 +3426,40 @@ export class ConnectorsClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.listRuntimeActionSchemas(
-      request,
-      options,
-      callback
-    );
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.connectors.v1.IListRuntimeActionSchemasRequest,
+          | protos.google.cloud.connectors.v1.IListRuntimeActionSchemasResponse
+          | null
+          | undefined,
+          protos.google.cloud.connectors.v1.IRuntimeActionSchema
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listRuntimeActionSchemas values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listRuntimeActionSchemas request %j', request);
+    return this.innerApiCalls
+      .listRuntimeActionSchemas(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.connectors.v1.IRuntimeActionSchema[],
+          protos.google.cloud.connectors.v1.IListRuntimeActionSchemasRequest | null,
+          protos.google.cloud.connectors.v1.IListRuntimeActionSchemasResponse,
+        ]) => {
+          this._log.info('listRuntimeActionSchemas values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listRuntimeActionSchemas`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
@@ -2971,7 +3502,10 @@ export class ConnectorsClient {
       });
     const defaultCallSettings = this._defaults['listRuntimeActionSchemas'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listRuntimeActionSchemas stream %j', request);
     return this.descriptors.page.listRuntimeActionSchemas.createStream(
       this.innerApiCalls.listRuntimeActionSchemas as GaxCall,
       request,
@@ -3026,7 +3560,10 @@ export class ConnectorsClient {
       });
     const defaultCallSettings = this._defaults['listRuntimeActionSchemas'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listRuntimeActionSchemas iterate %j', request);
     return this.descriptors.page.listRuntimeActionSchemas.asyncIterate(
       this.innerApiCalls['listRuntimeActionSchemas'] as GaxCall,
       request as {},
@@ -3281,7 +3818,7 @@ export class ConnectorsClient {
    */
   getOperation(
     request: protos.google.longrunning.GetOperationRequest,
-    options?:
+    optionsOrCallback?:
       | gax.CallOptions
       | Callback<
           protos.google.longrunning.Operation,
@@ -3294,6 +3831,20 @@ export class ConnectorsClient {
       {} | null | undefined
     >
   ): Promise<[protos.google.longrunning.Operation]> {
+    let options: gax.CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as gax.CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.getOperation(request, options, callback);
   }
   /**
@@ -3329,7 +3880,14 @@ export class ConnectorsClient {
   listOperationsAsync(
     request: protos.google.longrunning.ListOperationsRequest,
     options?: gax.CallOptions
-  ): AsyncIterable<protos.google.longrunning.ListOperationsResponse> {
+  ): AsyncIterable<protos.google.longrunning.IOperation> {
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.listOperationsAsync(request, options);
   }
   /**
@@ -3365,11 +3923,11 @@ export class ConnectorsClient {
    */
   cancelOperation(
     request: protos.google.longrunning.CancelOperationRequest,
-    options?:
+    optionsOrCallback?:
       | gax.CallOptions
       | Callback<
-          protos.google.protobuf.Empty,
           protos.google.longrunning.CancelOperationRequest,
+          protos.google.protobuf.Empty,
           {} | undefined | null
         >,
     callback?: Callback<
@@ -3378,6 +3936,20 @@ export class ConnectorsClient {
       {} | undefined | null
     >
   ): Promise<protos.google.protobuf.Empty> {
+    let options: gax.CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as gax.CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.cancelOperation(request, options, callback);
   }
 
@@ -3408,7 +3980,7 @@ export class ConnectorsClient {
    */
   deleteOperation(
     request: protos.google.longrunning.DeleteOperationRequest,
-    options?:
+    optionsOrCallback?:
       | gax.CallOptions
       | Callback<
           protos.google.protobuf.Empty,
@@ -3421,6 +3993,20 @@ export class ConnectorsClient {
       {} | null | undefined
     >
   ): Promise<protos.google.protobuf.Empty> {
+    let options: gax.CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as gax.CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.deleteOperation(request, options, callback);
   }
 
@@ -3826,6 +4412,7 @@ export class ConnectorsClient {
   close(): Promise<void> {
     if (this.connectorsStub && !this._terminated) {
       return this.connectorsStub.then(stub => {
+        this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
         this.iamClient.close();

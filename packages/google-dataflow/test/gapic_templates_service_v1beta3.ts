@@ -194,7 +194,9 @@ describe('v1beta3.TemplatesServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      client.initialize().catch(err => {
+        throw err;
+      });
       assert(client.templatesServiceStub);
       client.close().then(() => {
         done();
@@ -253,7 +255,7 @@ describe('v1beta3.TemplatesServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.dataflow.v1beta3.CreateJobFromTemplateRequest()
       );
@@ -267,7 +269,7 @@ describe('v1beta3.TemplatesServiceClient', () => {
         ['location']
       );
       request.location = defaultValue2;
-      const expectedHeaderRequestParams = `project_id=${defaultValue1}&location=${defaultValue2}`;
+      const expectedHeaderRequestParams = `project_id=${defaultValue1 ?? ''}&location=${defaultValue2 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.dataflow.v1beta3.Job()
       );
@@ -290,7 +292,7 @@ describe('v1beta3.TemplatesServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.dataflow.v1beta3.CreateJobFromTemplateRequest()
       );
@@ -304,7 +306,7 @@ describe('v1beta3.TemplatesServiceClient', () => {
         ['location']
       );
       request.location = defaultValue2;
-      const expectedHeaderRequestParams = `project_id=${defaultValue1}&location=${defaultValue2}`;
+      const expectedHeaderRequestParams = `project_id=${defaultValue1 ?? ''}&location=${defaultValue2 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.dataflow.v1beta3.Job()
       );
@@ -342,7 +344,7 @@ describe('v1beta3.TemplatesServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.dataflow.v1beta3.CreateJobFromTemplateRequest()
       );
@@ -356,7 +358,7 @@ describe('v1beta3.TemplatesServiceClient', () => {
         ['location']
       );
       request.location = defaultValue2;
-      const expectedHeaderRequestParams = `project_id=${defaultValue1}&location=${defaultValue2}`;
+      const expectedHeaderRequestParams = `project_id=${defaultValue1 ?? ''}&location=${defaultValue2 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createJobFromTemplate = stubSimpleCall(
         undefined,
@@ -381,7 +383,7 @@ describe('v1beta3.TemplatesServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.dataflow.v1beta3.CreateJobFromTemplateRequest()
       );
@@ -410,7 +412,7 @@ describe('v1beta3.TemplatesServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.dataflow.v1beta3.LaunchTemplateRequest()
       );
@@ -424,7 +426,7 @@ describe('v1beta3.TemplatesServiceClient', () => {
         ['location']
       );
       request.location = defaultValue2;
-      const expectedHeaderRequestParams = `project_id=${defaultValue1}&location=${defaultValue2}`;
+      const expectedHeaderRequestParams = `project_id=${defaultValue1 ?? ''}&location=${defaultValue2 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.dataflow.v1beta3.LaunchTemplateResponse()
       );
@@ -446,7 +448,7 @@ describe('v1beta3.TemplatesServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.dataflow.v1beta3.LaunchTemplateRequest()
       );
@@ -460,7 +462,7 @@ describe('v1beta3.TemplatesServiceClient', () => {
         ['location']
       );
       request.location = defaultValue2;
-      const expectedHeaderRequestParams = `project_id=${defaultValue1}&location=${defaultValue2}`;
+      const expectedHeaderRequestParams = `project_id=${defaultValue1 ?? ''}&location=${defaultValue2 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.dataflow.v1beta3.LaunchTemplateResponse()
       );
@@ -498,7 +500,7 @@ describe('v1beta3.TemplatesServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.dataflow.v1beta3.LaunchTemplateRequest()
       );
@@ -512,7 +514,7 @@ describe('v1beta3.TemplatesServiceClient', () => {
         ['location']
       );
       request.location = defaultValue2;
-      const expectedHeaderRequestParams = `project_id=${defaultValue1}&location=${defaultValue2}`;
+      const expectedHeaderRequestParams = `project_id=${defaultValue1 ?? ''}&location=${defaultValue2 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.launchTemplate = stubSimpleCall(
         undefined,
@@ -534,7 +536,7 @@ describe('v1beta3.TemplatesServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.dataflow.v1beta3.LaunchTemplateRequest()
       );
@@ -560,7 +562,7 @@ describe('v1beta3.TemplatesServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.dataflow.v1beta3.GetTemplateRequest()
       );
@@ -574,7 +576,7 @@ describe('v1beta3.TemplatesServiceClient', () => {
         ['location']
       );
       request.location = defaultValue2;
-      const expectedHeaderRequestParams = `project_id=${defaultValue1}&location=${defaultValue2}`;
+      const expectedHeaderRequestParams = `project_id=${defaultValue1 ?? ''}&location=${defaultValue2 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.dataflow.v1beta3.GetTemplateResponse()
       );
@@ -596,7 +598,7 @@ describe('v1beta3.TemplatesServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.dataflow.v1beta3.GetTemplateRequest()
       );
@@ -610,7 +612,7 @@ describe('v1beta3.TemplatesServiceClient', () => {
         ['location']
       );
       request.location = defaultValue2;
-      const expectedHeaderRequestParams = `project_id=${defaultValue1}&location=${defaultValue2}`;
+      const expectedHeaderRequestParams = `project_id=${defaultValue1 ?? ''}&location=${defaultValue2 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.dataflow.v1beta3.GetTemplateResponse()
       );
@@ -648,7 +650,7 @@ describe('v1beta3.TemplatesServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.dataflow.v1beta3.GetTemplateRequest()
       );
@@ -662,7 +664,7 @@ describe('v1beta3.TemplatesServiceClient', () => {
         ['location']
       );
       request.location = defaultValue2;
-      const expectedHeaderRequestParams = `project_id=${defaultValue1}&location=${defaultValue2}`;
+      const expectedHeaderRequestParams = `project_id=${defaultValue1 ?? ''}&location=${defaultValue2 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getTemplate = stubSimpleCall(
         undefined,
@@ -684,7 +686,7 @@ describe('v1beta3.TemplatesServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.dataflow.v1beta3.GetTemplateRequest()
       );

@@ -27,6 +27,7 @@ import type {
 
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
+import {loggingUtils as logging} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -51,6 +52,8 @@ export class PhishingProtectionServiceV1Beta1Client {
   private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
+  private _log = logging.log('phishing-protection');
+
   auth: gax.GoogleAuth;
   descriptors: Descriptors = {
     page: {},
@@ -85,7 +88,7 @@ export class PhishingProtectionServiceV1Beta1Client {
    *     Developer's Console, e.g. 'grape-spaceship-123'. We will also check
    *     the environment variable GCLOUD_PROJECT for your project ID. If your
    *     app is running in an environment which supports
-   *     {@link https://developers.google.com/identity/protocols/application-default-credentials Application Default Credentials},
+   *     {@link https://cloud.google.com/docs/authentication/application-default-credentials Application Default Credentials},
    *     your project ID will be detected automatically.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
@@ -469,8 +472,39 @@ export class PhishingProtectionServiceV1Beta1Client {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.reportPhishing(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('reportPhishing request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.phishingprotection.v1beta1.IReportPhishingResponse,
+          | protos.google.cloud.phishingprotection.v1beta1.IReportPhishingRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('reportPhishing response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .reportPhishing(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.phishingprotection.v1beta1.IReportPhishingResponse,
+          (
+            | protos.google.cloud.phishingprotection.v1beta1.IReportPhishingRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('reportPhishing response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
 
   // --------------------
@@ -509,6 +543,7 @@ export class PhishingProtectionServiceV1Beta1Client {
   close(): Promise<void> {
     if (this.phishingProtectionServiceV1Beta1Stub && !this._terminated) {
       return this.phishingProtectionServiceV1Beta1Stub.then(stub => {
+        this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
       });

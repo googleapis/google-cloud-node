@@ -280,7 +280,9 @@ describe('v1.SecurityCenterManagementClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      client.initialize().catch(err => {
+        throw err;
+      });
       assert(client.securityCenterManagementStub);
       client.close().then(() => {
         done();
@@ -343,7 +345,7 @@ describe('v1.SecurityCenterManagementClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.securitycentermanagement.v1.GetEffectiveSecurityHealthAnalyticsCustomModuleRequest()
       );
@@ -352,7 +354,7 @@ describe('v1.SecurityCenterManagementClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.securitycentermanagement.v1.EffectiveSecurityHealthAnalyticsCustomModule()
       );
@@ -379,7 +381,7 @@ describe('v1.SecurityCenterManagementClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.securitycentermanagement.v1.GetEffectiveSecurityHealthAnalyticsCustomModuleRequest()
       );
@@ -388,7 +390,7 @@ describe('v1.SecurityCenterManagementClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.securitycentermanagement.v1.EffectiveSecurityHealthAnalyticsCustomModule()
       );
@@ -429,7 +431,7 @@ describe('v1.SecurityCenterManagementClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.securitycentermanagement.v1.GetEffectiveSecurityHealthAnalyticsCustomModuleRequest()
       );
@@ -438,7 +440,7 @@ describe('v1.SecurityCenterManagementClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getEffectiveSecurityHealthAnalyticsCustomModule =
         stubSimpleCall(undefined, expectedError);
@@ -464,7 +466,7 @@ describe('v1.SecurityCenterManagementClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.securitycentermanagement.v1.GetEffectiveSecurityHealthAnalyticsCustomModuleRequest()
       );
@@ -489,7 +491,7 @@ describe('v1.SecurityCenterManagementClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.securitycentermanagement.v1.GetSecurityHealthAnalyticsCustomModuleRequest()
       );
@@ -498,7 +500,7 @@ describe('v1.SecurityCenterManagementClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.securitycentermanagement.v1.SecurityHealthAnalyticsCustomModule()
       );
@@ -523,7 +525,7 @@ describe('v1.SecurityCenterManagementClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.securitycentermanagement.v1.GetSecurityHealthAnalyticsCustomModuleRequest()
       );
@@ -532,7 +534,7 @@ describe('v1.SecurityCenterManagementClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.securitycentermanagement.v1.SecurityHealthAnalyticsCustomModule()
       );
@@ -571,7 +573,7 @@ describe('v1.SecurityCenterManagementClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.securitycentermanagement.v1.GetSecurityHealthAnalyticsCustomModuleRequest()
       );
@@ -580,7 +582,7 @@ describe('v1.SecurityCenterManagementClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getSecurityHealthAnalyticsCustomModule =
         stubSimpleCall(undefined, expectedError);
@@ -604,7 +606,7 @@ describe('v1.SecurityCenterManagementClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.securitycentermanagement.v1.GetSecurityHealthAnalyticsCustomModuleRequest()
       );
@@ -629,7 +631,7 @@ describe('v1.SecurityCenterManagementClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.securitycentermanagement.v1.CreateSecurityHealthAnalyticsCustomModuleRequest()
       );
@@ -638,7 +640,7 @@ describe('v1.SecurityCenterManagementClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.securitycentermanagement.v1.SecurityHealthAnalyticsCustomModule()
       );
@@ -665,7 +667,7 @@ describe('v1.SecurityCenterManagementClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.securitycentermanagement.v1.CreateSecurityHealthAnalyticsCustomModuleRequest()
       );
@@ -674,7 +676,7 @@ describe('v1.SecurityCenterManagementClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.securitycentermanagement.v1.SecurityHealthAnalyticsCustomModule()
       );
@@ -715,7 +717,7 @@ describe('v1.SecurityCenterManagementClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.securitycentermanagement.v1.CreateSecurityHealthAnalyticsCustomModuleRequest()
       );
@@ -724,7 +726,7 @@ describe('v1.SecurityCenterManagementClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createSecurityHealthAnalyticsCustomModule =
         stubSimpleCall(undefined, expectedError);
@@ -750,7 +752,7 @@ describe('v1.SecurityCenterManagementClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.securitycentermanagement.v1.CreateSecurityHealthAnalyticsCustomModuleRequest()
       );
@@ -775,7 +777,7 @@ describe('v1.SecurityCenterManagementClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.securitycentermanagement.v1.UpdateSecurityHealthAnalyticsCustomModuleRequest()
       );
@@ -785,7 +787,7 @@ describe('v1.SecurityCenterManagementClient', () => {
         ['securityHealthAnalyticsCustomModule', 'name']
       );
       request.securityHealthAnalyticsCustomModule.name = defaultValue1;
-      const expectedHeaderRequestParams = `security_health_analytics_custom_module.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `security_health_analytics_custom_module.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.securitycentermanagement.v1.SecurityHealthAnalyticsCustomModule()
       );
@@ -812,7 +814,7 @@ describe('v1.SecurityCenterManagementClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.securitycentermanagement.v1.UpdateSecurityHealthAnalyticsCustomModuleRequest()
       );
@@ -822,7 +824,7 @@ describe('v1.SecurityCenterManagementClient', () => {
         ['securityHealthAnalyticsCustomModule', 'name']
       );
       request.securityHealthAnalyticsCustomModule.name = defaultValue1;
-      const expectedHeaderRequestParams = `security_health_analytics_custom_module.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `security_health_analytics_custom_module.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.securitycentermanagement.v1.SecurityHealthAnalyticsCustomModule()
       );
@@ -863,7 +865,7 @@ describe('v1.SecurityCenterManagementClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.securitycentermanagement.v1.UpdateSecurityHealthAnalyticsCustomModuleRequest()
       );
@@ -873,7 +875,7 @@ describe('v1.SecurityCenterManagementClient', () => {
         ['securityHealthAnalyticsCustomModule', 'name']
       );
       request.securityHealthAnalyticsCustomModule.name = defaultValue1;
-      const expectedHeaderRequestParams = `security_health_analytics_custom_module.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `security_health_analytics_custom_module.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateSecurityHealthAnalyticsCustomModule =
         stubSimpleCall(undefined, expectedError);
@@ -899,7 +901,7 @@ describe('v1.SecurityCenterManagementClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.securitycentermanagement.v1.UpdateSecurityHealthAnalyticsCustomModuleRequest()
       );
@@ -925,7 +927,7 @@ describe('v1.SecurityCenterManagementClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.securitycentermanagement.v1.DeleteSecurityHealthAnalyticsCustomModuleRequest()
       );
@@ -934,7 +936,7 @@ describe('v1.SecurityCenterManagementClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -961,7 +963,7 @@ describe('v1.SecurityCenterManagementClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.securitycentermanagement.v1.DeleteSecurityHealthAnalyticsCustomModuleRequest()
       );
@@ -970,7 +972,7 @@ describe('v1.SecurityCenterManagementClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -1011,7 +1013,7 @@ describe('v1.SecurityCenterManagementClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.securitycentermanagement.v1.DeleteSecurityHealthAnalyticsCustomModuleRequest()
       );
@@ -1020,7 +1022,7 @@ describe('v1.SecurityCenterManagementClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteSecurityHealthAnalyticsCustomModule =
         stubSimpleCall(undefined, expectedError);
@@ -1046,7 +1048,7 @@ describe('v1.SecurityCenterManagementClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.securitycentermanagement.v1.DeleteSecurityHealthAnalyticsCustomModuleRequest()
       );
@@ -1071,7 +1073,7 @@ describe('v1.SecurityCenterManagementClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.securitycentermanagement.v1.SimulateSecurityHealthAnalyticsCustomModuleRequest()
       );
@@ -1080,7 +1082,7 @@ describe('v1.SecurityCenterManagementClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.securitycentermanagement.v1.SimulateSecurityHealthAnalyticsCustomModuleResponse()
       );
@@ -1107,7 +1109,7 @@ describe('v1.SecurityCenterManagementClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.securitycentermanagement.v1.SimulateSecurityHealthAnalyticsCustomModuleRequest()
       );
@@ -1116,7 +1118,7 @@ describe('v1.SecurityCenterManagementClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.securitycentermanagement.v1.SimulateSecurityHealthAnalyticsCustomModuleResponse()
       );
@@ -1157,7 +1159,7 @@ describe('v1.SecurityCenterManagementClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.securitycentermanagement.v1.SimulateSecurityHealthAnalyticsCustomModuleRequest()
       );
@@ -1166,7 +1168,7 @@ describe('v1.SecurityCenterManagementClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.simulateSecurityHealthAnalyticsCustomModule =
         stubSimpleCall(undefined, expectedError);
@@ -1192,7 +1194,7 @@ describe('v1.SecurityCenterManagementClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.securitycentermanagement.v1.SimulateSecurityHealthAnalyticsCustomModuleRequest()
       );
@@ -1217,7 +1219,7 @@ describe('v1.SecurityCenterManagementClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.securitycentermanagement.v1.GetEffectiveEventThreatDetectionCustomModuleRequest()
       );
@@ -1226,7 +1228,7 @@ describe('v1.SecurityCenterManagementClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.securitycentermanagement.v1.EffectiveEventThreatDetectionCustomModule()
       );
@@ -1253,7 +1255,7 @@ describe('v1.SecurityCenterManagementClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.securitycentermanagement.v1.GetEffectiveEventThreatDetectionCustomModuleRequest()
       );
@@ -1262,7 +1264,7 @@ describe('v1.SecurityCenterManagementClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.securitycentermanagement.v1.EffectiveEventThreatDetectionCustomModule()
       );
@@ -1303,7 +1305,7 @@ describe('v1.SecurityCenterManagementClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.securitycentermanagement.v1.GetEffectiveEventThreatDetectionCustomModuleRequest()
       );
@@ -1312,7 +1314,7 @@ describe('v1.SecurityCenterManagementClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getEffectiveEventThreatDetectionCustomModule =
         stubSimpleCall(undefined, expectedError);
@@ -1338,7 +1340,7 @@ describe('v1.SecurityCenterManagementClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.securitycentermanagement.v1.GetEffectiveEventThreatDetectionCustomModuleRequest()
       );
@@ -1363,7 +1365,7 @@ describe('v1.SecurityCenterManagementClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.securitycentermanagement.v1.GetEventThreatDetectionCustomModuleRequest()
       );
@@ -1372,7 +1374,7 @@ describe('v1.SecurityCenterManagementClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.securitycentermanagement.v1.EventThreatDetectionCustomModule()
       );
@@ -1397,7 +1399,7 @@ describe('v1.SecurityCenterManagementClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.securitycentermanagement.v1.GetEventThreatDetectionCustomModuleRequest()
       );
@@ -1406,7 +1408,7 @@ describe('v1.SecurityCenterManagementClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.securitycentermanagement.v1.EventThreatDetectionCustomModule()
       );
@@ -1445,7 +1447,7 @@ describe('v1.SecurityCenterManagementClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.securitycentermanagement.v1.GetEventThreatDetectionCustomModuleRequest()
       );
@@ -1454,7 +1456,7 @@ describe('v1.SecurityCenterManagementClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getEventThreatDetectionCustomModule = stubSimpleCall(
         undefined,
@@ -1480,7 +1482,7 @@ describe('v1.SecurityCenterManagementClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.securitycentermanagement.v1.GetEventThreatDetectionCustomModuleRequest()
       );
@@ -1505,7 +1507,7 @@ describe('v1.SecurityCenterManagementClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.securitycentermanagement.v1.CreateEventThreatDetectionCustomModuleRequest()
       );
@@ -1514,7 +1516,7 @@ describe('v1.SecurityCenterManagementClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.securitycentermanagement.v1.EventThreatDetectionCustomModule()
       );
@@ -1539,7 +1541,7 @@ describe('v1.SecurityCenterManagementClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.securitycentermanagement.v1.CreateEventThreatDetectionCustomModuleRequest()
       );
@@ -1548,7 +1550,7 @@ describe('v1.SecurityCenterManagementClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.securitycentermanagement.v1.EventThreatDetectionCustomModule()
       );
@@ -1587,7 +1589,7 @@ describe('v1.SecurityCenterManagementClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.securitycentermanagement.v1.CreateEventThreatDetectionCustomModuleRequest()
       );
@@ -1596,7 +1598,7 @@ describe('v1.SecurityCenterManagementClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createEventThreatDetectionCustomModule =
         stubSimpleCall(undefined, expectedError);
@@ -1620,7 +1622,7 @@ describe('v1.SecurityCenterManagementClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.securitycentermanagement.v1.CreateEventThreatDetectionCustomModuleRequest()
       );
@@ -1645,7 +1647,7 @@ describe('v1.SecurityCenterManagementClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.securitycentermanagement.v1.UpdateEventThreatDetectionCustomModuleRequest()
       );
@@ -1655,7 +1657,7 @@ describe('v1.SecurityCenterManagementClient', () => {
         ['eventThreatDetectionCustomModule', 'name']
       );
       request.eventThreatDetectionCustomModule.name = defaultValue1;
-      const expectedHeaderRequestParams = `event_threat_detection_custom_module.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `event_threat_detection_custom_module.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.securitycentermanagement.v1.EventThreatDetectionCustomModule()
       );
@@ -1680,7 +1682,7 @@ describe('v1.SecurityCenterManagementClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.securitycentermanagement.v1.UpdateEventThreatDetectionCustomModuleRequest()
       );
@@ -1690,7 +1692,7 @@ describe('v1.SecurityCenterManagementClient', () => {
         ['eventThreatDetectionCustomModule', 'name']
       );
       request.eventThreatDetectionCustomModule.name = defaultValue1;
-      const expectedHeaderRequestParams = `event_threat_detection_custom_module.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `event_threat_detection_custom_module.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.securitycentermanagement.v1.EventThreatDetectionCustomModule()
       );
@@ -1729,7 +1731,7 @@ describe('v1.SecurityCenterManagementClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.securitycentermanagement.v1.UpdateEventThreatDetectionCustomModuleRequest()
       );
@@ -1739,7 +1741,7 @@ describe('v1.SecurityCenterManagementClient', () => {
         ['eventThreatDetectionCustomModule', 'name']
       );
       request.eventThreatDetectionCustomModule.name = defaultValue1;
-      const expectedHeaderRequestParams = `event_threat_detection_custom_module.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `event_threat_detection_custom_module.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateEventThreatDetectionCustomModule =
         stubSimpleCall(undefined, expectedError);
@@ -1763,7 +1765,7 @@ describe('v1.SecurityCenterManagementClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.securitycentermanagement.v1.UpdateEventThreatDetectionCustomModuleRequest()
       );
@@ -1789,7 +1791,7 @@ describe('v1.SecurityCenterManagementClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.securitycentermanagement.v1.DeleteEventThreatDetectionCustomModuleRequest()
       );
@@ -1798,7 +1800,7 @@ describe('v1.SecurityCenterManagementClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -1823,7 +1825,7 @@ describe('v1.SecurityCenterManagementClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.securitycentermanagement.v1.DeleteEventThreatDetectionCustomModuleRequest()
       );
@@ -1832,7 +1834,7 @@ describe('v1.SecurityCenterManagementClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -1871,7 +1873,7 @@ describe('v1.SecurityCenterManagementClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.securitycentermanagement.v1.DeleteEventThreatDetectionCustomModuleRequest()
       );
@@ -1880,7 +1882,7 @@ describe('v1.SecurityCenterManagementClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteEventThreatDetectionCustomModule =
         stubSimpleCall(undefined, expectedError);
@@ -1904,7 +1906,7 @@ describe('v1.SecurityCenterManagementClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.securitycentermanagement.v1.DeleteEventThreatDetectionCustomModuleRequest()
       );
@@ -1929,7 +1931,7 @@ describe('v1.SecurityCenterManagementClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.securitycentermanagement.v1.ValidateEventThreatDetectionCustomModuleRequest()
       );
@@ -1938,7 +1940,7 @@ describe('v1.SecurityCenterManagementClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.securitycentermanagement.v1.ValidateEventThreatDetectionCustomModuleResponse()
       );
@@ -1965,7 +1967,7 @@ describe('v1.SecurityCenterManagementClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.securitycentermanagement.v1.ValidateEventThreatDetectionCustomModuleRequest()
       );
@@ -1974,7 +1976,7 @@ describe('v1.SecurityCenterManagementClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.securitycentermanagement.v1.ValidateEventThreatDetectionCustomModuleResponse()
       );
@@ -2015,7 +2017,7 @@ describe('v1.SecurityCenterManagementClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.securitycentermanagement.v1.ValidateEventThreatDetectionCustomModuleRequest()
       );
@@ -2024,7 +2026,7 @@ describe('v1.SecurityCenterManagementClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.validateEventThreatDetectionCustomModule =
         stubSimpleCall(undefined, expectedError);
@@ -2050,7 +2052,7 @@ describe('v1.SecurityCenterManagementClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.securitycentermanagement.v1.ValidateEventThreatDetectionCustomModuleRequest()
       );
@@ -2075,7 +2077,7 @@ describe('v1.SecurityCenterManagementClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.securitycentermanagement.v1.GetSecurityCenterServiceRequest()
       );
@@ -2084,7 +2086,7 @@ describe('v1.SecurityCenterManagementClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.securitycentermanagement.v1.SecurityCenterService()
       );
@@ -2108,7 +2110,7 @@ describe('v1.SecurityCenterManagementClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.securitycentermanagement.v1.GetSecurityCenterServiceRequest()
       );
@@ -2117,7 +2119,7 @@ describe('v1.SecurityCenterManagementClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.securitycentermanagement.v1.SecurityCenterService()
       );
@@ -2156,7 +2158,7 @@ describe('v1.SecurityCenterManagementClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.securitycentermanagement.v1.GetSecurityCenterServiceRequest()
       );
@@ -2165,7 +2167,7 @@ describe('v1.SecurityCenterManagementClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getSecurityCenterService = stubSimpleCall(
         undefined,
@@ -2191,7 +2193,7 @@ describe('v1.SecurityCenterManagementClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.securitycentermanagement.v1.GetSecurityCenterServiceRequest()
       );
@@ -2216,7 +2218,7 @@ describe('v1.SecurityCenterManagementClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.securitycentermanagement.v1.UpdateSecurityCenterServiceRequest()
       );
@@ -2226,7 +2228,7 @@ describe('v1.SecurityCenterManagementClient', () => {
         ['securityCenterService', 'name']
       );
       request.securityCenterService.name = defaultValue1;
-      const expectedHeaderRequestParams = `security_center_service.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `security_center_service.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.securitycentermanagement.v1.SecurityCenterService()
       );
@@ -2250,7 +2252,7 @@ describe('v1.SecurityCenterManagementClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.securitycentermanagement.v1.UpdateSecurityCenterServiceRequest()
       );
@@ -2260,7 +2262,7 @@ describe('v1.SecurityCenterManagementClient', () => {
         ['securityCenterService', 'name']
       );
       request.securityCenterService.name = defaultValue1;
-      const expectedHeaderRequestParams = `security_center_service.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `security_center_service.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.securitycentermanagement.v1.SecurityCenterService()
       );
@@ -2299,7 +2301,7 @@ describe('v1.SecurityCenterManagementClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.securitycentermanagement.v1.UpdateSecurityCenterServiceRequest()
       );
@@ -2309,7 +2311,7 @@ describe('v1.SecurityCenterManagementClient', () => {
         ['securityCenterService', 'name']
       );
       request.securityCenterService.name = defaultValue1;
-      const expectedHeaderRequestParams = `security_center_service.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `security_center_service.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateSecurityCenterService = stubSimpleCall(
         undefined,
@@ -2335,7 +2337,7 @@ describe('v1.SecurityCenterManagementClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.securitycentermanagement.v1.UpdateSecurityCenterServiceRequest()
       );
@@ -2361,7 +2363,7 @@ describe('v1.SecurityCenterManagementClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.securitycentermanagement.v1.ListEffectiveSecurityHealthAnalyticsCustomModulesRequest()
       );
@@ -2370,7 +2372,7 @@ describe('v1.SecurityCenterManagementClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.securitycentermanagement.v1.EffectiveSecurityHealthAnalyticsCustomModule()
@@ -2405,7 +2407,7 @@ describe('v1.SecurityCenterManagementClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.securitycentermanagement.v1.ListEffectiveSecurityHealthAnalyticsCustomModulesRequest()
       );
@@ -2414,7 +2416,7 @@ describe('v1.SecurityCenterManagementClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.securitycentermanagement.v1.EffectiveSecurityHealthAnalyticsCustomModule()
@@ -2465,7 +2467,7 @@ describe('v1.SecurityCenterManagementClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.securitycentermanagement.v1.ListEffectiveSecurityHealthAnalyticsCustomModulesRequest()
       );
@@ -2474,7 +2476,7 @@ describe('v1.SecurityCenterManagementClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listEffectiveSecurityHealthAnalyticsCustomModules =
         stubSimpleCall(undefined, expectedError);
@@ -2500,7 +2502,7 @@ describe('v1.SecurityCenterManagementClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.securitycentermanagement.v1.ListEffectiveSecurityHealthAnalyticsCustomModulesRequest()
       );
@@ -2509,7 +2511,7 @@ describe('v1.SecurityCenterManagementClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.securitycentermanagement.v1.EffectiveSecurityHealthAnalyticsCustomModule()
@@ -2577,7 +2579,7 @@ describe('v1.SecurityCenterManagementClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.securitycentermanagement.v1.ListEffectiveSecurityHealthAnalyticsCustomModulesRequest()
       );
@@ -2586,7 +2588,7 @@ describe('v1.SecurityCenterManagementClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listEffectiveSecurityHealthAnalyticsCustomModules.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -2643,7 +2645,7 @@ describe('v1.SecurityCenterManagementClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.securitycentermanagement.v1.ListEffectiveSecurityHealthAnalyticsCustomModulesRequest()
       );
@@ -2652,7 +2654,7 @@ describe('v1.SecurityCenterManagementClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.securitycentermanagement.v1.EffectiveSecurityHealthAnalyticsCustomModule()
@@ -2701,7 +2703,7 @@ describe('v1.SecurityCenterManagementClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.securitycentermanagement.v1.ListEffectiveSecurityHealthAnalyticsCustomModulesRequest()
       );
@@ -2710,7 +2712,7 @@ describe('v1.SecurityCenterManagementClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listEffectiveSecurityHealthAnalyticsCustomModules.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -2752,7 +2754,7 @@ describe('v1.SecurityCenterManagementClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.securitycentermanagement.v1.ListSecurityHealthAnalyticsCustomModulesRequest()
       );
@@ -2761,7 +2763,7 @@ describe('v1.SecurityCenterManagementClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.securitycentermanagement.v1.SecurityHealthAnalyticsCustomModule()
@@ -2796,7 +2798,7 @@ describe('v1.SecurityCenterManagementClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.securitycentermanagement.v1.ListSecurityHealthAnalyticsCustomModulesRequest()
       );
@@ -2805,7 +2807,7 @@ describe('v1.SecurityCenterManagementClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.securitycentermanagement.v1.SecurityHealthAnalyticsCustomModule()
@@ -2856,7 +2858,7 @@ describe('v1.SecurityCenterManagementClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.securitycentermanagement.v1.ListSecurityHealthAnalyticsCustomModulesRequest()
       );
@@ -2865,7 +2867,7 @@ describe('v1.SecurityCenterManagementClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listSecurityHealthAnalyticsCustomModules =
         stubSimpleCall(undefined, expectedError);
@@ -2891,7 +2893,7 @@ describe('v1.SecurityCenterManagementClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.securitycentermanagement.v1.ListSecurityHealthAnalyticsCustomModulesRequest()
       );
@@ -2900,7 +2902,7 @@ describe('v1.SecurityCenterManagementClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.securitycentermanagement.v1.SecurityHealthAnalyticsCustomModule()
@@ -2965,7 +2967,7 @@ describe('v1.SecurityCenterManagementClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.securitycentermanagement.v1.ListSecurityHealthAnalyticsCustomModulesRequest()
       );
@@ -2974,7 +2976,7 @@ describe('v1.SecurityCenterManagementClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listSecurityHealthAnalyticsCustomModules.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -3028,7 +3030,7 @@ describe('v1.SecurityCenterManagementClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.securitycentermanagement.v1.ListSecurityHealthAnalyticsCustomModulesRequest()
       );
@@ -3037,7 +3039,7 @@ describe('v1.SecurityCenterManagementClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.securitycentermanagement.v1.SecurityHealthAnalyticsCustomModule()
@@ -3084,7 +3086,7 @@ describe('v1.SecurityCenterManagementClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.securitycentermanagement.v1.ListSecurityHealthAnalyticsCustomModulesRequest()
       );
@@ -3093,7 +3095,7 @@ describe('v1.SecurityCenterManagementClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listSecurityHealthAnalyticsCustomModules.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -3133,7 +3135,7 @@ describe('v1.SecurityCenterManagementClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.securitycentermanagement.v1.ListDescendantSecurityHealthAnalyticsCustomModulesRequest()
       );
@@ -3142,7 +3144,7 @@ describe('v1.SecurityCenterManagementClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.securitycentermanagement.v1.SecurityHealthAnalyticsCustomModule()
@@ -3179,7 +3181,7 @@ describe('v1.SecurityCenterManagementClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.securitycentermanagement.v1.ListDescendantSecurityHealthAnalyticsCustomModulesRequest()
       );
@@ -3188,7 +3190,7 @@ describe('v1.SecurityCenterManagementClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.securitycentermanagement.v1.SecurityHealthAnalyticsCustomModule()
@@ -3239,7 +3241,7 @@ describe('v1.SecurityCenterManagementClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.securitycentermanagement.v1.ListDescendantSecurityHealthAnalyticsCustomModulesRequest()
       );
@@ -3248,7 +3250,7 @@ describe('v1.SecurityCenterManagementClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listDescendantSecurityHealthAnalyticsCustomModules =
         stubSimpleCall(undefined, expectedError);
@@ -3274,7 +3276,7 @@ describe('v1.SecurityCenterManagementClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.securitycentermanagement.v1.ListDescendantSecurityHealthAnalyticsCustomModulesRequest()
       );
@@ -3283,7 +3285,7 @@ describe('v1.SecurityCenterManagementClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.securitycentermanagement.v1.SecurityHealthAnalyticsCustomModule()
@@ -3353,7 +3355,7 @@ describe('v1.SecurityCenterManagementClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.securitycentermanagement.v1.ListDescendantSecurityHealthAnalyticsCustomModulesRequest()
       );
@@ -3362,7 +3364,7 @@ describe('v1.SecurityCenterManagementClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listDescendantSecurityHealthAnalyticsCustomModules.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -3421,7 +3423,7 @@ describe('v1.SecurityCenterManagementClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.securitycentermanagement.v1.ListDescendantSecurityHealthAnalyticsCustomModulesRequest()
       );
@@ -3430,7 +3432,7 @@ describe('v1.SecurityCenterManagementClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.securitycentermanagement.v1.SecurityHealthAnalyticsCustomModule()
@@ -3479,7 +3481,7 @@ describe('v1.SecurityCenterManagementClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.securitycentermanagement.v1.ListDescendantSecurityHealthAnalyticsCustomModulesRequest()
       );
@@ -3488,7 +3490,7 @@ describe('v1.SecurityCenterManagementClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listDescendantSecurityHealthAnalyticsCustomModules.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -3530,7 +3532,7 @@ describe('v1.SecurityCenterManagementClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.securitycentermanagement.v1.ListEffectiveEventThreatDetectionCustomModulesRequest()
       );
@@ -3539,7 +3541,7 @@ describe('v1.SecurityCenterManagementClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.securitycentermanagement.v1.EffectiveEventThreatDetectionCustomModule()
@@ -3574,7 +3576,7 @@ describe('v1.SecurityCenterManagementClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.securitycentermanagement.v1.ListEffectiveEventThreatDetectionCustomModulesRequest()
       );
@@ -3583,7 +3585,7 @@ describe('v1.SecurityCenterManagementClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.securitycentermanagement.v1.EffectiveEventThreatDetectionCustomModule()
@@ -3634,7 +3636,7 @@ describe('v1.SecurityCenterManagementClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.securitycentermanagement.v1.ListEffectiveEventThreatDetectionCustomModulesRequest()
       );
@@ -3643,7 +3645,7 @@ describe('v1.SecurityCenterManagementClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listEffectiveEventThreatDetectionCustomModules =
         stubSimpleCall(undefined, expectedError);
@@ -3669,7 +3671,7 @@ describe('v1.SecurityCenterManagementClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.securitycentermanagement.v1.ListEffectiveEventThreatDetectionCustomModulesRequest()
       );
@@ -3678,7 +3680,7 @@ describe('v1.SecurityCenterManagementClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.securitycentermanagement.v1.EffectiveEventThreatDetectionCustomModule()
@@ -3743,7 +3745,7 @@ describe('v1.SecurityCenterManagementClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.securitycentermanagement.v1.ListEffectiveEventThreatDetectionCustomModulesRequest()
       );
@@ -3752,7 +3754,7 @@ describe('v1.SecurityCenterManagementClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listEffectiveEventThreatDetectionCustomModules.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -3806,7 +3808,7 @@ describe('v1.SecurityCenterManagementClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.securitycentermanagement.v1.ListEffectiveEventThreatDetectionCustomModulesRequest()
       );
@@ -3815,7 +3817,7 @@ describe('v1.SecurityCenterManagementClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.securitycentermanagement.v1.EffectiveEventThreatDetectionCustomModule()
@@ -3862,7 +3864,7 @@ describe('v1.SecurityCenterManagementClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.securitycentermanagement.v1.ListEffectiveEventThreatDetectionCustomModulesRequest()
       );
@@ -3871,7 +3873,7 @@ describe('v1.SecurityCenterManagementClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listEffectiveEventThreatDetectionCustomModules.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -3911,7 +3913,7 @@ describe('v1.SecurityCenterManagementClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.securitycentermanagement.v1.ListEventThreatDetectionCustomModulesRequest()
       );
@@ -3920,7 +3922,7 @@ describe('v1.SecurityCenterManagementClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.securitycentermanagement.v1.EventThreatDetectionCustomModule()
@@ -3953,7 +3955,7 @@ describe('v1.SecurityCenterManagementClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.securitycentermanagement.v1.ListEventThreatDetectionCustomModulesRequest()
       );
@@ -3962,7 +3964,7 @@ describe('v1.SecurityCenterManagementClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.securitycentermanagement.v1.EventThreatDetectionCustomModule()
@@ -4011,7 +4013,7 @@ describe('v1.SecurityCenterManagementClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.securitycentermanagement.v1.ListEventThreatDetectionCustomModulesRequest()
       );
@@ -4020,7 +4022,7 @@ describe('v1.SecurityCenterManagementClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listEventThreatDetectionCustomModules =
         stubSimpleCall(undefined, expectedError);
@@ -4044,7 +4046,7 @@ describe('v1.SecurityCenterManagementClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.securitycentermanagement.v1.ListEventThreatDetectionCustomModulesRequest()
       );
@@ -4053,7 +4055,7 @@ describe('v1.SecurityCenterManagementClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.securitycentermanagement.v1.EventThreatDetectionCustomModule()
@@ -4118,7 +4120,7 @@ describe('v1.SecurityCenterManagementClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.securitycentermanagement.v1.ListEventThreatDetectionCustomModulesRequest()
       );
@@ -4127,7 +4129,7 @@ describe('v1.SecurityCenterManagementClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listEventThreatDetectionCustomModules.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -4181,7 +4183,7 @@ describe('v1.SecurityCenterManagementClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.securitycentermanagement.v1.ListEventThreatDetectionCustomModulesRequest()
       );
@@ -4190,7 +4192,7 @@ describe('v1.SecurityCenterManagementClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.securitycentermanagement.v1.EventThreatDetectionCustomModule()
@@ -4237,7 +4239,7 @@ describe('v1.SecurityCenterManagementClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.securitycentermanagement.v1.ListEventThreatDetectionCustomModulesRequest()
       );
@@ -4246,7 +4248,7 @@ describe('v1.SecurityCenterManagementClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listEventThreatDetectionCustomModules.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -4286,7 +4288,7 @@ describe('v1.SecurityCenterManagementClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.securitycentermanagement.v1.ListDescendantEventThreatDetectionCustomModulesRequest()
       );
@@ -4295,7 +4297,7 @@ describe('v1.SecurityCenterManagementClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.securitycentermanagement.v1.EventThreatDetectionCustomModule()
@@ -4330,7 +4332,7 @@ describe('v1.SecurityCenterManagementClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.securitycentermanagement.v1.ListDescendantEventThreatDetectionCustomModulesRequest()
       );
@@ -4339,7 +4341,7 @@ describe('v1.SecurityCenterManagementClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.securitycentermanagement.v1.EventThreatDetectionCustomModule()
@@ -4390,7 +4392,7 @@ describe('v1.SecurityCenterManagementClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.securitycentermanagement.v1.ListDescendantEventThreatDetectionCustomModulesRequest()
       );
@@ -4399,7 +4401,7 @@ describe('v1.SecurityCenterManagementClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listDescendantEventThreatDetectionCustomModules =
         stubSimpleCall(undefined, expectedError);
@@ -4425,7 +4427,7 @@ describe('v1.SecurityCenterManagementClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.securitycentermanagement.v1.ListDescendantEventThreatDetectionCustomModulesRequest()
       );
@@ -4434,7 +4436,7 @@ describe('v1.SecurityCenterManagementClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.securitycentermanagement.v1.EventThreatDetectionCustomModule()
@@ -4502,7 +4504,7 @@ describe('v1.SecurityCenterManagementClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.securitycentermanagement.v1.ListDescendantEventThreatDetectionCustomModulesRequest()
       );
@@ -4511,7 +4513,7 @@ describe('v1.SecurityCenterManagementClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listDescendantEventThreatDetectionCustomModules.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -4568,7 +4570,7 @@ describe('v1.SecurityCenterManagementClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.securitycentermanagement.v1.ListDescendantEventThreatDetectionCustomModulesRequest()
       );
@@ -4577,7 +4579,7 @@ describe('v1.SecurityCenterManagementClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.securitycentermanagement.v1.EventThreatDetectionCustomModule()
@@ -4626,7 +4628,7 @@ describe('v1.SecurityCenterManagementClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.securitycentermanagement.v1.ListDescendantEventThreatDetectionCustomModulesRequest()
       );
@@ -4635,7 +4637,7 @@ describe('v1.SecurityCenterManagementClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listDescendantEventThreatDetectionCustomModules.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -4677,7 +4679,7 @@ describe('v1.SecurityCenterManagementClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.securitycentermanagement.v1.ListSecurityCenterServicesRequest()
       );
@@ -4686,7 +4688,7 @@ describe('v1.SecurityCenterManagementClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.securitycentermanagement.v1.SecurityCenterService()
@@ -4718,7 +4720,7 @@ describe('v1.SecurityCenterManagementClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.securitycentermanagement.v1.ListSecurityCenterServicesRequest()
       );
@@ -4727,7 +4729,7 @@ describe('v1.SecurityCenterManagementClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.securitycentermanagement.v1.SecurityCenterService()
@@ -4776,7 +4778,7 @@ describe('v1.SecurityCenterManagementClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.securitycentermanagement.v1.ListSecurityCenterServicesRequest()
       );
@@ -4785,7 +4787,7 @@ describe('v1.SecurityCenterManagementClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listSecurityCenterServices = stubSimpleCall(
         undefined,
@@ -4811,7 +4813,7 @@ describe('v1.SecurityCenterManagementClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.securitycentermanagement.v1.ListSecurityCenterServicesRequest()
       );
@@ -4820,7 +4822,7 @@ describe('v1.SecurityCenterManagementClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.securitycentermanagement.v1.SecurityCenterService()
@@ -4881,7 +4883,7 @@ describe('v1.SecurityCenterManagementClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.securitycentermanagement.v1.ListSecurityCenterServicesRequest()
       );
@@ -4890,7 +4892,7 @@ describe('v1.SecurityCenterManagementClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listSecurityCenterServices.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -4940,7 +4942,7 @@ describe('v1.SecurityCenterManagementClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.securitycentermanagement.v1.ListSecurityCenterServicesRequest()
       );
@@ -4949,7 +4951,7 @@ describe('v1.SecurityCenterManagementClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.securitycentermanagement.v1.SecurityCenterService()
@@ -4995,7 +4997,7 @@ describe('v1.SecurityCenterManagementClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.securitycentermanagement.v1.ListSecurityCenterServicesRequest()
       );
@@ -5004,7 +5006,7 @@ describe('v1.SecurityCenterManagementClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listSecurityCenterServices.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -5042,7 +5044,7 @@ describe('v1.SecurityCenterManagementClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.GetLocationRequest()
       );
@@ -5073,7 +5075,7 @@ describe('v1.SecurityCenterManagementClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.GetLocationRequest()
       );
@@ -5118,7 +5120,7 @@ describe('v1.SecurityCenterManagementClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.GetLocationRequest()
       );
@@ -5154,7 +5156,7 @@ describe('v1.SecurityCenterManagementClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.ListLocationsRequest()
       );
@@ -5203,7 +5205,7 @@ describe('v1.SecurityCenterManagementClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.ListLocationsRequest()
       );
@@ -5240,7 +5242,7 @@ describe('v1.SecurityCenterManagementClient', () => {
   });
 
   describe('Path templates', () => {
-    describe('folderLocationEffectiveEventThreatDetectionCustomModule', () => {
+    describe('folderLocationEffectiveEventThreatDetectionCustomModule', async () => {
       const fakePath =
         '/rendered/path/folderLocationEffectiveEventThreatDetectionCustomModule';
       const expectedParameters = {
@@ -5254,7 +5256,7 @@ describe('v1.SecurityCenterManagementClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.folderLocationEffectiveEventThreatDetectionCustomModulePathTemplate.render =
         sinon.stub().returns(fakePath);
       client.pathTemplates.folderLocationEffectiveEventThreatDetectionCustomModulePathTemplate.match =
@@ -5334,7 +5336,7 @@ describe('v1.SecurityCenterManagementClient', () => {
       });
     });
 
-    describe('folderLocationEffectiveSecurityHealthAnalyticsCustomModule', () => {
+    describe('folderLocationEffectiveSecurityHealthAnalyticsCustomModule', async () => {
       const fakePath =
         '/rendered/path/folderLocationEffectiveSecurityHealthAnalyticsCustomModule';
       const expectedParameters = {
@@ -5348,7 +5350,7 @@ describe('v1.SecurityCenterManagementClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.folderLocationEffectiveSecurityHealthAnalyticsCustomModulePathTemplate.render =
         sinon.stub().returns(fakePath);
       client.pathTemplates.folderLocationEffectiveSecurityHealthAnalyticsCustomModulePathTemplate.match =
@@ -5428,7 +5430,7 @@ describe('v1.SecurityCenterManagementClient', () => {
       });
     });
 
-    describe('folderLocationEventThreatDetectionCustomModule', () => {
+    describe('folderLocationEventThreatDetectionCustomModule', async () => {
       const fakePath =
         '/rendered/path/folderLocationEventThreatDetectionCustomModule';
       const expectedParameters = {
@@ -5442,7 +5444,7 @@ describe('v1.SecurityCenterManagementClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.folderLocationEventThreatDetectionCustomModulePathTemplate.render =
         sinon.stub().returns(fakePath);
       client.pathTemplates.folderLocationEventThreatDetectionCustomModulePathTemplate.match =
@@ -5519,7 +5521,7 @@ describe('v1.SecurityCenterManagementClient', () => {
       });
     });
 
-    describe('folderLocationSecurityHealthAnalyticsCustomModule', () => {
+    describe('folderLocationSecurityHealthAnalyticsCustomModule', async () => {
       const fakePath =
         '/rendered/path/folderLocationSecurityHealthAnalyticsCustomModule';
       const expectedParameters = {
@@ -5533,7 +5535,7 @@ describe('v1.SecurityCenterManagementClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.folderLocationSecurityHealthAnalyticsCustomModulePathTemplate.render =
         sinon.stub().returns(fakePath);
       client.pathTemplates.folderLocationSecurityHealthAnalyticsCustomModulePathTemplate.match =
@@ -5610,7 +5612,7 @@ describe('v1.SecurityCenterManagementClient', () => {
       });
     });
 
-    describe('folderLocationService', () => {
+    describe('folderLocationService', async () => {
       const fakePath = '/rendered/path/folderLocationService';
       const expectedParameters = {
         folder: 'folderValue',
@@ -5622,7 +5624,7 @@ describe('v1.SecurityCenterManagementClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.folderLocationServicePathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -5690,7 +5692,7 @@ describe('v1.SecurityCenterManagementClient', () => {
       });
     });
 
-    describe('folderSourceFinding', () => {
+    describe('folderSourceFinding', async () => {
       const fakePath = '/rendered/path/folderSourceFinding';
       const expectedParameters = {
         folder: 'folderValue',
@@ -5702,7 +5704,7 @@ describe('v1.SecurityCenterManagementClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.folderSourceFindingPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -5767,7 +5769,7 @@ describe('v1.SecurityCenterManagementClient', () => {
       });
     });
 
-    describe('location', () => {
+    describe('location', async () => {
       const fakePath = '/rendered/path/location';
       const expectedParameters = {
         project: 'projectValue',
@@ -5778,7 +5780,7 @@ describe('v1.SecurityCenterManagementClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.locationPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -5817,7 +5819,7 @@ describe('v1.SecurityCenterManagementClient', () => {
       });
     });
 
-    describe('organization', () => {
+    describe('organization', async () => {
       const fakePath = '/rendered/path/organization';
       const expectedParameters = {
         organization: 'organizationValue',
@@ -5827,7 +5829,7 @@ describe('v1.SecurityCenterManagementClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.organizationPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -5856,7 +5858,7 @@ describe('v1.SecurityCenterManagementClient', () => {
       });
     });
 
-    describe('organizationLocation', () => {
+    describe('organizationLocation', async () => {
       const fakePath = '/rendered/path/organizationLocation';
       const expectedParameters = {
         organization: 'organizationValue',
@@ -5867,7 +5869,7 @@ describe('v1.SecurityCenterManagementClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.organizationLocationPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -5920,7 +5922,7 @@ describe('v1.SecurityCenterManagementClient', () => {
       });
     });
 
-    describe('organizationLocationEffectiveEventThreatDetectionCustomModule', () => {
+    describe('organizationLocationEffectiveEventThreatDetectionCustomModule', async () => {
       const fakePath =
         '/rendered/path/organizationLocationEffectiveEventThreatDetectionCustomModule';
       const expectedParameters = {
@@ -5934,7 +5936,7 @@ describe('v1.SecurityCenterManagementClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.organizationLocationEffectiveEventThreatDetectionCustomModulePathTemplate.render =
         sinon.stub().returns(fakePath);
       client.pathTemplates.organizationLocationEffectiveEventThreatDetectionCustomModulePathTemplate.match =
@@ -6014,7 +6016,7 @@ describe('v1.SecurityCenterManagementClient', () => {
       });
     });
 
-    describe('organizationLocationEffectiveSecurityHealthAnalyticsCustomModule', () => {
+    describe('organizationLocationEffectiveSecurityHealthAnalyticsCustomModule', async () => {
       const fakePath =
         '/rendered/path/organizationLocationEffectiveSecurityHealthAnalyticsCustomModule';
       const expectedParameters = {
@@ -6028,7 +6030,7 @@ describe('v1.SecurityCenterManagementClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.organizationLocationEffectiveSecurityHealthAnalyticsCustomModulePathTemplate.render =
         sinon.stub().returns(fakePath);
       client.pathTemplates.organizationLocationEffectiveSecurityHealthAnalyticsCustomModulePathTemplate.match =
@@ -6108,7 +6110,7 @@ describe('v1.SecurityCenterManagementClient', () => {
       });
     });
 
-    describe('organizationLocationEventThreatDetectionCustomModule', () => {
+    describe('organizationLocationEventThreatDetectionCustomModule', async () => {
       const fakePath =
         '/rendered/path/organizationLocationEventThreatDetectionCustomModule';
       const expectedParameters = {
@@ -6122,7 +6124,7 @@ describe('v1.SecurityCenterManagementClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.organizationLocationEventThreatDetectionCustomModulePathTemplate.render =
         sinon.stub().returns(fakePath);
       client.pathTemplates.organizationLocationEventThreatDetectionCustomModulePathTemplate.match =
@@ -6199,7 +6201,7 @@ describe('v1.SecurityCenterManagementClient', () => {
       });
     });
 
-    describe('organizationLocationSecurityHealthAnalyticsCustomModule', () => {
+    describe('organizationLocationSecurityHealthAnalyticsCustomModule', async () => {
       const fakePath =
         '/rendered/path/organizationLocationSecurityHealthAnalyticsCustomModule';
       const expectedParameters = {
@@ -6213,7 +6215,7 @@ describe('v1.SecurityCenterManagementClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.organizationLocationSecurityHealthAnalyticsCustomModulePathTemplate.render =
         sinon.stub().returns(fakePath);
       client.pathTemplates.organizationLocationSecurityHealthAnalyticsCustomModulePathTemplate.match =
@@ -6290,7 +6292,7 @@ describe('v1.SecurityCenterManagementClient', () => {
       });
     });
 
-    describe('organizationLocationService', () => {
+    describe('organizationLocationService', async () => {
       const fakePath = '/rendered/path/organizationLocationService';
       const expectedParameters = {
         organization: 'organizationValue',
@@ -6302,7 +6304,7 @@ describe('v1.SecurityCenterManagementClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.organizationLocationServicePathTemplate.render =
         sinon.stub().returns(fakePath);
       client.pathTemplates.organizationLocationServicePathTemplate.match = sinon
@@ -6369,7 +6371,7 @@ describe('v1.SecurityCenterManagementClient', () => {
       });
     });
 
-    describe('organizationSourceFinding', () => {
+    describe('organizationSourceFinding', async () => {
       const fakePath = '/rendered/path/organizationSourceFinding';
       const expectedParameters = {
         organization: 'organizationValue',
@@ -6381,7 +6383,7 @@ describe('v1.SecurityCenterManagementClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.organizationSourceFindingPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -6449,7 +6451,7 @@ describe('v1.SecurityCenterManagementClient', () => {
       });
     });
 
-    describe('project', () => {
+    describe('project', async () => {
       const fakePath = '/rendered/path/project';
       const expectedParameters = {
         project: 'projectValue',
@@ -6459,7 +6461,7 @@ describe('v1.SecurityCenterManagementClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -6488,7 +6490,7 @@ describe('v1.SecurityCenterManagementClient', () => {
       });
     });
 
-    describe('projectLocationEffectiveEventThreatDetectionCustomModule', () => {
+    describe('projectLocationEffectiveEventThreatDetectionCustomModule', async () => {
       const fakePath =
         '/rendered/path/projectLocationEffectiveEventThreatDetectionCustomModule';
       const expectedParameters = {
@@ -6502,7 +6504,7 @@ describe('v1.SecurityCenterManagementClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectLocationEffectiveEventThreatDetectionCustomModulePathTemplate.render =
         sinon.stub().returns(fakePath);
       client.pathTemplates.projectLocationEffectiveEventThreatDetectionCustomModulePathTemplate.match =
@@ -6582,7 +6584,7 @@ describe('v1.SecurityCenterManagementClient', () => {
       });
     });
 
-    describe('projectLocationEffectiveSecurityHealthAnalyticsCustomModule', () => {
+    describe('projectLocationEffectiveSecurityHealthAnalyticsCustomModule', async () => {
       const fakePath =
         '/rendered/path/projectLocationEffectiveSecurityHealthAnalyticsCustomModule';
       const expectedParameters = {
@@ -6596,7 +6598,7 @@ describe('v1.SecurityCenterManagementClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectLocationEffectiveSecurityHealthAnalyticsCustomModulePathTemplate.render =
         sinon.stub().returns(fakePath);
       client.pathTemplates.projectLocationEffectiveSecurityHealthAnalyticsCustomModulePathTemplate.match =
@@ -6676,7 +6678,7 @@ describe('v1.SecurityCenterManagementClient', () => {
       });
     });
 
-    describe('projectLocationEventThreatDetectionCustomModule', () => {
+    describe('projectLocationEventThreatDetectionCustomModule', async () => {
       const fakePath =
         '/rendered/path/projectLocationEventThreatDetectionCustomModule';
       const expectedParameters = {
@@ -6690,7 +6692,7 @@ describe('v1.SecurityCenterManagementClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectLocationEventThreatDetectionCustomModulePathTemplate.render =
         sinon.stub().returns(fakePath);
       client.pathTemplates.projectLocationEventThreatDetectionCustomModulePathTemplate.match =
@@ -6767,7 +6769,7 @@ describe('v1.SecurityCenterManagementClient', () => {
       });
     });
 
-    describe('projectLocationSecurityHealthAnalyticsCustomModule', () => {
+    describe('projectLocationSecurityHealthAnalyticsCustomModule', async () => {
       const fakePath =
         '/rendered/path/projectLocationSecurityHealthAnalyticsCustomModule';
       const expectedParameters = {
@@ -6781,7 +6783,7 @@ describe('v1.SecurityCenterManagementClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectLocationSecurityHealthAnalyticsCustomModulePathTemplate.render =
         sinon.stub().returns(fakePath);
       client.pathTemplates.projectLocationSecurityHealthAnalyticsCustomModulePathTemplate.match =
@@ -6858,7 +6860,7 @@ describe('v1.SecurityCenterManagementClient', () => {
       });
     });
 
-    describe('projectLocationService', () => {
+    describe('projectLocationService', async () => {
       const fakePath = '/rendered/path/projectLocationService';
       const expectedParameters = {
         project: 'projectValue',
@@ -6870,7 +6872,7 @@ describe('v1.SecurityCenterManagementClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectLocationServicePathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -6938,7 +6940,7 @@ describe('v1.SecurityCenterManagementClient', () => {
       });
     });
 
-    describe('projectSourceFinding', () => {
+    describe('projectSourceFinding', async () => {
       const fakePath = '/rendered/path/projectSourceFinding';
       const expectedParameters = {
         project: 'projectValue',
@@ -6950,7 +6952,7 @@ describe('v1.SecurityCenterManagementClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectSourceFindingPathTemplate.render = sinon
         .stub()
         .returns(fakePath);

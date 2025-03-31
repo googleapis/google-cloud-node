@@ -191,7 +191,9 @@ describe('v1p1beta1.ImageAnnotatorClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      client.initialize().catch(err => {
+        throw err;
+      });
       assert(client.imageAnnotatorStub);
       client.close().then(() => {
         done();
@@ -250,7 +252,7 @@ describe('v1p1beta1.ImageAnnotatorClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vision.v1p1beta1.BatchAnnotateImagesRequest()
       );
@@ -268,7 +270,7 @@ describe('v1p1beta1.ImageAnnotatorClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vision.v1p1beta1.BatchAnnotateImagesRequest()
       );
@@ -301,7 +303,7 @@ describe('v1p1beta1.ImageAnnotatorClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vision.v1p1beta1.BatchAnnotateImagesRequest()
       );
@@ -318,7 +320,7 @@ describe('v1p1beta1.ImageAnnotatorClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vision.v1p1beta1.BatchAnnotateImagesRequest()
       );

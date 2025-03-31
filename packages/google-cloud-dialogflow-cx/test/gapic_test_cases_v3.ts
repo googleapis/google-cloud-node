@@ -287,7 +287,9 @@ describe('v3.TestCasesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      client.initialize().catch(err => {
+        throw err;
+      });
       assert(client.testCasesStub);
       client.close().then(() => {
         done();
@@ -346,7 +348,7 @@ describe('v3.TestCasesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.BatchDeleteTestCasesRequest()
       );
@@ -355,7 +357,7 @@ describe('v3.TestCasesClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -378,7 +380,7 @@ describe('v3.TestCasesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.BatchDeleteTestCasesRequest()
       );
@@ -387,7 +389,7 @@ describe('v3.TestCasesClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -425,7 +427,7 @@ describe('v3.TestCasesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.BatchDeleteTestCasesRequest()
       );
@@ -434,7 +436,7 @@ describe('v3.TestCasesClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.batchDeleteTestCases = stubSimpleCall(
         undefined,
@@ -456,7 +458,7 @@ describe('v3.TestCasesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.BatchDeleteTestCasesRequest()
       );
@@ -477,7 +479,7 @@ describe('v3.TestCasesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.GetTestCaseRequest()
       );
@@ -486,7 +488,7 @@ describe('v3.TestCasesClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.TestCase()
       );
@@ -508,7 +510,7 @@ describe('v3.TestCasesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.GetTestCaseRequest()
       );
@@ -517,7 +519,7 @@ describe('v3.TestCasesClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.TestCase()
       );
@@ -555,7 +557,7 @@ describe('v3.TestCasesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.GetTestCaseRequest()
       );
@@ -564,7 +566,7 @@ describe('v3.TestCasesClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getTestCase = stubSimpleCall(
         undefined,
@@ -586,7 +588,7 @@ describe('v3.TestCasesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.GetTestCaseRequest()
       );
@@ -607,7 +609,7 @@ describe('v3.TestCasesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.CreateTestCaseRequest()
       );
@@ -616,7 +618,7 @@ describe('v3.TestCasesClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.TestCase()
       );
@@ -638,7 +640,7 @@ describe('v3.TestCasesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.CreateTestCaseRequest()
       );
@@ -647,7 +649,7 @@ describe('v3.TestCasesClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.TestCase()
       );
@@ -685,7 +687,7 @@ describe('v3.TestCasesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.CreateTestCaseRequest()
       );
@@ -694,7 +696,7 @@ describe('v3.TestCasesClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createTestCase = stubSimpleCall(
         undefined,
@@ -716,7 +718,7 @@ describe('v3.TestCasesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.CreateTestCaseRequest()
       );
@@ -737,7 +739,7 @@ describe('v3.TestCasesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.UpdateTestCaseRequest()
       );
@@ -747,7 +749,7 @@ describe('v3.TestCasesClient', () => {
         ['testCase', 'name']
       );
       request.testCase.name = defaultValue1;
-      const expectedHeaderRequestParams = `test_case.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `test_case.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.TestCase()
       );
@@ -769,7 +771,7 @@ describe('v3.TestCasesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.UpdateTestCaseRequest()
       );
@@ -779,7 +781,7 @@ describe('v3.TestCasesClient', () => {
         ['testCase', 'name']
       );
       request.testCase.name = defaultValue1;
-      const expectedHeaderRequestParams = `test_case.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `test_case.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.TestCase()
       );
@@ -817,7 +819,7 @@ describe('v3.TestCasesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.UpdateTestCaseRequest()
       );
@@ -827,7 +829,7 @@ describe('v3.TestCasesClient', () => {
         ['testCase', 'name']
       );
       request.testCase.name = defaultValue1;
-      const expectedHeaderRequestParams = `test_case.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `test_case.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateTestCase = stubSimpleCall(
         undefined,
@@ -849,7 +851,7 @@ describe('v3.TestCasesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.UpdateTestCaseRequest()
       );
@@ -871,7 +873,7 @@ describe('v3.TestCasesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.CalculateCoverageRequest()
       );
@@ -880,7 +882,7 @@ describe('v3.TestCasesClient', () => {
         ['agent']
       );
       request.agent = defaultValue1;
-      const expectedHeaderRequestParams = `agent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `agent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.CalculateCoverageResponse()
       );
@@ -902,7 +904,7 @@ describe('v3.TestCasesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.CalculateCoverageRequest()
       );
@@ -911,7 +913,7 @@ describe('v3.TestCasesClient', () => {
         ['agent']
       );
       request.agent = defaultValue1;
-      const expectedHeaderRequestParams = `agent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `agent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.CalculateCoverageResponse()
       );
@@ -949,7 +951,7 @@ describe('v3.TestCasesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.CalculateCoverageRequest()
       );
@@ -958,7 +960,7 @@ describe('v3.TestCasesClient', () => {
         ['agent']
       );
       request.agent = defaultValue1;
-      const expectedHeaderRequestParams = `agent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `agent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.calculateCoverage = stubSimpleCall(
         undefined,
@@ -980,7 +982,7 @@ describe('v3.TestCasesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.CalculateCoverageRequest()
       );
@@ -1001,7 +1003,7 @@ describe('v3.TestCasesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.GetTestCaseResultRequest()
       );
@@ -1010,7 +1012,7 @@ describe('v3.TestCasesClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.TestCaseResult()
       );
@@ -1032,7 +1034,7 @@ describe('v3.TestCasesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.GetTestCaseResultRequest()
       );
@@ -1041,7 +1043,7 @@ describe('v3.TestCasesClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.TestCaseResult()
       );
@@ -1079,7 +1081,7 @@ describe('v3.TestCasesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.GetTestCaseResultRequest()
       );
@@ -1088,7 +1090,7 @@ describe('v3.TestCasesClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getTestCaseResult = stubSimpleCall(
         undefined,
@@ -1110,7 +1112,7 @@ describe('v3.TestCasesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.GetTestCaseResultRequest()
       );
@@ -1131,7 +1133,7 @@ describe('v3.TestCasesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.RunTestCaseRequest()
       );
@@ -1140,7 +1142,7 @@ describe('v3.TestCasesClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1163,7 +1165,7 @@ describe('v3.TestCasesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.RunTestCaseRequest()
       );
@@ -1172,7 +1174,7 @@ describe('v3.TestCasesClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1217,7 +1219,7 @@ describe('v3.TestCasesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.RunTestCaseRequest()
       );
@@ -1226,7 +1228,7 @@ describe('v3.TestCasesClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.runTestCase = stubLongRunningCall(
         undefined,
@@ -1248,7 +1250,7 @@ describe('v3.TestCasesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.RunTestCaseRequest()
       );
@@ -1257,7 +1259,7 @@ describe('v3.TestCasesClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.runTestCase = stubLongRunningCall(
         undefined,
@@ -1281,7 +1283,7 @@ describe('v3.TestCasesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -1303,7 +1305,7 @@ describe('v3.TestCasesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -1321,7 +1323,7 @@ describe('v3.TestCasesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.BatchRunTestCasesRequest()
       );
@@ -1330,7 +1332,7 @@ describe('v3.TestCasesClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1354,7 +1356,7 @@ describe('v3.TestCasesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.BatchRunTestCasesRequest()
       );
@@ -1363,7 +1365,7 @@ describe('v3.TestCasesClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1408,7 +1410,7 @@ describe('v3.TestCasesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.BatchRunTestCasesRequest()
       );
@@ -1417,7 +1419,7 @@ describe('v3.TestCasesClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.batchRunTestCases = stubLongRunningCall(
         undefined,
@@ -1439,7 +1441,7 @@ describe('v3.TestCasesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.BatchRunTestCasesRequest()
       );
@@ -1448,7 +1450,7 @@ describe('v3.TestCasesClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.batchRunTestCases = stubLongRunningCall(
         undefined,
@@ -1472,7 +1474,7 @@ describe('v3.TestCasesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -1494,7 +1496,7 @@ describe('v3.TestCasesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -1515,7 +1517,7 @@ describe('v3.TestCasesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.ImportTestCasesRequest()
       );
@@ -1524,7 +1526,7 @@ describe('v3.TestCasesClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1548,7 +1550,7 @@ describe('v3.TestCasesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.ImportTestCasesRequest()
       );
@@ -1557,7 +1559,7 @@ describe('v3.TestCasesClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1602,7 +1604,7 @@ describe('v3.TestCasesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.ImportTestCasesRequest()
       );
@@ -1611,7 +1613,7 @@ describe('v3.TestCasesClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.importTestCases = stubLongRunningCall(
         undefined,
@@ -1633,7 +1635,7 @@ describe('v3.TestCasesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.ImportTestCasesRequest()
       );
@@ -1642,7 +1644,7 @@ describe('v3.TestCasesClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.importTestCases = stubLongRunningCall(
         undefined,
@@ -1666,7 +1668,7 @@ describe('v3.TestCasesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -1688,7 +1690,7 @@ describe('v3.TestCasesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -1709,7 +1711,7 @@ describe('v3.TestCasesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.ExportTestCasesRequest()
       );
@@ -1718,7 +1720,7 @@ describe('v3.TestCasesClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1742,7 +1744,7 @@ describe('v3.TestCasesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.ExportTestCasesRequest()
       );
@@ -1751,7 +1753,7 @@ describe('v3.TestCasesClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1796,7 +1798,7 @@ describe('v3.TestCasesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.ExportTestCasesRequest()
       );
@@ -1805,7 +1807,7 @@ describe('v3.TestCasesClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.exportTestCases = stubLongRunningCall(
         undefined,
@@ -1827,7 +1829,7 @@ describe('v3.TestCasesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.ExportTestCasesRequest()
       );
@@ -1836,7 +1838,7 @@ describe('v3.TestCasesClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.exportTestCases = stubLongRunningCall(
         undefined,
@@ -1860,7 +1862,7 @@ describe('v3.TestCasesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -1882,7 +1884,7 @@ describe('v3.TestCasesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -1903,7 +1905,7 @@ describe('v3.TestCasesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.ListTestCasesRequest()
       );
@@ -1912,7 +1914,7 @@ describe('v3.TestCasesClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.dialogflow.cx.v3.TestCase()
@@ -1942,7 +1944,7 @@ describe('v3.TestCasesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.ListTestCasesRequest()
       );
@@ -1951,7 +1953,7 @@ describe('v3.TestCasesClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.dialogflow.cx.v3.TestCase()
@@ -1997,7 +1999,7 @@ describe('v3.TestCasesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.ListTestCasesRequest()
       );
@@ -2006,7 +2008,7 @@ describe('v3.TestCasesClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listTestCases = stubSimpleCall(
         undefined,
@@ -2028,7 +2030,7 @@ describe('v3.TestCasesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.ListTestCasesRequest()
       );
@@ -2037,7 +2039,7 @@ describe('v3.TestCasesClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.dialogflow.cx.v3.TestCase()
@@ -2088,7 +2090,7 @@ describe('v3.TestCasesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.ListTestCasesRequest()
       );
@@ -2097,7 +2099,7 @@ describe('v3.TestCasesClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listTestCases.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -2137,7 +2139,7 @@ describe('v3.TestCasesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.ListTestCasesRequest()
       );
@@ -2146,7 +2148,7 @@ describe('v3.TestCasesClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.dialogflow.cx.v3.TestCase()
@@ -2186,7 +2188,7 @@ describe('v3.TestCasesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.ListTestCasesRequest()
       );
@@ -2195,7 +2197,7 @@ describe('v3.TestCasesClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listTestCases.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -2228,7 +2230,7 @@ describe('v3.TestCasesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.ListTestCaseResultsRequest()
       );
@@ -2237,7 +2239,7 @@ describe('v3.TestCasesClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.dialogflow.cx.v3.TestCaseResult()
@@ -2268,7 +2270,7 @@ describe('v3.TestCasesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.ListTestCaseResultsRequest()
       );
@@ -2277,7 +2279,7 @@ describe('v3.TestCasesClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.dialogflow.cx.v3.TestCaseResult()
@@ -2325,7 +2327,7 @@ describe('v3.TestCasesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.ListTestCaseResultsRequest()
       );
@@ -2334,7 +2336,7 @@ describe('v3.TestCasesClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listTestCaseResults = stubSimpleCall(
         undefined,
@@ -2356,7 +2358,7 @@ describe('v3.TestCasesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.ListTestCaseResultsRequest()
       );
@@ -2365,7 +2367,7 @@ describe('v3.TestCasesClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.dialogflow.cx.v3.TestCaseResult()
@@ -2417,7 +2419,7 @@ describe('v3.TestCasesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.ListTestCaseResultsRequest()
       );
@@ -2426,7 +2428,7 @@ describe('v3.TestCasesClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listTestCaseResults.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -2467,7 +2469,7 @@ describe('v3.TestCasesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.ListTestCaseResultsRequest()
       );
@@ -2476,7 +2478,7 @@ describe('v3.TestCasesClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.dialogflow.cx.v3.TestCaseResult()
@@ -2517,7 +2519,7 @@ describe('v3.TestCasesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.ListTestCaseResultsRequest()
       );
@@ -2526,7 +2528,7 @@ describe('v3.TestCasesClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listTestCaseResults.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -2559,7 +2561,7 @@ describe('v3.TestCasesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.GetLocationRequest()
       );
@@ -2589,7 +2591,7 @@ describe('v3.TestCasesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.GetLocationRequest()
       );
@@ -2633,7 +2635,7 @@ describe('v3.TestCasesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.GetLocationRequest()
       );
@@ -2668,7 +2670,7 @@ describe('v3.TestCasesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.ListLocationsRequest()
       );
@@ -2716,7 +2718,7 @@ describe('v3.TestCasesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.ListLocationsRequest()
       );
@@ -2757,7 +2759,7 @@ describe('v3.TestCasesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new operationsProtos.google.longrunning.GetOperationRequest()
       );
@@ -2836,7 +2838,7 @@ describe('v3.TestCasesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new operationsProtos.google.longrunning.CancelOperationRequest()
       );
@@ -2916,7 +2918,7 @@ describe('v3.TestCasesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new operationsProtos.google.longrunning.DeleteOperationRequest()
       );
@@ -3012,8 +3014,7 @@ describe('v3.TestCasesClient', () => {
       ];
       client.operationsClient.descriptor.listOperations.asyncIterate =
         stubAsyncIterationCall(expectedResponse);
-      const responses: operationsProtos.google.longrunning.ListOperationsResponse[] =
-        [];
+      const responses: operationsProtos.google.longrunning.IOperation[] = [];
       const iterable = client.operationsClient.listOperationsAsync(request);
       for await (const resource of iterable) {
         responses.push(resource!);
@@ -3032,7 +3033,7 @@ describe('v3.TestCasesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new operationsProtos.google.longrunning.ListOperationsRequest()
       );
@@ -3041,8 +3042,7 @@ describe('v3.TestCasesClient', () => {
         stubAsyncIterationCall(undefined, expectedError);
       const iterable = client.operationsClient.listOperationsAsync(request);
       await assert.rejects(async () => {
-        const responses: operationsProtos.google.longrunning.ListOperationsResponse[] =
-          [];
+        const responses: operationsProtos.google.longrunning.IOperation[] = [];
         for await (const resource of iterable) {
           responses.push(resource!);
         }
@@ -3058,7 +3058,7 @@ describe('v3.TestCasesClient', () => {
   });
 
   describe('Path templates', () => {
-    describe('agent', () => {
+    describe('agent', async () => {
       const fakePath = '/rendered/path/agent';
       const expectedParameters = {
         project: 'projectValue',
@@ -3069,7 +3069,7 @@ describe('v3.TestCasesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.agentPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -3122,7 +3122,7 @@ describe('v3.TestCasesClient', () => {
       });
     });
 
-    describe('agentGenerativeSettings', () => {
+    describe('agentGenerativeSettings', async () => {
       const fakePath = '/rendered/path/agentGenerativeSettings';
       const expectedParameters = {
         project: 'projectValue',
@@ -3133,7 +3133,7 @@ describe('v3.TestCasesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.agentGenerativeSettingsPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -3201,7 +3201,7 @@ describe('v3.TestCasesClient', () => {
       });
     });
 
-    describe('agentValidationResult', () => {
+    describe('agentValidationResult', async () => {
       const fakePath = '/rendered/path/agentValidationResult';
       const expectedParameters = {
         project: 'projectValue',
@@ -3212,7 +3212,7 @@ describe('v3.TestCasesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.agentValidationResultPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -3279,7 +3279,7 @@ describe('v3.TestCasesClient', () => {
       });
     });
 
-    describe('changelog', () => {
+    describe('changelog', async () => {
       const fakePath = '/rendered/path/changelog';
       const expectedParameters = {
         project: 'projectValue',
@@ -3291,7 +3291,7 @@ describe('v3.TestCasesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.changelogPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -3355,7 +3355,7 @@ describe('v3.TestCasesClient', () => {
       });
     });
 
-    describe('continuousTestResult', () => {
+    describe('continuousTestResult', async () => {
       const fakePath = '/rendered/path/continuousTestResult';
       const expectedParameters = {
         project: 'projectValue',
@@ -3368,7 +3368,7 @@ describe('v3.TestCasesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.continuousTestResultPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -3467,7 +3467,7 @@ describe('v3.TestCasesClient', () => {
       });
     });
 
-    describe('deployment', () => {
+    describe('deployment', async () => {
       const fakePath = '/rendered/path/deployment';
       const expectedParameters = {
         project: 'projectValue',
@@ -3480,7 +3480,7 @@ describe('v3.TestCasesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.deploymentPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -3555,7 +3555,7 @@ describe('v3.TestCasesClient', () => {
       });
     });
 
-    describe('entityType', () => {
+    describe('entityType', async () => {
       const fakePath = '/rendered/path/entityType';
       const expectedParameters = {
         project: 'projectValue',
@@ -3567,7 +3567,7 @@ describe('v3.TestCasesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.entityTypePathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -3631,7 +3631,7 @@ describe('v3.TestCasesClient', () => {
       });
     });
 
-    describe('environment', () => {
+    describe('environment', async () => {
       const fakePath = '/rendered/path/environment';
       const expectedParameters = {
         project: 'projectValue',
@@ -3643,7 +3643,7 @@ describe('v3.TestCasesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.environmentPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -3707,7 +3707,7 @@ describe('v3.TestCasesClient', () => {
       });
     });
 
-    describe('experiment', () => {
+    describe('experiment', async () => {
       const fakePath = '/rendered/path/experiment';
       const expectedParameters = {
         project: 'projectValue',
@@ -3720,7 +3720,7 @@ describe('v3.TestCasesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.experimentPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -3795,7 +3795,7 @@ describe('v3.TestCasesClient', () => {
       });
     });
 
-    describe('flow', () => {
+    describe('flow', async () => {
       const fakePath = '/rendered/path/flow';
       const expectedParameters = {
         project: 'projectValue',
@@ -3807,7 +3807,7 @@ describe('v3.TestCasesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.flowPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -3871,7 +3871,7 @@ describe('v3.TestCasesClient', () => {
       });
     });
 
-    describe('flowValidationResult', () => {
+    describe('flowValidationResult', async () => {
       const fakePath = '/rendered/path/flowValidationResult';
       const expectedParameters = {
         project: 'projectValue',
@@ -3883,7 +3883,7 @@ describe('v3.TestCasesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.flowValidationResultPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -3964,7 +3964,7 @@ describe('v3.TestCasesClient', () => {
       });
     });
 
-    describe('generator', () => {
+    describe('generator', async () => {
       const fakePath = '/rendered/path/generator';
       const expectedParameters = {
         project: 'projectValue',
@@ -3976,7 +3976,7 @@ describe('v3.TestCasesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.generatorPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -4040,7 +4040,7 @@ describe('v3.TestCasesClient', () => {
       });
     });
 
-    describe('intent', () => {
+    describe('intent', async () => {
       const fakePath = '/rendered/path/intent';
       const expectedParameters = {
         project: 'projectValue',
@@ -4052,7 +4052,7 @@ describe('v3.TestCasesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.intentPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -4116,7 +4116,7 @@ describe('v3.TestCasesClient', () => {
       });
     });
 
-    describe('location', () => {
+    describe('location', async () => {
       const fakePath = '/rendered/path/location';
       const expectedParameters = {
         project: 'projectValue',
@@ -4126,7 +4126,7 @@ describe('v3.TestCasesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.locationPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -4165,7 +4165,7 @@ describe('v3.TestCasesClient', () => {
       });
     });
 
-    describe('page', () => {
+    describe('page', async () => {
       const fakePath = '/rendered/path/page';
       const expectedParameters = {
         project: 'projectValue',
@@ -4178,7 +4178,7 @@ describe('v3.TestCasesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.pagePathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -4253,7 +4253,7 @@ describe('v3.TestCasesClient', () => {
       });
     });
 
-    describe('project', () => {
+    describe('project', async () => {
       const fakePath = '/rendered/path/project';
       const expectedParameters = {
         project: 'projectValue',
@@ -4262,7 +4262,7 @@ describe('v3.TestCasesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -4291,7 +4291,7 @@ describe('v3.TestCasesClient', () => {
       });
     });
 
-    describe('projectLocationAgentEnvironmentSessionEntityType', () => {
+    describe('projectLocationAgentEnvironmentSessionEntityType', async () => {
       const fakePath =
         '/rendered/path/projectLocationAgentEnvironmentSessionEntityType';
       const expectedParameters = {
@@ -4306,7 +4306,7 @@ describe('v3.TestCasesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectLocationAgentEnvironmentSessionEntityTypePathTemplate.render =
         sinon.stub().returns(fakePath);
       client.pathTemplates.projectLocationAgentEnvironmentSessionEntityTypePathTemplate.match =
@@ -4437,7 +4437,7 @@ describe('v3.TestCasesClient', () => {
       });
     });
 
-    describe('projectLocationAgentFlowTransitionRouteGroup', () => {
+    describe('projectLocationAgentFlowTransitionRouteGroup', async () => {
       const fakePath =
         '/rendered/path/projectLocationAgentFlowTransitionRouteGroup';
       const expectedParameters = {
@@ -4451,7 +4451,7 @@ describe('v3.TestCasesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectLocationAgentFlowTransitionRouteGroupPathTemplate.render =
         sinon.stub().returns(fakePath);
       client.pathTemplates.projectLocationAgentFlowTransitionRouteGroupPathTemplate.match =
@@ -4563,7 +4563,7 @@ describe('v3.TestCasesClient', () => {
       });
     });
 
-    describe('projectLocationAgentSessionEntityType', () => {
+    describe('projectLocationAgentSessionEntityType', async () => {
       const fakePath = '/rendered/path/projectLocationAgentSessionEntityType';
       const expectedParameters = {
         project: 'projectValue',
@@ -4576,7 +4576,7 @@ describe('v3.TestCasesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectLocationAgentSessionEntityTypePathTemplate.render =
         sinon.stub().returns(fakePath);
       client.pathTemplates.projectLocationAgentSessionEntityTypePathTemplate.match =
@@ -4688,7 +4688,7 @@ describe('v3.TestCasesClient', () => {
       });
     });
 
-    describe('projectLocationAgentTransitionRouteGroup', () => {
+    describe('projectLocationAgentTransitionRouteGroup', async () => {
       const fakePath =
         '/rendered/path/projectLocationAgentTransitionRouteGroup';
       const expectedParameters = {
@@ -4701,7 +4701,7 @@ describe('v3.TestCasesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectLocationAgentTransitionRouteGroupPathTemplate.render =
         sinon.stub().returns(fakePath);
       client.pathTemplates.projectLocationAgentTransitionRouteGroupPathTemplate.match =
@@ -4795,7 +4795,7 @@ describe('v3.TestCasesClient', () => {
       });
     });
 
-    describe('securitySettings', () => {
+    describe('securitySettings', async () => {
       const fakePath = '/rendered/path/securitySettings';
       const expectedParameters = {
         project: 'projectValue',
@@ -4806,7 +4806,7 @@ describe('v3.TestCasesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.securitySettingsPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -4863,7 +4863,7 @@ describe('v3.TestCasesClient', () => {
       });
     });
 
-    describe('testCase', () => {
+    describe('testCase', async () => {
       const fakePath = '/rendered/path/testCase';
       const expectedParameters = {
         project: 'projectValue',
@@ -4875,7 +4875,7 @@ describe('v3.TestCasesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.testCasePathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -4939,7 +4939,7 @@ describe('v3.TestCasesClient', () => {
       });
     });
 
-    describe('testCaseResult', () => {
+    describe('testCaseResult', async () => {
       const fakePath = '/rendered/path/testCaseResult';
       const expectedParameters = {
         project: 'projectValue',
@@ -4952,7 +4952,7 @@ describe('v3.TestCasesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.testCaseResultPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -5027,7 +5027,7 @@ describe('v3.TestCasesClient', () => {
       });
     });
 
-    describe('version', () => {
+    describe('version', async () => {
       const fakePath = '/rendered/path/version';
       const expectedParameters = {
         project: 'projectValue',
@@ -5040,7 +5040,7 @@ describe('v3.TestCasesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.versionPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -5115,7 +5115,7 @@ describe('v3.TestCasesClient', () => {
       });
     });
 
-    describe('webhook', () => {
+    describe('webhook', async () => {
       const fakePath = '/rendered/path/webhook';
       const expectedParameters = {
         project: 'projectValue',
@@ -5127,7 +5127,7 @@ describe('v3.TestCasesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.webhookPathTemplate.render = sinon
         .stub()
         .returns(fakePath);

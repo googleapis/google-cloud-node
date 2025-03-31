@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -20,10 +20,10 @@ import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
 import {SinonStub} from 'sinon';
-import {describe, it} from 'mocha';
+import {describe, it, beforeEach, afterEach} from 'mocha';
 import * as gatewaycontrolModule from '../src';
 
-import {protobuf} from 'google-gax';
+import {GoogleAuth, protobuf} from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
@@ -65,6 +65,19 @@ function stubSimpleCallWithCallback<ResponseType>(
 }
 
 describe('v1.GatewayControlClient', () => {
+  let googleAuth: GoogleAuth;
+  beforeEach(() => {
+    googleAuth = {
+      getClient: sinon.stub().resolves({
+        getRequestHeaders: sinon
+          .stub()
+          .resolves({Authorization: 'Bearer SOME_TOKEN'}),
+      }),
+    } as unknown as GoogleAuth;
+  });
+  afterEach(() => {
+    sinon.restore();
+  });
   describe('Common methods', () => {
     it('has apiEndpoint', () => {
       const client = new gatewaycontrolModule.v1.GatewayControlClient();
@@ -179,7 +192,7 @@ describe('v1.GatewayControlClient', () => {
 
     it('has initialize method and supports deferred initialization', async () => {
       const client = new gatewaycontrolModule.v1.GatewayControlClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        auth: googleAuth,
         projectId: 'bogus',
       });
       assert.strictEqual(client.gatewayControlStub, undefined);
@@ -189,10 +202,12 @@ describe('v1.GatewayControlClient', () => {
 
     it('has close method for the initialized client', done => {
       const client = new gatewaycontrolModule.v1.GatewayControlClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      client.initialize().catch(err => {
+        throw err;
+      });
       assert(client.gatewayControlStub);
       client.close().then(() => {
         done();
@@ -201,7 +216,7 @@ describe('v1.GatewayControlClient', () => {
 
     it('has close method for the non-initialized client', done => {
       const client = new gatewaycontrolModule.v1.GatewayControlClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        auth: googleAuth,
         projectId: 'bogus',
       });
       assert.strictEqual(client.gatewayControlStub, undefined);
@@ -213,7 +228,7 @@ describe('v1.GatewayControlClient', () => {
     it('has getProjectId method', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new gatewaycontrolModule.v1.GatewayControlClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        auth: googleAuth,
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
@@ -225,7 +240,7 @@ describe('v1.GatewayControlClient', () => {
     it('has getProjectId method with callback', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new gatewaycontrolModule.v1.GatewayControlClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        auth: googleAuth,
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon
@@ -248,10 +263,10 @@ describe('v1.GatewayControlClient', () => {
   describe('generateCredentials', () => {
     it('invokes generateCredentials without error', async () => {
       const client = new gatewaycontrolModule.v1.GatewayControlClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.gkeconnect.gateway.v1.GenerateCredentialsRequest()
       );
@@ -260,7 +275,7 @@ describe('v1.GatewayControlClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.gkeconnect.gateway.v1.GenerateCredentialsResponse()
       );
@@ -280,10 +295,10 @@ describe('v1.GatewayControlClient', () => {
 
     it('invokes generateCredentials without error using callback', async () => {
       const client = new gatewaycontrolModule.v1.GatewayControlClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.gkeconnect.gateway.v1.GenerateCredentialsRequest()
       );
@@ -292,7 +307,7 @@ describe('v1.GatewayControlClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.gkeconnect.gateway.v1.GenerateCredentialsResponse()
       );
@@ -327,10 +342,10 @@ describe('v1.GatewayControlClient', () => {
 
     it('invokes generateCredentials with error', async () => {
       const client = new gatewaycontrolModule.v1.GatewayControlClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.gkeconnect.gateway.v1.GenerateCredentialsRequest()
       );
@@ -339,7 +354,7 @@ describe('v1.GatewayControlClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.generateCredentials = stubSimpleCall(
         undefined,
@@ -358,10 +373,10 @@ describe('v1.GatewayControlClient', () => {
 
     it('invokes generateCredentials with closed client', async () => {
       const client = new gatewaycontrolModule.v1.GatewayControlClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.gkeconnect.gateway.v1.GenerateCredentialsRequest()
       );

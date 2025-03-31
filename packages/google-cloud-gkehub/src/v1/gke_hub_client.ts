@@ -31,6 +31,7 @@ import type {
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
+import {loggingUtils as logging} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -71,6 +72,8 @@ export class GkeHubClient {
   private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
+  private _log = logging.log('gke-hub');
+
   auth: gax.GoogleAuth;
   descriptors: Descriptors = {
     page: {},
@@ -106,7 +109,7 @@ export class GkeHubClient {
    *     Developer's Console, e.g. 'grape-spaceship-123'. We will also check
    *     the environment variable GCLOUD_PROJECT for your project ID. If your
    *     app is running in an environment which supports
-   *     {@link https://developers.google.com/identity/protocols/application-default-credentials Application Default Credentials},
+   *     {@link https://cloud.google.com/docs/authentication/application-default-credentials Application Default Credentials},
    *     your project ID will be detected automatically.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
@@ -650,8 +653,36 @@ export class GkeHubClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.getMembership(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('getMembership request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.gkehub.v1.IMembership,
+          | protos.google.cloud.gkehub.v1.IGetMembershipRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getMembership response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getMembership(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.gkehub.v1.IMembership,
+          protos.google.cloud.gkehub.v1.IGetMembershipRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getMembership response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Gets details of a single Feature.
@@ -733,8 +764,34 @@ export class GkeHubClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.getFeature(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('getFeature request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.gkehub.v1.IFeature,
+          protos.google.cloud.gkehub.v1.IGetFeatureRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getFeature response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getFeature(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.gkehub.v1.IFeature,
+          protos.google.cloud.gkehub.v1.IGetFeatureRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getFeature response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Generates the manifest for deployment of the GKE connect agent.
@@ -851,12 +908,39 @@ export class GkeHubClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.generateConnectManifest(
-      request,
-      options,
-      callback
-    );
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('generateConnectManifest request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.gkehub.v1.IGenerateConnectManifestResponse,
+          | protos.google.cloud.gkehub.v1.IGenerateConnectManifestRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('generateConnectManifest response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .generateConnectManifest(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.gkehub.v1.IGenerateConnectManifestResponse,
+          (
+            | protos.google.cloud.gkehub.v1.IGenerateConnectManifestRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('generateConnectManifest response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
 
   /**
@@ -989,8 +1073,40 @@ export class GkeHubClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.createMembership(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.gkehub.v1.IMembership,
+            protos.google.cloud.gkehub.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('createMembership response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('createMembership request %j', request);
+    return this.innerApiCalls
+      .createMembership(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.gkehub.v1.IMembership,
+            protos.google.cloud.gkehub.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createMembership response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `createMembership()`.
@@ -1011,6 +1127,7 @@ export class GkeHubClient {
       protos.google.cloud.gkehub.v1.OperationMetadata
     >
   > {
+    this._log.info('createMembership long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -1144,8 +1261,40 @@ export class GkeHubClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.createFeature(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.gkehub.v1.IFeature,
+            protos.google.cloud.gkehub.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('createFeature response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('createFeature request %j', request);
+    return this.innerApiCalls
+      .createFeature(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.gkehub.v1.IFeature,
+            protos.google.cloud.gkehub.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createFeature response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `createFeature()`.
@@ -1166,6 +1315,7 @@ export class GkeHubClient {
       protos.google.cloud.gkehub.v1.OperationMetadata
     >
   > {
+    this._log.info('createFeature long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -1303,8 +1453,40 @@ export class GkeHubClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.deleteMembership(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.gkehub.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('deleteMembership response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('deleteMembership request %j', request);
+    return this.innerApiCalls
+      .deleteMembership(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.gkehub.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteMembership response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `deleteMembership()`.
@@ -1325,6 +1507,7 @@ export class GkeHubClient {
       protos.google.cloud.gkehub.v1.OperationMetadata
     >
   > {
+    this._log.info('deleteMembership long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -1458,8 +1641,40 @@ export class GkeHubClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.deleteFeature(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.gkehub.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('deleteFeature response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('deleteFeature request %j', request);
+    return this.innerApiCalls
+      .deleteFeature(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.gkehub.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteFeature response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `deleteFeature()`.
@@ -1480,6 +1695,7 @@ export class GkeHubClient {
       protos.google.cloud.gkehub.v1.OperationMetadata
     >
   > {
+    this._log.info('deleteFeature long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -1620,8 +1836,40 @@ export class GkeHubClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.updateMembership(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.gkehub.v1.IMembership,
+            protos.google.cloud.gkehub.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('updateMembership response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('updateMembership request %j', request);
+    return this.innerApiCalls
+      .updateMembership(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.gkehub.v1.IMembership,
+            protos.google.cloud.gkehub.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('updateMembership response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `updateMembership()`.
@@ -1642,6 +1890,7 @@ export class GkeHubClient {
       protos.google.cloud.gkehub.v1.OperationMetadata
     >
   > {
+    this._log.info('updateMembership long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -1782,8 +2031,40 @@ export class GkeHubClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.updateFeature(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.gkehub.v1.IFeature,
+            protos.google.cloud.gkehub.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('updateFeature response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('updateFeature request %j', request);
+    return this.innerApiCalls
+      .updateFeature(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.gkehub.v1.IFeature,
+            protos.google.cloud.gkehub.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('updateFeature response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `updateFeature()`.
@@ -1804,6 +2085,7 @@ export class GkeHubClient {
       protos.google.cloud.gkehub.v1.OperationMetadata
     >
   > {
+    this._log.info('updateFeature long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -1937,8 +2219,36 @@ export class GkeHubClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.listMemberships(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.gkehub.v1.IListMembershipsRequest,
+          | protos.google.cloud.gkehub.v1.IListMembershipsResponse
+          | null
+          | undefined,
+          protos.google.cloud.gkehub.v1.IMembership
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listMemberships values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listMemberships request %j', request);
+    return this.innerApiCalls
+      .listMemberships(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.gkehub.v1.IMembership[],
+          protos.google.cloud.gkehub.v1.IListMembershipsRequest | null,
+          protos.google.cloud.gkehub.v1.IListMembershipsResponse,
+        ]) => {
+          this._log.info('listMemberships values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -2006,7 +2316,10 @@ export class GkeHubClient {
       });
     const defaultCallSettings = this._defaults['listMemberships'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listMemberships stream %j', request);
     return this.descriptors.page.listMemberships.createStream(
       this.innerApiCalls.listMemberships as GaxCall,
       request,
@@ -2082,7 +2395,10 @@ export class GkeHubClient {
       });
     const defaultCallSettings = this._defaults['listMemberships'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listMemberships iterate %j', request);
     return this.descriptors.page.listMemberships.asyncIterate(
       this.innerApiCalls['listMemberships'] as GaxCall,
       request as {},
@@ -2202,8 +2518,36 @@ export class GkeHubClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.listFeatures(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.gkehub.v1.IListFeaturesRequest,
+          | protos.google.cloud.gkehub.v1.IListFeaturesResponse
+          | null
+          | undefined,
+          protos.google.cloud.gkehub.v1.IFeature
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listFeatures values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listFeatures request %j', request);
+    return this.innerApiCalls
+      .listFeatures(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.gkehub.v1.IFeature[],
+          protos.google.cloud.gkehub.v1.IListFeaturesRequest | null,
+          protos.google.cloud.gkehub.v1.IListFeaturesResponse,
+        ]) => {
+          this._log.info('listFeatures values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -2266,7 +2610,10 @@ export class GkeHubClient {
       });
     const defaultCallSettings = this._defaults['listFeatures'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listFeatures stream %j', request);
     return this.descriptors.page.listFeatures.createStream(
       this.innerApiCalls.listFeatures as GaxCall,
       request,
@@ -2337,7 +2684,10 @@ export class GkeHubClient {
       });
     const defaultCallSettings = this._defaults['listFeatures'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listFeatures iterate %j', request);
     return this.descriptors.page.listFeatures.asyncIterate(
       this.innerApiCalls['listFeatures'] as GaxCall,
       request as {},
@@ -2517,6 +2867,7 @@ export class GkeHubClient {
   close(): Promise<void> {
     if (this.gkeHubStub && !this._terminated) {
       return this.gkeHubStub.then(stub => {
+        this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
         this.operationsClient.close();

@@ -1,7 +1,4 @@
 {
-  "options": {
-    "syntax": "proto3"
-  },
   "nested": {
     "google": {
       "nested": {
@@ -7218,7 +7215,8 @@
                         "ADSENSE_LINK": 27,
                         "AUDIENCE": 28,
                         "EVENT_CREATE_RULE": 29,
-                        "CALCULATED_METRIC": 31
+                        "CALCULATED_METRIC": 31,
+                        "KEY_EVENT": 32
                       }
                     },
                     "GoogleSignalsState": {
@@ -7990,7 +7988,8 @@
                                 "adsenseLink",
                                 "audience",
                                 "eventCreateRule",
-                                "calculatedMetric"
+                                "calculatedMetric",
+                                "keyEvent"
                               ]
                             }
                           },
@@ -8094,6 +8093,10 @@
                             "calculatedMetric": {
                               "type": "CalculatedMetric",
                               "id": 31
+                            },
+                            "keyEvent": {
+                              "type": "KeyEvent",
+                              "id": 32
                             }
                           }
                         }

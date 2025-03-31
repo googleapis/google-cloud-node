@@ -256,7 +256,9 @@ describe('v1beta1.CloudSchedulerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      client.initialize().catch(err => {
+        throw err;
+      });
       assert(client.cloudSchedulerStub);
       client.close().then(() => {
         done();
@@ -315,7 +317,7 @@ describe('v1beta1.CloudSchedulerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.scheduler.v1beta1.GetJobRequest()
       );
@@ -324,7 +326,7 @@ describe('v1beta1.CloudSchedulerClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.scheduler.v1beta1.Job()
       );
@@ -346,7 +348,7 @@ describe('v1beta1.CloudSchedulerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.scheduler.v1beta1.GetJobRequest()
       );
@@ -355,7 +357,7 @@ describe('v1beta1.CloudSchedulerClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.scheduler.v1beta1.Job()
       );
@@ -393,7 +395,7 @@ describe('v1beta1.CloudSchedulerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.scheduler.v1beta1.GetJobRequest()
       );
@@ -402,7 +404,7 @@ describe('v1beta1.CloudSchedulerClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getJob = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.getJob(request), expectedError);
@@ -421,7 +423,7 @@ describe('v1beta1.CloudSchedulerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.scheduler.v1beta1.GetJobRequest()
       );
@@ -442,7 +444,7 @@ describe('v1beta1.CloudSchedulerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.scheduler.v1beta1.CreateJobRequest()
       );
@@ -451,7 +453,7 @@ describe('v1beta1.CloudSchedulerClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.scheduler.v1beta1.Job()
       );
@@ -473,7 +475,7 @@ describe('v1beta1.CloudSchedulerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.scheduler.v1beta1.CreateJobRequest()
       );
@@ -482,7 +484,7 @@ describe('v1beta1.CloudSchedulerClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.scheduler.v1beta1.Job()
       );
@@ -520,7 +522,7 @@ describe('v1beta1.CloudSchedulerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.scheduler.v1beta1.CreateJobRequest()
       );
@@ -529,7 +531,7 @@ describe('v1beta1.CloudSchedulerClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createJob = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.createJob(request), expectedError);
@@ -548,7 +550,7 @@ describe('v1beta1.CloudSchedulerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.scheduler.v1beta1.CreateJobRequest()
       );
@@ -569,7 +571,7 @@ describe('v1beta1.CloudSchedulerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.scheduler.v1beta1.UpdateJobRequest()
       );
@@ -579,7 +581,7 @@ describe('v1beta1.CloudSchedulerClient', () => {
         ['job', 'name']
       );
       request.job.name = defaultValue1;
-      const expectedHeaderRequestParams = `job.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `job.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.scheduler.v1beta1.Job()
       );
@@ -601,7 +603,7 @@ describe('v1beta1.CloudSchedulerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.scheduler.v1beta1.UpdateJobRequest()
       );
@@ -611,7 +613,7 @@ describe('v1beta1.CloudSchedulerClient', () => {
         ['job', 'name']
       );
       request.job.name = defaultValue1;
-      const expectedHeaderRequestParams = `job.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `job.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.scheduler.v1beta1.Job()
       );
@@ -649,7 +651,7 @@ describe('v1beta1.CloudSchedulerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.scheduler.v1beta1.UpdateJobRequest()
       );
@@ -659,7 +661,7 @@ describe('v1beta1.CloudSchedulerClient', () => {
         ['job', 'name']
       );
       request.job.name = defaultValue1;
-      const expectedHeaderRequestParams = `job.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `job.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateJob = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.updateJob(request), expectedError);
@@ -678,7 +680,7 @@ describe('v1beta1.CloudSchedulerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.scheduler.v1beta1.UpdateJobRequest()
       );
@@ -700,7 +702,7 @@ describe('v1beta1.CloudSchedulerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.scheduler.v1beta1.DeleteJobRequest()
       );
@@ -709,7 +711,7 @@ describe('v1beta1.CloudSchedulerClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -731,7 +733,7 @@ describe('v1beta1.CloudSchedulerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.scheduler.v1beta1.DeleteJobRequest()
       );
@@ -740,7 +742,7 @@ describe('v1beta1.CloudSchedulerClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -778,7 +780,7 @@ describe('v1beta1.CloudSchedulerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.scheduler.v1beta1.DeleteJobRequest()
       );
@@ -787,7 +789,7 @@ describe('v1beta1.CloudSchedulerClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteJob = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.deleteJob(request), expectedError);
@@ -806,7 +808,7 @@ describe('v1beta1.CloudSchedulerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.scheduler.v1beta1.DeleteJobRequest()
       );
@@ -827,7 +829,7 @@ describe('v1beta1.CloudSchedulerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.scheduler.v1beta1.PauseJobRequest()
       );
@@ -836,7 +838,7 @@ describe('v1beta1.CloudSchedulerClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.scheduler.v1beta1.Job()
       );
@@ -858,7 +860,7 @@ describe('v1beta1.CloudSchedulerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.scheduler.v1beta1.PauseJobRequest()
       );
@@ -867,7 +869,7 @@ describe('v1beta1.CloudSchedulerClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.scheduler.v1beta1.Job()
       );
@@ -905,7 +907,7 @@ describe('v1beta1.CloudSchedulerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.scheduler.v1beta1.PauseJobRequest()
       );
@@ -914,7 +916,7 @@ describe('v1beta1.CloudSchedulerClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.pauseJob = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.pauseJob(request), expectedError);
@@ -933,7 +935,7 @@ describe('v1beta1.CloudSchedulerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.scheduler.v1beta1.PauseJobRequest()
       );
@@ -954,7 +956,7 @@ describe('v1beta1.CloudSchedulerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.scheduler.v1beta1.ResumeJobRequest()
       );
@@ -963,7 +965,7 @@ describe('v1beta1.CloudSchedulerClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.scheduler.v1beta1.Job()
       );
@@ -985,7 +987,7 @@ describe('v1beta1.CloudSchedulerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.scheduler.v1beta1.ResumeJobRequest()
       );
@@ -994,7 +996,7 @@ describe('v1beta1.CloudSchedulerClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.scheduler.v1beta1.Job()
       );
@@ -1032,7 +1034,7 @@ describe('v1beta1.CloudSchedulerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.scheduler.v1beta1.ResumeJobRequest()
       );
@@ -1041,7 +1043,7 @@ describe('v1beta1.CloudSchedulerClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.resumeJob = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.resumeJob(request), expectedError);
@@ -1060,7 +1062,7 @@ describe('v1beta1.CloudSchedulerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.scheduler.v1beta1.ResumeJobRequest()
       );
@@ -1081,7 +1083,7 @@ describe('v1beta1.CloudSchedulerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.scheduler.v1beta1.RunJobRequest()
       );
@@ -1090,7 +1092,7 @@ describe('v1beta1.CloudSchedulerClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.scheduler.v1beta1.Job()
       );
@@ -1112,7 +1114,7 @@ describe('v1beta1.CloudSchedulerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.scheduler.v1beta1.RunJobRequest()
       );
@@ -1121,7 +1123,7 @@ describe('v1beta1.CloudSchedulerClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.scheduler.v1beta1.Job()
       );
@@ -1159,7 +1161,7 @@ describe('v1beta1.CloudSchedulerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.scheduler.v1beta1.RunJobRequest()
       );
@@ -1168,7 +1170,7 @@ describe('v1beta1.CloudSchedulerClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.runJob = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.runJob(request), expectedError);
@@ -1187,7 +1189,7 @@ describe('v1beta1.CloudSchedulerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.scheduler.v1beta1.RunJobRequest()
       );
@@ -1208,7 +1210,7 @@ describe('v1beta1.CloudSchedulerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.scheduler.v1beta1.ListJobsRequest()
       );
@@ -1217,7 +1219,7 @@ describe('v1beta1.CloudSchedulerClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.scheduler.v1beta1.Job()),
         generateSampleMessage(new protos.google.cloud.scheduler.v1beta1.Job()),
@@ -1241,7 +1243,7 @@ describe('v1beta1.CloudSchedulerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.scheduler.v1beta1.ListJobsRequest()
       );
@@ -1250,7 +1252,7 @@ describe('v1beta1.CloudSchedulerClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.scheduler.v1beta1.Job()),
         generateSampleMessage(new protos.google.cloud.scheduler.v1beta1.Job()),
@@ -1290,7 +1292,7 @@ describe('v1beta1.CloudSchedulerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.scheduler.v1beta1.ListJobsRequest()
       );
@@ -1299,7 +1301,7 @@ describe('v1beta1.CloudSchedulerClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listJobs = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.listJobs(request), expectedError);
@@ -1318,7 +1320,7 @@ describe('v1beta1.CloudSchedulerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.scheduler.v1beta1.ListJobsRequest()
       );
@@ -1327,7 +1329,7 @@ describe('v1beta1.CloudSchedulerClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.scheduler.v1beta1.Job()),
         generateSampleMessage(new protos.google.cloud.scheduler.v1beta1.Job()),
@@ -1372,7 +1374,7 @@ describe('v1beta1.CloudSchedulerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.scheduler.v1beta1.ListJobsRequest()
       );
@@ -1381,7 +1383,7 @@ describe('v1beta1.CloudSchedulerClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listJobs.createStream = stubPageStreamingCall(
         undefined,
@@ -1423,7 +1425,7 @@ describe('v1beta1.CloudSchedulerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.scheduler.v1beta1.ListJobsRequest()
       );
@@ -1432,7 +1434,7 @@ describe('v1beta1.CloudSchedulerClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.scheduler.v1beta1.Job()),
         generateSampleMessage(new protos.google.cloud.scheduler.v1beta1.Job()),
@@ -1465,7 +1467,7 @@ describe('v1beta1.CloudSchedulerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.scheduler.v1beta1.ListJobsRequest()
       );
@@ -1474,7 +1476,7 @@ describe('v1beta1.CloudSchedulerClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listJobs.asyncIterate = stubAsyncIterationCall(
         undefined,
@@ -1507,7 +1509,7 @@ describe('v1beta1.CloudSchedulerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.GetLocationRequest()
       );
@@ -1537,7 +1539,7 @@ describe('v1beta1.CloudSchedulerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.GetLocationRequest()
       );
@@ -1581,7 +1583,7 @@ describe('v1beta1.CloudSchedulerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.GetLocationRequest()
       );
@@ -1616,7 +1618,7 @@ describe('v1beta1.CloudSchedulerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.ListLocationsRequest()
       );
@@ -1664,7 +1666,7 @@ describe('v1beta1.CloudSchedulerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.ListLocationsRequest()
       );
@@ -1701,7 +1703,7 @@ describe('v1beta1.CloudSchedulerClient', () => {
   });
 
   describe('Path templates', () => {
-    describe('job', () => {
+    describe('job', async () => {
       const fakePath = '/rendered/path/job';
       const expectedParameters = {
         project: 'projectValue',
@@ -1712,7 +1714,7 @@ describe('v1beta1.CloudSchedulerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.jobPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -1765,7 +1767,7 @@ describe('v1beta1.CloudSchedulerClient', () => {
       });
     });
 
-    describe('location', () => {
+    describe('location', async () => {
       const fakePath = '/rendered/path/location';
       const expectedParameters = {
         project: 'projectValue',
@@ -1775,7 +1777,7 @@ describe('v1beta1.CloudSchedulerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.locationPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -1814,7 +1816,7 @@ describe('v1beta1.CloudSchedulerClient', () => {
       });
     });
 
-    describe('project', () => {
+    describe('project', async () => {
       const fakePath = '/rendered/path/project';
       const expectedParameters = {
         project: 'projectValue',
@@ -1823,7 +1825,7 @@ describe('v1beta1.CloudSchedulerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectPathTemplate.render = sinon
         .stub()
         .returns(fakePath);

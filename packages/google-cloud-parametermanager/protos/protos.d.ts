@@ -316,6 +316,9 @@ export namespace google {
 
                     /** Parameter policyMember */
                     policyMember?: (google.iam.v1.IResourcePolicyMember|null);
+
+                    /** Parameter kmsKey */
+                    kmsKey?: (string|null);
                 }
 
                 /** Represents a Parameter. */
@@ -344,6 +347,12 @@ export namespace google {
 
                     /** Parameter policyMember. */
                     public policyMember?: (google.iam.v1.IResourcePolicyMember|null);
+
+                    /** Parameter kmsKey. */
+                    public kmsKey?: (string|null);
+
+                    /** Parameter _kmsKey. */
+                    public _kmsKey?: "kmsKey";
 
                     /**
                      * Creates a new Parameter instance using the specified properties.
@@ -1094,6 +1103,9 @@ export namespace google {
 
                     /** ParameterVersion payload */
                     payload?: (google.cloud.parametermanager.v1.IParameterVersionPayload|null);
+
+                    /** ParameterVersion kmsKeyVersion */
+                    kmsKeyVersion?: (string|null);
                 }
 
                 /** Represents a ParameterVersion. */
@@ -1119,6 +1131,12 @@ export namespace google {
 
                     /** ParameterVersion payload. */
                     public payload?: (google.cloud.parametermanager.v1.IParameterVersionPayload|null);
+
+                    /** ParameterVersion kmsKeyVersion. */
+                    public kmsKeyVersion?: (string|null);
+
+                    /** ParameterVersion _kmsKeyVersion. */
+                    public _kmsKeyVersion?: "kmsKeyVersion";
 
                     /**
                      * Creates a new ParameterVersion instance using the specified properties.

@@ -228,7 +228,9 @@ describe('v1.VideoIntelligenceServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      client.initialize().catch(err => {
+        throw err;
+      });
       assert(client.videoIntelligenceServiceStub);
       client.close().then(() => {
         done();
@@ -291,7 +293,7 @@ describe('v1.VideoIntelligenceServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.videointelligence.v1.AnnotateVideoRequest()
       );
@@ -311,7 +313,7 @@ describe('v1.VideoIntelligenceServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.videointelligence.v1.AnnotateVideoRequest()
       );
@@ -352,7 +354,7 @@ describe('v1.VideoIntelligenceServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.videointelligence.v1.AnnotateVideoRequest()
       );
@@ -370,7 +372,7 @@ describe('v1.VideoIntelligenceServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.videointelligence.v1.AnnotateVideoRequest()
       );
@@ -390,7 +392,7 @@ describe('v1.VideoIntelligenceServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -413,7 +415,7 @@ describe('v1.VideoIntelligenceServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(

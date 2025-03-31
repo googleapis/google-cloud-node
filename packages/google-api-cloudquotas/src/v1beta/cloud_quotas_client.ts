@@ -29,6 +29,7 @@ import type {
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
+import {loggingUtils as logging} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -59,6 +60,8 @@ export class CloudQuotasClient {
   private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
+  private _log = logging.log('cloudquotas');
+
   auth: gax.GoogleAuth;
   descriptors: Descriptors = {
     page: {},
@@ -93,7 +96,7 @@ export class CloudQuotasClient {
    *     Developer's Console, e.g. 'grape-spaceship-123'. We will also check
    *     the environment variable GCLOUD_PROJECT for your project ID. If your
    *     app is running in an environment which supports
-   *     {@link https://developers.google.com/identity/protocols/application-default-credentials Application Default Credentials},
+   *     {@link https://cloud.google.com/docs/authentication/application-default-credentials Application Default Credentials},
    *     your project ID will be detected automatically.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
@@ -213,9 +216,6 @@ export class CloudQuotasClient {
         new this._gaxModule.PathTemplate(
           'folders/{folder}/locations/{location}/services/{service}/quotaInfos/{quota_info}'
         ),
-      locationPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}'
-      ),
       organizationLocationQuotaPreferencePathTemplate:
         new this._gaxModule.PathTemplate(
           'organizations/{organization}/locations/{location}/quotaPreferences/{quota_preference}'
@@ -224,8 +224,8 @@ export class CloudQuotasClient {
         new this._gaxModule.PathTemplate(
           'organizations/{organization}/locations/{location}/services/{service}/quotaInfos/{quota_info}'
         ),
-      projectPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}'
+      projectLocationPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}'
       ),
       projectLocationQuotaPreferencePathTemplate:
         new this._gaxModule.PathTemplate(
@@ -519,8 +519,36 @@ export class CloudQuotasClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.getQuotaInfo(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('getQuotaInfo request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.api.cloudquotas.v1beta.IQuotaInfo,
+          | protos.google.api.cloudquotas.v1beta.IGetQuotaInfoRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getQuotaInfo response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getQuotaInfo(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.api.cloudquotas.v1beta.IQuotaInfo,
+          protos.google.api.cloudquotas.v1beta.IGetQuotaInfoRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getQuotaInfo response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Gets details of a single QuotaPreference.
@@ -618,8 +646,39 @@ export class CloudQuotasClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.getQuotaPreference(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('getQuotaPreference request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.api.cloudquotas.v1beta.IQuotaPreference,
+          | protos.google.api.cloudquotas.v1beta.IGetQuotaPreferenceRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getQuotaPreference response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getQuotaPreference(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.api.cloudquotas.v1beta.IQuotaPreference,
+          (
+            | protos.google.api.cloudquotas.v1beta.IGetQuotaPreferenceRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getQuotaPreference response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Creates a new QuotaPreference that declares the desired value for a quota.
@@ -724,8 +783,39 @@ export class CloudQuotasClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.createQuotaPreference(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('createQuotaPreference request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.api.cloudquotas.v1beta.IQuotaPreference,
+          | protos.google.api.cloudquotas.v1beta.ICreateQuotaPreferenceRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('createQuotaPreference response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .createQuotaPreference(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.api.cloudquotas.v1beta.IQuotaPreference,
+          (
+            | protos.google.api.cloudquotas.v1beta.ICreateQuotaPreferenceRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('createQuotaPreference response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Updates the parameters of a single QuotaPreference. It can updates the
@@ -836,8 +926,39 @@ export class CloudQuotasClient {
       this._gaxModule.routingHeader.fromParams({
         'quota_preference.name': request.quotaPreference!.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.updateQuotaPreference(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('updateQuotaPreference request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.api.cloudquotas.v1beta.IQuotaPreference,
+          | protos.google.api.cloudquotas.v1beta.IUpdateQuotaPreferenceRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('updateQuotaPreference response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .updateQuotaPreference(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.api.cloudquotas.v1beta.IQuotaPreference,
+          (
+            | protos.google.api.cloudquotas.v1beta.IUpdateQuotaPreferenceRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('updateQuotaPreference response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
 
   /**
@@ -942,12 +1063,40 @@ export class CloudQuotasClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.listQuotaInfos(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.api.cloudquotas.v1beta.IListQuotaInfosRequest,
+          | protos.google.api.cloudquotas.v1beta.IListQuotaInfosResponse
+          | null
+          | undefined,
+          protos.google.api.cloudquotas.v1beta.IQuotaInfo
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listQuotaInfos values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listQuotaInfos request %j', request);
+    return this.innerApiCalls
+      .listQuotaInfos(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.api.cloudquotas.v1beta.IQuotaInfo[],
+          protos.google.api.cloudquotas.v1beta.IListQuotaInfosRequest | null,
+          protos.google.api.cloudquotas.v1beta.IListQuotaInfosResponse,
+        ]) => {
+          this._log.info('listQuotaInfos values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listQuotaInfos`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
@@ -989,7 +1138,10 @@ export class CloudQuotasClient {
       });
     const defaultCallSettings = this._defaults['listQuotaInfos'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listQuotaInfos stream %j', request);
     return this.descriptors.page.listQuotaInfos.createStream(
       this.innerApiCalls.listQuotaInfos as GaxCall,
       request,
@@ -1043,7 +1195,10 @@ export class CloudQuotasClient {
       });
     const defaultCallSettings = this._defaults['listQuotaInfos'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listQuotaInfos iterate %j', request);
     return this.descriptors.page.listQuotaInfos.asyncIterate(
       this.innerApiCalls['listQuotaInfos'] as GaxCall,
       request as {},
@@ -1168,12 +1323,40 @@ export class CloudQuotasClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.listQuotaPreferences(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.api.cloudquotas.v1beta.IListQuotaPreferencesRequest,
+          | protos.google.api.cloudquotas.v1beta.IListQuotaPreferencesResponse
+          | null
+          | undefined,
+          protos.google.api.cloudquotas.v1beta.IQuotaPreference
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listQuotaPreferences values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listQuotaPreferences request %j', request);
+    return this.innerApiCalls
+      .listQuotaPreferences(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.api.cloudquotas.v1beta.IQuotaPreference[],
+          protos.google.api.cloudquotas.v1beta.IListQuotaPreferencesRequest | null,
+          protos.google.api.cloudquotas.v1beta.IListQuotaPreferencesResponse,
+        ]) => {
+          this._log.info('listQuotaPreferences values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listQuotaPreferences`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
@@ -1231,7 +1414,10 @@ export class CloudQuotasClient {
       });
     const defaultCallSettings = this._defaults['listQuotaPreferences'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listQuotaPreferences stream %j', request);
     return this.descriptors.page.listQuotaPreferences.createStream(
       this.innerApiCalls.listQuotaPreferences as GaxCall,
       request,
@@ -1301,7 +1487,10 @@ export class CloudQuotasClient {
       });
     const defaultCallSettings = this._defaults['listQuotaPreferences'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listQuotaPreferences iterate %j', request);
     return this.descriptors.page.listQuotaPreferences.asyncIterate(
       this.innerApiCalls['listQuotaPreferences'] as GaxCall,
       request as {},
@@ -1463,42 +1652,6 @@ export class CloudQuotasClient {
   }
 
   /**
-   * Return a fully-qualified location resource name string.
-   *
-   * @param {string} project
-   * @param {string} location
-   * @returns {string} Resource name string.
-   */
-  locationPath(project: string, location: string) {
-    return this.pathTemplates.locationPathTemplate.render({
-      project: project,
-      location: location,
-    });
-  }
-
-  /**
-   * Parse the project from Location resource.
-   *
-   * @param {string} locationName
-   *   A fully-qualified path representing Location resource.
-   * @returns {string} A string representing the project.
-   */
-  matchProjectFromLocationName(locationName: string) {
-    return this.pathTemplates.locationPathTemplate.match(locationName).project;
-  }
-
-  /**
-   * Parse the location from Location resource.
-   *
-   * @param {string} locationName
-   *   A fully-qualified path representing Location resource.
-   * @returns {string} A string representing the location.
-   */
-  matchLocationFromLocationName(locationName: string) {
-    return this.pathTemplates.locationPathTemplate.match(locationName).location;
-  }
-
-  /**
    * Return a fully-qualified organizationLocationQuotaPreference resource name string.
    *
    * @param {string} organization
@@ -1651,26 +1804,43 @@ export class CloudQuotasClient {
   }
 
   /**
-   * Return a fully-qualified project resource name string.
+   * Return a fully-qualified projectLocation resource name string.
    *
    * @param {string} project
+   * @param {string} location
    * @returns {string} Resource name string.
    */
-  projectPath(project: string) {
-    return this.pathTemplates.projectPathTemplate.render({
+  projectLocationPath(project: string, location: string) {
+    return this.pathTemplates.projectLocationPathTemplate.render({
       project: project,
+      location: location,
     });
   }
 
   /**
-   * Parse the project from Project resource.
+   * Parse the project from ProjectLocation resource.
    *
-   * @param {string} projectName
-   *   A fully-qualified path representing Project resource.
+   * @param {string} projectLocationName
+   *   A fully-qualified path representing project_location resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectName(projectName: string) {
-    return this.pathTemplates.projectPathTemplate.match(projectName).project;
+  matchProjectFromProjectLocationName(projectLocationName: string) {
+    return this.pathTemplates.projectLocationPathTemplate.match(
+      projectLocationName
+    ).project;
+  }
+
+  /**
+   * Parse the location from ProjectLocation resource.
+   *
+   * @param {string} projectLocationName
+   *   A fully-qualified path representing project_location resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromProjectLocationName(projectLocationName: string) {
+    return this.pathTemplates.projectLocationPathTemplate.match(
+      projectLocationName
+    ).location;
   }
 
   /**
@@ -1941,6 +2111,7 @@ export class CloudQuotasClient {
   close(): Promise<void> {
     if (this.cloudQuotasStub && !this._terminated) {
       return this.cloudQuotasStub.then(stub => {
+        this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
       });

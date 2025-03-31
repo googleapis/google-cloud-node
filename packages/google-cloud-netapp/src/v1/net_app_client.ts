@@ -33,6 +33,7 @@ import type {
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
+import {loggingUtils as logging} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -57,6 +58,8 @@ export class NetAppClient {
   private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
+  private _log = logging.log('netapp');
+
   auth: gax.GoogleAuth;
   descriptors: Descriptors = {
     page: {},
@@ -93,7 +96,7 @@ export class NetAppClient {
    *     Developer's Console, e.g. 'grape-spaceship-123'. We will also check
    *     the environment variable GCLOUD_PROJECT for your project ID. If your
    *     app is running in an environment which supports
-   *     {@link https://developers.google.com/identity/protocols/application-default-credentials Application Default Credentials},
+   *     {@link https://cloud.google.com/docs/authentication/application-default-credentials Application Default Credentials},
    *     your project ID will be detected automatically.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
@@ -1097,8 +1100,36 @@ export class NetAppClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.getStoragePool(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('getStoragePool request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.netapp.v1.IStoragePool,
+          | protos.google.cloud.netapp.v1.IGetStoragePoolRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getStoragePool response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getStoragePool(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.netapp.v1.IStoragePool,
+          protos.google.cloud.netapp.v1.IGetStoragePoolRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getStoragePool response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Gets details of a single Volume.
@@ -1179,8 +1210,34 @@ export class NetAppClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.getVolume(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('getVolume request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.netapp.v1.IVolume,
+          protos.google.cloud.netapp.v1.IGetVolumeRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getVolume response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getVolume(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.netapp.v1.IVolume,
+          protos.google.cloud.netapp.v1.IGetVolumeRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getVolume response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Describe a snapshot for a volume.
@@ -1262,8 +1319,34 @@ export class NetAppClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.getSnapshot(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('getSnapshot request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.netapp.v1.ISnapshot,
+          protos.google.cloud.netapp.v1.IGetSnapshotRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getSnapshot response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getSnapshot(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.netapp.v1.ISnapshot,
+          protos.google.cloud.netapp.v1.IGetSnapshotRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getSnapshot response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Describes a specified active directory.
@@ -1352,8 +1435,36 @@ export class NetAppClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.getActiveDirectory(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('getActiveDirectory request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.netapp.v1.IActiveDirectory,
+          | protos.google.cloud.netapp.v1.IGetActiveDirectoryRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getActiveDirectory response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getActiveDirectory(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.netapp.v1.IActiveDirectory,
+          protos.google.cloud.netapp.v1.IGetActiveDirectoryRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getActiveDirectory response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Returns the description of the specified KMS config by kms_config_id.
@@ -1434,8 +1545,34 @@ export class NetAppClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.getKmsConfig(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('getKmsConfig request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.netapp.v1.IKmsConfig,
+          protos.google.cloud.netapp.v1.IGetKmsConfigRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getKmsConfig response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getKmsConfig(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.netapp.v1.IKmsConfig,
+          protos.google.cloud.netapp.v1.IGetKmsConfigRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getKmsConfig response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Verifies KMS config reachability.
@@ -1518,8 +1655,36 @@ export class NetAppClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.verifyKmsConfig(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('verifyKmsConfig request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.netapp.v1.IVerifyKmsConfigResponse,
+          | protos.google.cloud.netapp.v1.IVerifyKmsConfigRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('verifyKmsConfig response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .verifyKmsConfig(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.netapp.v1.IVerifyKmsConfigResponse,
+          protos.google.cloud.netapp.v1.IVerifyKmsConfigRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('verifyKmsConfig response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Describe a replication for a volume.
@@ -1603,8 +1768,36 @@ export class NetAppClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.getReplication(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('getReplication request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.netapp.v1.IReplication,
+          | protos.google.cloud.netapp.v1.IGetReplicationRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getReplication response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getReplication(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.netapp.v1.IReplication,
+          protos.google.cloud.netapp.v1.IGetReplicationRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getReplication response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Returns the description of the specified backup vault
@@ -1688,8 +1881,36 @@ export class NetAppClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.getBackupVault(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('getBackupVault request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.netapp.v1.IBackupVault,
+          | protos.google.cloud.netapp.v1.IGetBackupVaultRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getBackupVault response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getBackupVault(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.netapp.v1.IBackupVault,
+          protos.google.cloud.netapp.v1.IGetBackupVaultRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getBackupVault response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Returns the description of the specified backup
@@ -1771,8 +1992,34 @@ export class NetAppClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.getBackup(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('getBackup request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.netapp.v1.IBackup,
+          protos.google.cloud.netapp.v1.IGetBackupRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getBackup response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getBackup(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.netapp.v1.IBackup,
+          protos.google.cloud.netapp.v1.IGetBackupRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getBackup response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Returns the description of the specified backup policy by backup_policy_id.
@@ -1856,8 +2103,36 @@ export class NetAppClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.getBackupPolicy(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('getBackupPolicy request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.netapp.v1.IBackupPolicy,
+          | protos.google.cloud.netapp.v1.IGetBackupPolicyRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getBackupPolicy response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getBackupPolicy(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.netapp.v1.IBackupPolicy,
+          protos.google.cloud.netapp.v1.IGetBackupPolicyRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getBackupPolicy response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Returns details of the specified quota rule.
@@ -1938,8 +2213,34 @@ export class NetAppClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.getQuotaRule(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('getQuotaRule request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.netapp.v1.IQuotaRule,
+          protos.google.cloud.netapp.v1.IGetQuotaRuleRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getQuotaRule response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getQuotaRule(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.netapp.v1.IQuotaRule,
+          protos.google.cloud.netapp.v1.IGetQuotaRuleRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getQuotaRule response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
 
   /**
@@ -2048,8 +2349,40 @@ export class NetAppClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.createStoragePool(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.netapp.v1.IStoragePool,
+            protos.google.cloud.netapp.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('createStoragePool response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('createStoragePool request %j', request);
+    return this.innerApiCalls
+      .createStoragePool(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.netapp.v1.IStoragePool,
+            protos.google.cloud.netapp.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createStoragePool response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `createStoragePool()`.
@@ -2070,6 +2403,7 @@ export class NetAppClient {
       protos.google.cloud.netapp.v1.OperationMetadata
     >
   > {
+    this._log.info('createStoragePool long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -2190,8 +2524,40 @@ export class NetAppClient {
       this._gaxModule.routingHeader.fromParams({
         'storage_pool.name': request.storagePool!.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.updateStoragePool(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.netapp.v1.IStoragePool,
+            protos.google.cloud.netapp.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('updateStoragePool response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('updateStoragePool request %j', request);
+    return this.innerApiCalls
+      .updateStoragePool(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.netapp.v1.IStoragePool,
+            protos.google.cloud.netapp.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('updateStoragePool response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `updateStoragePool()`.
@@ -2212,6 +2578,7 @@ export class NetAppClient {
       protos.google.cloud.netapp.v1.OperationMetadata
     >
   > {
+    this._log.info('updateStoragePool long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -2326,8 +2693,40 @@ export class NetAppClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.deleteStoragePool(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.netapp.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('deleteStoragePool response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('deleteStoragePool request %j', request);
+    return this.innerApiCalls
+      .deleteStoragePool(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.netapp.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteStoragePool response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `deleteStoragePool()`.
@@ -2348,6 +2747,7 @@ export class NetAppClient {
       protos.google.cloud.netapp.v1.OperationMetadata
     >
   > {
+    this._log.info('deleteStoragePool long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -2465,12 +2865,40 @@ export class NetAppClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.validateDirectoryService(
-      request,
-      options,
-      callback
-    );
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.netapp.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('validateDirectoryService response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('validateDirectoryService request %j', request);
+    return this.innerApiCalls
+      .validateDirectoryService(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.netapp.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('validateDirectoryService response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `validateDirectoryService()`.
@@ -2491,6 +2919,7 @@ export class NetAppClient {
       protos.google.cloud.netapp.v1.OperationMetadata
     >
   > {
+    this._log.info('validateDirectoryService long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -2606,12 +3035,40 @@ export class NetAppClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.switchActiveReplicaZone(
-      request,
-      options,
-      callback
-    );
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.netapp.v1.IStoragePool,
+            protos.google.cloud.netapp.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('switchActiveReplicaZone response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('switchActiveReplicaZone request %j', request);
+    return this.innerApiCalls
+      .switchActiveReplicaZone(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.netapp.v1.IStoragePool,
+            protos.google.cloud.netapp.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('switchActiveReplicaZone response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `switchActiveReplicaZone()`.
@@ -2632,6 +3089,7 @@ export class NetAppClient {
       protos.google.cloud.netapp.v1.OperationMetadata
     >
   > {
+    this._log.info('switchActiveReplicaZone long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -2753,8 +3211,40 @@ export class NetAppClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.createVolume(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.netapp.v1.IVolume,
+            protos.google.cloud.netapp.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('createVolume response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('createVolume request %j', request);
+    return this.innerApiCalls
+      .createVolume(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.netapp.v1.IVolume,
+            protos.google.cloud.netapp.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createVolume response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `createVolume()`.
@@ -2775,6 +3265,7 @@ export class NetAppClient {
       protos.google.cloud.netapp.v1.OperationMetadata
     >
   > {
+    this._log.info('createVolume long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -2895,8 +3386,40 @@ export class NetAppClient {
       this._gaxModule.routingHeader.fromParams({
         'volume.name': request.volume!.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.updateVolume(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.netapp.v1.IVolume,
+            protos.google.cloud.netapp.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('updateVolume response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('updateVolume request %j', request);
+    return this.innerApiCalls
+      .updateVolume(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.netapp.v1.IVolume,
+            protos.google.cloud.netapp.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('updateVolume response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `updateVolume()`.
@@ -2917,6 +3440,7 @@ export class NetAppClient {
       protos.google.cloud.netapp.v1.OperationMetadata
     >
   > {
+    this._log.info('updateVolume long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -3035,8 +3559,40 @@ export class NetAppClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.deleteVolume(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.netapp.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('deleteVolume response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('deleteVolume request %j', request);
+    return this.innerApiCalls
+      .deleteVolume(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.netapp.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteVolume response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `deleteVolume()`.
@@ -3057,6 +3613,7 @@ export class NetAppClient {
       protos.google.cloud.netapp.v1.OperationMetadata
     >
   > {
+    this._log.info('deleteVolume long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -3178,8 +3735,40 @@ export class NetAppClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.revertVolume(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.netapp.v1.IVolume,
+            protos.google.cloud.netapp.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('revertVolume response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('revertVolume request %j', request);
+    return this.innerApiCalls
+      .revertVolume(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.netapp.v1.IVolume,
+            protos.google.cloud.netapp.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('revertVolume response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `revertVolume()`.
@@ -3200,6 +3789,7 @@ export class NetAppClient {
       protos.google.cloud.netapp.v1.OperationMetadata
     >
   > {
+    this._log.info('revertVolume long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -3322,8 +3912,40 @@ export class NetAppClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.createSnapshot(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.netapp.v1.ISnapshot,
+            protos.google.cloud.netapp.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('createSnapshot response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('createSnapshot request %j', request);
+    return this.innerApiCalls
+      .createSnapshot(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.netapp.v1.ISnapshot,
+            protos.google.cloud.netapp.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createSnapshot response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `createSnapshot()`.
@@ -3344,6 +3966,7 @@ export class NetAppClient {
       protos.google.cloud.netapp.v1.OperationMetadata
     >
   > {
+    this._log.info('createSnapshot long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -3459,8 +4082,40 @@ export class NetAppClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.deleteSnapshot(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.netapp.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('deleteSnapshot response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('deleteSnapshot request %j', request);
+    return this.innerApiCalls
+      .deleteSnapshot(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.netapp.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteSnapshot response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `deleteSnapshot()`.
@@ -3481,6 +4136,7 @@ export class NetAppClient {
       protos.google.cloud.netapp.v1.OperationMetadata
     >
   > {
+    this._log.info('deleteSnapshot long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -3598,8 +4254,40 @@ export class NetAppClient {
       this._gaxModule.routingHeader.fromParams({
         'snapshot.name': request.snapshot!.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.updateSnapshot(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.netapp.v1.ISnapshot,
+            protos.google.cloud.netapp.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('updateSnapshot response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('updateSnapshot request %j', request);
+    return this.innerApiCalls
+      .updateSnapshot(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.netapp.v1.ISnapshot,
+            protos.google.cloud.netapp.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('updateSnapshot response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `updateSnapshot()`.
@@ -3620,6 +4308,7 @@ export class NetAppClient {
       protos.google.cloud.netapp.v1.OperationMetadata
     >
   > {
+    this._log.info('updateSnapshot long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -3742,8 +4431,40 @@ export class NetAppClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.createActiveDirectory(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.netapp.v1.IActiveDirectory,
+            protos.google.cloud.netapp.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('createActiveDirectory response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('createActiveDirectory request %j', request);
+    return this.innerApiCalls
+      .createActiveDirectory(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.netapp.v1.IActiveDirectory,
+            protos.google.cloud.netapp.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createActiveDirectory response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `createActiveDirectory()`.
@@ -3764,6 +4485,7 @@ export class NetAppClient {
       protos.google.cloud.netapp.v1.OperationMetadata
     >
   > {
+    this._log.info('createActiveDirectory long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -3884,8 +4606,40 @@ export class NetAppClient {
       this._gaxModule.routingHeader.fromParams({
         'active_directory.name': request.activeDirectory!.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.updateActiveDirectory(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.netapp.v1.IActiveDirectory,
+            protos.google.cloud.netapp.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('updateActiveDirectory response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('updateActiveDirectory request %j', request);
+    return this.innerApiCalls
+      .updateActiveDirectory(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.netapp.v1.IActiveDirectory,
+            protos.google.cloud.netapp.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('updateActiveDirectory response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `updateActiveDirectory()`.
@@ -3906,6 +4660,7 @@ export class NetAppClient {
       protos.google.cloud.netapp.v1.OperationMetadata
     >
   > {
+    this._log.info('updateActiveDirectory long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -4020,8 +4775,40 @@ export class NetAppClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.deleteActiveDirectory(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.netapp.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('deleteActiveDirectory response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('deleteActiveDirectory request %j', request);
+    return this.innerApiCalls
+      .deleteActiveDirectory(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.netapp.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteActiveDirectory response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `deleteActiveDirectory()`.
@@ -4042,6 +4829,7 @@ export class NetAppClient {
       protos.google.cloud.netapp.v1.OperationMetadata
     >
   > {
+    this._log.info('deleteActiveDirectory long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -4163,8 +4951,40 @@ export class NetAppClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.createKmsConfig(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.netapp.v1.IKmsConfig,
+            protos.google.cloud.netapp.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('createKmsConfig response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('createKmsConfig request %j', request);
+    return this.innerApiCalls
+      .createKmsConfig(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.netapp.v1.IKmsConfig,
+            protos.google.cloud.netapp.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createKmsConfig response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `createKmsConfig()`.
@@ -4185,6 +5005,7 @@ export class NetAppClient {
       protos.google.cloud.netapp.v1.OperationMetadata
     >
   > {
+    this._log.info('createKmsConfig long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -4305,8 +5126,40 @@ export class NetAppClient {
       this._gaxModule.routingHeader.fromParams({
         'kms_config.name': request.kmsConfig!.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.updateKmsConfig(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.netapp.v1.IKmsConfig,
+            protos.google.cloud.netapp.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('updateKmsConfig response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('updateKmsConfig request %j', request);
+    return this.innerApiCalls
+      .updateKmsConfig(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.netapp.v1.IKmsConfig,
+            protos.google.cloud.netapp.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('updateKmsConfig response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `updateKmsConfig()`.
@@ -4327,6 +5180,7 @@ export class NetAppClient {
       protos.google.cloud.netapp.v1.OperationMetadata
     >
   > {
+    this._log.info('updateKmsConfig long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -4442,8 +5296,40 @@ export class NetAppClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.encryptVolumes(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.netapp.v1.IKmsConfig,
+            protos.google.cloud.netapp.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('encryptVolumes response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('encryptVolumes request %j', request);
+    return this.innerApiCalls
+      .encryptVolumes(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.netapp.v1.IKmsConfig,
+            protos.google.cloud.netapp.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('encryptVolumes response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `encryptVolumes()`.
@@ -4464,6 +5350,7 @@ export class NetAppClient {
       protos.google.cloud.netapp.v1.OperationMetadata
     >
   > {
+    this._log.info('encryptVolumes long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -4578,8 +5465,40 @@ export class NetAppClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.deleteKmsConfig(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.netapp.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('deleteKmsConfig response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('deleteKmsConfig request %j', request);
+    return this.innerApiCalls
+      .deleteKmsConfig(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.netapp.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteKmsConfig response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `deleteKmsConfig()`.
@@ -4600,6 +5519,7 @@ export class NetAppClient {
       protos.google.cloud.netapp.v1.OperationMetadata
     >
   > {
+    this._log.info('deleteKmsConfig long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -4722,8 +5642,40 @@ export class NetAppClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.createReplication(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.netapp.v1.IReplication,
+            protos.google.cloud.netapp.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('createReplication response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('createReplication request %j', request);
+    return this.innerApiCalls
+      .createReplication(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.netapp.v1.IReplication,
+            protos.google.cloud.netapp.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createReplication response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `createReplication()`.
@@ -4744,6 +5696,7 @@ export class NetAppClient {
       protos.google.cloud.netapp.v1.OperationMetadata
     >
   > {
+    this._log.info('createReplication long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -4859,8 +5812,40 @@ export class NetAppClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.deleteReplication(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.netapp.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('deleteReplication response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('deleteReplication request %j', request);
+    return this.innerApiCalls
+      .deleteReplication(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.netapp.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteReplication response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `deleteReplication()`.
@@ -4881,6 +5866,7 @@ export class NetAppClient {
       protos.google.cloud.netapp.v1.OperationMetadata
     >
   > {
+    this._log.info('deleteReplication long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -4998,8 +5984,40 @@ export class NetAppClient {
       this._gaxModule.routingHeader.fromParams({
         'replication.name': request.replication!.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.updateReplication(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.netapp.v1.IReplication,
+            protos.google.cloud.netapp.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('updateReplication response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('updateReplication request %j', request);
+    return this.innerApiCalls
+      .updateReplication(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.netapp.v1.IReplication,
+            protos.google.cloud.netapp.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('updateReplication response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `updateReplication()`.
@@ -5020,6 +6038,7 @@ export class NetAppClient {
       protos.google.cloud.netapp.v1.OperationMetadata
     >
   > {
+    this._log.info('updateReplication long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -5142,8 +6161,40 @@ export class NetAppClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.stopReplication(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.netapp.v1.IReplication,
+            protos.google.cloud.netapp.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('stopReplication response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('stopReplication request %j', request);
+    return this.innerApiCalls
+      .stopReplication(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.netapp.v1.IReplication,
+            protos.google.cloud.netapp.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('stopReplication response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `stopReplication()`.
@@ -5164,6 +6215,7 @@ export class NetAppClient {
       protos.google.cloud.netapp.v1.OperationMetadata
     >
   > {
+    this._log.info('stopReplication long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -5279,8 +6331,40 @@ export class NetAppClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.resumeReplication(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.netapp.v1.IReplication,
+            protos.google.cloud.netapp.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('resumeReplication response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('resumeReplication request %j', request);
+    return this.innerApiCalls
+      .resumeReplication(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.netapp.v1.IReplication,
+            protos.google.cloud.netapp.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('resumeReplication response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `resumeReplication()`.
@@ -5301,6 +6385,7 @@ export class NetAppClient {
       protos.google.cloud.netapp.v1.OperationMetadata
     >
   > {
+    this._log.info('resumeReplication long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -5417,12 +6502,46 @@ export class NetAppClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.reverseReplicationDirection(
-      request,
-      options,
-      callback
-    );
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.netapp.v1.IReplication,
+            protos.google.cloud.netapp.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info(
+            'reverseReplicationDirection response %j',
+            rawResponse
+          );
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('reverseReplicationDirection request %j', request);
+    return this.innerApiCalls
+      .reverseReplicationDirection(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.netapp.v1.IReplication,
+            protos.google.cloud.netapp.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info(
+            'reverseReplicationDirection response %j',
+            rawResponse
+          );
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `reverseReplicationDirection()`.
@@ -5443,6 +6562,7 @@ export class NetAppClient {
       protos.google.cloud.netapp.v1.OperationMetadata
     >
   > {
+    this._log.info('reverseReplicationDirection long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -5569,8 +6689,40 @@ export class NetAppClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.establishPeering(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.netapp.v1.IReplication,
+            protos.google.cloud.netapp.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('establishPeering response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('establishPeering request %j', request);
+    return this.innerApiCalls
+      .establishPeering(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.netapp.v1.IReplication,
+            protos.google.cloud.netapp.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('establishPeering response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `establishPeering()`.
@@ -5591,6 +6743,7 @@ export class NetAppClient {
       protos.google.cloud.netapp.v1.OperationMetadata
     >
   > {
+    this._log.info('establishPeering long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -5707,8 +6860,40 @@ export class NetAppClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.syncReplication(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.netapp.v1.IReplication,
+            protos.google.cloud.netapp.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('syncReplication response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('syncReplication request %j', request);
+    return this.innerApiCalls
+      .syncReplication(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.netapp.v1.IReplication,
+            protos.google.cloud.netapp.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('syncReplication response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `syncReplication()`.
@@ -5729,6 +6914,7 @@ export class NetAppClient {
       protos.google.cloud.netapp.v1.OperationMetadata
     >
   > {
+    this._log.info('syncReplication long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -5852,8 +7038,40 @@ export class NetAppClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.createBackupVault(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.netapp.v1.IBackupVault,
+            protos.google.cloud.netapp.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('createBackupVault response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('createBackupVault request %j', request);
+    return this.innerApiCalls
+      .createBackupVault(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.netapp.v1.IBackupVault,
+            protos.google.cloud.netapp.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createBackupVault response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `createBackupVault()`.
@@ -5874,6 +7092,7 @@ export class NetAppClient {
       protos.google.cloud.netapp.v1.OperationMetadata
     >
   > {
+    this._log.info('createBackupVault long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -5994,8 +7213,40 @@ export class NetAppClient {
       this._gaxModule.routingHeader.fromParams({
         'backup_vault.name': request.backupVault!.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.updateBackupVault(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.netapp.v1.IBackupVault,
+            protos.google.cloud.netapp.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('updateBackupVault response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('updateBackupVault request %j', request);
+    return this.innerApiCalls
+      .updateBackupVault(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.netapp.v1.IBackupVault,
+            protos.google.cloud.netapp.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('updateBackupVault response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `updateBackupVault()`.
@@ -6016,6 +7267,7 @@ export class NetAppClient {
       protos.google.cloud.netapp.v1.OperationMetadata
     >
   > {
+    this._log.info('updateBackupVault long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -6131,8 +7383,40 @@ export class NetAppClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.deleteBackupVault(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.netapp.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('deleteBackupVault response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('deleteBackupVault request %j', request);
+    return this.innerApiCalls
+      .deleteBackupVault(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.netapp.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteBackupVault response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `deleteBackupVault()`.
@@ -6153,6 +7437,7 @@ export class NetAppClient {
       protos.google.cloud.netapp.v1.OperationMetadata
     >
   > {
+    this._log.info('deleteBackupVault long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -6279,8 +7564,40 @@ export class NetAppClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.createBackup(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.netapp.v1.IBackup,
+            protos.google.cloud.netapp.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('createBackup response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('createBackup request %j', request);
+    return this.innerApiCalls
+      .createBackup(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.netapp.v1.IBackup,
+            protos.google.cloud.netapp.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createBackup response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `createBackup()`.
@@ -6301,6 +7618,7 @@ export class NetAppClient {
       protos.google.cloud.netapp.v1.OperationMetadata
     >
   > {
+    this._log.info('createBackup long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -6416,8 +7734,40 @@ export class NetAppClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.deleteBackup(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.netapp.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('deleteBackup response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('deleteBackup request %j', request);
+    return this.innerApiCalls
+      .deleteBackup(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.netapp.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteBackup response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `deleteBackup()`.
@@ -6438,6 +7788,7 @@ export class NetAppClient {
       protos.google.cloud.netapp.v1.OperationMetadata
     >
   > {
+    this._log.info('deleteBackup long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -6558,8 +7909,40 @@ export class NetAppClient {
       this._gaxModule.routingHeader.fromParams({
         'backup.name': request.backup!.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.updateBackup(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.netapp.v1.IBackup,
+            protos.google.cloud.netapp.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('updateBackup response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('updateBackup request %j', request);
+    return this.innerApiCalls
+      .updateBackup(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.netapp.v1.IBackup,
+            protos.google.cloud.netapp.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('updateBackup response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `updateBackup()`.
@@ -6580,6 +7963,7 @@ export class NetAppClient {
       protos.google.cloud.netapp.v1.OperationMetadata
     >
   > {
+    this._log.info('updateBackup long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -6703,8 +8087,40 @@ export class NetAppClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.createBackupPolicy(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.netapp.v1.IBackupPolicy,
+            protos.google.cloud.netapp.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('createBackupPolicy response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('createBackupPolicy request %j', request);
+    return this.innerApiCalls
+      .createBackupPolicy(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.netapp.v1.IBackupPolicy,
+            protos.google.cloud.netapp.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createBackupPolicy response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `createBackupPolicy()`.
@@ -6725,6 +8141,7 @@ export class NetAppClient {
       protos.google.cloud.netapp.v1.OperationMetadata
     >
   > {
+    this._log.info('createBackupPolicy long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -6845,8 +8262,40 @@ export class NetAppClient {
       this._gaxModule.routingHeader.fromParams({
         'backup_policy.name': request.backupPolicy!.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.updateBackupPolicy(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.netapp.v1.IBackupPolicy,
+            protos.google.cloud.netapp.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('updateBackupPolicy response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('updateBackupPolicy request %j', request);
+    return this.innerApiCalls
+      .updateBackupPolicy(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.netapp.v1.IBackupPolicy,
+            protos.google.cloud.netapp.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('updateBackupPolicy response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `updateBackupPolicy()`.
@@ -6867,6 +8316,7 @@ export class NetAppClient {
       protos.google.cloud.netapp.v1.OperationMetadata
     >
   > {
+    this._log.info('updateBackupPolicy long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -6982,8 +8432,40 @@ export class NetAppClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.deleteBackupPolicy(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.netapp.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('deleteBackupPolicy response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('deleteBackupPolicy request %j', request);
+    return this.innerApiCalls
+      .deleteBackupPolicy(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.netapp.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteBackupPolicy response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `deleteBackupPolicy()`.
@@ -7004,6 +8486,7 @@ export class NetAppClient {
       protos.google.cloud.netapp.v1.OperationMetadata
     >
   > {
+    this._log.info('deleteBackupPolicy long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -7125,8 +8608,40 @@ export class NetAppClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.createQuotaRule(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.netapp.v1.IQuotaRule,
+            protos.google.cloud.netapp.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('createQuotaRule response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('createQuotaRule request %j', request);
+    return this.innerApiCalls
+      .createQuotaRule(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.netapp.v1.IQuotaRule,
+            protos.google.cloud.netapp.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createQuotaRule response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `createQuotaRule()`.
@@ -7147,6 +8662,7 @@ export class NetAppClient {
       protos.google.cloud.netapp.v1.OperationMetadata
     >
   > {
+    this._log.info('createQuotaRule long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -7267,8 +8783,40 @@ export class NetAppClient {
       this._gaxModule.routingHeader.fromParams({
         'quota_rule.name': request.quotaRule!.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.updateQuotaRule(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.netapp.v1.IQuotaRule,
+            protos.google.cloud.netapp.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('updateQuotaRule response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('updateQuotaRule request %j', request);
+    return this.innerApiCalls
+      .updateQuotaRule(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.netapp.v1.IQuotaRule,
+            protos.google.cloud.netapp.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('updateQuotaRule response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `updateQuotaRule()`.
@@ -7289,6 +8837,7 @@ export class NetAppClient {
       protos.google.cloud.netapp.v1.OperationMetadata
     >
   > {
+    this._log.info('updateQuotaRule long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -7403,8 +8952,40 @@ export class NetAppClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.deleteQuotaRule(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.netapp.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('deleteQuotaRule response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('deleteQuotaRule request %j', request);
+    return this.innerApiCalls
+      .deleteQuotaRule(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.netapp.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteQuotaRule response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `deleteQuotaRule()`.
@@ -7425,6 +9006,7 @@ export class NetAppClient {
       protos.google.cloud.netapp.v1.OperationMetadata
     >
   > {
+    this._log.info('deleteQuotaRule long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -7540,8 +9122,36 @@ export class NetAppClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.listStoragePools(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.netapp.v1.IListStoragePoolsRequest,
+          | protos.google.cloud.netapp.v1.IListStoragePoolsResponse
+          | null
+          | undefined,
+          protos.google.cloud.netapp.v1.IStoragePool
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listStoragePools values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listStoragePools request %j', request);
+    return this.innerApiCalls
+      .listStoragePools(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.netapp.v1.IStoragePool[],
+          protos.google.cloud.netapp.v1.IListStoragePoolsRequest | null,
+          protos.google.cloud.netapp.v1.IListStoragePoolsResponse,
+        ]) => {
+          this._log.info('listStoragePools values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -7585,7 +9195,10 @@ export class NetAppClient {
       });
     const defaultCallSettings = this._defaults['listStoragePools'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listStoragePools stream %j', request);
     return this.descriptors.page.listStoragePools.createStream(
       this.innerApiCalls.listStoragePools as GaxCall,
       request,
@@ -7637,7 +9250,10 @@ export class NetAppClient {
       });
     const defaultCallSettings = this._defaults['listStoragePools'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listStoragePools iterate %j', request);
     return this.descriptors.page.listStoragePools.asyncIterate(
       this.innerApiCalls['listStoragePools'] as GaxCall,
       request as {},
@@ -7735,8 +9351,34 @@ export class NetAppClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.listVolumes(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.netapp.v1.IListVolumesRequest,
+          protos.google.cloud.netapp.v1.IListVolumesResponse | null | undefined,
+          protos.google.cloud.netapp.v1.IVolume
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listVolumes values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listVolumes request %j', request);
+    return this.innerApiCalls
+      .listVolumes(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.netapp.v1.IVolume[],
+          protos.google.cloud.netapp.v1.IListVolumesRequest | null,
+          protos.google.cloud.netapp.v1.IListVolumesResponse,
+        ]) => {
+          this._log.info('listVolumes values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -7779,7 +9421,10 @@ export class NetAppClient {
       });
     const defaultCallSettings = this._defaults['listVolumes'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listVolumes stream %j', request);
     return this.descriptors.page.listVolumes.createStream(
       this.innerApiCalls.listVolumes as GaxCall,
       request,
@@ -7830,7 +9475,10 @@ export class NetAppClient {
       });
     const defaultCallSettings = this._defaults['listVolumes'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listVolumes iterate %j', request);
     return this.descriptors.page.listVolumes.asyncIterate(
       this.innerApiCalls['listVolumes'] as GaxCall,
       request as {},
@@ -7932,8 +9580,36 @@ export class NetAppClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.listSnapshots(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.netapp.v1.IListSnapshotsRequest,
+          | protos.google.cloud.netapp.v1.IListSnapshotsResponse
+          | null
+          | undefined,
+          protos.google.cloud.netapp.v1.ISnapshot
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listSnapshots values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listSnapshots request %j', request);
+    return this.innerApiCalls
+      .listSnapshots(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.netapp.v1.ISnapshot[],
+          protos.google.cloud.netapp.v1.IListSnapshotsRequest | null,
+          protos.google.cloud.netapp.v1.IListSnapshotsResponse,
+        ]) => {
+          this._log.info('listSnapshots values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -7978,7 +9654,10 @@ export class NetAppClient {
       });
     const defaultCallSettings = this._defaults['listSnapshots'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listSnapshots stream %j', request);
     return this.descriptors.page.listSnapshots.createStream(
       this.innerApiCalls.listSnapshots as GaxCall,
       request,
@@ -8031,7 +9710,10 @@ export class NetAppClient {
       });
     const defaultCallSettings = this._defaults['listSnapshots'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listSnapshots iterate %j', request);
     return this.descriptors.page.listSnapshots.asyncIterate(
       this.innerApiCalls['listSnapshots'] as GaxCall,
       request as {},
@@ -8137,8 +9819,36 @@ export class NetAppClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.listActiveDirectories(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.netapp.v1.IListActiveDirectoriesRequest,
+          | protos.google.cloud.netapp.v1.IListActiveDirectoriesResponse
+          | null
+          | undefined,
+          protos.google.cloud.netapp.v1.IActiveDirectory
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listActiveDirectories values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listActiveDirectories request %j', request);
+    return this.innerApiCalls
+      .listActiveDirectories(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.netapp.v1.IActiveDirectory[],
+          protos.google.cloud.netapp.v1.IListActiveDirectoriesRequest | null,
+          protos.google.cloud.netapp.v1.IListActiveDirectoriesResponse,
+        ]) => {
+          this._log.info('listActiveDirectories values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -8181,7 +9891,10 @@ export class NetAppClient {
       });
     const defaultCallSettings = this._defaults['listActiveDirectories'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listActiveDirectories stream %j', request);
     return this.descriptors.page.listActiveDirectories.createStream(
       this.innerApiCalls.listActiveDirectories as GaxCall,
       request,
@@ -8232,7 +9945,10 @@ export class NetAppClient {
       });
     const defaultCallSettings = this._defaults['listActiveDirectories'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listActiveDirectories iterate %j', request);
     return this.descriptors.page.listActiveDirectories.asyncIterate(
       this.innerApiCalls['listActiveDirectories'] as GaxCall,
       request as {},
@@ -8332,8 +10048,36 @@ export class NetAppClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.listKmsConfigs(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.netapp.v1.IListKmsConfigsRequest,
+          | protos.google.cloud.netapp.v1.IListKmsConfigsResponse
+          | null
+          | undefined,
+          protos.google.cloud.netapp.v1.IKmsConfig
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listKmsConfigs values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listKmsConfigs request %j', request);
+    return this.innerApiCalls
+      .listKmsConfigs(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.netapp.v1.IKmsConfig[],
+          protos.google.cloud.netapp.v1.IListKmsConfigsRequest | null,
+          protos.google.cloud.netapp.v1.IListKmsConfigsResponse,
+        ]) => {
+          this._log.info('listKmsConfigs values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -8376,7 +10120,10 @@ export class NetAppClient {
       });
     const defaultCallSettings = this._defaults['listKmsConfigs'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listKmsConfigs stream %j', request);
     return this.descriptors.page.listKmsConfigs.createStream(
       this.innerApiCalls.listKmsConfigs as GaxCall,
       request,
@@ -8427,7 +10174,10 @@ export class NetAppClient {
       });
     const defaultCallSettings = this._defaults['listKmsConfigs'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listKmsConfigs iterate %j', request);
     return this.descriptors.page.listKmsConfigs.asyncIterate(
       this.innerApiCalls['listKmsConfigs'] as GaxCall,
       request as {},
@@ -8535,8 +10285,36 @@ export class NetAppClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.listReplications(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.netapp.v1.IListReplicationsRequest,
+          | protos.google.cloud.netapp.v1.IListReplicationsResponse
+          | null
+          | undefined,
+          protos.google.cloud.netapp.v1.IReplication
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listReplications values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listReplications request %j', request);
+    return this.innerApiCalls
+      .listReplications(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.netapp.v1.IReplication[],
+          protos.google.cloud.netapp.v1.IListReplicationsRequest | null,
+          protos.google.cloud.netapp.v1.IListReplicationsResponse,
+        ]) => {
+          this._log.info('listReplications values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -8581,7 +10359,10 @@ export class NetAppClient {
       });
     const defaultCallSettings = this._defaults['listReplications'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listReplications stream %j', request);
     return this.descriptors.page.listReplications.createStream(
       this.innerApiCalls.listReplications as GaxCall,
       request,
@@ -8634,7 +10415,10 @@ export class NetAppClient {
       });
     const defaultCallSettings = this._defaults['listReplications'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listReplications iterate %j', request);
     return this.descriptors.page.listReplications.asyncIterate(
       this.innerApiCalls['listReplications'] as GaxCall,
       request as {},
@@ -8742,8 +10526,36 @@ export class NetAppClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.listBackupVaults(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.netapp.v1.IListBackupVaultsRequest,
+          | protos.google.cloud.netapp.v1.IListBackupVaultsResponse
+          | null
+          | undefined,
+          protos.google.cloud.netapp.v1.IBackupVault
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listBackupVaults values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listBackupVaults request %j', request);
+    return this.innerApiCalls
+      .listBackupVaults(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.netapp.v1.IBackupVault[],
+          protos.google.cloud.netapp.v1.IListBackupVaultsRequest | null,
+          protos.google.cloud.netapp.v1.IListBackupVaultsResponse,
+        ]) => {
+          this._log.info('listBackupVaults values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -8788,7 +10600,10 @@ export class NetAppClient {
       });
     const defaultCallSettings = this._defaults['listBackupVaults'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listBackupVaults stream %j', request);
     return this.descriptors.page.listBackupVaults.createStream(
       this.innerApiCalls.listBackupVaults as GaxCall,
       request,
@@ -8841,7 +10656,10 @@ export class NetAppClient {
       });
     const defaultCallSettings = this._defaults['listBackupVaults'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listBackupVaults iterate %j', request);
     return this.descriptors.page.listBackupVaults.asyncIterate(
       this.innerApiCalls['listBackupVaults'] as GaxCall,
       request as {},
@@ -8952,8 +10770,34 @@ export class NetAppClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.listBackups(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.netapp.v1.IListBackupsRequest,
+          protos.google.cloud.netapp.v1.IListBackupsResponse | null | undefined,
+          protos.google.cloud.netapp.v1.IBackup
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listBackups values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listBackups request %j', request);
+    return this.innerApiCalls
+      .listBackups(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.netapp.v1.IBackup[],
+          protos.google.cloud.netapp.v1.IListBackupsRequest | null,
+          protos.google.cloud.netapp.v1.IListBackupsResponse,
+        ]) => {
+          this._log.info('listBackups values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -9009,7 +10853,10 @@ export class NetAppClient {
       });
     const defaultCallSettings = this._defaults['listBackups'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listBackups stream %j', request);
     return this.descriptors.page.listBackups.createStream(
       this.innerApiCalls.listBackups as GaxCall,
       request,
@@ -9073,7 +10920,10 @@ export class NetAppClient {
       });
     const defaultCallSettings = this._defaults['listBackups'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listBackups iterate %j', request);
     return this.descriptors.page.listBackups.asyncIterate(
       this.innerApiCalls['listBackups'] as GaxCall,
       request as {},
@@ -9179,8 +11029,36 @@ export class NetAppClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.listBackupPolicies(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.netapp.v1.IListBackupPoliciesRequest,
+          | protos.google.cloud.netapp.v1.IListBackupPoliciesResponse
+          | null
+          | undefined,
+          protos.google.cloud.netapp.v1.IBackupPolicy
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listBackupPolicies values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listBackupPolicies request %j', request);
+    return this.innerApiCalls
+      .listBackupPolicies(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.netapp.v1.IBackupPolicy[],
+          protos.google.cloud.netapp.v1.IListBackupPoliciesRequest | null,
+          protos.google.cloud.netapp.v1.IListBackupPoliciesResponse,
+        ]) => {
+          this._log.info('listBackupPolicies values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -9223,7 +11101,10 @@ export class NetAppClient {
       });
     const defaultCallSettings = this._defaults['listBackupPolicies'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listBackupPolicies stream %j', request);
     return this.descriptors.page.listBackupPolicies.createStream(
       this.innerApiCalls.listBackupPolicies as GaxCall,
       request,
@@ -9274,7 +11155,10 @@ export class NetAppClient {
       });
     const defaultCallSettings = this._defaults['listBackupPolicies'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listBackupPolicies iterate %j', request);
     return this.descriptors.page.listBackupPolicies.asyncIterate(
       this.innerApiCalls['listBackupPolicies'] as GaxCall,
       request as {},
@@ -9374,8 +11258,36 @@ export class NetAppClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.listQuotaRules(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.netapp.v1.IListQuotaRulesRequest,
+          | protos.google.cloud.netapp.v1.IListQuotaRulesResponse
+          | null
+          | undefined,
+          protos.google.cloud.netapp.v1.IQuotaRule
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listQuotaRules values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listQuotaRules request %j', request);
+    return this.innerApiCalls
+      .listQuotaRules(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.netapp.v1.IQuotaRule[],
+          protos.google.cloud.netapp.v1.IListQuotaRulesRequest | null,
+          protos.google.cloud.netapp.v1.IListQuotaRulesResponse,
+        ]) => {
+          this._log.info('listQuotaRules values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -9418,7 +11330,10 @@ export class NetAppClient {
       });
     const defaultCallSettings = this._defaults['listQuotaRules'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listQuotaRules stream %j', request);
     return this.descriptors.page.listQuotaRules.createStream(
       this.innerApiCalls.listQuotaRules as GaxCall,
       request,
@@ -9469,7 +11384,10 @@ export class NetAppClient {
       });
     const defaultCallSettings = this._defaults['listQuotaRules'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listQuotaRules iterate %j', request);
     return this.descriptors.page.listQuotaRules.asyncIterate(
       this.innerApiCalls['listQuotaRules'] as GaxCall,
       request as {},
@@ -9648,7 +11566,7 @@ export class NetAppClient {
   listOperationsAsync(
     request: protos.google.longrunning.ListOperationsRequest,
     options?: gax.CallOptions
-  ): AsyncIterable<protos.google.longrunning.ListOperationsResponse> {
+  ): AsyncIterable<protos.google.longrunning.IOperation> {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
@@ -10382,6 +12300,7 @@ export class NetAppClient {
   close(): Promise<void> {
     if (this.netAppStub && !this._terminated) {
       return this.netAppStub.then(stub => {
+        this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
         this.locationsClient.close();

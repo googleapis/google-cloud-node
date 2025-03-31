@@ -11332,7 +11332,8 @@ export namespace google {
                         enum SyncMode {
                             SYNC_MODE_UNSPECIFIED = 0,
                             FULL = 1,
-                            INCREMENTAL = 2
+                            INCREMENTAL = 2,
+                            NONE = 3
                         }
 
                         /** LogLevel enum. */
@@ -19322,6 +19323,9 @@ export namespace google {
 
                         /** BigQueryPublishingConfig connection */
                         connection?: (string|null);
+
+                        /** BigQueryPublishingConfig location */
+                        location?: (string|null);
                     }
 
                     /** Represents a BigQueryPublishingConfig. */
@@ -19338,6 +19342,9 @@ export namespace google {
 
                         /** BigQueryPublishingConfig connection. */
                         public connection: string;
+
+                        /** BigQueryPublishingConfig location. */
+                        public location: string;
 
                         /**
                          * Creates a new BigQueryPublishingConfig instance using the specified properties.
@@ -32709,6 +32716,132 @@ export namespace google {
                         RESULT_UNSPECIFIED = 0,
                         PASSED = 1,
                         FAILED = 2
+                    }
+                }
+
+                /** Properties of a BusinessGlossaryEvent. */
+                interface IBusinessGlossaryEvent {
+
+                    /** BusinessGlossaryEvent message */
+                    message?: (string|null);
+
+                    /** BusinessGlossaryEvent eventType */
+                    eventType?: (google.cloud.dataplex.v1.BusinessGlossaryEvent.EventType|keyof typeof google.cloud.dataplex.v1.BusinessGlossaryEvent.EventType|null);
+
+                    /** BusinessGlossaryEvent resource */
+                    resource?: (string|null);
+                }
+
+                /** Represents a BusinessGlossaryEvent. */
+                class BusinessGlossaryEvent implements IBusinessGlossaryEvent {
+
+                    /**
+                     * Constructs a new BusinessGlossaryEvent.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.dataplex.v1.IBusinessGlossaryEvent);
+
+                    /** BusinessGlossaryEvent message. */
+                    public message: string;
+
+                    /** BusinessGlossaryEvent eventType. */
+                    public eventType: (google.cloud.dataplex.v1.BusinessGlossaryEvent.EventType|keyof typeof google.cloud.dataplex.v1.BusinessGlossaryEvent.EventType);
+
+                    /** BusinessGlossaryEvent resource. */
+                    public resource: string;
+
+                    /**
+                     * Creates a new BusinessGlossaryEvent instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns BusinessGlossaryEvent instance
+                     */
+                    public static create(properties?: google.cloud.dataplex.v1.IBusinessGlossaryEvent): google.cloud.dataplex.v1.BusinessGlossaryEvent;
+
+                    /**
+                     * Encodes the specified BusinessGlossaryEvent message. Does not implicitly {@link google.cloud.dataplex.v1.BusinessGlossaryEvent.verify|verify} messages.
+                     * @param message BusinessGlossaryEvent message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.dataplex.v1.IBusinessGlossaryEvent, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified BusinessGlossaryEvent message, length delimited. Does not implicitly {@link google.cloud.dataplex.v1.BusinessGlossaryEvent.verify|verify} messages.
+                     * @param message BusinessGlossaryEvent message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.dataplex.v1.IBusinessGlossaryEvent, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a BusinessGlossaryEvent message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns BusinessGlossaryEvent
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dataplex.v1.BusinessGlossaryEvent;
+
+                    /**
+                     * Decodes a BusinessGlossaryEvent message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns BusinessGlossaryEvent
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dataplex.v1.BusinessGlossaryEvent;
+
+                    /**
+                     * Verifies a BusinessGlossaryEvent message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a BusinessGlossaryEvent message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns BusinessGlossaryEvent
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.dataplex.v1.BusinessGlossaryEvent;
+
+                    /**
+                     * Creates a plain object from a BusinessGlossaryEvent message. Also converts values to other types if specified.
+                     * @param message BusinessGlossaryEvent
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.dataplex.v1.BusinessGlossaryEvent, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this BusinessGlossaryEvent to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for BusinessGlossaryEvent
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace BusinessGlossaryEvent {
+
+                    /** EventType enum. */
+                    enum EventType {
+                        EVENT_TYPE_UNSPECIFIED = 0,
+                        GLOSSARY_CREATE = 1,
+                        GLOSSARY_UPDATE = 2,
+                        GLOSSARY_DELETE = 3,
+                        GLOSSARY_CATEGORY_CREATE = 4,
+                        GLOSSARY_CATEGORY_UPDATE = 5,
+                        GLOSSARY_CATEGORY_DELETE = 6,
+                        GLOSSARY_TERM_CREATE = 7,
+                        GLOSSARY_TERM_UPDATE = 8,
+                        GLOSSARY_TERM_DELETE = 9
                     }
                 }
 

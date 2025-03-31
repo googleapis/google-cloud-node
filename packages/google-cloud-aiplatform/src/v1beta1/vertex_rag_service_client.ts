@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -445,7 +445,11 @@ export class VertexRagServiceClient {
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    const vertexRagServiceStubMethods = ['retrieveContexts'];
+    const vertexRagServiceStubMethods = [
+      'retrieveContexts',
+      'augmentPrompt',
+      'corroborateContent',
+    ];
     for (const methodName of vertexRagServiceStubMethods) {
       const callPromise = this.vertexRagServiceStub.then(
         stub =>
@@ -661,6 +665,216 @@ export class VertexRagServiceClient {
       });
     this.initialize();
     return this.innerApiCalls.retrieveContexts(request, options, callback);
+  }
+  /**
+   * Given an input prompt, it returns augmented prompt from vertex rag store
+   *  to guide LLM towards generating grounded responses.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.cloud.aiplatform.v1beta1.VertexRagStore} [request.vertexRagStore]
+   *   Optional. Retrieves contexts from the Vertex RagStore.
+   * @param {string} request.parent
+   *   Required. The resource name of the Location from which to augment prompt.
+   *   The users must have permission to make a call in the project.
+   *   Format:
+   *   `projects/{project}/locations/{location}`.
+   * @param {number[]} [request.contents]
+   *   Optional. Input content to augment, only text format is supported for now.
+   * @param {google.cloud.aiplatform.v1beta1.AugmentPromptRequest.Model} [request.model]
+   *   Optional. Metadata of the backend deployed model.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.aiplatform.v1beta1.AugmentPromptResponse|AugmentPromptResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta1/vertex_rag_service.augment_prompt.js</caption>
+   * region_tag:aiplatform_v1beta1_generated_VertexRagService_AugmentPrompt_async
+   */
+  augmentPrompt(
+    request?: protos.google.cloud.aiplatform.v1beta1.IAugmentPromptRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.aiplatform.v1beta1.IAugmentPromptResponse,
+      protos.google.cloud.aiplatform.v1beta1.IAugmentPromptRequest | undefined,
+      {} | undefined,
+    ]
+  >;
+  augmentPrompt(
+    request: protos.google.cloud.aiplatform.v1beta1.IAugmentPromptRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.aiplatform.v1beta1.IAugmentPromptResponse,
+      | protos.google.cloud.aiplatform.v1beta1.IAugmentPromptRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  augmentPrompt(
+    request: protos.google.cloud.aiplatform.v1beta1.IAugmentPromptRequest,
+    callback: Callback<
+      protos.google.cloud.aiplatform.v1beta1.IAugmentPromptResponse,
+      | protos.google.cloud.aiplatform.v1beta1.IAugmentPromptRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  augmentPrompt(
+    request?: protos.google.cloud.aiplatform.v1beta1.IAugmentPromptRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.aiplatform.v1beta1.IAugmentPromptResponse,
+          | protos.google.cloud.aiplatform.v1beta1.IAugmentPromptRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.aiplatform.v1beta1.IAugmentPromptResponse,
+      | protos.google.cloud.aiplatform.v1beta1.IAugmentPromptRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.aiplatform.v1beta1.IAugmentPromptResponse,
+      protos.google.cloud.aiplatform.v1beta1.IAugmentPromptRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.augmentPrompt(request, options, callback);
+  }
+  /**
+   * Given an input text, it returns a score that evaluates the factuality of
+   * the text. It also extracts and returns claims from the text and provides
+   * supporting facts.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The resource name of the Location from which to corroborate text.
+   *   The users must have permission to make a call in the project.
+   *   Format:
+   *   `projects/{project}/locations/{location}`.
+   * @param {google.cloud.aiplatform.v1beta1.Content} [request.content]
+   *   Optional. Input content to corroborate, only text format is supported for
+   *   now.
+   * @param {number[]} [request.facts]
+   *   Optional. Facts used to generate the text can also be used to corroborate
+   *   the text.
+   * @param {google.cloud.aiplatform.v1beta1.CorroborateContentRequest.Parameters} [request.parameters]
+   *   Optional. Parameters that can be set to override default settings per
+   *   request.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.aiplatform.v1beta1.CorroborateContentResponse|CorroborateContentResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta1/vertex_rag_service.corroborate_content.js</caption>
+   * region_tag:aiplatform_v1beta1_generated_VertexRagService_CorroborateContent_async
+   */
+  corroborateContent(
+    request?: protos.google.cloud.aiplatform.v1beta1.ICorroborateContentRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.aiplatform.v1beta1.ICorroborateContentResponse,
+      (
+        | protos.google.cloud.aiplatform.v1beta1.ICorroborateContentRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
+  corroborateContent(
+    request: protos.google.cloud.aiplatform.v1beta1.ICorroborateContentRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.aiplatform.v1beta1.ICorroborateContentResponse,
+      | protos.google.cloud.aiplatform.v1beta1.ICorroborateContentRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  corroborateContent(
+    request: protos.google.cloud.aiplatform.v1beta1.ICorroborateContentRequest,
+    callback: Callback<
+      protos.google.cloud.aiplatform.v1beta1.ICorroborateContentResponse,
+      | protos.google.cloud.aiplatform.v1beta1.ICorroborateContentRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  corroborateContent(
+    request?: protos.google.cloud.aiplatform.v1beta1.ICorroborateContentRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.aiplatform.v1beta1.ICorroborateContentResponse,
+          | protos.google.cloud.aiplatform.v1beta1.ICorroborateContentRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.aiplatform.v1beta1.ICorroborateContentResponse,
+      | protos.google.cloud.aiplatform.v1beta1.ICorroborateContentRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.aiplatform.v1beta1.ICorroborateContentResponse,
+      (
+        | protos.google.cloud.aiplatform.v1beta1.ICorroborateContentRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.corroborateContent(request, options, callback);
   }
 
   /**

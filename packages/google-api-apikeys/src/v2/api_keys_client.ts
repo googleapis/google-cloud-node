@@ -31,6 +31,7 @@ import type {
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
+import {loggingUtils as logging} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -55,6 +56,8 @@ export class ApiKeysClient {
   private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
+  private _log = logging.log('apikeys');
+
   auth: gax.GoogleAuth;
   descriptors: Descriptors = {
     page: {},
@@ -90,7 +93,7 @@ export class ApiKeysClient {
    *     Developer's Console, e.g. 'grape-spaceship-123'. We will also check
    *     the environment variable GCLOUD_PROJECT for your project ID. If your
    *     app is running in an environment which supports
-   *     {@link https://developers.google.com/identity/protocols/application-default-credentials Application Default Credentials},
+   *     {@link https://cloud.google.com/docs/authentication/application-default-credentials Application Default Credentials},
    *     your project ID will be detected automatically.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
@@ -553,8 +556,34 @@ export class ApiKeysClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.getKey(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('getKey request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.api.apikeys.v2.IKey,
+          protos.google.api.apikeys.v2.IGetKeyRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getKey response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getKey(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.api.apikeys.v2.IKey,
+          protos.google.api.apikeys.v2.IGetKeyRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getKey response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Get the key string for an API key.
@@ -638,8 +667,34 @@ export class ApiKeysClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.getKeyString(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('getKeyString request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.api.apikeys.v2.IGetKeyStringResponse,
+          protos.google.api.apikeys.v2.IGetKeyStringRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getKeyString response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getKeyString(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.api.apikeys.v2.IGetKeyStringResponse,
+          protos.google.api.apikeys.v2.IGetKeyStringRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getKeyString response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Find the parent project and resource name of the API
@@ -720,8 +775,34 @@ export class ApiKeysClient {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    this.initialize();
-    return this.innerApiCalls.lookupKey(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('lookupKey request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.api.apikeys.v2.ILookupKeyResponse,
+          protos.google.api.apikeys.v2.ILookupKeyRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('lookupKey response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .lookupKey(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.api.apikeys.v2.ILookupKeyResponse,
+          protos.google.api.apikeys.v2.ILookupKeyRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('lookupKey response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
 
   /**
@@ -840,8 +921,40 @@ export class ApiKeysClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.createKey(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.api.apikeys.v2.IKey,
+            protos.google.protobuf.IEmpty
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('createKey response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('createKey request %j', request);
+    return this.innerApiCalls
+      .createKey(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.api.apikeys.v2.IKey,
+            protos.google.protobuf.IEmpty
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createKey response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `createKey()`.
@@ -859,6 +972,7 @@ export class ApiKeysClient {
   ): Promise<
     LROperation<protos.google.api.apikeys.v2.Key, protos.google.protobuf.Empty>
   > {
+    this._log.info('createKey long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -987,8 +1101,40 @@ export class ApiKeysClient {
       this._gaxModule.routingHeader.fromParams({
         'key.name': request.key!.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.updateKey(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.api.apikeys.v2.IKey,
+            protos.google.protobuf.IEmpty
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('updateKey response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('updateKey request %j', request);
+    return this.innerApiCalls
+      .updateKey(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.api.apikeys.v2.IKey,
+            protos.google.protobuf.IEmpty
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('updateKey response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `updateKey()`.
@@ -1006,6 +1152,7 @@ export class ApiKeysClient {
   ): Promise<
     LROperation<protos.google.api.apikeys.v2.Key, protos.google.protobuf.Empty>
   > {
+    this._log.info('updateKey long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -1127,8 +1274,40 @@ export class ApiKeysClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.deleteKey(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.api.apikeys.v2.IKey,
+            protos.google.protobuf.IEmpty
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('deleteKey response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('deleteKey request %j', request);
+    return this.innerApiCalls
+      .deleteKey(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.api.apikeys.v2.IKey,
+            protos.google.protobuf.IEmpty
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteKey response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `deleteKey()`.
@@ -1146,6 +1325,7 @@ export class ApiKeysClient {
   ): Promise<
     LROperation<protos.google.api.apikeys.v2.Key, protos.google.protobuf.Empty>
   > {
+    this._log.info('deleteKey long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -1263,8 +1443,40 @@ export class ApiKeysClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.undeleteKey(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.api.apikeys.v2.IKey,
+            protos.google.protobuf.IEmpty
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('undeleteKey response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('undeleteKey request %j', request);
+    return this.innerApiCalls
+      .undeleteKey(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.api.apikeys.v2.IKey,
+            protos.google.protobuf.IEmpty
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('undeleteKey response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `undeleteKey()`.
@@ -1282,6 +1494,7 @@ export class ApiKeysClient {
   ): Promise<
     LROperation<protos.google.api.apikeys.v2.Key, protos.google.protobuf.Empty>
   > {
+    this._log.info('undeleteKey long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -1390,8 +1603,34 @@ export class ApiKeysClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.listKeys(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.api.apikeys.v2.IListKeysRequest,
+          protos.google.api.apikeys.v2.IListKeysResponse | null | undefined,
+          protos.google.api.apikeys.v2.IKey
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listKeys values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listKeys request %j', request);
+    return this.innerApiCalls
+      .listKeys(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.api.apikeys.v2.IKey[],
+          protos.google.api.apikeys.v2.IListKeysRequest | null,
+          protos.google.api.apikeys.v2.IListKeysResponse,
+        ]) => {
+          this._log.info('listKeys values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -1432,7 +1671,10 @@ export class ApiKeysClient {
       });
     const defaultCallSettings = this._defaults['listKeys'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listKeys stream %j', request);
     return this.descriptors.page.listKeys.createStream(
       this.innerApiCalls.listKeys as GaxCall,
       request,
@@ -1481,7 +1723,10 @@ export class ApiKeysClient {
       });
     const defaultCallSettings = this._defaults['listKeys'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listKeys iterate %j', request);
     return this.descriptors.page.listKeys.asyncIterate(
       this.innerApiCalls['listKeys'] as GaxCall,
       request as {},
@@ -1582,7 +1827,7 @@ export class ApiKeysClient {
   listOperationsAsync(
     request: protos.google.longrunning.ListOperationsRequest,
     options?: gax.CallOptions
-  ): AsyncIterable<protos.google.longrunning.ListOperationsResponse> {
+  ): AsyncIterable<protos.google.longrunning.IOperation> {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
@@ -1833,6 +2078,7 @@ export class ApiKeysClient {
   close(): Promise<void> {
     if (this.apiKeysStub && !this._terminated) {
       return this.apiKeysStub.then(stub => {
+        this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
         this.operationsClient.close();

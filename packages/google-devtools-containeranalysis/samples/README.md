@@ -12,6 +12,7 @@
 
 * [Before you begin](#before-you-begin)
 * [Samples](#samples)
+  * [Container_analysis.export_s_b_o_m](#container_analysis.export_s_b_o_m)
   * [Container_analysis.get_iam_policy](#container_analysis.get_iam_policy)
   * [Container_analysis.get_vulnerability_occurrences_summary](#container_analysis.get_vulnerability_occurrences_summary)
   * [Container_analysis.set_iam_policy](#container_analysis.set_iam_policy)
@@ -67,6 +68,23 @@ Before running the samples, make sure you've followed the steps outlined in
 `cd ..`
 
 ## Samples
+
+
+
+### Container_analysis.export_s_b_o_m
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-devtools-containeranalysis/samples/generated/v1/container_analysis.export_s_b_o_m.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-devtools-containeranalysis/samples/generated/v1/container_analysis.export_s_b_o_m.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-devtools-containeranalysis/samples/generated/v1/container_analysis.export_s_b_o_m.js`
+
+
+-----
+
 
 
 

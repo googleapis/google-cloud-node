@@ -31,6 +31,7 @@ import type {
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
+import {loggingUtils as logging} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -55,6 +56,8 @@ export class RuntimeProjectAttachmentServiceClient {
   private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
+  private _log = logging.log('apihub');
+
   auth: gax.GoogleAuth;
   descriptors: Descriptors = {
     page: {},
@@ -90,7 +93,7 @@ export class RuntimeProjectAttachmentServiceClient {
    *     Developer's Console, e.g. 'grape-spaceship-123'. We will also check
    *     the environment variable GCLOUD_PROJECT for your project ID. If your
    *     app is running in an environment which supports
-   *     {@link https://developers.google.com/identity/protocols/application-default-credentials Application Default Credentials},
+   *     {@link https://cloud.google.com/docs/authentication/application-default-credentials Application Default Credentials},
    *     your project ID will be detected automatically.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
@@ -545,12 +548,45 @@ export class RuntimeProjectAttachmentServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.createRuntimeProjectAttachment(
-      request,
-      options,
-      callback
-    );
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('createRuntimeProjectAttachment request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.apihub.v1.IRuntimeProjectAttachment,
+          | protos.google.cloud.apihub.v1.ICreateRuntimeProjectAttachmentRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info(
+            'createRuntimeProjectAttachment response %j',
+            response
+          );
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .createRuntimeProjectAttachment(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.apihub.v1.IRuntimeProjectAttachment,
+          (
+            | protos.google.cloud.apihub.v1.ICreateRuntimeProjectAttachmentRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info(
+            'createRuntimeProjectAttachment response %j',
+            response
+          );
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Gets a runtime project attachment.
@@ -647,12 +683,39 @@ export class RuntimeProjectAttachmentServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.getRuntimeProjectAttachment(
-      request,
-      options,
-      callback
-    );
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('getRuntimeProjectAttachment request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.apihub.v1.IRuntimeProjectAttachment,
+          | protos.google.cloud.apihub.v1.IGetRuntimeProjectAttachmentRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getRuntimeProjectAttachment response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getRuntimeProjectAttachment(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.apihub.v1.IRuntimeProjectAttachment,
+          (
+            | protos.google.cloud.apihub.v1.IGetRuntimeProjectAttachmentRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getRuntimeProjectAttachment response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Delete a runtime project attachment in the API Hub. This call will detach
@@ -750,12 +813,45 @@ export class RuntimeProjectAttachmentServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.deleteRuntimeProjectAttachment(
-      request,
-      options,
-      callback
-    );
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('deleteRuntimeProjectAttachment request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.cloud.apihub.v1.IDeleteRuntimeProjectAttachmentRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info(
+            'deleteRuntimeProjectAttachment response %j',
+            response
+          );
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .deleteRuntimeProjectAttachment(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.protobuf.IEmpty,
+          (
+            | protos.google.cloud.apihub.v1.IDeleteRuntimeProjectAttachmentRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info(
+            'deleteRuntimeProjectAttachment response %j',
+            response
+          );
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Look up a runtime project attachment. This API can be called in the context
@@ -853,12 +949,45 @@ export class RuntimeProjectAttachmentServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.lookupRuntimeProjectAttachment(
-      request,
-      options,
-      callback
-    );
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('lookupRuntimeProjectAttachment request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.apihub.v1.ILookupRuntimeProjectAttachmentResponse,
+          | protos.google.cloud.apihub.v1.ILookupRuntimeProjectAttachmentRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info(
+            'lookupRuntimeProjectAttachment response %j',
+            response
+          );
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .lookupRuntimeProjectAttachment(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.apihub.v1.ILookupRuntimeProjectAttachmentResponse,
+          (
+            | protos.google.cloud.apihub.v1.ILookupRuntimeProjectAttachmentRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info(
+            'lookupRuntimeProjectAttachment response %j',
+            response
+          );
+          return [response, options, rawResponse];
+        }
+      );
   }
 
   /**
@@ -984,12 +1113,36 @@ export class RuntimeProjectAttachmentServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.listRuntimeProjectAttachments(
-      request,
-      options,
-      callback
-    );
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.apihub.v1.IListRuntimeProjectAttachmentsRequest,
+          | protos.google.cloud.apihub.v1.IListRuntimeProjectAttachmentsResponse
+          | null
+          | undefined,
+          protos.google.cloud.apihub.v1.IRuntimeProjectAttachment
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listRuntimeProjectAttachments values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listRuntimeProjectAttachments request %j', request);
+    return this.innerApiCalls
+      .listRuntimeProjectAttachments(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.apihub.v1.IRuntimeProjectAttachment[],
+          protos.google.cloud.apihub.v1.IListRuntimeProjectAttachmentsRequest | null,
+          protos.google.cloud.apihub.v1.IListRuntimeProjectAttachmentsResponse,
+        ]) => {
+          this._log.info('listRuntimeProjectAttachments values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -1056,7 +1209,10 @@ export class RuntimeProjectAttachmentServiceClient {
       });
     const defaultCallSettings = this._defaults['listRuntimeProjectAttachments'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listRuntimeProjectAttachments stream %j', request);
     return this.descriptors.page.listRuntimeProjectAttachments.createStream(
       this.innerApiCalls.listRuntimeProjectAttachments as GaxCall,
       request,
@@ -1131,7 +1287,10 @@ export class RuntimeProjectAttachmentServiceClient {
       });
     const defaultCallSettings = this._defaults['listRuntimeProjectAttachments'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listRuntimeProjectAttachments iterate %j', request);
     return this.descriptors.page.listRuntimeProjectAttachments.asyncIterate(
       this.innerApiCalls['listRuntimeProjectAttachments'] as GaxCall,
       request as {},
@@ -2149,6 +2308,7 @@ export class RuntimeProjectAttachmentServiceClient {
   close(): Promise<void> {
     if (this.runtimeProjectAttachmentServiceStub && !this._terminated) {
       return this.runtimeProjectAttachmentServiceStub.then(stub => {
+        this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
         this.locationsClient.close();

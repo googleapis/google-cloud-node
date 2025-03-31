@@ -260,7 +260,9 @@ describe('v2alpha.MigrationServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      client.initialize().catch(err => {
+        throw err;
+      });
       assert(client.migrationServiceStub);
       client.close().then(() => {
         done();
@@ -319,7 +321,7 @@ describe('v2alpha.MigrationServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.migration.v2alpha.CreateMigrationWorkflowRequest()
       );
@@ -328,7 +330,7 @@ describe('v2alpha.MigrationServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.bigquery.migration.v2alpha.MigrationWorkflow()
       );
@@ -351,7 +353,7 @@ describe('v2alpha.MigrationServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.migration.v2alpha.CreateMigrationWorkflowRequest()
       );
@@ -360,7 +362,7 @@ describe('v2alpha.MigrationServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.bigquery.migration.v2alpha.MigrationWorkflow()
       );
@@ -398,7 +400,7 @@ describe('v2alpha.MigrationServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.migration.v2alpha.CreateMigrationWorkflowRequest()
       );
@@ -407,7 +409,7 @@ describe('v2alpha.MigrationServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createMigrationWorkflow = stubSimpleCall(
         undefined,
@@ -432,7 +434,7 @@ describe('v2alpha.MigrationServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.migration.v2alpha.CreateMigrationWorkflowRequest()
       );
@@ -456,7 +458,7 @@ describe('v2alpha.MigrationServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.migration.v2alpha.GetMigrationWorkflowRequest()
       );
@@ -465,7 +467,7 @@ describe('v2alpha.MigrationServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.bigquery.migration.v2alpha.MigrationWorkflow()
       );
@@ -488,7 +490,7 @@ describe('v2alpha.MigrationServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.migration.v2alpha.GetMigrationWorkflowRequest()
       );
@@ -497,7 +499,7 @@ describe('v2alpha.MigrationServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.bigquery.migration.v2alpha.MigrationWorkflow()
       );
@@ -535,7 +537,7 @@ describe('v2alpha.MigrationServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.migration.v2alpha.GetMigrationWorkflowRequest()
       );
@@ -544,7 +546,7 @@ describe('v2alpha.MigrationServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getMigrationWorkflow = stubSimpleCall(
         undefined,
@@ -566,7 +568,7 @@ describe('v2alpha.MigrationServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.migration.v2alpha.GetMigrationWorkflowRequest()
       );
@@ -587,7 +589,7 @@ describe('v2alpha.MigrationServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.migration.v2alpha.DeleteMigrationWorkflowRequest()
       );
@@ -596,7 +598,7 @@ describe('v2alpha.MigrationServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -619,7 +621,7 @@ describe('v2alpha.MigrationServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.migration.v2alpha.DeleteMigrationWorkflowRequest()
       );
@@ -628,7 +630,7 @@ describe('v2alpha.MigrationServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -666,7 +668,7 @@ describe('v2alpha.MigrationServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.migration.v2alpha.DeleteMigrationWorkflowRequest()
       );
@@ -675,7 +677,7 @@ describe('v2alpha.MigrationServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteMigrationWorkflow = stubSimpleCall(
         undefined,
@@ -700,7 +702,7 @@ describe('v2alpha.MigrationServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.migration.v2alpha.DeleteMigrationWorkflowRequest()
       );
@@ -724,7 +726,7 @@ describe('v2alpha.MigrationServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.migration.v2alpha.StartMigrationWorkflowRequest()
       );
@@ -733,7 +735,7 @@ describe('v2alpha.MigrationServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -756,7 +758,7 @@ describe('v2alpha.MigrationServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.migration.v2alpha.StartMigrationWorkflowRequest()
       );
@@ -765,7 +767,7 @@ describe('v2alpha.MigrationServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -803,7 +805,7 @@ describe('v2alpha.MigrationServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.migration.v2alpha.StartMigrationWorkflowRequest()
       );
@@ -812,7 +814,7 @@ describe('v2alpha.MigrationServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.startMigrationWorkflow = stubSimpleCall(
         undefined,
@@ -837,7 +839,7 @@ describe('v2alpha.MigrationServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.migration.v2alpha.StartMigrationWorkflowRequest()
       );
@@ -861,7 +863,7 @@ describe('v2alpha.MigrationServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.migration.v2alpha.GetMigrationSubtaskRequest()
       );
@@ -870,7 +872,7 @@ describe('v2alpha.MigrationServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.bigquery.migration.v2alpha.MigrationSubtask()
       );
@@ -893,7 +895,7 @@ describe('v2alpha.MigrationServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.migration.v2alpha.GetMigrationSubtaskRequest()
       );
@@ -902,7 +904,7 @@ describe('v2alpha.MigrationServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.bigquery.migration.v2alpha.MigrationSubtask()
       );
@@ -940,7 +942,7 @@ describe('v2alpha.MigrationServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.migration.v2alpha.GetMigrationSubtaskRequest()
       );
@@ -949,7 +951,7 @@ describe('v2alpha.MigrationServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getMigrationSubtask = stubSimpleCall(
         undefined,
@@ -971,7 +973,7 @@ describe('v2alpha.MigrationServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.migration.v2alpha.GetMigrationSubtaskRequest()
       );
@@ -992,7 +994,7 @@ describe('v2alpha.MigrationServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.migration.v2alpha.ListMigrationWorkflowsRequest()
       );
@@ -1001,7 +1003,7 @@ describe('v2alpha.MigrationServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.bigquery.migration.v2alpha.MigrationWorkflow()
@@ -1032,7 +1034,7 @@ describe('v2alpha.MigrationServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.migration.v2alpha.ListMigrationWorkflowsRequest()
       );
@@ -1041,7 +1043,7 @@ describe('v2alpha.MigrationServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.bigquery.migration.v2alpha.MigrationWorkflow()
@@ -1089,7 +1091,7 @@ describe('v2alpha.MigrationServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.migration.v2alpha.ListMigrationWorkflowsRequest()
       );
@@ -1098,7 +1100,7 @@ describe('v2alpha.MigrationServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listMigrationWorkflows = stubSimpleCall(
         undefined,
@@ -1123,7 +1125,7 @@ describe('v2alpha.MigrationServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.migration.v2alpha.ListMigrationWorkflowsRequest()
       );
@@ -1132,7 +1134,7 @@ describe('v2alpha.MigrationServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.bigquery.migration.v2alpha.MigrationWorkflow()
@@ -1192,7 +1194,7 @@ describe('v2alpha.MigrationServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.migration.v2alpha.ListMigrationWorkflowsRequest()
       );
@@ -1201,7 +1203,7 @@ describe('v2alpha.MigrationServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listMigrationWorkflows.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -1250,7 +1252,7 @@ describe('v2alpha.MigrationServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.migration.v2alpha.ListMigrationWorkflowsRequest()
       );
@@ -1259,7 +1261,7 @@ describe('v2alpha.MigrationServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.bigquery.migration.v2alpha.MigrationWorkflow()
@@ -1304,7 +1306,7 @@ describe('v2alpha.MigrationServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.migration.v2alpha.ListMigrationWorkflowsRequest()
       );
@@ -1313,7 +1315,7 @@ describe('v2alpha.MigrationServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listMigrationWorkflows.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -1351,7 +1353,7 @@ describe('v2alpha.MigrationServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.migration.v2alpha.ListMigrationSubtasksRequest()
       );
@@ -1360,7 +1362,7 @@ describe('v2alpha.MigrationServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.bigquery.migration.v2alpha.MigrationSubtask()
@@ -1391,7 +1393,7 @@ describe('v2alpha.MigrationServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.migration.v2alpha.ListMigrationSubtasksRequest()
       );
@@ -1400,7 +1402,7 @@ describe('v2alpha.MigrationServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.bigquery.migration.v2alpha.MigrationSubtask()
@@ -1448,7 +1450,7 @@ describe('v2alpha.MigrationServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.migration.v2alpha.ListMigrationSubtasksRequest()
       );
@@ -1457,7 +1459,7 @@ describe('v2alpha.MigrationServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listMigrationSubtasks = stubSimpleCall(
         undefined,
@@ -1482,7 +1484,7 @@ describe('v2alpha.MigrationServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.migration.v2alpha.ListMigrationSubtasksRequest()
       );
@@ -1491,7 +1493,7 @@ describe('v2alpha.MigrationServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.bigquery.migration.v2alpha.MigrationSubtask()
@@ -1551,7 +1553,7 @@ describe('v2alpha.MigrationServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.migration.v2alpha.ListMigrationSubtasksRequest()
       );
@@ -1560,7 +1562,7 @@ describe('v2alpha.MigrationServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listMigrationSubtasks.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -1609,7 +1611,7 @@ describe('v2alpha.MigrationServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.migration.v2alpha.ListMigrationSubtasksRequest()
       );
@@ -1618,7 +1620,7 @@ describe('v2alpha.MigrationServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.bigquery.migration.v2alpha.MigrationSubtask()
@@ -1663,7 +1665,7 @@ describe('v2alpha.MigrationServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.migration.v2alpha.ListMigrationSubtasksRequest()
       );
@@ -1672,7 +1674,7 @@ describe('v2alpha.MigrationServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listMigrationSubtasks.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -1705,7 +1707,7 @@ describe('v2alpha.MigrationServiceClient', () => {
   });
 
   describe('Path templates', () => {
-    describe('location', () => {
+    describe('location', async () => {
       const fakePath = '/rendered/path/location';
       const expectedParameters = {
         project: 'projectValue',
@@ -1715,7 +1717,7 @@ describe('v2alpha.MigrationServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.locationPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -1754,7 +1756,7 @@ describe('v2alpha.MigrationServiceClient', () => {
       });
     });
 
-    describe('migrationSubtask', () => {
+    describe('migrationSubtask', async () => {
       const fakePath = '/rendered/path/migrationSubtask';
       const expectedParameters = {
         project: 'projectValue',
@@ -1766,7 +1768,7 @@ describe('v2alpha.MigrationServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.migrationSubtaskPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -1833,7 +1835,7 @@ describe('v2alpha.MigrationServiceClient', () => {
       });
     });
 
-    describe('migrationWorkflow', () => {
+    describe('migrationWorkflow', async () => {
       const fakePath = '/rendered/path/migrationWorkflow';
       const expectedParameters = {
         project: 'projectValue',
@@ -1844,7 +1846,7 @@ describe('v2alpha.MigrationServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.migrationWorkflowPathTemplate.render = sinon
         .stub()
         .returns(fakePath);

@@ -29,6 +29,7 @@ import type {
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
+import {loggingUtils as logging} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -72,6 +73,8 @@ export class OrgPolicyClient {
   private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
+  private _log = logging.log('org-policy');
+
   auth: gax.GoogleAuth;
   descriptors: Descriptors = {
     page: {},
@@ -106,7 +109,7 @@ export class OrgPolicyClient {
    *     Developer's Console, e.g. 'grape-spaceship-123'. We will also check
    *     the environment variable GCLOUD_PROJECT for your project ID. If your
    *     app is running in an environment which supports
-   *     {@link https://developers.google.com/identity/protocols/application-default-credentials Application Default Credentials},
+   *     {@link https://cloud.google.com/docs/authentication/application-default-credentials Application Default Credentials},
    *     your project ID will be detected automatically.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
@@ -528,8 +531,34 @@ export class OrgPolicyClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.getPolicy(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('getPolicy request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.orgpolicy.v2.IPolicy,
+          protos.google.cloud.orgpolicy.v2.IGetPolicyRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getPolicy response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getPolicy(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.orgpolicy.v2.IPolicy,
+          protos.google.cloud.orgpolicy.v2.IGetPolicyRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getPolicy response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Gets the effective policy on a resource. This is the result of merging
@@ -624,8 +653,39 @@ export class OrgPolicyClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.getEffectivePolicy(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('getEffectivePolicy request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.orgpolicy.v2.IPolicy,
+          | protos.google.cloud.orgpolicy.v2.IGetEffectivePolicyRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getEffectivePolicy response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getEffectivePolicy(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.orgpolicy.v2.IPolicy,
+          (
+            | protos.google.cloud.orgpolicy.v2.IGetEffectivePolicyRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getEffectivePolicy response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Creates a policy.
@@ -721,8 +781,36 @@ export class OrgPolicyClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.createPolicy(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('createPolicy request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.orgpolicy.v2.IPolicy,
+          | protos.google.cloud.orgpolicy.v2.ICreatePolicyRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('createPolicy response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .createPolicy(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.orgpolicy.v2.IPolicy,
+          protos.google.cloud.orgpolicy.v2.ICreatePolicyRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createPolicy response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Updates a policy.
@@ -817,8 +905,36 @@ export class OrgPolicyClient {
       this._gaxModule.routingHeader.fromParams({
         'policy.name': request.policy!.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.updatePolicy(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('updatePolicy request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.orgpolicy.v2.IPolicy,
+          | protos.google.cloud.orgpolicy.v2.IUpdatePolicyRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('updatePolicy response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .updatePolicy(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.orgpolicy.v2.IPolicy,
+          protos.google.cloud.orgpolicy.v2.IUpdatePolicyRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('updatePolicy response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Deletes a policy.
@@ -909,8 +1025,36 @@ export class OrgPolicyClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.deletePolicy(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('deletePolicy request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.cloud.orgpolicy.v2.IDeletePolicyRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('deletePolicy response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .deletePolicy(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.protobuf.IEmpty,
+          protos.google.cloud.orgpolicy.v2.IDeletePolicyRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deletePolicy response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Creates a custom constraint.
@@ -1014,12 +1158,39 @@ export class OrgPolicyClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.createCustomConstraint(
-      request,
-      options,
-      callback
-    );
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('createCustomConstraint request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.orgpolicy.v2.ICustomConstraint,
+          | protos.google.cloud.orgpolicy.v2.ICreateCustomConstraintRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('createCustomConstraint response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .createCustomConstraint(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.orgpolicy.v2.ICustomConstraint,
+          (
+            | protos.google.cloud.orgpolicy.v2.ICreateCustomConstraintRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('createCustomConstraint response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Updates a custom constraint.
@@ -1120,12 +1291,39 @@ export class OrgPolicyClient {
       this._gaxModule.routingHeader.fromParams({
         'custom_constraint.name': request.customConstraint!.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.updateCustomConstraint(
-      request,
-      options,
-      callback
-    );
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('updateCustomConstraint request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.orgpolicy.v2.ICustomConstraint,
+          | protos.google.cloud.orgpolicy.v2.IUpdateCustomConstraintRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('updateCustomConstraint response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .updateCustomConstraint(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.orgpolicy.v2.ICustomConstraint,
+          (
+            | protos.google.cloud.orgpolicy.v2.IUpdateCustomConstraintRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('updateCustomConstraint response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Gets a custom constraint.
@@ -1218,8 +1416,39 @@ export class OrgPolicyClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.getCustomConstraint(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('getCustomConstraint request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.orgpolicy.v2.ICustomConstraint,
+          | protos.google.cloud.orgpolicy.v2.IGetCustomConstraintRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getCustomConstraint response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getCustomConstraint(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.orgpolicy.v2.ICustomConstraint,
+          (
+            | protos.google.cloud.orgpolicy.v2.IGetCustomConstraintRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getCustomConstraint response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Deletes a custom constraint.
@@ -1318,12 +1547,39 @@ export class OrgPolicyClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.deleteCustomConstraint(
-      request,
-      options,
-      callback
-    );
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('deleteCustomConstraint request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.cloud.orgpolicy.v2.IDeleteCustomConstraintRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('deleteCustomConstraint response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .deleteCustomConstraint(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.protobuf.IEmpty,
+          (
+            | protos.google.cloud.orgpolicy.v2.IDeleteCustomConstraintRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteCustomConstraint response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
 
   /**
@@ -1429,12 +1685,40 @@ export class OrgPolicyClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.listConstraints(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.orgpolicy.v2.IListConstraintsRequest,
+          | protos.google.cloud.orgpolicy.v2.IListConstraintsResponse
+          | null
+          | undefined,
+          protos.google.cloud.orgpolicy.v2.IConstraint
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listConstraints values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listConstraints request %j', request);
+    return this.innerApiCalls
+      .listConstraints(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.orgpolicy.v2.IConstraint[],
+          protos.google.cloud.orgpolicy.v2.IListConstraintsRequest | null,
+          protos.google.cloud.orgpolicy.v2.IListConstraintsResponse,
+        ]) => {
+          this._log.info('listConstraints values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listConstraints`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
@@ -1477,7 +1761,10 @@ export class OrgPolicyClient {
       });
     const defaultCallSettings = this._defaults['listConstraints'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listConstraints stream %j', request);
     return this.descriptors.page.listConstraints.createStream(
       this.innerApiCalls.listConstraints as GaxCall,
       request,
@@ -1532,7 +1819,10 @@ export class OrgPolicyClient {
       });
     const defaultCallSettings = this._defaults['listConstraints'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listConstraints iterate %j', request);
     return this.descriptors.page.listConstraints.asyncIterate(
       this.innerApiCalls['listConstraints'] as GaxCall,
       request as {},
@@ -1637,12 +1927,40 @@ export class OrgPolicyClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.listPolicies(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.orgpolicy.v2.IListPoliciesRequest,
+          | protos.google.cloud.orgpolicy.v2.IListPoliciesResponse
+          | null
+          | undefined,
+          protos.google.cloud.orgpolicy.v2.IPolicy
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listPolicies values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listPolicies request %j', request);
+    return this.innerApiCalls
+      .listPolicies(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.orgpolicy.v2.IPolicy[],
+          protos.google.cloud.orgpolicy.v2.IListPoliciesRequest | null,
+          protos.google.cloud.orgpolicy.v2.IListPoliciesResponse,
+        ]) => {
+          this._log.info('listPolicies values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listPolicies`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
@@ -1686,7 +2004,10 @@ export class OrgPolicyClient {
       });
     const defaultCallSettings = this._defaults['listPolicies'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listPolicies stream %j', request);
     return this.descriptors.page.listPolicies.createStream(
       this.innerApiCalls.listPolicies as GaxCall,
       request,
@@ -1742,7 +2063,10 @@ export class OrgPolicyClient {
       });
     const defaultCallSettings = this._defaults['listPolicies'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listPolicies iterate %j', request);
     return this.descriptors.page.listPolicies.asyncIterate(
       this.innerApiCalls['listPolicies'] as GaxCall,
       request as {},
@@ -1851,12 +2175,40 @@ export class OrgPolicyClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.listCustomConstraints(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.orgpolicy.v2.IListCustomConstraintsRequest,
+          | protos.google.cloud.orgpolicy.v2.IListCustomConstraintsResponse
+          | null
+          | undefined,
+          protos.google.cloud.orgpolicy.v2.ICustomConstraint
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listCustomConstraints values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listCustomConstraints request %j', request);
+    return this.innerApiCalls
+      .listCustomConstraints(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.orgpolicy.v2.ICustomConstraint[],
+          protos.google.cloud.orgpolicy.v2.IListCustomConstraintsRequest | null,
+          protos.google.cloud.orgpolicy.v2.IListCustomConstraintsResponse,
+        ]) => {
+          this._log.info('listCustomConstraints values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listCustomConstraints`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
@@ -1897,7 +2249,10 @@ export class OrgPolicyClient {
       });
     const defaultCallSettings = this._defaults['listCustomConstraints'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listCustomConstraints stream %j', request);
     return this.descriptors.page.listCustomConstraints.createStream(
       this.innerApiCalls.listCustomConstraints as GaxCall,
       request,
@@ -1950,7 +2305,10 @@ export class OrgPolicyClient {
       });
     const defaultCallSettings = this._defaults['listCustomConstraints'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listCustomConstraints iterate %j', request);
     return this.descriptors.page.listCustomConstraints.asyncIterate(
       this.innerApiCalls['listCustomConstraints'] as GaxCall,
       request as {},
@@ -2297,6 +2655,7 @@ export class OrgPolicyClient {
   close(): Promise<void> {
     if (this.orgPolicyStub && !this._terminated) {
       return this.orgPolicyStub.then(stub => {
+        this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
       });

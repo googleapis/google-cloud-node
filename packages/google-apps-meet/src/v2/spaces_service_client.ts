@@ -27,6 +27,7 @@ import type {
 
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
+import {loggingUtils as logging} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -51,6 +52,8 @@ export class SpacesServiceClient {
   private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
+  private _log = logging.log('meet');
+
   auth: gax.GoogleAuth;
   descriptors: Descriptors = {
     page: {},
@@ -85,7 +88,7 @@ export class SpacesServiceClient {
    *     Developer's Console, e.g. 'grape-spaceship-123'. We will also check
    *     the environment variable GCLOUD_PROJECT for your project ID. If your
    *     app is running in an environment which supports
-   *     {@link https://developers.google.com/identity/protocols/application-default-credentials Application Default Credentials},
+   *     {@link https://cloud.google.com/docs/authentication/application-default-credentials Application Default Credentials},
    *     your project ID will be detected automatically.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
@@ -466,8 +469,34 @@ export class SpacesServiceClient {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    this.initialize();
-    return this.innerApiCalls.createSpace(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('createSpace request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.apps.meet.v2.ISpace,
+          protos.google.apps.meet.v2.ICreateSpaceRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('createSpace response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .createSpace(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.apps.meet.v2.ISpace,
+          protos.google.apps.meet.v2.ICreateSpaceRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createSpace response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Gets details about a meeting space.
@@ -569,8 +598,34 @@ export class SpacesServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.getSpace(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('getSpace request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.apps.meet.v2.ISpace,
+          protos.google.apps.meet.v2.IGetSpaceRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getSpace response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getSpace(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.apps.meet.v2.ISpace,
+          protos.google.apps.meet.v2.IGetSpaceRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getSpace response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Updates details about a meeting space.
@@ -661,8 +716,34 @@ export class SpacesServiceClient {
       this._gaxModule.routingHeader.fromParams({
         'space.name': request.space!.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.updateSpace(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('updateSpace request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.apps.meet.v2.ISpace,
+          protos.google.apps.meet.v2.IUpdateSpaceRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('updateSpace response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .updateSpace(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.apps.meet.v2.ISpace,
+          protos.google.apps.meet.v2.IUpdateSpaceRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('updateSpace response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Ends an active conference (if there's one).
@@ -756,8 +837,36 @@ export class SpacesServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.endActiveConference(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('endActiveConference request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.apps.meet.v2.IEndActiveConferenceRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('endActiveConference response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .endActiveConference(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.protobuf.IEmpty,
+          protos.google.apps.meet.v2.IEndActiveConferenceRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('endActiveConference response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
 
   // --------------------
@@ -1057,6 +1166,7 @@ export class SpacesServiceClient {
   close(): Promise<void> {
     if (this.spacesServiceStub && !this._terminated) {
       return this.spacesServiceStub.then(stub => {
+        this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
       });

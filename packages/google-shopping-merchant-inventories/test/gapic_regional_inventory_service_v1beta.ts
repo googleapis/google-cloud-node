@@ -271,7 +271,9 @@ describe('v1beta.RegionalInventoryServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      client.initialize().catch(err => {
+        throw err;
+      });
       assert(client.regionalInventoryServiceStub);
       client.close().then(() => {
         done();
@@ -342,7 +344,7 @@ describe('v1beta.RegionalInventoryServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.shopping.merchant.inventories.v1beta.InsertRegionalInventoryRequest()
       );
@@ -351,7 +353,7 @@ describe('v1beta.RegionalInventoryServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.shopping.merchant.inventories.v1beta.RegionalInventory()
       );
@@ -377,7 +379,7 @@ describe('v1beta.RegionalInventoryServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.shopping.merchant.inventories.v1beta.InsertRegionalInventoryRequest()
       );
@@ -386,7 +388,7 @@ describe('v1beta.RegionalInventoryServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.shopping.merchant.inventories.v1beta.RegionalInventory()
       );
@@ -427,7 +429,7 @@ describe('v1beta.RegionalInventoryServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.shopping.merchant.inventories.v1beta.InsertRegionalInventoryRequest()
       );
@@ -436,7 +438,7 @@ describe('v1beta.RegionalInventoryServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.insertRegionalInventory = stubSimpleCall(
         undefined,
@@ -464,7 +466,7 @@ describe('v1beta.RegionalInventoryServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.shopping.merchant.inventories.v1beta.InsertRegionalInventoryRequest()
       );
@@ -491,7 +493,7 @@ describe('v1beta.RegionalInventoryServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.shopping.merchant.inventories.v1beta.DeleteRegionalInventoryRequest()
       );
@@ -500,7 +502,7 @@ describe('v1beta.RegionalInventoryServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -526,7 +528,7 @@ describe('v1beta.RegionalInventoryServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.shopping.merchant.inventories.v1beta.DeleteRegionalInventoryRequest()
       );
@@ -535,7 +537,7 @@ describe('v1beta.RegionalInventoryServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -576,7 +578,7 @@ describe('v1beta.RegionalInventoryServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.shopping.merchant.inventories.v1beta.DeleteRegionalInventoryRequest()
       );
@@ -585,7 +587,7 @@ describe('v1beta.RegionalInventoryServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteRegionalInventory = stubSimpleCall(
         undefined,
@@ -613,7 +615,7 @@ describe('v1beta.RegionalInventoryServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.shopping.merchant.inventories.v1beta.DeleteRegionalInventoryRequest()
       );
@@ -640,7 +642,7 @@ describe('v1beta.RegionalInventoryServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.shopping.merchant.inventories.v1beta.ListRegionalInventoriesRequest()
       );
@@ -649,7 +651,7 @@ describe('v1beta.RegionalInventoryServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.shopping.merchant.inventories.v1beta.RegionalInventory()
@@ -683,7 +685,7 @@ describe('v1beta.RegionalInventoryServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.shopping.merchant.inventories.v1beta.ListRegionalInventoriesRequest()
       );
@@ -692,7 +694,7 @@ describe('v1beta.RegionalInventoryServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.shopping.merchant.inventories.v1beta.RegionalInventory()
@@ -743,7 +745,7 @@ describe('v1beta.RegionalInventoryServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.shopping.merchant.inventories.v1beta.ListRegionalInventoriesRequest()
       );
@@ -752,7 +754,7 @@ describe('v1beta.RegionalInventoryServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listRegionalInventories = stubSimpleCall(
         undefined,
@@ -780,7 +782,7 @@ describe('v1beta.RegionalInventoryServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.shopping.merchant.inventories.v1beta.ListRegionalInventoriesRequest()
       );
@@ -789,7 +791,7 @@ describe('v1beta.RegionalInventoryServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.shopping.merchant.inventories.v1beta.RegionalInventory()
@@ -852,7 +854,7 @@ describe('v1beta.RegionalInventoryServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.shopping.merchant.inventories.v1beta.ListRegionalInventoriesRequest()
       );
@@ -861,7 +863,7 @@ describe('v1beta.RegionalInventoryServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listRegionalInventories.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -913,7 +915,7 @@ describe('v1beta.RegionalInventoryServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.shopping.merchant.inventories.v1beta.ListRegionalInventoriesRequest()
       );
@@ -922,7 +924,7 @@ describe('v1beta.RegionalInventoryServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.shopping.merchant.inventories.v1beta.RegionalInventory()
@@ -970,7 +972,7 @@ describe('v1beta.RegionalInventoryServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.shopping.merchant.inventories.v1beta.ListRegionalInventoriesRequest()
       );
@@ -979,7 +981,7 @@ describe('v1beta.RegionalInventoryServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listRegionalInventories.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -1012,7 +1014,7 @@ describe('v1beta.RegionalInventoryServiceClient', () => {
   });
 
   describe('Path templates', () => {
-    describe('localInventory', () => {
+    describe('localInventory', async () => {
       const fakePath = '/rendered/path/localInventory';
       const expectedParameters = {
         account: 'accountValue',
@@ -1026,7 +1028,7 @@ describe('v1beta.RegionalInventoryServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.localInventoryPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -1079,7 +1081,7 @@ describe('v1beta.RegionalInventoryServiceClient', () => {
       });
     });
 
-    describe('product', () => {
+    describe('product', async () => {
       const fakePath = '/rendered/path/product';
       const expectedParameters = {
         account: 'accountValue',
@@ -1092,7 +1094,7 @@ describe('v1beta.RegionalInventoryServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.productPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -1131,7 +1133,7 @@ describe('v1beta.RegionalInventoryServiceClient', () => {
       });
     });
 
-    describe('regionalInventory', () => {
+    describe('regionalInventory', async () => {
       const fakePath = '/rendered/path/regionalInventory';
       const expectedParameters = {
         account: 'accountValue',
@@ -1145,7 +1147,7 @@ describe('v1beta.RegionalInventoryServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.regionalInventoryPathTemplate.render = sinon
         .stub()
         .returns(fakePath);

@@ -29,6 +29,7 @@ import type {
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
+import {loggingUtils as logging} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -53,6 +54,8 @@ export class FileServiceClient {
   private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
+  private _log = logging.log('generativelanguage');
+
   auth: gax.GoogleAuth;
   descriptors: Descriptors = {
     page: {},
@@ -87,7 +90,7 @@ export class FileServiceClient {
    *     Developer's Console, e.g. 'grape-spaceship-123'. We will also check
    *     the environment variable GCLOUD_PROJECT for your project ID. If your
    *     app is running in an environment which supports
-   *     {@link https://developers.google.com/identity/protocols/application-default-credentials Application Default Credentials},
+   *     {@link https://cloud.google.com/docs/authentication/application-default-credentials Application Default Credentials},
    *     your project ID will be detected automatically.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
@@ -491,8 +494,39 @@ export class FileServiceClient {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    this.initialize();
-    return this.innerApiCalls.createFile(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('createFile request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.ai.generativelanguage.v1alpha.ICreateFileResponse,
+          | protos.google.ai.generativelanguage.v1alpha.ICreateFileRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('createFile response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .createFile(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.ai.generativelanguage.v1alpha.ICreateFileResponse,
+          (
+            | protos.google.ai.generativelanguage.v1alpha.ICreateFileRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('createFile response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Gets the metadata for the given `File`.
@@ -582,8 +616,39 @@ export class FileServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.getFile(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('getFile request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.ai.generativelanguage.v1alpha.IFile,
+          | protos.google.ai.generativelanguage.v1alpha.IGetFileRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getFile response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getFile(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.ai.generativelanguage.v1alpha.IFile,
+          (
+            | protos.google.ai.generativelanguage.v1alpha.IGetFileRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getFile response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Deletes the `File`.
@@ -679,8 +744,39 @@ export class FileServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.deleteFile(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('deleteFile request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.ai.generativelanguage.v1alpha.IDeleteFileRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('deleteFile response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .deleteFile(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.protobuf.IEmpty,
+          (
+            | protos.google.ai.generativelanguage.v1alpha.IDeleteFileRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteFile response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
 
   /**
@@ -772,8 +868,36 @@ export class FileServiceClient {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    this.initialize();
-    return this.innerApiCalls.listFiles(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.ai.generativelanguage.v1alpha.IListFilesRequest,
+          | protos.google.ai.generativelanguage.v1alpha.IListFilesResponse
+          | null
+          | undefined,
+          protos.google.ai.generativelanguage.v1alpha.IFile
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listFiles values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listFiles request %j', request);
+    return this.innerApiCalls
+      .listFiles(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.ai.generativelanguage.v1alpha.IFile[],
+          protos.google.ai.generativelanguage.v1alpha.IListFilesRequest | null,
+          protos.google.ai.generativelanguage.v1alpha.IListFilesResponse,
+        ]) => {
+          this._log.info('listFiles values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -806,7 +930,10 @@ export class FileServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     const defaultCallSettings = this._defaults['listFiles'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listFiles stream %j', request);
     return this.descriptors.page.listFiles.createStream(
       this.innerApiCalls.listFiles as GaxCall,
       request,
@@ -847,7 +974,10 @@ export class FileServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     const defaultCallSettings = this._defaults['listFiles'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listFiles iterate %j', request);
     return this.descriptors.page.listFiles.asyncIterate(
       this.innerApiCalls['listFiles'] as GaxCall,
       request as {},
@@ -1153,6 +1283,7 @@ export class FileServiceClient {
   close(): Promise<void> {
     if (this.fileServiceStub && !this._terminated) {
       return this.fileServiceStub.then(stub => {
+        this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
       });

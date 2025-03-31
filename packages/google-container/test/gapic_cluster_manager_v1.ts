@@ -252,7 +252,9 @@ describe('v1.ClusterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      client.initialize().catch(err => {
+        throw err;
+      });
       assert(client.clusterManagerStub);
       client.close().then(() => {
         done();
@@ -311,7 +313,7 @@ describe('v1.ClusterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.container.v1.ListClustersRequest()
       );
@@ -330,7 +332,7 @@ describe('v1.ClusterManagerClient', () => {
         ['zone']
       );
       request.zone = defaultValue3;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}&project_id=${defaultValue2}&zone=${defaultValue3}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}&project_id=${defaultValue2 ?? ''}&zone=${defaultValue3 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.container.v1.ListClustersResponse()
       );
@@ -352,7 +354,7 @@ describe('v1.ClusterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.container.v1.ListClustersRequest()
       );
@@ -371,7 +373,7 @@ describe('v1.ClusterManagerClient', () => {
         ['zone']
       );
       request.zone = defaultValue3;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}&project_id=${defaultValue2}&zone=${defaultValue3}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}&project_id=${defaultValue2 ?? ''}&zone=${defaultValue3 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.container.v1.ListClustersResponse()
       );
@@ -409,7 +411,7 @@ describe('v1.ClusterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.container.v1.ListClustersRequest()
       );
@@ -428,7 +430,7 @@ describe('v1.ClusterManagerClient', () => {
         ['zone']
       );
       request.zone = defaultValue3;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}&project_id=${defaultValue2}&zone=${defaultValue3}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}&project_id=${defaultValue2 ?? ''}&zone=${defaultValue3 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listClusters = stubSimpleCall(
         undefined,
@@ -450,7 +452,7 @@ describe('v1.ClusterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.container.v1.ListClustersRequest()
       );
@@ -481,7 +483,7 @@ describe('v1.ClusterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.container.v1.GetClusterRequest()
       );
@@ -505,7 +507,7 @@ describe('v1.ClusterManagerClient', () => {
         ['clusterId']
       );
       request.clusterId = defaultValue4;
-      const expectedHeaderRequestParams = `name=${defaultValue1}&project_id=${defaultValue2}&zone=${defaultValue3}&cluster_id=${defaultValue4}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}&project_id=${defaultValue2 ?? ''}&zone=${defaultValue3 ?? ''}&cluster_id=${defaultValue4 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.container.v1.Cluster()
       );
@@ -527,7 +529,7 @@ describe('v1.ClusterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.container.v1.GetClusterRequest()
       );
@@ -551,7 +553,7 @@ describe('v1.ClusterManagerClient', () => {
         ['clusterId']
       );
       request.clusterId = defaultValue4;
-      const expectedHeaderRequestParams = `name=${defaultValue1}&project_id=${defaultValue2}&zone=${defaultValue3}&cluster_id=${defaultValue4}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}&project_id=${defaultValue2 ?? ''}&zone=${defaultValue3 ?? ''}&cluster_id=${defaultValue4 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.container.v1.Cluster()
       );
@@ -589,7 +591,7 @@ describe('v1.ClusterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.container.v1.GetClusterRequest()
       );
@@ -613,7 +615,7 @@ describe('v1.ClusterManagerClient', () => {
         ['clusterId']
       );
       request.clusterId = defaultValue4;
-      const expectedHeaderRequestParams = `name=${defaultValue1}&project_id=${defaultValue2}&zone=${defaultValue3}&cluster_id=${defaultValue4}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}&project_id=${defaultValue2 ?? ''}&zone=${defaultValue3 ?? ''}&cluster_id=${defaultValue4 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getCluster = stubSimpleCall(
         undefined,
@@ -635,7 +637,7 @@ describe('v1.ClusterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.container.v1.GetClusterRequest()
       );
@@ -671,7 +673,7 @@ describe('v1.ClusterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.container.v1.CreateClusterRequest()
       );
@@ -690,7 +692,7 @@ describe('v1.ClusterManagerClient', () => {
         ['zone']
       );
       request.zone = defaultValue3;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}&project_id=${defaultValue2}&zone=${defaultValue3}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}&project_id=${defaultValue2 ?? ''}&zone=${defaultValue3 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.container.v1.Operation()
       );
@@ -712,7 +714,7 @@ describe('v1.ClusterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.container.v1.CreateClusterRequest()
       );
@@ -731,7 +733,7 @@ describe('v1.ClusterManagerClient', () => {
         ['zone']
       );
       request.zone = defaultValue3;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}&project_id=${defaultValue2}&zone=${defaultValue3}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}&project_id=${defaultValue2 ?? ''}&zone=${defaultValue3 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.container.v1.Operation()
       );
@@ -769,7 +771,7 @@ describe('v1.ClusterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.container.v1.CreateClusterRequest()
       );
@@ -788,7 +790,7 @@ describe('v1.ClusterManagerClient', () => {
         ['zone']
       );
       request.zone = defaultValue3;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}&project_id=${defaultValue2}&zone=${defaultValue3}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}&project_id=${defaultValue2 ?? ''}&zone=${defaultValue3 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createCluster = stubSimpleCall(
         undefined,
@@ -810,7 +812,7 @@ describe('v1.ClusterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.container.v1.CreateClusterRequest()
       );
@@ -841,7 +843,7 @@ describe('v1.ClusterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.container.v1.UpdateClusterRequest()
       );
@@ -865,7 +867,7 @@ describe('v1.ClusterManagerClient', () => {
         ['clusterId']
       );
       request.clusterId = defaultValue4;
-      const expectedHeaderRequestParams = `name=${defaultValue1}&project_id=${defaultValue2}&zone=${defaultValue3}&cluster_id=${defaultValue4}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}&project_id=${defaultValue2 ?? ''}&zone=${defaultValue3 ?? ''}&cluster_id=${defaultValue4 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.container.v1.Operation()
       );
@@ -887,7 +889,7 @@ describe('v1.ClusterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.container.v1.UpdateClusterRequest()
       );
@@ -911,7 +913,7 @@ describe('v1.ClusterManagerClient', () => {
         ['clusterId']
       );
       request.clusterId = defaultValue4;
-      const expectedHeaderRequestParams = `name=${defaultValue1}&project_id=${defaultValue2}&zone=${defaultValue3}&cluster_id=${defaultValue4}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}&project_id=${defaultValue2 ?? ''}&zone=${defaultValue3 ?? ''}&cluster_id=${defaultValue4 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.container.v1.Operation()
       );
@@ -949,7 +951,7 @@ describe('v1.ClusterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.container.v1.UpdateClusterRequest()
       );
@@ -973,7 +975,7 @@ describe('v1.ClusterManagerClient', () => {
         ['clusterId']
       );
       request.clusterId = defaultValue4;
-      const expectedHeaderRequestParams = `name=${defaultValue1}&project_id=${defaultValue2}&zone=${defaultValue3}&cluster_id=${defaultValue4}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}&project_id=${defaultValue2 ?? ''}&zone=${defaultValue3 ?? ''}&cluster_id=${defaultValue4 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateCluster = stubSimpleCall(
         undefined,
@@ -995,7 +997,7 @@ describe('v1.ClusterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.container.v1.UpdateClusterRequest()
       );
@@ -1031,7 +1033,7 @@ describe('v1.ClusterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.container.v1.UpdateNodePoolRequest()
       );
@@ -1060,7 +1062,7 @@ describe('v1.ClusterManagerClient', () => {
         ['nodePoolId']
       );
       request.nodePoolId = defaultValue5;
-      const expectedHeaderRequestParams = `name=${defaultValue1}&project_id=${defaultValue2}&zone=${defaultValue3}&cluster_id=${defaultValue4}&node_pool_id=${defaultValue5}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}&project_id=${defaultValue2 ?? ''}&zone=${defaultValue3 ?? ''}&cluster_id=${defaultValue4 ?? ''}&node_pool_id=${defaultValue5 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.container.v1.Operation()
       );
@@ -1082,7 +1084,7 @@ describe('v1.ClusterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.container.v1.UpdateNodePoolRequest()
       );
@@ -1111,7 +1113,7 @@ describe('v1.ClusterManagerClient', () => {
         ['nodePoolId']
       );
       request.nodePoolId = defaultValue5;
-      const expectedHeaderRequestParams = `name=${defaultValue1}&project_id=${defaultValue2}&zone=${defaultValue3}&cluster_id=${defaultValue4}&node_pool_id=${defaultValue5}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}&project_id=${defaultValue2 ?? ''}&zone=${defaultValue3 ?? ''}&cluster_id=${defaultValue4 ?? ''}&node_pool_id=${defaultValue5 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.container.v1.Operation()
       );
@@ -1149,7 +1151,7 @@ describe('v1.ClusterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.container.v1.UpdateNodePoolRequest()
       );
@@ -1178,7 +1180,7 @@ describe('v1.ClusterManagerClient', () => {
         ['nodePoolId']
       );
       request.nodePoolId = defaultValue5;
-      const expectedHeaderRequestParams = `name=${defaultValue1}&project_id=${defaultValue2}&zone=${defaultValue3}&cluster_id=${defaultValue4}&node_pool_id=${defaultValue5}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}&project_id=${defaultValue2 ?? ''}&zone=${defaultValue3 ?? ''}&cluster_id=${defaultValue4 ?? ''}&node_pool_id=${defaultValue5 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateNodePool = stubSimpleCall(
         undefined,
@@ -1200,7 +1202,7 @@ describe('v1.ClusterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.container.v1.UpdateNodePoolRequest()
       );
@@ -1241,7 +1243,7 @@ describe('v1.ClusterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.container.v1.SetNodePoolAutoscalingRequest()
       );
@@ -1270,7 +1272,7 @@ describe('v1.ClusterManagerClient', () => {
         ['nodePoolId']
       );
       request.nodePoolId = defaultValue5;
-      const expectedHeaderRequestParams = `name=${defaultValue1}&project_id=${defaultValue2}&zone=${defaultValue3}&cluster_id=${defaultValue4}&node_pool_id=${defaultValue5}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}&project_id=${defaultValue2 ?? ''}&zone=${defaultValue3 ?? ''}&cluster_id=${defaultValue4 ?? ''}&node_pool_id=${defaultValue5 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.container.v1.Operation()
       );
@@ -1293,7 +1295,7 @@ describe('v1.ClusterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.container.v1.SetNodePoolAutoscalingRequest()
       );
@@ -1322,7 +1324,7 @@ describe('v1.ClusterManagerClient', () => {
         ['nodePoolId']
       );
       request.nodePoolId = defaultValue5;
-      const expectedHeaderRequestParams = `name=${defaultValue1}&project_id=${defaultValue2}&zone=${defaultValue3}&cluster_id=${defaultValue4}&node_pool_id=${defaultValue5}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}&project_id=${defaultValue2 ?? ''}&zone=${defaultValue3 ?? ''}&cluster_id=${defaultValue4 ?? ''}&node_pool_id=${defaultValue5 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.container.v1.Operation()
       );
@@ -1360,7 +1362,7 @@ describe('v1.ClusterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.container.v1.SetNodePoolAutoscalingRequest()
       );
@@ -1389,7 +1391,7 @@ describe('v1.ClusterManagerClient', () => {
         ['nodePoolId']
       );
       request.nodePoolId = defaultValue5;
-      const expectedHeaderRequestParams = `name=${defaultValue1}&project_id=${defaultValue2}&zone=${defaultValue3}&cluster_id=${defaultValue4}&node_pool_id=${defaultValue5}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}&project_id=${defaultValue2 ?? ''}&zone=${defaultValue3 ?? ''}&cluster_id=${defaultValue4 ?? ''}&node_pool_id=${defaultValue5 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.setNodePoolAutoscaling = stubSimpleCall(
         undefined,
@@ -1414,7 +1416,7 @@ describe('v1.ClusterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.container.v1.SetNodePoolAutoscalingRequest()
       );
@@ -1458,7 +1460,7 @@ describe('v1.ClusterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.container.v1.SetLoggingServiceRequest()
       );
@@ -1482,7 +1484,7 @@ describe('v1.ClusterManagerClient', () => {
         ['clusterId']
       );
       request.clusterId = defaultValue4;
-      const expectedHeaderRequestParams = `name=${defaultValue1}&project_id=${defaultValue2}&zone=${defaultValue3}&cluster_id=${defaultValue4}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}&project_id=${defaultValue2 ?? ''}&zone=${defaultValue3 ?? ''}&cluster_id=${defaultValue4 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.container.v1.Operation()
       );
@@ -1504,7 +1506,7 @@ describe('v1.ClusterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.container.v1.SetLoggingServiceRequest()
       );
@@ -1528,7 +1530,7 @@ describe('v1.ClusterManagerClient', () => {
         ['clusterId']
       );
       request.clusterId = defaultValue4;
-      const expectedHeaderRequestParams = `name=${defaultValue1}&project_id=${defaultValue2}&zone=${defaultValue3}&cluster_id=${defaultValue4}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}&project_id=${defaultValue2 ?? ''}&zone=${defaultValue3 ?? ''}&cluster_id=${defaultValue4 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.container.v1.Operation()
       );
@@ -1566,7 +1568,7 @@ describe('v1.ClusterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.container.v1.SetLoggingServiceRequest()
       );
@@ -1590,7 +1592,7 @@ describe('v1.ClusterManagerClient', () => {
         ['clusterId']
       );
       request.clusterId = defaultValue4;
-      const expectedHeaderRequestParams = `name=${defaultValue1}&project_id=${defaultValue2}&zone=${defaultValue3}&cluster_id=${defaultValue4}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}&project_id=${defaultValue2 ?? ''}&zone=${defaultValue3 ?? ''}&cluster_id=${defaultValue4 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.setLoggingService = stubSimpleCall(
         undefined,
@@ -1612,7 +1614,7 @@ describe('v1.ClusterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.container.v1.SetLoggingServiceRequest()
       );
@@ -1648,7 +1650,7 @@ describe('v1.ClusterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.container.v1.SetMonitoringServiceRequest()
       );
@@ -1672,7 +1674,7 @@ describe('v1.ClusterManagerClient', () => {
         ['clusterId']
       );
       request.clusterId = defaultValue4;
-      const expectedHeaderRequestParams = `name=${defaultValue1}&project_id=${defaultValue2}&zone=${defaultValue3}&cluster_id=${defaultValue4}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}&project_id=${defaultValue2 ?? ''}&zone=${defaultValue3 ?? ''}&cluster_id=${defaultValue4 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.container.v1.Operation()
       );
@@ -1695,7 +1697,7 @@ describe('v1.ClusterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.container.v1.SetMonitoringServiceRequest()
       );
@@ -1719,7 +1721,7 @@ describe('v1.ClusterManagerClient', () => {
         ['clusterId']
       );
       request.clusterId = defaultValue4;
-      const expectedHeaderRequestParams = `name=${defaultValue1}&project_id=${defaultValue2}&zone=${defaultValue3}&cluster_id=${defaultValue4}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}&project_id=${defaultValue2 ?? ''}&zone=${defaultValue3 ?? ''}&cluster_id=${defaultValue4 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.container.v1.Operation()
       );
@@ -1757,7 +1759,7 @@ describe('v1.ClusterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.container.v1.SetMonitoringServiceRequest()
       );
@@ -1781,7 +1783,7 @@ describe('v1.ClusterManagerClient', () => {
         ['clusterId']
       );
       request.clusterId = defaultValue4;
-      const expectedHeaderRequestParams = `name=${defaultValue1}&project_id=${defaultValue2}&zone=${defaultValue3}&cluster_id=${defaultValue4}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}&project_id=${defaultValue2 ?? ''}&zone=${defaultValue3 ?? ''}&cluster_id=${defaultValue4 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.setMonitoringService = stubSimpleCall(
         undefined,
@@ -1803,7 +1805,7 @@ describe('v1.ClusterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.container.v1.SetMonitoringServiceRequest()
       );
@@ -1839,7 +1841,7 @@ describe('v1.ClusterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.container.v1.SetAddonsConfigRequest()
       );
@@ -1863,7 +1865,7 @@ describe('v1.ClusterManagerClient', () => {
         ['clusterId']
       );
       request.clusterId = defaultValue4;
-      const expectedHeaderRequestParams = `name=${defaultValue1}&project_id=${defaultValue2}&zone=${defaultValue3}&cluster_id=${defaultValue4}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}&project_id=${defaultValue2 ?? ''}&zone=${defaultValue3 ?? ''}&cluster_id=${defaultValue4 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.container.v1.Operation()
       );
@@ -1885,7 +1887,7 @@ describe('v1.ClusterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.container.v1.SetAddonsConfigRequest()
       );
@@ -1909,7 +1911,7 @@ describe('v1.ClusterManagerClient', () => {
         ['clusterId']
       );
       request.clusterId = defaultValue4;
-      const expectedHeaderRequestParams = `name=${defaultValue1}&project_id=${defaultValue2}&zone=${defaultValue3}&cluster_id=${defaultValue4}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}&project_id=${defaultValue2 ?? ''}&zone=${defaultValue3 ?? ''}&cluster_id=${defaultValue4 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.container.v1.Operation()
       );
@@ -1947,7 +1949,7 @@ describe('v1.ClusterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.container.v1.SetAddonsConfigRequest()
       );
@@ -1971,7 +1973,7 @@ describe('v1.ClusterManagerClient', () => {
         ['clusterId']
       );
       request.clusterId = defaultValue4;
-      const expectedHeaderRequestParams = `name=${defaultValue1}&project_id=${defaultValue2}&zone=${defaultValue3}&cluster_id=${defaultValue4}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}&project_id=${defaultValue2 ?? ''}&zone=${defaultValue3 ?? ''}&cluster_id=${defaultValue4 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.setAddonsConfig = stubSimpleCall(
         undefined,
@@ -1993,7 +1995,7 @@ describe('v1.ClusterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.container.v1.SetAddonsConfigRequest()
       );
@@ -2030,7 +2032,7 @@ describe('v1.ClusterManagerClient', () => {
         projectId: 'bogus',
       });
       const stub = sinon.stub(client, 'warn');
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.container.v1.SetLocationsRequest()
       );
@@ -2054,7 +2056,7 @@ describe('v1.ClusterManagerClient', () => {
         ['clusterId']
       );
       request.clusterId = defaultValue4;
-      const expectedHeaderRequestParams = `name=${defaultValue1}&project_id=${defaultValue2}&zone=${defaultValue3}&cluster_id=${defaultValue4}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}&project_id=${defaultValue2 ?? ''}&zone=${defaultValue3 ?? ''}&cluster_id=${defaultValue4 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.container.v1.Operation()
       );
@@ -2078,7 +2080,7 @@ describe('v1.ClusterManagerClient', () => {
         projectId: 'bogus',
       });
       const stub = sinon.stub(client, 'warn');
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.container.v1.SetLocationsRequest()
       );
@@ -2102,7 +2104,7 @@ describe('v1.ClusterManagerClient', () => {
         ['clusterId']
       );
       request.clusterId = defaultValue4;
-      const expectedHeaderRequestParams = `name=${defaultValue1}&project_id=${defaultValue2}&zone=${defaultValue3}&cluster_id=${defaultValue4}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}&project_id=${defaultValue2 ?? ''}&zone=${defaultValue3 ?? ''}&cluster_id=${defaultValue4 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.container.v1.Operation()
       );
@@ -2142,7 +2144,7 @@ describe('v1.ClusterManagerClient', () => {
         projectId: 'bogus',
       });
       const stub = sinon.stub(client, 'warn');
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.container.v1.SetLocationsRequest()
       );
@@ -2166,7 +2168,7 @@ describe('v1.ClusterManagerClient', () => {
         ['clusterId']
       );
       request.clusterId = defaultValue4;
-      const expectedHeaderRequestParams = `name=${defaultValue1}&project_id=${defaultValue2}&zone=${defaultValue3}&cluster_id=${defaultValue4}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}&project_id=${defaultValue2 ?? ''}&zone=${defaultValue3 ?? ''}&cluster_id=${defaultValue4 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.setLocations = stubSimpleCall(
         undefined,
@@ -2190,7 +2192,7 @@ describe('v1.ClusterManagerClient', () => {
         projectId: 'bogus',
       });
       const stub = sinon.stub(client, 'warn');
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.container.v1.SetLocationsRequest()
       );
@@ -2227,7 +2229,7 @@ describe('v1.ClusterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.container.v1.UpdateMasterRequest()
       );
@@ -2251,7 +2253,7 @@ describe('v1.ClusterManagerClient', () => {
         ['clusterId']
       );
       request.clusterId = defaultValue4;
-      const expectedHeaderRequestParams = `name=${defaultValue1}&project_id=${defaultValue2}&zone=${defaultValue3}&cluster_id=${defaultValue4}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}&project_id=${defaultValue2 ?? ''}&zone=${defaultValue3 ?? ''}&cluster_id=${defaultValue4 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.container.v1.Operation()
       );
@@ -2273,7 +2275,7 @@ describe('v1.ClusterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.container.v1.UpdateMasterRequest()
       );
@@ -2297,7 +2299,7 @@ describe('v1.ClusterManagerClient', () => {
         ['clusterId']
       );
       request.clusterId = defaultValue4;
-      const expectedHeaderRequestParams = `name=${defaultValue1}&project_id=${defaultValue2}&zone=${defaultValue3}&cluster_id=${defaultValue4}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}&project_id=${defaultValue2 ?? ''}&zone=${defaultValue3 ?? ''}&cluster_id=${defaultValue4 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.container.v1.Operation()
       );
@@ -2335,7 +2337,7 @@ describe('v1.ClusterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.container.v1.UpdateMasterRequest()
       );
@@ -2359,7 +2361,7 @@ describe('v1.ClusterManagerClient', () => {
         ['clusterId']
       );
       request.clusterId = defaultValue4;
-      const expectedHeaderRequestParams = `name=${defaultValue1}&project_id=${defaultValue2}&zone=${defaultValue3}&cluster_id=${defaultValue4}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}&project_id=${defaultValue2 ?? ''}&zone=${defaultValue3 ?? ''}&cluster_id=${defaultValue4 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateMaster = stubSimpleCall(
         undefined,
@@ -2381,7 +2383,7 @@ describe('v1.ClusterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.container.v1.UpdateMasterRequest()
       );
@@ -2417,7 +2419,7 @@ describe('v1.ClusterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.container.v1.SetMasterAuthRequest()
       );
@@ -2441,7 +2443,7 @@ describe('v1.ClusterManagerClient', () => {
         ['clusterId']
       );
       request.clusterId = defaultValue4;
-      const expectedHeaderRequestParams = `name=${defaultValue1}&project_id=${defaultValue2}&zone=${defaultValue3}&cluster_id=${defaultValue4}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}&project_id=${defaultValue2 ?? ''}&zone=${defaultValue3 ?? ''}&cluster_id=${defaultValue4 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.container.v1.Operation()
       );
@@ -2463,7 +2465,7 @@ describe('v1.ClusterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.container.v1.SetMasterAuthRequest()
       );
@@ -2487,7 +2489,7 @@ describe('v1.ClusterManagerClient', () => {
         ['clusterId']
       );
       request.clusterId = defaultValue4;
-      const expectedHeaderRequestParams = `name=${defaultValue1}&project_id=${defaultValue2}&zone=${defaultValue3}&cluster_id=${defaultValue4}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}&project_id=${defaultValue2 ?? ''}&zone=${defaultValue3 ?? ''}&cluster_id=${defaultValue4 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.container.v1.Operation()
       );
@@ -2525,7 +2527,7 @@ describe('v1.ClusterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.container.v1.SetMasterAuthRequest()
       );
@@ -2549,7 +2551,7 @@ describe('v1.ClusterManagerClient', () => {
         ['clusterId']
       );
       request.clusterId = defaultValue4;
-      const expectedHeaderRequestParams = `name=${defaultValue1}&project_id=${defaultValue2}&zone=${defaultValue3}&cluster_id=${defaultValue4}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}&project_id=${defaultValue2 ?? ''}&zone=${defaultValue3 ?? ''}&cluster_id=${defaultValue4 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.setMasterAuth = stubSimpleCall(
         undefined,
@@ -2571,7 +2573,7 @@ describe('v1.ClusterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.container.v1.SetMasterAuthRequest()
       );
@@ -2607,7 +2609,7 @@ describe('v1.ClusterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.container.v1.DeleteClusterRequest()
       );
@@ -2631,7 +2633,7 @@ describe('v1.ClusterManagerClient', () => {
         ['clusterId']
       );
       request.clusterId = defaultValue4;
-      const expectedHeaderRequestParams = `name=${defaultValue1}&project_id=${defaultValue2}&zone=${defaultValue3}&cluster_id=${defaultValue4}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}&project_id=${defaultValue2 ?? ''}&zone=${defaultValue3 ?? ''}&cluster_id=${defaultValue4 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.container.v1.Operation()
       );
@@ -2653,7 +2655,7 @@ describe('v1.ClusterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.container.v1.DeleteClusterRequest()
       );
@@ -2677,7 +2679,7 @@ describe('v1.ClusterManagerClient', () => {
         ['clusterId']
       );
       request.clusterId = defaultValue4;
-      const expectedHeaderRequestParams = `name=${defaultValue1}&project_id=${defaultValue2}&zone=${defaultValue3}&cluster_id=${defaultValue4}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}&project_id=${defaultValue2 ?? ''}&zone=${defaultValue3 ?? ''}&cluster_id=${defaultValue4 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.container.v1.Operation()
       );
@@ -2715,7 +2717,7 @@ describe('v1.ClusterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.container.v1.DeleteClusterRequest()
       );
@@ -2739,7 +2741,7 @@ describe('v1.ClusterManagerClient', () => {
         ['clusterId']
       );
       request.clusterId = defaultValue4;
-      const expectedHeaderRequestParams = `name=${defaultValue1}&project_id=${defaultValue2}&zone=${defaultValue3}&cluster_id=${defaultValue4}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}&project_id=${defaultValue2 ?? ''}&zone=${defaultValue3 ?? ''}&cluster_id=${defaultValue4 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteCluster = stubSimpleCall(
         undefined,
@@ -2761,7 +2763,7 @@ describe('v1.ClusterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.container.v1.DeleteClusterRequest()
       );
@@ -2797,7 +2799,7 @@ describe('v1.ClusterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.container.v1.ListOperationsRequest()
       );
@@ -2816,7 +2818,7 @@ describe('v1.ClusterManagerClient', () => {
         ['zone']
       );
       request.zone = defaultValue3;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}&project_id=${defaultValue2}&zone=${defaultValue3}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}&project_id=${defaultValue2 ?? ''}&zone=${defaultValue3 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.container.v1.ListOperationsResponse()
       );
@@ -2838,7 +2840,7 @@ describe('v1.ClusterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.container.v1.ListOperationsRequest()
       );
@@ -2857,7 +2859,7 @@ describe('v1.ClusterManagerClient', () => {
         ['zone']
       );
       request.zone = defaultValue3;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}&project_id=${defaultValue2}&zone=${defaultValue3}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}&project_id=${defaultValue2 ?? ''}&zone=${defaultValue3 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.container.v1.ListOperationsResponse()
       );
@@ -2895,7 +2897,7 @@ describe('v1.ClusterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.container.v1.ListOperationsRequest()
       );
@@ -2914,7 +2916,7 @@ describe('v1.ClusterManagerClient', () => {
         ['zone']
       );
       request.zone = defaultValue3;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}&project_id=${defaultValue2}&zone=${defaultValue3}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}&project_id=${defaultValue2 ?? ''}&zone=${defaultValue3 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listOperations = stubSimpleCall(
         undefined,
@@ -2936,7 +2938,7 @@ describe('v1.ClusterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.container.v1.ListOperationsRequest()
       );
@@ -2967,7 +2969,7 @@ describe('v1.ClusterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.container.v1.GetOperationRequest()
       );
@@ -2991,7 +2993,7 @@ describe('v1.ClusterManagerClient', () => {
         ['operationId']
       );
       request.operationId = defaultValue4;
-      const expectedHeaderRequestParams = `name=${defaultValue1}&project_id=${defaultValue2}&zone=${defaultValue3}&operation_id=${defaultValue4}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}&project_id=${defaultValue2 ?? ''}&zone=${defaultValue3 ?? ''}&operation_id=${defaultValue4 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.container.v1.Operation()
       );
@@ -3013,7 +3015,7 @@ describe('v1.ClusterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.container.v1.GetOperationRequest()
       );
@@ -3037,7 +3039,7 @@ describe('v1.ClusterManagerClient', () => {
         ['operationId']
       );
       request.operationId = defaultValue4;
-      const expectedHeaderRequestParams = `name=${defaultValue1}&project_id=${defaultValue2}&zone=${defaultValue3}&operation_id=${defaultValue4}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}&project_id=${defaultValue2 ?? ''}&zone=${defaultValue3 ?? ''}&operation_id=${defaultValue4 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.container.v1.Operation()
       );
@@ -3075,7 +3077,7 @@ describe('v1.ClusterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.container.v1.GetOperationRequest()
       );
@@ -3099,7 +3101,7 @@ describe('v1.ClusterManagerClient', () => {
         ['operationId']
       );
       request.operationId = defaultValue4;
-      const expectedHeaderRequestParams = `name=${defaultValue1}&project_id=${defaultValue2}&zone=${defaultValue3}&operation_id=${defaultValue4}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}&project_id=${defaultValue2 ?? ''}&zone=${defaultValue3 ?? ''}&operation_id=${defaultValue4 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getOperation = stubSimpleCall(
         undefined,
@@ -3121,7 +3123,7 @@ describe('v1.ClusterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.container.v1.GetOperationRequest()
       );
@@ -3157,7 +3159,7 @@ describe('v1.ClusterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.container.v1.CancelOperationRequest()
       );
@@ -3181,7 +3183,7 @@ describe('v1.ClusterManagerClient', () => {
         ['operationId']
       );
       request.operationId = defaultValue4;
-      const expectedHeaderRequestParams = `name=${defaultValue1}&project_id=${defaultValue2}&zone=${defaultValue3}&operation_id=${defaultValue4}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}&project_id=${defaultValue2 ?? ''}&zone=${defaultValue3 ?? ''}&operation_id=${defaultValue4 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -3203,7 +3205,7 @@ describe('v1.ClusterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.container.v1.CancelOperationRequest()
       );
@@ -3227,7 +3229,7 @@ describe('v1.ClusterManagerClient', () => {
         ['operationId']
       );
       request.operationId = defaultValue4;
-      const expectedHeaderRequestParams = `name=${defaultValue1}&project_id=${defaultValue2}&zone=${defaultValue3}&operation_id=${defaultValue4}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}&project_id=${defaultValue2 ?? ''}&zone=${defaultValue3 ?? ''}&operation_id=${defaultValue4 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -3265,7 +3267,7 @@ describe('v1.ClusterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.container.v1.CancelOperationRequest()
       );
@@ -3289,7 +3291,7 @@ describe('v1.ClusterManagerClient', () => {
         ['operationId']
       );
       request.operationId = defaultValue4;
-      const expectedHeaderRequestParams = `name=${defaultValue1}&project_id=${defaultValue2}&zone=${defaultValue3}&operation_id=${defaultValue4}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}&project_id=${defaultValue2 ?? ''}&zone=${defaultValue3 ?? ''}&operation_id=${defaultValue4 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.cancelOperation = stubSimpleCall(
         undefined,
@@ -3311,7 +3313,7 @@ describe('v1.ClusterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.container.v1.CancelOperationRequest()
       );
@@ -3347,7 +3349,7 @@ describe('v1.ClusterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.container.v1.GetServerConfigRequest()
       );
@@ -3366,7 +3368,7 @@ describe('v1.ClusterManagerClient', () => {
         ['zone']
       );
       request.zone = defaultValue3;
-      const expectedHeaderRequestParams = `name=${defaultValue1}&project_id=${defaultValue2}&zone=${defaultValue3}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}&project_id=${defaultValue2 ?? ''}&zone=${defaultValue3 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.container.v1.ServerConfig()
       );
@@ -3388,7 +3390,7 @@ describe('v1.ClusterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.container.v1.GetServerConfigRequest()
       );
@@ -3407,7 +3409,7 @@ describe('v1.ClusterManagerClient', () => {
         ['zone']
       );
       request.zone = defaultValue3;
-      const expectedHeaderRequestParams = `name=${defaultValue1}&project_id=${defaultValue2}&zone=${defaultValue3}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}&project_id=${defaultValue2 ?? ''}&zone=${defaultValue3 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.container.v1.ServerConfig()
       );
@@ -3445,7 +3447,7 @@ describe('v1.ClusterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.container.v1.GetServerConfigRequest()
       );
@@ -3464,7 +3466,7 @@ describe('v1.ClusterManagerClient', () => {
         ['zone']
       );
       request.zone = defaultValue3;
-      const expectedHeaderRequestParams = `name=${defaultValue1}&project_id=${defaultValue2}&zone=${defaultValue3}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}&project_id=${defaultValue2 ?? ''}&zone=${defaultValue3 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getServerConfig = stubSimpleCall(
         undefined,
@@ -3486,7 +3488,7 @@ describe('v1.ClusterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.container.v1.GetServerConfigRequest()
       );
@@ -3517,7 +3519,7 @@ describe('v1.ClusterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.container.v1.GetJSONWebKeysRequest()
       );
@@ -3526,7 +3528,7 @@ describe('v1.ClusterManagerClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.container.v1.GetJSONWebKeysResponse()
       );
@@ -3548,7 +3550,7 @@ describe('v1.ClusterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.container.v1.GetJSONWebKeysRequest()
       );
@@ -3557,7 +3559,7 @@ describe('v1.ClusterManagerClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.container.v1.GetJSONWebKeysResponse()
       );
@@ -3595,7 +3597,7 @@ describe('v1.ClusterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.container.v1.GetJSONWebKeysRequest()
       );
@@ -3604,7 +3606,7 @@ describe('v1.ClusterManagerClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getJsonWebKeys = stubSimpleCall(
         undefined,
@@ -3626,7 +3628,7 @@ describe('v1.ClusterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.container.v1.GetJSONWebKeysRequest()
       );
@@ -3647,7 +3649,7 @@ describe('v1.ClusterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.container.v1.ListNodePoolsRequest()
       );
@@ -3671,7 +3673,7 @@ describe('v1.ClusterManagerClient', () => {
         ['clusterId']
       );
       request.clusterId = defaultValue4;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}&project_id=${defaultValue2}&zone=${defaultValue3}&cluster_id=${defaultValue4}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}&project_id=${defaultValue2 ?? ''}&zone=${defaultValue3 ?? ''}&cluster_id=${defaultValue4 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.container.v1.ListNodePoolsResponse()
       );
@@ -3693,7 +3695,7 @@ describe('v1.ClusterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.container.v1.ListNodePoolsRequest()
       );
@@ -3717,7 +3719,7 @@ describe('v1.ClusterManagerClient', () => {
         ['clusterId']
       );
       request.clusterId = defaultValue4;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}&project_id=${defaultValue2}&zone=${defaultValue3}&cluster_id=${defaultValue4}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}&project_id=${defaultValue2 ?? ''}&zone=${defaultValue3 ?? ''}&cluster_id=${defaultValue4 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.container.v1.ListNodePoolsResponse()
       );
@@ -3755,7 +3757,7 @@ describe('v1.ClusterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.container.v1.ListNodePoolsRequest()
       );
@@ -3779,7 +3781,7 @@ describe('v1.ClusterManagerClient', () => {
         ['clusterId']
       );
       request.clusterId = defaultValue4;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}&project_id=${defaultValue2}&zone=${defaultValue3}&cluster_id=${defaultValue4}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}&project_id=${defaultValue2 ?? ''}&zone=${defaultValue3 ?? ''}&cluster_id=${defaultValue4 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listNodePools = stubSimpleCall(
         undefined,
@@ -3801,7 +3803,7 @@ describe('v1.ClusterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.container.v1.ListNodePoolsRequest()
       );
@@ -3837,7 +3839,7 @@ describe('v1.ClusterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.container.v1.GetNodePoolRequest()
       );
@@ -3866,7 +3868,7 @@ describe('v1.ClusterManagerClient', () => {
         ['nodePoolId']
       );
       request.nodePoolId = defaultValue5;
-      const expectedHeaderRequestParams = `name=${defaultValue1}&project_id=${defaultValue2}&zone=${defaultValue3}&cluster_id=${defaultValue4}&node_pool_id=${defaultValue5}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}&project_id=${defaultValue2 ?? ''}&zone=${defaultValue3 ?? ''}&cluster_id=${defaultValue4 ?? ''}&node_pool_id=${defaultValue5 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.container.v1.NodePool()
       );
@@ -3888,7 +3890,7 @@ describe('v1.ClusterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.container.v1.GetNodePoolRequest()
       );
@@ -3917,7 +3919,7 @@ describe('v1.ClusterManagerClient', () => {
         ['nodePoolId']
       );
       request.nodePoolId = defaultValue5;
-      const expectedHeaderRequestParams = `name=${defaultValue1}&project_id=${defaultValue2}&zone=${defaultValue3}&cluster_id=${defaultValue4}&node_pool_id=${defaultValue5}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}&project_id=${defaultValue2 ?? ''}&zone=${defaultValue3 ?? ''}&cluster_id=${defaultValue4 ?? ''}&node_pool_id=${defaultValue5 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.container.v1.NodePool()
       );
@@ -3955,7 +3957,7 @@ describe('v1.ClusterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.container.v1.GetNodePoolRequest()
       );
@@ -3984,7 +3986,7 @@ describe('v1.ClusterManagerClient', () => {
         ['nodePoolId']
       );
       request.nodePoolId = defaultValue5;
-      const expectedHeaderRequestParams = `name=${defaultValue1}&project_id=${defaultValue2}&zone=${defaultValue3}&cluster_id=${defaultValue4}&node_pool_id=${defaultValue5}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}&project_id=${defaultValue2 ?? ''}&zone=${defaultValue3 ?? ''}&cluster_id=${defaultValue4 ?? ''}&node_pool_id=${defaultValue5 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getNodePool = stubSimpleCall(
         undefined,
@@ -4006,7 +4008,7 @@ describe('v1.ClusterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.container.v1.GetNodePoolRequest()
       );
@@ -4047,7 +4049,7 @@ describe('v1.ClusterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.container.v1.CreateNodePoolRequest()
       );
@@ -4071,7 +4073,7 @@ describe('v1.ClusterManagerClient', () => {
         ['clusterId']
       );
       request.clusterId = defaultValue4;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}&project_id=${defaultValue2}&zone=${defaultValue3}&cluster_id=${defaultValue4}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}&project_id=${defaultValue2 ?? ''}&zone=${defaultValue3 ?? ''}&cluster_id=${defaultValue4 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.container.v1.Operation()
       );
@@ -4093,7 +4095,7 @@ describe('v1.ClusterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.container.v1.CreateNodePoolRequest()
       );
@@ -4117,7 +4119,7 @@ describe('v1.ClusterManagerClient', () => {
         ['clusterId']
       );
       request.clusterId = defaultValue4;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}&project_id=${defaultValue2}&zone=${defaultValue3}&cluster_id=${defaultValue4}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}&project_id=${defaultValue2 ?? ''}&zone=${defaultValue3 ?? ''}&cluster_id=${defaultValue4 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.container.v1.Operation()
       );
@@ -4155,7 +4157,7 @@ describe('v1.ClusterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.container.v1.CreateNodePoolRequest()
       );
@@ -4179,7 +4181,7 @@ describe('v1.ClusterManagerClient', () => {
         ['clusterId']
       );
       request.clusterId = defaultValue4;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}&project_id=${defaultValue2}&zone=${defaultValue3}&cluster_id=${defaultValue4}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}&project_id=${defaultValue2 ?? ''}&zone=${defaultValue3 ?? ''}&cluster_id=${defaultValue4 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createNodePool = stubSimpleCall(
         undefined,
@@ -4201,7 +4203,7 @@ describe('v1.ClusterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.container.v1.CreateNodePoolRequest()
       );
@@ -4237,7 +4239,7 @@ describe('v1.ClusterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.container.v1.DeleteNodePoolRequest()
       );
@@ -4266,7 +4268,7 @@ describe('v1.ClusterManagerClient', () => {
         ['nodePoolId']
       );
       request.nodePoolId = defaultValue5;
-      const expectedHeaderRequestParams = `name=${defaultValue1}&project_id=${defaultValue2}&zone=${defaultValue3}&cluster_id=${defaultValue4}&node_pool_id=${defaultValue5}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}&project_id=${defaultValue2 ?? ''}&zone=${defaultValue3 ?? ''}&cluster_id=${defaultValue4 ?? ''}&node_pool_id=${defaultValue5 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.container.v1.Operation()
       );
@@ -4288,7 +4290,7 @@ describe('v1.ClusterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.container.v1.DeleteNodePoolRequest()
       );
@@ -4317,7 +4319,7 @@ describe('v1.ClusterManagerClient', () => {
         ['nodePoolId']
       );
       request.nodePoolId = defaultValue5;
-      const expectedHeaderRequestParams = `name=${defaultValue1}&project_id=${defaultValue2}&zone=${defaultValue3}&cluster_id=${defaultValue4}&node_pool_id=${defaultValue5}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}&project_id=${defaultValue2 ?? ''}&zone=${defaultValue3 ?? ''}&cluster_id=${defaultValue4 ?? ''}&node_pool_id=${defaultValue5 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.container.v1.Operation()
       );
@@ -4355,7 +4357,7 @@ describe('v1.ClusterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.container.v1.DeleteNodePoolRequest()
       );
@@ -4384,7 +4386,7 @@ describe('v1.ClusterManagerClient', () => {
         ['nodePoolId']
       );
       request.nodePoolId = defaultValue5;
-      const expectedHeaderRequestParams = `name=${defaultValue1}&project_id=${defaultValue2}&zone=${defaultValue3}&cluster_id=${defaultValue4}&node_pool_id=${defaultValue5}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}&project_id=${defaultValue2 ?? ''}&zone=${defaultValue3 ?? ''}&cluster_id=${defaultValue4 ?? ''}&node_pool_id=${defaultValue5 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteNodePool = stubSimpleCall(
         undefined,
@@ -4406,7 +4408,7 @@ describe('v1.ClusterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.container.v1.DeleteNodePoolRequest()
       );
@@ -4447,7 +4449,7 @@ describe('v1.ClusterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.container.v1.CompleteNodePoolUpgradeRequest()
       );
@@ -4456,7 +4458,7 @@ describe('v1.ClusterManagerClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -4479,7 +4481,7 @@ describe('v1.ClusterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.container.v1.CompleteNodePoolUpgradeRequest()
       );
@@ -4488,7 +4490,7 @@ describe('v1.ClusterManagerClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -4526,7 +4528,7 @@ describe('v1.ClusterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.container.v1.CompleteNodePoolUpgradeRequest()
       );
@@ -4535,7 +4537,7 @@ describe('v1.ClusterManagerClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.completeNodePoolUpgrade = stubSimpleCall(
         undefined,
@@ -4560,7 +4562,7 @@ describe('v1.ClusterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.container.v1.CompleteNodePoolUpgradeRequest()
       );
@@ -4584,7 +4586,7 @@ describe('v1.ClusterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.container.v1.RollbackNodePoolUpgradeRequest()
       );
@@ -4613,7 +4615,7 @@ describe('v1.ClusterManagerClient', () => {
         ['nodePoolId']
       );
       request.nodePoolId = defaultValue5;
-      const expectedHeaderRequestParams = `name=${defaultValue1}&project_id=${defaultValue2}&zone=${defaultValue3}&cluster_id=${defaultValue4}&node_pool_id=${defaultValue5}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}&project_id=${defaultValue2 ?? ''}&zone=${defaultValue3 ?? ''}&cluster_id=${defaultValue4 ?? ''}&node_pool_id=${defaultValue5 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.container.v1.Operation()
       );
@@ -4636,7 +4638,7 @@ describe('v1.ClusterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.container.v1.RollbackNodePoolUpgradeRequest()
       );
@@ -4665,7 +4667,7 @@ describe('v1.ClusterManagerClient', () => {
         ['nodePoolId']
       );
       request.nodePoolId = defaultValue5;
-      const expectedHeaderRequestParams = `name=${defaultValue1}&project_id=${defaultValue2}&zone=${defaultValue3}&cluster_id=${defaultValue4}&node_pool_id=${defaultValue5}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}&project_id=${defaultValue2 ?? ''}&zone=${defaultValue3 ?? ''}&cluster_id=${defaultValue4 ?? ''}&node_pool_id=${defaultValue5 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.container.v1.Operation()
       );
@@ -4703,7 +4705,7 @@ describe('v1.ClusterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.container.v1.RollbackNodePoolUpgradeRequest()
       );
@@ -4732,7 +4734,7 @@ describe('v1.ClusterManagerClient', () => {
         ['nodePoolId']
       );
       request.nodePoolId = defaultValue5;
-      const expectedHeaderRequestParams = `name=${defaultValue1}&project_id=${defaultValue2}&zone=${defaultValue3}&cluster_id=${defaultValue4}&node_pool_id=${defaultValue5}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}&project_id=${defaultValue2 ?? ''}&zone=${defaultValue3 ?? ''}&cluster_id=${defaultValue4 ?? ''}&node_pool_id=${defaultValue5 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.rollbackNodePoolUpgrade = stubSimpleCall(
         undefined,
@@ -4757,7 +4759,7 @@ describe('v1.ClusterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.container.v1.RollbackNodePoolUpgradeRequest()
       );
@@ -4801,7 +4803,7 @@ describe('v1.ClusterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.container.v1.SetNodePoolManagementRequest()
       );
@@ -4830,7 +4832,7 @@ describe('v1.ClusterManagerClient', () => {
         ['nodePoolId']
       );
       request.nodePoolId = defaultValue5;
-      const expectedHeaderRequestParams = `name=${defaultValue1}&project_id=${defaultValue2}&zone=${defaultValue3}&cluster_id=${defaultValue4}&node_pool_id=${defaultValue5}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}&project_id=${defaultValue2 ?? ''}&zone=${defaultValue3 ?? ''}&cluster_id=${defaultValue4 ?? ''}&node_pool_id=${defaultValue5 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.container.v1.Operation()
       );
@@ -4853,7 +4855,7 @@ describe('v1.ClusterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.container.v1.SetNodePoolManagementRequest()
       );
@@ -4882,7 +4884,7 @@ describe('v1.ClusterManagerClient', () => {
         ['nodePoolId']
       );
       request.nodePoolId = defaultValue5;
-      const expectedHeaderRequestParams = `name=${defaultValue1}&project_id=${defaultValue2}&zone=${defaultValue3}&cluster_id=${defaultValue4}&node_pool_id=${defaultValue5}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}&project_id=${defaultValue2 ?? ''}&zone=${defaultValue3 ?? ''}&cluster_id=${defaultValue4 ?? ''}&node_pool_id=${defaultValue5 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.container.v1.Operation()
       );
@@ -4920,7 +4922,7 @@ describe('v1.ClusterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.container.v1.SetNodePoolManagementRequest()
       );
@@ -4949,7 +4951,7 @@ describe('v1.ClusterManagerClient', () => {
         ['nodePoolId']
       );
       request.nodePoolId = defaultValue5;
-      const expectedHeaderRequestParams = `name=${defaultValue1}&project_id=${defaultValue2}&zone=${defaultValue3}&cluster_id=${defaultValue4}&node_pool_id=${defaultValue5}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}&project_id=${defaultValue2 ?? ''}&zone=${defaultValue3 ?? ''}&cluster_id=${defaultValue4 ?? ''}&node_pool_id=${defaultValue5 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.setNodePoolManagement = stubSimpleCall(
         undefined,
@@ -4974,7 +4976,7 @@ describe('v1.ClusterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.container.v1.SetNodePoolManagementRequest()
       );
@@ -5018,7 +5020,7 @@ describe('v1.ClusterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.container.v1.SetLabelsRequest()
       );
@@ -5042,7 +5044,7 @@ describe('v1.ClusterManagerClient', () => {
         ['clusterId']
       );
       request.clusterId = defaultValue4;
-      const expectedHeaderRequestParams = `name=${defaultValue1}&project_id=${defaultValue2}&zone=${defaultValue3}&cluster_id=${defaultValue4}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}&project_id=${defaultValue2 ?? ''}&zone=${defaultValue3 ?? ''}&cluster_id=${defaultValue4 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.container.v1.Operation()
       );
@@ -5064,7 +5066,7 @@ describe('v1.ClusterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.container.v1.SetLabelsRequest()
       );
@@ -5088,7 +5090,7 @@ describe('v1.ClusterManagerClient', () => {
         ['clusterId']
       );
       request.clusterId = defaultValue4;
-      const expectedHeaderRequestParams = `name=${defaultValue1}&project_id=${defaultValue2}&zone=${defaultValue3}&cluster_id=${defaultValue4}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}&project_id=${defaultValue2 ?? ''}&zone=${defaultValue3 ?? ''}&cluster_id=${defaultValue4 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.container.v1.Operation()
       );
@@ -5126,7 +5128,7 @@ describe('v1.ClusterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.container.v1.SetLabelsRequest()
       );
@@ -5150,7 +5152,7 @@ describe('v1.ClusterManagerClient', () => {
         ['clusterId']
       );
       request.clusterId = defaultValue4;
-      const expectedHeaderRequestParams = `name=${defaultValue1}&project_id=${defaultValue2}&zone=${defaultValue3}&cluster_id=${defaultValue4}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}&project_id=${defaultValue2 ?? ''}&zone=${defaultValue3 ?? ''}&cluster_id=${defaultValue4 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.setLabels = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.setLabels(request), expectedError);
@@ -5169,7 +5171,7 @@ describe('v1.ClusterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.container.v1.SetLabelsRequest()
       );
@@ -5205,7 +5207,7 @@ describe('v1.ClusterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.container.v1.SetLegacyAbacRequest()
       );
@@ -5229,7 +5231,7 @@ describe('v1.ClusterManagerClient', () => {
         ['clusterId']
       );
       request.clusterId = defaultValue4;
-      const expectedHeaderRequestParams = `name=${defaultValue1}&project_id=${defaultValue2}&zone=${defaultValue3}&cluster_id=${defaultValue4}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}&project_id=${defaultValue2 ?? ''}&zone=${defaultValue3 ?? ''}&cluster_id=${defaultValue4 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.container.v1.Operation()
       );
@@ -5251,7 +5253,7 @@ describe('v1.ClusterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.container.v1.SetLegacyAbacRequest()
       );
@@ -5275,7 +5277,7 @@ describe('v1.ClusterManagerClient', () => {
         ['clusterId']
       );
       request.clusterId = defaultValue4;
-      const expectedHeaderRequestParams = `name=${defaultValue1}&project_id=${defaultValue2}&zone=${defaultValue3}&cluster_id=${defaultValue4}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}&project_id=${defaultValue2 ?? ''}&zone=${defaultValue3 ?? ''}&cluster_id=${defaultValue4 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.container.v1.Operation()
       );
@@ -5313,7 +5315,7 @@ describe('v1.ClusterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.container.v1.SetLegacyAbacRequest()
       );
@@ -5337,7 +5339,7 @@ describe('v1.ClusterManagerClient', () => {
         ['clusterId']
       );
       request.clusterId = defaultValue4;
-      const expectedHeaderRequestParams = `name=${defaultValue1}&project_id=${defaultValue2}&zone=${defaultValue3}&cluster_id=${defaultValue4}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}&project_id=${defaultValue2 ?? ''}&zone=${defaultValue3 ?? ''}&cluster_id=${defaultValue4 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.setLegacyAbac = stubSimpleCall(
         undefined,
@@ -5359,7 +5361,7 @@ describe('v1.ClusterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.container.v1.SetLegacyAbacRequest()
       );
@@ -5395,7 +5397,7 @@ describe('v1.ClusterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.container.v1.StartIPRotationRequest()
       );
@@ -5419,7 +5421,7 @@ describe('v1.ClusterManagerClient', () => {
         ['clusterId']
       );
       request.clusterId = defaultValue4;
-      const expectedHeaderRequestParams = `name=${defaultValue1}&project_id=${defaultValue2}&zone=${defaultValue3}&cluster_id=${defaultValue4}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}&project_id=${defaultValue2 ?? ''}&zone=${defaultValue3 ?? ''}&cluster_id=${defaultValue4 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.container.v1.Operation()
       );
@@ -5441,7 +5443,7 @@ describe('v1.ClusterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.container.v1.StartIPRotationRequest()
       );
@@ -5465,7 +5467,7 @@ describe('v1.ClusterManagerClient', () => {
         ['clusterId']
       );
       request.clusterId = defaultValue4;
-      const expectedHeaderRequestParams = `name=${defaultValue1}&project_id=${defaultValue2}&zone=${defaultValue3}&cluster_id=${defaultValue4}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}&project_id=${defaultValue2 ?? ''}&zone=${defaultValue3 ?? ''}&cluster_id=${defaultValue4 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.container.v1.Operation()
       );
@@ -5503,7 +5505,7 @@ describe('v1.ClusterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.container.v1.StartIPRotationRequest()
       );
@@ -5527,7 +5529,7 @@ describe('v1.ClusterManagerClient', () => {
         ['clusterId']
       );
       request.clusterId = defaultValue4;
-      const expectedHeaderRequestParams = `name=${defaultValue1}&project_id=${defaultValue2}&zone=${defaultValue3}&cluster_id=${defaultValue4}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}&project_id=${defaultValue2 ?? ''}&zone=${defaultValue3 ?? ''}&cluster_id=${defaultValue4 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.startIpRotation = stubSimpleCall(
         undefined,
@@ -5549,7 +5551,7 @@ describe('v1.ClusterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.container.v1.StartIPRotationRequest()
       );
@@ -5585,7 +5587,7 @@ describe('v1.ClusterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.container.v1.CompleteIPRotationRequest()
       );
@@ -5609,7 +5611,7 @@ describe('v1.ClusterManagerClient', () => {
         ['clusterId']
       );
       request.clusterId = defaultValue4;
-      const expectedHeaderRequestParams = `name=${defaultValue1}&project_id=${defaultValue2}&zone=${defaultValue3}&cluster_id=${defaultValue4}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}&project_id=${defaultValue2 ?? ''}&zone=${defaultValue3 ?? ''}&cluster_id=${defaultValue4 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.container.v1.Operation()
       );
@@ -5632,7 +5634,7 @@ describe('v1.ClusterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.container.v1.CompleteIPRotationRequest()
       );
@@ -5656,7 +5658,7 @@ describe('v1.ClusterManagerClient', () => {
         ['clusterId']
       );
       request.clusterId = defaultValue4;
-      const expectedHeaderRequestParams = `name=${defaultValue1}&project_id=${defaultValue2}&zone=${defaultValue3}&cluster_id=${defaultValue4}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}&project_id=${defaultValue2 ?? ''}&zone=${defaultValue3 ?? ''}&cluster_id=${defaultValue4 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.container.v1.Operation()
       );
@@ -5694,7 +5696,7 @@ describe('v1.ClusterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.container.v1.CompleteIPRotationRequest()
       );
@@ -5718,7 +5720,7 @@ describe('v1.ClusterManagerClient', () => {
         ['clusterId']
       );
       request.clusterId = defaultValue4;
-      const expectedHeaderRequestParams = `name=${defaultValue1}&project_id=${defaultValue2}&zone=${defaultValue3}&cluster_id=${defaultValue4}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}&project_id=${defaultValue2 ?? ''}&zone=${defaultValue3 ?? ''}&cluster_id=${defaultValue4 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.completeIpRotation = stubSimpleCall(
         undefined,
@@ -5740,7 +5742,7 @@ describe('v1.ClusterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.container.v1.CompleteIPRotationRequest()
       );
@@ -5776,7 +5778,7 @@ describe('v1.ClusterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.container.v1.SetNodePoolSizeRequest()
       );
@@ -5805,7 +5807,7 @@ describe('v1.ClusterManagerClient', () => {
         ['nodePoolId']
       );
       request.nodePoolId = defaultValue5;
-      const expectedHeaderRequestParams = `name=${defaultValue1}&project_id=${defaultValue2}&zone=${defaultValue3}&cluster_id=${defaultValue4}&node_pool_id=${defaultValue5}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}&project_id=${defaultValue2 ?? ''}&zone=${defaultValue3 ?? ''}&cluster_id=${defaultValue4 ?? ''}&node_pool_id=${defaultValue5 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.container.v1.Operation()
       );
@@ -5827,7 +5829,7 @@ describe('v1.ClusterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.container.v1.SetNodePoolSizeRequest()
       );
@@ -5856,7 +5858,7 @@ describe('v1.ClusterManagerClient', () => {
         ['nodePoolId']
       );
       request.nodePoolId = defaultValue5;
-      const expectedHeaderRequestParams = `name=${defaultValue1}&project_id=${defaultValue2}&zone=${defaultValue3}&cluster_id=${defaultValue4}&node_pool_id=${defaultValue5}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}&project_id=${defaultValue2 ?? ''}&zone=${defaultValue3 ?? ''}&cluster_id=${defaultValue4 ?? ''}&node_pool_id=${defaultValue5 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.container.v1.Operation()
       );
@@ -5894,7 +5896,7 @@ describe('v1.ClusterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.container.v1.SetNodePoolSizeRequest()
       );
@@ -5923,7 +5925,7 @@ describe('v1.ClusterManagerClient', () => {
         ['nodePoolId']
       );
       request.nodePoolId = defaultValue5;
-      const expectedHeaderRequestParams = `name=${defaultValue1}&project_id=${defaultValue2}&zone=${defaultValue3}&cluster_id=${defaultValue4}&node_pool_id=${defaultValue5}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}&project_id=${defaultValue2 ?? ''}&zone=${defaultValue3 ?? ''}&cluster_id=${defaultValue4 ?? ''}&node_pool_id=${defaultValue5 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.setNodePoolSize = stubSimpleCall(
         undefined,
@@ -5945,7 +5947,7 @@ describe('v1.ClusterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.container.v1.SetNodePoolSizeRequest()
       );
@@ -5986,7 +5988,7 @@ describe('v1.ClusterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.container.v1.SetNetworkPolicyRequest()
       );
@@ -6010,7 +6012,7 @@ describe('v1.ClusterManagerClient', () => {
         ['clusterId']
       );
       request.clusterId = defaultValue4;
-      const expectedHeaderRequestParams = `name=${defaultValue1}&project_id=${defaultValue2}&zone=${defaultValue3}&cluster_id=${defaultValue4}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}&project_id=${defaultValue2 ?? ''}&zone=${defaultValue3 ?? ''}&cluster_id=${defaultValue4 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.container.v1.Operation()
       );
@@ -6032,7 +6034,7 @@ describe('v1.ClusterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.container.v1.SetNetworkPolicyRequest()
       );
@@ -6056,7 +6058,7 @@ describe('v1.ClusterManagerClient', () => {
         ['clusterId']
       );
       request.clusterId = defaultValue4;
-      const expectedHeaderRequestParams = `name=${defaultValue1}&project_id=${defaultValue2}&zone=${defaultValue3}&cluster_id=${defaultValue4}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}&project_id=${defaultValue2 ?? ''}&zone=${defaultValue3 ?? ''}&cluster_id=${defaultValue4 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.container.v1.Operation()
       );
@@ -6094,7 +6096,7 @@ describe('v1.ClusterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.container.v1.SetNetworkPolicyRequest()
       );
@@ -6118,7 +6120,7 @@ describe('v1.ClusterManagerClient', () => {
         ['clusterId']
       );
       request.clusterId = defaultValue4;
-      const expectedHeaderRequestParams = `name=${defaultValue1}&project_id=${defaultValue2}&zone=${defaultValue3}&cluster_id=${defaultValue4}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}&project_id=${defaultValue2 ?? ''}&zone=${defaultValue3 ?? ''}&cluster_id=${defaultValue4 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.setNetworkPolicy = stubSimpleCall(
         undefined,
@@ -6140,7 +6142,7 @@ describe('v1.ClusterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.container.v1.SetNetworkPolicyRequest()
       );
@@ -6176,7 +6178,7 @@ describe('v1.ClusterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.container.v1.SetMaintenancePolicyRequest()
       );
@@ -6200,7 +6202,7 @@ describe('v1.ClusterManagerClient', () => {
         ['clusterId']
       );
       request.clusterId = defaultValue4;
-      const expectedHeaderRequestParams = `name=${defaultValue1}&project_id=${defaultValue2}&zone=${defaultValue3}&cluster_id=${defaultValue4}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}&project_id=${defaultValue2 ?? ''}&zone=${defaultValue3 ?? ''}&cluster_id=${defaultValue4 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.container.v1.Operation()
       );
@@ -6223,7 +6225,7 @@ describe('v1.ClusterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.container.v1.SetMaintenancePolicyRequest()
       );
@@ -6247,7 +6249,7 @@ describe('v1.ClusterManagerClient', () => {
         ['clusterId']
       );
       request.clusterId = defaultValue4;
-      const expectedHeaderRequestParams = `name=${defaultValue1}&project_id=${defaultValue2}&zone=${defaultValue3}&cluster_id=${defaultValue4}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}&project_id=${defaultValue2 ?? ''}&zone=${defaultValue3 ?? ''}&cluster_id=${defaultValue4 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.container.v1.Operation()
       );
@@ -6285,7 +6287,7 @@ describe('v1.ClusterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.container.v1.SetMaintenancePolicyRequest()
       );
@@ -6309,7 +6311,7 @@ describe('v1.ClusterManagerClient', () => {
         ['clusterId']
       );
       request.clusterId = defaultValue4;
-      const expectedHeaderRequestParams = `name=${defaultValue1}&project_id=${defaultValue2}&zone=${defaultValue3}&cluster_id=${defaultValue4}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}&project_id=${defaultValue2 ?? ''}&zone=${defaultValue3 ?? ''}&cluster_id=${defaultValue4 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.setMaintenancePolicy = stubSimpleCall(
         undefined,
@@ -6331,7 +6333,7 @@ describe('v1.ClusterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.container.v1.SetMaintenancePolicyRequest()
       );
@@ -6367,7 +6369,7 @@ describe('v1.ClusterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.container.v1.CheckAutopilotCompatibilityRequest()
       );
@@ -6376,7 +6378,7 @@ describe('v1.ClusterManagerClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.container.v1.CheckAutopilotCompatibilityResponse()
       );
@@ -6399,7 +6401,7 @@ describe('v1.ClusterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.container.v1.CheckAutopilotCompatibilityRequest()
       );
@@ -6408,7 +6410,7 @@ describe('v1.ClusterManagerClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.container.v1.CheckAutopilotCompatibilityResponse()
       );
@@ -6446,7 +6448,7 @@ describe('v1.ClusterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.container.v1.CheckAutopilotCompatibilityRequest()
       );
@@ -6455,7 +6457,7 @@ describe('v1.ClusterManagerClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.checkAutopilotCompatibility = stubSimpleCall(
         undefined,
@@ -6480,7 +6482,7 @@ describe('v1.ClusterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.container.v1.CheckAutopilotCompatibilityRequest()
       );
@@ -6504,7 +6506,7 @@ describe('v1.ClusterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.container.v1.ListUsableSubnetworksRequest()
       );
@@ -6513,7 +6515,7 @@ describe('v1.ClusterManagerClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.container.v1.UsableSubnetwork()
@@ -6544,7 +6546,7 @@ describe('v1.ClusterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.container.v1.ListUsableSubnetworksRequest()
       );
@@ -6553,7 +6555,7 @@ describe('v1.ClusterManagerClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.container.v1.UsableSubnetwork()
@@ -6599,7 +6601,7 @@ describe('v1.ClusterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.container.v1.ListUsableSubnetworksRequest()
       );
@@ -6608,7 +6610,7 @@ describe('v1.ClusterManagerClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listUsableSubnetworks = stubSimpleCall(
         undefined,
@@ -6633,7 +6635,7 @@ describe('v1.ClusterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.container.v1.ListUsableSubnetworksRequest()
       );
@@ -6642,7 +6644,7 @@ describe('v1.ClusterManagerClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.container.v1.UsableSubnetwork()
@@ -6699,7 +6701,7 @@ describe('v1.ClusterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.container.v1.ListUsableSubnetworksRequest()
       );
@@ -6708,7 +6710,7 @@ describe('v1.ClusterManagerClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listUsableSubnetworks.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -6754,7 +6756,7 @@ describe('v1.ClusterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.container.v1.ListUsableSubnetworksRequest()
       );
@@ -6763,7 +6765,7 @@ describe('v1.ClusterManagerClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.container.v1.UsableSubnetwork()
@@ -6807,7 +6809,7 @@ describe('v1.ClusterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.container.v1.ListUsableSubnetworksRequest()
       );
@@ -6816,7 +6818,7 @@ describe('v1.ClusterManagerClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listUsableSubnetworks.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -6848,7 +6850,7 @@ describe('v1.ClusterManagerClient', () => {
   });
 
   describe('Path templates', () => {
-    describe('caPool', () => {
+    describe('caPool', async () => {
       const fakePath = '/rendered/path/caPool';
       const expectedParameters = {
         project: 'projectValue',
@@ -6859,7 +6861,7 @@ describe('v1.ClusterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.caPoolPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -6912,7 +6914,7 @@ describe('v1.ClusterManagerClient', () => {
       });
     });
 
-    describe('cryptoKeyVersion', () => {
+    describe('cryptoKeyVersion', async () => {
       const fakePath = '/rendered/path/cryptoKeyVersion';
       const expectedParameters = {
         project: 'projectValue',
@@ -6925,7 +6927,7 @@ describe('v1.ClusterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.cryptoKeyVersionPathTemplate.render = sinon
         .stub()
         .returns(fakePath);

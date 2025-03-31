@@ -29,6 +29,7 @@ import type {
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
+import {loggingUtils as logging} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -54,6 +55,8 @@ export class DocumentLinkServiceClient {
   private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
+  private _log = logging.log('contentwarehouse');
+
   auth: gax.GoogleAuth;
   descriptors: Descriptors = {
     page: {},
@@ -88,7 +91,7 @@ export class DocumentLinkServiceClient {
    *     Developer's Console, e.g. 'grape-spaceship-123'. We will also check
    *     the environment variable GCLOUD_PROJECT for your project ID. If your
    *     app is running in an environment which supports
-   *     {@link https://developers.google.com/identity/protocols/application-default-credentials Application Default Credentials},
+   *     {@link https://cloud.google.com/docs/authentication/application-default-credentials Application Default Credentials},
    *     your project ID will be detected automatically.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
@@ -499,8 +502,39 @@ export class DocumentLinkServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.listLinkedTargets(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listLinkedTargets request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.contentwarehouse.v1.IListLinkedTargetsResponse,
+          | protos.google.cloud.contentwarehouse.v1.IListLinkedTargetsRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('listLinkedTargets response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .listLinkedTargets(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.contentwarehouse.v1.IListLinkedTargetsResponse,
+          (
+            | protos.google.cloud.contentwarehouse.v1.IListLinkedTargetsRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('listLinkedTargets response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Create a link between a source document and a target document.
@@ -604,8 +638,39 @@ export class DocumentLinkServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.createDocumentLink(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('createDocumentLink request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.contentwarehouse.v1.IDocumentLink,
+          | protos.google.cloud.contentwarehouse.v1.ICreateDocumentLinkRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('createDocumentLink response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .createDocumentLink(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.contentwarehouse.v1.IDocumentLink,
+          (
+            | protos.google.cloud.contentwarehouse.v1.ICreateDocumentLinkRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('createDocumentLink response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Remove the link between the source and target documents.
@@ -705,8 +770,39 @@ export class DocumentLinkServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.deleteDocumentLink(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('deleteDocumentLink request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.cloud.contentwarehouse.v1.IDeleteDocumentLinkRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('deleteDocumentLink response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .deleteDocumentLink(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.protobuf.IEmpty,
+          (
+            | protos.google.cloud.contentwarehouse.v1.IDeleteDocumentLinkRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteDocumentLink response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
 
   /**
@@ -816,12 +912,40 @@ export class DocumentLinkServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.listLinkedSources(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.contentwarehouse.v1.IListLinkedSourcesRequest,
+          | protos.google.cloud.contentwarehouse.v1.IListLinkedSourcesResponse
+          | null
+          | undefined,
+          protos.google.cloud.contentwarehouse.v1.IDocumentLink
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listLinkedSources values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listLinkedSources request %j', request);
+    return this.innerApiCalls
+      .listLinkedSources(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.contentwarehouse.v1.IDocumentLink[],
+          protos.google.cloud.contentwarehouse.v1.IListLinkedSourcesRequest | null,
+          protos.google.cloud.contentwarehouse.v1.IListLinkedSourcesResponse,
+        ]) => {
+          this._log.info('listLinkedSources values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listLinkedSources`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
@@ -868,7 +992,10 @@ export class DocumentLinkServiceClient {
       });
     const defaultCallSettings = this._defaults['listLinkedSources'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listLinkedSources stream %j', request);
     return this.descriptors.page.listLinkedSources.createStream(
       this.innerApiCalls.listLinkedSources as GaxCall,
       request,
@@ -927,7 +1054,10 @@ export class DocumentLinkServiceClient {
       });
     const defaultCallSettings = this._defaults['listLinkedSources'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listLinkedSources iterate %j', request);
     return this.descriptors.page.listLinkedSources.asyncIterate(
       this.innerApiCalls['listLinkedSources'] as GaxCall,
       request as {},
@@ -1310,6 +1440,7 @@ export class DocumentLinkServiceClient {
   close(): Promise<void> {
     if (this.documentLinkServiceStub && !this._terminated) {
       return this.documentLinkServiceStub.then(stub => {
+        this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
       });

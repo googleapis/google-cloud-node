@@ -282,7 +282,9 @@ describe('v1beta1.AutoMlClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      client.initialize().catch(err => {
+        throw err;
+      });
       assert(client.autoMlStub);
       client.close().then(() => {
         done();
@@ -341,7 +343,7 @@ describe('v1beta1.AutoMlClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.automl.v1beta1.CreateDatasetRequest()
       );
@@ -350,7 +352,7 @@ describe('v1beta1.AutoMlClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.automl.v1beta1.Dataset()
       );
@@ -372,7 +374,7 @@ describe('v1beta1.AutoMlClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.automl.v1beta1.CreateDatasetRequest()
       );
@@ -381,7 +383,7 @@ describe('v1beta1.AutoMlClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.automl.v1beta1.Dataset()
       );
@@ -419,7 +421,7 @@ describe('v1beta1.AutoMlClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.automl.v1beta1.CreateDatasetRequest()
       );
@@ -428,7 +430,7 @@ describe('v1beta1.AutoMlClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createDataset = stubSimpleCall(
         undefined,
@@ -450,7 +452,7 @@ describe('v1beta1.AutoMlClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.automl.v1beta1.CreateDatasetRequest()
       );
@@ -471,7 +473,7 @@ describe('v1beta1.AutoMlClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.automl.v1beta1.GetDatasetRequest()
       );
@@ -480,7 +482,7 @@ describe('v1beta1.AutoMlClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.automl.v1beta1.Dataset()
       );
@@ -502,7 +504,7 @@ describe('v1beta1.AutoMlClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.automl.v1beta1.GetDatasetRequest()
       );
@@ -511,7 +513,7 @@ describe('v1beta1.AutoMlClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.automl.v1beta1.Dataset()
       );
@@ -549,7 +551,7 @@ describe('v1beta1.AutoMlClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.automl.v1beta1.GetDatasetRequest()
       );
@@ -558,7 +560,7 @@ describe('v1beta1.AutoMlClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getDataset = stubSimpleCall(
         undefined,
@@ -580,7 +582,7 @@ describe('v1beta1.AutoMlClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.automl.v1beta1.GetDatasetRequest()
       );
@@ -601,7 +603,7 @@ describe('v1beta1.AutoMlClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.automl.v1beta1.UpdateDatasetRequest()
       );
@@ -611,7 +613,7 @@ describe('v1beta1.AutoMlClient', () => {
         ['dataset', 'name']
       );
       request.dataset.name = defaultValue1;
-      const expectedHeaderRequestParams = `dataset.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `dataset.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.automl.v1beta1.Dataset()
       );
@@ -633,7 +635,7 @@ describe('v1beta1.AutoMlClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.automl.v1beta1.UpdateDatasetRequest()
       );
@@ -643,7 +645,7 @@ describe('v1beta1.AutoMlClient', () => {
         ['dataset', 'name']
       );
       request.dataset.name = defaultValue1;
-      const expectedHeaderRequestParams = `dataset.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `dataset.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.automl.v1beta1.Dataset()
       );
@@ -681,7 +683,7 @@ describe('v1beta1.AutoMlClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.automl.v1beta1.UpdateDatasetRequest()
       );
@@ -691,7 +693,7 @@ describe('v1beta1.AutoMlClient', () => {
         ['dataset', 'name']
       );
       request.dataset.name = defaultValue1;
-      const expectedHeaderRequestParams = `dataset.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `dataset.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateDataset = stubSimpleCall(
         undefined,
@@ -713,7 +715,7 @@ describe('v1beta1.AutoMlClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.automl.v1beta1.UpdateDatasetRequest()
       );
@@ -735,7 +737,7 @@ describe('v1beta1.AutoMlClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.automl.v1beta1.GetAnnotationSpecRequest()
       );
@@ -744,7 +746,7 @@ describe('v1beta1.AutoMlClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.automl.v1beta1.AnnotationSpec()
       );
@@ -766,7 +768,7 @@ describe('v1beta1.AutoMlClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.automl.v1beta1.GetAnnotationSpecRequest()
       );
@@ -775,7 +777,7 @@ describe('v1beta1.AutoMlClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.automl.v1beta1.AnnotationSpec()
       );
@@ -813,7 +815,7 @@ describe('v1beta1.AutoMlClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.automl.v1beta1.GetAnnotationSpecRequest()
       );
@@ -822,7 +824,7 @@ describe('v1beta1.AutoMlClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getAnnotationSpec = stubSimpleCall(
         undefined,
@@ -844,7 +846,7 @@ describe('v1beta1.AutoMlClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.automl.v1beta1.GetAnnotationSpecRequest()
       );
@@ -865,7 +867,7 @@ describe('v1beta1.AutoMlClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.automl.v1beta1.GetTableSpecRequest()
       );
@@ -874,7 +876,7 @@ describe('v1beta1.AutoMlClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.automl.v1beta1.TableSpec()
       );
@@ -896,7 +898,7 @@ describe('v1beta1.AutoMlClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.automl.v1beta1.GetTableSpecRequest()
       );
@@ -905,7 +907,7 @@ describe('v1beta1.AutoMlClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.automl.v1beta1.TableSpec()
       );
@@ -943,7 +945,7 @@ describe('v1beta1.AutoMlClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.automl.v1beta1.GetTableSpecRequest()
       );
@@ -952,7 +954,7 @@ describe('v1beta1.AutoMlClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getTableSpec = stubSimpleCall(
         undefined,
@@ -974,7 +976,7 @@ describe('v1beta1.AutoMlClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.automl.v1beta1.GetTableSpecRequest()
       );
@@ -995,7 +997,7 @@ describe('v1beta1.AutoMlClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.automl.v1beta1.UpdateTableSpecRequest()
       );
@@ -1005,7 +1007,7 @@ describe('v1beta1.AutoMlClient', () => {
         ['tableSpec', 'name']
       );
       request.tableSpec.name = defaultValue1;
-      const expectedHeaderRequestParams = `table_spec.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `table_spec.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.automl.v1beta1.TableSpec()
       );
@@ -1027,7 +1029,7 @@ describe('v1beta1.AutoMlClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.automl.v1beta1.UpdateTableSpecRequest()
       );
@@ -1037,7 +1039,7 @@ describe('v1beta1.AutoMlClient', () => {
         ['tableSpec', 'name']
       );
       request.tableSpec.name = defaultValue1;
-      const expectedHeaderRequestParams = `table_spec.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `table_spec.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.automl.v1beta1.TableSpec()
       );
@@ -1075,7 +1077,7 @@ describe('v1beta1.AutoMlClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.automl.v1beta1.UpdateTableSpecRequest()
       );
@@ -1085,7 +1087,7 @@ describe('v1beta1.AutoMlClient', () => {
         ['tableSpec', 'name']
       );
       request.tableSpec.name = defaultValue1;
-      const expectedHeaderRequestParams = `table_spec.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `table_spec.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateTableSpec = stubSimpleCall(
         undefined,
@@ -1107,7 +1109,7 @@ describe('v1beta1.AutoMlClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.automl.v1beta1.UpdateTableSpecRequest()
       );
@@ -1129,7 +1131,7 @@ describe('v1beta1.AutoMlClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.automl.v1beta1.GetColumnSpecRequest()
       );
@@ -1138,7 +1140,7 @@ describe('v1beta1.AutoMlClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.automl.v1beta1.ColumnSpec()
       );
@@ -1160,7 +1162,7 @@ describe('v1beta1.AutoMlClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.automl.v1beta1.GetColumnSpecRequest()
       );
@@ -1169,7 +1171,7 @@ describe('v1beta1.AutoMlClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.automl.v1beta1.ColumnSpec()
       );
@@ -1207,7 +1209,7 @@ describe('v1beta1.AutoMlClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.automl.v1beta1.GetColumnSpecRequest()
       );
@@ -1216,7 +1218,7 @@ describe('v1beta1.AutoMlClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getColumnSpec = stubSimpleCall(
         undefined,
@@ -1238,7 +1240,7 @@ describe('v1beta1.AutoMlClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.automl.v1beta1.GetColumnSpecRequest()
       );
@@ -1259,7 +1261,7 @@ describe('v1beta1.AutoMlClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.automl.v1beta1.UpdateColumnSpecRequest()
       );
@@ -1269,7 +1271,7 @@ describe('v1beta1.AutoMlClient', () => {
         ['columnSpec', 'name']
       );
       request.columnSpec.name = defaultValue1;
-      const expectedHeaderRequestParams = `column_spec.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `column_spec.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.automl.v1beta1.ColumnSpec()
       );
@@ -1291,7 +1293,7 @@ describe('v1beta1.AutoMlClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.automl.v1beta1.UpdateColumnSpecRequest()
       );
@@ -1301,7 +1303,7 @@ describe('v1beta1.AutoMlClient', () => {
         ['columnSpec', 'name']
       );
       request.columnSpec.name = defaultValue1;
-      const expectedHeaderRequestParams = `column_spec.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `column_spec.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.automl.v1beta1.ColumnSpec()
       );
@@ -1339,7 +1341,7 @@ describe('v1beta1.AutoMlClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.automl.v1beta1.UpdateColumnSpecRequest()
       );
@@ -1349,7 +1351,7 @@ describe('v1beta1.AutoMlClient', () => {
         ['columnSpec', 'name']
       );
       request.columnSpec.name = defaultValue1;
-      const expectedHeaderRequestParams = `column_spec.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `column_spec.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateColumnSpec = stubSimpleCall(
         undefined,
@@ -1371,7 +1373,7 @@ describe('v1beta1.AutoMlClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.automl.v1beta1.UpdateColumnSpecRequest()
       );
@@ -1393,7 +1395,7 @@ describe('v1beta1.AutoMlClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.automl.v1beta1.GetModelRequest()
       );
@@ -1402,7 +1404,7 @@ describe('v1beta1.AutoMlClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.automl.v1beta1.Model()
       );
@@ -1424,7 +1426,7 @@ describe('v1beta1.AutoMlClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.automl.v1beta1.GetModelRequest()
       );
@@ -1433,7 +1435,7 @@ describe('v1beta1.AutoMlClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.automl.v1beta1.Model()
       );
@@ -1471,7 +1473,7 @@ describe('v1beta1.AutoMlClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.automl.v1beta1.GetModelRequest()
       );
@@ -1480,7 +1482,7 @@ describe('v1beta1.AutoMlClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getModel = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.getModel(request), expectedError);
@@ -1499,7 +1501,7 @@ describe('v1beta1.AutoMlClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.automl.v1beta1.GetModelRequest()
       );
@@ -1520,7 +1522,7 @@ describe('v1beta1.AutoMlClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.automl.v1beta1.GetModelEvaluationRequest()
       );
@@ -1529,7 +1531,7 @@ describe('v1beta1.AutoMlClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.automl.v1beta1.ModelEvaluation()
       );
@@ -1552,7 +1554,7 @@ describe('v1beta1.AutoMlClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.automl.v1beta1.GetModelEvaluationRequest()
       );
@@ -1561,7 +1563,7 @@ describe('v1beta1.AutoMlClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.automl.v1beta1.ModelEvaluation()
       );
@@ -1599,7 +1601,7 @@ describe('v1beta1.AutoMlClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.automl.v1beta1.GetModelEvaluationRequest()
       );
@@ -1608,7 +1610,7 @@ describe('v1beta1.AutoMlClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getModelEvaluation = stubSimpleCall(
         undefined,
@@ -1630,7 +1632,7 @@ describe('v1beta1.AutoMlClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.automl.v1beta1.GetModelEvaluationRequest()
       );
@@ -1651,7 +1653,7 @@ describe('v1beta1.AutoMlClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.automl.v1beta1.DeleteDatasetRequest()
       );
@@ -1660,7 +1662,7 @@ describe('v1beta1.AutoMlClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1684,7 +1686,7 @@ describe('v1beta1.AutoMlClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.automl.v1beta1.DeleteDatasetRequest()
       );
@@ -1693,7 +1695,7 @@ describe('v1beta1.AutoMlClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1738,7 +1740,7 @@ describe('v1beta1.AutoMlClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.automl.v1beta1.DeleteDatasetRequest()
       );
@@ -1747,7 +1749,7 @@ describe('v1beta1.AutoMlClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteDataset = stubLongRunningCall(
         undefined,
@@ -1769,7 +1771,7 @@ describe('v1beta1.AutoMlClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.automl.v1beta1.DeleteDatasetRequest()
       );
@@ -1778,7 +1780,7 @@ describe('v1beta1.AutoMlClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteDataset = stubLongRunningCall(
         undefined,
@@ -1802,7 +1804,7 @@ describe('v1beta1.AutoMlClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -1824,7 +1826,7 @@ describe('v1beta1.AutoMlClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -1845,7 +1847,7 @@ describe('v1beta1.AutoMlClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.automl.v1beta1.ImportDataRequest()
       );
@@ -1854,7 +1856,7 @@ describe('v1beta1.AutoMlClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1877,7 +1879,7 @@ describe('v1beta1.AutoMlClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.automl.v1beta1.ImportDataRequest()
       );
@@ -1886,7 +1888,7 @@ describe('v1beta1.AutoMlClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1931,7 +1933,7 @@ describe('v1beta1.AutoMlClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.automl.v1beta1.ImportDataRequest()
       );
@@ -1940,7 +1942,7 @@ describe('v1beta1.AutoMlClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.importData = stubLongRunningCall(
         undefined,
@@ -1962,7 +1964,7 @@ describe('v1beta1.AutoMlClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.automl.v1beta1.ImportDataRequest()
       );
@@ -1971,7 +1973,7 @@ describe('v1beta1.AutoMlClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.importData = stubLongRunningCall(
         undefined,
@@ -1995,7 +1997,7 @@ describe('v1beta1.AutoMlClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -2017,7 +2019,7 @@ describe('v1beta1.AutoMlClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -2035,7 +2037,7 @@ describe('v1beta1.AutoMlClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.automl.v1beta1.ExportDataRequest()
       );
@@ -2044,7 +2046,7 @@ describe('v1beta1.AutoMlClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2067,7 +2069,7 @@ describe('v1beta1.AutoMlClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.automl.v1beta1.ExportDataRequest()
       );
@@ -2076,7 +2078,7 @@ describe('v1beta1.AutoMlClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2121,7 +2123,7 @@ describe('v1beta1.AutoMlClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.automl.v1beta1.ExportDataRequest()
       );
@@ -2130,7 +2132,7 @@ describe('v1beta1.AutoMlClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.exportData = stubLongRunningCall(
         undefined,
@@ -2152,7 +2154,7 @@ describe('v1beta1.AutoMlClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.automl.v1beta1.ExportDataRequest()
       );
@@ -2161,7 +2163,7 @@ describe('v1beta1.AutoMlClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.exportData = stubLongRunningCall(
         undefined,
@@ -2185,7 +2187,7 @@ describe('v1beta1.AutoMlClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -2207,7 +2209,7 @@ describe('v1beta1.AutoMlClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -2225,7 +2227,7 @@ describe('v1beta1.AutoMlClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.automl.v1beta1.CreateModelRequest()
       );
@@ -2234,7 +2236,7 @@ describe('v1beta1.AutoMlClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2257,7 +2259,7 @@ describe('v1beta1.AutoMlClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.automl.v1beta1.CreateModelRequest()
       );
@@ -2266,7 +2268,7 @@ describe('v1beta1.AutoMlClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2311,7 +2313,7 @@ describe('v1beta1.AutoMlClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.automl.v1beta1.CreateModelRequest()
       );
@@ -2320,7 +2322,7 @@ describe('v1beta1.AutoMlClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createModel = stubLongRunningCall(
         undefined,
@@ -2342,7 +2344,7 @@ describe('v1beta1.AutoMlClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.automl.v1beta1.CreateModelRequest()
       );
@@ -2351,7 +2353,7 @@ describe('v1beta1.AutoMlClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createModel = stubLongRunningCall(
         undefined,
@@ -2375,7 +2377,7 @@ describe('v1beta1.AutoMlClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -2397,7 +2399,7 @@ describe('v1beta1.AutoMlClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -2415,7 +2417,7 @@ describe('v1beta1.AutoMlClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.automl.v1beta1.DeleteModelRequest()
       );
@@ -2424,7 +2426,7 @@ describe('v1beta1.AutoMlClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2447,7 +2449,7 @@ describe('v1beta1.AutoMlClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.automl.v1beta1.DeleteModelRequest()
       );
@@ -2456,7 +2458,7 @@ describe('v1beta1.AutoMlClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2501,7 +2503,7 @@ describe('v1beta1.AutoMlClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.automl.v1beta1.DeleteModelRequest()
       );
@@ -2510,7 +2512,7 @@ describe('v1beta1.AutoMlClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteModel = stubLongRunningCall(
         undefined,
@@ -2532,7 +2534,7 @@ describe('v1beta1.AutoMlClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.automl.v1beta1.DeleteModelRequest()
       );
@@ -2541,7 +2543,7 @@ describe('v1beta1.AutoMlClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteModel = stubLongRunningCall(
         undefined,
@@ -2565,7 +2567,7 @@ describe('v1beta1.AutoMlClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -2587,7 +2589,7 @@ describe('v1beta1.AutoMlClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -2605,7 +2607,7 @@ describe('v1beta1.AutoMlClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.automl.v1beta1.DeployModelRequest()
       );
@@ -2614,7 +2616,7 @@ describe('v1beta1.AutoMlClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2637,7 +2639,7 @@ describe('v1beta1.AutoMlClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.automl.v1beta1.DeployModelRequest()
       );
@@ -2646,7 +2648,7 @@ describe('v1beta1.AutoMlClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2691,7 +2693,7 @@ describe('v1beta1.AutoMlClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.automl.v1beta1.DeployModelRequest()
       );
@@ -2700,7 +2702,7 @@ describe('v1beta1.AutoMlClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deployModel = stubLongRunningCall(
         undefined,
@@ -2722,7 +2724,7 @@ describe('v1beta1.AutoMlClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.automl.v1beta1.DeployModelRequest()
       );
@@ -2731,7 +2733,7 @@ describe('v1beta1.AutoMlClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deployModel = stubLongRunningCall(
         undefined,
@@ -2755,7 +2757,7 @@ describe('v1beta1.AutoMlClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -2777,7 +2779,7 @@ describe('v1beta1.AutoMlClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -2795,7 +2797,7 @@ describe('v1beta1.AutoMlClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.automl.v1beta1.UndeployModelRequest()
       );
@@ -2804,7 +2806,7 @@ describe('v1beta1.AutoMlClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2828,7 +2830,7 @@ describe('v1beta1.AutoMlClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.automl.v1beta1.UndeployModelRequest()
       );
@@ -2837,7 +2839,7 @@ describe('v1beta1.AutoMlClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2882,7 +2884,7 @@ describe('v1beta1.AutoMlClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.automl.v1beta1.UndeployModelRequest()
       );
@@ -2891,7 +2893,7 @@ describe('v1beta1.AutoMlClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.undeployModel = stubLongRunningCall(
         undefined,
@@ -2913,7 +2915,7 @@ describe('v1beta1.AutoMlClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.automl.v1beta1.UndeployModelRequest()
       );
@@ -2922,7 +2924,7 @@ describe('v1beta1.AutoMlClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.undeployModel = stubLongRunningCall(
         undefined,
@@ -2946,7 +2948,7 @@ describe('v1beta1.AutoMlClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -2968,7 +2970,7 @@ describe('v1beta1.AutoMlClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -2989,7 +2991,7 @@ describe('v1beta1.AutoMlClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.automl.v1beta1.ExportModelRequest()
       );
@@ -2998,7 +3000,7 @@ describe('v1beta1.AutoMlClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -3021,7 +3023,7 @@ describe('v1beta1.AutoMlClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.automl.v1beta1.ExportModelRequest()
       );
@@ -3030,7 +3032,7 @@ describe('v1beta1.AutoMlClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -3075,7 +3077,7 @@ describe('v1beta1.AutoMlClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.automl.v1beta1.ExportModelRequest()
       );
@@ -3084,7 +3086,7 @@ describe('v1beta1.AutoMlClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.exportModel = stubLongRunningCall(
         undefined,
@@ -3106,7 +3108,7 @@ describe('v1beta1.AutoMlClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.automl.v1beta1.ExportModelRequest()
       );
@@ -3115,7 +3117,7 @@ describe('v1beta1.AutoMlClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.exportModel = stubLongRunningCall(
         undefined,
@@ -3139,7 +3141,7 @@ describe('v1beta1.AutoMlClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -3161,7 +3163,7 @@ describe('v1beta1.AutoMlClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -3179,7 +3181,7 @@ describe('v1beta1.AutoMlClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.automl.v1beta1.ExportEvaluatedExamplesRequest()
       );
@@ -3188,7 +3190,7 @@ describe('v1beta1.AutoMlClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -3212,7 +3214,7 @@ describe('v1beta1.AutoMlClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.automl.v1beta1.ExportEvaluatedExamplesRequest()
       );
@@ -3221,7 +3223,7 @@ describe('v1beta1.AutoMlClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -3266,7 +3268,7 @@ describe('v1beta1.AutoMlClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.automl.v1beta1.ExportEvaluatedExamplesRequest()
       );
@@ -3275,7 +3277,7 @@ describe('v1beta1.AutoMlClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.exportEvaluatedExamples = stubLongRunningCall(
         undefined,
@@ -3300,7 +3302,7 @@ describe('v1beta1.AutoMlClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.automl.v1beta1.ExportEvaluatedExamplesRequest()
       );
@@ -3309,7 +3311,7 @@ describe('v1beta1.AutoMlClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.exportEvaluatedExamples = stubLongRunningCall(
         undefined,
@@ -3333,7 +3335,7 @@ describe('v1beta1.AutoMlClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -3356,7 +3358,7 @@ describe('v1beta1.AutoMlClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -3377,7 +3379,7 @@ describe('v1beta1.AutoMlClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.automl.v1beta1.ListDatasetsRequest()
       );
@@ -3386,7 +3388,7 @@ describe('v1beta1.AutoMlClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.automl.v1beta1.Dataset()),
         generateSampleMessage(new protos.google.cloud.automl.v1beta1.Dataset()),
@@ -3410,7 +3412,7 @@ describe('v1beta1.AutoMlClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.automl.v1beta1.ListDatasetsRequest()
       );
@@ -3419,7 +3421,7 @@ describe('v1beta1.AutoMlClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.automl.v1beta1.Dataset()),
         generateSampleMessage(new protos.google.cloud.automl.v1beta1.Dataset()),
@@ -3459,7 +3461,7 @@ describe('v1beta1.AutoMlClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.automl.v1beta1.ListDatasetsRequest()
       );
@@ -3468,7 +3470,7 @@ describe('v1beta1.AutoMlClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listDatasets = stubSimpleCall(
         undefined,
@@ -3490,7 +3492,7 @@ describe('v1beta1.AutoMlClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.automl.v1beta1.ListDatasetsRequest()
       );
@@ -3499,7 +3501,7 @@ describe('v1beta1.AutoMlClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.automl.v1beta1.Dataset()),
         generateSampleMessage(new protos.google.cloud.automl.v1beta1.Dataset()),
@@ -3544,7 +3546,7 @@ describe('v1beta1.AutoMlClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.automl.v1beta1.ListDatasetsRequest()
       );
@@ -3553,7 +3555,7 @@ describe('v1beta1.AutoMlClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listDatasets.createStream = stubPageStreamingCall(
         undefined,
@@ -3595,7 +3597,7 @@ describe('v1beta1.AutoMlClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.automl.v1beta1.ListDatasetsRequest()
       );
@@ -3604,7 +3606,7 @@ describe('v1beta1.AutoMlClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.automl.v1beta1.Dataset()),
         generateSampleMessage(new protos.google.cloud.automl.v1beta1.Dataset()),
@@ -3638,7 +3640,7 @@ describe('v1beta1.AutoMlClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.automl.v1beta1.ListDatasetsRequest()
       );
@@ -3647,7 +3649,7 @@ describe('v1beta1.AutoMlClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listDatasets.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -3680,7 +3682,7 @@ describe('v1beta1.AutoMlClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.automl.v1beta1.ListTableSpecsRequest()
       );
@@ -3689,7 +3691,7 @@ describe('v1beta1.AutoMlClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.automl.v1beta1.TableSpec()
@@ -3719,7 +3721,7 @@ describe('v1beta1.AutoMlClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.automl.v1beta1.ListTableSpecsRequest()
       );
@@ -3728,7 +3730,7 @@ describe('v1beta1.AutoMlClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.automl.v1beta1.TableSpec()
@@ -3774,7 +3776,7 @@ describe('v1beta1.AutoMlClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.automl.v1beta1.ListTableSpecsRequest()
       );
@@ -3783,7 +3785,7 @@ describe('v1beta1.AutoMlClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listTableSpecs = stubSimpleCall(
         undefined,
@@ -3805,7 +3807,7 @@ describe('v1beta1.AutoMlClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.automl.v1beta1.ListTableSpecsRequest()
       );
@@ -3814,7 +3816,7 @@ describe('v1beta1.AutoMlClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.automl.v1beta1.TableSpec()
@@ -3865,7 +3867,7 @@ describe('v1beta1.AutoMlClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.automl.v1beta1.ListTableSpecsRequest()
       );
@@ -3874,7 +3876,7 @@ describe('v1beta1.AutoMlClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listTableSpecs.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -3914,7 +3916,7 @@ describe('v1beta1.AutoMlClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.automl.v1beta1.ListTableSpecsRequest()
       );
@@ -3923,7 +3925,7 @@ describe('v1beta1.AutoMlClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.automl.v1beta1.TableSpec()
@@ -3963,7 +3965,7 @@ describe('v1beta1.AutoMlClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.automl.v1beta1.ListTableSpecsRequest()
       );
@@ -3972,7 +3974,7 @@ describe('v1beta1.AutoMlClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listTableSpecs.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -4005,7 +4007,7 @@ describe('v1beta1.AutoMlClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.automl.v1beta1.ListColumnSpecsRequest()
       );
@@ -4014,7 +4016,7 @@ describe('v1beta1.AutoMlClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.automl.v1beta1.ColumnSpec()
@@ -4044,7 +4046,7 @@ describe('v1beta1.AutoMlClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.automl.v1beta1.ListColumnSpecsRequest()
       );
@@ -4053,7 +4055,7 @@ describe('v1beta1.AutoMlClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.automl.v1beta1.ColumnSpec()
@@ -4099,7 +4101,7 @@ describe('v1beta1.AutoMlClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.automl.v1beta1.ListColumnSpecsRequest()
       );
@@ -4108,7 +4110,7 @@ describe('v1beta1.AutoMlClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listColumnSpecs = stubSimpleCall(
         undefined,
@@ -4130,7 +4132,7 @@ describe('v1beta1.AutoMlClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.automl.v1beta1.ListColumnSpecsRequest()
       );
@@ -4139,7 +4141,7 @@ describe('v1beta1.AutoMlClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.automl.v1beta1.ColumnSpec()
@@ -4190,7 +4192,7 @@ describe('v1beta1.AutoMlClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.automl.v1beta1.ListColumnSpecsRequest()
       );
@@ -4199,7 +4201,7 @@ describe('v1beta1.AutoMlClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listColumnSpecs.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -4239,7 +4241,7 @@ describe('v1beta1.AutoMlClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.automl.v1beta1.ListColumnSpecsRequest()
       );
@@ -4248,7 +4250,7 @@ describe('v1beta1.AutoMlClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.automl.v1beta1.ColumnSpec()
@@ -4288,7 +4290,7 @@ describe('v1beta1.AutoMlClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.automl.v1beta1.ListColumnSpecsRequest()
       );
@@ -4297,7 +4299,7 @@ describe('v1beta1.AutoMlClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listColumnSpecs.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -4330,7 +4332,7 @@ describe('v1beta1.AutoMlClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.automl.v1beta1.ListModelsRequest()
       );
@@ -4339,7 +4341,7 @@ describe('v1beta1.AutoMlClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.automl.v1beta1.Model()),
         generateSampleMessage(new protos.google.cloud.automl.v1beta1.Model()),
@@ -4363,7 +4365,7 @@ describe('v1beta1.AutoMlClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.automl.v1beta1.ListModelsRequest()
       );
@@ -4372,7 +4374,7 @@ describe('v1beta1.AutoMlClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.automl.v1beta1.Model()),
         generateSampleMessage(new protos.google.cloud.automl.v1beta1.Model()),
@@ -4412,7 +4414,7 @@ describe('v1beta1.AutoMlClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.automl.v1beta1.ListModelsRequest()
       );
@@ -4421,7 +4423,7 @@ describe('v1beta1.AutoMlClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listModels = stubSimpleCall(
         undefined,
@@ -4443,7 +4445,7 @@ describe('v1beta1.AutoMlClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.automl.v1beta1.ListModelsRequest()
       );
@@ -4452,7 +4454,7 @@ describe('v1beta1.AutoMlClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.automl.v1beta1.Model()),
         generateSampleMessage(new protos.google.cloud.automl.v1beta1.Model()),
@@ -4497,7 +4499,7 @@ describe('v1beta1.AutoMlClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.automl.v1beta1.ListModelsRequest()
       );
@@ -4506,7 +4508,7 @@ describe('v1beta1.AutoMlClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listModels.createStream = stubPageStreamingCall(
         undefined,
@@ -4548,7 +4550,7 @@ describe('v1beta1.AutoMlClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.automl.v1beta1.ListModelsRequest()
       );
@@ -4557,7 +4559,7 @@ describe('v1beta1.AutoMlClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.automl.v1beta1.Model()),
         generateSampleMessage(new protos.google.cloud.automl.v1beta1.Model()),
@@ -4591,7 +4593,7 @@ describe('v1beta1.AutoMlClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.automl.v1beta1.ListModelsRequest()
       );
@@ -4600,7 +4602,7 @@ describe('v1beta1.AutoMlClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listModels.asyncIterate = stubAsyncIterationCall(
         undefined,
@@ -4635,7 +4637,7 @@ describe('v1beta1.AutoMlClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.automl.v1beta1.ListModelEvaluationsRequest()
       );
@@ -4644,7 +4646,7 @@ describe('v1beta1.AutoMlClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.automl.v1beta1.ModelEvaluation()
@@ -4675,7 +4677,7 @@ describe('v1beta1.AutoMlClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.automl.v1beta1.ListModelEvaluationsRequest()
       );
@@ -4684,7 +4686,7 @@ describe('v1beta1.AutoMlClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.automl.v1beta1.ModelEvaluation()
@@ -4732,7 +4734,7 @@ describe('v1beta1.AutoMlClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.automl.v1beta1.ListModelEvaluationsRequest()
       );
@@ -4741,7 +4743,7 @@ describe('v1beta1.AutoMlClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listModelEvaluations = stubSimpleCall(
         undefined,
@@ -4763,7 +4765,7 @@ describe('v1beta1.AutoMlClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.automl.v1beta1.ListModelEvaluationsRequest()
       );
@@ -4772,7 +4774,7 @@ describe('v1beta1.AutoMlClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.automl.v1beta1.ModelEvaluation()
@@ -4824,7 +4826,7 @@ describe('v1beta1.AutoMlClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.automl.v1beta1.ListModelEvaluationsRequest()
       );
@@ -4833,7 +4835,7 @@ describe('v1beta1.AutoMlClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listModelEvaluations.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -4874,7 +4876,7 @@ describe('v1beta1.AutoMlClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.automl.v1beta1.ListModelEvaluationsRequest()
       );
@@ -4883,7 +4885,7 @@ describe('v1beta1.AutoMlClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.automl.v1beta1.ModelEvaluation()
@@ -4924,7 +4926,7 @@ describe('v1beta1.AutoMlClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.automl.v1beta1.ListModelEvaluationsRequest()
       );
@@ -4933,7 +4935,7 @@ describe('v1beta1.AutoMlClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listModelEvaluations.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -4962,7 +4964,7 @@ describe('v1beta1.AutoMlClient', () => {
   });
 
   describe('Path templates', () => {
-    describe('annotationSpec', () => {
+    describe('annotationSpec', async () => {
       const fakePath = '/rendered/path/annotationSpec';
       const expectedParameters = {
         project: 'projectValue',
@@ -4974,7 +4976,7 @@ describe('v1beta1.AutoMlClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.annotationSpecPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -5039,7 +5041,7 @@ describe('v1beta1.AutoMlClient', () => {
       });
     });
 
-    describe('columnSpec', () => {
+    describe('columnSpec', async () => {
       const fakePath = '/rendered/path/columnSpec';
       const expectedParameters = {
         project: 'projectValue',
@@ -5052,7 +5054,7 @@ describe('v1beta1.AutoMlClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.columnSpecPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -5127,7 +5129,7 @@ describe('v1beta1.AutoMlClient', () => {
       });
     });
 
-    describe('dataset', () => {
+    describe('dataset', async () => {
       const fakePath = '/rendered/path/dataset';
       const expectedParameters = {
         project: 'projectValue',
@@ -5138,7 +5140,7 @@ describe('v1beta1.AutoMlClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.datasetPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -5191,7 +5193,7 @@ describe('v1beta1.AutoMlClient', () => {
       });
     });
 
-    describe('location', () => {
+    describe('location', async () => {
       const fakePath = '/rendered/path/location';
       const expectedParameters = {
         project: 'projectValue',
@@ -5201,7 +5203,7 @@ describe('v1beta1.AutoMlClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.locationPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -5240,7 +5242,7 @@ describe('v1beta1.AutoMlClient', () => {
       });
     });
 
-    describe('model', () => {
+    describe('model', async () => {
       const fakePath = '/rendered/path/model';
       const expectedParameters = {
         project: 'projectValue',
@@ -5251,7 +5253,7 @@ describe('v1beta1.AutoMlClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.modelPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -5304,7 +5306,7 @@ describe('v1beta1.AutoMlClient', () => {
       });
     });
 
-    describe('modelEvaluation', () => {
+    describe('modelEvaluation', async () => {
       const fakePath = '/rendered/path/modelEvaluation';
       const expectedParameters = {
         project: 'projectValue',
@@ -5316,7 +5318,7 @@ describe('v1beta1.AutoMlClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.modelEvaluationPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -5381,7 +5383,7 @@ describe('v1beta1.AutoMlClient', () => {
       });
     });
 
-    describe('tableSpec', () => {
+    describe('tableSpec', async () => {
       const fakePath = '/rendered/path/tableSpec';
       const expectedParameters = {
         project: 'projectValue',
@@ -5393,7 +5395,7 @@ describe('v1beta1.AutoMlClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.tableSpecPathTemplate.render = sinon
         .stub()
         .returns(fakePath);

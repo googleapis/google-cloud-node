@@ -4,7 +4,7 @@
   "license": "Apache-2.0",
   "author": "Google LLC",
   "engines": {
-    "node": ">=14.0.0"
+    "node": ">=18"
   },
   "files": [
     "*.js"
@@ -13,7 +13,7 @@
     "test": "c8 mocha"
   },
   "dependencies": {
-    "@google-cloud/retail": "^3.6.0",
+    "@google-cloud/retail": "^4.0.1",
     "@google-cloud/bigquery": "^7.0.0",
     "@google-cloud/storage": "^7.0.0"
   },

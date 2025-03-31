@@ -4,6 +4,36 @@
 
 [1]: https://www.npmjs.com/package/nodejs-tasks?activeTab=versions
 
+## [6.0.1](https://github.com/googleapis/google-cloud-node/compare/tasks-v6.0.0...tasks-v6.0.1) (2025-03-19)
+
+
+### Bug Fixes
+
+* [Many APIs] await/catch promises, and update listOperationsAsync return type ([#6188](https://github.com/googleapis/google-cloud-node/issues/6188)) ([a73cdbf](https://github.com/googleapis/google-cloud-node/commit/a73cdbfe33d5ba9952f0c87cb9d5d12ee8753dd2))
+
+## [6.0.0](https://github.com/googleapis/google-cloud-node/compare/tasks-v5.5.2...tasks-v6.0.0) (2025-03-18)
+
+
+### ⚠ BREAKING CHANGES
+
+* migrate tasks to node 18 ([#6123](https://github.com/googleapis/google-cloud-node/issues/6123))
+* upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096))
+
+### Features
+
+* Add request/response debug logging to gapics, update templates to gax 5 and node 18 ([#1671](https://github.com/googleapis/google-cloud-node/issues/1671)) ([eed00f4](https://github.com/googleapis/google-cloud-node/commit/eed00f4e4de22392db3a440a20486c3eeb9d33a6))
+
+
+### Bug Fixes
+
+* Add json files to tsconfig templates ([#1692](https://github.com/googleapis/google-cloud-node/issues/1692)) (ba6be1d) ([eed00f4](https://github.com/googleapis/google-cloud-node/commit/eed00f4e4de22392db3a440a20486c3eeb9d33a6))
+
+
+### Miscellaneous Chores
+
+* Migrate tasks to node 18 ([#6123](https://github.com/googleapis/google-cloud-node/issues/6123)) ([7d0481e](https://github.com/googleapis/google-cloud-node/commit/7d0481ec9e9e60e8c1631629439f1314d31858ac))
+* Upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096)) ([eadae64](https://github.com/googleapis/google-cloud-node/commit/eadae64d54e07aa2c65097ea52e65008d4e87436))
+
 ## [5.5.2](https://github.com/googleapis/google-cloud-node/compare/tasks-v5.5.1...tasks-v5.5.2) (2024-12-18)
 
 

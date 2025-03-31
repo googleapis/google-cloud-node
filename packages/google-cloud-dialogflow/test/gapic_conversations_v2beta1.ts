@@ -252,7 +252,9 @@ describe('v2beta1.ConversationsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      client.initialize().catch(err => {
+        throw err;
+      });
       assert(client.conversationsStub);
       client.close().then(() => {
         done();
@@ -311,7 +313,7 @@ describe('v2beta1.ConversationsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.v2beta1.CreateConversationRequest()
       );
@@ -320,7 +322,7 @@ describe('v2beta1.ConversationsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dialogflow.v2beta1.Conversation()
       );
@@ -343,7 +345,7 @@ describe('v2beta1.ConversationsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.v2beta1.CreateConversationRequest()
       );
@@ -352,7 +354,7 @@ describe('v2beta1.ConversationsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dialogflow.v2beta1.Conversation()
       );
@@ -390,7 +392,7 @@ describe('v2beta1.ConversationsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.v2beta1.CreateConversationRequest()
       );
@@ -399,7 +401,7 @@ describe('v2beta1.ConversationsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createConversation = stubSimpleCall(
         undefined,
@@ -421,7 +423,7 @@ describe('v2beta1.ConversationsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.v2beta1.CreateConversationRequest()
       );
@@ -442,7 +444,7 @@ describe('v2beta1.ConversationsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.v2beta1.GetConversationRequest()
       );
@@ -451,7 +453,7 @@ describe('v2beta1.ConversationsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dialogflow.v2beta1.Conversation()
       );
@@ -473,7 +475,7 @@ describe('v2beta1.ConversationsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.v2beta1.GetConversationRequest()
       );
@@ -482,7 +484,7 @@ describe('v2beta1.ConversationsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dialogflow.v2beta1.Conversation()
       );
@@ -520,7 +522,7 @@ describe('v2beta1.ConversationsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.v2beta1.GetConversationRequest()
       );
@@ -529,7 +531,7 @@ describe('v2beta1.ConversationsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getConversation = stubSimpleCall(
         undefined,
@@ -551,7 +553,7 @@ describe('v2beta1.ConversationsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.v2beta1.GetConversationRequest()
       );
@@ -572,7 +574,7 @@ describe('v2beta1.ConversationsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.v2beta1.CompleteConversationRequest()
       );
@@ -581,7 +583,7 @@ describe('v2beta1.ConversationsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dialogflow.v2beta1.Conversation()
       );
@@ -604,7 +606,7 @@ describe('v2beta1.ConversationsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.v2beta1.CompleteConversationRequest()
       );
@@ -613,7 +615,7 @@ describe('v2beta1.ConversationsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dialogflow.v2beta1.Conversation()
       );
@@ -651,7 +653,7 @@ describe('v2beta1.ConversationsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.v2beta1.CompleteConversationRequest()
       );
@@ -660,7 +662,7 @@ describe('v2beta1.ConversationsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.completeConversation = stubSimpleCall(
         undefined,
@@ -682,7 +684,7 @@ describe('v2beta1.ConversationsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.v2beta1.CompleteConversationRequest()
       );
@@ -697,13 +699,150 @@ describe('v2beta1.ConversationsClient', () => {
     });
   });
 
+  describe('ingestContextReferences', () => {
+    it('invokes ingestContextReferences without error', async () => {
+      const client = new conversationsModule.v2beta1.ConversationsClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.dialogflow.v2beta1.IngestContextReferencesRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.v2beta1.IngestContextReferencesRequest',
+        ['conversation']
+      );
+      request.conversation = defaultValue1;
+      const expectedHeaderRequestParams = `conversation=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.dialogflow.v2beta1.IngestContextReferencesResponse()
+      );
+      client.innerApiCalls.ingestContextReferences =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.ingestContextReferences(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.ingestContextReferences as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.ingestContextReferences as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes ingestContextReferences without error using callback', async () => {
+      const client = new conversationsModule.v2beta1.ConversationsClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.dialogflow.v2beta1.IngestContextReferencesRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.v2beta1.IngestContextReferencesRequest',
+        ['conversation']
+      );
+      request.conversation = defaultValue1;
+      const expectedHeaderRequestParams = `conversation=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.dialogflow.v2beta1.IngestContextReferencesResponse()
+      );
+      client.innerApiCalls.ingestContextReferences =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.ingestContextReferences(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.dialogflow.v2beta1.IIngestContextReferencesResponse | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.ingestContextReferences as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.ingestContextReferences as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes ingestContextReferences with error', async () => {
+      const client = new conversationsModule.v2beta1.ConversationsClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.dialogflow.v2beta1.IngestContextReferencesRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.v2beta1.IngestContextReferencesRequest',
+        ['conversation']
+      );
+      request.conversation = defaultValue1;
+      const expectedHeaderRequestParams = `conversation=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.ingestContextReferences = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.ingestContextReferences(request),
+        expectedError
+      );
+      const actualRequest = (
+        client.innerApiCalls.ingestContextReferences as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.ingestContextReferences as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes ingestContextReferences with closed client', async () => {
+      const client = new conversationsModule.v2beta1.ConversationsClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.dialogflow.v2beta1.IngestContextReferencesRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.v2beta1.IngestContextReferencesRequest',
+        ['conversation']
+      );
+      request.conversation = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(
+        client.ingestContextReferences(request),
+        expectedError
+      );
+    });
+  });
+
   describe('batchCreateMessages', () => {
     it('invokes batchCreateMessages without error', async () => {
       const client = new conversationsModule.v2beta1.ConversationsClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.v2beta1.BatchCreateMessagesRequest()
       );
@@ -712,7 +851,7 @@ describe('v2beta1.ConversationsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dialogflow.v2beta1.BatchCreateMessagesResponse()
       );
@@ -735,7 +874,7 @@ describe('v2beta1.ConversationsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.v2beta1.BatchCreateMessagesRequest()
       );
@@ -744,7 +883,7 @@ describe('v2beta1.ConversationsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dialogflow.v2beta1.BatchCreateMessagesResponse()
       );
@@ -782,7 +921,7 @@ describe('v2beta1.ConversationsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.v2beta1.BatchCreateMessagesRequest()
       );
@@ -791,7 +930,7 @@ describe('v2beta1.ConversationsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.batchCreateMessages = stubSimpleCall(
         undefined,
@@ -813,7 +952,7 @@ describe('v2beta1.ConversationsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.v2beta1.BatchCreateMessagesRequest()
       );
@@ -834,7 +973,7 @@ describe('v2beta1.ConversationsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.v2beta1.SuggestConversationSummaryRequest()
       );
@@ -843,7 +982,7 @@ describe('v2beta1.ConversationsClient', () => {
         ['conversation']
       );
       request.conversation = defaultValue1;
-      const expectedHeaderRequestParams = `conversation=${defaultValue1}`;
+      const expectedHeaderRequestParams = `conversation=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dialogflow.v2beta1.SuggestConversationSummaryResponse()
       );
@@ -866,7 +1005,7 @@ describe('v2beta1.ConversationsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.v2beta1.SuggestConversationSummaryRequest()
       );
@@ -875,7 +1014,7 @@ describe('v2beta1.ConversationsClient', () => {
         ['conversation']
       );
       request.conversation = defaultValue1;
-      const expectedHeaderRequestParams = `conversation=${defaultValue1}`;
+      const expectedHeaderRequestParams = `conversation=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dialogflow.v2beta1.SuggestConversationSummaryResponse()
       );
@@ -913,7 +1052,7 @@ describe('v2beta1.ConversationsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.v2beta1.SuggestConversationSummaryRequest()
       );
@@ -922,7 +1061,7 @@ describe('v2beta1.ConversationsClient', () => {
         ['conversation']
       );
       request.conversation = defaultValue1;
-      const expectedHeaderRequestParams = `conversation=${defaultValue1}`;
+      const expectedHeaderRequestParams = `conversation=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.suggestConversationSummary = stubSimpleCall(
         undefined,
@@ -947,7 +1086,7 @@ describe('v2beta1.ConversationsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.v2beta1.SuggestConversationSummaryRequest()
       );
@@ -971,7 +1110,7 @@ describe('v2beta1.ConversationsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.v2beta1.GenerateStatelessSummaryRequest()
       );
@@ -981,7 +1120,7 @@ describe('v2beta1.ConversationsClient', () => {
         ['statelessConversation', 'parent']
       );
       request.statelessConversation.parent = defaultValue1;
-      const expectedHeaderRequestParams = `stateless_conversation.parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `stateless_conversation.parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dialogflow.v2beta1.GenerateStatelessSummaryResponse()
       );
@@ -1004,7 +1143,7 @@ describe('v2beta1.ConversationsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.v2beta1.GenerateStatelessSummaryRequest()
       );
@@ -1014,7 +1153,7 @@ describe('v2beta1.ConversationsClient', () => {
         ['statelessConversation', 'parent']
       );
       request.statelessConversation.parent = defaultValue1;
-      const expectedHeaderRequestParams = `stateless_conversation.parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `stateless_conversation.parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dialogflow.v2beta1.GenerateStatelessSummaryResponse()
       );
@@ -1052,7 +1191,7 @@ describe('v2beta1.ConversationsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.v2beta1.GenerateStatelessSummaryRequest()
       );
@@ -1062,7 +1201,7 @@ describe('v2beta1.ConversationsClient', () => {
         ['statelessConversation', 'parent']
       );
       request.statelessConversation.parent = defaultValue1;
-      const expectedHeaderRequestParams = `stateless_conversation.parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `stateless_conversation.parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.generateStatelessSummary = stubSimpleCall(
         undefined,
@@ -1087,7 +1226,7 @@ describe('v2beta1.ConversationsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.v2beta1.GenerateStatelessSummaryRequest()
       );
@@ -1112,7 +1251,7 @@ describe('v2beta1.ConversationsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.v2beta1.GenerateStatelessSuggestionRequest()
       );
@@ -1121,7 +1260,7 @@ describe('v2beta1.ConversationsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dialogflow.v2beta1.GenerateStatelessSuggestionResponse()
       );
@@ -1144,7 +1283,7 @@ describe('v2beta1.ConversationsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.v2beta1.GenerateStatelessSuggestionRequest()
       );
@@ -1153,7 +1292,7 @@ describe('v2beta1.ConversationsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dialogflow.v2beta1.GenerateStatelessSuggestionResponse()
       );
@@ -1191,7 +1330,7 @@ describe('v2beta1.ConversationsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.v2beta1.GenerateStatelessSuggestionRequest()
       );
@@ -1200,7 +1339,7 @@ describe('v2beta1.ConversationsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.generateStatelessSuggestion = stubSimpleCall(
         undefined,
@@ -1225,7 +1364,7 @@ describe('v2beta1.ConversationsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.v2beta1.GenerateStatelessSuggestionRequest()
       );
@@ -1249,7 +1388,7 @@ describe('v2beta1.ConversationsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.v2beta1.SearchKnowledgeRequest()
       );
@@ -1263,7 +1402,7 @@ describe('v2beta1.ConversationsClient', () => {
         ['conversation']
       );
       request.conversation = defaultValue2;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}&conversation=${defaultValue2}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}&conversation=${defaultValue2 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dialogflow.v2beta1.SearchKnowledgeResponse()
       );
@@ -1285,7 +1424,7 @@ describe('v2beta1.ConversationsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.v2beta1.SearchKnowledgeRequest()
       );
@@ -1299,7 +1438,7 @@ describe('v2beta1.ConversationsClient', () => {
         ['conversation']
       );
       request.conversation = defaultValue2;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}&conversation=${defaultValue2}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}&conversation=${defaultValue2 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dialogflow.v2beta1.SearchKnowledgeResponse()
       );
@@ -1337,7 +1476,7 @@ describe('v2beta1.ConversationsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.v2beta1.SearchKnowledgeRequest()
       );
@@ -1351,7 +1490,7 @@ describe('v2beta1.ConversationsClient', () => {
         ['conversation']
       );
       request.conversation = defaultValue2;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}&conversation=${defaultValue2}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}&conversation=${defaultValue2 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.searchKnowledge = stubSimpleCall(
         undefined,
@@ -1373,7 +1512,7 @@ describe('v2beta1.ConversationsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.v2beta1.SearchKnowledgeRequest()
       );
@@ -1393,13 +1532,144 @@ describe('v2beta1.ConversationsClient', () => {
     });
   });
 
+  describe('generateSuggestions', () => {
+    it('invokes generateSuggestions without error', async () => {
+      const client = new conversationsModule.v2beta1.ConversationsClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.dialogflow.v2beta1.GenerateSuggestionsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.v2beta1.GenerateSuggestionsRequest',
+        ['conversation']
+      );
+      request.conversation = defaultValue1;
+      const expectedHeaderRequestParams = `conversation=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.dialogflow.v2beta1.GenerateSuggestionsResponse()
+      );
+      client.innerApiCalls.generateSuggestions =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.generateSuggestions(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.generateSuggestions as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.generateSuggestions as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes generateSuggestions without error using callback', async () => {
+      const client = new conversationsModule.v2beta1.ConversationsClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.dialogflow.v2beta1.GenerateSuggestionsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.v2beta1.GenerateSuggestionsRequest',
+        ['conversation']
+      );
+      request.conversation = defaultValue1;
+      const expectedHeaderRequestParams = `conversation=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.dialogflow.v2beta1.GenerateSuggestionsResponse()
+      );
+      client.innerApiCalls.generateSuggestions =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.generateSuggestions(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.dialogflow.v2beta1.IGenerateSuggestionsResponse | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.generateSuggestions as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.generateSuggestions as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes generateSuggestions with error', async () => {
+      const client = new conversationsModule.v2beta1.ConversationsClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.dialogflow.v2beta1.GenerateSuggestionsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.v2beta1.GenerateSuggestionsRequest',
+        ['conversation']
+      );
+      request.conversation = defaultValue1;
+      const expectedHeaderRequestParams = `conversation=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.generateSuggestions = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.generateSuggestions(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.generateSuggestions as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.generateSuggestions as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes generateSuggestions with closed client', async () => {
+      const client = new conversationsModule.v2beta1.ConversationsClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.dialogflow.v2beta1.GenerateSuggestionsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.v2beta1.GenerateSuggestionsRequest',
+        ['conversation']
+      );
+      request.conversation = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.generateSuggestions(request), expectedError);
+    });
+  });
+
   describe('listConversations', () => {
     it('invokes listConversations without error', async () => {
       const client = new conversationsModule.v2beta1.ConversationsClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.v2beta1.ListConversationsRequest()
       );
@@ -1408,7 +1678,7 @@ describe('v2beta1.ConversationsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.dialogflow.v2beta1.Conversation()
@@ -1438,7 +1708,7 @@ describe('v2beta1.ConversationsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.v2beta1.ListConversationsRequest()
       );
@@ -1447,7 +1717,7 @@ describe('v2beta1.ConversationsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.dialogflow.v2beta1.Conversation()
@@ -1495,7 +1765,7 @@ describe('v2beta1.ConversationsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.v2beta1.ListConversationsRequest()
       );
@@ -1504,7 +1774,7 @@ describe('v2beta1.ConversationsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listConversations = stubSimpleCall(
         undefined,
@@ -1526,7 +1796,7 @@ describe('v2beta1.ConversationsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.v2beta1.ListConversationsRequest()
       );
@@ -1535,7 +1805,7 @@ describe('v2beta1.ConversationsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.dialogflow.v2beta1.Conversation()
@@ -1587,7 +1857,7 @@ describe('v2beta1.ConversationsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.v2beta1.ListConversationsRequest()
       );
@@ -1596,7 +1866,7 @@ describe('v2beta1.ConversationsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listConversations.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -1637,7 +1907,7 @@ describe('v2beta1.ConversationsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.v2beta1.ListConversationsRequest()
       );
@@ -1646,7 +1916,7 @@ describe('v2beta1.ConversationsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.dialogflow.v2beta1.Conversation()
@@ -1687,7 +1957,7 @@ describe('v2beta1.ConversationsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.v2beta1.ListConversationsRequest()
       );
@@ -1696,7 +1966,7 @@ describe('v2beta1.ConversationsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listConversations.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -1730,7 +2000,7 @@ describe('v2beta1.ConversationsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.v2beta1.ListMessagesRequest()
       );
@@ -1739,7 +2009,7 @@ describe('v2beta1.ConversationsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.dialogflow.v2beta1.Message()
@@ -1769,7 +2039,7 @@ describe('v2beta1.ConversationsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.v2beta1.ListMessagesRequest()
       );
@@ -1778,7 +2048,7 @@ describe('v2beta1.ConversationsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.dialogflow.v2beta1.Message()
@@ -1824,7 +2094,7 @@ describe('v2beta1.ConversationsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.v2beta1.ListMessagesRequest()
       );
@@ -1833,7 +2103,7 @@ describe('v2beta1.ConversationsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listMessages = stubSimpleCall(
         undefined,
@@ -1855,7 +2125,7 @@ describe('v2beta1.ConversationsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.v2beta1.ListMessagesRequest()
       );
@@ -1864,7 +2134,7 @@ describe('v2beta1.ConversationsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.dialogflow.v2beta1.Message()
@@ -1915,7 +2185,7 @@ describe('v2beta1.ConversationsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.v2beta1.ListMessagesRequest()
       );
@@ -1924,7 +2194,7 @@ describe('v2beta1.ConversationsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listMessages.createStream = stubPageStreamingCall(
         undefined,
@@ -1966,7 +2236,7 @@ describe('v2beta1.ConversationsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.v2beta1.ListMessagesRequest()
       );
@@ -1975,7 +2245,7 @@ describe('v2beta1.ConversationsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.dialogflow.v2beta1.Message()
@@ -2015,7 +2285,7 @@ describe('v2beta1.ConversationsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.v2beta1.ListMessagesRequest()
       );
@@ -2024,7 +2294,7 @@ describe('v2beta1.ConversationsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listMessages.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -2056,7 +2326,7 @@ describe('v2beta1.ConversationsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.GetLocationRequest()
       );
@@ -2086,7 +2356,7 @@ describe('v2beta1.ConversationsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.GetLocationRequest()
       );
@@ -2130,7 +2400,7 @@ describe('v2beta1.ConversationsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.GetLocationRequest()
       );
@@ -2165,7 +2435,7 @@ describe('v2beta1.ConversationsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.ListLocationsRequest()
       );
@@ -2213,7 +2483,7 @@ describe('v2beta1.ConversationsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.ListLocationsRequest()
       );
@@ -2250,7 +2520,7 @@ describe('v2beta1.ConversationsClient', () => {
   });
 
   describe('Path templates', () => {
-    describe('encryptionSpec', () => {
+    describe('encryptionSpec', async () => {
       const fakePath = '/rendered/path/encryptionSpec';
       const expectedParameters = {
         project: 'projectValue',
@@ -2260,7 +2530,7 @@ describe('v2beta1.ConversationsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.encryptionSpecPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -2302,7 +2572,7 @@ describe('v2beta1.ConversationsClient', () => {
       });
     });
 
-    describe('generator', () => {
+    describe('generator', async () => {
       const fakePath = '/rendered/path/generator';
       const expectedParameters = {
         project: 'projectValue',
@@ -2313,7 +2583,7 @@ describe('v2beta1.ConversationsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.generatorPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -2366,7 +2636,7 @@ describe('v2beta1.ConversationsClient', () => {
       });
     });
 
-    describe('location', () => {
+    describe('location', async () => {
       const fakePath = '/rendered/path/location';
       const expectedParameters = {
         project: 'projectValue',
@@ -2376,7 +2646,7 @@ describe('v2beta1.ConversationsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.locationPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -2415,7 +2685,7 @@ describe('v2beta1.ConversationsClient', () => {
       });
     });
 
-    describe('project', () => {
+    describe('project', async () => {
       const fakePath = '/rendered/path/project';
       const expectedParameters = {
         project: 'projectValue',
@@ -2424,7 +2694,7 @@ describe('v2beta1.ConversationsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -2453,7 +2723,7 @@ describe('v2beta1.ConversationsClient', () => {
       });
     });
 
-    describe('projectAgent', () => {
+    describe('projectAgent', async () => {
       const fakePath = '/rendered/path/projectAgent';
       const expectedParameters = {
         project: 'projectValue',
@@ -2462,7 +2732,7 @@ describe('v2beta1.ConversationsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectAgentPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -2491,7 +2761,7 @@ describe('v2beta1.ConversationsClient', () => {
       });
     });
 
-    describe('projectAgentEntityType', () => {
+    describe('projectAgentEntityType', async () => {
       const fakePath = '/rendered/path/projectAgentEntityType';
       const expectedParameters = {
         project: 'projectValue',
@@ -2501,7 +2771,7 @@ describe('v2beta1.ConversationsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectAgentEntityTypePathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -2554,7 +2824,7 @@ describe('v2beta1.ConversationsClient', () => {
       });
     });
 
-    describe('projectAgentEnvironment', () => {
+    describe('projectAgentEnvironment', async () => {
       const fakePath = '/rendered/path/projectAgentEnvironment';
       const expectedParameters = {
         project: 'projectValue',
@@ -2564,7 +2834,7 @@ describe('v2beta1.ConversationsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectAgentEnvironmentPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -2617,7 +2887,7 @@ describe('v2beta1.ConversationsClient', () => {
       });
     });
 
-    describe('projectAgentEnvironmentUserSessionContext', () => {
+    describe('projectAgentEnvironmentUserSessionContext', async () => {
       const fakePath =
         '/rendered/path/projectAgentEnvironmentUserSessionContext';
       const expectedParameters = {
@@ -2631,7 +2901,7 @@ describe('v2beta1.ConversationsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectAgentEnvironmentUserSessionContextPathTemplate.render =
         sinon.stub().returns(fakePath);
       client.pathTemplates.projectAgentEnvironmentUserSessionContextPathTemplate.match =
@@ -2743,7 +3013,7 @@ describe('v2beta1.ConversationsClient', () => {
       });
     });
 
-    describe('projectAgentEnvironmentUserSessionEntityType', () => {
+    describe('projectAgentEnvironmentUserSessionEntityType', async () => {
       const fakePath =
         '/rendered/path/projectAgentEnvironmentUserSessionEntityType';
       const expectedParameters = {
@@ -2757,7 +3027,7 @@ describe('v2beta1.ConversationsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectAgentEnvironmentUserSessionEntityTypePathTemplate.render =
         sinon.stub().returns(fakePath);
       client.pathTemplates.projectAgentEnvironmentUserSessionEntityTypePathTemplate.match =
@@ -2869,7 +3139,7 @@ describe('v2beta1.ConversationsClient', () => {
       });
     });
 
-    describe('projectAgentFulfillment', () => {
+    describe('projectAgentFulfillment', async () => {
       const fakePath = '/rendered/path/projectAgentFulfillment';
       const expectedParameters = {
         project: 'projectValue',
@@ -2878,7 +3148,7 @@ describe('v2beta1.ConversationsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectAgentFulfillmentPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -2914,7 +3184,7 @@ describe('v2beta1.ConversationsClient', () => {
       });
     });
 
-    describe('projectAgentIntent', () => {
+    describe('projectAgentIntent', async () => {
       const fakePath = '/rendered/path/projectAgentIntent';
       const expectedParameters = {
         project: 'projectValue',
@@ -2924,7 +3194,7 @@ describe('v2beta1.ConversationsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectAgentIntentPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -2975,7 +3245,7 @@ describe('v2beta1.ConversationsClient', () => {
       });
     });
 
-    describe('projectAgentSessionContext', () => {
+    describe('projectAgentSessionContext', async () => {
       const fakePath = '/rendered/path/projectAgentSessionContext';
       const expectedParameters = {
         project: 'projectValue',
@@ -2986,7 +3256,7 @@ describe('v2beta1.ConversationsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectAgentSessionContextPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -3054,7 +3324,7 @@ describe('v2beta1.ConversationsClient', () => {
       });
     });
 
-    describe('projectAgentSessionEntityType', () => {
+    describe('projectAgentSessionEntityType', async () => {
       const fakePath = '/rendered/path/projectAgentSessionEntityType';
       const expectedParameters = {
         project: 'projectValue',
@@ -3065,7 +3335,7 @@ describe('v2beta1.ConversationsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectAgentSessionEntityTypePathTemplate.render =
         sinon.stub().returns(fakePath);
       client.pathTemplates.projectAgentSessionEntityTypePathTemplate.match =
@@ -3131,7 +3401,7 @@ describe('v2beta1.ConversationsClient', () => {
       });
     });
 
-    describe('projectAgentVersion', () => {
+    describe('projectAgentVersion', async () => {
       const fakePath = '/rendered/path/projectAgentVersion';
       const expectedParameters = {
         project: 'projectValue',
@@ -3141,7 +3411,7 @@ describe('v2beta1.ConversationsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectAgentVersionPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -3192,7 +3462,7 @@ describe('v2beta1.ConversationsClient', () => {
       });
     });
 
-    describe('projectAnswerRecord', () => {
+    describe('projectAnswerRecord', async () => {
       const fakePath = '/rendered/path/projectAnswerRecord';
       const expectedParameters = {
         project: 'projectValue',
@@ -3202,7 +3472,7 @@ describe('v2beta1.ConversationsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectAnswerRecordPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -3254,7 +3524,7 @@ describe('v2beta1.ConversationsClient', () => {
       });
     });
 
-    describe('projectConversation', () => {
+    describe('projectConversation', async () => {
       const fakePath = '/rendered/path/projectConversation';
       const expectedParameters = {
         project: 'projectValue',
@@ -3264,7 +3534,7 @@ describe('v2beta1.ConversationsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectConversationPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -3316,7 +3586,7 @@ describe('v2beta1.ConversationsClient', () => {
       });
     });
 
-    describe('projectConversationMessage', () => {
+    describe('projectConversationMessage', async () => {
       const fakePath = '/rendered/path/projectConversationMessage';
       const expectedParameters = {
         project: 'projectValue',
@@ -3327,7 +3597,7 @@ describe('v2beta1.ConversationsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectConversationMessagePathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -3395,7 +3665,7 @@ describe('v2beta1.ConversationsClient', () => {
       });
     });
 
-    describe('projectConversationParticipant', () => {
+    describe('projectConversationParticipant', async () => {
       const fakePath = '/rendered/path/projectConversationParticipant';
       const expectedParameters = {
         project: 'projectValue',
@@ -3406,7 +3676,7 @@ describe('v2beta1.ConversationsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectConversationParticipantPathTemplate.render =
         sinon.stub().returns(fakePath);
       client.pathTemplates.projectConversationParticipantPathTemplate.match =
@@ -3476,7 +3746,7 @@ describe('v2beta1.ConversationsClient', () => {
       });
     });
 
-    describe('projectConversationProfile', () => {
+    describe('projectConversationProfile', async () => {
       const fakePath = '/rendered/path/projectConversationProfile';
       const expectedParameters = {
         project: 'projectValue',
@@ -3486,7 +3756,7 @@ describe('v2beta1.ConversationsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectConversationProfilePathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -3541,7 +3811,7 @@ describe('v2beta1.ConversationsClient', () => {
       });
     });
 
-    describe('projectKnowledgeBase', () => {
+    describe('projectKnowledgeBase', async () => {
       const fakePath = '/rendered/path/projectKnowledgeBase';
       const expectedParameters = {
         project: 'projectValue',
@@ -3551,7 +3821,7 @@ describe('v2beta1.ConversationsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectKnowledgeBasePathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -3604,7 +3874,7 @@ describe('v2beta1.ConversationsClient', () => {
       });
     });
 
-    describe('projectKnowledgeBaseDocument', () => {
+    describe('projectKnowledgeBaseDocument', async () => {
       const fakePath = '/rendered/path/projectKnowledgeBaseDocument';
       const expectedParameters = {
         project: 'projectValue',
@@ -3615,7 +3885,7 @@ describe('v2beta1.ConversationsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectKnowledgeBaseDocumentPathTemplate.render =
         sinon.stub().returns(fakePath);
       client.pathTemplates.projectKnowledgeBaseDocumentPathTemplate.match =
@@ -3683,7 +3953,7 @@ describe('v2beta1.ConversationsClient', () => {
       });
     });
 
-    describe('projectLocationAgent', () => {
+    describe('projectLocationAgent', async () => {
       const fakePath = '/rendered/path/projectLocationAgent';
       const expectedParameters = {
         project: 'projectValue',
@@ -3693,7 +3963,7 @@ describe('v2beta1.ConversationsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectLocationAgentPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -3746,7 +4016,7 @@ describe('v2beta1.ConversationsClient', () => {
       });
     });
 
-    describe('projectLocationAgentEntityType', () => {
+    describe('projectLocationAgentEntityType', async () => {
       const fakePath = '/rendered/path/projectLocationAgentEntityType';
       const expectedParameters = {
         project: 'projectValue',
@@ -3757,7 +4027,7 @@ describe('v2beta1.ConversationsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectLocationAgentEntityTypePathTemplate.render =
         sinon.stub().returns(fakePath);
       client.pathTemplates.projectLocationAgentEntityTypePathTemplate.match =
@@ -3825,7 +4095,7 @@ describe('v2beta1.ConversationsClient', () => {
       });
     });
 
-    describe('projectLocationAgentEnvironment', () => {
+    describe('projectLocationAgentEnvironment', async () => {
       const fakePath = '/rendered/path/projectLocationAgentEnvironment';
       const expectedParameters = {
         project: 'projectValue',
@@ -3836,7 +4106,7 @@ describe('v2beta1.ConversationsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectLocationAgentEnvironmentPathTemplate.render =
         sinon.stub().returns(fakePath);
       client.pathTemplates.projectLocationAgentEnvironmentPathTemplate.match =
@@ -3904,7 +4174,7 @@ describe('v2beta1.ConversationsClient', () => {
       });
     });
 
-    describe('projectLocationAgentEnvironmentUserSessionContext', () => {
+    describe('projectLocationAgentEnvironmentUserSessionContext', async () => {
       const fakePath =
         '/rendered/path/projectLocationAgentEnvironmentUserSessionContext';
       const expectedParameters = {
@@ -3919,7 +4189,7 @@ describe('v2beta1.ConversationsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectLocationAgentEnvironmentUserSessionContextPathTemplate.render =
         sinon.stub().returns(fakePath);
       client.pathTemplates.projectLocationAgentEnvironmentUserSessionContextPathTemplate.match =
@@ -4050,7 +4320,7 @@ describe('v2beta1.ConversationsClient', () => {
       });
     });
 
-    describe('projectLocationAgentEnvironmentUserSessionEntityType', () => {
+    describe('projectLocationAgentEnvironmentUserSessionEntityType', async () => {
       const fakePath =
         '/rendered/path/projectLocationAgentEnvironmentUserSessionEntityType';
       const expectedParameters = {
@@ -4065,7 +4335,7 @@ describe('v2beta1.ConversationsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectLocationAgentEnvironmentUserSessionEntityTypePathTemplate.render =
         sinon.stub().returns(fakePath);
       client.pathTemplates.projectLocationAgentEnvironmentUserSessionEntityTypePathTemplate.match =
@@ -4196,7 +4466,7 @@ describe('v2beta1.ConversationsClient', () => {
       });
     });
 
-    describe('projectLocationAgentFulfillment', () => {
+    describe('projectLocationAgentFulfillment', async () => {
       const fakePath = '/rendered/path/projectLocationAgentFulfillment';
       const expectedParameters = {
         project: 'projectValue',
@@ -4206,7 +4476,7 @@ describe('v2beta1.ConversationsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectLocationAgentFulfillmentPathTemplate.render =
         sinon.stub().returns(fakePath);
       client.pathTemplates.projectLocationAgentFulfillmentPathTemplate.match =
@@ -4257,7 +4527,7 @@ describe('v2beta1.ConversationsClient', () => {
       });
     });
 
-    describe('projectLocationAgentIntent', () => {
+    describe('projectLocationAgentIntent', async () => {
       const fakePath = '/rendered/path/projectLocationAgentIntent';
       const expectedParameters = {
         project: 'projectValue',
@@ -4268,7 +4538,7 @@ describe('v2beta1.ConversationsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectLocationAgentIntentPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -4336,7 +4606,7 @@ describe('v2beta1.ConversationsClient', () => {
       });
     });
 
-    describe('projectLocationAgentSessionContext', () => {
+    describe('projectLocationAgentSessionContext', async () => {
       const fakePath = '/rendered/path/projectLocationAgentSessionContext';
       const expectedParameters = {
         project: 'projectValue',
@@ -4348,7 +4618,7 @@ describe('v2beta1.ConversationsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectLocationAgentSessionContextPathTemplate.render =
         sinon.stub().returns(fakePath);
       client.pathTemplates.projectLocationAgentSessionContextPathTemplate.match =
@@ -4437,7 +4707,7 @@ describe('v2beta1.ConversationsClient', () => {
       });
     });
 
-    describe('projectLocationAgentSessionEntityType', () => {
+    describe('projectLocationAgentSessionEntityType', async () => {
       const fakePath = '/rendered/path/projectLocationAgentSessionEntityType';
       const expectedParameters = {
         project: 'projectValue',
@@ -4449,7 +4719,7 @@ describe('v2beta1.ConversationsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectLocationAgentSessionEntityTypePathTemplate.render =
         sinon.stub().returns(fakePath);
       client.pathTemplates.projectLocationAgentSessionEntityTypePathTemplate.match =
@@ -4543,7 +4813,7 @@ describe('v2beta1.ConversationsClient', () => {
       });
     });
 
-    describe('projectLocationAgentVersion', () => {
+    describe('projectLocationAgentVersion', async () => {
       const fakePath = '/rendered/path/projectLocationAgentVersion';
       const expectedParameters = {
         project: 'projectValue',
@@ -4554,7 +4824,7 @@ describe('v2beta1.ConversationsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectLocationAgentVersionPathTemplate.render =
         sinon.stub().returns(fakePath);
       client.pathTemplates.projectLocationAgentVersionPathTemplate.match = sinon
@@ -4621,7 +4891,7 @@ describe('v2beta1.ConversationsClient', () => {
       });
     });
 
-    describe('projectLocationAnswerRecord', () => {
+    describe('projectLocationAnswerRecord', async () => {
       const fakePath = '/rendered/path/projectLocationAnswerRecord';
       const expectedParameters = {
         project: 'projectValue',
@@ -4632,7 +4902,7 @@ describe('v2beta1.ConversationsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectLocationAnswerRecordPathTemplate.render =
         sinon.stub().returns(fakePath);
       client.pathTemplates.projectLocationAnswerRecordPathTemplate.match = sinon
@@ -4699,7 +4969,7 @@ describe('v2beta1.ConversationsClient', () => {
       });
     });
 
-    describe('projectLocationConversation', () => {
+    describe('projectLocationConversation', async () => {
       const fakePath = '/rendered/path/projectLocationConversation';
       const expectedParameters = {
         project: 'projectValue',
@@ -4710,7 +4980,7 @@ describe('v2beta1.ConversationsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectLocationConversationPathTemplate.render =
         sinon.stub().returns(fakePath);
       client.pathTemplates.projectLocationConversationPathTemplate.match = sinon
@@ -4777,7 +5047,7 @@ describe('v2beta1.ConversationsClient', () => {
       });
     });
 
-    describe('projectLocationConversationMessage', () => {
+    describe('projectLocationConversationMessage', async () => {
       const fakePath = '/rendered/path/projectLocationConversationMessage';
       const expectedParameters = {
         project: 'projectValue',
@@ -4789,7 +5059,7 @@ describe('v2beta1.ConversationsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectLocationConversationMessagePathTemplate.render =
         sinon.stub().returns(fakePath);
       client.pathTemplates.projectLocationConversationMessagePathTemplate.match =
@@ -4878,7 +5148,7 @@ describe('v2beta1.ConversationsClient', () => {
       });
     });
 
-    describe('projectLocationConversationParticipant', () => {
+    describe('projectLocationConversationParticipant', async () => {
       const fakePath = '/rendered/path/projectLocationConversationParticipant';
       const expectedParameters = {
         project: 'projectValue',
@@ -4890,7 +5160,7 @@ describe('v2beta1.ConversationsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectLocationConversationParticipantPathTemplate.render =
         sinon.stub().returns(fakePath);
       client.pathTemplates.projectLocationConversationParticipantPathTemplate.match =
@@ -4984,7 +5254,7 @@ describe('v2beta1.ConversationsClient', () => {
       });
     });
 
-    describe('projectLocationConversationProfile', () => {
+    describe('projectLocationConversationProfile', async () => {
       const fakePath = '/rendered/path/projectLocationConversationProfile';
       const expectedParameters = {
         project: 'projectValue',
@@ -4995,7 +5265,7 @@ describe('v2beta1.ConversationsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectLocationConversationProfilePathTemplate.render =
         sinon.stub().returns(fakePath);
       client.pathTemplates.projectLocationConversationProfilePathTemplate.match =
@@ -5067,7 +5337,7 @@ describe('v2beta1.ConversationsClient', () => {
       });
     });
 
-    describe('projectLocationKnowledgeBase', () => {
+    describe('projectLocationKnowledgeBase', async () => {
       const fakePath = '/rendered/path/projectLocationKnowledgeBase';
       const expectedParameters = {
         project: 'projectValue',
@@ -5078,7 +5348,7 @@ describe('v2beta1.ConversationsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectLocationKnowledgeBasePathTemplate.render =
         sinon.stub().returns(fakePath);
       client.pathTemplates.projectLocationKnowledgeBasePathTemplate.match =
@@ -5146,7 +5416,7 @@ describe('v2beta1.ConversationsClient', () => {
       });
     });
 
-    describe('projectLocationKnowledgeBaseDocument', () => {
+    describe('projectLocationKnowledgeBaseDocument', async () => {
       const fakePath = '/rendered/path/projectLocationKnowledgeBaseDocument';
       const expectedParameters = {
         project: 'projectValue',
@@ -5158,7 +5428,7 @@ describe('v2beta1.ConversationsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectLocationKnowledgeBaseDocumentPathTemplate.render =
         sinon.stub().returns(fakePath);
       client.pathTemplates.projectLocationKnowledgeBaseDocumentPathTemplate.match =
@@ -5252,7 +5522,148 @@ describe('v2beta1.ConversationsClient', () => {
       });
     });
 
-    describe('sipTrunk', () => {
+    describe('projectLocationPhoneNumber', async () => {
+      const fakePath = '/rendered/path/projectLocationPhoneNumber';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        phone_number: 'phoneNumberValue',
+      };
+      const client = new conversationsModule.v2beta1.ConversationsClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      client.pathTemplates.projectLocationPhoneNumberPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.projectLocationPhoneNumberPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('projectLocationPhoneNumberPath', () => {
+        const result = client.projectLocationPhoneNumberPath(
+          'projectValue',
+          'locationValue',
+          'phoneNumberValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates.projectLocationPhoneNumberPathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromProjectLocationPhoneNumberName', () => {
+        const result =
+          client.matchProjectFromProjectLocationPhoneNumberName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (
+            client.pathTemplates.projectLocationPhoneNumberPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromProjectLocationPhoneNumberName', () => {
+        const result =
+          client.matchLocationFromProjectLocationPhoneNumberName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (
+            client.pathTemplates.projectLocationPhoneNumberPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchPhoneNumberFromProjectLocationPhoneNumberName', () => {
+        const result =
+          client.matchPhoneNumberFromProjectLocationPhoneNumberName(fakePath);
+        assert.strictEqual(result, 'phoneNumberValue');
+        assert(
+          (
+            client.pathTemplates.projectLocationPhoneNumberPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('projectPhoneNumber', async () => {
+      const fakePath = '/rendered/path/projectPhoneNumber';
+      const expectedParameters = {
+        project: 'projectValue',
+        phone_number: 'phoneNumberValue',
+      };
+      const client = new conversationsModule.v2beta1.ConversationsClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      client.pathTemplates.projectPhoneNumberPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.projectPhoneNumberPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('projectPhoneNumberPath', () => {
+        const result = client.projectPhoneNumberPath(
+          'projectValue',
+          'phoneNumberValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates.projectPhoneNumberPathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromProjectPhoneNumberName', () => {
+        const result = client.matchProjectFromProjectPhoneNumberName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (
+            client.pathTemplates.projectPhoneNumberPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchPhoneNumberFromProjectPhoneNumberName', () => {
+        const result =
+          client.matchPhoneNumberFromProjectPhoneNumberName(fakePath);
+        assert.strictEqual(result, 'phoneNumberValue');
+        assert(
+          (
+            client.pathTemplates.projectPhoneNumberPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('sipTrunk', async () => {
       const fakePath = '/rendered/path/sipTrunk';
       const expectedParameters = {
         project: 'projectValue',
@@ -5263,7 +5674,7 @@ describe('v2beta1.ConversationsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.sipTrunkPathTemplate.render = sinon
         .stub()
         .returns(fakePath);

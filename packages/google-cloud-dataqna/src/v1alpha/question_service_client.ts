@@ -27,6 +27,7 @@ import type {
 
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
+import {loggingUtils as logging} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -65,6 +66,8 @@ export class QuestionServiceClient {
   private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
+  private _log = logging.log('data-qna');
+
   auth: gax.GoogleAuth;
   descriptors: Descriptors = {
     page: {},
@@ -99,7 +102,7 @@ export class QuestionServiceClient {
    *     Developer's Console, e.g. 'grape-spaceship-123'. We will also check
    *     the environment variable GCLOUD_PROJECT for your project ID. If your
    *     app is running in an environment which supports
-   *     {@link https://developers.google.com/identity/protocols/application-default-credentials Application Default Credentials},
+   *     {@link https://cloud.google.com/docs/authentication/application-default-credentials Application Default Credentials},
    *     your project ID will be detected automatically.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
@@ -478,8 +481,36 @@ export class QuestionServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.getQuestion(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('getQuestion request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.dataqna.v1alpha.IQuestion,
+          | protos.google.cloud.dataqna.v1alpha.IGetQuestionRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getQuestion response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getQuestion(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.dataqna.v1alpha.IQuestion,
+          protos.google.cloud.dataqna.v1alpha.IGetQuestionRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getQuestion response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Creates a question.
@@ -571,8 +602,39 @@ export class QuestionServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.createQuestion(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('createQuestion request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.dataqna.v1alpha.IQuestion,
+          | protos.google.cloud.dataqna.v1alpha.ICreateQuestionRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('createQuestion response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .createQuestion(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.dataqna.v1alpha.IQuestion,
+          (
+            | protos.google.cloud.dataqna.v1alpha.ICreateQuestionRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('createQuestion response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Executes an interpretation.
@@ -664,8 +726,39 @@ export class QuestionServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.executeQuestion(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('executeQuestion request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.dataqna.v1alpha.IQuestion,
+          | protos.google.cloud.dataqna.v1alpha.IExecuteQuestionRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('executeQuestion response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .executeQuestion(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.dataqna.v1alpha.IQuestion,
+          (
+            | protos.google.cloud.dataqna.v1alpha.IExecuteQuestionRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('executeQuestion response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Gets previously created user feedback.
@@ -756,8 +849,39 @@ export class QuestionServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.getUserFeedback(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('getUserFeedback request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.dataqna.v1alpha.IUserFeedback,
+          | protos.google.cloud.dataqna.v1alpha.IGetUserFeedbackRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getUserFeedback response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getUserFeedback(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.dataqna.v1alpha.IUserFeedback,
+          (
+            | protos.google.cloud.dataqna.v1alpha.IGetUserFeedbackRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getUserFeedback response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Updates user feedback. This creates user feedback if there was none before
@@ -858,8 +982,39 @@ export class QuestionServiceClient {
       this._gaxModule.routingHeader.fromParams({
         'user_feedback.name': request.userFeedback!.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.updateUserFeedback(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('updateUserFeedback request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.dataqna.v1alpha.IUserFeedback,
+          | protos.google.cloud.dataqna.v1alpha.IUpdateUserFeedbackRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('updateUserFeedback response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .updateUserFeedback(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.dataqna.v1alpha.IUserFeedback,
+          (
+            | protos.google.cloud.dataqna.v1alpha.IUpdateUserFeedbackRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('updateUserFeedback response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
 
   // --------------------
@@ -1012,6 +1167,7 @@ export class QuestionServiceClient {
   close(): Promise<void> {
     if (this.questionServiceStub && !this._terminated) {
       return this.questionServiceStub.then(stub => {
+        this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
       });

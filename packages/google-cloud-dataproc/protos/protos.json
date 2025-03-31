@@ -1,7 +1,4 @@
 {
-  "options": {
-    "syntax": "proto3"
-  },
   "nested": {
     "google": {
       "nested": {
@@ -1075,6 +1072,13 @@
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
+                        },
+                        "authenticationConfig": {
+                          "type": "AuthenticationConfig",
+                          "id": 11,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },
@@ -1442,6 +1446,26 @@
                               "type": "int32",
                               "id": 3
                             }
+                          }
+                        }
+                      }
+                    },
+                    "AuthenticationConfig": {
+                      "fields": {
+                        "userWorkloadAuthenticationType": {
+                          "type": "AuthenticationType",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "AuthenticationType": {
+                          "values": {
+                            "AUTHENTICATION_TYPE_UNSPECIFIED": 0,
+                            "SERVICE_ACCOUNT": 1,
+                            "END_USER_CREDENTIALS": 2
                           }
                         }
                       }

@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -30,8 +30,8 @@ function main(parent, managementServerId, managementServer) {
    */
   /**
    *  Required. The management server project and location in the format
-   *  `projects/{project_id}/locations/{location}`. In Cloud Backup and DR
-   *  locations map to GCP regions, for example **us-central1**.
+   *  'projects/{project_id}/locations/{location}'. In Cloud Backup and DR
+   *  locations map to Google Cloud regions, for example **us-central1**.
    */
   // const parent = 'abc123'
   /**

@@ -255,7 +255,9 @@ describe('v2.ExportServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      client.initialize().catch(err => {
+        throw err;
+      });
       assert(client.exportServiceStub);
       client.close().then(() => {
         done();
@@ -314,7 +316,7 @@ describe('v2.ExportServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.devtools.cloudprofiler.v2.ListProfilesRequest()
       );
@@ -323,7 +325,7 @@ describe('v2.ExportServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.devtools.cloudprofiler.v2.Profile()
@@ -353,7 +355,7 @@ describe('v2.ExportServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.devtools.cloudprofiler.v2.ListProfilesRequest()
       );
@@ -362,7 +364,7 @@ describe('v2.ExportServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.devtools.cloudprofiler.v2.Profile()
@@ -408,7 +410,7 @@ describe('v2.ExportServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.devtools.cloudprofiler.v2.ListProfilesRequest()
       );
@@ -417,7 +419,7 @@ describe('v2.ExportServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listProfiles = stubSimpleCall(
         undefined,
@@ -439,7 +441,7 @@ describe('v2.ExportServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.devtools.cloudprofiler.v2.ListProfilesRequest()
       );
@@ -448,7 +450,7 @@ describe('v2.ExportServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.devtools.cloudprofiler.v2.Profile()
@@ -499,7 +501,7 @@ describe('v2.ExportServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.devtools.cloudprofiler.v2.ListProfilesRequest()
       );
@@ -508,7 +510,7 @@ describe('v2.ExportServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listProfiles.createStream = stubPageStreamingCall(
         undefined,
@@ -550,7 +552,7 @@ describe('v2.ExportServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.devtools.cloudprofiler.v2.ListProfilesRequest()
       );
@@ -559,7 +561,7 @@ describe('v2.ExportServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.devtools.cloudprofiler.v2.Profile()
@@ -599,7 +601,7 @@ describe('v2.ExportServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.devtools.cloudprofiler.v2.ListProfilesRequest()
       );
@@ -608,7 +610,7 @@ describe('v2.ExportServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listProfiles.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -637,7 +639,7 @@ describe('v2.ExportServiceClient', () => {
   });
 
   describe('Path templates', () => {
-    describe('profile', () => {
+    describe('profile', async () => {
       const fakePath = '/rendered/path/profile';
       const expectedParameters = {
         project: 'projectValue',
@@ -647,7 +649,7 @@ describe('v2.ExportServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.profilePathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -686,7 +688,7 @@ describe('v2.ExportServiceClient', () => {
       });
     });
 
-    describe('project', () => {
+    describe('project', async () => {
       const fakePath = '/rendered/path/project';
       const expectedParameters = {
         project: 'projectValue',
@@ -695,7 +697,7 @@ describe('v2.ExportServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectPathTemplate.render = sinon
         .stub()
         .returns(fakePath);

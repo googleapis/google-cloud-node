@@ -2513,6 +2513,11 @@
                 "removeResourcePolicies"
               ]
             },
+            "ReportHostAsFaulty": {
+              "methods": [
+                "reportHostAsFaulty"
+              ]
+            },
             "Reset": {
               "methods": [
                 "reset"
@@ -2762,6 +2767,11 @@
             "RemoveResourcePolicies": {
               "methods": [
                 "removeResourcePolicies"
+              ]
+            },
+            "ReportHostAsFaulty": {
+              "methods": [
+                "reportHostAsFaulty"
               ]
             },
             "Reset": {
@@ -4011,6 +4021,11 @@
                 "addAssociation"
               ]
             },
+            "AddPacketMirroringRule": {
+              "methods": [
+                "addPacketMirroringRule"
+              ]
+            },
             "AddRule": {
               "methods": [
                 "addRule"
@@ -4041,6 +4056,11 @@
                 "getIamPolicy"
               ]
             },
+            "GetPacketMirroringRule": {
+              "methods": [
+                "getPacketMirroringRule"
+              ]
+            },
             "GetRule": {
               "methods": [
                 "getRule"
@@ -4056,6 +4076,11 @@
                 "patch"
               ]
             },
+            "PatchPacketMirroringRule": {
+              "methods": [
+                "patchPacketMirroringRule"
+              ]
+            },
             "PatchRule": {
               "methods": [
                 "patchRule"
@@ -4064,6 +4089,11 @@
             "RemoveAssociation": {
               "methods": [
                 "removeAssociation"
+              ]
+            },
+            "RemovePacketMirroringRule": {
+              "methods": [
+                "removePacketMirroringRule"
               ]
             },
             "RemoveRule": {
@@ -4105,6 +4135,11 @@
                 "addAssociation"
               ]
             },
+            "AddPacketMirroringRule": {
+              "methods": [
+                "addPacketMirroringRule"
+              ]
+            },
             "AddRule": {
               "methods": [
                 "addRule"
@@ -4135,6 +4170,11 @@
                 "getIamPolicy"
               ]
             },
+            "GetPacketMirroringRule": {
+              "methods": [
+                "getPacketMirroringRule"
+              ]
+            },
             "GetRule": {
               "methods": [
                 "getRule"
@@ -4150,6 +4190,11 @@
                 "patch"
               ]
             },
+            "PatchPacketMirroringRule": {
+              "methods": [
+                "patchPacketMirroringRule"
+              ]
+            },
             "PatchRule": {
               "methods": [
                 "patchRule"
@@ -4158,6 +4203,11 @@
             "RemoveAssociation": {
               "methods": [
                 "removeAssociation"
+              ]
+            },
+            "RemovePacketMirroringRule": {
+              "methods": [
+                "removePacketMirroringRule"
               ]
             },
             "RemoveRule": {
@@ -7565,6 +7615,11 @@
                 "delete"
               ]
             },
+            "DeleteRoutePolicy": {
+              "methods": [
+                "deleteRoutePolicy"
+              ]
+            },
             "Get": {
               "methods": [
                 "get"
@@ -7573,6 +7628,11 @@
             "GetNatIpInfo": {
               "methods": [
                 "getNatIpInfo"
+              ]
+            },
+            "GetRoutePolicy": {
+              "methods": [
+                "getRoutePolicy"
               ]
             },
             "GetRouterStatus": {
@@ -7590,6 +7650,11 @@
                 "patch"
               ]
             },
+            "PatchRoutePolicy": {
+              "methods": [
+                "patchRoutePolicy"
+              ]
+            },
             "Preview": {
               "methods": [
                 "preview"
@@ -7598,6 +7663,11 @@
             "Update": {
               "methods": [
                 "update"
+              ]
+            },
+            "UpdateRoutePolicy": {
+              "methods": [
+                "updateRoutePolicy"
               ]
             },
             "AggregatedList": {
@@ -7619,6 +7689,20 @@
                 "list",
                 "listStream",
                 "listAsync"
+              ]
+            },
+            "ListBgpRoutes": {
+              "methods": [
+                "listBgpRoutes",
+                "listBgpRoutesStream",
+                "listBgpRoutesAsync"
+              ]
+            },
+            "ListRoutePolicies": {
+              "methods": [
+                "listRoutePolicies",
+                "listRoutePoliciesStream",
+                "listRoutePoliciesAsync"
               ]
             }
           }
@@ -7631,6 +7715,11 @@
                 "delete"
               ]
             },
+            "DeleteRoutePolicy": {
+              "methods": [
+                "deleteRoutePolicy"
+              ]
+            },
             "Get": {
               "methods": [
                 "get"
@@ -7639,6 +7728,11 @@
             "GetNatIpInfo": {
               "methods": [
                 "getNatIpInfo"
+              ]
+            },
+            "GetRoutePolicy": {
+              "methods": [
+                "getRoutePolicy"
               ]
             },
             "GetRouterStatus": {
@@ -7656,6 +7750,11 @@
                 "patch"
               ]
             },
+            "PatchRoutePolicy": {
+              "methods": [
+                "patchRoutePolicy"
+              ]
+            },
             "Preview": {
               "methods": [
                 "preview"
@@ -7664,6 +7763,11 @@
             "Update": {
               "methods": [
                 "update"
+              ]
+            },
+            "UpdateRoutePolicy": {
+              "methods": [
+                "updateRoutePolicy"
               ]
             },
             "AggregatedList": {
@@ -7685,6 +7789,20 @@
                 "list",
                 "listStream",
                 "listAsync"
+              ]
+            },
+            "ListBgpRoutes": {
+              "methods": [
+                "listBgpRoutes",
+                "listBgpRoutesStream",
+                "listBgpRoutesAsync"
+              ]
+            },
+            "ListRoutePolicies": {
+              "methods": [
+                "listRoutePolicies",
+                "listRoutePoliciesStream",
+                "listRoutePoliciesAsync"
               ]
             }
           }

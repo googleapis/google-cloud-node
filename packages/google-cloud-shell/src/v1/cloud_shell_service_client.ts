@@ -29,6 +29,7 @@ import type {
 
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
+import {loggingUtils as logging} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -59,6 +60,8 @@ export class CloudShellServiceClient {
   private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
+  private _log = logging.log('shell');
+
   auth: gax.GoogleAuth;
   descriptors: Descriptors = {
     page: {},
@@ -94,7 +97,7 @@ export class CloudShellServiceClient {
    *     Developer's Console, e.g. 'grape-spaceship-123'. We will also check
    *     the environment variable GCLOUD_PROJECT for your project ID. If your
    *     app is running in an environment which supports
-   *     {@link https://developers.google.com/identity/protocols/application-default-credentials Application Default Credentials},
+   *     {@link https://cloud.google.com/docs/authentication/application-default-credentials Application Default Credentials},
    *     your project ID will be detected automatically.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
@@ -525,8 +528,36 @@ export class CloudShellServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.getEnvironment(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('getEnvironment request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.shell.v1.IEnvironment,
+          | protos.google.cloud.shell.v1.IGetEnvironmentRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getEnvironment response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getEnvironment(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.shell.v1.IEnvironment,
+          protos.google.cloud.shell.v1.IGetEnvironmentRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getEnvironment response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
 
   /**
@@ -642,8 +673,40 @@ export class CloudShellServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.startEnvironment(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.shell.v1.IStartEnvironmentResponse,
+            protos.google.cloud.shell.v1.IStartEnvironmentMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('startEnvironment response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('startEnvironment request %j', request);
+    return this.innerApiCalls
+      .startEnvironment(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.shell.v1.IStartEnvironmentResponse,
+            protos.google.cloud.shell.v1.IStartEnvironmentMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('startEnvironment response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `startEnvironment()`.
@@ -664,6 +727,7 @@ export class CloudShellServiceClient {
       protos.google.cloud.shell.v1.StartEnvironmentMetadata
     >
   > {
+    this._log.info('startEnvironment long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -790,8 +854,40 @@ export class CloudShellServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.authorizeEnvironment(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.shell.v1.IAuthorizeEnvironmentResponse,
+            protos.google.cloud.shell.v1.IAuthorizeEnvironmentMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('authorizeEnvironment response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('authorizeEnvironment request %j', request);
+    return this.innerApiCalls
+      .authorizeEnvironment(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.shell.v1.IAuthorizeEnvironmentResponse,
+            protos.google.cloud.shell.v1.IAuthorizeEnvironmentMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('authorizeEnvironment response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `authorizeEnvironment()`.
@@ -812,6 +908,7 @@ export class CloudShellServiceClient {
       protos.google.cloud.shell.v1.AuthorizeEnvironmentMetadata
     >
   > {
+    this._log.info('authorizeEnvironment long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -936,8 +1033,40 @@ export class CloudShellServiceClient {
       this._gaxModule.routingHeader.fromParams({
         environment: request.environment ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.addPublicKey(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.shell.v1.IAddPublicKeyResponse,
+            protos.google.cloud.shell.v1.IAddPublicKeyMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('addPublicKey response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('addPublicKey request %j', request);
+    return this.innerApiCalls
+      .addPublicKey(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.shell.v1.IAddPublicKeyResponse,
+            protos.google.cloud.shell.v1.IAddPublicKeyMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('addPublicKey response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `addPublicKey()`.
@@ -958,6 +1087,7 @@ export class CloudShellServiceClient {
       protos.google.cloud.shell.v1.AddPublicKeyMetadata
     >
   > {
+    this._log.info('addPublicKey long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -1078,8 +1208,40 @@ export class CloudShellServiceClient {
       this._gaxModule.routingHeader.fromParams({
         environment: request.environment ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.removePublicKey(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.shell.v1.IRemovePublicKeyResponse,
+            protos.google.cloud.shell.v1.IRemovePublicKeyMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('removePublicKey response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('removePublicKey request %j', request);
+    return this.innerApiCalls
+      .removePublicKey(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.shell.v1.IRemovePublicKeyResponse,
+            protos.google.cloud.shell.v1.IRemovePublicKeyMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('removePublicKey response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `removePublicKey()`.
@@ -1100,6 +1262,7 @@ export class CloudShellServiceClient {
       protos.google.cloud.shell.v1.RemovePublicKeyMetadata
     >
   > {
+    this._log.info('removePublicKey long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -1209,7 +1372,7 @@ export class CloudShellServiceClient {
   listOperationsAsync(
     request: protos.google.longrunning.ListOperationsRequest,
     options?: gax.CallOptions
-  ): AsyncIterable<protos.google.longrunning.ListOperationsResponse> {
+  ): AsyncIterable<protos.google.longrunning.IOperation> {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
@@ -1390,6 +1553,7 @@ export class CloudShellServiceClient {
   close(): Promise<void> {
     if (this.cloudShellServiceStub && !this._terminated) {
       return this.cloudShellServiceStub.then(stub => {
+        this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
         this.operationsClient.close();

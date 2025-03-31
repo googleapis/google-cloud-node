@@ -29,6 +29,7 @@ import type {
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
+import {loggingUtils as logging} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -53,6 +54,8 @@ export class RetrieverServiceClient {
   private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
+  private _log = logging.log('generativelanguage');
+
   auth: gax.GoogleAuth;
   descriptors: Descriptors = {
     page: {},
@@ -87,7 +90,7 @@ export class RetrieverServiceClient {
    *     Developer's Console, e.g. 'grape-spaceship-123'. We will also check
    *     the environment variable GCLOUD_PROJECT for your project ID. If your
    *     app is running in an environment which supports
-   *     {@link https://developers.google.com/identity/protocols/application-default-credentials Application Default Credentials},
+   *     {@link https://cloud.google.com/docs/authentication/application-default-credentials Application Default Credentials},
    *     your project ID will be detected automatically.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
@@ -517,8 +520,39 @@ export class RetrieverServiceClient {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    this.initialize();
-    return this.innerApiCalls.createCorpus(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('createCorpus request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.ai.generativelanguage.v1beta.ICorpus,
+          | protos.google.ai.generativelanguage.v1beta.ICreateCorpusRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('createCorpus response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .createCorpus(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.ai.generativelanguage.v1beta.ICorpus,
+          (
+            | protos.google.ai.generativelanguage.v1beta.ICreateCorpusRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('createCorpus response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Gets information about a specific `Corpus`.
@@ -608,8 +642,39 @@ export class RetrieverServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.getCorpus(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('getCorpus request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.ai.generativelanguage.v1beta.ICorpus,
+          | protos.google.ai.generativelanguage.v1beta.IGetCorpusRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getCorpus response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getCorpus(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.ai.generativelanguage.v1beta.ICorpus,
+          (
+            | protos.google.ai.generativelanguage.v1beta.IGetCorpusRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getCorpus response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Updates a `Corpus`.
@@ -707,8 +772,39 @@ export class RetrieverServiceClient {
       this._gaxModule.routingHeader.fromParams({
         'corpus.name': request.corpus!.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.updateCorpus(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('updateCorpus request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.ai.generativelanguage.v1beta.ICorpus,
+          | protos.google.ai.generativelanguage.v1beta.IUpdateCorpusRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('updateCorpus response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .updateCorpus(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.ai.generativelanguage.v1beta.ICorpus,
+          (
+            | protos.google.ai.generativelanguage.v1beta.IUpdateCorpusRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('updateCorpus response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Deletes a `Corpus`.
@@ -810,8 +906,39 @@ export class RetrieverServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.deleteCorpus(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('deleteCorpus request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.ai.generativelanguage.v1beta.IDeleteCorpusRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('deleteCorpus response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .deleteCorpus(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.protobuf.IEmpty,
+          (
+            | protos.google.ai.generativelanguage.v1beta.IDeleteCorpusRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteCorpus response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Performs semantic search over a `Corpus`.
@@ -947,8 +1074,39 @@ export class RetrieverServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.queryCorpus(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('queryCorpus request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.ai.generativelanguage.v1beta.IQueryCorpusResponse,
+          | protos.google.ai.generativelanguage.v1beta.IQueryCorpusRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('queryCorpus response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .queryCorpus(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.ai.generativelanguage.v1beta.IQueryCorpusResponse,
+          (
+            | protos.google.ai.generativelanguage.v1beta.IQueryCorpusRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('queryCorpus response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Creates an empty `Document`.
@@ -1046,8 +1204,39 @@ export class RetrieverServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.createDocument(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('createDocument request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.ai.generativelanguage.v1beta.IDocument,
+          | protos.google.ai.generativelanguage.v1beta.ICreateDocumentRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('createDocument response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .createDocument(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.ai.generativelanguage.v1beta.IDocument,
+          (
+            | protos.google.ai.generativelanguage.v1beta.ICreateDocumentRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('createDocument response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Gets information about a specific `Document`.
@@ -1143,8 +1332,39 @@ export class RetrieverServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.getDocument(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('getDocument request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.ai.generativelanguage.v1beta.IDocument,
+          | protos.google.ai.generativelanguage.v1beta.IGetDocumentRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getDocument response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getDocument(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.ai.generativelanguage.v1beta.IDocument,
+          (
+            | protos.google.ai.generativelanguage.v1beta.IGetDocumentRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getDocument response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Updates a `Document`.
@@ -1243,8 +1463,39 @@ export class RetrieverServiceClient {
       this._gaxModule.routingHeader.fromParams({
         'document.name': request.document!.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.updateDocument(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('updateDocument request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.ai.generativelanguage.v1beta.IDocument,
+          | protos.google.ai.generativelanguage.v1beta.IUpdateDocumentRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('updateDocument response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .updateDocument(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.ai.generativelanguage.v1beta.IDocument,
+          (
+            | protos.google.ai.generativelanguage.v1beta.IUpdateDocumentRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('updateDocument response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Deletes a `Document`.
@@ -1346,8 +1597,39 @@ export class RetrieverServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.deleteDocument(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('deleteDocument request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.ai.generativelanguage.v1beta.IDeleteDocumentRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('deleteDocument response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .deleteDocument(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.protobuf.IEmpty,
+          (
+            | protos.google.ai.generativelanguage.v1beta.IDeleteDocumentRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteDocument response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Performs semantic search over a `Document`.
@@ -1483,8 +1765,39 @@ export class RetrieverServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.queryDocument(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('queryDocument request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.ai.generativelanguage.v1beta.IQueryDocumentResponse,
+          | protos.google.ai.generativelanguage.v1beta.IQueryDocumentRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('queryDocument response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .queryDocument(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.ai.generativelanguage.v1beta.IQueryDocumentResponse,
+          (
+            | protos.google.ai.generativelanguage.v1beta.IQueryDocumentRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('queryDocument response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Creates a `Chunk`.
@@ -1582,8 +1895,39 @@ export class RetrieverServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.createChunk(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('createChunk request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.ai.generativelanguage.v1beta.IChunk,
+          | protos.google.ai.generativelanguage.v1beta.ICreateChunkRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('createChunk response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .createChunk(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.ai.generativelanguage.v1beta.IChunk,
+          (
+            | protos.google.ai.generativelanguage.v1beta.ICreateChunkRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('createChunk response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Batch create `Chunk`s.
@@ -1683,8 +2027,39 @@ export class RetrieverServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.batchCreateChunks(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('batchCreateChunks request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.ai.generativelanguage.v1beta.IBatchCreateChunksResponse,
+          | protos.google.ai.generativelanguage.v1beta.IBatchCreateChunksRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('batchCreateChunks response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .batchCreateChunks(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.ai.generativelanguage.v1beta.IBatchCreateChunksResponse,
+          (
+            | protos.google.ai.generativelanguage.v1beta.IBatchCreateChunksRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('batchCreateChunks response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Gets information about a specific `Chunk`.
@@ -1774,8 +2149,39 @@ export class RetrieverServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.getChunk(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('getChunk request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.ai.generativelanguage.v1beta.IChunk,
+          | protos.google.ai.generativelanguage.v1beta.IGetChunkRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getChunk response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getChunk(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.ai.generativelanguage.v1beta.IChunk,
+          (
+            | protos.google.ai.generativelanguage.v1beta.IGetChunkRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getChunk response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Updates a `Chunk`.
@@ -1873,8 +2279,39 @@ export class RetrieverServiceClient {
       this._gaxModule.routingHeader.fromParams({
         'chunk.name': request.chunk!.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.updateChunk(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('updateChunk request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.ai.generativelanguage.v1beta.IChunk,
+          | protos.google.ai.generativelanguage.v1beta.IUpdateChunkRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('updateChunk response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .updateChunk(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.ai.generativelanguage.v1beta.IChunk,
+          (
+            | protos.google.ai.generativelanguage.v1beta.IUpdateChunkRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('updateChunk response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Batch update `Chunk`s.
@@ -1974,8 +2411,39 @@ export class RetrieverServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.batchUpdateChunks(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('batchUpdateChunks request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.ai.generativelanguage.v1beta.IBatchUpdateChunksResponse,
+          | protos.google.ai.generativelanguage.v1beta.IBatchUpdateChunksRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('batchUpdateChunks response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .batchUpdateChunks(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.ai.generativelanguage.v1beta.IBatchUpdateChunksResponse,
+          (
+            | protos.google.ai.generativelanguage.v1beta.IBatchUpdateChunksRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('batchUpdateChunks response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Deletes a `Chunk`.
@@ -2071,8 +2539,39 @@ export class RetrieverServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.deleteChunk(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('deleteChunk request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.ai.generativelanguage.v1beta.IDeleteChunkRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('deleteChunk response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .deleteChunk(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.protobuf.IEmpty,
+          (
+            | protos.google.ai.generativelanguage.v1beta.IDeleteChunkRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteChunk response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Batch delete `Chunk`s.
@@ -2171,8 +2670,39 @@ export class RetrieverServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.batchDeleteChunks(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('batchDeleteChunks request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.ai.generativelanguage.v1beta.IBatchDeleteChunksRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('batchDeleteChunks response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .batchDeleteChunks(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.protobuf.IEmpty,
+          (
+            | protos.google.ai.generativelanguage.v1beta.IBatchDeleteChunksRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('batchDeleteChunks response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
 
   /**
@@ -2273,8 +2803,36 @@ export class RetrieverServiceClient {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    this.initialize();
-    return this.innerApiCalls.listCorpora(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.ai.generativelanguage.v1beta.IListCorporaRequest,
+          | protos.google.ai.generativelanguage.v1beta.IListCorporaResponse
+          | null
+          | undefined,
+          protos.google.ai.generativelanguage.v1beta.ICorpus
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listCorpora values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listCorpora request %j', request);
+    return this.innerApiCalls
+      .listCorpora(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.ai.generativelanguage.v1beta.ICorpus[],
+          protos.google.ai.generativelanguage.v1beta.IListCorporaRequest | null,
+          protos.google.ai.generativelanguage.v1beta.IListCorporaResponse,
+        ]) => {
+          this._log.info('listCorpora values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -2316,7 +2874,10 @@ export class RetrieverServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     const defaultCallSettings = this._defaults['listCorpora'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listCorpora stream %j', request);
     return this.descriptors.page.listCorpora.createStream(
       this.innerApiCalls.listCorpora as GaxCall,
       request,
@@ -2366,7 +2927,10 @@ export class RetrieverServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     const defaultCallSettings = this._defaults['listCorpora'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listCorpora iterate %j', request);
     return this.descriptors.page.listCorpora.asyncIterate(
       this.innerApiCalls['listCorpora'] as GaxCall,
       request as {},
@@ -2478,8 +3042,36 @@ export class RetrieverServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.listDocuments(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.ai.generativelanguage.v1beta.IListDocumentsRequest,
+          | protos.google.ai.generativelanguage.v1beta.IListDocumentsResponse
+          | null
+          | undefined,
+          protos.google.ai.generativelanguage.v1beta.IDocument
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listDocuments values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listDocuments request %j', request);
+    return this.innerApiCalls
+      .listDocuments(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.ai.generativelanguage.v1beta.IDocument[],
+          protos.google.ai.generativelanguage.v1beta.IListDocumentsRequest | null,
+          protos.google.ai.generativelanguage.v1beta.IListDocumentsResponse,
+        ]) => {
+          this._log.info('listDocuments values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -2528,7 +3120,10 @@ export class RetrieverServiceClient {
       });
     const defaultCallSettings = this._defaults['listDocuments'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listDocuments stream %j', request);
     return this.descriptors.page.listDocuments.createStream(
       this.innerApiCalls.listDocuments as GaxCall,
       request,
@@ -2585,7 +3180,10 @@ export class RetrieverServiceClient {
       });
     const defaultCallSettings = this._defaults['listDocuments'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listDocuments iterate %j', request);
     return this.descriptors.page.listDocuments.asyncIterate(
       this.innerApiCalls['listDocuments'] as GaxCall,
       request as {},
@@ -2697,8 +3295,36 @@ export class RetrieverServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.listChunks(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.ai.generativelanguage.v1beta.IListChunksRequest,
+          | protos.google.ai.generativelanguage.v1beta.IListChunksResponse
+          | null
+          | undefined,
+          protos.google.ai.generativelanguage.v1beta.IChunk
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listChunks values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listChunks request %j', request);
+    return this.innerApiCalls
+      .listChunks(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.ai.generativelanguage.v1beta.IChunk[],
+          protos.google.ai.generativelanguage.v1beta.IListChunksRequest | null,
+          protos.google.ai.generativelanguage.v1beta.IListChunksResponse,
+        ]) => {
+          this._log.info('listChunks values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -2747,7 +3373,10 @@ export class RetrieverServiceClient {
       });
     const defaultCallSettings = this._defaults['listChunks'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listChunks stream %j', request);
     return this.descriptors.page.listChunks.createStream(
       this.innerApiCalls.listChunks as GaxCall,
       request,
@@ -2804,7 +3433,10 @@ export class RetrieverServiceClient {
       });
     const defaultCallSettings = this._defaults['listChunks'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listChunks iterate %j', request);
     return this.descriptors.page.listChunks.asyncIterate(
       this.innerApiCalls['listChunks'] as GaxCall,
       request as {},
@@ -3110,6 +3742,7 @@ export class RetrieverServiceClient {
   close(): Promise<void> {
     if (this.retrieverServiceStub && !this._terminated) {
       return this.retrieverServiceStub.then(stub => {
+        this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
       });

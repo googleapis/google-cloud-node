@@ -1,7 +1,7 @@
 {
     "clientLibrary": {
         "name": "nodejs-containeranalysis",
-        "version": "5.6.0",
+        "version": "6.1.0",
         "language": "TYPESCRIPT",
         "apis": [
             {
@@ -184,6 +184,50 @@
                 "method": {
                     "shortName": "GetVulnerabilityOccurrencesSummary",
                     "fullName": "google.devtools.containeranalysis.v1.ContainerAnalysis.GetVulnerabilityOccurrencesSummary",
+                    "service": {
+                        "shortName": "ContainerAnalysis",
+                        "fullName": "google.devtools.containeranalysis.v1.ContainerAnalysis"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "containeranalysis_v1_generated_ContainerAnalysis_ExportSBOM_async",
+            "title": "containeranalysis exportSBOM Sample",
+            "origin": "API_DEFINITION",
+            "description": " Generates an SBOM for the given resource.",
+            "canonical": true,
+            "file": "container_analysis.export_s_b_o_m.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 59,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "ExportSBOM",
+                "fullName": "google.devtools.containeranalysis.v1.ContainerAnalysis.ExportSBOM",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "name",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "cloud_storage_location",
+                        "type": ".google.devtools.containeranalysis.v1.ExportSBOMRequest.CloudStorageLocation"
+                    }
+                ],
+                "resultType": ".google.devtools.containeranalysis.v1.ExportSBOMResponse",
+                "client": {
+                    "shortName": "ContainerAnalysisClient",
+                    "fullName": "google.devtools.containeranalysis.v1.ContainerAnalysisClient"
+                },
+                "method": {
+                    "shortName": "ExportSBOM",
+                    "fullName": "google.devtools.containeranalysis.v1.ContainerAnalysis.ExportSBOM",
                     "service": {
                         "shortName": "ContainerAnalysis",
                         "fullName": "google.devtools.containeranalysis.v1.ContainerAnalysis"

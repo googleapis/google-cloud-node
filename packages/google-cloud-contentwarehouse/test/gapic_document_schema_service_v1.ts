@@ -268,7 +268,9 @@ describe('v1.DocumentSchemaServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      client.initialize().catch(err => {
+        throw err;
+      });
       assert(client.documentSchemaServiceStub);
       client.close().then(() => {
         done();
@@ -331,7 +333,7 @@ describe('v1.DocumentSchemaServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contentwarehouse.v1.CreateDocumentSchemaRequest()
       );
@@ -340,7 +342,7 @@ describe('v1.DocumentSchemaServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.contentwarehouse.v1.DocumentSchema()
       );
@@ -364,7 +366,7 @@ describe('v1.DocumentSchemaServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contentwarehouse.v1.CreateDocumentSchemaRequest()
       );
@@ -373,7 +375,7 @@ describe('v1.DocumentSchemaServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.contentwarehouse.v1.DocumentSchema()
       );
@@ -412,7 +414,7 @@ describe('v1.DocumentSchemaServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contentwarehouse.v1.CreateDocumentSchemaRequest()
       );
@@ -421,7 +423,7 @@ describe('v1.DocumentSchemaServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createDocumentSchema = stubSimpleCall(
         undefined,
@@ -444,7 +446,7 @@ describe('v1.DocumentSchemaServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contentwarehouse.v1.CreateDocumentSchemaRequest()
       );
@@ -466,7 +468,7 @@ describe('v1.DocumentSchemaServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contentwarehouse.v1.UpdateDocumentSchemaRequest()
       );
@@ -475,7 +477,7 @@ describe('v1.DocumentSchemaServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.contentwarehouse.v1.DocumentSchema()
       );
@@ -499,7 +501,7 @@ describe('v1.DocumentSchemaServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contentwarehouse.v1.UpdateDocumentSchemaRequest()
       );
@@ -508,7 +510,7 @@ describe('v1.DocumentSchemaServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.contentwarehouse.v1.DocumentSchema()
       );
@@ -547,7 +549,7 @@ describe('v1.DocumentSchemaServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contentwarehouse.v1.UpdateDocumentSchemaRequest()
       );
@@ -556,7 +558,7 @@ describe('v1.DocumentSchemaServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateDocumentSchema = stubSimpleCall(
         undefined,
@@ -579,7 +581,7 @@ describe('v1.DocumentSchemaServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contentwarehouse.v1.UpdateDocumentSchemaRequest()
       );
@@ -601,7 +603,7 @@ describe('v1.DocumentSchemaServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contentwarehouse.v1.GetDocumentSchemaRequest()
       );
@@ -610,7 +612,7 @@ describe('v1.DocumentSchemaServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.contentwarehouse.v1.DocumentSchema()
       );
@@ -633,7 +635,7 @@ describe('v1.DocumentSchemaServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contentwarehouse.v1.GetDocumentSchemaRequest()
       );
@@ -642,7 +644,7 @@ describe('v1.DocumentSchemaServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.contentwarehouse.v1.DocumentSchema()
       );
@@ -681,7 +683,7 @@ describe('v1.DocumentSchemaServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contentwarehouse.v1.GetDocumentSchemaRequest()
       );
@@ -690,7 +692,7 @@ describe('v1.DocumentSchemaServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getDocumentSchema = stubSimpleCall(
         undefined,
@@ -713,7 +715,7 @@ describe('v1.DocumentSchemaServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contentwarehouse.v1.GetDocumentSchemaRequest()
       );
@@ -735,7 +737,7 @@ describe('v1.DocumentSchemaServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contentwarehouse.v1.DeleteDocumentSchemaRequest()
       );
@@ -744,7 +746,7 @@ describe('v1.DocumentSchemaServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -768,7 +770,7 @@ describe('v1.DocumentSchemaServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contentwarehouse.v1.DeleteDocumentSchemaRequest()
       );
@@ -777,7 +779,7 @@ describe('v1.DocumentSchemaServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -816,7 +818,7 @@ describe('v1.DocumentSchemaServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contentwarehouse.v1.DeleteDocumentSchemaRequest()
       );
@@ -825,7 +827,7 @@ describe('v1.DocumentSchemaServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteDocumentSchema = stubSimpleCall(
         undefined,
@@ -848,7 +850,7 @@ describe('v1.DocumentSchemaServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contentwarehouse.v1.DeleteDocumentSchemaRequest()
       );
@@ -870,7 +872,7 @@ describe('v1.DocumentSchemaServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contentwarehouse.v1.ListDocumentSchemasRequest()
       );
@@ -879,7 +881,7 @@ describe('v1.DocumentSchemaServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.contentwarehouse.v1.DocumentSchema()
@@ -911,7 +913,7 @@ describe('v1.DocumentSchemaServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contentwarehouse.v1.ListDocumentSchemasRequest()
       );
@@ -920,7 +922,7 @@ describe('v1.DocumentSchemaServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.contentwarehouse.v1.DocumentSchema()
@@ -969,7 +971,7 @@ describe('v1.DocumentSchemaServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contentwarehouse.v1.ListDocumentSchemasRequest()
       );
@@ -978,7 +980,7 @@ describe('v1.DocumentSchemaServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listDocumentSchemas = stubSimpleCall(
         undefined,
@@ -1001,7 +1003,7 @@ describe('v1.DocumentSchemaServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contentwarehouse.v1.ListDocumentSchemasRequest()
       );
@@ -1010,7 +1012,7 @@ describe('v1.DocumentSchemaServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.contentwarehouse.v1.DocumentSchema()
@@ -1065,7 +1067,7 @@ describe('v1.DocumentSchemaServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contentwarehouse.v1.ListDocumentSchemasRequest()
       );
@@ -1074,7 +1076,7 @@ describe('v1.DocumentSchemaServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listDocumentSchemas.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -1118,7 +1120,7 @@ describe('v1.DocumentSchemaServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contentwarehouse.v1.ListDocumentSchemasRequest()
       );
@@ -1127,7 +1129,7 @@ describe('v1.DocumentSchemaServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.contentwarehouse.v1.DocumentSchema()
@@ -1169,7 +1171,7 @@ describe('v1.DocumentSchemaServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contentwarehouse.v1.ListDocumentSchemasRequest()
       );
@@ -1178,7 +1180,7 @@ describe('v1.DocumentSchemaServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listDocumentSchemas.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -1207,7 +1209,7 @@ describe('v1.DocumentSchemaServiceClient', () => {
   });
 
   describe('Path templates', () => {
-    describe('documentLink', () => {
+    describe('documentLink', async () => {
       const fakePath = '/rendered/path/documentLink';
       const expectedParameters = {
         project: 'projectValue',
@@ -1220,7 +1222,7 @@ describe('v1.DocumentSchemaServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.documentLinkPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -1284,7 +1286,7 @@ describe('v1.DocumentSchemaServiceClient', () => {
       });
     });
 
-    describe('documentSchema', () => {
+    describe('documentSchema', async () => {
       const fakePath = '/rendered/path/documentSchema';
       const expectedParameters = {
         project: 'projectValue',
@@ -1296,7 +1298,7 @@ describe('v1.DocumentSchemaServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.documentSchemaPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -1350,7 +1352,7 @@ describe('v1.DocumentSchemaServiceClient', () => {
       });
     });
 
-    describe('location', () => {
+    describe('location', async () => {
       const fakePath = '/rendered/path/location';
       const expectedParameters = {
         project: 'projectValue',
@@ -1361,7 +1363,7 @@ describe('v1.DocumentSchemaServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.locationPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -1400,7 +1402,7 @@ describe('v1.DocumentSchemaServiceClient', () => {
       });
     });
 
-    describe('projectLocationDocument', () => {
+    describe('projectLocationDocument', async () => {
       const fakePath = '/rendered/path/projectLocationDocument';
       const expectedParameters = {
         project: 'projectValue',
@@ -1412,7 +1414,7 @@ describe('v1.DocumentSchemaServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectLocationDocumentPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -1480,7 +1482,7 @@ describe('v1.DocumentSchemaServiceClient', () => {
       });
     });
 
-    describe('projectLocationDocumentsReferenceId', () => {
+    describe('projectLocationDocumentsReferenceId', async () => {
       const fakePath = '/rendered/path/projectLocationDocumentsReferenceId';
       const expectedParameters = {
         project: 'projectValue',
@@ -1492,7 +1494,7 @@ describe('v1.DocumentSchemaServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectLocationDocumentsReferenceIdPathTemplate.render =
         sinon.stub().returns(fakePath);
       client.pathTemplates.projectLocationDocumentsReferenceIdPathTemplate.match =
@@ -1564,7 +1566,7 @@ describe('v1.DocumentSchemaServiceClient', () => {
       });
     });
 
-    describe('ruleSet', () => {
+    describe('ruleSet', async () => {
       const fakePath = '/rendered/path/ruleSet';
       const expectedParameters = {
         project: 'projectValue',
@@ -1576,7 +1578,7 @@ describe('v1.DocumentSchemaServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.ruleSetPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -1629,7 +1631,7 @@ describe('v1.DocumentSchemaServiceClient', () => {
       });
     });
 
-    describe('synonymSet', () => {
+    describe('synonymSet', async () => {
       const fakePath = '/rendered/path/synonymSet';
       const expectedParameters = {
         project: 'projectValue',
@@ -1641,7 +1643,7 @@ describe('v1.DocumentSchemaServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.synonymSetPathTemplate.render = sinon
         .stub()
         .returns(fakePath);

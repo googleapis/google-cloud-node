@@ -4,6 +4,44 @@
 
 [1]: https://www.npmjs.com/package/PACKAGE NAME?activeTab=versions
 
+## [6.1.0](https://github.com/googleapis/google-cloud-node/compare/dlp-v6.0.1...dlp-v6.1.0) (2025-03-21)
+
+
+### Features
+
+* [dlp] add sample findings for data profiles ([#6192](https://github.com/googleapis/google-cloud-node/issues/6192)) ([3f39c49](https://github.com/googleapis/google-cloud-node/commit/3f39c49a0bd9cc9ee7544ae0dba60bf7d5c69805))
+* List tags on resources for data profiles ([3f39c49](https://github.com/googleapis/google-cloud-node/commit/3f39c49a0bd9cc9ee7544ae0dba60bf7d5c69805))
+
+## [6.0.1](https://github.com/googleapis/google-cloud-node/compare/dlp-v6.0.0...dlp-v6.0.1) (2025-03-19)
+
+
+### Bug Fixes
+
+* [Many APIs] await/catch promises, and update listOperationsAsync return type ([#6190](https://github.com/googleapis/google-cloud-node/issues/6190)) ([f4866df](https://github.com/googleapis/google-cloud-node/commit/f4866dfa6ab481163150f54928a9857d2dfef948))
+
+## [6.0.0](https://github.com/googleapis/google-cloud-node/compare/dlp-v5.13.0...dlp-v6.0.0) (2025-03-18)
+
+
+### ⚠ BREAKING CHANGES
+
+* upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096))
+
+### Features
+
+* [Many APIs] add request/response debug logging to gapics ([388b4e2](https://github.com/googleapis/google-cloud-node/commit/388b4e20329b7f6fc0dd061dddff573c45104213))
+
+
+### Miscellaneous Chores
+
+* Upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096)) ([eadae64](https://github.com/googleapis/google-cloud-node/commit/eadae64d54e07aa2c65097ea52e65008d4e87436))
+
+## [5.13.0](https://github.com/googleapis/google-cloud-node/compare/dlp-v5.12.0...dlp-v5.13.0) (2025-02-28)
+
+
+### Features
+
+* [dlp] discovery of Vertex AI datasets ([#6041](https://github.com/googleapis/google-cloud-node/issues/6041)) ([65beb7c](https://github.com/googleapis/google-cloud-node/commit/65beb7cee55e4f37a7449175905f896609ad001a))
+
 ## [5.12.0](https://github.com/googleapis/google-cloud-node/compare/dlp-v5.11.0...dlp-v5.12.0) (2024-10-30)
 
 

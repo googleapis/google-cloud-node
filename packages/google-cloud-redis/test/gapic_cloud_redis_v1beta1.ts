@@ -284,7 +284,9 @@ describe('v1beta1.CloudRedisClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      client.initialize().catch(err => {
+        throw err;
+      });
       assert(client.cloudRedisStub);
       client.close().then(() => {
         done();
@@ -343,7 +345,7 @@ describe('v1beta1.CloudRedisClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.redis.v1beta1.GetInstanceRequest()
       );
@@ -374,7 +376,7 @@ describe('v1beta1.CloudRedisClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.redis.v1beta1.GetInstanceRequest()
       );
@@ -421,7 +423,7 @@ describe('v1beta1.CloudRedisClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.redis.v1beta1.GetInstanceRequest()
       );
@@ -452,7 +454,7 @@ describe('v1beta1.CloudRedisClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.redis.v1beta1.GetInstanceRequest()
       );
@@ -473,7 +475,7 @@ describe('v1beta1.CloudRedisClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.redis.v1beta1.GetInstanceAuthStringRequest()
       );
@@ -505,7 +507,7 @@ describe('v1beta1.CloudRedisClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.redis.v1beta1.GetInstanceAuthStringRequest()
       );
@@ -552,7 +554,7 @@ describe('v1beta1.CloudRedisClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.redis.v1beta1.GetInstanceAuthStringRequest()
       );
@@ -586,7 +588,7 @@ describe('v1beta1.CloudRedisClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.redis.v1beta1.GetInstanceAuthStringRequest()
       );
@@ -610,7 +612,7 @@ describe('v1beta1.CloudRedisClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.redis.v1beta1.CreateInstanceRequest()
       );
@@ -643,7 +645,7 @@ describe('v1beta1.CloudRedisClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.redis.v1beta1.CreateInstanceRequest()
       );
@@ -697,7 +699,7 @@ describe('v1beta1.CloudRedisClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.redis.v1beta1.CreateInstanceRequest()
       );
@@ -728,7 +730,7 @@ describe('v1beta1.CloudRedisClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.redis.v1beta1.CreateInstanceRequest()
       );
@@ -761,7 +763,7 @@ describe('v1beta1.CloudRedisClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -783,7 +785,7 @@ describe('v1beta1.CloudRedisClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -804,7 +806,7 @@ describe('v1beta1.CloudRedisClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.redis.v1beta1.UpdateInstanceRequest()
       );
@@ -838,7 +840,7 @@ describe('v1beta1.CloudRedisClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.redis.v1beta1.UpdateInstanceRequest()
       );
@@ -893,7 +895,7 @@ describe('v1beta1.CloudRedisClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.redis.v1beta1.UpdateInstanceRequest()
       );
@@ -925,7 +927,7 @@ describe('v1beta1.CloudRedisClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.redis.v1beta1.UpdateInstanceRequest()
       );
@@ -959,7 +961,7 @@ describe('v1beta1.CloudRedisClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -981,7 +983,7 @@ describe('v1beta1.CloudRedisClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -1002,7 +1004,7 @@ describe('v1beta1.CloudRedisClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.redis.v1beta1.UpgradeInstanceRequest()
       );
@@ -1035,7 +1037,7 @@ describe('v1beta1.CloudRedisClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.redis.v1beta1.UpgradeInstanceRequest()
       );
@@ -1089,7 +1091,7 @@ describe('v1beta1.CloudRedisClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.redis.v1beta1.UpgradeInstanceRequest()
       );
@@ -1120,7 +1122,7 @@ describe('v1beta1.CloudRedisClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.redis.v1beta1.UpgradeInstanceRequest()
       );
@@ -1153,7 +1155,7 @@ describe('v1beta1.CloudRedisClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -1175,7 +1177,7 @@ describe('v1beta1.CloudRedisClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -1196,7 +1198,7 @@ describe('v1beta1.CloudRedisClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.redis.v1beta1.ImportInstanceRequest()
       );
@@ -1229,7 +1231,7 @@ describe('v1beta1.CloudRedisClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.redis.v1beta1.ImportInstanceRequest()
       );
@@ -1283,7 +1285,7 @@ describe('v1beta1.CloudRedisClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.redis.v1beta1.ImportInstanceRequest()
       );
@@ -1314,7 +1316,7 @@ describe('v1beta1.CloudRedisClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.redis.v1beta1.ImportInstanceRequest()
       );
@@ -1347,7 +1349,7 @@ describe('v1beta1.CloudRedisClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -1369,7 +1371,7 @@ describe('v1beta1.CloudRedisClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -1390,7 +1392,7 @@ describe('v1beta1.CloudRedisClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.redis.v1beta1.ExportInstanceRequest()
       );
@@ -1423,7 +1425,7 @@ describe('v1beta1.CloudRedisClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.redis.v1beta1.ExportInstanceRequest()
       );
@@ -1477,7 +1479,7 @@ describe('v1beta1.CloudRedisClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.redis.v1beta1.ExportInstanceRequest()
       );
@@ -1508,7 +1510,7 @@ describe('v1beta1.CloudRedisClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.redis.v1beta1.ExportInstanceRequest()
       );
@@ -1541,7 +1543,7 @@ describe('v1beta1.CloudRedisClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -1563,7 +1565,7 @@ describe('v1beta1.CloudRedisClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -1584,7 +1586,7 @@ describe('v1beta1.CloudRedisClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.redis.v1beta1.FailoverInstanceRequest()
       );
@@ -1617,7 +1619,7 @@ describe('v1beta1.CloudRedisClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.redis.v1beta1.FailoverInstanceRequest()
       );
@@ -1671,7 +1673,7 @@ describe('v1beta1.CloudRedisClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.redis.v1beta1.FailoverInstanceRequest()
       );
@@ -1702,7 +1704,7 @@ describe('v1beta1.CloudRedisClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.redis.v1beta1.FailoverInstanceRequest()
       );
@@ -1735,7 +1737,7 @@ describe('v1beta1.CloudRedisClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -1757,7 +1759,7 @@ describe('v1beta1.CloudRedisClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -1778,7 +1780,7 @@ describe('v1beta1.CloudRedisClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.redis.v1beta1.DeleteInstanceRequest()
       );
@@ -1811,7 +1813,7 @@ describe('v1beta1.CloudRedisClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.redis.v1beta1.DeleteInstanceRequest()
       );
@@ -1865,7 +1867,7 @@ describe('v1beta1.CloudRedisClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.redis.v1beta1.DeleteInstanceRequest()
       );
@@ -1896,7 +1898,7 @@ describe('v1beta1.CloudRedisClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.redis.v1beta1.DeleteInstanceRequest()
       );
@@ -1929,7 +1931,7 @@ describe('v1beta1.CloudRedisClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -1951,7 +1953,7 @@ describe('v1beta1.CloudRedisClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -1972,7 +1974,7 @@ describe('v1beta1.CloudRedisClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.redis.v1beta1.RescheduleMaintenanceRequest()
       );
@@ -2005,7 +2007,7 @@ describe('v1beta1.CloudRedisClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.redis.v1beta1.RescheduleMaintenanceRequest()
       );
@@ -2059,7 +2061,7 @@ describe('v1beta1.CloudRedisClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.redis.v1beta1.RescheduleMaintenanceRequest()
       );
@@ -2093,7 +2095,7 @@ describe('v1beta1.CloudRedisClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.redis.v1beta1.RescheduleMaintenanceRequest()
       );
@@ -2126,7 +2128,7 @@ describe('v1beta1.CloudRedisClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -2148,7 +2150,7 @@ describe('v1beta1.CloudRedisClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -2169,7 +2171,7 @@ describe('v1beta1.CloudRedisClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.redis.v1beta1.ListInstancesRequest()
       );
@@ -2202,7 +2204,7 @@ describe('v1beta1.CloudRedisClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.redis.v1beta1.ListInstancesRequest()
       );
@@ -2251,7 +2253,7 @@ describe('v1beta1.CloudRedisClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.redis.v1beta1.ListInstancesRequest()
       );
@@ -2282,7 +2284,7 @@ describe('v1beta1.CloudRedisClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.redis.v1beta1.ListInstancesRequest()
       );
@@ -2336,7 +2338,7 @@ describe('v1beta1.CloudRedisClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.redis.v1beta1.ListInstancesRequest()
       );
@@ -2385,7 +2387,7 @@ describe('v1beta1.CloudRedisClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.redis.v1beta1.ListInstancesRequest()
       );
@@ -2428,7 +2430,7 @@ describe('v1beta1.CloudRedisClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.redis.v1beta1.ListInstancesRequest()
       );
@@ -2465,7 +2467,7 @@ describe('v1beta1.CloudRedisClient', () => {
   });
 
   describe('Path templates', () => {
-    describe('instance', () => {
+    describe('instance', async () => {
       const fakePath = '/rendered/path/instance';
       const expectedParameters = {
         project: 'projectValue',
@@ -2476,7 +2478,7 @@ describe('v1beta1.CloudRedisClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.instancePathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -2529,7 +2531,7 @@ describe('v1beta1.CloudRedisClient', () => {
       });
     });
 
-    describe('location', () => {
+    describe('location', async () => {
       const fakePath = '/rendered/path/location';
       const expectedParameters = {
         project: 'projectValue',
@@ -2539,7 +2541,7 @@ describe('v1beta1.CloudRedisClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.locationPathTemplate.render = sinon
         .stub()
         .returns(fakePath);

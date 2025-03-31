@@ -54,7 +54,9 @@
   * [Conversations.create_conversation](#conversations.create_conversation)
   * [Conversations.generate_stateless_suggestion](#conversations.generate_stateless_suggestion)
   * [Conversations.generate_stateless_summary](#conversations.generate_stateless_summary)
+  * [Conversations.generate_suggestions](#conversations.generate_suggestions)
   * [Conversations.get_conversation](#conversations.get_conversation)
+  * [Conversations.ingest_context_references](#conversations.ingest_context_references)
   * [Conversations.list_conversations](#conversations.list_conversations)
   * [Conversations.list_messages](#conversations.list_messages)
   * [Conversations.search_knowledge](#conversations.search_knowledge)
@@ -156,7 +158,9 @@
   * [Conversations.create_conversation](#conversations.create_conversation)
   * [Conversations.generate_stateless_suggestion](#conversations.generate_stateless_suggestion)
   * [Conversations.generate_stateless_summary](#conversations.generate_stateless_summary)
+  * [Conversations.generate_suggestions](#conversations.generate_suggestions)
   * [Conversations.get_conversation](#conversations.get_conversation)
+  * [Conversations.ingest_context_references](#conversations.ingest_context_references)
   * [Conversations.list_conversations](#conversations.list_conversations)
   * [Conversations.list_messages](#conversations.list_messages)
   * [Conversations.search_knowledge](#conversations.search_knowledge)
@@ -217,6 +221,10 @@
   * [Participants.suggest_knowledge_assist](#participants.suggest_knowledge_assist)
   * [Participants.suggest_smart_replies](#participants.suggest_smart_replies)
   * [Participants.update_participant](#participants.update_participant)
+  * [Phone_numbers.delete_phone_number](#phone_numbers.delete_phone_number)
+  * [Phone_numbers.list_phone_numbers](#phone_numbers.list_phone_numbers)
+  * [Phone_numbers.undelete_phone_number](#phone_numbers.undelete_phone_number)
+  * [Phone_numbers.update_phone_number](#phone_numbers.update_phone_number)
   * [Session_entity_types.create_session_entity_type](#session_entity_types.create_session_entity_type)
   * [Session_entity_types.delete_session_entity_type](#session_entity_types.delete_session_entity_type)
   * [Session_entity_types.get_session_entity_type](#session_entity_types.get_session_entity_type)
@@ -965,6 +973,23 @@ __Usage:__
 
 
 
+### Conversations.generate_suggestions
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dialogflow/samples/generated/v2/conversations.generate_suggestions.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dialogflow/samples/generated/v2/conversations.generate_suggestions.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-dialogflow/samples/generated/v2/conversations.generate_suggestions.js`
+
+
+-----
+
+
+
+
 ### Conversations.get_conversation
 
 View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dialogflow/samples/generated/v2/conversations.get_conversation.js).
@@ -975,6 +1000,23 @@ __Usage:__
 
 
 `node packages/google-cloud-dialogflow/samples/generated/v2/conversations.get_conversation.js`
+
+
+-----
+
+
+
+
+### Conversations.ingest_context_references
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dialogflow/samples/generated/v2/conversations.ingest_context_references.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dialogflow/samples/generated/v2/conversations.ingest_context_references.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-dialogflow/samples/generated/v2/conversations.ingest_context_references.js`
 
 
 -----
@@ -2699,6 +2741,23 @@ __Usage:__
 
 
 
+### Conversations.generate_suggestions
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dialogflow/samples/generated/v2beta1/conversations.generate_suggestions.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dialogflow/samples/generated/v2beta1/conversations.generate_suggestions.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-dialogflow/samples/generated/v2beta1/conversations.generate_suggestions.js`
+
+
+-----
+
+
+
+
 ### Conversations.get_conversation
 
 View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dialogflow/samples/generated/v2beta1/conversations.get_conversation.js).
@@ -2709,6 +2768,23 @@ __Usage:__
 
 
 `node packages/google-cloud-dialogflow/samples/generated/v2beta1/conversations.get_conversation.js`
+
+
+-----
+
+
+
+
+### Conversations.ingest_context_references
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dialogflow/samples/generated/v2beta1/conversations.ingest_context_references.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dialogflow/samples/generated/v2beta1/conversations.ingest_context_references.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-dialogflow/samples/generated/v2beta1/conversations.ingest_context_references.js`
 
 
 -----
@@ -3729,6 +3805,74 @@ __Usage:__
 
 
 `node packages/google-cloud-dialogflow/samples/generated/v2beta1/participants.update_participant.js`
+
+
+-----
+
+
+
+
+### Phone_numbers.delete_phone_number
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dialogflow/samples/generated/v2beta1/phone_numbers.delete_phone_number.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dialogflow/samples/generated/v2beta1/phone_numbers.delete_phone_number.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-dialogflow/samples/generated/v2beta1/phone_numbers.delete_phone_number.js`
+
+
+-----
+
+
+
+
+### Phone_numbers.list_phone_numbers
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dialogflow/samples/generated/v2beta1/phone_numbers.list_phone_numbers.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dialogflow/samples/generated/v2beta1/phone_numbers.list_phone_numbers.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-dialogflow/samples/generated/v2beta1/phone_numbers.list_phone_numbers.js`
+
+
+-----
+
+
+
+
+### Phone_numbers.undelete_phone_number
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dialogflow/samples/generated/v2beta1/phone_numbers.undelete_phone_number.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dialogflow/samples/generated/v2beta1/phone_numbers.undelete_phone_number.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-dialogflow/samples/generated/v2beta1/phone_numbers.undelete_phone_number.js`
+
+
+-----
+
+
+
+
+### Phone_numbers.update_phone_number
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dialogflow/samples/generated/v2beta1/phone_numbers.update_phone_number.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dialogflow/samples/generated/v2beta1/phone_numbers.update_phone_number.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-dialogflow/samples/generated/v2beta1/phone_numbers.update_phone_number.js`
 
 
 -----

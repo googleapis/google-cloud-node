@@ -288,7 +288,9 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      client.initialize().catch(err => {
+        throw err;
+      });
       assert(client.cloudDeployStub);
       client.close().then(() => {
         done();
@@ -347,7 +349,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.GetDeliveryPipelineRequest()
       );
@@ -356,7 +358,7 @@ describe('v1.CloudDeployClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.deploy.v1.DeliveryPipeline()
       );
@@ -379,7 +381,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.GetDeliveryPipelineRequest()
       );
@@ -388,7 +390,7 @@ describe('v1.CloudDeployClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.deploy.v1.DeliveryPipeline()
       );
@@ -426,7 +428,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.GetDeliveryPipelineRequest()
       );
@@ -435,7 +437,7 @@ describe('v1.CloudDeployClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getDeliveryPipeline = stubSimpleCall(
         undefined,
@@ -457,7 +459,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.GetDeliveryPipelineRequest()
       );
@@ -478,7 +480,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.RollbackTargetRequest()
       );
@@ -487,7 +489,7 @@ describe('v1.CloudDeployClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.deploy.v1.RollbackTargetResponse()
       );
@@ -509,7 +511,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.RollbackTargetRequest()
       );
@@ -518,7 +520,7 @@ describe('v1.CloudDeployClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.deploy.v1.RollbackTargetResponse()
       );
@@ -556,7 +558,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.RollbackTargetRequest()
       );
@@ -565,7 +567,7 @@ describe('v1.CloudDeployClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.rollbackTarget = stubSimpleCall(
         undefined,
@@ -587,7 +589,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.RollbackTargetRequest()
       );
@@ -608,7 +610,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.GetTargetRequest()
       );
@@ -617,7 +619,7 @@ describe('v1.CloudDeployClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.deploy.v1.Target()
       );
@@ -639,7 +641,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.GetTargetRequest()
       );
@@ -648,7 +650,7 @@ describe('v1.CloudDeployClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.deploy.v1.Target()
       );
@@ -686,7 +688,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.GetTargetRequest()
       );
@@ -695,7 +697,7 @@ describe('v1.CloudDeployClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getTarget = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.getTarget(request), expectedError);
@@ -714,7 +716,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.GetTargetRequest()
       );
@@ -735,7 +737,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.GetCustomTargetTypeRequest()
       );
@@ -744,7 +746,7 @@ describe('v1.CloudDeployClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.deploy.v1.CustomTargetType()
       );
@@ -767,7 +769,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.GetCustomTargetTypeRequest()
       );
@@ -776,7 +778,7 @@ describe('v1.CloudDeployClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.deploy.v1.CustomTargetType()
       );
@@ -814,7 +816,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.GetCustomTargetTypeRequest()
       );
@@ -823,7 +825,7 @@ describe('v1.CloudDeployClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getCustomTargetType = stubSimpleCall(
         undefined,
@@ -845,7 +847,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.GetCustomTargetTypeRequest()
       );
@@ -866,7 +868,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.GetReleaseRequest()
       );
@@ -875,7 +877,7 @@ describe('v1.CloudDeployClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.deploy.v1.Release()
       );
@@ -897,7 +899,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.GetReleaseRequest()
       );
@@ -906,7 +908,7 @@ describe('v1.CloudDeployClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.deploy.v1.Release()
       );
@@ -944,7 +946,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.GetReleaseRequest()
       );
@@ -953,7 +955,7 @@ describe('v1.CloudDeployClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getRelease = stubSimpleCall(
         undefined,
@@ -975,7 +977,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.GetReleaseRequest()
       );
@@ -996,7 +998,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.AbandonReleaseRequest()
       );
@@ -1005,7 +1007,7 @@ describe('v1.CloudDeployClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.deploy.v1.AbandonReleaseResponse()
       );
@@ -1027,7 +1029,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.AbandonReleaseRequest()
       );
@@ -1036,7 +1038,7 @@ describe('v1.CloudDeployClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.deploy.v1.AbandonReleaseResponse()
       );
@@ -1074,7 +1076,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.AbandonReleaseRequest()
       );
@@ -1083,7 +1085,7 @@ describe('v1.CloudDeployClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.abandonRelease = stubSimpleCall(
         undefined,
@@ -1105,7 +1107,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.AbandonReleaseRequest()
       );
@@ -1126,7 +1128,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.GetDeployPolicyRequest()
       );
@@ -1135,7 +1137,7 @@ describe('v1.CloudDeployClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.deploy.v1.DeployPolicy()
       );
@@ -1157,7 +1159,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.GetDeployPolicyRequest()
       );
@@ -1166,7 +1168,7 @@ describe('v1.CloudDeployClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.deploy.v1.DeployPolicy()
       );
@@ -1204,7 +1206,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.GetDeployPolicyRequest()
       );
@@ -1213,7 +1215,7 @@ describe('v1.CloudDeployClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getDeployPolicy = stubSimpleCall(
         undefined,
@@ -1235,7 +1237,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.GetDeployPolicyRequest()
       );
@@ -1256,7 +1258,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.ApproveRolloutRequest()
       );
@@ -1265,7 +1267,7 @@ describe('v1.CloudDeployClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.deploy.v1.ApproveRolloutResponse()
       );
@@ -1287,7 +1289,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.ApproveRolloutRequest()
       );
@@ -1296,7 +1298,7 @@ describe('v1.CloudDeployClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.deploy.v1.ApproveRolloutResponse()
       );
@@ -1334,7 +1336,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.ApproveRolloutRequest()
       );
@@ -1343,7 +1345,7 @@ describe('v1.CloudDeployClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.approveRollout = stubSimpleCall(
         undefined,
@@ -1365,7 +1367,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.ApproveRolloutRequest()
       );
@@ -1386,7 +1388,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.AdvanceRolloutRequest()
       );
@@ -1395,7 +1397,7 @@ describe('v1.CloudDeployClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.deploy.v1.AdvanceRolloutResponse()
       );
@@ -1417,7 +1419,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.AdvanceRolloutRequest()
       );
@@ -1426,7 +1428,7 @@ describe('v1.CloudDeployClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.deploy.v1.AdvanceRolloutResponse()
       );
@@ -1464,7 +1466,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.AdvanceRolloutRequest()
       );
@@ -1473,7 +1475,7 @@ describe('v1.CloudDeployClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.advanceRollout = stubSimpleCall(
         undefined,
@@ -1495,7 +1497,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.AdvanceRolloutRequest()
       );
@@ -1516,7 +1518,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.CancelRolloutRequest()
       );
@@ -1525,7 +1527,7 @@ describe('v1.CloudDeployClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.deploy.v1.CancelRolloutResponse()
       );
@@ -1547,7 +1549,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.CancelRolloutRequest()
       );
@@ -1556,7 +1558,7 @@ describe('v1.CloudDeployClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.deploy.v1.CancelRolloutResponse()
       );
@@ -1594,7 +1596,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.CancelRolloutRequest()
       );
@@ -1603,7 +1605,7 @@ describe('v1.CloudDeployClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.cancelRollout = stubSimpleCall(
         undefined,
@@ -1625,7 +1627,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.CancelRolloutRequest()
       );
@@ -1646,7 +1648,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.GetRolloutRequest()
       );
@@ -1655,7 +1657,7 @@ describe('v1.CloudDeployClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.deploy.v1.Rollout()
       );
@@ -1677,7 +1679,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.GetRolloutRequest()
       );
@@ -1686,7 +1688,7 @@ describe('v1.CloudDeployClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.deploy.v1.Rollout()
       );
@@ -1724,7 +1726,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.GetRolloutRequest()
       );
@@ -1733,7 +1735,7 @@ describe('v1.CloudDeployClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getRollout = stubSimpleCall(
         undefined,
@@ -1755,7 +1757,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.GetRolloutRequest()
       );
@@ -1776,7 +1778,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.IgnoreJobRequest()
       );
@@ -1785,7 +1787,7 @@ describe('v1.CloudDeployClient', () => {
         ['rollout']
       );
       request.rollout = defaultValue1;
-      const expectedHeaderRequestParams = `rollout=${defaultValue1}`;
+      const expectedHeaderRequestParams = `rollout=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.deploy.v1.IgnoreJobResponse()
       );
@@ -1807,7 +1809,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.IgnoreJobRequest()
       );
@@ -1816,7 +1818,7 @@ describe('v1.CloudDeployClient', () => {
         ['rollout']
       );
       request.rollout = defaultValue1;
-      const expectedHeaderRequestParams = `rollout=${defaultValue1}`;
+      const expectedHeaderRequestParams = `rollout=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.deploy.v1.IgnoreJobResponse()
       );
@@ -1854,7 +1856,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.IgnoreJobRequest()
       );
@@ -1863,7 +1865,7 @@ describe('v1.CloudDeployClient', () => {
         ['rollout']
       );
       request.rollout = defaultValue1;
-      const expectedHeaderRequestParams = `rollout=${defaultValue1}`;
+      const expectedHeaderRequestParams = `rollout=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.ignoreJob = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.ignoreJob(request), expectedError);
@@ -1882,7 +1884,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.IgnoreJobRequest()
       );
@@ -1903,7 +1905,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.RetryJobRequest()
       );
@@ -1912,7 +1914,7 @@ describe('v1.CloudDeployClient', () => {
         ['rollout']
       );
       request.rollout = defaultValue1;
-      const expectedHeaderRequestParams = `rollout=${defaultValue1}`;
+      const expectedHeaderRequestParams = `rollout=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.deploy.v1.RetryJobResponse()
       );
@@ -1934,7 +1936,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.RetryJobRequest()
       );
@@ -1943,7 +1945,7 @@ describe('v1.CloudDeployClient', () => {
         ['rollout']
       );
       request.rollout = defaultValue1;
-      const expectedHeaderRequestParams = `rollout=${defaultValue1}`;
+      const expectedHeaderRequestParams = `rollout=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.deploy.v1.RetryJobResponse()
       );
@@ -1981,7 +1983,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.RetryJobRequest()
       );
@@ -1990,7 +1992,7 @@ describe('v1.CloudDeployClient', () => {
         ['rollout']
       );
       request.rollout = defaultValue1;
-      const expectedHeaderRequestParams = `rollout=${defaultValue1}`;
+      const expectedHeaderRequestParams = `rollout=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.retryJob = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.retryJob(request), expectedError);
@@ -2009,7 +2011,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.RetryJobRequest()
       );
@@ -2030,7 +2032,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.GetJobRunRequest()
       );
@@ -2039,7 +2041,7 @@ describe('v1.CloudDeployClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.deploy.v1.JobRun()
       );
@@ -2061,7 +2063,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.GetJobRunRequest()
       );
@@ -2070,7 +2072,7 @@ describe('v1.CloudDeployClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.deploy.v1.JobRun()
       );
@@ -2108,7 +2110,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.GetJobRunRequest()
       );
@@ -2117,7 +2119,7 @@ describe('v1.CloudDeployClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getJobRun = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.getJobRun(request), expectedError);
@@ -2136,7 +2138,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.GetJobRunRequest()
       );
@@ -2157,7 +2159,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.TerminateJobRunRequest()
       );
@@ -2166,7 +2168,7 @@ describe('v1.CloudDeployClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.deploy.v1.TerminateJobRunResponse()
       );
@@ -2188,7 +2190,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.TerminateJobRunRequest()
       );
@@ -2197,7 +2199,7 @@ describe('v1.CloudDeployClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.deploy.v1.TerminateJobRunResponse()
       );
@@ -2235,7 +2237,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.TerminateJobRunRequest()
       );
@@ -2244,7 +2246,7 @@ describe('v1.CloudDeployClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.terminateJobRun = stubSimpleCall(
         undefined,
@@ -2266,7 +2268,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.TerminateJobRunRequest()
       );
@@ -2287,7 +2289,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.GetConfigRequest()
       );
@@ -2296,7 +2298,7 @@ describe('v1.CloudDeployClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.deploy.v1.Config()
       );
@@ -2318,7 +2320,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.GetConfigRequest()
       );
@@ -2327,7 +2329,7 @@ describe('v1.CloudDeployClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.deploy.v1.Config()
       );
@@ -2365,7 +2367,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.GetConfigRequest()
       );
@@ -2374,7 +2376,7 @@ describe('v1.CloudDeployClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getConfig = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.getConfig(request), expectedError);
@@ -2393,7 +2395,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.GetConfigRequest()
       );
@@ -2414,7 +2416,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.GetAutomationRequest()
       );
@@ -2423,7 +2425,7 @@ describe('v1.CloudDeployClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.deploy.v1.Automation()
       );
@@ -2445,7 +2447,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.GetAutomationRequest()
       );
@@ -2454,7 +2456,7 @@ describe('v1.CloudDeployClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.deploy.v1.Automation()
       );
@@ -2492,7 +2494,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.GetAutomationRequest()
       );
@@ -2501,7 +2503,7 @@ describe('v1.CloudDeployClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getAutomation = stubSimpleCall(
         undefined,
@@ -2523,7 +2525,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.GetAutomationRequest()
       );
@@ -2544,7 +2546,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.GetAutomationRunRequest()
       );
@@ -2553,7 +2555,7 @@ describe('v1.CloudDeployClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.deploy.v1.AutomationRun()
       );
@@ -2575,7 +2577,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.GetAutomationRunRequest()
       );
@@ -2584,7 +2586,7 @@ describe('v1.CloudDeployClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.deploy.v1.AutomationRun()
       );
@@ -2622,7 +2624,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.GetAutomationRunRequest()
       );
@@ -2631,7 +2633,7 @@ describe('v1.CloudDeployClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getAutomationRun = stubSimpleCall(
         undefined,
@@ -2653,7 +2655,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.GetAutomationRunRequest()
       );
@@ -2674,7 +2676,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.CancelAutomationRunRequest()
       );
@@ -2683,7 +2685,7 @@ describe('v1.CloudDeployClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.deploy.v1.CancelAutomationRunResponse()
       );
@@ -2706,7 +2708,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.CancelAutomationRunRequest()
       );
@@ -2715,7 +2717,7 @@ describe('v1.CloudDeployClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.deploy.v1.CancelAutomationRunResponse()
       );
@@ -2753,7 +2755,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.CancelAutomationRunRequest()
       );
@@ -2762,7 +2764,7 @@ describe('v1.CloudDeployClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.cancelAutomationRun = stubSimpleCall(
         undefined,
@@ -2784,7 +2786,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.CancelAutomationRunRequest()
       );
@@ -2805,7 +2807,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.CreateDeliveryPipelineRequest()
       );
@@ -2814,7 +2816,7 @@ describe('v1.CloudDeployClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2838,7 +2840,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.CreateDeliveryPipelineRequest()
       );
@@ -2847,7 +2849,7 @@ describe('v1.CloudDeployClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2892,7 +2894,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.CreateDeliveryPipelineRequest()
       );
@@ -2901,7 +2903,7 @@ describe('v1.CloudDeployClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createDeliveryPipeline = stubLongRunningCall(
         undefined,
@@ -2926,7 +2928,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.CreateDeliveryPipelineRequest()
       );
@@ -2935,7 +2937,7 @@ describe('v1.CloudDeployClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createDeliveryPipeline = stubLongRunningCall(
         undefined,
@@ -2959,7 +2961,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -2981,7 +2983,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -3002,7 +3004,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.UpdateDeliveryPipelineRequest()
       );
@@ -3012,7 +3014,7 @@ describe('v1.CloudDeployClient', () => {
         ['deliveryPipeline', 'name']
       );
       request.deliveryPipeline.name = defaultValue1;
-      const expectedHeaderRequestParams = `delivery_pipeline.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `delivery_pipeline.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -3036,7 +3038,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.UpdateDeliveryPipelineRequest()
       );
@@ -3046,7 +3048,7 @@ describe('v1.CloudDeployClient', () => {
         ['deliveryPipeline', 'name']
       );
       request.deliveryPipeline.name = defaultValue1;
-      const expectedHeaderRequestParams = `delivery_pipeline.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `delivery_pipeline.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -3091,7 +3093,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.UpdateDeliveryPipelineRequest()
       );
@@ -3101,7 +3103,7 @@ describe('v1.CloudDeployClient', () => {
         ['deliveryPipeline', 'name']
       );
       request.deliveryPipeline.name = defaultValue1;
-      const expectedHeaderRequestParams = `delivery_pipeline.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `delivery_pipeline.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateDeliveryPipeline = stubLongRunningCall(
         undefined,
@@ -3126,7 +3128,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.UpdateDeliveryPipelineRequest()
       );
@@ -3136,7 +3138,7 @@ describe('v1.CloudDeployClient', () => {
         ['deliveryPipeline', 'name']
       );
       request.deliveryPipeline.name = defaultValue1;
-      const expectedHeaderRequestParams = `delivery_pipeline.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `delivery_pipeline.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateDeliveryPipeline = stubLongRunningCall(
         undefined,
@@ -3160,7 +3162,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -3182,7 +3184,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -3203,7 +3205,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.DeleteDeliveryPipelineRequest()
       );
@@ -3212,7 +3214,7 @@ describe('v1.CloudDeployClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -3236,7 +3238,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.DeleteDeliveryPipelineRequest()
       );
@@ -3245,7 +3247,7 @@ describe('v1.CloudDeployClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -3290,7 +3292,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.DeleteDeliveryPipelineRequest()
       );
@@ -3299,7 +3301,7 @@ describe('v1.CloudDeployClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteDeliveryPipeline = stubLongRunningCall(
         undefined,
@@ -3324,7 +3326,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.DeleteDeliveryPipelineRequest()
       );
@@ -3333,7 +3335,7 @@ describe('v1.CloudDeployClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteDeliveryPipeline = stubLongRunningCall(
         undefined,
@@ -3357,7 +3359,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -3379,7 +3381,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -3400,7 +3402,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.CreateTargetRequest()
       );
@@ -3409,7 +3411,7 @@ describe('v1.CloudDeployClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -3432,7 +3434,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.CreateTargetRequest()
       );
@@ -3441,7 +3443,7 @@ describe('v1.CloudDeployClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -3486,7 +3488,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.CreateTargetRequest()
       );
@@ -3495,7 +3497,7 @@ describe('v1.CloudDeployClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createTarget = stubLongRunningCall(
         undefined,
@@ -3517,7 +3519,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.CreateTargetRequest()
       );
@@ -3526,7 +3528,7 @@ describe('v1.CloudDeployClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createTarget = stubLongRunningCall(
         undefined,
@@ -3550,7 +3552,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -3572,7 +3574,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -3590,7 +3592,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.UpdateTargetRequest()
       );
@@ -3600,7 +3602,7 @@ describe('v1.CloudDeployClient', () => {
         ['target', 'name']
       );
       request.target.name = defaultValue1;
-      const expectedHeaderRequestParams = `target.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `target.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -3623,7 +3625,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.UpdateTargetRequest()
       );
@@ -3633,7 +3635,7 @@ describe('v1.CloudDeployClient', () => {
         ['target', 'name']
       );
       request.target.name = defaultValue1;
-      const expectedHeaderRequestParams = `target.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `target.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -3678,7 +3680,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.UpdateTargetRequest()
       );
@@ -3688,7 +3690,7 @@ describe('v1.CloudDeployClient', () => {
         ['target', 'name']
       );
       request.target.name = defaultValue1;
-      const expectedHeaderRequestParams = `target.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `target.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateTarget = stubLongRunningCall(
         undefined,
@@ -3710,7 +3712,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.UpdateTargetRequest()
       );
@@ -3720,7 +3722,7 @@ describe('v1.CloudDeployClient', () => {
         ['target', 'name']
       );
       request.target.name = defaultValue1;
-      const expectedHeaderRequestParams = `target.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `target.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateTarget = stubLongRunningCall(
         undefined,
@@ -3744,7 +3746,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -3766,7 +3768,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -3784,7 +3786,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.DeleteTargetRequest()
       );
@@ -3793,7 +3795,7 @@ describe('v1.CloudDeployClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -3816,7 +3818,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.DeleteTargetRequest()
       );
@@ -3825,7 +3827,7 @@ describe('v1.CloudDeployClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -3870,7 +3872,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.DeleteTargetRequest()
       );
@@ -3879,7 +3881,7 @@ describe('v1.CloudDeployClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteTarget = stubLongRunningCall(
         undefined,
@@ -3901,7 +3903,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.DeleteTargetRequest()
       );
@@ -3910,7 +3912,7 @@ describe('v1.CloudDeployClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteTarget = stubLongRunningCall(
         undefined,
@@ -3934,7 +3936,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -3956,7 +3958,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -3974,7 +3976,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.CreateCustomTargetTypeRequest()
       );
@@ -3983,7 +3985,7 @@ describe('v1.CloudDeployClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -4007,7 +4009,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.CreateCustomTargetTypeRequest()
       );
@@ -4016,7 +4018,7 @@ describe('v1.CloudDeployClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -4061,7 +4063,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.CreateCustomTargetTypeRequest()
       );
@@ -4070,7 +4072,7 @@ describe('v1.CloudDeployClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createCustomTargetType = stubLongRunningCall(
         undefined,
@@ -4095,7 +4097,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.CreateCustomTargetTypeRequest()
       );
@@ -4104,7 +4106,7 @@ describe('v1.CloudDeployClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createCustomTargetType = stubLongRunningCall(
         undefined,
@@ -4128,7 +4130,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -4150,7 +4152,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -4171,7 +4173,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.UpdateCustomTargetTypeRequest()
       );
@@ -4181,7 +4183,7 @@ describe('v1.CloudDeployClient', () => {
         ['customTargetType', 'name']
       );
       request.customTargetType.name = defaultValue1;
-      const expectedHeaderRequestParams = `custom_target_type.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `custom_target_type.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -4205,7 +4207,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.UpdateCustomTargetTypeRequest()
       );
@@ -4215,7 +4217,7 @@ describe('v1.CloudDeployClient', () => {
         ['customTargetType', 'name']
       );
       request.customTargetType.name = defaultValue1;
-      const expectedHeaderRequestParams = `custom_target_type.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `custom_target_type.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -4260,7 +4262,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.UpdateCustomTargetTypeRequest()
       );
@@ -4270,7 +4272,7 @@ describe('v1.CloudDeployClient', () => {
         ['customTargetType', 'name']
       );
       request.customTargetType.name = defaultValue1;
-      const expectedHeaderRequestParams = `custom_target_type.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `custom_target_type.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateCustomTargetType = stubLongRunningCall(
         undefined,
@@ -4295,7 +4297,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.UpdateCustomTargetTypeRequest()
       );
@@ -4305,7 +4307,7 @@ describe('v1.CloudDeployClient', () => {
         ['customTargetType', 'name']
       );
       request.customTargetType.name = defaultValue1;
-      const expectedHeaderRequestParams = `custom_target_type.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `custom_target_type.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateCustomTargetType = stubLongRunningCall(
         undefined,
@@ -4329,7 +4331,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -4351,7 +4353,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -4372,7 +4374,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.DeleteCustomTargetTypeRequest()
       );
@@ -4381,7 +4383,7 @@ describe('v1.CloudDeployClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -4405,7 +4407,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.DeleteCustomTargetTypeRequest()
       );
@@ -4414,7 +4416,7 @@ describe('v1.CloudDeployClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -4459,7 +4461,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.DeleteCustomTargetTypeRequest()
       );
@@ -4468,7 +4470,7 @@ describe('v1.CloudDeployClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteCustomTargetType = stubLongRunningCall(
         undefined,
@@ -4493,7 +4495,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.DeleteCustomTargetTypeRequest()
       );
@@ -4502,7 +4504,7 @@ describe('v1.CloudDeployClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteCustomTargetType = stubLongRunningCall(
         undefined,
@@ -4526,7 +4528,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -4548,7 +4550,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -4569,7 +4571,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.CreateReleaseRequest()
       );
@@ -4578,7 +4580,7 @@ describe('v1.CloudDeployClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -4602,7 +4604,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.CreateReleaseRequest()
       );
@@ -4611,7 +4613,7 @@ describe('v1.CloudDeployClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -4656,7 +4658,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.CreateReleaseRequest()
       );
@@ -4665,7 +4667,7 @@ describe('v1.CloudDeployClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createRelease = stubLongRunningCall(
         undefined,
@@ -4687,7 +4689,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.CreateReleaseRequest()
       );
@@ -4696,7 +4698,7 @@ describe('v1.CloudDeployClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createRelease = stubLongRunningCall(
         undefined,
@@ -4720,7 +4722,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -4742,7 +4744,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -4763,7 +4765,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.CreateDeployPolicyRequest()
       );
@@ -4772,7 +4774,7 @@ describe('v1.CloudDeployClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -4796,7 +4798,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.CreateDeployPolicyRequest()
       );
@@ -4805,7 +4807,7 @@ describe('v1.CloudDeployClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -4850,7 +4852,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.CreateDeployPolicyRequest()
       );
@@ -4859,7 +4861,7 @@ describe('v1.CloudDeployClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createDeployPolicy = stubLongRunningCall(
         undefined,
@@ -4881,7 +4883,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.CreateDeployPolicyRequest()
       );
@@ -4890,7 +4892,7 @@ describe('v1.CloudDeployClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createDeployPolicy = stubLongRunningCall(
         undefined,
@@ -4914,7 +4916,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -4936,7 +4938,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -4957,7 +4959,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.UpdateDeployPolicyRequest()
       );
@@ -4967,7 +4969,7 @@ describe('v1.CloudDeployClient', () => {
         ['deployPolicy', 'name']
       );
       request.deployPolicy.name = defaultValue1;
-      const expectedHeaderRequestParams = `deploy_policy.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `deploy_policy.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -4991,7 +4993,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.UpdateDeployPolicyRequest()
       );
@@ -5001,7 +5003,7 @@ describe('v1.CloudDeployClient', () => {
         ['deployPolicy', 'name']
       );
       request.deployPolicy.name = defaultValue1;
-      const expectedHeaderRequestParams = `deploy_policy.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `deploy_policy.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -5046,7 +5048,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.UpdateDeployPolicyRequest()
       );
@@ -5056,7 +5058,7 @@ describe('v1.CloudDeployClient', () => {
         ['deployPolicy', 'name']
       );
       request.deployPolicy.name = defaultValue1;
-      const expectedHeaderRequestParams = `deploy_policy.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `deploy_policy.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateDeployPolicy = stubLongRunningCall(
         undefined,
@@ -5078,7 +5080,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.UpdateDeployPolicyRequest()
       );
@@ -5088,7 +5090,7 @@ describe('v1.CloudDeployClient', () => {
         ['deployPolicy', 'name']
       );
       request.deployPolicy.name = defaultValue1;
-      const expectedHeaderRequestParams = `deploy_policy.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `deploy_policy.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateDeployPolicy = stubLongRunningCall(
         undefined,
@@ -5112,7 +5114,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -5134,7 +5136,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -5155,7 +5157,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.DeleteDeployPolicyRequest()
       );
@@ -5164,7 +5166,7 @@ describe('v1.CloudDeployClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -5188,7 +5190,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.DeleteDeployPolicyRequest()
       );
@@ -5197,7 +5199,7 @@ describe('v1.CloudDeployClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -5242,7 +5244,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.DeleteDeployPolicyRequest()
       );
@@ -5251,7 +5253,7 @@ describe('v1.CloudDeployClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteDeployPolicy = stubLongRunningCall(
         undefined,
@@ -5273,7 +5275,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.DeleteDeployPolicyRequest()
       );
@@ -5282,7 +5284,7 @@ describe('v1.CloudDeployClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteDeployPolicy = stubLongRunningCall(
         undefined,
@@ -5306,7 +5308,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -5328,7 +5330,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -5349,7 +5351,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.CreateRolloutRequest()
       );
@@ -5358,7 +5360,7 @@ describe('v1.CloudDeployClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -5382,7 +5384,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.CreateRolloutRequest()
       );
@@ -5391,7 +5393,7 @@ describe('v1.CloudDeployClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -5436,7 +5438,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.CreateRolloutRequest()
       );
@@ -5445,7 +5447,7 @@ describe('v1.CloudDeployClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createRollout = stubLongRunningCall(
         undefined,
@@ -5467,7 +5469,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.CreateRolloutRequest()
       );
@@ -5476,7 +5478,7 @@ describe('v1.CloudDeployClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createRollout = stubLongRunningCall(
         undefined,
@@ -5500,7 +5502,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -5522,7 +5524,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -5543,7 +5545,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.CreateAutomationRequest()
       );
@@ -5552,7 +5554,7 @@ describe('v1.CloudDeployClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -5576,7 +5578,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.CreateAutomationRequest()
       );
@@ -5585,7 +5587,7 @@ describe('v1.CloudDeployClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -5630,7 +5632,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.CreateAutomationRequest()
       );
@@ -5639,7 +5641,7 @@ describe('v1.CloudDeployClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createAutomation = stubLongRunningCall(
         undefined,
@@ -5661,7 +5663,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.CreateAutomationRequest()
       );
@@ -5670,7 +5672,7 @@ describe('v1.CloudDeployClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createAutomation = stubLongRunningCall(
         undefined,
@@ -5694,7 +5696,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -5716,7 +5718,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -5737,7 +5739,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.UpdateAutomationRequest()
       );
@@ -5747,7 +5749,7 @@ describe('v1.CloudDeployClient', () => {
         ['automation', 'name']
       );
       request.automation.name = defaultValue1;
-      const expectedHeaderRequestParams = `automation.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `automation.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -5771,7 +5773,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.UpdateAutomationRequest()
       );
@@ -5781,7 +5783,7 @@ describe('v1.CloudDeployClient', () => {
         ['automation', 'name']
       );
       request.automation.name = defaultValue1;
-      const expectedHeaderRequestParams = `automation.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `automation.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -5826,7 +5828,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.UpdateAutomationRequest()
       );
@@ -5836,7 +5838,7 @@ describe('v1.CloudDeployClient', () => {
         ['automation', 'name']
       );
       request.automation.name = defaultValue1;
-      const expectedHeaderRequestParams = `automation.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `automation.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateAutomation = stubLongRunningCall(
         undefined,
@@ -5858,7 +5860,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.UpdateAutomationRequest()
       );
@@ -5868,7 +5870,7 @@ describe('v1.CloudDeployClient', () => {
         ['automation', 'name']
       );
       request.automation.name = defaultValue1;
-      const expectedHeaderRequestParams = `automation.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `automation.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateAutomation = stubLongRunningCall(
         undefined,
@@ -5892,7 +5894,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -5914,7 +5916,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -5935,7 +5937,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.DeleteAutomationRequest()
       );
@@ -5944,7 +5946,7 @@ describe('v1.CloudDeployClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -5968,7 +5970,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.DeleteAutomationRequest()
       );
@@ -5977,7 +5979,7 @@ describe('v1.CloudDeployClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -6022,7 +6024,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.DeleteAutomationRequest()
       );
@@ -6031,7 +6033,7 @@ describe('v1.CloudDeployClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteAutomation = stubLongRunningCall(
         undefined,
@@ -6053,7 +6055,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.DeleteAutomationRequest()
       );
@@ -6062,7 +6064,7 @@ describe('v1.CloudDeployClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteAutomation = stubLongRunningCall(
         undefined,
@@ -6086,7 +6088,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -6108,7 +6110,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -6129,7 +6131,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.ListDeliveryPipelinesRequest()
       );
@@ -6138,7 +6140,7 @@ describe('v1.CloudDeployClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.deploy.v1.DeliveryPipeline()
@@ -6169,7 +6171,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.ListDeliveryPipelinesRequest()
       );
@@ -6178,7 +6180,7 @@ describe('v1.CloudDeployClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.deploy.v1.DeliveryPipeline()
@@ -6224,7 +6226,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.ListDeliveryPipelinesRequest()
       );
@@ -6233,7 +6235,7 @@ describe('v1.CloudDeployClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listDeliveryPipelines = stubSimpleCall(
         undefined,
@@ -6258,7 +6260,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.ListDeliveryPipelinesRequest()
       );
@@ -6267,7 +6269,7 @@ describe('v1.CloudDeployClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.deploy.v1.DeliveryPipeline()
@@ -6324,7 +6326,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.ListDeliveryPipelinesRequest()
       );
@@ -6333,7 +6335,7 @@ describe('v1.CloudDeployClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listDeliveryPipelines.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -6379,7 +6381,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.ListDeliveryPipelinesRequest()
       );
@@ -6388,7 +6390,7 @@ describe('v1.CloudDeployClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.deploy.v1.DeliveryPipeline()
@@ -6432,7 +6434,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.ListDeliveryPipelinesRequest()
       );
@@ -6441,7 +6443,7 @@ describe('v1.CloudDeployClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listDeliveryPipelines.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -6478,7 +6480,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.ListTargetsRequest()
       );
@@ -6487,7 +6489,7 @@ describe('v1.CloudDeployClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.deploy.v1.Target()),
         generateSampleMessage(new protos.google.cloud.deploy.v1.Target()),
@@ -6511,7 +6513,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.ListTargetsRequest()
       );
@@ -6520,7 +6522,7 @@ describe('v1.CloudDeployClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.deploy.v1.Target()),
         generateSampleMessage(new protos.google.cloud.deploy.v1.Target()),
@@ -6560,7 +6562,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.ListTargetsRequest()
       );
@@ -6569,7 +6571,7 @@ describe('v1.CloudDeployClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listTargets = stubSimpleCall(
         undefined,
@@ -6591,7 +6593,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.ListTargetsRequest()
       );
@@ -6600,7 +6602,7 @@ describe('v1.CloudDeployClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.deploy.v1.Target()),
         generateSampleMessage(new protos.google.cloud.deploy.v1.Target()),
@@ -6642,7 +6644,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.ListTargetsRequest()
       );
@@ -6651,7 +6653,7 @@ describe('v1.CloudDeployClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listTargets.createStream = stubPageStreamingCall(
         undefined,
@@ -6690,7 +6692,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.ListTargetsRequest()
       );
@@ -6699,7 +6701,7 @@ describe('v1.CloudDeployClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.deploy.v1.Target()),
         generateSampleMessage(new protos.google.cloud.deploy.v1.Target()),
@@ -6733,7 +6735,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.ListTargetsRequest()
       );
@@ -6742,7 +6744,7 @@ describe('v1.CloudDeployClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listTargets.asyncIterate = stubAsyncIterationCall(
         undefined,
@@ -6777,7 +6779,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.ListCustomTargetTypesRequest()
       );
@@ -6786,7 +6788,7 @@ describe('v1.CloudDeployClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.deploy.v1.CustomTargetType()
@@ -6817,7 +6819,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.ListCustomTargetTypesRequest()
       );
@@ -6826,7 +6828,7 @@ describe('v1.CloudDeployClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.deploy.v1.CustomTargetType()
@@ -6872,7 +6874,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.ListCustomTargetTypesRequest()
       );
@@ -6881,7 +6883,7 @@ describe('v1.CloudDeployClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listCustomTargetTypes = stubSimpleCall(
         undefined,
@@ -6906,7 +6908,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.ListCustomTargetTypesRequest()
       );
@@ -6915,7 +6917,7 @@ describe('v1.CloudDeployClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.deploy.v1.CustomTargetType()
@@ -6972,7 +6974,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.ListCustomTargetTypesRequest()
       );
@@ -6981,7 +6983,7 @@ describe('v1.CloudDeployClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listCustomTargetTypes.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -7027,7 +7029,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.ListCustomTargetTypesRequest()
       );
@@ -7036,7 +7038,7 @@ describe('v1.CloudDeployClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.deploy.v1.CustomTargetType()
@@ -7080,7 +7082,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.ListCustomTargetTypesRequest()
       );
@@ -7089,7 +7091,7 @@ describe('v1.CloudDeployClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listCustomTargetTypes.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -7126,7 +7128,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.ListReleasesRequest()
       );
@@ -7135,7 +7137,7 @@ describe('v1.CloudDeployClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.deploy.v1.Release()),
         generateSampleMessage(new protos.google.cloud.deploy.v1.Release()),
@@ -7159,7 +7161,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.ListReleasesRequest()
       );
@@ -7168,7 +7170,7 @@ describe('v1.CloudDeployClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.deploy.v1.Release()),
         generateSampleMessage(new protos.google.cloud.deploy.v1.Release()),
@@ -7208,7 +7210,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.ListReleasesRequest()
       );
@@ -7217,7 +7219,7 @@ describe('v1.CloudDeployClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listReleases = stubSimpleCall(
         undefined,
@@ -7239,7 +7241,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.ListReleasesRequest()
       );
@@ -7248,7 +7250,7 @@ describe('v1.CloudDeployClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.deploy.v1.Release()),
         generateSampleMessage(new protos.google.cloud.deploy.v1.Release()),
@@ -7290,7 +7292,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.ListReleasesRequest()
       );
@@ -7299,7 +7301,7 @@ describe('v1.CloudDeployClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listReleases.createStream = stubPageStreamingCall(
         undefined,
@@ -7338,7 +7340,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.ListReleasesRequest()
       );
@@ -7347,7 +7349,7 @@ describe('v1.CloudDeployClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.deploy.v1.Release()),
         generateSampleMessage(new protos.google.cloud.deploy.v1.Release()),
@@ -7381,7 +7383,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.ListReleasesRequest()
       );
@@ -7390,7 +7392,7 @@ describe('v1.CloudDeployClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listReleases.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -7423,7 +7425,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.ListDeployPoliciesRequest()
       );
@@ -7432,7 +7434,7 @@ describe('v1.CloudDeployClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.deploy.v1.DeployPolicy()),
         generateSampleMessage(new protos.google.cloud.deploy.v1.DeployPolicy()),
@@ -7457,7 +7459,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.ListDeployPoliciesRequest()
       );
@@ -7466,7 +7468,7 @@ describe('v1.CloudDeployClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.deploy.v1.DeployPolicy()),
         generateSampleMessage(new protos.google.cloud.deploy.v1.DeployPolicy()),
@@ -7506,7 +7508,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.ListDeployPoliciesRequest()
       );
@@ -7515,7 +7517,7 @@ describe('v1.CloudDeployClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listDeployPolicies = stubSimpleCall(
         undefined,
@@ -7537,7 +7539,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.ListDeployPoliciesRequest()
       );
@@ -7546,7 +7548,7 @@ describe('v1.CloudDeployClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.deploy.v1.DeployPolicy()),
         generateSampleMessage(new protos.google.cloud.deploy.v1.DeployPolicy()),
@@ -7591,7 +7593,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.ListDeployPoliciesRequest()
       );
@@ -7600,7 +7602,7 @@ describe('v1.CloudDeployClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listDeployPolicies.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -7640,7 +7642,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.ListDeployPoliciesRequest()
       );
@@ -7649,7 +7651,7 @@ describe('v1.CloudDeployClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.deploy.v1.DeployPolicy()),
         generateSampleMessage(new protos.google.cloud.deploy.v1.DeployPolicy()),
@@ -7683,7 +7685,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.ListDeployPoliciesRequest()
       );
@@ -7692,7 +7694,7 @@ describe('v1.CloudDeployClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listDeployPolicies.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -7725,7 +7727,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.ListRolloutsRequest()
       );
@@ -7734,7 +7736,7 @@ describe('v1.CloudDeployClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.deploy.v1.Rollout()),
         generateSampleMessage(new protos.google.cloud.deploy.v1.Rollout()),
@@ -7758,7 +7760,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.ListRolloutsRequest()
       );
@@ -7767,7 +7769,7 @@ describe('v1.CloudDeployClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.deploy.v1.Rollout()),
         generateSampleMessage(new protos.google.cloud.deploy.v1.Rollout()),
@@ -7807,7 +7809,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.ListRolloutsRequest()
       );
@@ -7816,7 +7818,7 @@ describe('v1.CloudDeployClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listRollouts = stubSimpleCall(
         undefined,
@@ -7838,7 +7840,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.ListRolloutsRequest()
       );
@@ -7847,7 +7849,7 @@ describe('v1.CloudDeployClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.deploy.v1.Rollout()),
         generateSampleMessage(new protos.google.cloud.deploy.v1.Rollout()),
@@ -7889,7 +7891,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.ListRolloutsRequest()
       );
@@ -7898,7 +7900,7 @@ describe('v1.CloudDeployClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listRollouts.createStream = stubPageStreamingCall(
         undefined,
@@ -7937,7 +7939,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.ListRolloutsRequest()
       );
@@ -7946,7 +7948,7 @@ describe('v1.CloudDeployClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.deploy.v1.Rollout()),
         generateSampleMessage(new protos.google.cloud.deploy.v1.Rollout()),
@@ -7980,7 +7982,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.ListRolloutsRequest()
       );
@@ -7989,7 +7991,7 @@ describe('v1.CloudDeployClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listRollouts.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -8022,7 +8024,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.ListJobRunsRequest()
       );
@@ -8031,7 +8033,7 @@ describe('v1.CloudDeployClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.deploy.v1.JobRun()),
         generateSampleMessage(new protos.google.cloud.deploy.v1.JobRun()),
@@ -8055,7 +8057,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.ListJobRunsRequest()
       );
@@ -8064,7 +8066,7 @@ describe('v1.CloudDeployClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.deploy.v1.JobRun()),
         generateSampleMessage(new protos.google.cloud.deploy.v1.JobRun()),
@@ -8104,7 +8106,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.ListJobRunsRequest()
       );
@@ -8113,7 +8115,7 @@ describe('v1.CloudDeployClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listJobRuns = stubSimpleCall(
         undefined,
@@ -8135,7 +8137,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.ListJobRunsRequest()
       );
@@ -8144,7 +8146,7 @@ describe('v1.CloudDeployClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.deploy.v1.JobRun()),
         generateSampleMessage(new protos.google.cloud.deploy.v1.JobRun()),
@@ -8186,7 +8188,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.ListJobRunsRequest()
       );
@@ -8195,7 +8197,7 @@ describe('v1.CloudDeployClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listJobRuns.createStream = stubPageStreamingCall(
         undefined,
@@ -8234,7 +8236,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.ListJobRunsRequest()
       );
@@ -8243,7 +8245,7 @@ describe('v1.CloudDeployClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.deploy.v1.JobRun()),
         generateSampleMessage(new protos.google.cloud.deploy.v1.JobRun()),
@@ -8277,7 +8279,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.ListJobRunsRequest()
       );
@@ -8286,7 +8288,7 @@ describe('v1.CloudDeployClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listJobRuns.asyncIterate = stubAsyncIterationCall(
         undefined,
@@ -8321,7 +8323,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.ListAutomationsRequest()
       );
@@ -8330,7 +8332,7 @@ describe('v1.CloudDeployClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.deploy.v1.Automation()),
         generateSampleMessage(new protos.google.cloud.deploy.v1.Automation()),
@@ -8354,7 +8356,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.ListAutomationsRequest()
       );
@@ -8363,7 +8365,7 @@ describe('v1.CloudDeployClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.deploy.v1.Automation()),
         generateSampleMessage(new protos.google.cloud.deploy.v1.Automation()),
@@ -8403,7 +8405,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.ListAutomationsRequest()
       );
@@ -8412,7 +8414,7 @@ describe('v1.CloudDeployClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listAutomations = stubSimpleCall(
         undefined,
@@ -8434,7 +8436,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.ListAutomationsRequest()
       );
@@ -8443,7 +8445,7 @@ describe('v1.CloudDeployClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.deploy.v1.Automation()),
         generateSampleMessage(new protos.google.cloud.deploy.v1.Automation()),
@@ -8488,7 +8490,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.ListAutomationsRequest()
       );
@@ -8497,7 +8499,7 @@ describe('v1.CloudDeployClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listAutomations.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -8537,7 +8539,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.ListAutomationsRequest()
       );
@@ -8546,7 +8548,7 @@ describe('v1.CloudDeployClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.deploy.v1.Automation()),
         generateSampleMessage(new protos.google.cloud.deploy.v1.Automation()),
@@ -8580,7 +8582,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.ListAutomationsRequest()
       );
@@ -8589,7 +8591,7 @@ describe('v1.CloudDeployClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listAutomations.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -8622,7 +8624,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.ListAutomationRunsRequest()
       );
@@ -8631,7 +8633,7 @@ describe('v1.CloudDeployClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.deploy.v1.AutomationRun()
@@ -8662,7 +8664,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.ListAutomationRunsRequest()
       );
@@ -8671,7 +8673,7 @@ describe('v1.CloudDeployClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.deploy.v1.AutomationRun()
@@ -8717,7 +8719,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.ListAutomationRunsRequest()
       );
@@ -8726,7 +8728,7 @@ describe('v1.CloudDeployClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listAutomationRuns = stubSimpleCall(
         undefined,
@@ -8748,7 +8750,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.ListAutomationRunsRequest()
       );
@@ -8757,7 +8759,7 @@ describe('v1.CloudDeployClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.deploy.v1.AutomationRun()
@@ -8808,7 +8810,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.ListAutomationRunsRequest()
       );
@@ -8817,7 +8819,7 @@ describe('v1.CloudDeployClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listAutomationRuns.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -8857,7 +8859,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.ListAutomationRunsRequest()
       );
@@ -8866,7 +8868,7 @@ describe('v1.CloudDeployClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.deploy.v1.AutomationRun()
@@ -8906,7 +8908,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.ListAutomationRunsRequest()
       );
@@ -8915,7 +8917,7 @@ describe('v1.CloudDeployClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listAutomationRuns.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -8947,7 +8949,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new IamProtos.google.iam.v1.GetIamPolicyRequest()
       );
@@ -8977,7 +8979,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new IamProtos.google.iam.v1.GetIamPolicyRequest()
       );
@@ -9021,7 +9023,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new IamProtos.google.iam.v1.GetIamPolicyRequest()
       );
@@ -9053,7 +9055,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new IamProtos.google.iam.v1.SetIamPolicyRequest()
       );
@@ -9083,7 +9085,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new IamProtos.google.iam.v1.SetIamPolicyRequest()
       );
@@ -9127,7 +9129,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new IamProtos.google.iam.v1.SetIamPolicyRequest()
       );
@@ -9159,7 +9161,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new IamProtos.google.iam.v1.TestIamPermissionsRequest()
       );
@@ -9192,7 +9194,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new IamProtos.google.iam.v1.TestIamPermissionsRequest()
       );
@@ -9236,7 +9238,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new IamProtos.google.iam.v1.TestIamPermissionsRequest()
       );
@@ -9271,7 +9273,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.GetLocationRequest()
       );
@@ -9301,7 +9303,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.GetLocationRequest()
       );
@@ -9345,7 +9347,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.GetLocationRequest()
       );
@@ -9380,7 +9382,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.ListLocationsRequest()
       );
@@ -9428,7 +9430,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.ListLocationsRequest()
       );
@@ -9469,7 +9471,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new operationsProtos.google.longrunning.GetOperationRequest()
       );
@@ -9548,7 +9550,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new operationsProtos.google.longrunning.CancelOperationRequest()
       );
@@ -9628,7 +9630,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new operationsProtos.google.longrunning.DeleteOperationRequest()
       );
@@ -9724,8 +9726,7 @@ describe('v1.CloudDeployClient', () => {
       ];
       client.operationsClient.descriptor.listOperations.asyncIterate =
         stubAsyncIterationCall(expectedResponse);
-      const responses: operationsProtos.google.longrunning.ListOperationsResponse[] =
-        [];
+      const responses: operationsProtos.google.longrunning.IOperation[] = [];
       const iterable = client.operationsClient.listOperationsAsync(request);
       for await (const resource of iterable) {
         responses.push(resource!);
@@ -9744,7 +9745,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new operationsProtos.google.longrunning.ListOperationsRequest()
       );
@@ -9753,8 +9754,7 @@ describe('v1.CloudDeployClient', () => {
         stubAsyncIterationCall(undefined, expectedError);
       const iterable = client.operationsClient.listOperationsAsync(request);
       await assert.rejects(async () => {
-        const responses: operationsProtos.google.longrunning.ListOperationsResponse[] =
-          [];
+        const responses: operationsProtos.google.longrunning.IOperation[] = [];
         for await (const resource of iterable) {
           responses.push(resource!);
         }
@@ -9770,7 +9770,7 @@ describe('v1.CloudDeployClient', () => {
   });
 
   describe('Path templates', () => {
-    describe('automation', () => {
+    describe('automation', async () => {
       const fakePath = '/rendered/path/automation';
       const expectedParameters = {
         project: 'projectValue',
@@ -9782,7 +9782,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.automationPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -9846,7 +9846,7 @@ describe('v1.CloudDeployClient', () => {
       });
     });
 
-    describe('automationRun', () => {
+    describe('automationRun', async () => {
       const fakePath = '/rendered/path/automationRun';
       const expectedParameters = {
         project: 'projectValue',
@@ -9858,7 +9858,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.automationRunPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -9923,7 +9923,7 @@ describe('v1.CloudDeployClient', () => {
       });
     });
 
-    describe('build', () => {
+    describe('build', async () => {
       const fakePath = '/rendered/path/build';
       const expectedParameters = {
         project: 'projectValue',
@@ -9934,7 +9934,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.buildPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -9987,7 +9987,7 @@ describe('v1.CloudDeployClient', () => {
       });
     });
 
-    describe('cluster', () => {
+    describe('cluster', async () => {
       const fakePath = '/rendered/path/cluster';
       const expectedParameters = {
         project: 'projectValue',
@@ -9998,7 +9998,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.clusterPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -10051,7 +10051,7 @@ describe('v1.CloudDeployClient', () => {
       });
     });
 
-    describe('config', () => {
+    describe('config', async () => {
       const fakePath = '/rendered/path/config';
       const expectedParameters = {
         project: 'projectValue',
@@ -10061,7 +10061,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.configPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -10100,7 +10100,7 @@ describe('v1.CloudDeployClient', () => {
       });
     });
 
-    describe('customTargetType', () => {
+    describe('customTargetType', async () => {
       const fakePath = '/rendered/path/customTargetType';
       const expectedParameters = {
         project: 'projectValue',
@@ -10111,7 +10111,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.customTargetTypePathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -10168,7 +10168,7 @@ describe('v1.CloudDeployClient', () => {
       });
     });
 
-    describe('deliveryPipeline', () => {
+    describe('deliveryPipeline', async () => {
       const fakePath = '/rendered/path/deliveryPipeline';
       const expectedParameters = {
         project: 'projectValue',
@@ -10179,7 +10179,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.deliveryPipelinePathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -10236,7 +10236,7 @@ describe('v1.CloudDeployClient', () => {
       });
     });
 
-    describe('deployPolicy', () => {
+    describe('deployPolicy', async () => {
       const fakePath = '/rendered/path/deployPolicy';
       const expectedParameters = {
         project: 'projectValue',
@@ -10247,7 +10247,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.deployPolicyPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -10300,7 +10300,7 @@ describe('v1.CloudDeployClient', () => {
       });
     });
 
-    describe('job', () => {
+    describe('job', async () => {
       const fakePath = '/rendered/path/job';
       const expectedParameters = {
         project: 'projectValue',
@@ -10311,7 +10311,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.jobPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -10364,7 +10364,7 @@ describe('v1.CloudDeployClient', () => {
       });
     });
 
-    describe('jobRun', () => {
+    describe('jobRun', async () => {
       const fakePath = '/rendered/path/jobRun';
       const expectedParameters = {
         project: 'projectValue',
@@ -10378,7 +10378,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.jobRunPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -10464,7 +10464,7 @@ describe('v1.CloudDeployClient', () => {
       });
     });
 
-    describe('location', () => {
+    describe('location', async () => {
       const fakePath = '/rendered/path/location';
       const expectedParameters = {
         project: 'projectValue',
@@ -10474,7 +10474,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.locationPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -10513,7 +10513,7 @@ describe('v1.CloudDeployClient', () => {
       });
     });
 
-    describe('membership', () => {
+    describe('membership', async () => {
       const fakePath = '/rendered/path/membership';
       const expectedParameters = {
         project: 'projectValue',
@@ -10524,7 +10524,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.membershipPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -10577,7 +10577,7 @@ describe('v1.CloudDeployClient', () => {
       });
     });
 
-    describe('project', () => {
+    describe('project', async () => {
       const fakePath = '/rendered/path/project';
       const expectedParameters = {
         project: 'projectValue',
@@ -10586,7 +10586,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -10615,7 +10615,7 @@ describe('v1.CloudDeployClient', () => {
       });
     });
 
-    describe('release', () => {
+    describe('release', async () => {
       const fakePath = '/rendered/path/release';
       const expectedParameters = {
         project: 'projectValue',
@@ -10627,7 +10627,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.releasePathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -10691,7 +10691,7 @@ describe('v1.CloudDeployClient', () => {
       });
     });
 
-    describe('rollout', () => {
+    describe('rollout', async () => {
       const fakePath = '/rendered/path/rollout';
       const expectedParameters = {
         project: 'projectValue',
@@ -10704,7 +10704,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.rolloutPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -10779,7 +10779,7 @@ describe('v1.CloudDeployClient', () => {
       });
     });
 
-    describe('service', () => {
+    describe('service', async () => {
       const fakePath = '/rendered/path/service';
       const expectedParameters = {
         project: 'projectValue',
@@ -10790,7 +10790,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.servicePathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -10843,7 +10843,7 @@ describe('v1.CloudDeployClient', () => {
       });
     });
 
-    describe('target', () => {
+    describe('target', async () => {
       const fakePath = '/rendered/path/target';
       const expectedParameters = {
         project: 'projectValue',
@@ -10854,7 +10854,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.targetPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -10907,7 +10907,7 @@ describe('v1.CloudDeployClient', () => {
       });
     });
 
-    describe('workerPool', () => {
+    describe('workerPool', async () => {
       const fakePath = '/rendered/path/workerPool';
       const expectedParameters = {
         project: 'projectValue',
@@ -10918,7 +10918,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.workerPoolPathTemplate.render = sinon
         .stub()
         .returns(fakePath);

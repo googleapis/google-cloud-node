@@ -31,6 +31,7 @@ import type {
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
+import {loggingUtils as logging} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -55,6 +56,8 @@ export class ApiGatewayServiceClient {
   private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
+  private _log = logging.log('api-gateway');
+
   auth: gax.GoogleAuth;
   descriptors: Descriptors = {
     page: {},
@@ -90,7 +93,7 @@ export class ApiGatewayServiceClient {
    *     Developer's Console, e.g. 'grape-spaceship-123'. We will also check
    *     the environment variable GCLOUD_PROJECT for your project ID. If your
    *     app is running in an environment which supports
-   *     {@link https://developers.google.com/identity/protocols/application-default-credentials Application Default Credentials},
+   *     {@link https://cloud.google.com/docs/authentication/application-default-credentials Application Default Credentials},
    *     your project ID will be detected automatically.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
@@ -682,8 +685,36 @@ export class ApiGatewayServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.getGateway(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('getGateway request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.apigateway.v1.IGateway,
+          | protos.google.cloud.apigateway.v1.IGetGatewayRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getGateway response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getGateway(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.apigateway.v1.IGateway,
+          protos.google.cloud.apigateway.v1.IGetGatewayRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getGateway response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Gets details of a single Api.
@@ -765,8 +796,34 @@ export class ApiGatewayServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.getApi(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('getApi request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.apigateway.v1.IApi,
+          protos.google.cloud.apigateway.v1.IGetApiRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getApi response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getApi(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.apigateway.v1.IApi,
+          protos.google.cloud.apigateway.v1.IGetApiRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getApi response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Gets details of a single ApiConfig.
@@ -853,8 +910,36 @@ export class ApiGatewayServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.getApiConfig(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('getApiConfig request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.apigateway.v1.IApiConfig,
+          | protos.google.cloud.apigateway.v1.IGetApiConfigRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getApiConfig response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getApiConfig(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.apigateway.v1.IApiConfig,
+          protos.google.cloud.apigateway.v1.IGetApiConfigRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getApiConfig response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
 
   /**
@@ -962,8 +1047,40 @@ export class ApiGatewayServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.createGateway(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.apigateway.v1.IGateway,
+            protos.google.cloud.apigateway.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('createGateway response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('createGateway request %j', request);
+    return this.innerApiCalls
+      .createGateway(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.apigateway.v1.IGateway,
+            protos.google.cloud.apigateway.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createGateway response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `createGateway()`.
@@ -984,6 +1101,7 @@ export class ApiGatewayServiceClient {
       protos.google.cloud.apigateway.v1.OperationMetadata
     >
   > {
+    this._log.info('createGateway long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -1104,8 +1222,40 @@ export class ApiGatewayServiceClient {
       this._gaxModule.routingHeader.fromParams({
         'gateway.name': request.gateway!.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.updateGateway(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.apigateway.v1.IGateway,
+            protos.google.cloud.apigateway.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('updateGateway response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('updateGateway request %j', request);
+    return this.innerApiCalls
+      .updateGateway(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.apigateway.v1.IGateway,
+            protos.google.cloud.apigateway.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('updateGateway response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `updateGateway()`.
@@ -1126,6 +1276,7 @@ export class ApiGatewayServiceClient {
       protos.google.cloud.apigateway.v1.OperationMetadata
     >
   > {
+    this._log.info('updateGateway long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -1241,8 +1392,40 @@ export class ApiGatewayServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.deleteGateway(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.apigateway.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('deleteGateway response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('deleteGateway request %j', request);
+    return this.innerApiCalls
+      .deleteGateway(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.apigateway.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteGateway response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `deleteGateway()`.
@@ -1263,6 +1446,7 @@ export class ApiGatewayServiceClient {
       protos.google.cloud.apigateway.v1.OperationMetadata
     >
   > {
+    this._log.info('deleteGateway long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -1383,8 +1567,40 @@ export class ApiGatewayServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.createApi(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.apigateway.v1.IApi,
+            protos.google.cloud.apigateway.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('createApi response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('createApi request %j', request);
+    return this.innerApiCalls
+      .createApi(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.apigateway.v1.IApi,
+            protos.google.cloud.apigateway.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createApi response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `createApi()`.
@@ -1405,6 +1621,7 @@ export class ApiGatewayServiceClient {
       protos.google.cloud.apigateway.v1.OperationMetadata
     >
   > {
+    this._log.info('createApi long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -1525,8 +1742,40 @@ export class ApiGatewayServiceClient {
       this._gaxModule.routingHeader.fromParams({
         'api.name': request.api!.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.updateApi(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.apigateway.v1.IApi,
+            protos.google.cloud.apigateway.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('updateApi response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('updateApi request %j', request);
+    return this.innerApiCalls
+      .updateApi(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.apigateway.v1.IApi,
+            protos.google.cloud.apigateway.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('updateApi response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `updateApi()`.
@@ -1547,6 +1796,7 @@ export class ApiGatewayServiceClient {
       protos.google.cloud.apigateway.v1.OperationMetadata
     >
   > {
+    this._log.info('updateApi long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -1662,8 +1912,40 @@ export class ApiGatewayServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.deleteApi(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.apigateway.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('deleteApi response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('deleteApi request %j', request);
+    return this.innerApiCalls
+      .deleteApi(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.apigateway.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteApi response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `deleteApi()`.
@@ -1684,6 +1966,7 @@ export class ApiGatewayServiceClient {
       protos.google.cloud.apigateway.v1.OperationMetadata
     >
   > {
+    this._log.info('deleteApi long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -1804,8 +2087,40 @@ export class ApiGatewayServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.createApiConfig(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.apigateway.v1.IApiConfig,
+            protos.google.cloud.apigateway.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('createApiConfig response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('createApiConfig request %j', request);
+    return this.innerApiCalls
+      .createApiConfig(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.apigateway.v1.IApiConfig,
+            protos.google.cloud.apigateway.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createApiConfig response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `createApiConfig()`.
@@ -1826,6 +2141,7 @@ export class ApiGatewayServiceClient {
       protos.google.cloud.apigateway.v1.OperationMetadata
     >
   > {
+    this._log.info('createApiConfig long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -1946,8 +2262,40 @@ export class ApiGatewayServiceClient {
       this._gaxModule.routingHeader.fromParams({
         'api_config.name': request.apiConfig!.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.updateApiConfig(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.apigateway.v1.IApiConfig,
+            protos.google.cloud.apigateway.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('updateApiConfig response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('updateApiConfig request %j', request);
+    return this.innerApiCalls
+      .updateApiConfig(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.apigateway.v1.IApiConfig,
+            protos.google.cloud.apigateway.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('updateApiConfig response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `updateApiConfig()`.
@@ -1968,6 +2316,7 @@ export class ApiGatewayServiceClient {
       protos.google.cloud.apigateway.v1.OperationMetadata
     >
   > {
+    this._log.info('updateApiConfig long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -2083,8 +2432,40 @@ export class ApiGatewayServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.deleteApiConfig(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.apigateway.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('deleteApiConfig response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('deleteApiConfig request %j', request);
+    return this.innerApiCalls
+      .deleteApiConfig(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.apigateway.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteApiConfig response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `deleteApiConfig()`.
@@ -2105,6 +2486,7 @@ export class ApiGatewayServiceClient {
       protos.google.cloud.apigateway.v1.OperationMetadata
     >
   > {
+    this._log.info('deleteApiConfig long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -2219,12 +2601,40 @@ export class ApiGatewayServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.listGateways(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.apigateway.v1.IListGatewaysRequest,
+          | protos.google.cloud.apigateway.v1.IListGatewaysResponse
+          | null
+          | undefined,
+          protos.google.cloud.apigateway.v1.IGateway
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listGateways values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listGateways request %j', request);
+    return this.innerApiCalls
+      .listGateways(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.apigateway.v1.IGateway[],
+          protos.google.cloud.apigateway.v1.IListGatewaysRequest | null,
+          protos.google.cloud.apigateway.v1.IListGatewaysResponse,
+        ]) => {
+          this._log.info('listGateways values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listGateways`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
@@ -2263,7 +2673,10 @@ export class ApiGatewayServiceClient {
       });
     const defaultCallSettings = this._defaults['listGateways'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listGateways stream %j', request);
     return this.descriptors.page.listGateways.createStream(
       this.innerApiCalls.listGateways as GaxCall,
       request,
@@ -2314,7 +2727,10 @@ export class ApiGatewayServiceClient {
       });
     const defaultCallSettings = this._defaults['listGateways'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listGateways iterate %j', request);
     return this.descriptors.page.listGateways.asyncIterate(
       this.innerApiCalls['listGateways'] as GaxCall,
       request as {},
@@ -2414,12 +2830,40 @@ export class ApiGatewayServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.listApis(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.apigateway.v1.IListApisRequest,
+          | protos.google.cloud.apigateway.v1.IListApisResponse
+          | null
+          | undefined,
+          protos.google.cloud.apigateway.v1.IApi
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listApis values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listApis request %j', request);
+    return this.innerApiCalls
+      .listApis(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.apigateway.v1.IApi[],
+          protos.google.cloud.apigateway.v1.IListApisRequest | null,
+          protos.google.cloud.apigateway.v1.IListApisResponse,
+        ]) => {
+          this._log.info('listApis values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listApis`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
@@ -2458,7 +2902,10 @@ export class ApiGatewayServiceClient {
       });
     const defaultCallSettings = this._defaults['listApis'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listApis stream %j', request);
     return this.descriptors.page.listApis.createStream(
       this.innerApiCalls.listApis as GaxCall,
       request,
@@ -2509,7 +2956,10 @@ export class ApiGatewayServiceClient {
       });
     const defaultCallSettings = this._defaults['listApis'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listApis iterate %j', request);
     return this.descriptors.page.listApis.asyncIterate(
       this.innerApiCalls['listApis'] as GaxCall,
       request as {},
@@ -2615,12 +3065,40 @@ export class ApiGatewayServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.listApiConfigs(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.apigateway.v1.IListApiConfigsRequest,
+          | protos.google.cloud.apigateway.v1.IListApiConfigsResponse
+          | null
+          | undefined,
+          protos.google.cloud.apigateway.v1.IApiConfig
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listApiConfigs values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listApiConfigs request %j', request);
+    return this.innerApiCalls
+      .listApiConfigs(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.apigateway.v1.IApiConfig[],
+          protos.google.cloud.apigateway.v1.IListApiConfigsRequest | null,
+          protos.google.cloud.apigateway.v1.IListApiConfigsResponse,
+        ]) => {
+          this._log.info('listApiConfigs values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listApiConfigs`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
@@ -2659,7 +3137,10 @@ export class ApiGatewayServiceClient {
       });
     const defaultCallSettings = this._defaults['listApiConfigs'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listApiConfigs stream %j', request);
     return this.descriptors.page.listApiConfigs.createStream(
       this.innerApiCalls.listApiConfigs as GaxCall,
       request,
@@ -2710,7 +3191,10 @@ export class ApiGatewayServiceClient {
       });
     const defaultCallSettings = this._defaults['listApiConfigs'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listApiConfigs iterate %j', request);
     return this.descriptors.page.listApiConfigs.asyncIterate(
       this.innerApiCalls['listApiConfigs'] as GaxCall,
       request as {},
@@ -2866,6 +3350,7 @@ export class ApiGatewayServiceClient {
   close(): Promise<void> {
     if (this.apiGatewayServiceStub && !this._terminated) {
       return this.apiGatewayServiceStub.then(stub => {
+        this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
         this.operationsClient.close();

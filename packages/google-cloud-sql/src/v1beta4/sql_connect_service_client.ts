@@ -29,6 +29,7 @@ import type {
 
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
+import {loggingUtils as logging} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -53,6 +54,8 @@ export class SqlConnectServiceClient {
   private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
+  private _log = logging.log('sql');
+
   auth: gax.GoogleAuth;
   descriptors: Descriptors = {
     page: {},
@@ -87,7 +90,7 @@ export class SqlConnectServiceClient {
    *     Developer's Console, e.g. 'grape-spaceship-123'. We will also check
    *     the environment variable GCLOUD_PROJECT for your project ID. If your
    *     app is running in an environment which supports
-   *     {@link https://developers.google.com/identity/protocols/application-default-credentials Application Default Credentials},
+   *     {@link https://cloud.google.com/docs/authentication/application-default-credentials Application Default Credentials},
    *     your project ID will be detected automatically.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
@@ -461,8 +464,39 @@ export class SqlConnectServiceClient {
         project: request.project ?? '',
         instance: request.instance ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.getConnectSettings(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('getConnectSettings request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.sql.v1beta4.IConnectSettings,
+          | protos.google.cloud.sql.v1beta4.IGetConnectSettingsRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getConnectSettings response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getConnectSettings(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.sql.v1beta4.IConnectSettings,
+          (
+            | protos.google.cloud.sql.v1beta4.IGetConnectSettingsRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getConnectSettings response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Generates a short-lived X509 certificate containing the provided public key
@@ -566,8 +600,39 @@ export class SqlConnectServiceClient {
         project: request.project ?? '',
         instance: request.instance ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.generateEphemeralCert(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('generateEphemeralCert request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.sql.v1beta4.IGenerateEphemeralCertResponse,
+          | protos.google.cloud.sql.v1beta4.IGenerateEphemeralCertRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('generateEphemeralCert response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .generateEphemeralCert(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.sql.v1beta4.IGenerateEphemeralCertResponse,
+          (
+            | protos.google.cloud.sql.v1beta4.IGenerateEphemeralCertRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('generateEphemeralCert response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
 
   /**
@@ -657,6 +722,7 @@ export class SqlConnectServiceClient {
   close(): Promise<void> {
     if (this.sqlConnectServiceStub && !this._terminated) {
       return this.sqlConnectServiceStub.then(stub => {
+        this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
         this.locationsClient.close();

@@ -4,6 +4,30 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/language?activeTab=versions
 
+## [7.0.1](https://github.com/googleapis/google-cloud-node/compare/language-v7.0.0...language-v7.0.1) (2025-03-19)
+
+
+### Bug Fixes
+
+* [Many APIs] await/catch promises, and update listOperationsAsync return type ([#6186](https://github.com/googleapis/google-cloud-node/issues/6186)) ([dcfc7b4](https://github.com/googleapis/google-cloud-node/commit/dcfc7b492a2ac3fb86b93ae1375bac1c5153d049))
+* **deps:** Update dependency mathjs to v14 ([#6130](https://github.com/googleapis/google-cloud-node/issues/6130)) ([24d9d0e](https://github.com/googleapis/google-cloud-node/commit/24d9d0e4372c1bd2bbc4815bcc2fe60f74b93c71))
+
+## [7.0.0](https://github.com/googleapis/google-cloud-node/compare/language-v6.5.0...language-v7.0.0) (2025-03-18)
+
+
+### ⚠ BREAKING CHANGES
+
+* upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096))
+
+### Features
+
+* [Many APIs] add request/response debug logging to gapics ([#6140](https://github.com/googleapis/google-cloud-node/issues/6140)) ([2f96b1f](https://github.com/googleapis/google-cloud-node/commit/2f96b1f95dd6b7cb89871b56e5ea5aadf5454292))
+
+
+### Miscellaneous Chores
+
+* Upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096)) ([eadae64](https://github.com/googleapis/google-cloud-node/commit/eadae64d54e07aa2c65097ea52e65008d4e87436))
+
 ## [6.5.0](https://github.com/googleapis/google-cloud-node/compare/language-v6.4.0...language-v6.5.0) (2024-08-09)
 
 

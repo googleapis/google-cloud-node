@@ -1,7 +1,7 @@
 {
     "clientLibrary": {
         "name": "nodejs-analyticshub",
-        "version": "1.6.0",
+        "version": "2.0.1",
         "language": "TYPESCRIPT",
         "apis": [
             {
@@ -158,7 +158,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 68,
+                    "end": 66,
                     "type": "FULL"
                 }
             ],
@@ -378,7 +378,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 68,
+                    "end": 66,
                     "type": "FULL"
                 }
             ],
@@ -510,7 +510,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 59,
+                    "end": 65,
                     "type": "FULL"
                 }
             ],
@@ -522,6 +522,10 @@
                     {
                         "name": "destination_dataset",
                         "type": ".google.cloud.bigquery.analyticshub.v1.DestinationDataset"
+                    },
+                    {
+                        "name": "destination_pubsub_subscription",
+                        "type": ".google.cloud.bigquery.analyticshub.v1.DestinationPubSubSubscription"
                     },
                     {
                         "name": "name",
@@ -547,14 +551,14 @@
             "regionTag": "analyticshub_v1_generated_AnalyticsHubService_SubscribeDataExchange_async",
             "title": "AnalyticsHubService subscribeDataExchange Sample",
             "origin": "API_DEFINITION",
-            "description": " Creates a Subscription to a Data Exchange. This is a long-running operation as it will create one or more linked datasets.",
+            "description": " Creates a Subscription to a Data Clean Room. This is a long-running operation as it will create one or more linked datasets.",
             "canonical": true,
             "file": "analytics_hub_service.subscribe_data_exchange.js",
             "language": "JAVASCRIPT",
             "segments": [
                 {
                     "start": 25,
-                    "end": 71,
+                    "end": 75,
                     "type": "FULL"
                 }
             ],
@@ -570,6 +574,10 @@
                     {
                         "name": "destination",
                         "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "destination_dataset",
+                        "type": ".google.cloud.bigquery.analyticshub.v1.DestinationDataset"
                     },
                     {
                         "name": "subscription",

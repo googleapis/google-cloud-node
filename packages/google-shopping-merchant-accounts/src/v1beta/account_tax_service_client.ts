@@ -29,6 +29,7 @@ import type {
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
+import {loggingUtils as logging} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -57,6 +58,8 @@ export class AccountTaxServiceClient {
   private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
+  private _log = logging.log('accounts');
+
   auth: gax.GoogleAuth;
   descriptors: Descriptors = {
     page: {},
@@ -91,7 +94,7 @@ export class AccountTaxServiceClient {
    *     Developer's Console, e.g. 'grape-spaceship-123'. We will also check
    *     the environment variable GCLOUD_PROJECT for your project ID. If your
    *     app is running in an environment which supports
-   *     {@link https://developers.google.com/identity/protocols/application-default-credentials Application Default Credentials},
+   *     {@link https://cloud.google.com/docs/authentication/application-default-credentials Application Default Credentials},
    *     your project ID will be detected automatically.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
@@ -214,6 +217,9 @@ export class AccountTaxServiceClient {
       ),
       autofeedSettingsPathTemplate: new this._gaxModule.PathTemplate(
         'accounts/{account}/autofeedSettings'
+      ),
+      automaticImprovementsPathTemplate: new this._gaxModule.PathTemplate(
+        'accounts/{account}/automaticImprovements'
       ),
       businessIdentityPathTemplate: new this._gaxModule.PathTemplate(
         'accounts/{account}/businessIdentity'
@@ -523,8 +529,39 @@ export class AccountTaxServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.getAccountTax(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('getAccountTax request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.shopping.merchant.accounts.v1beta.IAccountTax,
+          | protos.google.shopping.merchant.accounts.v1beta.IGetAccountTaxRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getAccountTax response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getAccountTax(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.shopping.merchant.accounts.v1beta.IAccountTax,
+          (
+            | protos.google.shopping.merchant.accounts.v1beta.IGetAccountTaxRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getAccountTax response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Updates the tax settings of the account.
@@ -621,8 +658,39 @@ export class AccountTaxServiceClient {
       this._gaxModule.routingHeader.fromParams({
         'account_tax.name': request.accountTax!.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.updateAccountTax(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('updateAccountTax request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.shopping.merchant.accounts.v1beta.IAccountTax,
+          | protos.google.shopping.merchant.accounts.v1beta.IUpdateAccountTaxRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('updateAccountTax response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .updateAccountTax(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.shopping.merchant.accounts.v1beta.IAccountTax,
+          (
+            | protos.google.shopping.merchant.accounts.v1beta.IUpdateAccountTaxRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('updateAccountTax response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
 
   /**
@@ -724,12 +792,40 @@ export class AccountTaxServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.listAccountTax(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.shopping.merchant.accounts.v1beta.IListAccountTaxRequest,
+          | protos.google.shopping.merchant.accounts.v1beta.IListAccountTaxResponse
+          | null
+          | undefined,
+          protos.google.shopping.merchant.accounts.v1beta.IAccountTax
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listAccountTax values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listAccountTax request %j', request);
+    return this.innerApiCalls
+      .listAccountTax(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.shopping.merchant.accounts.v1beta.IAccountTax[],
+          protos.google.shopping.merchant.accounts.v1beta.IListAccountTaxRequest | null,
+          protos.google.shopping.merchant.accounts.v1beta.IListAccountTaxResponse,
+        ]) => {
+          this._log.info('listAccountTax values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listAccountTax`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
@@ -765,7 +861,10 @@ export class AccountTaxServiceClient {
       });
     const defaultCallSettings = this._defaults['listAccountTax'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listAccountTax stream %j', request);
     return this.descriptors.page.listAccountTax.createStream(
       this.innerApiCalls.listAccountTax as GaxCall,
       request,
@@ -813,7 +912,10 @@ export class AccountTaxServiceClient {
       });
     const defaultCallSettings = this._defaults['listAccountTax'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listAccountTax iterate %j', request);
     return this.descriptors.page.listAccountTax.asyncIterate(
       this.innerApiCalls['listAccountTax'] as GaxCall,
       request as {},
@@ -944,6 +1046,31 @@ export class AccountTaxServiceClient {
   matchAccountFromAutofeedSettingsName(autofeedSettingsName: string) {
     return this.pathTemplates.autofeedSettingsPathTemplate.match(
       autofeedSettingsName
+    ).account;
+  }
+
+  /**
+   * Return a fully-qualified automaticImprovements resource name string.
+   *
+   * @param {string} account
+   * @returns {string} Resource name string.
+   */
+  automaticImprovementsPath(account: string) {
+    return this.pathTemplates.automaticImprovementsPathTemplate.render({
+      account: account,
+    });
+  }
+
+  /**
+   * Parse the account from AutomaticImprovements resource.
+   *
+   * @param {string} automaticImprovementsName
+   *   A fully-qualified path representing AutomaticImprovements resource.
+   * @returns {string} A string representing the account.
+   */
+  matchAccountFromAutomaticImprovementsName(automaticImprovementsName: string) {
+    return this.pathTemplates.automaticImprovementsPathTemplate.match(
+      automaticImprovementsName
     ).account;
   }
 
@@ -1310,6 +1437,7 @@ export class AccountTaxServiceClient {
   close(): Promise<void> {
     if (this.accountTaxServiceStub && !this._terminated) {
       return this.accountTaxServiceStub.then(stub => {
+        this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
       });

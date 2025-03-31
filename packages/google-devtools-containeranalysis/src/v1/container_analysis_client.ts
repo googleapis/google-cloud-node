@@ -28,6 +28,7 @@ import type {
 
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
+import {loggingUtils as logging} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -64,6 +65,8 @@ export class ContainerAnalysisClient {
   private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
+  private _log = logging.log('containeranalysis');
+
   auth: gax.GoogleAuth;
   descriptors: Descriptors = {
     page: {},
@@ -98,7 +101,7 @@ export class ContainerAnalysisClient {
    *     Developer's Console, e.g. 'grape-spaceship-123'. We will also check
    *     the environment variable GCLOUD_PROJECT for your project ID. If your
    *     app is running in an environment which supports
-   *     {@link https://developers.google.com/identity/protocols/application-default-credentials Application Default Credentials},
+   *     {@link https://cloud.google.com/docs/authentication/application-default-credentials Application Default Credentials},
    *     your project ID will be detected automatically.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
@@ -276,6 +279,7 @@ export class ContainerAnalysisClient {
       'getIamPolicy',
       'testIamPermissions',
       'getVulnerabilityOccurrencesSummary',
+      'exportSboM',
     ];
     for (const methodName of containerAnalysisStubMethods) {
       const callPromise = this.containerAnalysisStub.then(
@@ -488,8 +492,34 @@ export class ContainerAnalysisClient {
       this._gaxModule.routingHeader.fromParams({
         resource: request.resource ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.setIamPolicy(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('setIamPolicy request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.iam.v1.IPolicy,
+          protos.google.iam.v1.ISetIamPolicyRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('setIamPolicy response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .setIamPolicy(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.iam.v1.IPolicy,
+          protos.google.iam.v1.ISetIamPolicyRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('setIamPolicy response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Gets the access control policy for a note or an occurrence resource.
@@ -581,8 +611,34 @@ export class ContainerAnalysisClient {
       this._gaxModule.routingHeader.fromParams({
         resource: request.resource ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.getIamPolicy(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('getIamPolicy request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.iam.v1.IPolicy,
+          protos.google.iam.v1.IGetIamPolicyRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getIamPolicy response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getIamPolicy(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.iam.v1.IPolicy,
+          protos.google.iam.v1.IGetIamPolicyRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getIamPolicy response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Returns the permissions that a caller has on the specified note or
@@ -675,8 +731,34 @@ export class ContainerAnalysisClient {
       this._gaxModule.routingHeader.fromParams({
         resource: request.resource ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.testIamPermissions(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('testIamPermissions request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.iam.v1.ITestIamPermissionsResponse,
+          protos.google.iam.v1.ITestIamPermissionsRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('testIamPermissions response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .testIamPermissions(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.iam.v1.ITestIamPermissionsResponse,
+          protos.google.iam.v1.ITestIamPermissionsRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('testIamPermissions response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Gets a summary of the number and severity of occurrences.
@@ -684,8 +766,8 @@ export class ContainerAnalysisClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The name of the project to get a vulnerability summary for in the form of
-   *   `projects/[PROJECT_ID]`.
+   *   Required. The name of the project to get a vulnerability summary for in the
+   *   form of `projects/[PROJECT_ID]`.
    * @param {string} request.filter
    *   The filter expression.
    * @param {object} [options]
@@ -774,12 +856,176 @@ export class ContainerAnalysisClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.getVulnerabilityOccurrencesSummary(
-      request,
-      options,
-      callback
-    );
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('getVulnerabilityOccurrencesSummary request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.devtools.containeranalysis.v1.IVulnerabilityOccurrencesSummary,
+          | protos.google.devtools.containeranalysis.v1.IGetVulnerabilityOccurrencesSummaryRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info(
+            'getVulnerabilityOccurrencesSummary response %j',
+            response
+          );
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getVulnerabilityOccurrencesSummary(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.devtools.containeranalysis.v1.IVulnerabilityOccurrencesSummary,
+          (
+            | protos.google.devtools.containeranalysis.v1.IGetVulnerabilityOccurrencesSummaryRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info(
+            'getVulnerabilityOccurrencesSummary response %j',
+            response
+          );
+          return [response, options, rawResponse];
+        }
+      );
+  }
+  /**
+   * Generates an SBOM for the given resource.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the resource in the form of
+   *   `projects/[PROJECT_ID]/resources/[RESOURCE_URL]`.
+   * @param {google.devtools.containeranalysis.v1.ExportSBOMRequest.CloudStorageLocation} [request.cloudStorageLocation]
+   *   Optional. Empty placeholder to denote that this is a Google Cloud Storage
+   *   export request.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.devtools.containeranalysis.v1.ExportSBOMResponse|ExportSBOMResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/container_analysis.export_s_b_o_m.js</caption>
+   * region_tag:containeranalysis_v1_generated_ContainerAnalysis_ExportSBOM_async
+   */
+  exportSBOM(
+    request?: protos.google.devtools.containeranalysis.v1.IExportSBOMRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.devtools.containeranalysis.v1.IExportSBOMResponse,
+      (
+        | protos.google.devtools.containeranalysis.v1.IExportSBOMRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
+  exportSBOM(
+    request: protos.google.devtools.containeranalysis.v1.IExportSBOMRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.devtools.containeranalysis.v1.IExportSBOMResponse,
+      | protos.google.devtools.containeranalysis.v1.IExportSBOMRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  exportSBOM(
+    request: protos.google.devtools.containeranalysis.v1.IExportSBOMRequest,
+    callback: Callback<
+      protos.google.devtools.containeranalysis.v1.IExportSBOMResponse,
+      | protos.google.devtools.containeranalysis.v1.IExportSBOMRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  exportSBOM(
+    request?: protos.google.devtools.containeranalysis.v1.IExportSBOMRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.devtools.containeranalysis.v1.IExportSBOMResponse,
+          | protos.google.devtools.containeranalysis.v1.IExportSBOMRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.devtools.containeranalysis.v1.IExportSBOMResponse,
+      | protos.google.devtools.containeranalysis.v1.IExportSBOMRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.devtools.containeranalysis.v1.IExportSBOMResponse,
+      (
+        | protos.google.devtools.containeranalysis.v1.IExportSBOMRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('exportSBOM request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.devtools.containeranalysis.v1.IExportSBOMResponse,
+          | protos.google.devtools.containeranalysis.v1.IExportSBOMRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('exportSBOM response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .exportSboM(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.devtools.containeranalysis.v1.IExportSBOMResponse,
+          (
+            | protos.google.devtools.containeranalysis.v1.IExportSBOMRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('exportSBOM response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
 
   // --------------------
@@ -892,6 +1138,7 @@ export class ContainerAnalysisClient {
   close(): Promise<void> {
     if (this.containerAnalysisStub && !this._terminated) {
       return this.containerAnalysisStub.then(stub => {
+        this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
       });

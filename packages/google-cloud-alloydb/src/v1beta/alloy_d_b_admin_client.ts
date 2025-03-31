@@ -35,6 +35,7 @@ import type {
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
+import {loggingUtils as logging} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -59,6 +60,8 @@ export class AlloyDBAdminClient {
   private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
+  private _log = logging.log('alloydb');
+
   auth: gax.GoogleAuth;
   descriptors: Descriptors = {
     page: {},
@@ -96,7 +99,7 @@ export class AlloyDBAdminClient {
    *     Developer's Console, e.g. 'grape-spaceship-123'. We will also check
    *     the environment variable GCLOUD_PROJECT for your project ID. If your
    *     app is running in an environment which supports
-   *     {@link https://developers.google.com/identity/protocols/application-default-credentials Application Default Credentials},
+   *     {@link https://cloud.google.com/docs/authentication/application-default-credentials Application Default Credentials},
    *     your project ID will be detected automatically.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
@@ -331,6 +334,12 @@ export class AlloyDBAdminClient {
     const updateClusterMetadata = protoFilesRoot.lookup(
       '.google.cloud.alloydb.v1beta.OperationMetadata'
     ) as gax.protobuf.Type;
+    const exportClusterResponse = protoFilesRoot.lookup(
+      '.google.cloud.alloydb.v1beta.ExportClusterResponse'
+    ) as gax.protobuf.Type;
+    const exportClusterMetadata = protoFilesRoot.lookup(
+      '.google.cloud.alloydb.v1beta.OperationMetadata'
+    ) as gax.protobuf.Type;
     const upgradeClusterResponse = protoFilesRoot.lookup(
       '.google.cloud.alloydb.v1beta.UpgradeClusterResponse'
     ) as gax.protobuf.Type;
@@ -444,6 +453,11 @@ export class AlloyDBAdminClient {
         this.operationsClient,
         updateClusterResponse.decode.bind(updateClusterResponse),
         updateClusterMetadata.decode.bind(updateClusterMetadata)
+      ),
+      exportCluster: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        exportClusterResponse.decode.bind(exportClusterResponse),
+        exportClusterMetadata.decode.bind(exportClusterMetadata)
       ),
       upgradeCluster: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
@@ -594,6 +608,7 @@ export class AlloyDBAdminClient {
       'getCluster',
       'createCluster',
       'updateCluster',
+      'exportCluster',
       'upgradeCluster',
       'deleteCluster',
       'promoteCluster',
@@ -827,8 +842,36 @@ export class AlloyDBAdminClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.getCluster(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('getCluster request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.alloydb.v1beta.ICluster,
+          | protos.google.cloud.alloydb.v1beta.IGetClusterRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getCluster response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getCluster(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.alloydb.v1beta.ICluster,
+          protos.google.cloud.alloydb.v1beta.IGetClusterRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getCluster response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Gets details of a single Instance.
@@ -914,8 +957,36 @@ export class AlloyDBAdminClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.getInstance(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('getInstance request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.alloydb.v1beta.IInstance,
+          | protos.google.cloud.alloydb.v1beta.IGetInstanceRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getInstance response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getInstance(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.alloydb.v1beta.IInstance,
+          protos.google.cloud.alloydb.v1beta.IGetInstanceRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getInstance response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Executes a SQL statement in a database inside an AlloyDB instance.
@@ -1012,8 +1083,36 @@ export class AlloyDBAdminClient {
       this._gaxModule.routingHeader.fromParams({
         instance: request.instance ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.executeSql(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('executeSql request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.alloydb.v1beta.IExecuteSqlResponse,
+          | protos.google.cloud.alloydb.v1beta.IExecuteSqlRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('executeSql response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .executeSql(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.alloydb.v1beta.IExecuteSqlResponse,
+          protos.google.cloud.alloydb.v1beta.IExecuteSqlRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('executeSql response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Gets details of a single Backup.
@@ -1096,8 +1195,36 @@ export class AlloyDBAdminClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.getBackup(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('getBackup request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.alloydb.v1beta.IBackup,
+          | protos.google.cloud.alloydb.v1beta.IGetBackupRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getBackup response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getBackup(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.alloydb.v1beta.IBackup,
+          protos.google.cloud.alloydb.v1beta.IGetBackupRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getBackup response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Generate a client certificate signed by a Cluster CA.
@@ -1226,12 +1353,39 @@ export class AlloyDBAdminClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.generateClientCertificate(
-      request,
-      options,
-      callback
-    );
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('generateClientCertificate request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.alloydb.v1beta.IGenerateClientCertificateResponse,
+          | protos.google.cloud.alloydb.v1beta.IGenerateClientCertificateRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('generateClientCertificate response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .generateClientCertificate(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.alloydb.v1beta.IGenerateClientCertificateResponse,
+          (
+            | protos.google.cloud.alloydb.v1beta.IGenerateClientCertificateRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('generateClientCertificate response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Get instance metadata used for a connection.
@@ -1335,8 +1489,39 @@ export class AlloyDBAdminClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.getConnectionInfo(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('getConnectionInfo request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.alloydb.v1beta.IConnectionInfo,
+          | protos.google.cloud.alloydb.v1beta.IGetConnectionInfoRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getConnectionInfo response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getConnectionInfo(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.alloydb.v1beta.IConnectionInfo,
+          (
+            | protos.google.cloud.alloydb.v1beta.IGetConnectionInfoRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getConnectionInfo response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Gets details of a single User.
@@ -1418,8 +1603,34 @@ export class AlloyDBAdminClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.getUser(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('getUser request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.alloydb.v1beta.IUser,
+          protos.google.cloud.alloydb.v1beta.IGetUserRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getUser response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getUser(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.alloydb.v1beta.IUser,
+          protos.google.cloud.alloydb.v1beta.IGetUserRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getUser response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Creates a new User in a given project, location, and cluster.
@@ -1523,8 +1734,36 @@ export class AlloyDBAdminClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.createUser(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('createUser request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.alloydb.v1beta.IUser,
+          | protos.google.cloud.alloydb.v1beta.ICreateUserRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('createUser response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .createUser(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.alloydb.v1beta.IUser,
+          protos.google.cloud.alloydb.v1beta.ICreateUserRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createUser response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Updates the parameters of a single User.
@@ -1632,8 +1871,36 @@ export class AlloyDBAdminClient {
       this._gaxModule.routingHeader.fromParams({
         'user.name': request.user!.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.updateUser(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('updateUser request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.alloydb.v1beta.IUser,
+          | protos.google.cloud.alloydb.v1beta.IUpdateUserRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('updateUser response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .updateUser(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.alloydb.v1beta.IUser,
+          protos.google.cloud.alloydb.v1beta.IUpdateUserRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('updateUser response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Deletes a single User.
@@ -1734,8 +2001,36 @@ export class AlloyDBAdminClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.deleteUser(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('deleteUser request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.cloud.alloydb.v1beta.IDeleteUserRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('deleteUser response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .deleteUser(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.protobuf.IEmpty,
+          protos.google.cloud.alloydb.v1beta.IDeleteUserRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteUser response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
 
   /**
@@ -1860,8 +2155,40 @@ export class AlloyDBAdminClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.createCluster(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.alloydb.v1beta.ICluster,
+            protos.google.cloud.alloydb.v1beta.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('createCluster response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('createCluster request %j', request);
+    return this.innerApiCalls
+      .createCluster(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.alloydb.v1beta.ICluster,
+            protos.google.cloud.alloydb.v1beta.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createCluster response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `createCluster()`.
@@ -1882,6 +2209,7 @@ export class AlloyDBAdminClient {
       protos.google.cloud.alloydb.v1beta.OperationMetadata
     >
   > {
+    this._log.info('createCluster long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -2023,8 +2351,40 @@ export class AlloyDBAdminClient {
       this._gaxModule.routingHeader.fromParams({
         'cluster.name': request.cluster!.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.updateCluster(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.alloydb.v1beta.ICluster,
+            protos.google.cloud.alloydb.v1beta.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('updateCluster response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('updateCluster request %j', request);
+    return this.innerApiCalls
+      .updateCluster(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.alloydb.v1beta.ICluster,
+            protos.google.cloud.alloydb.v1beta.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('updateCluster response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `updateCluster()`.
@@ -2045,6 +2405,7 @@ export class AlloyDBAdminClient {
       protos.google.cloud.alloydb.v1beta.OperationMetadata
     >
   > {
+    this._log.info('updateCluster long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -2057,6 +2418,188 @@ export class AlloyDBAdminClient {
     );
     return decodeOperation as LROperation<
       protos.google.cloud.alloydb.v1beta.Cluster,
+      protos.google.cloud.alloydb.v1beta.OperationMetadata
+    >;
+  }
+  /**
+   * Exports data from the cluster.
+   * Imperative only.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.cloud.alloydb.v1beta.GcsDestination} request.gcsDestination
+   *   Required. Option to export data to cloud storage.
+   * @param {google.cloud.alloydb.v1beta.ExportClusterRequest.CsvExportOptions} request.csvExportOptions
+   *   Options for exporting data in CSV format. Required field to be set for
+   *   CSV file type.
+   * @param {google.cloud.alloydb.v1beta.ExportClusterRequest.SqlExportOptions} request.sqlExportOptions
+   *   Options for exporting data in SQL format. Required field to be set for
+   *   SQL file type.
+   * @param {string} request.name
+   *   Required. The resource name of the cluster.
+   * @param {string} request.database
+   *   Required. Name of the database where the export command will be executed.
+   *   Note - Value provided should be the same as expected from
+   *   `SELECT current_database();` and NOT as a resource reference.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta/alloy_d_b_admin.export_cluster.js</caption>
+   * region_tag:alloydb_v1beta_generated_AlloyDBAdmin_ExportCluster_async
+   */
+  exportCluster(
+    request?: protos.google.cloud.alloydb.v1beta.IExportClusterRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.alloydb.v1beta.IExportClusterResponse,
+        protos.google.cloud.alloydb.v1beta.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
+  exportCluster(
+    request: protos.google.cloud.alloydb.v1beta.IExportClusterRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.alloydb.v1beta.IExportClusterResponse,
+        protos.google.cloud.alloydb.v1beta.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  exportCluster(
+    request: protos.google.cloud.alloydb.v1beta.IExportClusterRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.alloydb.v1beta.IExportClusterResponse,
+        protos.google.cloud.alloydb.v1beta.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  exportCluster(
+    request?: protos.google.cloud.alloydb.v1beta.IExportClusterRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.alloydb.v1beta.IExportClusterResponse,
+            protos.google.cloud.alloydb.v1beta.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.alloydb.v1beta.IExportClusterResponse,
+        protos.google.cloud.alloydb.v1beta.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.alloydb.v1beta.IExportClusterResponse,
+        protos.google.cloud.alloydb.v1beta.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.alloydb.v1beta.IExportClusterResponse,
+            protos.google.cloud.alloydb.v1beta.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('exportCluster response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('exportCluster request %j', request);
+    return this.innerApiCalls
+      .exportCluster(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.alloydb.v1beta.IExportClusterResponse,
+            protos.google.cloud.alloydb.v1beta.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('exportCluster response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
+  }
+  /**
+   * Check the status of the long running operation returned by `exportCluster()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta/alloy_d_b_admin.export_cluster.js</caption>
+   * region_tag:alloydb_v1beta_generated_AlloyDBAdmin_ExportCluster_async
+   */
+  async checkExportClusterProgress(
+    name: string
+  ): Promise<
+    LROperation<
+      protos.google.cloud.alloydb.v1beta.ExportClusterResponse,
+      protos.google.cloud.alloydb.v1beta.OperationMetadata
+    >
+  > {
+    this._log.info('exportCluster long-running');
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        {name}
+      );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.exportCluster,
+      this._gaxModule.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.alloydb.v1beta.ExportClusterResponse,
       protos.google.cloud.alloydb.v1beta.OperationMetadata
     >;
   }
@@ -2184,8 +2727,40 @@ export class AlloyDBAdminClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.upgradeCluster(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.alloydb.v1beta.IUpgradeClusterResponse,
+            protos.google.cloud.alloydb.v1beta.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('upgradeCluster response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('upgradeCluster request %j', request);
+    return this.innerApiCalls
+      .upgradeCluster(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.alloydb.v1beta.IUpgradeClusterResponse,
+            protos.google.cloud.alloydb.v1beta.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('upgradeCluster response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `upgradeCluster()`.
@@ -2206,6 +2781,7 @@ export class AlloyDBAdminClient {
       protos.google.cloud.alloydb.v1beta.OperationMetadata
     >
   > {
+    this._log.info('upgradeCluster long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -2345,8 +2921,40 @@ export class AlloyDBAdminClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.deleteCluster(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.alloydb.v1beta.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('deleteCluster response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('deleteCluster request %j', request);
+    return this.innerApiCalls
+      .deleteCluster(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.alloydb.v1beta.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteCluster response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `deleteCluster()`.
@@ -2367,6 +2975,7 @@ export class AlloyDBAdminClient {
       protos.google.cloud.alloydb.v1beta.OperationMetadata
     >
   > {
+    this._log.info('deleteCluster long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -2507,8 +3116,40 @@ export class AlloyDBAdminClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.promoteCluster(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.alloydb.v1beta.ICluster,
+            protos.google.cloud.alloydb.v1beta.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('promoteCluster response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('promoteCluster request %j', request);
+    return this.innerApiCalls
+      .promoteCluster(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.alloydb.v1beta.ICluster,
+            protos.google.cloud.alloydb.v1beta.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('promoteCluster response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `promoteCluster()`.
@@ -2529,6 +3170,7 @@ export class AlloyDBAdminClient {
       protos.google.cloud.alloydb.v1beta.OperationMetadata
     >
   > {
+    this._log.info('promoteCluster long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -2664,8 +3306,40 @@ export class AlloyDBAdminClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.switchoverCluster(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.alloydb.v1beta.ICluster,
+            protos.google.cloud.alloydb.v1beta.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('switchoverCluster response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('switchoverCluster request %j', request);
+    return this.innerApiCalls
+      .switchoverCluster(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.alloydb.v1beta.ICluster,
+            protos.google.cloud.alloydb.v1beta.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('switchoverCluster response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `switchoverCluster()`.
@@ -2686,6 +3360,7 @@ export class AlloyDBAdminClient {
       protos.google.cloud.alloydb.v1beta.OperationMetadata
     >
   > {
+    this._log.info('switchoverCluster long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -2830,8 +3505,40 @@ export class AlloyDBAdminClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.restoreCluster(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.alloydb.v1beta.ICluster,
+            protos.google.cloud.alloydb.v1beta.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('restoreCluster response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('restoreCluster request %j', request);
+    return this.innerApiCalls
+      .restoreCluster(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.alloydb.v1beta.ICluster,
+            protos.google.cloud.alloydb.v1beta.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('restoreCluster response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `restoreCluster()`.
@@ -2852,6 +3559,7 @@ export class AlloyDBAdminClient {
       protos.google.cloud.alloydb.v1beta.OperationMetadata
     >
   > {
+    this._log.info('restoreCluster long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -2990,12 +3698,40 @@ export class AlloyDBAdminClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.createSecondaryCluster(
-      request,
-      options,
-      callback
-    );
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.alloydb.v1beta.ICluster,
+            protos.google.cloud.alloydb.v1beta.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('createSecondaryCluster response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('createSecondaryCluster request %j', request);
+    return this.innerApiCalls
+      .createSecondaryCluster(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.alloydb.v1beta.ICluster,
+            protos.google.cloud.alloydb.v1beta.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createSecondaryCluster response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `createSecondaryCluster()`.
@@ -3016,6 +3752,7 @@ export class AlloyDBAdminClient {
       protos.google.cloud.alloydb.v1beta.OperationMetadata
     >
   > {
+    this._log.info('createSecondaryCluster long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -3153,8 +3890,40 @@ export class AlloyDBAdminClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.createInstance(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.alloydb.v1beta.IInstance,
+            protos.google.cloud.alloydb.v1beta.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('createInstance response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('createInstance request %j', request);
+    return this.innerApiCalls
+      .createInstance(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.alloydb.v1beta.IInstance,
+            protos.google.cloud.alloydb.v1beta.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createInstance response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `createInstance()`.
@@ -3175,6 +3944,7 @@ export class AlloyDBAdminClient {
       protos.google.cloud.alloydb.v1beta.OperationMetadata
     >
   > {
+    this._log.info('createInstance long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -3312,12 +4082,40 @@ export class AlloyDBAdminClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.createSecondaryInstance(
-      request,
-      options,
-      callback
-    );
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.alloydb.v1beta.IInstance,
+            protos.google.cloud.alloydb.v1beta.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('createSecondaryInstance response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('createSecondaryInstance request %j', request);
+    return this.innerApiCalls
+      .createSecondaryInstance(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.alloydb.v1beta.IInstance,
+            protos.google.cloud.alloydb.v1beta.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createSecondaryInstance response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `createSecondaryInstance()`.
@@ -3338,6 +4136,7 @@ export class AlloyDBAdminClient {
       protos.google.cloud.alloydb.v1beta.OperationMetadata
     >
   > {
+    this._log.info('createSecondaryInstance long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -3477,8 +4276,40 @@ export class AlloyDBAdminClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.batchCreateInstances(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.alloydb.v1beta.IBatchCreateInstancesResponse,
+            protos.google.cloud.alloydb.v1beta.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('batchCreateInstances response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('batchCreateInstances request %j', request);
+    return this.innerApiCalls
+      .batchCreateInstances(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.alloydb.v1beta.IBatchCreateInstancesResponse,
+            protos.google.cloud.alloydb.v1beta.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('batchCreateInstances response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `batchCreateInstances()`.
@@ -3499,6 +4330,7 @@ export class AlloyDBAdminClient {
       protos.google.cloud.alloydb.v1beta.OperationMetadata
     >
   > {
+    this._log.info('batchCreateInstances long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -3640,8 +4472,40 @@ export class AlloyDBAdminClient {
       this._gaxModule.routingHeader.fromParams({
         'instance.name': request.instance!.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.updateInstance(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.alloydb.v1beta.IInstance,
+            protos.google.cloud.alloydb.v1beta.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('updateInstance response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('updateInstance request %j', request);
+    return this.innerApiCalls
+      .updateInstance(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.alloydb.v1beta.IInstance,
+            protos.google.cloud.alloydb.v1beta.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('updateInstance response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `updateInstance()`.
@@ -3662,6 +4526,7 @@ export class AlloyDBAdminClient {
       protos.google.cloud.alloydb.v1beta.OperationMetadata
     >
   > {
+    this._log.info('updateInstance long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -3799,8 +4664,40 @@ export class AlloyDBAdminClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.deleteInstance(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.alloydb.v1beta.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('deleteInstance response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('deleteInstance request %j', request);
+    return this.innerApiCalls
+      .deleteInstance(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.alloydb.v1beta.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteInstance response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `deleteInstance()`.
@@ -3821,6 +4718,7 @@ export class AlloyDBAdminClient {
       protos.google.cloud.alloydb.v1beta.OperationMetadata
     >
   > {
+    this._log.info('deleteInstance long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -3956,8 +4854,40 @@ export class AlloyDBAdminClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.failoverInstance(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.alloydb.v1beta.IInstance,
+            protos.google.cloud.alloydb.v1beta.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('failoverInstance response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('failoverInstance request %j', request);
+    return this.innerApiCalls
+      .failoverInstance(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.alloydb.v1beta.IInstance,
+            protos.google.cloud.alloydb.v1beta.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('failoverInstance response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `failoverInstance()`.
@@ -3978,6 +4908,7 @@ export class AlloyDBAdminClient {
       protos.google.cloud.alloydb.v1beta.OperationMetadata
     >
   > {
+    this._log.info('failoverInstance long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -4114,8 +5045,40 @@ export class AlloyDBAdminClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.injectFault(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.alloydb.v1beta.IInstance,
+            protos.google.cloud.alloydb.v1beta.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('injectFault response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('injectFault request %j', request);
+    return this.innerApiCalls
+      .injectFault(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.alloydb.v1beta.IInstance,
+            protos.google.cloud.alloydb.v1beta.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('injectFault response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `injectFault()`.
@@ -4136,6 +5099,7 @@ export class AlloyDBAdminClient {
       protos.google.cloud.alloydb.v1beta.OperationMetadata
     >
   > {
+    this._log.info('injectFault long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -4273,8 +5237,40 @@ export class AlloyDBAdminClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.restartInstance(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.alloydb.v1beta.IInstance,
+            protos.google.cloud.alloydb.v1beta.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('restartInstance response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('restartInstance request %j', request);
+    return this.innerApiCalls
+      .restartInstance(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.alloydb.v1beta.IInstance,
+            protos.google.cloud.alloydb.v1beta.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('restartInstance response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `restartInstance()`.
@@ -4295,6 +5291,7 @@ export class AlloyDBAdminClient {
       protos.google.cloud.alloydb.v1beta.OperationMetadata
     >
   > {
+    this._log.info('restartInstance long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -4430,8 +5427,40 @@ export class AlloyDBAdminClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.createBackup(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.alloydb.v1beta.IBackup,
+            protos.google.cloud.alloydb.v1beta.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('createBackup response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('createBackup request %j', request);
+    return this.innerApiCalls
+      .createBackup(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.alloydb.v1beta.IBackup,
+            protos.google.cloud.alloydb.v1beta.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createBackup response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `createBackup()`.
@@ -4452,6 +5481,7 @@ export class AlloyDBAdminClient {
       protos.google.cloud.alloydb.v1beta.OperationMetadata
     >
   > {
+    this._log.info('createBackup long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -4592,8 +5622,40 @@ export class AlloyDBAdminClient {
       this._gaxModule.routingHeader.fromParams({
         'backup.name': request.backup!.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.updateBackup(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.alloydb.v1beta.IBackup,
+            protos.google.cloud.alloydb.v1beta.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('updateBackup response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('updateBackup request %j', request);
+    return this.innerApiCalls
+      .updateBackup(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.alloydb.v1beta.IBackup,
+            protos.google.cloud.alloydb.v1beta.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('updateBackup response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `updateBackup()`.
@@ -4614,6 +5676,7 @@ export class AlloyDBAdminClient {
       protos.google.cloud.alloydb.v1beta.OperationMetadata
     >
   > {
+    this._log.info('updateBackup long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -4750,8 +5813,40 @@ export class AlloyDBAdminClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.deleteBackup(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.alloydb.v1beta.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('deleteBackup response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('deleteBackup request %j', request);
+    return this.innerApiCalls
+      .deleteBackup(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.alloydb.v1beta.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteBackup response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `deleteBackup()`.
@@ -4772,6 +5867,7 @@ export class AlloyDBAdminClient {
       protos.google.cloud.alloydb.v1beta.OperationMetadata
     >
   > {
+    this._log.info('deleteBackup long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -4889,8 +5985,36 @@ export class AlloyDBAdminClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.listClusters(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.alloydb.v1beta.IListClustersRequest,
+          | protos.google.cloud.alloydb.v1beta.IListClustersResponse
+          | null
+          | undefined,
+          protos.google.cloud.alloydb.v1beta.ICluster
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listClusters values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listClusters request %j', request);
+    return this.innerApiCalls
+      .listClusters(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.alloydb.v1beta.ICluster[],
+          protos.google.cloud.alloydb.v1beta.IListClustersRequest | null,
+          protos.google.cloud.alloydb.v1beta.IListClustersResponse,
+        ]) => {
+          this._log.info('listClusters values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -4936,7 +6060,10 @@ export class AlloyDBAdminClient {
       });
     const defaultCallSettings = this._defaults['listClusters'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listClusters stream %j', request);
     return this.descriptors.page.listClusters.createStream(
       this.innerApiCalls.listClusters as GaxCall,
       request,
@@ -4990,7 +6117,10 @@ export class AlloyDBAdminClient {
       });
     const defaultCallSettings = this._defaults['listClusters'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listClusters iterate %j', request);
     return this.descriptors.page.listClusters.asyncIterate(
       this.innerApiCalls['listClusters'] as GaxCall,
       request as {},
@@ -5101,8 +6231,36 @@ export class AlloyDBAdminClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.listInstances(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.alloydb.v1beta.IListInstancesRequest,
+          | protos.google.cloud.alloydb.v1beta.IListInstancesResponse
+          | null
+          | undefined,
+          protos.google.cloud.alloydb.v1beta.IInstance
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listInstances values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listInstances request %j', request);
+    return this.innerApiCalls
+      .listInstances(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.alloydb.v1beta.IInstance[],
+          protos.google.cloud.alloydb.v1beta.IListInstancesRequest | null,
+          protos.google.cloud.alloydb.v1beta.IListInstancesResponse,
+        ]) => {
+          this._log.info('listInstances values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -5150,7 +6308,10 @@ export class AlloyDBAdminClient {
       });
     const defaultCallSettings = this._defaults['listInstances'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listInstances stream %j', request);
     return this.descriptors.page.listInstances.createStream(
       this.innerApiCalls.listInstances as GaxCall,
       request,
@@ -5206,7 +6367,10 @@ export class AlloyDBAdminClient {
       });
     const defaultCallSettings = this._defaults['listInstances'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listInstances iterate %j', request);
     return this.descriptors.page.listInstances.asyncIterate(
       this.innerApiCalls['listInstances'] as GaxCall,
       request as {},
@@ -5312,8 +6476,36 @@ export class AlloyDBAdminClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.listBackups(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.alloydb.v1beta.IListBackupsRequest,
+          | protos.google.cloud.alloydb.v1beta.IListBackupsResponse
+          | null
+          | undefined,
+          protos.google.cloud.alloydb.v1beta.IBackup
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listBackups values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listBackups request %j', request);
+    return this.innerApiCalls
+      .listBackups(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.alloydb.v1beta.IBackup[],
+          protos.google.cloud.alloydb.v1beta.IListBackupsRequest | null,
+          protos.google.cloud.alloydb.v1beta.IListBackupsResponse,
+        ]) => {
+          this._log.info('listBackups values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -5356,7 +6548,10 @@ export class AlloyDBAdminClient {
       });
     const defaultCallSettings = this._defaults['listBackups'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listBackups stream %j', request);
     return this.descriptors.page.listBackups.createStream(
       this.innerApiCalls.listBackups as GaxCall,
       request,
@@ -5407,7 +6602,10 @@ export class AlloyDBAdminClient {
       });
     const defaultCallSettings = this._defaults['listBackups'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listBackups iterate %j', request);
     return this.descriptors.page.listBackups.asyncIterate(
       this.innerApiCalls['listBackups'] as GaxCall,
       request as {},
@@ -5515,12 +6713,36 @@ export class AlloyDBAdminClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.listSupportedDatabaseFlags(
-      request,
-      options,
-      callback
-    );
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.alloydb.v1beta.IListSupportedDatabaseFlagsRequest,
+          | protos.google.cloud.alloydb.v1beta.IListSupportedDatabaseFlagsResponse
+          | null
+          | undefined,
+          protos.google.cloud.alloydb.v1beta.ISupportedDatabaseFlag
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listSupportedDatabaseFlags values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listSupportedDatabaseFlags request %j', request);
+    return this.innerApiCalls
+      .listSupportedDatabaseFlags(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.alloydb.v1beta.ISupportedDatabaseFlag[],
+          protos.google.cloud.alloydb.v1beta.IListSupportedDatabaseFlagsRequest | null,
+          protos.google.cloud.alloydb.v1beta.IListSupportedDatabaseFlagsResponse,
+        ]) => {
+          this._log.info('listSupportedDatabaseFlags values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -5565,7 +6787,10 @@ export class AlloyDBAdminClient {
       });
     const defaultCallSettings = this._defaults['listSupportedDatabaseFlags'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listSupportedDatabaseFlags stream %j', request);
     return this.descriptors.page.listSupportedDatabaseFlags.createStream(
       this.innerApiCalls.listSupportedDatabaseFlags as GaxCall,
       request,
@@ -5618,7 +6843,10 @@ export class AlloyDBAdminClient {
       });
     const defaultCallSettings = this._defaults['listSupportedDatabaseFlags'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listSupportedDatabaseFlags iterate %j', request);
     return this.descriptors.page.listSupportedDatabaseFlags.asyncIterate(
       this.innerApiCalls['listSupportedDatabaseFlags'] as GaxCall,
       request as {},
@@ -5718,8 +6946,36 @@ export class AlloyDBAdminClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.listUsers(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.alloydb.v1beta.IListUsersRequest,
+          | protos.google.cloud.alloydb.v1beta.IListUsersResponse
+          | null
+          | undefined,
+          protos.google.cloud.alloydb.v1beta.IUser
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listUsers values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listUsers request %j', request);
+    return this.innerApiCalls
+      .listUsers(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.alloydb.v1beta.IUser[],
+          protos.google.cloud.alloydb.v1beta.IListUsersRequest | null,
+          protos.google.cloud.alloydb.v1beta.IListUsersResponse,
+        ]) => {
+          this._log.info('listUsers values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -5762,7 +7018,10 @@ export class AlloyDBAdminClient {
       });
     const defaultCallSettings = this._defaults['listUsers'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listUsers stream %j', request);
     return this.descriptors.page.listUsers.createStream(
       this.innerApiCalls.listUsers as GaxCall,
       request,
@@ -5813,7 +7072,10 @@ export class AlloyDBAdminClient {
       });
     const defaultCallSettings = this._defaults['listUsers'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listUsers iterate %j', request);
     return this.descriptors.page.listUsers.asyncIterate(
       this.innerApiCalls['listUsers'] as GaxCall,
       request as {},
@@ -5922,8 +7184,36 @@ export class AlloyDBAdminClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.listDatabases(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.alloydb.v1beta.IListDatabasesRequest,
+          | protos.google.cloud.alloydb.v1beta.IListDatabasesResponse
+          | null
+          | undefined,
+          protos.google.cloud.alloydb.v1beta.IDatabase
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listDatabases values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listDatabases request %j', request);
+    return this.innerApiCalls
+      .listDatabases(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.alloydb.v1beta.IDatabase[],
+          protos.google.cloud.alloydb.v1beta.IListDatabasesRequest | null,
+          protos.google.cloud.alloydb.v1beta.IListDatabasesResponse,
+        ]) => {
+          this._log.info('listDatabases values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -5969,7 +7259,10 @@ export class AlloyDBAdminClient {
       });
     const defaultCallSettings = this._defaults['listDatabases'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listDatabases stream %j', request);
     return this.descriptors.page.listDatabases.createStream(
       this.innerApiCalls.listDatabases as GaxCall,
       request,
@@ -6023,7 +7316,10 @@ export class AlloyDBAdminClient {
       });
     const defaultCallSettings = this._defaults['listDatabases'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listDatabases iterate %j', request);
     return this.descriptors.page.listDatabases.asyncIterate(
       this.innerApiCalls['listDatabases'] as GaxCall,
       request as {},
@@ -6340,7 +7636,7 @@ export class AlloyDBAdminClient {
   listOperationsAsync(
     request: protos.google.longrunning.ListOperationsRequest,
     options?: gax.CallOptions
-  ): AsyncIterable<protos.google.longrunning.ListOperationsResponse> {
+  ): AsyncIterable<protos.google.longrunning.IOperation> {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
@@ -6968,6 +8264,7 @@ export class AlloyDBAdminClient {
   close(): Promise<void> {
     if (this.alloyDBAdminStub && !this._terminated) {
       return this.alloyDBAdminStub.then(stub => {
+        this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
         this.iamClient.close();

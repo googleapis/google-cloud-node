@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -21,13 +21,13 @@ import "google/api/client.proto";
 import "google/api/field_behavior.proto";
 import "google/api/resource.proto";
 import "google/cloud/dialogflow/v2beta1/audio_config.proto";
+import "google/cloud/dialogflow/v2beta1/generator.proto";
 import "google/cloud/dialogflow/v2beta1/session.proto";
 import "google/protobuf/field_mask.proto";
 import "google/protobuf/struct.proto";
 import "google/protobuf/timestamp.proto";
 import "google/rpc/status.proto";
 
-option cc_enable_arenas = true;
 option csharp_namespace = "Google.Cloud.Dialogflow.V2Beta1";
 option go_package = "cloud.google.com/go/dialogflow/apiv2beta1/dialogflowpb;dialogflowpb";
 option java_multiple_files = true;
@@ -374,7 +374,8 @@ message Message {
   google.protobuf.Timestamp create_time = 6
       [(google.api.field_behavior) = OUTPUT_ONLY];
 
-  // Optional. The time when the message was sent.
+  // Optional. The time when the message was sent. For voice messages, this is
+  // the time when an utterance started.
   google.protobuf.Timestamp send_time = 9
       [(google.api.field_behavior) = OPTIONAL];
 
@@ -726,8 +727,8 @@ message AnalyzeContentRequest {
   // CX agent.
   google.protobuf.Struct cx_parameters = 18;
 
-  // The unique identifier of the CX page to override the `current_page` in the
-  // session.
+  // The unique identifier of the Dialogflow CX page to override the
+  // `current_page` in the session.
   // Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent
   // ID>/flows/<Flow ID>/pages/<Page ID>`.
   //
@@ -746,6 +747,7 @@ message AnalyzeContentRequest {
   // perspective. It is used for identifying the same message under one
   // participant.
   //
+  // For BatchCreateMessages API only:
   // Given two messages under the same participant:
   // * If send time are different regardless of whether the content of the
   // messages are exactly the same, the conversation will regard them as
@@ -952,8 +954,8 @@ message StreamingAnalyzeContentRequest {
   // CX agent.
   google.protobuf.Struct cx_parameters = 13;
 
-  // The unique identifier of the CX page to override the `current_page` in the
-  // session.
+  // The unique identifier of the Dialogflow CX page to override the
+  // `current_page` in the session.
   // Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent
   // ID>/flows/<Flow ID>/pages/<Page ID>`.
   //
@@ -989,11 +991,12 @@ message StreamingAnalyzeContentRequest {
   // https://cloud.google.com/agent-assist/docs/extended-streaming
   bool enable_extended_streaming = 11 [(google.api.field_behavior) = OPTIONAL];
 
-  // Enable partial virtual agent responses. If this flag is not enabled,
-  // response stream still contains only one final response even if some
-  // `Fulfillment`s in Dialogflow virtual agent have been configured to return
-  // partial responses.
-  bool enable_partial_automated_agent_reply = 12;
+  // Optional. Enable partial responses from Dialogflow CX agent. If this flag
+  // is not enabled, response stream still contains only one final response even
+  // if some `Fulfillment`s in Dialogflow CX agent have been configured to
+  // return partial responses.
+  bool enable_partial_automated_agent_reply = 12
+      [(google.api.field_behavior) = OPTIONAL];
 
   // if true, `StreamingAnalyzeContentResponse.debugging_info` will get
   // populated.
@@ -1072,6 +1075,9 @@ message StreamingAnalyzeContentResponse {
   // Debugging info that would get populated when
   // `StreamingAnalyzeContentRequest.enable_debugging_info` is set to true.
   CloudConversationDebuggingInfo debugging_info = 11;
+
+  // The name of the actual Cloud speech model used for speech recognition.
+  string speech_model = 13;
 }
 
 // Represents a part of a message possibly annotated with an entity. The part
@@ -1246,6 +1252,10 @@ message SuggestionResult {
 
     // SuggestDialogflowAssistsResponse if request is for ENTITY_EXTRACTION.
     SuggestDialogflowAssistsResponse suggest_entity_extraction_response = 7;
+
+    // Suggestions generated using generators triggered by customer or agent
+    // messages.
+    GenerateSuggestionsResponse generate_suggestions_response = 9;
   }
 }
 
@@ -1421,6 +1431,39 @@ message SuggestSmartRepliesResponse {
   // field in the request if there aren't that many messages in the
   // conversation.
   int32 context_size = 3;
+}
+
+// The response message for
+// [Conversations.GenerateSuggestions][google.cloud.dialogflow.v2beta1.Conversations.GenerateSuggestions].
+message GenerateSuggestionsResponse {
+  // A GeneratorSuggestion answer.
+  message GeneratorSuggestionAnswer {
+    // Suggestion details.
+    GeneratorSuggestion generator_suggestion = 1;
+
+    // The name of the generator used to generate this suggestion. Format:
+    // `projects/<Project ID>/locations/<Location ID>/generators/<Generator
+    // ID>`.
+    string source_generator = 2;
+
+    // Answer record that uniquely identifies the suggestion. This can be used
+    // to provide suggestion feedback.
+    string answer_record = 3 [(google.api.resource_reference) = {
+      type: "dialogflow.googleapis.com/AnswerRecord"
+    }];
+  }
+
+  // The answers generated for the conversation based on context.
+  repeated GeneratorSuggestionAnswer generator_suggestion_answers = 1;
+
+  // The name of the latest conversation message used as context for
+  // compiling suggestion.
+  //
+  // Format: `projects/<Project ID>/locations/<Location
+  // ID>/conversations/<Conversation ID>/messages/<Message ID>`.
+  string latest_message = 2 [(google.api.resource_reference) = {
+    type: "dialogflow.googleapis.com/Message"
+  }];
 }
 
 // The response message for
@@ -1628,7 +1671,8 @@ message ResponseMessage {
   //
   // You may set this, for example:
   //
-  // * In the entry fulfillment of a CX Page if entering the page indicates
+  // * In the entry fulfillment of a Dialogflow CX Page if entering the page
+  // indicates
   //   something went extremely wrong in the conversation.
   // * In a webhook response when you determine that the customer issue can only
   //   be handled by a human.
@@ -1738,7 +1782,7 @@ message SuggestKnowledgeAssistRequest {
   int32 context_size = 3 [(google.api.field_behavior) = OPTIONAL];
 
   // Optional. The previously suggested query for the given conversation. This
-  // helps identify whether the next suggestion we generate is resonably
+  // helps identify whether the next suggestion we generate is reasonably
   // different from the previous one. This is useful to avoid similar
   // suggestions within the conversation.
   string previous_suggested_query = 4 [(google.api.field_behavior) = OPTIONAL];

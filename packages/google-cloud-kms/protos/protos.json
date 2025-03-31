@@ -12,7 +12,6 @@
                     "java_multiple_files": true,
                     "java_outer_classname": "KmsProto",
                     "java_package": "com.google.cloud.kms.v1",
-                    "cc_enable_arenas": true,
                     "csharp_namespace": "Google.Cloud.Kms.V1",
                     "php_namespace": "Google\\Cloud\\Kms\\V1",
                     "(google.api.resource_definition).type": "servicedirectory.googleapis.com/Service",
@@ -174,6 +173,20 @@
                             "(google.api.resource_reference).type": "locations.googleapis.com/Location"
                           }
                         },
+                        "pageSize": {
+                          "type": "int32",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
                         "filter": {
                           "type": "string",
                           "id": 4,
@@ -189,6 +202,10 @@
                           "rule": "repeated",
                           "type": "KeyHandle",
                           "id": 1
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 2
                         }
                       }
                     },
@@ -306,6 +323,23 @@
                           "id": 2,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "state": {
+                          "type": "State",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "State": {
+                          "values": {
+                            "STATE_UNSPECIFIED": 0,
+                            "ACTIVE": 1,
+                            "KEY_PROJECT_DELETED": 2,
+                            "UNINITIALIZED": 3
                           }
                         }
                       }
@@ -704,7 +738,10 @@
                         "serviceResolvers": {
                           "rule": "repeated",
                           "type": "ServiceResolver",
-                          "id": 3
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         },
                         "etag": {
                           "type": "string",
@@ -1152,7 +1189,9 @@
                             "HMAC_SHA384": 34,
                             "HMAC_SHA512": 35,
                             "HMAC_SHA224": 36,
-                            "EXTERNAL_SYMMETRIC_ENCRYPTION": 18
+                            "EXTERNAL_SYMMETRIC_ENCRYPTION": 18,
+                            "PQ_SIGN_ML_DSA_65": 56,
+                            "PQ_SIGN_SLH_DSA_SHA2_128S": 57
                           }
                         },
                         "CryptoKeyVersionState": {
@@ -1175,6 +1214,18 @@
                             "CRYPTO_KEY_VERSION_VIEW_UNSPECIFIED": 0,
                             "FULL": 1
                           }
+                        }
+                      }
+                    },
+                    "ChecksummedData": {
+                      "fields": {
+                        "data": {
+                          "type": "bytes",
+                          "id": 3
+                        },
+                        "crc32cChecksum": {
+                          "type": "google.protobuf.Int64Value",
+                          "id": 2
                         }
                       }
                     },
@@ -1203,6 +1254,23 @@
                         "protectionLevel": {
                           "type": "ProtectionLevel",
                           "id": 5
+                        },
+                        "publicKeyFormat": {
+                          "type": "PublicKeyFormat",
+                          "id": 7
+                        },
+                        "publicKey": {
+                          "type": "ChecksummedData",
+                          "id": 8
+                        }
+                      },
+                      "nested": {
+                        "PublicKeyFormat": {
+                          "values": {
+                            "PUBLIC_KEY_FORMAT_UNSPECIFIED": 0,
+                            "PEM": 1,
+                            "NIST_PQC": 3
+                          }
                         }
                       }
                     },
@@ -1325,6 +1393,15 @@
                         }
                       }
                     },
+                    "KeyAccessJustificationsPolicy": {
+                      "fields": {
+                        "allowedAccessReasons": {
+                          "rule": "repeated",
+                          "type": "AccessReason",
+                          "id": 1
+                        }
+                      }
+                    },
                     "ProtectionLevel": {
                       "values": {
                         "PROTECTION_LEVEL_UNSPECIFIED": 0,
@@ -1348,15 +1425,6 @@
                         "MODIFIED_GOOGLE_INITIATED_SYSTEM_OPERATION": 9,
                         "GOOGLE_RESPONSE_TO_PRODUCTION_ALERT": 10,
                         "CUSTOMER_AUTHORIZED_WORKFLOW_SERVICING": 11
-                      }
-                    },
-                    "KeyAccessJustificationsPolicy": {
-                      "fields": {
-                        "allowedAccessReasons": {
-                          "rule": "repeated",
-                          "type": "AccessReason",
-                          "id": 1
-                        }
                       }
                     },
                     "KeyManagementService": {
@@ -2177,6 +2245,13 @@
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED",
                             "(google.api.resource_reference).type": "cloudkms.googleapis.com/CryptoKeyVersion"
+                          }
+                        },
+                        "publicKeyFormat": {
+                          "type": "PublicKey.PublicKeyFormat",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
                           }
                         }
                       }

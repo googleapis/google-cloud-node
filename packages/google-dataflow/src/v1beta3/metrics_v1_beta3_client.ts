@@ -29,6 +29,7 @@ import type {
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
+import {loggingUtils as logging} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -54,6 +55,8 @@ export class MetricsV1Beta3Client {
   private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
+  private _log = logging.log('dataflow');
+
   auth: gax.GoogleAuth;
   descriptors: Descriptors = {
     page: {},
@@ -87,7 +90,7 @@ export class MetricsV1Beta3Client {
    *     Developer's Console, e.g. 'grape-spaceship-123'. We will also check
    *     the environment variable GCLOUD_PROJECT for your project ID. If your
    *     app is running in an environment which supports
-   *     {@link https://developers.google.com/identity/protocols/application-default-credentials Application Default Credentials},
+   *     {@link https://cloud.google.com/docs/authentication/application-default-credentials Application Default Credentials},
    *     your project ID will be detected automatically.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
@@ -481,8 +484,36 @@ export class MetricsV1Beta3Client {
         location: request.location ?? '',
         job_id: request.jobId ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.getJobMetrics(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('getJobMetrics request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.dataflow.v1beta3.IJobMetrics,
+          | protos.google.dataflow.v1beta3.IGetJobMetricsRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getJobMetrics response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getJobMetrics(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.dataflow.v1beta3.IJobMetrics,
+          protos.google.dataflow.v1beta3.IGetJobMetricsRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getJobMetrics response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
 
   /**
@@ -587,16 +618,40 @@ export class MetricsV1Beta3Client {
         location: request.location ?? '',
         job_id: request.jobId ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.getJobExecutionDetails(
-      request,
-      options,
-      callback
-    );
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.dataflow.v1beta3.IGetJobExecutionDetailsRequest,
+          | protos.google.dataflow.v1beta3.IJobExecutionDetails
+          | null
+          | undefined,
+          protos.google.dataflow.v1beta3.IStageSummary
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('getJobExecutionDetails values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('getJobExecutionDetails request %j', request);
+    return this.innerApiCalls
+      .getJobExecutionDetails(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.dataflow.v1beta3.IStageSummary[],
+          protos.google.dataflow.v1beta3.IGetJobExecutionDetailsRequest | null,
+          protos.google.dataflow.v1beta3.IJobExecutionDetails,
+        ]) => {
+          this._log.info('getJobExecutionDetails values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `getJobExecutionDetails`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.projectId
@@ -642,7 +697,10 @@ export class MetricsV1Beta3Client {
       });
     const defaultCallSettings = this._defaults['getJobExecutionDetails'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('getJobExecutionDetails stream %j', request);
     return this.descriptors.page.getJobExecutionDetails.createStream(
       this.innerApiCalls.getJobExecutionDetails as GaxCall,
       request,
@@ -700,7 +758,10 @@ export class MetricsV1Beta3Client {
       });
     const defaultCallSettings = this._defaults['getJobExecutionDetails'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('getJobExecutionDetails iterate %j', request);
     return this.descriptors.page.getJobExecutionDetails.asyncIterate(
       this.innerApiCalls['getJobExecutionDetails'] as GaxCall,
       request as {},
@@ -817,16 +878,40 @@ export class MetricsV1Beta3Client {
         job_id: request.jobId ?? '',
         stage_id: request.stageId ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.getStageExecutionDetails(
-      request,
-      options,
-      callback
-    );
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.dataflow.v1beta3.IGetStageExecutionDetailsRequest,
+          | protos.google.dataflow.v1beta3.IStageExecutionDetails
+          | null
+          | undefined,
+          protos.google.dataflow.v1beta3.IWorkerDetails
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('getStageExecutionDetails values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('getStageExecutionDetails request %j', request);
+    return this.innerApiCalls
+      .getStageExecutionDetails(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.dataflow.v1beta3.IWorkerDetails[],
+          protos.google.dataflow.v1beta3.IGetStageExecutionDetailsRequest | null,
+          protos.google.dataflow.v1beta3.IStageExecutionDetails,
+        ]) => {
+          this._log.info('getStageExecutionDetails values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `getStageExecutionDetails`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.projectId
@@ -879,7 +964,10 @@ export class MetricsV1Beta3Client {
       });
     const defaultCallSettings = this._defaults['getStageExecutionDetails'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('getStageExecutionDetails stream %j', request);
     return this.descriptors.page.getStageExecutionDetails.createStream(
       this.innerApiCalls.getStageExecutionDetails as GaxCall,
       request,
@@ -944,7 +1032,10 @@ export class MetricsV1Beta3Client {
       });
     const defaultCallSettings = this._defaults['getStageExecutionDetails'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('getStageExecutionDetails iterate %j', request);
     return this.descriptors.page.getStageExecutionDetails.asyncIterate(
       this.innerApiCalls['getStageExecutionDetails'] as GaxCall,
       request as {},
@@ -961,6 +1052,7 @@ export class MetricsV1Beta3Client {
   close(): Promise<void> {
     if (this.metricsV1Beta3Stub && !this._terminated) {
       return this.metricsV1Beta3Stub.then(stub => {
+        this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
       });

@@ -263,7 +263,9 @@ describe('v1beta.PromotionsServiceClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      client.initialize().catch(err => {
+        throw err;
+      });
       assert(client.promotionsServiceStub);
       client.close().then(() => {
         done();
@@ -330,7 +332,7 @@ describe('v1beta.PromotionsServiceClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.shopping.merchant.promotions.v1beta.InsertPromotionRequest()
       );
@@ -339,7 +341,7 @@ describe('v1beta.PromotionsServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.shopping.merchant.promotions.v1beta.Promotion()
       );
@@ -363,7 +365,7 @@ describe('v1beta.PromotionsServiceClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.shopping.merchant.promotions.v1beta.InsertPromotionRequest()
       );
@@ -372,7 +374,7 @@ describe('v1beta.PromotionsServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.shopping.merchant.promotions.v1beta.Promotion()
       );
@@ -412,7 +414,7 @@ describe('v1beta.PromotionsServiceClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.shopping.merchant.promotions.v1beta.InsertPromotionRequest()
       );
@@ -421,7 +423,7 @@ describe('v1beta.PromotionsServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.insertPromotion = stubSimpleCall(
         undefined,
@@ -445,7 +447,7 @@ describe('v1beta.PromotionsServiceClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.shopping.merchant.promotions.v1beta.InsertPromotionRequest()
       );
@@ -468,7 +470,7 @@ describe('v1beta.PromotionsServiceClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.shopping.merchant.promotions.v1beta.GetPromotionRequest()
       );
@@ -477,7 +479,7 @@ describe('v1beta.PromotionsServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.shopping.merchant.promotions.v1beta.Promotion()
       );
@@ -501,7 +503,7 @@ describe('v1beta.PromotionsServiceClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.shopping.merchant.promotions.v1beta.GetPromotionRequest()
       );
@@ -510,7 +512,7 @@ describe('v1beta.PromotionsServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.shopping.merchant.promotions.v1beta.Promotion()
       );
@@ -550,7 +552,7 @@ describe('v1beta.PromotionsServiceClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.shopping.merchant.promotions.v1beta.GetPromotionRequest()
       );
@@ -559,7 +561,7 @@ describe('v1beta.PromotionsServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getPromotion = stubSimpleCall(
         undefined,
@@ -583,7 +585,7 @@ describe('v1beta.PromotionsServiceClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.shopping.merchant.promotions.v1beta.GetPromotionRequest()
       );
@@ -606,7 +608,7 @@ describe('v1beta.PromotionsServiceClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.shopping.merchant.promotions.v1beta.ListPromotionsRequest()
       );
@@ -615,7 +617,7 @@ describe('v1beta.PromotionsServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.shopping.merchant.promotions.v1beta.Promotion()
@@ -647,7 +649,7 @@ describe('v1beta.PromotionsServiceClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.shopping.merchant.promotions.v1beta.ListPromotionsRequest()
       );
@@ -656,7 +658,7 @@ describe('v1beta.PromotionsServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.shopping.merchant.promotions.v1beta.Promotion()
@@ -706,7 +708,7 @@ describe('v1beta.PromotionsServiceClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.shopping.merchant.promotions.v1beta.ListPromotionsRequest()
       );
@@ -715,7 +717,7 @@ describe('v1beta.PromotionsServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listPromotions = stubSimpleCall(
         undefined,
@@ -739,7 +741,7 @@ describe('v1beta.PromotionsServiceClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.shopping.merchant.promotions.v1beta.ListPromotionsRequest()
       );
@@ -748,7 +750,7 @@ describe('v1beta.PromotionsServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.shopping.merchant.promotions.v1beta.Promotion()
@@ -804,7 +806,7 @@ describe('v1beta.PromotionsServiceClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.shopping.merchant.promotions.v1beta.ListPromotionsRequest()
       );
@@ -813,7 +815,7 @@ describe('v1beta.PromotionsServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listPromotions.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -858,7 +860,7 @@ describe('v1beta.PromotionsServiceClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.shopping.merchant.promotions.v1beta.ListPromotionsRequest()
       );
@@ -867,7 +869,7 @@ describe('v1beta.PromotionsServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.shopping.merchant.promotions.v1beta.Promotion()
@@ -910,7 +912,7 @@ describe('v1beta.PromotionsServiceClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.shopping.merchant.promotions.v1beta.ListPromotionsRequest()
       );
@@ -919,7 +921,7 @@ describe('v1beta.PromotionsServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listPromotions.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -948,7 +950,7 @@ describe('v1beta.PromotionsServiceClient', () => {
   });
 
   describe('Path templates', () => {
-    describe('promotion', () => {
+    describe('promotion', async () => {
       const fakePath = '/rendered/path/promotion';
       const expectedParameters = {
         account: 'accountValue',
@@ -960,7 +962,7 @@ describe('v1beta.PromotionsServiceClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.promotionPathTemplate.render = sinon
         .stub()
         .returns(fakePath);

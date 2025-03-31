@@ -1,7 +1,4 @@
 {
-  "options": {
-    "syntax": "proto3"
-  },
   "nested": {
     "google": {
       "nested": {
@@ -2021,12 +2018,16 @@
                         },
                         "publicKey": {
                           "type": "string",
-                          "id": 3
+                          "id": 3,
+                          "options": {
+                            "json_name": "public_key"
+                          }
                         },
                         "accessToken": {
                           "type": "string",
                           "id": 4,
                           "options": {
+                            "json_name": "access_token",
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
                         },
@@ -3553,11 +3554,17 @@
                       "fields": {
                         "publicKey": {
                           "type": "string",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "json_name": "public_key"
+                          }
                         },
                         "accessToken": {
                           "type": "string",
-                          "id": 2
+                          "id": 2,
+                          "options": {
+                            "json_name": "access_token"
+                          }
                         }
                       }
                     },
@@ -4989,7 +4996,10 @@
                         },
                         "RAM": {
                           "type": "int64",
-                          "id": 2
+                          "id": 2,
+                          "options": {
+                            "json_name": "RAM"
+                          }
                         },
                         "kind": {
                           "type": "string",
@@ -4997,7 +5007,10 @@
                         },
                         "Disk_Quota": {
                           "type": "int64",
-                          "id": 4
+                          "id": 4,
+                          "options": {
+                            "json_name": "DiskQuota"
+                          }
                         },
                         "region": {
                           "rule": "repeated",

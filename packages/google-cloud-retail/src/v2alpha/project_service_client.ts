@@ -31,6 +31,7 @@ import type {
 
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
+import {loggingUtils as logging} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -55,6 +56,8 @@ export class ProjectServiceClient {
   private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
+  private _log = logging.log('retail');
+
   auth: gax.GoogleAuth;
   descriptors: Descriptors = {
     page: {},
@@ -91,7 +94,7 @@ export class ProjectServiceClient {
    *     Developer's Console, e.g. 'grape-spaceship-123'. We will also check
    *     the environment variable GCLOUD_PROJECT for your project ID. If your
    *     app is running in an environment which supports
-   *     {@link https://developers.google.com/identity/protocols/application-default-credentials Application Default Credentials},
+   *     {@link https://cloud.google.com/docs/authentication/application-default-credentials Application Default Credentials},
    *     your project ID will be detected automatically.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
@@ -558,8 +561,36 @@ export class ProjectServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.getProject(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('getProject request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.retail.v2alpha.IProject,
+          | protos.google.cloud.retail.v2alpha.IGetProjectRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getProject response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getProject(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.retail.v2alpha.IProject,
+          protos.google.cloud.retail.v2alpha.IGetProjectRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getProject response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Accepts service terms for this project.
@@ -646,8 +677,36 @@ export class ProjectServiceClient {
       this._gaxModule.routingHeader.fromParams({
         project: request.project ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.acceptTerms(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('acceptTerms request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.retail.v2alpha.IProject,
+          | protos.google.cloud.retail.v2alpha.IAcceptTermsRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('acceptTerms response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .acceptTerms(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.retail.v2alpha.IProject,
+          protos.google.cloud.retail.v2alpha.IAcceptTermsRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('acceptTerms response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Lists all the retail API solutions the project has enrolled.
@@ -743,8 +802,39 @@ export class ProjectServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.listEnrolledSolutions(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listEnrolledSolutions request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.retail.v2alpha.IListEnrolledSolutionsResponse,
+          | protos.google.cloud.retail.v2alpha.IListEnrolledSolutionsRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('listEnrolledSolutions response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .listEnrolledSolutions(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.retail.v2alpha.IListEnrolledSolutionsResponse,
+          (
+            | protos.google.cloud.retail.v2alpha.IListEnrolledSolutionsRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('listEnrolledSolutions response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Gets the {@link protos.google.cloud.retail.v2alpha.LoggingConfig|LoggingConfig} of the
@@ -835,8 +925,39 @@ export class ProjectServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.getLoggingConfig(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('getLoggingConfig request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.retail.v2alpha.ILoggingConfig,
+          | protos.google.cloud.retail.v2alpha.IGetLoggingConfigRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getLoggingConfig response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getLoggingConfig(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.retail.v2alpha.ILoggingConfig,
+          (
+            | protos.google.cloud.retail.v2alpha.IGetLoggingConfigRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getLoggingConfig response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Updates the {@link protos.google.cloud.retail.v2alpha.LoggingConfig|LoggingConfig} of
@@ -949,8 +1070,39 @@ export class ProjectServiceClient {
       this._gaxModule.routingHeader.fromParams({
         'logging_config.name': request.loggingConfig!.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.updateLoggingConfig(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('updateLoggingConfig request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.retail.v2alpha.ILoggingConfig,
+          | protos.google.cloud.retail.v2alpha.IUpdateLoggingConfigRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('updateLoggingConfig response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .updateLoggingConfig(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.retail.v2alpha.ILoggingConfig,
+          (
+            | protos.google.cloud.retail.v2alpha.IUpdateLoggingConfigRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('updateLoggingConfig response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Get the {@link protos.google.cloud.retail.v2alpha.AlertConfig|AlertConfig} of the
@@ -1041,8 +1193,36 @@ export class ProjectServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.getAlertConfig(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('getAlertConfig request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.retail.v2alpha.IAlertConfig,
+          | protos.google.cloud.retail.v2alpha.IGetAlertConfigRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getAlertConfig response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getAlertConfig(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.retail.v2alpha.IAlertConfig,
+          protos.google.cloud.retail.v2alpha.IGetAlertConfigRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getAlertConfig response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Update the alert config of the requested project.
@@ -1143,8 +1323,39 @@ export class ProjectServiceClient {
       this._gaxModule.routingHeader.fromParams({
         'alert_config.name': request.alertConfig!.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.updateAlertConfig(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('updateAlertConfig request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.retail.v2alpha.IAlertConfig,
+          | protos.google.cloud.retail.v2alpha.IUpdateAlertConfigRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('updateAlertConfig response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .updateAlertConfig(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.retail.v2alpha.IAlertConfig,
+          (
+            | protos.google.cloud.retail.v2alpha.IUpdateAlertConfigRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('updateAlertConfig response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
 
   /**
@@ -1256,8 +1467,40 @@ export class ProjectServiceClient {
       this._gaxModule.routingHeader.fromParams({
         project: request.project ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.enrollSolution(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.retail.v2alpha.IEnrollSolutionResponse,
+            protos.google.cloud.retail.v2alpha.IEnrollSolutionMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('enrollSolution response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('enrollSolution request %j', request);
+    return this.innerApiCalls
+      .enrollSolution(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.retail.v2alpha.IEnrollSolutionResponse,
+            protos.google.cloud.retail.v2alpha.IEnrollSolutionMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('enrollSolution response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `enrollSolution()`.
@@ -1278,6 +1521,7 @@ export class ProjectServiceClient {
       protos.google.cloud.retail.v2alpha.EnrollSolutionMetadata
     >
   > {
+    this._log.info('enrollSolution long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -1465,7 +1709,7 @@ export class ProjectServiceClient {
   listOperationsAsync(
     request: protos.google.longrunning.ListOperationsRequest,
     options?: gax.CallOptions
-  ): AsyncIterable<protos.google.longrunning.ListOperationsResponse> {
+  ): AsyncIterable<protos.google.longrunning.IOperation> {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
@@ -2293,6 +2537,7 @@ export class ProjectServiceClient {
   close(): Promise<void> {
     if (this.projectServiceStub && !this._terminated) {
       return this.projectServiceStub.then(stub => {
+        this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
         this.locationsClient.close();

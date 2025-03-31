@@ -27,6 +27,7 @@ import type {
 
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
+import {loggingUtils as logging} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -59,6 +60,8 @@ export class IAMCredentialsClient {
   private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
+  private _log = logging.log('iam-credentials');
+
   auth: gax.GoogleAuth;
   descriptors: Descriptors = {
     page: {},
@@ -92,7 +95,7 @@ export class IAMCredentialsClient {
    *     Developer's Console, e.g. 'grape-spaceship-123'. We will also check
    *     the environment variable GCLOUD_PROJECT for your project ID. If your
    *     app is running in an environment which supports
-   *     {@link https://developers.google.com/identity/protocols/application-default-credentials Application Default Credentials},
+   *     {@link https://cloud.google.com/docs/authentication/application-default-credentials Application Default Credentials},
    *     your project ID will be detected automatically.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
@@ -479,8 +482,39 @@ export class IAMCredentialsClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.generateAccessToken(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('generateAccessToken request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.iam.credentials.v1.IGenerateAccessTokenResponse,
+          | protos.google.iam.credentials.v1.IGenerateAccessTokenRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('generateAccessToken response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .generateAccessToken(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.iam.credentials.v1.IGenerateAccessTokenResponse,
+          (
+            | protos.google.iam.credentials.v1.IGenerateAccessTokenRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('generateAccessToken response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Generates an OpenID Connect ID token for a service account.
@@ -589,8 +623,36 @@ export class IAMCredentialsClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.generateIdToken(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('generateIdToken request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.iam.credentials.v1.IGenerateIdTokenResponse,
+          | protos.google.iam.credentials.v1.IGenerateIdTokenRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('generateIdToken response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .generateIdToken(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.iam.credentials.v1.IGenerateIdTokenResponse,
+          protos.google.iam.credentials.v1.IGenerateIdTokenRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('generateIdToken response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Signs a blob using a service account's system-managed private key.
@@ -687,8 +749,34 @@ export class IAMCredentialsClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.signBlob(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('signBlob request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.iam.credentials.v1.ISignBlobResponse,
+          protos.google.iam.credentials.v1.ISignBlobRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('signBlob response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .signBlob(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.iam.credentials.v1.ISignBlobResponse,
+          protos.google.iam.credentials.v1.ISignBlobRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('signBlob response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Signs a JWT using a service account's system-managed private key.
@@ -785,8 +873,34 @@ export class IAMCredentialsClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.signJwt(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('signJwt request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.iam.credentials.v1.ISignJwtResponse,
+          protos.google.iam.credentials.v1.ISignJwtRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('signJwt response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .signJwt(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.iam.credentials.v1.ISignJwtResponse,
+          protos.google.iam.credentials.v1.ISignJwtRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('signJwt response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
 
   /**
@@ -798,6 +912,7 @@ export class IAMCredentialsClient {
   close(): Promise<void> {
     if (this.iAMCredentialsStub && !this._terminated) {
       return this.iAMCredentialsStub.then(stub => {
+        this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
       });

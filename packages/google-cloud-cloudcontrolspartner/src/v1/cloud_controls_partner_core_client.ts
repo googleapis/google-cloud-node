@@ -29,6 +29,7 @@ import type {
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
+import {loggingUtils as logging} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -53,6 +54,8 @@ export class CloudControlsPartnerCoreClient {
   private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
+  private _log = logging.log('cloudcontrolspartner');
+
   auth: gax.GoogleAuth;
   descriptors: Descriptors = {
     page: {},
@@ -87,7 +90,7 @@ export class CloudControlsPartnerCoreClient {
    *     Developer's Console, e.g. 'grape-spaceship-123'. We will also check
    *     the environment variable GCLOUD_PROJECT for your project ID. If your
    *     app is running in an environment which supports
-   *     {@link https://developers.google.com/identity/protocols/application-default-credentials Application Default Credentials},
+   *     {@link https://cloud.google.com/docs/authentication/application-default-credentials Application Default Credentials},
    *     your project ID will be detected automatically.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
@@ -511,8 +514,39 @@ export class CloudControlsPartnerCoreClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.getWorkload(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('getWorkload request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.cloudcontrolspartner.v1.IWorkload,
+          | protos.google.cloud.cloudcontrolspartner.v1.IGetWorkloadRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getWorkload response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getWorkload(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.cloudcontrolspartner.v1.IWorkload,
+          (
+            | protos.google.cloud.cloudcontrolspartner.v1.IGetWorkloadRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getWorkload response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Gets details of a single customer
@@ -608,8 +642,39 @@ export class CloudControlsPartnerCoreClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.getCustomer(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('getCustomer request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.cloudcontrolspartner.v1.ICustomer,
+          | protos.google.cloud.cloudcontrolspartner.v1.IGetCustomerRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getCustomer response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getCustomer(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.cloudcontrolspartner.v1.ICustomer,
+          (
+            | protos.google.cloud.cloudcontrolspartner.v1.IGetCustomerRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getCustomer response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Gets the EKM connections associated with a workload
@@ -705,8 +770,39 @@ export class CloudControlsPartnerCoreClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.getEkmConnections(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('getEkmConnections request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.cloudcontrolspartner.v1.IEkmConnections,
+          | protos.google.cloud.cloudcontrolspartner.v1.IGetEkmConnectionsRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getEkmConnections response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getEkmConnections(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.cloudcontrolspartner.v1.IEkmConnections,
+          (
+            | protos.google.cloud.cloudcontrolspartner.v1.IGetEkmConnectionsRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getEkmConnections response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Gets the partner permissions granted for a workload
@@ -802,8 +898,39 @@ export class CloudControlsPartnerCoreClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.getPartnerPermissions(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('getPartnerPermissions request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.cloudcontrolspartner.v1.IPartnerPermissions,
+          | protos.google.cloud.cloudcontrolspartner.v1.IGetPartnerPermissionsRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getPartnerPermissions response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getPartnerPermissions(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.cloudcontrolspartner.v1.IPartnerPermissions,
+          (
+            | protos.google.cloud.cloudcontrolspartner.v1.IGetPartnerPermissionsRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getPartnerPermissions response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Get details of a Partner.
@@ -899,8 +1026,39 @@ export class CloudControlsPartnerCoreClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.getPartner(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('getPartner request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.cloudcontrolspartner.v1.IPartner,
+          | protos.google.cloud.cloudcontrolspartner.v1.IGetPartnerRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getPartner response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getPartner(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.cloudcontrolspartner.v1.IPartner,
+          (
+            | protos.google.cloud.cloudcontrolspartner.v1.IGetPartnerRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getPartner response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
 
   /**
@@ -1005,12 +1163,40 @@ export class CloudControlsPartnerCoreClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.listWorkloads(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.cloudcontrolspartner.v1.IListWorkloadsRequest,
+          | protos.google.cloud.cloudcontrolspartner.v1.IListWorkloadsResponse
+          | null
+          | undefined,
+          protos.google.cloud.cloudcontrolspartner.v1.IWorkload
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listWorkloads values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listWorkloads request %j', request);
+    return this.innerApiCalls
+      .listWorkloads(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.cloudcontrolspartner.v1.IWorkload[],
+          protos.google.cloud.cloudcontrolspartner.v1.IListWorkloadsRequest | null,
+          protos.google.cloud.cloudcontrolspartner.v1.IListWorkloadsResponse,
+        ]) => {
+          this._log.info('listWorkloads values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listWorkloads`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
@@ -1052,7 +1238,10 @@ export class CloudControlsPartnerCoreClient {
       });
     const defaultCallSettings = this._defaults['listWorkloads'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listWorkloads stream %j', request);
     return this.descriptors.page.listWorkloads.createStream(
       this.innerApiCalls.listWorkloads as GaxCall,
       request,
@@ -1106,7 +1295,10 @@ export class CloudControlsPartnerCoreClient {
       });
     const defaultCallSettings = this._defaults['listWorkloads'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listWorkloads iterate %j', request);
     return this.descriptors.page.listWorkloads.asyncIterate(
       this.innerApiCalls['listWorkloads'] as GaxCall,
       request as {},
@@ -1214,12 +1406,40 @@ export class CloudControlsPartnerCoreClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.listCustomers(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.cloudcontrolspartner.v1.IListCustomersRequest,
+          | protos.google.cloud.cloudcontrolspartner.v1.IListCustomersResponse
+          | null
+          | undefined,
+          protos.google.cloud.cloudcontrolspartner.v1.ICustomer
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listCustomers values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listCustomers request %j', request);
+    return this.innerApiCalls
+      .listCustomers(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.cloudcontrolspartner.v1.ICustomer[],
+          protos.google.cloud.cloudcontrolspartner.v1.IListCustomersRequest | null,
+          protos.google.cloud.cloudcontrolspartner.v1.IListCustomersResponse,
+        ]) => {
+          this._log.info('listCustomers values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listCustomers`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
@@ -1260,7 +1480,10 @@ export class CloudControlsPartnerCoreClient {
       });
     const defaultCallSettings = this._defaults['listCustomers'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listCustomers stream %j', request);
     return this.descriptors.page.listCustomers.createStream(
       this.innerApiCalls.listCustomers as GaxCall,
       request,
@@ -1313,7 +1536,10 @@ export class CloudControlsPartnerCoreClient {
       });
     const defaultCallSettings = this._defaults['listCustomers'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listCustomers iterate %j', request);
     return this.descriptors.page.listCustomers.asyncIterate(
       this.innerApiCalls['listCustomers'] as GaxCall,
       request as {},
@@ -1426,21 +1652,45 @@ export class CloudControlsPartnerCoreClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this.warn(
       'DEP$CloudControlsPartnerCore-$ListAccessApprovalRequests',
       'ListAccessApprovalRequests is deprecated and may be removed in a future version.',
       'DeprecationWarning'
     );
-    return this.innerApiCalls.listAccessApprovalRequests(
-      request,
-      options,
-      callback
-    );
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.cloudcontrolspartner.v1.IListAccessApprovalRequestsRequest,
+          | protos.google.cloud.cloudcontrolspartner.v1.IListAccessApprovalRequestsResponse
+          | null
+          | undefined,
+          protos.google.cloud.cloudcontrolspartner.v1.IAccessApprovalRequest
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listAccessApprovalRequests values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listAccessApprovalRequests request %j', request);
+    return this.innerApiCalls
+      .listAccessApprovalRequests(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.cloudcontrolspartner.v1.IAccessApprovalRequest[],
+          protos.google.cloud.cloudcontrolspartner.v1.IListAccessApprovalRequestsRequest | null,
+          protos.google.cloud.cloudcontrolspartner.v1.IListAccessApprovalRequestsResponse,
+        ]) => {
+          this._log.info('listAccessApprovalRequests values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listAccessApprovalRequests`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
@@ -1485,12 +1735,15 @@ export class CloudControlsPartnerCoreClient {
       });
     const defaultCallSettings = this._defaults['listAccessApprovalRequests'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this.warn(
       'DEP$CloudControlsPartnerCore-$ListAccessApprovalRequests',
       'ListAccessApprovalRequests is deprecated and may be removed in a future version.',
       'DeprecationWarning'
     );
+    this._log.info('listAccessApprovalRequests stream %j', request);
     return this.descriptors.page.listAccessApprovalRequests.createStream(
       this.innerApiCalls.listAccessApprovalRequests as GaxCall,
       request,
@@ -1547,12 +1800,15 @@ export class CloudControlsPartnerCoreClient {
       });
     const defaultCallSettings = this._defaults['listAccessApprovalRequests'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this.warn(
       'DEP$CloudControlsPartnerCore-$ListAccessApprovalRequests',
       'ListAccessApprovalRequests is deprecated and may be removed in a future version.',
       'DeprecationWarning'
     );
+    this._log.info('listAccessApprovalRequests iterate %j', request);
     return this.descriptors.page.listAccessApprovalRequests.asyncIterate(
       this.innerApiCalls['listAccessApprovalRequests'] as GaxCall,
       request as {},
@@ -2064,6 +2320,7 @@ export class CloudControlsPartnerCoreClient {
   close(): Promise<void> {
     if (this.cloudControlsPartnerCoreStub && !this._terminated) {
       return this.cloudControlsPartnerCoreStub.then(stub => {
+        this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
       });

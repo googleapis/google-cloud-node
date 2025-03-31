@@ -286,7 +286,9 @@ describe('v1.LicenseManagementServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      client.initialize().catch(err => {
+        throw err;
+      });
       assert(client.licenseManagementServiceStub);
       client.close().then(() => {
         done();
@@ -349,7 +351,7 @@ describe('v1.LicenseManagementServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.commerce.consumer.procurement.v1.GetLicensePoolRequest()
       );
@@ -358,7 +360,7 @@ describe('v1.LicenseManagementServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.commerce.consumer.procurement.v1.LicensePool()
       );
@@ -381,7 +383,7 @@ describe('v1.LicenseManagementServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.commerce.consumer.procurement.v1.GetLicensePoolRequest()
       );
@@ -390,7 +392,7 @@ describe('v1.LicenseManagementServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.commerce.consumer.procurement.v1.LicensePool()
       );
@@ -429,7 +431,7 @@ describe('v1.LicenseManagementServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.commerce.consumer.procurement.v1.GetLicensePoolRequest()
       );
@@ -438,7 +440,7 @@ describe('v1.LicenseManagementServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getLicensePool = stubSimpleCall(
         undefined,
@@ -461,7 +463,7 @@ describe('v1.LicenseManagementServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.commerce.consumer.procurement.v1.GetLicensePoolRequest()
       );
@@ -483,7 +485,7 @@ describe('v1.LicenseManagementServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.commerce.consumer.procurement.v1.UpdateLicensePoolRequest()
       );
@@ -493,7 +495,7 @@ describe('v1.LicenseManagementServiceClient', () => {
         ['licensePool', 'name']
       );
       request.licensePool.name = defaultValue1;
-      const expectedHeaderRequestParams = `license_pool.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `license_pool.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.commerce.consumer.procurement.v1.LicensePool()
       );
@@ -516,7 +518,7 @@ describe('v1.LicenseManagementServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.commerce.consumer.procurement.v1.UpdateLicensePoolRequest()
       );
@@ -526,7 +528,7 @@ describe('v1.LicenseManagementServiceClient', () => {
         ['licensePool', 'name']
       );
       request.licensePool.name = defaultValue1;
-      const expectedHeaderRequestParams = `license_pool.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `license_pool.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.commerce.consumer.procurement.v1.LicensePool()
       );
@@ -565,7 +567,7 @@ describe('v1.LicenseManagementServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.commerce.consumer.procurement.v1.UpdateLicensePoolRequest()
       );
@@ -575,7 +577,7 @@ describe('v1.LicenseManagementServiceClient', () => {
         ['licensePool', 'name']
       );
       request.licensePool.name = defaultValue1;
-      const expectedHeaderRequestParams = `license_pool.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `license_pool.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateLicensePool = stubSimpleCall(
         undefined,
@@ -598,7 +600,7 @@ describe('v1.LicenseManagementServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.commerce.consumer.procurement.v1.UpdateLicensePoolRequest()
       );
@@ -621,7 +623,7 @@ describe('v1.LicenseManagementServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.commerce.consumer.procurement.v1.AssignRequest()
       );
@@ -630,7 +632,7 @@ describe('v1.LicenseManagementServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.commerce.consumer.procurement.v1.AssignResponse()
       );
@@ -653,7 +655,7 @@ describe('v1.LicenseManagementServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.commerce.consumer.procurement.v1.AssignRequest()
       );
@@ -662,7 +664,7 @@ describe('v1.LicenseManagementServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.commerce.consumer.procurement.v1.AssignResponse()
       );
@@ -701,7 +703,7 @@ describe('v1.LicenseManagementServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.commerce.consumer.procurement.v1.AssignRequest()
       );
@@ -710,7 +712,7 @@ describe('v1.LicenseManagementServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.assign = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.assign(request), expectedError);
@@ -730,7 +732,7 @@ describe('v1.LicenseManagementServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.commerce.consumer.procurement.v1.AssignRequest()
       );
@@ -752,7 +754,7 @@ describe('v1.LicenseManagementServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.commerce.consumer.procurement.v1.UnassignRequest()
       );
@@ -761,7 +763,7 @@ describe('v1.LicenseManagementServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.commerce.consumer.procurement.v1.UnassignResponse()
       );
@@ -784,7 +786,7 @@ describe('v1.LicenseManagementServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.commerce.consumer.procurement.v1.UnassignRequest()
       );
@@ -793,7 +795,7 @@ describe('v1.LicenseManagementServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.commerce.consumer.procurement.v1.UnassignResponse()
       );
@@ -832,7 +834,7 @@ describe('v1.LicenseManagementServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.commerce.consumer.procurement.v1.UnassignRequest()
       );
@@ -841,7 +843,7 @@ describe('v1.LicenseManagementServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.unassign = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.unassign(request), expectedError);
@@ -861,7 +863,7 @@ describe('v1.LicenseManagementServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.commerce.consumer.procurement.v1.UnassignRequest()
       );
@@ -883,7 +885,7 @@ describe('v1.LicenseManagementServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.commerce.consumer.procurement.v1.EnumerateLicensedUsersRequest()
       );
@@ -892,7 +894,7 @@ describe('v1.LicenseManagementServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.commerce.consumer.procurement.v1.LicensedUser()
@@ -924,7 +926,7 @@ describe('v1.LicenseManagementServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.commerce.consumer.procurement.v1.EnumerateLicensedUsersRequest()
       );
@@ -933,7 +935,7 @@ describe('v1.LicenseManagementServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.commerce.consumer.procurement.v1.LicensedUser()
@@ -982,7 +984,7 @@ describe('v1.LicenseManagementServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.commerce.consumer.procurement.v1.EnumerateLicensedUsersRequest()
       );
@@ -991,7 +993,7 @@ describe('v1.LicenseManagementServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.enumerateLicensedUsers = stubSimpleCall(
         undefined,
@@ -1017,7 +1019,7 @@ describe('v1.LicenseManagementServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.commerce.consumer.procurement.v1.EnumerateLicensedUsersRequest()
       );
@@ -1026,7 +1028,7 @@ describe('v1.LicenseManagementServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.commerce.consumer.procurement.v1.LicensedUser()
@@ -1087,7 +1089,7 @@ describe('v1.LicenseManagementServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.commerce.consumer.procurement.v1.EnumerateLicensedUsersRequest()
       );
@@ -1096,7 +1098,7 @@ describe('v1.LicenseManagementServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.enumerateLicensedUsers.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -1146,7 +1148,7 @@ describe('v1.LicenseManagementServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.commerce.consumer.procurement.v1.EnumerateLicensedUsersRequest()
       );
@@ -1155,7 +1157,7 @@ describe('v1.LicenseManagementServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.commerce.consumer.procurement.v1.LicensedUser()
@@ -1201,7 +1203,7 @@ describe('v1.LicenseManagementServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.commerce.consumer.procurement.v1.EnumerateLicensedUsersRequest()
       );
@@ -1210,7 +1212,7 @@ describe('v1.LicenseManagementServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.enumerateLicensedUsers.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -1243,7 +1245,7 @@ describe('v1.LicenseManagementServiceClient', () => {
   });
 
   describe('Path templates', () => {
-    describe('licensePool', () => {
+    describe('licensePool', async () => {
       const fakePath = '/rendered/path/licensePool';
       const expectedParameters = {
         billing_account: 'billingAccountValue',
@@ -1254,7 +1256,7 @@ describe('v1.LicenseManagementServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.licensePoolPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -1296,7 +1298,7 @@ describe('v1.LicenseManagementServiceClient', () => {
       });
     });
 
-    describe('order', () => {
+    describe('order', async () => {
       const fakePath = '/rendered/path/order';
       const expectedParameters = {
         billing_account: 'billingAccountValue',
@@ -1307,7 +1309,7 @@ describe('v1.LicenseManagementServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.orderPathTemplate.render = sinon
         .stub()
         .returns(fakePath);

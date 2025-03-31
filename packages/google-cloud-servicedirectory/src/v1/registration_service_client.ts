@@ -31,6 +31,7 @@ import type {
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
+import {loggingUtils as logging} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -69,6 +70,8 @@ export class RegistrationServiceClient {
   private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
+  private _log = logging.log('service-directory');
+
   auth: gax.GoogleAuth;
   descriptors: Descriptors = {
     page: {},
@@ -104,7 +107,7 @@ export class RegistrationServiceClient {
    *     Developer's Console, e.g. 'grape-spaceship-123'. We will also check
    *     the environment variable GCLOUD_PROJECT for your project ID. If your
    *     app is running in an environment which supports
-   *     {@link https://developers.google.com/identity/protocols/application-default-credentials Application Default Credentials},
+   *     {@link https://cloud.google.com/docs/authentication/application-default-credentials Application Default Credentials},
    *     your project ID will be detected automatically.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
@@ -542,8 +545,39 @@ export class RegistrationServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.createNamespace(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('createNamespace request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.servicedirectory.v1.INamespace,
+          | protos.google.cloud.servicedirectory.v1.ICreateNamespaceRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('createNamespace response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .createNamespace(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.servicedirectory.v1.INamespace,
+          (
+            | protos.google.cloud.servicedirectory.v1.ICreateNamespaceRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('createNamespace response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Gets a namespace.
@@ -632,8 +666,39 @@ export class RegistrationServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.getNamespace(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('getNamespace request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.servicedirectory.v1.INamespace,
+          | protos.google.cloud.servicedirectory.v1.IGetNamespaceRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getNamespace response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getNamespace(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.servicedirectory.v1.INamespace,
+          (
+            | protos.google.cloud.servicedirectory.v1.IGetNamespaceRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getNamespace response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Updates a namespace.
@@ -730,8 +795,39 @@ export class RegistrationServiceClient {
       this._gaxModule.routingHeader.fromParams({
         'namespace.name': request.namespace!.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.updateNamespace(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('updateNamespace request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.servicedirectory.v1.INamespace,
+          | protos.google.cloud.servicedirectory.v1.IUpdateNamespaceRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('updateNamespace response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .updateNamespace(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.servicedirectory.v1.INamespace,
+          (
+            | protos.google.cloud.servicedirectory.v1.IUpdateNamespaceRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('updateNamespace response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Deletes a namespace. This also deletes all services and endpoints in
@@ -827,8 +923,39 @@ export class RegistrationServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.deleteNamespace(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('deleteNamespace request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.cloud.servicedirectory.v1.IDeleteNamespaceRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('deleteNamespace response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .deleteNamespace(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.protobuf.IEmpty,
+          (
+            | protos.google.cloud.servicedirectory.v1.IDeleteNamespaceRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteNamespace response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Creates a service, and returns the new service.
@@ -927,8 +1054,39 @@ export class RegistrationServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.createService(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('createService request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.servicedirectory.v1.IService,
+          | protos.google.cloud.servicedirectory.v1.ICreateServiceRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('createService response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .createService(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.servicedirectory.v1.IService,
+          (
+            | protos.google.cloud.servicedirectory.v1.ICreateServiceRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('createService response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Gets a service.
@@ -1017,8 +1175,39 @@ export class RegistrationServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.getService(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('getService request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.servicedirectory.v1.IService,
+          | protos.google.cloud.servicedirectory.v1.IGetServiceRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getService response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getService(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.servicedirectory.v1.IService,
+          (
+            | protos.google.cloud.servicedirectory.v1.IGetServiceRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getService response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Updates a service.
@@ -1109,8 +1298,39 @@ export class RegistrationServiceClient {
       this._gaxModule.routingHeader.fromParams({
         'service.name': request.service!.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.updateService(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('updateService request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.servicedirectory.v1.IService,
+          | protos.google.cloud.servicedirectory.v1.IUpdateServiceRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('updateService response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .updateService(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.servicedirectory.v1.IService,
+          (
+            | protos.google.cloud.servicedirectory.v1.IUpdateServiceRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('updateService response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Deletes a service. This also deletes all endpoints associated with
@@ -1200,8 +1420,39 @@ export class RegistrationServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.deleteService(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('deleteService request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.cloud.servicedirectory.v1.IDeleteServiceRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('deleteService response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .deleteService(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.protobuf.IEmpty,
+          (
+            | protos.google.cloud.servicedirectory.v1.IDeleteServiceRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteService response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Creates an endpoint, and returns the new endpoint.
@@ -1306,8 +1557,39 @@ export class RegistrationServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.createEndpoint(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('createEndpoint request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.servicedirectory.v1.IEndpoint,
+          | protos.google.cloud.servicedirectory.v1.ICreateEndpointRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('createEndpoint response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .createEndpoint(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.servicedirectory.v1.IEndpoint,
+          (
+            | protos.google.cloud.servicedirectory.v1.ICreateEndpointRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('createEndpoint response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Gets an endpoint.
@@ -1396,8 +1678,39 @@ export class RegistrationServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.getEndpoint(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('getEndpoint request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.servicedirectory.v1.IEndpoint,
+          | protos.google.cloud.servicedirectory.v1.IGetEndpointRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getEndpoint response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getEndpoint(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.servicedirectory.v1.IEndpoint,
+          (
+            | protos.google.cloud.servicedirectory.v1.IGetEndpointRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getEndpoint response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Updates an endpoint.
@@ -1494,8 +1807,39 @@ export class RegistrationServiceClient {
       this._gaxModule.routingHeader.fromParams({
         'endpoint.name': request.endpoint!.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.updateEndpoint(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('updateEndpoint request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.servicedirectory.v1.IEndpoint,
+          | protos.google.cloud.servicedirectory.v1.IUpdateEndpointRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('updateEndpoint response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .updateEndpoint(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.servicedirectory.v1.IEndpoint,
+          (
+            | protos.google.cloud.servicedirectory.v1.IUpdateEndpointRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('updateEndpoint response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Deletes an endpoint.
@@ -1590,8 +1934,39 @@ export class RegistrationServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.deleteEndpoint(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('deleteEndpoint request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.cloud.servicedirectory.v1.IDeleteEndpointRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('deleteEndpoint response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .deleteEndpoint(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.protobuf.IEmpty,
+          (
+            | protos.google.cloud.servicedirectory.v1.IDeleteEndpointRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteEndpoint response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Gets the IAM Policy for a resource (namespace or service only).
@@ -1676,8 +2051,34 @@ export class RegistrationServiceClient {
       this._gaxModule.routingHeader.fromParams({
         resource: request.resource ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.getIamPolicy(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('getIamPolicy request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.iam.v1.IPolicy,
+          protos.google.iam.v1.IGetIamPolicyRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getIamPolicy response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getIamPolicy(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.iam.v1.IPolicy,
+          protos.google.iam.v1.IGetIamPolicyRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getIamPolicy response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Sets the IAM Policy for a resource (namespace or service only).
@@ -1770,8 +2171,34 @@ export class RegistrationServiceClient {
       this._gaxModule.routingHeader.fromParams({
         resource: request.resource ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.setIamPolicy(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('setIamPolicy request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.iam.v1.IPolicy,
+          protos.google.iam.v1.ISetIamPolicyRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('setIamPolicy response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .setIamPolicy(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.iam.v1.IPolicy,
+          protos.google.iam.v1.ISetIamPolicyRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('setIamPolicy response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Tests IAM permissions for a resource (namespace or service only).
@@ -1858,8 +2285,34 @@ export class RegistrationServiceClient {
       this._gaxModule.routingHeader.fromParams({
         resource: request.resource ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.testIamPermissions(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('testIamPermissions request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.iam.v1.ITestIamPermissionsResponse,
+          protos.google.iam.v1.ITestIamPermissionsRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('testIamPermissions response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .testIamPermissions(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.iam.v1.ITestIamPermissionsResponse,
+          protos.google.iam.v1.ITestIamPermissionsRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('testIamPermissions response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
 
   /**
@@ -1998,8 +2451,36 @@ export class RegistrationServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.listNamespaces(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.servicedirectory.v1.IListNamespacesRequest,
+          | protos.google.cloud.servicedirectory.v1.IListNamespacesResponse
+          | null
+          | undefined,
+          protos.google.cloud.servicedirectory.v1.INamespace
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listNamespaces values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listNamespaces request %j', request);
+    return this.innerApiCalls
+      .listNamespaces(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.servicedirectory.v1.INamespace[],
+          protos.google.cloud.servicedirectory.v1.IListNamespacesRequest | null,
+          protos.google.cloud.servicedirectory.v1.IListNamespacesResponse,
+        ]) => {
+          this._log.info('listNamespaces values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -2079,7 +2560,10 @@ export class RegistrationServiceClient {
       });
     const defaultCallSettings = this._defaults['listNamespaces'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listNamespaces stream %j', request);
     return this.descriptors.page.listNamespaces.createStream(
       this.innerApiCalls.listNamespaces as GaxCall,
       request,
@@ -2167,7 +2651,10 @@ export class RegistrationServiceClient {
       });
     const defaultCallSettings = this._defaults['listNamespaces'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listNamespaces iterate %j', request);
     return this.descriptors.page.listNamespaces.asyncIterate(
       this.innerApiCalls['listNamespaces'] as GaxCall,
       request as {},
@@ -2312,8 +2799,36 @@ export class RegistrationServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.listServices(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.servicedirectory.v1.IListServicesRequest,
+          | protos.google.cloud.servicedirectory.v1.IListServicesResponse
+          | null
+          | undefined,
+          protos.google.cloud.servicedirectory.v1.IService
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listServices values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listServices request %j', request);
+    return this.innerApiCalls
+      .listServices(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.servicedirectory.v1.IService[],
+          protos.google.cloud.servicedirectory.v1.IListServicesRequest | null,
+          protos.google.cloud.servicedirectory.v1.IListServicesResponse,
+        ]) => {
+          this._log.info('listServices values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -2395,7 +2910,10 @@ export class RegistrationServiceClient {
       });
     const defaultCallSettings = this._defaults['listServices'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listServices stream %j', request);
     return this.descriptors.page.listServices.createStream(
       this.innerApiCalls.listServices as GaxCall,
       request,
@@ -2485,7 +3003,10 @@ export class RegistrationServiceClient {
       });
     const defaultCallSettings = this._defaults['listServices'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listServices iterate %j', request);
     return this.descriptors.page.listServices.asyncIterate(
       this.innerApiCalls['listServices'] as GaxCall,
       request as {},
@@ -2633,8 +3154,36 @@ export class RegistrationServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.listEndpoints(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.servicedirectory.v1.IListEndpointsRequest,
+          | protos.google.cloud.servicedirectory.v1.IListEndpointsResponse
+          | null
+          | undefined,
+          protos.google.cloud.servicedirectory.v1.IEndpoint
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listEndpoints values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listEndpoints request %j', request);
+    return this.innerApiCalls
+      .listEndpoints(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.servicedirectory.v1.IEndpoint[],
+          protos.google.cloud.servicedirectory.v1.IListEndpointsRequest | null,
+          protos.google.cloud.servicedirectory.v1.IListEndpointsResponse,
+        ]) => {
+          this._log.info('listEndpoints values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -2719,7 +3268,10 @@ export class RegistrationServiceClient {
       });
     const defaultCallSettings = this._defaults['listEndpoints'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listEndpoints stream %j', request);
     return this.descriptors.page.listEndpoints.createStream(
       this.innerApiCalls.listEndpoints as GaxCall,
       request,
@@ -2812,7 +3364,10 @@ export class RegistrationServiceClient {
       });
     const defaultCallSettings = this._defaults['listEndpoints'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listEndpoints iterate %j', request);
     return this.descriptors.page.listEndpoints.asyncIterate(
       this.innerApiCalls['listEndpoints'] as GaxCall,
       request as {},
@@ -3147,6 +3702,7 @@ export class RegistrationServiceClient {
   close(): Promise<void> {
     if (this.registrationServiceStub && !this._terminated) {
       return this.registrationServiceStub.then(stub => {
+        this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
         this.locationsClient.close();

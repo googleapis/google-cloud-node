@@ -29,6 +29,7 @@ import type {
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
+import {loggingUtils as logging} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -59,6 +60,8 @@ export class BinauthzManagementServiceV1Beta1Client {
   private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
+  private _log = logging.log('binary-authorization');
+
   auth: gax.GoogleAuth;
   descriptors: Descriptors = {
     page: {},
@@ -93,7 +96,7 @@ export class BinauthzManagementServiceV1Beta1Client {
    *     Developer's Console, e.g. 'grape-spaceship-123'. We will also check
    *     the environment variable GCLOUD_PROJECT for your project ID. If your
    *     app is running in an environment which supports
-   *     {@link https://developers.google.com/identity/protocols/application-default-credentials Application Default Credentials},
+   *     {@link https://cloud.google.com/docs/authentication/application-default-credentials Application Default Credentials},
    *     your project ID will be detected automatically.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
@@ -503,8 +506,39 @@ export class BinauthzManagementServiceV1Beta1Client {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.getPolicy(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('getPolicy request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.binaryauthorization.v1beta1.IPolicy,
+          | protos.google.cloud.binaryauthorization.v1beta1.IGetPolicyRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getPolicy response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getPolicy(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.binaryauthorization.v1beta1.IPolicy,
+          (
+            | protos.google.cloud.binaryauthorization.v1beta1.IGetPolicyRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getPolicy response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Creates or updates a project's {@link protos.google.cloud.binaryauthorization.v1beta1.Policy|policy}, and returns a copy of the
@@ -605,8 +639,39 @@ export class BinauthzManagementServiceV1Beta1Client {
       this._gaxModule.routingHeader.fromParams({
         'policy.name': request.policy!.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.updatePolicy(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('updatePolicy request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.binaryauthorization.v1beta1.IPolicy,
+          | protos.google.cloud.binaryauthorization.v1beta1.IUpdatePolicyRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('updatePolicy response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .updatePolicy(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.binaryauthorization.v1beta1.IPolicy,
+          (
+            | protos.google.cloud.binaryauthorization.v1beta1.IUpdatePolicyRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('updatePolicy response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Creates an {@link protos.google.cloud.binaryauthorization.v1beta1.Attestor|attestor}, and returns a copy of the new
@@ -710,8 +775,39 @@ export class BinauthzManagementServiceV1Beta1Client {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.createAttestor(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('createAttestor request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.binaryauthorization.v1beta1.IAttestor,
+          | protos.google.cloud.binaryauthorization.v1beta1.ICreateAttestorRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('createAttestor response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .createAttestor(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.binaryauthorization.v1beta1.IAttestor,
+          (
+            | protos.google.cloud.binaryauthorization.v1beta1.ICreateAttestorRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('createAttestor response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Gets an {@link protos.google.cloud.binaryauthorization.v1beta1.Attestor|attestor}.
@@ -808,8 +904,39 @@ export class BinauthzManagementServiceV1Beta1Client {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.getAttestor(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('getAttestor request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.binaryauthorization.v1beta1.IAttestor,
+          | protos.google.cloud.binaryauthorization.v1beta1.IGetAttestorRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getAttestor response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getAttestor(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.binaryauthorization.v1beta1.IAttestor,
+          (
+            | protos.google.cloud.binaryauthorization.v1beta1.IGetAttestorRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getAttestor response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Updates an {@link protos.google.cloud.binaryauthorization.v1beta1.Attestor|attestor}.
@@ -907,8 +1034,39 @@ export class BinauthzManagementServiceV1Beta1Client {
       this._gaxModule.routingHeader.fromParams({
         'attestor.name': request.attestor!.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.updateAttestor(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('updateAttestor request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.binaryauthorization.v1beta1.IAttestor,
+          | protos.google.cloud.binaryauthorization.v1beta1.IUpdateAttestorRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('updateAttestor response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .updateAttestor(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.binaryauthorization.v1beta1.IAttestor,
+          (
+            | protos.google.cloud.binaryauthorization.v1beta1.IUpdateAttestorRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('updateAttestor response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Deletes an {@link protos.google.cloud.binaryauthorization.v1beta1.Attestor|attestor}. Returns NOT_FOUND if the
@@ -1005,8 +1163,39 @@ export class BinauthzManagementServiceV1Beta1Client {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.deleteAttestor(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('deleteAttestor request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.cloud.binaryauthorization.v1beta1.IDeleteAttestorRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('deleteAttestor response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .deleteAttestor(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.protobuf.IEmpty,
+          (
+            | protos.google.cloud.binaryauthorization.v1beta1.IDeleteAttestorRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteAttestor response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
 
   /**
@@ -1108,12 +1297,40 @@ export class BinauthzManagementServiceV1Beta1Client {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.listAttestors(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.binaryauthorization.v1beta1.IListAttestorsRequest,
+          | protos.google.cloud.binaryauthorization.v1beta1.IListAttestorsResponse
+          | null
+          | undefined,
+          protos.google.cloud.binaryauthorization.v1beta1.IAttestor
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listAttestors values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listAttestors request %j', request);
+    return this.innerApiCalls
+      .listAttestors(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.binaryauthorization.v1beta1.IAttestor[],
+          protos.google.cloud.binaryauthorization.v1beta1.IListAttestorsRequest | null,
+          protos.google.cloud.binaryauthorization.v1beta1.IListAttestorsResponse,
+        ]) => {
+          this._log.info('listAttestors values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listAttestors`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
@@ -1151,7 +1368,10 @@ export class BinauthzManagementServiceV1Beta1Client {
       });
     const defaultCallSettings = this._defaults['listAttestors'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listAttestors stream %j', request);
     return this.descriptors.page.listAttestors.createStream(
       this.innerApiCalls.listAttestors as GaxCall,
       request,
@@ -1201,7 +1421,10 @@ export class BinauthzManagementServiceV1Beta1Client {
       });
     const defaultCallSettings = this._defaults['listAttestors'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listAttestors iterate %j', request);
     return this.descriptors.page.listAttestors.asyncIterate(
       this.innerApiCalls['listAttestors'] as GaxCall,
       request as {},
@@ -1329,6 +1552,7 @@ export class BinauthzManagementServiceV1Beta1Client {
   close(): Promise<void> {
     if (this.binauthzManagementServiceV1Beta1Stub && !this._terminated) {
       return this.binauthzManagementServiceV1Beta1Stub.then(stub => {
+        this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
       });

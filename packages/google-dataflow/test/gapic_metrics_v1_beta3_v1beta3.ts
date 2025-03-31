@@ -253,7 +253,9 @@ describe('v1beta3.MetricsV1Beta3Client', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      client.initialize().catch(err => {
+        throw err;
+      });
       assert(client.metricsV1Beta3Stub);
       client.close().then(() => {
         done();
@@ -312,7 +314,7 @@ describe('v1beta3.MetricsV1Beta3Client', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.dataflow.v1beta3.GetJobMetricsRequest()
       );
@@ -331,7 +333,7 @@ describe('v1beta3.MetricsV1Beta3Client', () => {
         ['jobId']
       );
       request.jobId = defaultValue3;
-      const expectedHeaderRequestParams = `project_id=${defaultValue1}&location=${defaultValue2}&job_id=${defaultValue3}`;
+      const expectedHeaderRequestParams = `project_id=${defaultValue1 ?? ''}&location=${defaultValue2 ?? ''}&job_id=${defaultValue3 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.dataflow.v1beta3.JobMetrics()
       );
@@ -353,7 +355,7 @@ describe('v1beta3.MetricsV1Beta3Client', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.dataflow.v1beta3.GetJobMetricsRequest()
       );
@@ -372,7 +374,7 @@ describe('v1beta3.MetricsV1Beta3Client', () => {
         ['jobId']
       );
       request.jobId = defaultValue3;
-      const expectedHeaderRequestParams = `project_id=${defaultValue1}&location=${defaultValue2}&job_id=${defaultValue3}`;
+      const expectedHeaderRequestParams = `project_id=${defaultValue1 ?? ''}&location=${defaultValue2 ?? ''}&job_id=${defaultValue3 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.dataflow.v1beta3.JobMetrics()
       );
@@ -410,7 +412,7 @@ describe('v1beta3.MetricsV1Beta3Client', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.dataflow.v1beta3.GetJobMetricsRequest()
       );
@@ -429,7 +431,7 @@ describe('v1beta3.MetricsV1Beta3Client', () => {
         ['jobId']
       );
       request.jobId = defaultValue3;
-      const expectedHeaderRequestParams = `project_id=${defaultValue1}&location=${defaultValue2}&job_id=${defaultValue3}`;
+      const expectedHeaderRequestParams = `project_id=${defaultValue1 ?? ''}&location=${defaultValue2 ?? ''}&job_id=${defaultValue3 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getJobMetrics = stubSimpleCall(
         undefined,
@@ -451,7 +453,7 @@ describe('v1beta3.MetricsV1Beta3Client', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.dataflow.v1beta3.GetJobMetricsRequest()
       );
@@ -482,7 +484,7 @@ describe('v1beta3.MetricsV1Beta3Client', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.dataflow.v1beta3.GetJobExecutionDetailsRequest()
       );
@@ -501,7 +503,7 @@ describe('v1beta3.MetricsV1Beta3Client', () => {
         ['jobId']
       );
       request.jobId = defaultValue3;
-      const expectedHeaderRequestParams = `project_id=${defaultValue1}&location=${defaultValue2}&job_id=${defaultValue3}`;
+      const expectedHeaderRequestParams = `project_id=${defaultValue1 ?? ''}&location=${defaultValue2 ?? ''}&job_id=${defaultValue3 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.dataflow.v1beta3.StageSummary()
@@ -532,7 +534,7 @@ describe('v1beta3.MetricsV1Beta3Client', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.dataflow.v1beta3.GetJobExecutionDetailsRequest()
       );
@@ -551,7 +553,7 @@ describe('v1beta3.MetricsV1Beta3Client', () => {
         ['jobId']
       );
       request.jobId = defaultValue3;
-      const expectedHeaderRequestParams = `project_id=${defaultValue1}&location=${defaultValue2}&job_id=${defaultValue3}`;
+      const expectedHeaderRequestParams = `project_id=${defaultValue1 ?? ''}&location=${defaultValue2 ?? ''}&job_id=${defaultValue3 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.dataflow.v1beta3.StageSummary()
@@ -597,7 +599,7 @@ describe('v1beta3.MetricsV1Beta3Client', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.dataflow.v1beta3.GetJobExecutionDetailsRequest()
       );
@@ -616,7 +618,7 @@ describe('v1beta3.MetricsV1Beta3Client', () => {
         ['jobId']
       );
       request.jobId = defaultValue3;
-      const expectedHeaderRequestParams = `project_id=${defaultValue1}&location=${defaultValue2}&job_id=${defaultValue3}`;
+      const expectedHeaderRequestParams = `project_id=${defaultValue1 ?? ''}&location=${defaultValue2 ?? ''}&job_id=${defaultValue3 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getJobExecutionDetails = stubSimpleCall(
         undefined,
@@ -641,7 +643,7 @@ describe('v1beta3.MetricsV1Beta3Client', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.dataflow.v1beta3.GetJobExecutionDetailsRequest()
       );
@@ -660,7 +662,7 @@ describe('v1beta3.MetricsV1Beta3Client', () => {
         ['jobId']
       );
       request.jobId = defaultValue3;
-      const expectedHeaderRequestParams = `project_id=${defaultValue1}&location=${defaultValue2}&job_id=${defaultValue3}`;
+      const expectedHeaderRequestParams = `project_id=${defaultValue1 ?? ''}&location=${defaultValue2 ?? ''}&job_id=${defaultValue3 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.dataflow.v1beta3.StageSummary()
@@ -717,7 +719,7 @@ describe('v1beta3.MetricsV1Beta3Client', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.dataflow.v1beta3.GetJobExecutionDetailsRequest()
       );
@@ -736,7 +738,7 @@ describe('v1beta3.MetricsV1Beta3Client', () => {
         ['jobId']
       );
       request.jobId = defaultValue3;
-      const expectedHeaderRequestParams = `project_id=${defaultValue1}&location=${defaultValue2}&job_id=${defaultValue3}`;
+      const expectedHeaderRequestParams = `project_id=${defaultValue1 ?? ''}&location=${defaultValue2 ?? ''}&job_id=${defaultValue3 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.getJobExecutionDetails.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -782,7 +784,7 @@ describe('v1beta3.MetricsV1Beta3Client', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.dataflow.v1beta3.GetJobExecutionDetailsRequest()
       );
@@ -801,7 +803,7 @@ describe('v1beta3.MetricsV1Beta3Client', () => {
         ['jobId']
       );
       request.jobId = defaultValue3;
-      const expectedHeaderRequestParams = `project_id=${defaultValue1}&location=${defaultValue2}&job_id=${defaultValue3}`;
+      const expectedHeaderRequestParams = `project_id=${defaultValue1 ?? ''}&location=${defaultValue2 ?? ''}&job_id=${defaultValue3 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.dataflow.v1beta3.StageSummary()
@@ -845,7 +847,7 @@ describe('v1beta3.MetricsV1Beta3Client', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.dataflow.v1beta3.GetJobExecutionDetailsRequest()
       );
@@ -864,7 +866,7 @@ describe('v1beta3.MetricsV1Beta3Client', () => {
         ['jobId']
       );
       request.jobId = defaultValue3;
-      const expectedHeaderRequestParams = `project_id=${defaultValue1}&location=${defaultValue2}&job_id=${defaultValue3}`;
+      const expectedHeaderRequestParams = `project_id=${defaultValue1 ?? ''}&location=${defaultValue2 ?? ''}&job_id=${defaultValue3 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.getJobExecutionDetails.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -901,7 +903,7 @@ describe('v1beta3.MetricsV1Beta3Client', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.dataflow.v1beta3.GetStageExecutionDetailsRequest()
       );
@@ -925,7 +927,7 @@ describe('v1beta3.MetricsV1Beta3Client', () => {
         ['stageId']
       );
       request.stageId = defaultValue4;
-      const expectedHeaderRequestParams = `project_id=${defaultValue1}&location=${defaultValue2}&job_id=${defaultValue3}&stage_id=${defaultValue4}`;
+      const expectedHeaderRequestParams = `project_id=${defaultValue1 ?? ''}&location=${defaultValue2 ?? ''}&job_id=${defaultValue3 ?? ''}&stage_id=${defaultValue4 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.dataflow.v1beta3.WorkerDetails()
@@ -956,7 +958,7 @@ describe('v1beta3.MetricsV1Beta3Client', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.dataflow.v1beta3.GetStageExecutionDetailsRequest()
       );
@@ -980,7 +982,7 @@ describe('v1beta3.MetricsV1Beta3Client', () => {
         ['stageId']
       );
       request.stageId = defaultValue4;
-      const expectedHeaderRequestParams = `project_id=${defaultValue1}&location=${defaultValue2}&job_id=${defaultValue3}&stage_id=${defaultValue4}`;
+      const expectedHeaderRequestParams = `project_id=${defaultValue1 ?? ''}&location=${defaultValue2 ?? ''}&job_id=${defaultValue3 ?? ''}&stage_id=${defaultValue4 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.dataflow.v1beta3.WorkerDetails()
@@ -1026,7 +1028,7 @@ describe('v1beta3.MetricsV1Beta3Client', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.dataflow.v1beta3.GetStageExecutionDetailsRequest()
       );
@@ -1050,7 +1052,7 @@ describe('v1beta3.MetricsV1Beta3Client', () => {
         ['stageId']
       );
       request.stageId = defaultValue4;
-      const expectedHeaderRequestParams = `project_id=${defaultValue1}&location=${defaultValue2}&job_id=${defaultValue3}&stage_id=${defaultValue4}`;
+      const expectedHeaderRequestParams = `project_id=${defaultValue1 ?? ''}&location=${defaultValue2 ?? ''}&job_id=${defaultValue3 ?? ''}&stage_id=${defaultValue4 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getStageExecutionDetails = stubSimpleCall(
         undefined,
@@ -1075,7 +1077,7 @@ describe('v1beta3.MetricsV1Beta3Client', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.dataflow.v1beta3.GetStageExecutionDetailsRequest()
       );
@@ -1099,7 +1101,7 @@ describe('v1beta3.MetricsV1Beta3Client', () => {
         ['stageId']
       );
       request.stageId = defaultValue4;
-      const expectedHeaderRequestParams = `project_id=${defaultValue1}&location=${defaultValue2}&job_id=${defaultValue3}&stage_id=${defaultValue4}`;
+      const expectedHeaderRequestParams = `project_id=${defaultValue1 ?? ''}&location=${defaultValue2 ?? ''}&job_id=${defaultValue3 ?? ''}&stage_id=${defaultValue4 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.dataflow.v1beta3.WorkerDetails()
@@ -1156,7 +1158,7 @@ describe('v1beta3.MetricsV1Beta3Client', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.dataflow.v1beta3.GetStageExecutionDetailsRequest()
       );
@@ -1180,7 +1182,7 @@ describe('v1beta3.MetricsV1Beta3Client', () => {
         ['stageId']
       );
       request.stageId = defaultValue4;
-      const expectedHeaderRequestParams = `project_id=${defaultValue1}&location=${defaultValue2}&job_id=${defaultValue3}&stage_id=${defaultValue4}`;
+      const expectedHeaderRequestParams = `project_id=${defaultValue1 ?? ''}&location=${defaultValue2 ?? ''}&job_id=${defaultValue3 ?? ''}&stage_id=${defaultValue4 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.getStageExecutionDetails.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -1226,7 +1228,7 @@ describe('v1beta3.MetricsV1Beta3Client', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.dataflow.v1beta3.GetStageExecutionDetailsRequest()
       );
@@ -1250,7 +1252,7 @@ describe('v1beta3.MetricsV1Beta3Client', () => {
         ['stageId']
       );
       request.stageId = defaultValue4;
-      const expectedHeaderRequestParams = `project_id=${defaultValue1}&location=${defaultValue2}&job_id=${defaultValue3}&stage_id=${defaultValue4}`;
+      const expectedHeaderRequestParams = `project_id=${defaultValue1 ?? ''}&location=${defaultValue2 ?? ''}&job_id=${defaultValue3 ?? ''}&stage_id=${defaultValue4 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.dataflow.v1beta3.WorkerDetails()
@@ -1294,7 +1296,7 @@ describe('v1beta3.MetricsV1Beta3Client', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.dataflow.v1beta3.GetStageExecutionDetailsRequest()
       );
@@ -1318,7 +1320,7 @@ describe('v1beta3.MetricsV1Beta3Client', () => {
         ['stageId']
       );
       request.stageId = defaultValue4;
-      const expectedHeaderRequestParams = `project_id=${defaultValue1}&location=${defaultValue2}&job_id=${defaultValue3}&stage_id=${defaultValue4}`;
+      const expectedHeaderRequestParams = `project_id=${defaultValue1 ?? ''}&location=${defaultValue2 ?? ''}&job_id=${defaultValue3 ?? ''}&stage_id=${defaultValue4 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.getStageExecutionDetails.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);

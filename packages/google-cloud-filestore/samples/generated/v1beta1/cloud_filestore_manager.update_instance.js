@@ -33,8 +33,12 @@ function main(updateMask, instance) {
    *  this field.  The elements of the repeated paths field may only include
    *  these fields:
    *  * "description"
+   *  * "directory_services"
    *  * "file_shares"
    *  * "labels"
+   *  * "performance_config"
+   *  * "deletion_protection_enabled"
+   *  * "deletion_protection_reason"
    */
   // const updateMask = {}
   /**

@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -66,6 +66,8 @@ message RankingRecord {
   string content = 3;
 
   // The score of this record based on the given query and selected model.
+  // The score will be rounded to 2 decimal places. If the score is close to 0,
+  // it will be rounded to 0.0001 to avoid returning unset.
   float score = 4;
 }
 
@@ -73,7 +75,7 @@ message RankingRecord {
 // [RankService.Rank][google.cloud.discoveryengine.v1.RankService.Rank] method.
 message RankRequest {
   // Required. The resource name of the rank service config, such as
-  // `projects/{project_num}/locations/{location_id}/rankingConfigs/default_ranking_config`.
+  // `projects/{project_num}/locations/{location}/rankingConfigs/default_ranking_config`.
   string ranking_config = 1 [
     (google.api.field_behavior) = REQUIRED,
     (google.api.resource_reference) = {
@@ -83,7 +85,7 @@ message RankRequest {
 
   // The identifier of the model to use. It is one of:
   //
-  // * `semantic-ranker-512@latest`: Semantic ranking model with maxiumn input
+  // * `semantic-ranker-512@latest`: Semantic ranking model with maximum input
   // token size 512.
   //
   // It is set to `semantic-ranker-512@latest` by default if unspecified.

@@ -266,7 +266,9 @@ describe('v1.MapsPlatformDatasetsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      client.initialize().catch(err => {
+        throw err;
+      });
       assert(client.mapsPlatformDatasetsStub);
       client.close().then(() => {
         done();
@@ -329,7 +331,7 @@ describe('v1.MapsPlatformDatasetsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.maps.mapsplatformdatasets.v1.CreateDatasetRequest()
       );
@@ -338,7 +340,7 @@ describe('v1.MapsPlatformDatasetsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.maps.mapsplatformdatasets.v1.Dataset()
       );
@@ -361,7 +363,7 @@ describe('v1.MapsPlatformDatasetsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.maps.mapsplatformdatasets.v1.CreateDatasetRequest()
       );
@@ -370,7 +372,7 @@ describe('v1.MapsPlatformDatasetsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.maps.mapsplatformdatasets.v1.Dataset()
       );
@@ -409,7 +411,7 @@ describe('v1.MapsPlatformDatasetsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.maps.mapsplatformdatasets.v1.CreateDatasetRequest()
       );
@@ -418,7 +420,7 @@ describe('v1.MapsPlatformDatasetsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createDataset = stubSimpleCall(
         undefined,
@@ -441,7 +443,7 @@ describe('v1.MapsPlatformDatasetsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.maps.mapsplatformdatasets.v1.CreateDatasetRequest()
       );
@@ -463,7 +465,7 @@ describe('v1.MapsPlatformDatasetsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.maps.mapsplatformdatasets.v1.UpdateDatasetMetadataRequest()
       );
@@ -473,7 +475,7 @@ describe('v1.MapsPlatformDatasetsClient', () => {
         ['dataset', 'name']
       );
       request.dataset.name = defaultValue1;
-      const expectedHeaderRequestParams = `dataset.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `dataset.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.maps.mapsplatformdatasets.v1.Dataset()
       );
@@ -497,7 +499,7 @@ describe('v1.MapsPlatformDatasetsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.maps.mapsplatformdatasets.v1.UpdateDatasetMetadataRequest()
       );
@@ -507,7 +509,7 @@ describe('v1.MapsPlatformDatasetsClient', () => {
         ['dataset', 'name']
       );
       request.dataset.name = defaultValue1;
-      const expectedHeaderRequestParams = `dataset.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `dataset.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.maps.mapsplatformdatasets.v1.Dataset()
       );
@@ -546,7 +548,7 @@ describe('v1.MapsPlatformDatasetsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.maps.mapsplatformdatasets.v1.UpdateDatasetMetadataRequest()
       );
@@ -556,7 +558,7 @@ describe('v1.MapsPlatformDatasetsClient', () => {
         ['dataset', 'name']
       );
       request.dataset.name = defaultValue1;
-      const expectedHeaderRequestParams = `dataset.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `dataset.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateDatasetMetadata = stubSimpleCall(
         undefined,
@@ -582,7 +584,7 @@ describe('v1.MapsPlatformDatasetsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.maps.mapsplatformdatasets.v1.UpdateDatasetMetadataRequest()
       );
@@ -608,7 +610,7 @@ describe('v1.MapsPlatformDatasetsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.maps.mapsplatformdatasets.v1.GetDatasetRequest()
       );
@@ -617,7 +619,7 @@ describe('v1.MapsPlatformDatasetsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.maps.mapsplatformdatasets.v1.Dataset()
       );
@@ -640,7 +642,7 @@ describe('v1.MapsPlatformDatasetsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.maps.mapsplatformdatasets.v1.GetDatasetRequest()
       );
@@ -649,7 +651,7 @@ describe('v1.MapsPlatformDatasetsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.maps.mapsplatformdatasets.v1.Dataset()
       );
@@ -688,7 +690,7 @@ describe('v1.MapsPlatformDatasetsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.maps.mapsplatformdatasets.v1.GetDatasetRequest()
       );
@@ -697,7 +699,7 @@ describe('v1.MapsPlatformDatasetsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getDataset = stubSimpleCall(
         undefined,
@@ -720,7 +722,7 @@ describe('v1.MapsPlatformDatasetsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.maps.mapsplatformdatasets.v1.GetDatasetRequest()
       );
@@ -742,7 +744,7 @@ describe('v1.MapsPlatformDatasetsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.maps.mapsplatformdatasets.v1.DeleteDatasetRequest()
       );
@@ -751,7 +753,7 @@ describe('v1.MapsPlatformDatasetsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -774,7 +776,7 @@ describe('v1.MapsPlatformDatasetsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.maps.mapsplatformdatasets.v1.DeleteDatasetRequest()
       );
@@ -783,7 +785,7 @@ describe('v1.MapsPlatformDatasetsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -822,7 +824,7 @@ describe('v1.MapsPlatformDatasetsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.maps.mapsplatformdatasets.v1.DeleteDatasetRequest()
       );
@@ -831,7 +833,7 @@ describe('v1.MapsPlatformDatasetsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteDataset = stubSimpleCall(
         undefined,
@@ -854,7 +856,7 @@ describe('v1.MapsPlatformDatasetsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.maps.mapsplatformdatasets.v1.DeleteDatasetRequest()
       );
@@ -876,7 +878,7 @@ describe('v1.MapsPlatformDatasetsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.maps.mapsplatformdatasets.v1.FetchDatasetErrorsRequest()
       );
@@ -885,7 +887,7 @@ describe('v1.MapsPlatformDatasetsClient', () => {
         ['dataset']
       );
       request.dataset = defaultValue1;
-      const expectedHeaderRequestParams = `dataset=${defaultValue1}`;
+      const expectedHeaderRequestParams = `dataset=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.rpc.Status()),
         generateSampleMessage(new protos.google.rpc.Status()),
@@ -911,7 +913,7 @@ describe('v1.MapsPlatformDatasetsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.maps.mapsplatformdatasets.v1.FetchDatasetErrorsRequest()
       );
@@ -920,7 +922,7 @@ describe('v1.MapsPlatformDatasetsClient', () => {
         ['dataset']
       );
       request.dataset = defaultValue1;
-      const expectedHeaderRequestParams = `dataset=${defaultValue1}`;
+      const expectedHeaderRequestParams = `dataset=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.rpc.Status()),
         generateSampleMessage(new protos.google.rpc.Status()),
@@ -958,7 +960,7 @@ describe('v1.MapsPlatformDatasetsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.maps.mapsplatformdatasets.v1.FetchDatasetErrorsRequest()
       );
@@ -967,7 +969,7 @@ describe('v1.MapsPlatformDatasetsClient', () => {
         ['dataset']
       );
       request.dataset = defaultValue1;
-      const expectedHeaderRequestParams = `dataset=${defaultValue1}`;
+      const expectedHeaderRequestParams = `dataset=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.fetchDatasetErrors = stubSimpleCall(
         undefined,
@@ -990,7 +992,7 @@ describe('v1.MapsPlatformDatasetsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.maps.mapsplatformdatasets.v1.FetchDatasetErrorsRequest()
       );
@@ -999,7 +1001,7 @@ describe('v1.MapsPlatformDatasetsClient', () => {
         ['dataset']
       );
       request.dataset = defaultValue1;
-      const expectedHeaderRequestParams = `dataset=${defaultValue1}`;
+      const expectedHeaderRequestParams = `dataset=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.rpc.Status()),
         generateSampleMessage(new protos.google.rpc.Status()),
@@ -1042,7 +1044,7 @@ describe('v1.MapsPlatformDatasetsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.maps.mapsplatformdatasets.v1.FetchDatasetErrorsRequest()
       );
@@ -1051,7 +1053,7 @@ describe('v1.MapsPlatformDatasetsClient', () => {
         ['dataset']
       );
       request.dataset = defaultValue1;
-      const expectedHeaderRequestParams = `dataset=${defaultValue1}`;
+      const expectedHeaderRequestParams = `dataset=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.fetchDatasetErrors.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -1089,7 +1091,7 @@ describe('v1.MapsPlatformDatasetsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.maps.mapsplatformdatasets.v1.FetchDatasetErrorsRequest()
       );
@@ -1098,7 +1100,7 @@ describe('v1.MapsPlatformDatasetsClient', () => {
         ['dataset']
       );
       request.dataset = defaultValue1;
-      const expectedHeaderRequestParams = `dataset=${defaultValue1}`;
+      const expectedHeaderRequestParams = `dataset=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.rpc.Status()),
         generateSampleMessage(new protos.google.rpc.Status()),
@@ -1133,7 +1135,7 @@ describe('v1.MapsPlatformDatasetsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.maps.mapsplatformdatasets.v1.FetchDatasetErrorsRequest()
       );
@@ -1142,7 +1144,7 @@ describe('v1.MapsPlatformDatasetsClient', () => {
         ['dataset']
       );
       request.dataset = defaultValue1;
-      const expectedHeaderRequestParams = `dataset=${defaultValue1}`;
+      const expectedHeaderRequestParams = `dataset=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.fetchDatasetErrors.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -1176,7 +1178,7 @@ describe('v1.MapsPlatformDatasetsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.maps.mapsplatformdatasets.v1.ListDatasetsRequest()
       );
@@ -1185,7 +1187,7 @@ describe('v1.MapsPlatformDatasetsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.maps.mapsplatformdatasets.v1.Dataset()
@@ -1216,7 +1218,7 @@ describe('v1.MapsPlatformDatasetsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.maps.mapsplatformdatasets.v1.ListDatasetsRequest()
       );
@@ -1225,7 +1227,7 @@ describe('v1.MapsPlatformDatasetsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.maps.mapsplatformdatasets.v1.Dataset()
@@ -1274,7 +1276,7 @@ describe('v1.MapsPlatformDatasetsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.maps.mapsplatformdatasets.v1.ListDatasetsRequest()
       );
@@ -1283,7 +1285,7 @@ describe('v1.MapsPlatformDatasetsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listDatasets = stubSimpleCall(
         undefined,
@@ -1306,7 +1308,7 @@ describe('v1.MapsPlatformDatasetsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.maps.mapsplatformdatasets.v1.ListDatasetsRequest()
       );
@@ -1315,7 +1317,7 @@ describe('v1.MapsPlatformDatasetsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.maps.mapsplatformdatasets.v1.Dataset()
@@ -1368,7 +1370,7 @@ describe('v1.MapsPlatformDatasetsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.maps.mapsplatformdatasets.v1.ListDatasetsRequest()
       );
@@ -1377,7 +1379,7 @@ describe('v1.MapsPlatformDatasetsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listDatasets.createStream = stubPageStreamingCall(
         undefined,
@@ -1421,7 +1423,7 @@ describe('v1.MapsPlatformDatasetsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.maps.mapsplatformdatasets.v1.ListDatasetsRequest()
       );
@@ -1430,7 +1432,7 @@ describe('v1.MapsPlatformDatasetsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.maps.mapsplatformdatasets.v1.Dataset()
@@ -1472,7 +1474,7 @@ describe('v1.MapsPlatformDatasetsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.maps.mapsplatformdatasets.v1.ListDatasetsRequest()
       );
@@ -1481,7 +1483,7 @@ describe('v1.MapsPlatformDatasetsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listDatasets.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -1510,7 +1512,7 @@ describe('v1.MapsPlatformDatasetsClient', () => {
   });
 
   describe('Path templates', () => {
-    describe('dataset', () => {
+    describe('dataset', async () => {
       const fakePath = '/rendered/path/dataset';
       const expectedParameters = {
         project: 'projectValue',
@@ -1521,7 +1523,7 @@ describe('v1.MapsPlatformDatasetsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.datasetPathTemplate.render = sinon
         .stub()
         .returns(fakePath);

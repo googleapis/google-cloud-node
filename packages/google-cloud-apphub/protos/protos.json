@@ -1,7 +1,4 @@
 {
-  "options": {
-    "syntax": "proto3"
-  },
   "nested": {
     "google": {
       "nested": {
@@ -1561,7 +1558,8 @@
                         "Type": {
                           "values": {
                             "TYPE_UNSPECIFIED": 0,
-                            "REGIONAL": 1
+                            "REGIONAL": 1,
+                            "GLOBAL": 2
                           }
                         }
                       }

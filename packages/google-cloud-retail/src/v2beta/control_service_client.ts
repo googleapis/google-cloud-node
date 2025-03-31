@@ -32,6 +32,7 @@ import type {
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
+import {loggingUtils as logging} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -56,6 +57,8 @@ export class ControlServiceClient {
   private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
+  private _log = logging.log('retail');
+
   auth: gax.GoogleAuth;
   descriptors: Descriptors = {
     page: {},
@@ -92,7 +95,7 @@ export class ControlServiceClient {
    *     Developer's Console, e.g. 'grape-spaceship-123'. We will also check
    *     the environment variable GCLOUD_PROJECT for your project ID. If your
    *     app is running in an environment which supports
-   *     {@link https://developers.google.com/identity/protocols/application-default-credentials Application Default Credentials},
+   *     {@link https://cloud.google.com/docs/authentication/application-default-credentials Application Default Credentials},
    *     your project ID will be detected automatically.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
@@ -551,8 +554,36 @@ export class ControlServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.createControl(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('createControl request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.retail.v2beta.IControl,
+          | protos.google.cloud.retail.v2beta.ICreateControlRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('createControl response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .createControl(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.retail.v2beta.IControl,
+          protos.google.cloud.retail.v2beta.ICreateControlRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createControl response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Deletes a Control.
@@ -645,8 +676,36 @@ export class ControlServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.deleteControl(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('deleteControl request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.cloud.retail.v2beta.IDeleteControlRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('deleteControl response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .deleteControl(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.protobuf.IEmpty,
+          protos.google.cloud.retail.v2beta.IDeleteControlRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteControl response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Updates a Control.
@@ -748,8 +807,36 @@ export class ControlServiceClient {
       this._gaxModule.routingHeader.fromParams({
         'control.name': request.control!.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.updateControl(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('updateControl request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.retail.v2beta.IControl,
+          | protos.google.cloud.retail.v2beta.IUpdateControlRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('updateControl response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .updateControl(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.retail.v2beta.IControl,
+          protos.google.cloud.retail.v2beta.IUpdateControlRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('updateControl response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Gets a Control.
@@ -833,8 +920,36 @@ export class ControlServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.getControl(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('getControl request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.retail.v2beta.IControl,
+          | protos.google.cloud.retail.v2beta.IGetControlRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getControl response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getControl(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.retail.v2beta.IControl,
+          protos.google.cloud.retail.v2beta.IGetControlRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getControl response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
 
   /**
@@ -942,8 +1057,36 @@ export class ControlServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.listControls(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.retail.v2beta.IListControlsRequest,
+          | protos.google.cloud.retail.v2beta.IListControlsResponse
+          | null
+          | undefined,
+          protos.google.cloud.retail.v2beta.IControl
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listControls values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listControls request %j', request);
+    return this.innerApiCalls
+      .listControls(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.retail.v2beta.IControl[],
+          protos.google.cloud.retail.v2beta.IListControlsRequest | null,
+          protos.google.cloud.retail.v2beta.IListControlsResponse,
+        ]) => {
+          this._log.info('listControls values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -991,7 +1134,10 @@ export class ControlServiceClient {
       });
     const defaultCallSettings = this._defaults['listControls'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listControls stream %j', request);
     return this.descriptors.page.listControls.createStream(
       this.innerApiCalls.listControls as GaxCall,
       request,
@@ -1047,7 +1193,10 @@ export class ControlServiceClient {
       });
     const defaultCallSettings = this._defaults['listControls'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listControls iterate %j', request);
     return this.descriptors.page.listControls.asyncIterate(
       this.innerApiCalls['listControls'] as GaxCall,
       request as {},
@@ -1226,7 +1375,7 @@ export class ControlServiceClient {
   listOperationsAsync(
     request: protos.google.longrunning.ListOperationsRequest,
     options?: gax.CallOptions
-  ): AsyncIterable<protos.google.longrunning.ListOperationsResponse> {
+  ): AsyncIterable<protos.google.longrunning.IOperation> {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
@@ -1833,6 +1982,7 @@ export class ControlServiceClient {
   close(): Promise<void> {
     if (this.controlServiceStub && !this._terminated) {
       return this.controlServiceStub.then(stub => {
+        this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
         this.locationsClient.close();

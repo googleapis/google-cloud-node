@@ -26,6 +26,7 @@ import "google/cloud/aiplatform/v1/explanation.proto";
 import "google/cloud/aiplatform/v1/tool.proto";
 import "google/cloud/aiplatform/v1/types.proto";
 import "google/protobuf/struct.proto";
+import "google/protobuf/timestamp.proto";
 
 option csharp_namespace = "Google.Cloud.AIPlatform.V1";
 option go_package = "cloud.google.com/go/aiplatform/apiv1/aiplatformpb;aiplatformpb";
@@ -668,6 +669,10 @@ message CountTokensResponse {
   // The total number of billable characters counted across all instances from
   // the request.
   int32 total_billable_characters = 2;
+
+  // Output only. List of modalities that were processed in the request input.
+  repeated ModalityTokenCount prompt_tokens_details = 3
+      [(google.api.field_behavior) = OUTPUT_ONLY];
 }
 
 // Request message for [PredictionService.GenerateContent].
@@ -694,6 +699,18 @@ message GenerateContentRequest {
   // a separate paragraph.
   optional Content system_instruction = 8
       [(google.api.field_behavior) = OPTIONAL];
+
+  // Optional. The name of the cached content used as context to serve the
+  // prediction. Note: only used in explicit caching, where users can have
+  // control over caching (e.g. what content to cache) and enjoy guaranteed cost
+  // savings. Format:
+  // `projects/{project}/locations/{location}/cachedContents/{cachedContent}`
+  string cached_content = 9 [
+    (google.api.field_behavior) = OPTIONAL,
+    (google.api.resource_reference) = {
+      type: "aiplatform.googleapis.com/CachedContent"
+    }
+  ];
 
   // Optional. A list of `Tools` the model may use to generate the next
   // response.
@@ -772,6 +789,24 @@ message GenerateContentResponse {
 
     // Total token count for prompt and response candidates.
     int32 total_token_count = 3;
+
+    // Output only. Number of tokens in the cached part in the input (the cached
+    // content).
+    int32 cached_content_token_count = 5
+        [(google.api.field_behavior) = OUTPUT_ONLY];
+
+    // Output only. List of modalities that were processed in the request input.
+    repeated ModalityTokenCount prompt_tokens_details = 9
+        [(google.api.field_behavior) = OUTPUT_ONLY];
+
+    // Output only. List of modalities of the cached content in the request
+    // input.
+    repeated ModalityTokenCount cache_tokens_details = 10
+        [(google.api.field_behavior) = OUTPUT_ONLY];
+
+    // Output only. List of modalities that were returned in the response.
+    repeated ModalityTokenCount candidates_tokens_details = 11
+        [(google.api.field_behavior) = OUTPUT_ONLY];
   }
 
   // Output only. Generated candidates.
@@ -779,6 +814,14 @@ message GenerateContentResponse {
 
   // Output only. The model version used to generate the response.
   string model_version = 11 [(google.api.field_behavior) = OUTPUT_ONLY];
+
+  // Output only. Timestamp when the request is made to the server.
+  google.protobuf.Timestamp create_time = 12
+      [(google.api.field_behavior) = OUTPUT_ONLY];
+
+  // Output only. response_id is used to identify each response. It is the
+  // encoding of the event_id.
+  string response_id = 13 [(google.api.field_behavior) = OUTPUT_ONLY];
 
   // Output only. Content filter results for a prompt sent in the request.
   // Note: Sent only in the first stream chunk.

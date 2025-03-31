@@ -1,5 +1,35 @@
 # Changelog
 
+## [0.6.0](https://github.com/googleapis/google-cloud-node/compare/meet-v0.5.0...meet-v0.6.0) (2025-03-19)
+
+
+### Features
+
+* [Many APIs] await/catch promises, and update listOperationsAsync return type ([#6182](https://github.com/googleapis/google-cloud-node/issues/6182)) ([c41ff07](https://github.com/googleapis/google-cloud-node/commit/c41ff0729b65a1207978b4029d6369cc0552e0bf))
+
+## [0.5.0](https://github.com/googleapis/google-cloud-node/compare/meet-v0.4.0...meet-v0.5.0) (2025-03-18)
+
+
+### ⚠ BREAKING CHANGES
+
+* upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096))
+
+### Features
+
+* [Many APIs] add request/response debug logging to gapics, update templates to gax 5  ([54a73fe](https://github.com/googleapis/google-cloud-node/commit/54a73fe74eab0675c006f24d5f1e4574c44d829b))
+
+
+### Miscellaneous Chores
+
+* Upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096)) ([eadae64](https://github.com/googleapis/google-cloud-node/commit/eadae64d54e07aa2c65097ea52e65008d4e87436))
+
+## [0.4.0](https://github.com/googleapis/google-cloud-node/compare/meet-v0.3.0...meet-v0.4.0) (2025-02-28)
+
+
+### Features
+
+* [meet] Add `ConnectActiveConference` method to `SpacesService` ([#6050](https://github.com/googleapis/google-cloud-node/issues/6050)) ([b77c164](https://github.com/googleapis/google-cloud-node/commit/b77c1641ad7d05b67e48e670d964457f2454c8d2))
+
 ## [0.3.0](https://github.com/googleapis/google-cloud-node/compare/meet-v0.2.0...meet-v0.3.0) (2024-05-21)
 
 

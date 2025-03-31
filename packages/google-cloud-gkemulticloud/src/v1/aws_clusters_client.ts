@@ -31,6 +31,7 @@ import type {
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
+import {loggingUtils as logging} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -56,6 +57,8 @@ export class AwsClustersClient {
   private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
+  private _log = logging.log('gkemulticloud');
+
   auth: gax.GoogleAuth;
   descriptors: Descriptors = {
     page: {},
@@ -91,7 +94,7 @@ export class AwsClustersClient {
    *     Developer's Console, e.g. 'grape-spaceship-123'. We will also check
    *     the environment variable GCLOUD_PROJECT for your project ID. If your
    *     app is running in an environment which supports
-   *     {@link https://developers.google.com/identity/protocols/application-default-credentials Application Default Credentials},
+   *     {@link https://cloud.google.com/docs/authentication/application-default-credentials Application Default Credentials},
    *     your project ID will be detected automatically.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
@@ -648,8 +651,39 @@ export class AwsClustersClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.getAwsCluster(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('getAwsCluster request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.gkemulticloud.v1.IAwsCluster,
+          | protos.google.cloud.gkemulticloud.v1.IGetAwsClusterRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getAwsCluster response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getAwsCluster(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.gkemulticloud.v1.IAwsCluster,
+          (
+            | protos.google.cloud.gkemulticloud.v1.IGetAwsClusterRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getAwsCluster response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Generates an access token for a cluster agent.
@@ -762,12 +796,39 @@ export class AwsClustersClient {
       this._gaxModule.routingHeader.fromParams({
         aws_cluster: request.awsCluster ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.generateAwsClusterAgentToken(
-      request,
-      options,
-      callback
-    );
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('generateAwsClusterAgentToken request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.gkemulticloud.v1.IGenerateAwsClusterAgentTokenResponse,
+          | protos.google.cloud.gkemulticloud.v1.IGenerateAwsClusterAgentTokenRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('generateAwsClusterAgentToken response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .generateAwsClusterAgentToken(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.gkemulticloud.v1.IGenerateAwsClusterAgentTokenResponse,
+          (
+            | protos.google.cloud.gkemulticloud.v1.IGenerateAwsClusterAgentTokenRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('generateAwsClusterAgentToken response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Generates a short-lived access token to authenticate to a given
@@ -871,12 +932,39 @@ export class AwsClustersClient {
       this._gaxModule.routingHeader.fromParams({
         aws_cluster: request.awsCluster ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.generateAwsAccessToken(
-      request,
-      options,
-      callback
-    );
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('generateAwsAccessToken request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.gkemulticloud.v1.IGenerateAwsAccessTokenResponse,
+          | protos.google.cloud.gkemulticloud.v1.IGenerateAwsAccessTokenRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('generateAwsAccessToken response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .generateAwsAccessToken(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.gkemulticloud.v1.IGenerateAwsAccessTokenResponse,
+          (
+            | protos.google.cloud.gkemulticloud.v1.IGenerateAwsAccessTokenRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('generateAwsAccessToken response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Describes a specific
@@ -974,8 +1062,39 @@ export class AwsClustersClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.getAwsNodePool(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('getAwsNodePool request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.gkemulticloud.v1.IAwsNodePool,
+          | protos.google.cloud.gkemulticloud.v1.IGetAwsNodePoolRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getAwsNodePool response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getAwsNodePool(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.gkemulticloud.v1.IAwsNodePool,
+          (
+            | protos.google.cloud.gkemulticloud.v1.IGetAwsNodePoolRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getAwsNodePool response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Gets the OIDC discovery document for the cluster.
@@ -1076,8 +1195,39 @@ export class AwsClustersClient {
       this._gaxModule.routingHeader.fromParams({
         aws_cluster: request.awsCluster ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.getAwsOpenIdConfig(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('getAwsOpenIdConfig request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.gkemulticloud.v1.IAwsOpenIdConfig,
+          | protos.google.cloud.gkemulticloud.v1.IGetAwsOpenIdConfigRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getAwsOpenIdConfig response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getAwsOpenIdConfig(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.gkemulticloud.v1.IAwsOpenIdConfig,
+          (
+            | protos.google.cloud.gkemulticloud.v1.IGetAwsOpenIdConfigRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getAwsOpenIdConfig response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Gets the public component of the cluster signing keys in
@@ -1175,8 +1325,39 @@ export class AwsClustersClient {
       this._gaxModule.routingHeader.fromParams({
         aws_cluster: request.awsCluster ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.getAwsJsonWebKeys(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('getAwsJsonWebKeys request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.gkemulticloud.v1.IAwsJsonWebKeys,
+          | protos.google.cloud.gkemulticloud.v1.IGetAwsJsonWebKeysRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getAwsJsonWebKeys response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getAwsJsonWebKeys(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.gkemulticloud.v1.IAwsJsonWebKeys,
+          (
+            | protos.google.cloud.gkemulticloud.v1.IGetAwsJsonWebKeysRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getAwsJsonWebKeys response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Returns information, such as supported AWS regions and Kubernetes
@@ -1280,8 +1461,39 @@ export class AwsClustersClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.getAwsServerConfig(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('getAwsServerConfig request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.gkemulticloud.v1.IAwsServerConfig,
+          | protos.google.cloud.gkemulticloud.v1.IGetAwsServerConfigRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getAwsServerConfig response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getAwsServerConfig(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.gkemulticloud.v1.IAwsServerConfig,
+          (
+            | protos.google.cloud.gkemulticloud.v1.IGetAwsServerConfigRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getAwsServerConfig response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
 
   /**
@@ -1410,8 +1622,40 @@ export class AwsClustersClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.createAwsCluster(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.gkemulticloud.v1.IAwsCluster,
+            protos.google.cloud.gkemulticloud.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('createAwsCluster response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('createAwsCluster request %j', request);
+    return this.innerApiCalls
+      .createAwsCluster(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.gkemulticloud.v1.IAwsCluster,
+            protos.google.cloud.gkemulticloud.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createAwsCluster response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `createAwsCluster()`.
@@ -1432,6 +1676,7 @@ export class AwsClustersClient {
       protos.google.cloud.gkemulticloud.v1.OperationMetadata
     >
   > {
+    this._log.info('createAwsCluster long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -1581,8 +1826,40 @@ export class AwsClustersClient {
       this._gaxModule.routingHeader.fromParams({
         'aws_cluster.name': request.awsCluster!.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.updateAwsCluster(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.gkemulticloud.v1.IAwsCluster,
+            protos.google.cloud.gkemulticloud.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('updateAwsCluster response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('updateAwsCluster request %j', request);
+    return this.innerApiCalls
+      .updateAwsCluster(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.gkemulticloud.v1.IAwsCluster,
+            protos.google.cloud.gkemulticloud.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('updateAwsCluster response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `updateAwsCluster()`.
@@ -1603,6 +1880,7 @@ export class AwsClustersClient {
       protos.google.cloud.gkemulticloud.v1.OperationMetadata
     >
   > {
+    this._log.info('updateAwsCluster long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -1754,8 +2032,40 @@ export class AwsClustersClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.deleteAwsCluster(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.gkemulticloud.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('deleteAwsCluster response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('deleteAwsCluster request %j', request);
+    return this.innerApiCalls
+      .deleteAwsCluster(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.gkemulticloud.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteAwsCluster response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `deleteAwsCluster()`.
@@ -1776,6 +2086,7 @@ export class AwsClustersClient {
       protos.google.cloud.gkemulticloud.v1.OperationMetadata
     >
   > {
+    this._log.info('deleteAwsCluster long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -1918,8 +2229,40 @@ export class AwsClustersClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.createAwsNodePool(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.gkemulticloud.v1.IAwsNodePool,
+            protos.google.cloud.gkemulticloud.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('createAwsNodePool response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('createAwsNodePool request %j', request);
+    return this.innerApiCalls
+      .createAwsNodePool(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.gkemulticloud.v1.IAwsNodePool,
+            protos.google.cloud.gkemulticloud.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createAwsNodePool response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `createAwsNodePool()`.
@@ -1940,6 +2283,7 @@ export class AwsClustersClient {
       protos.google.cloud.gkemulticloud.v1.OperationMetadata
     >
   > {
+    this._log.info('createAwsNodePool long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -2092,8 +2436,40 @@ export class AwsClustersClient {
       this._gaxModule.routingHeader.fromParams({
         'aws_node_pool.name': request.awsNodePool!.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.updateAwsNodePool(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.gkemulticloud.v1.IAwsNodePool,
+            protos.google.cloud.gkemulticloud.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('updateAwsNodePool response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('updateAwsNodePool request %j', request);
+    return this.innerApiCalls
+      .updateAwsNodePool(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.gkemulticloud.v1.IAwsNodePool,
+            protos.google.cloud.gkemulticloud.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('updateAwsNodePool response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `updateAwsNodePool()`.
@@ -2114,6 +2490,7 @@ export class AwsClustersClient {
       protos.google.cloud.gkemulticloud.v1.OperationMetadata
     >
   > {
+    this._log.info('updateAwsNodePool long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -2244,12 +2621,40 @@ export class AwsClustersClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.rollbackAwsNodePoolUpdate(
-      request,
-      options,
-      callback
-    );
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.gkemulticloud.v1.IAwsNodePool,
+            protos.google.cloud.gkemulticloud.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('rollbackAwsNodePoolUpdate response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('rollbackAwsNodePoolUpdate request %j', request);
+    return this.innerApiCalls
+      .rollbackAwsNodePoolUpdate(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.gkemulticloud.v1.IAwsNodePool,
+            protos.google.cloud.gkemulticloud.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('rollbackAwsNodePoolUpdate response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `rollbackAwsNodePoolUpdate()`.
@@ -2270,6 +2675,7 @@ export class AwsClustersClient {
       protos.google.cloud.gkemulticloud.v1.OperationMetadata
     >
   > {
+    this._log.info('rollbackAwsNodePoolUpdate long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -2419,8 +2825,40 @@ export class AwsClustersClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.deleteAwsNodePool(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.gkemulticloud.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('deleteAwsNodePool response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('deleteAwsNodePool request %j', request);
+    return this.innerApiCalls
+      .deleteAwsNodePool(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.gkemulticloud.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteAwsNodePool response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `deleteAwsNodePool()`.
@@ -2441,6 +2879,7 @@ export class AwsClustersClient {
       protos.google.cloud.gkemulticloud.v1.OperationMetadata
     >
   > {
+    this._log.info('deleteAwsNodePool long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -2565,8 +3004,36 @@ export class AwsClustersClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.listAwsClusters(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.gkemulticloud.v1.IListAwsClustersRequest,
+          | protos.google.cloud.gkemulticloud.v1.IListAwsClustersResponse
+          | null
+          | undefined,
+          protos.google.cloud.gkemulticloud.v1.IAwsCluster
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listAwsClusters values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listAwsClusters request %j', request);
+    return this.innerApiCalls
+      .listAwsClusters(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.gkemulticloud.v1.IAwsCluster[],
+          protos.google.cloud.gkemulticloud.v1.IListAwsClustersRequest | null,
+          protos.google.cloud.gkemulticloud.v1.IListAwsClustersResponse,
+        ]) => {
+          this._log.info('listAwsClusters values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -2618,7 +3085,10 @@ export class AwsClustersClient {
       });
     const defaultCallSettings = this._defaults['listAwsClusters'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listAwsClusters stream %j', request);
     return this.descriptors.page.listAwsClusters.createStream(
       this.innerApiCalls.listAwsClusters as GaxCall,
       request,
@@ -2678,7 +3148,10 @@ export class AwsClustersClient {
       });
     const defaultCallSettings = this._defaults['listAwsClusters'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listAwsClusters iterate %j', request);
     return this.descriptors.page.listAwsClusters.asyncIterate(
       this.innerApiCalls['listAwsClusters'] as GaxCall,
       request as {},
@@ -2796,8 +3269,36 @@ export class AwsClustersClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.listAwsNodePools(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.gkemulticloud.v1.IListAwsNodePoolsRequest,
+          | protos.google.cloud.gkemulticloud.v1.IListAwsNodePoolsResponse
+          | null
+          | undefined,
+          protos.google.cloud.gkemulticloud.v1.IAwsNodePool
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listAwsNodePools values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listAwsNodePools request %j', request);
+    return this.innerApiCalls
+      .listAwsNodePools(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.gkemulticloud.v1.IAwsNodePool[],
+          protos.google.cloud.gkemulticloud.v1.IListAwsNodePoolsRequest | null,
+          protos.google.cloud.gkemulticloud.v1.IListAwsNodePoolsResponse,
+        ]) => {
+          this._log.info('listAwsNodePools values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -2850,7 +3351,10 @@ export class AwsClustersClient {
       });
     const defaultCallSettings = this._defaults['listAwsNodePools'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listAwsNodePools stream %j', request);
     return this.descriptors.page.listAwsNodePools.createStream(
       this.innerApiCalls.listAwsNodePools as GaxCall,
       request,
@@ -2911,7 +3415,10 @@ export class AwsClustersClient {
       });
     const defaultCallSettings = this._defaults['listAwsNodePools'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listAwsNodePools iterate %j', request);
     return this.descriptors.page.listAwsNodePools.asyncIterate(
       this.innerApiCalls['listAwsNodePools'] as GaxCall,
       request as {},
@@ -3012,7 +3519,7 @@ export class AwsClustersClient {
   listOperationsAsync(
     request: protos.google.longrunning.ListOperationsRequest,
     options?: gax.CallOptions
-  ): AsyncIterable<protos.google.longrunning.ListOperationsResponse> {
+  ): AsyncIterable<protos.google.longrunning.IOperation> {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
@@ -3691,6 +4198,7 @@ export class AwsClustersClient {
   close(): Promise<void> {
     if (this.awsClustersStub && !this._terminated) {
       return this.awsClustersStub.then(stub => {
+        this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
         this.operationsClient.close();

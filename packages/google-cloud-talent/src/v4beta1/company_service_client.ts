@@ -29,6 +29,7 @@ import type {
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
+import {loggingUtils as logging} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -53,6 +54,8 @@ export class CompanyServiceClient {
   private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
+  private _log = logging.log('talent');
+
   auth: gax.GoogleAuth;
   descriptors: Descriptors = {
     page: {},
@@ -87,7 +90,7 @@ export class CompanyServiceClient {
    *     Developer's Console, e.g. 'grape-spaceship-123'. We will also check
    *     the environment variable GCLOUD_PROJECT for your project ID. If your
    *     app is running in an environment which supports
-   *     {@link https://developers.google.com/identity/protocols/application-default-credentials Application Default Credentials},
+   *     {@link https://cloud.google.com/docs/authentication/application-default-credentials Application Default Credentials},
    *     your project ID will be detected automatically.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
@@ -495,8 +498,36 @@ export class CompanyServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.createCompany(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('createCompany request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.talent.v4beta1.ICompany,
+          | protos.google.cloud.talent.v4beta1.ICreateCompanyRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('createCompany response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .createCompany(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.talent.v4beta1.ICompany,
+          protos.google.cloud.talent.v4beta1.ICreateCompanyRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createCompany response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Retrieves specified company.
@@ -586,8 +617,36 @@ export class CompanyServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.getCompany(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('getCompany request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.talent.v4beta1.ICompany,
+          | protos.google.cloud.talent.v4beta1.IGetCompanyRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getCompany response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getCompany(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.talent.v4beta1.ICompany,
+          protos.google.cloud.talent.v4beta1.IGetCompanyRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getCompany response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Updates specified company.
@@ -689,8 +748,36 @@ export class CompanyServiceClient {
       this._gaxModule.routingHeader.fromParams({
         'company.name': request.company!.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.updateCompany(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('updateCompany request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.talent.v4beta1.ICompany,
+          | protos.google.cloud.talent.v4beta1.IUpdateCompanyRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('updateCompany response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .updateCompany(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.talent.v4beta1.ICompany,
+          protos.google.cloud.talent.v4beta1.IUpdateCompanyRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('updateCompany response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Deletes specified company.
@@ -787,8 +874,36 @@ export class CompanyServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.deleteCompany(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('deleteCompany request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.cloud.talent.v4beta1.IDeleteCompanyRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('deleteCompany response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .deleteCompany(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.protobuf.IEmpty,
+          protos.google.cloud.talent.v4beta1.IDeleteCompanyRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteCompany response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
 
   /**
@@ -900,8 +1015,36 @@ export class CompanyServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.listCompanies(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.talent.v4beta1.IListCompaniesRequest,
+          | protos.google.cloud.talent.v4beta1.IListCompaniesResponse
+          | null
+          | undefined,
+          protos.google.cloud.talent.v4beta1.ICompany
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listCompanies values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listCompanies request %j', request);
+    return this.innerApiCalls
+      .listCompanies(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.talent.v4beta1.ICompany[],
+          protos.google.cloud.talent.v4beta1.IListCompaniesRequest | null,
+          protos.google.cloud.talent.v4beta1.IListCompaniesResponse,
+        ]) => {
+          this._log.info('listCompanies values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -954,7 +1097,10 @@ export class CompanyServiceClient {
       });
     const defaultCallSettings = this._defaults['listCompanies'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listCompanies stream %j', request);
     return this.descriptors.page.listCompanies.createStream(
       this.innerApiCalls.listCompanies as GaxCall,
       request,
@@ -1015,7 +1161,10 @@ export class CompanyServiceClient {
       });
     const defaultCallSettings = this._defaults['listCompanies'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listCompanies iterate %j', request);
     return this.descriptors.page.listCompanies.asyncIterate(
       this.innerApiCalls['listCompanies'] as GaxCall,
       request as {},
@@ -1281,6 +1430,7 @@ export class CompanyServiceClient {
   close(): Promise<void> {
     if (this.companyServiceStub && !this._terminated) {
       return this.companyServiceStub.then(stub => {
+        this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
       });

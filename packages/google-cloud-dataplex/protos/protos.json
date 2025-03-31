@@ -1,7 +1,4 @@
 {
-  "options": {
-    "syntax": "proto3"
-  },
   "nested": {
     "google": {
       "nested": {
@@ -3680,7 +3677,8 @@
                               "values": {
                                 "SYNC_MODE_UNSPECIFIED": 0,
                                 "FULL": 1,
-                                "INCREMENTAL": 2
+                                "INCREMENTAL": 2,
+                                "NONE": 3
                               }
                             },
                             "LogLevel": {
@@ -6432,6 +6430,13 @@
                                 "(google.api.field_behavior)": "OPTIONAL",
                                 "(google.api.resource_reference).type": "bigqueryconnection.googleapis.com/Connection"
                               }
+                            },
+                            "location": {
+                              "type": "string",
+                              "id": 4,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
                             }
                           },
                           "nested": {
@@ -7538,6 +7543,7 @@
                     },
                     "DataTaxonomyService": {
                       "options": {
+                        "deprecated": true,
                         "(google.api.default_host)": "dataplex.googleapis.com",
                         "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/cloud-platform"
                       },
@@ -7546,6 +7552,7 @@
                           "requestType": "CreateDataTaxonomyRequest",
                           "responseType": "google.longrunning.Operation",
                           "options": {
+                            "deprecated": true,
                             "(google.api.http).post": "/v1/{parent=projects/*/locations/*}/dataTaxonomies",
                             "(google.api.http).body": "data_taxonomy",
                             "(google.api.method_signature)": "parent,data_taxonomy,data_taxonomy_id",
@@ -7553,6 +7560,9 @@
                             "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
                           },
                           "parsedOptions": [
+                            {
+                              "deprecated": true
+                            },
                             {
                               "(google.api.http)": {
                                 "post": "/v1/{parent=projects/*/locations/*}/dataTaxonomies",
@@ -7574,6 +7584,7 @@
                           "requestType": "UpdateDataTaxonomyRequest",
                           "responseType": "google.longrunning.Operation",
                           "options": {
+                            "deprecated": true,
                             "(google.api.http).patch": "/v1/{data_taxonomy.name=projects/*/locations/*/dataTaxonomies/*}",
                             "(google.api.http).body": "data_taxonomy",
                             "(google.api.method_signature)": "data_taxonomy,update_mask",
@@ -7581,6 +7592,9 @@
                             "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
                           },
                           "parsedOptions": [
+                            {
+                              "deprecated": true
+                            },
                             {
                               "(google.api.http)": {
                                 "patch": "/v1/{data_taxonomy.name=projects/*/locations/*/dataTaxonomies/*}",
@@ -7602,12 +7616,16 @@
                           "requestType": "DeleteDataTaxonomyRequest",
                           "responseType": "google.longrunning.Operation",
                           "options": {
+                            "deprecated": true,
                             "(google.api.http).delete": "/v1/{name=projects/*/locations/*/dataTaxonomies/*}",
                             "(google.api.method_signature)": "name",
                             "(google.longrunning.operation_info).response_type": "google.protobuf.Empty",
                             "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
                           },
                           "parsedOptions": [
+                            {
+                              "deprecated": true
+                            },
                             {
                               "(google.api.http)": {
                                 "delete": "/v1/{name=projects/*/locations/*/dataTaxonomies/*}"
@@ -7628,10 +7646,14 @@
                           "requestType": "ListDataTaxonomiesRequest",
                           "responseType": "ListDataTaxonomiesResponse",
                           "options": {
+                            "deprecated": true,
                             "(google.api.http).get": "/v1/{parent=projects/*/locations/*}/dataTaxonomies",
                             "(google.api.method_signature)": "parent"
                           },
                           "parsedOptions": [
+                            {
+                              "deprecated": true
+                            },
                             {
                               "(google.api.http)": {
                                 "get": "/v1/{parent=projects/*/locations/*}/dataTaxonomies"
@@ -7646,10 +7668,14 @@
                           "requestType": "GetDataTaxonomyRequest",
                           "responseType": "DataTaxonomy",
                           "options": {
+                            "deprecated": true,
                             "(google.api.http).get": "/v1/{name=projects/*/locations/*/dataTaxonomies/*}",
                             "(google.api.method_signature)": "name"
                           },
                           "parsedOptions": [
+                            {
+                              "deprecated": true
+                            },
                             {
                               "(google.api.http)": {
                                 "get": "/v1/{name=projects/*/locations/*/dataTaxonomies/*}"
@@ -7664,6 +7690,7 @@
                           "requestType": "CreateDataAttributeBindingRequest",
                           "responseType": "google.longrunning.Operation",
                           "options": {
+                            "deprecated": true,
                             "(google.api.http).post": "/v1/{parent=projects/*/locations/*}/dataAttributeBindings",
                             "(google.api.http).body": "data_attribute_binding",
                             "(google.api.method_signature)": "parent,data_attribute_binding,data_attribute_binding_id",
@@ -7671,6 +7698,9 @@
                             "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
                           },
                           "parsedOptions": [
+                            {
+                              "deprecated": true
+                            },
                             {
                               "(google.api.http)": {
                                 "post": "/v1/{parent=projects/*/locations/*}/dataAttributeBindings",
@@ -7692,6 +7722,7 @@
                           "requestType": "UpdateDataAttributeBindingRequest",
                           "responseType": "google.longrunning.Operation",
                           "options": {
+                            "deprecated": true,
                             "(google.api.http).patch": "/v1/{data_attribute_binding.name=projects/*/locations/*/dataAttributeBindings/*}",
                             "(google.api.http).body": "data_attribute_binding",
                             "(google.api.method_signature)": "data_attribute_binding,update_mask",
@@ -7699,6 +7730,9 @@
                             "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
                           },
                           "parsedOptions": [
+                            {
+                              "deprecated": true
+                            },
                             {
                               "(google.api.http)": {
                                 "patch": "/v1/{data_attribute_binding.name=projects/*/locations/*/dataAttributeBindings/*}",
@@ -7720,12 +7754,16 @@
                           "requestType": "DeleteDataAttributeBindingRequest",
                           "responseType": "google.longrunning.Operation",
                           "options": {
+                            "deprecated": true,
                             "(google.api.http).delete": "/v1/{name=projects/*/locations/*/dataAttributeBindings/*}",
                             "(google.api.method_signature)": "name",
                             "(google.longrunning.operation_info).response_type": "google.protobuf.Empty",
                             "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
                           },
                           "parsedOptions": [
+                            {
+                              "deprecated": true
+                            },
                             {
                               "(google.api.http)": {
                                 "delete": "/v1/{name=projects/*/locations/*/dataAttributeBindings/*}"
@@ -7746,10 +7784,14 @@
                           "requestType": "ListDataAttributeBindingsRequest",
                           "responseType": "ListDataAttributeBindingsResponse",
                           "options": {
+                            "deprecated": true,
                             "(google.api.http).get": "/v1/{parent=projects/*/locations/*}/dataAttributeBindings",
                             "(google.api.method_signature)": "parent"
                           },
                           "parsedOptions": [
+                            {
+                              "deprecated": true
+                            },
                             {
                               "(google.api.http)": {
                                 "get": "/v1/{parent=projects/*/locations/*}/dataAttributeBindings"
@@ -7764,10 +7806,14 @@
                           "requestType": "GetDataAttributeBindingRequest",
                           "responseType": "DataAttributeBinding",
                           "options": {
+                            "deprecated": true,
                             "(google.api.http).get": "/v1/{name=projects/*/locations/*/dataAttributeBindings/*}",
                             "(google.api.method_signature)": "name"
                           },
                           "parsedOptions": [
+                            {
+                              "deprecated": true
+                            },
                             {
                               "(google.api.http)": {
                                 "get": "/v1/{name=projects/*/locations/*/dataAttributeBindings/*}"
@@ -7782,6 +7828,7 @@
                           "requestType": "CreateDataAttributeRequest",
                           "responseType": "google.longrunning.Operation",
                           "options": {
+                            "deprecated": true,
                             "(google.api.http).post": "/v1/{parent=projects/*/locations/*/dataTaxonomies/*}/attributes",
                             "(google.api.http).body": "data_attribute",
                             "(google.api.method_signature)": "parent,data_attribute,data_attribute_id",
@@ -7789,6 +7836,9 @@
                             "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
                           },
                           "parsedOptions": [
+                            {
+                              "deprecated": true
+                            },
                             {
                               "(google.api.http)": {
                                 "post": "/v1/{parent=projects/*/locations/*/dataTaxonomies/*}/attributes",
@@ -7810,6 +7860,7 @@
                           "requestType": "UpdateDataAttributeRequest",
                           "responseType": "google.longrunning.Operation",
                           "options": {
+                            "deprecated": true,
                             "(google.api.http).patch": "/v1/{data_attribute.name=projects/*/locations/*/dataTaxonomies/*/attributes/*}",
                             "(google.api.http).body": "data_attribute",
                             "(google.api.method_signature)": "data_attribute,update_mask",
@@ -7817,6 +7868,9 @@
                             "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
                           },
                           "parsedOptions": [
+                            {
+                              "deprecated": true
+                            },
                             {
                               "(google.api.http)": {
                                 "patch": "/v1/{data_attribute.name=projects/*/locations/*/dataTaxonomies/*/attributes/*}",
@@ -7838,12 +7892,16 @@
                           "requestType": "DeleteDataAttributeRequest",
                           "responseType": "google.longrunning.Operation",
                           "options": {
+                            "deprecated": true,
                             "(google.api.http).delete": "/v1/{name=projects/*/locations/*/dataTaxonomies/*/attributes/*}",
                             "(google.api.method_signature)": "name",
                             "(google.longrunning.operation_info).response_type": "google.protobuf.Empty",
                             "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
                           },
                           "parsedOptions": [
+                            {
+                              "deprecated": true
+                            },
                             {
                               "(google.api.http)": {
                                 "delete": "/v1/{name=projects/*/locations/*/dataTaxonomies/*/attributes/*}"
@@ -7864,10 +7922,14 @@
                           "requestType": "ListDataAttributesRequest",
                           "responseType": "ListDataAttributesResponse",
                           "options": {
+                            "deprecated": true,
                             "(google.api.http).get": "/v1/{parent=projects/*/locations/*/dataTaxonomies/*}/attributes",
                             "(google.api.method_signature)": "parent"
                           },
                           "parsedOptions": [
+                            {
+                              "deprecated": true
+                            },
                             {
                               "(google.api.http)": {
                                 "get": "/v1/{parent=projects/*/locations/*/dataTaxonomies/*}/attributes"
@@ -7882,10 +7944,14 @@
                           "requestType": "GetDataAttributeRequest",
                           "responseType": "DataAttribute",
                           "options": {
+                            "deprecated": true,
                             "(google.api.http).get": "/v1/{name=projects/*/locations/*/dataTaxonomies/*/attributes/*}",
                             "(google.api.method_signature)": "name"
                           },
                           "parsedOptions": [
+                            {
+                              "deprecated": true
+                            },
                             {
                               "(google.api.http)": {
                                 "get": "/v1/{name=projects/*/locations/*/dataTaxonomies/*/attributes/*}"
@@ -7900,6 +7966,7 @@
                     },
                     "DataTaxonomy": {
                       "options": {
+                        "deprecated": true,
                         "(google.api.resource).type": "dataplex.googleapis.com/DataTaxonomy",
                         "(google.api.resource).pattern": "projects/{project}/locations/{location}/dataTaxonomies/{data_taxonomy_id}"
                       },
@@ -7977,6 +8044,7 @@
                     },
                     "DataAttribute": {
                       "options": {
+                        "deprecated": true,
                         "(google.api.resource).type": "dataplex.googleapis.com/DataAttribute",
                         "(google.api.resource).pattern": "projects/{project}/locations/{location}/dataTaxonomies/{dataTaxonomy}/attributes/{data_attribute_id}"
                       },
@@ -8069,6 +8137,7 @@
                     },
                     "DataAttributeBinding": {
                       "options": {
+                        "deprecated": true,
                         "(google.api.resource).type": "dataplex.googleapis.com/DataAttributeBinding",
                         "(google.api.resource).pattern": "projects/{project}/locations/{location}/dataAttributeBindings/{data_attribute_binding_id}"
                       },
@@ -8184,6 +8253,9 @@
                       }
                     },
                     "CreateDataTaxonomyRequest": {
+                      "options": {
+                        "deprecated": true
+                      },
                       "fields": {
                         "parent": {
                           "type": "string",
@@ -8217,6 +8289,9 @@
                       }
                     },
                     "UpdateDataTaxonomyRequest": {
+                      "options": {
+                        "deprecated": true
+                      },
                       "fields": {
                         "updateMask": {
                           "type": "google.protobuf.FieldMask",
@@ -8242,6 +8317,9 @@
                       }
                     },
                     "GetDataTaxonomyRequest": {
+                      "options": {
+                        "deprecated": true
+                      },
                       "fields": {
                         "name": {
                           "type": "string",
@@ -8312,6 +8390,9 @@
                       }
                     },
                     "DeleteDataTaxonomyRequest": {
+                      "options": {
+                        "deprecated": true
+                      },
                       "fields": {
                         "name": {
                           "type": "string",
@@ -10186,6 +10267,38 @@
                             "RESULT_UNSPECIFIED": 0,
                             "PASSED": 1,
                             "FAILED": 2
+                          }
+                        }
+                      }
+                    },
+                    "BusinessGlossaryEvent": {
+                      "fields": {
+                        "message": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "eventType": {
+                          "type": "EventType",
+                          "id": 2
+                        },
+                        "resource": {
+                          "type": "string",
+                          "id": 3
+                        }
+                      },
+                      "nested": {
+                        "EventType": {
+                          "values": {
+                            "EVENT_TYPE_UNSPECIFIED": 0,
+                            "GLOSSARY_CREATE": 1,
+                            "GLOSSARY_UPDATE": 2,
+                            "GLOSSARY_DELETE": 3,
+                            "GLOSSARY_CATEGORY_CREATE": 4,
+                            "GLOSSARY_CATEGORY_UPDATE": 5,
+                            "GLOSSARY_CATEGORY_DELETE": 6,
+                            "GLOSSARY_TERM_CREATE": 7,
+                            "GLOSSARY_TERM_UPDATE": 8,
+                            "GLOSSARY_TERM_DELETE": 9
                           }
                         }
                       }

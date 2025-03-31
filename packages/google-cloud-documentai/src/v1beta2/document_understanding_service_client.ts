@@ -856,7 +856,7 @@ export class DocumentUnderstandingServiceClient {
   listOperationsAsync(
     request: protos.google.longrunning.ListOperationsRequest,
     options?: gax.CallOptions
-  ): AsyncIterable<protos.google.longrunning.ListOperationsResponse> {
+  ): AsyncIterable<protos.google.longrunning.IOperation> {
     return this.operationsClient.listOperationsAsync(request, options);
   }
   /**

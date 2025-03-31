@@ -253,7 +253,9 @@ describe('v1.AuthorizedDomainsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      client.initialize().catch(err => {
+        throw err;
+      });
       assert(client.authorizedDomainsStub);
       client.close().then(() => {
         done();
@@ -312,7 +314,7 @@ describe('v1.AuthorizedDomainsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.appengine.v1.ListAuthorizedDomainsRequest()
       );
@@ -321,7 +323,7 @@ describe('v1.AuthorizedDomainsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.appengine.v1.AuthorizedDomain()
@@ -352,7 +354,7 @@ describe('v1.AuthorizedDomainsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.appengine.v1.ListAuthorizedDomainsRequest()
       );
@@ -361,7 +363,7 @@ describe('v1.AuthorizedDomainsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.appengine.v1.AuthorizedDomain()
@@ -407,7 +409,7 @@ describe('v1.AuthorizedDomainsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.appengine.v1.ListAuthorizedDomainsRequest()
       );
@@ -416,7 +418,7 @@ describe('v1.AuthorizedDomainsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listAuthorizedDomains = stubSimpleCall(
         undefined,
@@ -441,7 +443,7 @@ describe('v1.AuthorizedDomainsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.appengine.v1.ListAuthorizedDomainsRequest()
       );
@@ -450,7 +452,7 @@ describe('v1.AuthorizedDomainsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.appengine.v1.AuthorizedDomain()
@@ -507,7 +509,7 @@ describe('v1.AuthorizedDomainsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.appengine.v1.ListAuthorizedDomainsRequest()
       );
@@ -516,7 +518,7 @@ describe('v1.AuthorizedDomainsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listAuthorizedDomains.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -562,7 +564,7 @@ describe('v1.AuthorizedDomainsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.appengine.v1.ListAuthorizedDomainsRequest()
       );
@@ -571,7 +573,7 @@ describe('v1.AuthorizedDomainsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.appengine.v1.AuthorizedDomain()
@@ -615,7 +617,7 @@ describe('v1.AuthorizedDomainsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.appengine.v1.ListAuthorizedDomainsRequest()
       );
@@ -624,7 +626,7 @@ describe('v1.AuthorizedDomainsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listAuthorizedDomains.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -656,7 +658,7 @@ describe('v1.AuthorizedDomainsClient', () => {
   });
 
   describe('Path templates', () => {
-    describe('instance', () => {
+    describe('instance', async () => {
       const fakePath = '/rendered/path/instance';
       const expectedParameters = {
         app: 'appValue',
@@ -668,7 +670,7 @@ describe('v1.AuthorizedDomainsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.instancePathTemplate.render = sinon
         .stub()
         .returns(fakePath);

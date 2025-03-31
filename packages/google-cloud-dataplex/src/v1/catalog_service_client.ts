@@ -33,6 +33,7 @@ import type {
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
+import {loggingUtils as logging} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -61,6 +62,8 @@ export class CatalogServiceClient {
   private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
+  private _log = logging.log('dataplex');
+
   auth: gax.GoogleAuth;
   descriptors: Descriptors = {
     page: {},
@@ -97,7 +100,7 @@ export class CatalogServiceClient {
    *     Developer's Console, e.g. 'grape-spaceship-123'. We will also check
    *     the environment variable GCLOUD_PROJECT for your project ID. If your
    *     app is running in an environment which supports
-   *     {@link https://developers.google.com/identity/protocols/application-default-credentials Application Default Credentials},
+   *     {@link https://cloud.google.com/docs/authentication/application-default-credentials Application Default Credentials},
    *     your project ID will be detected automatically.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
@@ -977,8 +980,36 @@ export class CatalogServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.getEntryType(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('getEntryType request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.dataplex.v1.IEntryType,
+          | protos.google.cloud.dataplex.v1.IGetEntryTypeRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getEntryType response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getEntryType(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.dataplex.v1.IEntryType,
+          protos.google.cloud.dataplex.v1.IGetEntryTypeRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getEntryType response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Gets an AspectType.
@@ -1062,8 +1093,36 @@ export class CatalogServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.getAspectType(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('getAspectType request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.dataplex.v1.IAspectType,
+          | protos.google.cloud.dataplex.v1.IGetAspectTypeRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getAspectType response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getAspectType(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.dataplex.v1.IAspectType,
+          protos.google.cloud.dataplex.v1.IGetAspectTypeRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getAspectType response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Gets an EntryGroup.
@@ -1147,8 +1206,36 @@ export class CatalogServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.getEntryGroup(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('getEntryGroup request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.dataplex.v1.IEntryGroup,
+          | protos.google.cloud.dataplex.v1.IGetEntryGroupRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getEntryGroup response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getEntryGroup(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.dataplex.v1.IEntryGroup,
+          protos.google.cloud.dataplex.v1.IGetEntryGroupRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getEntryGroup response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Creates an Entry.
@@ -1255,8 +1342,36 @@ export class CatalogServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.createEntry(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('createEntry request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.dataplex.v1.IEntry,
+          | protos.google.cloud.dataplex.v1.ICreateEntryRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('createEntry response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .createEntry(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.dataplex.v1.IEntry,
+          protos.google.cloud.dataplex.v1.ICreateEntryRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createEntry response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Updates an Entry.
@@ -1371,8 +1486,36 @@ export class CatalogServiceClient {
       this._gaxModule.routingHeader.fromParams({
         'entry.name': request.entry!.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.updateEntry(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('updateEntry request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.dataplex.v1.IEntry,
+          | protos.google.cloud.dataplex.v1.IUpdateEntryRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('updateEntry response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .updateEntry(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.dataplex.v1.IEntry,
+          protos.google.cloud.dataplex.v1.IUpdateEntryRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('updateEntry response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Deletes an Entry.
@@ -1456,16 +1599,39 @@ export class CatalogServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.deleteEntry(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('deleteEntry request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.dataplex.v1.IEntry,
+          | protos.google.cloud.dataplex.v1.IDeleteEntryRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('deleteEntry response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .deleteEntry(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.dataplex.v1.IEntry,
+          protos.google.cloud.dataplex.v1.IDeleteEntryRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteEntry response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Gets an Entry.
-   *
-   * **Caution**: The BigQuery metadata that is stored in Dataplex Catalog is
-   * changing. For more information, see [Changes to BigQuery metadata stored in
-   * Dataplex
-   * Catalog](https://cloud.google.com/dataplex/docs/biqquery-metadata-changes).
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -1553,16 +1719,37 @@ export class CatalogServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.getEntry(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('getEntry request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.dataplex.v1.IEntry,
+          protos.google.cloud.dataplex.v1.IGetEntryRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getEntry response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getEntry(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.dataplex.v1.IEntry,
+          protos.google.cloud.dataplex.v1.IGetEntryRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getEntry response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
-   * Looks up a single Entry by name using the permission on the source system.
-   *
-   * **Caution**: The BigQuery metadata that is stored in Dataplex Catalog is
-   * changing. For more information, see [Changes to BigQuery metadata stored in
-   * Dataplex
-   * Catalog](https://cloud.google.com/dataplex/docs/biqquery-metadata-changes).
+   * Looks up an entry by name using the permission on the source system.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -1655,8 +1842,36 @@ export class CatalogServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.lookupEntry(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('lookupEntry request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.dataplex.v1.IEntry,
+          | protos.google.cloud.dataplex.v1.ILookupEntryRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('lookupEntry response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .lookupEntry(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.dataplex.v1.IEntry,
+          protos.google.cloud.dataplex.v1.ILookupEntryRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('lookupEntry response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Gets a metadata job.
@@ -1740,8 +1955,36 @@ export class CatalogServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.getMetadataJob(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('getMetadataJob request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.dataplex.v1.IMetadataJob,
+          | protos.google.cloud.dataplex.v1.IGetMetadataJobRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getMetadataJob response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getMetadataJob(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.dataplex.v1.IMetadataJob,
+          protos.google.cloud.dataplex.v1.IGetMetadataJobRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getMetadataJob response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Cancels a metadata job.
@@ -1836,8 +2079,36 @@ export class CatalogServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.cancelMetadataJob(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('cancelMetadataJob request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.cloud.dataplex.v1.ICancelMetadataJobRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('cancelMetadataJob response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .cancelMetadataJob(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.protobuf.IEmpty,
+          protos.google.cloud.dataplex.v1.ICancelMetadataJobRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('cancelMetadataJob response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
 
   /**
@@ -1948,8 +2219,40 @@ export class CatalogServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.createEntryType(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.dataplex.v1.IEntryType,
+            protos.google.cloud.dataplex.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('createEntryType response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('createEntryType request %j', request);
+    return this.innerApiCalls
+      .createEntryType(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.dataplex.v1.IEntryType,
+            protos.google.cloud.dataplex.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createEntryType response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `createEntryType()`.
@@ -1970,6 +2273,7 @@ export class CatalogServiceClient {
       protos.google.cloud.dataplex.v1.OperationMetadata
     >
   > {
+    this._log.info('createEntryType long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -2089,8 +2393,40 @@ export class CatalogServiceClient {
       this._gaxModule.routingHeader.fromParams({
         'entry_type.name': request.entryType!.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.updateEntryType(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.dataplex.v1.IEntryType,
+            protos.google.cloud.dataplex.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('updateEntryType response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('updateEntryType request %j', request);
+    return this.innerApiCalls
+      .updateEntryType(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.dataplex.v1.IEntryType,
+            protos.google.cloud.dataplex.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('updateEntryType response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `updateEntryType()`.
@@ -2111,6 +2447,7 @@ export class CatalogServiceClient {
       protos.google.cloud.dataplex.v1.OperationMetadata
     >
   > {
+    this._log.info('updateEntryType long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -2229,8 +2566,40 @@ export class CatalogServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.deleteEntryType(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.dataplex.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('deleteEntryType response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('deleteEntryType request %j', request);
+    return this.innerApiCalls
+      .deleteEntryType(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.dataplex.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteEntryType response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `deleteEntryType()`.
@@ -2251,6 +2620,7 @@ export class CatalogServiceClient {
       protos.google.cloud.dataplex.v1.OperationMetadata
     >
   > {
+    this._log.info('deleteEntryType long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -2374,8 +2744,40 @@ export class CatalogServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.createAspectType(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.dataplex.v1.IAspectType,
+            protos.google.cloud.dataplex.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('createAspectType response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('createAspectType request %j', request);
+    return this.innerApiCalls
+      .createAspectType(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.dataplex.v1.IAspectType,
+            protos.google.cloud.dataplex.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createAspectType response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `createAspectType()`.
@@ -2396,6 +2798,7 @@ export class CatalogServiceClient {
       protos.google.cloud.dataplex.v1.OperationMetadata
     >
   > {
+    this._log.info('createAspectType long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -2515,8 +2918,40 @@ export class CatalogServiceClient {
       this._gaxModule.routingHeader.fromParams({
         'aspect_type.name': request.aspectType!.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.updateAspectType(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.dataplex.v1.IAspectType,
+            protos.google.cloud.dataplex.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('updateAspectType response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('updateAspectType request %j', request);
+    return this.innerApiCalls
+      .updateAspectType(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.dataplex.v1.IAspectType,
+            protos.google.cloud.dataplex.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('updateAspectType response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `updateAspectType()`.
@@ -2537,6 +2972,7 @@ export class CatalogServiceClient {
       protos.google.cloud.dataplex.v1.OperationMetadata
     >
   > {
+    this._log.info('updateAspectType long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -2656,8 +3092,40 @@ export class CatalogServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.deleteAspectType(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.dataplex.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('deleteAspectType response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('deleteAspectType request %j', request);
+    return this.innerApiCalls
+      .deleteAspectType(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.dataplex.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteAspectType response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `deleteAspectType()`.
@@ -2678,6 +3146,7 @@ export class CatalogServiceClient {
       protos.google.cloud.dataplex.v1.OperationMetadata
     >
   > {
+    this._log.info('deleteAspectType long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -2801,8 +3270,40 @@ export class CatalogServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.createEntryGroup(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.dataplex.v1.IEntryGroup,
+            protos.google.cloud.dataplex.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('createEntryGroup response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('createEntryGroup request %j', request);
+    return this.innerApiCalls
+      .createEntryGroup(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.dataplex.v1.IEntryGroup,
+            protos.google.cloud.dataplex.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createEntryGroup response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `createEntryGroup()`.
@@ -2823,6 +3324,7 @@ export class CatalogServiceClient {
       protos.google.cloud.dataplex.v1.OperationMetadata
     >
   > {
+    this._log.info('createEntryGroup long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -2942,8 +3444,40 @@ export class CatalogServiceClient {
       this._gaxModule.routingHeader.fromParams({
         'entry_group.name': request.entryGroup!.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.updateEntryGroup(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.dataplex.v1.IEntryGroup,
+            protos.google.cloud.dataplex.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('updateEntryGroup response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('updateEntryGroup request %j', request);
+    return this.innerApiCalls
+      .updateEntryGroup(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.dataplex.v1.IEntryGroup,
+            protos.google.cloud.dataplex.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('updateEntryGroup response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `updateEntryGroup()`.
@@ -2964,6 +3498,7 @@ export class CatalogServiceClient {
       protos.google.cloud.dataplex.v1.OperationMetadata
     >
   > {
+    this._log.info('updateEntryGroup long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -3083,8 +3618,40 @@ export class CatalogServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.deleteEntryGroup(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.dataplex.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('deleteEntryGroup response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('deleteEntryGroup request %j', request);
+    return this.innerApiCalls
+      .deleteEntryGroup(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.dataplex.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteEntryGroup response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `deleteEntryGroup()`.
@@ -3105,6 +3672,7 @@ export class CatalogServiceClient {
       protos.google.cloud.dataplex.v1.OperationMetadata
     >
   > {
+    this._log.info('deleteEntryGroup long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -3229,8 +3797,40 @@ export class CatalogServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.createMetadataJob(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.dataplex.v1.IMetadataJob,
+            protos.google.cloud.dataplex.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('createMetadataJob response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('createMetadataJob request %j', request);
+    return this.innerApiCalls
+      .createMetadataJob(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.dataplex.v1.IMetadataJob,
+            protos.google.cloud.dataplex.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createMetadataJob response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `createMetadataJob()`.
@@ -3251,6 +3851,7 @@ export class CatalogServiceClient {
       protos.google.cloud.dataplex.v1.OperationMetadata
     >
   > {
+    this._log.info('createMetadataJob long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -3380,12 +3981,40 @@ export class CatalogServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.listEntryTypes(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.dataplex.v1.IListEntryTypesRequest,
+          | protos.google.cloud.dataplex.v1.IListEntryTypesResponse
+          | null
+          | undefined,
+          protos.google.cloud.dataplex.v1.IEntryType
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listEntryTypes values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listEntryTypes request %j', request);
+    return this.innerApiCalls
+      .listEntryTypes(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.dataplex.v1.IEntryType[],
+          protos.google.cloud.dataplex.v1.IListEntryTypesRequest | null,
+          protos.google.cloud.dataplex.v1.IListEntryTypesResponse,
+        ]) => {
+          this._log.info('listEntryTypes values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listEntryTypes`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
@@ -3439,7 +4068,10 @@ export class CatalogServiceClient {
       });
     const defaultCallSettings = this._defaults['listEntryTypes'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listEntryTypes stream %j', request);
     return this.descriptors.page.listEntryTypes.createStream(
       this.innerApiCalls.listEntryTypes as GaxCall,
       request,
@@ -3505,7 +4137,10 @@ export class CatalogServiceClient {
       });
     const defaultCallSettings = this._defaults['listEntryTypes'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listEntryTypes iterate %j', request);
     return this.descriptors.page.listEntryTypes.asyncIterate(
       this.innerApiCalls['listEntryTypes'] as GaxCall,
       request as {},
@@ -3626,12 +4261,40 @@ export class CatalogServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.listAspectTypes(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.dataplex.v1.IListAspectTypesRequest,
+          | protos.google.cloud.dataplex.v1.IListAspectTypesResponse
+          | null
+          | undefined,
+          protos.google.cloud.dataplex.v1.IAspectType
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listAspectTypes values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listAspectTypes request %j', request);
+    return this.innerApiCalls
+      .listAspectTypes(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.dataplex.v1.IAspectType[],
+          protos.google.cloud.dataplex.v1.IListAspectTypesRequest | null,
+          protos.google.cloud.dataplex.v1.IListAspectTypesResponse,
+        ]) => {
+          this._log.info('listAspectTypes values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listAspectTypes`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
@@ -3685,7 +4348,10 @@ export class CatalogServiceClient {
       });
     const defaultCallSettings = this._defaults['listAspectTypes'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listAspectTypes stream %j', request);
     return this.descriptors.page.listAspectTypes.createStream(
       this.innerApiCalls.listAspectTypes as GaxCall,
       request,
@@ -3751,7 +4417,10 @@ export class CatalogServiceClient {
       });
     const defaultCallSettings = this._defaults['listAspectTypes'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listAspectTypes iterate %j', request);
     return this.descriptors.page.listAspectTypes.asyncIterate(
       this.innerApiCalls['listAspectTypes'] as GaxCall,
       request as {},
@@ -3864,12 +4533,40 @@ export class CatalogServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.listEntryGroups(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.dataplex.v1.IListEntryGroupsRequest,
+          | protos.google.cloud.dataplex.v1.IListEntryGroupsResponse
+          | null
+          | undefined,
+          protos.google.cloud.dataplex.v1.IEntryGroup
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listEntryGroups values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listEntryGroups request %j', request);
+    return this.innerApiCalls
+      .listEntryGroups(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.dataplex.v1.IEntryGroup[],
+          protos.google.cloud.dataplex.v1.IListEntryGroupsRequest | null,
+          protos.google.cloud.dataplex.v1.IListEntryGroupsResponse,
+        ]) => {
+          this._log.info('listEntryGroups values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listEntryGroups`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
@@ -3915,7 +4612,10 @@ export class CatalogServiceClient {
       });
     const defaultCallSettings = this._defaults['listEntryGroups'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listEntryGroups stream %j', request);
     return this.descriptors.page.listEntryGroups.createStream(
       this.innerApiCalls.listEntryGroups as GaxCall,
       request,
@@ -3973,7 +4673,10 @@ export class CatalogServiceClient {
       });
     const defaultCallSettings = this._defaults['listEntryGroups'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listEntryGroups iterate %j', request);
     return this.descriptors.page.listEntryGroups.asyncIterate(
       this.innerApiCalls['listEntryGroups'] as GaxCall,
       request as {},
@@ -4095,12 +4798,40 @@ export class CatalogServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.listEntries(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.dataplex.v1.IListEntriesRequest,
+          | protos.google.cloud.dataplex.v1.IListEntriesResponse
+          | null
+          | undefined,
+          protos.google.cloud.dataplex.v1.IEntry
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listEntries values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listEntries request %j', request);
+    return this.innerApiCalls
+      .listEntries(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.dataplex.v1.IEntry[],
+          protos.google.cloud.dataplex.v1.IListEntriesRequest | null,
+          protos.google.cloud.dataplex.v1.IListEntriesResponse,
+        ]) => {
+          this._log.info('listEntries values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listEntries`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
@@ -4161,7 +4892,10 @@ export class CatalogServiceClient {
       });
     const defaultCallSettings = this._defaults['listEntries'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listEntries stream %j', request);
     return this.descriptors.page.listEntries.createStream(
       this.innerApiCalls.listEntries as GaxCall,
       request,
@@ -4234,7 +4968,10 @@ export class CatalogServiceClient {
       });
     const defaultCallSettings = this._defaults['listEntries'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listEntries iterate %j', request);
     return this.descriptors.page.listEntries.asyncIterate(
       this.innerApiCalls['listEntries'] as GaxCall,
       request as {},
@@ -4263,6 +5000,7 @@ export class CatalogServiceClient {
    * @param {string} [request.orderBy]
    *   Optional. Specifies the ordering of results.
    *   Supported values are:
+   *
    *   * `relevance` (default)
    *   * `last_modified_timestamp`
    *   * `last_modified_timestamp asc`
@@ -4348,12 +5086,40 @@ export class CatalogServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.searchEntries(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.dataplex.v1.ISearchEntriesRequest,
+          | protos.google.cloud.dataplex.v1.ISearchEntriesResponse
+          | null
+          | undefined,
+          protos.google.cloud.dataplex.v1.ISearchEntriesResult
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('searchEntries values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('searchEntries request %j', request);
+    return this.innerApiCalls
+      .searchEntries(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.dataplex.v1.ISearchEntriesResult[],
+          protos.google.cloud.dataplex.v1.ISearchEntriesRequest | null,
+          protos.google.cloud.dataplex.v1.ISearchEntriesResponse,
+        ]) => {
+          this._log.info('searchEntries values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `searchEntries`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
@@ -4373,6 +5139,7 @@ export class CatalogServiceClient {
    * @param {string} [request.orderBy]
    *   Optional. Specifies the ordering of results.
    *   Supported values are:
+   *
    *   * `relevance` (default)
    *   * `last_modified_timestamp`
    *   * `last_modified_timestamp asc`
@@ -4406,7 +5173,10 @@ export class CatalogServiceClient {
       });
     const defaultCallSettings = this._defaults['searchEntries'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('searchEntries stream %j', request);
     return this.descriptors.page.searchEntries.createStream(
       this.innerApiCalls.searchEntries as GaxCall,
       request,
@@ -4437,6 +5207,7 @@ export class CatalogServiceClient {
    * @param {string} [request.orderBy]
    *   Optional. Specifies the ordering of results.
    *   Supported values are:
+   *
    *   * `relevance` (default)
    *   * `last_modified_timestamp`
    *   * `last_modified_timestamp asc`
@@ -4471,7 +5242,10 @@ export class CatalogServiceClient {
       });
     const defaultCallSettings = this._defaults['searchEntries'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('searchEntries iterate %j', request);
     return this.descriptors.page.searchEntries.asyncIterate(
       this.innerApiCalls['searchEntries'] as GaxCall,
       request as {},
@@ -4591,12 +5365,40 @@ export class CatalogServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.listMetadataJobs(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.dataplex.v1.IListMetadataJobsRequest,
+          | protos.google.cloud.dataplex.v1.IListMetadataJobsResponse
+          | null
+          | undefined,
+          protos.google.cloud.dataplex.v1.IMetadataJob
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listMetadataJobs values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listMetadataJobs request %j', request);
+    return this.innerApiCalls
+      .listMetadataJobs(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.dataplex.v1.IMetadataJob[],
+          protos.google.cloud.dataplex.v1.IListMetadataJobsRequest | null,
+          protos.google.cloud.dataplex.v1.IListMetadataJobsResponse,
+        ]) => {
+          this._log.info('listMetadataJobs values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listMetadataJobs`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
@@ -4649,7 +5451,10 @@ export class CatalogServiceClient {
       });
     const defaultCallSettings = this._defaults['listMetadataJobs'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listMetadataJobs stream %j', request);
     return this.descriptors.page.listMetadataJobs.createStream(
       this.innerApiCalls.listMetadataJobs as GaxCall,
       request,
@@ -4714,7 +5519,10 @@ export class CatalogServiceClient {
       });
     const defaultCallSettings = this._defaults['listMetadataJobs'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listMetadataJobs iterate %j', request);
     return this.descriptors.page.listMetadataJobs.asyncIterate(
       this.innerApiCalls['listMetadataJobs'] as GaxCall,
       request as {},
@@ -4831,7 +5639,7 @@ export class CatalogServiceClient {
    */
   getOperation(
     request: protos.google.longrunning.GetOperationRequest,
-    options?:
+    optionsOrCallback?:
       | gax.CallOptions
       | Callback<
           protos.google.longrunning.Operation,
@@ -4844,6 +5652,20 @@ export class CatalogServiceClient {
       {} | null | undefined
     >
   ): Promise<[protos.google.longrunning.Operation]> {
+    let options: gax.CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as gax.CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.getOperation(request, options, callback);
   }
   /**
@@ -4879,7 +5701,14 @@ export class CatalogServiceClient {
   listOperationsAsync(
     request: protos.google.longrunning.ListOperationsRequest,
     options?: gax.CallOptions
-  ): AsyncIterable<protos.google.longrunning.ListOperationsResponse> {
+  ): AsyncIterable<protos.google.longrunning.IOperation> {
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.listOperationsAsync(request, options);
   }
   /**
@@ -4915,11 +5744,11 @@ export class CatalogServiceClient {
    */
   cancelOperation(
     request: protos.google.longrunning.CancelOperationRequest,
-    options?:
+    optionsOrCallback?:
       | gax.CallOptions
       | Callback<
-          protos.google.protobuf.Empty,
           protos.google.longrunning.CancelOperationRequest,
+          protos.google.protobuf.Empty,
           {} | undefined | null
         >,
     callback?: Callback<
@@ -4928,6 +5757,20 @@ export class CatalogServiceClient {
       {} | undefined | null
     >
   ): Promise<protos.google.protobuf.Empty> {
+    let options: gax.CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as gax.CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.cancelOperation(request, options, callback);
   }
 
@@ -4958,7 +5801,7 @@ export class CatalogServiceClient {
    */
   deleteOperation(
     request: protos.google.longrunning.DeleteOperationRequest,
-    options?:
+    optionsOrCallback?:
       | gax.CallOptions
       | Callback<
           protos.google.protobuf.Empty,
@@ -4971,6 +5814,20 @@ export class CatalogServiceClient {
       {} | null | undefined
     >
   ): Promise<protos.google.protobuf.Empty> {
+    let options: gax.CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as gax.CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.deleteOperation(request, options, callback);
   }
 
@@ -6641,6 +7498,7 @@ export class CatalogServiceClient {
   close(): Promise<void> {
     if (this.catalogServiceStub && !this._terminated) {
       return this.catalogServiceStub.then(stub => {
+        this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
         this.locationsClient.close();

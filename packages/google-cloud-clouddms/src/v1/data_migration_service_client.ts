@@ -35,6 +35,7 @@ import type {
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
+import {loggingUtils as logging} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -59,6 +60,8 @@ export class DataMigrationServiceClient {
   private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
+  private _log = logging.log('dms');
+
   auth: gax.GoogleAuth;
   descriptors: Descriptors = {
     page: {},
@@ -96,7 +99,7 @@ export class DataMigrationServiceClient {
    *     Developer's Console, e.g. 'grape-spaceship-123'. We will also check
    *     the environment variable GCLOUD_PROJECT for your project ID. If your
    *     app is running in an environment which supports
-   *     {@link https://developers.google.com/identity/protocols/application-default-credentials Application Default Credentials},
+   *     {@link https://cloud.google.com/docs/authentication/application-default-credentials Application Default Credentials},
    *     your project ID will be detected automatically.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
@@ -976,8 +979,36 @@ export class DataMigrationServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.getMigrationJob(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('getMigrationJob request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.clouddms.v1.IMigrationJob,
+          | protos.google.cloud.clouddms.v1.IGetMigrationJobRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getMigrationJob response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getMigrationJob(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.clouddms.v1.IMigrationJob,
+          protos.google.cloud.clouddms.v1.IGetMigrationJobRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getMigrationJob response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Generate a SSH configuration script to configure the reverse SSH
@@ -1075,8 +1106,36 @@ export class DataMigrationServiceClient {
       this._gaxModule.routingHeader.fromParams({
         migration_job: request.migrationJob ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.generateSshScript(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('generateSshScript request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.clouddms.v1.ISshScript,
+          | protos.google.cloud.clouddms.v1.IGenerateSshScriptRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('generateSshScript response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .generateSshScript(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.clouddms.v1.ISshScript,
+          protos.google.cloud.clouddms.v1.IGenerateSshScriptRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('generateSshScript response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Generate a TCP Proxy configuration script to configure a cloud-hosted VM
@@ -1186,12 +1245,39 @@ export class DataMigrationServiceClient {
       this._gaxModule.routingHeader.fromParams({
         migration_job: request.migrationJob ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.generateTcpProxyScript(
-      request,
-      options,
-      callback
-    );
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('generateTcpProxyScript request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.clouddms.v1.ITcpProxyScript,
+          | protos.google.cloud.clouddms.v1.IGenerateTcpProxyScriptRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('generateTcpProxyScript response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .generateTcpProxyScript(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.clouddms.v1.ITcpProxyScript,
+          (
+            | protos.google.cloud.clouddms.v1.IGenerateTcpProxyScriptRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('generateTcpProxyScript response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Gets details of a single connection profile.
@@ -1280,8 +1366,39 @@ export class DataMigrationServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.getConnectionProfile(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('getConnectionProfile request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.clouddms.v1.IConnectionProfile,
+          | protos.google.cloud.clouddms.v1.IGetConnectionProfileRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getConnectionProfile response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getConnectionProfile(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.clouddms.v1.IConnectionProfile,
+          (
+            | protos.google.cloud.clouddms.v1.IGetConnectionProfileRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getConnectionProfile response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Gets details of a single private connection.
@@ -1370,8 +1487,39 @@ export class DataMigrationServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.getPrivateConnection(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('getPrivateConnection request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.clouddms.v1.IPrivateConnection,
+          | protos.google.cloud.clouddms.v1.IGetPrivateConnectionRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getPrivateConnection response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getPrivateConnection(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.clouddms.v1.IPrivateConnection,
+          (
+            | protos.google.cloud.clouddms.v1.IGetPrivateConnectionRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getPrivateConnection response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Gets details of a single conversion workspace.
@@ -1466,12 +1614,39 @@ export class DataMigrationServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.getConversionWorkspace(
-      request,
-      options,
-      callback
-    );
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('getConversionWorkspace request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.clouddms.v1.IConversionWorkspace,
+          | protos.google.cloud.clouddms.v1.IGetConversionWorkspaceRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getConversionWorkspace response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getConversionWorkspace(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.clouddms.v1.IConversionWorkspace,
+          (
+            | protos.google.cloud.clouddms.v1.IGetConversionWorkspaceRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getConversionWorkspace response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Creates a new mapping rule for a given conversion workspace.
@@ -1574,8 +1749,36 @@ export class DataMigrationServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.createMappingRule(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('createMappingRule request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.clouddms.v1.IMappingRule,
+          | protos.google.cloud.clouddms.v1.ICreateMappingRuleRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('createMappingRule response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .createMappingRule(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.clouddms.v1.IMappingRule,
+          protos.google.cloud.clouddms.v1.ICreateMappingRuleRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createMappingRule response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Deletes a single mapping rule.
@@ -1672,8 +1875,36 @@ export class DataMigrationServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.deleteMappingRule(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('deleteMappingRule request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.cloud.clouddms.v1.IDeleteMappingRuleRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('deleteMappingRule response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .deleteMappingRule(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.protobuf.IEmpty,
+          protos.google.cloud.clouddms.v1.IDeleteMappingRuleRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteMappingRule response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Gets the details of a mapping rule.
@@ -1762,8 +1993,36 @@ export class DataMigrationServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.getMappingRule(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('getMappingRule request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.clouddms.v1.IMappingRule,
+          | protos.google.cloud.clouddms.v1.IGetMappingRuleRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getMappingRule response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getMappingRule(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.clouddms.v1.IMappingRule,
+          protos.google.cloud.clouddms.v1.IGetMappingRuleRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getMappingRule response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Searches/lists the background jobs for a specific
@@ -1869,8 +2128,39 @@ export class DataMigrationServiceClient {
       this._gaxModule.routingHeader.fromParams({
         conversion_workspace: request.conversionWorkspace ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.searchBackgroundJobs(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('searchBackgroundJobs request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.clouddms.v1.ISearchBackgroundJobsResponse,
+          | protos.google.cloud.clouddms.v1.ISearchBackgroundJobsRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('searchBackgroundJobs response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .searchBackgroundJobs(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.clouddms.v1.ISearchBackgroundJobsResponse,
+          (
+            | protos.google.cloud.clouddms.v1.ISearchBackgroundJobsRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('searchBackgroundJobs response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Retrieves a list of committed revisions of a specific conversion
@@ -1970,12 +2260,45 @@ export class DataMigrationServiceClient {
       this._gaxModule.routingHeader.fromParams({
         conversion_workspace: request.conversionWorkspace ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.describeConversionWorkspaceRevisions(
-      request,
-      options,
-      callback
-    );
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('describeConversionWorkspaceRevisions request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.clouddms.v1.IDescribeConversionWorkspaceRevisionsResponse,
+          | protos.google.cloud.clouddms.v1.IDescribeConversionWorkspaceRevisionsRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info(
+            'describeConversionWorkspaceRevisions response %j',
+            response
+          );
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .describeConversionWorkspaceRevisions(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.clouddms.v1.IDescribeConversionWorkspaceRevisionsResponse,
+          (
+            | protos.google.cloud.clouddms.v1.IDescribeConversionWorkspaceRevisionsRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info(
+            'describeConversionWorkspaceRevisions response %j',
+            response
+          );
+          return [response, options, rawResponse];
+        }
+      );
   }
 
   /**
@@ -2091,8 +2414,40 @@ export class DataMigrationServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.createMigrationJob(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.clouddms.v1.IMigrationJob,
+            protos.google.cloud.clouddms.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('createMigrationJob response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('createMigrationJob request %j', request);
+    return this.innerApiCalls
+      .createMigrationJob(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.clouddms.v1.IMigrationJob,
+            protos.google.cloud.clouddms.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createMigrationJob response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `createMigrationJob()`.
@@ -2113,6 +2468,7 @@ export class DataMigrationServiceClient {
       protos.google.cloud.clouddms.v1.OperationMetadata
     >
   > {
+    this._log.info('createMigrationJob long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -2238,8 +2594,40 @@ export class DataMigrationServiceClient {
       this._gaxModule.routingHeader.fromParams({
         'migration_job.name': request.migrationJob!.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.updateMigrationJob(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.clouddms.v1.IMigrationJob,
+            protos.google.cloud.clouddms.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('updateMigrationJob response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('updateMigrationJob request %j', request);
+    return this.innerApiCalls
+      .updateMigrationJob(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.clouddms.v1.IMigrationJob,
+            protos.google.cloud.clouddms.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('updateMigrationJob response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `updateMigrationJob()`.
@@ -2260,6 +2648,7 @@ export class DataMigrationServiceClient {
       protos.google.cloud.clouddms.v1.OperationMetadata
     >
   > {
+    this._log.info('updateMigrationJob long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -2386,8 +2775,40 @@ export class DataMigrationServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.deleteMigrationJob(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.clouddms.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('deleteMigrationJob response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('deleteMigrationJob request %j', request);
+    return this.innerApiCalls
+      .deleteMigrationJob(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.clouddms.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteMigrationJob response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `deleteMigrationJob()`.
@@ -2408,6 +2829,7 @@ export class DataMigrationServiceClient {
       protos.google.cloud.clouddms.v1.OperationMetadata
     >
   > {
+    this._log.info('deleteMigrationJob long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -2525,8 +2947,40 @@ export class DataMigrationServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.startMigrationJob(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.clouddms.v1.IMigrationJob,
+            protos.google.cloud.clouddms.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('startMigrationJob response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('startMigrationJob request %j', request);
+    return this.innerApiCalls
+      .startMigrationJob(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.clouddms.v1.IMigrationJob,
+            protos.google.cloud.clouddms.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('startMigrationJob response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `startMigrationJob()`.
@@ -2547,6 +3001,7 @@ export class DataMigrationServiceClient {
       protos.google.cloud.clouddms.v1.OperationMetadata
     >
   > {
+    this._log.info('startMigrationJob long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -2661,8 +3116,40 @@ export class DataMigrationServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.stopMigrationJob(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.clouddms.v1.IMigrationJob,
+            protos.google.cloud.clouddms.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('stopMigrationJob response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('stopMigrationJob request %j', request);
+    return this.innerApiCalls
+      .stopMigrationJob(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.clouddms.v1.IMigrationJob,
+            protos.google.cloud.clouddms.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('stopMigrationJob response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `stopMigrationJob()`.
@@ -2683,6 +3170,7 @@ export class DataMigrationServiceClient {
       protos.google.cloud.clouddms.v1.OperationMetadata
     >
   > {
+    this._log.info('stopMigrationJob long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -2798,8 +3286,40 @@ export class DataMigrationServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.resumeMigrationJob(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.clouddms.v1.IMigrationJob,
+            protos.google.cloud.clouddms.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('resumeMigrationJob response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('resumeMigrationJob request %j', request);
+    return this.innerApiCalls
+      .resumeMigrationJob(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.clouddms.v1.IMigrationJob,
+            protos.google.cloud.clouddms.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('resumeMigrationJob response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `resumeMigrationJob()`.
@@ -2820,6 +3340,7 @@ export class DataMigrationServiceClient {
       protos.google.cloud.clouddms.v1.OperationMetadata
     >
   > {
+    this._log.info('resumeMigrationJob long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -2935,8 +3456,40 @@ export class DataMigrationServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.promoteMigrationJob(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.clouddms.v1.IMigrationJob,
+            protos.google.cloud.clouddms.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('promoteMigrationJob response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('promoteMigrationJob request %j', request);
+    return this.innerApiCalls
+      .promoteMigrationJob(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.clouddms.v1.IMigrationJob,
+            protos.google.cloud.clouddms.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('promoteMigrationJob response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `promoteMigrationJob()`.
@@ -2957,6 +3510,7 @@ export class DataMigrationServiceClient {
       protos.google.cloud.clouddms.v1.OperationMetadata
     >
   > {
+    this._log.info('promoteMigrationJob long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -3078,8 +3632,40 @@ export class DataMigrationServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.verifyMigrationJob(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.clouddms.v1.IMigrationJob,
+            protos.google.cloud.clouddms.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('verifyMigrationJob response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('verifyMigrationJob request %j', request);
+    return this.innerApiCalls
+      .verifyMigrationJob(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.clouddms.v1.IMigrationJob,
+            protos.google.cloud.clouddms.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('verifyMigrationJob response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `verifyMigrationJob()`.
@@ -3100,6 +3686,7 @@ export class DataMigrationServiceClient {
       protos.google.cloud.clouddms.v1.OperationMetadata
     >
   > {
+    this._log.info('verifyMigrationJob long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -3219,8 +3806,40 @@ export class DataMigrationServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.restartMigrationJob(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.clouddms.v1.IMigrationJob,
+            protos.google.cloud.clouddms.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('restartMigrationJob response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('restartMigrationJob request %j', request);
+    return this.innerApiCalls
+      .restartMigrationJob(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.clouddms.v1.IMigrationJob,
+            protos.google.cloud.clouddms.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('restartMigrationJob response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `restartMigrationJob()`.
@@ -3241,6 +3860,7 @@ export class DataMigrationServiceClient {
       protos.google.cloud.clouddms.v1.OperationMetadata
     >
   > {
+    this._log.info('restartMigrationJob long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -3375,12 +3995,40 @@ export class DataMigrationServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.createConnectionProfile(
-      request,
-      options,
-      callback
-    );
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.clouddms.v1.IConnectionProfile,
+            protos.google.cloud.clouddms.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('createConnectionProfile response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('createConnectionProfile request %j', request);
+    return this.innerApiCalls
+      .createConnectionProfile(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.clouddms.v1.IConnectionProfile,
+            protos.google.cloud.clouddms.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createConnectionProfile response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `createConnectionProfile()`.
@@ -3401,6 +4049,7 @@ export class DataMigrationServiceClient {
       protos.google.cloud.clouddms.v1.OperationMetadata
     >
   > {
+    this._log.info('createConnectionProfile long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -3534,12 +4183,40 @@ export class DataMigrationServiceClient {
       this._gaxModule.routingHeader.fromParams({
         'connection_profile.name': request.connectionProfile!.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.updateConnectionProfile(
-      request,
-      options,
-      callback
-    );
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.clouddms.v1.IConnectionProfile,
+            protos.google.cloud.clouddms.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('updateConnectionProfile response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('updateConnectionProfile request %j', request);
+    return this.innerApiCalls
+      .updateConnectionProfile(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.clouddms.v1.IConnectionProfile,
+            protos.google.cloud.clouddms.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('updateConnectionProfile response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `updateConnectionProfile()`.
@@ -3560,6 +4237,7 @@ export class DataMigrationServiceClient {
       protos.google.cloud.clouddms.v1.OperationMetadata
     >
   > {
+    this._log.info('updateConnectionProfile long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -3687,12 +4365,40 @@ export class DataMigrationServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.deleteConnectionProfile(
-      request,
-      options,
-      callback
-    );
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.clouddms.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('deleteConnectionProfile response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('deleteConnectionProfile request %j', request);
+    return this.innerApiCalls
+      .deleteConnectionProfile(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.clouddms.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteConnectionProfile response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `deleteConnectionProfile()`.
@@ -3713,6 +4419,7 @@ export class DataMigrationServiceClient {
       protos.google.cloud.clouddms.v1.OperationMetadata
     >
   > {
+    this._log.info('deleteConnectionProfile long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -3841,12 +4548,40 @@ export class DataMigrationServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.createPrivateConnection(
-      request,
-      options,
-      callback
-    );
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.clouddms.v1.IPrivateConnection,
+            protos.google.cloud.clouddms.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('createPrivateConnection response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('createPrivateConnection request %j', request);
+    return this.innerApiCalls
+      .createPrivateConnection(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.clouddms.v1.IPrivateConnection,
+            protos.google.cloud.clouddms.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createPrivateConnection response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `createPrivateConnection()`.
@@ -3867,6 +4602,7 @@ export class DataMigrationServiceClient {
       protos.google.cloud.clouddms.v1.OperationMetadata
     >
   > {
+    this._log.info('createPrivateConnection long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -3989,12 +4725,40 @@ export class DataMigrationServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.deletePrivateConnection(
-      request,
-      options,
-      callback
-    );
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.clouddms.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('deletePrivateConnection response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('deletePrivateConnection request %j', request);
+    return this.innerApiCalls
+      .deletePrivateConnection(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.clouddms.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deletePrivateConnection response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `deletePrivateConnection()`.
@@ -4015,6 +4779,7 @@ export class DataMigrationServiceClient {
       protos.google.cloud.clouddms.v1.OperationMetadata
     >
   > {
+    this._log.info('deletePrivateConnection long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -4141,12 +4906,40 @@ export class DataMigrationServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.createConversionWorkspace(
-      request,
-      options,
-      callback
-    );
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.clouddms.v1.IConversionWorkspace,
+            protos.google.cloud.clouddms.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('createConversionWorkspace response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('createConversionWorkspace request %j', request);
+    return this.innerApiCalls
+      .createConversionWorkspace(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.clouddms.v1.IConversionWorkspace,
+            protos.google.cloud.clouddms.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createConversionWorkspace response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `createConversionWorkspace()`.
@@ -4167,6 +4960,7 @@ export class DataMigrationServiceClient {
       protos.google.cloud.clouddms.v1.OperationMetadata
     >
   > {
+    this._log.info('createConversionWorkspace long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -4292,12 +5086,40 @@ export class DataMigrationServiceClient {
       this._gaxModule.routingHeader.fromParams({
         'conversion_workspace.name': request.conversionWorkspace!.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.updateConversionWorkspace(
-      request,
-      options,
-      callback
-    );
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.clouddms.v1.IConversionWorkspace,
+            protos.google.cloud.clouddms.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('updateConversionWorkspace response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('updateConversionWorkspace request %j', request);
+    return this.innerApiCalls
+      .updateConversionWorkspace(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.clouddms.v1.IConversionWorkspace,
+            protos.google.cloud.clouddms.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('updateConversionWorkspace response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `updateConversionWorkspace()`.
@@ -4318,6 +5140,7 @@ export class DataMigrationServiceClient {
       protos.google.cloud.clouddms.v1.OperationMetadata
     >
   > {
+    this._log.info('updateConversionWorkspace long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -4443,12 +5266,40 @@ export class DataMigrationServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.deleteConversionWorkspace(
-      request,
-      options,
-      callback
-    );
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.clouddms.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('deleteConversionWorkspace response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('deleteConversionWorkspace request %j', request);
+    return this.innerApiCalls
+      .deleteConversionWorkspace(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.clouddms.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteConversionWorkspace response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `deleteConversionWorkspace()`.
@@ -4469,6 +5320,7 @@ export class DataMigrationServiceClient {
       protos.google.cloud.clouddms.v1.OperationMetadata
     >
   > {
+    this._log.info('deleteConversionWorkspace long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -4594,12 +5446,40 @@ export class DataMigrationServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.seedConversionWorkspace(
-      request,
-      options,
-      callback
-    );
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.clouddms.v1.IConversionWorkspace,
+            protos.google.cloud.clouddms.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('seedConversionWorkspace response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('seedConversionWorkspace request %j', request);
+    return this.innerApiCalls
+      .seedConversionWorkspace(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.clouddms.v1.IConversionWorkspace,
+            protos.google.cloud.clouddms.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('seedConversionWorkspace response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `seedConversionWorkspace()`.
@@ -4620,6 +5500,7 @@ export class DataMigrationServiceClient {
       protos.google.cloud.clouddms.v1.OperationMetadata
     >
   > {
+    this._log.info('seedConversionWorkspace long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -4744,8 +5625,40 @@ export class DataMigrationServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.importMappingRules(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.clouddms.v1.IConversionWorkspace,
+            protos.google.cloud.clouddms.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('importMappingRules response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('importMappingRules request %j', request);
+    return this.innerApiCalls
+      .importMappingRules(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.clouddms.v1.IConversionWorkspace,
+            protos.google.cloud.clouddms.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('importMappingRules response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `importMappingRules()`.
@@ -4766,6 +5679,7 @@ export class DataMigrationServiceClient {
       protos.google.cloud.clouddms.v1.OperationMetadata
     >
   > {
+    this._log.info('importMappingRules long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -4891,12 +5805,40 @@ export class DataMigrationServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.convertConversionWorkspace(
-      request,
-      options,
-      callback
-    );
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.clouddms.v1.IConversionWorkspace,
+            protos.google.cloud.clouddms.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('convertConversionWorkspace response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('convertConversionWorkspace request %j', request);
+    return this.innerApiCalls
+      .convertConversionWorkspace(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.clouddms.v1.IConversionWorkspace,
+            protos.google.cloud.clouddms.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('convertConversionWorkspace response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `convertConversionWorkspace()`.
@@ -4917,6 +5859,7 @@ export class DataMigrationServiceClient {
       protos.google.cloud.clouddms.v1.OperationMetadata
     >
   > {
+    this._log.info('convertConversionWorkspace long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -5033,12 +5976,40 @@ export class DataMigrationServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.commitConversionWorkspace(
-      request,
-      options,
-      callback
-    );
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.clouddms.v1.IConversionWorkspace,
+            protos.google.cloud.clouddms.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('commitConversionWorkspace response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('commitConversionWorkspace request %j', request);
+    return this.innerApiCalls
+      .commitConversionWorkspace(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.clouddms.v1.IConversionWorkspace,
+            protos.google.cloud.clouddms.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('commitConversionWorkspace response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `commitConversionWorkspace()`.
@@ -5059,6 +6030,7 @@ export class DataMigrationServiceClient {
       protos.google.cloud.clouddms.v1.OperationMetadata
     >
   > {
+    this._log.info('commitConversionWorkspace long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -5173,12 +6145,46 @@ export class DataMigrationServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.rollbackConversionWorkspace(
-      request,
-      options,
-      callback
-    );
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.clouddms.v1.IConversionWorkspace,
+            protos.google.cloud.clouddms.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info(
+            'rollbackConversionWorkspace response %j',
+            rawResponse
+          );
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('rollbackConversionWorkspace request %j', request);
+    return this.innerApiCalls
+      .rollbackConversionWorkspace(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.clouddms.v1.IConversionWorkspace,
+            protos.google.cloud.clouddms.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info(
+            'rollbackConversionWorkspace response %j',
+            rawResponse
+          );
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `rollbackConversionWorkspace()`.
@@ -5199,6 +6205,7 @@ export class DataMigrationServiceClient {
       protos.google.cloud.clouddms.v1.OperationMetadata
     >
   > {
+    this._log.info('rollbackConversionWorkspace long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -5328,12 +6335,40 @@ export class DataMigrationServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.applyConversionWorkspace(
-      request,
-      options,
-      callback
-    );
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.clouddms.v1.IConversionWorkspace,
+            protos.google.cloud.clouddms.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('applyConversionWorkspace response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('applyConversionWorkspace request %j', request);
+    return this.innerApiCalls
+      .applyConversionWorkspace(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.clouddms.v1.IConversionWorkspace,
+            protos.google.cloud.clouddms.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('applyConversionWorkspace response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `applyConversionWorkspace()`.
@@ -5354,6 +6389,7 @@ export class DataMigrationServiceClient {
       protos.google.cloud.clouddms.v1.OperationMetadata
     >
   > {
+    this._log.info('applyConversionWorkspace long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -5483,12 +6519,40 @@ export class DataMigrationServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.listMigrationJobs(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.clouddms.v1.IListMigrationJobsRequest,
+          | protos.google.cloud.clouddms.v1.IListMigrationJobsResponse
+          | null
+          | undefined,
+          protos.google.cloud.clouddms.v1.IMigrationJob
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listMigrationJobs values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listMigrationJobs request %j', request);
+    return this.innerApiCalls
+      .listMigrationJobs(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.clouddms.v1.IMigrationJob[],
+          protos.google.cloud.clouddms.v1.IListMigrationJobsRequest | null,
+          protos.google.cloud.clouddms.v1.IListMigrationJobsResponse,
+        ]) => {
+          this._log.info('listMigrationJobs values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listMigrationJobs`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
@@ -5542,7 +6606,10 @@ export class DataMigrationServiceClient {
       });
     const defaultCallSettings = this._defaults['listMigrationJobs'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listMigrationJobs stream %j', request);
     return this.descriptors.page.listMigrationJobs.createStream(
       this.innerApiCalls.listMigrationJobs as GaxCall,
       request,
@@ -5608,7 +6675,10 @@ export class DataMigrationServiceClient {
       });
     const defaultCallSettings = this._defaults['listMigrationJobs'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listMigrationJobs iterate %j', request);
     return this.descriptors.page.listMigrationJobs.asyncIterate(
       this.innerApiCalls['listMigrationJobs'] as GaxCall,
       request as {},
@@ -5729,16 +6799,40 @@ export class DataMigrationServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.listConnectionProfiles(
-      request,
-      options,
-      callback
-    );
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.clouddms.v1.IListConnectionProfilesRequest,
+          | protos.google.cloud.clouddms.v1.IListConnectionProfilesResponse
+          | null
+          | undefined,
+          protos.google.cloud.clouddms.v1.IConnectionProfile
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listConnectionProfiles values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listConnectionProfiles request %j', request);
+    return this.innerApiCalls
+      .listConnectionProfiles(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.clouddms.v1.IConnectionProfile[],
+          protos.google.cloud.clouddms.v1.IListConnectionProfilesRequest | null,
+          protos.google.cloud.clouddms.v1.IListConnectionProfilesResponse,
+        ]) => {
+          this._log.info('listConnectionProfiles values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listConnectionProfiles`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
@@ -5791,7 +6885,10 @@ export class DataMigrationServiceClient {
       });
     const defaultCallSettings = this._defaults['listConnectionProfiles'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listConnectionProfiles stream %j', request);
     return this.descriptors.page.listConnectionProfiles.createStream(
       this.innerApiCalls.listConnectionProfiles as GaxCall,
       request,
@@ -5856,7 +6953,10 @@ export class DataMigrationServiceClient {
       });
     const defaultCallSettings = this._defaults['listConnectionProfiles'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listConnectionProfiles iterate %j', request);
     return this.descriptors.page.listConnectionProfiles.asyncIterate(
       this.innerApiCalls['listConnectionProfiles'] as GaxCall,
       request as {},
@@ -5973,16 +7073,40 @@ export class DataMigrationServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.listPrivateConnections(
-      request,
-      options,
-      callback
-    );
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.clouddms.v1.IListPrivateConnectionsRequest,
+          | protos.google.cloud.clouddms.v1.IListPrivateConnectionsResponse
+          | null
+          | undefined,
+          protos.google.cloud.clouddms.v1.IPrivateConnection
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listPrivateConnections values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listPrivateConnections request %j', request);
+    return this.innerApiCalls
+      .listPrivateConnections(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.clouddms.v1.IPrivateConnection[],
+          protos.google.cloud.clouddms.v1.IListPrivateConnectionsRequest | null,
+          protos.google.cloud.clouddms.v1.IListPrivateConnectionsResponse,
+        ]) => {
+          this._log.info('listPrivateConnections values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listPrivateConnections`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
@@ -6032,7 +7156,10 @@ export class DataMigrationServiceClient {
       });
     const defaultCallSettings = this._defaults['listPrivateConnections'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listPrivateConnections stream %j', request);
     return this.descriptors.page.listPrivateConnections.createStream(
       this.innerApiCalls.listPrivateConnections as GaxCall,
       request,
@@ -6094,7 +7221,10 @@ export class DataMigrationServiceClient {
       });
     const defaultCallSettings = this._defaults['listPrivateConnections'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listPrivateConnections iterate %j', request);
     return this.descriptors.page.listPrivateConnections.asyncIterate(
       this.innerApiCalls['listPrivateConnections'] as GaxCall,
       request as {},
@@ -6210,16 +7340,40 @@ export class DataMigrationServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.listConversionWorkspaces(
-      request,
-      options,
-      callback
-    );
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.clouddms.v1.IListConversionWorkspacesRequest,
+          | protos.google.cloud.clouddms.v1.IListConversionWorkspacesResponse
+          | null
+          | undefined,
+          protos.google.cloud.clouddms.v1.IConversionWorkspace
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listConversionWorkspaces values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listConversionWorkspaces request %j', request);
+    return this.innerApiCalls
+      .listConversionWorkspaces(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.clouddms.v1.IConversionWorkspace[],
+          protos.google.cloud.clouddms.v1.IListConversionWorkspacesRequest | null,
+          protos.google.cloud.clouddms.v1.IListConversionWorkspacesResponse,
+        ]) => {
+          this._log.info('listConversionWorkspaces values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listConversionWorkspaces`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
@@ -6268,7 +7422,10 @@ export class DataMigrationServiceClient {
       });
     const defaultCallSettings = this._defaults['listConversionWorkspaces'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listConversionWorkspaces stream %j', request);
     return this.descriptors.page.listConversionWorkspaces.createStream(
       this.innerApiCalls.listConversionWorkspaces as GaxCall,
       request,
@@ -6329,7 +7486,10 @@ export class DataMigrationServiceClient {
       });
     const defaultCallSettings = this._defaults['listConversionWorkspaces'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listConversionWorkspaces iterate %j', request);
     return this.descriptors.page.listConversionWorkspaces.asyncIterate(
       this.innerApiCalls['listConversionWorkspaces'] as GaxCall,
       request as {},
@@ -6437,12 +7597,40 @@ export class DataMigrationServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.listMappingRules(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.clouddms.v1.IListMappingRulesRequest,
+          | protos.google.cloud.clouddms.v1.IListMappingRulesResponse
+          | null
+          | undefined,
+          protos.google.cloud.clouddms.v1.IMappingRule
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listMappingRules values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listMappingRules request %j', request);
+    return this.innerApiCalls
+      .listMappingRules(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.clouddms.v1.IMappingRule[],
+          protos.google.cloud.clouddms.v1.IListMappingRulesRequest | null,
+          protos.google.cloud.clouddms.v1.IListMappingRulesResponse,
+        ]) => {
+          this._log.info('listMappingRules values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listMappingRules`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
@@ -6483,7 +7671,10 @@ export class DataMigrationServiceClient {
       });
     const defaultCallSettings = this._defaults['listMappingRules'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listMappingRules stream %j', request);
     return this.descriptors.page.listMappingRules.createStream(
       this.innerApiCalls.listMappingRules as GaxCall,
       request,
@@ -6536,7 +7727,10 @@ export class DataMigrationServiceClient {
       });
     const defaultCallSettings = this._defaults['listMappingRules'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listMappingRules iterate %j', request);
     return this.descriptors.page.listMappingRules.asyncIterate(
       this.innerApiCalls['listMappingRules'] as GaxCall,
       request as {},
@@ -6663,16 +7857,40 @@ export class DataMigrationServiceClient {
       this._gaxModule.routingHeader.fromParams({
         conversion_workspace: request.conversionWorkspace ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.describeDatabaseEntities(
-      request,
-      options,
-      callback
-    );
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.clouddms.v1.IDescribeDatabaseEntitiesRequest,
+          | protos.google.cloud.clouddms.v1.IDescribeDatabaseEntitiesResponse
+          | null
+          | undefined,
+          protos.google.cloud.clouddms.v1.IDatabaseEntity
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('describeDatabaseEntities values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('describeDatabaseEntities request %j', request);
+    return this.innerApiCalls
+      .describeDatabaseEntities(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.clouddms.v1.IDatabaseEntity[],
+          protos.google.cloud.clouddms.v1.IDescribeDatabaseEntitiesRequest | null,
+          protos.google.cloud.clouddms.v1.IDescribeDatabaseEntitiesResponse,
+        ]) => {
+          this._log.info('describeDatabaseEntities values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `describeDatabaseEntities`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.conversionWorkspace
@@ -6727,7 +7945,10 @@ export class DataMigrationServiceClient {
       });
     const defaultCallSettings = this._defaults['describeDatabaseEntities'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('describeDatabaseEntities stream %j', request);
     return this.descriptors.page.describeDatabaseEntities.createStream(
       this.innerApiCalls.describeDatabaseEntities as GaxCall,
       request,
@@ -6794,7 +8015,10 @@ export class DataMigrationServiceClient {
       });
     const defaultCallSettings = this._defaults['describeDatabaseEntities'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('describeDatabaseEntities iterate %j', request);
     return this.descriptors.page.describeDatabaseEntities.asyncIterate(
       this.innerApiCalls['describeDatabaseEntities'] as GaxCall,
       request as {},
@@ -6897,12 +8121,40 @@ export class DataMigrationServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.fetchStaticIps(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.clouddms.v1.IFetchStaticIpsRequest,
+          | protos.google.cloud.clouddms.v1.IFetchStaticIpsResponse
+          | null
+          | undefined,
+          string
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('fetchStaticIps values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('fetchStaticIps request %j', request);
+    return this.innerApiCalls
+      .fetchStaticIps(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          string[],
+          protos.google.cloud.clouddms.v1.IFetchStaticIpsRequest | null,
+          protos.google.cloud.clouddms.v1.IFetchStaticIpsResponse,
+        ]) => {
+          this._log.info('fetchStaticIps values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `fetchStaticIps`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
@@ -6937,7 +8189,10 @@ export class DataMigrationServiceClient {
       });
     const defaultCallSettings = this._defaults['fetchStaticIps'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('fetchStaticIps stream %j', request);
     return this.descriptors.page.fetchStaticIps.createStream(
       this.innerApiCalls.fetchStaticIps as GaxCall,
       request,
@@ -6984,7 +8239,10 @@ export class DataMigrationServiceClient {
       });
     const defaultCallSettings = this._defaults['fetchStaticIps'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('fetchStaticIps iterate %j', request);
     return this.descriptors.page.fetchStaticIps.asyncIterate(
       this.innerApiCalls['fetchStaticIps'] as GaxCall,
       request as {},
@@ -7239,7 +8497,7 @@ export class DataMigrationServiceClient {
    */
   getOperation(
     request: protos.google.longrunning.GetOperationRequest,
-    options?:
+    optionsOrCallback?:
       | gax.CallOptions
       | Callback<
           protos.google.longrunning.Operation,
@@ -7252,6 +8510,20 @@ export class DataMigrationServiceClient {
       {} | null | undefined
     >
   ): Promise<[protos.google.longrunning.Operation]> {
+    let options: gax.CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as gax.CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.getOperation(request, options, callback);
   }
   /**
@@ -7287,7 +8559,14 @@ export class DataMigrationServiceClient {
   listOperationsAsync(
     request: protos.google.longrunning.ListOperationsRequest,
     options?: gax.CallOptions
-  ): AsyncIterable<protos.google.longrunning.ListOperationsResponse> {
+  ): AsyncIterable<protos.google.longrunning.IOperation> {
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.listOperationsAsync(request, options);
   }
   /**
@@ -7323,11 +8602,11 @@ export class DataMigrationServiceClient {
    */
   cancelOperation(
     request: protos.google.longrunning.CancelOperationRequest,
-    options?:
+    optionsOrCallback?:
       | gax.CallOptions
       | Callback<
-          protos.google.protobuf.Empty,
           protos.google.longrunning.CancelOperationRequest,
+          protos.google.protobuf.Empty,
           {} | undefined | null
         >,
     callback?: Callback<
@@ -7336,6 +8615,20 @@ export class DataMigrationServiceClient {
       {} | undefined | null
     >
   ): Promise<protos.google.protobuf.Empty> {
+    let options: gax.CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as gax.CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.cancelOperation(request, options, callback);
   }
 
@@ -7366,7 +8659,7 @@ export class DataMigrationServiceClient {
    */
   deleteOperation(
     request: protos.google.longrunning.DeleteOperationRequest,
-    options?:
+    optionsOrCallback?:
       | gax.CallOptions
       | Callback<
           protos.google.protobuf.Empty,
@@ -7379,6 +8672,20 @@ export class DataMigrationServiceClient {
       {} | null | undefined
     >
   ): Promise<protos.google.protobuf.Empty> {
+    let options: gax.CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as gax.CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.deleteOperation(request, options, callback);
   }
 
@@ -7760,6 +9067,7 @@ export class DataMigrationServiceClient {
   close(): Promise<void> {
     if (this.dataMigrationServiceStub && !this._terminated) {
       return this.dataMigrationServiceStub.then(stub => {
+        this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
         this.iamClient.close();

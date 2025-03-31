@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -55,6 +55,34 @@ service SearchService {
       }
     };
   }
+
+  // Performs a search. Similar to the
+  // [SearchService.Search][google.cloud.discoveryengine.v1.SearchService.Search]
+  // method, but a lite version that allows API key for authentication, where
+  // OAuth and IAM checks are not required.
+  //
+  // Only public website search is supported by this method. If data stores and
+  // engines not associated with public website search are specified, a
+  // `FAILED_PRECONDITION` error is returned.
+  //
+  // This method can be used for easy onboarding without having to implement an
+  // authentication backend. However, it is strongly recommended to use
+  // [SearchService.Search][google.cloud.discoveryengine.v1.SearchService.Search]
+  // instead with required OAuth and IAM checks to provide better data security.
+  rpc SearchLite(SearchRequest) returns (SearchResponse) {
+    option (google.api.http) = {
+      post: "/v1/{serving_config=projects/*/locations/*/dataStores/*/servingConfigs/*}:searchLite"
+      body: "*"
+      additional_bindings {
+        post: "/v1/{serving_config=projects/*/locations/*/collections/*/dataStores/*/servingConfigs/*}:searchLite"
+        body: "*"
+      }
+      additional_bindings {
+        post: "/v1/{serving_config=projects/*/locations/*/collections/*/engines/*/servingConfigs/*}:searchLite"
+        body: "*"
+      }
+    };
+  }
 }
 
 // Request message for
@@ -83,6 +111,16 @@ message SearchRequest {
         type: "discoveryengine.googleapis.com/DataStore"
       }
     ];
+
+    // Optional. Filter specification to filter documents in the data store
+    // specified by data_store field. For more information on filtering, see
+    // [Filtering](https://cloud.google.com/generative-ai-app-builder/docs/filter-search-metadata)
+    string filter = 5 [(google.api.field_behavior) = OPTIONAL];
+
+    // Optional. Boost specification to boost certain documents.
+    // For more information on boosting, see
+    // [Boosting](https://cloud.google.com/generative-ai-app-builder/docs/boost-search-results)
+    BoostSpec boost_spec = 6 [(google.api.field_behavior) = OPTIONAL];
   }
 
   // A facet specification to perform faceted search.
@@ -223,6 +261,80 @@ message SearchRequest {
   message BoostSpec {
     // Boost applies to documents which match a condition.
     message ConditionBoostSpec {
+      // Specification for custom ranking based on customer specified attribute
+      // value. It provides more controls for customized ranking than the simple
+      // (condition, boost) combination above.
+      message BoostControlSpec {
+        // The control points used to define the curve. The curve defined
+        // through these control points can only be monotonically increasing
+        // or decreasing(constant values are acceptable).
+        message ControlPoint {
+          // Can be one of:
+          // 1. The numerical field value.
+          // 2. The duration spec for freshness:
+          // The value must be formatted as an XSD `dayTimeDuration` value (a
+          // restricted subset of an ISO 8601 duration value). The pattern for
+          // this is: `[nD][T[nH][nM][nS]]`.
+          string attribute_value = 1;
+
+          // The value between -1 to 1 by which to boost the score if the
+          // attribute_value evaluates to the value specified above.
+          float boost_amount = 2;
+        }
+
+        // The attribute(or function) for which the custom ranking is to be
+        // applied.
+        enum AttributeType {
+          // Unspecified AttributeType.
+          ATTRIBUTE_TYPE_UNSPECIFIED = 0;
+
+          // The value of the numerical field will be used to dynamically update
+          // the boost amount. In this case, the attribute_value (the x value)
+          // of the control point will be the actual value of the numerical
+          // field for which the boost_amount is specified.
+          NUMERICAL = 1;
+
+          // For the freshness use case the attribute value will be the duration
+          // between the current time and the date in the datetime field
+          // specified. The value must be formatted as an XSD `dayTimeDuration`
+          // value (a restricted subset of an ISO 8601 duration value). The
+          // pattern for this is: `[nD][T[nH][nM][nS]]`.
+          // For example, `5D`, `3DT12H30M`, `T24H`.
+          FRESHNESS = 2;
+        }
+
+        // The interpolation type to be applied. Default will be linear
+        // (Piecewise Linear).
+        enum InterpolationType {
+          // Interpolation type is unspecified. In this case, it defaults to
+          // Linear.
+          INTERPOLATION_TYPE_UNSPECIFIED = 0;
+
+          // Piecewise linear interpolation will be applied.
+          LINEAR = 1;
+        }
+
+        // The name of the field whose value will be used to determine the
+        // boost amount.
+        string field_name = 1;
+
+        // The attribute type to be used to determine the boost amount. The
+        // attribute value can be derived from the field value of the specified
+        // field_name. In the case of numerical it is straightforward i.e.
+        // attribute_value = numerical_field_value. In the case of freshness
+        // however, attribute_value = (time.now() - datetime_field_value).
+        AttributeType attribute_type = 2;
+
+        // The interpolation type to be applied to connect the control points
+        // listed below.
+        InterpolationType interpolation_type = 3;
+
+        // The control points used to define the curve. The monotonic function
+        // (defined through the interpolation_type above) passes through the
+        // control points listed here.
+        repeated ControlPoint control_points = 4;
+      }
+
       // An expression which specifies a boost condition. The syntax and
       // supported fields are the same as a filter expression. See
       // [SearchRequest.filter][google.cloud.discoveryengine.v1.SearchRequest.filter]
@@ -255,10 +367,14 @@ message SearchRequest {
       // boost_control_spec below are set. If both are set then the global boost
       // is ignored and the more fine-grained boost_control_spec is applied.
       float boost = 2;
+
+      // Complex specification for custom ranking based on customer defined
+      // attribute value.
+      BoostControlSpec boost_control_spec = 3;
     }
 
     // Condition boost specifications. If a document matches multiple conditions
-    // in the specifictions, boost scores from these specifications are all
+    // in the specifications, boost scores from these specifications are all
     // applied and combined in a non-linear way. Maximum number of
     // specifications is 20.
     repeated ConditionBoostSpec condition_boost_specs = 1;
@@ -428,6 +544,20 @@ message SearchRequest {
       // high relevance search results will generate answers.
       bool ignore_low_relevant_content = 9;
 
+      // Optional. Specifies whether to filter out jail-breaking queries. The
+      // default value is `false`.
+      //
+      // Google employs search-query classification to detect jail-breaking
+      // queries. No summary is returned if the search query is classified as a
+      // jail-breaking query. A user might add instructions to the query to
+      // change the tone, style, language, content of the answer, or ask the
+      // model to act as a different entity, e.g. "Reply in the tone of a
+      // competing company's CEO". If this field is set to `true`, we skip
+      // generating summaries for jail-breaking queries and return fallback
+      // messages instead.
+      bool ignore_jail_breaking_query = 10
+          [(google.api.field_behavior) = OPTIONAL];
+
       // If specified, the spec will be used to modify the prompt provided to
       // the LLM.
       ModelPromptSpec model_prompt_spec = 5;
@@ -531,7 +661,8 @@ message SearchRequest {
       DOCUMENTS = 1;
 
       // Returns chunks in the search result. Only available if the
-      // [DataStore.DocumentProcessingConfig.chunking_config][] is specified.
+      // [DocumentProcessingConfig.chunking_config][google.cloud.discoveryengine.v1.DocumentProcessingConfig.chunking_config]
+      // is specified.
       CHUNKS = 2;
     }
 
@@ -572,12 +703,34 @@ message SearchRequest {
 
       // Enables Search As You Type.
       ENABLED = 2;
+
+      // Automatic switching between search-as-you-type and standard search
+      // modes, ideal for single-API implementations (e.g., debouncing).
+      AUTO = 3;
     }
 
     // The condition under which search as you type should occur.
     // Default to
     // [Condition.DISABLED][google.cloud.discoveryengine.v1.SearchRequest.SearchAsYouTypeSpec.Condition.DISABLED].
     Condition condition = 1;
+  }
+
+  // Specifies features for display, like match highlighting.
+  message DisplaySpec {
+    // Enum describing under which condition match highlighting should occur.
+    enum MatchHighlightingCondition {
+      // Server behavior is the same as `MATCH_HIGHLIGHTING_DISABLED`.
+      MATCH_HIGHLIGHTING_CONDITION_UNSPECIFIED = 0;
+
+      // Disables match highlighting on all documents.
+      MATCH_HIGHLIGHTING_DISABLED = 1;
+
+      // Enables match highlighting on all documents.
+      MATCH_HIGHLIGHTING_ENABLED = 2;
+    }
+
+    // The condition under which match highlighting should occur.
+    MatchHighlightingCondition match_highlighting_condition = 1;
   }
 
   // Session specification.
@@ -616,11 +769,39 @@ message SearchRequest {
     // The number of top search results to persist. The persisted search results
     // can be used for the subsequent /answer api call.
     //
-    // This field is simliar to the `summary_result_count` field in
+    // This field is similar to the `summary_result_count` field in
     // [SearchRequest.ContentSearchSpec.SummarySpec.summary_result_count][google.cloud.discoveryengine.v1.SearchRequest.ContentSearchSpec.SummarySpec.summary_result_count].
     //
     // At most 10 results for documents mode, or 50 for chunks mode.
     optional int32 search_result_persistence_count = 2;
+  }
+
+  // The specification for returning the document relevance score.
+  message RelevanceScoreSpec {
+    // Optional. Whether to return the relevance score for search results.
+    // The higher the score, the more relevant the document is to the query.
+    bool return_relevance_score = 1 [(google.api.field_behavior) = OPTIONAL];
+  }
+
+  // The relevance threshold of the search results. The higher relevance
+  // threshold is, the higher relevant results are shown and the less number of
+  // results are returned.
+  enum RelevanceThreshold {
+    // Default value. In this case, server behavior defaults to Google defined
+    // threshold.
+    RELEVANCE_THRESHOLD_UNSPECIFIED = 0;
+
+    // Lowest relevance threshold.
+    LOWEST = 1;
+
+    // Low relevance threshold.
+    LOW = 2;
+
+    // Medium relevance threshold.
+    MEDIUM = 3;
+
+    // High relevance threshold.
+    HIGH = 4;
   }
 
   // Required. The resource name of the Search serving config, such as
@@ -682,10 +863,18 @@ message SearchRequest {
   // If this field is negative, an  `INVALID_ARGUMENT`  is returned.
   int32 offset = 6;
 
-  // Specs defining dataStores to filter on in a search call and configurations
-  // for those dataStores. This is only considered for engines with multiple
-  // dataStores use case. For single dataStore within an engine, they should
-  // use the specs at the top level.
+  // The maximum number of results to return for OneBox.
+  // This applies to each OneBox type individually.
+  // Default number is 10.
+  int32 one_box_page_size = 47;
+
+  // Specifications that define the specific
+  // [DataStore][google.cloud.discoveryengine.v1.DataStore]s to be searched,
+  // along with configurations for those data stores. This is only considered
+  // for [Engine][google.cloud.discoveryengine.v1.Engine]s with multiple data
+  // stores. For engines with a single data store, the specs directly under
+  // [SearchRequest][google.cloud.discoveryengine.v1.SearchRequest] should be
+  // used.
   repeated DataStoreSpec data_store_specs = 32;
 
   // The filter syntax consists of an expression language for constructing a
@@ -734,7 +923,7 @@ message SearchRequest {
   string order_by = 8;
 
   // Information about the end user.
-  // Highly recommended for analytics.
+  // Highly recommended for analytics and personalization.
   // [UserInfo.user_agent][google.cloud.discoveryengine.v1.UserInfo.user_agent]
   // is used to deduce `device_type` for analytics.
   UserInfo user_info = 21;
@@ -829,6 +1018,10 @@ message SearchRequest {
   // vertical.
   SearchAsYouTypeSpec search_as_you_type_spec = 31;
 
+  // Optional. Config for display feature, like match highlighting on search
+  // results.
+  DisplaySpec display_spec = 38 [(google.api.field_behavior) = OPTIONAL];
+
   // The session resource name. Optional.
   //
   // Session allows users to do multi-turn /search API calls or coordination
@@ -863,6 +1056,19 @@ message SearchRequest {
   //
   // Can be used only when `session` is set.
   SessionSpec session_spec = 42;
+
+  // The relevance threshold of the search results.
+  //
+  // Default to Google defined threshold, leveraging a balance of
+  // precision and recall to deliver both highly accurate results and
+  // comprehensive coverage of relevant information.
+  //
+  // This feature is not supported for healthcare search.
+  RelevanceThreshold relevance_threshold = 44;
+
+  // Optional. The specification for returning the relevance score.
+  RelevanceScoreSpec relevance_score_spec = 52
+      [(google.api.field_behavior) = OPTIONAL];
 }
 
 // Response message for
@@ -884,6 +1090,10 @@ message SearchResponse {
     // is set to
     // [CHUNKS][google.cloud.discoveryengine.v1.SearchRequest.ContentSearchSpec.SearchResultMode.CHUNKS].
     Chunk chunk = 18;
+
+    // Output only. Google provided available scores.
+    map<string, DoubleList> model_scores = 4
+        [(google.api.field_behavior) = OUTPUT_ONLY];
   }
 
   // A facet result.
@@ -1013,6 +1223,7 @@ message SearchResponse {
 
       // The non-summary seeking query ignored case.
       //
+      // Google skips the summary if the query is chit chat.
       // Only used when
       // [SummarySpec.ignore_non_summary_seeking_query][google.cloud.discoveryengine.v1.SearchRequest.ContentSearchSpec.SummarySpec.ignore_non_summary_seeking_query]
       // is set to `true`.
@@ -1055,6 +1266,19 @@ message SearchResponse {
       // Google skips the summary if there is a customer policy violation
       // detected. The policy is defined by the customer.
       CUSTOMER_POLICY_VIOLATION = 8;
+
+      // The non-answer seeking query ignored case.
+      //
+      // Google skips the summary if the query doesn't have clear intent.
+      // Only used when
+      // [SearchRequest.ContentSearchSpec.SummarySpec.ignore_non_answer_seeking_query]
+      // is set to `true`.
+      NON_SUMMARY_SEEKING_QUERY_IGNORED_V2 = 9;
+
+      // The time out case.
+      //
+      // Google skips the summary if the time out.
+      TIME_OUT = 10;
     }
 
     // The summary content.
@@ -1156,4 +1380,7 @@ message SearchResponse {
   // [SearchRequest.session][google.cloud.discoveryengine.v1.SearchRequest.session]
   // is provided. See its description for more details.
   SessionInfo session_info = 19;
+
+  // Promotions for site search.
+  repeated SearchLinkPromotion search_link_promotions = 23;
 }

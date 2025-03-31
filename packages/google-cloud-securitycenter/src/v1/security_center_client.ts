@@ -31,6 +31,7 @@ import type {
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
+import {loggingUtils as logging} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -55,6 +56,8 @@ export class SecurityCenterClient {
   private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
+  private _log = logging.log('security-center');
+
   auth: gax.GoogleAuth;
   descriptors: Descriptors = {
     page: {},
@@ -90,7 +93,7 @@ export class SecurityCenterClient {
    *     Developer's Console, e.g. 'grape-spaceship-123'. We will also check
    *     the environment variable GCLOUD_PROJECT for your project ID. If your
    *     app is running in an environment which supports
-   *     {@link https://developers.google.com/identity/protocols/application-default-credentials Application Default Credentials},
+   *     {@link https://cloud.google.com/docs/authentication/application-default-credentials Application Default Credentials},
    *     your project ID will be detected automatically.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
@@ -864,12 +867,52 @@ export class SecurityCenterClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.createSecurityHealthAnalyticsCustomModule(
-      request,
-      options,
-      callback
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info(
+      'createSecurityHealthAnalyticsCustomModule request %j',
+      request
     );
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.securitycenter.v1.ISecurityHealthAnalyticsCustomModule,
+          | protos.google.cloud.securitycenter.v1.ICreateSecurityHealthAnalyticsCustomModuleRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info(
+            'createSecurityHealthAnalyticsCustomModule response %j',
+            response
+          );
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .createSecurityHealthAnalyticsCustomModule(
+        request,
+        options,
+        wrappedCallback
+      )
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.securitycenter.v1.ISecurityHealthAnalyticsCustomModule,
+          (
+            | protos.google.cloud.securitycenter.v1.ICreateSecurityHealthAnalyticsCustomModuleRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info(
+            'createSecurityHealthAnalyticsCustomModule response %j',
+            response
+          );
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Creates a source.
@@ -962,8 +1005,39 @@ export class SecurityCenterClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.createSource(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('createSource request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.securitycenter.v1.ISource,
+          | protos.google.cloud.securitycenter.v1.ICreateSourceRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('createSource response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .createSource(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.securitycenter.v1.ISource,
+          (
+            | protos.google.cloud.securitycenter.v1.ICreateSourceRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('createSource response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Creates a finding. The corresponding source must exist for finding creation
@@ -1061,8 +1135,39 @@ export class SecurityCenterClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.createFinding(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('createFinding request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.securitycenter.v1.IFinding,
+          | protos.google.cloud.securitycenter.v1.ICreateFindingRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('createFinding response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .createFinding(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.securitycenter.v1.IFinding,
+          (
+            | protos.google.cloud.securitycenter.v1.ICreateFindingRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('createFinding response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Creates a mute config.
@@ -1166,8 +1271,39 @@ export class SecurityCenterClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.createMuteConfig(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('createMuteConfig request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.securitycenter.v1.IMuteConfig,
+          | protos.google.cloud.securitycenter.v1.ICreateMuteConfigRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('createMuteConfig response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .createMuteConfig(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.securitycenter.v1.IMuteConfig,
+          (
+            | protos.google.cloud.securitycenter.v1.ICreateMuteConfigRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('createMuteConfig response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Creates a notification config.
@@ -1273,12 +1409,39 @@ export class SecurityCenterClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.createNotificationConfig(
-      request,
-      options,
-      callback
-    );
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('createNotificationConfig request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.securitycenter.v1.INotificationConfig,
+          | protos.google.cloud.securitycenter.v1.ICreateNotificationConfigRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('createNotificationConfig response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .createNotificationConfig(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.securitycenter.v1.INotificationConfig,
+          (
+            | protos.google.cloud.securitycenter.v1.ICreateNotificationConfigRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('createNotificationConfig response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Deletes an existing mute config.
@@ -1379,8 +1542,39 @@ export class SecurityCenterClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.deleteMuteConfig(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('deleteMuteConfig request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.cloud.securitycenter.v1.IDeleteMuteConfigRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('deleteMuteConfig response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .deleteMuteConfig(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.protobuf.IEmpty,
+          (
+            | protos.google.cloud.securitycenter.v1.IDeleteMuteConfigRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteMuteConfig response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Deletes a notification config.
@@ -1478,12 +1672,39 @@ export class SecurityCenterClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.deleteNotificationConfig(
-      request,
-      options,
-      callback
-    );
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('deleteNotificationConfig request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.cloud.securitycenter.v1.IDeleteNotificationConfigRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('deleteNotificationConfig response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .deleteNotificationConfig(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.protobuf.IEmpty,
+          (
+            | protos.google.cloud.securitycenter.v1.IDeleteNotificationConfigRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteNotificationConfig response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Deletes the specified SecurityHealthAnalyticsCustomModule and all of its
@@ -1584,12 +1805,52 @@ export class SecurityCenterClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.deleteSecurityHealthAnalyticsCustomModule(
-      request,
-      options,
-      callback
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info(
+      'deleteSecurityHealthAnalyticsCustomModule request %j',
+      request
     );
+    const wrappedCallback:
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.cloud.securitycenter.v1.IDeleteSecurityHealthAnalyticsCustomModuleRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info(
+            'deleteSecurityHealthAnalyticsCustomModule response %j',
+            response
+          );
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .deleteSecurityHealthAnalyticsCustomModule(
+        request,
+        options,
+        wrappedCallback
+      )
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.protobuf.IEmpty,
+          (
+            | protos.google.cloud.securitycenter.v1.IDeleteSecurityHealthAnalyticsCustomModuleRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info(
+            'deleteSecurityHealthAnalyticsCustomModule response %j',
+            response
+          );
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Get the simulation by name or the latest simulation for the given
@@ -1683,8 +1944,39 @@ export class SecurityCenterClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.getSimulation(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('getSimulation request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.securitycenter.v1.ISimulation,
+          | protos.google.cloud.securitycenter.v1.IGetSimulationRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getSimulation response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getSimulation(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.securitycenter.v1.ISimulation,
+          (
+            | protos.google.cloud.securitycenter.v1.IGetSimulationRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getSimulation response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Get the valued resource by name
@@ -1782,8 +2074,39 @@ export class SecurityCenterClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.getValuedResource(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('getValuedResource request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.securitycenter.v1.IValuedResource,
+          | protos.google.cloud.securitycenter.v1.IGetValuedResourceRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getValuedResource response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getValuedResource(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.securitycenter.v1.IValuedResource,
+          (
+            | protos.google.cloud.securitycenter.v1.IGetValuedResourceRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getValuedResource response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Gets a BigQuery export.
@@ -1881,8 +2204,39 @@ export class SecurityCenterClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.getBigQueryExport(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('getBigQueryExport request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.securitycenter.v1.IBigQueryExport,
+          | protos.google.cloud.securitycenter.v1.IGetBigQueryExportRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getBigQueryExport response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getBigQueryExport(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.securitycenter.v1.IBigQueryExport,
+          (
+            | protos.google.cloud.securitycenter.v1.IGetBigQueryExportRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getBigQueryExport response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Gets the access control policy on the specified Source.
@@ -1967,8 +2321,34 @@ export class SecurityCenterClient {
       this._gaxModule.routingHeader.fromParams({
         resource: request.resource ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.getIamPolicy(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('getIamPolicy request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.iam.v1.IPolicy,
+          protos.google.iam.v1.IGetIamPolicyRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getIamPolicy response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getIamPolicy(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.iam.v1.IPolicy,
+          protos.google.iam.v1.IGetIamPolicyRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getIamPolicy response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Gets a mute config.
@@ -2063,8 +2443,39 @@ export class SecurityCenterClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.getMuteConfig(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('getMuteConfig request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.securitycenter.v1.IMuteConfig,
+          | protos.google.cloud.securitycenter.v1.IGetMuteConfigRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getMuteConfig response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getMuteConfig(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.securitycenter.v1.IMuteConfig,
+          (
+            | protos.google.cloud.securitycenter.v1.IGetMuteConfigRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getMuteConfig response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Gets a notification config.
@@ -2162,8 +2573,39 @@ export class SecurityCenterClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.getNotificationConfig(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('getNotificationConfig request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.securitycenter.v1.INotificationConfig,
+          | protos.google.cloud.securitycenter.v1.IGetNotificationConfigRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getNotificationConfig response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getNotificationConfig(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.securitycenter.v1.INotificationConfig,
+          (
+            | protos.google.cloud.securitycenter.v1.IGetNotificationConfigRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getNotificationConfig response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Gets the settings for an organization.
@@ -2259,12 +2701,39 @@ export class SecurityCenterClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.getOrganizationSettings(
-      request,
-      options,
-      callback
-    );
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('getOrganizationSettings request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.securitycenter.v1.IOrganizationSettings,
+          | protos.google.cloud.securitycenter.v1.IGetOrganizationSettingsRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getOrganizationSettings response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getOrganizationSettings(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.securitycenter.v1.IOrganizationSettings,
+          (
+            | protos.google.cloud.securitycenter.v1.IGetOrganizationSettingsRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getOrganizationSettings response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Retrieves an EffectiveSecurityHealthAnalyticsCustomModule.
@@ -2363,12 +2832,52 @@ export class SecurityCenterClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.getEffectiveSecurityHealthAnalyticsCustomModule(
-      request,
-      options,
-      callback
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info(
+      'getEffectiveSecurityHealthAnalyticsCustomModule request %j',
+      request
     );
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.securitycenter.v1.IEffectiveSecurityHealthAnalyticsCustomModule,
+          | protos.google.cloud.securitycenter.v1.IGetEffectiveSecurityHealthAnalyticsCustomModuleRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info(
+            'getEffectiveSecurityHealthAnalyticsCustomModule response %j',
+            response
+          );
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getEffectiveSecurityHealthAnalyticsCustomModule(
+        request,
+        options,
+        wrappedCallback
+      )
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.securitycenter.v1.IEffectiveSecurityHealthAnalyticsCustomModule,
+          (
+            | protos.google.cloud.securitycenter.v1.IGetEffectiveSecurityHealthAnalyticsCustomModuleRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info(
+            'getEffectiveSecurityHealthAnalyticsCustomModule response %j',
+            response
+          );
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Retrieves a SecurityHealthAnalyticsCustomModule.
@@ -2467,12 +2976,48 @@ export class SecurityCenterClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.getSecurityHealthAnalyticsCustomModule(
-      request,
-      options,
-      callback
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info(
+      'getSecurityHealthAnalyticsCustomModule request %j',
+      request
     );
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.securitycenter.v1.ISecurityHealthAnalyticsCustomModule,
+          | protos.google.cloud.securitycenter.v1.IGetSecurityHealthAnalyticsCustomModuleRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info(
+            'getSecurityHealthAnalyticsCustomModule response %j',
+            response
+          );
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getSecurityHealthAnalyticsCustomModule(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.securitycenter.v1.ISecurityHealthAnalyticsCustomModule,
+          (
+            | protos.google.cloud.securitycenter.v1.IGetSecurityHealthAnalyticsCustomModuleRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info(
+            'getSecurityHealthAnalyticsCustomModule response %j',
+            response
+          );
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Gets a source.
@@ -2562,8 +3107,36 @@ export class SecurityCenterClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.getSource(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('getSource request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.securitycenter.v1.ISource,
+          | protos.google.cloud.securitycenter.v1.IGetSourceRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getSource response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getSource(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.securitycenter.v1.ISource,
+          protos.google.cloud.securitycenter.v1.IGetSourceRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getSource response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Updates the state of a finding.
@@ -2661,8 +3234,39 @@ export class SecurityCenterClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.setFindingState(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('setFindingState request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.securitycenter.v1.IFinding,
+          | protos.google.cloud.securitycenter.v1.ISetFindingStateRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('setFindingState response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .setFindingState(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.securitycenter.v1.IFinding,
+          (
+            | protos.google.cloud.securitycenter.v1.ISetFindingStateRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('setFindingState response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Updates the mute state of a finding.
@@ -2752,8 +3356,36 @@ export class SecurityCenterClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.setMute(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('setMute request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.securitycenter.v1.IFinding,
+          | protos.google.cloud.securitycenter.v1.ISetMuteRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('setMute response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .setMute(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.securitycenter.v1.IFinding,
+          protos.google.cloud.securitycenter.v1.ISetMuteRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('setMute response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Sets the access control policy on the specified Source.
@@ -2846,8 +3478,34 @@ export class SecurityCenterClient {
       this._gaxModule.routingHeader.fromParams({
         resource: request.resource ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.setIamPolicy(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('setIamPolicy request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.iam.v1.IPolicy,
+          protos.google.iam.v1.ISetIamPolicyRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('setIamPolicy response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .setIamPolicy(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.iam.v1.IPolicy,
+          protos.google.iam.v1.ISetIamPolicyRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('setIamPolicy response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Returns the permissions that a caller has on the specified source.
@@ -2934,8 +3592,34 @@ export class SecurityCenterClient {
       this._gaxModule.routingHeader.fromParams({
         resource: request.resource ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.testIamPermissions(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('testIamPermissions request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.iam.v1.ITestIamPermissionsResponse,
+          protos.google.iam.v1.ITestIamPermissionsRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('testIamPermissions response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .testIamPermissions(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.iam.v1.ITestIamPermissionsResponse,
+          protos.google.iam.v1.ITestIamPermissionsRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('testIamPermissions response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Simulates a given SecurityHealthAnalyticsCustomModule and Resource.
@@ -3038,12 +3722,52 @@ export class SecurityCenterClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.simulateSecurityHealthAnalyticsCustomModule(
-      request,
-      options,
-      callback
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info(
+      'simulateSecurityHealthAnalyticsCustomModule request %j',
+      request
     );
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.securitycenter.v1.ISimulateSecurityHealthAnalyticsCustomModuleResponse,
+          | protos.google.cloud.securitycenter.v1.ISimulateSecurityHealthAnalyticsCustomModuleRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info(
+            'simulateSecurityHealthAnalyticsCustomModule response %j',
+            response
+          );
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .simulateSecurityHealthAnalyticsCustomModule(
+        request,
+        options,
+        wrappedCallback
+      )
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.securitycenter.v1.ISimulateSecurityHealthAnalyticsCustomModuleResponse,
+          (
+            | protos.google.cloud.securitycenter.v1.ISimulateSecurityHealthAnalyticsCustomModuleRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info(
+            'simulateSecurityHealthAnalyticsCustomModule response %j',
+            response
+          );
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Updates external system. This is for a given finding.
@@ -3142,8 +3866,39 @@ export class SecurityCenterClient {
       this._gaxModule.routingHeader.fromParams({
         'external_system.name': request.externalSystem!.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.updateExternalSystem(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('updateExternalSystem request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.securitycenter.v1.IExternalSystem,
+          | protos.google.cloud.securitycenter.v1.IUpdateExternalSystemRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('updateExternalSystem response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .updateExternalSystem(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.securitycenter.v1.IExternalSystem,
+          (
+            | protos.google.cloud.securitycenter.v1.IUpdateExternalSystemRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('updateExternalSystem response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Creates or updates a finding. The corresponding source must exist for a
@@ -3246,8 +4001,39 @@ export class SecurityCenterClient {
       this._gaxModule.routingHeader.fromParams({
         'finding.name': request.finding!.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.updateFinding(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('updateFinding request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.securitycenter.v1.IFinding,
+          | protos.google.cloud.securitycenter.v1.IUpdateFindingRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('updateFinding response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .updateFinding(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.securitycenter.v1.IFinding,
+          (
+            | protos.google.cloud.securitycenter.v1.IUpdateFindingRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('updateFinding response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Updates a mute config.
@@ -3345,8 +4131,39 @@ export class SecurityCenterClient {
       this._gaxModule.routingHeader.fromParams({
         'mute_config.name': request.muteConfig!.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.updateMuteConfig(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('updateMuteConfig request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.securitycenter.v1.IMuteConfig,
+          | protos.google.cloud.securitycenter.v1.IUpdateMuteConfigRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('updateMuteConfig response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .updateMuteConfig(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.securitycenter.v1.IMuteConfig,
+          (
+            | protos.google.cloud.securitycenter.v1.IUpdateMuteConfigRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('updateMuteConfig response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    *
@@ -3447,12 +4264,39 @@ export class SecurityCenterClient {
       this._gaxModule.routingHeader.fromParams({
         'notification_config.name': request.notificationConfig!.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.updateNotificationConfig(
-      request,
-      options,
-      callback
-    );
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('updateNotificationConfig request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.securitycenter.v1.INotificationConfig,
+          | protos.google.cloud.securitycenter.v1.IUpdateNotificationConfigRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('updateNotificationConfig response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .updateNotificationConfig(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.securitycenter.v1.INotificationConfig,
+          (
+            | protos.google.cloud.securitycenter.v1.IUpdateNotificationConfigRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('updateNotificationConfig response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Updates an organization's settings.
@@ -3551,12 +4395,39 @@ export class SecurityCenterClient {
       this._gaxModule.routingHeader.fromParams({
         'organization_settings.name': request.organizationSettings!.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.updateOrganizationSettings(
-      request,
-      options,
-      callback
-    );
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('updateOrganizationSettings request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.securitycenter.v1.IOrganizationSettings,
+          | protos.google.cloud.securitycenter.v1.IUpdateOrganizationSettingsRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('updateOrganizationSettings response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .updateOrganizationSettings(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.securitycenter.v1.IOrganizationSettings,
+          (
+            | protos.google.cloud.securitycenter.v1.IUpdateOrganizationSettingsRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('updateOrganizationSettings response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Updates the SecurityHealthAnalyticsCustomModule under the given name based
@@ -3660,12 +4531,52 @@ export class SecurityCenterClient {
         'security_health_analytics_custom_module.name':
           request.securityHealthAnalyticsCustomModule!.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.updateSecurityHealthAnalyticsCustomModule(
-      request,
-      options,
-      callback
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info(
+      'updateSecurityHealthAnalyticsCustomModule request %j',
+      request
     );
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.securitycenter.v1.ISecurityHealthAnalyticsCustomModule,
+          | protos.google.cloud.securitycenter.v1.IUpdateSecurityHealthAnalyticsCustomModuleRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info(
+            'updateSecurityHealthAnalyticsCustomModule response %j',
+            response
+          );
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .updateSecurityHealthAnalyticsCustomModule(
+        request,
+        options,
+        wrappedCallback
+      )
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.securitycenter.v1.ISecurityHealthAnalyticsCustomModule,
+          (
+            | protos.google.cloud.securitycenter.v1.IUpdateSecurityHealthAnalyticsCustomModuleRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info(
+            'updateSecurityHealthAnalyticsCustomModule response %j',
+            response
+          );
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Updates a source.
@@ -3758,8 +4669,39 @@ export class SecurityCenterClient {
       this._gaxModule.routingHeader.fromParams({
         'source.name': request.source!.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.updateSource(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('updateSource request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.securitycenter.v1.ISource,
+          | protos.google.cloud.securitycenter.v1.IUpdateSourceRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('updateSource response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .updateSource(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.securitycenter.v1.ISource,
+          (
+            | protos.google.cloud.securitycenter.v1.IUpdateSourceRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('updateSource response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Updates security marks.
@@ -3865,8 +4807,39 @@ export class SecurityCenterClient {
       this._gaxModule.routingHeader.fromParams({
         'security_marks.name': request.securityMarks!.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.updateSecurityMarks(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('updateSecurityMarks request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.securitycenter.v1.ISecurityMarks,
+          | protos.google.cloud.securitycenter.v1.IUpdateSecurityMarksRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('updateSecurityMarks response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .updateSecurityMarks(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.securitycenter.v1.ISecurityMarks,
+          (
+            | protos.google.cloud.securitycenter.v1.IUpdateSecurityMarksRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('updateSecurityMarks response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Creates a BigQuery export.
@@ -3970,8 +4943,39 @@ export class SecurityCenterClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.createBigQueryExport(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('createBigQueryExport request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.securitycenter.v1.IBigQueryExport,
+          | protos.google.cloud.securitycenter.v1.ICreateBigQueryExportRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('createBigQueryExport response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .createBigQueryExport(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.securitycenter.v1.IBigQueryExport,
+          (
+            | protos.google.cloud.securitycenter.v1.ICreateBigQueryExportRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('createBigQueryExport response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Deletes an existing BigQuery export.
@@ -4069,8 +5073,39 @@ export class SecurityCenterClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.deleteBigQueryExport(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('deleteBigQueryExport request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.cloud.securitycenter.v1.IDeleteBigQueryExportRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('deleteBigQueryExport response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .deleteBigQueryExport(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.protobuf.IEmpty,
+          (
+            | protos.google.cloud.securitycenter.v1.IDeleteBigQueryExportRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteBigQueryExport response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Updates a BigQuery export.
@@ -4168,8 +5203,39 @@ export class SecurityCenterClient {
       this._gaxModule.routingHeader.fromParams({
         'big_query_export.name': request.bigQueryExport!.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.updateBigQueryExport(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('updateBigQueryExport request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.securitycenter.v1.IBigQueryExport,
+          | protos.google.cloud.securitycenter.v1.IUpdateBigQueryExportRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('updateBigQueryExport response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .updateBigQueryExport(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.securitycenter.v1.IBigQueryExport,
+          (
+            | protos.google.cloud.securitycenter.v1.IUpdateBigQueryExportRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('updateBigQueryExport response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Creates a resident Event Threat Detection custom module at the scope of the
@@ -4277,12 +5343,48 @@ export class SecurityCenterClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.createEventThreatDetectionCustomModule(
-      request,
-      options,
-      callback
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info(
+      'createEventThreatDetectionCustomModule request %j',
+      request
     );
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.securitycenter.v1.IEventThreatDetectionCustomModule,
+          | protos.google.cloud.securitycenter.v1.ICreateEventThreatDetectionCustomModuleRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info(
+            'createEventThreatDetectionCustomModule response %j',
+            response
+          );
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .createEventThreatDetectionCustomModule(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.securitycenter.v1.IEventThreatDetectionCustomModule,
+          (
+            | protos.google.cloud.securitycenter.v1.ICreateEventThreatDetectionCustomModuleRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info(
+            'createEventThreatDetectionCustomModule response %j',
+            response
+          );
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Deletes the specified Event Threat Detection custom module and all of its
@@ -4385,12 +5487,48 @@ export class SecurityCenterClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.deleteEventThreatDetectionCustomModule(
-      request,
-      options,
-      callback
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info(
+      'deleteEventThreatDetectionCustomModule request %j',
+      request
     );
+    const wrappedCallback:
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.cloud.securitycenter.v1.IDeleteEventThreatDetectionCustomModuleRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info(
+            'deleteEventThreatDetectionCustomModule response %j',
+            response
+          );
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .deleteEventThreatDetectionCustomModule(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.protobuf.IEmpty,
+          (
+            | protos.google.cloud.securitycenter.v1.IDeleteEventThreatDetectionCustomModuleRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info(
+            'deleteEventThreatDetectionCustomModule response %j',
+            response
+          );
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Gets an Event Threat Detection custom module.
@@ -4491,12 +5629,45 @@ export class SecurityCenterClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.getEventThreatDetectionCustomModule(
-      request,
-      options,
-      callback
-    );
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('getEventThreatDetectionCustomModule request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.securitycenter.v1.IEventThreatDetectionCustomModule,
+          | protos.google.cloud.securitycenter.v1.IGetEventThreatDetectionCustomModuleRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info(
+            'getEventThreatDetectionCustomModule response %j',
+            response
+          );
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getEventThreatDetectionCustomModule(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.securitycenter.v1.IEventThreatDetectionCustomModule,
+          (
+            | protos.google.cloud.securitycenter.v1.IGetEventThreatDetectionCustomModuleRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info(
+            'getEventThreatDetectionCustomModule response %j',
+            response
+          );
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Updates the Event Threat Detection custom module with the given name based
@@ -4600,12 +5771,48 @@ export class SecurityCenterClient {
         'event_threat_detection_custom_module.name':
           request.eventThreatDetectionCustomModule!.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.updateEventThreatDetectionCustomModule(
-      request,
-      options,
-      callback
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info(
+      'updateEventThreatDetectionCustomModule request %j',
+      request
     );
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.securitycenter.v1.IEventThreatDetectionCustomModule,
+          | protos.google.cloud.securitycenter.v1.IUpdateEventThreatDetectionCustomModuleRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info(
+            'updateEventThreatDetectionCustomModule response %j',
+            response
+          );
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .updateEventThreatDetectionCustomModule(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.securitycenter.v1.IEventThreatDetectionCustomModule,
+          (
+            | protos.google.cloud.securitycenter.v1.IUpdateEventThreatDetectionCustomModuleRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info(
+            'updateEventThreatDetectionCustomModule response %j',
+            response
+          );
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Validates the given Event Threat Detection custom module.
@@ -4711,12 +5918,52 @@ export class SecurityCenterClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.validateEventThreatDetectionCustomModule(
-      request,
-      options,
-      callback
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info(
+      'validateEventThreatDetectionCustomModule request %j',
+      request
     );
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.securitycenter.v1.IValidateEventThreatDetectionCustomModuleResponse,
+          | protos.google.cloud.securitycenter.v1.IValidateEventThreatDetectionCustomModuleRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info(
+            'validateEventThreatDetectionCustomModule response %j',
+            response
+          );
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .validateEventThreatDetectionCustomModule(
+        request,
+        options,
+        wrappedCallback
+      )
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.securitycenter.v1.IValidateEventThreatDetectionCustomModuleResponse,
+          (
+            | protos.google.cloud.securitycenter.v1.IValidateEventThreatDetectionCustomModuleRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info(
+            'validateEventThreatDetectionCustomModule response %j',
+            response
+          );
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Gets an effective Event Threat Detection custom module at the given level.
@@ -4818,12 +6065,52 @@ export class SecurityCenterClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.getEffectiveEventThreatDetectionCustomModule(
-      request,
-      options,
-      callback
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info(
+      'getEffectiveEventThreatDetectionCustomModule request %j',
+      request
     );
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.securitycenter.v1.IEffectiveEventThreatDetectionCustomModule,
+          | protos.google.cloud.securitycenter.v1.IGetEffectiveEventThreatDetectionCustomModuleRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info(
+            'getEffectiveEventThreatDetectionCustomModule response %j',
+            response
+          );
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getEffectiveEventThreatDetectionCustomModule(
+        request,
+        options,
+        wrappedCallback
+      )
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.securitycenter.v1.IEffectiveEventThreatDetectionCustomModule,
+          (
+            | protos.google.cloud.securitycenter.v1.IGetEffectiveEventThreatDetectionCustomModuleRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info(
+            'getEffectiveEventThreatDetectionCustomModule response %j',
+            response
+          );
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Creates a ResourceValueConfig for an organization. Maps user's tags to
@@ -4923,12 +6210,45 @@ export class SecurityCenterClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.batchCreateResourceValueConfigs(
-      request,
-      options,
-      callback
-    );
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('batchCreateResourceValueConfigs request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.securitycenter.v1.IBatchCreateResourceValueConfigsResponse,
+          | protos.google.cloud.securitycenter.v1.IBatchCreateResourceValueConfigsRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info(
+            'batchCreateResourceValueConfigs response %j',
+            response
+          );
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .batchCreateResourceValueConfigs(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.securitycenter.v1.IBatchCreateResourceValueConfigsResponse,
+          (
+            | protos.google.cloud.securitycenter.v1.IBatchCreateResourceValueConfigsRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info(
+            'batchCreateResourceValueConfigs response %j',
+            response
+          );
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Deletes a ResourceValueConfig.
@@ -5023,12 +6343,39 @@ export class SecurityCenterClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.deleteResourceValueConfig(
-      request,
-      options,
-      callback
-    );
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('deleteResourceValueConfig request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.cloud.securitycenter.v1.IDeleteResourceValueConfigRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('deleteResourceValueConfig response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .deleteResourceValueConfig(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.protobuf.IEmpty,
+          (
+            | protos.google.cloud.securitycenter.v1.IDeleteResourceValueConfigRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteResourceValueConfig response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Gets a ResourceValueConfig.
@@ -5124,12 +6471,39 @@ export class SecurityCenterClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.getResourceValueConfig(
-      request,
-      options,
-      callback
-    );
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('getResourceValueConfig request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.securitycenter.v1.IResourceValueConfig,
+          | protos.google.cloud.securitycenter.v1.IGetResourceValueConfigRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getResourceValueConfig response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getResourceValueConfig(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.securitycenter.v1.IResourceValueConfig,
+          (
+            | protos.google.cloud.securitycenter.v1.IGetResourceValueConfigRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getResourceValueConfig response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Updates an existing ResourceValueConfigs with new rules.
@@ -5227,12 +6601,39 @@ export class SecurityCenterClient {
       this._gaxModule.routingHeader.fromParams({
         'resource_value_config.name': request.resourceValueConfig!.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.updateResourceValueConfig(
-      request,
-      options,
-      callback
-    );
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('updateResourceValueConfig request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.securitycenter.v1.IResourceValueConfig,
+          | protos.google.cloud.securitycenter.v1.IUpdateResourceValueConfigRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('updateResourceValueConfig response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .updateResourceValueConfig(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.securitycenter.v1.IResourceValueConfig,
+          (
+            | protos.google.cloud.securitycenter.v1.IUpdateResourceValueConfigRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('updateResourceValueConfig response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
 
   /**
@@ -5366,8 +6767,40 @@ export class SecurityCenterClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.bulkMuteFindings(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.securitycenter.v1.IBulkMuteFindingsResponse,
+            protos.google.protobuf.IEmpty
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('bulkMuteFindings response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('bulkMuteFindings request %j', request);
+    return this.innerApiCalls
+      .bulkMuteFindings(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.securitycenter.v1.IBulkMuteFindingsResponse,
+            protos.google.protobuf.IEmpty
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('bulkMuteFindings response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `bulkMuteFindings()`.
@@ -5388,6 +6821,7 @@ export class SecurityCenterClient {
       protos.google.protobuf.Empty
     >
   > {
+    this._log.info('bulkMuteFindings long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -5509,13 +6943,45 @@ export class SecurityCenterClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this.warn(
       'DEP$SecurityCenter-$RunAssetDiscovery',
       'RunAssetDiscovery is deprecated and may be removed in a future version.',
       'DeprecationWarning'
     );
-    return this.innerApiCalls.runAssetDiscovery(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.securitycenter.v1.IRunAssetDiscoveryResponse,
+            protos.google.protobuf.IEmpty
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('runAssetDiscovery response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('runAssetDiscovery request %j', request);
+    return this.innerApiCalls
+      .runAssetDiscovery(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.securitycenter.v1.IRunAssetDiscoveryResponse,
+            protos.google.protobuf.IEmpty
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('runAssetDiscovery response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `runAssetDiscovery()`.
@@ -5542,6 +7008,7 @@ export class SecurityCenterClient {
       'checkRunAssetDiscoveryProgress is deprecated and may be removed in a future version.',
       'DeprecationWarning'
     );
+    this._log.info('runAssetDiscovery long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -5773,13 +7240,41 @@ export class SecurityCenterClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this.warn(
       'DEP$SecurityCenter-$GroupAssets',
       'GroupAssets is deprecated and may be removed in a future version.',
       'DeprecationWarning'
     );
-    return this.innerApiCalls.groupAssets(request, options, callback);
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.securitycenter.v1.IGroupAssetsRequest,
+          | protos.google.cloud.securitycenter.v1.IGroupAssetsResponse
+          | null
+          | undefined,
+          protos.google.cloud.securitycenter.v1.IGroupResult
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('groupAssets values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('groupAssets request %j', request);
+    return this.innerApiCalls
+      .groupAssets(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.securitycenter.v1.IGroupResult[],
+          protos.google.cloud.securitycenter.v1.IGroupAssetsRequest | null,
+          protos.google.cloud.securitycenter.v1.IGroupAssetsResponse,
+        ]) => {
+          this._log.info('groupAssets values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -5938,12 +7433,15 @@ export class SecurityCenterClient {
       });
     const defaultCallSettings = this._defaults['groupAssets'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this.warn(
       'DEP$SecurityCenter-$GroupAssets',
       'GroupAssets is deprecated and may be removed in a future version.',
       'DeprecationWarning'
     );
+    this._log.info('groupAssets stream %j', request);
     return this.descriptors.page.groupAssets.createStream(
       this.innerApiCalls.groupAssets as GaxCall,
       request,
@@ -6110,12 +7608,15 @@ export class SecurityCenterClient {
       });
     const defaultCallSettings = this._defaults['groupAssets'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this.warn(
       'DEP$SecurityCenter-$GroupAssets',
       'GroupAssets is deprecated and may be removed in a future version.',
       'DeprecationWarning'
     );
+    this._log.info('groupAssets iterate %j', request);
     return this.descriptors.page.groupAssets.asyncIterate(
       this.innerApiCalls['groupAssets'] as GaxCall,
       request as {},
@@ -6337,8 +7838,36 @@ export class SecurityCenterClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.groupFindings(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.securitycenter.v1.IGroupFindingsRequest,
+          | protos.google.cloud.securitycenter.v1.IGroupFindingsResponse
+          | null
+          | undefined,
+          protos.google.cloud.securitycenter.v1.IGroupResult
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('groupFindings values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('groupFindings request %j', request);
+    return this.innerApiCalls
+      .groupFindings(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.securitycenter.v1.IGroupResult[],
+          protos.google.cloud.securitycenter.v1.IGroupFindingsRequest | null,
+          protos.google.cloud.securitycenter.v1.IGroupFindingsResponse,
+        ]) => {
+          this._log.info('groupFindings values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -6491,7 +8020,10 @@ export class SecurityCenterClient {
       });
     const defaultCallSettings = this._defaults['groupFindings'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('groupFindings stream %j', request);
     return this.descriptors.page.groupFindings.createStream(
       this.innerApiCalls.groupFindings as GaxCall,
       request,
@@ -6652,7 +8184,10 @@ export class SecurityCenterClient {
       });
     const defaultCallSettings = this._defaults['groupFindings'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('groupFindings iterate %j', request);
     return this.descriptors.page.groupFindings.asyncIterate(
       this.innerApiCalls['groupFindings'] as GaxCall,
       request as {},
@@ -6880,13 +8415,41 @@ export class SecurityCenterClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this.warn(
       'DEP$SecurityCenter-$ListAssets',
       'ListAssets is deprecated and may be removed in a future version.',
       'DeprecationWarning'
     );
-    return this.innerApiCalls.listAssets(request, options, callback);
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.securitycenter.v1.IListAssetsRequest,
+          | protos.google.cloud.securitycenter.v1.IListAssetsResponse
+          | null
+          | undefined,
+          protos.google.cloud.securitycenter.v1.ListAssetsResponse.IListAssetsResult
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listAssets values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listAssets request %j', request);
+    return this.innerApiCalls
+      .listAssets(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.securitycenter.v1.ListAssetsResponse.IListAssetsResult[],
+          protos.google.cloud.securitycenter.v1.IListAssetsRequest | null,
+          protos.google.cloud.securitycenter.v1.IListAssetsResponse,
+        ]) => {
+          this._log.info('listAssets values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -7051,12 +8614,15 @@ export class SecurityCenterClient {
       });
     const defaultCallSettings = this._defaults['listAssets'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this.warn(
       'DEP$SecurityCenter-$ListAssets',
       'ListAssets is deprecated and may be removed in a future version.',
       'DeprecationWarning'
     );
+    this._log.info('listAssets stream %j', request);
     return this.descriptors.page.listAssets.createStream(
       this.innerApiCalls.listAssets as GaxCall,
       request,
@@ -7229,12 +8795,15 @@ export class SecurityCenterClient {
       });
     const defaultCallSettings = this._defaults['listAssets'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this.warn(
       'DEP$SecurityCenter-$ListAssets',
       'ListAssets is deprecated and may be removed in a future version.',
       'DeprecationWarning'
     );
+    this._log.info('listAssets iterate %j', request);
     return this.descriptors.page.listAssets.asyncIterate(
       this.innerApiCalls['listAssets'] as GaxCall,
       request as {},
@@ -7340,12 +8909,49 @@ export class SecurityCenterClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.listDescendantSecurityHealthAnalyticsCustomModules(
-      request,
-      options,
-      callback
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.securitycenter.v1.IListDescendantSecurityHealthAnalyticsCustomModulesRequest,
+          | protos.google.cloud.securitycenter.v1.IListDescendantSecurityHealthAnalyticsCustomModulesResponse
+          | null
+          | undefined,
+          protos.google.cloud.securitycenter.v1.ISecurityHealthAnalyticsCustomModule
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info(
+            'listDescendantSecurityHealthAnalyticsCustomModules values %j',
+            values
+          );
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info(
+      'listDescendantSecurityHealthAnalyticsCustomModules request %j',
+      request
     );
+    return this.innerApiCalls
+      .listDescendantSecurityHealthAnalyticsCustomModules(
+        request,
+        options,
+        wrappedCallback
+      )
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.securitycenter.v1.ISecurityHealthAnalyticsCustomModule[],
+          protos.google.cloud.securitycenter.v1.IListDescendantSecurityHealthAnalyticsCustomModulesRequest | null,
+          protos.google.cloud.securitycenter.v1.IListDescendantSecurityHealthAnalyticsCustomModulesResponse,
+        ]) => {
+          this._log.info(
+            'listDescendantSecurityHealthAnalyticsCustomModules values %j',
+            response
+          );
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -7388,7 +8994,13 @@ export class SecurityCenterClient {
     const defaultCallSettings =
       this._defaults['listDescendantSecurityHealthAnalyticsCustomModules'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info(
+      'listDescendantSecurityHealthAnalyticsCustomModules stream %j',
+      request
+    );
     return this.descriptors.page.listDescendantSecurityHealthAnalyticsCustomModules.createStream(
       this.innerApiCalls
         .listDescendantSecurityHealthAnalyticsCustomModules as GaxCall,
@@ -7440,7 +9052,13 @@ export class SecurityCenterClient {
     const defaultCallSettings =
       this._defaults['listDescendantSecurityHealthAnalyticsCustomModules'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info(
+      'listDescendantSecurityHealthAnalyticsCustomModules iterate %j',
+      request
+    );
     return this.descriptors.page.listDescendantSecurityHealthAnalyticsCustomModules.asyncIterate(
       this.innerApiCalls[
         'listDescendantSecurityHealthAnalyticsCustomModules'
@@ -7675,8 +9293,36 @@ export class SecurityCenterClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.listFindings(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.securitycenter.v1.IListFindingsRequest,
+          | protos.google.cloud.securitycenter.v1.IListFindingsResponse
+          | null
+          | undefined,
+          protos.google.cloud.securitycenter.v1.ListFindingsResponse.IListFindingsResult
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listFindings values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listFindings request %j', request);
+    return this.innerApiCalls
+      .listFindings(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.securitycenter.v1.ListFindingsResponse.IListFindingsResult[],
+          protos.google.cloud.securitycenter.v1.IListFindingsRequest | null,
+          protos.google.cloud.securitycenter.v1.IListFindingsResponse,
+        ]) => {
+          this._log.info('listFindings values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -7843,7 +9489,10 @@ export class SecurityCenterClient {
       });
     const defaultCallSettings = this._defaults['listFindings'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listFindings stream %j', request);
     return this.descriptors.page.listFindings.createStream(
       this.innerApiCalls.listFindings as GaxCall,
       request,
@@ -8018,7 +9667,10 @@ export class SecurityCenterClient {
       });
     const defaultCallSettings = this._defaults['listFindings'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listFindings iterate %j', request);
     return this.descriptors.page.listFindings.asyncIterate(
       this.innerApiCalls['listFindings'] as GaxCall,
       request as {},
@@ -8128,8 +9780,36 @@ export class SecurityCenterClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.listMuteConfigs(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.securitycenter.v1.IListMuteConfigsRequest,
+          | protos.google.cloud.securitycenter.v1.IListMuteConfigsResponse
+          | null
+          | undefined,
+          protos.google.cloud.securitycenter.v1.IMuteConfig
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listMuteConfigs values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listMuteConfigs request %j', request);
+    return this.innerApiCalls
+      .listMuteConfigs(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.securitycenter.v1.IMuteConfig[],
+          protos.google.cloud.securitycenter.v1.IListMuteConfigsRequest | null,
+          protos.google.cloud.securitycenter.v1.IListMuteConfigsResponse,
+        ]) => {
+          this._log.info('listMuteConfigs values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -8176,7 +9856,10 @@ export class SecurityCenterClient {
       });
     const defaultCallSettings = this._defaults['listMuteConfigs'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listMuteConfigs stream %j', request);
     return this.descriptors.page.listMuteConfigs.createStream(
       this.innerApiCalls.listMuteConfigs as GaxCall,
       request,
@@ -8231,7 +9914,10 @@ export class SecurityCenterClient {
       });
     const defaultCallSettings = this._defaults['listMuteConfigs'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listMuteConfigs iterate %j', request);
     return this.descriptors.page.listMuteConfigs.asyncIterate(
       this.innerApiCalls['listMuteConfigs'] as GaxCall,
       request as {},
@@ -8337,12 +10023,36 @@ export class SecurityCenterClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.listNotificationConfigs(
-      request,
-      options,
-      callback
-    );
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.securitycenter.v1.IListNotificationConfigsRequest,
+          | protos.google.cloud.securitycenter.v1.IListNotificationConfigsResponse
+          | null
+          | undefined,
+          protos.google.cloud.securitycenter.v1.INotificationConfig
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listNotificationConfigs values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listNotificationConfigs request %j', request);
+    return this.innerApiCalls
+      .listNotificationConfigs(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.securitycenter.v1.INotificationConfig[],
+          protos.google.cloud.securitycenter.v1.IListNotificationConfigsRequest | null,
+          protos.google.cloud.securitycenter.v1.IListNotificationConfigsResponse,
+        ]) => {
+          this._log.info('listNotificationConfigs values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -8385,7 +10095,10 @@ export class SecurityCenterClient {
       });
     const defaultCallSettings = this._defaults['listNotificationConfigs'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listNotificationConfigs stream %j', request);
     return this.descriptors.page.listNotificationConfigs.createStream(
       this.innerApiCalls.listNotificationConfigs as GaxCall,
       request,
@@ -8436,7 +10149,10 @@ export class SecurityCenterClient {
       });
     const defaultCallSettings = this._defaults['listNotificationConfigs'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listNotificationConfigs iterate %j', request);
     return this.descriptors.page.listNotificationConfigs.asyncIterate(
       this.innerApiCalls['listNotificationConfigs'] as GaxCall,
       request as {},
@@ -8543,12 +10259,49 @@ export class SecurityCenterClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.listEffectiveSecurityHealthAnalyticsCustomModules(
-      request,
-      options,
-      callback
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.securitycenter.v1.IListEffectiveSecurityHealthAnalyticsCustomModulesRequest,
+          | protos.google.cloud.securitycenter.v1.IListEffectiveSecurityHealthAnalyticsCustomModulesResponse
+          | null
+          | undefined,
+          protos.google.cloud.securitycenter.v1.IEffectiveSecurityHealthAnalyticsCustomModule
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info(
+            'listEffectiveSecurityHealthAnalyticsCustomModules values %j',
+            values
+          );
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info(
+      'listEffectiveSecurityHealthAnalyticsCustomModules request %j',
+      request
     );
+    return this.innerApiCalls
+      .listEffectiveSecurityHealthAnalyticsCustomModules(
+        request,
+        options,
+        wrappedCallback
+      )
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.securitycenter.v1.IEffectiveSecurityHealthAnalyticsCustomModule[],
+          protos.google.cloud.securitycenter.v1.IListEffectiveSecurityHealthAnalyticsCustomModulesRequest | null,
+          protos.google.cloud.securitycenter.v1.IListEffectiveSecurityHealthAnalyticsCustomModulesResponse,
+        ]) => {
+          this._log.info(
+            'listEffectiveSecurityHealthAnalyticsCustomModules values %j',
+            response
+          );
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -8591,7 +10344,13 @@ export class SecurityCenterClient {
     const defaultCallSettings =
       this._defaults['listEffectiveSecurityHealthAnalyticsCustomModules'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info(
+      'listEffectiveSecurityHealthAnalyticsCustomModules stream %j',
+      request
+    );
     return this.descriptors.page.listEffectiveSecurityHealthAnalyticsCustomModules.createStream(
       this.innerApiCalls
         .listEffectiveSecurityHealthAnalyticsCustomModules as GaxCall,
@@ -8643,7 +10402,13 @@ export class SecurityCenterClient {
     const defaultCallSettings =
       this._defaults['listEffectiveSecurityHealthAnalyticsCustomModules'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info(
+      'listEffectiveSecurityHealthAnalyticsCustomModules iterate %j',
+      request
+    );
     return this.descriptors.page.listEffectiveSecurityHealthAnalyticsCustomModules.asyncIterate(
       this.innerApiCalls[
         'listEffectiveSecurityHealthAnalyticsCustomModules'
@@ -8752,12 +10517,49 @@ export class SecurityCenterClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.listSecurityHealthAnalyticsCustomModules(
-      request,
-      options,
-      callback
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.securitycenter.v1.IListSecurityHealthAnalyticsCustomModulesRequest,
+          | protos.google.cloud.securitycenter.v1.IListSecurityHealthAnalyticsCustomModulesResponse
+          | null
+          | undefined,
+          protos.google.cloud.securitycenter.v1.ISecurityHealthAnalyticsCustomModule
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info(
+            'listSecurityHealthAnalyticsCustomModules values %j',
+            values
+          );
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info(
+      'listSecurityHealthAnalyticsCustomModules request %j',
+      request
     );
+    return this.innerApiCalls
+      .listSecurityHealthAnalyticsCustomModules(
+        request,
+        options,
+        wrappedCallback
+      )
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.securitycenter.v1.ISecurityHealthAnalyticsCustomModule[],
+          protos.google.cloud.securitycenter.v1.IListSecurityHealthAnalyticsCustomModulesRequest | null,
+          protos.google.cloud.securitycenter.v1.IListSecurityHealthAnalyticsCustomModulesResponse,
+        ]) => {
+          this._log.info(
+            'listSecurityHealthAnalyticsCustomModules values %j',
+            response
+          );
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -8800,7 +10602,13 @@ export class SecurityCenterClient {
     const defaultCallSettings =
       this._defaults['listSecurityHealthAnalyticsCustomModules'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info(
+      'listSecurityHealthAnalyticsCustomModules stream %j',
+      request
+    );
     return this.descriptors.page.listSecurityHealthAnalyticsCustomModules.createStream(
       this.innerApiCalls.listSecurityHealthAnalyticsCustomModules as GaxCall,
       request,
@@ -8851,7 +10659,13 @@ export class SecurityCenterClient {
     const defaultCallSettings =
       this._defaults['listSecurityHealthAnalyticsCustomModules'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info(
+      'listSecurityHealthAnalyticsCustomModules iterate %j',
+      request
+    );
     return this.descriptors.page.listSecurityHealthAnalyticsCustomModules.asyncIterate(
       this.innerApiCalls['listSecurityHealthAnalyticsCustomModules'] as GaxCall,
       request as {},
@@ -8957,8 +10771,36 @@ export class SecurityCenterClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.listSources(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.securitycenter.v1.IListSourcesRequest,
+          | protos.google.cloud.securitycenter.v1.IListSourcesResponse
+          | null
+          | undefined,
+          protos.google.cloud.securitycenter.v1.ISource
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listSources values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listSources request %j', request);
+    return this.innerApiCalls
+      .listSources(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.securitycenter.v1.ISource[],
+          protos.google.cloud.securitycenter.v1.IListSourcesRequest | null,
+          protos.google.cloud.securitycenter.v1.IListSourcesResponse,
+        ]) => {
+          this._log.info('listSources values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -9001,7 +10843,10 @@ export class SecurityCenterClient {
       });
     const defaultCallSettings = this._defaults['listSources'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listSources stream %j', request);
     return this.descriptors.page.listSources.createStream(
       this.innerApiCalls.listSources as GaxCall,
       request,
@@ -9052,7 +10897,10 @@ export class SecurityCenterClient {
       });
     const defaultCallSettings = this._defaults['listSources'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listSources iterate %j', request);
     return this.descriptors.page.listSources.asyncIterate(
       this.innerApiCalls['listSources'] as GaxCall,
       request as {},
@@ -9165,8 +11013,36 @@ export class SecurityCenterClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.listBigQueryExports(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.securitycenter.v1.IListBigQueryExportsRequest,
+          | protos.google.cloud.securitycenter.v1.IListBigQueryExportsResponse
+          | null
+          | undefined,
+          protos.google.cloud.securitycenter.v1.IBigQueryExport
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listBigQueryExports values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listBigQueryExports request %j', request);
+    return this.innerApiCalls
+      .listBigQueryExports(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.securitycenter.v1.IBigQueryExport[],
+          protos.google.cloud.securitycenter.v1.IListBigQueryExportsRequest | null,
+          protos.google.cloud.securitycenter.v1.IListBigQueryExportsResponse,
+        ]) => {
+          this._log.info('listBigQueryExports values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -9212,7 +11088,10 @@ export class SecurityCenterClient {
       });
     const defaultCallSettings = this._defaults['listBigQueryExports'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listBigQueryExports stream %j', request);
     return this.descriptors.page.listBigQueryExports.createStream(
       this.innerApiCalls.listBigQueryExports as GaxCall,
       request,
@@ -9266,7 +11145,10 @@ export class SecurityCenterClient {
       });
     const defaultCallSettings = this._defaults['listBigQueryExports'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listBigQueryExports iterate %j', request);
     return this.descriptors.page.listBigQueryExports.asyncIterate(
       this.innerApiCalls['listBigQueryExports'] as GaxCall,
       request as {},
@@ -9383,12 +11265,49 @@ export class SecurityCenterClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.listDescendantEventThreatDetectionCustomModules(
-      request,
-      options,
-      callback
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.securitycenter.v1.IListDescendantEventThreatDetectionCustomModulesRequest,
+          | protos.google.cloud.securitycenter.v1.IListDescendantEventThreatDetectionCustomModulesResponse
+          | null
+          | undefined,
+          protos.google.cloud.securitycenter.v1.IEventThreatDetectionCustomModule
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info(
+            'listDescendantEventThreatDetectionCustomModules values %j',
+            values
+          );
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info(
+      'listDescendantEventThreatDetectionCustomModules request %j',
+      request
     );
+    return this.innerApiCalls
+      .listDescendantEventThreatDetectionCustomModules(
+        request,
+        options,
+        wrappedCallback
+      )
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.securitycenter.v1.IEventThreatDetectionCustomModule[],
+          protos.google.cloud.securitycenter.v1.IListDescendantEventThreatDetectionCustomModulesRequest | null,
+          protos.google.cloud.securitycenter.v1.IListDescendantEventThreatDetectionCustomModulesResponse,
+        ]) => {
+          this._log.info(
+            'listDescendantEventThreatDetectionCustomModules values %j',
+            response
+          );
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -9442,7 +11361,13 @@ export class SecurityCenterClient {
     const defaultCallSettings =
       this._defaults['listDescendantEventThreatDetectionCustomModules'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info(
+      'listDescendantEventThreatDetectionCustomModules stream %j',
+      request
+    );
     return this.descriptors.page.listDescendantEventThreatDetectionCustomModules.createStream(
       this.innerApiCalls
         .listDescendantEventThreatDetectionCustomModules as GaxCall,
@@ -9505,7 +11430,13 @@ export class SecurityCenterClient {
     const defaultCallSettings =
       this._defaults['listDescendantEventThreatDetectionCustomModules'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info(
+      'listDescendantEventThreatDetectionCustomModules iterate %j',
+      request
+    );
     return this.descriptors.page.listDescendantEventThreatDetectionCustomModules.asyncIterate(
       this.innerApiCalls[
         'listDescendantEventThreatDetectionCustomModules'
@@ -9625,12 +11556,42 @@ export class SecurityCenterClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.listEventThreatDetectionCustomModules(
-      request,
-      options,
-      callback
-    );
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.securitycenter.v1.IListEventThreatDetectionCustomModulesRequest,
+          | protos.google.cloud.securitycenter.v1.IListEventThreatDetectionCustomModulesResponse
+          | null
+          | undefined,
+          protos.google.cloud.securitycenter.v1.IEventThreatDetectionCustomModule
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info(
+            'listEventThreatDetectionCustomModules values %j',
+            values
+          );
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listEventThreatDetectionCustomModules request %j', request);
+    return this.innerApiCalls
+      .listEventThreatDetectionCustomModules(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.securitycenter.v1.IEventThreatDetectionCustomModule[],
+          protos.google.cloud.securitycenter.v1.IListEventThreatDetectionCustomModulesRequest | null,
+          protos.google.cloud.securitycenter.v1.IListEventThreatDetectionCustomModulesResponse,
+        ]) => {
+          this._log.info(
+            'listEventThreatDetectionCustomModules values %j',
+            response
+          );
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -9684,7 +11645,10 @@ export class SecurityCenterClient {
     const defaultCallSettings =
       this._defaults['listEventThreatDetectionCustomModules'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listEventThreatDetectionCustomModules stream %j', request);
     return this.descriptors.page.listEventThreatDetectionCustomModules.createStream(
       this.innerApiCalls.listEventThreatDetectionCustomModules as GaxCall,
       request,
@@ -9746,7 +11710,10 @@ export class SecurityCenterClient {
     const defaultCallSettings =
       this._defaults['listEventThreatDetectionCustomModules'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listEventThreatDetectionCustomModules iterate %j', request);
     return this.descriptors.page.listEventThreatDetectionCustomModules.asyncIterate(
       this.innerApiCalls['listEventThreatDetectionCustomModules'] as GaxCall,
       request as {},
@@ -9864,12 +11831,49 @@ export class SecurityCenterClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.listEffectiveEventThreatDetectionCustomModules(
-      request,
-      options,
-      callback
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.securitycenter.v1.IListEffectiveEventThreatDetectionCustomModulesRequest,
+          | protos.google.cloud.securitycenter.v1.IListEffectiveEventThreatDetectionCustomModulesResponse
+          | null
+          | undefined,
+          protos.google.cloud.securitycenter.v1.IEffectiveEventThreatDetectionCustomModule
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info(
+            'listEffectiveEventThreatDetectionCustomModules values %j',
+            values
+          );
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info(
+      'listEffectiveEventThreatDetectionCustomModules request %j',
+      request
     );
+    return this.innerApiCalls
+      .listEffectiveEventThreatDetectionCustomModules(
+        request,
+        options,
+        wrappedCallback
+      )
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.securitycenter.v1.IEffectiveEventThreatDetectionCustomModule[],
+          protos.google.cloud.securitycenter.v1.IListEffectiveEventThreatDetectionCustomModulesRequest | null,
+          protos.google.cloud.securitycenter.v1.IListEffectiveEventThreatDetectionCustomModulesResponse,
+        ]) => {
+          this._log.info(
+            'listEffectiveEventThreatDetectionCustomModules values %j',
+            response
+          );
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -9923,7 +11927,13 @@ export class SecurityCenterClient {
     const defaultCallSettings =
       this._defaults['listEffectiveEventThreatDetectionCustomModules'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info(
+      'listEffectiveEventThreatDetectionCustomModules stream %j',
+      request
+    );
     return this.descriptors.page.listEffectiveEventThreatDetectionCustomModules.createStream(
       this.innerApiCalls
         .listEffectiveEventThreatDetectionCustomModules as GaxCall,
@@ -9986,7 +11996,13 @@ export class SecurityCenterClient {
     const defaultCallSettings =
       this._defaults['listEffectiveEventThreatDetectionCustomModules'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info(
+      'listEffectiveEventThreatDetectionCustomModules iterate %j',
+      request
+    );
     return this.descriptors.page.listEffectiveEventThreatDetectionCustomModules.asyncIterate(
       this.innerApiCalls[
         'listEffectiveEventThreatDetectionCustomModules'
@@ -10101,12 +12117,36 @@ export class SecurityCenterClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.listResourceValueConfigs(
-      request,
-      options,
-      callback
-    );
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.securitycenter.v1.IListResourceValueConfigsRequest,
+          | protos.google.cloud.securitycenter.v1.IListResourceValueConfigsResponse
+          | null
+          | undefined,
+          protos.google.cloud.securitycenter.v1.IResourceValueConfig
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listResourceValueConfigs values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listResourceValueConfigs request %j', request);
+    return this.innerApiCalls
+      .listResourceValueConfigs(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.securitycenter.v1.IResourceValueConfig[],
+          protos.google.cloud.securitycenter.v1.IListResourceValueConfigsRequest | null,
+          protos.google.cloud.securitycenter.v1.IListResourceValueConfigsResponse,
+        ]) => {
+          this._log.info('listResourceValueConfigs values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -10156,7 +12196,10 @@ export class SecurityCenterClient {
       });
     const defaultCallSettings = this._defaults['listResourceValueConfigs'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listResourceValueConfigs stream %j', request);
     return this.descriptors.page.listResourceValueConfigs.createStream(
       this.innerApiCalls.listResourceValueConfigs as GaxCall,
       request,
@@ -10214,7 +12257,10 @@ export class SecurityCenterClient {
       });
     const defaultCallSettings = this._defaults['listResourceValueConfigs'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listResourceValueConfigs iterate %j', request);
     return this.descriptors.page.listResourceValueConfigs.asyncIterate(
       this.innerApiCalls['listResourceValueConfigs'] as GaxCall,
       request as {},
@@ -10350,8 +12396,36 @@ export class SecurityCenterClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.listValuedResources(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.securitycenter.v1.IListValuedResourcesRequest,
+          | protos.google.cloud.securitycenter.v1.IListValuedResourcesResponse
+          | null
+          | undefined,
+          protos.google.cloud.securitycenter.v1.IValuedResource
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listValuedResources values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listValuedResources request %j', request);
+    return this.innerApiCalls
+      .listValuedResources(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.securitycenter.v1.IValuedResource[],
+          protos.google.cloud.securitycenter.v1.IListValuedResourcesRequest | null,
+          protos.google.cloud.securitycenter.v1.IListValuedResourcesResponse,
+        ]) => {
+          this._log.info('listValuedResources values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -10424,7 +12498,10 @@ export class SecurityCenterClient {
       });
     const defaultCallSettings = this._defaults['listValuedResources'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listValuedResources stream %j', request);
     return this.descriptors.page.listValuedResources.createStream(
       this.innerApiCalls.listValuedResources as GaxCall,
       request,
@@ -10505,7 +12582,10 @@ export class SecurityCenterClient {
       });
     const defaultCallSettings = this._defaults['listValuedResources'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listValuedResources iterate %j', request);
     return this.descriptors.page.listValuedResources.asyncIterate(
       this.innerApiCalls['listValuedResources'] as GaxCall,
       request as {},
@@ -10621,8 +12701,36 @@ export class SecurityCenterClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.listAttackPaths(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.securitycenter.v1.IListAttackPathsRequest,
+          | protos.google.cloud.securitycenter.v1.IListAttackPathsResponse
+          | null
+          | undefined,
+          protos.google.cloud.securitycenter.v1.IAttackPath
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listAttackPaths values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listAttackPaths request %j', request);
+    return this.innerApiCalls
+      .listAttackPaths(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.securitycenter.v1.IAttackPath[],
+          protos.google.cloud.securitycenter.v1.IListAttackPathsRequest | null,
+          protos.google.cloud.securitycenter.v1.IListAttackPathsResponse,
+        ]) => {
+          this._log.info('listAttackPaths values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -10674,7 +12782,10 @@ export class SecurityCenterClient {
       });
     const defaultCallSettings = this._defaults['listAttackPaths'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listAttackPaths stream %j', request);
     return this.descriptors.page.listAttackPaths.createStream(
       this.innerApiCalls.listAttackPaths as GaxCall,
       request,
@@ -10734,7 +12845,10 @@ export class SecurityCenterClient {
       });
     const defaultCallSettings = this._defaults['listAttackPaths'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listAttackPaths iterate %j', request);
     return this.descriptors.page.listAttackPaths.asyncIterate(
       this.innerApiCalls['listAttackPaths'] as GaxCall,
       request as {},
@@ -10835,7 +12949,7 @@ export class SecurityCenterClient {
   listOperationsAsync(
     request: protos.google.longrunning.ListOperationsRequest,
     options?: gax.CallOptions
-  ): AsyncIterable<protos.google.longrunning.ListOperationsResponse> {
+  ): AsyncIterable<protos.google.longrunning.IOperation> {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
@@ -13480,6 +15594,7 @@ export class SecurityCenterClient {
   close(): Promise<void> {
     if (this.securityCenterStub && !this._terminated) {
       return this.securityCenterStub.then(stub => {
+        this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
         this.operationsClient.close();

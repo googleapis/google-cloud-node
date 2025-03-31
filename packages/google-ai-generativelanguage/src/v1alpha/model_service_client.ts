@@ -31,6 +31,7 @@ import type {
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
+import {loggingUtils as logging} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -55,6 +56,8 @@ export class ModelServiceClient {
   private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
+  private _log = logging.log('generativelanguage');
+
   auth: gax.GoogleAuth;
   descriptors: Descriptors = {
     page: {},
@@ -90,7 +93,7 @@ export class ModelServiceClient {
    *     Developer's Console, e.g. 'grape-spaceship-123'. We will also check
    *     the environment variable GCLOUD_PROJECT for your project ID. If your
    *     app is running in an environment which supports
-   *     {@link https://developers.google.com/identity/protocols/application-default-credentials Application Default Credentials},
+   *     {@link https://cloud.google.com/docs/authentication/application-default-credentials Application Default Credentials},
    *     your project ID will be detected automatically.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
@@ -556,8 +559,39 @@ export class ModelServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.getModel(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('getModel request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.ai.generativelanguage.v1alpha.IModel,
+          | protos.google.ai.generativelanguage.v1alpha.IGetModelRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getModel response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getModel(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.ai.generativelanguage.v1alpha.IModel,
+          (
+            | protos.google.ai.generativelanguage.v1alpha.IGetModelRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getModel response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Gets information about a specific TunedModel.
@@ -654,8 +688,39 @@ export class ModelServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.getTunedModel(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('getTunedModel request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.ai.generativelanguage.v1alpha.ITunedModel,
+          | protos.google.ai.generativelanguage.v1alpha.IGetTunedModelRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getTunedModel response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getTunedModel(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.ai.generativelanguage.v1alpha.ITunedModel,
+          (
+            | protos.google.ai.generativelanguage.v1alpha.IGetTunedModelRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getTunedModel response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Updates a tuned model.
@@ -752,8 +817,39 @@ export class ModelServiceClient {
       this._gaxModule.routingHeader.fromParams({
         'tuned_model.name': request.tunedModel!.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.updateTunedModel(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('updateTunedModel request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.ai.generativelanguage.v1alpha.ITunedModel,
+          | protos.google.ai.generativelanguage.v1alpha.IUpdateTunedModelRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('updateTunedModel response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .updateTunedModel(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.ai.generativelanguage.v1alpha.ITunedModel,
+          (
+            | protos.google.ai.generativelanguage.v1alpha.IUpdateTunedModelRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('updateTunedModel response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Deletes a tuned model.
@@ -849,8 +945,39 @@ export class ModelServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.deleteTunedModel(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('deleteTunedModel request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.ai.generativelanguage.v1alpha.IDeleteTunedModelRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('deleteTunedModel response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .deleteTunedModel(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.protobuf.IEmpty,
+          (
+            | protos.google.ai.generativelanguage.v1alpha.IDeleteTunedModelRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteTunedModel response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
 
   /**
@@ -959,8 +1086,40 @@ export class ModelServiceClient {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    this.initialize();
-    return this.innerApiCalls.createTunedModel(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.ai.generativelanguage.v1alpha.ITunedModel,
+            protos.google.ai.generativelanguage.v1alpha.ICreateTunedModelMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('createTunedModel response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('createTunedModel request %j', request);
+    return this.innerApiCalls
+      .createTunedModel(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.ai.generativelanguage.v1alpha.ITunedModel,
+            protos.google.ai.generativelanguage.v1alpha.ICreateTunedModelMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createTunedModel response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `createTunedModel()`.
@@ -981,6 +1140,7 @@ export class ModelServiceClient {
       protos.google.ai.generativelanguage.v1alpha.CreateTunedModelMetadata
     >
   > {
+    this._log.info('createTunedModel long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -1095,8 +1255,36 @@ export class ModelServiceClient {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    this.initialize();
-    return this.innerApiCalls.listModels(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.ai.generativelanguage.v1alpha.IListModelsRequest,
+          | protos.google.ai.generativelanguage.v1alpha.IListModelsResponse
+          | null
+          | undefined,
+          protos.google.ai.generativelanguage.v1alpha.IModel
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listModels values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listModels request %j', request);
+    return this.innerApiCalls
+      .listModels(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.ai.generativelanguage.v1alpha.IModel[],
+          protos.google.ai.generativelanguage.v1alpha.IListModelsRequest | null,
+          protos.google.ai.generativelanguage.v1alpha.IListModelsResponse,
+        ]) => {
+          this._log.info('listModels values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -1138,7 +1326,10 @@ export class ModelServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     const defaultCallSettings = this._defaults['listModels'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listModels stream %j', request);
     return this.descriptors.page.listModels.createStream(
       this.innerApiCalls.listModels as GaxCall,
       request,
@@ -1188,7 +1379,10 @@ export class ModelServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     const defaultCallSettings = this._defaults['listModels'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listModels iterate %j', request);
     return this.descriptors.page.listModels.asyncIterate(
       this.innerApiCalls['listModels'] as GaxCall,
       request as {},
@@ -1309,8 +1503,36 @@ export class ModelServiceClient {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    this.initialize();
-    return this.innerApiCalls.listTunedModels(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.ai.generativelanguage.v1alpha.IListTunedModelsRequest,
+          | protos.google.ai.generativelanguage.v1alpha.IListTunedModelsResponse
+          | null
+          | undefined,
+          protos.google.ai.generativelanguage.v1alpha.ITunedModel
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listTunedModels values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listTunedModels request %j', request);
+    return this.innerApiCalls
+      .listTunedModels(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.ai.generativelanguage.v1alpha.ITunedModel[],
+          protos.google.ai.generativelanguage.v1alpha.IListTunedModelsRequest | null,
+          protos.google.ai.generativelanguage.v1alpha.IListTunedModelsResponse,
+        ]) => {
+          this._log.info('listTunedModels values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -1368,7 +1590,10 @@ export class ModelServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     const defaultCallSettings = this._defaults['listTunedModels'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listTunedModels stream %j', request);
     return this.descriptors.page.listTunedModels.createStream(
       this.innerApiCalls.listTunedModels as GaxCall,
       request,
@@ -1434,7 +1659,10 @@ export class ModelServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     const defaultCallSettings = this._defaults['listTunedModels'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listTunedModels iterate %j', request);
     return this.descriptors.page.listTunedModels.asyncIterate(
       this.innerApiCalls['listTunedModels'] as GaxCall,
       request as {},
@@ -1535,7 +1763,7 @@ export class ModelServiceClient {
   listOperationsAsync(
     request: protos.google.longrunning.ListOperationsRequest,
     options?: gax.CallOptions
-  ): AsyncIterable<protos.google.longrunning.ListOperationsResponse> {
+  ): AsyncIterable<protos.google.longrunning.IOperation> {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
@@ -1964,6 +2192,7 @@ export class ModelServiceClient {
   close(): Promise<void> {
     if (this.modelServiceStub && !this._terminated) {
       return this.modelServiceStub.then(stub => {
+        this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
         this.operationsClient.close();

@@ -284,7 +284,9 @@ describe('v1.EnvironmentsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      client.initialize().catch(err => {
+        throw err;
+      });
       assert(client.environmentsStub);
       client.close().then(() => {
         done();
@@ -343,7 +345,7 @@ describe('v1.EnvironmentsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.orchestration.airflow.service.v1.GetEnvironmentRequest()
       );
@@ -374,7 +376,7 @@ describe('v1.EnvironmentsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.orchestration.airflow.service.v1.GetEnvironmentRequest()
       );
@@ -421,7 +423,7 @@ describe('v1.EnvironmentsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.orchestration.airflow.service.v1.GetEnvironmentRequest()
       );
@@ -452,7 +454,7 @@ describe('v1.EnvironmentsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.orchestration.airflow.service.v1.GetEnvironmentRequest()
       );
@@ -473,7 +475,7 @@ describe('v1.EnvironmentsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.orchestration.airflow.service.v1.ExecuteAirflowCommandRequest()
       );
@@ -505,7 +507,7 @@ describe('v1.EnvironmentsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.orchestration.airflow.service.v1.ExecuteAirflowCommandRequest()
       );
@@ -552,7 +554,7 @@ describe('v1.EnvironmentsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.orchestration.airflow.service.v1.ExecuteAirflowCommandRequest()
       );
@@ -586,7 +588,7 @@ describe('v1.EnvironmentsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.orchestration.airflow.service.v1.ExecuteAirflowCommandRequest()
       );
@@ -610,7 +612,7 @@ describe('v1.EnvironmentsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.orchestration.airflow.service.v1.StopAirflowCommandRequest()
       );
@@ -642,7 +644,7 @@ describe('v1.EnvironmentsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.orchestration.airflow.service.v1.StopAirflowCommandRequest()
       );
@@ -689,7 +691,7 @@ describe('v1.EnvironmentsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.orchestration.airflow.service.v1.StopAirflowCommandRequest()
       );
@@ -720,7 +722,7 @@ describe('v1.EnvironmentsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.orchestration.airflow.service.v1.StopAirflowCommandRequest()
       );
@@ -741,7 +743,7 @@ describe('v1.EnvironmentsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.orchestration.airflow.service.v1.PollAirflowCommandRequest()
       );
@@ -773,7 +775,7 @@ describe('v1.EnvironmentsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.orchestration.airflow.service.v1.PollAirflowCommandRequest()
       );
@@ -820,7 +822,7 @@ describe('v1.EnvironmentsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.orchestration.airflow.service.v1.PollAirflowCommandRequest()
       );
@@ -851,7 +853,7 @@ describe('v1.EnvironmentsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.orchestration.airflow.service.v1.PollAirflowCommandRequest()
       );
@@ -872,7 +874,7 @@ describe('v1.EnvironmentsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.orchestration.airflow.service.v1.CreateUserWorkloadsSecretRequest()
       );
@@ -904,7 +906,7 @@ describe('v1.EnvironmentsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.orchestration.airflow.service.v1.CreateUserWorkloadsSecretRequest()
       );
@@ -951,7 +953,7 @@ describe('v1.EnvironmentsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.orchestration.airflow.service.v1.CreateUserWorkloadsSecretRequest()
       );
@@ -985,7 +987,7 @@ describe('v1.EnvironmentsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.orchestration.airflow.service.v1.CreateUserWorkloadsSecretRequest()
       );
@@ -1009,7 +1011,7 @@ describe('v1.EnvironmentsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.orchestration.airflow.service.v1.GetUserWorkloadsSecretRequest()
       );
@@ -1041,7 +1043,7 @@ describe('v1.EnvironmentsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.orchestration.airflow.service.v1.GetUserWorkloadsSecretRequest()
       );
@@ -1088,7 +1090,7 @@ describe('v1.EnvironmentsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.orchestration.airflow.service.v1.GetUserWorkloadsSecretRequest()
       );
@@ -1122,7 +1124,7 @@ describe('v1.EnvironmentsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.orchestration.airflow.service.v1.GetUserWorkloadsSecretRequest()
       );
@@ -1146,7 +1148,7 @@ describe('v1.EnvironmentsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.orchestration.airflow.service.v1.UpdateUserWorkloadsSecretRequest()
       );
@@ -1179,7 +1181,7 @@ describe('v1.EnvironmentsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.orchestration.airflow.service.v1.UpdateUserWorkloadsSecretRequest()
       );
@@ -1227,7 +1229,7 @@ describe('v1.EnvironmentsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.orchestration.airflow.service.v1.UpdateUserWorkloadsSecretRequest()
       );
@@ -1262,7 +1264,7 @@ describe('v1.EnvironmentsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.orchestration.airflow.service.v1.UpdateUserWorkloadsSecretRequest()
       );
@@ -1287,7 +1289,7 @@ describe('v1.EnvironmentsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.orchestration.airflow.service.v1.DeleteUserWorkloadsSecretRequest()
       );
@@ -1319,7 +1321,7 @@ describe('v1.EnvironmentsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.orchestration.airflow.service.v1.DeleteUserWorkloadsSecretRequest()
       );
@@ -1366,7 +1368,7 @@ describe('v1.EnvironmentsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.orchestration.airflow.service.v1.DeleteUserWorkloadsSecretRequest()
       );
@@ -1400,7 +1402,7 @@ describe('v1.EnvironmentsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.orchestration.airflow.service.v1.DeleteUserWorkloadsSecretRequest()
       );
@@ -1424,7 +1426,7 @@ describe('v1.EnvironmentsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.orchestration.airflow.service.v1.CreateUserWorkloadsConfigMapRequest()
       );
@@ -1456,7 +1458,7 @@ describe('v1.EnvironmentsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.orchestration.airflow.service.v1.CreateUserWorkloadsConfigMapRequest()
       );
@@ -1503,7 +1505,7 @@ describe('v1.EnvironmentsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.orchestration.airflow.service.v1.CreateUserWorkloadsConfigMapRequest()
       );
@@ -1537,7 +1539,7 @@ describe('v1.EnvironmentsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.orchestration.airflow.service.v1.CreateUserWorkloadsConfigMapRequest()
       );
@@ -1561,7 +1563,7 @@ describe('v1.EnvironmentsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.orchestration.airflow.service.v1.GetUserWorkloadsConfigMapRequest()
       );
@@ -1593,7 +1595,7 @@ describe('v1.EnvironmentsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.orchestration.airflow.service.v1.GetUserWorkloadsConfigMapRequest()
       );
@@ -1640,7 +1642,7 @@ describe('v1.EnvironmentsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.orchestration.airflow.service.v1.GetUserWorkloadsConfigMapRequest()
       );
@@ -1674,7 +1676,7 @@ describe('v1.EnvironmentsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.orchestration.airflow.service.v1.GetUserWorkloadsConfigMapRequest()
       );
@@ -1698,7 +1700,7 @@ describe('v1.EnvironmentsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.orchestration.airflow.service.v1.UpdateUserWorkloadsConfigMapRequest()
       );
@@ -1731,7 +1733,7 @@ describe('v1.EnvironmentsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.orchestration.airflow.service.v1.UpdateUserWorkloadsConfigMapRequest()
       );
@@ -1779,7 +1781,7 @@ describe('v1.EnvironmentsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.orchestration.airflow.service.v1.UpdateUserWorkloadsConfigMapRequest()
       );
@@ -1814,7 +1816,7 @@ describe('v1.EnvironmentsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.orchestration.airflow.service.v1.UpdateUserWorkloadsConfigMapRequest()
       );
@@ -1839,7 +1841,7 @@ describe('v1.EnvironmentsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.orchestration.airflow.service.v1.DeleteUserWorkloadsConfigMapRequest()
       );
@@ -1871,7 +1873,7 @@ describe('v1.EnvironmentsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.orchestration.airflow.service.v1.DeleteUserWorkloadsConfigMapRequest()
       );
@@ -1918,7 +1920,7 @@ describe('v1.EnvironmentsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.orchestration.airflow.service.v1.DeleteUserWorkloadsConfigMapRequest()
       );
@@ -1952,7 +1954,7 @@ describe('v1.EnvironmentsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.orchestration.airflow.service.v1.DeleteUserWorkloadsConfigMapRequest()
       );
@@ -1976,7 +1978,7 @@ describe('v1.EnvironmentsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.orchestration.airflow.service.v1.FetchDatabasePropertiesRequest()
       );
@@ -2008,7 +2010,7 @@ describe('v1.EnvironmentsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.orchestration.airflow.service.v1.FetchDatabasePropertiesRequest()
       );
@@ -2055,7 +2057,7 @@ describe('v1.EnvironmentsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.orchestration.airflow.service.v1.FetchDatabasePropertiesRequest()
       );
@@ -2089,7 +2091,7 @@ describe('v1.EnvironmentsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.orchestration.airflow.service.v1.FetchDatabasePropertiesRequest()
       );
@@ -2113,7 +2115,7 @@ describe('v1.EnvironmentsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.orchestration.airflow.service.v1.CreateEnvironmentRequest()
       );
@@ -2146,7 +2148,7 @@ describe('v1.EnvironmentsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.orchestration.airflow.service.v1.CreateEnvironmentRequest()
       );
@@ -2200,7 +2202,7 @@ describe('v1.EnvironmentsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.orchestration.airflow.service.v1.CreateEnvironmentRequest()
       );
@@ -2231,7 +2233,7 @@ describe('v1.EnvironmentsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.orchestration.airflow.service.v1.CreateEnvironmentRequest()
       );
@@ -2264,7 +2266,7 @@ describe('v1.EnvironmentsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -2286,7 +2288,7 @@ describe('v1.EnvironmentsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -2307,7 +2309,7 @@ describe('v1.EnvironmentsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.orchestration.airflow.service.v1.UpdateEnvironmentRequest()
       );
@@ -2340,7 +2342,7 @@ describe('v1.EnvironmentsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.orchestration.airflow.service.v1.UpdateEnvironmentRequest()
       );
@@ -2394,7 +2396,7 @@ describe('v1.EnvironmentsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.orchestration.airflow.service.v1.UpdateEnvironmentRequest()
       );
@@ -2425,7 +2427,7 @@ describe('v1.EnvironmentsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.orchestration.airflow.service.v1.UpdateEnvironmentRequest()
       );
@@ -2458,7 +2460,7 @@ describe('v1.EnvironmentsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -2480,7 +2482,7 @@ describe('v1.EnvironmentsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -2501,7 +2503,7 @@ describe('v1.EnvironmentsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.orchestration.airflow.service.v1.DeleteEnvironmentRequest()
       );
@@ -2534,7 +2536,7 @@ describe('v1.EnvironmentsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.orchestration.airflow.service.v1.DeleteEnvironmentRequest()
       );
@@ -2588,7 +2590,7 @@ describe('v1.EnvironmentsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.orchestration.airflow.service.v1.DeleteEnvironmentRequest()
       );
@@ -2619,7 +2621,7 @@ describe('v1.EnvironmentsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.orchestration.airflow.service.v1.DeleteEnvironmentRequest()
       );
@@ -2652,7 +2654,7 @@ describe('v1.EnvironmentsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -2674,7 +2676,7 @@ describe('v1.EnvironmentsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -2695,7 +2697,7 @@ describe('v1.EnvironmentsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.orchestration.airflow.service.v1.CheckUpgradeRequest()
       );
@@ -2727,7 +2729,7 @@ describe('v1.EnvironmentsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.orchestration.airflow.service.v1.CheckUpgradeRequest()
       );
@@ -2781,7 +2783,7 @@ describe('v1.EnvironmentsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.orchestration.airflow.service.v1.CheckUpgradeRequest()
       );
@@ -2812,7 +2814,7 @@ describe('v1.EnvironmentsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.orchestration.airflow.service.v1.CheckUpgradeRequest()
       );
@@ -2845,7 +2847,7 @@ describe('v1.EnvironmentsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -2867,7 +2869,7 @@ describe('v1.EnvironmentsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -2885,7 +2887,7 @@ describe('v1.EnvironmentsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.orchestration.airflow.service.v1.SaveSnapshotRequest()
       );
@@ -2917,7 +2919,7 @@ describe('v1.EnvironmentsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.orchestration.airflow.service.v1.SaveSnapshotRequest()
       );
@@ -2971,7 +2973,7 @@ describe('v1.EnvironmentsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.orchestration.airflow.service.v1.SaveSnapshotRequest()
       );
@@ -3002,7 +3004,7 @@ describe('v1.EnvironmentsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.orchestration.airflow.service.v1.SaveSnapshotRequest()
       );
@@ -3035,7 +3037,7 @@ describe('v1.EnvironmentsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -3057,7 +3059,7 @@ describe('v1.EnvironmentsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -3075,7 +3077,7 @@ describe('v1.EnvironmentsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.orchestration.airflow.service.v1.LoadSnapshotRequest()
       );
@@ -3107,7 +3109,7 @@ describe('v1.EnvironmentsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.orchestration.airflow.service.v1.LoadSnapshotRequest()
       );
@@ -3161,7 +3163,7 @@ describe('v1.EnvironmentsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.orchestration.airflow.service.v1.LoadSnapshotRequest()
       );
@@ -3192,7 +3194,7 @@ describe('v1.EnvironmentsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.orchestration.airflow.service.v1.LoadSnapshotRequest()
       );
@@ -3225,7 +3227,7 @@ describe('v1.EnvironmentsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -3247,7 +3249,7 @@ describe('v1.EnvironmentsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -3265,7 +3267,7 @@ describe('v1.EnvironmentsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.orchestration.airflow.service.v1.DatabaseFailoverRequest()
       );
@@ -3298,7 +3300,7 @@ describe('v1.EnvironmentsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.orchestration.airflow.service.v1.DatabaseFailoverRequest()
       );
@@ -3352,7 +3354,7 @@ describe('v1.EnvironmentsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.orchestration.airflow.service.v1.DatabaseFailoverRequest()
       );
@@ -3383,7 +3385,7 @@ describe('v1.EnvironmentsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.orchestration.airflow.service.v1.DatabaseFailoverRequest()
       );
@@ -3416,7 +3418,7 @@ describe('v1.EnvironmentsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -3438,7 +3440,7 @@ describe('v1.EnvironmentsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -3459,7 +3461,7 @@ describe('v1.EnvironmentsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.orchestration.airflow.service.v1.ListEnvironmentsRequest()
       );
@@ -3498,7 +3500,7 @@ describe('v1.EnvironmentsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.orchestration.airflow.service.v1.ListEnvironmentsRequest()
       );
@@ -3555,7 +3557,7 @@ describe('v1.EnvironmentsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.orchestration.airflow.service.v1.ListEnvironmentsRequest()
       );
@@ -3586,7 +3588,7 @@ describe('v1.EnvironmentsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.orchestration.airflow.service.v1.ListEnvironmentsRequest()
       );
@@ -3649,7 +3651,7 @@ describe('v1.EnvironmentsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.orchestration.airflow.service.v1.ListEnvironmentsRequest()
       );
@@ -3701,7 +3703,7 @@ describe('v1.EnvironmentsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.orchestration.airflow.service.v1.ListEnvironmentsRequest()
       );
@@ -3751,7 +3753,7 @@ describe('v1.EnvironmentsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.orchestration.airflow.service.v1.ListEnvironmentsRequest()
       );
@@ -3794,7 +3796,7 @@ describe('v1.EnvironmentsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.orchestration.airflow.service.v1.ListWorkloadsRequest()
       );
@@ -3833,7 +3835,7 @@ describe('v1.EnvironmentsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.orchestration.airflow.service.v1.ListWorkloadsRequest()
       );
@@ -3890,7 +3892,7 @@ describe('v1.EnvironmentsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.orchestration.airflow.service.v1.ListWorkloadsRequest()
       );
@@ -3921,7 +3923,7 @@ describe('v1.EnvironmentsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.orchestration.airflow.service.v1.ListWorkloadsRequest()
       );
@@ -3984,7 +3986,7 @@ describe('v1.EnvironmentsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.orchestration.airflow.service.v1.ListWorkloadsRequest()
       );
@@ -4036,7 +4038,7 @@ describe('v1.EnvironmentsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.orchestration.airflow.service.v1.ListWorkloadsRequest()
       );
@@ -4086,7 +4088,7 @@ describe('v1.EnvironmentsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.orchestration.airflow.service.v1.ListWorkloadsRequest()
       );
@@ -4129,7 +4131,7 @@ describe('v1.EnvironmentsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.orchestration.airflow.service.v1.ListUserWorkloadsSecretsRequest()
       );
@@ -4169,7 +4171,7 @@ describe('v1.EnvironmentsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.orchestration.airflow.service.v1.ListUserWorkloadsSecretsRequest()
       );
@@ -4226,7 +4228,7 @@ describe('v1.EnvironmentsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.orchestration.airflow.service.v1.ListUserWorkloadsSecretsRequest()
       );
@@ -4260,7 +4262,7 @@ describe('v1.EnvironmentsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.orchestration.airflow.service.v1.ListUserWorkloadsSecretsRequest()
       );
@@ -4329,7 +4331,7 @@ describe('v1.EnvironmentsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.orchestration.airflow.service.v1.ListUserWorkloadsSecretsRequest()
       );
@@ -4387,7 +4389,7 @@ describe('v1.EnvironmentsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.orchestration.airflow.service.v1.ListUserWorkloadsSecretsRequest()
       );
@@ -4441,7 +4443,7 @@ describe('v1.EnvironmentsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.orchestration.airflow.service.v1.ListUserWorkloadsSecretsRequest()
       );
@@ -4488,7 +4490,7 @@ describe('v1.EnvironmentsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.orchestration.airflow.service.v1.ListUserWorkloadsConfigMapsRequest()
       );
@@ -4528,7 +4530,7 @@ describe('v1.EnvironmentsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.orchestration.airflow.service.v1.ListUserWorkloadsConfigMapsRequest()
       );
@@ -4585,7 +4587,7 @@ describe('v1.EnvironmentsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.orchestration.airflow.service.v1.ListUserWorkloadsConfigMapsRequest()
       );
@@ -4619,7 +4621,7 @@ describe('v1.EnvironmentsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.orchestration.airflow.service.v1.ListUserWorkloadsConfigMapsRequest()
       );
@@ -4688,7 +4690,7 @@ describe('v1.EnvironmentsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.orchestration.airflow.service.v1.ListUserWorkloadsConfigMapsRequest()
       );
@@ -4746,7 +4748,7 @@ describe('v1.EnvironmentsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.orchestration.airflow.service.v1.ListUserWorkloadsConfigMapsRequest()
       );
@@ -4800,7 +4802,7 @@ describe('v1.EnvironmentsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.orchestration.airflow.service.v1.ListUserWorkloadsConfigMapsRequest()
       );
@@ -4846,7 +4848,7 @@ describe('v1.EnvironmentsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new operationsProtos.google.longrunning.GetOperationRequest()
       );
@@ -4925,7 +4927,7 @@ describe('v1.EnvironmentsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new operationsProtos.google.longrunning.CancelOperationRequest()
       );
@@ -5005,7 +5007,7 @@ describe('v1.EnvironmentsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new operationsProtos.google.longrunning.DeleteOperationRequest()
       );
@@ -5101,8 +5103,7 @@ describe('v1.EnvironmentsClient', () => {
       ];
       client.operationsClient.descriptor.listOperations.asyncIterate =
         stubAsyncIterationCall(expectedResponse);
-      const responses: operationsProtos.google.longrunning.ListOperationsResponse[] =
-        [];
+      const responses: operationsProtos.google.longrunning.IOperation[] = [];
       const iterable = client.operationsClient.listOperationsAsync(request);
       for await (const resource of iterable) {
         responses.push(resource!);
@@ -5121,7 +5122,7 @@ describe('v1.EnvironmentsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new operationsProtos.google.longrunning.ListOperationsRequest()
       );
@@ -5130,8 +5131,7 @@ describe('v1.EnvironmentsClient', () => {
         stubAsyncIterationCall(undefined, expectedError);
       const iterable = client.operationsClient.listOperationsAsync(request);
       await assert.rejects(async () => {
-        const responses: operationsProtos.google.longrunning.ListOperationsResponse[] =
-          [];
+        const responses: operationsProtos.google.longrunning.IOperation[] = [];
         for await (const resource of iterable) {
           responses.push(resource!);
         }
@@ -5147,7 +5147,7 @@ describe('v1.EnvironmentsClient', () => {
   });
 
   describe('Path templates', () => {
-    describe('environment', () => {
+    describe('environment', async () => {
       const fakePath = '/rendered/path/environment';
       const expectedParameters = {
         project: 'projectValue',
@@ -5158,7 +5158,7 @@ describe('v1.EnvironmentsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.environmentPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -5211,7 +5211,7 @@ describe('v1.EnvironmentsClient', () => {
       });
     });
 
-    describe('userWorkloadsConfigMap', () => {
+    describe('userWorkloadsConfigMap', async () => {
       const fakePath = '/rendered/path/userWorkloadsConfigMap';
       const expectedParameters = {
         project: 'projectValue',
@@ -5223,7 +5223,7 @@ describe('v1.EnvironmentsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.userWorkloadsConfigMapPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -5308,7 +5308,7 @@ describe('v1.EnvironmentsClient', () => {
       });
     });
 
-    describe('userWorkloadsSecret', () => {
+    describe('userWorkloadsSecret', async () => {
       const fakePath = '/rendered/path/userWorkloadsSecret';
       const expectedParameters = {
         project: 'projectValue',
@@ -5320,7 +5320,7 @@ describe('v1.EnvironmentsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.userWorkloadsSecretPathTemplate.render = sinon
         .stub()
         .returns(fakePath);

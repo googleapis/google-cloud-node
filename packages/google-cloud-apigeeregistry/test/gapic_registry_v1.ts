@@ -253,7 +253,9 @@ describe('v1.RegistryClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      client.initialize().catch(err => {
+        throw err;
+      });
       assert(client.registryStub);
       client.close().then(() => {
         done();
@@ -312,7 +314,7 @@ describe('v1.RegistryClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apigeeregistry.v1.GetApiRequest()
       );
@@ -343,7 +345,7 @@ describe('v1.RegistryClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apigeeregistry.v1.GetApiRequest()
       );
@@ -390,7 +392,7 @@ describe('v1.RegistryClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apigeeregistry.v1.GetApiRequest()
       );
@@ -418,7 +420,7 @@ describe('v1.RegistryClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apigeeregistry.v1.GetApiRequest()
       );
@@ -439,7 +441,7 @@ describe('v1.RegistryClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apigeeregistry.v1.CreateApiRequest()
       );
@@ -470,7 +472,7 @@ describe('v1.RegistryClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apigeeregistry.v1.CreateApiRequest()
       );
@@ -517,7 +519,7 @@ describe('v1.RegistryClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apigeeregistry.v1.CreateApiRequest()
       );
@@ -545,7 +547,7 @@ describe('v1.RegistryClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apigeeregistry.v1.CreateApiRequest()
       );
@@ -566,7 +568,7 @@ describe('v1.RegistryClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apigeeregistry.v1.UpdateApiRequest()
       );
@@ -598,7 +600,7 @@ describe('v1.RegistryClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apigeeregistry.v1.UpdateApiRequest()
       );
@@ -646,7 +648,7 @@ describe('v1.RegistryClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apigeeregistry.v1.UpdateApiRequest()
       );
@@ -675,7 +677,7 @@ describe('v1.RegistryClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apigeeregistry.v1.UpdateApiRequest()
       );
@@ -697,7 +699,7 @@ describe('v1.RegistryClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apigeeregistry.v1.DeleteApiRequest()
       );
@@ -728,7 +730,7 @@ describe('v1.RegistryClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apigeeregistry.v1.DeleteApiRequest()
       );
@@ -775,7 +777,7 @@ describe('v1.RegistryClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apigeeregistry.v1.DeleteApiRequest()
       );
@@ -803,7 +805,7 @@ describe('v1.RegistryClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apigeeregistry.v1.DeleteApiRequest()
       );
@@ -824,7 +826,7 @@ describe('v1.RegistryClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apigeeregistry.v1.GetApiVersionRequest()
       );
@@ -855,7 +857,7 @@ describe('v1.RegistryClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apigeeregistry.v1.GetApiVersionRequest()
       );
@@ -902,7 +904,7 @@ describe('v1.RegistryClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apigeeregistry.v1.GetApiVersionRequest()
       );
@@ -933,7 +935,7 @@ describe('v1.RegistryClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apigeeregistry.v1.GetApiVersionRequest()
       );
@@ -954,7 +956,7 @@ describe('v1.RegistryClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apigeeregistry.v1.CreateApiVersionRequest()
       );
@@ -985,7 +987,7 @@ describe('v1.RegistryClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apigeeregistry.v1.CreateApiVersionRequest()
       );
@@ -1032,7 +1034,7 @@ describe('v1.RegistryClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apigeeregistry.v1.CreateApiVersionRequest()
       );
@@ -1063,7 +1065,7 @@ describe('v1.RegistryClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apigeeregistry.v1.CreateApiVersionRequest()
       );
@@ -1084,7 +1086,7 @@ describe('v1.RegistryClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apigeeregistry.v1.UpdateApiVersionRequest()
       );
@@ -1116,7 +1118,7 @@ describe('v1.RegistryClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apigeeregistry.v1.UpdateApiVersionRequest()
       );
@@ -1164,7 +1166,7 @@ describe('v1.RegistryClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apigeeregistry.v1.UpdateApiVersionRequest()
       );
@@ -1196,7 +1198,7 @@ describe('v1.RegistryClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apigeeregistry.v1.UpdateApiVersionRequest()
       );
@@ -1218,7 +1220,7 @@ describe('v1.RegistryClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apigeeregistry.v1.DeleteApiVersionRequest()
       );
@@ -1249,7 +1251,7 @@ describe('v1.RegistryClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apigeeregistry.v1.DeleteApiVersionRequest()
       );
@@ -1296,7 +1298,7 @@ describe('v1.RegistryClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apigeeregistry.v1.DeleteApiVersionRequest()
       );
@@ -1327,7 +1329,7 @@ describe('v1.RegistryClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apigeeregistry.v1.DeleteApiVersionRequest()
       );
@@ -1348,7 +1350,7 @@ describe('v1.RegistryClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apigeeregistry.v1.GetApiSpecRequest()
       );
@@ -1379,7 +1381,7 @@ describe('v1.RegistryClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apigeeregistry.v1.GetApiSpecRequest()
       );
@@ -1426,7 +1428,7 @@ describe('v1.RegistryClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apigeeregistry.v1.GetApiSpecRequest()
       );
@@ -1457,7 +1459,7 @@ describe('v1.RegistryClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apigeeregistry.v1.GetApiSpecRequest()
       );
@@ -1478,7 +1480,7 @@ describe('v1.RegistryClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apigeeregistry.v1.GetApiSpecContentsRequest()
       );
@@ -1510,7 +1512,7 @@ describe('v1.RegistryClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apigeeregistry.v1.GetApiSpecContentsRequest()
       );
@@ -1554,7 +1556,7 @@ describe('v1.RegistryClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apigeeregistry.v1.GetApiSpecContentsRequest()
       );
@@ -1585,7 +1587,7 @@ describe('v1.RegistryClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apigeeregistry.v1.GetApiSpecContentsRequest()
       );
@@ -1606,7 +1608,7 @@ describe('v1.RegistryClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apigeeregistry.v1.CreateApiSpecRequest()
       );
@@ -1637,7 +1639,7 @@ describe('v1.RegistryClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apigeeregistry.v1.CreateApiSpecRequest()
       );
@@ -1684,7 +1686,7 @@ describe('v1.RegistryClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apigeeregistry.v1.CreateApiSpecRequest()
       );
@@ -1715,7 +1717,7 @@ describe('v1.RegistryClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apigeeregistry.v1.CreateApiSpecRequest()
       );
@@ -1736,7 +1738,7 @@ describe('v1.RegistryClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apigeeregistry.v1.UpdateApiSpecRequest()
       );
@@ -1768,7 +1770,7 @@ describe('v1.RegistryClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apigeeregistry.v1.UpdateApiSpecRequest()
       );
@@ -1816,7 +1818,7 @@ describe('v1.RegistryClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apigeeregistry.v1.UpdateApiSpecRequest()
       );
@@ -1848,7 +1850,7 @@ describe('v1.RegistryClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apigeeregistry.v1.UpdateApiSpecRequest()
       );
@@ -1870,7 +1872,7 @@ describe('v1.RegistryClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apigeeregistry.v1.DeleteApiSpecRequest()
       );
@@ -1901,7 +1903,7 @@ describe('v1.RegistryClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apigeeregistry.v1.DeleteApiSpecRequest()
       );
@@ -1948,7 +1950,7 @@ describe('v1.RegistryClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apigeeregistry.v1.DeleteApiSpecRequest()
       );
@@ -1979,7 +1981,7 @@ describe('v1.RegistryClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apigeeregistry.v1.DeleteApiSpecRequest()
       );
@@ -2000,7 +2002,7 @@ describe('v1.RegistryClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apigeeregistry.v1.TagApiSpecRevisionRequest()
       );
@@ -2032,7 +2034,7 @@ describe('v1.RegistryClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apigeeregistry.v1.TagApiSpecRevisionRequest()
       );
@@ -2079,7 +2081,7 @@ describe('v1.RegistryClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apigeeregistry.v1.TagApiSpecRevisionRequest()
       );
@@ -2110,7 +2112,7 @@ describe('v1.RegistryClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apigeeregistry.v1.TagApiSpecRevisionRequest()
       );
@@ -2131,7 +2133,7 @@ describe('v1.RegistryClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apigeeregistry.v1.RollbackApiSpecRequest()
       );
@@ -2162,7 +2164,7 @@ describe('v1.RegistryClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apigeeregistry.v1.RollbackApiSpecRequest()
       );
@@ -2209,7 +2211,7 @@ describe('v1.RegistryClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apigeeregistry.v1.RollbackApiSpecRequest()
       );
@@ -2240,7 +2242,7 @@ describe('v1.RegistryClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apigeeregistry.v1.RollbackApiSpecRequest()
       );
@@ -2261,7 +2263,7 @@ describe('v1.RegistryClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apigeeregistry.v1.DeleteApiSpecRevisionRequest()
       );
@@ -2293,7 +2295,7 @@ describe('v1.RegistryClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apigeeregistry.v1.DeleteApiSpecRevisionRequest()
       );
@@ -2340,7 +2342,7 @@ describe('v1.RegistryClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apigeeregistry.v1.DeleteApiSpecRevisionRequest()
       );
@@ -2374,7 +2376,7 @@ describe('v1.RegistryClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apigeeregistry.v1.DeleteApiSpecRevisionRequest()
       );
@@ -2398,7 +2400,7 @@ describe('v1.RegistryClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apigeeregistry.v1.GetApiDeploymentRequest()
       );
@@ -2429,7 +2431,7 @@ describe('v1.RegistryClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apigeeregistry.v1.GetApiDeploymentRequest()
       );
@@ -2476,7 +2478,7 @@ describe('v1.RegistryClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apigeeregistry.v1.GetApiDeploymentRequest()
       );
@@ -2507,7 +2509,7 @@ describe('v1.RegistryClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apigeeregistry.v1.GetApiDeploymentRequest()
       );
@@ -2528,7 +2530,7 @@ describe('v1.RegistryClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apigeeregistry.v1.CreateApiDeploymentRequest()
       );
@@ -2560,7 +2562,7 @@ describe('v1.RegistryClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apigeeregistry.v1.CreateApiDeploymentRequest()
       );
@@ -2607,7 +2609,7 @@ describe('v1.RegistryClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apigeeregistry.v1.CreateApiDeploymentRequest()
       );
@@ -2638,7 +2640,7 @@ describe('v1.RegistryClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apigeeregistry.v1.CreateApiDeploymentRequest()
       );
@@ -2659,7 +2661,7 @@ describe('v1.RegistryClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apigeeregistry.v1.UpdateApiDeploymentRequest()
       );
@@ -2692,7 +2694,7 @@ describe('v1.RegistryClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apigeeregistry.v1.UpdateApiDeploymentRequest()
       );
@@ -2740,7 +2742,7 @@ describe('v1.RegistryClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apigeeregistry.v1.UpdateApiDeploymentRequest()
       );
@@ -2772,7 +2774,7 @@ describe('v1.RegistryClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apigeeregistry.v1.UpdateApiDeploymentRequest()
       );
@@ -2794,7 +2796,7 @@ describe('v1.RegistryClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apigeeregistry.v1.DeleteApiDeploymentRequest()
       );
@@ -2826,7 +2828,7 @@ describe('v1.RegistryClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apigeeregistry.v1.DeleteApiDeploymentRequest()
       );
@@ -2873,7 +2875,7 @@ describe('v1.RegistryClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apigeeregistry.v1.DeleteApiDeploymentRequest()
       );
@@ -2904,7 +2906,7 @@ describe('v1.RegistryClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apigeeregistry.v1.DeleteApiDeploymentRequest()
       );
@@ -2925,7 +2927,7 @@ describe('v1.RegistryClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apigeeregistry.v1.TagApiDeploymentRevisionRequest()
       );
@@ -2957,7 +2959,7 @@ describe('v1.RegistryClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apigeeregistry.v1.TagApiDeploymentRevisionRequest()
       );
@@ -3004,7 +3006,7 @@ describe('v1.RegistryClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apigeeregistry.v1.TagApiDeploymentRevisionRequest()
       );
@@ -3038,7 +3040,7 @@ describe('v1.RegistryClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apigeeregistry.v1.TagApiDeploymentRevisionRequest()
       );
@@ -3062,7 +3064,7 @@ describe('v1.RegistryClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apigeeregistry.v1.RollbackApiDeploymentRequest()
       );
@@ -3094,7 +3096,7 @@ describe('v1.RegistryClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apigeeregistry.v1.RollbackApiDeploymentRequest()
       );
@@ -3141,7 +3143,7 @@ describe('v1.RegistryClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apigeeregistry.v1.RollbackApiDeploymentRequest()
       );
@@ -3175,7 +3177,7 @@ describe('v1.RegistryClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apigeeregistry.v1.RollbackApiDeploymentRequest()
       );
@@ -3199,7 +3201,7 @@ describe('v1.RegistryClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apigeeregistry.v1.DeleteApiDeploymentRevisionRequest()
       );
@@ -3231,7 +3233,7 @@ describe('v1.RegistryClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apigeeregistry.v1.DeleteApiDeploymentRevisionRequest()
       );
@@ -3278,7 +3280,7 @@ describe('v1.RegistryClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apigeeregistry.v1.DeleteApiDeploymentRevisionRequest()
       );
@@ -3312,7 +3314,7 @@ describe('v1.RegistryClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apigeeregistry.v1.DeleteApiDeploymentRevisionRequest()
       );
@@ -3336,7 +3338,7 @@ describe('v1.RegistryClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apigeeregistry.v1.GetArtifactRequest()
       );
@@ -3367,7 +3369,7 @@ describe('v1.RegistryClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apigeeregistry.v1.GetArtifactRequest()
       );
@@ -3414,7 +3416,7 @@ describe('v1.RegistryClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apigeeregistry.v1.GetArtifactRequest()
       );
@@ -3445,7 +3447,7 @@ describe('v1.RegistryClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apigeeregistry.v1.GetArtifactRequest()
       );
@@ -3466,7 +3468,7 @@ describe('v1.RegistryClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apigeeregistry.v1.GetArtifactContentsRequest()
       );
@@ -3498,7 +3500,7 @@ describe('v1.RegistryClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apigeeregistry.v1.GetArtifactContentsRequest()
       );
@@ -3542,7 +3544,7 @@ describe('v1.RegistryClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apigeeregistry.v1.GetArtifactContentsRequest()
       );
@@ -3573,7 +3575,7 @@ describe('v1.RegistryClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apigeeregistry.v1.GetArtifactContentsRequest()
       );
@@ -3594,7 +3596,7 @@ describe('v1.RegistryClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apigeeregistry.v1.CreateArtifactRequest()
       );
@@ -3625,7 +3627,7 @@ describe('v1.RegistryClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apigeeregistry.v1.CreateArtifactRequest()
       );
@@ -3672,7 +3674,7 @@ describe('v1.RegistryClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apigeeregistry.v1.CreateArtifactRequest()
       );
@@ -3703,7 +3705,7 @@ describe('v1.RegistryClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apigeeregistry.v1.CreateArtifactRequest()
       );
@@ -3724,7 +3726,7 @@ describe('v1.RegistryClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apigeeregistry.v1.ReplaceArtifactRequest()
       );
@@ -3756,7 +3758,7 @@ describe('v1.RegistryClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apigeeregistry.v1.ReplaceArtifactRequest()
       );
@@ -3804,7 +3806,7 @@ describe('v1.RegistryClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apigeeregistry.v1.ReplaceArtifactRequest()
       );
@@ -3836,7 +3838,7 @@ describe('v1.RegistryClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apigeeregistry.v1.ReplaceArtifactRequest()
       );
@@ -3858,7 +3860,7 @@ describe('v1.RegistryClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apigeeregistry.v1.DeleteArtifactRequest()
       );
@@ -3889,7 +3891,7 @@ describe('v1.RegistryClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apigeeregistry.v1.DeleteArtifactRequest()
       );
@@ -3936,7 +3938,7 @@ describe('v1.RegistryClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apigeeregistry.v1.DeleteArtifactRequest()
       );
@@ -3967,7 +3969,7 @@ describe('v1.RegistryClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apigeeregistry.v1.DeleteArtifactRequest()
       );
@@ -3988,7 +3990,7 @@ describe('v1.RegistryClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apigeeregistry.v1.ListApisRequest()
       );
@@ -4021,7 +4023,7 @@ describe('v1.RegistryClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apigeeregistry.v1.ListApisRequest()
       );
@@ -4070,7 +4072,7 @@ describe('v1.RegistryClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apigeeregistry.v1.ListApisRequest()
       );
@@ -4098,7 +4100,7 @@ describe('v1.RegistryClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apigeeregistry.v1.ListApisRequest()
       );
@@ -4152,7 +4154,7 @@ describe('v1.RegistryClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apigeeregistry.v1.ListApisRequest()
       );
@@ -4203,7 +4205,7 @@ describe('v1.RegistryClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apigeeregistry.v1.ListApisRequest()
       );
@@ -4245,7 +4247,7 @@ describe('v1.RegistryClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apigeeregistry.v1.ListApisRequest()
       );
@@ -4288,7 +4290,7 @@ describe('v1.RegistryClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apigeeregistry.v1.ListApiVersionsRequest()
       );
@@ -4327,7 +4329,7 @@ describe('v1.RegistryClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apigeeregistry.v1.ListApiVersionsRequest()
       );
@@ -4382,7 +4384,7 @@ describe('v1.RegistryClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apigeeregistry.v1.ListApiVersionsRequest()
       );
@@ -4413,7 +4415,7 @@ describe('v1.RegistryClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apigeeregistry.v1.ListApiVersionsRequest()
       );
@@ -4474,7 +4476,7 @@ describe('v1.RegistryClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apigeeregistry.v1.ListApiVersionsRequest()
       );
@@ -4524,7 +4526,7 @@ describe('v1.RegistryClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apigeeregistry.v1.ListApiVersionsRequest()
       );
@@ -4573,7 +4575,7 @@ describe('v1.RegistryClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apigeeregistry.v1.ListApiVersionsRequest()
       );
@@ -4616,7 +4618,7 @@ describe('v1.RegistryClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apigeeregistry.v1.ListApiSpecsRequest()
       );
@@ -4655,7 +4657,7 @@ describe('v1.RegistryClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apigeeregistry.v1.ListApiSpecsRequest()
       );
@@ -4710,7 +4712,7 @@ describe('v1.RegistryClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apigeeregistry.v1.ListApiSpecsRequest()
       );
@@ -4741,7 +4743,7 @@ describe('v1.RegistryClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apigeeregistry.v1.ListApiSpecsRequest()
       );
@@ -4801,7 +4803,7 @@ describe('v1.RegistryClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apigeeregistry.v1.ListApiSpecsRequest()
       );
@@ -4852,7 +4854,7 @@ describe('v1.RegistryClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apigeeregistry.v1.ListApiSpecsRequest()
       );
@@ -4901,7 +4903,7 @@ describe('v1.RegistryClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apigeeregistry.v1.ListApiSpecsRequest()
       );
@@ -4943,7 +4945,7 @@ describe('v1.RegistryClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apigeeregistry.v1.ListApiSpecRevisionsRequest()
       );
@@ -4983,7 +4985,7 @@ describe('v1.RegistryClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apigeeregistry.v1.ListApiSpecRevisionsRequest()
       );
@@ -5038,7 +5040,7 @@ describe('v1.RegistryClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apigeeregistry.v1.ListApiSpecRevisionsRequest()
       );
@@ -5069,7 +5071,7 @@ describe('v1.RegistryClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apigeeregistry.v1.ListApiSpecRevisionsRequest()
       );
@@ -5129,7 +5131,7 @@ describe('v1.RegistryClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apigeeregistry.v1.ListApiSpecRevisionsRequest()
       );
@@ -5178,7 +5180,7 @@ describe('v1.RegistryClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apigeeregistry.v1.ListApiSpecRevisionsRequest()
       );
@@ -5227,7 +5229,7 @@ describe('v1.RegistryClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apigeeregistry.v1.ListApiSpecRevisionsRequest()
       );
@@ -5269,7 +5271,7 @@ describe('v1.RegistryClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apigeeregistry.v1.ListApiDeploymentsRequest()
       );
@@ -5309,7 +5311,7 @@ describe('v1.RegistryClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apigeeregistry.v1.ListApiDeploymentsRequest()
       );
@@ -5366,7 +5368,7 @@ describe('v1.RegistryClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apigeeregistry.v1.ListApiDeploymentsRequest()
       );
@@ -5397,7 +5399,7 @@ describe('v1.RegistryClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apigeeregistry.v1.ListApiDeploymentsRequest()
       );
@@ -5458,7 +5460,7 @@ describe('v1.RegistryClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apigeeregistry.v1.ListApiDeploymentsRequest()
       );
@@ -5508,7 +5510,7 @@ describe('v1.RegistryClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apigeeregistry.v1.ListApiDeploymentsRequest()
       );
@@ -5558,7 +5560,7 @@ describe('v1.RegistryClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apigeeregistry.v1.ListApiDeploymentsRequest()
       );
@@ -5601,7 +5603,7 @@ describe('v1.RegistryClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apigeeregistry.v1.ListApiDeploymentRevisionsRequest()
       );
@@ -5641,7 +5643,7 @@ describe('v1.RegistryClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apigeeregistry.v1.ListApiDeploymentRevisionsRequest()
       );
@@ -5698,7 +5700,7 @@ describe('v1.RegistryClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apigeeregistry.v1.ListApiDeploymentRevisionsRequest()
       );
@@ -5732,7 +5734,7 @@ describe('v1.RegistryClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apigeeregistry.v1.ListApiDeploymentRevisionsRequest()
       );
@@ -5799,7 +5801,7 @@ describe('v1.RegistryClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apigeeregistry.v1.ListApiDeploymentRevisionsRequest()
       );
@@ -5855,7 +5857,7 @@ describe('v1.RegistryClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apigeeregistry.v1.ListApiDeploymentRevisionsRequest()
       );
@@ -5909,7 +5911,7 @@ describe('v1.RegistryClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apigeeregistry.v1.ListApiDeploymentRevisionsRequest()
       );
@@ -5956,7 +5958,7 @@ describe('v1.RegistryClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apigeeregistry.v1.ListArtifactsRequest()
       );
@@ -5995,7 +5997,7 @@ describe('v1.RegistryClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apigeeregistry.v1.ListArtifactsRequest()
       );
@@ -6050,7 +6052,7 @@ describe('v1.RegistryClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apigeeregistry.v1.ListArtifactsRequest()
       );
@@ -6081,7 +6083,7 @@ describe('v1.RegistryClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apigeeregistry.v1.ListArtifactsRequest()
       );
@@ -6141,7 +6143,7 @@ describe('v1.RegistryClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apigeeregistry.v1.ListArtifactsRequest()
       );
@@ -6190,7 +6192,7 @@ describe('v1.RegistryClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apigeeregistry.v1.ListArtifactsRequest()
       );
@@ -6239,7 +6241,7 @@ describe('v1.RegistryClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apigeeregistry.v1.ListArtifactsRequest()
       );
@@ -6280,7 +6282,7 @@ describe('v1.RegistryClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new IamProtos.google.iam.v1.GetIamPolicyRequest()
       );
@@ -6310,7 +6312,7 @@ describe('v1.RegistryClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new IamProtos.google.iam.v1.GetIamPolicyRequest()
       );
@@ -6354,7 +6356,7 @@ describe('v1.RegistryClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new IamProtos.google.iam.v1.GetIamPolicyRequest()
       );
@@ -6386,7 +6388,7 @@ describe('v1.RegistryClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new IamProtos.google.iam.v1.SetIamPolicyRequest()
       );
@@ -6416,7 +6418,7 @@ describe('v1.RegistryClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new IamProtos.google.iam.v1.SetIamPolicyRequest()
       );
@@ -6460,7 +6462,7 @@ describe('v1.RegistryClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new IamProtos.google.iam.v1.SetIamPolicyRequest()
       );
@@ -6492,7 +6494,7 @@ describe('v1.RegistryClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new IamProtos.google.iam.v1.TestIamPermissionsRequest()
       );
@@ -6525,7 +6527,7 @@ describe('v1.RegistryClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new IamProtos.google.iam.v1.TestIamPermissionsRequest()
       );
@@ -6569,7 +6571,7 @@ describe('v1.RegistryClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new IamProtos.google.iam.v1.TestIamPermissionsRequest()
       );
@@ -6604,7 +6606,7 @@ describe('v1.RegistryClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.GetLocationRequest()
       );
@@ -6634,7 +6636,7 @@ describe('v1.RegistryClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.GetLocationRequest()
       );
@@ -6678,7 +6680,7 @@ describe('v1.RegistryClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.GetLocationRequest()
       );
@@ -6713,7 +6715,7 @@ describe('v1.RegistryClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.ListLocationsRequest()
       );
@@ -6761,7 +6763,7 @@ describe('v1.RegistryClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.ListLocationsRequest()
       );
@@ -6798,7 +6800,7 @@ describe('v1.RegistryClient', () => {
   });
 
   describe('Path templates', () => {
-    describe('api', () => {
+    describe('api', async () => {
       const fakePath = '/rendered/path/api';
       const expectedParameters = {
         project: 'projectValue',
@@ -6809,7 +6811,7 @@ describe('v1.RegistryClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.apiPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -6862,7 +6864,7 @@ describe('v1.RegistryClient', () => {
       });
     });
 
-    describe('apiDeployment', () => {
+    describe('apiDeployment', async () => {
       const fakePath = '/rendered/path/apiDeployment';
       const expectedParameters = {
         project: 'projectValue',
@@ -6874,7 +6876,7 @@ describe('v1.RegistryClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.apiDeploymentPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -6938,7 +6940,7 @@ describe('v1.RegistryClient', () => {
       });
     });
 
-    describe('apiSpec', () => {
+    describe('apiSpec', async () => {
       const fakePath = '/rendered/path/apiSpec';
       const expectedParameters = {
         project: 'projectValue',
@@ -6951,7 +6953,7 @@ describe('v1.RegistryClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.apiSpecPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -7026,7 +7028,7 @@ describe('v1.RegistryClient', () => {
       });
     });
 
-    describe('apiVersion', () => {
+    describe('apiVersion', async () => {
       const fakePath = '/rendered/path/apiVersion';
       const expectedParameters = {
         project: 'projectValue',
@@ -7038,7 +7040,7 @@ describe('v1.RegistryClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.apiVersionPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -7102,7 +7104,7 @@ describe('v1.RegistryClient', () => {
       });
     });
 
-    describe('instance', () => {
+    describe('instance', async () => {
       const fakePath = '/rendered/path/instance';
       const expectedParameters = {
         project: 'projectValue',
@@ -7113,7 +7115,7 @@ describe('v1.RegistryClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.instancePathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -7166,7 +7168,7 @@ describe('v1.RegistryClient', () => {
       });
     });
 
-    describe('location', () => {
+    describe('location', async () => {
       const fakePath = '/rendered/path/location';
       const expectedParameters = {
         project: 'projectValue',
@@ -7176,7 +7178,7 @@ describe('v1.RegistryClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.locationPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -7215,7 +7217,7 @@ describe('v1.RegistryClient', () => {
       });
     });
 
-    describe('project', () => {
+    describe('project', async () => {
       const fakePath = '/rendered/path/project';
       const expectedParameters = {
         project: 'projectValue',
@@ -7224,7 +7226,7 @@ describe('v1.RegistryClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -7253,7 +7255,7 @@ describe('v1.RegistryClient', () => {
       });
     });
 
-    describe('projectLocationApiArtifact', () => {
+    describe('projectLocationApiArtifact', async () => {
       const fakePath = '/rendered/path/projectLocationApiArtifact';
       const expectedParameters = {
         project: 'projectValue',
@@ -7265,7 +7267,7 @@ describe('v1.RegistryClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectLocationApiArtifactPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -7348,7 +7350,7 @@ describe('v1.RegistryClient', () => {
       });
     });
 
-    describe('projectLocationApiDeploymentArtifact', () => {
+    describe('projectLocationApiDeploymentArtifact', async () => {
       const fakePath = '/rendered/path/projectLocationApiDeploymentArtifact';
       const expectedParameters = {
         project: 'projectValue',
@@ -7361,7 +7363,7 @@ describe('v1.RegistryClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectLocationApiDeploymentArtifactPathTemplate.render =
         sinon.stub().returns(fakePath);
       client.pathTemplates.projectLocationApiDeploymentArtifactPathTemplate.match =
@@ -7471,7 +7473,7 @@ describe('v1.RegistryClient', () => {
       });
     });
 
-    describe('projectLocationApiVersionArtifact', () => {
+    describe('projectLocationApiVersionArtifact', async () => {
       const fakePath = '/rendered/path/projectLocationApiVersionArtifact';
       const expectedParameters = {
         project: 'projectValue',
@@ -7484,7 +7486,7 @@ describe('v1.RegistryClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectLocationApiVersionArtifactPathTemplate.render =
         sinon.stub().returns(fakePath);
       client.pathTemplates.projectLocationApiVersionArtifactPathTemplate.match =
@@ -7588,7 +7590,7 @@ describe('v1.RegistryClient', () => {
       });
     });
 
-    describe('projectLocationApiVersionSpecArtifact', () => {
+    describe('projectLocationApiVersionSpecArtifact', async () => {
       const fakePath = '/rendered/path/projectLocationApiVersionSpecArtifact';
       const expectedParameters = {
         project: 'projectValue',
@@ -7602,7 +7604,7 @@ describe('v1.RegistryClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectLocationApiVersionSpecArtifactPathTemplate.render =
         sinon.stub().returns(fakePath);
       client.pathTemplates.projectLocationApiVersionSpecArtifactPathTemplate.match =
@@ -7732,7 +7734,7 @@ describe('v1.RegistryClient', () => {
       });
     });
 
-    describe('projectLocationArtifact', () => {
+    describe('projectLocationArtifact', async () => {
       const fakePath = '/rendered/path/projectLocationArtifact';
       const expectedParameters = {
         project: 'projectValue',
@@ -7743,7 +7745,7 @@ describe('v1.RegistryClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectLocationArtifactPathTemplate.render = sinon
         .stub()
         .returns(fakePath);

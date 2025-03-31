@@ -265,7 +265,9 @@ describe('v1beta.LocalInventoryServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      client.initialize().catch(err => {
+        throw err;
+      });
       assert(client.localInventoryServiceStub);
       client.close().then(() => {
         done();
@@ -328,7 +330,7 @@ describe('v1beta.LocalInventoryServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.shopping.merchant.inventories.v1beta.InsertLocalInventoryRequest()
       );
@@ -337,7 +339,7 @@ describe('v1beta.LocalInventoryServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.shopping.merchant.inventories.v1beta.LocalInventory()
       );
@@ -361,7 +363,7 @@ describe('v1beta.LocalInventoryServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.shopping.merchant.inventories.v1beta.InsertLocalInventoryRequest()
       );
@@ -370,7 +372,7 @@ describe('v1beta.LocalInventoryServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.shopping.merchant.inventories.v1beta.LocalInventory()
       );
@@ -409,7 +411,7 @@ describe('v1beta.LocalInventoryServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.shopping.merchant.inventories.v1beta.InsertLocalInventoryRequest()
       );
@@ -418,7 +420,7 @@ describe('v1beta.LocalInventoryServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.insertLocalInventory = stubSimpleCall(
         undefined,
@@ -441,7 +443,7 @@ describe('v1beta.LocalInventoryServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.shopping.merchant.inventories.v1beta.InsertLocalInventoryRequest()
       );
@@ -463,7 +465,7 @@ describe('v1beta.LocalInventoryServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.shopping.merchant.inventories.v1beta.DeleteLocalInventoryRequest()
       );
@@ -472,7 +474,7 @@ describe('v1beta.LocalInventoryServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -496,7 +498,7 @@ describe('v1beta.LocalInventoryServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.shopping.merchant.inventories.v1beta.DeleteLocalInventoryRequest()
       );
@@ -505,7 +507,7 @@ describe('v1beta.LocalInventoryServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -544,7 +546,7 @@ describe('v1beta.LocalInventoryServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.shopping.merchant.inventories.v1beta.DeleteLocalInventoryRequest()
       );
@@ -553,7 +555,7 @@ describe('v1beta.LocalInventoryServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteLocalInventory = stubSimpleCall(
         undefined,
@@ -576,7 +578,7 @@ describe('v1beta.LocalInventoryServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.shopping.merchant.inventories.v1beta.DeleteLocalInventoryRequest()
       );
@@ -598,7 +600,7 @@ describe('v1beta.LocalInventoryServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.shopping.merchant.inventories.v1beta.ListLocalInventoriesRequest()
       );
@@ -607,7 +609,7 @@ describe('v1beta.LocalInventoryServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.shopping.merchant.inventories.v1beta.LocalInventory()
@@ -639,7 +641,7 @@ describe('v1beta.LocalInventoryServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.shopping.merchant.inventories.v1beta.ListLocalInventoriesRequest()
       );
@@ -648,7 +650,7 @@ describe('v1beta.LocalInventoryServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.shopping.merchant.inventories.v1beta.LocalInventory()
@@ -697,7 +699,7 @@ describe('v1beta.LocalInventoryServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.shopping.merchant.inventories.v1beta.ListLocalInventoriesRequest()
       );
@@ -706,7 +708,7 @@ describe('v1beta.LocalInventoryServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listLocalInventories = stubSimpleCall(
         undefined,
@@ -729,7 +731,7 @@ describe('v1beta.LocalInventoryServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.shopping.merchant.inventories.v1beta.ListLocalInventoriesRequest()
       );
@@ -738,7 +740,7 @@ describe('v1beta.LocalInventoryServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.shopping.merchant.inventories.v1beta.LocalInventory()
@@ -793,7 +795,7 @@ describe('v1beta.LocalInventoryServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.shopping.merchant.inventories.v1beta.ListLocalInventoriesRequest()
       );
@@ -802,7 +804,7 @@ describe('v1beta.LocalInventoryServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listLocalInventories.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -846,7 +848,7 @@ describe('v1beta.LocalInventoryServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.shopping.merchant.inventories.v1beta.ListLocalInventoriesRequest()
       );
@@ -855,7 +857,7 @@ describe('v1beta.LocalInventoryServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.shopping.merchant.inventories.v1beta.LocalInventory()
@@ -897,7 +899,7 @@ describe('v1beta.LocalInventoryServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.shopping.merchant.inventories.v1beta.ListLocalInventoriesRequest()
       );
@@ -906,7 +908,7 @@ describe('v1beta.LocalInventoryServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listLocalInventories.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -935,7 +937,7 @@ describe('v1beta.LocalInventoryServiceClient', () => {
   });
 
   describe('Path templates', () => {
-    describe('localInventory', () => {
+    describe('localInventory', async () => {
       const fakePath = '/rendered/path/localInventory';
       const expectedParameters = {
         account: 'accountValue',
@@ -947,7 +949,7 @@ describe('v1beta.LocalInventoryServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.localInventoryPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -1000,7 +1002,7 @@ describe('v1beta.LocalInventoryServiceClient', () => {
       });
     });
 
-    describe('product', () => {
+    describe('product', async () => {
       const fakePath = '/rendered/path/product';
       const expectedParameters = {
         account: 'accountValue',
@@ -1011,7 +1013,7 @@ describe('v1beta.LocalInventoryServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.productPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -1050,7 +1052,7 @@ describe('v1beta.LocalInventoryServiceClient', () => {
       });
     });
 
-    describe('regionalInventory', () => {
+    describe('regionalInventory', async () => {
       const fakePath = '/rendered/path/regionalInventory';
       const expectedParameters = {
         account: 'accountValue',
@@ -1062,7 +1064,7 @@ describe('v1beta.LocalInventoryServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.regionalInventoryPathTemplate.render = sinon
         .stub()
         .returns(fakePath);

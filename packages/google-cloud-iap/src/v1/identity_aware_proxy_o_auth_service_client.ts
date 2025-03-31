@@ -29,6 +29,7 @@ import type {
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
+import {loggingUtils as logging} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -55,6 +56,8 @@ export class IdentityAwareProxyOAuthServiceClient {
   private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
+  private _log = logging.log('iap');
+
   auth: gax.GoogleAuth;
   descriptors: Descriptors = {
     page: {},
@@ -89,7 +92,7 @@ export class IdentityAwareProxyOAuthServiceClient {
    *     Developer's Console, e.g. 'grape-spaceship-123'. We will also check
    *     the environment variable GCLOUD_PROJECT for your project ID. If your
    *     app is running in an environment which supports
-   *     {@link https://developers.google.com/identity/protocols/application-default-credentials Application Default Credentials},
+   *     {@link https://cloud.google.com/docs/authentication/application-default-credentials Application Default Credentials},
    *     your project ID will be detected automatically.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
@@ -477,8 +480,34 @@ export class IdentityAwareProxyOAuthServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.listBrands(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listBrands request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.iap.v1.IListBrandsResponse,
+          protos.google.cloud.iap.v1.IListBrandsRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('listBrands response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .listBrands(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.iap.v1.IListBrandsResponse,
+          protos.google.cloud.iap.v1.IListBrandsRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('listBrands response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Constructs a new OAuth brand for the project if one does not exist.
@@ -569,8 +598,34 @@ export class IdentityAwareProxyOAuthServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.createBrand(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('createBrand request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.iap.v1.IBrand,
+          protos.google.cloud.iap.v1.ICreateBrandRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('createBrand response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .createBrand(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.iap.v1.IBrand,
+          protos.google.cloud.iap.v1.ICreateBrandRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createBrand response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Retrieves the OAuth brand of the project.
@@ -652,8 +707,34 @@ export class IdentityAwareProxyOAuthServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.getBrand(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('getBrand request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.iap.v1.IBrand,
+          protos.google.cloud.iap.v1.IGetBrandRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getBrand response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getBrand(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.iap.v1.IBrand,
+          protos.google.cloud.iap.v1.IGetBrandRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getBrand response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Creates an Identity Aware Proxy (IAP) OAuth client. The client is owned
@@ -755,12 +836,45 @@ export class IdentityAwareProxyOAuthServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.createIdentityAwareProxyClient(
-      request,
-      options,
-      callback
-    );
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('createIdentityAwareProxyClient request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.iap.v1.IIdentityAwareProxyClient,
+          | protos.google.cloud.iap.v1.ICreateIdentityAwareProxyClientRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info(
+            'createIdentityAwareProxyClient response %j',
+            response
+          );
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .createIdentityAwareProxyClient(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.iap.v1.IIdentityAwareProxyClient,
+          (
+            | protos.google.cloud.iap.v1.ICreateIdentityAwareProxyClientRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info(
+            'createIdentityAwareProxyClient response %j',
+            response
+          );
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Retrieves an Identity Aware Proxy (IAP) OAuth client.
@@ -858,12 +972,39 @@ export class IdentityAwareProxyOAuthServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.getIdentityAwareProxyClient(
-      request,
-      options,
-      callback
-    );
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('getIdentityAwareProxyClient request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.iap.v1.IIdentityAwareProxyClient,
+          | protos.google.cloud.iap.v1.IGetIdentityAwareProxyClientRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getIdentityAwareProxyClient response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getIdentityAwareProxyClient(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.iap.v1.IIdentityAwareProxyClient,
+          (
+            | protos.google.cloud.iap.v1.IGetIdentityAwareProxyClientRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getIdentityAwareProxyClient response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Resets an Identity Aware Proxy (IAP) OAuth client secret. Useful if the
@@ -961,12 +1102,45 @@ export class IdentityAwareProxyOAuthServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.resetIdentityAwareProxyClientSecret(
-      request,
-      options,
-      callback
-    );
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('resetIdentityAwareProxyClientSecret request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.iap.v1.IIdentityAwareProxyClient,
+          | protos.google.cloud.iap.v1.IResetIdentityAwareProxyClientSecretRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info(
+            'resetIdentityAwareProxyClientSecret response %j',
+            response
+          );
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .resetIdentityAwareProxyClientSecret(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.iap.v1.IIdentityAwareProxyClient,
+          (
+            | protos.google.cloud.iap.v1.IResetIdentityAwareProxyClientSecretRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info(
+            'resetIdentityAwareProxyClientSecret response %j',
+            response
+          );
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Deletes an Identity Aware Proxy (IAP) OAuth client. Useful for removing
@@ -1065,12 +1239,45 @@ export class IdentityAwareProxyOAuthServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.deleteIdentityAwareProxyClient(
-      request,
-      options,
-      callback
-    );
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('deleteIdentityAwareProxyClient request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.cloud.iap.v1.IDeleteIdentityAwareProxyClientRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info(
+            'deleteIdentityAwareProxyClient response %j',
+            response
+          );
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .deleteIdentityAwareProxyClient(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.protobuf.IEmpty,
+          (
+            | protos.google.cloud.iap.v1.IDeleteIdentityAwareProxyClientRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info(
+            'deleteIdentityAwareProxyClient response %j',
+            response
+          );
+          return [response, options, rawResponse];
+        }
+      );
   }
 
   /**
@@ -1176,16 +1383,40 @@ export class IdentityAwareProxyOAuthServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.listIdentityAwareProxyClients(
-      request,
-      options,
-      callback
-    );
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.iap.v1.IListIdentityAwareProxyClientsRequest,
+          | protos.google.cloud.iap.v1.IListIdentityAwareProxyClientsResponse
+          | null
+          | undefined,
+          protos.google.cloud.iap.v1.IIdentityAwareProxyClient
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listIdentityAwareProxyClients values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listIdentityAwareProxyClients request %j', request);
+    return this.innerApiCalls
+      .listIdentityAwareProxyClients(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.iap.v1.IIdentityAwareProxyClient[],
+          protos.google.cloud.iap.v1.IListIdentityAwareProxyClientsRequest | null,
+          protos.google.cloud.iap.v1.IListIdentityAwareProxyClientsResponse,
+        ]) => {
+          this._log.info('listIdentityAwareProxyClients values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listIdentityAwareProxyClients`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
@@ -1228,7 +1459,10 @@ export class IdentityAwareProxyOAuthServiceClient {
       });
     const defaultCallSettings = this._defaults['listIdentityAwareProxyClients'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listIdentityAwareProxyClients stream %j', request);
     return this.descriptors.page.listIdentityAwareProxyClients.createStream(
       this.innerApiCalls.listIdentityAwareProxyClients as GaxCall,
       request,
@@ -1283,7 +1517,10 @@ export class IdentityAwareProxyOAuthServiceClient {
       });
     const defaultCallSettings = this._defaults['listIdentityAwareProxyClients'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listIdentityAwareProxyClients iterate %j', request);
     return this.descriptors.page.listIdentityAwareProxyClients.asyncIterate(
       this.innerApiCalls['listIdentityAwareProxyClients'] as GaxCall,
       request as {},
@@ -1421,6 +1658,7 @@ export class IdentityAwareProxyOAuthServiceClient {
   close(): Promise<void> {
     if (this.identityAwareProxyOAuthServiceStub && !this._terminated) {
       return this.identityAwareProxyOAuthServiceStub.then(stub => {
+        this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
       });

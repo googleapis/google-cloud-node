@@ -1,5 +1,28 @@
 # Changelog
 
+## [9.1.0](https://github.com/googleapis/google-cloud-node/compare/documentai-v9.0.0...documentai-v9.1.0) (2025-03-19)
+
+
+### Features
+
+* [documentai] Added config options to enable LLM layout parsing ([#6180](https://github.com/googleapis/google-cloud-node/issues/6180)) ([f0f3e3a](https://github.com/googleapis/google-cloud-node/commit/f0f3e3a7956143160cb36d8cba96e669c76e3c2e))
+
+## [9.0.0](https://github.com/googleapis/google-cloud-node/compare/documentai-v8.12.0...documentai-v9.0.0) (2025-03-18)
+
+
+### ⚠ BREAKING CHANGES
+
+* upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096))
+
+### Features
+
+* [Many APIs] add request/response debug logging to gapics ([afcb5c0](https://github.com/googleapis/google-cloud-node/commit/afcb5c07e82bc8349b9677766cd880f69a97f77f))
+
+
+### Miscellaneous Chores
+
+* Upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096)) ([eadae64](https://github.com/googleapis/google-cloud-node/commit/eadae64d54e07aa2c65097ea52e65008d4e87436))
+
 ## [8.12.0](https://github.com/googleapis/google-cloud-node/compare/documentai-v8.11.0...documentai-v8.12.0) (2024-10-30)
 
 

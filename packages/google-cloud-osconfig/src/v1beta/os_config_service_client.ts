@@ -29,6 +29,7 @@ import type {
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
+import {loggingUtils as logging} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -56,6 +57,8 @@ export class OsConfigServiceClient {
   private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
+  private _log = logging.log('osconfig');
+
   auth: gax.GoogleAuth;
   descriptors: Descriptors = {
     page: {},
@@ -90,7 +93,7 @@ export class OsConfigServiceClient {
    *     Developer's Console, e.g. 'grape-spaceship-123'. We will also check
    *     the environment variable GCLOUD_PROJECT for your project ID. If your
    *     app is running in an environment which supports
-   *     {@link https://developers.google.com/identity/protocols/application-default-credentials Application Default Credentials},
+   *     {@link https://cloud.google.com/docs/authentication/application-default-credentials Application Default Credentials},
    *     your project ID will be detected automatically.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
@@ -527,8 +530,39 @@ export class OsConfigServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.executePatchJob(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('executePatchJob request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.osconfig.v1beta.IPatchJob,
+          | protos.google.cloud.osconfig.v1beta.IExecutePatchJobRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('executePatchJob response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .executePatchJob(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.osconfig.v1beta.IPatchJob,
+          (
+            | protos.google.cloud.osconfig.v1beta.IExecutePatchJobRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('executePatchJob response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Get the patch job. This can be used to track the progress of an
@@ -618,8 +652,36 @@ export class OsConfigServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.getPatchJob(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('getPatchJob request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.osconfig.v1beta.IPatchJob,
+          | protos.google.cloud.osconfig.v1beta.IGetPatchJobRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getPatchJob response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getPatchJob(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.osconfig.v1beta.IPatchJob,
+          protos.google.cloud.osconfig.v1beta.IGetPatchJobRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getPatchJob response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Cancel a patch job. The patch job must be active. Canceled patch jobs
@@ -709,8 +771,39 @@ export class OsConfigServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.cancelPatchJob(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('cancelPatchJob request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.osconfig.v1beta.IPatchJob,
+          | protos.google.cloud.osconfig.v1beta.ICancelPatchJobRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('cancelPatchJob response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .cancelPatchJob(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.osconfig.v1beta.IPatchJob,
+          (
+            | protos.google.cloud.osconfig.v1beta.ICancelPatchJobRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('cancelPatchJob response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Create an OS Config patch deployment.
@@ -815,8 +908,39 @@ export class OsConfigServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.createPatchDeployment(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('createPatchDeployment request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.osconfig.v1beta.IPatchDeployment,
+          | protos.google.cloud.osconfig.v1beta.ICreatePatchDeploymentRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('createPatchDeployment response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .createPatchDeployment(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.osconfig.v1beta.IPatchDeployment,
+          (
+            | protos.google.cloud.osconfig.v1beta.ICreatePatchDeploymentRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('createPatchDeployment response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Get an OS Config patch deployment.
@@ -912,8 +1036,39 @@ export class OsConfigServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.getPatchDeployment(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('getPatchDeployment request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.osconfig.v1beta.IPatchDeployment,
+          | protos.google.cloud.osconfig.v1beta.IGetPatchDeploymentRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getPatchDeployment response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getPatchDeployment(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.osconfig.v1beta.IPatchDeployment,
+          (
+            | protos.google.cloud.osconfig.v1beta.IGetPatchDeploymentRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getPatchDeployment response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Delete an OS Config patch deployment.
@@ -1009,8 +1164,39 @@ export class OsConfigServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.deletePatchDeployment(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('deletePatchDeployment request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.cloud.osconfig.v1beta.IDeletePatchDeploymentRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('deletePatchDeployment response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .deletePatchDeployment(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.protobuf.IEmpty,
+          (
+            | protos.google.cloud.osconfig.v1beta.IDeletePatchDeploymentRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('deletePatchDeployment response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Update an OS Config patch deployment.
@@ -1108,8 +1294,39 @@ export class OsConfigServiceClient {
       this._gaxModule.routingHeader.fromParams({
         'patch_deployment.name': request.patchDeployment!.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.updatePatchDeployment(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('updatePatchDeployment request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.osconfig.v1beta.IPatchDeployment,
+          | protos.google.cloud.osconfig.v1beta.IUpdatePatchDeploymentRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('updatePatchDeployment response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .updatePatchDeployment(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.osconfig.v1beta.IPatchDeployment,
+          (
+            | protos.google.cloud.osconfig.v1beta.IUpdatePatchDeploymentRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('updatePatchDeployment response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Change state of patch deployment to "PAUSED".
@@ -1206,8 +1423,39 @@ export class OsConfigServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.pausePatchDeployment(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('pausePatchDeployment request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.osconfig.v1beta.IPatchDeployment,
+          | protos.google.cloud.osconfig.v1beta.IPausePatchDeploymentRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('pausePatchDeployment response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .pausePatchDeployment(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.osconfig.v1beta.IPatchDeployment,
+          (
+            | protos.google.cloud.osconfig.v1beta.IPausePatchDeploymentRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('pausePatchDeployment response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Change state of patch deployment back to "ACTIVE".
@@ -1304,8 +1552,39 @@ export class OsConfigServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.resumePatchDeployment(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('resumePatchDeployment request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.osconfig.v1beta.IPatchDeployment,
+          | protos.google.cloud.osconfig.v1beta.IResumePatchDeploymentRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('resumePatchDeployment response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .resumePatchDeployment(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.osconfig.v1beta.IPatchDeployment,
+          (
+            | protos.google.cloud.osconfig.v1beta.IResumePatchDeploymentRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('resumePatchDeployment response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Create an OS Config guest policy.
@@ -1406,8 +1685,39 @@ export class OsConfigServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.createGuestPolicy(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('createGuestPolicy request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.osconfig.v1beta.IGuestPolicy,
+          | protos.google.cloud.osconfig.v1beta.ICreateGuestPolicyRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('createGuestPolicy response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .createGuestPolicy(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.osconfig.v1beta.IGuestPolicy,
+          (
+            | protos.google.cloud.osconfig.v1beta.ICreateGuestPolicyRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('createGuestPolicy response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Get an OS Config guest policy.
@@ -1497,8 +1807,39 @@ export class OsConfigServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.getGuestPolicy(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('getGuestPolicy request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.osconfig.v1beta.IGuestPolicy,
+          | protos.google.cloud.osconfig.v1beta.IGetGuestPolicyRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getGuestPolicy response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getGuestPolicy(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.osconfig.v1beta.IGuestPolicy,
+          (
+            | protos.google.cloud.osconfig.v1beta.IGetGuestPolicyRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getGuestPolicy response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Update an OS Config guest policy.
@@ -1590,8 +1931,39 @@ export class OsConfigServiceClient {
       this._gaxModule.routingHeader.fromParams({
         'guest_policy.name': request.guestPolicy!.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.updateGuestPolicy(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('updateGuestPolicy request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.osconfig.v1beta.IGuestPolicy,
+          | protos.google.cloud.osconfig.v1beta.IUpdateGuestPolicyRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('updateGuestPolicy response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .updateGuestPolicy(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.osconfig.v1beta.IGuestPolicy,
+          (
+            | protos.google.cloud.osconfig.v1beta.IUpdateGuestPolicyRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('updateGuestPolicy response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Delete an OS Config guest policy.
@@ -1681,8 +2053,39 @@ export class OsConfigServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.deleteGuestPolicy(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('deleteGuestPolicy request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.cloud.osconfig.v1beta.IDeleteGuestPolicyRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('deleteGuestPolicy response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .deleteGuestPolicy(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.protobuf.IEmpty,
+          (
+            | protos.google.cloud.osconfig.v1beta.IDeleteGuestPolicyRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteGuestPolicy response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Lookup the effective guest policy that applies to a VM instance. This
@@ -1790,12 +2193,39 @@ export class OsConfigServiceClient {
       this._gaxModule.routingHeader.fromParams({
         instance: request.instance ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.lookupEffectiveGuestPolicy(
-      request,
-      options,
-      callback
-    );
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('lookupEffectiveGuestPolicy request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.osconfig.v1beta.IEffectiveGuestPolicy,
+          | protos.google.cloud.osconfig.v1beta.ILookupEffectiveGuestPolicyRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('lookupEffectiveGuestPolicy response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .lookupEffectiveGuestPolicy(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.osconfig.v1beta.IEffectiveGuestPolicy,
+          (
+            | protos.google.cloud.osconfig.v1beta.ILookupEffectiveGuestPolicyRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('lookupEffectiveGuestPolicy response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
 
   /**
@@ -1897,12 +2327,40 @@ export class OsConfigServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.listPatchJobs(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.osconfig.v1beta.IListPatchJobsRequest,
+          | protos.google.cloud.osconfig.v1beta.IListPatchJobsResponse
+          | null
+          | undefined,
+          protos.google.cloud.osconfig.v1beta.IPatchJob
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listPatchJobs values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listPatchJobs request %j', request);
+    return this.innerApiCalls
+      .listPatchJobs(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.osconfig.v1beta.IPatchJob[],
+          protos.google.cloud.osconfig.v1beta.IListPatchJobsRequest | null,
+          protos.google.cloud.osconfig.v1beta.IListPatchJobsResponse,
+        ]) => {
+          this._log.info('listPatchJobs values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listPatchJobs`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
@@ -1941,7 +2399,10 @@ export class OsConfigServiceClient {
       });
     const defaultCallSettings = this._defaults['listPatchJobs'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listPatchJobs stream %j', request);
     return this.descriptors.page.listPatchJobs.createStream(
       this.innerApiCalls.listPatchJobs as GaxCall,
       request,
@@ -1992,7 +2453,10 @@ export class OsConfigServiceClient {
       });
     const defaultCallSettings = this._defaults['listPatchJobs'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listPatchJobs iterate %j', request);
     return this.descriptors.page.listPatchJobs.asyncIterate(
       this.innerApiCalls['listPatchJobs'] as GaxCall,
       request as {},
@@ -2098,16 +2562,40 @@ export class OsConfigServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.listPatchJobInstanceDetails(
-      request,
-      options,
-      callback
-    );
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.osconfig.v1beta.IListPatchJobInstanceDetailsRequest,
+          | protos.google.cloud.osconfig.v1beta.IListPatchJobInstanceDetailsResponse
+          | null
+          | undefined,
+          protos.google.cloud.osconfig.v1beta.IPatchJobInstanceDetails
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listPatchJobInstanceDetails values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listPatchJobInstanceDetails request %j', request);
+    return this.innerApiCalls
+      .listPatchJobInstanceDetails(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.osconfig.v1beta.IPatchJobInstanceDetails[],
+          protos.google.cloud.osconfig.v1beta.IListPatchJobInstanceDetailsRequest | null,
+          protos.google.cloud.osconfig.v1beta.IListPatchJobInstanceDetailsResponse,
+        ]) => {
+          this._log.info('listPatchJobInstanceDetails values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listPatchJobInstanceDetails`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
@@ -2146,7 +2634,10 @@ export class OsConfigServiceClient {
       });
     const defaultCallSettings = this._defaults['listPatchJobInstanceDetails'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listPatchJobInstanceDetails stream %j', request);
     return this.descriptors.page.listPatchJobInstanceDetails.createStream(
       this.innerApiCalls.listPatchJobInstanceDetails as GaxCall,
       request,
@@ -2197,7 +2688,10 @@ export class OsConfigServiceClient {
       });
     const defaultCallSettings = this._defaults['listPatchJobInstanceDetails'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listPatchJobInstanceDetails iterate %j', request);
     return this.descriptors.page.listPatchJobInstanceDetails.asyncIterate(
       this.innerApiCalls['listPatchJobInstanceDetails'] as GaxCall,
       request as {},
@@ -2299,12 +2793,40 @@ export class OsConfigServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.listPatchDeployments(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.osconfig.v1beta.IListPatchDeploymentsRequest,
+          | protos.google.cloud.osconfig.v1beta.IListPatchDeploymentsResponse
+          | null
+          | undefined,
+          protos.google.cloud.osconfig.v1beta.IPatchDeployment
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listPatchDeployments values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listPatchDeployments request %j', request);
+    return this.innerApiCalls
+      .listPatchDeployments(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.osconfig.v1beta.IPatchDeployment[],
+          protos.google.cloud.osconfig.v1beta.IListPatchDeploymentsRequest | null,
+          protos.google.cloud.osconfig.v1beta.IListPatchDeploymentsResponse,
+        ]) => {
+          this._log.info('listPatchDeployments values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listPatchDeployments`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
@@ -2339,7 +2861,10 @@ export class OsConfigServiceClient {
       });
     const defaultCallSettings = this._defaults['listPatchDeployments'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listPatchDeployments stream %j', request);
     return this.descriptors.page.listPatchDeployments.createStream(
       this.innerApiCalls.listPatchDeployments as GaxCall,
       request,
@@ -2386,7 +2911,10 @@ export class OsConfigServiceClient {
       });
     const defaultCallSettings = this._defaults['listPatchDeployments'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listPatchDeployments iterate %j', request);
     return this.descriptors.page.listPatchDeployments.asyncIterate(
       this.innerApiCalls['listPatchDeployments'] as GaxCall,
       request as {},
@@ -2489,12 +3017,40 @@ export class OsConfigServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.listGuestPolicies(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.osconfig.v1beta.IListGuestPoliciesRequest,
+          | protos.google.cloud.osconfig.v1beta.IListGuestPoliciesResponse
+          | null
+          | undefined,
+          protos.google.cloud.osconfig.v1beta.IGuestPolicy
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listGuestPolicies values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listGuestPolicies request %j', request);
+    return this.innerApiCalls
+      .listGuestPolicies(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.osconfig.v1beta.IGuestPolicy[],
+          protos.google.cloud.osconfig.v1beta.IListGuestPoliciesRequest | null,
+          protos.google.cloud.osconfig.v1beta.IListGuestPoliciesResponse,
+        ]) => {
+          this._log.info('listGuestPolicies values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listGuestPolicies`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
@@ -2530,7 +3086,10 @@ export class OsConfigServiceClient {
       });
     const defaultCallSettings = this._defaults['listGuestPolicies'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listGuestPolicies stream %j', request);
     return this.descriptors.page.listGuestPolicies.createStream(
       this.innerApiCalls.listGuestPolicies as GaxCall,
       request,
@@ -2578,7 +3137,10 @@ export class OsConfigServiceClient {
       });
     const defaultCallSettings = this._defaults['listGuestPolicies'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listGuestPolicies iterate %j', request);
     return this.descriptors.page.listGuestPolicies.asyncIterate(
       this.innerApiCalls['listGuestPolicies'] as GaxCall,
       request as {},
@@ -2713,6 +3275,7 @@ export class OsConfigServiceClient {
   close(): Promise<void> {
     if (this.osConfigServiceStub && !this._terminated) {
       return this.osConfigServiceStub.then(stub => {
+        this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
       });

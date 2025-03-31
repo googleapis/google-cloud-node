@@ -3353,6 +3353,3051 @@ export namespace google {
                      */
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
+
+                /** Properties of a ConnectCluster. */
+                interface IConnectCluster {
+
+                    /** ConnectCluster gcpConfig */
+                    gcpConfig?: (google.cloud.managedkafka.v1.IConnectGcpConfig|null);
+
+                    /** ConnectCluster name */
+                    name?: (string|null);
+
+                    /** ConnectCluster kafkaCluster */
+                    kafkaCluster?: (string|null);
+
+                    /** ConnectCluster createTime */
+                    createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** ConnectCluster updateTime */
+                    updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** ConnectCluster labels */
+                    labels?: ({ [k: string]: string }|null);
+
+                    /** ConnectCluster capacityConfig */
+                    capacityConfig?: (google.cloud.managedkafka.v1.ICapacityConfig|null);
+
+                    /** ConnectCluster state */
+                    state?: (google.cloud.managedkafka.v1.ConnectCluster.State|keyof typeof google.cloud.managedkafka.v1.ConnectCluster.State|null);
+
+                    /** ConnectCluster config */
+                    config?: ({ [k: string]: string }|null);
+                }
+
+                /** Represents a ConnectCluster. */
+                class ConnectCluster implements IConnectCluster {
+
+                    /**
+                     * Constructs a new ConnectCluster.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.managedkafka.v1.IConnectCluster);
+
+                    /** ConnectCluster gcpConfig. */
+                    public gcpConfig?: (google.cloud.managedkafka.v1.IConnectGcpConfig|null);
+
+                    /** ConnectCluster name. */
+                    public name: string;
+
+                    /** ConnectCluster kafkaCluster. */
+                    public kafkaCluster: string;
+
+                    /** ConnectCluster createTime. */
+                    public createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** ConnectCluster updateTime. */
+                    public updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** ConnectCluster labels. */
+                    public labels: { [k: string]: string };
+
+                    /** ConnectCluster capacityConfig. */
+                    public capacityConfig?: (google.cloud.managedkafka.v1.ICapacityConfig|null);
+
+                    /** ConnectCluster state. */
+                    public state: (google.cloud.managedkafka.v1.ConnectCluster.State|keyof typeof google.cloud.managedkafka.v1.ConnectCluster.State);
+
+                    /** ConnectCluster config. */
+                    public config: { [k: string]: string };
+
+                    /** ConnectCluster platformConfig. */
+                    public platformConfig?: "gcpConfig";
+
+                    /**
+                     * Creates a new ConnectCluster instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ConnectCluster instance
+                     */
+                    public static create(properties?: google.cloud.managedkafka.v1.IConnectCluster): google.cloud.managedkafka.v1.ConnectCluster;
+
+                    /**
+                     * Encodes the specified ConnectCluster message. Does not implicitly {@link google.cloud.managedkafka.v1.ConnectCluster.verify|verify} messages.
+                     * @param message ConnectCluster message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.managedkafka.v1.IConnectCluster, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ConnectCluster message, length delimited. Does not implicitly {@link google.cloud.managedkafka.v1.ConnectCluster.verify|verify} messages.
+                     * @param message ConnectCluster message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.managedkafka.v1.IConnectCluster, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ConnectCluster message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ConnectCluster
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.managedkafka.v1.ConnectCluster;
+
+                    /**
+                     * Decodes a ConnectCluster message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ConnectCluster
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.managedkafka.v1.ConnectCluster;
+
+                    /**
+                     * Verifies a ConnectCluster message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ConnectCluster message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ConnectCluster
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.managedkafka.v1.ConnectCluster;
+
+                    /**
+                     * Creates a plain object from a ConnectCluster message. Also converts values to other types if specified.
+                     * @param message ConnectCluster
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.managedkafka.v1.ConnectCluster, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ConnectCluster to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ConnectCluster
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace ConnectCluster {
+
+                    /** State enum. */
+                    enum State {
+                        STATE_UNSPECIFIED = 0,
+                        CREATING = 1,
+                        ACTIVE = 2,
+                        DELETING = 3
+                    }
+                }
+
+                /** Properties of a ConnectNetworkConfig. */
+                interface IConnectNetworkConfig {
+
+                    /** ConnectNetworkConfig primarySubnet */
+                    primarySubnet?: (string|null);
+
+                    /** ConnectNetworkConfig additionalSubnets */
+                    additionalSubnets?: (string[]|null);
+
+                    /** ConnectNetworkConfig dnsDomainNames */
+                    dnsDomainNames?: (string[]|null);
+                }
+
+                /** Represents a ConnectNetworkConfig. */
+                class ConnectNetworkConfig implements IConnectNetworkConfig {
+
+                    /**
+                     * Constructs a new ConnectNetworkConfig.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.managedkafka.v1.IConnectNetworkConfig);
+
+                    /** ConnectNetworkConfig primarySubnet. */
+                    public primarySubnet: string;
+
+                    /** ConnectNetworkConfig additionalSubnets. */
+                    public additionalSubnets: string[];
+
+                    /** ConnectNetworkConfig dnsDomainNames. */
+                    public dnsDomainNames: string[];
+
+                    /**
+                     * Creates a new ConnectNetworkConfig instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ConnectNetworkConfig instance
+                     */
+                    public static create(properties?: google.cloud.managedkafka.v1.IConnectNetworkConfig): google.cloud.managedkafka.v1.ConnectNetworkConfig;
+
+                    /**
+                     * Encodes the specified ConnectNetworkConfig message. Does not implicitly {@link google.cloud.managedkafka.v1.ConnectNetworkConfig.verify|verify} messages.
+                     * @param message ConnectNetworkConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.managedkafka.v1.IConnectNetworkConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ConnectNetworkConfig message, length delimited. Does not implicitly {@link google.cloud.managedkafka.v1.ConnectNetworkConfig.verify|verify} messages.
+                     * @param message ConnectNetworkConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.managedkafka.v1.IConnectNetworkConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ConnectNetworkConfig message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ConnectNetworkConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.managedkafka.v1.ConnectNetworkConfig;
+
+                    /**
+                     * Decodes a ConnectNetworkConfig message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ConnectNetworkConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.managedkafka.v1.ConnectNetworkConfig;
+
+                    /**
+                     * Verifies a ConnectNetworkConfig message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ConnectNetworkConfig message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ConnectNetworkConfig
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.managedkafka.v1.ConnectNetworkConfig;
+
+                    /**
+                     * Creates a plain object from a ConnectNetworkConfig message. Also converts values to other types if specified.
+                     * @param message ConnectNetworkConfig
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.managedkafka.v1.ConnectNetworkConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ConnectNetworkConfig to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ConnectNetworkConfig
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ConnectAccessConfig. */
+                interface IConnectAccessConfig {
+
+                    /** ConnectAccessConfig networkConfigs */
+                    networkConfigs?: (google.cloud.managedkafka.v1.IConnectNetworkConfig[]|null);
+                }
+
+                /** Represents a ConnectAccessConfig. */
+                class ConnectAccessConfig implements IConnectAccessConfig {
+
+                    /**
+                     * Constructs a new ConnectAccessConfig.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.managedkafka.v1.IConnectAccessConfig);
+
+                    /** ConnectAccessConfig networkConfigs. */
+                    public networkConfigs: google.cloud.managedkafka.v1.IConnectNetworkConfig[];
+
+                    /**
+                     * Creates a new ConnectAccessConfig instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ConnectAccessConfig instance
+                     */
+                    public static create(properties?: google.cloud.managedkafka.v1.IConnectAccessConfig): google.cloud.managedkafka.v1.ConnectAccessConfig;
+
+                    /**
+                     * Encodes the specified ConnectAccessConfig message. Does not implicitly {@link google.cloud.managedkafka.v1.ConnectAccessConfig.verify|verify} messages.
+                     * @param message ConnectAccessConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.managedkafka.v1.IConnectAccessConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ConnectAccessConfig message, length delimited. Does not implicitly {@link google.cloud.managedkafka.v1.ConnectAccessConfig.verify|verify} messages.
+                     * @param message ConnectAccessConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.managedkafka.v1.IConnectAccessConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ConnectAccessConfig message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ConnectAccessConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.managedkafka.v1.ConnectAccessConfig;
+
+                    /**
+                     * Decodes a ConnectAccessConfig message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ConnectAccessConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.managedkafka.v1.ConnectAccessConfig;
+
+                    /**
+                     * Verifies a ConnectAccessConfig message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ConnectAccessConfig message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ConnectAccessConfig
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.managedkafka.v1.ConnectAccessConfig;
+
+                    /**
+                     * Creates a plain object from a ConnectAccessConfig message. Also converts values to other types if specified.
+                     * @param message ConnectAccessConfig
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.managedkafka.v1.ConnectAccessConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ConnectAccessConfig to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ConnectAccessConfig
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ConnectGcpConfig. */
+                interface IConnectGcpConfig {
+
+                    /** ConnectGcpConfig accessConfig */
+                    accessConfig?: (google.cloud.managedkafka.v1.IConnectAccessConfig|null);
+
+                    /** ConnectGcpConfig secretPaths */
+                    secretPaths?: (string[]|null);
+                }
+
+                /** Represents a ConnectGcpConfig. */
+                class ConnectGcpConfig implements IConnectGcpConfig {
+
+                    /**
+                     * Constructs a new ConnectGcpConfig.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.managedkafka.v1.IConnectGcpConfig);
+
+                    /** ConnectGcpConfig accessConfig. */
+                    public accessConfig?: (google.cloud.managedkafka.v1.IConnectAccessConfig|null);
+
+                    /** ConnectGcpConfig secretPaths. */
+                    public secretPaths: string[];
+
+                    /**
+                     * Creates a new ConnectGcpConfig instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ConnectGcpConfig instance
+                     */
+                    public static create(properties?: google.cloud.managedkafka.v1.IConnectGcpConfig): google.cloud.managedkafka.v1.ConnectGcpConfig;
+
+                    /**
+                     * Encodes the specified ConnectGcpConfig message. Does not implicitly {@link google.cloud.managedkafka.v1.ConnectGcpConfig.verify|verify} messages.
+                     * @param message ConnectGcpConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.managedkafka.v1.IConnectGcpConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ConnectGcpConfig message, length delimited. Does not implicitly {@link google.cloud.managedkafka.v1.ConnectGcpConfig.verify|verify} messages.
+                     * @param message ConnectGcpConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.managedkafka.v1.IConnectGcpConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ConnectGcpConfig message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ConnectGcpConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.managedkafka.v1.ConnectGcpConfig;
+
+                    /**
+                     * Decodes a ConnectGcpConfig message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ConnectGcpConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.managedkafka.v1.ConnectGcpConfig;
+
+                    /**
+                     * Verifies a ConnectGcpConfig message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ConnectGcpConfig message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ConnectGcpConfig
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.managedkafka.v1.ConnectGcpConfig;
+
+                    /**
+                     * Creates a plain object from a ConnectGcpConfig message. Also converts values to other types if specified.
+                     * @param message ConnectGcpConfig
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.managedkafka.v1.ConnectGcpConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ConnectGcpConfig to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ConnectGcpConfig
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a Connector. */
+                interface IConnector {
+
+                    /** Connector taskRestartPolicy */
+                    taskRestartPolicy?: (google.cloud.managedkafka.v1.ITaskRetryPolicy|null);
+
+                    /** Connector name */
+                    name?: (string|null);
+
+                    /** Connector configs */
+                    configs?: ({ [k: string]: string }|null);
+
+                    /** Connector state */
+                    state?: (google.cloud.managedkafka.v1.Connector.State|keyof typeof google.cloud.managedkafka.v1.Connector.State|null);
+                }
+
+                /** Represents a Connector. */
+                class Connector implements IConnector {
+
+                    /**
+                     * Constructs a new Connector.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.managedkafka.v1.IConnector);
+
+                    /** Connector taskRestartPolicy. */
+                    public taskRestartPolicy?: (google.cloud.managedkafka.v1.ITaskRetryPolicy|null);
+
+                    /** Connector name. */
+                    public name: string;
+
+                    /** Connector configs. */
+                    public configs: { [k: string]: string };
+
+                    /** Connector state. */
+                    public state: (google.cloud.managedkafka.v1.Connector.State|keyof typeof google.cloud.managedkafka.v1.Connector.State);
+
+                    /** Connector restartPolicy. */
+                    public restartPolicy?: "taskRestartPolicy";
+
+                    /**
+                     * Creates a new Connector instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns Connector instance
+                     */
+                    public static create(properties?: google.cloud.managedkafka.v1.IConnector): google.cloud.managedkafka.v1.Connector;
+
+                    /**
+                     * Encodes the specified Connector message. Does not implicitly {@link google.cloud.managedkafka.v1.Connector.verify|verify} messages.
+                     * @param message Connector message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.managedkafka.v1.IConnector, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified Connector message, length delimited. Does not implicitly {@link google.cloud.managedkafka.v1.Connector.verify|verify} messages.
+                     * @param message Connector message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.managedkafka.v1.IConnector, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a Connector message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns Connector
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.managedkafka.v1.Connector;
+
+                    /**
+                     * Decodes a Connector message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns Connector
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.managedkafka.v1.Connector;
+
+                    /**
+                     * Verifies a Connector message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a Connector message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns Connector
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.managedkafka.v1.Connector;
+
+                    /**
+                     * Creates a plain object from a Connector message. Also converts values to other types if specified.
+                     * @param message Connector
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.managedkafka.v1.Connector, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this Connector to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for Connector
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace Connector {
+
+                    /** State enum. */
+                    enum State {
+                        STATE_UNSPECIFIED = 0,
+                        UNASSIGNED = 1,
+                        RUNNING = 2,
+                        PAUSED = 3,
+                        FAILED = 4,
+                        RESTARTING = 5,
+                        STOPPED = 6
+                    }
+                }
+
+                /** Properties of a TaskRetryPolicy. */
+                interface ITaskRetryPolicy {
+
+                    /** TaskRetryPolicy minimumBackoff */
+                    minimumBackoff?: (google.protobuf.IDuration|null);
+
+                    /** TaskRetryPolicy maximumBackoff */
+                    maximumBackoff?: (google.protobuf.IDuration|null);
+                }
+
+                /** Represents a TaskRetryPolicy. */
+                class TaskRetryPolicy implements ITaskRetryPolicy {
+
+                    /**
+                     * Constructs a new TaskRetryPolicy.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.managedkafka.v1.ITaskRetryPolicy);
+
+                    /** TaskRetryPolicy minimumBackoff. */
+                    public minimumBackoff?: (google.protobuf.IDuration|null);
+
+                    /** TaskRetryPolicy maximumBackoff. */
+                    public maximumBackoff?: (google.protobuf.IDuration|null);
+
+                    /**
+                     * Creates a new TaskRetryPolicy instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns TaskRetryPolicy instance
+                     */
+                    public static create(properties?: google.cloud.managedkafka.v1.ITaskRetryPolicy): google.cloud.managedkafka.v1.TaskRetryPolicy;
+
+                    /**
+                     * Encodes the specified TaskRetryPolicy message. Does not implicitly {@link google.cloud.managedkafka.v1.TaskRetryPolicy.verify|verify} messages.
+                     * @param message TaskRetryPolicy message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.managedkafka.v1.ITaskRetryPolicy, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified TaskRetryPolicy message, length delimited. Does not implicitly {@link google.cloud.managedkafka.v1.TaskRetryPolicy.verify|verify} messages.
+                     * @param message TaskRetryPolicy message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.managedkafka.v1.ITaskRetryPolicy, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a TaskRetryPolicy message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns TaskRetryPolicy
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.managedkafka.v1.TaskRetryPolicy;
+
+                    /**
+                     * Decodes a TaskRetryPolicy message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns TaskRetryPolicy
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.managedkafka.v1.TaskRetryPolicy;
+
+                    /**
+                     * Verifies a TaskRetryPolicy message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a TaskRetryPolicy message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns TaskRetryPolicy
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.managedkafka.v1.TaskRetryPolicy;
+
+                    /**
+                     * Creates a plain object from a TaskRetryPolicy message. Also converts values to other types if specified.
+                     * @param message TaskRetryPolicy
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.managedkafka.v1.TaskRetryPolicy, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this TaskRetryPolicy to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for TaskRetryPolicy
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Represents a ManagedKafkaConnect */
+                class ManagedKafkaConnect extends $protobuf.rpc.Service {
+
+                    /**
+                     * Constructs a new ManagedKafkaConnect service.
+                     * @param rpcImpl RPC implementation
+                     * @param [requestDelimited=false] Whether requests are length-delimited
+                     * @param [responseDelimited=false] Whether responses are length-delimited
+                     */
+                    constructor(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean);
+
+                    /**
+                     * Creates new ManagedKafkaConnect service using the specified rpc implementation.
+                     * @param rpcImpl RPC implementation
+                     * @param [requestDelimited=false] Whether requests are length-delimited
+                     * @param [responseDelimited=false] Whether responses are length-delimited
+                     * @returns RPC service. Useful where requests and/or responses are streamed.
+                     */
+                    public static create(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean): ManagedKafkaConnect;
+
+                    /**
+                     * Calls ListConnectClusters.
+                     * @param request ListConnectClustersRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ListConnectClustersResponse
+                     */
+                    public listConnectClusters(request: google.cloud.managedkafka.v1.IListConnectClustersRequest, callback: google.cloud.managedkafka.v1.ManagedKafkaConnect.ListConnectClustersCallback): void;
+
+                    /**
+                     * Calls ListConnectClusters.
+                     * @param request ListConnectClustersRequest message or plain object
+                     * @returns Promise
+                     */
+                    public listConnectClusters(request: google.cloud.managedkafka.v1.IListConnectClustersRequest): Promise<google.cloud.managedkafka.v1.ListConnectClustersResponse>;
+
+                    /**
+                     * Calls GetConnectCluster.
+                     * @param request GetConnectClusterRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ConnectCluster
+                     */
+                    public getConnectCluster(request: google.cloud.managedkafka.v1.IGetConnectClusterRequest, callback: google.cloud.managedkafka.v1.ManagedKafkaConnect.GetConnectClusterCallback): void;
+
+                    /**
+                     * Calls GetConnectCluster.
+                     * @param request GetConnectClusterRequest message or plain object
+                     * @returns Promise
+                     */
+                    public getConnectCluster(request: google.cloud.managedkafka.v1.IGetConnectClusterRequest): Promise<google.cloud.managedkafka.v1.ConnectCluster>;
+
+                    /**
+                     * Calls CreateConnectCluster.
+                     * @param request CreateConnectClusterRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public createConnectCluster(request: google.cloud.managedkafka.v1.ICreateConnectClusterRequest, callback: google.cloud.managedkafka.v1.ManagedKafkaConnect.CreateConnectClusterCallback): void;
+
+                    /**
+                     * Calls CreateConnectCluster.
+                     * @param request CreateConnectClusterRequest message or plain object
+                     * @returns Promise
+                     */
+                    public createConnectCluster(request: google.cloud.managedkafka.v1.ICreateConnectClusterRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls UpdateConnectCluster.
+                     * @param request UpdateConnectClusterRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public updateConnectCluster(request: google.cloud.managedkafka.v1.IUpdateConnectClusterRequest, callback: google.cloud.managedkafka.v1.ManagedKafkaConnect.UpdateConnectClusterCallback): void;
+
+                    /**
+                     * Calls UpdateConnectCluster.
+                     * @param request UpdateConnectClusterRequest message or plain object
+                     * @returns Promise
+                     */
+                    public updateConnectCluster(request: google.cloud.managedkafka.v1.IUpdateConnectClusterRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls DeleteConnectCluster.
+                     * @param request DeleteConnectClusterRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public deleteConnectCluster(request: google.cloud.managedkafka.v1.IDeleteConnectClusterRequest, callback: google.cloud.managedkafka.v1.ManagedKafkaConnect.DeleteConnectClusterCallback): void;
+
+                    /**
+                     * Calls DeleteConnectCluster.
+                     * @param request DeleteConnectClusterRequest message or plain object
+                     * @returns Promise
+                     */
+                    public deleteConnectCluster(request: google.cloud.managedkafka.v1.IDeleteConnectClusterRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls ListConnectors.
+                     * @param request ListConnectorsRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ListConnectorsResponse
+                     */
+                    public listConnectors(request: google.cloud.managedkafka.v1.IListConnectorsRequest, callback: google.cloud.managedkafka.v1.ManagedKafkaConnect.ListConnectorsCallback): void;
+
+                    /**
+                     * Calls ListConnectors.
+                     * @param request ListConnectorsRequest message or plain object
+                     * @returns Promise
+                     */
+                    public listConnectors(request: google.cloud.managedkafka.v1.IListConnectorsRequest): Promise<google.cloud.managedkafka.v1.ListConnectorsResponse>;
+
+                    /**
+                     * Calls GetConnector.
+                     * @param request GetConnectorRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Connector
+                     */
+                    public getConnector(request: google.cloud.managedkafka.v1.IGetConnectorRequest, callback: google.cloud.managedkafka.v1.ManagedKafkaConnect.GetConnectorCallback): void;
+
+                    /**
+                     * Calls GetConnector.
+                     * @param request GetConnectorRequest message or plain object
+                     * @returns Promise
+                     */
+                    public getConnector(request: google.cloud.managedkafka.v1.IGetConnectorRequest): Promise<google.cloud.managedkafka.v1.Connector>;
+
+                    /**
+                     * Calls CreateConnector.
+                     * @param request CreateConnectorRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Connector
+                     */
+                    public createConnector(request: google.cloud.managedkafka.v1.ICreateConnectorRequest, callback: google.cloud.managedkafka.v1.ManagedKafkaConnect.CreateConnectorCallback): void;
+
+                    /**
+                     * Calls CreateConnector.
+                     * @param request CreateConnectorRequest message or plain object
+                     * @returns Promise
+                     */
+                    public createConnector(request: google.cloud.managedkafka.v1.ICreateConnectorRequest): Promise<google.cloud.managedkafka.v1.Connector>;
+
+                    /**
+                     * Calls UpdateConnector.
+                     * @param request UpdateConnectorRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Connector
+                     */
+                    public updateConnector(request: google.cloud.managedkafka.v1.IUpdateConnectorRequest, callback: google.cloud.managedkafka.v1.ManagedKafkaConnect.UpdateConnectorCallback): void;
+
+                    /**
+                     * Calls UpdateConnector.
+                     * @param request UpdateConnectorRequest message or plain object
+                     * @returns Promise
+                     */
+                    public updateConnector(request: google.cloud.managedkafka.v1.IUpdateConnectorRequest): Promise<google.cloud.managedkafka.v1.Connector>;
+
+                    /**
+                     * Calls DeleteConnector.
+                     * @param request DeleteConnectorRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Empty
+                     */
+                    public deleteConnector(request: google.cloud.managedkafka.v1.IDeleteConnectorRequest, callback: google.cloud.managedkafka.v1.ManagedKafkaConnect.DeleteConnectorCallback): void;
+
+                    /**
+                     * Calls DeleteConnector.
+                     * @param request DeleteConnectorRequest message or plain object
+                     * @returns Promise
+                     */
+                    public deleteConnector(request: google.cloud.managedkafka.v1.IDeleteConnectorRequest): Promise<google.protobuf.Empty>;
+
+                    /**
+                     * Calls PauseConnector.
+                     * @param request PauseConnectorRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and PauseConnectorResponse
+                     */
+                    public pauseConnector(request: google.cloud.managedkafka.v1.IPauseConnectorRequest, callback: google.cloud.managedkafka.v1.ManagedKafkaConnect.PauseConnectorCallback): void;
+
+                    /**
+                     * Calls PauseConnector.
+                     * @param request PauseConnectorRequest message or plain object
+                     * @returns Promise
+                     */
+                    public pauseConnector(request: google.cloud.managedkafka.v1.IPauseConnectorRequest): Promise<google.cloud.managedkafka.v1.PauseConnectorResponse>;
+
+                    /**
+                     * Calls ResumeConnector.
+                     * @param request ResumeConnectorRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ResumeConnectorResponse
+                     */
+                    public resumeConnector(request: google.cloud.managedkafka.v1.IResumeConnectorRequest, callback: google.cloud.managedkafka.v1.ManagedKafkaConnect.ResumeConnectorCallback): void;
+
+                    /**
+                     * Calls ResumeConnector.
+                     * @param request ResumeConnectorRequest message or plain object
+                     * @returns Promise
+                     */
+                    public resumeConnector(request: google.cloud.managedkafka.v1.IResumeConnectorRequest): Promise<google.cloud.managedkafka.v1.ResumeConnectorResponse>;
+
+                    /**
+                     * Calls RestartConnector.
+                     * @param request RestartConnectorRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and RestartConnectorResponse
+                     */
+                    public restartConnector(request: google.cloud.managedkafka.v1.IRestartConnectorRequest, callback: google.cloud.managedkafka.v1.ManagedKafkaConnect.RestartConnectorCallback): void;
+
+                    /**
+                     * Calls RestartConnector.
+                     * @param request RestartConnectorRequest message or plain object
+                     * @returns Promise
+                     */
+                    public restartConnector(request: google.cloud.managedkafka.v1.IRestartConnectorRequest): Promise<google.cloud.managedkafka.v1.RestartConnectorResponse>;
+
+                    /**
+                     * Calls StopConnector.
+                     * @param request StopConnectorRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and StopConnectorResponse
+                     */
+                    public stopConnector(request: google.cloud.managedkafka.v1.IStopConnectorRequest, callback: google.cloud.managedkafka.v1.ManagedKafkaConnect.StopConnectorCallback): void;
+
+                    /**
+                     * Calls StopConnector.
+                     * @param request StopConnectorRequest message or plain object
+                     * @returns Promise
+                     */
+                    public stopConnector(request: google.cloud.managedkafka.v1.IStopConnectorRequest): Promise<google.cloud.managedkafka.v1.StopConnectorResponse>;
+                }
+
+                namespace ManagedKafkaConnect {
+
+                    /**
+                     * Callback as used by {@link google.cloud.managedkafka.v1.ManagedKafkaConnect|listConnectClusters}.
+                     * @param error Error, if any
+                     * @param [response] ListConnectClustersResponse
+                     */
+                    type ListConnectClustersCallback = (error: (Error|null), response?: google.cloud.managedkafka.v1.ListConnectClustersResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.managedkafka.v1.ManagedKafkaConnect|getConnectCluster}.
+                     * @param error Error, if any
+                     * @param [response] ConnectCluster
+                     */
+                    type GetConnectClusterCallback = (error: (Error|null), response?: google.cloud.managedkafka.v1.ConnectCluster) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.managedkafka.v1.ManagedKafkaConnect|createConnectCluster}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type CreateConnectClusterCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.managedkafka.v1.ManagedKafkaConnect|updateConnectCluster}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type UpdateConnectClusterCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.managedkafka.v1.ManagedKafkaConnect|deleteConnectCluster}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type DeleteConnectClusterCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.managedkafka.v1.ManagedKafkaConnect|listConnectors}.
+                     * @param error Error, if any
+                     * @param [response] ListConnectorsResponse
+                     */
+                    type ListConnectorsCallback = (error: (Error|null), response?: google.cloud.managedkafka.v1.ListConnectorsResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.managedkafka.v1.ManagedKafkaConnect|getConnector}.
+                     * @param error Error, if any
+                     * @param [response] Connector
+                     */
+                    type GetConnectorCallback = (error: (Error|null), response?: google.cloud.managedkafka.v1.Connector) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.managedkafka.v1.ManagedKafkaConnect|createConnector}.
+                     * @param error Error, if any
+                     * @param [response] Connector
+                     */
+                    type CreateConnectorCallback = (error: (Error|null), response?: google.cloud.managedkafka.v1.Connector) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.managedkafka.v1.ManagedKafkaConnect|updateConnector}.
+                     * @param error Error, if any
+                     * @param [response] Connector
+                     */
+                    type UpdateConnectorCallback = (error: (Error|null), response?: google.cloud.managedkafka.v1.Connector) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.managedkafka.v1.ManagedKafkaConnect|deleteConnector}.
+                     * @param error Error, if any
+                     * @param [response] Empty
+                     */
+                    type DeleteConnectorCallback = (error: (Error|null), response?: google.protobuf.Empty) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.managedkafka.v1.ManagedKafkaConnect|pauseConnector}.
+                     * @param error Error, if any
+                     * @param [response] PauseConnectorResponse
+                     */
+                    type PauseConnectorCallback = (error: (Error|null), response?: google.cloud.managedkafka.v1.PauseConnectorResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.managedkafka.v1.ManagedKafkaConnect|resumeConnector}.
+                     * @param error Error, if any
+                     * @param [response] ResumeConnectorResponse
+                     */
+                    type ResumeConnectorCallback = (error: (Error|null), response?: google.cloud.managedkafka.v1.ResumeConnectorResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.managedkafka.v1.ManagedKafkaConnect|restartConnector}.
+                     * @param error Error, if any
+                     * @param [response] RestartConnectorResponse
+                     */
+                    type RestartConnectorCallback = (error: (Error|null), response?: google.cloud.managedkafka.v1.RestartConnectorResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.managedkafka.v1.ManagedKafkaConnect|stopConnector}.
+                     * @param error Error, if any
+                     * @param [response] StopConnectorResponse
+                     */
+                    type StopConnectorCallback = (error: (Error|null), response?: google.cloud.managedkafka.v1.StopConnectorResponse) => void;
+                }
+
+                /** Properties of a GetConnectClusterRequest. */
+                interface IGetConnectClusterRequest {
+
+                    /** GetConnectClusterRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a GetConnectClusterRequest. */
+                class GetConnectClusterRequest implements IGetConnectClusterRequest {
+
+                    /**
+                     * Constructs a new GetConnectClusterRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.managedkafka.v1.IGetConnectClusterRequest);
+
+                    /** GetConnectClusterRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new GetConnectClusterRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GetConnectClusterRequest instance
+                     */
+                    public static create(properties?: google.cloud.managedkafka.v1.IGetConnectClusterRequest): google.cloud.managedkafka.v1.GetConnectClusterRequest;
+
+                    /**
+                     * Encodes the specified GetConnectClusterRequest message. Does not implicitly {@link google.cloud.managedkafka.v1.GetConnectClusterRequest.verify|verify} messages.
+                     * @param message GetConnectClusterRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.managedkafka.v1.IGetConnectClusterRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GetConnectClusterRequest message, length delimited. Does not implicitly {@link google.cloud.managedkafka.v1.GetConnectClusterRequest.verify|verify} messages.
+                     * @param message GetConnectClusterRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.managedkafka.v1.IGetConnectClusterRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GetConnectClusterRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GetConnectClusterRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.managedkafka.v1.GetConnectClusterRequest;
+
+                    /**
+                     * Decodes a GetConnectClusterRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GetConnectClusterRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.managedkafka.v1.GetConnectClusterRequest;
+
+                    /**
+                     * Verifies a GetConnectClusterRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GetConnectClusterRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GetConnectClusterRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.managedkafka.v1.GetConnectClusterRequest;
+
+                    /**
+                     * Creates a plain object from a GetConnectClusterRequest message. Also converts values to other types if specified.
+                     * @param message GetConnectClusterRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.managedkafka.v1.GetConnectClusterRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GetConnectClusterRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GetConnectClusterRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a CreateConnectClusterRequest. */
+                interface ICreateConnectClusterRequest {
+
+                    /** CreateConnectClusterRequest parent */
+                    parent?: (string|null);
+
+                    /** CreateConnectClusterRequest connectClusterId */
+                    connectClusterId?: (string|null);
+
+                    /** CreateConnectClusterRequest connectCluster */
+                    connectCluster?: (google.cloud.managedkafka.v1.IConnectCluster|null);
+
+                    /** CreateConnectClusterRequest requestId */
+                    requestId?: (string|null);
+                }
+
+                /** Represents a CreateConnectClusterRequest. */
+                class CreateConnectClusterRequest implements ICreateConnectClusterRequest {
+
+                    /**
+                     * Constructs a new CreateConnectClusterRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.managedkafka.v1.ICreateConnectClusterRequest);
+
+                    /** CreateConnectClusterRequest parent. */
+                    public parent: string;
+
+                    /** CreateConnectClusterRequest connectClusterId. */
+                    public connectClusterId: string;
+
+                    /** CreateConnectClusterRequest connectCluster. */
+                    public connectCluster?: (google.cloud.managedkafka.v1.IConnectCluster|null);
+
+                    /** CreateConnectClusterRequest requestId. */
+                    public requestId: string;
+
+                    /**
+                     * Creates a new CreateConnectClusterRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CreateConnectClusterRequest instance
+                     */
+                    public static create(properties?: google.cloud.managedkafka.v1.ICreateConnectClusterRequest): google.cloud.managedkafka.v1.CreateConnectClusterRequest;
+
+                    /**
+                     * Encodes the specified CreateConnectClusterRequest message. Does not implicitly {@link google.cloud.managedkafka.v1.CreateConnectClusterRequest.verify|verify} messages.
+                     * @param message CreateConnectClusterRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.managedkafka.v1.ICreateConnectClusterRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CreateConnectClusterRequest message, length delimited. Does not implicitly {@link google.cloud.managedkafka.v1.CreateConnectClusterRequest.verify|verify} messages.
+                     * @param message CreateConnectClusterRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.managedkafka.v1.ICreateConnectClusterRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CreateConnectClusterRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CreateConnectClusterRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.managedkafka.v1.CreateConnectClusterRequest;
+
+                    /**
+                     * Decodes a CreateConnectClusterRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CreateConnectClusterRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.managedkafka.v1.CreateConnectClusterRequest;
+
+                    /**
+                     * Verifies a CreateConnectClusterRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CreateConnectClusterRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CreateConnectClusterRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.managedkafka.v1.CreateConnectClusterRequest;
+
+                    /**
+                     * Creates a plain object from a CreateConnectClusterRequest message. Also converts values to other types if specified.
+                     * @param message CreateConnectClusterRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.managedkafka.v1.CreateConnectClusterRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CreateConnectClusterRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for CreateConnectClusterRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an UpdateConnectClusterRequest. */
+                interface IUpdateConnectClusterRequest {
+
+                    /** UpdateConnectClusterRequest updateMask */
+                    updateMask?: (google.protobuf.IFieldMask|null);
+
+                    /** UpdateConnectClusterRequest connectCluster */
+                    connectCluster?: (google.cloud.managedkafka.v1.IConnectCluster|null);
+
+                    /** UpdateConnectClusterRequest requestId */
+                    requestId?: (string|null);
+                }
+
+                /** Represents an UpdateConnectClusterRequest. */
+                class UpdateConnectClusterRequest implements IUpdateConnectClusterRequest {
+
+                    /**
+                     * Constructs a new UpdateConnectClusterRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.managedkafka.v1.IUpdateConnectClusterRequest);
+
+                    /** UpdateConnectClusterRequest updateMask. */
+                    public updateMask?: (google.protobuf.IFieldMask|null);
+
+                    /** UpdateConnectClusterRequest connectCluster. */
+                    public connectCluster?: (google.cloud.managedkafka.v1.IConnectCluster|null);
+
+                    /** UpdateConnectClusterRequest requestId. */
+                    public requestId: string;
+
+                    /**
+                     * Creates a new UpdateConnectClusterRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns UpdateConnectClusterRequest instance
+                     */
+                    public static create(properties?: google.cloud.managedkafka.v1.IUpdateConnectClusterRequest): google.cloud.managedkafka.v1.UpdateConnectClusterRequest;
+
+                    /**
+                     * Encodes the specified UpdateConnectClusterRequest message. Does not implicitly {@link google.cloud.managedkafka.v1.UpdateConnectClusterRequest.verify|verify} messages.
+                     * @param message UpdateConnectClusterRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.managedkafka.v1.IUpdateConnectClusterRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified UpdateConnectClusterRequest message, length delimited. Does not implicitly {@link google.cloud.managedkafka.v1.UpdateConnectClusterRequest.verify|verify} messages.
+                     * @param message UpdateConnectClusterRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.managedkafka.v1.IUpdateConnectClusterRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an UpdateConnectClusterRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns UpdateConnectClusterRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.managedkafka.v1.UpdateConnectClusterRequest;
+
+                    /**
+                     * Decodes an UpdateConnectClusterRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns UpdateConnectClusterRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.managedkafka.v1.UpdateConnectClusterRequest;
+
+                    /**
+                     * Verifies an UpdateConnectClusterRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an UpdateConnectClusterRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns UpdateConnectClusterRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.managedkafka.v1.UpdateConnectClusterRequest;
+
+                    /**
+                     * Creates a plain object from an UpdateConnectClusterRequest message. Also converts values to other types if specified.
+                     * @param message UpdateConnectClusterRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.managedkafka.v1.UpdateConnectClusterRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this UpdateConnectClusterRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for UpdateConnectClusterRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a DeleteConnectClusterRequest. */
+                interface IDeleteConnectClusterRequest {
+
+                    /** DeleteConnectClusterRequest name */
+                    name?: (string|null);
+
+                    /** DeleteConnectClusterRequest requestId */
+                    requestId?: (string|null);
+                }
+
+                /** Represents a DeleteConnectClusterRequest. */
+                class DeleteConnectClusterRequest implements IDeleteConnectClusterRequest {
+
+                    /**
+                     * Constructs a new DeleteConnectClusterRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.managedkafka.v1.IDeleteConnectClusterRequest);
+
+                    /** DeleteConnectClusterRequest name. */
+                    public name: string;
+
+                    /** DeleteConnectClusterRequest requestId. */
+                    public requestId: string;
+
+                    /**
+                     * Creates a new DeleteConnectClusterRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DeleteConnectClusterRequest instance
+                     */
+                    public static create(properties?: google.cloud.managedkafka.v1.IDeleteConnectClusterRequest): google.cloud.managedkafka.v1.DeleteConnectClusterRequest;
+
+                    /**
+                     * Encodes the specified DeleteConnectClusterRequest message. Does not implicitly {@link google.cloud.managedkafka.v1.DeleteConnectClusterRequest.verify|verify} messages.
+                     * @param message DeleteConnectClusterRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.managedkafka.v1.IDeleteConnectClusterRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DeleteConnectClusterRequest message, length delimited. Does not implicitly {@link google.cloud.managedkafka.v1.DeleteConnectClusterRequest.verify|verify} messages.
+                     * @param message DeleteConnectClusterRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.managedkafka.v1.IDeleteConnectClusterRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DeleteConnectClusterRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DeleteConnectClusterRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.managedkafka.v1.DeleteConnectClusterRequest;
+
+                    /**
+                     * Decodes a DeleteConnectClusterRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DeleteConnectClusterRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.managedkafka.v1.DeleteConnectClusterRequest;
+
+                    /**
+                     * Verifies a DeleteConnectClusterRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DeleteConnectClusterRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DeleteConnectClusterRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.managedkafka.v1.DeleteConnectClusterRequest;
+
+                    /**
+                     * Creates a plain object from a DeleteConnectClusterRequest message. Also converts values to other types if specified.
+                     * @param message DeleteConnectClusterRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.managedkafka.v1.DeleteConnectClusterRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DeleteConnectClusterRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DeleteConnectClusterRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListConnectClustersRequest. */
+                interface IListConnectClustersRequest {
+
+                    /** ListConnectClustersRequest parent */
+                    parent?: (string|null);
+
+                    /** ListConnectClustersRequest pageSize */
+                    pageSize?: (number|null);
+
+                    /** ListConnectClustersRequest pageToken */
+                    pageToken?: (string|null);
+
+                    /** ListConnectClustersRequest filter */
+                    filter?: (string|null);
+
+                    /** ListConnectClustersRequest orderBy */
+                    orderBy?: (string|null);
+                }
+
+                /** Represents a ListConnectClustersRequest. */
+                class ListConnectClustersRequest implements IListConnectClustersRequest {
+
+                    /**
+                     * Constructs a new ListConnectClustersRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.managedkafka.v1.IListConnectClustersRequest);
+
+                    /** ListConnectClustersRequest parent. */
+                    public parent: string;
+
+                    /** ListConnectClustersRequest pageSize. */
+                    public pageSize: number;
+
+                    /** ListConnectClustersRequest pageToken. */
+                    public pageToken: string;
+
+                    /** ListConnectClustersRequest filter. */
+                    public filter: string;
+
+                    /** ListConnectClustersRequest orderBy. */
+                    public orderBy: string;
+
+                    /**
+                     * Creates a new ListConnectClustersRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListConnectClustersRequest instance
+                     */
+                    public static create(properties?: google.cloud.managedkafka.v1.IListConnectClustersRequest): google.cloud.managedkafka.v1.ListConnectClustersRequest;
+
+                    /**
+                     * Encodes the specified ListConnectClustersRequest message. Does not implicitly {@link google.cloud.managedkafka.v1.ListConnectClustersRequest.verify|verify} messages.
+                     * @param message ListConnectClustersRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.managedkafka.v1.IListConnectClustersRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListConnectClustersRequest message, length delimited. Does not implicitly {@link google.cloud.managedkafka.v1.ListConnectClustersRequest.verify|verify} messages.
+                     * @param message ListConnectClustersRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.managedkafka.v1.IListConnectClustersRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListConnectClustersRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListConnectClustersRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.managedkafka.v1.ListConnectClustersRequest;
+
+                    /**
+                     * Decodes a ListConnectClustersRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListConnectClustersRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.managedkafka.v1.ListConnectClustersRequest;
+
+                    /**
+                     * Verifies a ListConnectClustersRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListConnectClustersRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListConnectClustersRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.managedkafka.v1.ListConnectClustersRequest;
+
+                    /**
+                     * Creates a plain object from a ListConnectClustersRequest message. Also converts values to other types if specified.
+                     * @param message ListConnectClustersRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.managedkafka.v1.ListConnectClustersRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListConnectClustersRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListConnectClustersRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListConnectClustersResponse. */
+                interface IListConnectClustersResponse {
+
+                    /** ListConnectClustersResponse connectClusters */
+                    connectClusters?: (google.cloud.managedkafka.v1.IConnectCluster[]|null);
+
+                    /** ListConnectClustersResponse nextPageToken */
+                    nextPageToken?: (string|null);
+
+                    /** ListConnectClustersResponse unreachable */
+                    unreachable?: (string[]|null);
+                }
+
+                /** Represents a ListConnectClustersResponse. */
+                class ListConnectClustersResponse implements IListConnectClustersResponse {
+
+                    /**
+                     * Constructs a new ListConnectClustersResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.managedkafka.v1.IListConnectClustersResponse);
+
+                    /** ListConnectClustersResponse connectClusters. */
+                    public connectClusters: google.cloud.managedkafka.v1.IConnectCluster[];
+
+                    /** ListConnectClustersResponse nextPageToken. */
+                    public nextPageToken: string;
+
+                    /** ListConnectClustersResponse unreachable. */
+                    public unreachable: string[];
+
+                    /**
+                     * Creates a new ListConnectClustersResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListConnectClustersResponse instance
+                     */
+                    public static create(properties?: google.cloud.managedkafka.v1.IListConnectClustersResponse): google.cloud.managedkafka.v1.ListConnectClustersResponse;
+
+                    /**
+                     * Encodes the specified ListConnectClustersResponse message. Does not implicitly {@link google.cloud.managedkafka.v1.ListConnectClustersResponse.verify|verify} messages.
+                     * @param message ListConnectClustersResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.managedkafka.v1.IListConnectClustersResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListConnectClustersResponse message, length delimited. Does not implicitly {@link google.cloud.managedkafka.v1.ListConnectClustersResponse.verify|verify} messages.
+                     * @param message ListConnectClustersResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.managedkafka.v1.IListConnectClustersResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListConnectClustersResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListConnectClustersResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.managedkafka.v1.ListConnectClustersResponse;
+
+                    /**
+                     * Decodes a ListConnectClustersResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListConnectClustersResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.managedkafka.v1.ListConnectClustersResponse;
+
+                    /**
+                     * Verifies a ListConnectClustersResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListConnectClustersResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListConnectClustersResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.managedkafka.v1.ListConnectClustersResponse;
+
+                    /**
+                     * Creates a plain object from a ListConnectClustersResponse message. Also converts values to other types if specified.
+                     * @param message ListConnectClustersResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.managedkafka.v1.ListConnectClustersResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListConnectClustersResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListConnectClustersResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a GetConnectorRequest. */
+                interface IGetConnectorRequest {
+
+                    /** GetConnectorRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a GetConnectorRequest. */
+                class GetConnectorRequest implements IGetConnectorRequest {
+
+                    /**
+                     * Constructs a new GetConnectorRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.managedkafka.v1.IGetConnectorRequest);
+
+                    /** GetConnectorRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new GetConnectorRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GetConnectorRequest instance
+                     */
+                    public static create(properties?: google.cloud.managedkafka.v1.IGetConnectorRequest): google.cloud.managedkafka.v1.GetConnectorRequest;
+
+                    /**
+                     * Encodes the specified GetConnectorRequest message. Does not implicitly {@link google.cloud.managedkafka.v1.GetConnectorRequest.verify|verify} messages.
+                     * @param message GetConnectorRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.managedkafka.v1.IGetConnectorRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GetConnectorRequest message, length delimited. Does not implicitly {@link google.cloud.managedkafka.v1.GetConnectorRequest.verify|verify} messages.
+                     * @param message GetConnectorRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.managedkafka.v1.IGetConnectorRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GetConnectorRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GetConnectorRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.managedkafka.v1.GetConnectorRequest;
+
+                    /**
+                     * Decodes a GetConnectorRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GetConnectorRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.managedkafka.v1.GetConnectorRequest;
+
+                    /**
+                     * Verifies a GetConnectorRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GetConnectorRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GetConnectorRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.managedkafka.v1.GetConnectorRequest;
+
+                    /**
+                     * Creates a plain object from a GetConnectorRequest message. Also converts values to other types if specified.
+                     * @param message GetConnectorRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.managedkafka.v1.GetConnectorRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GetConnectorRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GetConnectorRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a CreateConnectorRequest. */
+                interface ICreateConnectorRequest {
+
+                    /** CreateConnectorRequest parent */
+                    parent?: (string|null);
+
+                    /** CreateConnectorRequest connectorId */
+                    connectorId?: (string|null);
+
+                    /** CreateConnectorRequest connector */
+                    connector?: (google.cloud.managedkafka.v1.IConnector|null);
+                }
+
+                /** Represents a CreateConnectorRequest. */
+                class CreateConnectorRequest implements ICreateConnectorRequest {
+
+                    /**
+                     * Constructs a new CreateConnectorRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.managedkafka.v1.ICreateConnectorRequest);
+
+                    /** CreateConnectorRequest parent. */
+                    public parent: string;
+
+                    /** CreateConnectorRequest connectorId. */
+                    public connectorId: string;
+
+                    /** CreateConnectorRequest connector. */
+                    public connector?: (google.cloud.managedkafka.v1.IConnector|null);
+
+                    /**
+                     * Creates a new CreateConnectorRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CreateConnectorRequest instance
+                     */
+                    public static create(properties?: google.cloud.managedkafka.v1.ICreateConnectorRequest): google.cloud.managedkafka.v1.CreateConnectorRequest;
+
+                    /**
+                     * Encodes the specified CreateConnectorRequest message. Does not implicitly {@link google.cloud.managedkafka.v1.CreateConnectorRequest.verify|verify} messages.
+                     * @param message CreateConnectorRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.managedkafka.v1.ICreateConnectorRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CreateConnectorRequest message, length delimited. Does not implicitly {@link google.cloud.managedkafka.v1.CreateConnectorRequest.verify|verify} messages.
+                     * @param message CreateConnectorRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.managedkafka.v1.ICreateConnectorRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CreateConnectorRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CreateConnectorRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.managedkafka.v1.CreateConnectorRequest;
+
+                    /**
+                     * Decodes a CreateConnectorRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CreateConnectorRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.managedkafka.v1.CreateConnectorRequest;
+
+                    /**
+                     * Verifies a CreateConnectorRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CreateConnectorRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CreateConnectorRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.managedkafka.v1.CreateConnectorRequest;
+
+                    /**
+                     * Creates a plain object from a CreateConnectorRequest message. Also converts values to other types if specified.
+                     * @param message CreateConnectorRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.managedkafka.v1.CreateConnectorRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CreateConnectorRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for CreateConnectorRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an UpdateConnectorRequest. */
+                interface IUpdateConnectorRequest {
+
+                    /** UpdateConnectorRequest updateMask */
+                    updateMask?: (google.protobuf.IFieldMask|null);
+
+                    /** UpdateConnectorRequest connector */
+                    connector?: (google.cloud.managedkafka.v1.IConnector|null);
+                }
+
+                /** Represents an UpdateConnectorRequest. */
+                class UpdateConnectorRequest implements IUpdateConnectorRequest {
+
+                    /**
+                     * Constructs a new UpdateConnectorRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.managedkafka.v1.IUpdateConnectorRequest);
+
+                    /** UpdateConnectorRequest updateMask. */
+                    public updateMask?: (google.protobuf.IFieldMask|null);
+
+                    /** UpdateConnectorRequest connector. */
+                    public connector?: (google.cloud.managedkafka.v1.IConnector|null);
+
+                    /**
+                     * Creates a new UpdateConnectorRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns UpdateConnectorRequest instance
+                     */
+                    public static create(properties?: google.cloud.managedkafka.v1.IUpdateConnectorRequest): google.cloud.managedkafka.v1.UpdateConnectorRequest;
+
+                    /**
+                     * Encodes the specified UpdateConnectorRequest message. Does not implicitly {@link google.cloud.managedkafka.v1.UpdateConnectorRequest.verify|verify} messages.
+                     * @param message UpdateConnectorRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.managedkafka.v1.IUpdateConnectorRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified UpdateConnectorRequest message, length delimited. Does not implicitly {@link google.cloud.managedkafka.v1.UpdateConnectorRequest.verify|verify} messages.
+                     * @param message UpdateConnectorRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.managedkafka.v1.IUpdateConnectorRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an UpdateConnectorRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns UpdateConnectorRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.managedkafka.v1.UpdateConnectorRequest;
+
+                    /**
+                     * Decodes an UpdateConnectorRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns UpdateConnectorRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.managedkafka.v1.UpdateConnectorRequest;
+
+                    /**
+                     * Verifies an UpdateConnectorRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an UpdateConnectorRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns UpdateConnectorRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.managedkafka.v1.UpdateConnectorRequest;
+
+                    /**
+                     * Creates a plain object from an UpdateConnectorRequest message. Also converts values to other types if specified.
+                     * @param message UpdateConnectorRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.managedkafka.v1.UpdateConnectorRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this UpdateConnectorRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for UpdateConnectorRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a DeleteConnectorRequest. */
+                interface IDeleteConnectorRequest {
+
+                    /** DeleteConnectorRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a DeleteConnectorRequest. */
+                class DeleteConnectorRequest implements IDeleteConnectorRequest {
+
+                    /**
+                     * Constructs a new DeleteConnectorRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.managedkafka.v1.IDeleteConnectorRequest);
+
+                    /** DeleteConnectorRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new DeleteConnectorRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DeleteConnectorRequest instance
+                     */
+                    public static create(properties?: google.cloud.managedkafka.v1.IDeleteConnectorRequest): google.cloud.managedkafka.v1.DeleteConnectorRequest;
+
+                    /**
+                     * Encodes the specified DeleteConnectorRequest message. Does not implicitly {@link google.cloud.managedkafka.v1.DeleteConnectorRequest.verify|verify} messages.
+                     * @param message DeleteConnectorRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.managedkafka.v1.IDeleteConnectorRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DeleteConnectorRequest message, length delimited. Does not implicitly {@link google.cloud.managedkafka.v1.DeleteConnectorRequest.verify|verify} messages.
+                     * @param message DeleteConnectorRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.managedkafka.v1.IDeleteConnectorRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DeleteConnectorRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DeleteConnectorRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.managedkafka.v1.DeleteConnectorRequest;
+
+                    /**
+                     * Decodes a DeleteConnectorRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DeleteConnectorRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.managedkafka.v1.DeleteConnectorRequest;
+
+                    /**
+                     * Verifies a DeleteConnectorRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DeleteConnectorRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DeleteConnectorRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.managedkafka.v1.DeleteConnectorRequest;
+
+                    /**
+                     * Creates a plain object from a DeleteConnectorRequest message. Also converts values to other types if specified.
+                     * @param message DeleteConnectorRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.managedkafka.v1.DeleteConnectorRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DeleteConnectorRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DeleteConnectorRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListConnectorsRequest. */
+                interface IListConnectorsRequest {
+
+                    /** ListConnectorsRequest parent */
+                    parent?: (string|null);
+
+                    /** ListConnectorsRequest pageSize */
+                    pageSize?: (number|null);
+
+                    /** ListConnectorsRequest pageToken */
+                    pageToken?: (string|null);
+                }
+
+                /** Represents a ListConnectorsRequest. */
+                class ListConnectorsRequest implements IListConnectorsRequest {
+
+                    /**
+                     * Constructs a new ListConnectorsRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.managedkafka.v1.IListConnectorsRequest);
+
+                    /** ListConnectorsRequest parent. */
+                    public parent: string;
+
+                    /** ListConnectorsRequest pageSize. */
+                    public pageSize: number;
+
+                    /** ListConnectorsRequest pageToken. */
+                    public pageToken: string;
+
+                    /**
+                     * Creates a new ListConnectorsRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListConnectorsRequest instance
+                     */
+                    public static create(properties?: google.cloud.managedkafka.v1.IListConnectorsRequest): google.cloud.managedkafka.v1.ListConnectorsRequest;
+
+                    /**
+                     * Encodes the specified ListConnectorsRequest message. Does not implicitly {@link google.cloud.managedkafka.v1.ListConnectorsRequest.verify|verify} messages.
+                     * @param message ListConnectorsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.managedkafka.v1.IListConnectorsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListConnectorsRequest message, length delimited. Does not implicitly {@link google.cloud.managedkafka.v1.ListConnectorsRequest.verify|verify} messages.
+                     * @param message ListConnectorsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.managedkafka.v1.IListConnectorsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListConnectorsRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListConnectorsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.managedkafka.v1.ListConnectorsRequest;
+
+                    /**
+                     * Decodes a ListConnectorsRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListConnectorsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.managedkafka.v1.ListConnectorsRequest;
+
+                    /**
+                     * Verifies a ListConnectorsRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListConnectorsRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListConnectorsRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.managedkafka.v1.ListConnectorsRequest;
+
+                    /**
+                     * Creates a plain object from a ListConnectorsRequest message. Also converts values to other types if specified.
+                     * @param message ListConnectorsRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.managedkafka.v1.ListConnectorsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListConnectorsRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListConnectorsRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListConnectorsResponse. */
+                interface IListConnectorsResponse {
+
+                    /** ListConnectorsResponse connectors */
+                    connectors?: (google.cloud.managedkafka.v1.IConnector[]|null);
+
+                    /** ListConnectorsResponse nextPageToken */
+                    nextPageToken?: (string|null);
+                }
+
+                /** Represents a ListConnectorsResponse. */
+                class ListConnectorsResponse implements IListConnectorsResponse {
+
+                    /**
+                     * Constructs a new ListConnectorsResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.managedkafka.v1.IListConnectorsResponse);
+
+                    /** ListConnectorsResponse connectors. */
+                    public connectors: google.cloud.managedkafka.v1.IConnector[];
+
+                    /** ListConnectorsResponse nextPageToken. */
+                    public nextPageToken: string;
+
+                    /**
+                     * Creates a new ListConnectorsResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListConnectorsResponse instance
+                     */
+                    public static create(properties?: google.cloud.managedkafka.v1.IListConnectorsResponse): google.cloud.managedkafka.v1.ListConnectorsResponse;
+
+                    /**
+                     * Encodes the specified ListConnectorsResponse message. Does not implicitly {@link google.cloud.managedkafka.v1.ListConnectorsResponse.verify|verify} messages.
+                     * @param message ListConnectorsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.managedkafka.v1.IListConnectorsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListConnectorsResponse message, length delimited. Does not implicitly {@link google.cloud.managedkafka.v1.ListConnectorsResponse.verify|verify} messages.
+                     * @param message ListConnectorsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.managedkafka.v1.IListConnectorsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListConnectorsResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListConnectorsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.managedkafka.v1.ListConnectorsResponse;
+
+                    /**
+                     * Decodes a ListConnectorsResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListConnectorsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.managedkafka.v1.ListConnectorsResponse;
+
+                    /**
+                     * Verifies a ListConnectorsResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListConnectorsResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListConnectorsResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.managedkafka.v1.ListConnectorsResponse;
+
+                    /**
+                     * Creates a plain object from a ListConnectorsResponse message. Also converts values to other types if specified.
+                     * @param message ListConnectorsResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.managedkafka.v1.ListConnectorsResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListConnectorsResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListConnectorsResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a PauseConnectorRequest. */
+                interface IPauseConnectorRequest {
+
+                    /** PauseConnectorRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a PauseConnectorRequest. */
+                class PauseConnectorRequest implements IPauseConnectorRequest {
+
+                    /**
+                     * Constructs a new PauseConnectorRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.managedkafka.v1.IPauseConnectorRequest);
+
+                    /** PauseConnectorRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new PauseConnectorRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns PauseConnectorRequest instance
+                     */
+                    public static create(properties?: google.cloud.managedkafka.v1.IPauseConnectorRequest): google.cloud.managedkafka.v1.PauseConnectorRequest;
+
+                    /**
+                     * Encodes the specified PauseConnectorRequest message. Does not implicitly {@link google.cloud.managedkafka.v1.PauseConnectorRequest.verify|verify} messages.
+                     * @param message PauseConnectorRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.managedkafka.v1.IPauseConnectorRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified PauseConnectorRequest message, length delimited. Does not implicitly {@link google.cloud.managedkafka.v1.PauseConnectorRequest.verify|verify} messages.
+                     * @param message PauseConnectorRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.managedkafka.v1.IPauseConnectorRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a PauseConnectorRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns PauseConnectorRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.managedkafka.v1.PauseConnectorRequest;
+
+                    /**
+                     * Decodes a PauseConnectorRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns PauseConnectorRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.managedkafka.v1.PauseConnectorRequest;
+
+                    /**
+                     * Verifies a PauseConnectorRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a PauseConnectorRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns PauseConnectorRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.managedkafka.v1.PauseConnectorRequest;
+
+                    /**
+                     * Creates a plain object from a PauseConnectorRequest message. Also converts values to other types if specified.
+                     * @param message PauseConnectorRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.managedkafka.v1.PauseConnectorRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this PauseConnectorRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for PauseConnectorRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a PauseConnectorResponse. */
+                interface IPauseConnectorResponse {
+                }
+
+                /** Represents a PauseConnectorResponse. */
+                class PauseConnectorResponse implements IPauseConnectorResponse {
+
+                    /**
+                     * Constructs a new PauseConnectorResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.managedkafka.v1.IPauseConnectorResponse);
+
+                    /**
+                     * Creates a new PauseConnectorResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns PauseConnectorResponse instance
+                     */
+                    public static create(properties?: google.cloud.managedkafka.v1.IPauseConnectorResponse): google.cloud.managedkafka.v1.PauseConnectorResponse;
+
+                    /**
+                     * Encodes the specified PauseConnectorResponse message. Does not implicitly {@link google.cloud.managedkafka.v1.PauseConnectorResponse.verify|verify} messages.
+                     * @param message PauseConnectorResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.managedkafka.v1.IPauseConnectorResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified PauseConnectorResponse message, length delimited. Does not implicitly {@link google.cloud.managedkafka.v1.PauseConnectorResponse.verify|verify} messages.
+                     * @param message PauseConnectorResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.managedkafka.v1.IPauseConnectorResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a PauseConnectorResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns PauseConnectorResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.managedkafka.v1.PauseConnectorResponse;
+
+                    /**
+                     * Decodes a PauseConnectorResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns PauseConnectorResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.managedkafka.v1.PauseConnectorResponse;
+
+                    /**
+                     * Verifies a PauseConnectorResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a PauseConnectorResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns PauseConnectorResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.managedkafka.v1.PauseConnectorResponse;
+
+                    /**
+                     * Creates a plain object from a PauseConnectorResponse message. Also converts values to other types if specified.
+                     * @param message PauseConnectorResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.managedkafka.v1.PauseConnectorResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this PauseConnectorResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for PauseConnectorResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ResumeConnectorRequest. */
+                interface IResumeConnectorRequest {
+
+                    /** ResumeConnectorRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a ResumeConnectorRequest. */
+                class ResumeConnectorRequest implements IResumeConnectorRequest {
+
+                    /**
+                     * Constructs a new ResumeConnectorRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.managedkafka.v1.IResumeConnectorRequest);
+
+                    /** ResumeConnectorRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new ResumeConnectorRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ResumeConnectorRequest instance
+                     */
+                    public static create(properties?: google.cloud.managedkafka.v1.IResumeConnectorRequest): google.cloud.managedkafka.v1.ResumeConnectorRequest;
+
+                    /**
+                     * Encodes the specified ResumeConnectorRequest message. Does not implicitly {@link google.cloud.managedkafka.v1.ResumeConnectorRequest.verify|verify} messages.
+                     * @param message ResumeConnectorRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.managedkafka.v1.IResumeConnectorRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ResumeConnectorRequest message, length delimited. Does not implicitly {@link google.cloud.managedkafka.v1.ResumeConnectorRequest.verify|verify} messages.
+                     * @param message ResumeConnectorRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.managedkafka.v1.IResumeConnectorRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ResumeConnectorRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ResumeConnectorRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.managedkafka.v1.ResumeConnectorRequest;
+
+                    /**
+                     * Decodes a ResumeConnectorRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ResumeConnectorRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.managedkafka.v1.ResumeConnectorRequest;
+
+                    /**
+                     * Verifies a ResumeConnectorRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ResumeConnectorRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ResumeConnectorRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.managedkafka.v1.ResumeConnectorRequest;
+
+                    /**
+                     * Creates a plain object from a ResumeConnectorRequest message. Also converts values to other types if specified.
+                     * @param message ResumeConnectorRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.managedkafka.v1.ResumeConnectorRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ResumeConnectorRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ResumeConnectorRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ResumeConnectorResponse. */
+                interface IResumeConnectorResponse {
+                }
+
+                /** Represents a ResumeConnectorResponse. */
+                class ResumeConnectorResponse implements IResumeConnectorResponse {
+
+                    /**
+                     * Constructs a new ResumeConnectorResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.managedkafka.v1.IResumeConnectorResponse);
+
+                    /**
+                     * Creates a new ResumeConnectorResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ResumeConnectorResponse instance
+                     */
+                    public static create(properties?: google.cloud.managedkafka.v1.IResumeConnectorResponse): google.cloud.managedkafka.v1.ResumeConnectorResponse;
+
+                    /**
+                     * Encodes the specified ResumeConnectorResponse message. Does not implicitly {@link google.cloud.managedkafka.v1.ResumeConnectorResponse.verify|verify} messages.
+                     * @param message ResumeConnectorResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.managedkafka.v1.IResumeConnectorResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ResumeConnectorResponse message, length delimited. Does not implicitly {@link google.cloud.managedkafka.v1.ResumeConnectorResponse.verify|verify} messages.
+                     * @param message ResumeConnectorResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.managedkafka.v1.IResumeConnectorResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ResumeConnectorResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ResumeConnectorResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.managedkafka.v1.ResumeConnectorResponse;
+
+                    /**
+                     * Decodes a ResumeConnectorResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ResumeConnectorResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.managedkafka.v1.ResumeConnectorResponse;
+
+                    /**
+                     * Verifies a ResumeConnectorResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ResumeConnectorResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ResumeConnectorResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.managedkafka.v1.ResumeConnectorResponse;
+
+                    /**
+                     * Creates a plain object from a ResumeConnectorResponse message. Also converts values to other types if specified.
+                     * @param message ResumeConnectorResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.managedkafka.v1.ResumeConnectorResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ResumeConnectorResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ResumeConnectorResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a RestartConnectorRequest. */
+                interface IRestartConnectorRequest {
+
+                    /** RestartConnectorRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a RestartConnectorRequest. */
+                class RestartConnectorRequest implements IRestartConnectorRequest {
+
+                    /**
+                     * Constructs a new RestartConnectorRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.managedkafka.v1.IRestartConnectorRequest);
+
+                    /** RestartConnectorRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new RestartConnectorRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns RestartConnectorRequest instance
+                     */
+                    public static create(properties?: google.cloud.managedkafka.v1.IRestartConnectorRequest): google.cloud.managedkafka.v1.RestartConnectorRequest;
+
+                    /**
+                     * Encodes the specified RestartConnectorRequest message. Does not implicitly {@link google.cloud.managedkafka.v1.RestartConnectorRequest.verify|verify} messages.
+                     * @param message RestartConnectorRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.managedkafka.v1.IRestartConnectorRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified RestartConnectorRequest message, length delimited. Does not implicitly {@link google.cloud.managedkafka.v1.RestartConnectorRequest.verify|verify} messages.
+                     * @param message RestartConnectorRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.managedkafka.v1.IRestartConnectorRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a RestartConnectorRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns RestartConnectorRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.managedkafka.v1.RestartConnectorRequest;
+
+                    /**
+                     * Decodes a RestartConnectorRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns RestartConnectorRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.managedkafka.v1.RestartConnectorRequest;
+
+                    /**
+                     * Verifies a RestartConnectorRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a RestartConnectorRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns RestartConnectorRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.managedkafka.v1.RestartConnectorRequest;
+
+                    /**
+                     * Creates a plain object from a RestartConnectorRequest message. Also converts values to other types if specified.
+                     * @param message RestartConnectorRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.managedkafka.v1.RestartConnectorRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this RestartConnectorRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for RestartConnectorRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a RestartConnectorResponse. */
+                interface IRestartConnectorResponse {
+                }
+
+                /** Represents a RestartConnectorResponse. */
+                class RestartConnectorResponse implements IRestartConnectorResponse {
+
+                    /**
+                     * Constructs a new RestartConnectorResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.managedkafka.v1.IRestartConnectorResponse);
+
+                    /**
+                     * Creates a new RestartConnectorResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns RestartConnectorResponse instance
+                     */
+                    public static create(properties?: google.cloud.managedkafka.v1.IRestartConnectorResponse): google.cloud.managedkafka.v1.RestartConnectorResponse;
+
+                    /**
+                     * Encodes the specified RestartConnectorResponse message. Does not implicitly {@link google.cloud.managedkafka.v1.RestartConnectorResponse.verify|verify} messages.
+                     * @param message RestartConnectorResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.managedkafka.v1.IRestartConnectorResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified RestartConnectorResponse message, length delimited. Does not implicitly {@link google.cloud.managedkafka.v1.RestartConnectorResponse.verify|verify} messages.
+                     * @param message RestartConnectorResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.managedkafka.v1.IRestartConnectorResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a RestartConnectorResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns RestartConnectorResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.managedkafka.v1.RestartConnectorResponse;
+
+                    /**
+                     * Decodes a RestartConnectorResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns RestartConnectorResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.managedkafka.v1.RestartConnectorResponse;
+
+                    /**
+                     * Verifies a RestartConnectorResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a RestartConnectorResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns RestartConnectorResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.managedkafka.v1.RestartConnectorResponse;
+
+                    /**
+                     * Creates a plain object from a RestartConnectorResponse message. Also converts values to other types if specified.
+                     * @param message RestartConnectorResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.managedkafka.v1.RestartConnectorResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this RestartConnectorResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for RestartConnectorResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a StopConnectorRequest. */
+                interface IStopConnectorRequest {
+
+                    /** StopConnectorRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a StopConnectorRequest. */
+                class StopConnectorRequest implements IStopConnectorRequest {
+
+                    /**
+                     * Constructs a new StopConnectorRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.managedkafka.v1.IStopConnectorRequest);
+
+                    /** StopConnectorRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new StopConnectorRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns StopConnectorRequest instance
+                     */
+                    public static create(properties?: google.cloud.managedkafka.v1.IStopConnectorRequest): google.cloud.managedkafka.v1.StopConnectorRequest;
+
+                    /**
+                     * Encodes the specified StopConnectorRequest message. Does not implicitly {@link google.cloud.managedkafka.v1.StopConnectorRequest.verify|verify} messages.
+                     * @param message StopConnectorRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.managedkafka.v1.IStopConnectorRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified StopConnectorRequest message, length delimited. Does not implicitly {@link google.cloud.managedkafka.v1.StopConnectorRequest.verify|verify} messages.
+                     * @param message StopConnectorRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.managedkafka.v1.IStopConnectorRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a StopConnectorRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns StopConnectorRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.managedkafka.v1.StopConnectorRequest;
+
+                    /**
+                     * Decodes a StopConnectorRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns StopConnectorRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.managedkafka.v1.StopConnectorRequest;
+
+                    /**
+                     * Verifies a StopConnectorRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a StopConnectorRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns StopConnectorRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.managedkafka.v1.StopConnectorRequest;
+
+                    /**
+                     * Creates a plain object from a StopConnectorRequest message. Also converts values to other types if specified.
+                     * @param message StopConnectorRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.managedkafka.v1.StopConnectorRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this StopConnectorRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for StopConnectorRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a StopConnectorResponse. */
+                interface IStopConnectorResponse {
+                }
+
+                /** Represents a StopConnectorResponse. */
+                class StopConnectorResponse implements IStopConnectorResponse {
+
+                    /**
+                     * Constructs a new StopConnectorResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.managedkafka.v1.IStopConnectorResponse);
+
+                    /**
+                     * Creates a new StopConnectorResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns StopConnectorResponse instance
+                     */
+                    public static create(properties?: google.cloud.managedkafka.v1.IStopConnectorResponse): google.cloud.managedkafka.v1.StopConnectorResponse;
+
+                    /**
+                     * Encodes the specified StopConnectorResponse message. Does not implicitly {@link google.cloud.managedkafka.v1.StopConnectorResponse.verify|verify} messages.
+                     * @param message StopConnectorResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.managedkafka.v1.IStopConnectorResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified StopConnectorResponse message, length delimited. Does not implicitly {@link google.cloud.managedkafka.v1.StopConnectorResponse.verify|verify} messages.
+                     * @param message StopConnectorResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.managedkafka.v1.IStopConnectorResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a StopConnectorResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns StopConnectorResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.managedkafka.v1.StopConnectorResponse;
+
+                    /**
+                     * Decodes a StopConnectorResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns StopConnectorResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.managedkafka.v1.StopConnectorResponse;
+
+                    /**
+                     * Verifies a StopConnectorResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a StopConnectorResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns StopConnectorResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.managedkafka.v1.StopConnectorResponse;
+
+                    /**
+                     * Creates a plain object from a StopConnectorResponse message. Also converts values to other types if specified.
+                     * @param message StopConnectorResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.managedkafka.v1.StopConnectorResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this StopConnectorResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for StopConnectorResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
             }
         }
     }

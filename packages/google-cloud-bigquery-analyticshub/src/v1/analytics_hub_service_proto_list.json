@@ -1,3 +1,4 @@
 [
-  "../../protos/google/cloud/bigquery/analyticshub/v1/analyticshub.proto"
+  "../../protos/google/cloud/bigquery/analyticshub/v1/analyticshub.proto",
+  "../../protos/google/cloud/bigquery/analyticshub/v1/pubsub.proto"
 ]

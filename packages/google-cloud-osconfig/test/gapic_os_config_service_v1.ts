@@ -252,7 +252,9 @@ describe('v1.OsConfigServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      client.initialize().catch(err => {
+        throw err;
+      });
       assert(client.osConfigServiceStub);
       client.close().then(() => {
         done();
@@ -311,7 +313,7 @@ describe('v1.OsConfigServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.osconfig.v1.ExecutePatchJobRequest()
       );
@@ -320,7 +322,7 @@ describe('v1.OsConfigServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.osconfig.v1.PatchJob()
       );
@@ -342,7 +344,7 @@ describe('v1.OsConfigServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.osconfig.v1.ExecutePatchJobRequest()
       );
@@ -351,7 +353,7 @@ describe('v1.OsConfigServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.osconfig.v1.PatchJob()
       );
@@ -389,7 +391,7 @@ describe('v1.OsConfigServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.osconfig.v1.ExecutePatchJobRequest()
       );
@@ -398,7 +400,7 @@ describe('v1.OsConfigServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.executePatchJob = stubSimpleCall(
         undefined,
@@ -420,7 +422,7 @@ describe('v1.OsConfigServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.osconfig.v1.ExecutePatchJobRequest()
       );
@@ -441,7 +443,7 @@ describe('v1.OsConfigServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.osconfig.v1.GetPatchJobRequest()
       );
@@ -450,7 +452,7 @@ describe('v1.OsConfigServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.osconfig.v1.PatchJob()
       );
@@ -472,7 +474,7 @@ describe('v1.OsConfigServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.osconfig.v1.GetPatchJobRequest()
       );
@@ -481,7 +483,7 @@ describe('v1.OsConfigServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.osconfig.v1.PatchJob()
       );
@@ -519,7 +521,7 @@ describe('v1.OsConfigServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.osconfig.v1.GetPatchJobRequest()
       );
@@ -528,7 +530,7 @@ describe('v1.OsConfigServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getPatchJob = stubSimpleCall(
         undefined,
@@ -550,7 +552,7 @@ describe('v1.OsConfigServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.osconfig.v1.GetPatchJobRequest()
       );
@@ -571,7 +573,7 @@ describe('v1.OsConfigServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.osconfig.v1.CancelPatchJobRequest()
       );
@@ -580,7 +582,7 @@ describe('v1.OsConfigServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.osconfig.v1.PatchJob()
       );
@@ -602,7 +604,7 @@ describe('v1.OsConfigServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.osconfig.v1.CancelPatchJobRequest()
       );
@@ -611,7 +613,7 @@ describe('v1.OsConfigServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.osconfig.v1.PatchJob()
       );
@@ -649,7 +651,7 @@ describe('v1.OsConfigServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.osconfig.v1.CancelPatchJobRequest()
       );
@@ -658,7 +660,7 @@ describe('v1.OsConfigServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.cancelPatchJob = stubSimpleCall(
         undefined,
@@ -680,7 +682,7 @@ describe('v1.OsConfigServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.osconfig.v1.CancelPatchJobRequest()
       );
@@ -701,7 +703,7 @@ describe('v1.OsConfigServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.osconfig.v1.CreatePatchDeploymentRequest()
       );
@@ -710,7 +712,7 @@ describe('v1.OsConfigServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.osconfig.v1.PatchDeployment()
       );
@@ -733,7 +735,7 @@ describe('v1.OsConfigServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.osconfig.v1.CreatePatchDeploymentRequest()
       );
@@ -742,7 +744,7 @@ describe('v1.OsConfigServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.osconfig.v1.PatchDeployment()
       );
@@ -780,7 +782,7 @@ describe('v1.OsConfigServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.osconfig.v1.CreatePatchDeploymentRequest()
       );
@@ -789,7 +791,7 @@ describe('v1.OsConfigServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createPatchDeployment = stubSimpleCall(
         undefined,
@@ -814,7 +816,7 @@ describe('v1.OsConfigServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.osconfig.v1.CreatePatchDeploymentRequest()
       );
@@ -838,7 +840,7 @@ describe('v1.OsConfigServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.osconfig.v1.GetPatchDeploymentRequest()
       );
@@ -847,7 +849,7 @@ describe('v1.OsConfigServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.osconfig.v1.PatchDeployment()
       );
@@ -870,7 +872,7 @@ describe('v1.OsConfigServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.osconfig.v1.GetPatchDeploymentRequest()
       );
@@ -879,7 +881,7 @@ describe('v1.OsConfigServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.osconfig.v1.PatchDeployment()
       );
@@ -917,7 +919,7 @@ describe('v1.OsConfigServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.osconfig.v1.GetPatchDeploymentRequest()
       );
@@ -926,7 +928,7 @@ describe('v1.OsConfigServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getPatchDeployment = stubSimpleCall(
         undefined,
@@ -948,7 +950,7 @@ describe('v1.OsConfigServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.osconfig.v1.GetPatchDeploymentRequest()
       );
@@ -969,7 +971,7 @@ describe('v1.OsConfigServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.osconfig.v1.DeletePatchDeploymentRequest()
       );
@@ -978,7 +980,7 @@ describe('v1.OsConfigServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -1001,7 +1003,7 @@ describe('v1.OsConfigServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.osconfig.v1.DeletePatchDeploymentRequest()
       );
@@ -1010,7 +1012,7 @@ describe('v1.OsConfigServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -1048,7 +1050,7 @@ describe('v1.OsConfigServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.osconfig.v1.DeletePatchDeploymentRequest()
       );
@@ -1057,7 +1059,7 @@ describe('v1.OsConfigServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deletePatchDeployment = stubSimpleCall(
         undefined,
@@ -1082,7 +1084,7 @@ describe('v1.OsConfigServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.osconfig.v1.DeletePatchDeploymentRequest()
       );
@@ -1106,7 +1108,7 @@ describe('v1.OsConfigServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.osconfig.v1.UpdatePatchDeploymentRequest()
       );
@@ -1116,7 +1118,7 @@ describe('v1.OsConfigServiceClient', () => {
         ['patchDeployment', 'name']
       );
       request.patchDeployment.name = defaultValue1;
-      const expectedHeaderRequestParams = `patch_deployment.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `patch_deployment.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.osconfig.v1.PatchDeployment()
       );
@@ -1139,7 +1141,7 @@ describe('v1.OsConfigServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.osconfig.v1.UpdatePatchDeploymentRequest()
       );
@@ -1149,7 +1151,7 @@ describe('v1.OsConfigServiceClient', () => {
         ['patchDeployment', 'name']
       );
       request.patchDeployment.name = defaultValue1;
-      const expectedHeaderRequestParams = `patch_deployment.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `patch_deployment.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.osconfig.v1.PatchDeployment()
       );
@@ -1187,7 +1189,7 @@ describe('v1.OsConfigServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.osconfig.v1.UpdatePatchDeploymentRequest()
       );
@@ -1197,7 +1199,7 @@ describe('v1.OsConfigServiceClient', () => {
         ['patchDeployment', 'name']
       );
       request.patchDeployment.name = defaultValue1;
-      const expectedHeaderRequestParams = `patch_deployment.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `patch_deployment.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updatePatchDeployment = stubSimpleCall(
         undefined,
@@ -1222,7 +1224,7 @@ describe('v1.OsConfigServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.osconfig.v1.UpdatePatchDeploymentRequest()
       );
@@ -1247,7 +1249,7 @@ describe('v1.OsConfigServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.osconfig.v1.PausePatchDeploymentRequest()
       );
@@ -1256,7 +1258,7 @@ describe('v1.OsConfigServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.osconfig.v1.PatchDeployment()
       );
@@ -1279,7 +1281,7 @@ describe('v1.OsConfigServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.osconfig.v1.PausePatchDeploymentRequest()
       );
@@ -1288,7 +1290,7 @@ describe('v1.OsConfigServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.osconfig.v1.PatchDeployment()
       );
@@ -1326,7 +1328,7 @@ describe('v1.OsConfigServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.osconfig.v1.PausePatchDeploymentRequest()
       );
@@ -1335,7 +1337,7 @@ describe('v1.OsConfigServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.pausePatchDeployment = stubSimpleCall(
         undefined,
@@ -1357,7 +1359,7 @@ describe('v1.OsConfigServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.osconfig.v1.PausePatchDeploymentRequest()
       );
@@ -1378,7 +1380,7 @@ describe('v1.OsConfigServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.osconfig.v1.ResumePatchDeploymentRequest()
       );
@@ -1387,7 +1389,7 @@ describe('v1.OsConfigServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.osconfig.v1.PatchDeployment()
       );
@@ -1410,7 +1412,7 @@ describe('v1.OsConfigServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.osconfig.v1.ResumePatchDeploymentRequest()
       );
@@ -1419,7 +1421,7 @@ describe('v1.OsConfigServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.osconfig.v1.PatchDeployment()
       );
@@ -1457,7 +1459,7 @@ describe('v1.OsConfigServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.osconfig.v1.ResumePatchDeploymentRequest()
       );
@@ -1466,7 +1468,7 @@ describe('v1.OsConfigServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.resumePatchDeployment = stubSimpleCall(
         undefined,
@@ -1491,7 +1493,7 @@ describe('v1.OsConfigServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.osconfig.v1.ResumePatchDeploymentRequest()
       );
@@ -1515,7 +1517,7 @@ describe('v1.OsConfigServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.osconfig.v1.ListPatchJobsRequest()
       );
@@ -1524,7 +1526,7 @@ describe('v1.OsConfigServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.osconfig.v1.PatchJob()),
         generateSampleMessage(new protos.google.cloud.osconfig.v1.PatchJob()),
@@ -1548,7 +1550,7 @@ describe('v1.OsConfigServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.osconfig.v1.ListPatchJobsRequest()
       );
@@ -1557,7 +1559,7 @@ describe('v1.OsConfigServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.osconfig.v1.PatchJob()),
         generateSampleMessage(new protos.google.cloud.osconfig.v1.PatchJob()),
@@ -1597,7 +1599,7 @@ describe('v1.OsConfigServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.osconfig.v1.ListPatchJobsRequest()
       );
@@ -1606,7 +1608,7 @@ describe('v1.OsConfigServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listPatchJobs = stubSimpleCall(
         undefined,
@@ -1628,7 +1630,7 @@ describe('v1.OsConfigServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.osconfig.v1.ListPatchJobsRequest()
       );
@@ -1637,7 +1639,7 @@ describe('v1.OsConfigServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.osconfig.v1.PatchJob()),
         generateSampleMessage(new protos.google.cloud.osconfig.v1.PatchJob()),
@@ -1682,7 +1684,7 @@ describe('v1.OsConfigServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.osconfig.v1.ListPatchJobsRequest()
       );
@@ -1691,7 +1693,7 @@ describe('v1.OsConfigServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listPatchJobs.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -1731,7 +1733,7 @@ describe('v1.OsConfigServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.osconfig.v1.ListPatchJobsRequest()
       );
@@ -1740,7 +1742,7 @@ describe('v1.OsConfigServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.osconfig.v1.PatchJob()),
         generateSampleMessage(new protos.google.cloud.osconfig.v1.PatchJob()),
@@ -1774,7 +1776,7 @@ describe('v1.OsConfigServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.osconfig.v1.ListPatchJobsRequest()
       );
@@ -1783,7 +1785,7 @@ describe('v1.OsConfigServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listPatchJobs.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -1816,7 +1818,7 @@ describe('v1.OsConfigServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.osconfig.v1.ListPatchJobInstanceDetailsRequest()
       );
@@ -1825,7 +1827,7 @@ describe('v1.OsConfigServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.osconfig.v1.PatchJobInstanceDetails()
@@ -1856,7 +1858,7 @@ describe('v1.OsConfigServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.osconfig.v1.ListPatchJobInstanceDetailsRequest()
       );
@@ -1865,7 +1867,7 @@ describe('v1.OsConfigServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.osconfig.v1.PatchJobInstanceDetails()
@@ -1913,7 +1915,7 @@ describe('v1.OsConfigServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.osconfig.v1.ListPatchJobInstanceDetailsRequest()
       );
@@ -1922,7 +1924,7 @@ describe('v1.OsConfigServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listPatchJobInstanceDetails = stubSimpleCall(
         undefined,
@@ -1947,7 +1949,7 @@ describe('v1.OsConfigServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.osconfig.v1.ListPatchJobInstanceDetailsRequest()
       );
@@ -1956,7 +1958,7 @@ describe('v1.OsConfigServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.osconfig.v1.PatchJobInstanceDetails()
@@ -2016,7 +2018,7 @@ describe('v1.OsConfigServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.osconfig.v1.ListPatchJobInstanceDetailsRequest()
       );
@@ -2025,7 +2027,7 @@ describe('v1.OsConfigServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listPatchJobInstanceDetails.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -2074,7 +2076,7 @@ describe('v1.OsConfigServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.osconfig.v1.ListPatchJobInstanceDetailsRequest()
       );
@@ -2083,7 +2085,7 @@ describe('v1.OsConfigServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.osconfig.v1.PatchJobInstanceDetails()
@@ -2128,7 +2130,7 @@ describe('v1.OsConfigServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.osconfig.v1.ListPatchJobInstanceDetailsRequest()
       );
@@ -2137,7 +2139,7 @@ describe('v1.OsConfigServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listPatchJobInstanceDetails.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -2175,7 +2177,7 @@ describe('v1.OsConfigServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.osconfig.v1.ListPatchDeploymentsRequest()
       );
@@ -2184,7 +2186,7 @@ describe('v1.OsConfigServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.osconfig.v1.PatchDeployment()
@@ -2215,7 +2217,7 @@ describe('v1.OsConfigServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.osconfig.v1.ListPatchDeploymentsRequest()
       );
@@ -2224,7 +2226,7 @@ describe('v1.OsConfigServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.osconfig.v1.PatchDeployment()
@@ -2270,7 +2272,7 @@ describe('v1.OsConfigServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.osconfig.v1.ListPatchDeploymentsRequest()
       );
@@ -2279,7 +2281,7 @@ describe('v1.OsConfigServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listPatchDeployments = stubSimpleCall(
         undefined,
@@ -2301,7 +2303,7 @@ describe('v1.OsConfigServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.osconfig.v1.ListPatchDeploymentsRequest()
       );
@@ -2310,7 +2312,7 @@ describe('v1.OsConfigServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.osconfig.v1.PatchDeployment()
@@ -2361,7 +2363,7 @@ describe('v1.OsConfigServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.osconfig.v1.ListPatchDeploymentsRequest()
       );
@@ -2370,7 +2372,7 @@ describe('v1.OsConfigServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listPatchDeployments.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -2410,7 +2412,7 @@ describe('v1.OsConfigServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.osconfig.v1.ListPatchDeploymentsRequest()
       );
@@ -2419,7 +2421,7 @@ describe('v1.OsConfigServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.osconfig.v1.PatchDeployment()
@@ -2459,7 +2461,7 @@ describe('v1.OsConfigServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.osconfig.v1.ListPatchDeploymentsRequest()
       );
@@ -2468,7 +2470,7 @@ describe('v1.OsConfigServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listPatchDeployments.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -2497,7 +2499,7 @@ describe('v1.OsConfigServiceClient', () => {
   });
 
   describe('Path templates', () => {
-    describe('inventory', () => {
+    describe('inventory', async () => {
       const fakePath = '/rendered/path/inventory';
       const expectedParameters = {
         project: 'projectValue',
@@ -2508,7 +2510,7 @@ describe('v1.OsConfigServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.inventoryPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -2561,7 +2563,7 @@ describe('v1.OsConfigServiceClient', () => {
       });
     });
 
-    describe('oSPolicyAssignment', () => {
+    describe('oSPolicyAssignment', async () => {
       const fakePath = '/rendered/path/oSPolicyAssignment';
       const expectedParameters = {
         project: 'projectValue',
@@ -2572,7 +2574,7 @@ describe('v1.OsConfigServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.oSPolicyAssignmentPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -2638,7 +2640,7 @@ describe('v1.OsConfigServiceClient', () => {
       });
     });
 
-    describe('oSPolicyAssignmentReport', () => {
+    describe('oSPolicyAssignmentReport', async () => {
       const fakePath = '/rendered/path/oSPolicyAssignmentReport';
       const expectedParameters = {
         project: 'projectValue',
@@ -2650,7 +2652,7 @@ describe('v1.OsConfigServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.oSPolicyAssignmentReportPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -2733,7 +2735,7 @@ describe('v1.OsConfigServiceClient', () => {
       });
     });
 
-    describe('patchDeployment', () => {
+    describe('patchDeployment', async () => {
       const fakePath = '/rendered/path/patchDeployment';
       const expectedParameters = {
         project: 'projectValue',
@@ -2743,7 +2745,7 @@ describe('v1.OsConfigServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.patchDeploymentPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -2786,7 +2788,7 @@ describe('v1.OsConfigServiceClient', () => {
       });
     });
 
-    describe('patchJob', () => {
+    describe('patchJob', async () => {
       const fakePath = '/rendered/path/patchJob';
       const expectedParameters = {
         project: 'projectValue',
@@ -2796,7 +2798,7 @@ describe('v1.OsConfigServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.patchJobPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -2835,7 +2837,7 @@ describe('v1.OsConfigServiceClient', () => {
       });
     });
 
-    describe('vulnerabilityReport', () => {
+    describe('vulnerabilityReport', async () => {
       const fakePath = '/rendered/path/vulnerabilityReport';
       const expectedParameters = {
         project: 'projectValue',
@@ -2846,7 +2848,7 @@ describe('v1.OsConfigServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.vulnerabilityReportPathTemplate.render = sinon
         .stub()
         .returns(fakePath);

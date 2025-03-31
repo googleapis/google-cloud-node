@@ -1,5 +1,35 @@
 # Changelog
 
+## [2.0.1](https://github.com/googleapis/google-cloud-node/compare/places-v2.0.0...places-v2.0.1) (2025-03-19)
+
+
+### Bug Fixes
+
+* [Many APIs] await/catch promises, and update listOperationsAsync return type ([#6190](https://github.com/googleapis/google-cloud-node/issues/6190)) ([f4866df](https://github.com/googleapis/google-cloud-node/commit/f4866dfa6ab481163150f54928a9857d2dfef948))
+
+## [2.0.0](https://github.com/googleapis/google-cloud-node/compare/places-v1.10.0...places-v2.0.0) (2025-03-18)
+
+
+### ⚠ BREAKING CHANGES
+
+* upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096))
+
+### Features
+
+* Add request/response debug logging to gapics, update templates to gax 5 and node 18 ([ec637db](https://github.com/googleapis/google-cloud-node/commit/ec637db171237d31da01f356af88a243e608fb14))
+
+
+### Miscellaneous Chores
+
+* Upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096)) ([eadae64](https://github.com/googleapis/google-cloud-node/commit/eadae64d54e07aa2c65097ea52e65008d4e87436))
+
+## [1.10.0](https://github.com/googleapis/google-cloud-node/compare/places-v1.9.1...places-v1.10.0) (2025-02-28)
+
+
+### Features
+
+* [places] add NACS EVCS connector type support ([#6051](https://github.com/googleapis/google-cloud-node/issues/6051)) ([f5fac00](https://github.com/googleapis/google-cloud-node/commit/f5fac003a02e29727928de5d630f819c40e5fb4e))
+
 ## [1.9.1](https://github.com/googleapis/google-cloud-node/compare/places-v1.9.0...places-v1.9.1) (2025-01-29)
 
 

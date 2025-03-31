@@ -268,7 +268,9 @@ describe('v1beta1.AnalyticsHubServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      client.initialize().catch(err => {
+        throw err;
+      });
       assert(client.analyticsHubServiceStub);
       client.close().then(() => {
         done();
@@ -331,7 +333,7 @@ describe('v1beta1.AnalyticsHubServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.dataexchange.v1beta1.GetDataExchangeRequest()
       );
@@ -340,7 +342,7 @@ describe('v1beta1.AnalyticsHubServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.bigquery.dataexchange.v1beta1.DataExchange()
       );
@@ -363,7 +365,7 @@ describe('v1beta1.AnalyticsHubServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.dataexchange.v1beta1.GetDataExchangeRequest()
       );
@@ -372,7 +374,7 @@ describe('v1beta1.AnalyticsHubServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.bigquery.dataexchange.v1beta1.DataExchange()
       );
@@ -411,7 +413,7 @@ describe('v1beta1.AnalyticsHubServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.dataexchange.v1beta1.GetDataExchangeRequest()
       );
@@ -420,7 +422,7 @@ describe('v1beta1.AnalyticsHubServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getDataExchange = stubSimpleCall(
         undefined,
@@ -443,7 +445,7 @@ describe('v1beta1.AnalyticsHubServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.dataexchange.v1beta1.GetDataExchangeRequest()
       );
@@ -465,7 +467,7 @@ describe('v1beta1.AnalyticsHubServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.dataexchange.v1beta1.CreateDataExchangeRequest()
       );
@@ -474,7 +476,7 @@ describe('v1beta1.AnalyticsHubServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.bigquery.dataexchange.v1beta1.DataExchange()
       );
@@ -498,7 +500,7 @@ describe('v1beta1.AnalyticsHubServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.dataexchange.v1beta1.CreateDataExchangeRequest()
       );
@@ -507,7 +509,7 @@ describe('v1beta1.AnalyticsHubServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.bigquery.dataexchange.v1beta1.DataExchange()
       );
@@ -546,7 +548,7 @@ describe('v1beta1.AnalyticsHubServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.dataexchange.v1beta1.CreateDataExchangeRequest()
       );
@@ -555,7 +557,7 @@ describe('v1beta1.AnalyticsHubServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createDataExchange = stubSimpleCall(
         undefined,
@@ -578,7 +580,7 @@ describe('v1beta1.AnalyticsHubServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.dataexchange.v1beta1.CreateDataExchangeRequest()
       );
@@ -600,7 +602,7 @@ describe('v1beta1.AnalyticsHubServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.dataexchange.v1beta1.UpdateDataExchangeRequest()
       );
@@ -610,7 +612,7 @@ describe('v1beta1.AnalyticsHubServiceClient', () => {
         ['dataExchange', 'name']
       );
       request.dataExchange.name = defaultValue1;
-      const expectedHeaderRequestParams = `data_exchange.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `data_exchange.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.bigquery.dataexchange.v1beta1.DataExchange()
       );
@@ -634,7 +636,7 @@ describe('v1beta1.AnalyticsHubServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.dataexchange.v1beta1.UpdateDataExchangeRequest()
       );
@@ -644,7 +646,7 @@ describe('v1beta1.AnalyticsHubServiceClient', () => {
         ['dataExchange', 'name']
       );
       request.dataExchange.name = defaultValue1;
-      const expectedHeaderRequestParams = `data_exchange.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `data_exchange.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.bigquery.dataexchange.v1beta1.DataExchange()
       );
@@ -683,7 +685,7 @@ describe('v1beta1.AnalyticsHubServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.dataexchange.v1beta1.UpdateDataExchangeRequest()
       );
@@ -693,7 +695,7 @@ describe('v1beta1.AnalyticsHubServiceClient', () => {
         ['dataExchange', 'name']
       );
       request.dataExchange.name = defaultValue1;
-      const expectedHeaderRequestParams = `data_exchange.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `data_exchange.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateDataExchange = stubSimpleCall(
         undefined,
@@ -716,7 +718,7 @@ describe('v1beta1.AnalyticsHubServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.dataexchange.v1beta1.UpdateDataExchangeRequest()
       );
@@ -739,7 +741,7 @@ describe('v1beta1.AnalyticsHubServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.dataexchange.v1beta1.DeleteDataExchangeRequest()
       );
@@ -748,7 +750,7 @@ describe('v1beta1.AnalyticsHubServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -772,7 +774,7 @@ describe('v1beta1.AnalyticsHubServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.dataexchange.v1beta1.DeleteDataExchangeRequest()
       );
@@ -781,7 +783,7 @@ describe('v1beta1.AnalyticsHubServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -820,7 +822,7 @@ describe('v1beta1.AnalyticsHubServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.dataexchange.v1beta1.DeleteDataExchangeRequest()
       );
@@ -829,7 +831,7 @@ describe('v1beta1.AnalyticsHubServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteDataExchange = stubSimpleCall(
         undefined,
@@ -852,7 +854,7 @@ describe('v1beta1.AnalyticsHubServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.dataexchange.v1beta1.DeleteDataExchangeRequest()
       );
@@ -874,7 +876,7 @@ describe('v1beta1.AnalyticsHubServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.dataexchange.v1beta1.GetListingRequest()
       );
@@ -883,7 +885,7 @@ describe('v1beta1.AnalyticsHubServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.bigquery.dataexchange.v1beta1.Listing()
       );
@@ -906,7 +908,7 @@ describe('v1beta1.AnalyticsHubServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.dataexchange.v1beta1.GetListingRequest()
       );
@@ -915,7 +917,7 @@ describe('v1beta1.AnalyticsHubServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.bigquery.dataexchange.v1beta1.Listing()
       );
@@ -954,7 +956,7 @@ describe('v1beta1.AnalyticsHubServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.dataexchange.v1beta1.GetListingRequest()
       );
@@ -963,7 +965,7 @@ describe('v1beta1.AnalyticsHubServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getListing = stubSimpleCall(
         undefined,
@@ -986,7 +988,7 @@ describe('v1beta1.AnalyticsHubServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.dataexchange.v1beta1.GetListingRequest()
       );
@@ -1008,7 +1010,7 @@ describe('v1beta1.AnalyticsHubServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.dataexchange.v1beta1.CreateListingRequest()
       );
@@ -1017,7 +1019,7 @@ describe('v1beta1.AnalyticsHubServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.bigquery.dataexchange.v1beta1.Listing()
       );
@@ -1040,7 +1042,7 @@ describe('v1beta1.AnalyticsHubServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.dataexchange.v1beta1.CreateListingRequest()
       );
@@ -1049,7 +1051,7 @@ describe('v1beta1.AnalyticsHubServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.bigquery.dataexchange.v1beta1.Listing()
       );
@@ -1088,7 +1090,7 @@ describe('v1beta1.AnalyticsHubServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.dataexchange.v1beta1.CreateListingRequest()
       );
@@ -1097,7 +1099,7 @@ describe('v1beta1.AnalyticsHubServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createListing = stubSimpleCall(
         undefined,
@@ -1120,7 +1122,7 @@ describe('v1beta1.AnalyticsHubServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.dataexchange.v1beta1.CreateListingRequest()
       );
@@ -1142,7 +1144,7 @@ describe('v1beta1.AnalyticsHubServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.dataexchange.v1beta1.UpdateListingRequest()
       );
@@ -1152,7 +1154,7 @@ describe('v1beta1.AnalyticsHubServiceClient', () => {
         ['listing', 'name']
       );
       request.listing.name = defaultValue1;
-      const expectedHeaderRequestParams = `listing.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `listing.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.bigquery.dataexchange.v1beta1.Listing()
       );
@@ -1175,7 +1177,7 @@ describe('v1beta1.AnalyticsHubServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.dataexchange.v1beta1.UpdateListingRequest()
       );
@@ -1185,7 +1187,7 @@ describe('v1beta1.AnalyticsHubServiceClient', () => {
         ['listing', 'name']
       );
       request.listing.name = defaultValue1;
-      const expectedHeaderRequestParams = `listing.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `listing.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.bigquery.dataexchange.v1beta1.Listing()
       );
@@ -1224,7 +1226,7 @@ describe('v1beta1.AnalyticsHubServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.dataexchange.v1beta1.UpdateListingRequest()
       );
@@ -1234,7 +1236,7 @@ describe('v1beta1.AnalyticsHubServiceClient', () => {
         ['listing', 'name']
       );
       request.listing.name = defaultValue1;
-      const expectedHeaderRequestParams = `listing.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `listing.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateListing = stubSimpleCall(
         undefined,
@@ -1257,7 +1259,7 @@ describe('v1beta1.AnalyticsHubServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.dataexchange.v1beta1.UpdateListingRequest()
       );
@@ -1280,7 +1282,7 @@ describe('v1beta1.AnalyticsHubServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.dataexchange.v1beta1.DeleteListingRequest()
       );
@@ -1289,7 +1291,7 @@ describe('v1beta1.AnalyticsHubServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -1312,7 +1314,7 @@ describe('v1beta1.AnalyticsHubServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.dataexchange.v1beta1.DeleteListingRequest()
       );
@@ -1321,7 +1323,7 @@ describe('v1beta1.AnalyticsHubServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -1360,7 +1362,7 @@ describe('v1beta1.AnalyticsHubServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.dataexchange.v1beta1.DeleteListingRequest()
       );
@@ -1369,7 +1371,7 @@ describe('v1beta1.AnalyticsHubServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteListing = stubSimpleCall(
         undefined,
@@ -1392,7 +1394,7 @@ describe('v1beta1.AnalyticsHubServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.dataexchange.v1beta1.DeleteListingRequest()
       );
@@ -1414,7 +1416,7 @@ describe('v1beta1.AnalyticsHubServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.dataexchange.v1beta1.SubscribeListingRequest()
       );
@@ -1423,7 +1425,7 @@ describe('v1beta1.AnalyticsHubServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.bigquery.dataexchange.v1beta1.SubscribeListingResponse()
       );
@@ -1446,7 +1448,7 @@ describe('v1beta1.AnalyticsHubServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.dataexchange.v1beta1.SubscribeListingRequest()
       );
@@ -1455,7 +1457,7 @@ describe('v1beta1.AnalyticsHubServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.bigquery.dataexchange.v1beta1.SubscribeListingResponse()
       );
@@ -1494,7 +1496,7 @@ describe('v1beta1.AnalyticsHubServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.dataexchange.v1beta1.SubscribeListingRequest()
       );
@@ -1503,7 +1505,7 @@ describe('v1beta1.AnalyticsHubServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.subscribeListing = stubSimpleCall(
         undefined,
@@ -1526,7 +1528,7 @@ describe('v1beta1.AnalyticsHubServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.dataexchange.v1beta1.SubscribeListingRequest()
       );
@@ -1548,7 +1550,7 @@ describe('v1beta1.AnalyticsHubServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.iam.v1.GetIamPolicyRequest()
       );
@@ -1557,7 +1559,7 @@ describe('v1beta1.AnalyticsHubServiceClient', () => {
         ['resource']
       );
       request.resource = defaultValue1;
-      const expectedHeaderRequestParams = `resource=${defaultValue1}`;
+      const expectedHeaderRequestParams = `resource=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.iam.v1.Policy()
       );
@@ -1580,7 +1582,7 @@ describe('v1beta1.AnalyticsHubServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.iam.v1.GetIamPolicyRequest()
       );
@@ -1589,7 +1591,7 @@ describe('v1beta1.AnalyticsHubServiceClient', () => {
         ['resource']
       );
       request.resource = defaultValue1;
-      const expectedHeaderRequestParams = `resource=${defaultValue1}`;
+      const expectedHeaderRequestParams = `resource=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.iam.v1.Policy()
       );
@@ -1628,7 +1630,7 @@ describe('v1beta1.AnalyticsHubServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.iam.v1.GetIamPolicyRequest()
       );
@@ -1637,7 +1639,7 @@ describe('v1beta1.AnalyticsHubServiceClient', () => {
         ['resource']
       );
       request.resource = defaultValue1;
-      const expectedHeaderRequestParams = `resource=${defaultValue1}`;
+      const expectedHeaderRequestParams = `resource=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getIamPolicy = stubSimpleCall(
         undefined,
@@ -1660,7 +1662,7 @@ describe('v1beta1.AnalyticsHubServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.iam.v1.GetIamPolicyRequest()
       );
@@ -1682,7 +1684,7 @@ describe('v1beta1.AnalyticsHubServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.iam.v1.SetIamPolicyRequest()
       );
@@ -1691,7 +1693,7 @@ describe('v1beta1.AnalyticsHubServiceClient', () => {
         ['resource']
       );
       request.resource = defaultValue1;
-      const expectedHeaderRequestParams = `resource=${defaultValue1}`;
+      const expectedHeaderRequestParams = `resource=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.iam.v1.Policy()
       );
@@ -1714,7 +1716,7 @@ describe('v1beta1.AnalyticsHubServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.iam.v1.SetIamPolicyRequest()
       );
@@ -1723,7 +1725,7 @@ describe('v1beta1.AnalyticsHubServiceClient', () => {
         ['resource']
       );
       request.resource = defaultValue1;
-      const expectedHeaderRequestParams = `resource=${defaultValue1}`;
+      const expectedHeaderRequestParams = `resource=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.iam.v1.Policy()
       );
@@ -1762,7 +1764,7 @@ describe('v1beta1.AnalyticsHubServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.iam.v1.SetIamPolicyRequest()
       );
@@ -1771,7 +1773,7 @@ describe('v1beta1.AnalyticsHubServiceClient', () => {
         ['resource']
       );
       request.resource = defaultValue1;
-      const expectedHeaderRequestParams = `resource=${defaultValue1}`;
+      const expectedHeaderRequestParams = `resource=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.setIamPolicy = stubSimpleCall(
         undefined,
@@ -1794,7 +1796,7 @@ describe('v1beta1.AnalyticsHubServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.iam.v1.SetIamPolicyRequest()
       );
@@ -1816,7 +1818,7 @@ describe('v1beta1.AnalyticsHubServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.iam.v1.TestIamPermissionsRequest()
       );
@@ -1825,7 +1827,7 @@ describe('v1beta1.AnalyticsHubServiceClient', () => {
         ['resource']
       );
       request.resource = defaultValue1;
-      const expectedHeaderRequestParams = `resource=${defaultValue1}`;
+      const expectedHeaderRequestParams = `resource=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.iam.v1.TestIamPermissionsResponse()
       );
@@ -1849,7 +1851,7 @@ describe('v1beta1.AnalyticsHubServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.iam.v1.TestIamPermissionsRequest()
       );
@@ -1858,7 +1860,7 @@ describe('v1beta1.AnalyticsHubServiceClient', () => {
         ['resource']
       );
       request.resource = defaultValue1;
-      const expectedHeaderRequestParams = `resource=${defaultValue1}`;
+      const expectedHeaderRequestParams = `resource=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.iam.v1.TestIamPermissionsResponse()
       );
@@ -1897,7 +1899,7 @@ describe('v1beta1.AnalyticsHubServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.iam.v1.TestIamPermissionsRequest()
       );
@@ -1906,7 +1908,7 @@ describe('v1beta1.AnalyticsHubServiceClient', () => {
         ['resource']
       );
       request.resource = defaultValue1;
-      const expectedHeaderRequestParams = `resource=${defaultValue1}`;
+      const expectedHeaderRequestParams = `resource=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.testIamPermissions = stubSimpleCall(
         undefined,
@@ -1929,7 +1931,7 @@ describe('v1beta1.AnalyticsHubServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.iam.v1.TestIamPermissionsRequest()
       );
@@ -1951,7 +1953,7 @@ describe('v1beta1.AnalyticsHubServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.dataexchange.v1beta1.ListDataExchangesRequest()
       );
@@ -1960,7 +1962,7 @@ describe('v1beta1.AnalyticsHubServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.bigquery.dataexchange.v1beta1.DataExchange()
@@ -1991,7 +1993,7 @@ describe('v1beta1.AnalyticsHubServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.dataexchange.v1beta1.ListDataExchangesRequest()
       );
@@ -2000,7 +2002,7 @@ describe('v1beta1.AnalyticsHubServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.bigquery.dataexchange.v1beta1.DataExchange()
@@ -2049,7 +2051,7 @@ describe('v1beta1.AnalyticsHubServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.dataexchange.v1beta1.ListDataExchangesRequest()
       );
@@ -2058,7 +2060,7 @@ describe('v1beta1.AnalyticsHubServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listDataExchanges = stubSimpleCall(
         undefined,
@@ -2081,7 +2083,7 @@ describe('v1beta1.AnalyticsHubServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.dataexchange.v1beta1.ListDataExchangesRequest()
       );
@@ -2090,7 +2092,7 @@ describe('v1beta1.AnalyticsHubServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.bigquery.dataexchange.v1beta1.DataExchange()
@@ -2145,7 +2147,7 @@ describe('v1beta1.AnalyticsHubServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.dataexchange.v1beta1.ListDataExchangesRequest()
       );
@@ -2154,7 +2156,7 @@ describe('v1beta1.AnalyticsHubServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listDataExchanges.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -2198,7 +2200,7 @@ describe('v1beta1.AnalyticsHubServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.dataexchange.v1beta1.ListDataExchangesRequest()
       );
@@ -2207,7 +2209,7 @@ describe('v1beta1.AnalyticsHubServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.bigquery.dataexchange.v1beta1.DataExchange()
@@ -2249,7 +2251,7 @@ describe('v1beta1.AnalyticsHubServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.dataexchange.v1beta1.ListDataExchangesRequest()
       );
@@ -2258,7 +2260,7 @@ describe('v1beta1.AnalyticsHubServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listDataExchanges.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -2293,7 +2295,7 @@ describe('v1beta1.AnalyticsHubServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.dataexchange.v1beta1.ListOrgDataExchangesRequest()
       );
@@ -2302,7 +2304,7 @@ describe('v1beta1.AnalyticsHubServiceClient', () => {
         ['organization']
       );
       request.organization = defaultValue1;
-      const expectedHeaderRequestParams = `organization=${defaultValue1}`;
+      const expectedHeaderRequestParams = `organization=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.bigquery.dataexchange.v1beta1.DataExchange()
@@ -2334,7 +2336,7 @@ describe('v1beta1.AnalyticsHubServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.dataexchange.v1beta1.ListOrgDataExchangesRequest()
       );
@@ -2343,7 +2345,7 @@ describe('v1beta1.AnalyticsHubServiceClient', () => {
         ['organization']
       );
       request.organization = defaultValue1;
-      const expectedHeaderRequestParams = `organization=${defaultValue1}`;
+      const expectedHeaderRequestParams = `organization=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.bigquery.dataexchange.v1beta1.DataExchange()
@@ -2392,7 +2394,7 @@ describe('v1beta1.AnalyticsHubServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.dataexchange.v1beta1.ListOrgDataExchangesRequest()
       );
@@ -2401,7 +2403,7 @@ describe('v1beta1.AnalyticsHubServiceClient', () => {
         ['organization']
       );
       request.organization = defaultValue1;
-      const expectedHeaderRequestParams = `organization=${defaultValue1}`;
+      const expectedHeaderRequestParams = `organization=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listOrgDataExchanges = stubSimpleCall(
         undefined,
@@ -2424,7 +2426,7 @@ describe('v1beta1.AnalyticsHubServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.dataexchange.v1beta1.ListOrgDataExchangesRequest()
       );
@@ -2433,7 +2435,7 @@ describe('v1beta1.AnalyticsHubServiceClient', () => {
         ['organization']
       );
       request.organization = defaultValue1;
-      const expectedHeaderRequestParams = `organization=${defaultValue1}`;
+      const expectedHeaderRequestParams = `organization=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.bigquery.dataexchange.v1beta1.DataExchange()
@@ -2488,7 +2490,7 @@ describe('v1beta1.AnalyticsHubServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.dataexchange.v1beta1.ListOrgDataExchangesRequest()
       );
@@ -2497,7 +2499,7 @@ describe('v1beta1.AnalyticsHubServiceClient', () => {
         ['organization']
       );
       request.organization = defaultValue1;
-      const expectedHeaderRequestParams = `organization=${defaultValue1}`;
+      const expectedHeaderRequestParams = `organization=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listOrgDataExchanges.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -2541,7 +2543,7 @@ describe('v1beta1.AnalyticsHubServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.dataexchange.v1beta1.ListOrgDataExchangesRequest()
       );
@@ -2550,7 +2552,7 @@ describe('v1beta1.AnalyticsHubServiceClient', () => {
         ['organization']
       );
       request.organization = defaultValue1;
-      const expectedHeaderRequestParams = `organization=${defaultValue1}`;
+      const expectedHeaderRequestParams = `organization=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.bigquery.dataexchange.v1beta1.DataExchange()
@@ -2592,7 +2594,7 @@ describe('v1beta1.AnalyticsHubServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.dataexchange.v1beta1.ListOrgDataExchangesRequest()
       );
@@ -2601,7 +2603,7 @@ describe('v1beta1.AnalyticsHubServiceClient', () => {
         ['organization']
       );
       request.organization = defaultValue1;
-      const expectedHeaderRequestParams = `organization=${defaultValue1}`;
+      const expectedHeaderRequestParams = `organization=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listOrgDataExchanges.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -2636,7 +2638,7 @@ describe('v1beta1.AnalyticsHubServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.dataexchange.v1beta1.ListListingsRequest()
       );
@@ -2645,7 +2647,7 @@ describe('v1beta1.AnalyticsHubServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.bigquery.dataexchange.v1beta1.Listing()
@@ -2676,7 +2678,7 @@ describe('v1beta1.AnalyticsHubServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.dataexchange.v1beta1.ListListingsRequest()
       );
@@ -2685,7 +2687,7 @@ describe('v1beta1.AnalyticsHubServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.bigquery.dataexchange.v1beta1.Listing()
@@ -2734,7 +2736,7 @@ describe('v1beta1.AnalyticsHubServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.dataexchange.v1beta1.ListListingsRequest()
       );
@@ -2743,7 +2745,7 @@ describe('v1beta1.AnalyticsHubServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listListings = stubSimpleCall(
         undefined,
@@ -2766,7 +2768,7 @@ describe('v1beta1.AnalyticsHubServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.dataexchange.v1beta1.ListListingsRequest()
       );
@@ -2775,7 +2777,7 @@ describe('v1beta1.AnalyticsHubServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.bigquery.dataexchange.v1beta1.Listing()
@@ -2830,7 +2832,7 @@ describe('v1beta1.AnalyticsHubServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.dataexchange.v1beta1.ListListingsRequest()
       );
@@ -2839,7 +2841,7 @@ describe('v1beta1.AnalyticsHubServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listListings.createStream = stubPageStreamingCall(
         undefined,
@@ -2885,7 +2887,7 @@ describe('v1beta1.AnalyticsHubServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.dataexchange.v1beta1.ListListingsRequest()
       );
@@ -2894,7 +2896,7 @@ describe('v1beta1.AnalyticsHubServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.bigquery.dataexchange.v1beta1.Listing()
@@ -2936,7 +2938,7 @@ describe('v1beta1.AnalyticsHubServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.dataexchange.v1beta1.ListListingsRequest()
       );
@@ -2945,7 +2947,7 @@ describe('v1beta1.AnalyticsHubServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listListings.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -2979,7 +2981,7 @@ describe('v1beta1.AnalyticsHubServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.GetLocationRequest()
       );
@@ -3010,7 +3012,7 @@ describe('v1beta1.AnalyticsHubServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.GetLocationRequest()
       );
@@ -3055,7 +3057,7 @@ describe('v1beta1.AnalyticsHubServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.GetLocationRequest()
       );
@@ -3091,7 +3093,7 @@ describe('v1beta1.AnalyticsHubServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.ListLocationsRequest()
       );
@@ -3140,7 +3142,7 @@ describe('v1beta1.AnalyticsHubServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.ListLocationsRequest()
       );
@@ -3177,7 +3179,7 @@ describe('v1beta1.AnalyticsHubServiceClient', () => {
   });
 
   describe('Path templates', () => {
-    describe('dataExchange', () => {
+    describe('dataExchange', async () => {
       const fakePath = '/rendered/path/dataExchange';
       const expectedParameters = {
         project: 'projectValue',
@@ -3189,7 +3191,7 @@ describe('v1beta1.AnalyticsHubServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.dataExchangePathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -3242,7 +3244,7 @@ describe('v1beta1.AnalyticsHubServiceClient', () => {
       });
     });
 
-    describe('listing', () => {
+    describe('listing', async () => {
       const fakePath = '/rendered/path/listing';
       const expectedParameters = {
         project: 'projectValue',
@@ -3255,7 +3257,7 @@ describe('v1beta1.AnalyticsHubServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.listingPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -3319,7 +3321,7 @@ describe('v1beta1.AnalyticsHubServiceClient', () => {
       });
     });
 
-    describe('location', () => {
+    describe('location', async () => {
       const fakePath = '/rendered/path/location';
       const expectedParameters = {
         project: 'projectValue',
@@ -3330,7 +3332,7 @@ describe('v1beta1.AnalyticsHubServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.locationPathTemplate.render = sinon
         .stub()
         .returns(fakePath);

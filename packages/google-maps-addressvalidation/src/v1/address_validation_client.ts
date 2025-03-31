@@ -27,6 +27,7 @@ import type {
 
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
+import {loggingUtils as logging} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -51,6 +52,8 @@ export class AddressValidationClient {
   private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
+  private _log = logging.log('addressvalidation');
+
   auth: gax.GoogleAuth;
   descriptors: Descriptors = {
     page: {},
@@ -84,7 +87,7 @@ export class AddressValidationClient {
    *     Developer's Console, e.g. 'grape-spaceship-123'. We will also check
    *     the environment variable GCLOUD_PROJECT for your project ID. If your
    *     app is running in an environment which supports
-   *     {@link https://developers.google.com/identity/protocols/application-default-credentials Application Default Credentials},
+   *     {@link https://cloud.google.com/docs/authentication/application-default-credentials Application Default Credentials},
    *     your project ID will be detected automatically.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
@@ -507,8 +510,39 @@ export class AddressValidationClient {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    this.initialize();
-    return this.innerApiCalls.validateAddress(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('validateAddress request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.maps.addressvalidation.v1.IValidateAddressResponse,
+          | protos.google.maps.addressvalidation.v1.IValidateAddressRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('validateAddress response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .validateAddress(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.maps.addressvalidation.v1.IValidateAddressResponse,
+          (
+            | protos.google.maps.addressvalidation.v1.IValidateAddressRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('validateAddress response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Feedback about the outcome of the sequence of validation attempts. This
@@ -611,12 +645,39 @@ export class AddressValidationClient {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    this.initialize();
-    return this.innerApiCalls.provideValidationFeedback(
-      request,
-      options,
-      callback
-    );
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('provideValidationFeedback request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.maps.addressvalidation.v1.IProvideValidationFeedbackResponse,
+          | protos.google.maps.addressvalidation.v1.IProvideValidationFeedbackRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('provideValidationFeedback response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .provideValidationFeedback(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.maps.addressvalidation.v1.IProvideValidationFeedbackResponse,
+          (
+            | protos.google.maps.addressvalidation.v1.IProvideValidationFeedbackRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('provideValidationFeedback response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
 
   /**
@@ -628,6 +689,7 @@ export class AddressValidationClient {
   close(): Promise<void> {
     if (this.addressValidationStub && !this._terminated) {
       return this.addressValidationStub.then(stub => {
+        this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
       });

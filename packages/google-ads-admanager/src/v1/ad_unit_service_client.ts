@@ -29,6 +29,7 @@ import type {
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
+import {loggingUtils as logging} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -53,6 +54,8 @@ export class AdUnitServiceClient {
   private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
+  private _log = logging.log('admanager');
+
   auth: gax.GoogleAuth;
   descriptors: Descriptors = {
     page: {},
@@ -87,7 +90,7 @@ export class AdUnitServiceClient {
    *     Developer's Console, e.g. 'grape-spaceship-123'. We will also check
    *     the environment variable GCLOUD_PROJECT for your project ID. If your
    *     app is running in an environment which supports
-   *     {@link https://developers.google.com/identity/protocols/application-default-credentials Application Default Credentials},
+   *     {@link https://cloud.google.com/docs/authentication/application-default-credentials Application Default Credentials},
    *     your project ID will be detected automatically.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
@@ -518,8 +521,34 @@ export class AdUnitServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.getAdUnit(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('getAdUnit request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.ads.admanager.v1.IAdUnit,
+          protos.google.ads.admanager.v1.IGetAdUnitRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getAdUnit response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getAdUnit(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.ads.admanager.v1.IAdUnit,
+          protos.google.ads.admanager.v1.IGetAdUnitRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getAdUnit response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
 
   /**
@@ -628,8 +657,36 @@ export class AdUnitServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.listAdUnits(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.ads.admanager.v1.IListAdUnitsRequest,
+          | protos.google.ads.admanager.v1.IListAdUnitsResponse
+          | null
+          | undefined,
+          protos.google.ads.admanager.v1.IAdUnit
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listAdUnits values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listAdUnits request %j', request);
+    return this.innerApiCalls
+      .listAdUnits(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.ads.admanager.v1.IAdUnit[],
+          protos.google.ads.admanager.v1.IListAdUnitsRequest | null,
+          protos.google.ads.admanager.v1.IListAdUnitsResponse,
+        ]) => {
+          this._log.info('listAdUnits values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -685,7 +742,10 @@ export class AdUnitServiceClient {
       });
     const defaultCallSettings = this._defaults['listAdUnits'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listAdUnits stream %j', request);
     return this.descriptors.page.listAdUnits.createStream(
       this.innerApiCalls.listAdUnits as GaxCall,
       request,
@@ -749,7 +809,10 @@ export class AdUnitServiceClient {
       });
     const defaultCallSettings = this._defaults['listAdUnits'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listAdUnits iterate %j', request);
     return this.descriptors.page.listAdUnits.asyncIterate(
       this.innerApiCalls['listAdUnits'] as GaxCall,
       request as {},
@@ -868,8 +931,36 @@ export class AdUnitServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.listAdUnitSizes(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.ads.admanager.v1.IListAdUnitSizesRequest,
+          | protos.google.ads.admanager.v1.IListAdUnitSizesResponse
+          | null
+          | undefined,
+          protos.google.ads.admanager.v1.IAdUnitSize
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listAdUnitSizes values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listAdUnitSizes request %j', request);
+    return this.innerApiCalls
+      .listAdUnitSizes(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.ads.admanager.v1.IAdUnitSize[],
+          protos.google.ads.admanager.v1.IListAdUnitSizesRequest | null,
+          protos.google.ads.admanager.v1.IListAdUnitSizesResponse,
+        ]) => {
+          this._log.info('listAdUnitSizes values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -925,7 +1016,10 @@ export class AdUnitServiceClient {
       });
     const defaultCallSettings = this._defaults['listAdUnitSizes'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listAdUnitSizes stream %j', request);
     return this.descriptors.page.listAdUnitSizes.createStream(
       this.innerApiCalls.listAdUnitSizes as GaxCall,
       request,
@@ -989,7 +1083,10 @@ export class AdUnitServiceClient {
       });
     const defaultCallSettings = this._defaults['listAdUnitSizes'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listAdUnitSizes iterate %j', request);
     return this.descriptors.page.listAdUnitSizes.asyncIterate(
       this.innerApiCalls['listAdUnitSizes'] as GaxCall,
       request as {},
@@ -1626,6 +1723,7 @@ export class AdUnitServiceClient {
   close(): Promise<void> {
     if (this.adUnitServiceStub && !this._terminated) {
       return this.adUnitServiceStub.then(stub => {
+        this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
       });

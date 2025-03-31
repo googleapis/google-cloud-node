@@ -1,5 +1,36 @@
 # Changelog
 
+## [2.1.0](https://github.com/googleapis/google-cloud-node/compare/alloydb-v2.0.0...alloydb-v2.1.0) (2025-03-19)
+
+
+### Features
+
+* [alloydb] A new method `ExportCluster` is added to service `AlloyDBAdmin` ([#6170](https://github.com/googleapis/google-cloud-node/issues/6170)) ([4569e91](https://github.com/googleapis/google-cloud-node/commit/4569e91b5f4c888cd52dd795dbe27cddf0801f51))
+* [Many APIs] await/catch promises, and update listOperationsAsync return type ([#6182](https://github.com/googleapis/google-cloud-node/issues/6182)) ([c41ff07](https://github.com/googleapis/google-cloud-node/commit/c41ff0729b65a1207978b4029d6369cc0552e0bf))
+
+## [2.0.0](https://github.com/googleapis/google-cloud-node/compare/alloydb-v1.10.2...alloydb-v2.0.0) (2025-03-18)
+
+
+### ⚠ BREAKING CHANGES
+
+* upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096))
+
+### Features
+
+* [Many APIs] add request/response debug logging to gapics, update templates to gax 5  ([54a73fe](https://github.com/googleapis/google-cloud-node/commit/54a73fe74eab0675c006f24d5f1e4574c44d829b))
+
+
+### Miscellaneous Chores
+
+* Upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096)) ([eadae64](https://github.com/googleapis/google-cloud-node/commit/eadae64d54e07aa2c65097ea52e65008d4e87436))
+
+## [1.10.2](https://github.com/googleapis/google-cloud-node/compare/alloydb-v1.10.1...alloydb-v1.10.2) (2025-02-12)
+
+
+### Bug Fixes
+
+* [Many APIs] finalize fixing typings for headers in generator ([#6011](https://github.com/googleapis/google-cloud-node/issues/6011)) ([ee865ff](https://github.com/googleapis/google-cloud-node/commit/ee865ff34a696fbd657e4cfb6cc4be2f6651f77a))
+
 ## [1.10.1](https://github.com/googleapis/google-cloud-node/compare/alloydb-v1.10.0...alloydb-v1.10.1) (2024-11-14)
 
 

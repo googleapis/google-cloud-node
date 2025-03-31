@@ -27,6 +27,7 @@ import type {
 
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
+import {loggingUtils as logging} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -51,6 +52,8 @@ export class SolarClient {
   private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
+  private _log = logging.log('solar');
+
   auth: gax.GoogleAuth;
   descriptors: Descriptors = {
     page: {},
@@ -84,7 +87,7 @@ export class SolarClient {
    *     Developer's Console, e.g. 'grape-spaceship-123'. We will also check
    *     the environment variable GCLOUD_PROJECT for your project ID. If your
    *     app is running in an environment which supports
-   *     {@link https://developers.google.com/identity/protocols/application-default-credentials Application Default Credentials},
+   *     {@link https://cloud.google.com/docs/authentication/application-default-credentials Application Default Credentials},
    *     your project ID will be detected automatically.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
@@ -462,12 +465,39 @@ export class SolarClient {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    this.initialize();
-    return this.innerApiCalls.findClosestBuildingInsights(
-      request,
-      options,
-      callback
-    );
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('findClosestBuildingInsights request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.maps.solar.v1.IBuildingInsights,
+          | protos.google.maps.solar.v1.IFindClosestBuildingInsightsRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('findClosestBuildingInsights response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .findClosestBuildingInsights(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.maps.solar.v1.IBuildingInsights,
+          (
+            | protos.google.maps.solar.v1.IFindClosestBuildingInsightsRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('findClosestBuildingInsights response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Gets solar information for a region surrounding a location.
@@ -578,8 +608,34 @@ export class SolarClient {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    this.initialize();
-    return this.innerApiCalls.getDataLayers(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('getDataLayers request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.maps.solar.v1.IDataLayers,
+          protos.google.maps.solar.v1.IGetDataLayersRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getDataLayers response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getDataLayers(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.maps.solar.v1.IDataLayers,
+          protos.google.maps.solar.v1.IGetDataLayersRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getDataLayers response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Returns an image by its ID.
@@ -656,8 +712,34 @@ export class SolarClient {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    this.initialize();
-    return this.innerApiCalls.getGeoTiff(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('getGeoTiff request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.api.IHttpBody,
+          protos.google.maps.solar.v1.IGetGeoTiffRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getGeoTiff response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getGeoTiff(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.api.IHttpBody,
+          protos.google.maps.solar.v1.IGetGeoTiffRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getGeoTiff response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
 
   /**
@@ -669,6 +751,7 @@ export class SolarClient {
   close(): Promise<void> {
     if (this.solarStub && !this._terminated) {
       return this.solarStub.then(stub => {
+        this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
       });

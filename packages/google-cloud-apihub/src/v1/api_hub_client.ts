@@ -31,6 +31,7 @@ import type {
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
+import {loggingUtils as logging} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -55,6 +56,8 @@ export class ApiHubClient {
   private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
+  private _log = logging.log('apihub');
+
   auth: gax.GoogleAuth;
   descriptors: Descriptors = {
     page: {},
@@ -90,7 +93,7 @@ export class ApiHubClient {
    *     Developer's Console, e.g. 'grape-spaceship-123'. We will also check
    *     the environment variable GCLOUD_PROJECT for your project ID. If your
    *     app is running in an environment which supports
-   *     {@link https://developers.google.com/identity/protocols/application-default-credentials Application Default Credentials},
+   *     {@link https://cloud.google.com/docs/authentication/application-default-credentials Application Default Credentials},
    *     your project ID will be detected automatically.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
@@ -600,8 +603,34 @@ export class ApiHubClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.createApi(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('createApi request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.apihub.v1.IApi,
+          protos.google.cloud.apihub.v1.ICreateApiRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('createApi response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .createApi(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.apihub.v1.IApi,
+          protos.google.cloud.apihub.v1.ICreateApiRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createApi response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Get API resource details including the API versions contained in it.
@@ -683,8 +712,34 @@ export class ApiHubClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.getApi(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('getApi request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.apihub.v1.IApi,
+          protos.google.cloud.apihub.v1.IGetApiRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getApi response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getApi(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.apihub.v1.IApi,
+          protos.google.cloud.apihub.v1.IGetApiRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getApi response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Update an API resource in the API hub. The following fields in the
@@ -789,8 +844,34 @@ export class ApiHubClient {
       this._gaxModule.routingHeader.fromParams({
         'api.name': request.api!.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.updateApi(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('updateApi request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.apihub.v1.IApi,
+          protos.google.cloud.apihub.v1.IUpdateApiRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('updateApi response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .updateApi(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.apihub.v1.IApi,
+          protos.google.cloud.apihub.v1.IUpdateApiRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('updateApi response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Delete an API resource in the API hub. API can only be deleted if all
@@ -876,8 +957,34 @@ export class ApiHubClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.deleteApi(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('deleteApi request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.cloud.apihub.v1.IDeleteApiRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('deleteApi response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .deleteApi(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.protobuf.IEmpty,
+          protos.google.cloud.apihub.v1.IDeleteApiRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteApi response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Create an API version for an API resource in the API hub.
@@ -973,8 +1080,36 @@ export class ApiHubClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.createVersion(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('createVersion request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.apihub.v1.IVersion,
+          | protos.google.cloud.apihub.v1.ICreateVersionRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('createVersion response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .createVersion(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.apihub.v1.IVersion,
+          protos.google.cloud.apihub.v1.ICreateVersionRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createVersion response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Get details about the API version of an API resource. This will include
@@ -1059,8 +1194,34 @@ export class ApiHubClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.getVersion(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('getVersion request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.apihub.v1.IVersion,
+          protos.google.cloud.apihub.v1.IGetVersionRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getVersion response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getVersion(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.apihub.v1.IVersion,
+          protos.google.cloud.apihub.v1.IGetVersionRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getVersion response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Update API version. The following fields in the
@@ -1163,8 +1324,36 @@ export class ApiHubClient {
       this._gaxModule.routingHeader.fromParams({
         'version.name': request.version!.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.updateVersion(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('updateVersion request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.apihub.v1.IVersion,
+          | protos.google.cloud.apihub.v1.IUpdateVersionRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('updateVersion response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .updateVersion(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.apihub.v1.IVersion,
+          protos.google.cloud.apihub.v1.IUpdateVersionRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('updateVersion response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Delete an API version. Version can only be deleted if all underlying specs,
@@ -1253,8 +1442,36 @@ export class ApiHubClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.deleteVersion(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('deleteVersion request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.cloud.apihub.v1.IDeleteVersionRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('deleteVersion response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .deleteVersion(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.protobuf.IEmpty,
+          protos.google.cloud.apihub.v1.IDeleteVersionRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteVersion response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Add a spec to an API version in the API hub.
@@ -1370,8 +1587,34 @@ export class ApiHubClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.createSpec(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('createSpec request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.apihub.v1.ISpec,
+          protos.google.cloud.apihub.v1.ICreateSpecRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('createSpec response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .createSpec(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.apihub.v1.ISpec,
+          protos.google.cloud.apihub.v1.ICreateSpecRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createSpec response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Get details about the information parsed from a spec.
@@ -1457,8 +1700,34 @@ export class ApiHubClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.getSpec(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('getSpec request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.apihub.v1.ISpec,
+          protos.google.cloud.apihub.v1.IGetSpecRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getSpec response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getSpec(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.apihub.v1.ISpec,
+          protos.google.cloud.apihub.v1.IGetSpecRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getSpec response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Get spec contents.
@@ -1543,8 +1812,36 @@ export class ApiHubClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.getSpecContents(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('getSpecContents request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.apihub.v1.ISpecContents,
+          | protos.google.cloud.apihub.v1.IGetSpecContentsRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getSpecContents response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getSpecContents(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.apihub.v1.ISpecContents,
+          protos.google.cloud.apihub.v1.IGetSpecContentsRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getSpecContents response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Update spec. The following fields in the
@@ -1652,8 +1949,34 @@ export class ApiHubClient {
       this._gaxModule.routingHeader.fromParams({
         'spec.name': request.spec!.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.updateSpec(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('updateSpec request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.apihub.v1.ISpec,
+          protos.google.cloud.apihub.v1.IUpdateSpecRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('updateSpec response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .updateSpec(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.apihub.v1.ISpec,
+          protos.google.cloud.apihub.v1.IUpdateSpecRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('updateSpec response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Delete a spec.
@@ -1738,8 +2061,34 @@ export class ApiHubClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.deleteSpec(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('deleteSpec request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.cloud.apihub.v1.IDeleteSpecRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('deleteSpec response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .deleteSpec(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.protobuf.IEmpty,
+          protos.google.cloud.apihub.v1.IDeleteSpecRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteSpec response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Get details about a particular operation in API version.
@@ -1824,8 +2173,36 @@ export class ApiHubClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.getApiOperation(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('getApiOperation request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.apihub.v1.IApiOperation,
+          | protos.google.cloud.apihub.v1.IGetApiOperationRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getApiOperation response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getApiOperation(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.apihub.v1.IApiOperation,
+          protos.google.cloud.apihub.v1.IGetApiOperationRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getApiOperation response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Get details about a definition in an API version.
@@ -1910,8 +2287,36 @@ export class ApiHubClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.getDefinition(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('getDefinition request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.apihub.v1.IDefinition,
+          | protos.google.cloud.apihub.v1.IGetDefinitionRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getDefinition response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getDefinition(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.apihub.v1.IDefinition,
+          protos.google.cloud.apihub.v1.IGetDefinitionRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getDefinition response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Create a deployment resource in the API hub.
@@ -2010,8 +2415,36 @@ export class ApiHubClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.createDeployment(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('createDeployment request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.apihub.v1.IDeployment,
+          | protos.google.cloud.apihub.v1.ICreateDeploymentRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('createDeployment response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .createDeployment(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.apihub.v1.IDeployment,
+          protos.google.cloud.apihub.v1.ICreateDeploymentRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createDeployment response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Get details about a deployment and the API versions linked to it.
@@ -2095,8 +2528,36 @@ export class ApiHubClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.getDeployment(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('getDeployment request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.apihub.v1.IDeployment,
+          | protos.google.cloud.apihub.v1.IGetDeploymentRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getDeployment response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getDeployment(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.apihub.v1.IDeployment,
+          protos.google.cloud.apihub.v1.IGetDeploymentRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getDeployment response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Update a deployment resource in the API hub. The following fields in the
@@ -2201,8 +2662,36 @@ export class ApiHubClient {
       this._gaxModule.routingHeader.fromParams({
         'deployment.name': request.deployment!.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.updateDeployment(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('updateDeployment request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.apihub.v1.IDeployment,
+          | protos.google.cloud.apihub.v1.IUpdateDeploymentRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('updateDeployment response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .updateDeployment(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.apihub.v1.IDeployment,
+          protos.google.cloud.apihub.v1.IUpdateDeploymentRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('updateDeployment response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Delete a deployment resource in the API hub.
@@ -2286,8 +2775,36 @@ export class ApiHubClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.deleteDeployment(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('deleteDeployment request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.cloud.apihub.v1.IDeleteDeploymentRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('deleteDeployment response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .deleteDeployment(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.protobuf.IEmpty,
+          protos.google.cloud.apihub.v1.IDeleteDeploymentRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteDeployment response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Create a user defined attribute.
@@ -2390,8 +2907,36 @@ export class ApiHubClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.createAttribute(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('createAttribute request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.apihub.v1.IAttribute,
+          | protos.google.cloud.apihub.v1.ICreateAttributeRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('createAttribute response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .createAttribute(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.apihub.v1.IAttribute,
+          protos.google.cloud.apihub.v1.ICreateAttributeRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createAttribute response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Get details about the attribute.
@@ -2474,8 +3019,34 @@ export class ApiHubClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.getAttribute(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('getAttribute request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.apihub.v1.IAttribute,
+          protos.google.cloud.apihub.v1.IGetAttributeRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getAttribute response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getAttribute(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.apihub.v1.IAttribute,
+          protos.google.cloud.apihub.v1.IGetAttributeRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getAttribute response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Update the attribute.  The following fields in the
@@ -2586,8 +3157,36 @@ export class ApiHubClient {
       this._gaxModule.routingHeader.fromParams({
         'attribute.name': request.attribute!.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.updateAttribute(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('updateAttribute request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.apihub.v1.IAttribute,
+          | protos.google.cloud.apihub.v1.IUpdateAttributeRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('updateAttribute response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .updateAttribute(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.apihub.v1.IAttribute,
+          protos.google.cloud.apihub.v1.IUpdateAttributeRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('updateAttribute response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Delete an attribute.
@@ -2676,8 +3275,36 @@ export class ApiHubClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.deleteAttribute(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('deleteAttribute request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.cloud.apihub.v1.IDeleteAttributeRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('deleteAttribute response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .deleteAttribute(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.protobuf.IEmpty,
+          protos.google.cloud.apihub.v1.IDeleteAttributeRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteAttribute response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Create an External API resource in the API hub.
@@ -2781,8 +3408,36 @@ export class ApiHubClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.createExternalApi(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('createExternalApi request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.apihub.v1.IExternalApi,
+          | protos.google.cloud.apihub.v1.ICreateExternalApiRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('createExternalApi response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .createExternalApi(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.apihub.v1.IExternalApi,
+          protos.google.cloud.apihub.v1.ICreateExternalApiRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createExternalApi response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Get details about an External API resource in the API hub.
@@ -2867,8 +3522,36 @@ export class ApiHubClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.getExternalApi(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('getExternalApi request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.apihub.v1.IExternalApi,
+          | protos.google.cloud.apihub.v1.IGetExternalApiRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getExternalApi response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getExternalApi(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.apihub.v1.IExternalApi,
+          protos.google.cloud.apihub.v1.IGetExternalApiRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getExternalApi response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Update an External API resource in the API hub. The following fields can be
@@ -2974,8 +3657,36 @@ export class ApiHubClient {
       this._gaxModule.routingHeader.fromParams({
         'external_api.name': request.externalApi!.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.updateExternalApi(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('updateExternalApi request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.apihub.v1.IExternalApi,
+          | protos.google.cloud.apihub.v1.IUpdateExternalApiRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('updateExternalApi response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .updateExternalApi(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.apihub.v1.IExternalApi,
+          protos.google.cloud.apihub.v1.IUpdateExternalApiRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('updateExternalApi response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Delete an External API resource in the API hub.
@@ -3066,8 +3777,36 @@ export class ApiHubClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.deleteExternalApi(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('deleteExternalApi request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.cloud.apihub.v1.IDeleteExternalApiRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('deleteExternalApi response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .deleteExternalApi(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.protobuf.IEmpty,
+          protos.google.cloud.apihub.v1.IDeleteExternalApiRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteExternalApi response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
 
   /**
@@ -3236,8 +3975,34 @@ export class ApiHubClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.listApis(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.apihub.v1.IListApisRequest,
+          protos.google.cloud.apihub.v1.IListApisResponse | null | undefined,
+          protos.google.cloud.apihub.v1.IApi
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listApis values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listApis request %j', request);
+    return this.innerApiCalls
+      .listApis(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.apihub.v1.IApi[],
+          protos.google.cloud.apihub.v1.IListApisRequest | null,
+          protos.google.cloud.apihub.v1.IListApisResponse,
+        ]) => {
+          this._log.info('listApis values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -3355,7 +4120,10 @@ export class ApiHubClient {
       });
     const defaultCallSettings = this._defaults['listApis'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listApis stream %j', request);
     return this.descriptors.page.listApis.createStream(
       this.innerApiCalls.listApis as GaxCall,
       request,
@@ -3481,7 +4249,10 @@ export class ApiHubClient {
       });
     const defaultCallSettings = this._defaults['listApis'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listApis iterate %j', request);
     return this.descriptors.page.listApis.asyncIterate(
       this.innerApiCalls['listApis'] as GaxCall,
       request as {},
@@ -3644,8 +4415,36 @@ export class ApiHubClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.listVersions(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.apihub.v1.IListVersionsRequest,
+          | protos.google.cloud.apihub.v1.IListVersionsResponse
+          | null
+          | undefined,
+          protos.google.cloud.apihub.v1.IVersion
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listVersions values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listVersions request %j', request);
+    return this.innerApiCalls
+      .listVersions(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.apihub.v1.IVersion[],
+          protos.google.cloud.apihub.v1.IListVersionsRequest | null,
+          protos.google.cloud.apihub.v1.IListVersionsResponse,
+        ]) => {
+          this._log.info('listVersions values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -3751,7 +4550,10 @@ export class ApiHubClient {
       });
     const defaultCallSettings = this._defaults['listVersions'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listVersions stream %j', request);
     return this.descriptors.page.listVersions.createStream(
       this.innerApiCalls.listVersions as GaxCall,
       request,
@@ -3865,7 +4667,10 @@ export class ApiHubClient {
       });
     const defaultCallSettings = this._defaults['listVersions'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listVersions iterate %j', request);
     return this.descriptors.page.listVersions.asyncIterate(
       this.innerApiCalls['listVersions'] as GaxCall,
       request as {},
@@ -4019,8 +4824,34 @@ export class ApiHubClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.listSpecs(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.apihub.v1.IListSpecsRequest,
+          protos.google.cloud.apihub.v1.IListSpecsResponse | null | undefined,
+          protos.google.cloud.apihub.v1.ISpec
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listSpecs values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listSpecs request %j', request);
+    return this.innerApiCalls
+      .listSpecs(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.apihub.v1.ISpec[],
+          protos.google.cloud.apihub.v1.IListSpecsRequest | null,
+          protos.google.cloud.apihub.v1.IListSpecsResponse,
+        ]) => {
+          this._log.info('listSpecs values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -4119,7 +4950,10 @@ export class ApiHubClient {
       });
     const defaultCallSettings = this._defaults['listSpecs'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listSpecs stream %j', request);
     return this.descriptors.page.listSpecs.createStream(
       this.innerApiCalls.listSpecs as GaxCall,
       request,
@@ -4226,7 +5060,10 @@ export class ApiHubClient {
       });
     const defaultCallSettings = this._defaults['listSpecs'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listSpecs iterate %j', request);
     return this.descriptors.page.listSpecs.asyncIterate(
       this.innerApiCalls['listSpecs'] as GaxCall,
       request as {},
@@ -4377,8 +5214,36 @@ export class ApiHubClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.listApiOperations(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.apihub.v1.IListApiOperationsRequest,
+          | protos.google.cloud.apihub.v1.IListApiOperationsResponse
+          | null
+          | undefined,
+          protos.google.cloud.apihub.v1.IApiOperation
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listApiOperations values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listApiOperations request %j', request);
+    return this.innerApiCalls
+      .listApiOperations(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.apihub.v1.IApiOperation[],
+          protos.google.cloud.apihub.v1.IListApiOperationsRequest | null,
+          protos.google.cloud.apihub.v1.IListApiOperationsResponse,
+        ]) => {
+          this._log.info('listApiOperations values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -4466,7 +5331,10 @@ export class ApiHubClient {
       });
     const defaultCallSettings = this._defaults['listApiOperations'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listApiOperations stream %j', request);
     return this.descriptors.page.listApiOperations.createStream(
       this.innerApiCalls.listApiOperations as GaxCall,
       request,
@@ -4562,7 +5430,10 @@ export class ApiHubClient {
       });
     const defaultCallSettings = this._defaults['listApiOperations'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listApiOperations iterate %j', request);
     return this.descriptors.page.listApiOperations.asyncIterate(
       this.innerApiCalls['listApiOperations'] as GaxCall,
       request as {},
@@ -4724,8 +5595,36 @@ export class ApiHubClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.listDeployments(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.apihub.v1.IListDeploymentsRequest,
+          | protos.google.cloud.apihub.v1.IListDeploymentsResponse
+          | null
+          | undefined,
+          protos.google.cloud.apihub.v1.IDeployment
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listDeployments values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listDeployments request %j', request);
+    return this.innerApiCalls
+      .listDeployments(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.apihub.v1.IDeployment[],
+          protos.google.cloud.apihub.v1.IListDeploymentsRequest | null,
+          protos.google.cloud.apihub.v1.IListDeploymentsResponse,
+        ]) => {
+          this._log.info('listDeployments values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -4830,7 +5729,10 @@ export class ApiHubClient {
       });
     const defaultCallSettings = this._defaults['listDeployments'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listDeployments stream %j', request);
     return this.descriptors.page.listDeployments.createStream(
       this.innerApiCalls.listDeployments as GaxCall,
       request,
@@ -4943,7 +5845,10 @@ export class ApiHubClient {
       });
     const defaultCallSettings = this._defaults['listDeployments'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listDeployments iterate %j', request);
     return this.descriptors.page.listDeployments.asyncIterate(
       this.innerApiCalls['listDeployments'] as GaxCall,
       request as {},
@@ -5090,8 +5995,36 @@ export class ApiHubClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.listAttributes(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.apihub.v1.IListAttributesRequest,
+          | protos.google.cloud.apihub.v1.IListAttributesResponse
+          | null
+          | undefined,
+          protos.google.cloud.apihub.v1.IAttribute
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listAttributes values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listAttributes request %j', request);
+    return this.innerApiCalls
+      .listAttributes(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.apihub.v1.IAttribute[],
+          protos.google.cloud.apihub.v1.IListAttributesRequest | null,
+          protos.google.cloud.apihub.v1.IListAttributesResponse,
+        ]) => {
+          this._log.info('listAttributes values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -5181,7 +6114,10 @@ export class ApiHubClient {
       });
     const defaultCallSettings = this._defaults['listAttributes'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listAttributes stream %j', request);
     return this.descriptors.page.listAttributes.createStream(
       this.innerApiCalls.listAttributes as GaxCall,
       request,
@@ -5279,7 +6215,10 @@ export class ApiHubClient {
       });
     const defaultCallSettings = this._defaults['listAttributes'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listAttributes iterate %j', request);
     return this.descriptors.page.listAttributes.asyncIterate(
       this.innerApiCalls['listAttributes'] as GaxCall,
       request as {},
@@ -5411,8 +6350,36 @@ export class ApiHubClient {
       this._gaxModule.routingHeader.fromParams({
         location: request.location ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.searchResources(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.apihub.v1.ISearchResourcesRequest,
+          | protos.google.cloud.apihub.v1.ISearchResourcesResponse
+          | null
+          | undefined,
+          protos.google.cloud.apihub.v1.ISearchResult
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('searchResources values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('searchResources request %j', request);
+    return this.innerApiCalls
+      .searchResources(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.apihub.v1.ISearchResult[],
+          protos.google.cloud.apihub.v1.ISearchResourcesRequest | null,
+          protos.google.cloud.apihub.v1.ISearchResourcesResponse,
+        ]) => {
+          this._log.info('searchResources values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -5487,7 +6454,10 @@ export class ApiHubClient {
       });
     const defaultCallSettings = this._defaults['searchResources'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('searchResources stream %j', request);
     return this.descriptors.page.searchResources.createStream(
       this.innerApiCalls.searchResources as GaxCall,
       request,
@@ -5570,7 +6540,10 @@ export class ApiHubClient {
       });
     const defaultCallSettings = this._defaults['searchResources'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('searchResources iterate %j', request);
     return this.descriptors.page.searchResources.asyncIterate(
       this.innerApiCalls['searchResources'] as GaxCall,
       request as {},
@@ -5679,8 +6652,36 @@ export class ApiHubClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.listExternalApis(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.apihub.v1.IListExternalApisRequest,
+          | protos.google.cloud.apihub.v1.IListExternalApisResponse
+          | null
+          | undefined,
+          protos.google.cloud.apihub.v1.IExternalApi
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listExternalApis values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listExternalApis request %j', request);
+    return this.innerApiCalls
+      .listExternalApis(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.apihub.v1.IExternalApi[],
+          protos.google.cloud.apihub.v1.IListExternalApisRequest | null,
+          protos.google.cloud.apihub.v1.IListExternalApisResponse,
+        ]) => {
+          this._log.info('listExternalApis values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -5726,7 +6727,10 @@ export class ApiHubClient {
       });
     const defaultCallSettings = this._defaults['listExternalApis'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listExternalApis stream %j', request);
     return this.descriptors.page.listExternalApis.createStream(
       this.innerApiCalls.listExternalApis as GaxCall,
       request,
@@ -5780,7 +6784,10 @@ export class ApiHubClient {
       });
     const defaultCallSettings = this._defaults['listExternalApis'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listExternalApis iterate %j', request);
     return this.descriptors.page.listExternalApis.asyncIterate(
       this.innerApiCalls['listExternalApis'] as GaxCall,
       request as {},
@@ -6798,6 +7805,7 @@ export class ApiHubClient {
   close(): Promise<void> {
     if (this.apiHubStub && !this._terminated) {
       return this.apiHubStub.then(stub => {
+        this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
         this.locationsClient.close();

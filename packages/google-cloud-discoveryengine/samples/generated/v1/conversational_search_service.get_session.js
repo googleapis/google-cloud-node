@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -30,9 +30,14 @@ function main(name) {
    */
   /**
    *  Required. The resource name of the Session to get. Format:
-   *  `projects/{project_number}/locations/{location_id}/collections/{collection}/dataStores/{data_store_id}/sessions/{session_id}`
+   *  `projects/{project}/locations/{location}/collections/{collection}/dataStores/{data_store_id}/sessions/{session_id}`
    */
   // const name = 'abc123'
+  /**
+   *  Optional. If set to true, the full session including all answer details
+   *  will be returned.
+   */
+  // const includeAnswerDetails = true
 
   // Imports the Discoveryengine library
   const {ConversationalSearchServiceClient} = require('@google-cloud/discoveryengine').v1;

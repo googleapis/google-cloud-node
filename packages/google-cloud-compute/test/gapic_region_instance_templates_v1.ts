@@ -278,7 +278,9 @@ describe('v1.RegionInstanceTemplatesClient', () => {
           auth: googleAuth,
           projectId: 'bogus',
         });
-      client.initialize();
+      client.initialize().catch(err => {
+        throw err;
+      });
       assert(client.regionInstanceTemplatesStub);
       client.close().then(() => {
         done();
@@ -341,7 +343,7 @@ describe('v1.RegionInstanceTemplatesClient', () => {
           auth: googleAuth,
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DeleteRegionInstanceTemplateRequest()
       );
@@ -383,7 +385,7 @@ describe('v1.RegionInstanceTemplatesClient', () => {
           auth: googleAuth,
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DeleteRegionInstanceTemplateRequest()
       );
@@ -441,7 +443,7 @@ describe('v1.RegionInstanceTemplatesClient', () => {
           auth: googleAuth,
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DeleteRegionInstanceTemplateRequest()
       );
@@ -480,7 +482,7 @@ describe('v1.RegionInstanceTemplatesClient', () => {
           auth: googleAuth,
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DeleteRegionInstanceTemplateRequest()
       );
@@ -512,7 +514,7 @@ describe('v1.RegionInstanceTemplatesClient', () => {
           auth: googleAuth,
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetRegionInstanceTemplateRequest()
       );
@@ -553,7 +555,7 @@ describe('v1.RegionInstanceTemplatesClient', () => {
           auth: googleAuth,
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetRegionInstanceTemplateRequest()
       );
@@ -609,7 +611,7 @@ describe('v1.RegionInstanceTemplatesClient', () => {
           auth: googleAuth,
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetRegionInstanceTemplateRequest()
       );
@@ -647,7 +649,7 @@ describe('v1.RegionInstanceTemplatesClient', () => {
           auth: googleAuth,
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetRegionInstanceTemplateRequest()
       );
@@ -679,7 +681,7 @@ describe('v1.RegionInstanceTemplatesClient', () => {
           auth: googleAuth,
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.InsertRegionInstanceTemplateRequest()
       );
@@ -716,7 +718,7 @@ describe('v1.RegionInstanceTemplatesClient', () => {
           auth: googleAuth,
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.InsertRegionInstanceTemplateRequest()
       );
@@ -769,7 +771,7 @@ describe('v1.RegionInstanceTemplatesClient', () => {
           auth: googleAuth,
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.InsertRegionInstanceTemplateRequest()
       );
@@ -803,7 +805,7 @@ describe('v1.RegionInstanceTemplatesClient', () => {
           auth: googleAuth,
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.InsertRegionInstanceTemplateRequest()
       );
@@ -830,7 +832,7 @@ describe('v1.RegionInstanceTemplatesClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListRegionInstanceTemplatesRequest()
       );
@@ -874,7 +876,7 @@ describe('v1.RegionInstanceTemplatesClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListRegionInstanceTemplatesRequest()
       );
@@ -933,7 +935,7 @@ describe('v1.RegionInstanceTemplatesClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListRegionInstanceTemplatesRequest()
       );
@@ -966,7 +968,7 @@ describe('v1.RegionInstanceTemplatesClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListRegionInstanceTemplatesRequest()
       );
@@ -1032,7 +1034,7 @@ describe('v1.RegionInstanceTemplatesClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListRegionInstanceTemplatesRequest()
       );
@@ -1089,7 +1091,7 @@ describe('v1.RegionInstanceTemplatesClient', () => {
           auth: googleAuth,
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListRegionInstanceTemplatesRequest()
       );
@@ -1143,7 +1145,7 @@ describe('v1.RegionInstanceTemplatesClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListRegionInstanceTemplatesRequest()
       );

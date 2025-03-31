@@ -223,7 +223,9 @@ describe('v1beta4.SqlSslCertsServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      client.initialize().catch(err => {
+        throw err;
+      });
       assert(client.sqlSslCertsServiceStub);
       client.close().then(() => {
         done();
@@ -286,7 +288,7 @@ describe('v1beta4.SqlSslCertsServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.sql.v1beta4.SqlSslCertsDeleteRequest()
       );
@@ -305,7 +307,7 @@ describe('v1beta4.SqlSslCertsServiceClient', () => {
         ['sha1Fingerprint']
       );
       request.sha1Fingerprint = defaultValue3;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&instance=${defaultValue2}&sha1_fingerprint=${defaultValue3}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&instance=${defaultValue2 ?? ''}&sha1_fingerprint=${defaultValue3 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.sql.v1beta4.Operation()
       );
@@ -328,7 +330,7 @@ describe('v1beta4.SqlSslCertsServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.sql.v1beta4.SqlSslCertsDeleteRequest()
       );
@@ -347,7 +349,7 @@ describe('v1beta4.SqlSslCertsServiceClient', () => {
         ['sha1Fingerprint']
       );
       request.sha1Fingerprint = defaultValue3;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&instance=${defaultValue2}&sha1_fingerprint=${defaultValue3}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&instance=${defaultValue2 ?? ''}&sha1_fingerprint=${defaultValue3 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.sql.v1beta4.Operation()
       );
@@ -386,7 +388,7 @@ describe('v1beta4.SqlSslCertsServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.sql.v1beta4.SqlSslCertsDeleteRequest()
       );
@@ -405,7 +407,7 @@ describe('v1beta4.SqlSslCertsServiceClient', () => {
         ['sha1Fingerprint']
       );
       request.sha1Fingerprint = defaultValue3;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&instance=${defaultValue2}&sha1_fingerprint=${defaultValue3}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&instance=${defaultValue2 ?? ''}&sha1_fingerprint=${defaultValue3 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.delete = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.delete(request), expectedError);
@@ -425,7 +427,7 @@ describe('v1beta4.SqlSslCertsServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.sql.v1beta4.SqlSslCertsDeleteRequest()
       );
@@ -457,7 +459,7 @@ describe('v1beta4.SqlSslCertsServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.sql.v1beta4.SqlSslCertsGetRequest()
       );
@@ -476,7 +478,7 @@ describe('v1beta4.SqlSslCertsServiceClient', () => {
         ['sha1Fingerprint']
       );
       request.sha1Fingerprint = defaultValue3;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&instance=${defaultValue2}&sha1_fingerprint=${defaultValue3}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&instance=${defaultValue2 ?? ''}&sha1_fingerprint=${defaultValue3 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.sql.v1beta4.SslCert()
       );
@@ -498,7 +500,7 @@ describe('v1beta4.SqlSslCertsServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.sql.v1beta4.SqlSslCertsGetRequest()
       );
@@ -517,7 +519,7 @@ describe('v1beta4.SqlSslCertsServiceClient', () => {
         ['sha1Fingerprint']
       );
       request.sha1Fingerprint = defaultValue3;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&instance=${defaultValue2}&sha1_fingerprint=${defaultValue3}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&instance=${defaultValue2 ?? ''}&sha1_fingerprint=${defaultValue3 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.sql.v1beta4.SslCert()
       );
@@ -554,7 +556,7 @@ describe('v1beta4.SqlSslCertsServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.sql.v1beta4.SqlSslCertsGetRequest()
       );
@@ -573,7 +575,7 @@ describe('v1beta4.SqlSslCertsServiceClient', () => {
         ['sha1Fingerprint']
       );
       request.sha1Fingerprint = defaultValue3;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&instance=${defaultValue2}&sha1_fingerprint=${defaultValue3}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&instance=${defaultValue2 ?? ''}&sha1_fingerprint=${defaultValue3 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.get = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.get(request), expectedError);
@@ -592,7 +594,7 @@ describe('v1beta4.SqlSslCertsServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.sql.v1beta4.SqlSslCertsGetRequest()
       );
@@ -624,7 +626,7 @@ describe('v1beta4.SqlSslCertsServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.sql.v1beta4.SqlSslCertsInsertRequest()
       );
@@ -638,7 +640,7 @@ describe('v1beta4.SqlSslCertsServiceClient', () => {
         ['instance']
       );
       request.instance = defaultValue2;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&instance=${defaultValue2}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&instance=${defaultValue2 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.sql.v1beta4.SslCertsInsertResponse()
       );
@@ -661,7 +663,7 @@ describe('v1beta4.SqlSslCertsServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.sql.v1beta4.SqlSslCertsInsertRequest()
       );
@@ -675,7 +677,7 @@ describe('v1beta4.SqlSslCertsServiceClient', () => {
         ['instance']
       );
       request.instance = defaultValue2;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&instance=${defaultValue2}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&instance=${defaultValue2 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.sql.v1beta4.SslCertsInsertResponse()
       );
@@ -714,7 +716,7 @@ describe('v1beta4.SqlSslCertsServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.sql.v1beta4.SqlSslCertsInsertRequest()
       );
@@ -728,7 +730,7 @@ describe('v1beta4.SqlSslCertsServiceClient', () => {
         ['instance']
       );
       request.instance = defaultValue2;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&instance=${defaultValue2}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&instance=${defaultValue2 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.insert = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.insert(request), expectedError);
@@ -748,7 +750,7 @@ describe('v1beta4.SqlSslCertsServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.sql.v1beta4.SqlSslCertsInsertRequest()
       );
@@ -775,7 +777,7 @@ describe('v1beta4.SqlSslCertsServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.sql.v1beta4.SqlSslCertsListRequest()
       );
@@ -789,7 +791,7 @@ describe('v1beta4.SqlSslCertsServiceClient', () => {
         ['instance']
       );
       request.instance = defaultValue2;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&instance=${defaultValue2}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&instance=${defaultValue2 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.sql.v1beta4.SslCertsListResponse()
       );
@@ -811,7 +813,7 @@ describe('v1beta4.SqlSslCertsServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.sql.v1beta4.SqlSslCertsListRequest()
       );
@@ -825,7 +827,7 @@ describe('v1beta4.SqlSslCertsServiceClient', () => {
         ['instance']
       );
       request.instance = defaultValue2;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&instance=${defaultValue2}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&instance=${defaultValue2 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.sql.v1beta4.SslCertsListResponse()
       );
@@ -862,7 +864,7 @@ describe('v1beta4.SqlSslCertsServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.sql.v1beta4.SqlSslCertsListRequest()
       );
@@ -876,7 +878,7 @@ describe('v1beta4.SqlSslCertsServiceClient', () => {
         ['instance']
       );
       request.instance = defaultValue2;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&instance=${defaultValue2}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&instance=${defaultValue2 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.list = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.list(request), expectedError);
@@ -895,7 +897,7 @@ describe('v1beta4.SqlSslCertsServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.sql.v1beta4.SqlSslCertsListRequest()
       );
@@ -921,7 +923,7 @@ describe('v1beta4.SqlSslCertsServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.GetLocationRequest()
       );
@@ -952,7 +954,7 @@ describe('v1beta4.SqlSslCertsServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.GetLocationRequest()
       );
@@ -997,7 +999,7 @@ describe('v1beta4.SqlSslCertsServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.GetLocationRequest()
       );
@@ -1033,7 +1035,7 @@ describe('v1beta4.SqlSslCertsServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.ListLocationsRequest()
       );
@@ -1082,7 +1084,7 @@ describe('v1beta4.SqlSslCertsServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.ListLocationsRequest()
       );

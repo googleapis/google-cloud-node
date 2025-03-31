@@ -1,7 +1,7 @@
 {
     "clientLibrary": {
         "name": "nodejs-containeranalysis",
-        "version": "5.6.0",
+        "version": "6.1.0",
         "language": "TYPESCRIPT",
         "apis": [
             {

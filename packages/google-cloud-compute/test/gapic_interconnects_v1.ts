@@ -265,7 +265,9 @@ describe('v1.InterconnectsClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      client.initialize().catch(err => {
+        throw err;
+      });
       assert(client.interconnectsStub);
       client.close().then(() => {
         done();
@@ -324,7 +326,7 @@ describe('v1.InterconnectsClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DeleteInterconnectRequest()
       );
@@ -360,7 +362,7 @@ describe('v1.InterconnectsClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DeleteInterconnectRequest()
       );
@@ -412,7 +414,7 @@ describe('v1.InterconnectsClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DeleteInterconnectRequest()
       );
@@ -445,7 +447,7 @@ describe('v1.InterconnectsClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DeleteInterconnectRequest()
       );
@@ -471,7 +473,7 @@ describe('v1.InterconnectsClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetInterconnectRequest()
       );
@@ -506,7 +508,7 @@ describe('v1.InterconnectsClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetInterconnectRequest()
       );
@@ -556,7 +558,7 @@ describe('v1.InterconnectsClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetInterconnectRequest()
       );
@@ -588,7 +590,7 @@ describe('v1.InterconnectsClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetInterconnectRequest()
       );
@@ -614,7 +616,7 @@ describe('v1.InterconnectsClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetDiagnosticsInterconnectRequest()
       );
@@ -650,7 +652,7 @@ describe('v1.InterconnectsClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetDiagnosticsInterconnectRequest()
       );
@@ -702,7 +704,7 @@ describe('v1.InterconnectsClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetDiagnosticsInterconnectRequest()
       );
@@ -738,7 +740,7 @@ describe('v1.InterconnectsClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetDiagnosticsInterconnectRequest()
       );
@@ -764,7 +766,7 @@ describe('v1.InterconnectsClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetMacsecConfigInterconnectRequest()
       );
@@ -800,7 +802,7 @@ describe('v1.InterconnectsClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetMacsecConfigInterconnectRequest()
       );
@@ -852,7 +854,7 @@ describe('v1.InterconnectsClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetMacsecConfigInterconnectRequest()
       );
@@ -888,7 +890,7 @@ describe('v1.InterconnectsClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetMacsecConfigInterconnectRequest()
       );
@@ -914,7 +916,7 @@ describe('v1.InterconnectsClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.InsertInterconnectRequest()
       );
@@ -945,7 +947,7 @@ describe('v1.InterconnectsClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.InsertInterconnectRequest()
       );
@@ -992,7 +994,7 @@ describe('v1.InterconnectsClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.InsertInterconnectRequest()
       );
@@ -1020,7 +1022,7 @@ describe('v1.InterconnectsClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.InsertInterconnectRequest()
       );
@@ -1041,7 +1043,7 @@ describe('v1.InterconnectsClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.PatchInterconnectRequest()
       );
@@ -1076,7 +1078,7 @@ describe('v1.InterconnectsClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.PatchInterconnectRequest()
       );
@@ -1126,7 +1128,7 @@ describe('v1.InterconnectsClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.PatchInterconnectRequest()
       );
@@ -1158,7 +1160,7 @@ describe('v1.InterconnectsClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.PatchInterconnectRequest()
       );
@@ -1184,7 +1186,7 @@ describe('v1.InterconnectsClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.SetLabelsInterconnectRequest()
       );
@@ -1220,7 +1222,7 @@ describe('v1.InterconnectsClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.SetLabelsInterconnectRequest()
       );
@@ -1272,7 +1274,7 @@ describe('v1.InterconnectsClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.SetLabelsInterconnectRequest()
       );
@@ -1305,7 +1307,7 @@ describe('v1.InterconnectsClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.SetLabelsInterconnectRequest()
       );
@@ -1331,7 +1333,7 @@ describe('v1.InterconnectsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListInterconnectsRequest()
       );
@@ -1369,7 +1371,7 @@ describe('v1.InterconnectsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListInterconnectsRequest()
       );
@@ -1422,7 +1424,7 @@ describe('v1.InterconnectsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListInterconnectsRequest()
       );
@@ -1449,7 +1451,7 @@ describe('v1.InterconnectsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListInterconnectsRequest()
       );
@@ -1509,7 +1511,7 @@ describe('v1.InterconnectsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListInterconnectsRequest()
       );
@@ -1560,7 +1562,7 @@ describe('v1.InterconnectsClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListInterconnectsRequest()
       );
@@ -1608,7 +1610,7 @@ describe('v1.InterconnectsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListInterconnectsRequest()
       );

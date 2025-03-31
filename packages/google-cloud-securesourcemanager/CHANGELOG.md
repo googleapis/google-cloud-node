@@ -1,5 +1,35 @@
 # Changelog
 
+## [0.5.1](https://github.com/googleapis/google-cloud-node/compare/securesourcemanager-v0.5.0...securesourcemanager-v0.5.1) (2025-03-19)
+
+
+### Bug Fixes
+
+* [Many APIs] await/catch promises, and update listOperationsAsync return type ([#6188](https://github.com/googleapis/google-cloud-node/issues/6188)) ([a73cdbf](https://github.com/googleapis/google-cloud-node/commit/a73cdbfe33d5ba9952f0c87cb9d5d12ee8753dd2))
+
+## [0.5.0](https://github.com/googleapis/google-cloud-node/compare/securesourcemanager-v0.4.1...securesourcemanager-v0.5.0) (2025-03-18)
+
+
+### ⚠ BREAKING CHANGES
+
+* upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096))
+
+### Features
+
+* [Many APIs] add request/response debug logging to gapics ([b99c5f8](https://github.com/googleapis/google-cloud-node/commit/b99c5f8269a8401c72e9c913971c7e90467209e2))
+
+
+### Miscellaneous Chores
+
+* Upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096)) ([eadae64](https://github.com/googleapis/google-cloud-node/commit/eadae64d54e07aa2c65097ea52e65008d4e87436))
+
+## [0.4.1](https://github.com/googleapis/google-cloud-node/compare/securesourcemanager-v0.4.0...securesourcemanager-v0.4.1) (2025-02-12)
+
+
+### Bug Fixes
+
+* [Many APIs] finalize fixing typings for headers in generator ([#6018](https://github.com/googleapis/google-cloud-node/issues/6018)) ([9dc5856](https://github.com/googleapis/google-cloud-node/commit/9dc585661489f51bb7a85b39519fd8b11dfffc5b))
+
 ## [0.4.0](https://github.com/googleapis/google-cloud-node/compare/securesourcemanager-v0.3.0...securesourcemanager-v0.4.0) (2024-10-30)
 
 

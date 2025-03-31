@@ -29,6 +29,7 @@ import type {
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
+import {loggingUtils as logging} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -53,6 +54,8 @@ export class PromotionsServiceClient {
   private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
+  private _log = logging.log('promotions');
+
   auth: gax.GoogleAuth;
   descriptors: Descriptors = {
     page: {},
@@ -87,7 +90,7 @@ export class PromotionsServiceClient {
    *     Developer's Console, e.g. 'grape-spaceship-123'. We will also check
    *     the environment variable GCLOUD_PROJECT for your project ID. If your
    *     app is running in an environment which supports
-   *     {@link https://developers.google.com/identity/protocols/application-default-credentials Application Default Credentials},
+   *     {@link https://cloud.google.com/docs/authentication/application-default-credentials Application Default Credentials},
    *     your project ID will be detected automatically.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
@@ -485,8 +488,39 @@ export class PromotionsServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.insertPromotion(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('insertPromotion request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.shopping.merchant.promotions.v1beta.IPromotion,
+          | protos.google.shopping.merchant.promotions.v1beta.IInsertPromotionRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('insertPromotion response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .insertPromotion(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.shopping.merchant.promotions.v1beta.IPromotion,
+          (
+            | protos.google.shopping.merchant.promotions.v1beta.IInsertPromotionRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('insertPromotion response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Retrieves the promotion from your Merchant Center account.
@@ -585,8 +619,39 @@ export class PromotionsServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.getPromotion(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('getPromotion request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.shopping.merchant.promotions.v1beta.IPromotion,
+          | protos.google.shopping.merchant.promotions.v1beta.IGetPromotionRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getPromotion response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getPromotion(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.shopping.merchant.promotions.v1beta.IPromotion,
+          (
+            | protos.google.shopping.merchant.promotions.v1beta.IGetPromotionRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getPromotion response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
 
   /**
@@ -696,12 +761,40 @@ export class PromotionsServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.listPromotions(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.shopping.merchant.promotions.v1beta.IListPromotionsRequest,
+          | protos.google.shopping.merchant.promotions.v1beta.IListPromotionsResponse
+          | null
+          | undefined,
+          protos.google.shopping.merchant.promotions.v1beta.IPromotion
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listPromotions values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listPromotions request %j', request);
+    return this.innerApiCalls
+      .listPromotions(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.shopping.merchant.promotions.v1beta.IPromotion[],
+          protos.google.shopping.merchant.promotions.v1beta.IListPromotionsRequest | null,
+          protos.google.shopping.merchant.promotions.v1beta.IListPromotionsResponse,
+        ]) => {
+          this._log.info('listPromotions values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listPromotions`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
@@ -743,7 +836,10 @@ export class PromotionsServiceClient {
       });
     const defaultCallSettings = this._defaults['listPromotions'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listPromotions stream %j', request);
     return this.descriptors.page.listPromotions.createStream(
       this.innerApiCalls.listPromotions as GaxCall,
       request,
@@ -797,7 +893,10 @@ export class PromotionsServiceClient {
       });
     const defaultCallSettings = this._defaults['listPromotions'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listPromotions iterate %j', request);
     return this.descriptors.page.listPromotions.asyncIterate(
       this.innerApiCalls['listPromotions'] as GaxCall,
       request as {},
@@ -855,6 +954,7 @@ export class PromotionsServiceClient {
   close(): Promise<void> {
     if (this.promotionsServiceStub && !this._terminated) {
       return this.promotionsServiceStub.then(stub => {
+        this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
       });

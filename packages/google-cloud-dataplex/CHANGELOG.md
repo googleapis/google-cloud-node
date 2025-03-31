@@ -1,5 +1,30 @@
 # Changelog
 
+## [4.0.1](https://github.com/googleapis/google-cloud-node/compare/dataplex-v4.0.0...dataplex-v4.0.1) (2025-03-19)
+
+
+### Bug Fixes
+
+* [Many APIs] await/catch promises, and update listOperationsAsync return type ([#6184](https://github.com/googleapis/google-cloud-node/issues/6184)) ([2fcd202](https://github.com/googleapis/google-cloud-node/commit/2fcd2029c35e8fb2199d03ac6e61e2d821ddf72e))
+
+## [4.0.0](https://github.com/googleapis/google-cloud-node/compare/dataplex-v3.14.0...dataplex-v4.0.0) (2025-03-18)
+
+
+### ⚠ BREAKING CHANGES
+
+* upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096))
+
+### Miscellaneous Chores
+
+* Upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096)) ([eadae64](https://github.com/googleapis/google-cloud-node/commit/eadae64d54e07aa2c65097ea52e65008d4e87436))
+
+## [3.14.0](https://github.com/googleapis/google-cloud-node/compare/dataplex-v3.13.0...dataplex-v3.14.0) (2025-02-12)
+
+
+### Features
+
+* [dataplex] Added value `NONE` to  the `SyncMode` enum ([#6022](https://github.com/googleapis/google-cloud-node/issues/6022)) ([b363570](https://github.com/googleapis/google-cloud-node/commit/b363570e21e346f39025d586d6851e5b9b8d2f67))
+
 ## [3.13.0](https://github.com/googleapis/google-cloud-node/compare/dataplex-v3.12.0...dataplex-v3.13.0) (2025-01-11)
 
 

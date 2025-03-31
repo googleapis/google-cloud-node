@@ -1,7 +1,7 @@
 {
     "clientLibrary": {
         "name": "nodejs-dataplex",
-        "version": "3.13.0",
+        "version": "4.0.1",
         "language": "TYPESCRIPT",
         "apis": [
             {
@@ -931,7 +931,7 @@
             "regionTag": "dataplex_v1_generated_CatalogService_GetEntry_async",
             "title": "CatalogService getEntry Sample",
             "origin": "API_DEFINITION",
-            "description": " Gets an Entry. **Caution**: The BigQuery metadata that is stored in Dataplex Catalog is changing. For more information, see [Changes to BigQuery metadata stored in Dataplex Catalog](https://cloud.google.com/dataplex/docs/biqquery-metadata-changes).",
+            "description": " Gets an Entry.",
             "canonical": true,
             "file": "catalog_service.get_entry.js",
             "language": "JAVASCRIPT",
@@ -983,7 +983,7 @@
             "regionTag": "dataplex_v1_generated_CatalogService_LookupEntry_async",
             "title": "CatalogService lookupEntry Sample",
             "origin": "API_DEFINITION",
-            "description": " Looks up a single Entry by name using the permission on the source system. **Caution**: The BigQuery metadata that is stored in Dataplex Catalog is changing. For more information, see [Changes to BigQuery metadata stored in Dataplex Catalog](https://cloud.google.com/dataplex/docs/biqquery-metadata-changes).",
+            "description": " Looks up an entry by name using the permission on the source system.",
             "canonical": true,
             "file": "catalog_service.lookup_entry.js",
             "language": "JAVASCRIPT",
@@ -3634,7 +3634,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 76,
+                    "end": 73,
                     "type": "FULL"
                 }
             ],
@@ -3834,7 +3834,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 54,
+                    "end": 52,
                     "type": "FULL"
                 }
             ],

@@ -33,6 +33,7 @@ import type {
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
+import {loggingUtils as logging} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -58,6 +59,8 @@ export class DataformClient {
   private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
+  private _log = logging.log('dataform');
+
   auth: gax.GoogleAuth;
   descriptors: Descriptors = {
     page: {},
@@ -94,7 +97,7 @@ export class DataformClient {
    *     Developer's Console, e.g. 'grape-spaceship-123'. We will also check
    *     the environment variable GCLOUD_PROJECT for your project ID. If your
    *     app is running in an environment which supports
-   *     {@link https://developers.google.com/identity/protocols/application-default-credentials Application Default Credentials},
+   *     {@link https://cloud.google.com/docs/authentication/application-default-credentials Application Default Credentials},
    *     your project ID will be detected automatically.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
@@ -215,6 +218,15 @@ export class DataformClient {
       compilationResultPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/repositories/{repository}/compilationResults/{compilation_result}'
       ),
+      configPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/config'
+      ),
+      cryptoKeyPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/keyRings/{key_ring}/cryptoKeys/{crypto_key}'
+      ),
+      cryptoKeyVersionPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/keyRings/{key_ring}/cryptoKeys/{crypto_key}/cryptoKeyVersions/{crypto_key_version}'
+      ),
       locationPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}'
       ),
@@ -266,6 +278,11 @@ export class DataformClient {
         'pageToken',
         'nextPageToken',
         'directoryEntries'
+      ),
+      searchFiles: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'searchResults'
       ),
       listReleaseConfigs: new this._gaxModule.PageDescriptor(
         'pageToken',
@@ -373,6 +390,7 @@ export class DataformClient {
       'resetWorkspaceChanges',
       'fetchFileDiff',
       'queryDirectoryContents',
+      'searchFiles',
       'makeDirectory',
       'removeDirectory',
       'moveDirectory',
@@ -400,6 +418,8 @@ export class DataformClient {
       'deleteWorkflowInvocation',
       'cancelWorkflowInvocation',
       'queryWorkflowInvocationActions',
+      'getConfig',
+      'updateConfig',
     ];
     for (const methodName of dataformStubMethods) {
       const callPromise = this.dataformStub.then(
@@ -492,7 +512,10 @@ export class DataformClient {
    * @returns {string[]} List of default scopes.
    */
   static get scopes() {
-    return ['https://www.googleapis.com/auth/cloud-platform'];
+    return [
+      'https://www.googleapis.com/auth/bigquery',
+      'https://www.googleapis.com/auth/cloud-platform',
+    ];
   }
 
   getProjectId(): Promise<string>;
@@ -601,8 +624,39 @@ export class DataformClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.getRepository(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('getRepository request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.dataform.v1beta1.IRepository,
+          | protos.google.cloud.dataform.v1beta1.IGetRepositoryRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getRepository response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getRepository(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.dataform.v1beta1.IRepository,
+          (
+            | protos.google.cloud.dataform.v1beta1.IGetRepositoryRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getRepository response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Creates a new Repository in a given project and location.
@@ -697,11 +751,48 @@ export class DataformClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.createRepository(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('createRepository request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.dataform.v1beta1.IRepository,
+          | protos.google.cloud.dataform.v1beta1.ICreateRepositoryRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('createRepository response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .createRepository(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.dataform.v1beta1.IRepository,
+          (
+            | protos.google.cloud.dataform.v1beta1.ICreateRepositoryRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('createRepository response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Updates a single Repository.
+   *
+   * **Note:** This method does not fully implement
+   * [AIP-134](https://google.aip.dev/134); in particular:
+   * - The wildcard entry (**\***) is treated as a bad request
+   * - When the **field_mask** is omitted, instead of only updating the set
+   *   fields, the request is treated as a full update on all modifiable fields
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -790,8 +881,39 @@ export class DataformClient {
       this._gaxModule.routingHeader.fromParams({
         'repository.name': request.repository!.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.updateRepository(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('updateRepository request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.dataform.v1beta1.IRepository,
+          | protos.google.cloud.dataform.v1beta1.IUpdateRepositoryRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('updateRepository response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .updateRepository(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.dataform.v1beta1.IRepository,
+          (
+            | protos.google.cloud.dataform.v1beta1.IUpdateRepositoryRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('updateRepository response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Deletes a single Repository.
@@ -800,10 +922,10 @@ export class DataformClient {
    *   The request object that will be sent.
    * @param {string} request.name
    *   Required. The repository's name.
-   * @param {boolean} request.force
-   *   If set to true, any child resources of this repository will also be
-   *   deleted. (Otherwise, the request will only succeed if the repository has no
-   *   child resources.)
+   * @param {boolean} [request.force]
+   *   Optional. If set to true, any child resources of this repository will also
+   *   be deleted. (Otherwise, the request will only succeed if the repository has
+   *   no child resources.)
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -884,8 +1006,39 @@ export class DataformClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.deleteRepository(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('deleteRepository request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.cloud.dataform.v1beta1.IDeleteRepositoryRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('deleteRepository response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .deleteRepository(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.protobuf.IEmpty,
+          (
+            | protos.google.cloud.dataform.v1beta1.IDeleteRepositoryRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteRepository response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Applies a Git commit to a Repository. The Repository must not have a value
@@ -901,13 +1054,13 @@ export class DataformClient {
    *   Optional. The commit SHA which must be the repository's current HEAD before
    *   applying this commit; otherwise this request will fail. If unset, no
    *   validation on the current HEAD commit SHA is performed.
-   * @param {number[]} request.fileOperations
-   *   A map to the path of the file to the operation. The path is the full file
-   *   path including filename, from repository root.
+   * @param {number[]} [request.fileOperations]
+   *   Optional. A map to the path of the file to the operation. The path is the
+   *   full file path including filename, from repository root.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
+   *   The first element of the array is an object representing {@link protos.google.cloud.dataform.v1beta1.CommitRepositoryChangesResponse|CommitRepositoryChangesResponse}.
    *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1beta1/dataform.commit_repository_changes.js</caption>
@@ -918,7 +1071,7 @@ export class DataformClient {
     options?: CallOptions
   ): Promise<
     [
-      protos.google.protobuf.IEmpty,
+      protos.google.cloud.dataform.v1beta1.ICommitRepositoryChangesResponse,
       (
         | protos.google.cloud.dataform.v1beta1.ICommitRepositoryChangesRequest
         | undefined
@@ -930,7 +1083,7 @@ export class DataformClient {
     request: protos.google.cloud.dataform.v1beta1.ICommitRepositoryChangesRequest,
     options: CallOptions,
     callback: Callback<
-      protos.google.protobuf.IEmpty,
+      protos.google.cloud.dataform.v1beta1.ICommitRepositoryChangesResponse,
       | protos.google.cloud.dataform.v1beta1.ICommitRepositoryChangesRequest
       | null
       | undefined,
@@ -940,7 +1093,7 @@ export class DataformClient {
   commitRepositoryChanges(
     request: protos.google.cloud.dataform.v1beta1.ICommitRepositoryChangesRequest,
     callback: Callback<
-      protos.google.protobuf.IEmpty,
+      protos.google.cloud.dataform.v1beta1.ICommitRepositoryChangesResponse,
       | protos.google.cloud.dataform.v1beta1.ICommitRepositoryChangesRequest
       | null
       | undefined,
@@ -952,14 +1105,14 @@ export class DataformClient {
     optionsOrCallback?:
       | CallOptions
       | Callback<
-          protos.google.protobuf.IEmpty,
+          protos.google.cloud.dataform.v1beta1.ICommitRepositoryChangesResponse,
           | protos.google.cloud.dataform.v1beta1.ICommitRepositoryChangesRequest
           | null
           | undefined,
           {} | null | undefined
         >,
     callback?: Callback<
-      protos.google.protobuf.IEmpty,
+      protos.google.cloud.dataform.v1beta1.ICommitRepositoryChangesResponse,
       | protos.google.cloud.dataform.v1beta1.ICommitRepositoryChangesRequest
       | null
       | undefined,
@@ -967,7 +1120,7 @@ export class DataformClient {
     >
   ): Promise<
     [
-      protos.google.protobuf.IEmpty,
+      protos.google.cloud.dataform.v1beta1.ICommitRepositoryChangesResponse,
       (
         | protos.google.cloud.dataform.v1beta1.ICommitRepositoryChangesRequest
         | undefined
@@ -990,12 +1143,39 @@ export class DataformClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.commitRepositoryChanges(
-      request,
-      options,
-      callback
-    );
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('commitRepositoryChanges request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.dataform.v1beta1.ICommitRepositoryChangesResponse,
+          | protos.google.cloud.dataform.v1beta1.ICommitRepositoryChangesRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('commitRepositoryChanges response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .commitRepositoryChanges(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.dataform.v1beta1.ICommitRepositoryChangesResponse,
+          (
+            | protos.google.cloud.dataform.v1beta1.ICommitRepositoryChangesRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('commitRepositoryChanges response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Returns the contents of a file (inside a Repository). The Repository
@@ -1096,8 +1276,39 @@ export class DataformClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.readRepositoryFile(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('readRepositoryFile request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.dataform.v1beta1.IReadRepositoryFileResponse,
+          | protos.google.cloud.dataform.v1beta1.IReadRepositoryFileRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('readRepositoryFile response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .readRepositoryFile(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.dataform.v1beta1.IReadRepositoryFileResponse,
+          (
+            | protos.google.cloud.dataform.v1beta1.IReadRepositoryFileRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('readRepositoryFile response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Computes a Repository's Git access token status.
@@ -1192,12 +1403,45 @@ export class DataformClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.computeRepositoryAccessTokenStatus(
-      request,
-      options,
-      callback
-    );
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('computeRepositoryAccessTokenStatus request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.dataform.v1beta1.IComputeRepositoryAccessTokenStatusResponse,
+          | protos.google.cloud.dataform.v1beta1.IComputeRepositoryAccessTokenStatusRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info(
+            'computeRepositoryAccessTokenStatus response %j',
+            response
+          );
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .computeRepositoryAccessTokenStatus(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.dataform.v1beta1.IComputeRepositoryAccessTokenStatusResponse,
+          (
+            | protos.google.cloud.dataform.v1beta1.IComputeRepositoryAccessTokenStatusRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info(
+            'computeRepositoryAccessTokenStatus response %j',
+            response
+          );
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Fetches a Repository's remote branches.
@@ -1292,8 +1536,39 @@ export class DataformClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.fetchRemoteBranches(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('fetchRemoteBranches request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.dataform.v1beta1.IFetchRemoteBranchesResponse,
+          | protos.google.cloud.dataform.v1beta1.IFetchRemoteBranchesRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('fetchRemoteBranches response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .fetchRemoteBranches(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.dataform.v1beta1.IFetchRemoteBranchesResponse,
+          (
+            | protos.google.cloud.dataform.v1beta1.IFetchRemoteBranchesRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('fetchRemoteBranches response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Fetches a single Workspace.
@@ -1382,8 +1657,36 @@ export class DataformClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.getWorkspace(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('getWorkspace request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.dataform.v1beta1.IWorkspace,
+          | protos.google.cloud.dataform.v1beta1.IGetWorkspaceRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getWorkspace response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getWorkspace(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.dataform.v1beta1.IWorkspace,
+          protos.google.cloud.dataform.v1beta1.IGetWorkspaceRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getWorkspace response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Creates a new Workspace in a given Repository.
@@ -1478,8 +1781,39 @@ export class DataformClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.createWorkspace(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('createWorkspace request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.dataform.v1beta1.IWorkspace,
+          | protos.google.cloud.dataform.v1beta1.ICreateWorkspaceRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('createWorkspace response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .createWorkspace(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.dataform.v1beta1.IWorkspace,
+          (
+            | protos.google.cloud.dataform.v1beta1.ICreateWorkspaceRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('createWorkspace response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Deletes a single Workspace.
@@ -1568,8 +1902,39 @@ export class DataformClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.deleteWorkspace(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('deleteWorkspace request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.cloud.dataform.v1beta1.IDeleteWorkspaceRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('deleteWorkspace response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .deleteWorkspace(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.protobuf.IEmpty,
+          (
+            | protos.google.cloud.dataform.v1beta1.IDeleteWorkspaceRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteWorkspace response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Installs dependency NPM packages (inside a Workspace).
@@ -1664,8 +2029,39 @@ export class DataformClient {
       this._gaxModule.routingHeader.fromParams({
         workspace: request.workspace ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.installNpmPackages(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('installNpmPackages request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.dataform.v1beta1.IInstallNpmPackagesResponse,
+          | protos.google.cloud.dataform.v1beta1.IInstallNpmPackagesRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('installNpmPackages response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .installNpmPackages(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.dataform.v1beta1.IInstallNpmPackagesResponse,
+          (
+            | protos.google.cloud.dataform.v1beta1.IInstallNpmPackagesRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('installNpmPackages response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Pulls Git commits from the Repository's remote into a Workspace.
@@ -1683,7 +2079,7 @@ export class DataformClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
+   *   The first element of the array is an object representing {@link protos.google.cloud.dataform.v1beta1.PullGitCommitsResponse|PullGitCommitsResponse}.
    *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1beta1/dataform.pull_git_commits.js</caption>
@@ -1694,7 +2090,7 @@ export class DataformClient {
     options?: CallOptions
   ): Promise<
     [
-      protos.google.protobuf.IEmpty,
+      protos.google.cloud.dataform.v1beta1.IPullGitCommitsResponse,
       protos.google.cloud.dataform.v1beta1.IPullGitCommitsRequest | undefined,
       {} | undefined,
     ]
@@ -1703,7 +2099,7 @@ export class DataformClient {
     request: protos.google.cloud.dataform.v1beta1.IPullGitCommitsRequest,
     options: CallOptions,
     callback: Callback<
-      protos.google.protobuf.IEmpty,
+      protos.google.cloud.dataform.v1beta1.IPullGitCommitsResponse,
       | protos.google.cloud.dataform.v1beta1.IPullGitCommitsRequest
       | null
       | undefined,
@@ -1713,7 +2109,7 @@ export class DataformClient {
   pullGitCommits(
     request: protos.google.cloud.dataform.v1beta1.IPullGitCommitsRequest,
     callback: Callback<
-      protos.google.protobuf.IEmpty,
+      protos.google.cloud.dataform.v1beta1.IPullGitCommitsResponse,
       | protos.google.cloud.dataform.v1beta1.IPullGitCommitsRequest
       | null
       | undefined,
@@ -1725,14 +2121,14 @@ export class DataformClient {
     optionsOrCallback?:
       | CallOptions
       | Callback<
-          protos.google.protobuf.IEmpty,
+          protos.google.cloud.dataform.v1beta1.IPullGitCommitsResponse,
           | protos.google.cloud.dataform.v1beta1.IPullGitCommitsRequest
           | null
           | undefined,
           {} | null | undefined
         >,
     callback?: Callback<
-      protos.google.protobuf.IEmpty,
+      protos.google.cloud.dataform.v1beta1.IPullGitCommitsResponse,
       | protos.google.cloud.dataform.v1beta1.IPullGitCommitsRequest
       | null
       | undefined,
@@ -1740,7 +2136,7 @@ export class DataformClient {
     >
   ): Promise<
     [
-      protos.google.protobuf.IEmpty,
+      protos.google.cloud.dataform.v1beta1.IPullGitCommitsResponse,
       protos.google.cloud.dataform.v1beta1.IPullGitCommitsRequest | undefined,
       {} | undefined,
     ]
@@ -1760,8 +2156,39 @@ export class DataformClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.pullGitCommits(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('pullGitCommits request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.dataform.v1beta1.IPullGitCommitsResponse,
+          | protos.google.cloud.dataform.v1beta1.IPullGitCommitsRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('pullGitCommits response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .pullGitCommits(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.dataform.v1beta1.IPullGitCommitsResponse,
+          (
+            | protos.google.cloud.dataform.v1beta1.IPullGitCommitsRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('pullGitCommits response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Pushes Git commits from a Workspace to the Repository's remote.
@@ -1777,7 +2204,7 @@ export class DataformClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
+   *   The first element of the array is an object representing {@link protos.google.cloud.dataform.v1beta1.PushGitCommitsResponse|PushGitCommitsResponse}.
    *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1beta1/dataform.push_git_commits.js</caption>
@@ -1788,7 +2215,7 @@ export class DataformClient {
     options?: CallOptions
   ): Promise<
     [
-      protos.google.protobuf.IEmpty,
+      protos.google.cloud.dataform.v1beta1.IPushGitCommitsResponse,
       protos.google.cloud.dataform.v1beta1.IPushGitCommitsRequest | undefined,
       {} | undefined,
     ]
@@ -1797,7 +2224,7 @@ export class DataformClient {
     request: protos.google.cloud.dataform.v1beta1.IPushGitCommitsRequest,
     options: CallOptions,
     callback: Callback<
-      protos.google.protobuf.IEmpty,
+      protos.google.cloud.dataform.v1beta1.IPushGitCommitsResponse,
       | protos.google.cloud.dataform.v1beta1.IPushGitCommitsRequest
       | null
       | undefined,
@@ -1807,7 +2234,7 @@ export class DataformClient {
   pushGitCommits(
     request: protos.google.cloud.dataform.v1beta1.IPushGitCommitsRequest,
     callback: Callback<
-      protos.google.protobuf.IEmpty,
+      protos.google.cloud.dataform.v1beta1.IPushGitCommitsResponse,
       | protos.google.cloud.dataform.v1beta1.IPushGitCommitsRequest
       | null
       | undefined,
@@ -1819,14 +2246,14 @@ export class DataformClient {
     optionsOrCallback?:
       | CallOptions
       | Callback<
-          protos.google.protobuf.IEmpty,
+          protos.google.cloud.dataform.v1beta1.IPushGitCommitsResponse,
           | protos.google.cloud.dataform.v1beta1.IPushGitCommitsRequest
           | null
           | undefined,
           {} | null | undefined
         >,
     callback?: Callback<
-      protos.google.protobuf.IEmpty,
+      protos.google.cloud.dataform.v1beta1.IPushGitCommitsResponse,
       | protos.google.cloud.dataform.v1beta1.IPushGitCommitsRequest
       | null
       | undefined,
@@ -1834,7 +2261,7 @@ export class DataformClient {
     >
   ): Promise<
     [
-      protos.google.protobuf.IEmpty,
+      protos.google.cloud.dataform.v1beta1.IPushGitCommitsResponse,
       protos.google.cloud.dataform.v1beta1.IPushGitCommitsRequest | undefined,
       {} | undefined,
     ]
@@ -1854,8 +2281,39 @@ export class DataformClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.pushGitCommits(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('pushGitCommits request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.dataform.v1beta1.IPushGitCommitsResponse,
+          | protos.google.cloud.dataform.v1beta1.IPushGitCommitsRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('pushGitCommits response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .pushGitCommits(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.dataform.v1beta1.IPushGitCommitsResponse,
+          (
+            | protos.google.cloud.dataform.v1beta1.IPushGitCommitsRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('pushGitCommits response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Fetches Git statuses for the files in a Workspace.
@@ -1950,8 +2408,39 @@ export class DataformClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.fetchFileGitStatuses(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('fetchFileGitStatuses request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.dataform.v1beta1.IFetchFileGitStatusesResponse,
+          | protos.google.cloud.dataform.v1beta1.IFetchFileGitStatusesRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('fetchFileGitStatuses response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .fetchFileGitStatuses(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.dataform.v1beta1.IFetchFileGitStatusesResponse,
+          (
+            | protos.google.cloud.dataform.v1beta1.IFetchFileGitStatusesRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('fetchFileGitStatuses response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Fetches Git ahead/behind against a remote branch.
@@ -2050,8 +2539,39 @@ export class DataformClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.fetchGitAheadBehind(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('fetchGitAheadBehind request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.dataform.v1beta1.IFetchGitAheadBehindResponse,
+          | protos.google.cloud.dataform.v1beta1.IFetchGitAheadBehindRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('fetchGitAheadBehind response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .fetchGitAheadBehind(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.dataform.v1beta1.IFetchGitAheadBehindResponse,
+          (
+            | protos.google.cloud.dataform.v1beta1.IFetchGitAheadBehindRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('fetchGitAheadBehind response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Applies a Git commit for uncommitted files in a Workspace.
@@ -2070,7 +2590,7 @@ export class DataformClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
+   *   The first element of the array is an object representing {@link protos.google.cloud.dataform.v1beta1.CommitWorkspaceChangesResponse|CommitWorkspaceChangesResponse}.
    *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1beta1/dataform.commit_workspace_changes.js</caption>
@@ -2081,7 +2601,7 @@ export class DataformClient {
     options?: CallOptions
   ): Promise<
     [
-      protos.google.protobuf.IEmpty,
+      protos.google.cloud.dataform.v1beta1.ICommitWorkspaceChangesResponse,
       (
         | protos.google.cloud.dataform.v1beta1.ICommitWorkspaceChangesRequest
         | undefined
@@ -2093,7 +2613,7 @@ export class DataformClient {
     request: protos.google.cloud.dataform.v1beta1.ICommitWorkspaceChangesRequest,
     options: CallOptions,
     callback: Callback<
-      protos.google.protobuf.IEmpty,
+      protos.google.cloud.dataform.v1beta1.ICommitWorkspaceChangesResponse,
       | protos.google.cloud.dataform.v1beta1.ICommitWorkspaceChangesRequest
       | null
       | undefined,
@@ -2103,7 +2623,7 @@ export class DataformClient {
   commitWorkspaceChanges(
     request: protos.google.cloud.dataform.v1beta1.ICommitWorkspaceChangesRequest,
     callback: Callback<
-      protos.google.protobuf.IEmpty,
+      protos.google.cloud.dataform.v1beta1.ICommitWorkspaceChangesResponse,
       | protos.google.cloud.dataform.v1beta1.ICommitWorkspaceChangesRequest
       | null
       | undefined,
@@ -2115,14 +2635,14 @@ export class DataformClient {
     optionsOrCallback?:
       | CallOptions
       | Callback<
-          protos.google.protobuf.IEmpty,
+          protos.google.cloud.dataform.v1beta1.ICommitWorkspaceChangesResponse,
           | protos.google.cloud.dataform.v1beta1.ICommitWorkspaceChangesRequest
           | null
           | undefined,
           {} | null | undefined
         >,
     callback?: Callback<
-      protos.google.protobuf.IEmpty,
+      protos.google.cloud.dataform.v1beta1.ICommitWorkspaceChangesResponse,
       | protos.google.cloud.dataform.v1beta1.ICommitWorkspaceChangesRequest
       | null
       | undefined,
@@ -2130,7 +2650,7 @@ export class DataformClient {
     >
   ): Promise<
     [
-      protos.google.protobuf.IEmpty,
+      protos.google.cloud.dataform.v1beta1.ICommitWorkspaceChangesResponse,
       (
         | protos.google.cloud.dataform.v1beta1.ICommitWorkspaceChangesRequest
         | undefined
@@ -2153,12 +2673,39 @@ export class DataformClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.commitWorkspaceChanges(
-      request,
-      options,
-      callback
-    );
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('commitWorkspaceChanges request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.dataform.v1beta1.ICommitWorkspaceChangesResponse,
+          | protos.google.cloud.dataform.v1beta1.ICommitWorkspaceChangesRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('commitWorkspaceChanges response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .commitWorkspaceChanges(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.dataform.v1beta1.ICommitWorkspaceChangesResponse,
+          (
+            | protos.google.cloud.dataform.v1beta1.ICommitWorkspaceChangesRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('commitWorkspaceChanges response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Performs a Git reset for uncommitted files in a Workspace.
@@ -2175,7 +2722,7 @@ export class DataformClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
+   *   The first element of the array is an object representing {@link protos.google.cloud.dataform.v1beta1.ResetWorkspaceChangesResponse|ResetWorkspaceChangesResponse}.
    *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1beta1/dataform.reset_workspace_changes.js</caption>
@@ -2186,7 +2733,7 @@ export class DataformClient {
     options?: CallOptions
   ): Promise<
     [
-      protos.google.protobuf.IEmpty,
+      protos.google.cloud.dataform.v1beta1.IResetWorkspaceChangesResponse,
       (
         | protos.google.cloud.dataform.v1beta1.IResetWorkspaceChangesRequest
         | undefined
@@ -2198,7 +2745,7 @@ export class DataformClient {
     request: protos.google.cloud.dataform.v1beta1.IResetWorkspaceChangesRequest,
     options: CallOptions,
     callback: Callback<
-      protos.google.protobuf.IEmpty,
+      protos.google.cloud.dataform.v1beta1.IResetWorkspaceChangesResponse,
       | protos.google.cloud.dataform.v1beta1.IResetWorkspaceChangesRequest
       | null
       | undefined,
@@ -2208,7 +2755,7 @@ export class DataformClient {
   resetWorkspaceChanges(
     request: protos.google.cloud.dataform.v1beta1.IResetWorkspaceChangesRequest,
     callback: Callback<
-      protos.google.protobuf.IEmpty,
+      protos.google.cloud.dataform.v1beta1.IResetWorkspaceChangesResponse,
       | protos.google.cloud.dataform.v1beta1.IResetWorkspaceChangesRequest
       | null
       | undefined,
@@ -2220,14 +2767,14 @@ export class DataformClient {
     optionsOrCallback?:
       | CallOptions
       | Callback<
-          protos.google.protobuf.IEmpty,
+          protos.google.cloud.dataform.v1beta1.IResetWorkspaceChangesResponse,
           | protos.google.cloud.dataform.v1beta1.IResetWorkspaceChangesRequest
           | null
           | undefined,
           {} | null | undefined
         >,
     callback?: Callback<
-      protos.google.protobuf.IEmpty,
+      protos.google.cloud.dataform.v1beta1.IResetWorkspaceChangesResponse,
       | protos.google.cloud.dataform.v1beta1.IResetWorkspaceChangesRequest
       | null
       | undefined,
@@ -2235,7 +2782,7 @@ export class DataformClient {
     >
   ): Promise<
     [
-      protos.google.protobuf.IEmpty,
+      protos.google.cloud.dataform.v1beta1.IResetWorkspaceChangesResponse,
       (
         | protos.google.cloud.dataform.v1beta1.IResetWorkspaceChangesRequest
         | undefined
@@ -2258,8 +2805,39 @@ export class DataformClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.resetWorkspaceChanges(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('resetWorkspaceChanges request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.dataform.v1beta1.IResetWorkspaceChangesResponse,
+          | protos.google.cloud.dataform.v1beta1.IResetWorkspaceChangesRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('resetWorkspaceChanges response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .resetWorkspaceChanges(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.dataform.v1beta1.IResetWorkspaceChangesResponse,
+          (
+            | protos.google.cloud.dataform.v1beta1.IResetWorkspaceChangesRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('resetWorkspaceChanges response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Fetches Git diff for an uncommitted file in a Workspace.
@@ -2351,8 +2929,39 @@ export class DataformClient {
       this._gaxModule.routingHeader.fromParams({
         workspace: request.workspace ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.fetchFileDiff(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('fetchFileDiff request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.dataform.v1beta1.IFetchFileDiffResponse,
+          | protos.google.cloud.dataform.v1beta1.IFetchFileDiffRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('fetchFileDiff response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .fetchFileDiff(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.dataform.v1beta1.IFetchFileDiffResponse,
+          (
+            | protos.google.cloud.dataform.v1beta1.IFetchFileDiffRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('fetchFileDiff response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Creates a directory inside a Workspace.
@@ -2444,8 +3053,39 @@ export class DataformClient {
       this._gaxModule.routingHeader.fromParams({
         workspace: request.workspace ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.makeDirectory(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('makeDirectory request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.dataform.v1beta1.IMakeDirectoryResponse,
+          | protos.google.cloud.dataform.v1beta1.IMakeDirectoryRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('makeDirectory response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .makeDirectory(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.dataform.v1beta1.IMakeDirectoryResponse,
+          (
+            | protos.google.cloud.dataform.v1beta1.IMakeDirectoryRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('makeDirectory response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Deletes a directory (inside a Workspace) and all of its contents.
@@ -2460,7 +3100,7 @@ export class DataformClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
+   *   The first element of the array is an object representing {@link protos.google.cloud.dataform.v1beta1.RemoveDirectoryResponse|RemoveDirectoryResponse}.
    *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1beta1/dataform.remove_directory.js</caption>
@@ -2471,7 +3111,7 @@ export class DataformClient {
     options?: CallOptions
   ): Promise<
     [
-      protos.google.protobuf.IEmpty,
+      protos.google.cloud.dataform.v1beta1.IRemoveDirectoryResponse,
       protos.google.cloud.dataform.v1beta1.IRemoveDirectoryRequest | undefined,
       {} | undefined,
     ]
@@ -2480,7 +3120,7 @@ export class DataformClient {
     request: protos.google.cloud.dataform.v1beta1.IRemoveDirectoryRequest,
     options: CallOptions,
     callback: Callback<
-      protos.google.protobuf.IEmpty,
+      protos.google.cloud.dataform.v1beta1.IRemoveDirectoryResponse,
       | protos.google.cloud.dataform.v1beta1.IRemoveDirectoryRequest
       | null
       | undefined,
@@ -2490,7 +3130,7 @@ export class DataformClient {
   removeDirectory(
     request: protos.google.cloud.dataform.v1beta1.IRemoveDirectoryRequest,
     callback: Callback<
-      protos.google.protobuf.IEmpty,
+      protos.google.cloud.dataform.v1beta1.IRemoveDirectoryResponse,
       | protos.google.cloud.dataform.v1beta1.IRemoveDirectoryRequest
       | null
       | undefined,
@@ -2502,14 +3142,14 @@ export class DataformClient {
     optionsOrCallback?:
       | CallOptions
       | Callback<
-          protos.google.protobuf.IEmpty,
+          protos.google.cloud.dataform.v1beta1.IRemoveDirectoryResponse,
           | protos.google.cloud.dataform.v1beta1.IRemoveDirectoryRequest
           | null
           | undefined,
           {} | null | undefined
         >,
     callback?: Callback<
-      protos.google.protobuf.IEmpty,
+      protos.google.cloud.dataform.v1beta1.IRemoveDirectoryResponse,
       | protos.google.cloud.dataform.v1beta1.IRemoveDirectoryRequest
       | null
       | undefined,
@@ -2517,7 +3157,7 @@ export class DataformClient {
     >
   ): Promise<
     [
-      protos.google.protobuf.IEmpty,
+      protos.google.cloud.dataform.v1beta1.IRemoveDirectoryResponse,
       protos.google.cloud.dataform.v1beta1.IRemoveDirectoryRequest | undefined,
       {} | undefined,
     ]
@@ -2537,8 +3177,39 @@ export class DataformClient {
       this._gaxModule.routingHeader.fromParams({
         workspace: request.workspace ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.removeDirectory(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('removeDirectory request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.dataform.v1beta1.IRemoveDirectoryResponse,
+          | protos.google.cloud.dataform.v1beta1.IRemoveDirectoryRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('removeDirectory response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .removeDirectory(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.dataform.v1beta1.IRemoveDirectoryResponse,
+          (
+            | protos.google.cloud.dataform.v1beta1.IRemoveDirectoryRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('removeDirectory response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Moves a directory (inside a Workspace), and all of its contents, to a new
@@ -2634,8 +3305,39 @@ export class DataformClient {
       this._gaxModule.routingHeader.fromParams({
         workspace: request.workspace ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.moveDirectory(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('moveDirectory request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.dataform.v1beta1.IMoveDirectoryResponse,
+          | protos.google.cloud.dataform.v1beta1.IMoveDirectoryRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('moveDirectory response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .moveDirectory(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.dataform.v1beta1.IMoveDirectoryResponse,
+          (
+            | protos.google.cloud.dataform.v1beta1.IMoveDirectoryRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('moveDirectory response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Returns the contents of a file (inside a Workspace).
@@ -2647,6 +3349,9 @@ export class DataformClient {
    * @param {string} request.path
    *   Required. The file's full path including filename, relative to the
    *   workspace root.
+   * @param {string} [request.revision]
+   *   Optional. The Git revision of the file to return. If left empty, the
+   *   current contents of `path` will be returned.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -2721,8 +3426,36 @@ export class DataformClient {
       this._gaxModule.routingHeader.fromParams({
         workspace: request.workspace ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.readFile(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('readFile request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.dataform.v1beta1.IReadFileResponse,
+          | protos.google.cloud.dataform.v1beta1.IReadFileRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('readFile response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .readFile(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.dataform.v1beta1.IReadFileResponse,
+          protos.google.cloud.dataform.v1beta1.IReadFileRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('readFile response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Deletes a file (inside a Workspace).
@@ -2737,7 +3470,7 @@ export class DataformClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
+   *   The first element of the array is an object representing {@link protos.google.cloud.dataform.v1beta1.RemoveFileResponse|RemoveFileResponse}.
    *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1beta1/dataform.remove_file.js</caption>
@@ -2748,7 +3481,7 @@ export class DataformClient {
     options?: CallOptions
   ): Promise<
     [
-      protos.google.protobuf.IEmpty,
+      protos.google.cloud.dataform.v1beta1.IRemoveFileResponse,
       protos.google.cloud.dataform.v1beta1.IRemoveFileRequest | undefined,
       {} | undefined,
     ]
@@ -2757,7 +3490,7 @@ export class DataformClient {
     request: protos.google.cloud.dataform.v1beta1.IRemoveFileRequest,
     options: CallOptions,
     callback: Callback<
-      protos.google.protobuf.IEmpty,
+      protos.google.cloud.dataform.v1beta1.IRemoveFileResponse,
       | protos.google.cloud.dataform.v1beta1.IRemoveFileRequest
       | null
       | undefined,
@@ -2767,7 +3500,7 @@ export class DataformClient {
   removeFile(
     request: protos.google.cloud.dataform.v1beta1.IRemoveFileRequest,
     callback: Callback<
-      protos.google.protobuf.IEmpty,
+      protos.google.cloud.dataform.v1beta1.IRemoveFileResponse,
       | protos.google.cloud.dataform.v1beta1.IRemoveFileRequest
       | null
       | undefined,
@@ -2779,14 +3512,14 @@ export class DataformClient {
     optionsOrCallback?:
       | CallOptions
       | Callback<
-          protos.google.protobuf.IEmpty,
+          protos.google.cloud.dataform.v1beta1.IRemoveFileResponse,
           | protos.google.cloud.dataform.v1beta1.IRemoveFileRequest
           | null
           | undefined,
           {} | null | undefined
         >,
     callback?: Callback<
-      protos.google.protobuf.IEmpty,
+      protos.google.cloud.dataform.v1beta1.IRemoveFileResponse,
       | protos.google.cloud.dataform.v1beta1.IRemoveFileRequest
       | null
       | undefined,
@@ -2794,7 +3527,7 @@ export class DataformClient {
     >
   ): Promise<
     [
-      protos.google.protobuf.IEmpty,
+      protos.google.cloud.dataform.v1beta1.IRemoveFileResponse,
       protos.google.cloud.dataform.v1beta1.IRemoveFileRequest | undefined,
       {} | undefined,
     ]
@@ -2814,8 +3547,36 @@ export class DataformClient {
       this._gaxModule.routingHeader.fromParams({
         workspace: request.workspace ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.removeFile(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('removeFile request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.dataform.v1beta1.IRemoveFileResponse,
+          | protos.google.cloud.dataform.v1beta1.IRemoveFileRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('removeFile response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .removeFile(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.dataform.v1beta1.IRemoveFileResponse,
+          protos.google.cloud.dataform.v1beta1.IRemoveFileRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('removeFile response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Moves a file (inside a Workspace) to a new location.
@@ -2904,8 +3665,36 @@ export class DataformClient {
       this._gaxModule.routingHeader.fromParams({
         workspace: request.workspace ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.moveFile(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('moveFile request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.dataform.v1beta1.IMoveFileResponse,
+          | protos.google.cloud.dataform.v1beta1.IMoveFileRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('moveFile response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .moveFile(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.dataform.v1beta1.IMoveFileResponse,
+          protos.google.cloud.dataform.v1beta1.IMoveFileRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('moveFile response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Writes to a file (inside a Workspace).
@@ -2992,8 +3781,36 @@ export class DataformClient {
       this._gaxModule.routingHeader.fromParams({
         workspace: request.workspace ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.writeFile(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('writeFile request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.dataform.v1beta1.IWriteFileResponse,
+          | protos.google.cloud.dataform.v1beta1.IWriteFileRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('writeFile response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .writeFile(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.dataform.v1beta1.IWriteFileResponse,
+          protos.google.cloud.dataform.v1beta1.IWriteFileRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('writeFile response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Fetches a single ReleaseConfig.
@@ -3082,8 +3899,39 @@ export class DataformClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.getReleaseConfig(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('getReleaseConfig request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.dataform.v1beta1.IReleaseConfig,
+          | protos.google.cloud.dataform.v1beta1.IGetReleaseConfigRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getReleaseConfig response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getReleaseConfig(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.dataform.v1beta1.IReleaseConfig,
+          (
+            | protos.google.cloud.dataform.v1beta1.IGetReleaseConfigRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getReleaseConfig response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Creates a new ReleaseConfig in a given Repository.
@@ -3184,11 +4032,48 @@ export class DataformClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.createReleaseConfig(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('createReleaseConfig request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.dataform.v1beta1.IReleaseConfig,
+          | protos.google.cloud.dataform.v1beta1.ICreateReleaseConfigRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('createReleaseConfig response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .createReleaseConfig(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.dataform.v1beta1.IReleaseConfig,
+          (
+            | protos.google.cloud.dataform.v1beta1.ICreateReleaseConfigRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('createReleaseConfig response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Updates a single ReleaseConfig.
+   *
+   * **Note:** This method does not fully implement
+   * [AIP-134](https://google.aip.dev/134); in particular:
+   * - The wildcard entry (**\***) is treated as a bad request
+   * - When the **field_mask** is omitted, instead of only updating the set
+   *   fields, the request is treated as a full update on all modifiable fields
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -3283,8 +4168,39 @@ export class DataformClient {
       this._gaxModule.routingHeader.fromParams({
         'release_config.name': request.releaseConfig!.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.updateReleaseConfig(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('updateReleaseConfig request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.dataform.v1beta1.IReleaseConfig,
+          | protos.google.cloud.dataform.v1beta1.IUpdateReleaseConfigRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('updateReleaseConfig response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .updateReleaseConfig(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.dataform.v1beta1.IReleaseConfig,
+          (
+            | protos.google.cloud.dataform.v1beta1.IUpdateReleaseConfigRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('updateReleaseConfig response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Deletes a single ReleaseConfig.
@@ -3379,8 +4295,39 @@ export class DataformClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.deleteReleaseConfig(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('deleteReleaseConfig request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.cloud.dataform.v1beta1.IDeleteReleaseConfigRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('deleteReleaseConfig response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .deleteReleaseConfig(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.protobuf.IEmpty,
+          (
+            | protos.google.cloud.dataform.v1beta1.IDeleteReleaseConfigRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteReleaseConfig response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Fetches a single CompilationResult.
@@ -3475,8 +4422,39 @@ export class DataformClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.getCompilationResult(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('getCompilationResult request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.dataform.v1beta1.ICompilationResult,
+          | protos.google.cloud.dataform.v1beta1.IGetCompilationResultRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getCompilationResult response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getCompilationResult(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.dataform.v1beta1.ICompilationResult,
+          (
+            | protos.google.cloud.dataform.v1beta1.IGetCompilationResultRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getCompilationResult response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Creates a new CompilationResult in a given project and location.
@@ -3574,12 +4552,39 @@ export class DataformClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.createCompilationResult(
-      request,
-      options,
-      callback
-    );
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('createCompilationResult request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.dataform.v1beta1.ICompilationResult,
+          | protos.google.cloud.dataform.v1beta1.ICreateCompilationResultRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('createCompilationResult response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .createCompilationResult(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.dataform.v1beta1.ICompilationResult,
+          (
+            | protos.google.cloud.dataform.v1beta1.ICreateCompilationResultRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('createCompilationResult response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Fetches a single WorkflowConfig.
@@ -3674,8 +4679,39 @@ export class DataformClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.getWorkflowConfig(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('getWorkflowConfig request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.dataform.v1beta1.IWorkflowConfig,
+          | protos.google.cloud.dataform.v1beta1.IGetWorkflowConfigRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getWorkflowConfig response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getWorkflowConfig(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.dataform.v1beta1.IWorkflowConfig,
+          (
+            | protos.google.cloud.dataform.v1beta1.IGetWorkflowConfigRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getWorkflowConfig response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Creates a new WorkflowConfig in a given Repository.
@@ -3776,11 +4812,48 @@ export class DataformClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.createWorkflowConfig(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('createWorkflowConfig request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.dataform.v1beta1.IWorkflowConfig,
+          | protos.google.cloud.dataform.v1beta1.ICreateWorkflowConfigRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('createWorkflowConfig response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .createWorkflowConfig(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.dataform.v1beta1.IWorkflowConfig,
+          (
+            | protos.google.cloud.dataform.v1beta1.ICreateWorkflowConfigRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('createWorkflowConfig response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Updates a single WorkflowConfig.
+   *
+   * **Note:** This method does not fully implement
+   * [AIP-134](https://google.aip.dev/134); in particular:
+   * - The wildcard entry (**\***) is treated as a bad request
+   * - When the **field_mask** is omitted, instead of only updating the set
+   *   fields, the request is treated as a full update on all modifiable fields
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -3875,8 +4948,39 @@ export class DataformClient {
       this._gaxModule.routingHeader.fromParams({
         'workflow_config.name': request.workflowConfig!.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.updateWorkflowConfig(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('updateWorkflowConfig request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.dataform.v1beta1.IWorkflowConfig,
+          | protos.google.cloud.dataform.v1beta1.IUpdateWorkflowConfigRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('updateWorkflowConfig response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .updateWorkflowConfig(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.dataform.v1beta1.IWorkflowConfig,
+          (
+            | protos.google.cloud.dataform.v1beta1.IUpdateWorkflowConfigRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('updateWorkflowConfig response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Deletes a single WorkflowConfig.
@@ -3971,8 +5075,39 @@ export class DataformClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.deleteWorkflowConfig(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('deleteWorkflowConfig request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.cloud.dataform.v1beta1.IDeleteWorkflowConfigRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('deleteWorkflowConfig response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .deleteWorkflowConfig(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.protobuf.IEmpty,
+          (
+            | protos.google.cloud.dataform.v1beta1.IDeleteWorkflowConfigRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteWorkflowConfig response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Fetches a single WorkflowInvocation.
@@ -4067,8 +5202,39 @@ export class DataformClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.getWorkflowInvocation(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('getWorkflowInvocation request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.dataform.v1beta1.IWorkflowInvocation,
+          | protos.google.cloud.dataform.v1beta1.IGetWorkflowInvocationRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getWorkflowInvocation response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getWorkflowInvocation(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.dataform.v1beta1.IWorkflowInvocation,
+          (
+            | protos.google.cloud.dataform.v1beta1.IGetWorkflowInvocationRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getWorkflowInvocation response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Creates a new WorkflowInvocation in a given Repository.
@@ -4166,12 +5332,39 @@ export class DataformClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.createWorkflowInvocation(
-      request,
-      options,
-      callback
-    );
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('createWorkflowInvocation request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.dataform.v1beta1.IWorkflowInvocation,
+          | protos.google.cloud.dataform.v1beta1.ICreateWorkflowInvocationRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('createWorkflowInvocation response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .createWorkflowInvocation(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.dataform.v1beta1.IWorkflowInvocation,
+          (
+            | protos.google.cloud.dataform.v1beta1.ICreateWorkflowInvocationRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('createWorkflowInvocation response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Deletes a single WorkflowInvocation.
@@ -4266,12 +5459,39 @@ export class DataformClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.deleteWorkflowInvocation(
-      request,
-      options,
-      callback
-    );
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('deleteWorkflowInvocation request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.cloud.dataform.v1beta1.IDeleteWorkflowInvocationRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('deleteWorkflowInvocation response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .deleteWorkflowInvocation(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.protobuf.IEmpty,
+          (
+            | protos.google.cloud.dataform.v1beta1.IDeleteWorkflowInvocationRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteWorkflowInvocation response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Requests cancellation of a running WorkflowInvocation.
@@ -4283,7 +5503,7 @@ export class DataformClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
+   *   The first element of the array is an object representing {@link protos.google.cloud.dataform.v1beta1.CancelWorkflowInvocationResponse|CancelWorkflowInvocationResponse}.
    *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1beta1/dataform.cancel_workflow_invocation.js</caption>
@@ -4294,7 +5514,7 @@ export class DataformClient {
     options?: CallOptions
   ): Promise<
     [
-      protos.google.protobuf.IEmpty,
+      protos.google.cloud.dataform.v1beta1.ICancelWorkflowInvocationResponse,
       (
         | protos.google.cloud.dataform.v1beta1.ICancelWorkflowInvocationRequest
         | undefined
@@ -4306,7 +5526,7 @@ export class DataformClient {
     request: protos.google.cloud.dataform.v1beta1.ICancelWorkflowInvocationRequest,
     options: CallOptions,
     callback: Callback<
-      protos.google.protobuf.IEmpty,
+      protos.google.cloud.dataform.v1beta1.ICancelWorkflowInvocationResponse,
       | protos.google.cloud.dataform.v1beta1.ICancelWorkflowInvocationRequest
       | null
       | undefined,
@@ -4316,7 +5536,7 @@ export class DataformClient {
   cancelWorkflowInvocation(
     request: protos.google.cloud.dataform.v1beta1.ICancelWorkflowInvocationRequest,
     callback: Callback<
-      protos.google.protobuf.IEmpty,
+      protos.google.cloud.dataform.v1beta1.ICancelWorkflowInvocationResponse,
       | protos.google.cloud.dataform.v1beta1.ICancelWorkflowInvocationRequest
       | null
       | undefined,
@@ -4328,14 +5548,14 @@ export class DataformClient {
     optionsOrCallback?:
       | CallOptions
       | Callback<
-          protos.google.protobuf.IEmpty,
+          protos.google.cloud.dataform.v1beta1.ICancelWorkflowInvocationResponse,
           | protos.google.cloud.dataform.v1beta1.ICancelWorkflowInvocationRequest
           | null
           | undefined,
           {} | null | undefined
         >,
     callback?: Callback<
-      protos.google.protobuf.IEmpty,
+      protos.google.cloud.dataform.v1beta1.ICancelWorkflowInvocationResponse,
       | protos.google.cloud.dataform.v1beta1.ICancelWorkflowInvocationRequest
       | null
       | undefined,
@@ -4343,7 +5563,7 @@ export class DataformClient {
     >
   ): Promise<
     [
-      protos.google.protobuf.IEmpty,
+      protos.google.cloud.dataform.v1beta1.ICancelWorkflowInvocationResponse,
       (
         | protos.google.cloud.dataform.v1beta1.ICancelWorkflowInvocationRequest
         | undefined
@@ -4366,12 +5586,277 @@ export class DataformClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.cancelWorkflowInvocation(
-      request,
-      options,
-      callback
-    );
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('cancelWorkflowInvocation request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.dataform.v1beta1.ICancelWorkflowInvocationResponse,
+          | protos.google.cloud.dataform.v1beta1.ICancelWorkflowInvocationRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('cancelWorkflowInvocation response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .cancelWorkflowInvocation(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.dataform.v1beta1.ICancelWorkflowInvocationResponse,
+          (
+            | protos.google.cloud.dataform.v1beta1.ICancelWorkflowInvocationRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('cancelWorkflowInvocation response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
+  }
+  /**
+   * Get default config for a given project and location.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The config name.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.dataform.v1beta1.Config|Config}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta1/dataform.get_config.js</caption>
+   * region_tag:dataform_v1beta1_generated_Dataform_GetConfig_async
+   */
+  getConfig(
+    request?: protos.google.cloud.dataform.v1beta1.IGetConfigRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.dataform.v1beta1.IConfig,
+      protos.google.cloud.dataform.v1beta1.IGetConfigRequest | undefined,
+      {} | undefined,
+    ]
+  >;
+  getConfig(
+    request: protos.google.cloud.dataform.v1beta1.IGetConfigRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.dataform.v1beta1.IConfig,
+      protos.google.cloud.dataform.v1beta1.IGetConfigRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  getConfig(
+    request: protos.google.cloud.dataform.v1beta1.IGetConfigRequest,
+    callback: Callback<
+      protos.google.cloud.dataform.v1beta1.IConfig,
+      protos.google.cloud.dataform.v1beta1.IGetConfigRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  getConfig(
+    request?: protos.google.cloud.dataform.v1beta1.IGetConfigRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.dataform.v1beta1.IConfig,
+          | protos.google.cloud.dataform.v1beta1.IGetConfigRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.dataform.v1beta1.IConfig,
+      protos.google.cloud.dataform.v1beta1.IGetConfigRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.dataform.v1beta1.IConfig,
+      protos.google.cloud.dataform.v1beta1.IGetConfigRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('getConfig request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.dataform.v1beta1.IConfig,
+          | protos.google.cloud.dataform.v1beta1.IGetConfigRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getConfig response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getConfig(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.dataform.v1beta1.IConfig,
+          protos.google.cloud.dataform.v1beta1.IGetConfigRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getConfig response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
+  }
+  /**
+   * Update default config for a given project and location.
+   *
+   * **Note:** This method does not fully implement
+   * [AIP-134](https://google.aip.dev/134); in particular:
+   * - The wildcard entry (**\***) is treated as a bad request
+   * - When the **field_mask** is omitted, instead of only updating the set
+   *   fields, the request is treated as a full update on all modifiable fields
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.cloud.dataform.v1beta1.Config} request.config
+   *   Required. The config to update.
+   * @param {google.protobuf.FieldMask} [request.updateMask]
+   *   Optional. Specifies the fields to be updated in the config.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.dataform.v1beta1.Config|Config}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta1/dataform.update_config.js</caption>
+   * region_tag:dataform_v1beta1_generated_Dataform_UpdateConfig_async
+   */
+  updateConfig(
+    request?: protos.google.cloud.dataform.v1beta1.IUpdateConfigRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.dataform.v1beta1.IConfig,
+      protos.google.cloud.dataform.v1beta1.IUpdateConfigRequest | undefined,
+      {} | undefined,
+    ]
+  >;
+  updateConfig(
+    request: protos.google.cloud.dataform.v1beta1.IUpdateConfigRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.dataform.v1beta1.IConfig,
+      | protos.google.cloud.dataform.v1beta1.IUpdateConfigRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  updateConfig(
+    request: protos.google.cloud.dataform.v1beta1.IUpdateConfigRequest,
+    callback: Callback<
+      protos.google.cloud.dataform.v1beta1.IConfig,
+      | protos.google.cloud.dataform.v1beta1.IUpdateConfigRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  updateConfig(
+    request?: protos.google.cloud.dataform.v1beta1.IUpdateConfigRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.dataform.v1beta1.IConfig,
+          | protos.google.cloud.dataform.v1beta1.IUpdateConfigRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.dataform.v1beta1.IConfig,
+      | protos.google.cloud.dataform.v1beta1.IUpdateConfigRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.dataform.v1beta1.IConfig,
+      protos.google.cloud.dataform.v1beta1.IUpdateConfigRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        'config.name': request.config!.name ?? '',
+      });
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('updateConfig request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.dataform.v1beta1.IConfig,
+          | protos.google.cloud.dataform.v1beta1.IUpdateConfigRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('updateConfig response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .updateConfig(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.dataform.v1beta1.IConfig,
+          protos.google.cloud.dataform.v1beta1.IUpdateConfigRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('updateConfig response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
 
   /**
@@ -4390,8 +5875,9 @@ export class DataformClient {
    *   Optional. Page token received from a previous `ListRepositories` call.
    *   Provide this to retrieve the subsequent page.
    *
-   *   When paginating, all other parameters provided to `ListRepositories`
-   *   must match the call that provided the page token.
+   *   When paginating, all other parameters provided to `ListRepositories`,
+   *   with the exception of `page_size`, must match the call that provided the
+   *   page token.
    * @param {string} [request.orderBy]
    *   Optional. This field only supports ordering by `name`. If unspecified, the
    *   server will choose the ordering. If specified, the default order is
@@ -4481,12 +5967,40 @@ export class DataformClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.listRepositories(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.dataform.v1beta1.IListRepositoriesRequest,
+          | protos.google.cloud.dataform.v1beta1.IListRepositoriesResponse
+          | null
+          | undefined,
+          protos.google.cloud.dataform.v1beta1.IRepository
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listRepositories values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listRepositories request %j', request);
+    return this.innerApiCalls
+      .listRepositories(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.dataform.v1beta1.IRepository[],
+          protos.google.cloud.dataform.v1beta1.IListRepositoriesRequest | null,
+          protos.google.cloud.dataform.v1beta1.IListRepositoriesResponse,
+        ]) => {
+          this._log.info('listRepositories values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listRepositories`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
@@ -4500,8 +6014,9 @@ export class DataformClient {
    *   Optional. Page token received from a previous `ListRepositories` call.
    *   Provide this to retrieve the subsequent page.
    *
-   *   When paginating, all other parameters provided to `ListRepositories`
-   *   must match the call that provided the page token.
+   *   When paginating, all other parameters provided to `ListRepositories`,
+   *   with the exception of `page_size`, must match the call that provided the
+   *   page token.
    * @param {string} [request.orderBy]
    *   Optional. This field only supports ordering by `name`. If unspecified, the
    *   server will choose the ordering. If specified, the default order is
@@ -4533,7 +6048,10 @@ export class DataformClient {
       });
     const defaultCallSettings = this._defaults['listRepositories'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listRepositories stream %j', request);
     return this.descriptors.page.listRepositories.createStream(
       this.innerApiCalls.listRepositories as GaxCall,
       request,
@@ -4558,8 +6076,9 @@ export class DataformClient {
    *   Optional. Page token received from a previous `ListRepositories` call.
    *   Provide this to retrieve the subsequent page.
    *
-   *   When paginating, all other parameters provided to `ListRepositories`
-   *   must match the call that provided the page token.
+   *   When paginating, all other parameters provided to `ListRepositories`,
+   *   with the exception of `page_size`, must match the call that provided the
+   *   page token.
    * @param {string} [request.orderBy]
    *   Optional. This field only supports ordering by `name`. If unspecified, the
    *   server will choose the ordering. If specified, the default order is
@@ -4592,7 +6111,10 @@ export class DataformClient {
       });
     const defaultCallSettings = this._defaults['listRepositories'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listRepositories iterate %j', request);
     return this.descriptors.page.listRepositories.asyncIterate(
       this.innerApiCalls['listRepositories'] as GaxCall,
       request as {},
@@ -4623,8 +6145,8 @@ export class DataformClient {
    *   subsequent page.
    *
    *   When paginating, all other parameters provided to
-   *   `QueryRepositoryDirectoryContents` must match the call that provided the
-   *   page token.
+   *   `QueryRepositoryDirectoryContents`, with the exception of `page_size`, must
+   *   match the call that provided the page token.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -4708,16 +6230,43 @@ export class DataformClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.queryRepositoryDirectoryContents(
-      request,
-      options,
-      callback
-    );
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.dataform.v1beta1.IQueryRepositoryDirectoryContentsRequest,
+          | protos.google.cloud.dataform.v1beta1.IQueryRepositoryDirectoryContentsResponse
+          | null
+          | undefined,
+          protos.google.cloud.dataform.v1beta1.IDirectoryEntry
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('queryRepositoryDirectoryContents values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('queryRepositoryDirectoryContents request %j', request);
+    return this.innerApiCalls
+      .queryRepositoryDirectoryContents(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.dataform.v1beta1.IDirectoryEntry[],
+          protos.google.cloud.dataform.v1beta1.IQueryRepositoryDirectoryContentsRequest | null,
+          protos.google.cloud.dataform.v1beta1.IQueryRepositoryDirectoryContentsResponse,
+        ]) => {
+          this._log.info(
+            'queryRepositoryDirectoryContents values %j',
+            response
+          );
+          return [response, input, output];
+        }
+      );
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `queryRepositoryDirectoryContents`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
@@ -4738,8 +6287,8 @@ export class DataformClient {
    *   subsequent page.
    *
    *   When paginating, all other parameters provided to
-   *   `QueryRepositoryDirectoryContents` must match the call that provided the
-   *   page token.
+   *   `QueryRepositoryDirectoryContents`, with the exception of `page_size`, must
+   *   match the call that provided the page token.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
@@ -4766,7 +6315,10 @@ export class DataformClient {
     const defaultCallSettings =
       this._defaults['queryRepositoryDirectoryContents'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('queryRepositoryDirectoryContents stream %j', request);
     return this.descriptors.page.queryRepositoryDirectoryContents.createStream(
       this.innerApiCalls.queryRepositoryDirectoryContents as GaxCall,
       request,
@@ -4798,8 +6350,8 @@ export class DataformClient {
    *   subsequent page.
    *
    *   When paginating, all other parameters provided to
-   *   `QueryRepositoryDirectoryContents` must match the call that provided the
-   *   page token.
+   *   `QueryRepositoryDirectoryContents`, with the exception of `page_size`, must
+   *   match the call that provided the page token.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
@@ -4827,7 +6379,10 @@ export class DataformClient {
     const defaultCallSettings =
       this._defaults['queryRepositoryDirectoryContents'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('queryRepositoryDirectoryContents iterate %j', request);
     return this.descriptors.page.queryRepositoryDirectoryContents.asyncIterate(
       this.innerApiCalls['queryRepositoryDirectoryContents'] as GaxCall,
       request as {},
@@ -4850,8 +6405,9 @@ export class DataformClient {
    *   Optional. Page token received from a previous `FetchRepositoryHistory`
    *   call. Provide this to retrieve the subsequent page.
    *
-   *   When paginating, all other parameters provided to `FetchRepositoryHistory`
-   *   must match the call that provided the page token.
+   *   When paginating, all other parameters provided to `FetchRepositoryHistory`,
+   *   with the exception of `page_size`, must match the call that provided the
+   *   page token.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -4935,16 +6491,40 @@ export class DataformClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.fetchRepositoryHistory(
-      request,
-      options,
-      callback
-    );
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.dataform.v1beta1.IFetchRepositoryHistoryRequest,
+          | protos.google.cloud.dataform.v1beta1.IFetchRepositoryHistoryResponse
+          | null
+          | undefined,
+          protos.google.cloud.dataform.v1beta1.ICommitLogEntry
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('fetchRepositoryHistory values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('fetchRepositoryHistory request %j', request);
+    return this.innerApiCalls
+      .fetchRepositoryHistory(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.dataform.v1beta1.ICommitLogEntry[],
+          protos.google.cloud.dataform.v1beta1.IFetchRepositoryHistoryRequest | null,
+          protos.google.cloud.dataform.v1beta1.IFetchRepositoryHistoryResponse,
+        ]) => {
+          this._log.info('fetchRepositoryHistory values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `fetchRepositoryHistory`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
@@ -4957,8 +6537,9 @@ export class DataformClient {
    *   Optional. Page token received from a previous `FetchRepositoryHistory`
    *   call. Provide this to retrieve the subsequent page.
    *
-   *   When paginating, all other parameters provided to `FetchRepositoryHistory`
-   *   must match the call that provided the page token.
+   *   When paginating, all other parameters provided to `FetchRepositoryHistory`,
+   *   with the exception of `page_size`, must match the call that provided the
+   *   page token.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
@@ -4984,7 +6565,10 @@ export class DataformClient {
       });
     const defaultCallSettings = this._defaults['fetchRepositoryHistory'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('fetchRepositoryHistory stream %j', request);
     return this.descriptors.page.fetchRepositoryHistory.createStream(
       this.innerApiCalls.fetchRepositoryHistory as GaxCall,
       request,
@@ -5008,8 +6592,9 @@ export class DataformClient {
    *   Optional. Page token received from a previous `FetchRepositoryHistory`
    *   call. Provide this to retrieve the subsequent page.
    *
-   *   When paginating, all other parameters provided to `FetchRepositoryHistory`
-   *   must match the call that provided the page token.
+   *   When paginating, all other parameters provided to `FetchRepositoryHistory`,
+   *   with the exception of `page_size`, must match the call that provided the
+   *   page token.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
@@ -5036,7 +6621,10 @@ export class DataformClient {
       });
     const defaultCallSettings = this._defaults['fetchRepositoryHistory'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('fetchRepositoryHistory iterate %j', request);
     return this.descriptors.page.fetchRepositoryHistory.asyncIterate(
       this.innerApiCalls['fetchRepositoryHistory'] as GaxCall,
       request as {},
@@ -5059,8 +6647,9 @@ export class DataformClient {
    *   Optional. Page token received from a previous `ListWorkspaces` call.
    *   Provide this to retrieve the subsequent page.
    *
-   *   When paginating, all other parameters provided to `ListWorkspaces`
-   *   must match the call that provided the page token.
+   *   When paginating, all other parameters provided to `ListWorkspaces`, with
+   *   the exception of `page_size`, must match the call that provided the page
+   *   token.
    * @param {string} [request.orderBy]
    *   Optional. This field only supports ordering by `name`. If unspecified, the
    *   server will choose the ordering. If specified, the default order is
@@ -5150,12 +6739,40 @@ export class DataformClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.listWorkspaces(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.dataform.v1beta1.IListWorkspacesRequest,
+          | protos.google.cloud.dataform.v1beta1.IListWorkspacesResponse
+          | null
+          | undefined,
+          protos.google.cloud.dataform.v1beta1.IWorkspace
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listWorkspaces values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listWorkspaces request %j', request);
+    return this.innerApiCalls
+      .listWorkspaces(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.dataform.v1beta1.IWorkspace[],
+          protos.google.cloud.dataform.v1beta1.IListWorkspacesRequest | null,
+          protos.google.cloud.dataform.v1beta1.IListWorkspacesResponse,
+        ]) => {
+          this._log.info('listWorkspaces values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listWorkspaces`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
@@ -5169,8 +6786,9 @@ export class DataformClient {
    *   Optional. Page token received from a previous `ListWorkspaces` call.
    *   Provide this to retrieve the subsequent page.
    *
-   *   When paginating, all other parameters provided to `ListWorkspaces`
-   *   must match the call that provided the page token.
+   *   When paginating, all other parameters provided to `ListWorkspaces`, with
+   *   the exception of `page_size`, must match the call that provided the page
+   *   token.
    * @param {string} [request.orderBy]
    *   Optional. This field only supports ordering by `name`. If unspecified, the
    *   server will choose the ordering. If specified, the default order is
@@ -5202,7 +6820,10 @@ export class DataformClient {
       });
     const defaultCallSettings = this._defaults['listWorkspaces'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listWorkspaces stream %j', request);
     return this.descriptors.page.listWorkspaces.createStream(
       this.innerApiCalls.listWorkspaces as GaxCall,
       request,
@@ -5227,8 +6848,9 @@ export class DataformClient {
    *   Optional. Page token received from a previous `ListWorkspaces` call.
    *   Provide this to retrieve the subsequent page.
    *
-   *   When paginating, all other parameters provided to `ListWorkspaces`
-   *   must match the call that provided the page token.
+   *   When paginating, all other parameters provided to `ListWorkspaces`, with
+   *   the exception of `page_size`, must match the call that provided the page
+   *   token.
    * @param {string} [request.orderBy]
    *   Optional. This field only supports ordering by `name`. If unspecified, the
    *   server will choose the ordering. If specified, the default order is
@@ -5261,7 +6883,10 @@ export class DataformClient {
       });
     const defaultCallSettings = this._defaults['listWorkspaces'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listWorkspaces iterate %j', request);
     return this.descriptors.page.listWorkspaces.asyncIterate(
       this.innerApiCalls['listWorkspaces'] as GaxCall,
       request as {},
@@ -5287,8 +6912,8 @@ export class DataformClient {
    *   call. Provide this to retrieve the subsequent page.
    *
    *   When paginating, all other parameters provided to
-   *   `QueryDirectoryContents` must match the call that provided the page
-   *   token.
+   *   `QueryDirectoryContents`, with the exception of `page_size`, must match the
+   *   call that provided the page token.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -5372,16 +6997,40 @@ export class DataformClient {
       this._gaxModule.routingHeader.fromParams({
         workspace: request.workspace ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.queryDirectoryContents(
-      request,
-      options,
-      callback
-    );
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.dataform.v1beta1.IQueryDirectoryContentsRequest,
+          | protos.google.cloud.dataform.v1beta1.IQueryDirectoryContentsResponse
+          | null
+          | undefined,
+          protos.google.cloud.dataform.v1beta1.IDirectoryEntry
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('queryDirectoryContents values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('queryDirectoryContents request %j', request);
+    return this.innerApiCalls
+      .queryDirectoryContents(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.dataform.v1beta1.IDirectoryEntry[],
+          protos.google.cloud.dataform.v1beta1.IQueryDirectoryContentsRequest | null,
+          protos.google.cloud.dataform.v1beta1.IQueryDirectoryContentsResponse,
+        ]) => {
+          this._log.info('queryDirectoryContents values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `queryDirectoryContents`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.workspace
@@ -5398,8 +7047,8 @@ export class DataformClient {
    *   call. Provide this to retrieve the subsequent page.
    *
    *   When paginating, all other parameters provided to
-   *   `QueryDirectoryContents` must match the call that provided the page
-   *   token.
+   *   `QueryDirectoryContents`, with the exception of `page_size`, must match the
+   *   call that provided the page token.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
@@ -5425,7 +7074,10 @@ export class DataformClient {
       });
     const defaultCallSettings = this._defaults['queryDirectoryContents'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('queryDirectoryContents stream %j', request);
     return this.descriptors.page.queryDirectoryContents.createStream(
       this.innerApiCalls.queryDirectoryContents as GaxCall,
       request,
@@ -5453,8 +7105,8 @@ export class DataformClient {
    *   call. Provide this to retrieve the subsequent page.
    *
    *   When paginating, all other parameters provided to
-   *   `QueryDirectoryContents` must match the call that provided the page
-   *   token.
+   *   `QueryDirectoryContents`, with the exception of `page_size`, must match the
+   *   call that provided the page token.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
@@ -5481,12 +7133,268 @@ export class DataformClient {
       });
     const defaultCallSettings = this._defaults['queryDirectoryContents'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('queryDirectoryContents iterate %j', request);
     return this.descriptors.page.queryDirectoryContents.asyncIterate(
       this.innerApiCalls['queryDirectoryContents'] as GaxCall,
       request as {},
       callSettings
     ) as AsyncIterable<protos.google.cloud.dataform.v1beta1.IDirectoryEntry>;
+  }
+  /**
+   * Finds the contents of a given Workspace directory by filter.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.workspace
+   *   Required. The workspace's name.
+   * @param {number} [request.pageSize]
+   *   Optional. Maximum number of search results to return. The server may return
+   *   fewer items than requested. If unspecified, the server will pick an
+   *   appropriate default.
+   * @param {string} [request.pageToken]
+   *   Optional. Page token received from a previous `SearchFilesRequest`
+   *   call. Provide this to retrieve the subsequent page.
+   *
+   *   When paginating, all other parameters provided to `SearchFilesRequest`,
+   *   with the exception of `page_size`, must match the call that provided the
+   *   page token.
+   * @param {string} [request.filter]
+   *   Optional. Optional filter for the returned list in filtering format.
+   *   Filtering is only currently supported on the `path` field.
+   *   See https://google.aip.dev/160 for details.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link protos.google.cloud.dataform.v1beta1.SearchResult|SearchResult}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `searchFilesAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
+  searchFiles(
+    request?: protos.google.cloud.dataform.v1beta1.ISearchFilesRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.dataform.v1beta1.ISearchResult[],
+      protos.google.cloud.dataform.v1beta1.ISearchFilesRequest | null,
+      protos.google.cloud.dataform.v1beta1.ISearchFilesResponse,
+    ]
+  >;
+  searchFiles(
+    request: protos.google.cloud.dataform.v1beta1.ISearchFilesRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.dataform.v1beta1.ISearchFilesRequest,
+      | protos.google.cloud.dataform.v1beta1.ISearchFilesResponse
+      | null
+      | undefined,
+      protos.google.cloud.dataform.v1beta1.ISearchResult
+    >
+  ): void;
+  searchFiles(
+    request: protos.google.cloud.dataform.v1beta1.ISearchFilesRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.dataform.v1beta1.ISearchFilesRequest,
+      | protos.google.cloud.dataform.v1beta1.ISearchFilesResponse
+      | null
+      | undefined,
+      protos.google.cloud.dataform.v1beta1.ISearchResult
+    >
+  ): void;
+  searchFiles(
+    request?: protos.google.cloud.dataform.v1beta1.ISearchFilesRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
+          protos.google.cloud.dataform.v1beta1.ISearchFilesRequest,
+          | protos.google.cloud.dataform.v1beta1.ISearchFilesResponse
+          | null
+          | undefined,
+          protos.google.cloud.dataform.v1beta1.ISearchResult
+        >,
+    callback?: PaginationCallback<
+      protos.google.cloud.dataform.v1beta1.ISearchFilesRequest,
+      | protos.google.cloud.dataform.v1beta1.ISearchFilesResponse
+      | null
+      | undefined,
+      protos.google.cloud.dataform.v1beta1.ISearchResult
+    >
+  ): Promise<
+    [
+      protos.google.cloud.dataform.v1beta1.ISearchResult[],
+      protos.google.cloud.dataform.v1beta1.ISearchFilesRequest | null,
+      protos.google.cloud.dataform.v1beta1.ISearchFilesResponse,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        workspace: request.workspace ?? '',
+      });
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.dataform.v1beta1.ISearchFilesRequest,
+          | protos.google.cloud.dataform.v1beta1.ISearchFilesResponse
+          | null
+          | undefined,
+          protos.google.cloud.dataform.v1beta1.ISearchResult
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('searchFiles values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('searchFiles request %j', request);
+    return this.innerApiCalls
+      .searchFiles(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.dataform.v1beta1.ISearchResult[],
+          protos.google.cloud.dataform.v1beta1.ISearchFilesRequest | null,
+          protos.google.cloud.dataform.v1beta1.ISearchFilesResponse,
+        ]) => {
+          this._log.info('searchFiles values %j', response);
+          return [response, input, output];
+        }
+      );
+  }
+
+  /**
+   * Equivalent to `searchFiles`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.workspace
+   *   Required. The workspace's name.
+   * @param {number} [request.pageSize]
+   *   Optional. Maximum number of search results to return. The server may return
+   *   fewer items than requested. If unspecified, the server will pick an
+   *   appropriate default.
+   * @param {string} [request.pageToken]
+   *   Optional. Page token received from a previous `SearchFilesRequest`
+   *   call. Provide this to retrieve the subsequent page.
+   *
+   *   When paginating, all other parameters provided to `SearchFilesRequest`,
+   *   with the exception of `page_size`, must match the call that provided the
+   *   page token.
+   * @param {string} [request.filter]
+   *   Optional. Optional filter for the returned list in filtering format.
+   *   Filtering is only currently supported on the `path` field.
+   *   See https://google.aip.dev/160 for details.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing {@link protos.google.cloud.dataform.v1beta1.SearchResult|SearchResult} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `searchFilesAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
+  searchFilesStream(
+    request?: protos.google.cloud.dataform.v1beta1.ISearchFilesRequest,
+    options?: CallOptions
+  ): Transform {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        workspace: request.workspace ?? '',
+      });
+    const defaultCallSettings = this._defaults['searchFiles'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('searchFiles stream %j', request);
+    return this.descriptors.page.searchFiles.createStream(
+      this.innerApiCalls.searchFiles as GaxCall,
+      request,
+      callSettings
+    );
+  }
+
+  /**
+   * Equivalent to `searchFiles`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.workspace
+   *   Required. The workspace's name.
+   * @param {number} [request.pageSize]
+   *   Optional. Maximum number of search results to return. The server may return
+   *   fewer items than requested. If unspecified, the server will pick an
+   *   appropriate default.
+   * @param {string} [request.pageToken]
+   *   Optional. Page token received from a previous `SearchFilesRequest`
+   *   call. Provide this to retrieve the subsequent page.
+   *
+   *   When paginating, all other parameters provided to `SearchFilesRequest`,
+   *   with the exception of `page_size`, must match the call that provided the
+   *   page token.
+   * @param {string} [request.filter]
+   *   Optional. Optional filter for the returned list in filtering format.
+   *   Filtering is only currently supported on the `path` field.
+   *   See https://google.aip.dev/160 for details.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link protos.google.cloud.dataform.v1beta1.SearchResult|SearchResult}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta1/dataform.search_files.js</caption>
+   * region_tag:dataform_v1beta1_generated_Dataform_SearchFiles_async
+   */
+  searchFilesAsync(
+    request?: protos.google.cloud.dataform.v1beta1.ISearchFilesRequest,
+    options?: CallOptions
+  ): AsyncIterable<protos.google.cloud.dataform.v1beta1.ISearchResult> {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        workspace: request.workspace ?? '',
+      });
+    const defaultCallSettings = this._defaults['searchFiles'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('searchFiles iterate %j', request);
+    return this.descriptors.page.searchFiles.asyncIterate(
+      this.innerApiCalls['searchFiles'] as GaxCall,
+      request as {},
+      callSettings
+    ) as AsyncIterable<protos.google.cloud.dataform.v1beta1.ISearchResult>;
   }
   /**
    * Lists ReleaseConfigs in a given Repository.
@@ -5504,8 +7412,9 @@ export class DataformClient {
    *   Optional. Page token received from a previous `ListReleaseConfigs` call.
    *   Provide this to retrieve the subsequent page.
    *
-   *   When paginating, all other parameters provided to `ListReleaseConfigs`
-   *   must match the call that provided the page token.
+   *   When paginating, all other parameters provided to `ListReleaseConfigs`,
+   *   with the exception of `page_size`, must match the call that provided the
+   *   page token.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -5589,12 +7498,40 @@ export class DataformClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.listReleaseConfigs(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.dataform.v1beta1.IListReleaseConfigsRequest,
+          | protos.google.cloud.dataform.v1beta1.IListReleaseConfigsResponse
+          | null
+          | undefined,
+          protos.google.cloud.dataform.v1beta1.IReleaseConfig
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listReleaseConfigs values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listReleaseConfigs request %j', request);
+    return this.innerApiCalls
+      .listReleaseConfigs(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.dataform.v1beta1.IReleaseConfig[],
+          protos.google.cloud.dataform.v1beta1.IListReleaseConfigsRequest | null,
+          protos.google.cloud.dataform.v1beta1.IListReleaseConfigsResponse,
+        ]) => {
+          this._log.info('listReleaseConfigs values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listReleaseConfigs`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
@@ -5608,8 +7545,9 @@ export class DataformClient {
    *   Optional. Page token received from a previous `ListReleaseConfigs` call.
    *   Provide this to retrieve the subsequent page.
    *
-   *   When paginating, all other parameters provided to `ListReleaseConfigs`
-   *   must match the call that provided the page token.
+   *   When paginating, all other parameters provided to `ListReleaseConfigs`,
+   *   with the exception of `page_size`, must match the call that provided the
+   *   page token.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
@@ -5635,7 +7573,10 @@ export class DataformClient {
       });
     const defaultCallSettings = this._defaults['listReleaseConfigs'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listReleaseConfigs stream %j', request);
     return this.descriptors.page.listReleaseConfigs.createStream(
       this.innerApiCalls.listReleaseConfigs as GaxCall,
       request,
@@ -5660,8 +7601,9 @@ export class DataformClient {
    *   Optional. Page token received from a previous `ListReleaseConfigs` call.
    *   Provide this to retrieve the subsequent page.
    *
-   *   When paginating, all other parameters provided to `ListReleaseConfigs`
-   *   must match the call that provided the page token.
+   *   When paginating, all other parameters provided to `ListReleaseConfigs`,
+   *   with the exception of `page_size`, must match the call that provided the
+   *   page token.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
@@ -5688,7 +7630,10 @@ export class DataformClient {
       });
     const defaultCallSettings = this._defaults['listReleaseConfigs'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listReleaseConfigs iterate %j', request);
     return this.descriptors.page.listReleaseConfigs.asyncIterate(
       this.innerApiCalls['listReleaseConfigs'] as GaxCall,
       request as {},
@@ -5711,8 +7656,15 @@ export class DataformClient {
    *   Optional. Page token received from a previous `ListCompilationResults`
    *   call. Provide this to retrieve the subsequent page.
    *
-   *   When paginating, all other parameters provided to `ListCompilationResults`
-   *   must match the call that provided the page token.
+   *   When paginating, all other parameters provided to `ListCompilationResults`,
+   *   with the exception of `page_size`, must match the call that provided the
+   *   page token.
+   * @param {string} [request.orderBy]
+   *   Optional. This field only supports ordering by `name` and `create_time`.
+   *   If unspecified, the server will choose the ordering.
+   *   If specified, the default order is ascending for the `name` field.
+   * @param {string} [request.filter]
+   *   Optional. Filter for the returned list.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -5796,16 +7748,40 @@ export class DataformClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.listCompilationResults(
-      request,
-      options,
-      callback
-    );
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.dataform.v1beta1.IListCompilationResultsRequest,
+          | protos.google.cloud.dataform.v1beta1.IListCompilationResultsResponse
+          | null
+          | undefined,
+          protos.google.cloud.dataform.v1beta1.ICompilationResult
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listCompilationResults values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listCompilationResults request %j', request);
+    return this.innerApiCalls
+      .listCompilationResults(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.dataform.v1beta1.ICompilationResult[],
+          protos.google.cloud.dataform.v1beta1.IListCompilationResultsRequest | null,
+          protos.google.cloud.dataform.v1beta1.IListCompilationResultsResponse,
+        ]) => {
+          this._log.info('listCompilationResults values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listCompilationResults`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
@@ -5819,8 +7795,15 @@ export class DataformClient {
    *   Optional. Page token received from a previous `ListCompilationResults`
    *   call. Provide this to retrieve the subsequent page.
    *
-   *   When paginating, all other parameters provided to `ListCompilationResults`
-   *   must match the call that provided the page token.
+   *   When paginating, all other parameters provided to `ListCompilationResults`,
+   *   with the exception of `page_size`, must match the call that provided the
+   *   page token.
+   * @param {string} [request.orderBy]
+   *   Optional. This field only supports ordering by `name` and `create_time`.
+   *   If unspecified, the server will choose the ordering.
+   *   If specified, the default order is ascending for the `name` field.
+   * @param {string} [request.filter]
+   *   Optional. Filter for the returned list.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
@@ -5846,7 +7829,10 @@ export class DataformClient {
       });
     const defaultCallSettings = this._defaults['listCompilationResults'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listCompilationResults stream %j', request);
     return this.descriptors.page.listCompilationResults.createStream(
       this.innerApiCalls.listCompilationResults as GaxCall,
       request,
@@ -5871,8 +7857,15 @@ export class DataformClient {
    *   Optional. Page token received from a previous `ListCompilationResults`
    *   call. Provide this to retrieve the subsequent page.
    *
-   *   When paginating, all other parameters provided to `ListCompilationResults`
-   *   must match the call that provided the page token.
+   *   When paginating, all other parameters provided to `ListCompilationResults`,
+   *   with the exception of `page_size`, must match the call that provided the
+   *   page token.
+   * @param {string} [request.orderBy]
+   *   Optional. This field only supports ordering by `name` and `create_time`.
+   *   If unspecified, the server will choose the ordering.
+   *   If specified, the default order is ascending for the `name` field.
+   * @param {string} [request.filter]
+   *   Optional. Filter for the returned list.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
@@ -5899,7 +7892,10 @@ export class DataformClient {
       });
     const defaultCallSettings = this._defaults['listCompilationResults'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listCompilationResults iterate %j', request);
     return this.descriptors.page.listCompilationResults.asyncIterate(
       this.innerApiCalls['listCompilationResults'] as GaxCall,
       request as {},
@@ -5923,8 +7919,8 @@ export class DataformClient {
    *   subsequent page.
    *
    *   When paginating, all other parameters provided to
-   *   `QueryCompilationResultActions` must match the call that provided the page
-   *   token.
+   *   `QueryCompilationResultActions`, with the exception of `page_size`, must
+   *   match the call that provided the page token.
    * @param {string} [request.filter]
    *   Optional. Optional filter for the returned list. Filtering is only
    *   currently supported on the `file_path` field.
@@ -6011,16 +8007,40 @@ export class DataformClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.queryCompilationResultActions(
-      request,
-      options,
-      callback
-    );
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.dataform.v1beta1.IQueryCompilationResultActionsRequest,
+          | protos.google.cloud.dataform.v1beta1.IQueryCompilationResultActionsResponse
+          | null
+          | undefined,
+          protos.google.cloud.dataform.v1beta1.ICompilationResultAction
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('queryCompilationResultActions values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('queryCompilationResultActions request %j', request);
+    return this.innerApiCalls
+      .queryCompilationResultActions(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.dataform.v1beta1.ICompilationResultAction[],
+          protos.google.cloud.dataform.v1beta1.IQueryCompilationResultActionsRequest | null,
+          protos.google.cloud.dataform.v1beta1.IQueryCompilationResultActionsResponse,
+        ]) => {
+          this._log.info('queryCompilationResultActions values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `queryCompilationResultActions`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
@@ -6035,8 +8055,8 @@ export class DataformClient {
    *   subsequent page.
    *
    *   When paginating, all other parameters provided to
-   *   `QueryCompilationResultActions` must match the call that provided the page
-   *   token.
+   *   `QueryCompilationResultActions`, with the exception of `page_size`, must
+   *   match the call that provided the page token.
    * @param {string} [request.filter]
    *   Optional. Optional filter for the returned list. Filtering is only
    *   currently supported on the `file_path` field.
@@ -6065,7 +8085,10 @@ export class DataformClient {
       });
     const defaultCallSettings = this._defaults['queryCompilationResultActions'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('queryCompilationResultActions stream %j', request);
     return this.descriptors.page.queryCompilationResultActions.createStream(
       this.innerApiCalls.queryCompilationResultActions as GaxCall,
       request,
@@ -6091,8 +8114,8 @@ export class DataformClient {
    *   subsequent page.
    *
    *   When paginating, all other parameters provided to
-   *   `QueryCompilationResultActions` must match the call that provided the page
-   *   token.
+   *   `QueryCompilationResultActions`, with the exception of `page_size`, must
+   *   match the call that provided the page token.
    * @param {string} [request.filter]
    *   Optional. Optional filter for the returned list. Filtering is only
    *   currently supported on the `file_path` field.
@@ -6122,7 +8145,10 @@ export class DataformClient {
       });
     const defaultCallSettings = this._defaults['queryCompilationResultActions'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('queryCompilationResultActions iterate %j', request);
     return this.descriptors.page.queryCompilationResultActions.asyncIterate(
       this.innerApiCalls['queryCompilationResultActions'] as GaxCall,
       request as {},
@@ -6145,8 +8171,9 @@ export class DataformClient {
    *   Optional. Page token received from a previous `ListWorkflowConfigs` call.
    *   Provide this to retrieve the subsequent page.
    *
-   *   When paginating, all other parameters provided to `ListWorkflowConfigs`
-   *   must match the call that provided the page token.
+   *   When paginating, all other parameters provided to `ListWorkflowConfigs`,
+   *   with the exception of `page_size`, must match the call that provided the
+   *   page token.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -6230,12 +8257,40 @@ export class DataformClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.listWorkflowConfigs(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.dataform.v1beta1.IListWorkflowConfigsRequest,
+          | protos.google.cloud.dataform.v1beta1.IListWorkflowConfigsResponse
+          | null
+          | undefined,
+          protos.google.cloud.dataform.v1beta1.IWorkflowConfig
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listWorkflowConfigs values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listWorkflowConfigs request %j', request);
+    return this.innerApiCalls
+      .listWorkflowConfigs(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.dataform.v1beta1.IWorkflowConfig[],
+          protos.google.cloud.dataform.v1beta1.IListWorkflowConfigsRequest | null,
+          protos.google.cloud.dataform.v1beta1.IListWorkflowConfigsResponse,
+        ]) => {
+          this._log.info('listWorkflowConfigs values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listWorkflowConfigs`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
@@ -6249,8 +8304,9 @@ export class DataformClient {
    *   Optional. Page token received from a previous `ListWorkflowConfigs` call.
    *   Provide this to retrieve the subsequent page.
    *
-   *   When paginating, all other parameters provided to `ListWorkflowConfigs`
-   *   must match the call that provided the page token.
+   *   When paginating, all other parameters provided to `ListWorkflowConfigs`,
+   *   with the exception of `page_size`, must match the call that provided the
+   *   page token.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
@@ -6276,7 +8332,10 @@ export class DataformClient {
       });
     const defaultCallSettings = this._defaults['listWorkflowConfigs'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listWorkflowConfigs stream %j', request);
     return this.descriptors.page.listWorkflowConfigs.createStream(
       this.innerApiCalls.listWorkflowConfigs as GaxCall,
       request,
@@ -6301,8 +8360,9 @@ export class DataformClient {
    *   Optional. Page token received from a previous `ListWorkflowConfigs` call.
    *   Provide this to retrieve the subsequent page.
    *
-   *   When paginating, all other parameters provided to `ListWorkflowConfigs`
-   *   must match the call that provided the page token.
+   *   When paginating, all other parameters provided to `ListWorkflowConfigs`,
+   *   with the exception of `page_size`, must match the call that provided the
+   *   page token.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
@@ -6329,7 +8389,10 @@ export class DataformClient {
       });
     const defaultCallSettings = this._defaults['listWorkflowConfigs'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listWorkflowConfigs iterate %j', request);
     return this.descriptors.page.listWorkflowConfigs.asyncIterate(
       this.innerApiCalls['listWorkflowConfigs'] as GaxCall,
       request as {},
@@ -6352,8 +8415,9 @@ export class DataformClient {
    *   Optional. Page token received from a previous `ListWorkflowInvocations`
    *   call. Provide this to retrieve the subsequent page.
    *
-   *   When paginating, all other parameters provided to `ListWorkflowInvocations`
-   *   must match the call that provided the page token.
+   *   When paginating, all other parameters provided to
+   *   `ListWorkflowInvocations`, with the exception of `page_size`, must match
+   *   the call that provided the page token.
    * @param {string} [request.orderBy]
    *   Optional. This field only supports ordering by `name`. If unspecified, the
    *   server will choose the ordering. If specified, the default order is
@@ -6443,16 +8507,40 @@ export class DataformClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.listWorkflowInvocations(
-      request,
-      options,
-      callback
-    );
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.dataform.v1beta1.IListWorkflowInvocationsRequest,
+          | protos.google.cloud.dataform.v1beta1.IListWorkflowInvocationsResponse
+          | null
+          | undefined,
+          protos.google.cloud.dataform.v1beta1.IWorkflowInvocation
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listWorkflowInvocations values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listWorkflowInvocations request %j', request);
+    return this.innerApiCalls
+      .listWorkflowInvocations(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.dataform.v1beta1.IWorkflowInvocation[],
+          protos.google.cloud.dataform.v1beta1.IListWorkflowInvocationsRequest | null,
+          protos.google.cloud.dataform.v1beta1.IListWorkflowInvocationsResponse,
+        ]) => {
+          this._log.info('listWorkflowInvocations values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listWorkflowInvocations`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
@@ -6466,8 +8554,9 @@ export class DataformClient {
    *   Optional. Page token received from a previous `ListWorkflowInvocations`
    *   call. Provide this to retrieve the subsequent page.
    *
-   *   When paginating, all other parameters provided to `ListWorkflowInvocations`
-   *   must match the call that provided the page token.
+   *   When paginating, all other parameters provided to
+   *   `ListWorkflowInvocations`, with the exception of `page_size`, must match
+   *   the call that provided the page token.
    * @param {string} [request.orderBy]
    *   Optional. This field only supports ordering by `name`. If unspecified, the
    *   server will choose the ordering. If specified, the default order is
@@ -6499,7 +8588,10 @@ export class DataformClient {
       });
     const defaultCallSettings = this._defaults['listWorkflowInvocations'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listWorkflowInvocations stream %j', request);
     return this.descriptors.page.listWorkflowInvocations.createStream(
       this.innerApiCalls.listWorkflowInvocations as GaxCall,
       request,
@@ -6524,8 +8616,9 @@ export class DataformClient {
    *   Optional. Page token received from a previous `ListWorkflowInvocations`
    *   call. Provide this to retrieve the subsequent page.
    *
-   *   When paginating, all other parameters provided to `ListWorkflowInvocations`
-   *   must match the call that provided the page token.
+   *   When paginating, all other parameters provided to
+   *   `ListWorkflowInvocations`, with the exception of `page_size`, must match
+   *   the call that provided the page token.
    * @param {string} [request.orderBy]
    *   Optional. This field only supports ordering by `name`. If unspecified, the
    *   server will choose the ordering. If specified, the default order is
@@ -6558,7 +8651,10 @@ export class DataformClient {
       });
     const defaultCallSettings = this._defaults['listWorkflowInvocations'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listWorkflowInvocations iterate %j', request);
     return this.descriptors.page.listWorkflowInvocations.asyncIterate(
       this.innerApiCalls['listWorkflowInvocations'] as GaxCall,
       request as {},
@@ -6582,8 +8678,8 @@ export class DataformClient {
    *   subsequent page.
    *
    *   When paginating, all other parameters provided to
-   *   `QueryWorkflowInvocationActions` must match the call that provided the page
-   *   token.
+   *   `QueryWorkflowInvocationActions`, with the exception of `page_size`, must
+   *   match the call that provided the page token.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -6667,16 +8763,40 @@ export class DataformClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.queryWorkflowInvocationActions(
-      request,
-      options,
-      callback
-    );
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.dataform.v1beta1.IQueryWorkflowInvocationActionsRequest,
+          | protos.google.cloud.dataform.v1beta1.IQueryWorkflowInvocationActionsResponse
+          | null
+          | undefined,
+          protos.google.cloud.dataform.v1beta1.IWorkflowInvocationAction
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('queryWorkflowInvocationActions values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('queryWorkflowInvocationActions request %j', request);
+    return this.innerApiCalls
+      .queryWorkflowInvocationActions(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.dataform.v1beta1.IWorkflowInvocationAction[],
+          protos.google.cloud.dataform.v1beta1.IQueryWorkflowInvocationActionsRequest | null,
+          protos.google.cloud.dataform.v1beta1.IQueryWorkflowInvocationActionsResponse,
+        ]) => {
+          this._log.info('queryWorkflowInvocationActions values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `queryWorkflowInvocationActions`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
@@ -6691,8 +8811,8 @@ export class DataformClient {
    *   subsequent page.
    *
    *   When paginating, all other parameters provided to
-   *   `QueryWorkflowInvocationActions` must match the call that provided the page
-   *   token.
+   *   `QueryWorkflowInvocationActions`, with the exception of `page_size`, must
+   *   match the call that provided the page token.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
@@ -6719,7 +8839,10 @@ export class DataformClient {
     const defaultCallSettings =
       this._defaults['queryWorkflowInvocationActions'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('queryWorkflowInvocationActions stream %j', request);
     return this.descriptors.page.queryWorkflowInvocationActions.createStream(
       this.innerApiCalls.queryWorkflowInvocationActions as GaxCall,
       request,
@@ -6745,8 +8868,8 @@ export class DataformClient {
    *   subsequent page.
    *
    *   When paginating, all other parameters provided to
-   *   `QueryWorkflowInvocationActions` must match the call that provided the page
-   *   token.
+   *   `QueryWorkflowInvocationActions`, with the exception of `page_size`, must
+   *   match the call that provided the page token.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
@@ -6774,7 +8897,10 @@ export class DataformClient {
     const defaultCallSettings =
       this._defaults['queryWorkflowInvocationActions'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('queryWorkflowInvocationActions iterate %j', request);
     return this.descriptors.page.queryWorkflowInvocationActions.asyncIterate(
       this.innerApiCalls['queryWorkflowInvocationActions'] as GaxCall,
       request as {},
@@ -7076,6 +9202,204 @@ export class DataformClient {
     return this.pathTemplates.compilationResultPathTemplate.match(
       compilationResultName
     ).compilation_result;
+  }
+
+  /**
+   * Return a fully-qualified config resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @returns {string} Resource name string.
+   */
+  configPath(project: string, location: string) {
+    return this.pathTemplates.configPathTemplate.render({
+      project: project,
+      location: location,
+    });
+  }
+
+  /**
+   * Parse the project from Config resource.
+   *
+   * @param {string} configName
+   *   A fully-qualified path representing Config resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromConfigName(configName: string) {
+    return this.pathTemplates.configPathTemplate.match(configName).project;
+  }
+
+  /**
+   * Parse the location from Config resource.
+   *
+   * @param {string} configName
+   *   A fully-qualified path representing Config resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromConfigName(configName: string) {
+    return this.pathTemplates.configPathTemplate.match(configName).location;
+  }
+
+  /**
+   * Return a fully-qualified cryptoKey resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} key_ring
+   * @param {string} crypto_key
+   * @returns {string} Resource name string.
+   */
+  cryptoKeyPath(
+    project: string,
+    location: string,
+    keyRing: string,
+    cryptoKey: string
+  ) {
+    return this.pathTemplates.cryptoKeyPathTemplate.render({
+      project: project,
+      location: location,
+      key_ring: keyRing,
+      crypto_key: cryptoKey,
+    });
+  }
+
+  /**
+   * Parse the project from CryptoKey resource.
+   *
+   * @param {string} cryptoKeyName
+   *   A fully-qualified path representing CryptoKey resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromCryptoKeyName(cryptoKeyName: string) {
+    return this.pathTemplates.cryptoKeyPathTemplate.match(cryptoKeyName)
+      .project;
+  }
+
+  /**
+   * Parse the location from CryptoKey resource.
+   *
+   * @param {string} cryptoKeyName
+   *   A fully-qualified path representing CryptoKey resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromCryptoKeyName(cryptoKeyName: string) {
+    return this.pathTemplates.cryptoKeyPathTemplate.match(cryptoKeyName)
+      .location;
+  }
+
+  /**
+   * Parse the key_ring from CryptoKey resource.
+   *
+   * @param {string} cryptoKeyName
+   *   A fully-qualified path representing CryptoKey resource.
+   * @returns {string} A string representing the key_ring.
+   */
+  matchKeyRingFromCryptoKeyName(cryptoKeyName: string) {
+    return this.pathTemplates.cryptoKeyPathTemplate.match(cryptoKeyName)
+      .key_ring;
+  }
+
+  /**
+   * Parse the crypto_key from CryptoKey resource.
+   *
+   * @param {string} cryptoKeyName
+   *   A fully-qualified path representing CryptoKey resource.
+   * @returns {string} A string representing the crypto_key.
+   */
+  matchCryptoKeyFromCryptoKeyName(cryptoKeyName: string) {
+    return this.pathTemplates.cryptoKeyPathTemplate.match(cryptoKeyName)
+      .crypto_key;
+  }
+
+  /**
+   * Return a fully-qualified cryptoKeyVersion resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} key_ring
+   * @param {string} crypto_key
+   * @param {string} crypto_key_version
+   * @returns {string} Resource name string.
+   */
+  cryptoKeyVersionPath(
+    project: string,
+    location: string,
+    keyRing: string,
+    cryptoKey: string,
+    cryptoKeyVersion: string
+  ) {
+    return this.pathTemplates.cryptoKeyVersionPathTemplate.render({
+      project: project,
+      location: location,
+      key_ring: keyRing,
+      crypto_key: cryptoKey,
+      crypto_key_version: cryptoKeyVersion,
+    });
+  }
+
+  /**
+   * Parse the project from CryptoKeyVersion resource.
+   *
+   * @param {string} cryptoKeyVersionName
+   *   A fully-qualified path representing CryptoKeyVersion resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromCryptoKeyVersionName(cryptoKeyVersionName: string) {
+    return this.pathTemplates.cryptoKeyVersionPathTemplate.match(
+      cryptoKeyVersionName
+    ).project;
+  }
+
+  /**
+   * Parse the location from CryptoKeyVersion resource.
+   *
+   * @param {string} cryptoKeyVersionName
+   *   A fully-qualified path representing CryptoKeyVersion resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromCryptoKeyVersionName(cryptoKeyVersionName: string) {
+    return this.pathTemplates.cryptoKeyVersionPathTemplate.match(
+      cryptoKeyVersionName
+    ).location;
+  }
+
+  /**
+   * Parse the key_ring from CryptoKeyVersion resource.
+   *
+   * @param {string} cryptoKeyVersionName
+   *   A fully-qualified path representing CryptoKeyVersion resource.
+   * @returns {string} A string representing the key_ring.
+   */
+  matchKeyRingFromCryptoKeyVersionName(cryptoKeyVersionName: string) {
+    return this.pathTemplates.cryptoKeyVersionPathTemplate.match(
+      cryptoKeyVersionName
+    ).key_ring;
+  }
+
+  /**
+   * Parse the crypto_key from CryptoKeyVersion resource.
+   *
+   * @param {string} cryptoKeyVersionName
+   *   A fully-qualified path representing CryptoKeyVersion resource.
+   * @returns {string} A string representing the crypto_key.
+   */
+  matchCryptoKeyFromCryptoKeyVersionName(cryptoKeyVersionName: string) {
+    return this.pathTemplates.cryptoKeyVersionPathTemplate.match(
+      cryptoKeyVersionName
+    ).crypto_key;
+  }
+
+  /**
+   * Parse the crypto_key_version from CryptoKeyVersion resource.
+   *
+   * @param {string} cryptoKeyVersionName
+   *   A fully-qualified path representing CryptoKeyVersion resource.
+   * @returns {string} A string representing the crypto_key_version.
+   */
+  matchCryptoKeyVersionFromCryptoKeyVersionName(cryptoKeyVersionName: string) {
+    return this.pathTemplates.cryptoKeyVersionPathTemplate.match(
+      cryptoKeyVersionName
+    ).crypto_key_version;
   }
 
   /**
@@ -7521,6 +9845,7 @@ export class DataformClient {
   close(): Promise<void> {
     if (this.dataformStub && !this._terminated) {
       return this.dataformStub.then(stub => {
+        this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
         this.iamClient.close();

@@ -35,6 +35,7 @@ import type {
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
+import {loggingUtils as logging} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -60,6 +61,8 @@ export class EventarcClient {
   private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
+  private _log = logging.log('eventarc');
+
   auth: gax.GoogleAuth;
   descriptors: Descriptors = {
     page: {},
@@ -97,7 +100,7 @@ export class EventarcClient {
    *     Developer's Console, e.g. 'grape-spaceship-123'. We will also check
    *     the environment variable GCLOUD_PROJECT for your project ID. If your
    *     app is running in an environment which supports
-   *     {@link https://developers.google.com/identity/protocols/application-default-credentials Application Default Credentials},
+   *     {@link https://cloud.google.com/docs/authentication/application-default-credentials Application Default Credentials},
    *     your project ID will be detected automatically.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
@@ -951,8 +954,34 @@ export class EventarcClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.getTrigger(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('getTrigger request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.eventarc.v1.ITrigger,
+          protos.google.cloud.eventarc.v1.IGetTriggerRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getTrigger response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getTrigger(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.eventarc.v1.ITrigger,
+          protos.google.cloud.eventarc.v1.IGetTriggerRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getTrigger response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Get a single Channel.
@@ -1033,8 +1062,34 @@ export class EventarcClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.getChannel(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('getChannel request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.eventarc.v1.IChannel,
+          protos.google.cloud.eventarc.v1.IGetChannelRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getChannel response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getChannel(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.eventarc.v1.IChannel,
+          protos.google.cloud.eventarc.v1.IGetChannelRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getChannel response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Get a single Provider.
@@ -1117,8 +1172,36 @@ export class EventarcClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.getProvider(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('getProvider request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.eventarc.v1.IProvider,
+          | protos.google.cloud.eventarc.v1.IGetProviderRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getProvider response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getProvider(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.eventarc.v1.IProvider,
+          protos.google.cloud.eventarc.v1.IGetProviderRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getProvider response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Get a single ChannelConnection.
@@ -1207,8 +1290,39 @@ export class EventarcClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.getChannelConnection(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('getChannelConnection request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.eventarc.v1.IChannelConnection,
+          | protos.google.cloud.eventarc.v1.IGetChannelConnectionRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getChannelConnection response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getChannelConnection(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.eventarc.v1.IChannelConnection,
+          (
+            | protos.google.cloud.eventarc.v1.IGetChannelConnectionRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getChannelConnection response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Get a GoogleChannelConfig
@@ -1303,12 +1417,39 @@ export class EventarcClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.getGoogleChannelConfig(
-      request,
-      options,
-      callback
-    );
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('getGoogleChannelConfig request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.eventarc.v1.IGoogleChannelConfig,
+          | protos.google.cloud.eventarc.v1.IGetGoogleChannelConfigRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getGoogleChannelConfig response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getGoogleChannelConfig(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.eventarc.v1.IGoogleChannelConfig,
+          (
+            | protos.google.cloud.eventarc.v1.IGetGoogleChannelConfigRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getGoogleChannelConfig response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Update a single GoogleChannelConfig
@@ -1407,12 +1548,39 @@ export class EventarcClient {
       this._gaxModule.routingHeader.fromParams({
         'google_channel_config.name': request.googleChannelConfig!.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.updateGoogleChannelConfig(
-      request,
-      options,
-      callback
-    );
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('updateGoogleChannelConfig request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.eventarc.v1.IGoogleChannelConfig,
+          | protos.google.cloud.eventarc.v1.IUpdateGoogleChannelConfigRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('updateGoogleChannelConfig response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .updateGoogleChannelConfig(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.eventarc.v1.IGoogleChannelConfig,
+          (
+            | protos.google.cloud.eventarc.v1.IUpdateGoogleChannelConfigRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('updateGoogleChannelConfig response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Get a single MessageBus.
@@ -1495,8 +1663,36 @@ export class EventarcClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.getMessageBus(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('getMessageBus request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.eventarc.v1.IMessageBus,
+          | protos.google.cloud.eventarc.v1.IGetMessageBusRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getMessageBus response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getMessageBus(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.eventarc.v1.IMessageBus,
+          protos.google.cloud.eventarc.v1.IGetMessageBusRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getMessageBus response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Get a single Enrollment.
@@ -1579,8 +1775,36 @@ export class EventarcClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.getEnrollment(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('getEnrollment request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.eventarc.v1.IEnrollment,
+          | protos.google.cloud.eventarc.v1.IGetEnrollmentRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getEnrollment response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getEnrollment(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.eventarc.v1.IEnrollment,
+          protos.google.cloud.eventarc.v1.IGetEnrollmentRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getEnrollment response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Get a single Pipeline.
@@ -1663,8 +1887,36 @@ export class EventarcClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.getPipeline(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('getPipeline request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.eventarc.v1.IPipeline,
+          | protos.google.cloud.eventarc.v1.IGetPipelineRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getPipeline response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getPipeline(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.eventarc.v1.IPipeline,
+          protos.google.cloud.eventarc.v1.IGetPipelineRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getPipeline response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Get a single GoogleApiSource.
@@ -1753,8 +2005,39 @@ export class EventarcClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.getGoogleApiSource(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('getGoogleApiSource request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.eventarc.v1.IGoogleApiSource,
+          | protos.google.cloud.eventarc.v1.IGetGoogleApiSourceRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getGoogleApiSource response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getGoogleApiSource(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.eventarc.v1.IGoogleApiSource,
+          (
+            | protos.google.cloud.eventarc.v1.IGetGoogleApiSourceRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getGoogleApiSource response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
 
   /**
@@ -1863,8 +2146,40 @@ export class EventarcClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.createTrigger(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.eventarc.v1.ITrigger,
+            protos.google.cloud.eventarc.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('createTrigger response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('createTrigger request %j', request);
+    return this.innerApiCalls
+      .createTrigger(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.eventarc.v1.ITrigger,
+            protos.google.cloud.eventarc.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createTrigger response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `createTrigger()`.
@@ -1885,6 +2200,7 @@ export class EventarcClient {
       protos.google.cloud.eventarc.v1.OperationMetadata
     >
   > {
+    this._log.info('createTrigger long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -2009,8 +2325,40 @@ export class EventarcClient {
       this._gaxModule.routingHeader.fromParams({
         'trigger.name': request.trigger!.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.updateTrigger(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.eventarc.v1.ITrigger,
+            protos.google.cloud.eventarc.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('updateTrigger response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('updateTrigger request %j', request);
+    return this.innerApiCalls
+      .updateTrigger(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.eventarc.v1.ITrigger,
+            protos.google.cloud.eventarc.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('updateTrigger response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `updateTrigger()`.
@@ -2031,6 +2379,7 @@ export class EventarcClient {
       protos.google.cloud.eventarc.v1.OperationMetadata
     >
   > {
+    this._log.info('updateTrigger long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -2154,8 +2503,40 @@ export class EventarcClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.deleteTrigger(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.eventarc.v1.ITrigger,
+            protos.google.cloud.eventarc.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('deleteTrigger response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('deleteTrigger request %j', request);
+    return this.innerApiCalls
+      .deleteTrigger(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.eventarc.v1.ITrigger,
+            protos.google.cloud.eventarc.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteTrigger response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `deleteTrigger()`.
@@ -2176,6 +2557,7 @@ export class EventarcClient {
       protos.google.cloud.eventarc.v1.OperationMetadata
     >
   > {
+    this._log.info('deleteTrigger long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -2297,8 +2679,40 @@ export class EventarcClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.createChannel(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.eventarc.v1.IChannel,
+            protos.google.cloud.eventarc.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('createChannel response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('createChannel request %j', request);
+    return this.innerApiCalls
+      .createChannel(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.eventarc.v1.IChannel,
+            protos.google.cloud.eventarc.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createChannel response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `createChannel()`.
@@ -2319,6 +2733,7 @@ export class EventarcClient {
       protos.google.cloud.eventarc.v1.OperationMetadata
     >
   > {
+    this._log.info('createChannel long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -2440,8 +2855,40 @@ export class EventarcClient {
       this._gaxModule.routingHeader.fromParams({
         'channel.name': request.channel!.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.updateChannel(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.eventarc.v1.IChannel,
+            protos.google.cloud.eventarc.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('updateChannel response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('updateChannel request %j', request);
+    return this.innerApiCalls
+      .updateChannel(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.eventarc.v1.IChannel,
+            protos.google.cloud.eventarc.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('updateChannel response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `updateChannel()`.
@@ -2462,6 +2909,7 @@ export class EventarcClient {
       protos.google.cloud.eventarc.v1.OperationMetadata
     >
   > {
+    this._log.info('updateChannel long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -2579,8 +3027,40 @@ export class EventarcClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.deleteChannel(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.eventarc.v1.IChannel,
+            protos.google.cloud.eventarc.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('deleteChannel response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('deleteChannel request %j', request);
+    return this.innerApiCalls
+      .deleteChannel(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.eventarc.v1.IChannel,
+            protos.google.cloud.eventarc.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteChannel response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `deleteChannel()`.
@@ -2601,6 +3081,7 @@ export class EventarcClient {
       protos.google.cloud.eventarc.v1.OperationMetadata
     >
   > {
+    this._log.info('deleteChannel long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -2719,12 +3200,40 @@ export class EventarcClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.createChannelConnection(
-      request,
-      options,
-      callback
-    );
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.eventarc.v1.IChannelConnection,
+            protos.google.cloud.eventarc.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('createChannelConnection response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('createChannelConnection request %j', request);
+    return this.innerApiCalls
+      .createChannelConnection(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.eventarc.v1.IChannelConnection,
+            protos.google.cloud.eventarc.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createChannelConnection response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `createChannelConnection()`.
@@ -2745,6 +3254,7 @@ export class EventarcClient {
       protos.google.cloud.eventarc.v1.OperationMetadata
     >
   > {
+    this._log.info('createChannelConnection long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -2859,12 +3369,40 @@ export class EventarcClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.deleteChannelConnection(
-      request,
-      options,
-      callback
-    );
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.eventarc.v1.IChannelConnection,
+            protos.google.cloud.eventarc.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('deleteChannelConnection response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('deleteChannelConnection request %j', request);
+    return this.innerApiCalls
+      .deleteChannelConnection(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.eventarc.v1.IChannelConnection,
+            protos.google.cloud.eventarc.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteChannelConnection response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `deleteChannelConnection()`.
@@ -2885,6 +3423,7 @@ export class EventarcClient {
       protos.google.cloud.eventarc.v1.OperationMetadata
     >
   > {
+    this._log.info('deleteChannelConnection long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -3007,8 +3546,40 @@ export class EventarcClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.createMessageBus(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.eventarc.v1.IMessageBus,
+            protos.google.cloud.eventarc.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('createMessageBus response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('createMessageBus request %j', request);
+    return this.innerApiCalls
+      .createMessageBus(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.eventarc.v1.IMessageBus,
+            protos.google.cloud.eventarc.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createMessageBus response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `createMessageBus()`.
@@ -3029,6 +3600,7 @@ export class EventarcClient {
       protos.google.cloud.eventarc.v1.OperationMetadata
     >
   > {
+    this._log.info('createMessageBus long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -3153,8 +3725,40 @@ export class EventarcClient {
       this._gaxModule.routingHeader.fromParams({
         'message_bus.name': request.messageBus!.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.updateMessageBus(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.eventarc.v1.IMessageBus,
+            protos.google.cloud.eventarc.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('updateMessageBus response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('updateMessageBus request %j', request);
+    return this.innerApiCalls
+      .updateMessageBus(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.eventarc.v1.IMessageBus,
+            protos.google.cloud.eventarc.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('updateMessageBus response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `updateMessageBus()`.
@@ -3175,6 +3779,7 @@ export class EventarcClient {
       protos.google.cloud.eventarc.v1.OperationMetadata
     >
   > {
+    this._log.info('updateMessageBus long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -3298,8 +3903,40 @@ export class EventarcClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.deleteMessageBus(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.eventarc.v1.IMessageBus,
+            protos.google.cloud.eventarc.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('deleteMessageBus response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('deleteMessageBus request %j', request);
+    return this.innerApiCalls
+      .deleteMessageBus(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.eventarc.v1.IMessageBus,
+            protos.google.cloud.eventarc.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteMessageBus response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `deleteMessageBus()`.
@@ -3320,6 +3957,7 @@ export class EventarcClient {
       protos.google.cloud.eventarc.v1.OperationMetadata
     >
   > {
+    this._log.info('deleteMessageBus long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -3442,8 +4080,40 @@ export class EventarcClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.createEnrollment(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.eventarc.v1.IEnrollment,
+            protos.google.cloud.eventarc.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('createEnrollment response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('createEnrollment request %j', request);
+    return this.innerApiCalls
+      .createEnrollment(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.eventarc.v1.IEnrollment,
+            protos.google.cloud.eventarc.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createEnrollment response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `createEnrollment()`.
@@ -3464,6 +4134,7 @@ export class EventarcClient {
       protos.google.cloud.eventarc.v1.OperationMetadata
     >
   > {
+    this._log.info('createEnrollment long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -3588,8 +4259,40 @@ export class EventarcClient {
       this._gaxModule.routingHeader.fromParams({
         'enrollment.name': request.enrollment!.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.updateEnrollment(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.eventarc.v1.IEnrollment,
+            protos.google.cloud.eventarc.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('updateEnrollment response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('updateEnrollment request %j', request);
+    return this.innerApiCalls
+      .updateEnrollment(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.eventarc.v1.IEnrollment,
+            protos.google.cloud.eventarc.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('updateEnrollment response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `updateEnrollment()`.
@@ -3610,6 +4313,7 @@ export class EventarcClient {
       protos.google.cloud.eventarc.v1.OperationMetadata
     >
   > {
+    this._log.info('updateEnrollment long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -3733,8 +4437,40 @@ export class EventarcClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.deleteEnrollment(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.eventarc.v1.IEnrollment,
+            protos.google.cloud.eventarc.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('deleteEnrollment response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('deleteEnrollment request %j', request);
+    return this.innerApiCalls
+      .deleteEnrollment(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.eventarc.v1.IEnrollment,
+            protos.google.cloud.eventarc.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteEnrollment response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `deleteEnrollment()`.
@@ -3755,6 +4491,7 @@ export class EventarcClient {
       protos.google.cloud.eventarc.v1.OperationMetadata
     >
   > {
+    this._log.info('deleteEnrollment long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -3876,8 +4613,40 @@ export class EventarcClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.createPipeline(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.eventarc.v1.IPipeline,
+            protos.google.cloud.eventarc.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('createPipeline response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('createPipeline request %j', request);
+    return this.innerApiCalls
+      .createPipeline(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.eventarc.v1.IPipeline,
+            protos.google.cloud.eventarc.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createPipeline response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `createPipeline()`.
@@ -3898,6 +4667,7 @@ export class EventarcClient {
       protos.google.cloud.eventarc.v1.OperationMetadata
     >
   > {
+    this._log.info('createPipeline long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -4022,8 +4792,40 @@ export class EventarcClient {
       this._gaxModule.routingHeader.fromParams({
         'pipeline.name': request.pipeline!.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.updatePipeline(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.eventarc.v1.IPipeline,
+            protos.google.cloud.eventarc.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('updatePipeline response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('updatePipeline request %j', request);
+    return this.innerApiCalls
+      .updatePipeline(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.eventarc.v1.IPipeline,
+            protos.google.cloud.eventarc.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('updatePipeline response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `updatePipeline()`.
@@ -4044,6 +4846,7 @@ export class EventarcClient {
       protos.google.cloud.eventarc.v1.OperationMetadata
     >
   > {
+    this._log.info('updatePipeline long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -4167,8 +4970,40 @@ export class EventarcClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.deletePipeline(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.eventarc.v1.IPipeline,
+            protos.google.cloud.eventarc.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('deletePipeline response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('deletePipeline request %j', request);
+    return this.innerApiCalls
+      .deletePipeline(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.eventarc.v1.IPipeline,
+            protos.google.cloud.eventarc.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deletePipeline response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `deletePipeline()`.
@@ -4189,6 +5024,7 @@ export class EventarcClient {
       protos.google.cloud.eventarc.v1.OperationMetadata
     >
   > {
+    this._log.info('deletePipeline long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -4311,8 +5147,40 @@ export class EventarcClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.createGoogleApiSource(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.eventarc.v1.IGoogleApiSource,
+            protos.google.cloud.eventarc.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('createGoogleApiSource response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('createGoogleApiSource request %j', request);
+    return this.innerApiCalls
+      .createGoogleApiSource(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.eventarc.v1.IGoogleApiSource,
+            protos.google.cloud.eventarc.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createGoogleApiSource response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `createGoogleApiSource()`.
@@ -4333,6 +5201,7 @@ export class EventarcClient {
       protos.google.cloud.eventarc.v1.OperationMetadata
     >
   > {
+    this._log.info('createGoogleApiSource long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -4458,8 +5327,40 @@ export class EventarcClient {
       this._gaxModule.routingHeader.fromParams({
         'google_api_source.name': request.googleApiSource!.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.updateGoogleApiSource(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.eventarc.v1.IGoogleApiSource,
+            protos.google.cloud.eventarc.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('updateGoogleApiSource response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('updateGoogleApiSource request %j', request);
+    return this.innerApiCalls
+      .updateGoogleApiSource(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.eventarc.v1.IGoogleApiSource,
+            protos.google.cloud.eventarc.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('updateGoogleApiSource response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `updateGoogleApiSource()`.
@@ -4480,6 +5381,7 @@ export class EventarcClient {
       protos.google.cloud.eventarc.v1.OperationMetadata
     >
   > {
+    this._log.info('updateGoogleApiSource long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -4603,8 +5505,40 @@ export class EventarcClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.deleteGoogleApiSource(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.eventarc.v1.IGoogleApiSource,
+            protos.google.cloud.eventarc.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('deleteGoogleApiSource response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('deleteGoogleApiSource request %j', request);
+    return this.innerApiCalls
+      .deleteGoogleApiSource(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.eventarc.v1.IGoogleApiSource,
+            protos.google.cloud.eventarc.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteGoogleApiSource response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `deleteGoogleApiSource()`.
@@ -4625,6 +5559,7 @@ export class EventarcClient {
       protos.google.cloud.eventarc.v1.OperationMetadata
     >
   > {
+    this._log.info('deleteGoogleApiSource long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -4743,8 +5678,36 @@ export class EventarcClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.listTriggers(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.eventarc.v1.IListTriggersRequest,
+          | protos.google.cloud.eventarc.v1.IListTriggersResponse
+          | null
+          | undefined,
+          protos.google.cloud.eventarc.v1.ITrigger
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listTriggers values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listTriggers request %j', request);
+    return this.innerApiCalls
+      .listTriggers(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.eventarc.v1.ITrigger[],
+          protos.google.cloud.eventarc.v1.IListTriggersRequest | null,
+          protos.google.cloud.eventarc.v1.IListTriggersResponse,
+        ]) => {
+          this._log.info('listTriggers values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -4797,7 +5760,10 @@ export class EventarcClient {
       });
     const defaultCallSettings = this._defaults['listTriggers'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listTriggers stream %j', request);
     return this.descriptors.page.listTriggers.createStream(
       this.innerApiCalls.listTriggers as GaxCall,
       request,
@@ -4858,7 +5824,10 @@ export class EventarcClient {
       });
     const defaultCallSettings = this._defaults['listTriggers'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listTriggers iterate %j', request);
     return this.descriptors.page.listTriggers.asyncIterate(
       this.innerApiCalls['listTriggers'] as GaxCall,
       request as {},
@@ -4964,8 +5933,36 @@ export class EventarcClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.listChannels(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.eventarc.v1.IListChannelsRequest,
+          | protos.google.cloud.eventarc.v1.IListChannelsResponse
+          | null
+          | undefined,
+          protos.google.cloud.eventarc.v1.IChannel
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listChannels values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listChannels request %j', request);
+    return this.innerApiCalls
+      .listChannels(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.eventarc.v1.IChannel[],
+          protos.google.cloud.eventarc.v1.IListChannelsRequest | null,
+          protos.google.cloud.eventarc.v1.IListChannelsResponse,
+        ]) => {
+          this._log.info('listChannels values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -5014,7 +6011,10 @@ export class EventarcClient {
       });
     const defaultCallSettings = this._defaults['listChannels'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listChannels stream %j', request);
     return this.descriptors.page.listChannels.createStream(
       this.innerApiCalls.listChannels as GaxCall,
       request,
@@ -5071,7 +6071,10 @@ export class EventarcClient {
       });
     const defaultCallSettings = this._defaults['listChannels'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listChannels iterate %j', request);
     return this.descriptors.page.listChannels.asyncIterate(
       this.innerApiCalls['listChannels'] as GaxCall,
       request as {},
@@ -5177,8 +6180,36 @@ export class EventarcClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.listProviders(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.eventarc.v1.IListProvidersRequest,
+          | protos.google.cloud.eventarc.v1.IListProvidersResponse
+          | null
+          | undefined,
+          protos.google.cloud.eventarc.v1.IProvider
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listProviders values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listProviders request %j', request);
+    return this.innerApiCalls
+      .listProviders(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.eventarc.v1.IProvider[],
+          protos.google.cloud.eventarc.v1.IListProvidersRequest | null,
+          protos.google.cloud.eventarc.v1.IListProvidersResponse,
+        ]) => {
+          this._log.info('listProviders values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -5227,7 +6258,10 @@ export class EventarcClient {
       });
     const defaultCallSettings = this._defaults['listProviders'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listProviders stream %j', request);
     return this.descriptors.page.listProviders.createStream(
       this.innerApiCalls.listProviders as GaxCall,
       request,
@@ -5284,7 +6318,10 @@ export class EventarcClient {
       });
     const defaultCallSettings = this._defaults['listProviders'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listProviders iterate %j', request);
     return this.descriptors.page.listProviders.asyncIterate(
       this.innerApiCalls['listProviders'] as GaxCall,
       request as {},
@@ -5391,12 +6428,36 @@ export class EventarcClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.listChannelConnections(
-      request,
-      options,
-      callback
-    );
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.eventarc.v1.IListChannelConnectionsRequest,
+          | protos.google.cloud.eventarc.v1.IListChannelConnectionsResponse
+          | null
+          | undefined,
+          protos.google.cloud.eventarc.v1.IChannelConnection
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listChannelConnections values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listChannelConnections request %j', request);
+    return this.innerApiCalls
+      .listChannelConnections(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.eventarc.v1.IChannelConnection[],
+          protos.google.cloud.eventarc.v1.IListChannelConnectionsRequest | null,
+          protos.google.cloud.eventarc.v1.IListChannelConnectionsResponse,
+        ]) => {
+          this._log.info('listChannelConnections values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -5440,7 +6501,10 @@ export class EventarcClient {
       });
     const defaultCallSettings = this._defaults['listChannelConnections'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listChannelConnections stream %j', request);
     return this.descriptors.page.listChannelConnections.createStream(
       this.innerApiCalls.listChannelConnections as GaxCall,
       request,
@@ -5492,7 +6556,10 @@ export class EventarcClient {
       });
     const defaultCallSettings = this._defaults['listChannelConnections'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listChannelConnections iterate %j', request);
     return this.descriptors.page.listChannelConnections.asyncIterate(
       this.innerApiCalls['listChannelConnections'] as GaxCall,
       request as {},
@@ -5607,8 +6674,36 @@ export class EventarcClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.listMessageBuses(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.eventarc.v1.IListMessageBusesRequest,
+          | protos.google.cloud.eventarc.v1.IListMessageBusesResponse
+          | null
+          | undefined,
+          protos.google.cloud.eventarc.v1.IMessageBus
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listMessageBuses values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listMessageBuses request %j', request);
+    return this.innerApiCalls
+      .listMessageBuses(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.eventarc.v1.IMessageBus[],
+          protos.google.cloud.eventarc.v1.IListMessageBusesRequest | null,
+          protos.google.cloud.eventarc.v1.IListMessageBusesResponse,
+        ]) => {
+          this._log.info('listMessageBuses values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -5660,7 +6755,10 @@ export class EventarcClient {
       });
     const defaultCallSettings = this._defaults['listMessageBuses'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listMessageBuses stream %j', request);
     return this.descriptors.page.listMessageBuses.createStream(
       this.innerApiCalls.listMessageBuses as GaxCall,
       request,
@@ -5720,7 +6818,10 @@ export class EventarcClient {
       });
     const defaultCallSettings = this._defaults['listMessageBuses'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listMessageBuses iterate %j', request);
     return this.descriptors.page.listMessageBuses.asyncIterate(
       this.innerApiCalls['listMessageBuses'] as GaxCall,
       request as {},
@@ -5827,12 +6928,36 @@ export class EventarcClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.listMessageBusEnrollments(
-      request,
-      options,
-      callback
-    );
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.eventarc.v1.IListMessageBusEnrollmentsRequest,
+          | protos.google.cloud.eventarc.v1.IListMessageBusEnrollmentsResponse
+          | null
+          | undefined,
+          string
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listMessageBusEnrollments values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listMessageBusEnrollments request %j', request);
+    return this.innerApiCalls
+      .listMessageBusEnrollments(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          string[],
+          protos.google.cloud.eventarc.v1.IListMessageBusEnrollmentsRequest | null,
+          protos.google.cloud.eventarc.v1.IListMessageBusEnrollmentsResponse,
+        ]) => {
+          this._log.info('listMessageBusEnrollments values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -5876,7 +7001,10 @@ export class EventarcClient {
       });
     const defaultCallSettings = this._defaults['listMessageBusEnrollments'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listMessageBusEnrollments stream %j', request);
     return this.descriptors.page.listMessageBusEnrollments.createStream(
       this.innerApiCalls.listMessageBusEnrollments as GaxCall,
       request,
@@ -5928,7 +7056,10 @@ export class EventarcClient {
       });
     const defaultCallSettings = this._defaults['listMessageBusEnrollments'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listMessageBusEnrollments iterate %j', request);
     return this.descriptors.page.listMessageBusEnrollments.asyncIterate(
       this.innerApiCalls['listMessageBusEnrollments'] as GaxCall,
       request as {},
@@ -6043,8 +7174,36 @@ export class EventarcClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.listEnrollments(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.eventarc.v1.IListEnrollmentsRequest,
+          | protos.google.cloud.eventarc.v1.IListEnrollmentsResponse
+          | null
+          | undefined,
+          protos.google.cloud.eventarc.v1.IEnrollment
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listEnrollments values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listEnrollments request %j', request);
+    return this.innerApiCalls
+      .listEnrollments(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.eventarc.v1.IEnrollment[],
+          protos.google.cloud.eventarc.v1.IListEnrollmentsRequest | null,
+          protos.google.cloud.eventarc.v1.IListEnrollmentsResponse,
+        ]) => {
+          this._log.info('listEnrollments values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -6096,7 +7255,10 @@ export class EventarcClient {
       });
     const defaultCallSettings = this._defaults['listEnrollments'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listEnrollments stream %j', request);
     return this.descriptors.page.listEnrollments.createStream(
       this.innerApiCalls.listEnrollments as GaxCall,
       request,
@@ -6156,7 +7318,10 @@ export class EventarcClient {
       });
     const defaultCallSettings = this._defaults['listEnrollments'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listEnrollments iterate %j', request);
     return this.descriptors.page.listEnrollments.asyncIterate(
       this.innerApiCalls['listEnrollments'] as GaxCall,
       request as {},
@@ -6265,8 +7430,36 @@ export class EventarcClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.listPipelines(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.eventarc.v1.IListPipelinesRequest,
+          | protos.google.cloud.eventarc.v1.IListPipelinesResponse
+          | null
+          | undefined,
+          protos.google.cloud.eventarc.v1.IPipeline
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listPipelines values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listPipelines request %j', request);
+    return this.innerApiCalls
+      .listPipelines(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.eventarc.v1.IPipeline[],
+          protos.google.cloud.eventarc.v1.IListPipelinesRequest | null,
+          protos.google.cloud.eventarc.v1.IListPipelinesResponse,
+        ]) => {
+          this._log.info('listPipelines values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -6318,7 +7511,10 @@ export class EventarcClient {
       });
     const defaultCallSettings = this._defaults['listPipelines'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listPipelines stream %j', request);
     return this.descriptors.page.listPipelines.createStream(
       this.innerApiCalls.listPipelines as GaxCall,
       request,
@@ -6378,7 +7574,10 @@ export class EventarcClient {
       });
     const defaultCallSettings = this._defaults['listPipelines'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listPipelines iterate %j', request);
     return this.descriptors.page.listPipelines.asyncIterate(
       this.innerApiCalls['listPipelines'] as GaxCall,
       request as {},
@@ -6493,8 +7692,36 @@ export class EventarcClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.listGoogleApiSources(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.eventarc.v1.IListGoogleApiSourcesRequest,
+          | protos.google.cloud.eventarc.v1.IListGoogleApiSourcesResponse
+          | null
+          | undefined,
+          protos.google.cloud.eventarc.v1.IGoogleApiSource
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listGoogleApiSources values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listGoogleApiSources request %j', request);
+    return this.innerApiCalls
+      .listGoogleApiSources(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.eventarc.v1.IGoogleApiSource[],
+          protos.google.cloud.eventarc.v1.IListGoogleApiSourcesRequest | null,
+          protos.google.cloud.eventarc.v1.IListGoogleApiSourcesResponse,
+        ]) => {
+          this._log.info('listGoogleApiSources values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -6546,7 +7773,10 @@ export class EventarcClient {
       });
     const defaultCallSettings = this._defaults['listGoogleApiSources'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listGoogleApiSources stream %j', request);
     return this.descriptors.page.listGoogleApiSources.createStream(
       this.innerApiCalls.listGoogleApiSources as GaxCall,
       request,
@@ -6606,7 +7836,10 @@ export class EventarcClient {
       });
     const defaultCallSettings = this._defaults['listGoogleApiSources'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listGoogleApiSources iterate %j', request);
     return this.descriptors.page.listGoogleApiSources.asyncIterate(
       this.innerApiCalls['listGoogleApiSources'] as GaxCall,
       request as {},
@@ -6923,7 +8156,7 @@ export class EventarcClient {
   listOperationsAsync(
     request: protos.google.longrunning.ListOperationsRequest,
     options?: gax.CallOptions
-  ): AsyncIterable<protos.google.longrunning.ListOperationsResponse> {
+  ): AsyncIterable<protos.google.longrunning.IOperation> {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
@@ -7585,6 +8818,7 @@ export class EventarcClient {
   close(): Promise<void> {
     if (this.eventarcStub && !this._terminated) {
       return this.eventarcStub.then(stub => {
+        this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
         this.iamClient.close();

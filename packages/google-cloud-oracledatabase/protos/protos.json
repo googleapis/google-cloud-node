@@ -1,7 +1,4 @@
 {
-  "options": {
-    "syntax": "proto3"
-  },
   "nested": {
     "google": {
       "nested": {
@@ -137,7 +134,7 @@
                           "type": "string",
                           "id": 9,
                           "options": {
-                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.field_behavior)": "OPTIONAL",
                             "(google.api.resource_reference).type": "compute.googleapis.com/Network"
                           }
                         },
@@ -145,7 +142,7 @@
                           "type": "string",
                           "id": 10,
                           "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
+                            "(google.api.field_behavior)": "OPTIONAL"
                           }
                         },
                         "createTime": {
@@ -1639,7 +1636,8 @@
                             "ACCOUNT_NOT_LINKED": 1,
                             "ACCOUNT_NOT_ACTIVE": 2,
                             "ACTIVE": 3,
-                            "ACCOUNT_SUSPENDED": 4
+                            "ACCOUNT_SUSPENDED": 4,
+                            "NOT_APPROVED_IN_PRIVATE_MARKETPLACE": 5
                           }
                         }
                       }

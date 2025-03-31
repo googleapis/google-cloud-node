@@ -31,6 +31,7 @@ import type {
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
+import {loggingUtils as logging} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -57,6 +58,8 @@ export class AttachedClustersClient {
   private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
+  private _log = logging.log('gkemulticloud');
+
   auth: gax.GoogleAuth;
   descriptors: Descriptors = {
     page: {},
@@ -92,7 +95,7 @@ export class AttachedClustersClient {
    *     Developer's Console, e.g. 'grape-spaceship-123'. We will also check
    *     the environment variable GCLOUD_PROJECT for your project ID. If your
    *     app is running in an environment which supports
-   *     {@link https://developers.google.com/identity/protocols/application-default-credentials Application Default Credentials},
+   *     {@link https://cloud.google.com/docs/authentication/application-default-credentials Application Default Credentials},
    *     your project ID will be detected automatically.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
@@ -614,8 +617,39 @@ export class AttachedClustersClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.getAttachedCluster(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('getAttachedCluster request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.gkemulticloud.v1.IAttachedCluster,
+          | protos.google.cloud.gkemulticloud.v1.IGetAttachedClusterRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getAttachedCluster response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getAttachedCluster(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.gkemulticloud.v1.IAttachedCluster,
+          (
+            | protos.google.cloud.gkemulticloud.v1.IGetAttachedClusterRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getAttachedCluster response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Returns information, such as supported Kubernetes versions, on a given
@@ -719,12 +753,39 @@ export class AttachedClustersClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.getAttachedServerConfig(
-      request,
-      options,
-      callback
-    );
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('getAttachedServerConfig request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.gkemulticloud.v1.IAttachedServerConfig,
+          | protos.google.cloud.gkemulticloud.v1.IGetAttachedServerConfigRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getAttachedServerConfig response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getAttachedServerConfig(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.gkemulticloud.v1.IAttachedServerConfig,
+          (
+            | protos.google.cloud.gkemulticloud.v1.IGetAttachedServerConfigRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getAttachedServerConfig response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Generates the install manifest to be installed on the target cluster.
@@ -850,12 +911,48 @@ export class AttachedClustersClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.generateAttachedClusterInstallManifest(
-      request,
-      options,
-      callback
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info(
+      'generateAttachedClusterInstallManifest request %j',
+      request
     );
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.gkemulticloud.v1.IGenerateAttachedClusterInstallManifestResponse,
+          | protos.google.cloud.gkemulticloud.v1.IGenerateAttachedClusterInstallManifestRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info(
+            'generateAttachedClusterInstallManifest response %j',
+            response
+          );
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .generateAttachedClusterInstallManifest(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.gkemulticloud.v1.IGenerateAttachedClusterInstallManifestResponse,
+          (
+            | protos.google.cloud.gkemulticloud.v1.IGenerateAttachedClusterInstallManifestRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info(
+            'generateAttachedClusterInstallManifest response %j',
+            response
+          );
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Generates an access token for a cluster agent.
@@ -966,12 +1063,45 @@ export class AttachedClustersClient {
       this._gaxModule.routingHeader.fromParams({
         attached_cluster: request.attachedCluster ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.generateAttachedClusterAgentToken(
-      request,
-      options,
-      callback
-    );
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('generateAttachedClusterAgentToken request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.gkemulticloud.v1.IGenerateAttachedClusterAgentTokenResponse,
+          | protos.google.cloud.gkemulticloud.v1.IGenerateAttachedClusterAgentTokenRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info(
+            'generateAttachedClusterAgentToken response %j',
+            response
+          );
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .generateAttachedClusterAgentToken(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.gkemulticloud.v1.IGenerateAttachedClusterAgentTokenResponse,
+          (
+            | protos.google.cloud.gkemulticloud.v1.IGenerateAttachedClusterAgentTokenRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info(
+            'generateAttachedClusterAgentToken response %j',
+            response
+          );
+          return [response, options, rawResponse];
+        }
+      );
   }
 
   /**
@@ -1101,8 +1231,40 @@ export class AttachedClustersClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.createAttachedCluster(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.gkemulticloud.v1.IAttachedCluster,
+            protos.google.cloud.gkemulticloud.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('createAttachedCluster response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('createAttachedCluster request %j', request);
+    return this.innerApiCalls
+      .createAttachedCluster(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.gkemulticloud.v1.IAttachedCluster,
+            protos.google.cloud.gkemulticloud.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createAttachedCluster response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `createAttachedCluster()`.
@@ -1123,6 +1285,7 @@ export class AttachedClustersClient {
       protos.google.cloud.gkemulticloud.v1.OperationMetadata
     >
   > {
+    this._log.info('createAttachedCluster long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -1260,8 +1423,40 @@ export class AttachedClustersClient {
       this._gaxModule.routingHeader.fromParams({
         'attached_cluster.name': request.attachedCluster!.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.updateAttachedCluster(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.gkemulticloud.v1.IAttachedCluster,
+            protos.google.cloud.gkemulticloud.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('updateAttachedCluster response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('updateAttachedCluster request %j', request);
+    return this.innerApiCalls
+      .updateAttachedCluster(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.gkemulticloud.v1.IAttachedCluster,
+            protos.google.cloud.gkemulticloud.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('updateAttachedCluster response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `updateAttachedCluster()`.
@@ -1282,6 +1477,7 @@ export class AttachedClustersClient {
       protos.google.cloud.gkemulticloud.v1.OperationMetadata
     >
   > {
+    this._log.info('updateAttachedCluster long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -1428,8 +1624,40 @@ export class AttachedClustersClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.importAttachedCluster(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.gkemulticloud.v1.IAttachedCluster,
+            protos.google.cloud.gkemulticloud.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('importAttachedCluster response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('importAttachedCluster request %j', request);
+    return this.innerApiCalls
+      .importAttachedCluster(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.gkemulticloud.v1.IAttachedCluster,
+            protos.google.cloud.gkemulticloud.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('importAttachedCluster response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `importAttachedCluster()`.
@@ -1450,6 +1678,7 @@ export class AttachedClustersClient {
       protos.google.cloud.gkemulticloud.v1.OperationMetadata
     >
   > {
+    this._log.info('importAttachedCluster long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -1599,8 +1828,40 @@ export class AttachedClustersClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.deleteAttachedCluster(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.gkemulticloud.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('deleteAttachedCluster response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('deleteAttachedCluster request %j', request);
+    return this.innerApiCalls
+      .deleteAttachedCluster(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.gkemulticloud.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteAttachedCluster response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `deleteAttachedCluster()`.
@@ -1621,6 +1882,7 @@ export class AttachedClustersClient {
       protos.google.cloud.gkemulticloud.v1.OperationMetadata
     >
   > {
+    this._log.info('deleteAttachedCluster long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -1745,8 +2007,36 @@ export class AttachedClustersClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.listAttachedClusters(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.gkemulticloud.v1.IListAttachedClustersRequest,
+          | protos.google.cloud.gkemulticloud.v1.IListAttachedClustersResponse
+          | null
+          | undefined,
+          protos.google.cloud.gkemulticloud.v1.IAttachedCluster
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listAttachedClusters values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listAttachedClusters request %j', request);
+    return this.innerApiCalls
+      .listAttachedClusters(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.gkemulticloud.v1.IAttachedCluster[],
+          protos.google.cloud.gkemulticloud.v1.IListAttachedClustersRequest | null,
+          protos.google.cloud.gkemulticloud.v1.IListAttachedClustersResponse,
+        ]) => {
+          this._log.info('listAttachedClusters values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -1798,7 +2088,10 @@ export class AttachedClustersClient {
       });
     const defaultCallSettings = this._defaults['listAttachedClusters'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listAttachedClusters stream %j', request);
     return this.descriptors.page.listAttachedClusters.createStream(
       this.innerApiCalls.listAttachedClusters as GaxCall,
       request,
@@ -1858,7 +2151,10 @@ export class AttachedClustersClient {
       });
     const defaultCallSettings = this._defaults['listAttachedClusters'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listAttachedClusters iterate %j', request);
     return this.descriptors.page.listAttachedClusters.asyncIterate(
       this.innerApiCalls['listAttachedClusters'] as GaxCall,
       request as {},
@@ -1959,7 +2255,7 @@ export class AttachedClustersClient {
   listOperationsAsync(
     request: protos.google.longrunning.ListOperationsRequest,
     options?: gax.CallOptions
-  ): AsyncIterable<protos.google.longrunning.ListOperationsResponse> {
+  ): AsyncIterable<protos.google.longrunning.IOperation> {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
@@ -2638,6 +2934,7 @@ export class AttachedClustersClient {
   close(): Promise<void> {
     if (this.attachedClustersStub && !this._terminated) {
       return this.attachedClustersStub.then(stub => {
+        this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
         this.operationsClient.close();

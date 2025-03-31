@@ -31,6 +31,7 @@ import type {
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
+import {loggingUtils as logging} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -55,6 +56,8 @@ export class DomainsClient {
   private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
+  private _log = logging.log('domains');
+
   auth: gax.GoogleAuth;
   descriptors: Descriptors = {
     page: {},
@@ -90,7 +93,7 @@ export class DomainsClient {
    *     Developer's Console, e.g. 'grape-spaceship-123'. We will also check
    *     the environment variable GCLOUD_PROJECT for your project ID. If your
    *     app is running in an environment which supports
-   *     {@link https://developers.google.com/identity/protocols/application-default-credentials Application Default Credentials},
+   *     {@link https://cloud.google.com/docs/authentication/application-default-credentials Application Default Credentials},
    *     your project ID will be detected automatically.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
@@ -642,8 +645,39 @@ export class DomainsClient {
       this._gaxModule.routingHeader.fromParams({
         location: request.location ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.searchDomains(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('searchDomains request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.domains.v1alpha2.ISearchDomainsResponse,
+          | protos.google.cloud.domains.v1alpha2.ISearchDomainsRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('searchDomains response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .searchDomains(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.domains.v1alpha2.ISearchDomainsResponse,
+          (
+            | protos.google.cloud.domains.v1alpha2.ISearchDomainsRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('searchDomains response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Gets parameters needed to register a new domain name, including price and
@@ -741,12 +775,39 @@ export class DomainsClient {
       this._gaxModule.routingHeader.fromParams({
         location: request.location ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.retrieveRegisterParameters(
-      request,
-      options,
-      callback
-    );
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('retrieveRegisterParameters request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.domains.v1alpha2.IRetrieveRegisterParametersResponse,
+          | protos.google.cloud.domains.v1alpha2.IRetrieveRegisterParametersRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('retrieveRegisterParameters response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .retrieveRegisterParameters(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.domains.v1alpha2.IRetrieveRegisterParametersResponse,
+          (
+            | protos.google.cloud.domains.v1alpha2.IRetrieveRegisterParametersRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('retrieveRegisterParameters response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Gets parameters needed to transfer a domain name from another registrar to
@@ -848,12 +909,39 @@ export class DomainsClient {
       this._gaxModule.routingHeader.fromParams({
         location: request.location ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.retrieveTransferParameters(
-      request,
-      options,
-      callback
-    );
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('retrieveTransferParameters request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.domains.v1alpha2.IRetrieveTransferParametersResponse,
+          | protos.google.cloud.domains.v1alpha2.IRetrieveTransferParametersRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('retrieveTransferParameters response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .retrieveTransferParameters(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.domains.v1alpha2.IRetrieveTransferParametersResponse,
+          (
+            | protos.google.cloud.domains.v1alpha2.IRetrieveTransferParametersRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('retrieveTransferParameters response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Gets the details of a `Registration` resource.
@@ -943,8 +1031,39 @@ export class DomainsClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.getRegistration(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('getRegistration request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.domains.v1alpha2.IRegistration,
+          | protos.google.cloud.domains.v1alpha2.IGetRegistrationRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getRegistration response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getRegistration(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.domains.v1alpha2.IRegistration,
+          (
+            | protos.google.cloud.domains.v1alpha2.IGetRegistrationRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getRegistration response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Gets the authorization code of the `Registration` for the purpose of
@@ -1044,12 +1163,39 @@ export class DomainsClient {
       this._gaxModule.routingHeader.fromParams({
         registration: request.registration ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.retrieveAuthorizationCode(
-      request,
-      options,
-      callback
-    );
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('retrieveAuthorizationCode request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.domains.v1alpha2.IAuthorizationCode,
+          | protos.google.cloud.domains.v1alpha2.IRetrieveAuthorizationCodeRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('retrieveAuthorizationCode response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .retrieveAuthorizationCode(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.domains.v1alpha2.IAuthorizationCode,
+          (
+            | protos.google.cloud.domains.v1alpha2.IRetrieveAuthorizationCodeRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('retrieveAuthorizationCode response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Resets the authorization code of the `Registration` to a new random string.
@@ -1148,12 +1294,39 @@ export class DomainsClient {
       this._gaxModule.routingHeader.fromParams({
         registration: request.registration ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.resetAuthorizationCode(
-      request,
-      options,
-      callback
-    );
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('resetAuthorizationCode request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.domains.v1alpha2.IAuthorizationCode,
+          | protos.google.cloud.domains.v1alpha2.IResetAuthorizationCodeRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('resetAuthorizationCode response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .resetAuthorizationCode(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.domains.v1alpha2.IAuthorizationCode,
+          (
+            | protos.google.cloud.domains.v1alpha2.IResetAuthorizationCodeRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('resetAuthorizationCode response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
 
   /**
@@ -1285,8 +1458,40 @@ export class DomainsClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.registerDomain(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.domains.v1alpha2.IRegistration,
+            protos.google.cloud.domains.v1alpha2.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('registerDomain response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('registerDomain request %j', request);
+    return this.innerApiCalls
+      .registerDomain(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.domains.v1alpha2.IRegistration,
+            protos.google.cloud.domains.v1alpha2.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('registerDomain response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `registerDomain()`.
@@ -1307,6 +1512,7 @@ export class DomainsClient {
       protos.google.cloud.domains.v1alpha2.OperationMetadata
     >
   > {
+    this._log.info('registerDomain long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -1463,8 +1669,40 @@ export class DomainsClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.transferDomain(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.domains.v1alpha2.IRegistration,
+            protos.google.cloud.domains.v1alpha2.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('transferDomain response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('transferDomain request %j', request);
+    return this.innerApiCalls
+      .transferDomain(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.domains.v1alpha2.IRegistration,
+            protos.google.cloud.domains.v1alpha2.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('transferDomain response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `transferDomain()`.
@@ -1485,6 +1723,7 @@ export class DomainsClient {
       protos.google.cloud.domains.v1alpha2.OperationMetadata
     >
   > {
+    this._log.info('transferDomain long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -1608,8 +1847,40 @@ export class DomainsClient {
       this._gaxModule.routingHeader.fromParams({
         'registration.name': request.registration!.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.updateRegistration(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.domains.v1alpha2.IRegistration,
+            protos.google.cloud.domains.v1alpha2.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('updateRegistration response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('updateRegistration request %j', request);
+    return this.innerApiCalls
+      .updateRegistration(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.domains.v1alpha2.IRegistration,
+            protos.google.cloud.domains.v1alpha2.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('updateRegistration response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `updateRegistration()`.
@@ -1630,6 +1901,7 @@ export class DomainsClient {
       protos.google.cloud.domains.v1alpha2.OperationMetadata
     >
   > {
+    this._log.info('updateRegistration long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -1751,12 +2023,46 @@ export class DomainsClient {
       this._gaxModule.routingHeader.fromParams({
         registration: request.registration ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.configureManagementSettings(
-      request,
-      options,
-      callback
-    );
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.domains.v1alpha2.IRegistration,
+            protos.google.cloud.domains.v1alpha2.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info(
+            'configureManagementSettings response %j',
+            rawResponse
+          );
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('configureManagementSettings request %j', request);
+    return this.innerApiCalls
+      .configureManagementSettings(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.domains.v1alpha2.IRegistration,
+            protos.google.cloud.domains.v1alpha2.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info(
+            'configureManagementSettings response %j',
+            rawResponse
+          );
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `configureManagementSettings()`.
@@ -1777,6 +2083,7 @@ export class DomainsClient {
       protos.google.cloud.domains.v1alpha2.OperationMetadata
     >
   > {
+    this._log.info('configureManagementSettings long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -1906,8 +2213,40 @@ export class DomainsClient {
       this._gaxModule.routingHeader.fromParams({
         registration: request.registration ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.configureDnsSettings(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.domains.v1alpha2.IRegistration,
+            protos.google.cloud.domains.v1alpha2.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('configureDnsSettings response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('configureDnsSettings request %j', request);
+    return this.innerApiCalls
+      .configureDnsSettings(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.domains.v1alpha2.IRegistration,
+            protos.google.cloud.domains.v1alpha2.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('configureDnsSettings response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `configureDnsSettings()`.
@@ -1928,6 +2267,7 @@ export class DomainsClient {
       protos.google.cloud.domains.v1alpha2.OperationMetadata
     >
   > {
+    this._log.info('configureDnsSettings long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -2055,12 +2395,40 @@ export class DomainsClient {
       this._gaxModule.routingHeader.fromParams({
         registration: request.registration ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.configureContactSettings(
-      request,
-      options,
-      callback
-    );
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.domains.v1alpha2.IRegistration,
+            protos.google.cloud.domains.v1alpha2.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('configureContactSettings response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('configureContactSettings request %j', request);
+    return this.innerApiCalls
+      .configureContactSettings(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.domains.v1alpha2.IRegistration,
+            protos.google.cloud.domains.v1alpha2.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('configureContactSettings response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `configureContactSettings()`.
@@ -2081,6 +2449,7 @@ export class DomainsClient {
       protos.google.cloud.domains.v1alpha2.OperationMetadata
     >
   > {
+    this._log.info('configureContactSettings long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -2204,8 +2573,40 @@ export class DomainsClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.exportRegistration(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.domains.v1alpha2.IRegistration,
+            protos.google.cloud.domains.v1alpha2.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('exportRegistration response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('exportRegistration request %j', request);
+    return this.innerApiCalls
+      .exportRegistration(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.domains.v1alpha2.IRegistration,
+            protos.google.cloud.domains.v1alpha2.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('exportRegistration response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `exportRegistration()`.
@@ -2226,6 +2627,7 @@ export class DomainsClient {
       protos.google.cloud.domains.v1alpha2.OperationMetadata
     >
   > {
+    this._log.info('exportRegistration long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -2359,8 +2761,40 @@ export class DomainsClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.deleteRegistration(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.domains.v1alpha2.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('deleteRegistration response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('deleteRegistration request %j', request);
+    return this.innerApiCalls
+      .deleteRegistration(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.domains.v1alpha2.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteRegistration response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `deleteRegistration()`.
@@ -2381,6 +2815,7 @@ export class DomainsClient {
       protos.google.cloud.domains.v1alpha2.OperationMetadata
     >
   > {
+    this._log.info('deleteRegistration long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -2509,12 +2944,40 @@ export class DomainsClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.listRegistrations(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.domains.v1alpha2.IListRegistrationsRequest,
+          | protos.google.cloud.domains.v1alpha2.IListRegistrationsResponse
+          | null
+          | undefined,
+          protos.google.cloud.domains.v1alpha2.IRegistration
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listRegistrations values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listRegistrations request %j', request);
+    return this.innerApiCalls
+      .listRegistrations(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.domains.v1alpha2.IRegistration[],
+          protos.google.cloud.domains.v1alpha2.IListRegistrationsRequest | null,
+          protos.google.cloud.domains.v1alpha2.IListRegistrationsResponse,
+        ]) => {
+          this._log.info('listRegistrations values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listRegistrations`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
@@ -2567,7 +3030,10 @@ export class DomainsClient {
       });
     const defaultCallSettings = this._defaults['listRegistrations'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listRegistrations stream %j', request);
     return this.descriptors.page.listRegistrations.createStream(
       this.innerApiCalls.listRegistrations as GaxCall,
       request,
@@ -2632,7 +3098,10 @@ export class DomainsClient {
       });
     const defaultCallSettings = this._defaults['listRegistrations'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listRegistrations iterate %j', request);
     return this.descriptors.page.listRegistrations.asyncIterate(
       this.innerApiCalls['listRegistrations'] as GaxCall,
       request as {},
@@ -2740,6 +3209,7 @@ export class DomainsClient {
   close(): Promise<void> {
     if (this.domainsStub && !this._terminated) {
       return this.domainsStub.then(stub => {
+        this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
         this.operationsClient.close();

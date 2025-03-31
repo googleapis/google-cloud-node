@@ -266,7 +266,9 @@ describe('v1alpha.WebSecurityScannerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      client.initialize().catch(err => {
+        throw err;
+      });
       assert(client.webSecurityScannerStub);
       client.close().then(() => {
         done();
@@ -329,7 +331,7 @@ describe('v1alpha.WebSecurityScannerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.websecurityscanner.v1alpha.CreateScanConfigRequest()
       );
@@ -338,7 +340,7 @@ describe('v1alpha.WebSecurityScannerClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.websecurityscanner.v1alpha.ScanConfig()
       );
@@ -361,7 +363,7 @@ describe('v1alpha.WebSecurityScannerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.websecurityscanner.v1alpha.CreateScanConfigRequest()
       );
@@ -370,7 +372,7 @@ describe('v1alpha.WebSecurityScannerClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.websecurityscanner.v1alpha.ScanConfig()
       );
@@ -409,7 +411,7 @@ describe('v1alpha.WebSecurityScannerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.websecurityscanner.v1alpha.CreateScanConfigRequest()
       );
@@ -418,7 +420,7 @@ describe('v1alpha.WebSecurityScannerClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createScanConfig = stubSimpleCall(
         undefined,
@@ -441,7 +443,7 @@ describe('v1alpha.WebSecurityScannerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.websecurityscanner.v1alpha.CreateScanConfigRequest()
       );
@@ -463,7 +465,7 @@ describe('v1alpha.WebSecurityScannerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.websecurityscanner.v1alpha.DeleteScanConfigRequest()
       );
@@ -472,7 +474,7 @@ describe('v1alpha.WebSecurityScannerClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -495,7 +497,7 @@ describe('v1alpha.WebSecurityScannerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.websecurityscanner.v1alpha.DeleteScanConfigRequest()
       );
@@ -504,7 +506,7 @@ describe('v1alpha.WebSecurityScannerClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -543,7 +545,7 @@ describe('v1alpha.WebSecurityScannerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.websecurityscanner.v1alpha.DeleteScanConfigRequest()
       );
@@ -552,7 +554,7 @@ describe('v1alpha.WebSecurityScannerClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteScanConfig = stubSimpleCall(
         undefined,
@@ -575,7 +577,7 @@ describe('v1alpha.WebSecurityScannerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.websecurityscanner.v1alpha.DeleteScanConfigRequest()
       );
@@ -597,7 +599,7 @@ describe('v1alpha.WebSecurityScannerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.websecurityscanner.v1alpha.GetScanConfigRequest()
       );
@@ -606,7 +608,7 @@ describe('v1alpha.WebSecurityScannerClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.websecurityscanner.v1alpha.ScanConfig()
       );
@@ -629,7 +631,7 @@ describe('v1alpha.WebSecurityScannerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.websecurityscanner.v1alpha.GetScanConfigRequest()
       );
@@ -638,7 +640,7 @@ describe('v1alpha.WebSecurityScannerClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.websecurityscanner.v1alpha.ScanConfig()
       );
@@ -677,7 +679,7 @@ describe('v1alpha.WebSecurityScannerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.websecurityscanner.v1alpha.GetScanConfigRequest()
       );
@@ -686,7 +688,7 @@ describe('v1alpha.WebSecurityScannerClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getScanConfig = stubSimpleCall(
         undefined,
@@ -709,7 +711,7 @@ describe('v1alpha.WebSecurityScannerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.websecurityscanner.v1alpha.GetScanConfigRequest()
       );
@@ -731,7 +733,7 @@ describe('v1alpha.WebSecurityScannerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.websecurityscanner.v1alpha.UpdateScanConfigRequest()
       );
@@ -741,7 +743,7 @@ describe('v1alpha.WebSecurityScannerClient', () => {
         ['scanConfig', 'name']
       );
       request.scanConfig.name = defaultValue1;
-      const expectedHeaderRequestParams = `scan_config.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `scan_config.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.websecurityscanner.v1alpha.ScanConfig()
       );
@@ -764,7 +766,7 @@ describe('v1alpha.WebSecurityScannerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.websecurityscanner.v1alpha.UpdateScanConfigRequest()
       );
@@ -774,7 +776,7 @@ describe('v1alpha.WebSecurityScannerClient', () => {
         ['scanConfig', 'name']
       );
       request.scanConfig.name = defaultValue1;
-      const expectedHeaderRequestParams = `scan_config.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `scan_config.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.websecurityscanner.v1alpha.ScanConfig()
       );
@@ -813,7 +815,7 @@ describe('v1alpha.WebSecurityScannerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.websecurityscanner.v1alpha.UpdateScanConfigRequest()
       );
@@ -823,7 +825,7 @@ describe('v1alpha.WebSecurityScannerClient', () => {
         ['scanConfig', 'name']
       );
       request.scanConfig.name = defaultValue1;
-      const expectedHeaderRequestParams = `scan_config.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `scan_config.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateScanConfig = stubSimpleCall(
         undefined,
@@ -846,7 +848,7 @@ describe('v1alpha.WebSecurityScannerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.websecurityscanner.v1alpha.UpdateScanConfigRequest()
       );
@@ -869,7 +871,7 @@ describe('v1alpha.WebSecurityScannerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.websecurityscanner.v1alpha.StartScanRunRequest()
       );
@@ -878,7 +880,7 @@ describe('v1alpha.WebSecurityScannerClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.websecurityscanner.v1alpha.ScanRun()
       );
@@ -901,7 +903,7 @@ describe('v1alpha.WebSecurityScannerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.websecurityscanner.v1alpha.StartScanRunRequest()
       );
@@ -910,7 +912,7 @@ describe('v1alpha.WebSecurityScannerClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.websecurityscanner.v1alpha.ScanRun()
       );
@@ -949,7 +951,7 @@ describe('v1alpha.WebSecurityScannerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.websecurityscanner.v1alpha.StartScanRunRequest()
       );
@@ -958,7 +960,7 @@ describe('v1alpha.WebSecurityScannerClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.startScanRun = stubSimpleCall(
         undefined,
@@ -981,7 +983,7 @@ describe('v1alpha.WebSecurityScannerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.websecurityscanner.v1alpha.StartScanRunRequest()
       );
@@ -1003,7 +1005,7 @@ describe('v1alpha.WebSecurityScannerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.websecurityscanner.v1alpha.GetScanRunRequest()
       );
@@ -1012,7 +1014,7 @@ describe('v1alpha.WebSecurityScannerClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.websecurityscanner.v1alpha.ScanRun()
       );
@@ -1035,7 +1037,7 @@ describe('v1alpha.WebSecurityScannerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.websecurityscanner.v1alpha.GetScanRunRequest()
       );
@@ -1044,7 +1046,7 @@ describe('v1alpha.WebSecurityScannerClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.websecurityscanner.v1alpha.ScanRun()
       );
@@ -1083,7 +1085,7 @@ describe('v1alpha.WebSecurityScannerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.websecurityscanner.v1alpha.GetScanRunRequest()
       );
@@ -1092,7 +1094,7 @@ describe('v1alpha.WebSecurityScannerClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getScanRun = stubSimpleCall(
         undefined,
@@ -1115,7 +1117,7 @@ describe('v1alpha.WebSecurityScannerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.websecurityscanner.v1alpha.GetScanRunRequest()
       );
@@ -1137,7 +1139,7 @@ describe('v1alpha.WebSecurityScannerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.websecurityscanner.v1alpha.StopScanRunRequest()
       );
@@ -1146,7 +1148,7 @@ describe('v1alpha.WebSecurityScannerClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.websecurityscanner.v1alpha.ScanRun()
       );
@@ -1169,7 +1171,7 @@ describe('v1alpha.WebSecurityScannerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.websecurityscanner.v1alpha.StopScanRunRequest()
       );
@@ -1178,7 +1180,7 @@ describe('v1alpha.WebSecurityScannerClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.websecurityscanner.v1alpha.ScanRun()
       );
@@ -1217,7 +1219,7 @@ describe('v1alpha.WebSecurityScannerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.websecurityscanner.v1alpha.StopScanRunRequest()
       );
@@ -1226,7 +1228,7 @@ describe('v1alpha.WebSecurityScannerClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.stopScanRun = stubSimpleCall(
         undefined,
@@ -1249,7 +1251,7 @@ describe('v1alpha.WebSecurityScannerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.websecurityscanner.v1alpha.StopScanRunRequest()
       );
@@ -1271,7 +1273,7 @@ describe('v1alpha.WebSecurityScannerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.websecurityscanner.v1alpha.GetFindingRequest()
       );
@@ -1280,7 +1282,7 @@ describe('v1alpha.WebSecurityScannerClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.websecurityscanner.v1alpha.Finding()
       );
@@ -1303,7 +1305,7 @@ describe('v1alpha.WebSecurityScannerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.websecurityscanner.v1alpha.GetFindingRequest()
       );
@@ -1312,7 +1314,7 @@ describe('v1alpha.WebSecurityScannerClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.websecurityscanner.v1alpha.Finding()
       );
@@ -1351,7 +1353,7 @@ describe('v1alpha.WebSecurityScannerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.websecurityscanner.v1alpha.GetFindingRequest()
       );
@@ -1360,7 +1362,7 @@ describe('v1alpha.WebSecurityScannerClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getFinding = stubSimpleCall(
         undefined,
@@ -1383,7 +1385,7 @@ describe('v1alpha.WebSecurityScannerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.websecurityscanner.v1alpha.GetFindingRequest()
       );
@@ -1405,7 +1407,7 @@ describe('v1alpha.WebSecurityScannerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.websecurityscanner.v1alpha.ListFindingTypeStatsRequest()
       );
@@ -1414,7 +1416,7 @@ describe('v1alpha.WebSecurityScannerClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.websecurityscanner.v1alpha.ListFindingTypeStatsResponse()
       );
@@ -1438,7 +1440,7 @@ describe('v1alpha.WebSecurityScannerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.websecurityscanner.v1alpha.ListFindingTypeStatsRequest()
       );
@@ -1447,7 +1449,7 @@ describe('v1alpha.WebSecurityScannerClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.websecurityscanner.v1alpha.ListFindingTypeStatsResponse()
       );
@@ -1486,7 +1488,7 @@ describe('v1alpha.WebSecurityScannerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.websecurityscanner.v1alpha.ListFindingTypeStatsRequest()
       );
@@ -1495,7 +1497,7 @@ describe('v1alpha.WebSecurityScannerClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listFindingTypeStats = stubSimpleCall(
         undefined,
@@ -1518,7 +1520,7 @@ describe('v1alpha.WebSecurityScannerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.websecurityscanner.v1alpha.ListFindingTypeStatsRequest()
       );
@@ -1540,7 +1542,7 @@ describe('v1alpha.WebSecurityScannerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.websecurityscanner.v1alpha.ListScanConfigsRequest()
       );
@@ -1549,7 +1551,7 @@ describe('v1alpha.WebSecurityScannerClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.websecurityscanner.v1alpha.ScanConfig()
@@ -1580,7 +1582,7 @@ describe('v1alpha.WebSecurityScannerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.websecurityscanner.v1alpha.ListScanConfigsRequest()
       );
@@ -1589,7 +1591,7 @@ describe('v1alpha.WebSecurityScannerClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.websecurityscanner.v1alpha.ScanConfig()
@@ -1638,7 +1640,7 @@ describe('v1alpha.WebSecurityScannerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.websecurityscanner.v1alpha.ListScanConfigsRequest()
       );
@@ -1647,7 +1649,7 @@ describe('v1alpha.WebSecurityScannerClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listScanConfigs = stubSimpleCall(
         undefined,
@@ -1670,7 +1672,7 @@ describe('v1alpha.WebSecurityScannerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.websecurityscanner.v1alpha.ListScanConfigsRequest()
       );
@@ -1679,7 +1681,7 @@ describe('v1alpha.WebSecurityScannerClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.websecurityscanner.v1alpha.ScanConfig()
@@ -1734,7 +1736,7 @@ describe('v1alpha.WebSecurityScannerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.websecurityscanner.v1alpha.ListScanConfigsRequest()
       );
@@ -1743,7 +1745,7 @@ describe('v1alpha.WebSecurityScannerClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listScanConfigs.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -1787,7 +1789,7 @@ describe('v1alpha.WebSecurityScannerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.websecurityscanner.v1alpha.ListScanConfigsRequest()
       );
@@ -1796,7 +1798,7 @@ describe('v1alpha.WebSecurityScannerClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.websecurityscanner.v1alpha.ScanConfig()
@@ -1838,7 +1840,7 @@ describe('v1alpha.WebSecurityScannerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.websecurityscanner.v1alpha.ListScanConfigsRequest()
       );
@@ -1847,7 +1849,7 @@ describe('v1alpha.WebSecurityScannerClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listScanConfigs.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -1882,7 +1884,7 @@ describe('v1alpha.WebSecurityScannerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.websecurityscanner.v1alpha.ListScanRunsRequest()
       );
@@ -1891,7 +1893,7 @@ describe('v1alpha.WebSecurityScannerClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.websecurityscanner.v1alpha.ScanRun()
@@ -1922,7 +1924,7 @@ describe('v1alpha.WebSecurityScannerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.websecurityscanner.v1alpha.ListScanRunsRequest()
       );
@@ -1931,7 +1933,7 @@ describe('v1alpha.WebSecurityScannerClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.websecurityscanner.v1alpha.ScanRun()
@@ -1980,7 +1982,7 @@ describe('v1alpha.WebSecurityScannerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.websecurityscanner.v1alpha.ListScanRunsRequest()
       );
@@ -1989,7 +1991,7 @@ describe('v1alpha.WebSecurityScannerClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listScanRuns = stubSimpleCall(
         undefined,
@@ -2012,7 +2014,7 @@ describe('v1alpha.WebSecurityScannerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.websecurityscanner.v1alpha.ListScanRunsRequest()
       );
@@ -2021,7 +2023,7 @@ describe('v1alpha.WebSecurityScannerClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.websecurityscanner.v1alpha.ScanRun()
@@ -2076,7 +2078,7 @@ describe('v1alpha.WebSecurityScannerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.websecurityscanner.v1alpha.ListScanRunsRequest()
       );
@@ -2085,7 +2087,7 @@ describe('v1alpha.WebSecurityScannerClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listScanRuns.createStream = stubPageStreamingCall(
         undefined,
@@ -2131,7 +2133,7 @@ describe('v1alpha.WebSecurityScannerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.websecurityscanner.v1alpha.ListScanRunsRequest()
       );
@@ -2140,7 +2142,7 @@ describe('v1alpha.WebSecurityScannerClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.websecurityscanner.v1alpha.ScanRun()
@@ -2182,7 +2184,7 @@ describe('v1alpha.WebSecurityScannerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.websecurityscanner.v1alpha.ListScanRunsRequest()
       );
@@ -2191,7 +2193,7 @@ describe('v1alpha.WebSecurityScannerClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listScanRuns.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -2226,7 +2228,7 @@ describe('v1alpha.WebSecurityScannerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.websecurityscanner.v1alpha.ListCrawledUrlsRequest()
       );
@@ -2235,7 +2237,7 @@ describe('v1alpha.WebSecurityScannerClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.websecurityscanner.v1alpha.CrawledUrl()
@@ -2266,7 +2268,7 @@ describe('v1alpha.WebSecurityScannerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.websecurityscanner.v1alpha.ListCrawledUrlsRequest()
       );
@@ -2275,7 +2277,7 @@ describe('v1alpha.WebSecurityScannerClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.websecurityscanner.v1alpha.CrawledUrl()
@@ -2324,7 +2326,7 @@ describe('v1alpha.WebSecurityScannerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.websecurityscanner.v1alpha.ListCrawledUrlsRequest()
       );
@@ -2333,7 +2335,7 @@ describe('v1alpha.WebSecurityScannerClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listCrawledUrls = stubSimpleCall(
         undefined,
@@ -2356,7 +2358,7 @@ describe('v1alpha.WebSecurityScannerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.websecurityscanner.v1alpha.ListCrawledUrlsRequest()
       );
@@ -2365,7 +2367,7 @@ describe('v1alpha.WebSecurityScannerClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.websecurityscanner.v1alpha.CrawledUrl()
@@ -2420,7 +2422,7 @@ describe('v1alpha.WebSecurityScannerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.websecurityscanner.v1alpha.ListCrawledUrlsRequest()
       );
@@ -2429,7 +2431,7 @@ describe('v1alpha.WebSecurityScannerClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listCrawledUrls.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -2473,7 +2475,7 @@ describe('v1alpha.WebSecurityScannerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.websecurityscanner.v1alpha.ListCrawledUrlsRequest()
       );
@@ -2482,7 +2484,7 @@ describe('v1alpha.WebSecurityScannerClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.websecurityscanner.v1alpha.CrawledUrl()
@@ -2524,7 +2526,7 @@ describe('v1alpha.WebSecurityScannerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.websecurityscanner.v1alpha.ListCrawledUrlsRequest()
       );
@@ -2533,7 +2535,7 @@ describe('v1alpha.WebSecurityScannerClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listCrawledUrls.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -2568,7 +2570,7 @@ describe('v1alpha.WebSecurityScannerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.websecurityscanner.v1alpha.ListFindingsRequest()
       );
@@ -2577,7 +2579,7 @@ describe('v1alpha.WebSecurityScannerClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.websecurityscanner.v1alpha.Finding()
@@ -2608,7 +2610,7 @@ describe('v1alpha.WebSecurityScannerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.websecurityscanner.v1alpha.ListFindingsRequest()
       );
@@ -2617,7 +2619,7 @@ describe('v1alpha.WebSecurityScannerClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.websecurityscanner.v1alpha.Finding()
@@ -2666,7 +2668,7 @@ describe('v1alpha.WebSecurityScannerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.websecurityscanner.v1alpha.ListFindingsRequest()
       );
@@ -2675,7 +2677,7 @@ describe('v1alpha.WebSecurityScannerClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listFindings = stubSimpleCall(
         undefined,
@@ -2698,7 +2700,7 @@ describe('v1alpha.WebSecurityScannerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.websecurityscanner.v1alpha.ListFindingsRequest()
       );
@@ -2707,7 +2709,7 @@ describe('v1alpha.WebSecurityScannerClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.websecurityscanner.v1alpha.Finding()
@@ -2762,7 +2764,7 @@ describe('v1alpha.WebSecurityScannerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.websecurityscanner.v1alpha.ListFindingsRequest()
       );
@@ -2771,7 +2773,7 @@ describe('v1alpha.WebSecurityScannerClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listFindings.createStream = stubPageStreamingCall(
         undefined,
@@ -2817,7 +2819,7 @@ describe('v1alpha.WebSecurityScannerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.websecurityscanner.v1alpha.ListFindingsRequest()
       );
@@ -2826,7 +2828,7 @@ describe('v1alpha.WebSecurityScannerClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.websecurityscanner.v1alpha.Finding()
@@ -2868,7 +2870,7 @@ describe('v1alpha.WebSecurityScannerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.websecurityscanner.v1alpha.ListFindingsRequest()
       );
@@ -2877,7 +2879,7 @@ describe('v1alpha.WebSecurityScannerClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listFindings.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -2906,7 +2908,7 @@ describe('v1alpha.WebSecurityScannerClient', () => {
   });
 
   describe('Path templates', () => {
-    describe('finding', () => {
+    describe('finding', async () => {
       const fakePath = '/rendered/path/finding';
       const expectedParameters = {
         project: 'projectValue',
@@ -2919,7 +2921,7 @@ describe('v1alpha.WebSecurityScannerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.findingPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -2983,7 +2985,7 @@ describe('v1alpha.WebSecurityScannerClient', () => {
       });
     });
 
-    describe('project', () => {
+    describe('project', async () => {
       const fakePath = '/rendered/path/project';
       const expectedParameters = {
         project: 'projectValue',
@@ -2993,7 +2995,7 @@ describe('v1alpha.WebSecurityScannerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -3022,7 +3024,7 @@ describe('v1alpha.WebSecurityScannerClient', () => {
       });
     });
 
-    describe('scanConfig', () => {
+    describe('scanConfig', async () => {
       const fakePath = '/rendered/path/scanConfig';
       const expectedParameters = {
         project: 'projectValue',
@@ -3033,7 +3035,7 @@ describe('v1alpha.WebSecurityScannerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.scanConfigPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -3072,7 +3074,7 @@ describe('v1alpha.WebSecurityScannerClient', () => {
       });
     });
 
-    describe('scanRun', () => {
+    describe('scanRun', async () => {
       const fakePath = '/rendered/path/scanRun';
       const expectedParameters = {
         project: 'projectValue',
@@ -3084,7 +3086,7 @@ describe('v1alpha.WebSecurityScannerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.scanRunPathTemplate.render = sinon
         .stub()
         .returns(fakePath);

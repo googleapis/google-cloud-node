@@ -31,6 +31,7 @@ import type {
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
+import {loggingUtils as logging} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -55,6 +56,8 @@ export class BetaAnalyticsDataClient {
   private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
+  private _log = logging.log('data');
+
   auth: gax.GoogleAuth;
   descriptors: Descriptors = {
     page: {},
@@ -90,7 +93,7 @@ export class BetaAnalyticsDataClient {
    *     Developer's Console, e.g. 'grape-spaceship-123'. We will also check
    *     the environment variable GCLOUD_PROJECT for your project ID. If your
    *     app is running in an environment which supports
-   *     {@link https://developers.google.com/identity/protocols/application-default-credentials Application Default Credentials},
+   *     {@link https://cloud.google.com/docs/authentication/application-default-credentials Application Default Credentials},
    *     your project ID will be detected automatically.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
@@ -607,8 +610,36 @@ export class BetaAnalyticsDataClient {
       this._gaxModule.routingHeader.fromParams({
         property: request.property ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.runReport(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('runReport request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.analytics.data.v1beta.IRunReportResponse,
+          | protos.google.analytics.data.v1beta.IRunReportRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('runReport response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .runReport(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.analytics.data.v1beta.IRunReportResponse,
+          protos.google.analytics.data.v1beta.IRunReportRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('runReport response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Returns a customized pivot report of your Google Analytics event data.
@@ -757,8 +788,39 @@ export class BetaAnalyticsDataClient {
       this._gaxModule.routingHeader.fromParams({
         property: request.property ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.runPivotReport(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('runPivotReport request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.analytics.data.v1beta.IRunPivotReportResponse,
+          | protos.google.analytics.data.v1beta.IRunPivotReportRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('runPivotReport response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .runPivotReport(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.analytics.data.v1beta.IRunPivotReportResponse,
+          (
+            | protos.google.analytics.data.v1beta.IRunPivotReportRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('runPivotReport response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Returns multiple reports in a batch. All reports must be for the same
@@ -859,8 +921,39 @@ export class BetaAnalyticsDataClient {
       this._gaxModule.routingHeader.fromParams({
         property: request.property ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.batchRunReports(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('batchRunReports request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.analytics.data.v1beta.IBatchRunReportsResponse,
+          | protos.google.analytics.data.v1beta.IBatchRunReportsRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('batchRunReports response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .batchRunReports(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.analytics.data.v1beta.IBatchRunReportsResponse,
+          (
+            | protos.google.analytics.data.v1beta.IBatchRunReportsRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('batchRunReports response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Returns multiple pivot reports in a batch. All reports must be for the same
@@ -967,8 +1060,39 @@ export class BetaAnalyticsDataClient {
       this._gaxModule.routingHeader.fromParams({
         property: request.property ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.batchRunPivotReports(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('batchRunPivotReports request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.analytics.data.v1beta.IBatchRunPivotReportsResponse,
+          | protos.google.analytics.data.v1beta.IBatchRunPivotReportsRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('batchRunPivotReports response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .batchRunPivotReports(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.analytics.data.v1beta.IBatchRunPivotReportsResponse,
+          (
+            | protos.google.analytics.data.v1beta.IBatchRunPivotReportsRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('batchRunPivotReports response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Returns metadata for dimensions and metrics available in reporting methods.
@@ -1076,8 +1200,36 @@ export class BetaAnalyticsDataClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.getMetadata(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('getMetadata request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.analytics.data.v1beta.IMetadata,
+          | protos.google.analytics.data.v1beta.IGetMetadataRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getMetadata response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getMetadata(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.analytics.data.v1beta.IMetadata,
+          protos.google.analytics.data.v1beta.IGetMetadataRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getMetadata response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Returns a customized report of realtime event data for your property.
@@ -1213,8 +1365,39 @@ export class BetaAnalyticsDataClient {
       this._gaxModule.routingHeader.fromParams({
         property: request.property ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.runRealtimeReport(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('runRealtimeReport request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.analytics.data.v1beta.IRunRealtimeReportResponse,
+          | protos.google.analytics.data.v1beta.IRunRealtimeReportRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('runRealtimeReport response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .runRealtimeReport(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.analytics.data.v1beta.IRunRealtimeReportResponse,
+          (
+            | protos.google.analytics.data.v1beta.IRunRealtimeReportRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('runRealtimeReport response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * This compatibility method lists dimensions and metrics that can be added to
@@ -1339,8 +1522,39 @@ export class BetaAnalyticsDataClient {
       this._gaxModule.routingHeader.fromParams({
         property: request.property ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.checkCompatibility(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('checkCompatibility request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.analytics.data.v1beta.ICheckCompatibilityResponse,
+          | protos.google.analytics.data.v1beta.ICheckCompatibilityRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('checkCompatibility response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .checkCompatibility(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.analytics.data.v1beta.ICheckCompatibilityResponse,
+          (
+            | protos.google.analytics.data.v1beta.ICheckCompatibilityRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('checkCompatibility response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Retrieves an audience export of users. After creating an audience, the
@@ -1475,8 +1689,39 @@ export class BetaAnalyticsDataClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.queryAudienceExport(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('queryAudienceExport request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.analytics.data.v1beta.IQueryAudienceExportResponse,
+          | protos.google.analytics.data.v1beta.IQueryAudienceExportRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('queryAudienceExport response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .queryAudienceExport(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.analytics.data.v1beta.IQueryAudienceExportResponse,
+          (
+            | protos.google.analytics.data.v1beta.IQueryAudienceExportRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('queryAudienceExport response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Gets configuration metadata about a specific audience export. This method
@@ -1577,8 +1822,39 @@ export class BetaAnalyticsDataClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.getAudienceExport(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('getAudienceExport request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.analytics.data.v1beta.IAudienceExport,
+          | protos.google.analytics.data.v1beta.IGetAudienceExportRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getAudienceExport response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getAudienceExport(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.analytics.data.v1beta.IAudienceExport,
+          (
+            | protos.google.analytics.data.v1beta.IGetAudienceExportRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getAudienceExport response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
 
   /**
@@ -1707,8 +1983,40 @@ export class BetaAnalyticsDataClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.createAudienceExport(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.analytics.data.v1beta.IAudienceExport,
+            protos.google.analytics.data.v1beta.IAudienceExportMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('createAudienceExport response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('createAudienceExport request %j', request);
+    return this.innerApiCalls
+      .createAudienceExport(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.analytics.data.v1beta.IAudienceExport,
+            protos.google.analytics.data.v1beta.IAudienceExportMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createAudienceExport response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `createAudienceExport()`.
@@ -1729,6 +2037,7 @@ export class BetaAnalyticsDataClient {
       protos.google.analytics.data.v1beta.AudienceExportMetadata
     >
   > {
+    this._log.info('createAudienceExport long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -1860,8 +2169,36 @@ export class BetaAnalyticsDataClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.listAudienceExports(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.analytics.data.v1beta.IListAudienceExportsRequest,
+          | protos.google.analytics.data.v1beta.IListAudienceExportsResponse
+          | null
+          | undefined,
+          protos.google.analytics.data.v1beta.IAudienceExport
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listAudienceExports values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listAudienceExports request %j', request);
+    return this.innerApiCalls
+      .listAudienceExports(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.analytics.data.v1beta.IAudienceExport[],
+          protos.google.analytics.data.v1beta.IListAudienceExportsRequest | null,
+          protos.google.analytics.data.v1beta.IListAudienceExportsResponse,
+        ]) => {
+          this._log.info('listAudienceExports values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -1907,7 +2244,10 @@ export class BetaAnalyticsDataClient {
       });
     const defaultCallSettings = this._defaults['listAudienceExports'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listAudienceExports stream %j', request);
     return this.descriptors.page.listAudienceExports.createStream(
       this.innerApiCalls.listAudienceExports as GaxCall,
       request,
@@ -1961,7 +2301,10 @@ export class BetaAnalyticsDataClient {
       });
     const defaultCallSettings = this._defaults['listAudienceExports'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listAudienceExports iterate %j', request);
     return this.descriptors.page.listAudienceExports.asyncIterate(
       this.innerApiCalls['listAudienceExports'] as GaxCall,
       request as {},
@@ -2062,7 +2405,7 @@ export class BetaAnalyticsDataClient {
   listOperationsAsync(
     request: protos.google.longrunning.ListOperationsRequest,
     options?: gax.CallOptions
-  ): AsyncIterable<protos.google.longrunning.ListOperationsResponse> {
+  ): AsyncIterable<protos.google.longrunning.IOperation> {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
@@ -2291,6 +2634,7 @@ export class BetaAnalyticsDataClient {
   close(): Promise<void> {
     if (this.betaAnalyticsDataStub && !this._terminated) {
       return this.betaAnalyticsDataStub.then(stub => {
+        this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
         this.operationsClient.close();

@@ -1,5 +1,30 @@
 # Changelog
 
+## [0.4.0](https://github.com/googleapis/google-cloud-node/compare/storage-control-v0.3.0...storage-control-v0.4.0) (2025-03-19)
+
+
+### Features
+
+* [storage] Add Anywhere cache control APIs ([#6151](https://github.com/googleapis/google-cloud-node/issues/6151)) ([6f0340d](https://github.com/googleapis/google-cloud-node/commit/6f0340dc21027b6c66bcf77e8cb1cd30fc7d4ea3))
+
+## [0.3.0](https://github.com/googleapis/google-cloud-node/compare/storage-control-v0.2.1...storage-control-v0.3.0) (2025-03-18)
+
+
+### ⚠ BREAKING CHANGES
+
+* upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096))
+
+### Miscellaneous Chores
+
+* Upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096)) ([eadae64](https://github.com/googleapis/google-cloud-node/commit/eadae64d54e07aa2c65097ea52e65008d4e87436))
+
+## [0.2.1](https://github.com/googleapis/google-cloud-node/compare/storage-control-v0.2.0...storage-control-v0.2.1) (2025-02-12)
+
+
+### Bug Fixes
+
+* [Many APIs] finalize fixing typings for headers in generator ([#6019](https://github.com/googleapis/google-cloud-node/issues/6019)) ([734397c](https://github.com/googleapis/google-cloud-node/commit/734397c6b98d0aafe8832544da3f483b1eade1b2))
+
 ## [0.2.0](https://github.com/googleapis/google-cloud-node/compare/storage-control-v0.1.1...storage-control-v0.2.0) (2024-05-21)
 
 

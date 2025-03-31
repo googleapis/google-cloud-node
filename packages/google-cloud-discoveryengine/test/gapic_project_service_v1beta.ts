@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -243,7 +243,9 @@ describe('v1beta.ProjectServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      client.initialize().catch(err => {
+        throw err;
+      });
       assert(client.projectServiceStub);
       client.close().then(() => {
         done();
@@ -302,7 +304,7 @@ describe('v1beta.ProjectServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.discoveryengine.v1beta.ProvisionProjectRequest()
       );
@@ -311,7 +313,7 @@ describe('v1beta.ProjectServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -335,7 +337,7 @@ describe('v1beta.ProjectServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.discoveryengine.v1beta.ProvisionProjectRequest()
       );
@@ -344,7 +346,7 @@ describe('v1beta.ProjectServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -389,7 +391,7 @@ describe('v1beta.ProjectServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.discoveryengine.v1beta.ProvisionProjectRequest()
       );
@@ -398,7 +400,7 @@ describe('v1beta.ProjectServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.provisionProject = stubLongRunningCall(
         undefined,
@@ -420,7 +422,7 @@ describe('v1beta.ProjectServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.discoveryengine.v1beta.ProvisionProjectRequest()
       );
@@ -429,7 +431,7 @@ describe('v1beta.ProjectServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.provisionProject = stubLongRunningCall(
         undefined,
@@ -453,7 +455,7 @@ describe('v1beta.ProjectServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -475,7 +477,7 @@ describe('v1beta.ProjectServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -495,7 +497,7 @@ describe('v1beta.ProjectServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.GetLocationRequest()
       );
@@ -525,7 +527,7 @@ describe('v1beta.ProjectServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.GetLocationRequest()
       );
@@ -569,7 +571,7 @@ describe('v1beta.ProjectServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.GetLocationRequest()
       );
@@ -604,7 +606,7 @@ describe('v1beta.ProjectServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.ListLocationsRequest()
       );
@@ -652,7 +654,7 @@ describe('v1beta.ProjectServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.ListLocationsRequest()
       );
@@ -693,7 +695,7 @@ describe('v1beta.ProjectServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new operationsProtos.google.longrunning.GetOperationRequest()
       );
@@ -772,7 +774,7 @@ describe('v1beta.ProjectServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new operationsProtos.google.longrunning.CancelOperationRequest()
       );
@@ -852,7 +854,7 @@ describe('v1beta.ProjectServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new operationsProtos.google.longrunning.DeleteOperationRequest()
       );
@@ -948,8 +950,7 @@ describe('v1beta.ProjectServiceClient', () => {
       ];
       client.operationsClient.descriptor.listOperations.asyncIterate =
         stubAsyncIterationCall(expectedResponse);
-      const responses: operationsProtos.google.longrunning.ListOperationsResponse[] =
-        [];
+      const responses: operationsProtos.google.longrunning.IOperation[] = [];
       const iterable = client.operationsClient.listOperationsAsync(request);
       for await (const resource of iterable) {
         responses.push(resource!);
@@ -968,7 +969,7 @@ describe('v1beta.ProjectServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new operationsProtos.google.longrunning.ListOperationsRequest()
       );
@@ -977,8 +978,7 @@ describe('v1beta.ProjectServiceClient', () => {
         stubAsyncIterationCall(undefined, expectedError);
       const iterable = client.operationsClient.listOperationsAsync(request);
       await assert.rejects(async () => {
-        const responses: operationsProtos.google.longrunning.ListOperationsResponse[] =
-          [];
+        const responses: operationsProtos.google.longrunning.IOperation[] = [];
         for await (const resource of iterable) {
           responses.push(resource!);
         }
@@ -994,7 +994,7 @@ describe('v1beta.ProjectServiceClient', () => {
   });
 
   describe('Path templates', () => {
-    describe('engine', () => {
+    describe('engine', async () => {
       const fakePath = '/rendered/path/engine';
       const expectedParameters = {
         project: 'projectValue',
@@ -1006,7 +1006,7 @@ describe('v1beta.ProjectServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.enginePathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -1070,7 +1070,7 @@ describe('v1beta.ProjectServiceClient', () => {
       });
     });
 
-    describe('evaluation', () => {
+    describe('evaluation', async () => {
       const fakePath = '/rendered/path/evaluation';
       const expectedParameters = {
         project: 'projectValue',
@@ -1081,7 +1081,7 @@ describe('v1beta.ProjectServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.evaluationPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -1134,7 +1134,72 @@ describe('v1beta.ProjectServiceClient', () => {
       });
     });
 
-    describe('project', () => {
+    describe('groundingConfig', async () => {
+      const fakePath = '/rendered/path/groundingConfig';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        grounding_config: 'groundingConfigValue',
+      };
+      const client = new projectserviceModule.v1beta.ProjectServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      client.pathTemplates.groundingConfigPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.groundingConfigPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('groundingConfigPath', () => {
+        const result = client.groundingConfigPath(
+          'projectValue',
+          'locationValue',
+          'groundingConfigValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.groundingConfigPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromGroundingConfigName', () => {
+        const result = client.matchProjectFromGroundingConfigName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.groundingConfigPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromGroundingConfigName', () => {
+        const result = client.matchLocationFromGroundingConfigName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.groundingConfigPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchGroundingConfigFromGroundingConfigName', () => {
+        const result =
+          client.matchGroundingConfigFromGroundingConfigName(fakePath);
+        assert.strictEqual(result, 'groundingConfigValue');
+        assert(
+          (client.pathTemplates.groundingConfigPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('project', async () => {
       const fakePath = '/rendered/path/project';
       const expectedParameters = {
         project: 'projectValue',
@@ -1143,7 +1208,7 @@ describe('v1beta.ProjectServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -1172,7 +1237,7 @@ describe('v1beta.ProjectServiceClient', () => {
       });
     });
 
-    describe('projectLocationCollectionDataStore', () => {
+    describe('projectLocationCollectionDataStore', async () => {
       const fakePath = '/rendered/path/projectLocationCollectionDataStore';
       const expectedParameters = {
         project: 'projectValue',
@@ -1184,7 +1249,7 @@ describe('v1beta.ProjectServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectLocationCollectionDataStorePathTemplate.render =
         sinon.stub().returns(fakePath);
       client.pathTemplates.projectLocationCollectionDataStorePathTemplate.match =
@@ -1273,7 +1338,7 @@ describe('v1beta.ProjectServiceClient', () => {
       });
     });
 
-    describe('projectLocationCollectionDataStoreBranchDocument', () => {
+    describe('projectLocationCollectionDataStoreBranchDocument', async () => {
       const fakePath =
         '/rendered/path/projectLocationCollectionDataStoreBranchDocument';
       const expectedParameters = {
@@ -1288,7 +1353,7 @@ describe('v1beta.ProjectServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectLocationCollectionDataStoreBranchDocumentPathTemplate.render =
         sinon.stub().returns(fakePath);
       client.pathTemplates.projectLocationCollectionDataStoreBranchDocumentPathTemplate.match =
@@ -1419,7 +1484,7 @@ describe('v1beta.ProjectServiceClient', () => {
       });
     });
 
-    describe('projectLocationCollectionDataStoreBranchDocumentChunk', () => {
+    describe('projectLocationCollectionDataStoreBranchDocumentChunk', async () => {
       const fakePath =
         '/rendered/path/projectLocationCollectionDataStoreBranchDocumentChunk';
       const expectedParameters = {
@@ -1435,7 +1500,7 @@ describe('v1beta.ProjectServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectLocationCollectionDataStoreBranchDocumentChunkPathTemplate.render =
         sinon.stub().returns(fakePath);
       client.pathTemplates.projectLocationCollectionDataStoreBranchDocumentChunkPathTemplate.match =
@@ -1584,7 +1649,7 @@ describe('v1beta.ProjectServiceClient', () => {
       });
     });
 
-    describe('projectLocationCollectionDataStoreControl', () => {
+    describe('projectLocationCollectionDataStoreControl', async () => {
       const fakePath =
         '/rendered/path/projectLocationCollectionDataStoreControl';
       const expectedParameters = {
@@ -1598,7 +1663,7 @@ describe('v1beta.ProjectServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectLocationCollectionDataStoreControlPathTemplate.render =
         sinon.stub().returns(fakePath);
       client.pathTemplates.projectLocationCollectionDataStoreControlPathTemplate.match =
@@ -1710,7 +1775,7 @@ describe('v1beta.ProjectServiceClient', () => {
       });
     });
 
-    describe('projectLocationCollectionDataStoreConversation', () => {
+    describe('projectLocationCollectionDataStoreConversation', async () => {
       const fakePath =
         '/rendered/path/projectLocationCollectionDataStoreConversation';
       const expectedParameters = {
@@ -1724,7 +1789,7 @@ describe('v1beta.ProjectServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectLocationCollectionDataStoreConversationPathTemplate.render =
         sinon.stub().returns(fakePath);
       client.pathTemplates.projectLocationCollectionDataStoreConversationPathTemplate.match =
@@ -1837,7 +1902,7 @@ describe('v1beta.ProjectServiceClient', () => {
       });
     });
 
-    describe('projectLocationCollectionDataStoreCustomTuningModel', () => {
+    describe('projectLocationCollectionDataStoreCustomTuningModel', async () => {
       const fakePath =
         '/rendered/path/projectLocationCollectionDataStoreCustomTuningModel';
       const expectedParameters = {
@@ -1851,7 +1916,7 @@ describe('v1beta.ProjectServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectLocationCollectionDataStoreCustomTuningModelPathTemplate.render =
         sinon.stub().returns(fakePath);
       client.pathTemplates.projectLocationCollectionDataStoreCustomTuningModelPathTemplate.match =
@@ -1964,7 +2029,7 @@ describe('v1beta.ProjectServiceClient', () => {
       });
     });
 
-    describe('projectLocationCollectionDataStoreDocumentProcessingConfig', () => {
+    describe('projectLocationCollectionDataStoreDocumentProcessingConfig', async () => {
       const fakePath =
         '/rendered/path/projectLocationCollectionDataStoreDocumentProcessingConfig';
       const expectedParameters = {
@@ -1977,7 +2042,7 @@ describe('v1beta.ProjectServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectLocationCollectionDataStoreDocumentProcessingConfigPathTemplate.render =
         sinon.stub().returns(fakePath);
       client.pathTemplates.projectLocationCollectionDataStoreDocumentProcessingConfigPathTemplate.match =
@@ -2072,7 +2137,7 @@ describe('v1beta.ProjectServiceClient', () => {
       });
     });
 
-    describe('projectLocationCollectionDataStoreSchema', () => {
+    describe('projectLocationCollectionDataStoreSchema', async () => {
       const fakePath =
         '/rendered/path/projectLocationCollectionDataStoreSchema';
       const expectedParameters = {
@@ -2086,7 +2151,7 @@ describe('v1beta.ProjectServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectLocationCollectionDataStoreSchemaPathTemplate.render =
         sinon.stub().returns(fakePath);
       client.pathTemplates.projectLocationCollectionDataStoreSchemaPathTemplate.match =
@@ -2198,7 +2263,7 @@ describe('v1beta.ProjectServiceClient', () => {
       });
     });
 
-    describe('projectLocationCollectionDataStoreServingConfig', () => {
+    describe('projectLocationCollectionDataStoreServingConfig', async () => {
       const fakePath =
         '/rendered/path/projectLocationCollectionDataStoreServingConfig';
       const expectedParameters = {
@@ -2212,7 +2277,7 @@ describe('v1beta.ProjectServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectLocationCollectionDataStoreServingConfigPathTemplate.render =
         sinon.stub().returns(fakePath);
       client.pathTemplates.projectLocationCollectionDataStoreServingConfigPathTemplate.match =
@@ -2325,7 +2390,7 @@ describe('v1beta.ProjectServiceClient', () => {
       });
     });
 
-    describe('projectLocationCollectionDataStoreSession', () => {
+    describe('projectLocationCollectionDataStoreSession', async () => {
       const fakePath =
         '/rendered/path/projectLocationCollectionDataStoreSession';
       const expectedParameters = {
@@ -2339,7 +2404,7 @@ describe('v1beta.ProjectServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectLocationCollectionDataStoreSessionPathTemplate.render =
         sinon.stub().returns(fakePath);
       client.pathTemplates.projectLocationCollectionDataStoreSessionPathTemplate.match =
@@ -2451,7 +2516,7 @@ describe('v1beta.ProjectServiceClient', () => {
       });
     });
 
-    describe('projectLocationCollectionDataStoreSessionAnswer', () => {
+    describe('projectLocationCollectionDataStoreSessionAnswer', async () => {
       const fakePath =
         '/rendered/path/projectLocationCollectionDataStoreSessionAnswer';
       const expectedParameters = {
@@ -2466,7 +2531,7 @@ describe('v1beta.ProjectServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectLocationCollectionDataStoreSessionAnswerPathTemplate.render =
         sinon.stub().returns(fakePath);
       client.pathTemplates.projectLocationCollectionDataStoreSessionAnswerPathTemplate.match =
@@ -2597,7 +2662,7 @@ describe('v1beta.ProjectServiceClient', () => {
       });
     });
 
-    describe('projectLocationCollectionDataStoreSiteSearchEngine', () => {
+    describe('projectLocationCollectionDataStoreSiteSearchEngine', async () => {
       const fakePath =
         '/rendered/path/projectLocationCollectionDataStoreSiteSearchEngine';
       const expectedParameters = {
@@ -2610,7 +2675,7 @@ describe('v1beta.ProjectServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectLocationCollectionDataStoreSiteSearchEnginePathTemplate.render =
         sinon.stub().returns(fakePath);
       client.pathTemplates.projectLocationCollectionDataStoreSiteSearchEnginePathTemplate.match =
@@ -2705,7 +2770,134 @@ describe('v1beta.ProjectServiceClient', () => {
       });
     });
 
-    describe('projectLocationCollectionDataStoreSiteSearchEngineTargetSite', () => {
+    describe('projectLocationCollectionDataStoreSiteSearchEngineSitemap', async () => {
+      const fakePath =
+        '/rendered/path/projectLocationCollectionDataStoreSiteSearchEngineSitemap';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        collection: 'collectionValue',
+        data_store: 'dataStoreValue',
+        sitemap: 'sitemapValue',
+      };
+      const client = new projectserviceModule.v1beta.ProjectServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      client.pathTemplates.projectLocationCollectionDataStoreSiteSearchEngineSitemapPathTemplate.render =
+        sinon.stub().returns(fakePath);
+      client.pathTemplates.projectLocationCollectionDataStoreSiteSearchEngineSitemapPathTemplate.match =
+        sinon.stub().returns(expectedParameters);
+
+      it('projectLocationCollectionDataStoreSiteSearchEngineSitemapPath', () => {
+        const result =
+          client.projectLocationCollectionDataStoreSiteSearchEngineSitemapPath(
+            'projectValue',
+            'locationValue',
+            'collectionValue',
+            'dataStoreValue',
+            'sitemapValue'
+          );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates
+              .projectLocationCollectionDataStoreSiteSearchEngineSitemapPathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromProjectLocationCollectionDataStoreSiteSearchEngineSitemapName', () => {
+        const result =
+          client.matchProjectFromProjectLocationCollectionDataStoreSiteSearchEngineSitemapName(
+            fakePath
+          );
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (
+            client.pathTemplates
+              .projectLocationCollectionDataStoreSiteSearchEngineSitemapPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromProjectLocationCollectionDataStoreSiteSearchEngineSitemapName', () => {
+        const result =
+          client.matchLocationFromProjectLocationCollectionDataStoreSiteSearchEngineSitemapName(
+            fakePath
+          );
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (
+            client.pathTemplates
+              .projectLocationCollectionDataStoreSiteSearchEngineSitemapPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchCollectionFromProjectLocationCollectionDataStoreSiteSearchEngineSitemapName', () => {
+        const result =
+          client.matchCollectionFromProjectLocationCollectionDataStoreSiteSearchEngineSitemapName(
+            fakePath
+          );
+        assert.strictEqual(result, 'collectionValue');
+        assert(
+          (
+            client.pathTemplates
+              .projectLocationCollectionDataStoreSiteSearchEngineSitemapPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchDataStoreFromProjectLocationCollectionDataStoreSiteSearchEngineSitemapName', () => {
+        const result =
+          client.matchDataStoreFromProjectLocationCollectionDataStoreSiteSearchEngineSitemapName(
+            fakePath
+          );
+        assert.strictEqual(result, 'dataStoreValue');
+        assert(
+          (
+            client.pathTemplates
+              .projectLocationCollectionDataStoreSiteSearchEngineSitemapPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchSitemapFromProjectLocationCollectionDataStoreSiteSearchEngineSitemapName', () => {
+        const result =
+          client.matchSitemapFromProjectLocationCollectionDataStoreSiteSearchEngineSitemapName(
+            fakePath
+          );
+        assert.strictEqual(result, 'sitemapValue');
+        assert(
+          (
+            client.pathTemplates
+              .projectLocationCollectionDataStoreSiteSearchEngineSitemapPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('projectLocationCollectionDataStoreSiteSearchEngineTargetSite', async () => {
       const fakePath =
         '/rendered/path/projectLocationCollectionDataStoreSiteSearchEngineTargetSite';
       const expectedParameters = {
@@ -2719,7 +2911,7 @@ describe('v1beta.ProjectServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectLocationCollectionDataStoreSiteSearchEngineTargetSitePathTemplate.render =
         sinon.stub().returns(fakePath);
       client.pathTemplates.projectLocationCollectionDataStoreSiteSearchEngineTargetSitePathTemplate.match =
@@ -2832,7 +3024,7 @@ describe('v1beta.ProjectServiceClient', () => {
       });
     });
 
-    describe('projectLocationCollectionEngineControl', () => {
+    describe('projectLocationCollectionEngineControl', async () => {
       const fakePath = '/rendered/path/projectLocationCollectionEngineControl';
       const expectedParameters = {
         project: 'projectValue',
@@ -2845,7 +3037,7 @@ describe('v1beta.ProjectServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectLocationCollectionEngineControlPathTemplate.render =
         sinon.stub().returns(fakePath);
       client.pathTemplates.projectLocationCollectionEngineControlPathTemplate.match =
@@ -2957,7 +3149,7 @@ describe('v1beta.ProjectServiceClient', () => {
       });
     });
 
-    describe('projectLocationCollectionEngineConversation', () => {
+    describe('projectLocationCollectionEngineConversation', async () => {
       const fakePath =
         '/rendered/path/projectLocationCollectionEngineConversation';
       const expectedParameters = {
@@ -2971,7 +3163,7 @@ describe('v1beta.ProjectServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectLocationCollectionEngineConversationPathTemplate.render =
         sinon.stub().returns(fakePath);
       client.pathTemplates.projectLocationCollectionEngineConversationPathTemplate.match =
@@ -3083,7 +3275,7 @@ describe('v1beta.ProjectServiceClient', () => {
       });
     });
 
-    describe('projectLocationCollectionEngineServingConfig', () => {
+    describe('projectLocationCollectionEngineServingConfig', async () => {
       const fakePath =
         '/rendered/path/projectLocationCollectionEngineServingConfig';
       const expectedParameters = {
@@ -3097,7 +3289,7 @@ describe('v1beta.ProjectServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectLocationCollectionEngineServingConfigPathTemplate.render =
         sinon.stub().returns(fakePath);
       client.pathTemplates.projectLocationCollectionEngineServingConfigPathTemplate.match =
@@ -3209,7 +3401,7 @@ describe('v1beta.ProjectServiceClient', () => {
       });
     });
 
-    describe('projectLocationCollectionEngineSession', () => {
+    describe('projectLocationCollectionEngineSession', async () => {
       const fakePath = '/rendered/path/projectLocationCollectionEngineSession';
       const expectedParameters = {
         project: 'projectValue',
@@ -3222,7 +3414,7 @@ describe('v1beta.ProjectServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectLocationCollectionEngineSessionPathTemplate.render =
         sinon.stub().returns(fakePath);
       client.pathTemplates.projectLocationCollectionEngineSessionPathTemplate.match =
@@ -3334,7 +3526,7 @@ describe('v1beta.ProjectServiceClient', () => {
       });
     });
 
-    describe('projectLocationCollectionEngineSessionAnswer', () => {
+    describe('projectLocationCollectionEngineSessionAnswer', async () => {
       const fakePath =
         '/rendered/path/projectLocationCollectionEngineSessionAnswer';
       const expectedParameters = {
@@ -3349,7 +3541,7 @@ describe('v1beta.ProjectServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectLocationCollectionEngineSessionAnswerPathTemplate.render =
         sinon.stub().returns(fakePath);
       client.pathTemplates.projectLocationCollectionEngineSessionAnswerPathTemplate.match =
@@ -3479,7 +3671,7 @@ describe('v1beta.ProjectServiceClient', () => {
       });
     });
 
-    describe('projectLocationDataStore', () => {
+    describe('projectLocationDataStore', async () => {
       const fakePath = '/rendered/path/projectLocationDataStore';
       const expectedParameters = {
         project: 'projectValue',
@@ -3490,7 +3682,7 @@ describe('v1beta.ProjectServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectLocationDataStorePathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -3558,7 +3750,7 @@ describe('v1beta.ProjectServiceClient', () => {
       });
     });
 
-    describe('projectLocationDataStoreBranchDocument', () => {
+    describe('projectLocationDataStoreBranchDocument', async () => {
       const fakePath = '/rendered/path/projectLocationDataStoreBranchDocument';
       const expectedParameters = {
         project: 'projectValue',
@@ -3571,7 +3763,7 @@ describe('v1beta.ProjectServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectLocationDataStoreBranchDocumentPathTemplate.render =
         sinon.stub().returns(fakePath);
       client.pathTemplates.projectLocationDataStoreBranchDocumentPathTemplate.match =
@@ -3683,7 +3875,7 @@ describe('v1beta.ProjectServiceClient', () => {
       });
     });
 
-    describe('projectLocationDataStoreBranchDocumentChunk', () => {
+    describe('projectLocationDataStoreBranchDocumentChunk', async () => {
       const fakePath =
         '/rendered/path/projectLocationDataStoreBranchDocumentChunk';
       const expectedParameters = {
@@ -3698,7 +3890,7 @@ describe('v1beta.ProjectServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectLocationDataStoreBranchDocumentChunkPathTemplate.render =
         sinon.stub().returns(fakePath);
       client.pathTemplates.projectLocationDataStoreBranchDocumentChunkPathTemplate.match =
@@ -3828,7 +4020,7 @@ describe('v1beta.ProjectServiceClient', () => {
       });
     });
 
-    describe('projectLocationDataStoreControl', () => {
+    describe('projectLocationDataStoreControl', async () => {
       const fakePath = '/rendered/path/projectLocationDataStoreControl';
       const expectedParameters = {
         project: 'projectValue',
@@ -3840,7 +4032,7 @@ describe('v1beta.ProjectServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectLocationDataStoreControlPathTemplate.render =
         sinon.stub().returns(fakePath);
       client.pathTemplates.projectLocationDataStoreControlPathTemplate.match =
@@ -3923,7 +4115,7 @@ describe('v1beta.ProjectServiceClient', () => {
       });
     });
 
-    describe('projectLocationDataStoreConversation', () => {
+    describe('projectLocationDataStoreConversation', async () => {
       const fakePath = '/rendered/path/projectLocationDataStoreConversation';
       const expectedParameters = {
         project: 'projectValue',
@@ -3935,7 +4127,7 @@ describe('v1beta.ProjectServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectLocationDataStoreConversationPathTemplate.render =
         sinon.stub().returns(fakePath);
       client.pathTemplates.projectLocationDataStoreConversationPathTemplate.match =
@@ -4029,7 +4221,7 @@ describe('v1beta.ProjectServiceClient', () => {
       });
     });
 
-    describe('projectLocationDataStoreCustomTuningModel', () => {
+    describe('projectLocationDataStoreCustomTuningModel', async () => {
       const fakePath =
         '/rendered/path/projectLocationDataStoreCustomTuningModel';
       const expectedParameters = {
@@ -4042,7 +4234,7 @@ describe('v1beta.ProjectServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectLocationDataStoreCustomTuningModelPathTemplate.render =
         sinon.stub().returns(fakePath);
       client.pathTemplates.projectLocationDataStoreCustomTuningModelPathTemplate.match =
@@ -4136,7 +4328,7 @@ describe('v1beta.ProjectServiceClient', () => {
       });
     });
 
-    describe('projectLocationDataStoreDocumentProcessingConfig', () => {
+    describe('projectLocationDataStoreDocumentProcessingConfig', async () => {
       const fakePath =
         '/rendered/path/projectLocationDataStoreDocumentProcessingConfig';
       const expectedParameters = {
@@ -4148,7 +4340,7 @@ describe('v1beta.ProjectServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectLocationDataStoreDocumentProcessingConfigPathTemplate.render =
         sinon.stub().returns(fakePath);
       client.pathTemplates.projectLocationDataStoreDocumentProcessingConfigPathTemplate.match =
@@ -4225,7 +4417,7 @@ describe('v1beta.ProjectServiceClient', () => {
       });
     });
 
-    describe('projectLocationDataStoreSchema', () => {
+    describe('projectLocationDataStoreSchema', async () => {
       const fakePath = '/rendered/path/projectLocationDataStoreSchema';
       const expectedParameters = {
         project: 'projectValue',
@@ -4237,7 +4429,7 @@ describe('v1beta.ProjectServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectLocationDataStoreSchemaPathTemplate.render =
         sinon.stub().returns(fakePath);
       client.pathTemplates.projectLocationDataStoreSchemaPathTemplate.match =
@@ -4318,7 +4510,7 @@ describe('v1beta.ProjectServiceClient', () => {
       });
     });
 
-    describe('projectLocationDataStoreServingConfig', () => {
+    describe('projectLocationDataStoreServingConfig', async () => {
       const fakePath = '/rendered/path/projectLocationDataStoreServingConfig';
       const expectedParameters = {
         project: 'projectValue',
@@ -4330,7 +4522,7 @@ describe('v1beta.ProjectServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectLocationDataStoreServingConfigPathTemplate.render =
         sinon.stub().returns(fakePath);
       client.pathTemplates.projectLocationDataStoreServingConfigPathTemplate.match =
@@ -4424,7 +4616,7 @@ describe('v1beta.ProjectServiceClient', () => {
       });
     });
 
-    describe('projectLocationDataStoreSession', () => {
+    describe('projectLocationDataStoreSession', async () => {
       const fakePath = '/rendered/path/projectLocationDataStoreSession';
       const expectedParameters = {
         project: 'projectValue',
@@ -4436,7 +4628,7 @@ describe('v1beta.ProjectServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectLocationDataStoreSessionPathTemplate.render =
         sinon.stub().returns(fakePath);
       client.pathTemplates.projectLocationDataStoreSessionPathTemplate.match =
@@ -4519,7 +4711,7 @@ describe('v1beta.ProjectServiceClient', () => {
       });
     });
 
-    describe('projectLocationDataStoreSessionAnswer', () => {
+    describe('projectLocationDataStoreSessionAnswer', async () => {
       const fakePath = '/rendered/path/projectLocationDataStoreSessionAnswer';
       const expectedParameters = {
         project: 'projectValue',
@@ -4532,7 +4724,7 @@ describe('v1beta.ProjectServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectLocationDataStoreSessionAnswerPathTemplate.render =
         sinon.stub().returns(fakePath);
       client.pathTemplates.projectLocationDataStoreSessionAnswerPathTemplate.match =
@@ -4644,7 +4836,7 @@ describe('v1beta.ProjectServiceClient', () => {
       });
     });
 
-    describe('projectLocationDataStoreSiteSearchEngine', () => {
+    describe('projectLocationDataStoreSiteSearchEngine', async () => {
       const fakePath =
         '/rendered/path/projectLocationDataStoreSiteSearchEngine';
       const expectedParameters = {
@@ -4656,7 +4848,7 @@ describe('v1beta.ProjectServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectLocationDataStoreSiteSearchEnginePathTemplate.render =
         sinon.stub().returns(fakePath);
       client.pathTemplates.projectLocationDataStoreSiteSearchEnginePathTemplate.match =
@@ -4732,7 +4924,115 @@ describe('v1beta.ProjectServiceClient', () => {
       });
     });
 
-    describe('projectLocationDataStoreSiteSearchEngineTargetSite', () => {
+    describe('projectLocationDataStoreSiteSearchEngineSitemap', async () => {
+      const fakePath =
+        '/rendered/path/projectLocationDataStoreSiteSearchEngineSitemap';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        data_store: 'dataStoreValue',
+        sitemap: 'sitemapValue',
+      };
+      const client = new projectserviceModule.v1beta.ProjectServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      client.pathTemplates.projectLocationDataStoreSiteSearchEngineSitemapPathTemplate.render =
+        sinon.stub().returns(fakePath);
+      client.pathTemplates.projectLocationDataStoreSiteSearchEngineSitemapPathTemplate.match =
+        sinon.stub().returns(expectedParameters);
+
+      it('projectLocationDataStoreSiteSearchEngineSitemapPath', () => {
+        const result =
+          client.projectLocationDataStoreSiteSearchEngineSitemapPath(
+            'projectValue',
+            'locationValue',
+            'dataStoreValue',
+            'sitemapValue'
+          );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates
+              .projectLocationDataStoreSiteSearchEngineSitemapPathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromProjectLocationDataStoreSiteSearchEngineSitemapName', () => {
+        const result =
+          client.matchProjectFromProjectLocationDataStoreSiteSearchEngineSitemapName(
+            fakePath
+          );
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (
+            client.pathTemplates
+              .projectLocationDataStoreSiteSearchEngineSitemapPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromProjectLocationDataStoreSiteSearchEngineSitemapName', () => {
+        const result =
+          client.matchLocationFromProjectLocationDataStoreSiteSearchEngineSitemapName(
+            fakePath
+          );
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (
+            client.pathTemplates
+              .projectLocationDataStoreSiteSearchEngineSitemapPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchDataStoreFromProjectLocationDataStoreSiteSearchEngineSitemapName', () => {
+        const result =
+          client.matchDataStoreFromProjectLocationDataStoreSiteSearchEngineSitemapName(
+            fakePath
+          );
+        assert.strictEqual(result, 'dataStoreValue');
+        assert(
+          (
+            client.pathTemplates
+              .projectLocationDataStoreSiteSearchEngineSitemapPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchSitemapFromProjectLocationDataStoreSiteSearchEngineSitemapName', () => {
+        const result =
+          client.matchSitemapFromProjectLocationDataStoreSiteSearchEngineSitemapName(
+            fakePath
+          );
+        assert.strictEqual(result, 'sitemapValue');
+        assert(
+          (
+            client.pathTemplates
+              .projectLocationDataStoreSiteSearchEngineSitemapPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('projectLocationDataStoreSiteSearchEngineTargetSite', async () => {
       const fakePath =
         '/rendered/path/projectLocationDataStoreSiteSearchEngineTargetSite';
       const expectedParameters = {
@@ -4745,7 +5045,7 @@ describe('v1beta.ProjectServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectLocationDataStoreSiteSearchEngineTargetSitePathTemplate.render =
         sinon.stub().returns(fakePath);
       client.pathTemplates.projectLocationDataStoreSiteSearchEngineTargetSitePathTemplate.match =
@@ -4840,7 +5140,7 @@ describe('v1beta.ProjectServiceClient', () => {
       });
     });
 
-    describe('sampleQuery', () => {
+    describe('sampleQuery', async () => {
       const fakePath = '/rendered/path/sampleQuery';
       const expectedParameters = {
         project: 'projectValue',
@@ -4852,7 +5152,7 @@ describe('v1beta.ProjectServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.sampleQueryPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -4916,7 +5216,7 @@ describe('v1beta.ProjectServiceClient', () => {
       });
     });
 
-    describe('sampleQuerySet', () => {
+    describe('sampleQuerySet', async () => {
       const fakePath = '/rendered/path/sampleQuerySet';
       const expectedParameters = {
         project: 'projectValue',
@@ -4927,7 +5227,7 @@ describe('v1beta.ProjectServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.sampleQuerySetPathTemplate.render = sinon
         .stub()
         .returns(fakePath);

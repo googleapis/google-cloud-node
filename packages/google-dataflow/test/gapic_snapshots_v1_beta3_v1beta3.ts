@@ -194,7 +194,9 @@ describe('v1beta3.SnapshotsV1Beta3Client', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      client.initialize().catch(err => {
+        throw err;
+      });
       assert(client.snapshotsV1Beta3Stub);
       client.close().then(() => {
         done();
@@ -253,7 +255,7 @@ describe('v1beta3.SnapshotsV1Beta3Client', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.dataflow.v1beta3.GetSnapshotRequest()
       );
@@ -272,7 +274,7 @@ describe('v1beta3.SnapshotsV1Beta3Client', () => {
         ['snapshotId']
       );
       request.snapshotId = defaultValue3;
-      const expectedHeaderRequestParams = `project_id=${defaultValue1}&location=${defaultValue2}&snapshot_id=${defaultValue3}`;
+      const expectedHeaderRequestParams = `project_id=${defaultValue1 ?? ''}&location=${defaultValue2 ?? ''}&snapshot_id=${defaultValue3 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.dataflow.v1beta3.Snapshot()
       );
@@ -294,7 +296,7 @@ describe('v1beta3.SnapshotsV1Beta3Client', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.dataflow.v1beta3.GetSnapshotRequest()
       );
@@ -313,7 +315,7 @@ describe('v1beta3.SnapshotsV1Beta3Client', () => {
         ['snapshotId']
       );
       request.snapshotId = defaultValue3;
-      const expectedHeaderRequestParams = `project_id=${defaultValue1}&location=${defaultValue2}&snapshot_id=${defaultValue3}`;
+      const expectedHeaderRequestParams = `project_id=${defaultValue1 ?? ''}&location=${defaultValue2 ?? ''}&snapshot_id=${defaultValue3 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.dataflow.v1beta3.Snapshot()
       );
@@ -351,7 +353,7 @@ describe('v1beta3.SnapshotsV1Beta3Client', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.dataflow.v1beta3.GetSnapshotRequest()
       );
@@ -370,7 +372,7 @@ describe('v1beta3.SnapshotsV1Beta3Client', () => {
         ['snapshotId']
       );
       request.snapshotId = defaultValue3;
-      const expectedHeaderRequestParams = `project_id=${defaultValue1}&location=${defaultValue2}&snapshot_id=${defaultValue3}`;
+      const expectedHeaderRequestParams = `project_id=${defaultValue1 ?? ''}&location=${defaultValue2 ?? ''}&snapshot_id=${defaultValue3 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getSnapshot = stubSimpleCall(
         undefined,
@@ -392,7 +394,7 @@ describe('v1beta3.SnapshotsV1Beta3Client', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.dataflow.v1beta3.GetSnapshotRequest()
       );
@@ -423,7 +425,7 @@ describe('v1beta3.SnapshotsV1Beta3Client', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.dataflow.v1beta3.DeleteSnapshotRequest()
       );
@@ -442,7 +444,7 @@ describe('v1beta3.SnapshotsV1Beta3Client', () => {
         ['snapshotId']
       );
       request.snapshotId = defaultValue3;
-      const expectedHeaderRequestParams = `project_id=${defaultValue1}&location=${defaultValue2}&snapshot_id=${defaultValue3}`;
+      const expectedHeaderRequestParams = `project_id=${defaultValue1 ?? ''}&location=${defaultValue2 ?? ''}&snapshot_id=${defaultValue3 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.dataflow.v1beta3.DeleteSnapshotResponse()
       );
@@ -464,7 +466,7 @@ describe('v1beta3.SnapshotsV1Beta3Client', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.dataflow.v1beta3.DeleteSnapshotRequest()
       );
@@ -483,7 +485,7 @@ describe('v1beta3.SnapshotsV1Beta3Client', () => {
         ['snapshotId']
       );
       request.snapshotId = defaultValue3;
-      const expectedHeaderRequestParams = `project_id=${defaultValue1}&location=${defaultValue2}&snapshot_id=${defaultValue3}`;
+      const expectedHeaderRequestParams = `project_id=${defaultValue1 ?? ''}&location=${defaultValue2 ?? ''}&snapshot_id=${defaultValue3 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.dataflow.v1beta3.DeleteSnapshotResponse()
       );
@@ -521,7 +523,7 @@ describe('v1beta3.SnapshotsV1Beta3Client', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.dataflow.v1beta3.DeleteSnapshotRequest()
       );
@@ -540,7 +542,7 @@ describe('v1beta3.SnapshotsV1Beta3Client', () => {
         ['snapshotId']
       );
       request.snapshotId = defaultValue3;
-      const expectedHeaderRequestParams = `project_id=${defaultValue1}&location=${defaultValue2}&snapshot_id=${defaultValue3}`;
+      const expectedHeaderRequestParams = `project_id=${defaultValue1 ?? ''}&location=${defaultValue2 ?? ''}&snapshot_id=${defaultValue3 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteSnapshot = stubSimpleCall(
         undefined,
@@ -562,7 +564,7 @@ describe('v1beta3.SnapshotsV1Beta3Client', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.dataflow.v1beta3.DeleteSnapshotRequest()
       );
@@ -593,7 +595,7 @@ describe('v1beta3.SnapshotsV1Beta3Client', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.dataflow.v1beta3.ListSnapshotsRequest()
       );
@@ -612,7 +614,7 @@ describe('v1beta3.SnapshotsV1Beta3Client', () => {
         ['jobId']
       );
       request.jobId = defaultValue3;
-      const expectedHeaderRequestParams = `project_id=${defaultValue1}&location=${defaultValue2}&job_id=${defaultValue3}`;
+      const expectedHeaderRequestParams = `project_id=${defaultValue1 ?? ''}&location=${defaultValue2 ?? ''}&job_id=${defaultValue3 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.dataflow.v1beta3.ListSnapshotsResponse()
       );
@@ -634,7 +636,7 @@ describe('v1beta3.SnapshotsV1Beta3Client', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.dataflow.v1beta3.ListSnapshotsRequest()
       );
@@ -653,7 +655,7 @@ describe('v1beta3.SnapshotsV1Beta3Client', () => {
         ['jobId']
       );
       request.jobId = defaultValue3;
-      const expectedHeaderRequestParams = `project_id=${defaultValue1}&location=${defaultValue2}&job_id=${defaultValue3}`;
+      const expectedHeaderRequestParams = `project_id=${defaultValue1 ?? ''}&location=${defaultValue2 ?? ''}&job_id=${defaultValue3 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.dataflow.v1beta3.ListSnapshotsResponse()
       );
@@ -691,7 +693,7 @@ describe('v1beta3.SnapshotsV1Beta3Client', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.dataflow.v1beta3.ListSnapshotsRequest()
       );
@@ -710,7 +712,7 @@ describe('v1beta3.SnapshotsV1Beta3Client', () => {
         ['jobId']
       );
       request.jobId = defaultValue3;
-      const expectedHeaderRequestParams = `project_id=${defaultValue1}&location=${defaultValue2}&job_id=${defaultValue3}`;
+      const expectedHeaderRequestParams = `project_id=${defaultValue1 ?? ''}&location=${defaultValue2 ?? ''}&job_id=${defaultValue3 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listSnapshots = stubSimpleCall(
         undefined,
@@ -732,7 +734,7 @@ describe('v1beta3.SnapshotsV1Beta3Client', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.dataflow.v1beta3.ListSnapshotsRequest()
       );

@@ -1,7 +1,7 @@
 {
     "clientLibrary": {
         "name": "nodejs-meet",
-        "version": "0.3.0",
+        "version": "0.6.0",
         "language": "TYPESCRIPT",
         "apis": [
             {
@@ -664,6 +664,50 @@
                 "method": {
                     "shortName": "UpdateSpace",
                     "fullName": "google.apps.meet.v2beta.SpacesService.UpdateSpace",
+                    "service": {
+                        "shortName": "SpacesService",
+                        "fullName": "google.apps.meet.v2beta.SpacesService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "meet_v2beta_generated_SpacesService_ConnectActiveConference_async",
+            "title": "ConferenceRecordsService connectActiveConference Sample",
+            "origin": "API_DEFINITION",
+            "description": " [Developer Preview](https://developers.google.com/workspace/preview): Broker a WebRTC connection to the active conference of a space. On success, clients must use the resulting SDP (Session Description Protocol) answer to establish a WebRTC connection. Once connected, additional functionality is available across WebRTC data channels. See [Meet Media API overview](https://developers.google.com/meet/media-api/guides/overview) for more details about this connection.",
+            "canonical": true,
+            "file": "spaces_service.connect_active_conference.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 64,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "ConnectActiveConference",
+                "fullName": "google.apps.meet.v2beta.SpacesService.ConnectActiveConference",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "name",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "offer",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.apps.meet.v2beta.ConnectActiveConferenceResponse",
+                "client": {
+                    "shortName": "SpacesServiceClient",
+                    "fullName": "google.apps.meet.v2beta.SpacesServiceClient"
+                },
+                "method": {
+                    "shortName": "ConnectActiveConference",
+                    "fullName": "google.apps.meet.v2beta.SpacesService.ConnectActiveConference",
                     "service": {
                         "shortName": "SpacesService",
                         "fullName": "google.apps.meet.v2beta.SpacesService"

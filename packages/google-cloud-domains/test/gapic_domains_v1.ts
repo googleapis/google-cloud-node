@@ -282,7 +282,9 @@ describe('v1.DomainsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      client.initialize().catch(err => {
+        throw err;
+      });
       assert(client.domainsStub);
       client.close().then(() => {
         done();
@@ -341,7 +343,7 @@ describe('v1.DomainsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.domains.v1.SearchDomainsRequest()
       );
@@ -350,7 +352,7 @@ describe('v1.DomainsClient', () => {
         ['location']
       );
       request.location = defaultValue1;
-      const expectedHeaderRequestParams = `location=${defaultValue1}`;
+      const expectedHeaderRequestParams = `location=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.domains.v1.SearchDomainsResponse()
       );
@@ -372,7 +374,7 @@ describe('v1.DomainsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.domains.v1.SearchDomainsRequest()
       );
@@ -381,7 +383,7 @@ describe('v1.DomainsClient', () => {
         ['location']
       );
       request.location = defaultValue1;
-      const expectedHeaderRequestParams = `location=${defaultValue1}`;
+      const expectedHeaderRequestParams = `location=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.domains.v1.SearchDomainsResponse()
       );
@@ -419,7 +421,7 @@ describe('v1.DomainsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.domains.v1.SearchDomainsRequest()
       );
@@ -428,7 +430,7 @@ describe('v1.DomainsClient', () => {
         ['location']
       );
       request.location = defaultValue1;
-      const expectedHeaderRequestParams = `location=${defaultValue1}`;
+      const expectedHeaderRequestParams = `location=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.searchDomains = stubSimpleCall(
         undefined,
@@ -450,7 +452,7 @@ describe('v1.DomainsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.domains.v1.SearchDomainsRequest()
       );
@@ -471,7 +473,7 @@ describe('v1.DomainsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.domains.v1.RetrieveRegisterParametersRequest()
       );
@@ -480,7 +482,7 @@ describe('v1.DomainsClient', () => {
         ['location']
       );
       request.location = defaultValue1;
-      const expectedHeaderRequestParams = `location=${defaultValue1}`;
+      const expectedHeaderRequestParams = `location=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.domains.v1.RetrieveRegisterParametersResponse()
       );
@@ -503,7 +505,7 @@ describe('v1.DomainsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.domains.v1.RetrieveRegisterParametersRequest()
       );
@@ -512,7 +514,7 @@ describe('v1.DomainsClient', () => {
         ['location']
       );
       request.location = defaultValue1;
-      const expectedHeaderRequestParams = `location=${defaultValue1}`;
+      const expectedHeaderRequestParams = `location=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.domains.v1.RetrieveRegisterParametersResponse()
       );
@@ -550,7 +552,7 @@ describe('v1.DomainsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.domains.v1.RetrieveRegisterParametersRequest()
       );
@@ -559,7 +561,7 @@ describe('v1.DomainsClient', () => {
         ['location']
       );
       request.location = defaultValue1;
-      const expectedHeaderRequestParams = `location=${defaultValue1}`;
+      const expectedHeaderRequestParams = `location=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.retrieveRegisterParameters = stubSimpleCall(
         undefined,
@@ -584,7 +586,7 @@ describe('v1.DomainsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.domains.v1.RetrieveRegisterParametersRequest()
       );
@@ -608,7 +610,7 @@ describe('v1.DomainsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.domains.v1.RetrieveTransferParametersRequest()
       );
@@ -617,7 +619,7 @@ describe('v1.DomainsClient', () => {
         ['location']
       );
       request.location = defaultValue1;
-      const expectedHeaderRequestParams = `location=${defaultValue1}`;
+      const expectedHeaderRequestParams = `location=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.domains.v1.RetrieveTransferParametersResponse()
       );
@@ -640,7 +642,7 @@ describe('v1.DomainsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.domains.v1.RetrieveTransferParametersRequest()
       );
@@ -649,7 +651,7 @@ describe('v1.DomainsClient', () => {
         ['location']
       );
       request.location = defaultValue1;
-      const expectedHeaderRequestParams = `location=${defaultValue1}`;
+      const expectedHeaderRequestParams = `location=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.domains.v1.RetrieveTransferParametersResponse()
       );
@@ -687,7 +689,7 @@ describe('v1.DomainsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.domains.v1.RetrieveTransferParametersRequest()
       );
@@ -696,7 +698,7 @@ describe('v1.DomainsClient', () => {
         ['location']
       );
       request.location = defaultValue1;
-      const expectedHeaderRequestParams = `location=${defaultValue1}`;
+      const expectedHeaderRequestParams = `location=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.retrieveTransferParameters = stubSimpleCall(
         undefined,
@@ -721,7 +723,7 @@ describe('v1.DomainsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.domains.v1.RetrieveTransferParametersRequest()
       );
@@ -745,7 +747,7 @@ describe('v1.DomainsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.domains.v1.GetRegistrationRequest()
       );
@@ -754,7 +756,7 @@ describe('v1.DomainsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.domains.v1.Registration()
       );
@@ -776,7 +778,7 @@ describe('v1.DomainsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.domains.v1.GetRegistrationRequest()
       );
@@ -785,7 +787,7 @@ describe('v1.DomainsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.domains.v1.Registration()
       );
@@ -823,7 +825,7 @@ describe('v1.DomainsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.domains.v1.GetRegistrationRequest()
       );
@@ -832,7 +834,7 @@ describe('v1.DomainsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getRegistration = stubSimpleCall(
         undefined,
@@ -854,7 +856,7 @@ describe('v1.DomainsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.domains.v1.GetRegistrationRequest()
       );
@@ -875,7 +877,7 @@ describe('v1.DomainsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.domains.v1.RetrieveAuthorizationCodeRequest()
       );
@@ -884,7 +886,7 @@ describe('v1.DomainsClient', () => {
         ['registration']
       );
       request.registration = defaultValue1;
-      const expectedHeaderRequestParams = `registration=${defaultValue1}`;
+      const expectedHeaderRequestParams = `registration=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.domains.v1.AuthorizationCode()
       );
@@ -907,7 +909,7 @@ describe('v1.DomainsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.domains.v1.RetrieveAuthorizationCodeRequest()
       );
@@ -916,7 +918,7 @@ describe('v1.DomainsClient', () => {
         ['registration']
       );
       request.registration = defaultValue1;
-      const expectedHeaderRequestParams = `registration=${defaultValue1}`;
+      const expectedHeaderRequestParams = `registration=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.domains.v1.AuthorizationCode()
       );
@@ -954,7 +956,7 @@ describe('v1.DomainsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.domains.v1.RetrieveAuthorizationCodeRequest()
       );
@@ -963,7 +965,7 @@ describe('v1.DomainsClient', () => {
         ['registration']
       );
       request.registration = defaultValue1;
-      const expectedHeaderRequestParams = `registration=${defaultValue1}`;
+      const expectedHeaderRequestParams = `registration=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.retrieveAuthorizationCode = stubSimpleCall(
         undefined,
@@ -988,7 +990,7 @@ describe('v1.DomainsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.domains.v1.RetrieveAuthorizationCodeRequest()
       );
@@ -1012,7 +1014,7 @@ describe('v1.DomainsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.domains.v1.ResetAuthorizationCodeRequest()
       );
@@ -1021,7 +1023,7 @@ describe('v1.DomainsClient', () => {
         ['registration']
       );
       request.registration = defaultValue1;
-      const expectedHeaderRequestParams = `registration=${defaultValue1}`;
+      const expectedHeaderRequestParams = `registration=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.domains.v1.AuthorizationCode()
       );
@@ -1044,7 +1046,7 @@ describe('v1.DomainsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.domains.v1.ResetAuthorizationCodeRequest()
       );
@@ -1053,7 +1055,7 @@ describe('v1.DomainsClient', () => {
         ['registration']
       );
       request.registration = defaultValue1;
-      const expectedHeaderRequestParams = `registration=${defaultValue1}`;
+      const expectedHeaderRequestParams = `registration=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.domains.v1.AuthorizationCode()
       );
@@ -1091,7 +1093,7 @@ describe('v1.DomainsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.domains.v1.ResetAuthorizationCodeRequest()
       );
@@ -1100,7 +1102,7 @@ describe('v1.DomainsClient', () => {
         ['registration']
       );
       request.registration = defaultValue1;
-      const expectedHeaderRequestParams = `registration=${defaultValue1}`;
+      const expectedHeaderRequestParams = `registration=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.resetAuthorizationCode = stubSimpleCall(
         undefined,
@@ -1125,7 +1127,7 @@ describe('v1.DomainsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.domains.v1.ResetAuthorizationCodeRequest()
       );
@@ -1149,7 +1151,7 @@ describe('v1.DomainsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.domains.v1.RegisterDomainRequest()
       );
@@ -1158,7 +1160,7 @@ describe('v1.DomainsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1182,7 +1184,7 @@ describe('v1.DomainsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.domains.v1.RegisterDomainRequest()
       );
@@ -1191,7 +1193,7 @@ describe('v1.DomainsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1236,7 +1238,7 @@ describe('v1.DomainsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.domains.v1.RegisterDomainRequest()
       );
@@ -1245,7 +1247,7 @@ describe('v1.DomainsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.registerDomain = stubLongRunningCall(
         undefined,
@@ -1267,7 +1269,7 @@ describe('v1.DomainsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.domains.v1.RegisterDomainRequest()
       );
@@ -1276,7 +1278,7 @@ describe('v1.DomainsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.registerDomain = stubLongRunningCall(
         undefined,
@@ -1300,7 +1302,7 @@ describe('v1.DomainsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -1322,7 +1324,7 @@ describe('v1.DomainsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -1343,7 +1345,7 @@ describe('v1.DomainsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.domains.v1.TransferDomainRequest()
       );
@@ -1352,7 +1354,7 @@ describe('v1.DomainsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1376,7 +1378,7 @@ describe('v1.DomainsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.domains.v1.TransferDomainRequest()
       );
@@ -1385,7 +1387,7 @@ describe('v1.DomainsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1430,7 +1432,7 @@ describe('v1.DomainsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.domains.v1.TransferDomainRequest()
       );
@@ -1439,7 +1441,7 @@ describe('v1.DomainsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.transferDomain = stubLongRunningCall(
         undefined,
@@ -1461,7 +1463,7 @@ describe('v1.DomainsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.domains.v1.TransferDomainRequest()
       );
@@ -1470,7 +1472,7 @@ describe('v1.DomainsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.transferDomain = stubLongRunningCall(
         undefined,
@@ -1494,7 +1496,7 @@ describe('v1.DomainsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -1516,7 +1518,7 @@ describe('v1.DomainsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -1537,7 +1539,7 @@ describe('v1.DomainsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.domains.v1.UpdateRegistrationRequest()
       );
@@ -1547,7 +1549,7 @@ describe('v1.DomainsClient', () => {
         ['registration', 'name']
       );
       request.registration.name = defaultValue1;
-      const expectedHeaderRequestParams = `registration.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `registration.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1571,7 +1573,7 @@ describe('v1.DomainsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.domains.v1.UpdateRegistrationRequest()
       );
@@ -1581,7 +1583,7 @@ describe('v1.DomainsClient', () => {
         ['registration', 'name']
       );
       request.registration.name = defaultValue1;
-      const expectedHeaderRequestParams = `registration.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `registration.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1626,7 +1628,7 @@ describe('v1.DomainsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.domains.v1.UpdateRegistrationRequest()
       );
@@ -1636,7 +1638,7 @@ describe('v1.DomainsClient', () => {
         ['registration', 'name']
       );
       request.registration.name = defaultValue1;
-      const expectedHeaderRequestParams = `registration.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `registration.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateRegistration = stubLongRunningCall(
         undefined,
@@ -1658,7 +1660,7 @@ describe('v1.DomainsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.domains.v1.UpdateRegistrationRequest()
       );
@@ -1668,7 +1670,7 @@ describe('v1.DomainsClient', () => {
         ['registration', 'name']
       );
       request.registration.name = defaultValue1;
-      const expectedHeaderRequestParams = `registration.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `registration.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateRegistration = stubLongRunningCall(
         undefined,
@@ -1692,7 +1694,7 @@ describe('v1.DomainsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -1714,7 +1716,7 @@ describe('v1.DomainsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -1735,7 +1737,7 @@ describe('v1.DomainsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.domains.v1.ConfigureManagementSettingsRequest()
       );
@@ -1744,7 +1746,7 @@ describe('v1.DomainsClient', () => {
         ['registration']
       );
       request.registration = defaultValue1;
-      const expectedHeaderRequestParams = `registration=${defaultValue1}`;
+      const expectedHeaderRequestParams = `registration=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1768,7 +1770,7 @@ describe('v1.DomainsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.domains.v1.ConfigureManagementSettingsRequest()
       );
@@ -1777,7 +1779,7 @@ describe('v1.DomainsClient', () => {
         ['registration']
       );
       request.registration = defaultValue1;
-      const expectedHeaderRequestParams = `registration=${defaultValue1}`;
+      const expectedHeaderRequestParams = `registration=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1822,7 +1824,7 @@ describe('v1.DomainsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.domains.v1.ConfigureManagementSettingsRequest()
       );
@@ -1831,7 +1833,7 @@ describe('v1.DomainsClient', () => {
         ['registration']
       );
       request.registration = defaultValue1;
-      const expectedHeaderRequestParams = `registration=${defaultValue1}`;
+      const expectedHeaderRequestParams = `registration=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.configureManagementSettings = stubLongRunningCall(
         undefined,
@@ -1856,7 +1858,7 @@ describe('v1.DomainsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.domains.v1.ConfigureManagementSettingsRequest()
       );
@@ -1865,7 +1867,7 @@ describe('v1.DomainsClient', () => {
         ['registration']
       );
       request.registration = defaultValue1;
-      const expectedHeaderRequestParams = `registration=${defaultValue1}`;
+      const expectedHeaderRequestParams = `registration=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.configureManagementSettings = stubLongRunningCall(
         undefined,
@@ -1889,7 +1891,7 @@ describe('v1.DomainsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -1912,7 +1914,7 @@ describe('v1.DomainsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -1933,7 +1935,7 @@ describe('v1.DomainsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.domains.v1.ConfigureDnsSettingsRequest()
       );
@@ -1942,7 +1944,7 @@ describe('v1.DomainsClient', () => {
         ['registration']
       );
       request.registration = defaultValue1;
-      const expectedHeaderRequestParams = `registration=${defaultValue1}`;
+      const expectedHeaderRequestParams = `registration=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1966,7 +1968,7 @@ describe('v1.DomainsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.domains.v1.ConfigureDnsSettingsRequest()
       );
@@ -1975,7 +1977,7 @@ describe('v1.DomainsClient', () => {
         ['registration']
       );
       request.registration = defaultValue1;
-      const expectedHeaderRequestParams = `registration=${defaultValue1}`;
+      const expectedHeaderRequestParams = `registration=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2020,7 +2022,7 @@ describe('v1.DomainsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.domains.v1.ConfigureDnsSettingsRequest()
       );
@@ -2029,7 +2031,7 @@ describe('v1.DomainsClient', () => {
         ['registration']
       );
       request.registration = defaultValue1;
-      const expectedHeaderRequestParams = `registration=${defaultValue1}`;
+      const expectedHeaderRequestParams = `registration=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.configureDnsSettings = stubLongRunningCall(
         undefined,
@@ -2051,7 +2053,7 @@ describe('v1.DomainsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.domains.v1.ConfigureDnsSettingsRequest()
       );
@@ -2060,7 +2062,7 @@ describe('v1.DomainsClient', () => {
         ['registration']
       );
       request.registration = defaultValue1;
-      const expectedHeaderRequestParams = `registration=${defaultValue1}`;
+      const expectedHeaderRequestParams = `registration=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.configureDnsSettings = stubLongRunningCall(
         undefined,
@@ -2084,7 +2086,7 @@ describe('v1.DomainsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -2106,7 +2108,7 @@ describe('v1.DomainsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -2127,7 +2129,7 @@ describe('v1.DomainsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.domains.v1.ConfigureContactSettingsRequest()
       );
@@ -2136,7 +2138,7 @@ describe('v1.DomainsClient', () => {
         ['registration']
       );
       request.registration = defaultValue1;
-      const expectedHeaderRequestParams = `registration=${defaultValue1}`;
+      const expectedHeaderRequestParams = `registration=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2160,7 +2162,7 @@ describe('v1.DomainsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.domains.v1.ConfigureContactSettingsRequest()
       );
@@ -2169,7 +2171,7 @@ describe('v1.DomainsClient', () => {
         ['registration']
       );
       request.registration = defaultValue1;
-      const expectedHeaderRequestParams = `registration=${defaultValue1}`;
+      const expectedHeaderRequestParams = `registration=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2214,7 +2216,7 @@ describe('v1.DomainsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.domains.v1.ConfigureContactSettingsRequest()
       );
@@ -2223,7 +2225,7 @@ describe('v1.DomainsClient', () => {
         ['registration']
       );
       request.registration = defaultValue1;
-      const expectedHeaderRequestParams = `registration=${defaultValue1}`;
+      const expectedHeaderRequestParams = `registration=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.configureContactSettings = stubLongRunningCall(
         undefined,
@@ -2248,7 +2250,7 @@ describe('v1.DomainsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.domains.v1.ConfigureContactSettingsRequest()
       );
@@ -2257,7 +2259,7 @@ describe('v1.DomainsClient', () => {
         ['registration']
       );
       request.registration = defaultValue1;
-      const expectedHeaderRequestParams = `registration=${defaultValue1}`;
+      const expectedHeaderRequestParams = `registration=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.configureContactSettings = stubLongRunningCall(
         undefined,
@@ -2281,7 +2283,7 @@ describe('v1.DomainsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -2304,7 +2306,7 @@ describe('v1.DomainsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -2325,7 +2327,7 @@ describe('v1.DomainsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.domains.v1.ExportRegistrationRequest()
       );
@@ -2334,7 +2336,7 @@ describe('v1.DomainsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2358,7 +2360,7 @@ describe('v1.DomainsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.domains.v1.ExportRegistrationRequest()
       );
@@ -2367,7 +2369,7 @@ describe('v1.DomainsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2412,7 +2414,7 @@ describe('v1.DomainsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.domains.v1.ExportRegistrationRequest()
       );
@@ -2421,7 +2423,7 @@ describe('v1.DomainsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.exportRegistration = stubLongRunningCall(
         undefined,
@@ -2443,7 +2445,7 @@ describe('v1.DomainsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.domains.v1.ExportRegistrationRequest()
       );
@@ -2452,7 +2454,7 @@ describe('v1.DomainsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.exportRegistration = stubLongRunningCall(
         undefined,
@@ -2476,7 +2478,7 @@ describe('v1.DomainsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -2498,7 +2500,7 @@ describe('v1.DomainsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -2519,7 +2521,7 @@ describe('v1.DomainsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.domains.v1.DeleteRegistrationRequest()
       );
@@ -2528,7 +2530,7 @@ describe('v1.DomainsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2552,7 +2554,7 @@ describe('v1.DomainsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.domains.v1.DeleteRegistrationRequest()
       );
@@ -2561,7 +2563,7 @@ describe('v1.DomainsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2606,7 +2608,7 @@ describe('v1.DomainsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.domains.v1.DeleteRegistrationRequest()
       );
@@ -2615,7 +2617,7 @@ describe('v1.DomainsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteRegistration = stubLongRunningCall(
         undefined,
@@ -2637,7 +2639,7 @@ describe('v1.DomainsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.domains.v1.DeleteRegistrationRequest()
       );
@@ -2646,7 +2648,7 @@ describe('v1.DomainsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteRegistration = stubLongRunningCall(
         undefined,
@@ -2670,7 +2672,7 @@ describe('v1.DomainsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -2692,7 +2694,7 @@ describe('v1.DomainsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -2713,7 +2715,7 @@ describe('v1.DomainsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.domains.v1.ListRegistrationsRequest()
       );
@@ -2722,7 +2724,7 @@ describe('v1.DomainsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.domains.v1.Registration()
@@ -2752,7 +2754,7 @@ describe('v1.DomainsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.domains.v1.ListRegistrationsRequest()
       );
@@ -2761,7 +2763,7 @@ describe('v1.DomainsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.domains.v1.Registration()
@@ -2807,7 +2809,7 @@ describe('v1.DomainsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.domains.v1.ListRegistrationsRequest()
       );
@@ -2816,7 +2818,7 @@ describe('v1.DomainsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listRegistrations = stubSimpleCall(
         undefined,
@@ -2838,7 +2840,7 @@ describe('v1.DomainsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.domains.v1.ListRegistrationsRequest()
       );
@@ -2847,7 +2849,7 @@ describe('v1.DomainsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.domains.v1.Registration()
@@ -2898,7 +2900,7 @@ describe('v1.DomainsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.domains.v1.ListRegistrationsRequest()
       );
@@ -2907,7 +2909,7 @@ describe('v1.DomainsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listRegistrations.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -2947,7 +2949,7 @@ describe('v1.DomainsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.domains.v1.ListRegistrationsRequest()
       );
@@ -2956,7 +2958,7 @@ describe('v1.DomainsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.domains.v1.Registration()
@@ -2996,7 +2998,7 @@ describe('v1.DomainsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.domains.v1.ListRegistrationsRequest()
       );
@@ -3005,7 +3007,7 @@ describe('v1.DomainsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listRegistrations.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -3033,7 +3035,7 @@ describe('v1.DomainsClient', () => {
   });
 
   describe('Path templates', () => {
-    describe('location', () => {
+    describe('location', async () => {
       const fakePath = '/rendered/path/location';
       const expectedParameters = {
         project: 'projectValue',
@@ -3043,7 +3045,7 @@ describe('v1.DomainsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.locationPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -3082,7 +3084,7 @@ describe('v1.DomainsClient', () => {
       });
     });
 
-    describe('registration', () => {
+    describe('registration', async () => {
       const fakePath = '/rendered/path/registration';
       const expectedParameters = {
         project: 'projectValue',
@@ -3093,7 +3095,7 @@ describe('v1.DomainsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.registrationPathTemplate.render = sinon
         .stub()
         .returns(fakePath);

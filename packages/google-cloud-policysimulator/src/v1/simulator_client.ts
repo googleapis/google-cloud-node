@@ -31,6 +31,7 @@ import type {
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
+import {loggingUtils as logging} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -66,6 +67,8 @@ export class SimulatorClient {
   private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
+  private _log = logging.log('policysimulator');
+
   auth: gax.GoogleAuth;
   descriptors: Descriptors = {
     page: {},
@@ -101,7 +104,7 @@ export class SimulatorClient {
    *     Developer's Console, e.g. 'grape-spaceship-123'. We will also check
    *     the environment variable GCLOUD_PROJECT for your project ID. If your
    *     app is running in an environment which supports
-   *     {@link https://developers.google.com/identity/protocols/application-default-credentials Application Default Credentials},
+   *     {@link https://cloud.google.com/docs/authentication/application-default-credentials Application Default Credentials},
    *     your project ID will be detected automatically.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
@@ -566,8 +569,36 @@ export class SimulatorClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.getReplay(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('getReplay request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.policysimulator.v1.IReplay,
+          | protos.google.cloud.policysimulator.v1.IGetReplayRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getReplay response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getReplay(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.policysimulator.v1.IReplay,
+          protos.google.cloud.policysimulator.v1.IGetReplayRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getReplay response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
 
   /**
@@ -677,8 +708,40 @@ export class SimulatorClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.createReplay(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.policysimulator.v1.IReplay,
+            protos.google.cloud.policysimulator.v1.IReplayOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('createReplay response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('createReplay request %j', request);
+    return this.innerApiCalls
+      .createReplay(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.policysimulator.v1.IReplay,
+            protos.google.cloud.policysimulator.v1.IReplayOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createReplay response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `createReplay()`.
@@ -699,6 +762,7 @@ export class SimulatorClient {
       protos.google.cloud.policysimulator.v1.ReplayOperationMetadata
     >
   > {
+    this._log.info('createReplay long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -825,8 +889,36 @@ export class SimulatorClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.listReplayResults(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.policysimulator.v1.IListReplayResultsRequest,
+          | protos.google.cloud.policysimulator.v1.IListReplayResultsResponse
+          | null
+          | undefined,
+          protos.google.cloud.policysimulator.v1.IReplayResult
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listReplayResults values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listReplayResults request %j', request);
+    return this.innerApiCalls
+      .listReplayResults(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.policysimulator.v1.IReplayResult[],
+          protos.google.cloud.policysimulator.v1.IListReplayResultsRequest | null,
+          protos.google.cloud.policysimulator.v1.IListReplayResultsResponse,
+        ]) => {
+          this._log.info('listReplayResults values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -880,7 +972,10 @@ export class SimulatorClient {
       });
     const defaultCallSettings = this._defaults['listReplayResults'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listReplayResults stream %j', request);
     return this.descriptors.page.listReplayResults.createStream(
       this.innerApiCalls.listReplayResults as GaxCall,
       request,
@@ -942,7 +1037,10 @@ export class SimulatorClient {
       });
     const defaultCallSettings = this._defaults['listReplayResults'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listReplayResults iterate %j', request);
     return this.descriptors.page.listReplayResults.asyncIterate(
       this.innerApiCalls['listReplayResults'] as GaxCall,
       request as {},
@@ -1043,7 +1141,7 @@ export class SimulatorClient {
   listOperationsAsync(
     request: protos.google.longrunning.ListOperationsRequest,
     options?: gax.CallOptions
-  ): AsyncIterable<protos.google.longrunning.ListOperationsResponse> {
+  ): AsyncIterable<protos.google.longrunning.IOperation> {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
@@ -1618,6 +1716,7 @@ export class SimulatorClient {
   close(): Promise<void> {
     if (this.simulatorStub && !this._terminated) {
       return this.simulatorStub.then(stub => {
+        this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
         this.operationsClient.close();

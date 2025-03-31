@@ -192,7 +192,9 @@ describe('v1.IAMCredentialsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      client.initialize().catch(err => {
+        throw err;
+      });
       assert(client.iAMCredentialsStub);
       client.close().then(() => {
         done();
@@ -251,7 +253,7 @@ describe('v1.IAMCredentialsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.iam.credentials.v1.GenerateAccessTokenRequest()
       );
@@ -260,7 +262,7 @@ describe('v1.IAMCredentialsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.iam.credentials.v1.GenerateAccessTokenResponse()
       );
@@ -283,7 +285,7 @@ describe('v1.IAMCredentialsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.iam.credentials.v1.GenerateAccessTokenRequest()
       );
@@ -292,7 +294,7 @@ describe('v1.IAMCredentialsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.iam.credentials.v1.GenerateAccessTokenResponse()
       );
@@ -330,7 +332,7 @@ describe('v1.IAMCredentialsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.iam.credentials.v1.GenerateAccessTokenRequest()
       );
@@ -339,7 +341,7 @@ describe('v1.IAMCredentialsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.generateAccessToken = stubSimpleCall(
         undefined,
@@ -361,7 +363,7 @@ describe('v1.IAMCredentialsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.iam.credentials.v1.GenerateAccessTokenRequest()
       );
@@ -382,7 +384,7 @@ describe('v1.IAMCredentialsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.iam.credentials.v1.GenerateIdTokenRequest()
       );
@@ -391,7 +393,7 @@ describe('v1.IAMCredentialsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.iam.credentials.v1.GenerateIdTokenResponse()
       );
@@ -413,7 +415,7 @@ describe('v1.IAMCredentialsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.iam.credentials.v1.GenerateIdTokenRequest()
       );
@@ -422,7 +424,7 @@ describe('v1.IAMCredentialsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.iam.credentials.v1.GenerateIdTokenResponse()
       );
@@ -460,7 +462,7 @@ describe('v1.IAMCredentialsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.iam.credentials.v1.GenerateIdTokenRequest()
       );
@@ -469,7 +471,7 @@ describe('v1.IAMCredentialsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.generateIdToken = stubSimpleCall(
         undefined,
@@ -491,7 +493,7 @@ describe('v1.IAMCredentialsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.iam.credentials.v1.GenerateIdTokenRequest()
       );
@@ -512,7 +514,7 @@ describe('v1.IAMCredentialsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.iam.credentials.v1.SignBlobRequest()
       );
@@ -521,7 +523,7 @@ describe('v1.IAMCredentialsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.iam.credentials.v1.SignBlobResponse()
       );
@@ -543,7 +545,7 @@ describe('v1.IAMCredentialsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.iam.credentials.v1.SignBlobRequest()
       );
@@ -552,7 +554,7 @@ describe('v1.IAMCredentialsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.iam.credentials.v1.SignBlobResponse()
       );
@@ -590,7 +592,7 @@ describe('v1.IAMCredentialsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.iam.credentials.v1.SignBlobRequest()
       );
@@ -599,7 +601,7 @@ describe('v1.IAMCredentialsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.signBlob = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.signBlob(request), expectedError);
@@ -618,7 +620,7 @@ describe('v1.IAMCredentialsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.iam.credentials.v1.SignBlobRequest()
       );
@@ -639,7 +641,7 @@ describe('v1.IAMCredentialsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.iam.credentials.v1.SignJwtRequest()
       );
@@ -648,7 +650,7 @@ describe('v1.IAMCredentialsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.iam.credentials.v1.SignJwtResponse()
       );
@@ -670,7 +672,7 @@ describe('v1.IAMCredentialsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.iam.credentials.v1.SignJwtRequest()
       );
@@ -679,7 +681,7 @@ describe('v1.IAMCredentialsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.iam.credentials.v1.SignJwtResponse()
       );
@@ -717,7 +719,7 @@ describe('v1.IAMCredentialsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.iam.credentials.v1.SignJwtRequest()
       );
@@ -726,7 +728,7 @@ describe('v1.IAMCredentialsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.signJwt = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.signJwt(request), expectedError);
@@ -745,7 +747,7 @@ describe('v1.IAMCredentialsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.iam.credentials.v1.SignJwtRequest()
       );

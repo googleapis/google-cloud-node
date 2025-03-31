@@ -29,6 +29,7 @@ import type {
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
+import {loggingUtils as logging} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -53,6 +54,8 @@ export class AnalyticsAdminServiceClient {
   private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
+  private _log = logging.log('admin');
+
   auth: gax.GoogleAuth;
   descriptors: Descriptors = {
     page: {},
@@ -87,7 +90,7 @@ export class AnalyticsAdminServiceClient {
    *     Developer's Console, e.g. 'grape-spaceship-123'. We will also check
    *     the environment variable GCLOUD_PROJECT for your project ID. If your
    *     app is running in an environment which supports
-   *     {@link https://developers.google.com/identity/protocols/application-default-credentials Application Default Credentials},
+   *     {@link https://cloud.google.com/docs/authentication/application-default-credentials Application Default Credentials},
    *     your project ID will be detected automatically.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
@@ -858,8 +861,36 @@ export class AnalyticsAdminServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.getAccount(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('getAccount request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.analytics.admin.v1alpha.IAccount,
+          | protos.google.analytics.admin.v1alpha.IGetAccountRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getAccount response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getAccount(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.analytics.admin.v1alpha.IAccount,
+          protos.google.analytics.admin.v1alpha.IGetAccountRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getAccount response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Marks target Account as soft-deleted (ie: "trashed") and returns it.
@@ -960,8 +991,39 @@ export class AnalyticsAdminServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.deleteAccount(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('deleteAccount request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.analytics.admin.v1alpha.IDeleteAccountRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('deleteAccount response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .deleteAccount(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.protobuf.IEmpty,
+          (
+            | protos.google.analytics.admin.v1alpha.IDeleteAccountRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteAccount response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Updates an account.
@@ -1056,8 +1118,39 @@ export class AnalyticsAdminServiceClient {
       this._gaxModule.routingHeader.fromParams({
         'account.name': request.account!.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.updateAccount(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('updateAccount request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.analytics.admin.v1alpha.IAccount,
+          | protos.google.analytics.admin.v1alpha.IUpdateAccountRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('updateAccount response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .updateAccount(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.analytics.admin.v1alpha.IAccount,
+          (
+            | protos.google.analytics.admin.v1alpha.IUpdateAccountRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('updateAccount response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Requests a ticket for creating an account.
@@ -1151,12 +1244,39 @@ export class AnalyticsAdminServiceClient {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    this.initialize();
-    return this.innerApiCalls.provisionAccountTicket(
-      request,
-      options,
-      callback
-    );
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('provisionAccountTicket request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.analytics.admin.v1alpha.IProvisionAccountTicketResponse,
+          | protos.google.analytics.admin.v1alpha.IProvisionAccountTicketRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('provisionAccountTicket response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .provisionAccountTicket(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.analytics.admin.v1alpha.IProvisionAccountTicketResponse,
+          (
+            | protos.google.analytics.admin.v1alpha.IProvisionAccountTicketRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('provisionAccountTicket response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Lookup for a single GA Property.
@@ -1247,8 +1367,36 @@ export class AnalyticsAdminServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.getProperty(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('getProperty request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.analytics.admin.v1alpha.IProperty,
+          | protos.google.analytics.admin.v1alpha.IGetPropertyRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getProperty response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getProperty(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.analytics.admin.v1alpha.IProperty,
+          protos.google.analytics.admin.v1alpha.IGetPropertyRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getProperty response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Creates a Google Analytics property with the specified location and
@@ -1335,8 +1483,39 @@ export class AnalyticsAdminServiceClient {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    this.initialize();
-    return this.innerApiCalls.createProperty(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('createProperty request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.analytics.admin.v1alpha.IProperty,
+          | protos.google.analytics.admin.v1alpha.ICreatePropertyRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('createProperty response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .createProperty(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.analytics.admin.v1alpha.IProperty,
+          (
+            | protos.google.analytics.admin.v1alpha.ICreatePropertyRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('createProperty response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Marks target Property as soft-deleted (ie: "trashed") and returns it.
@@ -1437,8 +1616,39 @@ export class AnalyticsAdminServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.deleteProperty(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('deleteProperty request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.analytics.admin.v1alpha.IProperty,
+          | protos.google.analytics.admin.v1alpha.IDeletePropertyRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('deleteProperty response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .deleteProperty(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.analytics.admin.v1alpha.IProperty,
+          (
+            | protos.google.analytics.admin.v1alpha.IDeletePropertyRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteProperty response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Updates a property.
@@ -1534,8 +1744,39 @@ export class AnalyticsAdminServiceClient {
       this._gaxModule.routingHeader.fromParams({
         'property.name': request.property!.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.updateProperty(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('updateProperty request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.analytics.admin.v1alpha.IProperty,
+          | protos.google.analytics.admin.v1alpha.IUpdatePropertyRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('updateProperty response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .updateProperty(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.analytics.admin.v1alpha.IProperty,
+          (
+            | protos.google.analytics.admin.v1alpha.IUpdatePropertyRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('updateProperty response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Creates a FirebaseLink.
@@ -1636,8 +1877,39 @@ export class AnalyticsAdminServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.createFirebaseLink(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('createFirebaseLink request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.analytics.admin.v1alpha.IFirebaseLink,
+          | protos.google.analytics.admin.v1alpha.ICreateFirebaseLinkRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('createFirebaseLink response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .createFirebaseLink(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.analytics.admin.v1alpha.IFirebaseLink,
+          (
+            | protos.google.analytics.admin.v1alpha.ICreateFirebaseLinkRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('createFirebaseLink response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Deletes a FirebaseLink on a property
@@ -1734,8 +2006,39 @@ export class AnalyticsAdminServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.deleteFirebaseLink(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('deleteFirebaseLink request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.analytics.admin.v1alpha.IDeleteFirebaseLinkRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('deleteFirebaseLink response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .deleteFirebaseLink(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.protobuf.IEmpty,
+          (
+            | protos.google.analytics.admin.v1alpha.IDeleteFirebaseLinkRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteFirebaseLink response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Returns the Site Tag for the specified web stream.
@@ -1835,8 +2138,39 @@ export class AnalyticsAdminServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.getGlobalSiteTag(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('getGlobalSiteTag request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.analytics.admin.v1alpha.IGlobalSiteTag,
+          | protos.google.analytics.admin.v1alpha.IGetGlobalSiteTagRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getGlobalSiteTag response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getGlobalSiteTag(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.analytics.admin.v1alpha.IGlobalSiteTag,
+          (
+            | protos.google.analytics.admin.v1alpha.IGetGlobalSiteTagRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getGlobalSiteTag response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Creates a GoogleAdsLink.
@@ -1933,8 +2267,39 @@ export class AnalyticsAdminServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.createGoogleAdsLink(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('createGoogleAdsLink request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.analytics.admin.v1alpha.IGoogleAdsLink,
+          | protos.google.analytics.admin.v1alpha.ICreateGoogleAdsLinkRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('createGoogleAdsLink response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .createGoogleAdsLink(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.analytics.admin.v1alpha.IGoogleAdsLink,
+          (
+            | protos.google.analytics.admin.v1alpha.ICreateGoogleAdsLinkRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('createGoogleAdsLink response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Updates a GoogleAdsLink on a property
@@ -2034,8 +2399,39 @@ export class AnalyticsAdminServiceClient {
       this._gaxModule.routingHeader.fromParams({
         'google_ads_link.name': request.googleAdsLink!.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.updateGoogleAdsLink(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('updateGoogleAdsLink request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.analytics.admin.v1alpha.IGoogleAdsLink,
+          | protos.google.analytics.admin.v1alpha.IUpdateGoogleAdsLinkRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('updateGoogleAdsLink response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .updateGoogleAdsLink(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.analytics.admin.v1alpha.IGoogleAdsLink,
+          (
+            | protos.google.analytics.admin.v1alpha.IUpdateGoogleAdsLinkRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('updateGoogleAdsLink response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Deletes a GoogleAdsLink on a property
@@ -2130,8 +2526,39 @@ export class AnalyticsAdminServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.deleteGoogleAdsLink(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('deleteGoogleAdsLink request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.analytics.admin.v1alpha.IDeleteGoogleAdsLinkRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('deleteGoogleAdsLink response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .deleteGoogleAdsLink(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.protobuf.IEmpty,
+          (
+            | protos.google.analytics.admin.v1alpha.IDeleteGoogleAdsLinkRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteGoogleAdsLink response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Get data sharing settings on an account.
@@ -2230,12 +2657,39 @@ export class AnalyticsAdminServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.getDataSharingSettings(
-      request,
-      options,
-      callback
-    );
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('getDataSharingSettings request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.analytics.admin.v1alpha.IDataSharingSettings,
+          | protos.google.analytics.admin.v1alpha.IGetDataSharingSettingsRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getDataSharingSettings response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getDataSharingSettings(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.analytics.admin.v1alpha.IDataSharingSettings,
+          (
+            | protos.google.analytics.admin.v1alpha.IGetDataSharingSettingsRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getDataSharingSettings response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Lookup for a single MeasurementProtocolSecret.
@@ -2332,12 +2786,39 @@ export class AnalyticsAdminServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.getMeasurementProtocolSecret(
-      request,
-      options,
-      callback
-    );
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('getMeasurementProtocolSecret request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.analytics.admin.v1alpha.IMeasurementProtocolSecret,
+          | protos.google.analytics.admin.v1alpha.IGetMeasurementProtocolSecretRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getMeasurementProtocolSecret response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getMeasurementProtocolSecret(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.analytics.admin.v1alpha.IMeasurementProtocolSecret,
+          (
+            | protos.google.analytics.admin.v1alpha.IGetMeasurementProtocolSecretRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getMeasurementProtocolSecret response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Creates a measurement protocol secret.
@@ -2435,12 +2916,45 @@ export class AnalyticsAdminServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.createMeasurementProtocolSecret(
-      request,
-      options,
-      callback
-    );
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('createMeasurementProtocolSecret request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.analytics.admin.v1alpha.IMeasurementProtocolSecret,
+          | protos.google.analytics.admin.v1alpha.ICreateMeasurementProtocolSecretRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info(
+            'createMeasurementProtocolSecret response %j',
+            response
+          );
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .createMeasurementProtocolSecret(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.analytics.admin.v1alpha.IMeasurementProtocolSecret,
+          (
+            | protos.google.analytics.admin.v1alpha.ICreateMeasurementProtocolSecretRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info(
+            'createMeasurementProtocolSecret response %j',
+            response
+          );
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Deletes target MeasurementProtocolSecret.
@@ -2537,12 +3051,45 @@ export class AnalyticsAdminServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.deleteMeasurementProtocolSecret(
-      request,
-      options,
-      callback
-    );
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('deleteMeasurementProtocolSecret request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.analytics.admin.v1alpha.IDeleteMeasurementProtocolSecretRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info(
+            'deleteMeasurementProtocolSecret response %j',
+            response
+          );
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .deleteMeasurementProtocolSecret(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.protobuf.IEmpty,
+          (
+            | protos.google.analytics.admin.v1alpha.IDeleteMeasurementProtocolSecretRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info(
+            'deleteMeasurementProtocolSecret response %j',
+            response
+          );
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Updates a measurement protocol secret.
@@ -2641,12 +3188,45 @@ export class AnalyticsAdminServiceClient {
         'measurement_protocol_secret.name':
           request.measurementProtocolSecret!.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.updateMeasurementProtocolSecret(
-      request,
-      options,
-      callback
-    );
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('updateMeasurementProtocolSecret request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.analytics.admin.v1alpha.IMeasurementProtocolSecret,
+          | protos.google.analytics.admin.v1alpha.IUpdateMeasurementProtocolSecretRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info(
+            'updateMeasurementProtocolSecret response %j',
+            response
+          );
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .updateMeasurementProtocolSecret(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.analytics.admin.v1alpha.IMeasurementProtocolSecret,
+          (
+            | protos.google.analytics.admin.v1alpha.IUpdateMeasurementProtocolSecretRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info(
+            'updateMeasurementProtocolSecret response %j',
+            response
+          );
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Acknowledges the terms of user data collection for the specified property.
@@ -2754,12 +3334,39 @@ export class AnalyticsAdminServiceClient {
       this._gaxModule.routingHeader.fromParams({
         property: request.property ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.acknowledgeUserDataCollection(
-      request,
-      options,
-      callback
-    );
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('acknowledgeUserDataCollection request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.analytics.admin.v1alpha.IAcknowledgeUserDataCollectionResponse,
+          | protos.google.analytics.admin.v1alpha.IAcknowledgeUserDataCollectionRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('acknowledgeUserDataCollection response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .acknowledgeUserDataCollection(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.analytics.admin.v1alpha.IAcknowledgeUserDataCollectionResponse,
+          (
+            | protos.google.analytics.admin.v1alpha.IAcknowledgeUserDataCollectionRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('acknowledgeUserDataCollection response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Looks up a single SKAdNetworkConversionValueSchema.
@@ -2856,12 +3463,45 @@ export class AnalyticsAdminServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.getSkAdNetworkConversionValueSchema(
-      request,
-      options,
-      callback
-    );
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('getSKAdNetworkConversionValueSchema request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.analytics.admin.v1alpha.ISKAdNetworkConversionValueSchema,
+          | protos.google.analytics.admin.v1alpha.IGetSKAdNetworkConversionValueSchemaRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info(
+            'getSKAdNetworkConversionValueSchema response %j',
+            response
+          );
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getSkAdNetworkConversionValueSchema(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.analytics.admin.v1alpha.ISKAdNetworkConversionValueSchema,
+          (
+            | protos.google.analytics.admin.v1alpha.IGetSKAdNetworkConversionValueSchemaRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info(
+            'getSKAdNetworkConversionValueSchema response %j',
+            response
+          );
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Creates a SKAdNetworkConversionValueSchema.
@@ -2959,12 +3599,48 @@ export class AnalyticsAdminServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.createSkAdNetworkConversionValueSchema(
-      request,
-      options,
-      callback
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info(
+      'createSKAdNetworkConversionValueSchema request %j',
+      request
     );
+    const wrappedCallback:
+      | Callback<
+          protos.google.analytics.admin.v1alpha.ISKAdNetworkConversionValueSchema,
+          | protos.google.analytics.admin.v1alpha.ICreateSKAdNetworkConversionValueSchemaRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info(
+            'createSKAdNetworkConversionValueSchema response %j',
+            response
+          );
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .createSkAdNetworkConversionValueSchema(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.analytics.admin.v1alpha.ISKAdNetworkConversionValueSchema,
+          (
+            | protos.google.analytics.admin.v1alpha.ICreateSKAdNetworkConversionValueSchemaRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info(
+            'createSKAdNetworkConversionValueSchema response %j',
+            response
+          );
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Deletes target SKAdNetworkConversionValueSchema.
@@ -3061,12 +3737,48 @@ export class AnalyticsAdminServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.deleteSkAdNetworkConversionValueSchema(
-      request,
-      options,
-      callback
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info(
+      'deleteSKAdNetworkConversionValueSchema request %j',
+      request
     );
+    const wrappedCallback:
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.analytics.admin.v1alpha.IDeleteSKAdNetworkConversionValueSchemaRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info(
+            'deleteSKAdNetworkConversionValueSchema response %j',
+            response
+          );
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .deleteSkAdNetworkConversionValueSchema(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.protobuf.IEmpty,
+          (
+            | protos.google.analytics.admin.v1alpha.IDeleteSKAdNetworkConversionValueSchemaRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info(
+            'deleteSKAdNetworkConversionValueSchema response %j',
+            response
+          );
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Updates a SKAdNetworkConversionValueSchema.
@@ -3165,12 +3877,48 @@ export class AnalyticsAdminServiceClient {
         'skadnetwork_conversion_value_schema.name':
           request.skadnetworkConversionValueSchema!.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.updateSkAdNetworkConversionValueSchema(
-      request,
-      options,
-      callback
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info(
+      'updateSKAdNetworkConversionValueSchema request %j',
+      request
     );
+    const wrappedCallback:
+      | Callback<
+          protos.google.analytics.admin.v1alpha.ISKAdNetworkConversionValueSchema,
+          | protos.google.analytics.admin.v1alpha.IUpdateSKAdNetworkConversionValueSchemaRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info(
+            'updateSKAdNetworkConversionValueSchema response %j',
+            response
+          );
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .updateSkAdNetworkConversionValueSchema(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.analytics.admin.v1alpha.ISKAdNetworkConversionValueSchema,
+          (
+            | protos.google.analytics.admin.v1alpha.IUpdateSKAdNetworkConversionValueSchemaRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info(
+            'updateSKAdNetworkConversionValueSchema response %j',
+            response
+          );
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Lookup for Google Signals settings for a property.
@@ -3266,12 +4014,39 @@ export class AnalyticsAdminServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.getGoogleSignalsSettings(
-      request,
-      options,
-      callback
-    );
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('getGoogleSignalsSettings request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.analytics.admin.v1alpha.IGoogleSignalsSettings,
+          | protos.google.analytics.admin.v1alpha.IGetGoogleSignalsSettingsRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getGoogleSignalsSettings response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getGoogleSignalsSettings(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.analytics.admin.v1alpha.IGoogleSignalsSettings,
+          (
+            | protos.google.analytics.admin.v1alpha.IGetGoogleSignalsSettingsRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getGoogleSignalsSettings response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Updates Google Signals settings for a property.
@@ -3373,12 +4148,39 @@ export class AnalyticsAdminServiceClient {
         'google_signals_settings.name':
           request.googleSignalsSettings!.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.updateGoogleSignalsSettings(
-      request,
-      options,
-      callback
-    );
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('updateGoogleSignalsSettings request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.analytics.admin.v1alpha.IGoogleSignalsSettings,
+          | protos.google.analytics.admin.v1alpha.IUpdateGoogleSignalsSettingsRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('updateGoogleSignalsSettings response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .updateGoogleSignalsSettings(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.analytics.admin.v1alpha.IGoogleSignalsSettings,
+          (
+            | protos.google.analytics.admin.v1alpha.IUpdateGoogleSignalsSettingsRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('updateGoogleSignalsSettings response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Deprecated: Use `CreateKeyEvent` instead.
@@ -3478,13 +4280,44 @@ export class AnalyticsAdminServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this.warn(
       'DEP$AnalyticsAdminService-$CreateConversionEvent',
       'CreateConversionEvent is deprecated and may be removed in a future version.',
       'DeprecationWarning'
     );
-    return this.innerApiCalls.createConversionEvent(request, options, callback);
+    this._log.info('createConversionEvent request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.analytics.admin.v1alpha.IConversionEvent,
+          | protos.google.analytics.admin.v1alpha.ICreateConversionEventRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('createConversionEvent response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .createConversionEvent(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.analytics.admin.v1alpha.IConversionEvent,
+          (
+            | protos.google.analytics.admin.v1alpha.ICreateConversionEventRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('createConversionEvent response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Deprecated: Use `UpdateKeyEvent` instead.
@@ -3587,13 +4420,44 @@ export class AnalyticsAdminServiceClient {
       this._gaxModule.routingHeader.fromParams({
         'conversion_event.name': request.conversionEvent!.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this.warn(
       'DEP$AnalyticsAdminService-$UpdateConversionEvent',
       'UpdateConversionEvent is deprecated and may be removed in a future version.',
       'DeprecationWarning'
     );
-    return this.innerApiCalls.updateConversionEvent(request, options, callback);
+    this._log.info('updateConversionEvent request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.analytics.admin.v1alpha.IConversionEvent,
+          | protos.google.analytics.admin.v1alpha.IUpdateConversionEventRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('updateConversionEvent response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .updateConversionEvent(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.analytics.admin.v1alpha.IConversionEvent,
+          (
+            | protos.google.analytics.admin.v1alpha.IUpdateConversionEventRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('updateConversionEvent response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Deprecated: Use `GetKeyEvent` instead.
@@ -3692,13 +4556,44 @@ export class AnalyticsAdminServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this.warn(
       'DEP$AnalyticsAdminService-$GetConversionEvent',
       'GetConversionEvent is deprecated and may be removed in a future version.',
       'DeprecationWarning'
     );
-    return this.innerApiCalls.getConversionEvent(request, options, callback);
+    this._log.info('getConversionEvent request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.analytics.admin.v1alpha.IConversionEvent,
+          | protos.google.analytics.admin.v1alpha.IGetConversionEventRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getConversionEvent response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getConversionEvent(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.analytics.admin.v1alpha.IConversionEvent,
+          (
+            | protos.google.analytics.admin.v1alpha.IGetConversionEventRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getConversionEvent response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Deprecated: Use `DeleteKeyEvent` instead.
@@ -3797,13 +4692,44 @@ export class AnalyticsAdminServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this.warn(
       'DEP$AnalyticsAdminService-$DeleteConversionEvent',
       'DeleteConversionEvent is deprecated and may be removed in a future version.',
       'DeprecationWarning'
     );
-    return this.innerApiCalls.deleteConversionEvent(request, options, callback);
+    this._log.info('deleteConversionEvent request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.analytics.admin.v1alpha.IDeleteConversionEventRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('deleteConversionEvent response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .deleteConversionEvent(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.protobuf.IEmpty,
+          (
+            | protos.google.analytics.admin.v1alpha.IDeleteConversionEventRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteConversionEvent response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Creates a Key Event.
@@ -3895,8 +4821,39 @@ export class AnalyticsAdminServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.createKeyEvent(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('createKeyEvent request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.analytics.admin.v1alpha.IKeyEvent,
+          | protos.google.analytics.admin.v1alpha.ICreateKeyEventRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('createKeyEvent response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .createKeyEvent(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.analytics.admin.v1alpha.IKeyEvent,
+          (
+            | protos.google.analytics.admin.v1alpha.ICreateKeyEventRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('createKeyEvent response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Updates a Key Event.
@@ -3991,8 +4948,39 @@ export class AnalyticsAdminServiceClient {
       this._gaxModule.routingHeader.fromParams({
         'key_event.name': request.keyEvent!.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.updateKeyEvent(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('updateKeyEvent request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.analytics.admin.v1alpha.IKeyEvent,
+          | protos.google.analytics.admin.v1alpha.IUpdateKeyEventRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('updateKeyEvent response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .updateKeyEvent(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.analytics.admin.v1alpha.IKeyEvent,
+          (
+            | protos.google.analytics.admin.v1alpha.IUpdateKeyEventRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('updateKeyEvent response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Retrieve a single Key Event.
@@ -4083,8 +5071,36 @@ export class AnalyticsAdminServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.getKeyEvent(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('getKeyEvent request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.analytics.admin.v1alpha.IKeyEvent,
+          | protos.google.analytics.admin.v1alpha.IGetKeyEventRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getKeyEvent response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getKeyEvent(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.analytics.admin.v1alpha.IKeyEvent,
+          protos.google.analytics.admin.v1alpha.IGetKeyEventRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getKeyEvent response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Deletes a Key Event.
@@ -4175,8 +5191,39 @@ export class AnalyticsAdminServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.deleteKeyEvent(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('deleteKeyEvent request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.analytics.admin.v1alpha.IDeleteKeyEventRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('deleteKeyEvent response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .deleteKeyEvent(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.protobuf.IEmpty,
+          (
+            | protos.google.analytics.admin.v1alpha.IDeleteKeyEventRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteKeyEvent response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Look up a single DisplayVideo360AdvertiserLink
@@ -4272,12 +5319,45 @@ export class AnalyticsAdminServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.getDisplayVideo360AdvertiserLink(
-      request,
-      options,
-      callback
-    );
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('getDisplayVideo360AdvertiserLink request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.analytics.admin.v1alpha.IDisplayVideo360AdvertiserLink,
+          | protos.google.analytics.admin.v1alpha.IGetDisplayVideo360AdvertiserLinkRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info(
+            'getDisplayVideo360AdvertiserLink response %j',
+            response
+          );
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getDisplayVideo360AdvertiserLink(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.analytics.admin.v1alpha.IDisplayVideo360AdvertiserLink,
+          (
+            | protos.google.analytics.admin.v1alpha.IGetDisplayVideo360AdvertiserLinkRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info(
+            'getDisplayVideo360AdvertiserLink response %j',
+            response
+          );
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Creates a DisplayVideo360AdvertiserLink.
@@ -4378,12 +5458,45 @@ export class AnalyticsAdminServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.createDisplayVideo360AdvertiserLink(
-      request,
-      options,
-      callback
-    );
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('createDisplayVideo360AdvertiserLink request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.analytics.admin.v1alpha.IDisplayVideo360AdvertiserLink,
+          | protos.google.analytics.admin.v1alpha.ICreateDisplayVideo360AdvertiserLinkRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info(
+            'createDisplayVideo360AdvertiserLink response %j',
+            response
+          );
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .createDisplayVideo360AdvertiserLink(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.analytics.admin.v1alpha.IDisplayVideo360AdvertiserLink,
+          (
+            | protos.google.analytics.admin.v1alpha.ICreateDisplayVideo360AdvertiserLinkRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info(
+            'createDisplayVideo360AdvertiserLink response %j',
+            response
+          );
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Deletes a DisplayVideo360AdvertiserLink on a property.
@@ -4479,12 +5592,45 @@ export class AnalyticsAdminServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.deleteDisplayVideo360AdvertiserLink(
-      request,
-      options,
-      callback
-    );
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('deleteDisplayVideo360AdvertiserLink request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.analytics.admin.v1alpha.IDeleteDisplayVideo360AdvertiserLinkRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info(
+            'deleteDisplayVideo360AdvertiserLink response %j',
+            response
+          );
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .deleteDisplayVideo360AdvertiserLink(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.protobuf.IEmpty,
+          (
+            | protos.google.analytics.admin.v1alpha.IDeleteDisplayVideo360AdvertiserLinkRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info(
+            'deleteDisplayVideo360AdvertiserLink response %j',
+            response
+          );
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Updates a DisplayVideo360AdvertiserLink on a property.
@@ -4584,12 +5730,45 @@ export class AnalyticsAdminServiceClient {
         'display_video_360_advertiser_link.name':
           request.displayVideo_360AdvertiserLink!.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.updateDisplayVideo360AdvertiserLink(
-      request,
-      options,
-      callback
-    );
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('updateDisplayVideo360AdvertiserLink request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.analytics.admin.v1alpha.IDisplayVideo360AdvertiserLink,
+          | protos.google.analytics.admin.v1alpha.IUpdateDisplayVideo360AdvertiserLinkRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info(
+            'updateDisplayVideo360AdvertiserLink response %j',
+            response
+          );
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .updateDisplayVideo360AdvertiserLink(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.analytics.admin.v1alpha.IDisplayVideo360AdvertiserLink,
+          (
+            | protos.google.analytics.admin.v1alpha.IUpdateDisplayVideo360AdvertiserLinkRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info(
+            'updateDisplayVideo360AdvertiserLink response %j',
+            response
+          );
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Lookup for a single DisplayVideo360AdvertiserLinkProposal.
@@ -4685,12 +5864,52 @@ export class AnalyticsAdminServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.getDisplayVideo360AdvertiserLinkProposal(
-      request,
-      options,
-      callback
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info(
+      'getDisplayVideo360AdvertiserLinkProposal request %j',
+      request
     );
+    const wrappedCallback:
+      | Callback<
+          protos.google.analytics.admin.v1alpha.IDisplayVideo360AdvertiserLinkProposal,
+          | protos.google.analytics.admin.v1alpha.IGetDisplayVideo360AdvertiserLinkProposalRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info(
+            'getDisplayVideo360AdvertiserLinkProposal response %j',
+            response
+          );
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getDisplayVideo360AdvertiserLinkProposal(
+        request,
+        options,
+        wrappedCallback
+      )
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.analytics.admin.v1alpha.IDisplayVideo360AdvertiserLinkProposal,
+          (
+            | protos.google.analytics.admin.v1alpha.IGetDisplayVideo360AdvertiserLinkProposalRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info(
+            'getDisplayVideo360AdvertiserLinkProposal response %j',
+            response
+          );
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Creates a DisplayVideo360AdvertiserLinkProposal.
@@ -4787,12 +6006,52 @@ export class AnalyticsAdminServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.createDisplayVideo360AdvertiserLinkProposal(
-      request,
-      options,
-      callback
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info(
+      'createDisplayVideo360AdvertiserLinkProposal request %j',
+      request
     );
+    const wrappedCallback:
+      | Callback<
+          protos.google.analytics.admin.v1alpha.IDisplayVideo360AdvertiserLinkProposal,
+          | protos.google.analytics.admin.v1alpha.ICreateDisplayVideo360AdvertiserLinkProposalRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info(
+            'createDisplayVideo360AdvertiserLinkProposal response %j',
+            response
+          );
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .createDisplayVideo360AdvertiserLinkProposal(
+        request,
+        options,
+        wrappedCallback
+      )
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.analytics.admin.v1alpha.IDisplayVideo360AdvertiserLinkProposal,
+          (
+            | protos.google.analytics.admin.v1alpha.ICreateDisplayVideo360AdvertiserLinkProposalRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info(
+            'createDisplayVideo360AdvertiserLinkProposal response %j',
+            response
+          );
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Deletes a DisplayVideo360AdvertiserLinkProposal on a property.
@@ -4889,12 +6148,52 @@ export class AnalyticsAdminServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.deleteDisplayVideo360AdvertiserLinkProposal(
-      request,
-      options,
-      callback
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info(
+      'deleteDisplayVideo360AdvertiserLinkProposal request %j',
+      request
     );
+    const wrappedCallback:
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.analytics.admin.v1alpha.IDeleteDisplayVideo360AdvertiserLinkProposalRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info(
+            'deleteDisplayVideo360AdvertiserLinkProposal response %j',
+            response
+          );
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .deleteDisplayVideo360AdvertiserLinkProposal(
+        request,
+        options,
+        wrappedCallback
+      )
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.protobuf.IEmpty,
+          (
+            | protos.google.analytics.admin.v1alpha.IDeleteDisplayVideo360AdvertiserLinkProposalRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info(
+            'deleteDisplayVideo360AdvertiserLinkProposal response %j',
+            response
+          );
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Approves a DisplayVideo360AdvertiserLinkProposal.
@@ -4992,12 +6291,52 @@ export class AnalyticsAdminServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.approveDisplayVideo360AdvertiserLinkProposal(
-      request,
-      options,
-      callback
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info(
+      'approveDisplayVideo360AdvertiserLinkProposal request %j',
+      request
     );
+    const wrappedCallback:
+      | Callback<
+          protos.google.analytics.admin.v1alpha.IApproveDisplayVideo360AdvertiserLinkProposalResponse,
+          | protos.google.analytics.admin.v1alpha.IApproveDisplayVideo360AdvertiserLinkProposalRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info(
+            'approveDisplayVideo360AdvertiserLinkProposal response %j',
+            response
+          );
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .approveDisplayVideo360AdvertiserLinkProposal(
+        request,
+        options,
+        wrappedCallback
+      )
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.analytics.admin.v1alpha.IApproveDisplayVideo360AdvertiserLinkProposalResponse,
+          (
+            | protos.google.analytics.admin.v1alpha.IApproveDisplayVideo360AdvertiserLinkProposalRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info(
+            'approveDisplayVideo360AdvertiserLinkProposal response %j',
+            response
+          );
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Cancels a DisplayVideo360AdvertiserLinkProposal.
@@ -5097,12 +6436,52 @@ export class AnalyticsAdminServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.cancelDisplayVideo360AdvertiserLinkProposal(
-      request,
-      options,
-      callback
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info(
+      'cancelDisplayVideo360AdvertiserLinkProposal request %j',
+      request
     );
+    const wrappedCallback:
+      | Callback<
+          protos.google.analytics.admin.v1alpha.IDisplayVideo360AdvertiserLinkProposal,
+          | protos.google.analytics.admin.v1alpha.ICancelDisplayVideo360AdvertiserLinkProposalRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info(
+            'cancelDisplayVideo360AdvertiserLinkProposal response %j',
+            response
+          );
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .cancelDisplayVideo360AdvertiserLinkProposal(
+        request,
+        options,
+        wrappedCallback
+      )
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.analytics.admin.v1alpha.IDisplayVideo360AdvertiserLinkProposal,
+          (
+            | protos.google.analytics.admin.v1alpha.ICancelDisplayVideo360AdvertiserLinkProposalRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info(
+            'cancelDisplayVideo360AdvertiserLinkProposal response %j',
+            response
+          );
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Creates a CustomDimension.
@@ -5199,8 +6578,39 @@ export class AnalyticsAdminServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.createCustomDimension(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('createCustomDimension request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.analytics.admin.v1alpha.ICustomDimension,
+          | protos.google.analytics.admin.v1alpha.ICreateCustomDimensionRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('createCustomDimension response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .createCustomDimension(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.analytics.admin.v1alpha.ICustomDimension,
+          (
+            | protos.google.analytics.admin.v1alpha.ICreateCustomDimensionRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('createCustomDimension response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Updates a CustomDimension on a property.
@@ -5299,8 +6709,39 @@ export class AnalyticsAdminServiceClient {
       this._gaxModule.routingHeader.fromParams({
         'custom_dimension.name': request.customDimension!.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.updateCustomDimension(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('updateCustomDimension request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.analytics.admin.v1alpha.ICustomDimension,
+          | protos.google.analytics.admin.v1alpha.IUpdateCustomDimensionRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('updateCustomDimension response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .updateCustomDimension(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.analytics.admin.v1alpha.ICustomDimension,
+          (
+            | protos.google.analytics.admin.v1alpha.IUpdateCustomDimensionRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('updateCustomDimension response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Archives a CustomDimension on a property.
@@ -5396,12 +6837,39 @@ export class AnalyticsAdminServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.archiveCustomDimension(
-      request,
-      options,
-      callback
-    );
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('archiveCustomDimension request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.analytics.admin.v1alpha.IArchiveCustomDimensionRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('archiveCustomDimension response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .archiveCustomDimension(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.protobuf.IEmpty,
+          (
+            | protos.google.analytics.admin.v1alpha.IArchiveCustomDimensionRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('archiveCustomDimension response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Lookup for a single CustomDimension.
@@ -5497,8 +6965,39 @@ export class AnalyticsAdminServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.getCustomDimension(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('getCustomDimension request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.analytics.admin.v1alpha.ICustomDimension,
+          | protos.google.analytics.admin.v1alpha.IGetCustomDimensionRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getCustomDimension response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getCustomDimension(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.analytics.admin.v1alpha.ICustomDimension,
+          (
+            | protos.google.analytics.admin.v1alpha.IGetCustomDimensionRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getCustomDimension response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Creates a CustomMetric.
@@ -5595,8 +7094,39 @@ export class AnalyticsAdminServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.createCustomMetric(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('createCustomMetric request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.analytics.admin.v1alpha.ICustomMetric,
+          | protos.google.analytics.admin.v1alpha.ICreateCustomMetricRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('createCustomMetric response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .createCustomMetric(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.analytics.admin.v1alpha.ICustomMetric,
+          (
+            | protos.google.analytics.admin.v1alpha.ICreateCustomMetricRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('createCustomMetric response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Updates a CustomMetric on a property.
@@ -5695,8 +7225,39 @@ export class AnalyticsAdminServiceClient {
       this._gaxModule.routingHeader.fromParams({
         'custom_metric.name': request.customMetric!.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.updateCustomMetric(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('updateCustomMetric request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.analytics.admin.v1alpha.ICustomMetric,
+          | protos.google.analytics.admin.v1alpha.IUpdateCustomMetricRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('updateCustomMetric response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .updateCustomMetric(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.analytics.admin.v1alpha.ICustomMetric,
+          (
+            | protos.google.analytics.admin.v1alpha.IUpdateCustomMetricRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('updateCustomMetric response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Archives a CustomMetric on a property.
@@ -5792,8 +7353,39 @@ export class AnalyticsAdminServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.archiveCustomMetric(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('archiveCustomMetric request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.analytics.admin.v1alpha.IArchiveCustomMetricRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('archiveCustomMetric response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .archiveCustomMetric(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.protobuf.IEmpty,
+          (
+            | protos.google.analytics.admin.v1alpha.IArchiveCustomMetricRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('archiveCustomMetric response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Lookup for a single CustomMetric.
@@ -5883,8 +7475,39 @@ export class AnalyticsAdminServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.getCustomMetric(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('getCustomMetric request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.analytics.admin.v1alpha.ICustomMetric,
+          | protos.google.analytics.admin.v1alpha.IGetCustomMetricRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getCustomMetric response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getCustomMetric(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.analytics.admin.v1alpha.ICustomMetric,
+          (
+            | protos.google.analytics.admin.v1alpha.IGetCustomMetricRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getCustomMetric response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Returns the singleton data retention settings for this property.
@@ -5982,12 +7605,39 @@ export class AnalyticsAdminServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.getDataRetentionSettings(
-      request,
-      options,
-      callback
-    );
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('getDataRetentionSettings request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.analytics.admin.v1alpha.IDataRetentionSettings,
+          | protos.google.analytics.admin.v1alpha.IGetDataRetentionSettingsRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getDataRetentionSettings response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getDataRetentionSettings(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.analytics.admin.v1alpha.IDataRetentionSettings,
+          (
+            | protos.google.analytics.admin.v1alpha.IGetDataRetentionSettingsRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getDataRetentionSettings response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Updates the singleton data retention settings for this property.
@@ -6089,12 +7739,39 @@ export class AnalyticsAdminServiceClient {
         'data_retention_settings.name':
           request.dataRetentionSettings!.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.updateDataRetentionSettings(
-      request,
-      options,
-      callback
-    );
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('updateDataRetentionSettings request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.analytics.admin.v1alpha.IDataRetentionSettings,
+          | protos.google.analytics.admin.v1alpha.IUpdateDataRetentionSettingsRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('updateDataRetentionSettings response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .updateDataRetentionSettings(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.analytics.admin.v1alpha.IDataRetentionSettings,
+          (
+            | protos.google.analytics.admin.v1alpha.IUpdateDataRetentionSettingsRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('updateDataRetentionSettings response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Creates a DataStream.
@@ -6191,8 +7868,39 @@ export class AnalyticsAdminServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.createDataStream(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('createDataStream request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.analytics.admin.v1alpha.IDataStream,
+          | protos.google.analytics.admin.v1alpha.ICreateDataStreamRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('createDataStream response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .createDataStream(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.analytics.admin.v1alpha.IDataStream,
+          (
+            | protos.google.analytics.admin.v1alpha.ICreateDataStreamRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('createDataStream response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Deletes a DataStream on a property.
@@ -6288,8 +7996,39 @@ export class AnalyticsAdminServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.deleteDataStream(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('deleteDataStream request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.analytics.admin.v1alpha.IDeleteDataStreamRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('deleteDataStream response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .deleteDataStream(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.protobuf.IEmpty,
+          (
+            | protos.google.analytics.admin.v1alpha.IDeleteDataStreamRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteDataStream response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Updates a DataStream on a property.
@@ -6388,8 +8127,39 @@ export class AnalyticsAdminServiceClient {
       this._gaxModule.routingHeader.fromParams({
         'data_stream.name': request.dataStream!.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.updateDataStream(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('updateDataStream request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.analytics.admin.v1alpha.IDataStream,
+          | protos.google.analytics.admin.v1alpha.IUpdateDataStreamRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('updateDataStream response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .updateDataStream(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.analytics.admin.v1alpha.IDataStream,
+          (
+            | protos.google.analytics.admin.v1alpha.IUpdateDataStreamRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('updateDataStream response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Lookup for a single DataStream.
@@ -6479,8 +8249,39 @@ export class AnalyticsAdminServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.getDataStream(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('getDataStream request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.analytics.admin.v1alpha.IDataStream,
+          | protos.google.analytics.admin.v1alpha.IGetDataStreamRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getDataStream response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getDataStream(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.analytics.admin.v1alpha.IDataStream,
+          (
+            | protos.google.analytics.admin.v1alpha.IGetDataStreamRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getDataStream response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Lookup for a single Audience.
@@ -6572,8 +8373,36 @@ export class AnalyticsAdminServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.getAudience(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('getAudience request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.analytics.admin.v1alpha.IAudience,
+          | protos.google.analytics.admin.v1alpha.IGetAudienceRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getAudience response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getAudience(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.analytics.admin.v1alpha.IAudience,
+          protos.google.analytics.admin.v1alpha.IGetAudienceRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getAudience response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Creates an Audience.
@@ -6664,8 +8493,39 @@ export class AnalyticsAdminServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.createAudience(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('createAudience request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.analytics.admin.v1alpha.IAudience,
+          | protos.google.analytics.admin.v1alpha.ICreateAudienceRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('createAudience response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .createAudience(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.analytics.admin.v1alpha.IAudience,
+          (
+            | protos.google.analytics.admin.v1alpha.ICreateAudienceRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('createAudience response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Updates an Audience on a property.
@@ -6760,8 +8620,39 @@ export class AnalyticsAdminServiceClient {
       this._gaxModule.routingHeader.fromParams({
         'audience.name': request.audience!.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.updateAudience(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('updateAudience request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.analytics.admin.v1alpha.IAudience,
+          | protos.google.analytics.admin.v1alpha.IUpdateAudienceRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('updateAudience response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .updateAudience(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.analytics.admin.v1alpha.IAudience,
+          (
+            | protos.google.analytics.admin.v1alpha.IUpdateAudienceRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('updateAudience response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Archives an Audience on a property.
@@ -6850,8 +8741,39 @@ export class AnalyticsAdminServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.archiveAudience(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('archiveAudience request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.analytics.admin.v1alpha.IArchiveAudienceRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('archiveAudience response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .archiveAudience(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.protobuf.IEmpty,
+          (
+            | protos.google.analytics.admin.v1alpha.IArchiveAudienceRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('archiveAudience response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Look up a single SearchAds360Link
@@ -6947,8 +8869,39 @@ export class AnalyticsAdminServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.getSearchAds360Link(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('getSearchAds360Link request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.analytics.admin.v1alpha.ISearchAds360Link,
+          | protos.google.analytics.admin.v1alpha.IGetSearchAds360LinkRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getSearchAds360Link response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getSearchAds360Link(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.analytics.admin.v1alpha.ISearchAds360Link,
+          (
+            | protos.google.analytics.admin.v1alpha.IGetSearchAds360LinkRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getSearchAds360Link response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Creates a SearchAds360Link.
@@ -7045,12 +8998,39 @@ export class AnalyticsAdminServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.createSearchAds360Link(
-      request,
-      options,
-      callback
-    );
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('createSearchAds360Link request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.analytics.admin.v1alpha.ISearchAds360Link,
+          | protos.google.analytics.admin.v1alpha.ICreateSearchAds360LinkRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('createSearchAds360Link response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .createSearchAds360Link(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.analytics.admin.v1alpha.ISearchAds360Link,
+          (
+            | protos.google.analytics.admin.v1alpha.ICreateSearchAds360LinkRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('createSearchAds360Link response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Deletes a SearchAds360Link on a property.
@@ -7146,12 +9126,39 @@ export class AnalyticsAdminServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.deleteSearchAds360Link(
-      request,
-      options,
-      callback
-    );
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('deleteSearchAds360Link request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.analytics.admin.v1alpha.IDeleteSearchAds360LinkRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('deleteSearchAds360Link response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .deleteSearchAds360Link(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.protobuf.IEmpty,
+          (
+            | protos.google.analytics.admin.v1alpha.IDeleteSearchAds360LinkRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteSearchAds360Link response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Updates a SearchAds360Link on a property.
@@ -7250,12 +9257,39 @@ export class AnalyticsAdminServiceClient {
       this._gaxModule.routingHeader.fromParams({
         'search_ads_360_link.name': request.searchAds_360Link!.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.updateSearchAds360Link(
-      request,
-      options,
-      callback
-    );
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('updateSearchAds360Link request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.analytics.admin.v1alpha.ISearchAds360Link,
+          | protos.google.analytics.admin.v1alpha.IUpdateSearchAds360LinkRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('updateSearchAds360Link response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .updateSearchAds360Link(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.analytics.admin.v1alpha.ISearchAds360Link,
+          (
+            | protos.google.analytics.admin.v1alpha.IUpdateSearchAds360LinkRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('updateSearchAds360Link response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Lookup for a AttributionSettings singleton.
@@ -7351,12 +9385,39 @@ export class AnalyticsAdminServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.getAttributionSettings(
-      request,
-      options,
-      callback
-    );
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('getAttributionSettings request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.analytics.admin.v1alpha.IAttributionSettings,
+          | protos.google.analytics.admin.v1alpha.IGetAttributionSettingsRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getAttributionSettings response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getAttributionSettings(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.analytics.admin.v1alpha.IAttributionSettings,
+          (
+            | protos.google.analytics.admin.v1alpha.IGetAttributionSettingsRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getAttributionSettings response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Updates attribution settings on a property.
@@ -7457,12 +9518,39 @@ export class AnalyticsAdminServiceClient {
       this._gaxModule.routingHeader.fromParams({
         'attribution_settings.name': request.attributionSettings!.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.updateAttributionSettings(
-      request,
-      options,
-      callback
-    );
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('updateAttributionSettings request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.analytics.admin.v1alpha.IAttributionSettings,
+          | protos.google.analytics.admin.v1alpha.IUpdateAttributionSettingsRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('updateAttributionSettings response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .updateAttributionSettings(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.analytics.admin.v1alpha.IAttributionSettings,
+          (
+            | protos.google.analytics.admin.v1alpha.IUpdateAttributionSettingsRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('updateAttributionSettings response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Returns a customized report of data access records. The report provides
@@ -7645,8 +9733,39 @@ export class AnalyticsAdminServiceClient {
       this._gaxModule.routingHeader.fromParams({
         entity: request.entity ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.runAccessReport(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('runAccessReport request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.analytics.admin.v1alpha.IRunAccessReportResponse,
+          | protos.google.analytics.admin.v1alpha.IRunAccessReportRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('runAccessReport response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .runAccessReport(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.analytics.admin.v1alpha.IRunAccessReportResponse,
+          (
+            | protos.google.analytics.admin.v1alpha.IRunAccessReportRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('runAccessReport response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Creates an access binding on an account or property.
@@ -7745,8 +9864,39 @@ export class AnalyticsAdminServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.createAccessBinding(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('createAccessBinding request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.analytics.admin.v1alpha.IAccessBinding,
+          | protos.google.analytics.admin.v1alpha.ICreateAccessBindingRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('createAccessBinding response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .createAccessBinding(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.analytics.admin.v1alpha.IAccessBinding,
+          (
+            | protos.google.analytics.admin.v1alpha.ICreateAccessBindingRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('createAccessBinding response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Gets information about an access binding.
@@ -7844,8 +9994,39 @@ export class AnalyticsAdminServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.getAccessBinding(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('getAccessBinding request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.analytics.admin.v1alpha.IAccessBinding,
+          | protos.google.analytics.admin.v1alpha.IGetAccessBindingRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getAccessBinding response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getAccessBinding(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.analytics.admin.v1alpha.IAccessBinding,
+          (
+            | protos.google.analytics.admin.v1alpha.IGetAccessBindingRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getAccessBinding response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Updates an access binding on an account or property.
@@ -7940,8 +10121,39 @@ export class AnalyticsAdminServiceClient {
       this._gaxModule.routingHeader.fromParams({
         'access_binding.name': request.accessBinding!.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.updateAccessBinding(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('updateAccessBinding request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.analytics.admin.v1alpha.IAccessBinding,
+          | protos.google.analytics.admin.v1alpha.IUpdateAccessBindingRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('updateAccessBinding response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .updateAccessBinding(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.analytics.admin.v1alpha.IAccessBinding,
+          (
+            | protos.google.analytics.admin.v1alpha.IUpdateAccessBindingRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('updateAccessBinding response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Deletes an access binding on an account or property.
@@ -8038,8 +10250,39 @@ export class AnalyticsAdminServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.deleteAccessBinding(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('deleteAccessBinding request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.analytics.admin.v1alpha.IDeleteAccessBindingRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('deleteAccessBinding response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .deleteAccessBinding(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.protobuf.IEmpty,
+          (
+            | protos.google.analytics.admin.v1alpha.IDeleteAccessBindingRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteAccessBinding response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Creates information about multiple access bindings to an account or
@@ -8145,12 +10388,39 @@ export class AnalyticsAdminServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.batchCreateAccessBindings(
-      request,
-      options,
-      callback
-    );
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('batchCreateAccessBindings request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.analytics.admin.v1alpha.IBatchCreateAccessBindingsResponse,
+          | protos.google.analytics.admin.v1alpha.IBatchCreateAccessBindingsRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('batchCreateAccessBindings response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .batchCreateAccessBindings(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.analytics.admin.v1alpha.IBatchCreateAccessBindingsResponse,
+          (
+            | protos.google.analytics.admin.v1alpha.IBatchCreateAccessBindingsRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('batchCreateAccessBindings response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Gets information about multiple access bindings to an account or property.
@@ -8255,12 +10525,39 @@ export class AnalyticsAdminServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.batchGetAccessBindings(
-      request,
-      options,
-      callback
-    );
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('batchGetAccessBindings request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.analytics.admin.v1alpha.IBatchGetAccessBindingsResponse,
+          | protos.google.analytics.admin.v1alpha.IBatchGetAccessBindingsRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('batchGetAccessBindings response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .batchGetAccessBindings(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.analytics.admin.v1alpha.IBatchGetAccessBindingsResponse,
+          (
+            | protos.google.analytics.admin.v1alpha.IBatchGetAccessBindingsRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('batchGetAccessBindings response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Updates information about multiple access bindings to an account or
@@ -8364,12 +10661,39 @@ export class AnalyticsAdminServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.batchUpdateAccessBindings(
-      request,
-      options,
-      callback
-    );
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('batchUpdateAccessBindings request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.analytics.admin.v1alpha.IBatchUpdateAccessBindingsResponse,
+          | protos.google.analytics.admin.v1alpha.IBatchUpdateAccessBindingsRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('batchUpdateAccessBindings response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .batchUpdateAccessBindings(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.analytics.admin.v1alpha.IBatchUpdateAccessBindingsResponse,
+          (
+            | protos.google.analytics.admin.v1alpha.IBatchUpdateAccessBindingsRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('batchUpdateAccessBindings response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Deletes information about multiple users' links to an account or property.
@@ -8471,12 +10795,39 @@ export class AnalyticsAdminServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.batchDeleteAccessBindings(
-      request,
-      options,
-      callback
-    );
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('batchDeleteAccessBindings request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.analytics.admin.v1alpha.IBatchDeleteAccessBindingsRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('batchDeleteAccessBindings response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .batchDeleteAccessBindings(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.protobuf.IEmpty,
+          (
+            | protos.google.analytics.admin.v1alpha.IBatchDeleteAccessBindingsRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('batchDeleteAccessBindings response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Lookup for a single ExpandedDataSet.
@@ -8572,8 +10923,39 @@ export class AnalyticsAdminServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.getExpandedDataSet(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('getExpandedDataSet request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.analytics.admin.v1alpha.IExpandedDataSet,
+          | protos.google.analytics.admin.v1alpha.IGetExpandedDataSetRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getExpandedDataSet response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getExpandedDataSet(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.analytics.admin.v1alpha.IExpandedDataSet,
+          (
+            | protos.google.analytics.admin.v1alpha.IGetExpandedDataSetRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getExpandedDataSet response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Creates a ExpandedDataSet.
@@ -8670,8 +11052,39 @@ export class AnalyticsAdminServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.createExpandedDataSet(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('createExpandedDataSet request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.analytics.admin.v1alpha.IExpandedDataSet,
+          | protos.google.analytics.admin.v1alpha.ICreateExpandedDataSetRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('createExpandedDataSet response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .createExpandedDataSet(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.analytics.admin.v1alpha.IExpandedDataSet,
+          (
+            | protos.google.analytics.admin.v1alpha.ICreateExpandedDataSetRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('createExpandedDataSet response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Updates a ExpandedDataSet on a property.
@@ -8773,8 +11186,39 @@ export class AnalyticsAdminServiceClient {
       this._gaxModule.routingHeader.fromParams({
         'expanded_data_set.name': request.expandedDataSet!.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.updateExpandedDataSet(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('updateExpandedDataSet request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.analytics.admin.v1alpha.IExpandedDataSet,
+          | protos.google.analytics.admin.v1alpha.IUpdateExpandedDataSetRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('updateExpandedDataSet response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .updateExpandedDataSet(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.analytics.admin.v1alpha.IExpandedDataSet,
+          (
+            | protos.google.analytics.admin.v1alpha.IUpdateExpandedDataSetRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('updateExpandedDataSet response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Deletes a ExpandedDataSet on a property.
@@ -8869,8 +11313,39 @@ export class AnalyticsAdminServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.deleteExpandedDataSet(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('deleteExpandedDataSet request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.analytics.admin.v1alpha.IDeleteExpandedDataSetRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('deleteExpandedDataSet response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .deleteExpandedDataSet(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.protobuf.IEmpty,
+          (
+            | protos.google.analytics.admin.v1alpha.IDeleteExpandedDataSetRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteExpandedDataSet response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Lookup for a single ChannelGroup.
@@ -8960,8 +11435,39 @@ export class AnalyticsAdminServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.getChannelGroup(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('getChannelGroup request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.analytics.admin.v1alpha.IChannelGroup,
+          | protos.google.analytics.admin.v1alpha.IGetChannelGroupRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getChannelGroup response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getChannelGroup(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.analytics.admin.v1alpha.IChannelGroup,
+          (
+            | protos.google.analytics.admin.v1alpha.IGetChannelGroupRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getChannelGroup response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Creates a ChannelGroup.
@@ -9059,8 +11565,39 @@ export class AnalyticsAdminServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.createChannelGroup(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('createChannelGroup request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.analytics.admin.v1alpha.IChannelGroup,
+          | protos.google.analytics.admin.v1alpha.ICreateChannelGroupRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('createChannelGroup response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .createChannelGroup(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.analytics.admin.v1alpha.IChannelGroup,
+          (
+            | protos.google.analytics.admin.v1alpha.ICreateChannelGroupRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('createChannelGroup response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Updates a ChannelGroup.
@@ -9162,8 +11699,39 @@ export class AnalyticsAdminServiceClient {
       this._gaxModule.routingHeader.fromParams({
         'channel_group.name': request.channelGroup!.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.updateChannelGroup(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('updateChannelGroup request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.analytics.admin.v1alpha.IChannelGroup,
+          | protos.google.analytics.admin.v1alpha.IUpdateChannelGroupRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('updateChannelGroup response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .updateChannelGroup(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.analytics.admin.v1alpha.IChannelGroup,
+          (
+            | protos.google.analytics.admin.v1alpha.IUpdateChannelGroupRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('updateChannelGroup response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Deletes a ChannelGroup on a property.
@@ -9259,8 +11827,39 @@ export class AnalyticsAdminServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.deleteChannelGroup(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('deleteChannelGroup request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.analytics.admin.v1alpha.IDeleteChannelGroupRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('deleteChannelGroup response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .deleteChannelGroup(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.protobuf.IEmpty,
+          (
+            | protos.google.analytics.admin.v1alpha.IDeleteChannelGroupRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteChannelGroup response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Sets the opt out status for the automated GA4 setup process for a UA
@@ -9358,12 +11957,45 @@ export class AnalyticsAdminServiceClient {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    this.initialize();
-    return this.innerApiCalls.setAutomatedGa4ConfigurationOptOut(
-      request,
-      options,
-      callback
-    );
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('setAutomatedGa4ConfigurationOptOut request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.analytics.admin.v1alpha.ISetAutomatedGa4ConfigurationOptOutResponse,
+          | protos.google.analytics.admin.v1alpha.ISetAutomatedGa4ConfigurationOptOutRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info(
+            'setAutomatedGa4ConfigurationOptOut response %j',
+            response
+          );
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .setAutomatedGa4ConfigurationOptOut(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.analytics.admin.v1alpha.ISetAutomatedGa4ConfigurationOptOutResponse,
+          (
+            | protos.google.analytics.admin.v1alpha.ISetAutomatedGa4ConfigurationOptOutRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info(
+            'setAutomatedGa4ConfigurationOptOut response %j',
+            response
+          );
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Fetches the opt out status for the automated GA4 setup process for a UA
@@ -9459,12 +12091,45 @@ export class AnalyticsAdminServiceClient {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    this.initialize();
-    return this.innerApiCalls.fetchAutomatedGa4ConfigurationOptOut(
-      request,
-      options,
-      callback
-    );
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('fetchAutomatedGa4ConfigurationOptOut request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.analytics.admin.v1alpha.IFetchAutomatedGa4ConfigurationOptOutResponse,
+          | protos.google.analytics.admin.v1alpha.IFetchAutomatedGa4ConfigurationOptOutRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info(
+            'fetchAutomatedGa4ConfigurationOptOut response %j',
+            response
+          );
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .fetchAutomatedGa4ConfigurationOptOut(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.analytics.admin.v1alpha.IFetchAutomatedGa4ConfigurationOptOutResponse,
+          (
+            | protos.google.analytics.admin.v1alpha.IFetchAutomatedGa4ConfigurationOptOutRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info(
+            'fetchAutomatedGa4ConfigurationOptOut response %j',
+            response
+          );
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Creates a BigQueryLink.
@@ -9561,8 +12226,39 @@ export class AnalyticsAdminServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.createBigQueryLink(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('createBigQueryLink request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.analytics.admin.v1alpha.IBigQueryLink,
+          | protos.google.analytics.admin.v1alpha.ICreateBigQueryLinkRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('createBigQueryLink response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .createBigQueryLink(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.analytics.admin.v1alpha.IBigQueryLink,
+          (
+            | protos.google.analytics.admin.v1alpha.ICreateBigQueryLinkRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('createBigQueryLink response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Lookup for a single BigQuery Link.
@@ -9653,8 +12349,39 @@ export class AnalyticsAdminServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.getBigQueryLink(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('getBigQueryLink request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.analytics.admin.v1alpha.IBigQueryLink,
+          | protos.google.analytics.admin.v1alpha.IGetBigQueryLinkRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getBigQueryLink response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getBigQueryLink(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.analytics.admin.v1alpha.IBigQueryLink,
+          (
+            | protos.google.analytics.admin.v1alpha.IGetBigQueryLinkRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getBigQueryLink response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Deletes a BigQueryLink on a property.
@@ -9750,8 +12477,39 @@ export class AnalyticsAdminServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.deleteBigQueryLink(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('deleteBigQueryLink request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.analytics.admin.v1alpha.IDeleteBigQueryLinkRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('deleteBigQueryLink response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .deleteBigQueryLink(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.protobuf.IEmpty,
+          (
+            | protos.google.analytics.admin.v1alpha.IDeleteBigQueryLinkRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteBigQueryLink response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Updates a BigQueryLink.
@@ -9852,8 +12610,39 @@ export class AnalyticsAdminServiceClient {
       this._gaxModule.routingHeader.fromParams({
         'bigquery_link.name': request.bigqueryLink!.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.updateBigQueryLink(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('updateBigQueryLink request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.analytics.admin.v1alpha.IBigQueryLink,
+          | protos.google.analytics.admin.v1alpha.IUpdateBigQueryLinkRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('updateBigQueryLink response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .updateBigQueryLink(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.analytics.admin.v1alpha.IBigQueryLink,
+          (
+            | protos.google.analytics.admin.v1alpha.IUpdateBigQueryLinkRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('updateBigQueryLink response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Returns the enhanced measurement settings for this data stream.
@@ -9953,12 +12742,45 @@ export class AnalyticsAdminServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.getEnhancedMeasurementSettings(
-      request,
-      options,
-      callback
-    );
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('getEnhancedMeasurementSettings request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.analytics.admin.v1alpha.IEnhancedMeasurementSettings,
+          | protos.google.analytics.admin.v1alpha.IGetEnhancedMeasurementSettingsRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info(
+            'getEnhancedMeasurementSettings response %j',
+            response
+          );
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getEnhancedMeasurementSettings(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.analytics.admin.v1alpha.IEnhancedMeasurementSettings,
+          (
+            | protos.google.analytics.admin.v1alpha.IGetEnhancedMeasurementSettingsRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info(
+            'getEnhancedMeasurementSettings response %j',
+            response
+          );
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Updates the enhanced measurement settings for this data stream.
@@ -10062,12 +12884,45 @@ export class AnalyticsAdminServiceClient {
         'enhanced_measurement_settings.name':
           request.enhancedMeasurementSettings!.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.updateEnhancedMeasurementSettings(
-      request,
-      options,
-      callback
-    );
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('updateEnhancedMeasurementSettings request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.analytics.admin.v1alpha.IEnhancedMeasurementSettings,
+          | protos.google.analytics.admin.v1alpha.IUpdateEnhancedMeasurementSettingsRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info(
+            'updateEnhancedMeasurementSettings response %j',
+            response
+          );
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .updateEnhancedMeasurementSettings(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.analytics.admin.v1alpha.IEnhancedMeasurementSettings,
+          (
+            | protos.google.analytics.admin.v1alpha.IUpdateEnhancedMeasurementSettingsRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info(
+            'updateEnhancedMeasurementSettings response %j',
+            response
+          );
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Creates a connected site tag for a Universal Analytics property. You can
@@ -10165,12 +13020,39 @@ export class AnalyticsAdminServiceClient {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    this.initialize();
-    return this.innerApiCalls.createConnectedSiteTag(
-      request,
-      options,
-      callback
-    );
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('createConnectedSiteTag request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.analytics.admin.v1alpha.ICreateConnectedSiteTagResponse,
+          | protos.google.analytics.admin.v1alpha.ICreateConnectedSiteTagRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('createConnectedSiteTag response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .createConnectedSiteTag(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.analytics.admin.v1alpha.ICreateConnectedSiteTagResponse,
+          (
+            | protos.google.analytics.admin.v1alpha.ICreateConnectedSiteTagRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('createConnectedSiteTag response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Deletes a connected site tag for a Universal Analytics property.
@@ -10268,12 +13150,39 @@ export class AnalyticsAdminServiceClient {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    this.initialize();
-    return this.innerApiCalls.deleteConnectedSiteTag(
-      request,
-      options,
-      callback
-    );
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('deleteConnectedSiteTag request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.analytics.admin.v1alpha.IDeleteConnectedSiteTagRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('deleteConnectedSiteTag response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .deleteConnectedSiteTag(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.protobuf.IEmpty,
+          (
+            | protos.google.analytics.admin.v1alpha.IDeleteConnectedSiteTagRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteConnectedSiteTag response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Lists the connected site tags for a Universal Analytics property. A maximum
@@ -10369,8 +13278,39 @@ export class AnalyticsAdminServiceClient {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    this.initialize();
-    return this.innerApiCalls.listConnectedSiteTags(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listConnectedSiteTags request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.analytics.admin.v1alpha.IListConnectedSiteTagsResponse,
+          | protos.google.analytics.admin.v1alpha.IListConnectedSiteTagsRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('listConnectedSiteTags response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .listConnectedSiteTags(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.analytics.admin.v1alpha.IListConnectedSiteTagsResponse,
+          (
+            | protos.google.analytics.admin.v1alpha.IListConnectedSiteTagsRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('listConnectedSiteTags response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Given a specified UA property, looks up the GA4 property connected to it.
@@ -10466,12 +13406,39 @@ export class AnalyticsAdminServiceClient {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    this.initialize();
-    return this.innerApiCalls.fetchConnectedGa4Property(
-      request,
-      options,
-      callback
-    );
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('fetchConnectedGa4Property request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.analytics.admin.v1alpha.IFetchConnectedGa4PropertyResponse,
+          | protos.google.analytics.admin.v1alpha.IFetchConnectedGa4PropertyRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('fetchConnectedGa4Property response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .fetchConnectedGa4Property(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.analytics.admin.v1alpha.IFetchConnectedGa4PropertyResponse,
+          (
+            | protos.google.analytics.admin.v1alpha.IFetchConnectedGa4PropertyRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('fetchConnectedGa4Property response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Looks up a single AdSenseLink.
@@ -10562,8 +13529,39 @@ export class AnalyticsAdminServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.getAdSenseLink(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('getAdSenseLink request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.analytics.admin.v1alpha.IAdSenseLink,
+          | protos.google.analytics.admin.v1alpha.IGetAdSenseLinkRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getAdSenseLink response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getAdSenseLink(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.analytics.admin.v1alpha.IAdSenseLink,
+          (
+            | protos.google.analytics.admin.v1alpha.IGetAdSenseLinkRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getAdSenseLink response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Creates an AdSenseLink.
@@ -10662,8 +13660,39 @@ export class AnalyticsAdminServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.createAdSenseLink(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('createAdSenseLink request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.analytics.admin.v1alpha.IAdSenseLink,
+          | protos.google.analytics.admin.v1alpha.ICreateAdSenseLinkRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('createAdSenseLink response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .createAdSenseLink(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.analytics.admin.v1alpha.IAdSenseLink,
+          (
+            | protos.google.analytics.admin.v1alpha.ICreateAdSenseLinkRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('createAdSenseLink response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Deletes an AdSenseLink.
@@ -10760,8 +13789,39 @@ export class AnalyticsAdminServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.deleteAdSenseLink(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('deleteAdSenseLink request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.analytics.admin.v1alpha.IDeleteAdSenseLinkRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('deleteAdSenseLink response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .deleteAdSenseLink(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.protobuf.IEmpty,
+          (
+            | protos.google.analytics.admin.v1alpha.IDeleteAdSenseLinkRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteAdSenseLink response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Lookup for a single EventCreateRule.
@@ -10857,8 +13917,39 @@ export class AnalyticsAdminServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.getEventCreateRule(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('getEventCreateRule request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.analytics.admin.v1alpha.IEventCreateRule,
+          | protos.google.analytics.admin.v1alpha.IGetEventCreateRuleRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getEventCreateRule response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getEventCreateRule(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.analytics.admin.v1alpha.IEventCreateRule,
+          (
+            | protos.google.analytics.admin.v1alpha.IGetEventCreateRuleRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getEventCreateRule response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Creates an EventCreateRule.
@@ -10955,8 +14046,39 @@ export class AnalyticsAdminServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.createEventCreateRule(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('createEventCreateRule request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.analytics.admin.v1alpha.IEventCreateRule,
+          | protos.google.analytics.admin.v1alpha.ICreateEventCreateRuleRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('createEventCreateRule response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .createEventCreateRule(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.analytics.admin.v1alpha.IEventCreateRule,
+          (
+            | protos.google.analytics.admin.v1alpha.ICreateEventCreateRuleRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('createEventCreateRule response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Updates an EventCreateRule.
@@ -11058,8 +14180,39 @@ export class AnalyticsAdminServiceClient {
       this._gaxModule.routingHeader.fromParams({
         'event_create_rule.name': request.eventCreateRule!.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.updateEventCreateRule(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('updateEventCreateRule request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.analytics.admin.v1alpha.IEventCreateRule,
+          | protos.google.analytics.admin.v1alpha.IUpdateEventCreateRuleRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('updateEventCreateRule response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .updateEventCreateRule(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.analytics.admin.v1alpha.IEventCreateRule,
+          (
+            | protos.google.analytics.admin.v1alpha.IUpdateEventCreateRuleRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('updateEventCreateRule response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Deletes an EventCreateRule.
@@ -11155,8 +14308,39 @@ export class AnalyticsAdminServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.deleteEventCreateRule(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('deleteEventCreateRule request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.analytics.admin.v1alpha.IDeleteEventCreateRuleRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('deleteEventCreateRule response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .deleteEventCreateRule(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.protobuf.IEmpty,
+          (
+            | protos.google.analytics.admin.v1alpha.IDeleteEventCreateRuleRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteEventCreateRule response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Lookup for a single EventEditRule.
@@ -11252,8 +14436,39 @@ export class AnalyticsAdminServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.getEventEditRule(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('getEventEditRule request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.analytics.admin.v1alpha.IEventEditRule,
+          | protos.google.analytics.admin.v1alpha.IGetEventEditRuleRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getEventEditRule response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getEventEditRule(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.analytics.admin.v1alpha.IEventEditRule,
+          (
+            | protos.google.analytics.admin.v1alpha.IGetEventEditRuleRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getEventEditRule response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Creates an EventEditRule.
@@ -11350,8 +14565,39 @@ export class AnalyticsAdminServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.createEventEditRule(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('createEventEditRule request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.analytics.admin.v1alpha.IEventEditRule,
+          | protos.google.analytics.admin.v1alpha.ICreateEventEditRuleRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('createEventEditRule response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .createEventEditRule(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.analytics.admin.v1alpha.IEventEditRule,
+          (
+            | protos.google.analytics.admin.v1alpha.ICreateEventEditRuleRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('createEventEditRule response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Updates an EventEditRule.
@@ -11453,8 +14699,39 @@ export class AnalyticsAdminServiceClient {
       this._gaxModule.routingHeader.fromParams({
         'event_edit_rule.name': request.eventEditRule!.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.updateEventEditRule(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('updateEventEditRule request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.analytics.admin.v1alpha.IEventEditRule,
+          | protos.google.analytics.admin.v1alpha.IUpdateEventEditRuleRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('updateEventEditRule response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .updateEventEditRule(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.analytics.admin.v1alpha.IEventEditRule,
+          (
+            | protos.google.analytics.admin.v1alpha.IUpdateEventEditRuleRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('updateEventEditRule response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Deletes an EventEditRule.
@@ -11549,8 +14826,39 @@ export class AnalyticsAdminServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.deleteEventEditRule(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('deleteEventEditRule request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.analytics.admin.v1alpha.IDeleteEventEditRuleRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('deleteEventEditRule response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .deleteEventEditRule(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.protobuf.IEmpty,
+          (
+            | protos.google.analytics.admin.v1alpha.IDeleteEventEditRuleRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteEventEditRule response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Changes the processing order of event edit rules on the specified stream.
@@ -11649,8 +14957,39 @@ export class AnalyticsAdminServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.reorderEventEditRules(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('reorderEventEditRules request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.analytics.admin.v1alpha.IReorderEventEditRulesRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('reorderEventEditRules response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .reorderEventEditRules(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.protobuf.IEmpty,
+          (
+            | protos.google.analytics.admin.v1alpha.IReorderEventEditRulesRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('reorderEventEditRules response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Updates a DataRedactionSettings on a property.
@@ -11752,12 +15091,39 @@ export class AnalyticsAdminServiceClient {
         'data_redaction_settings.name':
           request.dataRedactionSettings!.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.updateDataRedactionSettings(
-      request,
-      options,
-      callback
-    );
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('updateDataRedactionSettings request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.analytics.admin.v1alpha.IDataRedactionSettings,
+          | protos.google.analytics.admin.v1alpha.IUpdateDataRedactionSettingsRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('updateDataRedactionSettings response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .updateDataRedactionSettings(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.analytics.admin.v1alpha.IDataRedactionSettings,
+          (
+            | protos.google.analytics.admin.v1alpha.IUpdateDataRedactionSettingsRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('updateDataRedactionSettings response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Lookup for a single DataRedactionSettings.
@@ -11855,12 +15221,39 @@ export class AnalyticsAdminServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.getDataRedactionSettings(
-      request,
-      options,
-      callback
-    );
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('getDataRedactionSettings request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.analytics.admin.v1alpha.IDataRedactionSettings,
+          | protos.google.analytics.admin.v1alpha.IGetDataRedactionSettingsRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getDataRedactionSettings response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getDataRedactionSettings(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.analytics.admin.v1alpha.IDataRedactionSettings,
+          (
+            | protos.google.analytics.admin.v1alpha.IGetDataRedactionSettingsRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getDataRedactionSettings response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Lookup for a single CalculatedMetric.
@@ -11957,8 +15350,39 @@ export class AnalyticsAdminServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.getCalculatedMetric(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('getCalculatedMetric request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.analytics.admin.v1alpha.ICalculatedMetric,
+          | protos.google.analytics.admin.v1alpha.IGetCalculatedMetricRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getCalculatedMetric response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getCalculatedMetric(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.analytics.admin.v1alpha.ICalculatedMetric,
+          (
+            | protos.google.analytics.admin.v1alpha.IGetCalculatedMetricRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getCalculatedMetric response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Creates a CalculatedMetric.
@@ -12065,12 +15489,39 @@ export class AnalyticsAdminServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.createCalculatedMetric(
-      request,
-      options,
-      callback
-    );
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('createCalculatedMetric request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.analytics.admin.v1alpha.ICalculatedMetric,
+          | protos.google.analytics.admin.v1alpha.ICreateCalculatedMetricRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('createCalculatedMetric response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .createCalculatedMetric(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.analytics.admin.v1alpha.ICalculatedMetric,
+          (
+            | protos.google.analytics.admin.v1alpha.ICreateCalculatedMetricRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('createCalculatedMetric response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Updates a CalculatedMetric on a property.
@@ -12169,12 +15620,39 @@ export class AnalyticsAdminServiceClient {
       this._gaxModule.routingHeader.fromParams({
         'calculated_metric.name': request.calculatedMetric!.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.updateCalculatedMetric(
-      request,
-      options,
-      callback
-    );
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('updateCalculatedMetric request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.analytics.admin.v1alpha.ICalculatedMetric,
+          | protos.google.analytics.admin.v1alpha.IUpdateCalculatedMetricRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('updateCalculatedMetric response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .updateCalculatedMetric(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.analytics.admin.v1alpha.ICalculatedMetric,
+          (
+            | protos.google.analytics.admin.v1alpha.IUpdateCalculatedMetricRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('updateCalculatedMetric response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Deletes a CalculatedMetric on a property.
@@ -12271,12 +15749,39 @@ export class AnalyticsAdminServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.deleteCalculatedMetric(
-      request,
-      options,
-      callback
-    );
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('deleteCalculatedMetric request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.analytics.admin.v1alpha.IDeleteCalculatedMetricRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('deleteCalculatedMetric response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .deleteCalculatedMetric(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.protobuf.IEmpty,
+          (
+            | protos.google.analytics.admin.v1alpha.IDeleteCalculatedMetricRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteCalculatedMetric response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Create a roll-up property and all roll-up property source links.
@@ -12370,8 +15875,39 @@ export class AnalyticsAdminServiceClient {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    this.initialize();
-    return this.innerApiCalls.createRollupProperty(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('createRollupProperty request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.analytics.admin.v1alpha.ICreateRollupPropertyResponse,
+          | protos.google.analytics.admin.v1alpha.ICreateRollupPropertyRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('createRollupProperty response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .createRollupProperty(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.analytics.admin.v1alpha.ICreateRollupPropertyResponse,
+          (
+            | protos.google.analytics.admin.v1alpha.ICreateRollupPropertyRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('createRollupProperty response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Lookup for a single roll-up property source Link.
@@ -12471,12 +16007,39 @@ export class AnalyticsAdminServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.getRollupPropertySourceLink(
-      request,
-      options,
-      callback
-    );
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('getRollupPropertySourceLink request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.analytics.admin.v1alpha.IRollupPropertySourceLink,
+          | protos.google.analytics.admin.v1alpha.IGetRollupPropertySourceLinkRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getRollupPropertySourceLink response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getRollupPropertySourceLink(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.analytics.admin.v1alpha.IRollupPropertySourceLink,
+          (
+            | protos.google.analytics.admin.v1alpha.IGetRollupPropertySourceLinkRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getRollupPropertySourceLink response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Creates a roll-up property source link.
@@ -12576,12 +16139,45 @@ export class AnalyticsAdminServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.createRollupPropertySourceLink(
-      request,
-      options,
-      callback
-    );
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('createRollupPropertySourceLink request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.analytics.admin.v1alpha.IRollupPropertySourceLink,
+          | protos.google.analytics.admin.v1alpha.ICreateRollupPropertySourceLinkRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info(
+            'createRollupPropertySourceLink response %j',
+            response
+          );
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .createRollupPropertySourceLink(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.analytics.admin.v1alpha.IRollupPropertySourceLink,
+          (
+            | protos.google.analytics.admin.v1alpha.ICreateRollupPropertySourceLinkRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info(
+            'createRollupPropertySourceLink response %j',
+            response
+          );
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Deletes a roll-up property source link.
@@ -12680,12 +16276,45 @@ export class AnalyticsAdminServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.deleteRollupPropertySourceLink(
-      request,
-      options,
-      callback
-    );
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('deleteRollupPropertySourceLink request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.analytics.admin.v1alpha.IDeleteRollupPropertySourceLinkRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info(
+            'deleteRollupPropertySourceLink response %j',
+            response
+          );
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .deleteRollupPropertySourceLink(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.protobuf.IEmpty,
+          (
+            | protos.google.analytics.admin.v1alpha.IDeleteRollupPropertySourceLinkRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info(
+            'deleteRollupPropertySourceLink response %j',
+            response
+          );
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Create a subproperty and a subproperty event filter that applies to the
@@ -12779,8 +16408,39 @@ export class AnalyticsAdminServiceClient {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    this.initialize();
-    return this.innerApiCalls.provisionSubproperty(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('provisionSubproperty request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.analytics.admin.v1alpha.IProvisionSubpropertyResponse,
+          | protos.google.analytics.admin.v1alpha.IProvisionSubpropertyRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('provisionSubproperty response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .provisionSubproperty(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.analytics.admin.v1alpha.IProvisionSubpropertyResponse,
+          (
+            | protos.google.analytics.admin.v1alpha.IProvisionSubpropertyRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('provisionSubproperty response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Creates a subproperty Event Filter.
@@ -12878,12 +16538,39 @@ export class AnalyticsAdminServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.createSubpropertyEventFilter(
-      request,
-      options,
-      callback
-    );
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('createSubpropertyEventFilter request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.analytics.admin.v1alpha.ISubpropertyEventFilter,
+          | protos.google.analytics.admin.v1alpha.ICreateSubpropertyEventFilterRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('createSubpropertyEventFilter response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .createSubpropertyEventFilter(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.analytics.admin.v1alpha.ISubpropertyEventFilter,
+          (
+            | protos.google.analytics.admin.v1alpha.ICreateSubpropertyEventFilterRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('createSubpropertyEventFilter response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Lookup for a single subproperty Event Filter.
@@ -12981,12 +16668,39 @@ export class AnalyticsAdminServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.getSubpropertyEventFilter(
-      request,
-      options,
-      callback
-    );
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('getSubpropertyEventFilter request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.analytics.admin.v1alpha.ISubpropertyEventFilter,
+          | protos.google.analytics.admin.v1alpha.IGetSubpropertyEventFilterRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getSubpropertyEventFilter response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getSubpropertyEventFilter(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.analytics.admin.v1alpha.ISubpropertyEventFilter,
+          (
+            | protos.google.analytics.admin.v1alpha.IGetSubpropertyEventFilterRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getSubpropertyEventFilter response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Updates a subproperty Event Filter.
@@ -13087,12 +16801,39 @@ export class AnalyticsAdminServiceClient {
         'subproperty_event_filter.name':
           request.subpropertyEventFilter!.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.updateSubpropertyEventFilter(
-      request,
-      options,
-      callback
-    );
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('updateSubpropertyEventFilter request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.analytics.admin.v1alpha.ISubpropertyEventFilter,
+          | protos.google.analytics.admin.v1alpha.IUpdateSubpropertyEventFilterRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('updateSubpropertyEventFilter response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .updateSubpropertyEventFilter(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.analytics.admin.v1alpha.ISubpropertyEventFilter,
+          (
+            | protos.google.analytics.admin.v1alpha.IUpdateSubpropertyEventFilterRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('updateSubpropertyEventFilter response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Deletes a subproperty event filter.
@@ -13190,12 +16931,39 @@ export class AnalyticsAdminServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.deleteSubpropertyEventFilter(
-      request,
-      options,
-      callback
-    );
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('deleteSubpropertyEventFilter request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.analytics.admin.v1alpha.IDeleteSubpropertyEventFilterRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('deleteSubpropertyEventFilter response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .deleteSubpropertyEventFilter(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.protobuf.IEmpty,
+          (
+            | protos.google.analytics.admin.v1alpha.IDeleteSubpropertyEventFilterRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteSubpropertyEventFilter response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
 
   /**
@@ -13300,12 +17068,40 @@ export class AnalyticsAdminServiceClient {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    this.initialize();
-    return this.innerApiCalls.listAccounts(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.analytics.admin.v1alpha.IListAccountsRequest,
+          | protos.google.analytics.admin.v1alpha.IListAccountsResponse
+          | null
+          | undefined,
+          protos.google.analytics.admin.v1alpha.IAccount
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listAccounts values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listAccounts request %j', request);
+    return this.innerApiCalls
+      .listAccounts(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.analytics.admin.v1alpha.IAccount[],
+          protos.google.analytics.admin.v1alpha.IListAccountsRequest | null,
+          protos.google.analytics.admin.v1alpha.IListAccountsResponse,
+        ]) => {
+          this._log.info('listAccounts values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listAccounts`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {number} request.pageSize
@@ -13343,7 +17139,10 @@ export class AnalyticsAdminServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     const defaultCallSettings = this._defaults['listAccounts'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listAccounts stream %j', request);
     return this.descriptors.page.listAccounts.createStream(
       this.innerApiCalls.listAccounts as GaxCall,
       request,
@@ -13393,7 +17192,10 @@ export class AnalyticsAdminServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     const defaultCallSettings = this._defaults['listAccounts'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listAccounts iterate %j', request);
     return this.descriptors.page.listAccounts.asyncIterate(
       this.innerApiCalls['listAccounts'] as GaxCall,
       request as {},
@@ -13494,12 +17296,40 @@ export class AnalyticsAdminServiceClient {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    this.initialize();
-    return this.innerApiCalls.listAccountSummaries(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.analytics.admin.v1alpha.IListAccountSummariesRequest,
+          | protos.google.analytics.admin.v1alpha.IListAccountSummariesResponse
+          | null
+          | undefined,
+          protos.google.analytics.admin.v1alpha.IAccountSummary
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listAccountSummaries values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listAccountSummaries request %j', request);
+    return this.innerApiCalls
+      .listAccountSummaries(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.analytics.admin.v1alpha.IAccountSummary[],
+          protos.google.analytics.admin.v1alpha.IListAccountSummariesRequest | null,
+          protos.google.analytics.admin.v1alpha.IListAccountSummariesResponse,
+        ]) => {
+          this._log.info('listAccountSummaries values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listAccountSummaries`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {number} request.pageSize
@@ -13533,7 +17363,10 @@ export class AnalyticsAdminServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     const defaultCallSettings = this._defaults['listAccountSummaries'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listAccountSummaries stream %j', request);
     return this.descriptors.page.listAccountSummaries.createStream(
       this.innerApiCalls.listAccountSummaries as GaxCall,
       request,
@@ -13579,7 +17412,10 @@ export class AnalyticsAdminServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     const defaultCallSettings = this._defaults['listAccountSummaries'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listAccountSummaries iterate %j', request);
     return this.descriptors.page.listAccountSummaries.asyncIterate(
       this.innerApiCalls['listAccountSummaries'] as GaxCall,
       request as {},
@@ -13705,12 +17541,40 @@ export class AnalyticsAdminServiceClient {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    this.initialize();
-    return this.innerApiCalls.listProperties(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.analytics.admin.v1alpha.IListPropertiesRequest,
+          | protos.google.analytics.admin.v1alpha.IListPropertiesResponse
+          | null
+          | undefined,
+          protos.google.analytics.admin.v1alpha.IProperty
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listProperties values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listProperties request %j', request);
+    return this.innerApiCalls
+      .listProperties(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.analytics.admin.v1alpha.IProperty[],
+          protos.google.analytics.admin.v1alpha.IListPropertiesRequest | null,
+          protos.google.analytics.admin.v1alpha.IListPropertiesResponse,
+        ]) => {
+          this._log.info('listProperties values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listProperties`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.filter
@@ -13765,7 +17629,10 @@ export class AnalyticsAdminServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     const defaultCallSettings = this._defaults['listProperties'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listProperties stream %j', request);
     return this.descriptors.page.listProperties.createStream(
       this.innerApiCalls.listProperties as GaxCall,
       request,
@@ -13832,7 +17699,10 @@ export class AnalyticsAdminServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     const defaultCallSettings = this._defaults['listProperties'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listProperties iterate %j', request);
     return this.descriptors.page.listProperties.asyncIterate(
       this.innerApiCalls['listProperties'] as GaxCall,
       request as {},
@@ -13942,12 +17812,40 @@ export class AnalyticsAdminServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.listFirebaseLinks(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.analytics.admin.v1alpha.IListFirebaseLinksRequest,
+          | protos.google.analytics.admin.v1alpha.IListFirebaseLinksResponse
+          | null
+          | undefined,
+          protos.google.analytics.admin.v1alpha.IFirebaseLink
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listFirebaseLinks values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listFirebaseLinks request %j', request);
+    return this.innerApiCalls
+      .listFirebaseLinks(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.analytics.admin.v1alpha.IFirebaseLink[],
+          protos.google.analytics.admin.v1alpha.IListFirebaseLinksRequest | null,
+          protos.google.analytics.admin.v1alpha.IListFirebaseLinksResponse,
+        ]) => {
+          this._log.info('listFirebaseLinks values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listFirebaseLinks`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
@@ -13989,7 +17887,10 @@ export class AnalyticsAdminServiceClient {
       });
     const defaultCallSettings = this._defaults['listFirebaseLinks'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listFirebaseLinks stream %j', request);
     return this.descriptors.page.listFirebaseLinks.createStream(
       this.innerApiCalls.listFirebaseLinks as GaxCall,
       request,
@@ -14043,7 +17944,10 @@ export class AnalyticsAdminServiceClient {
       });
     const defaultCallSettings = this._defaults['listFirebaseLinks'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listFirebaseLinks iterate %j', request);
     return this.descriptors.page.listFirebaseLinks.asyncIterate(
       this.innerApiCalls['listFirebaseLinks'] as GaxCall,
       request as {},
@@ -14150,12 +18054,40 @@ export class AnalyticsAdminServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.listGoogleAdsLinks(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.analytics.admin.v1alpha.IListGoogleAdsLinksRequest,
+          | protos.google.analytics.admin.v1alpha.IListGoogleAdsLinksResponse
+          | null
+          | undefined,
+          protos.google.analytics.admin.v1alpha.IGoogleAdsLink
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listGoogleAdsLinks values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listGoogleAdsLinks request %j', request);
+    return this.innerApiCalls
+      .listGoogleAdsLinks(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.analytics.admin.v1alpha.IGoogleAdsLink[],
+          protos.google.analytics.admin.v1alpha.IListGoogleAdsLinksRequest | null,
+          protos.google.analytics.admin.v1alpha.IListGoogleAdsLinksResponse,
+        ]) => {
+          this._log.info('listGoogleAdsLinks values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listGoogleAdsLinks`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
@@ -14195,7 +18127,10 @@ export class AnalyticsAdminServiceClient {
       });
     const defaultCallSettings = this._defaults['listGoogleAdsLinks'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listGoogleAdsLinks stream %j', request);
     return this.descriptors.page.listGoogleAdsLinks.createStream(
       this.innerApiCalls.listGoogleAdsLinks as GaxCall,
       request,
@@ -14247,7 +18182,10 @@ export class AnalyticsAdminServiceClient {
       });
     const defaultCallSettings = this._defaults['listGoogleAdsLinks'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listGoogleAdsLinks iterate %j', request);
     return this.descriptors.page.listGoogleAdsLinks.asyncIterate(
       this.innerApiCalls['listGoogleAdsLinks'] as GaxCall,
       request as {},
@@ -14356,16 +18294,40 @@ export class AnalyticsAdminServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.listMeasurementProtocolSecrets(
-      request,
-      options,
-      callback
-    );
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.analytics.admin.v1alpha.IListMeasurementProtocolSecretsRequest,
+          | protos.google.analytics.admin.v1alpha.IListMeasurementProtocolSecretsResponse
+          | null
+          | undefined,
+          protos.google.analytics.admin.v1alpha.IMeasurementProtocolSecret
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listMeasurementProtocolSecrets values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listMeasurementProtocolSecrets request %j', request);
+    return this.innerApiCalls
+      .listMeasurementProtocolSecrets(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.analytics.admin.v1alpha.IMeasurementProtocolSecret[],
+          protos.google.analytics.admin.v1alpha.IListMeasurementProtocolSecretsRequest | null,
+          protos.google.analytics.admin.v1alpha.IListMeasurementProtocolSecretsResponse,
+        ]) => {
+          this._log.info('listMeasurementProtocolSecrets values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listMeasurementProtocolSecrets`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
@@ -14407,7 +18369,10 @@ export class AnalyticsAdminServiceClient {
     const defaultCallSettings =
       this._defaults['listMeasurementProtocolSecrets'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listMeasurementProtocolSecrets stream %j', request);
     return this.descriptors.page.listMeasurementProtocolSecrets.createStream(
       this.innerApiCalls.listMeasurementProtocolSecrets as GaxCall,
       request,
@@ -14461,7 +18426,10 @@ export class AnalyticsAdminServiceClient {
     const defaultCallSettings =
       this._defaults['listMeasurementProtocolSecrets'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listMeasurementProtocolSecrets iterate %j', request);
     return this.descriptors.page.listMeasurementProtocolSecrets.asyncIterate(
       this.innerApiCalls['listMeasurementProtocolSecrets'] as GaxCall,
       request as {},
@@ -14573,16 +18541,46 @@ export class AnalyticsAdminServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.listSkAdNetworkConversionValueSchemas(
-      request,
-      options,
-      callback
-    );
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.analytics.admin.v1alpha.IListSKAdNetworkConversionValueSchemasRequest,
+          | protos.google.analytics.admin.v1alpha.IListSKAdNetworkConversionValueSchemasResponse
+          | null
+          | undefined,
+          protos.google.analytics.admin.v1alpha.ISKAdNetworkConversionValueSchema
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info(
+            'listSKAdNetworkConversionValueSchemas values %j',
+            values
+          );
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listSKAdNetworkConversionValueSchemas request %j', request);
+    return this.innerApiCalls
+      .listSkAdNetworkConversionValueSchemas(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.analytics.admin.v1alpha.ISKAdNetworkConversionValueSchema[],
+          protos.google.analytics.admin.v1alpha.IListSKAdNetworkConversionValueSchemasRequest | null,
+          protos.google.analytics.admin.v1alpha.IListSKAdNetworkConversionValueSchemasResponse,
+        ]) => {
+          this._log.info(
+            'listSKAdNetworkConversionValueSchemas values %j',
+            response
+          );
+          return [response, input, output];
+        }
+      );
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listSKAdNetworkConversionValueSchemas`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
@@ -14627,7 +18625,10 @@ export class AnalyticsAdminServiceClient {
     const defaultCallSettings =
       this._defaults['listSkAdNetworkConversionValueSchemas'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listSKAdNetworkConversionValueSchemas stream %j', request);
     return this.descriptors.page.listSKAdNetworkConversionValueSchemas.createStream(
       this.innerApiCalls.listSkAdNetworkConversionValueSchemas as GaxCall,
       request,
@@ -14684,7 +18685,10 @@ export class AnalyticsAdminServiceClient {
     const defaultCallSettings =
       this._defaults['listSkAdNetworkConversionValueSchemas'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listSKAdNetworkConversionValueSchemas iterate %j', request);
     return this.descriptors.page.listSKAdNetworkConversionValueSchemas.asyncIterate(
       this.innerApiCalls['listSkAdNetworkConversionValueSchemas'] as GaxCall,
       request as {},
@@ -14823,16 +18827,40 @@ export class AnalyticsAdminServiceClient {
       this._gaxModule.routingHeader.fromParams({
         account: request.account ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.searchChangeHistoryEvents(
-      request,
-      options,
-      callback
-    );
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.analytics.admin.v1alpha.ISearchChangeHistoryEventsRequest,
+          | protos.google.analytics.admin.v1alpha.ISearchChangeHistoryEventsResponse
+          | null
+          | undefined,
+          protos.google.analytics.admin.v1alpha.IChangeHistoryEvent
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('searchChangeHistoryEvents values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('searchChangeHistoryEvents request %j', request);
+    return this.innerApiCalls
+      .searchChangeHistoryEvents(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.analytics.admin.v1alpha.IChangeHistoryEvent[],
+          protos.google.analytics.admin.v1alpha.ISearchChangeHistoryEventsRequest | null,
+          protos.google.analytics.admin.v1alpha.ISearchChangeHistoryEventsResponse,
+        ]) => {
+          this._log.info('searchChangeHistoryEvents values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `searchChangeHistoryEvents`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.account
@@ -14900,7 +18928,10 @@ export class AnalyticsAdminServiceClient {
       });
     const defaultCallSettings = this._defaults['searchChangeHistoryEvents'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('searchChangeHistoryEvents stream %j', request);
     return this.descriptors.page.searchChangeHistoryEvents.createStream(
       this.innerApiCalls.searchChangeHistoryEvents as GaxCall,
       request,
@@ -14980,7 +19011,10 @@ export class AnalyticsAdminServiceClient {
       });
     const defaultCallSettings = this._defaults['searchChangeHistoryEvents'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('searchChangeHistoryEvents iterate %j', request);
     return this.descriptors.page.searchChangeHistoryEvents.asyncIterate(
       this.innerApiCalls['searchChangeHistoryEvents'] as GaxCall,
       request as {},
@@ -15091,17 +19125,45 @@ export class AnalyticsAdminServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this.warn(
       'DEP$AnalyticsAdminService-$ListConversionEvents',
       'ListConversionEvents is deprecated and may be removed in a future version.',
       'DeprecationWarning'
     );
-    return this.innerApiCalls.listConversionEvents(request, options, callback);
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.analytics.admin.v1alpha.IListConversionEventsRequest,
+          | protos.google.analytics.admin.v1alpha.IListConversionEventsResponse
+          | null
+          | undefined,
+          protos.google.analytics.admin.v1alpha.IConversionEvent
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listConversionEvents values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listConversionEvents request %j', request);
+    return this.innerApiCalls
+      .listConversionEvents(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.analytics.admin.v1alpha.IConversionEvent[],
+          protos.google.analytics.admin.v1alpha.IListConversionEventsRequest | null,
+          protos.google.analytics.admin.v1alpha.IListConversionEventsResponse,
+        ]) => {
+          this._log.info('listConversionEvents values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listConversionEvents`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
@@ -15142,12 +19204,15 @@ export class AnalyticsAdminServiceClient {
       });
     const defaultCallSettings = this._defaults['listConversionEvents'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this.warn(
       'DEP$AnalyticsAdminService-$ListConversionEvents',
       'ListConversionEvents is deprecated and may be removed in a future version.',
       'DeprecationWarning'
     );
+    this._log.info('listConversionEvents stream %j', request);
     return this.descriptors.page.listConversionEvents.createStream(
       this.innerApiCalls.listConversionEvents as GaxCall,
       request,
@@ -15200,12 +19265,15 @@ export class AnalyticsAdminServiceClient {
       });
     const defaultCallSettings = this._defaults['listConversionEvents'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this.warn(
       'DEP$AnalyticsAdminService-$ListConversionEvents',
       'ListConversionEvents is deprecated and may be removed in a future version.',
       'DeprecationWarning'
     );
+    this._log.info('listConversionEvents iterate %j', request);
     return this.descriptors.page.listConversionEvents.asyncIterate(
       this.innerApiCalls['listConversionEvents'] as GaxCall,
       request as {},
@@ -15313,12 +19381,40 @@ export class AnalyticsAdminServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.listKeyEvents(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.analytics.admin.v1alpha.IListKeyEventsRequest,
+          | protos.google.analytics.admin.v1alpha.IListKeyEventsResponse
+          | null
+          | undefined,
+          protos.google.analytics.admin.v1alpha.IKeyEvent
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listKeyEvents values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listKeyEvents request %j', request);
+    return this.innerApiCalls
+      .listKeyEvents(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.analytics.admin.v1alpha.IKeyEvent[],
+          protos.google.analytics.admin.v1alpha.IListKeyEventsRequest | null,
+          protos.google.analytics.admin.v1alpha.IListKeyEventsResponse,
+        ]) => {
+          this._log.info('listKeyEvents values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listKeyEvents`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
@@ -15358,7 +19454,10 @@ export class AnalyticsAdminServiceClient {
       });
     const defaultCallSettings = this._defaults['listKeyEvents'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listKeyEvents stream %j', request);
     return this.descriptors.page.listKeyEvents.createStream(
       this.innerApiCalls.listKeyEvents as GaxCall,
       request,
@@ -15410,7 +19509,10 @@ export class AnalyticsAdminServiceClient {
       });
     const defaultCallSettings = this._defaults['listKeyEvents'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listKeyEvents iterate %j', request);
     return this.descriptors.page.listKeyEvents.asyncIterate(
       this.innerApiCalls['listKeyEvents'] as GaxCall,
       request as {},
@@ -15518,16 +19620,46 @@ export class AnalyticsAdminServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.listDisplayVideo360AdvertiserLinks(
-      request,
-      options,
-      callback
-    );
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.analytics.admin.v1alpha.IListDisplayVideo360AdvertiserLinksRequest,
+          | protos.google.analytics.admin.v1alpha.IListDisplayVideo360AdvertiserLinksResponse
+          | null
+          | undefined,
+          protos.google.analytics.admin.v1alpha.IDisplayVideo360AdvertiserLink
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info(
+            'listDisplayVideo360AdvertiserLinks values %j',
+            values
+          );
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listDisplayVideo360AdvertiserLinks request %j', request);
+    return this.innerApiCalls
+      .listDisplayVideo360AdvertiserLinks(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.analytics.admin.v1alpha.IDisplayVideo360AdvertiserLink[],
+          protos.google.analytics.admin.v1alpha.IListDisplayVideo360AdvertiserLinksRequest | null,
+          protos.google.analytics.admin.v1alpha.IListDisplayVideo360AdvertiserLinksResponse,
+        ]) => {
+          this._log.info(
+            'listDisplayVideo360AdvertiserLinks values %j',
+            response
+          );
+          return [response, input, output];
+        }
+      );
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listDisplayVideo360AdvertiserLinks`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
@@ -15569,7 +19701,10 @@ export class AnalyticsAdminServiceClient {
     const defaultCallSettings =
       this._defaults['listDisplayVideo360AdvertiserLinks'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listDisplayVideo360AdvertiserLinks stream %j', request);
     return this.descriptors.page.listDisplayVideo360AdvertiserLinks.createStream(
       this.innerApiCalls.listDisplayVideo360AdvertiserLinks as GaxCall,
       request,
@@ -15623,7 +19758,10 @@ export class AnalyticsAdminServiceClient {
     const defaultCallSettings =
       this._defaults['listDisplayVideo360AdvertiserLinks'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listDisplayVideo360AdvertiserLinks iterate %j', request);
     return this.descriptors.page.listDisplayVideo360AdvertiserLinks.asyncIterate(
       this.innerApiCalls['listDisplayVideo360AdvertiserLinks'] as GaxCall,
       request as {},
@@ -15732,16 +19870,53 @@ export class AnalyticsAdminServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.listDisplayVideo360AdvertiserLinkProposals(
-      request,
-      options,
-      callback
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.analytics.admin.v1alpha.IListDisplayVideo360AdvertiserLinkProposalsRequest,
+          | protos.google.analytics.admin.v1alpha.IListDisplayVideo360AdvertiserLinkProposalsResponse
+          | null
+          | undefined,
+          protos.google.analytics.admin.v1alpha.IDisplayVideo360AdvertiserLinkProposal
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info(
+            'listDisplayVideo360AdvertiserLinkProposals values %j',
+            values
+          );
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info(
+      'listDisplayVideo360AdvertiserLinkProposals request %j',
+      request
     );
+    return this.innerApiCalls
+      .listDisplayVideo360AdvertiserLinkProposals(
+        request,
+        options,
+        wrappedCallback
+      )
+      ?.then(
+        ([response, input, output]: [
+          protos.google.analytics.admin.v1alpha.IDisplayVideo360AdvertiserLinkProposal[],
+          protos.google.analytics.admin.v1alpha.IListDisplayVideo360AdvertiserLinkProposalsRequest | null,
+          protos.google.analytics.admin.v1alpha.IListDisplayVideo360AdvertiserLinkProposalsResponse,
+        ]) => {
+          this._log.info(
+            'listDisplayVideo360AdvertiserLinkProposals values %j',
+            response
+          );
+          return [response, input, output];
+        }
+      );
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listDisplayVideo360AdvertiserLinkProposals`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
@@ -15784,7 +19959,13 @@ export class AnalyticsAdminServiceClient {
     const defaultCallSettings =
       this._defaults['listDisplayVideo360AdvertiserLinkProposals'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info(
+      'listDisplayVideo360AdvertiserLinkProposals stream %j',
+      request
+    );
     return this.descriptors.page.listDisplayVideo360AdvertiserLinkProposals.createStream(
       this.innerApiCalls.listDisplayVideo360AdvertiserLinkProposals as GaxCall,
       request,
@@ -15839,7 +20020,13 @@ export class AnalyticsAdminServiceClient {
     const defaultCallSettings =
       this._defaults['listDisplayVideo360AdvertiserLinkProposals'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info(
+      'listDisplayVideo360AdvertiserLinkProposals iterate %j',
+      request
+    );
     return this.descriptors.page.listDisplayVideo360AdvertiserLinkProposals.asyncIterate(
       this.innerApiCalls[
         'listDisplayVideo360AdvertiserLinkProposals'
@@ -15948,12 +20135,40 @@ export class AnalyticsAdminServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.listCustomDimensions(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.analytics.admin.v1alpha.IListCustomDimensionsRequest,
+          | protos.google.analytics.admin.v1alpha.IListCustomDimensionsResponse
+          | null
+          | undefined,
+          protos.google.analytics.admin.v1alpha.ICustomDimension
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listCustomDimensions values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listCustomDimensions request %j', request);
+    return this.innerApiCalls
+      .listCustomDimensions(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.analytics.admin.v1alpha.ICustomDimension[],
+          protos.google.analytics.admin.v1alpha.IListCustomDimensionsRequest | null,
+          protos.google.analytics.admin.v1alpha.IListCustomDimensionsResponse,
+        ]) => {
+          this._log.info('listCustomDimensions values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listCustomDimensions`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
@@ -15993,7 +20208,10 @@ export class AnalyticsAdminServiceClient {
       });
     const defaultCallSettings = this._defaults['listCustomDimensions'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listCustomDimensions stream %j', request);
     return this.descriptors.page.listCustomDimensions.createStream(
       this.innerApiCalls.listCustomDimensions as GaxCall,
       request,
@@ -16045,7 +20263,10 @@ export class AnalyticsAdminServiceClient {
       });
     const defaultCallSettings = this._defaults['listCustomDimensions'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listCustomDimensions iterate %j', request);
     return this.descriptors.page.listCustomDimensions.asyncIterate(
       this.innerApiCalls['listCustomDimensions'] as GaxCall,
       request as {},
@@ -16152,12 +20373,40 @@ export class AnalyticsAdminServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.listCustomMetrics(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.analytics.admin.v1alpha.IListCustomMetricsRequest,
+          | protos.google.analytics.admin.v1alpha.IListCustomMetricsResponse
+          | null
+          | undefined,
+          protos.google.analytics.admin.v1alpha.ICustomMetric
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listCustomMetrics values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listCustomMetrics request %j', request);
+    return this.innerApiCalls
+      .listCustomMetrics(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.analytics.admin.v1alpha.ICustomMetric[],
+          protos.google.analytics.admin.v1alpha.IListCustomMetricsRequest | null,
+          protos.google.analytics.admin.v1alpha.IListCustomMetricsResponse,
+        ]) => {
+          this._log.info('listCustomMetrics values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listCustomMetrics`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
@@ -16197,7 +20446,10 @@ export class AnalyticsAdminServiceClient {
       });
     const defaultCallSettings = this._defaults['listCustomMetrics'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listCustomMetrics stream %j', request);
     return this.descriptors.page.listCustomMetrics.createStream(
       this.innerApiCalls.listCustomMetrics as GaxCall,
       request,
@@ -16249,7 +20501,10 @@ export class AnalyticsAdminServiceClient {
       });
     const defaultCallSettings = this._defaults['listCustomMetrics'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listCustomMetrics iterate %j', request);
     return this.descriptors.page.listCustomMetrics.asyncIterate(
       this.innerApiCalls['listCustomMetrics'] as GaxCall,
       request as {},
@@ -16356,12 +20611,40 @@ export class AnalyticsAdminServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.listDataStreams(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.analytics.admin.v1alpha.IListDataStreamsRequest,
+          | protos.google.analytics.admin.v1alpha.IListDataStreamsResponse
+          | null
+          | undefined,
+          protos.google.analytics.admin.v1alpha.IDataStream
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listDataStreams values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listDataStreams request %j', request);
+    return this.innerApiCalls
+      .listDataStreams(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.analytics.admin.v1alpha.IDataStream[],
+          protos.google.analytics.admin.v1alpha.IListDataStreamsRequest | null,
+          protos.google.analytics.admin.v1alpha.IListDataStreamsResponse,
+        ]) => {
+          this._log.info('listDataStreams values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listDataStreams`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
@@ -16401,7 +20684,10 @@ export class AnalyticsAdminServiceClient {
       });
     const defaultCallSettings = this._defaults['listDataStreams'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listDataStreams stream %j', request);
     return this.descriptors.page.listDataStreams.createStream(
       this.innerApiCalls.listDataStreams as GaxCall,
       request,
@@ -16453,7 +20739,10 @@ export class AnalyticsAdminServiceClient {
       });
     const defaultCallSettings = this._defaults['listDataStreams'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listDataStreams iterate %j', request);
     return this.descriptors.page.listDataStreams.asyncIterate(
       this.innerApiCalls['listDataStreams'] as GaxCall,
       request as {},
@@ -16562,12 +20851,40 @@ export class AnalyticsAdminServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.listAudiences(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.analytics.admin.v1alpha.IListAudiencesRequest,
+          | protos.google.analytics.admin.v1alpha.IListAudiencesResponse
+          | null
+          | undefined,
+          protos.google.analytics.admin.v1alpha.IAudience
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listAudiences values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listAudiences request %j', request);
+    return this.innerApiCalls
+      .listAudiences(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.analytics.admin.v1alpha.IAudience[],
+          protos.google.analytics.admin.v1alpha.IListAudiencesRequest | null,
+          protos.google.analytics.admin.v1alpha.IListAudiencesResponse,
+        ]) => {
+          this._log.info('listAudiences values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listAudiences`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
@@ -16607,7 +20924,10 @@ export class AnalyticsAdminServiceClient {
       });
     const defaultCallSettings = this._defaults['listAudiences'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listAudiences stream %j', request);
     return this.descriptors.page.listAudiences.createStream(
       this.innerApiCalls.listAudiences as GaxCall,
       request,
@@ -16659,7 +20979,10 @@ export class AnalyticsAdminServiceClient {
       });
     const defaultCallSettings = this._defaults['listAudiences'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listAudiences iterate %j', request);
     return this.descriptors.page.listAudiences.asyncIterate(
       this.innerApiCalls['listAudiences'] as GaxCall,
       request as {},
@@ -16767,12 +21090,40 @@ export class AnalyticsAdminServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.listSearchAds360Links(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.analytics.admin.v1alpha.IListSearchAds360LinksRequest,
+          | protos.google.analytics.admin.v1alpha.IListSearchAds360LinksResponse
+          | null
+          | undefined,
+          protos.google.analytics.admin.v1alpha.ISearchAds360Link
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listSearchAds360Links values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listSearchAds360Links request %j', request);
+    return this.innerApiCalls
+      .listSearchAds360Links(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.analytics.admin.v1alpha.ISearchAds360Link[],
+          protos.google.analytics.admin.v1alpha.IListSearchAds360LinksRequest | null,
+          protos.google.analytics.admin.v1alpha.IListSearchAds360LinksResponse,
+        ]) => {
+          this._log.info('listSearchAds360Links values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listSearchAds360Links`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
@@ -16813,7 +21164,10 @@ export class AnalyticsAdminServiceClient {
       });
     const defaultCallSettings = this._defaults['listSearchAds360Links'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listSearchAds360Links stream %j', request);
     return this.descriptors.page.listSearchAds360Links.createStream(
       this.innerApiCalls.listSearchAds360Links as GaxCall,
       request,
@@ -16866,7 +21220,10 @@ export class AnalyticsAdminServiceClient {
       });
     const defaultCallSettings = this._defaults['listSearchAds360Links'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listSearchAds360Links iterate %j', request);
     return this.descriptors.page.listSearchAds360Links.asyncIterate(
       this.innerApiCalls['listSearchAds360Links'] as GaxCall,
       request as {},
@@ -16975,12 +21332,40 @@ export class AnalyticsAdminServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.listAccessBindings(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.analytics.admin.v1alpha.IListAccessBindingsRequest,
+          | protos.google.analytics.admin.v1alpha.IListAccessBindingsResponse
+          | null
+          | undefined,
+          protos.google.analytics.admin.v1alpha.IAccessBinding
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listAccessBindings values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listAccessBindings request %j', request);
+    return this.innerApiCalls
+      .listAccessBindings(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.analytics.admin.v1alpha.IAccessBinding[],
+          protos.google.analytics.admin.v1alpha.IListAccessBindingsRequest | null,
+          protos.google.analytics.admin.v1alpha.IListAccessBindingsResponse,
+        ]) => {
+          this._log.info('listAccessBindings values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listAccessBindings`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
@@ -17022,7 +21407,10 @@ export class AnalyticsAdminServiceClient {
       });
     const defaultCallSettings = this._defaults['listAccessBindings'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listAccessBindings stream %j', request);
     return this.descriptors.page.listAccessBindings.createStream(
       this.innerApiCalls.listAccessBindings as GaxCall,
       request,
@@ -17076,7 +21464,10 @@ export class AnalyticsAdminServiceClient {
       });
     const defaultCallSettings = this._defaults['listAccessBindings'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listAccessBindings iterate %j', request);
     return this.descriptors.page.listAccessBindings.asyncIterate(
       this.innerApiCalls['listAccessBindings'] as GaxCall,
       request as {},
@@ -17183,12 +21574,40 @@ export class AnalyticsAdminServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.listExpandedDataSets(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.analytics.admin.v1alpha.IListExpandedDataSetsRequest,
+          | protos.google.analytics.admin.v1alpha.IListExpandedDataSetsResponse
+          | null
+          | undefined,
+          protos.google.analytics.admin.v1alpha.IExpandedDataSet
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listExpandedDataSets values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listExpandedDataSets request %j', request);
+    return this.innerApiCalls
+      .listExpandedDataSets(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.analytics.admin.v1alpha.IExpandedDataSet[],
+          protos.google.analytics.admin.v1alpha.IListExpandedDataSetsRequest | null,
+          protos.google.analytics.admin.v1alpha.IListExpandedDataSetsResponse,
+        ]) => {
+          this._log.info('listExpandedDataSets values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listExpandedDataSets`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
@@ -17228,7 +21647,10 @@ export class AnalyticsAdminServiceClient {
       });
     const defaultCallSettings = this._defaults['listExpandedDataSets'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listExpandedDataSets stream %j', request);
     return this.descriptors.page.listExpandedDataSets.createStream(
       this.innerApiCalls.listExpandedDataSets as GaxCall,
       request,
@@ -17280,7 +21702,10 @@ export class AnalyticsAdminServiceClient {
       });
     const defaultCallSettings = this._defaults['listExpandedDataSets'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listExpandedDataSets iterate %j', request);
     return this.descriptors.page.listExpandedDataSets.asyncIterate(
       this.innerApiCalls['listExpandedDataSets'] as GaxCall,
       request as {},
@@ -17388,12 +21813,40 @@ export class AnalyticsAdminServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.listChannelGroups(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.analytics.admin.v1alpha.IListChannelGroupsRequest,
+          | protos.google.analytics.admin.v1alpha.IListChannelGroupsResponse
+          | null
+          | undefined,
+          protos.google.analytics.admin.v1alpha.IChannelGroup
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listChannelGroups values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listChannelGroups request %j', request);
+    return this.innerApiCalls
+      .listChannelGroups(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.analytics.admin.v1alpha.IChannelGroup[],
+          protos.google.analytics.admin.v1alpha.IListChannelGroupsRequest | null,
+          protos.google.analytics.admin.v1alpha.IListChannelGroupsResponse,
+        ]) => {
+          this._log.info('listChannelGroups values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listChannelGroups`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
@@ -17434,7 +21887,10 @@ export class AnalyticsAdminServiceClient {
       });
     const defaultCallSettings = this._defaults['listChannelGroups'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listChannelGroups stream %j', request);
     return this.descriptors.page.listChannelGroups.createStream(
       this.innerApiCalls.listChannelGroups as GaxCall,
       request,
@@ -17487,7 +21943,10 @@ export class AnalyticsAdminServiceClient {
       });
     const defaultCallSettings = this._defaults['listChannelGroups'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listChannelGroups iterate %j', request);
     return this.descriptors.page.listChannelGroups.asyncIterate(
       this.innerApiCalls['listChannelGroups'] as GaxCall,
       request as {},
@@ -17596,12 +22055,40 @@ export class AnalyticsAdminServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.listBigQueryLinks(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.analytics.admin.v1alpha.IListBigQueryLinksRequest,
+          | protos.google.analytics.admin.v1alpha.IListBigQueryLinksResponse
+          | null
+          | undefined,
+          protos.google.analytics.admin.v1alpha.IBigQueryLink
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listBigQueryLinks values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listBigQueryLinks request %j', request);
+    return this.innerApiCalls
+      .listBigQueryLinks(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.analytics.admin.v1alpha.IBigQueryLink[],
+          protos.google.analytics.admin.v1alpha.IListBigQueryLinksRequest | null,
+          protos.google.analytics.admin.v1alpha.IListBigQueryLinksResponse,
+        ]) => {
+          this._log.info('listBigQueryLinks values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listBigQueryLinks`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
@@ -17643,7 +22130,10 @@ export class AnalyticsAdminServiceClient {
       });
     const defaultCallSettings = this._defaults['listBigQueryLinks'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listBigQueryLinks stream %j', request);
     return this.descriptors.page.listBigQueryLinks.createStream(
       this.innerApiCalls.listBigQueryLinks as GaxCall,
       request,
@@ -17697,7 +22187,10 @@ export class AnalyticsAdminServiceClient {
       });
     const defaultCallSettings = this._defaults['listBigQueryLinks'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listBigQueryLinks iterate %j', request);
     return this.descriptors.page.listBigQueryLinks.asyncIterate(
       this.innerApiCalls['listBigQueryLinks'] as GaxCall,
       request as {},
@@ -17806,12 +22299,40 @@ export class AnalyticsAdminServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.listAdSenseLinks(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.analytics.admin.v1alpha.IListAdSenseLinksRequest,
+          | protos.google.analytics.admin.v1alpha.IListAdSenseLinksResponse
+          | null
+          | undefined,
+          protos.google.analytics.admin.v1alpha.IAdSenseLink
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listAdSenseLinks values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listAdSenseLinks request %j', request);
+    return this.innerApiCalls
+      .listAdSenseLinks(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.analytics.admin.v1alpha.IAdSenseLink[],
+          protos.google.analytics.admin.v1alpha.IListAdSenseLinksRequest | null,
+          protos.google.analytics.admin.v1alpha.IListAdSenseLinksResponse,
+        ]) => {
+          this._log.info('listAdSenseLinks values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listAdSenseLinks`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
@@ -17853,7 +22374,10 @@ export class AnalyticsAdminServiceClient {
       });
     const defaultCallSettings = this._defaults['listAdSenseLinks'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listAdSenseLinks stream %j', request);
     return this.descriptors.page.listAdSenseLinks.createStream(
       this.innerApiCalls.listAdSenseLinks as GaxCall,
       request,
@@ -17907,7 +22431,10 @@ export class AnalyticsAdminServiceClient {
       });
     const defaultCallSettings = this._defaults['listAdSenseLinks'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listAdSenseLinks iterate %j', request);
     return this.descriptors.page.listAdSenseLinks.asyncIterate(
       this.innerApiCalls['listAdSenseLinks'] as GaxCall,
       request as {},
@@ -18014,12 +22541,40 @@ export class AnalyticsAdminServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.listEventCreateRules(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.analytics.admin.v1alpha.IListEventCreateRulesRequest,
+          | protos.google.analytics.admin.v1alpha.IListEventCreateRulesResponse
+          | null
+          | undefined,
+          protos.google.analytics.admin.v1alpha.IEventCreateRule
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listEventCreateRules values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listEventCreateRules request %j', request);
+    return this.innerApiCalls
+      .listEventCreateRules(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.analytics.admin.v1alpha.IEventCreateRule[],
+          protos.google.analytics.admin.v1alpha.IListEventCreateRulesRequest | null,
+          protos.google.analytics.admin.v1alpha.IListEventCreateRulesResponse,
+        ]) => {
+          this._log.info('listEventCreateRules values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listEventCreateRules`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
@@ -18059,7 +22614,10 @@ export class AnalyticsAdminServiceClient {
       });
     const defaultCallSettings = this._defaults['listEventCreateRules'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listEventCreateRules stream %j', request);
     return this.descriptors.page.listEventCreateRules.createStream(
       this.innerApiCalls.listEventCreateRules as GaxCall,
       request,
@@ -18111,7 +22669,10 @@ export class AnalyticsAdminServiceClient {
       });
     const defaultCallSettings = this._defaults['listEventCreateRules'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listEventCreateRules iterate %j', request);
     return this.descriptors.page.listEventCreateRules.asyncIterate(
       this.innerApiCalls['listEventCreateRules'] as GaxCall,
       request as {},
@@ -18218,12 +22779,40 @@ export class AnalyticsAdminServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.listEventEditRules(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.analytics.admin.v1alpha.IListEventEditRulesRequest,
+          | protos.google.analytics.admin.v1alpha.IListEventEditRulesResponse
+          | null
+          | undefined,
+          protos.google.analytics.admin.v1alpha.IEventEditRule
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listEventEditRules values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listEventEditRules request %j', request);
+    return this.innerApiCalls
+      .listEventEditRules(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.analytics.admin.v1alpha.IEventEditRule[],
+          protos.google.analytics.admin.v1alpha.IListEventEditRulesRequest | null,
+          protos.google.analytics.admin.v1alpha.IListEventEditRulesResponse,
+        ]) => {
+          this._log.info('listEventEditRules values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listEventEditRules`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
@@ -18263,7 +22852,10 @@ export class AnalyticsAdminServiceClient {
       });
     const defaultCallSettings = this._defaults['listEventEditRules'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listEventEditRules stream %j', request);
     return this.descriptors.page.listEventEditRules.createStream(
       this.innerApiCalls.listEventEditRules as GaxCall,
       request,
@@ -18315,7 +22907,10 @@ export class AnalyticsAdminServiceClient {
       });
     const defaultCallSettings = this._defaults['listEventEditRules'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listEventEditRules iterate %j', request);
     return this.descriptors.page.listEventEditRules.asyncIterate(
       this.innerApiCalls['listEventEditRules'] as GaxCall,
       request as {},
@@ -18422,12 +23017,40 @@ export class AnalyticsAdminServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.listCalculatedMetrics(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.analytics.admin.v1alpha.IListCalculatedMetricsRequest,
+          | protos.google.analytics.admin.v1alpha.IListCalculatedMetricsResponse
+          | null
+          | undefined,
+          protos.google.analytics.admin.v1alpha.ICalculatedMetric
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listCalculatedMetrics values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listCalculatedMetrics request %j', request);
+    return this.innerApiCalls
+      .listCalculatedMetrics(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.analytics.admin.v1alpha.ICalculatedMetric[],
+          protos.google.analytics.admin.v1alpha.IListCalculatedMetricsRequest | null,
+          protos.google.analytics.admin.v1alpha.IListCalculatedMetricsResponse,
+        ]) => {
+          this._log.info('listCalculatedMetrics values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listCalculatedMetrics`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
@@ -18467,7 +23090,10 @@ export class AnalyticsAdminServiceClient {
       });
     const defaultCallSettings = this._defaults['listCalculatedMetrics'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listCalculatedMetrics stream %j', request);
     return this.descriptors.page.listCalculatedMetrics.createStream(
       this.innerApiCalls.listCalculatedMetrics as GaxCall,
       request,
@@ -18519,7 +23145,10 @@ export class AnalyticsAdminServiceClient {
       });
     const defaultCallSettings = this._defaults['listCalculatedMetrics'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listCalculatedMetrics iterate %j', request);
     return this.descriptors.page.listCalculatedMetrics.asyncIterate(
       this.innerApiCalls['listCalculatedMetrics'] as GaxCall,
       request as {},
@@ -18630,16 +23259,40 @@ export class AnalyticsAdminServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.listRollupPropertySourceLinks(
-      request,
-      options,
-      callback
-    );
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.analytics.admin.v1alpha.IListRollupPropertySourceLinksRequest,
+          | protos.google.analytics.admin.v1alpha.IListRollupPropertySourceLinksResponse
+          | null
+          | undefined,
+          protos.google.analytics.admin.v1alpha.IRollupPropertySourceLink
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listRollupPropertySourceLinks values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listRollupPropertySourceLinks request %j', request);
+    return this.innerApiCalls
+      .listRollupPropertySourceLinks(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.analytics.admin.v1alpha.IRollupPropertySourceLink[],
+          protos.google.analytics.admin.v1alpha.IListRollupPropertySourceLinksRequest | null,
+          protos.google.analytics.admin.v1alpha.IListRollupPropertySourceLinksResponse,
+        ]) => {
+          this._log.info('listRollupPropertySourceLinks values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listRollupPropertySourceLinks`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
@@ -18681,7 +23334,10 @@ export class AnalyticsAdminServiceClient {
       });
     const defaultCallSettings = this._defaults['listRollupPropertySourceLinks'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listRollupPropertySourceLinks stream %j', request);
     return this.descriptors.page.listRollupPropertySourceLinks.createStream(
       this.innerApiCalls.listRollupPropertySourceLinks as GaxCall,
       request,
@@ -18735,7 +23391,10 @@ export class AnalyticsAdminServiceClient {
       });
     const defaultCallSettings = this._defaults['listRollupPropertySourceLinks'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listRollupPropertySourceLinks iterate %j', request);
     return this.descriptors.page.listRollupPropertySourceLinks.asyncIterate(
       this.innerApiCalls['listRollupPropertySourceLinks'] as GaxCall,
       request as {},
@@ -18845,16 +23504,40 @@ export class AnalyticsAdminServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.listSubpropertyEventFilters(
-      request,
-      options,
-      callback
-    );
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.analytics.admin.v1alpha.IListSubpropertyEventFiltersRequest,
+          | protos.google.analytics.admin.v1alpha.IListSubpropertyEventFiltersResponse
+          | null
+          | undefined,
+          protos.google.analytics.admin.v1alpha.ISubpropertyEventFilter
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listSubpropertyEventFilters values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listSubpropertyEventFilters request %j', request);
+    return this.innerApiCalls
+      .listSubpropertyEventFilters(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.analytics.admin.v1alpha.ISubpropertyEventFilter[],
+          protos.google.analytics.admin.v1alpha.IListSubpropertyEventFiltersRequest | null,
+          protos.google.analytics.admin.v1alpha.IListSubpropertyEventFiltersResponse,
+        ]) => {
+          this._log.info('listSubpropertyEventFilters values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listSubpropertyEventFilters`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
@@ -18897,7 +23580,10 @@ export class AnalyticsAdminServiceClient {
       });
     const defaultCallSettings = this._defaults['listSubpropertyEventFilters'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listSubpropertyEventFilters stream %j', request);
     return this.descriptors.page.listSubpropertyEventFilters.createStream(
       this.innerApiCalls.listSubpropertyEventFilters as GaxCall,
       request,
@@ -18952,7 +23638,10 @@ export class AnalyticsAdminServiceClient {
       });
     const defaultCallSettings = this._defaults['listSubpropertyEventFilters'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listSubpropertyEventFilters iterate %j', request);
     return this.descriptors.page.listSubpropertyEventFilters.asyncIterate(
       this.innerApiCalls['listSubpropertyEventFilters'] as GaxCall,
       request as {},
@@ -20277,6 +24966,7 @@ export class AnalyticsAdminServiceClient {
   close(): Promise<void> {
     if (this.analyticsAdminServiceStub && !this._terminated) {
       return this.analyticsAdminServiceStub.then(stub => {
+        this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
       });

@@ -274,7 +274,9 @@ describe('v1.AdvisoryNotificationsServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      client.initialize().catch(err => {
+        throw err;
+      });
       assert(client.advisoryNotificationsServiceStub);
       client.close().then(() => {
         done();
@@ -345,7 +347,7 @@ describe('v1.AdvisoryNotificationsServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.advisorynotifications.v1.GetNotificationRequest()
       );
@@ -354,7 +356,7 @@ describe('v1.AdvisoryNotificationsServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.advisorynotifications.v1.Notification()
       );
@@ -379,7 +381,7 @@ describe('v1.AdvisoryNotificationsServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.advisorynotifications.v1.GetNotificationRequest()
       );
@@ -388,7 +390,7 @@ describe('v1.AdvisoryNotificationsServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.advisorynotifications.v1.Notification()
       );
@@ -429,7 +431,7 @@ describe('v1.AdvisoryNotificationsServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.advisorynotifications.v1.GetNotificationRequest()
       );
@@ -438,7 +440,7 @@ describe('v1.AdvisoryNotificationsServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getNotification = stubSimpleCall(
         undefined,
@@ -463,7 +465,7 @@ describe('v1.AdvisoryNotificationsServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.advisorynotifications.v1.GetNotificationRequest()
       );
@@ -487,7 +489,7 @@ describe('v1.AdvisoryNotificationsServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.advisorynotifications.v1.GetSettingsRequest()
       );
@@ -496,7 +498,7 @@ describe('v1.AdvisoryNotificationsServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.advisorynotifications.v1.Settings()
       );
@@ -521,7 +523,7 @@ describe('v1.AdvisoryNotificationsServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.advisorynotifications.v1.GetSettingsRequest()
       );
@@ -530,7 +532,7 @@ describe('v1.AdvisoryNotificationsServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.advisorynotifications.v1.Settings()
       );
@@ -571,7 +573,7 @@ describe('v1.AdvisoryNotificationsServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.advisorynotifications.v1.GetSettingsRequest()
       );
@@ -580,7 +582,7 @@ describe('v1.AdvisoryNotificationsServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getSettings = stubSimpleCall(
         undefined,
@@ -605,7 +607,7 @@ describe('v1.AdvisoryNotificationsServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.advisorynotifications.v1.GetSettingsRequest()
       );
@@ -629,7 +631,7 @@ describe('v1.AdvisoryNotificationsServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.advisorynotifications.v1.UpdateSettingsRequest()
       );
@@ -639,7 +641,7 @@ describe('v1.AdvisoryNotificationsServiceClient', () => {
         ['settings', 'name']
       );
       request.settings.name = defaultValue1;
-      const expectedHeaderRequestParams = `settings.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `settings.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.advisorynotifications.v1.Settings()
       );
@@ -664,7 +666,7 @@ describe('v1.AdvisoryNotificationsServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.advisorynotifications.v1.UpdateSettingsRequest()
       );
@@ -674,7 +676,7 @@ describe('v1.AdvisoryNotificationsServiceClient', () => {
         ['settings', 'name']
       );
       request.settings.name = defaultValue1;
-      const expectedHeaderRequestParams = `settings.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `settings.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.advisorynotifications.v1.Settings()
       );
@@ -715,7 +717,7 @@ describe('v1.AdvisoryNotificationsServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.advisorynotifications.v1.UpdateSettingsRequest()
       );
@@ -725,7 +727,7 @@ describe('v1.AdvisoryNotificationsServiceClient', () => {
         ['settings', 'name']
       );
       request.settings.name = defaultValue1;
-      const expectedHeaderRequestParams = `settings.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `settings.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateSettings = stubSimpleCall(
         undefined,
@@ -750,7 +752,7 @@ describe('v1.AdvisoryNotificationsServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.advisorynotifications.v1.UpdateSettingsRequest()
       );
@@ -775,7 +777,7 @@ describe('v1.AdvisoryNotificationsServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.advisorynotifications.v1.ListNotificationsRequest()
       );
@@ -784,7 +786,7 @@ describe('v1.AdvisoryNotificationsServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.advisorynotifications.v1.Notification()
@@ -817,7 +819,7 @@ describe('v1.AdvisoryNotificationsServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.advisorynotifications.v1.ListNotificationsRequest()
       );
@@ -826,7 +828,7 @@ describe('v1.AdvisoryNotificationsServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.advisorynotifications.v1.Notification()
@@ -877,7 +879,7 @@ describe('v1.AdvisoryNotificationsServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.advisorynotifications.v1.ListNotificationsRequest()
       );
@@ -886,7 +888,7 @@ describe('v1.AdvisoryNotificationsServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listNotifications = stubSimpleCall(
         undefined,
@@ -911,7 +913,7 @@ describe('v1.AdvisoryNotificationsServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.advisorynotifications.v1.ListNotificationsRequest()
       );
@@ -920,7 +922,7 @@ describe('v1.AdvisoryNotificationsServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.advisorynotifications.v1.Notification()
@@ -977,7 +979,7 @@ describe('v1.AdvisoryNotificationsServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.advisorynotifications.v1.ListNotificationsRequest()
       );
@@ -986,7 +988,7 @@ describe('v1.AdvisoryNotificationsServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listNotifications.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -1032,7 +1034,7 @@ describe('v1.AdvisoryNotificationsServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.advisorynotifications.v1.ListNotificationsRequest()
       );
@@ -1041,7 +1043,7 @@ describe('v1.AdvisoryNotificationsServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.advisorynotifications.v1.Notification()
@@ -1085,7 +1087,7 @@ describe('v1.AdvisoryNotificationsServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.advisorynotifications.v1.ListNotificationsRequest()
       );
@@ -1094,7 +1096,7 @@ describe('v1.AdvisoryNotificationsServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listNotifications.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -1123,7 +1125,7 @@ describe('v1.AdvisoryNotificationsServiceClient', () => {
   });
 
   describe('Path templates', () => {
-    describe('organizationLocation', () => {
+    describe('organizationLocation', async () => {
       const fakePath = '/rendered/path/organizationLocation';
       const expectedParameters = {
         organization: 'organizationValue',
@@ -1136,7 +1138,7 @@ describe('v1.AdvisoryNotificationsServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.organizationLocationPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -1189,7 +1191,7 @@ describe('v1.AdvisoryNotificationsServiceClient', () => {
       });
     });
 
-    describe('organizationLocationNotification', () => {
+    describe('organizationLocationNotification', async () => {
       const fakePath = '/rendered/path/organizationLocationNotification';
       const expectedParameters = {
         organization: 'organizationValue',
@@ -1203,7 +1205,7 @@ describe('v1.AdvisoryNotificationsServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.organizationLocationNotificationPathTemplate.render =
         sinon.stub().returns(fakePath);
       client.pathTemplates.organizationLocationNotificationPathTemplate.match =
@@ -1275,7 +1277,7 @@ describe('v1.AdvisoryNotificationsServiceClient', () => {
       });
     });
 
-    describe('organizationLocationSettings', () => {
+    describe('organizationLocationSettings', async () => {
       const fakePath = '/rendered/path/organizationLocationSettings';
       const expectedParameters = {
         organization: 'organizationValue',
@@ -1288,7 +1290,7 @@ describe('v1.AdvisoryNotificationsServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.organizationLocationSettingsPathTemplate.render =
         sinon.stub().returns(fakePath);
       client.pathTemplates.organizationLocationSettingsPathTemplate.match =
@@ -1341,7 +1343,7 @@ describe('v1.AdvisoryNotificationsServiceClient', () => {
       });
     });
 
-    describe('projectLocationNotification', () => {
+    describe('projectLocationNotification', async () => {
       const fakePath = '/rendered/path/projectLocationNotification';
       const expectedParameters = {
         project: 'projectValue',
@@ -1355,7 +1357,7 @@ describe('v1.AdvisoryNotificationsServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectLocationNotificationPathTemplate.render =
         sinon.stub().returns(fakePath);
       client.pathTemplates.projectLocationNotificationPathTemplate.match = sinon
@@ -1422,7 +1424,7 @@ describe('v1.AdvisoryNotificationsServiceClient', () => {
       });
     });
 
-    describe('projectLocationSettings', () => {
+    describe('projectLocationSettings', async () => {
       const fakePath = '/rendered/path/projectLocationSettings';
       const expectedParameters = {
         project: 'projectValue',
@@ -1435,7 +1437,7 @@ describe('v1.AdvisoryNotificationsServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectLocationSettingsPathTemplate.render = sinon
         .stub()
         .returns(fakePath);

@@ -1,7 +1,7 @@
 {
     "clientLibrary": {
         "name": "nodejs-alloydb",
-        "version": "1.10.1",
+        "version": "2.1.0",
         "language": "TYPESCRIPT",
         "apis": [
             {

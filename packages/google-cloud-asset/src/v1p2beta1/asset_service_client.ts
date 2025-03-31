@@ -27,6 +27,7 @@ import type {
 
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
+import {loggingUtils as logging} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -51,6 +52,8 @@ export class AssetServiceClient {
   private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
+  private _log = logging.log('asset');
+
   auth: gax.GoogleAuth;
   descriptors: Descriptors = {
     page: {},
@@ -85,7 +88,7 @@ export class AssetServiceClient {
    *     Developer's Console, e.g. 'grape-spaceship-123'. We will also check
    *     the environment variable GCLOUD_PROJECT for your project ID. If your
    *     app is running in an environment which supports
-   *     {@link https://developers.google.com/identity/protocols/application-default-credentials Application Default Credentials},
+   *     {@link https://cloud.google.com/docs/authentication/application-default-credentials Application Default Credentials},
    *     your project ID will be detected automatically.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
@@ -480,8 +483,36 @@ export class AssetServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.createFeed(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('createFeed request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.asset.v1p2beta1.IFeed,
+          | protos.google.cloud.asset.v1p2beta1.ICreateFeedRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('createFeed response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .createFeed(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.asset.v1p2beta1.IFeed,
+          protos.google.cloud.asset.v1p2beta1.ICreateFeedRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createFeed response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Gets details about an asset feed.
@@ -567,8 +598,36 @@ export class AssetServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.getFeed(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('getFeed request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.asset.v1p2beta1.IFeed,
+          | protos.google.cloud.asset.v1p2beta1.IGetFeedRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getFeed response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getFeed(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.asset.v1p2beta1.IFeed,
+          protos.google.cloud.asset.v1p2beta1.IGetFeedRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getFeed response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Lists all asset feeds in a parent project/folder/organization.
@@ -653,8 +712,36 @@ export class AssetServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.listFeeds(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listFeeds request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.asset.v1p2beta1.IListFeedsResponse,
+          | protos.google.cloud.asset.v1p2beta1.IListFeedsRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('listFeeds response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .listFeeds(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.asset.v1p2beta1.IListFeedsResponse,
+          protos.google.cloud.asset.v1p2beta1.IListFeedsRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('listFeeds response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Updates an asset feed configuration.
@@ -745,8 +832,36 @@ export class AssetServiceClient {
       this._gaxModule.routingHeader.fromParams({
         'feed.name': request.feed!.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.updateFeed(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('updateFeed request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.asset.v1p2beta1.IFeed,
+          | protos.google.cloud.asset.v1p2beta1.IUpdateFeedRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('updateFeed response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .updateFeed(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.asset.v1p2beta1.IFeed,
+          protos.google.cloud.asset.v1p2beta1.IUpdateFeedRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('updateFeed response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Deletes an asset feed.
@@ -832,8 +947,36 @@ export class AssetServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.deleteFeed(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('deleteFeed request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.cloud.asset.v1p2beta1.IDeleteFeedRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('deleteFeed response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .deleteFeed(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.protobuf.IEmpty,
+          protos.google.cloud.asset.v1p2beta1.IDeleteFeedRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteFeed response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
 
   // --------------------
@@ -1066,6 +1209,7 @@ export class AssetServiceClient {
   close(): Promise<void> {
     if (this.assetServiceStub && !this._terminated) {
       return this.assetServiceStub.then(stub => {
+        this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
       });

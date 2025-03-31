@@ -288,7 +288,9 @@ describe('v1.EventarcClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      client.initialize().catch(err => {
+        throw err;
+      });
       assert(client.eventarcStub);
       client.close().then(() => {
         done();
@@ -347,7 +349,7 @@ describe('v1.EventarcClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.eventarc.v1.GetTriggerRequest()
       );
@@ -378,7 +380,7 @@ describe('v1.EventarcClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.eventarc.v1.GetTriggerRequest()
       );
@@ -425,7 +427,7 @@ describe('v1.EventarcClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.eventarc.v1.GetTriggerRequest()
       );
@@ -456,7 +458,7 @@ describe('v1.EventarcClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.eventarc.v1.GetTriggerRequest()
       );
@@ -477,7 +479,7 @@ describe('v1.EventarcClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.eventarc.v1.GetChannelRequest()
       );
@@ -508,7 +510,7 @@ describe('v1.EventarcClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.eventarc.v1.GetChannelRequest()
       );
@@ -555,7 +557,7 @@ describe('v1.EventarcClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.eventarc.v1.GetChannelRequest()
       );
@@ -586,7 +588,7 @@ describe('v1.EventarcClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.eventarc.v1.GetChannelRequest()
       );
@@ -607,7 +609,7 @@ describe('v1.EventarcClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.eventarc.v1.GetProviderRequest()
       );
@@ -638,7 +640,7 @@ describe('v1.EventarcClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.eventarc.v1.GetProviderRequest()
       );
@@ -685,7 +687,7 @@ describe('v1.EventarcClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.eventarc.v1.GetProviderRequest()
       );
@@ -716,7 +718,7 @@ describe('v1.EventarcClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.eventarc.v1.GetProviderRequest()
       );
@@ -737,7 +739,7 @@ describe('v1.EventarcClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.eventarc.v1.GetChannelConnectionRequest()
       );
@@ -769,7 +771,7 @@ describe('v1.EventarcClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.eventarc.v1.GetChannelConnectionRequest()
       );
@@ -816,7 +818,7 @@ describe('v1.EventarcClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.eventarc.v1.GetChannelConnectionRequest()
       );
@@ -847,7 +849,7 @@ describe('v1.EventarcClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.eventarc.v1.GetChannelConnectionRequest()
       );
@@ -868,7 +870,7 @@ describe('v1.EventarcClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.eventarc.v1.GetGoogleChannelConfigRequest()
       );
@@ -900,7 +902,7 @@ describe('v1.EventarcClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.eventarc.v1.GetGoogleChannelConfigRequest()
       );
@@ -947,7 +949,7 @@ describe('v1.EventarcClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.eventarc.v1.GetGoogleChannelConfigRequest()
       );
@@ -981,7 +983,7 @@ describe('v1.EventarcClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.eventarc.v1.GetGoogleChannelConfigRequest()
       );
@@ -1005,7 +1007,7 @@ describe('v1.EventarcClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.eventarc.v1.UpdateGoogleChannelConfigRequest()
       );
@@ -1038,7 +1040,7 @@ describe('v1.EventarcClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.eventarc.v1.UpdateGoogleChannelConfigRequest()
       );
@@ -1086,7 +1088,7 @@ describe('v1.EventarcClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.eventarc.v1.UpdateGoogleChannelConfigRequest()
       );
@@ -1121,7 +1123,7 @@ describe('v1.EventarcClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.eventarc.v1.UpdateGoogleChannelConfigRequest()
       );
@@ -1146,7 +1148,7 @@ describe('v1.EventarcClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.eventarc.v1.GetMessageBusRequest()
       );
@@ -1177,7 +1179,7 @@ describe('v1.EventarcClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.eventarc.v1.GetMessageBusRequest()
       );
@@ -1224,7 +1226,7 @@ describe('v1.EventarcClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.eventarc.v1.GetMessageBusRequest()
       );
@@ -1255,7 +1257,7 @@ describe('v1.EventarcClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.eventarc.v1.GetMessageBusRequest()
       );
@@ -1276,7 +1278,7 @@ describe('v1.EventarcClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.eventarc.v1.GetEnrollmentRequest()
       );
@@ -1307,7 +1309,7 @@ describe('v1.EventarcClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.eventarc.v1.GetEnrollmentRequest()
       );
@@ -1354,7 +1356,7 @@ describe('v1.EventarcClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.eventarc.v1.GetEnrollmentRequest()
       );
@@ -1385,7 +1387,7 @@ describe('v1.EventarcClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.eventarc.v1.GetEnrollmentRequest()
       );
@@ -1406,7 +1408,7 @@ describe('v1.EventarcClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.eventarc.v1.GetPipelineRequest()
       );
@@ -1437,7 +1439,7 @@ describe('v1.EventarcClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.eventarc.v1.GetPipelineRequest()
       );
@@ -1484,7 +1486,7 @@ describe('v1.EventarcClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.eventarc.v1.GetPipelineRequest()
       );
@@ -1515,7 +1517,7 @@ describe('v1.EventarcClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.eventarc.v1.GetPipelineRequest()
       );
@@ -1536,7 +1538,7 @@ describe('v1.EventarcClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.eventarc.v1.GetGoogleApiSourceRequest()
       );
@@ -1568,7 +1570,7 @@ describe('v1.EventarcClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.eventarc.v1.GetGoogleApiSourceRequest()
       );
@@ -1615,7 +1617,7 @@ describe('v1.EventarcClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.eventarc.v1.GetGoogleApiSourceRequest()
       );
@@ -1646,7 +1648,7 @@ describe('v1.EventarcClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.eventarc.v1.GetGoogleApiSourceRequest()
       );
@@ -1667,7 +1669,7 @@ describe('v1.EventarcClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.eventarc.v1.CreateTriggerRequest()
       );
@@ -1700,7 +1702,7 @@ describe('v1.EventarcClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.eventarc.v1.CreateTriggerRequest()
       );
@@ -1754,7 +1756,7 @@ describe('v1.EventarcClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.eventarc.v1.CreateTriggerRequest()
       );
@@ -1785,7 +1787,7 @@ describe('v1.EventarcClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.eventarc.v1.CreateTriggerRequest()
       );
@@ -1818,7 +1820,7 @@ describe('v1.EventarcClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -1840,7 +1842,7 @@ describe('v1.EventarcClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -1861,7 +1863,7 @@ describe('v1.EventarcClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.eventarc.v1.UpdateTriggerRequest()
       );
@@ -1895,7 +1897,7 @@ describe('v1.EventarcClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.eventarc.v1.UpdateTriggerRequest()
       );
@@ -1950,7 +1952,7 @@ describe('v1.EventarcClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.eventarc.v1.UpdateTriggerRequest()
       );
@@ -1982,7 +1984,7 @@ describe('v1.EventarcClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.eventarc.v1.UpdateTriggerRequest()
       );
@@ -2016,7 +2018,7 @@ describe('v1.EventarcClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -2038,7 +2040,7 @@ describe('v1.EventarcClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -2059,7 +2061,7 @@ describe('v1.EventarcClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.eventarc.v1.DeleteTriggerRequest()
       );
@@ -2092,7 +2094,7 @@ describe('v1.EventarcClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.eventarc.v1.DeleteTriggerRequest()
       );
@@ -2146,7 +2148,7 @@ describe('v1.EventarcClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.eventarc.v1.DeleteTriggerRequest()
       );
@@ -2177,7 +2179,7 @@ describe('v1.EventarcClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.eventarc.v1.DeleteTriggerRequest()
       );
@@ -2210,7 +2212,7 @@ describe('v1.EventarcClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -2232,7 +2234,7 @@ describe('v1.EventarcClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -2253,7 +2255,7 @@ describe('v1.EventarcClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.eventarc.v1.CreateChannelRequest()
       );
@@ -2286,7 +2288,7 @@ describe('v1.EventarcClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.eventarc.v1.CreateChannelRequest()
       );
@@ -2340,7 +2342,7 @@ describe('v1.EventarcClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.eventarc.v1.CreateChannelRequest()
       );
@@ -2371,7 +2373,7 @@ describe('v1.EventarcClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.eventarc.v1.CreateChannelRequest()
       );
@@ -2404,7 +2406,7 @@ describe('v1.EventarcClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -2426,7 +2428,7 @@ describe('v1.EventarcClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -2447,7 +2449,7 @@ describe('v1.EventarcClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.eventarc.v1.UpdateChannelRequest()
       );
@@ -2481,7 +2483,7 @@ describe('v1.EventarcClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.eventarc.v1.UpdateChannelRequest()
       );
@@ -2536,7 +2538,7 @@ describe('v1.EventarcClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.eventarc.v1.UpdateChannelRequest()
       );
@@ -2568,7 +2570,7 @@ describe('v1.EventarcClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.eventarc.v1.UpdateChannelRequest()
       );
@@ -2602,7 +2604,7 @@ describe('v1.EventarcClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -2624,7 +2626,7 @@ describe('v1.EventarcClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -2645,7 +2647,7 @@ describe('v1.EventarcClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.eventarc.v1.DeleteChannelRequest()
       );
@@ -2678,7 +2680,7 @@ describe('v1.EventarcClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.eventarc.v1.DeleteChannelRequest()
       );
@@ -2732,7 +2734,7 @@ describe('v1.EventarcClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.eventarc.v1.DeleteChannelRequest()
       );
@@ -2763,7 +2765,7 @@ describe('v1.EventarcClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.eventarc.v1.DeleteChannelRequest()
       );
@@ -2796,7 +2798,7 @@ describe('v1.EventarcClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -2818,7 +2820,7 @@ describe('v1.EventarcClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -2839,7 +2841,7 @@ describe('v1.EventarcClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.eventarc.v1.CreateChannelConnectionRequest()
       );
@@ -2872,7 +2874,7 @@ describe('v1.EventarcClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.eventarc.v1.CreateChannelConnectionRequest()
       );
@@ -2926,7 +2928,7 @@ describe('v1.EventarcClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.eventarc.v1.CreateChannelConnectionRequest()
       );
@@ -2960,7 +2962,7 @@ describe('v1.EventarcClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.eventarc.v1.CreateChannelConnectionRequest()
       );
@@ -2993,7 +2995,7 @@ describe('v1.EventarcClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -3016,7 +3018,7 @@ describe('v1.EventarcClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -3037,7 +3039,7 @@ describe('v1.EventarcClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.eventarc.v1.DeleteChannelConnectionRequest()
       );
@@ -3070,7 +3072,7 @@ describe('v1.EventarcClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.eventarc.v1.DeleteChannelConnectionRequest()
       );
@@ -3124,7 +3126,7 @@ describe('v1.EventarcClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.eventarc.v1.DeleteChannelConnectionRequest()
       );
@@ -3158,7 +3160,7 @@ describe('v1.EventarcClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.eventarc.v1.DeleteChannelConnectionRequest()
       );
@@ -3191,7 +3193,7 @@ describe('v1.EventarcClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -3214,7 +3216,7 @@ describe('v1.EventarcClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -3235,7 +3237,7 @@ describe('v1.EventarcClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.eventarc.v1.CreateMessageBusRequest()
       );
@@ -3268,7 +3270,7 @@ describe('v1.EventarcClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.eventarc.v1.CreateMessageBusRequest()
       );
@@ -3322,7 +3324,7 @@ describe('v1.EventarcClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.eventarc.v1.CreateMessageBusRequest()
       );
@@ -3353,7 +3355,7 @@ describe('v1.EventarcClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.eventarc.v1.CreateMessageBusRequest()
       );
@@ -3386,7 +3388,7 @@ describe('v1.EventarcClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -3408,7 +3410,7 @@ describe('v1.EventarcClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -3429,7 +3431,7 @@ describe('v1.EventarcClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.eventarc.v1.UpdateMessageBusRequest()
       );
@@ -3463,7 +3465,7 @@ describe('v1.EventarcClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.eventarc.v1.UpdateMessageBusRequest()
       );
@@ -3518,7 +3520,7 @@ describe('v1.EventarcClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.eventarc.v1.UpdateMessageBusRequest()
       );
@@ -3550,7 +3552,7 @@ describe('v1.EventarcClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.eventarc.v1.UpdateMessageBusRequest()
       );
@@ -3584,7 +3586,7 @@ describe('v1.EventarcClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -3606,7 +3608,7 @@ describe('v1.EventarcClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -3627,7 +3629,7 @@ describe('v1.EventarcClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.eventarc.v1.DeleteMessageBusRequest()
       );
@@ -3660,7 +3662,7 @@ describe('v1.EventarcClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.eventarc.v1.DeleteMessageBusRequest()
       );
@@ -3714,7 +3716,7 @@ describe('v1.EventarcClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.eventarc.v1.DeleteMessageBusRequest()
       );
@@ -3745,7 +3747,7 @@ describe('v1.EventarcClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.eventarc.v1.DeleteMessageBusRequest()
       );
@@ -3778,7 +3780,7 @@ describe('v1.EventarcClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -3800,7 +3802,7 @@ describe('v1.EventarcClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -3821,7 +3823,7 @@ describe('v1.EventarcClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.eventarc.v1.CreateEnrollmentRequest()
       );
@@ -3854,7 +3856,7 @@ describe('v1.EventarcClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.eventarc.v1.CreateEnrollmentRequest()
       );
@@ -3908,7 +3910,7 @@ describe('v1.EventarcClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.eventarc.v1.CreateEnrollmentRequest()
       );
@@ -3939,7 +3941,7 @@ describe('v1.EventarcClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.eventarc.v1.CreateEnrollmentRequest()
       );
@@ -3972,7 +3974,7 @@ describe('v1.EventarcClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -3994,7 +3996,7 @@ describe('v1.EventarcClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -4015,7 +4017,7 @@ describe('v1.EventarcClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.eventarc.v1.UpdateEnrollmentRequest()
       );
@@ -4049,7 +4051,7 @@ describe('v1.EventarcClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.eventarc.v1.UpdateEnrollmentRequest()
       );
@@ -4104,7 +4106,7 @@ describe('v1.EventarcClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.eventarc.v1.UpdateEnrollmentRequest()
       );
@@ -4136,7 +4138,7 @@ describe('v1.EventarcClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.eventarc.v1.UpdateEnrollmentRequest()
       );
@@ -4170,7 +4172,7 @@ describe('v1.EventarcClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -4192,7 +4194,7 @@ describe('v1.EventarcClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -4213,7 +4215,7 @@ describe('v1.EventarcClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.eventarc.v1.DeleteEnrollmentRequest()
       );
@@ -4246,7 +4248,7 @@ describe('v1.EventarcClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.eventarc.v1.DeleteEnrollmentRequest()
       );
@@ -4300,7 +4302,7 @@ describe('v1.EventarcClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.eventarc.v1.DeleteEnrollmentRequest()
       );
@@ -4331,7 +4333,7 @@ describe('v1.EventarcClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.eventarc.v1.DeleteEnrollmentRequest()
       );
@@ -4364,7 +4366,7 @@ describe('v1.EventarcClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -4386,7 +4388,7 @@ describe('v1.EventarcClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -4407,7 +4409,7 @@ describe('v1.EventarcClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.eventarc.v1.CreatePipelineRequest()
       );
@@ -4440,7 +4442,7 @@ describe('v1.EventarcClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.eventarc.v1.CreatePipelineRequest()
       );
@@ -4494,7 +4496,7 @@ describe('v1.EventarcClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.eventarc.v1.CreatePipelineRequest()
       );
@@ -4525,7 +4527,7 @@ describe('v1.EventarcClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.eventarc.v1.CreatePipelineRequest()
       );
@@ -4558,7 +4560,7 @@ describe('v1.EventarcClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -4580,7 +4582,7 @@ describe('v1.EventarcClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -4601,7 +4603,7 @@ describe('v1.EventarcClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.eventarc.v1.UpdatePipelineRequest()
       );
@@ -4635,7 +4637,7 @@ describe('v1.EventarcClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.eventarc.v1.UpdatePipelineRequest()
       );
@@ -4690,7 +4692,7 @@ describe('v1.EventarcClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.eventarc.v1.UpdatePipelineRequest()
       );
@@ -4722,7 +4724,7 @@ describe('v1.EventarcClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.eventarc.v1.UpdatePipelineRequest()
       );
@@ -4756,7 +4758,7 @@ describe('v1.EventarcClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -4778,7 +4780,7 @@ describe('v1.EventarcClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -4799,7 +4801,7 @@ describe('v1.EventarcClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.eventarc.v1.DeletePipelineRequest()
       );
@@ -4832,7 +4834,7 @@ describe('v1.EventarcClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.eventarc.v1.DeletePipelineRequest()
       );
@@ -4886,7 +4888,7 @@ describe('v1.EventarcClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.eventarc.v1.DeletePipelineRequest()
       );
@@ -4917,7 +4919,7 @@ describe('v1.EventarcClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.eventarc.v1.DeletePipelineRequest()
       );
@@ -4950,7 +4952,7 @@ describe('v1.EventarcClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -4972,7 +4974,7 @@ describe('v1.EventarcClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -4993,7 +4995,7 @@ describe('v1.EventarcClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.eventarc.v1.CreateGoogleApiSourceRequest()
       );
@@ -5026,7 +5028,7 @@ describe('v1.EventarcClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.eventarc.v1.CreateGoogleApiSourceRequest()
       );
@@ -5080,7 +5082,7 @@ describe('v1.EventarcClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.eventarc.v1.CreateGoogleApiSourceRequest()
       );
@@ -5114,7 +5116,7 @@ describe('v1.EventarcClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.eventarc.v1.CreateGoogleApiSourceRequest()
       );
@@ -5147,7 +5149,7 @@ describe('v1.EventarcClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -5169,7 +5171,7 @@ describe('v1.EventarcClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -5190,7 +5192,7 @@ describe('v1.EventarcClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.eventarc.v1.UpdateGoogleApiSourceRequest()
       );
@@ -5224,7 +5226,7 @@ describe('v1.EventarcClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.eventarc.v1.UpdateGoogleApiSourceRequest()
       );
@@ -5279,7 +5281,7 @@ describe('v1.EventarcClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.eventarc.v1.UpdateGoogleApiSourceRequest()
       );
@@ -5314,7 +5316,7 @@ describe('v1.EventarcClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.eventarc.v1.UpdateGoogleApiSourceRequest()
       );
@@ -5348,7 +5350,7 @@ describe('v1.EventarcClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -5370,7 +5372,7 @@ describe('v1.EventarcClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -5391,7 +5393,7 @@ describe('v1.EventarcClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.eventarc.v1.DeleteGoogleApiSourceRequest()
       );
@@ -5424,7 +5426,7 @@ describe('v1.EventarcClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.eventarc.v1.DeleteGoogleApiSourceRequest()
       );
@@ -5478,7 +5480,7 @@ describe('v1.EventarcClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.eventarc.v1.DeleteGoogleApiSourceRequest()
       );
@@ -5512,7 +5514,7 @@ describe('v1.EventarcClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.eventarc.v1.DeleteGoogleApiSourceRequest()
       );
@@ -5545,7 +5547,7 @@ describe('v1.EventarcClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -5567,7 +5569,7 @@ describe('v1.EventarcClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -5588,7 +5590,7 @@ describe('v1.EventarcClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.eventarc.v1.ListTriggersRequest()
       );
@@ -5621,7 +5623,7 @@ describe('v1.EventarcClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.eventarc.v1.ListTriggersRequest()
       );
@@ -5670,7 +5672,7 @@ describe('v1.EventarcClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.eventarc.v1.ListTriggersRequest()
       );
@@ -5701,7 +5703,7 @@ describe('v1.EventarcClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.eventarc.v1.ListTriggersRequest()
       );
@@ -5755,7 +5757,7 @@ describe('v1.EventarcClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.eventarc.v1.ListTriggersRequest()
       );
@@ -5806,7 +5808,7 @@ describe('v1.EventarcClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.eventarc.v1.ListTriggersRequest()
       );
@@ -5849,7 +5851,7 @@ describe('v1.EventarcClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.eventarc.v1.ListTriggersRequest()
       );
@@ -5891,7 +5893,7 @@ describe('v1.EventarcClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.eventarc.v1.ListChannelsRequest()
       );
@@ -5924,7 +5926,7 @@ describe('v1.EventarcClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.eventarc.v1.ListChannelsRequest()
       );
@@ -5973,7 +5975,7 @@ describe('v1.EventarcClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.eventarc.v1.ListChannelsRequest()
       );
@@ -6004,7 +6006,7 @@ describe('v1.EventarcClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.eventarc.v1.ListChannelsRequest()
       );
@@ -6058,7 +6060,7 @@ describe('v1.EventarcClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.eventarc.v1.ListChannelsRequest()
       );
@@ -6109,7 +6111,7 @@ describe('v1.EventarcClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.eventarc.v1.ListChannelsRequest()
       );
@@ -6152,7 +6154,7 @@ describe('v1.EventarcClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.eventarc.v1.ListChannelsRequest()
       );
@@ -6194,7 +6196,7 @@ describe('v1.EventarcClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.eventarc.v1.ListProvidersRequest()
       );
@@ -6227,7 +6229,7 @@ describe('v1.EventarcClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.eventarc.v1.ListProvidersRequest()
       );
@@ -6276,7 +6278,7 @@ describe('v1.EventarcClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.eventarc.v1.ListProvidersRequest()
       );
@@ -6307,7 +6309,7 @@ describe('v1.EventarcClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.eventarc.v1.ListProvidersRequest()
       );
@@ -6361,7 +6363,7 @@ describe('v1.EventarcClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.eventarc.v1.ListProvidersRequest()
       );
@@ -6410,7 +6412,7 @@ describe('v1.EventarcClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.eventarc.v1.ListProvidersRequest()
       );
@@ -6453,7 +6455,7 @@ describe('v1.EventarcClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.eventarc.v1.ListProvidersRequest()
       );
@@ -6495,7 +6497,7 @@ describe('v1.EventarcClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.eventarc.v1.ListChannelConnectionsRequest()
       );
@@ -6535,7 +6537,7 @@ describe('v1.EventarcClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.eventarc.v1.ListChannelConnectionsRequest()
       );
@@ -6590,7 +6592,7 @@ describe('v1.EventarcClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.eventarc.v1.ListChannelConnectionsRequest()
       );
@@ -6624,7 +6626,7 @@ describe('v1.EventarcClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.eventarc.v1.ListChannelConnectionsRequest()
       );
@@ -6691,7 +6693,7 @@ describe('v1.EventarcClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.eventarc.v1.ListChannelConnectionsRequest()
       );
@@ -6747,7 +6749,7 @@ describe('v1.EventarcClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.eventarc.v1.ListChannelConnectionsRequest()
       );
@@ -6801,7 +6803,7 @@ describe('v1.EventarcClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.eventarc.v1.ListChannelConnectionsRequest()
       );
@@ -6848,7 +6850,7 @@ describe('v1.EventarcClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.eventarc.v1.ListMessageBusesRequest()
       );
@@ -6881,7 +6883,7 @@ describe('v1.EventarcClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.eventarc.v1.ListMessageBusesRequest()
       );
@@ -6930,7 +6932,7 @@ describe('v1.EventarcClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.eventarc.v1.ListMessageBusesRequest()
       );
@@ -6961,7 +6963,7 @@ describe('v1.EventarcClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.eventarc.v1.ListMessageBusesRequest()
       );
@@ -7015,7 +7017,7 @@ describe('v1.EventarcClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.eventarc.v1.ListMessageBusesRequest()
       );
@@ -7064,7 +7066,7 @@ describe('v1.EventarcClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.eventarc.v1.ListMessageBusesRequest()
       );
@@ -7107,7 +7109,7 @@ describe('v1.EventarcClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.eventarc.v1.ListMessageBusesRequest()
       );
@@ -7149,7 +7151,7 @@ describe('v1.EventarcClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.eventarc.v1.ListMessageBusEnrollmentsRequest()
       );
@@ -7179,7 +7181,7 @@ describe('v1.EventarcClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.eventarc.v1.ListMessageBusEnrollmentsRequest()
       );
@@ -7221,7 +7223,7 @@ describe('v1.EventarcClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.eventarc.v1.ListMessageBusEnrollmentsRequest()
       );
@@ -7255,7 +7257,7 @@ describe('v1.EventarcClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.eventarc.v1.ListMessageBusEnrollmentsRequest()
       );
@@ -7308,7 +7310,7 @@ describe('v1.EventarcClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.eventarc.v1.ListMessageBusEnrollmentsRequest()
       );
@@ -7360,7 +7362,7 @@ describe('v1.EventarcClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.eventarc.v1.ListMessageBusEnrollmentsRequest()
       );
@@ -7403,7 +7405,7 @@ describe('v1.EventarcClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.eventarc.v1.ListMessageBusEnrollmentsRequest()
       );
@@ -7449,7 +7451,7 @@ describe('v1.EventarcClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.eventarc.v1.ListEnrollmentsRequest()
       );
@@ -7482,7 +7484,7 @@ describe('v1.EventarcClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.eventarc.v1.ListEnrollmentsRequest()
       );
@@ -7531,7 +7533,7 @@ describe('v1.EventarcClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.eventarc.v1.ListEnrollmentsRequest()
       );
@@ -7562,7 +7564,7 @@ describe('v1.EventarcClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.eventarc.v1.ListEnrollmentsRequest()
       );
@@ -7616,7 +7618,7 @@ describe('v1.EventarcClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.eventarc.v1.ListEnrollmentsRequest()
       );
@@ -7665,7 +7667,7 @@ describe('v1.EventarcClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.eventarc.v1.ListEnrollmentsRequest()
       );
@@ -7708,7 +7710,7 @@ describe('v1.EventarcClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.eventarc.v1.ListEnrollmentsRequest()
       );
@@ -7750,7 +7752,7 @@ describe('v1.EventarcClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.eventarc.v1.ListPipelinesRequest()
       );
@@ -7783,7 +7785,7 @@ describe('v1.EventarcClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.eventarc.v1.ListPipelinesRequest()
       );
@@ -7832,7 +7834,7 @@ describe('v1.EventarcClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.eventarc.v1.ListPipelinesRequest()
       );
@@ -7863,7 +7865,7 @@ describe('v1.EventarcClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.eventarc.v1.ListPipelinesRequest()
       );
@@ -7917,7 +7919,7 @@ describe('v1.EventarcClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.eventarc.v1.ListPipelinesRequest()
       );
@@ -7966,7 +7968,7 @@ describe('v1.EventarcClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.eventarc.v1.ListPipelinesRequest()
       );
@@ -8009,7 +8011,7 @@ describe('v1.EventarcClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.eventarc.v1.ListPipelinesRequest()
       );
@@ -8051,7 +8053,7 @@ describe('v1.EventarcClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.eventarc.v1.ListGoogleApiSourcesRequest()
       );
@@ -8091,7 +8093,7 @@ describe('v1.EventarcClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.eventarc.v1.ListGoogleApiSourcesRequest()
       );
@@ -8146,7 +8148,7 @@ describe('v1.EventarcClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.eventarc.v1.ListGoogleApiSourcesRequest()
       );
@@ -8177,7 +8179,7 @@ describe('v1.EventarcClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.eventarc.v1.ListGoogleApiSourcesRequest()
       );
@@ -8237,7 +8239,7 @@ describe('v1.EventarcClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.eventarc.v1.ListGoogleApiSourcesRequest()
       );
@@ -8286,7 +8288,7 @@ describe('v1.EventarcClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.eventarc.v1.ListGoogleApiSourcesRequest()
       );
@@ -8335,7 +8337,7 @@ describe('v1.EventarcClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.eventarc.v1.ListGoogleApiSourcesRequest()
       );
@@ -8377,7 +8379,7 @@ describe('v1.EventarcClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new IamProtos.google.iam.v1.GetIamPolicyRequest()
       );
@@ -8407,7 +8409,7 @@ describe('v1.EventarcClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new IamProtos.google.iam.v1.GetIamPolicyRequest()
       );
@@ -8451,7 +8453,7 @@ describe('v1.EventarcClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new IamProtos.google.iam.v1.GetIamPolicyRequest()
       );
@@ -8483,7 +8485,7 @@ describe('v1.EventarcClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new IamProtos.google.iam.v1.SetIamPolicyRequest()
       );
@@ -8513,7 +8515,7 @@ describe('v1.EventarcClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new IamProtos.google.iam.v1.SetIamPolicyRequest()
       );
@@ -8557,7 +8559,7 @@ describe('v1.EventarcClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new IamProtos.google.iam.v1.SetIamPolicyRequest()
       );
@@ -8589,7 +8591,7 @@ describe('v1.EventarcClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new IamProtos.google.iam.v1.TestIamPermissionsRequest()
       );
@@ -8622,7 +8624,7 @@ describe('v1.EventarcClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new IamProtos.google.iam.v1.TestIamPermissionsRequest()
       );
@@ -8666,7 +8668,7 @@ describe('v1.EventarcClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new IamProtos.google.iam.v1.TestIamPermissionsRequest()
       );
@@ -8701,7 +8703,7 @@ describe('v1.EventarcClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.GetLocationRequest()
       );
@@ -8731,7 +8733,7 @@ describe('v1.EventarcClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.GetLocationRequest()
       );
@@ -8775,7 +8777,7 @@ describe('v1.EventarcClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.GetLocationRequest()
       );
@@ -8810,7 +8812,7 @@ describe('v1.EventarcClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.ListLocationsRequest()
       );
@@ -8858,7 +8860,7 @@ describe('v1.EventarcClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.ListLocationsRequest()
       );
@@ -8899,7 +8901,7 @@ describe('v1.EventarcClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new operationsProtos.google.longrunning.GetOperationRequest()
       );
@@ -8978,7 +8980,7 @@ describe('v1.EventarcClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new operationsProtos.google.longrunning.CancelOperationRequest()
       );
@@ -9058,7 +9060,7 @@ describe('v1.EventarcClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new operationsProtos.google.longrunning.DeleteOperationRequest()
       );
@@ -9154,8 +9156,7 @@ describe('v1.EventarcClient', () => {
       ];
       client.operationsClient.descriptor.listOperations.asyncIterate =
         stubAsyncIterationCall(expectedResponse);
-      const responses: operationsProtos.google.longrunning.ListOperationsResponse[] =
-        [];
+      const responses: operationsProtos.google.longrunning.IOperation[] = [];
       const iterable = client.operationsClient.listOperationsAsync(request);
       for await (const resource of iterable) {
         responses.push(resource!);
@@ -9174,7 +9175,7 @@ describe('v1.EventarcClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new operationsProtos.google.longrunning.ListOperationsRequest()
       );
@@ -9183,8 +9184,7 @@ describe('v1.EventarcClient', () => {
         stubAsyncIterationCall(undefined, expectedError);
       const iterable = client.operationsClient.listOperationsAsync(request);
       await assert.rejects(async () => {
-        const responses: operationsProtos.google.longrunning.ListOperationsResponse[] =
-          [];
+        const responses: operationsProtos.google.longrunning.IOperation[] = [];
         for await (const resource of iterable) {
           responses.push(resource!);
         }
@@ -9200,7 +9200,7 @@ describe('v1.EventarcClient', () => {
   });
 
   describe('Path templates', () => {
-    describe('channel', () => {
+    describe('channel', async () => {
       const fakePath = '/rendered/path/channel';
       const expectedParameters = {
         project: 'projectValue',
@@ -9211,7 +9211,7 @@ describe('v1.EventarcClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.channelPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -9264,7 +9264,7 @@ describe('v1.EventarcClient', () => {
       });
     });
 
-    describe('channelConnection', () => {
+    describe('channelConnection', async () => {
       const fakePath = '/rendered/path/channelConnection';
       const expectedParameters = {
         project: 'projectValue',
@@ -9275,7 +9275,7 @@ describe('v1.EventarcClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.channelConnectionPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -9341,7 +9341,7 @@ describe('v1.EventarcClient', () => {
       });
     });
 
-    describe('enrollment', () => {
+    describe('enrollment', async () => {
       const fakePath = '/rendered/path/enrollment';
       const expectedParameters = {
         project: 'projectValue',
@@ -9352,7 +9352,7 @@ describe('v1.EventarcClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.enrollmentPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -9405,7 +9405,7 @@ describe('v1.EventarcClient', () => {
       });
     });
 
-    describe('googleApiSource', () => {
+    describe('googleApiSource', async () => {
       const fakePath = '/rendered/path/googleApiSource';
       const expectedParameters = {
         project: 'projectValue',
@@ -9416,7 +9416,7 @@ describe('v1.EventarcClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.googleApiSourcePathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -9470,7 +9470,7 @@ describe('v1.EventarcClient', () => {
       });
     });
 
-    describe('googleChannelConfig', () => {
+    describe('googleChannelConfig', async () => {
       const fakePath = '/rendered/path/googleChannelConfig';
       const expectedParameters = {
         project: 'projectValue',
@@ -9480,7 +9480,7 @@ describe('v1.EventarcClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.googleChannelConfigPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -9532,7 +9532,7 @@ describe('v1.EventarcClient', () => {
       });
     });
 
-    describe('location', () => {
+    describe('location', async () => {
       const fakePath = '/rendered/path/location';
       const expectedParameters = {
         project: 'projectValue',
@@ -9542,7 +9542,7 @@ describe('v1.EventarcClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.locationPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -9581,7 +9581,7 @@ describe('v1.EventarcClient', () => {
       });
     });
 
-    describe('messageBus', () => {
+    describe('messageBus', async () => {
       const fakePath = '/rendered/path/messageBus';
       const expectedParameters = {
         project: 'projectValue',
@@ -9592,7 +9592,7 @@ describe('v1.EventarcClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.messageBusPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -9645,7 +9645,7 @@ describe('v1.EventarcClient', () => {
       });
     });
 
-    describe('pipeline', () => {
+    describe('pipeline', async () => {
       const fakePath = '/rendered/path/pipeline';
       const expectedParameters = {
         project: 'projectValue',
@@ -9656,7 +9656,7 @@ describe('v1.EventarcClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.pipelinePathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -9709,7 +9709,7 @@ describe('v1.EventarcClient', () => {
       });
     });
 
-    describe('project', () => {
+    describe('project', async () => {
       const fakePath = '/rendered/path/project';
       const expectedParameters = {
         project: 'projectValue',
@@ -9718,7 +9718,7 @@ describe('v1.EventarcClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -9747,7 +9747,7 @@ describe('v1.EventarcClient', () => {
       });
     });
 
-    describe('provider', () => {
+    describe('provider', async () => {
       const fakePath = '/rendered/path/provider';
       const expectedParameters = {
         project: 'projectValue',
@@ -9758,7 +9758,7 @@ describe('v1.EventarcClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.providerPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -9811,7 +9811,7 @@ describe('v1.EventarcClient', () => {
       });
     });
 
-    describe('trigger', () => {
+    describe('trigger', async () => {
       const fakePath = '/rendered/path/trigger';
       const expectedParameters = {
         project: 'projectValue',
@@ -9822,7 +9822,7 @@ describe('v1.EventarcClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.triggerPathTemplate.render = sinon
         .stub()
         .returns(fakePath);

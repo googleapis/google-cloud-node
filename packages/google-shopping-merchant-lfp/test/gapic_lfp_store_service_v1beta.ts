@@ -253,7 +253,9 @@ describe('v1beta.LfpStoreServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      client.initialize().catch(err => {
+        throw err;
+      });
       assert(client.lfpStoreServiceStub);
       client.close().then(() => {
         done();
@@ -312,7 +314,7 @@ describe('v1beta.LfpStoreServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.shopping.merchant.lfp.v1beta.GetLfpStoreRequest()
       );
@@ -321,7 +323,7 @@ describe('v1beta.LfpStoreServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.shopping.merchant.lfp.v1beta.LfpStore()
       );
@@ -343,7 +345,7 @@ describe('v1beta.LfpStoreServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.shopping.merchant.lfp.v1beta.GetLfpStoreRequest()
       );
@@ -352,7 +354,7 @@ describe('v1beta.LfpStoreServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.shopping.merchant.lfp.v1beta.LfpStore()
       );
@@ -390,7 +392,7 @@ describe('v1beta.LfpStoreServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.shopping.merchant.lfp.v1beta.GetLfpStoreRequest()
       );
@@ -399,7 +401,7 @@ describe('v1beta.LfpStoreServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getLfpStore = stubSimpleCall(
         undefined,
@@ -421,7 +423,7 @@ describe('v1beta.LfpStoreServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.shopping.merchant.lfp.v1beta.GetLfpStoreRequest()
       );
@@ -442,7 +444,7 @@ describe('v1beta.LfpStoreServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.shopping.merchant.lfp.v1beta.InsertLfpStoreRequest()
       );
@@ -451,7 +453,7 @@ describe('v1beta.LfpStoreServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.shopping.merchant.lfp.v1beta.LfpStore()
       );
@@ -473,7 +475,7 @@ describe('v1beta.LfpStoreServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.shopping.merchant.lfp.v1beta.InsertLfpStoreRequest()
       );
@@ -482,7 +484,7 @@ describe('v1beta.LfpStoreServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.shopping.merchant.lfp.v1beta.LfpStore()
       );
@@ -520,7 +522,7 @@ describe('v1beta.LfpStoreServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.shopping.merchant.lfp.v1beta.InsertLfpStoreRequest()
       );
@@ -529,7 +531,7 @@ describe('v1beta.LfpStoreServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.insertLfpStore = stubSimpleCall(
         undefined,
@@ -551,7 +553,7 @@ describe('v1beta.LfpStoreServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.shopping.merchant.lfp.v1beta.InsertLfpStoreRequest()
       );
@@ -572,7 +574,7 @@ describe('v1beta.LfpStoreServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.shopping.merchant.lfp.v1beta.DeleteLfpStoreRequest()
       );
@@ -581,7 +583,7 @@ describe('v1beta.LfpStoreServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -603,7 +605,7 @@ describe('v1beta.LfpStoreServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.shopping.merchant.lfp.v1beta.DeleteLfpStoreRequest()
       );
@@ -612,7 +614,7 @@ describe('v1beta.LfpStoreServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -650,7 +652,7 @@ describe('v1beta.LfpStoreServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.shopping.merchant.lfp.v1beta.DeleteLfpStoreRequest()
       );
@@ -659,7 +661,7 @@ describe('v1beta.LfpStoreServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteLfpStore = stubSimpleCall(
         undefined,
@@ -681,7 +683,7 @@ describe('v1beta.LfpStoreServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.shopping.merchant.lfp.v1beta.DeleteLfpStoreRequest()
       );
@@ -702,7 +704,7 @@ describe('v1beta.LfpStoreServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.shopping.merchant.lfp.v1beta.ListLfpStoresRequest()
       );
@@ -711,7 +713,7 @@ describe('v1beta.LfpStoreServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.shopping.merchant.lfp.v1beta.LfpStore()
@@ -741,7 +743,7 @@ describe('v1beta.LfpStoreServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.shopping.merchant.lfp.v1beta.ListLfpStoresRequest()
       );
@@ -750,7 +752,7 @@ describe('v1beta.LfpStoreServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.shopping.merchant.lfp.v1beta.LfpStore()
@@ -798,7 +800,7 @@ describe('v1beta.LfpStoreServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.shopping.merchant.lfp.v1beta.ListLfpStoresRequest()
       );
@@ -807,7 +809,7 @@ describe('v1beta.LfpStoreServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listLfpStores = stubSimpleCall(
         undefined,
@@ -829,7 +831,7 @@ describe('v1beta.LfpStoreServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.shopping.merchant.lfp.v1beta.ListLfpStoresRequest()
       );
@@ -838,7 +840,7 @@ describe('v1beta.LfpStoreServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.shopping.merchant.lfp.v1beta.LfpStore()
@@ -890,7 +892,7 @@ describe('v1beta.LfpStoreServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.shopping.merchant.lfp.v1beta.ListLfpStoresRequest()
       );
@@ -899,7 +901,7 @@ describe('v1beta.LfpStoreServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listLfpStores.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -940,7 +942,7 @@ describe('v1beta.LfpStoreServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.shopping.merchant.lfp.v1beta.ListLfpStoresRequest()
       );
@@ -949,7 +951,7 @@ describe('v1beta.LfpStoreServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.shopping.merchant.lfp.v1beta.LfpStore()
@@ -990,7 +992,7 @@ describe('v1beta.LfpStoreServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.shopping.merchant.lfp.v1beta.ListLfpStoresRequest()
       );
@@ -999,7 +1001,7 @@ describe('v1beta.LfpStoreServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listLfpStores.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -1028,7 +1030,7 @@ describe('v1beta.LfpStoreServiceClient', () => {
   });
 
   describe('Path templates', () => {
-    describe('account', () => {
+    describe('account', async () => {
       const fakePath = '/rendered/path/account';
       const expectedParameters = {
         account: 'accountValue',
@@ -1037,7 +1039,7 @@ describe('v1beta.LfpStoreServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.accountPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -1066,7 +1068,7 @@ describe('v1beta.LfpStoreServiceClient', () => {
       });
     });
 
-    describe('lfpInventory', () => {
+    describe('lfpInventory', async () => {
       const fakePath = '/rendered/path/lfpInventory';
       const expectedParameters = {
         account: 'accountValue',
@@ -1078,7 +1080,7 @@ describe('v1beta.LfpStoreServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.lfpInventoryPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -1142,7 +1144,7 @@ describe('v1beta.LfpStoreServiceClient', () => {
       });
     });
 
-    describe('lfpSale', () => {
+    describe('lfpSale', async () => {
       const fakePath = '/rendered/path/lfpSale';
       const expectedParameters = {
         account: 'accountValue',
@@ -1152,7 +1154,7 @@ describe('v1beta.LfpStoreServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.lfpSalePathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -1191,7 +1193,7 @@ describe('v1beta.LfpStoreServiceClient', () => {
       });
     });
 
-    describe('lfpStore', () => {
+    describe('lfpStore', async () => {
       const fakePath = '/rendered/path/lfpStore';
       const expectedParameters = {
         account: 'accountValue',
@@ -1202,7 +1204,7 @@ describe('v1beta.LfpStoreServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.lfpStorePathTemplate.render = sinon
         .stub()
         .returns(fakePath);

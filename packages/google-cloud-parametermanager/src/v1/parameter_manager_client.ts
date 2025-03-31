@@ -31,6 +31,7 @@ import type {
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
+import {loggingUtils as logging} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -55,6 +56,8 @@ export class ParameterManagerClient {
   private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
+  private _log = logging.log('parametermanager');
+
   auth: gax.GoogleAuth;
   descriptors: Descriptors = {
     page: {},
@@ -90,7 +93,7 @@ export class ParameterManagerClient {
    *     Developer's Console, e.g. 'grape-spaceship-123'. We will also check
    *     the environment variable GCLOUD_PROJECT for your project ID. If your
    *     app is running in an environment which supports
-   *     {@link https://developers.google.com/identity/protocols/application-default-credentials Application Default Credentials},
+   *     {@link https://cloud.google.com/docs/authentication/application-default-credentials Application Default Credentials},
    *     your project ID will be detected automatically.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
@@ -500,8 +503,39 @@ export class ParameterManagerClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.getParameter(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('getParameter request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.parametermanager.v1.IParameter,
+          | protos.google.cloud.parametermanager.v1.IGetParameterRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getParameter response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getParameter(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.parametermanager.v1.IParameter,
+          (
+            | protos.google.cloud.parametermanager.v1.IGetParameterRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getParameter response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Creates a new Parameter in a given project and location.
@@ -615,8 +649,39 @@ export class ParameterManagerClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.createParameter(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('createParameter request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.parametermanager.v1.IParameter,
+          | protos.google.cloud.parametermanager.v1.ICreateParameterRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('createParameter response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .createParameter(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.parametermanager.v1.IParameter,
+          (
+            | protos.google.cloud.parametermanager.v1.ICreateParameterRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('createParameter response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Updates a single Parameter.
@@ -732,8 +797,39 @@ export class ParameterManagerClient {
       this._gaxModule.routingHeader.fromParams({
         'parameter.name': request.parameter!.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.updateParameter(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('updateParameter request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.parametermanager.v1.IParameter,
+          | protos.google.cloud.parametermanager.v1.IUpdateParameterRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('updateParameter response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .updateParameter(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.parametermanager.v1.IParameter,
+          (
+            | protos.google.cloud.parametermanager.v1.IUpdateParameterRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('updateParameter response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Deletes a single Parameter.
@@ -843,8 +939,39 @@ export class ParameterManagerClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.deleteParameter(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('deleteParameter request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.cloud.parametermanager.v1.IDeleteParameterRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('deleteParameter response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .deleteParameter(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.protobuf.IEmpty,
+          (
+            | protos.google.cloud.parametermanager.v1.IDeleteParameterRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteParameter response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Gets details of a single ParameterVersion.
@@ -944,8 +1071,39 @@ export class ParameterManagerClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.getParameterVersion(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('getParameterVersion request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.parametermanager.v1.IParameterVersion,
+          | protos.google.cloud.parametermanager.v1.IGetParameterVersionRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getParameterVersion response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getParameterVersion(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.parametermanager.v1.IParameterVersion,
+          (
+            | protos.google.cloud.parametermanager.v1.IGetParameterVersionRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getParameterVersion response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Gets rendered version of a ParameterVersion.
@@ -1040,12 +1198,39 @@ export class ParameterManagerClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.renderParameterVersion(
-      request,
-      options,
-      callback
-    );
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('renderParameterVersion request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.parametermanager.v1.IRenderParameterVersionResponse,
+          | protos.google.cloud.parametermanager.v1.IRenderParameterVersionRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('renderParameterVersion response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .renderParameterVersion(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.parametermanager.v1.IRenderParameterVersionResponse,
+          (
+            | protos.google.cloud.parametermanager.v1.IRenderParameterVersionRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('renderParameterVersion response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Creates a new ParameterVersion in a given project, location, and parameter.
@@ -1159,12 +1344,39 @@ export class ParameterManagerClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.createParameterVersion(
-      request,
-      options,
-      callback
-    );
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('createParameterVersion request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.parametermanager.v1.IParameterVersion,
+          | protos.google.cloud.parametermanager.v1.ICreateParameterVersionRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('createParameterVersion response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .createParameterVersion(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.parametermanager.v1.IParameterVersion,
+          (
+            | protos.google.cloud.parametermanager.v1.ICreateParameterVersionRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('createParameterVersion response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Updates a single ParameterVersion.
@@ -1280,12 +1492,39 @@ export class ParameterManagerClient {
       this._gaxModule.routingHeader.fromParams({
         'parameter_version.name': request.parameterVersion!.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.updateParameterVersion(
-      request,
-      options,
-      callback
-    );
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('updateParameterVersion request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.parametermanager.v1.IParameterVersion,
+          | protos.google.cloud.parametermanager.v1.IUpdateParameterVersionRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('updateParameterVersion response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .updateParameterVersion(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.parametermanager.v1.IParameterVersion,
+          (
+            | protos.google.cloud.parametermanager.v1.IUpdateParameterVersionRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('updateParameterVersion response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Deletes a single ParameterVersion.
@@ -1395,12 +1634,39 @@ export class ParameterManagerClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.deleteParameterVersion(
-      request,
-      options,
-      callback
-    );
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('deleteParameterVersion request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.cloud.parametermanager.v1.IDeleteParameterVersionRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('deleteParameterVersion response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .deleteParameterVersion(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.protobuf.IEmpty,
+          (
+            | protos.google.cloud.parametermanager.v1.IDeleteParameterVersionRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteParameterVersion response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
 
   /**
@@ -1503,8 +1769,36 @@ export class ParameterManagerClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.listParameters(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.parametermanager.v1.IListParametersRequest,
+          | protos.google.cloud.parametermanager.v1.IListParametersResponse
+          | null
+          | undefined,
+          protos.google.cloud.parametermanager.v1.IParameter
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listParameters values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listParameters request %j', request);
+    return this.innerApiCalls
+      .listParameters(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.parametermanager.v1.IParameter[],
+          protos.google.cloud.parametermanager.v1.IListParametersRequest | null,
+          protos.google.cloud.parametermanager.v1.IListParametersResponse,
+        ]) => {
+          this._log.info('listParameters values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -1548,7 +1842,10 @@ export class ParameterManagerClient {
       });
     const defaultCallSettings = this._defaults['listParameters'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listParameters stream %j', request);
     return this.descriptors.page.listParameters.createStream(
       this.innerApiCalls.listParameters as GaxCall,
       request,
@@ -1600,7 +1897,10 @@ export class ParameterManagerClient {
       });
     const defaultCallSettings = this._defaults['listParameters'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listParameters iterate %j', request);
     return this.descriptors.page.listParameters.asyncIterate(
       this.innerApiCalls['listParameters'] as GaxCall,
       request as {},
@@ -1707,8 +2007,36 @@ export class ParameterManagerClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.listParameterVersions(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.parametermanager.v1.IListParameterVersionsRequest,
+          | protos.google.cloud.parametermanager.v1.IListParameterVersionsResponse
+          | null
+          | undefined,
+          protos.google.cloud.parametermanager.v1.IParameterVersion
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listParameterVersions values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listParameterVersions request %j', request);
+    return this.innerApiCalls
+      .listParameterVersions(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.parametermanager.v1.IParameterVersion[],
+          protos.google.cloud.parametermanager.v1.IListParameterVersionsRequest | null,
+          protos.google.cloud.parametermanager.v1.IListParameterVersionsResponse,
+        ]) => {
+          this._log.info('listParameterVersions values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -1752,7 +2080,10 @@ export class ParameterManagerClient {
       });
     const defaultCallSettings = this._defaults['listParameterVersions'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listParameterVersions stream %j', request);
     return this.descriptors.page.listParameterVersions.createStream(
       this.innerApiCalls.listParameterVersions as GaxCall,
       request,
@@ -1804,7 +2135,10 @@ export class ParameterManagerClient {
       });
     const defaultCallSettings = this._defaults['listParameterVersions'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listParameterVersions iterate %j', request);
     return this.descriptors.page.listParameterVersions.asyncIterate(
       this.innerApiCalls['listParameterVersions'] as GaxCall,
       request as {},
@@ -2088,6 +2422,7 @@ export class ParameterManagerClient {
   close(): Promise<void> {
     if (this.parameterManagerStub && !this._terminated) {
       return this.parameterManagerStub.then(stub => {
+        this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
         this.locationsClient.close();

@@ -29,6 +29,7 @@ import type {
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
+import {loggingUtils as logging} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -64,6 +65,8 @@ export class TablesServiceClient {
   private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
+  private _log = logging.log('area120-tables');
+
   auth: gax.GoogleAuth;
   descriptors: Descriptors = {
     page: {},
@@ -98,7 +101,7 @@ export class TablesServiceClient {
    *     Developer's Console, e.g. 'grape-spaceship-123'. We will also check
    *     the environment variable GCLOUD_PROJECT for your project ID. If your
    *     app is running in an environment which supports
-   *     {@link https://developers.google.com/identity/protocols/application-default-credentials Application Default Credentials},
+   *     {@link https://cloud.google.com/docs/authentication/application-default-credentials Application Default Credentials},
    *     your project ID will be detected automatically.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
@@ -505,8 +508,36 @@ export class TablesServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.getTable(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('getTable request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.area120.tables.v1alpha1.ITable,
+          | protos.google.area120.tables.v1alpha1.IGetTableRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getTable response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getTable(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.area120.tables.v1alpha1.ITable,
+          protos.google.area120.tables.v1alpha1.IGetTableRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getTable response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Gets a workspace. Returns NOT_FOUND if the workspace does not exist.
@@ -596,8 +627,39 @@ export class TablesServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.getWorkspace(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('getWorkspace request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.area120.tables.v1alpha1.IWorkspace,
+          | protos.google.area120.tables.v1alpha1.IGetWorkspaceRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getWorkspace response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getWorkspace(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.area120.tables.v1alpha1.IWorkspace,
+          (
+            | protos.google.area120.tables.v1alpha1.IGetWorkspaceRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getWorkspace response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Gets a row. Returns NOT_FOUND if the row does not exist in the table.
@@ -684,8 +746,36 @@ export class TablesServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.getRow(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('getRow request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.area120.tables.v1alpha1.IRow,
+          | protos.google.area120.tables.v1alpha1.IGetRowRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getRow response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getRow(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.area120.tables.v1alpha1.IRow,
+          protos.google.area120.tables.v1alpha1.IGetRowRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getRow response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Creates a row.
@@ -780,8 +870,36 @@ export class TablesServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.createRow(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('createRow request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.area120.tables.v1alpha1.IRow,
+          | protos.google.area120.tables.v1alpha1.ICreateRowRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('createRow response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .createRow(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.area120.tables.v1alpha1.IRow,
+          protos.google.area120.tables.v1alpha1.ICreateRowRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createRow response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Creates multiple rows.
@@ -875,8 +993,39 @@ export class TablesServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.batchCreateRows(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('batchCreateRows request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.area120.tables.v1alpha1.IBatchCreateRowsResponse,
+          | protos.google.area120.tables.v1alpha1.IBatchCreateRowsRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('batchCreateRows response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .batchCreateRows(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.area120.tables.v1alpha1.IBatchCreateRowsResponse,
+          (
+            | protos.google.area120.tables.v1alpha1.IBatchCreateRowsRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('batchCreateRows response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Updates a row.
@@ -970,8 +1119,36 @@ export class TablesServiceClient {
       this._gaxModule.routingHeader.fromParams({
         'row.name': request.row!.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.updateRow(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('updateRow request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.area120.tables.v1alpha1.IRow,
+          | protos.google.area120.tables.v1alpha1.IUpdateRowRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('updateRow response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .updateRow(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.area120.tables.v1alpha1.IRow,
+          protos.google.area120.tables.v1alpha1.IUpdateRowRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('updateRow response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Updates multiple rows.
@@ -1065,8 +1242,39 @@ export class TablesServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.batchUpdateRows(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('batchUpdateRows request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.area120.tables.v1alpha1.IBatchUpdateRowsResponse,
+          | protos.google.area120.tables.v1alpha1.IBatchUpdateRowsRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('batchUpdateRows response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .batchUpdateRows(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.area120.tables.v1alpha1.IBatchUpdateRowsResponse,
+          (
+            | protos.google.area120.tables.v1alpha1.IBatchUpdateRowsRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('batchUpdateRows response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Deletes a row.
@@ -1156,8 +1364,36 @@ export class TablesServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.deleteRow(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('deleteRow request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.area120.tables.v1alpha1.IDeleteRowRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('deleteRow response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .deleteRow(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.protobuf.IEmpty,
+          protos.google.area120.tables.v1alpha1.IDeleteRowRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteRow response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Deletes multiple rows.
@@ -1252,8 +1488,39 @@ export class TablesServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.batchDeleteRows(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('batchDeleteRows request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.area120.tables.v1alpha1.IBatchDeleteRowsRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('batchDeleteRows response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .batchDeleteRows(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.protobuf.IEmpty,
+          (
+            | protos.google.area120.tables.v1alpha1.IBatchDeleteRowsRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('batchDeleteRows response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
 
   /**
@@ -1352,12 +1619,40 @@ export class TablesServiceClient {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    this.initialize();
-    return this.innerApiCalls.listTables(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.area120.tables.v1alpha1.IListTablesRequest,
+          | protos.google.area120.tables.v1alpha1.IListTablesResponse
+          | null
+          | undefined,
+          protos.google.area120.tables.v1alpha1.ITable
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listTables values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listTables request %j', request);
+    return this.innerApiCalls
+      .listTables(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.area120.tables.v1alpha1.ITable[],
+          protos.google.area120.tables.v1alpha1.IListTablesRequest | null,
+          protos.google.area120.tables.v1alpha1.IListTablesResponse,
+        ]) => {
+          this._log.info('listTables values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listTables`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {number} request.pageSize
@@ -1393,7 +1688,10 @@ export class TablesServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     const defaultCallSettings = this._defaults['listTables'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listTables stream %j', request);
     return this.descriptors.page.listTables.createStream(
       this.innerApiCalls.listTables as GaxCall,
       request,
@@ -1441,7 +1739,10 @@ export class TablesServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     const defaultCallSettings = this._defaults['listTables'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listTables iterate %j', request);
     return this.descriptors.page.listTables.asyncIterate(
       this.innerApiCalls['listTables'] as GaxCall,
       request as {},
@@ -1544,12 +1845,40 @@ export class TablesServiceClient {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    this.initialize();
-    return this.innerApiCalls.listWorkspaces(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.area120.tables.v1alpha1.IListWorkspacesRequest,
+          | protos.google.area120.tables.v1alpha1.IListWorkspacesResponse
+          | null
+          | undefined,
+          protos.google.area120.tables.v1alpha1.IWorkspace
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listWorkspaces values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listWorkspaces request %j', request);
+    return this.innerApiCalls
+      .listWorkspaces(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.area120.tables.v1alpha1.IWorkspace[],
+          protos.google.area120.tables.v1alpha1.IListWorkspacesRequest | null,
+          protos.google.area120.tables.v1alpha1.IListWorkspacesResponse,
+        ]) => {
+          this._log.info('listWorkspaces values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listWorkspaces`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {number} request.pageSize
@@ -1585,7 +1914,10 @@ export class TablesServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     const defaultCallSettings = this._defaults['listWorkspaces'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listWorkspaces stream %j', request);
     return this.descriptors.page.listWorkspaces.createStream(
       this.innerApiCalls.listWorkspaces as GaxCall,
       request,
@@ -1633,7 +1965,10 @@ export class TablesServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     const defaultCallSettings = this._defaults['listWorkspaces'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listWorkspaces iterate %j', request);
     return this.descriptors.page.listWorkspaces.asyncIterate(
       this.innerApiCalls['listWorkspaces'] as GaxCall,
       request as {},
@@ -1750,12 +2085,40 @@ export class TablesServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.listRows(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.area120.tables.v1alpha1.IListRowsRequest,
+          | protos.google.area120.tables.v1alpha1.IListRowsResponse
+          | null
+          | undefined,
+          protos.google.area120.tables.v1alpha1.IRow
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listRows values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listRows request %j', request);
+    return this.innerApiCalls
+      .listRows(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.area120.tables.v1alpha1.IRow[],
+          protos.google.area120.tables.v1alpha1.IListRowsRequest | null,
+          protos.google.area120.tables.v1alpha1.IListRowsResponse,
+        ]) => {
+          this._log.info('listRows values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listRows`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
@@ -1805,7 +2168,10 @@ export class TablesServiceClient {
       });
     const defaultCallSettings = this._defaults['listRows'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listRows stream %j', request);
     return this.descriptors.page.listRows.createStream(
       this.innerApiCalls.listRows as GaxCall,
       request,
@@ -1867,7 +2233,10 @@ export class TablesServiceClient {
       });
     const defaultCallSettings = this._defaults['listRows'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listRows iterate %j', request);
     return this.descriptors.page.listRows.asyncIterate(
       this.innerApiCalls['listRows'] as GaxCall,
       request as {},
@@ -1970,6 +2339,7 @@ export class TablesServiceClient {
   close(): Promise<void> {
     if (this.tablesServiceStub && !this._terminated) {
       return this.tablesServiceStub.then(stub => {
+        this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
       });

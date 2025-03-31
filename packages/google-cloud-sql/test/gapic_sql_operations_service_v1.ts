@@ -223,7 +223,9 @@ describe('v1.SqlOperationsServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      client.initialize().catch(err => {
+        throw err;
+      });
       assert(client.sqlOperationsServiceStub);
       client.close().then(() => {
         done();
@@ -286,7 +288,7 @@ describe('v1.SqlOperationsServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.sql.v1.SqlOperationsGetRequest()
       );
@@ -300,7 +302,7 @@ describe('v1.SqlOperationsServiceClient', () => {
         ['operation']
       );
       request.operation = defaultValue2;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&operation=${defaultValue2}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&operation=${defaultValue2 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.sql.v1.Operation()
       );
@@ -322,7 +324,7 @@ describe('v1.SqlOperationsServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.sql.v1.SqlOperationsGetRequest()
       );
@@ -336,7 +338,7 @@ describe('v1.SqlOperationsServiceClient', () => {
         ['operation']
       );
       request.operation = defaultValue2;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&operation=${defaultValue2}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&operation=${defaultValue2 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.sql.v1.Operation()
       );
@@ -373,7 +375,7 @@ describe('v1.SqlOperationsServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.sql.v1.SqlOperationsGetRequest()
       );
@@ -387,7 +389,7 @@ describe('v1.SqlOperationsServiceClient', () => {
         ['operation']
       );
       request.operation = defaultValue2;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&operation=${defaultValue2}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&operation=${defaultValue2 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.get = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.get(request), expectedError);
@@ -406,7 +408,7 @@ describe('v1.SqlOperationsServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.sql.v1.SqlOperationsGetRequest()
       );
@@ -433,7 +435,7 @@ describe('v1.SqlOperationsServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.sql.v1.SqlOperationsListRequest()
       );
@@ -442,7 +444,7 @@ describe('v1.SqlOperationsServiceClient', () => {
         ['project']
       );
       request.project = defaultValue1;
-      const expectedHeaderRequestParams = `project=${defaultValue1}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.sql.v1.OperationsListResponse()
       );
@@ -464,7 +466,7 @@ describe('v1.SqlOperationsServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.sql.v1.SqlOperationsListRequest()
       );
@@ -473,7 +475,7 @@ describe('v1.SqlOperationsServiceClient', () => {
         ['project']
       );
       request.project = defaultValue1;
-      const expectedHeaderRequestParams = `project=${defaultValue1}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.sql.v1.OperationsListResponse()
       );
@@ -510,7 +512,7 @@ describe('v1.SqlOperationsServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.sql.v1.SqlOperationsListRequest()
       );
@@ -519,7 +521,7 @@ describe('v1.SqlOperationsServiceClient', () => {
         ['project']
       );
       request.project = defaultValue1;
-      const expectedHeaderRequestParams = `project=${defaultValue1}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.list = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.list(request), expectedError);
@@ -538,7 +540,7 @@ describe('v1.SqlOperationsServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.sql.v1.SqlOperationsListRequest()
       );
@@ -560,7 +562,7 @@ describe('v1.SqlOperationsServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.sql.v1.SqlOperationsCancelRequest()
       );
@@ -574,7 +576,7 @@ describe('v1.SqlOperationsServiceClient', () => {
         ['operation']
       );
       request.operation = defaultValue2;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&operation=${defaultValue2}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&operation=${defaultValue2 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -597,7 +599,7 @@ describe('v1.SqlOperationsServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.sql.v1.SqlOperationsCancelRequest()
       );
@@ -611,7 +613,7 @@ describe('v1.SqlOperationsServiceClient', () => {
         ['operation']
       );
       request.operation = defaultValue2;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&operation=${defaultValue2}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&operation=${defaultValue2 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -650,7 +652,7 @@ describe('v1.SqlOperationsServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.sql.v1.SqlOperationsCancelRequest()
       );
@@ -664,7 +666,7 @@ describe('v1.SqlOperationsServiceClient', () => {
         ['operation']
       );
       request.operation = defaultValue2;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&operation=${defaultValue2}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&operation=${defaultValue2 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.cancel = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.cancel(request), expectedError);
@@ -684,7 +686,7 @@ describe('v1.SqlOperationsServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.sql.v1.SqlOperationsCancelRequest()
       );
@@ -710,7 +712,7 @@ describe('v1.SqlOperationsServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.GetLocationRequest()
       );
@@ -741,7 +743,7 @@ describe('v1.SqlOperationsServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.GetLocationRequest()
       );
@@ -786,7 +788,7 @@ describe('v1.SqlOperationsServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.GetLocationRequest()
       );
@@ -822,7 +824,7 @@ describe('v1.SqlOperationsServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.ListLocationsRequest()
       );
@@ -871,7 +873,7 @@ describe('v1.SqlOperationsServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.ListLocationsRequest()
       );

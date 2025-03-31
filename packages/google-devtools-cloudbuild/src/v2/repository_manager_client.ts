@@ -35,6 +35,7 @@ import type {
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
+import {loggingUtils as logging} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -59,6 +60,8 @@ export class RepositoryManagerClient {
   private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
+  private _log = logging.log('cloudbuild');
+
   auth: gax.GoogleAuth;
   descriptors: Descriptors = {
     page: {},
@@ -96,7 +99,7 @@ export class RepositoryManagerClient {
    *     Developer's Console, e.g. 'grape-spaceship-123'. We will also check
    *     the environment variable GCLOUD_PROJECT for your project ID. If your
    *     app is running in an environment which supports
-   *     {@link https://developers.google.com/identity/protocols/application-default-credentials Application Default Credentials},
+   *     {@link https://cloud.google.com/docs/authentication/application-default-credentials Application Default Credentials},
    *     your project ID will be detected automatically.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
@@ -637,8 +640,39 @@ export class RepositoryManagerClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.getConnection(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('getConnection request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.devtools.cloudbuild.v2.IConnection,
+          | protos.google.devtools.cloudbuild.v2.IGetConnectionRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getConnection response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getConnection(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.devtools.cloudbuild.v2.IConnection,
+          (
+            | protos.google.devtools.cloudbuild.v2.IGetConnectionRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getConnection response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Gets details of a single repository.
@@ -728,8 +762,39 @@ export class RepositoryManagerClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.getRepository(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('getRepository request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.devtools.cloudbuild.v2.IRepository,
+          | protos.google.devtools.cloudbuild.v2.IGetRepositoryRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getRepository response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getRepository(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.devtools.cloudbuild.v2.IRepository,
+          (
+            | protos.google.devtools.cloudbuild.v2.IGetRepositoryRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getRepository response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Fetches read/write token of a given repository.
@@ -825,8 +890,39 @@ export class RepositoryManagerClient {
       this._gaxModule.routingHeader.fromParams({
         repository: request.repository ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.fetchReadWriteToken(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('fetchReadWriteToken request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.devtools.cloudbuild.v2.IFetchReadWriteTokenResponse,
+          | protos.google.devtools.cloudbuild.v2.IFetchReadWriteTokenRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('fetchReadWriteToken response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .fetchReadWriteToken(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.devtools.cloudbuild.v2.IFetchReadWriteTokenResponse,
+          (
+            | protos.google.devtools.cloudbuild.v2.IFetchReadWriteTokenRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('fetchReadWriteToken response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Fetches read token of a given repository.
@@ -916,8 +1012,39 @@ export class RepositoryManagerClient {
       this._gaxModule.routingHeader.fromParams({
         repository: request.repository ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.fetchReadToken(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('fetchReadToken request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.devtools.cloudbuild.v2.IFetchReadTokenResponse,
+          | protos.google.devtools.cloudbuild.v2.IFetchReadTokenRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('fetchReadToken response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .fetchReadToken(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.devtools.cloudbuild.v2.IFetchReadTokenResponse,
+          (
+            | protos.google.devtools.cloudbuild.v2.IFetchReadTokenRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('fetchReadToken response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Fetch the list of branches or tags for a given repository.
@@ -1009,8 +1136,36 @@ export class RepositoryManagerClient {
       this._gaxModule.routingHeader.fromParams({
         repository: request.repository ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.fetchGitRefs(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('fetchGitRefs request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.devtools.cloudbuild.v2.IFetchGitRefsResponse,
+          | protos.google.devtools.cloudbuild.v2.IFetchGitRefsRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('fetchGitRefs response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .fetchGitRefs(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.devtools.cloudbuild.v2.IFetchGitRefsResponse,
+          protos.google.devtools.cloudbuild.v2.IFetchGitRefsRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('fetchGitRefs response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
 
   /**
@@ -1120,8 +1275,40 @@ export class RepositoryManagerClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.createConnection(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.devtools.cloudbuild.v2.IConnection,
+            protos.google.devtools.cloudbuild.v2.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('createConnection response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('createConnection request %j', request);
+    return this.innerApiCalls
+      .createConnection(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.devtools.cloudbuild.v2.IConnection,
+            protos.google.devtools.cloudbuild.v2.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createConnection response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `createConnection()`.
@@ -1142,6 +1329,7 @@ export class RepositoryManagerClient {
       protos.google.devtools.cloudbuild.v2.OperationMetadata
     >
   > {
+    this._log.info('createConnection long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -1268,8 +1456,40 @@ export class RepositoryManagerClient {
       this._gaxModule.routingHeader.fromParams({
         'connection.name': request.connection!.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.updateConnection(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.devtools.cloudbuild.v2.IConnection,
+            protos.google.devtools.cloudbuild.v2.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('updateConnection response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('updateConnection request %j', request);
+    return this.innerApiCalls
+      .updateConnection(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.devtools.cloudbuild.v2.IConnection,
+            protos.google.devtools.cloudbuild.v2.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('updateConnection response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `updateConnection()`.
@@ -1290,6 +1510,7 @@ export class RepositoryManagerClient {
       protos.google.devtools.cloudbuild.v2.OperationMetadata
     >
   > {
+    this._log.info('updateConnection long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -1411,8 +1632,40 @@ export class RepositoryManagerClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.deleteConnection(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.devtools.cloudbuild.v2.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('deleteConnection response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('deleteConnection request %j', request);
+    return this.innerApiCalls
+      .deleteConnection(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.devtools.cloudbuild.v2.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteConnection response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `deleteConnection()`.
@@ -1433,6 +1686,7 @@ export class RepositoryManagerClient {
       protos.google.devtools.cloudbuild.v2.OperationMetadata
     >
   > {
+    this._log.info('deleteConnection long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -1556,8 +1810,40 @@ export class RepositoryManagerClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.createRepository(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.devtools.cloudbuild.v2.IRepository,
+            protos.google.devtools.cloudbuild.v2.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('createRepository response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('createRepository request %j', request);
+    return this.innerApiCalls
+      .createRepository(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.devtools.cloudbuild.v2.IRepository,
+            protos.google.devtools.cloudbuild.v2.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createRepository response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `createRepository()`.
@@ -1578,6 +1864,7 @@ export class RepositoryManagerClient {
       protos.google.devtools.cloudbuild.v2.OperationMetadata
     >
   > {
+    this._log.info('createRepository long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -1697,12 +1984,40 @@ export class RepositoryManagerClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.batchCreateRepositories(
-      request,
-      options,
-      callback
-    );
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.devtools.cloudbuild.v2.IBatchCreateRepositoriesResponse,
+            protos.google.devtools.cloudbuild.v2.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('batchCreateRepositories response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('batchCreateRepositories request %j', request);
+    return this.innerApiCalls
+      .batchCreateRepositories(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.devtools.cloudbuild.v2.IBatchCreateRepositoriesResponse,
+            protos.google.devtools.cloudbuild.v2.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('batchCreateRepositories response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `batchCreateRepositories()`.
@@ -1723,6 +2038,7 @@ export class RepositoryManagerClient {
       protos.google.devtools.cloudbuild.v2.OperationMetadata
     >
   > {
+    this._log.info('batchCreateRepositories long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -1844,8 +2160,40 @@ export class RepositoryManagerClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.deleteRepository(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.devtools.cloudbuild.v2.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('deleteRepository response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('deleteRepository request %j', request);
+    return this.innerApiCalls
+      .deleteRepository(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.devtools.cloudbuild.v2.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteRepository response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `deleteRepository()`.
@@ -1866,6 +2214,7 @@ export class RepositoryManagerClient {
       protos.google.devtools.cloudbuild.v2.OperationMetadata
     >
   > {
+    this._log.info('deleteRepository long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -1976,8 +2325,36 @@ export class RepositoryManagerClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.listConnections(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.devtools.cloudbuild.v2.IListConnectionsRequest,
+          | protos.google.devtools.cloudbuild.v2.IListConnectionsResponse
+          | null
+          | undefined,
+          protos.google.devtools.cloudbuild.v2.IConnection
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listConnections values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listConnections request %j', request);
+    return this.innerApiCalls
+      .listConnections(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.devtools.cloudbuild.v2.IConnection[],
+          protos.google.devtools.cloudbuild.v2.IListConnectionsRequest | null,
+          protos.google.devtools.cloudbuild.v2.IListConnectionsResponse,
+        ]) => {
+          this._log.info('listConnections values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -2016,7 +2393,10 @@ export class RepositoryManagerClient {
       });
     const defaultCallSettings = this._defaults['listConnections'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listConnections stream %j', request);
     return this.descriptors.page.listConnections.createStream(
       this.innerApiCalls.listConnections as GaxCall,
       request,
@@ -2063,7 +2443,10 @@ export class RepositoryManagerClient {
       });
     const defaultCallSettings = this._defaults['listConnections'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listConnections iterate %j', request);
     return this.descriptors.page.listConnections.asyncIterate(
       this.innerApiCalls['listConnections'] as GaxCall,
       request as {},
@@ -2170,8 +2553,36 @@ export class RepositoryManagerClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.listRepositories(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.devtools.cloudbuild.v2.IListRepositoriesRequest,
+          | protos.google.devtools.cloudbuild.v2.IListRepositoriesResponse
+          | null
+          | undefined,
+          protos.google.devtools.cloudbuild.v2.IRepository
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listRepositories values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listRepositories request %j', request);
+    return this.innerApiCalls
+      .listRepositories(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.devtools.cloudbuild.v2.IRepository[],
+          protos.google.devtools.cloudbuild.v2.IListRepositoriesRequest | null,
+          protos.google.devtools.cloudbuild.v2.IListRepositoriesResponse,
+        ]) => {
+          this._log.info('listRepositories values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -2215,7 +2626,10 @@ export class RepositoryManagerClient {
       });
     const defaultCallSettings = this._defaults['listRepositories'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listRepositories stream %j', request);
     return this.descriptors.page.listRepositories.createStream(
       this.innerApiCalls.listRepositories as GaxCall,
       request,
@@ -2267,7 +2681,10 @@ export class RepositoryManagerClient {
       });
     const defaultCallSettings = this._defaults['listRepositories'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listRepositories iterate %j', request);
     return this.descriptors.page.listRepositories.asyncIterate(
       this.innerApiCalls['listRepositories'] as GaxCall,
       request as {},
@@ -2370,12 +2787,36 @@ export class RepositoryManagerClient {
       this._gaxModule.routingHeader.fromParams({
         connection: request.connection ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.fetchLinkableRepositories(
-      request,
-      options,
-      callback
-    );
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.devtools.cloudbuild.v2.IFetchLinkableRepositoriesRequest,
+          | protos.google.devtools.cloudbuild.v2.IFetchLinkableRepositoriesResponse
+          | null
+          | undefined,
+          protos.google.devtools.cloudbuild.v2.IRepository
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('fetchLinkableRepositories values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('fetchLinkableRepositories request %j', request);
+    return this.innerApiCalls
+      .fetchLinkableRepositories(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.devtools.cloudbuild.v2.IRepository[],
+          protos.google.devtools.cloudbuild.v2.IFetchLinkableRepositoriesRequest | null,
+          protos.google.devtools.cloudbuild.v2.IFetchLinkableRepositoriesResponse,
+        ]) => {
+          this._log.info('fetchLinkableRepositories values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -2414,7 +2855,10 @@ export class RepositoryManagerClient {
       });
     const defaultCallSettings = this._defaults['fetchLinkableRepositories'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('fetchLinkableRepositories stream %j', request);
     return this.descriptors.page.fetchLinkableRepositories.createStream(
       this.innerApiCalls.fetchLinkableRepositories as GaxCall,
       request,
@@ -2461,7 +2905,10 @@ export class RepositoryManagerClient {
       });
     const defaultCallSettings = this._defaults['fetchLinkableRepositories'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('fetchLinkableRepositories iterate %j', request);
     return this.descriptors.page.fetchLinkableRepositories.asyncIterate(
       this.innerApiCalls['fetchLinkableRepositories'] as GaxCall,
       request as {},
@@ -2778,7 +3225,7 @@ export class RepositoryManagerClient {
   listOperationsAsync(
     request: protos.google.longrunning.ListOperationsRequest,
     options?: gax.CallOptions
-  ): AsyncIterable<protos.google.longrunning.ListOperationsResponse> {
+  ): AsyncIterable<protos.google.longrunning.IOperation> {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
@@ -3222,6 +3669,7 @@ export class RepositoryManagerClient {
   close(): Promise<void> {
     if (this.repositoryManagerStub && !this._terminated) {
       return this.repositoryManagerStub.then(stub => {
+        this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
         this.iamClient.close();

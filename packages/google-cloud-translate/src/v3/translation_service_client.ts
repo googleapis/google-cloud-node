@@ -35,6 +35,7 @@ import type {
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
+import {loggingUtils as logging} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -59,6 +60,8 @@ export class TranslationServiceClient {
   private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
+  private _log = logging.log('translate');
+
   auth: gax.GoogleAuth;
   descriptors: Descriptors = {
     page: {},
@@ -96,7 +99,7 @@ export class TranslationServiceClient {
    *     Developer's Console, e.g. 'grape-spaceship-123'. We will also check
    *     the environment variable GCLOUD_PROJECT for your project ID. If your
    *     app is running in an environment which supports
-   *     {@link https://developers.google.com/identity/protocols/application-default-credentials Application Default Credentials},
+   *     {@link https://cloud.google.com/docs/authentication/application-default-credentials Application Default Credentials},
    *     your project ID will be detected automatically.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
@@ -823,8 +826,36 @@ export class TranslationServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.translateText(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('translateText request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.translation.v3.ITranslateTextResponse,
+          | protos.google.cloud.translation.v3.ITranslateTextRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('translateText response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .translateText(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.translation.v3.ITranslateTextResponse,
+          protos.google.cloud.translation.v3.ITranslateTextRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('translateText response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Romanize input text written in non-Latin scripts to Latin text.
@@ -927,8 +958,36 @@ export class TranslationServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.romanizeText(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('romanizeText request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.translation.v3.IRomanizeTextResponse,
+          | protos.google.cloud.translation.v3.IRomanizeTextRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('romanizeText response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .romanizeText(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.translation.v3.IRomanizeTextResponse,
+          protos.google.cloud.translation.v3.IRomanizeTextRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('romanizeText response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Detects the language of text within a request.
@@ -1052,8 +1111,36 @@ export class TranslationServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.detectLanguage(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('detectLanguage request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.translation.v3.IDetectLanguageResponse,
+          | protos.google.cloud.translation.v3.IDetectLanguageRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('detectLanguage response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .detectLanguage(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.translation.v3.IDetectLanguageResponse,
+          protos.google.cloud.translation.v3.IDetectLanguageRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('detectLanguage response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Returns a list of supported languages for translation.
@@ -1178,8 +1265,39 @@ export class TranslationServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.getSupportedLanguages(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('getSupportedLanguages request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.translation.v3.ISupportedLanguages,
+          | protos.google.cloud.translation.v3.IGetSupportedLanguagesRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getSupportedLanguages response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getSupportedLanguages(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.translation.v3.ISupportedLanguages,
+          (
+            | protos.google.cloud.translation.v3.IGetSupportedLanguagesRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getSupportedLanguages response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Translates documents in synchronous mode.
@@ -1341,8 +1459,39 @@ export class TranslationServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.translateDocument(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('translateDocument request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.translation.v3.ITranslateDocumentResponse,
+          | protos.google.cloud.translation.v3.ITranslateDocumentRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('translateDocument response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .translateDocument(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.translation.v3.ITranslateDocumentResponse,
+          (
+            | protos.google.cloud.translation.v3.ITranslateDocumentRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('translateDocument response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Gets a glossary. Returns NOT_FOUND, if the glossary doesn't
@@ -1426,8 +1575,36 @@ export class TranslationServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.getGlossary(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('getGlossary request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.translation.v3.IGlossary,
+          | protos.google.cloud.translation.v3.IGetGlossaryRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getGlossary response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getGlossary(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.translation.v3.IGlossary,
+          protos.google.cloud.translation.v3.IGetGlossaryRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getGlossary response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Gets a single glossary entry by the given id.
@@ -1516,8 +1693,39 @@ export class TranslationServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.getGlossaryEntry(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('getGlossaryEntry request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.translation.v3.IGlossaryEntry,
+          | protos.google.cloud.translation.v3.IGetGlossaryEntryRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getGlossaryEntry response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getGlossaryEntry(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.translation.v3.IGlossaryEntry,
+          (
+            | protos.google.cloud.translation.v3.IGetGlossaryEntryRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getGlossaryEntry response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Creates a glossary entry.
@@ -1614,8 +1822,39 @@ export class TranslationServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.createGlossaryEntry(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('createGlossaryEntry request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.translation.v3.IGlossaryEntry,
+          | protos.google.cloud.translation.v3.ICreateGlossaryEntryRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('createGlossaryEntry response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .createGlossaryEntry(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.translation.v3.IGlossaryEntry,
+          (
+            | protos.google.cloud.translation.v3.ICreateGlossaryEntryRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('createGlossaryEntry response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Updates a glossary entry.
@@ -1710,8 +1949,39 @@ export class TranslationServiceClient {
       this._gaxModule.routingHeader.fromParams({
         'glossary_entry.name': request.glossaryEntry!.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.updateGlossaryEntry(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('updateGlossaryEntry request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.translation.v3.IGlossaryEntry,
+          | protos.google.cloud.translation.v3.IUpdateGlossaryEntryRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('updateGlossaryEntry response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .updateGlossaryEntry(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.translation.v3.IGlossaryEntry,
+          (
+            | protos.google.cloud.translation.v3.IUpdateGlossaryEntryRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('updateGlossaryEntry response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Deletes a single entry from the glossary
@@ -1806,8 +2076,39 @@ export class TranslationServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.deleteGlossaryEntry(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('deleteGlossaryEntry request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.cloud.translation.v3.IDeleteGlossaryEntryRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('deleteGlossaryEntry response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .deleteGlossaryEntry(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.protobuf.IEmpty,
+          (
+            | protos.google.cloud.translation.v3.IDeleteGlossaryEntryRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteGlossaryEntry response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Gets a Dataset.
@@ -1890,8 +2191,36 @@ export class TranslationServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.getDataset(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('getDataset request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.translation.v3.IDataset,
+          | protos.google.cloud.translation.v3.IGetDatasetRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getDataset response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getDataset(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.translation.v3.IDataset,
+          protos.google.cloud.translation.v3.IGetDatasetRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getDataset response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Creates an Adaptive MT dataset.
@@ -1989,12 +2318,39 @@ export class TranslationServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.createAdaptiveMtDataset(
-      request,
-      options,
-      callback
-    );
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('createAdaptiveMtDataset request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.translation.v3.IAdaptiveMtDataset,
+          | protos.google.cloud.translation.v3.ICreateAdaptiveMtDatasetRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('createAdaptiveMtDataset response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .createAdaptiveMtDataset(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.translation.v3.IAdaptiveMtDataset,
+          (
+            | protos.google.cloud.translation.v3.ICreateAdaptiveMtDatasetRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('createAdaptiveMtDataset response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Deletes an Adaptive MT dataset, including all its entries and associated
@@ -2091,12 +2447,39 @@ export class TranslationServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.deleteAdaptiveMtDataset(
-      request,
-      options,
-      callback
-    );
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('deleteAdaptiveMtDataset request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.cloud.translation.v3.IDeleteAdaptiveMtDatasetRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('deleteAdaptiveMtDataset response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .deleteAdaptiveMtDataset(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.protobuf.IEmpty,
+          (
+            | protos.google.cloud.translation.v3.IDeleteAdaptiveMtDatasetRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteAdaptiveMtDataset response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Gets the Adaptive MT dataset.
@@ -2192,8 +2575,39 @@ export class TranslationServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.getAdaptiveMtDataset(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('getAdaptiveMtDataset request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.translation.v3.IAdaptiveMtDataset,
+          | protos.google.cloud.translation.v3.IGetAdaptiveMtDatasetRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getAdaptiveMtDataset response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getAdaptiveMtDataset(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.translation.v3.IAdaptiveMtDataset,
+          (
+            | protos.google.cloud.translation.v3.IGetAdaptiveMtDatasetRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getAdaptiveMtDataset response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Translate text using Adaptive MT.
@@ -2301,8 +2715,39 @@ export class TranslationServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.adaptiveMtTranslate(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('adaptiveMtTranslate request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.translation.v3.IAdaptiveMtTranslateResponse,
+          | protos.google.cloud.translation.v3.IAdaptiveMtTranslateRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('adaptiveMtTranslate response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .adaptiveMtTranslate(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.translation.v3.IAdaptiveMtTranslateResponse,
+          (
+            | protos.google.cloud.translation.v3.IAdaptiveMtTranslateRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('adaptiveMtTranslate response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Gets and AdaptiveMtFile
@@ -2392,8 +2837,39 @@ export class TranslationServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.getAdaptiveMtFile(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('getAdaptiveMtFile request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.translation.v3.IAdaptiveMtFile,
+          | protos.google.cloud.translation.v3.IGetAdaptiveMtFileRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getAdaptiveMtFile response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getAdaptiveMtFile(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.translation.v3.IAdaptiveMtFile,
+          (
+            | protos.google.cloud.translation.v3.IGetAdaptiveMtFileRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getAdaptiveMtFile response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Deletes an AdaptiveMtFile along with its sentences.
@@ -2489,8 +2965,39 @@ export class TranslationServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.deleteAdaptiveMtFile(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('deleteAdaptiveMtFile request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.cloud.translation.v3.IDeleteAdaptiveMtFileRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('deleteAdaptiveMtFile response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .deleteAdaptiveMtFile(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.protobuf.IEmpty,
+          (
+            | protos.google.cloud.translation.v3.IDeleteAdaptiveMtFileRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteAdaptiveMtFile response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Imports an AdaptiveMtFile and adds all of its sentences into the
@@ -2591,8 +3098,39 @@ export class TranslationServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.importAdaptiveMtFile(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('importAdaptiveMtFile request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.translation.v3.IImportAdaptiveMtFileResponse,
+          | protos.google.cloud.translation.v3.IImportAdaptiveMtFileRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('importAdaptiveMtFile response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .importAdaptiveMtFile(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.translation.v3.IImportAdaptiveMtFileResponse,
+          (
+            | protos.google.cloud.translation.v3.IImportAdaptiveMtFileRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('importAdaptiveMtFile response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Gets a model.
@@ -2675,8 +3213,36 @@ export class TranslationServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.getModel(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('getModel request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.translation.v3.IModel,
+          | protos.google.cloud.translation.v3.IGetModelRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getModel response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getModel(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.translation.v3.IModel,
+          protos.google.cloud.translation.v3.IGetModelRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getModel response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
 
   /**
@@ -2834,8 +3400,40 @@ export class TranslationServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.batchTranslateText(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.translation.v3.IBatchTranslateResponse,
+            protos.google.cloud.translation.v3.IBatchTranslateMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('batchTranslateText response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('batchTranslateText request %j', request);
+    return this.innerApiCalls
+      .batchTranslateText(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.translation.v3.IBatchTranslateResponse,
+            protos.google.cloud.translation.v3.IBatchTranslateMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('batchTranslateText response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `batchTranslateText()`.
@@ -2856,6 +3454,7 @@ export class TranslationServiceClient {
       protos.google.cloud.translation.v3.BatchTranslateMetadata
     >
   > {
+    this._log.info('batchTranslateText long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -3041,12 +3640,40 @@ export class TranslationServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.batchTranslateDocument(
-      request,
-      options,
-      callback
-    );
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.translation.v3.IBatchTranslateDocumentResponse,
+            protos.google.cloud.translation.v3.IBatchTranslateDocumentMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('batchTranslateDocument response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('batchTranslateDocument request %j', request);
+    return this.innerApiCalls
+      .batchTranslateDocument(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.translation.v3.IBatchTranslateDocumentResponse,
+            protos.google.cloud.translation.v3.IBatchTranslateDocumentMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('batchTranslateDocument response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `batchTranslateDocument()`.
@@ -3067,6 +3694,7 @@ export class TranslationServiceClient {
       protos.google.cloud.translation.v3.BatchTranslateDocumentMetadata
     >
   > {
+    this._log.info('batchTranslateDocument long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -3184,8 +3812,40 @@ export class TranslationServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.createGlossary(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.translation.v3.IGlossary,
+            protos.google.cloud.translation.v3.ICreateGlossaryMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('createGlossary response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('createGlossary request %j', request);
+    return this.innerApiCalls
+      .createGlossary(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.translation.v3.IGlossary,
+            protos.google.cloud.translation.v3.ICreateGlossaryMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createGlossary response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `createGlossary()`.
@@ -3206,6 +3866,7 @@ export class TranslationServiceClient {
       protos.google.cloud.translation.v3.CreateGlossaryMetadata
     >
   > {
+    this._log.info('createGlossary long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -3324,8 +3985,40 @@ export class TranslationServiceClient {
       this._gaxModule.routingHeader.fromParams({
         'glossary.name': request.glossary!.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.updateGlossary(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.translation.v3.IGlossary,
+            protos.google.cloud.translation.v3.IUpdateGlossaryMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('updateGlossary response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('updateGlossary request %j', request);
+    return this.innerApiCalls
+      .updateGlossary(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.translation.v3.IGlossary,
+            protos.google.cloud.translation.v3.IUpdateGlossaryMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('updateGlossary response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `updateGlossary()`.
@@ -3346,6 +4039,7 @@ export class TranslationServiceClient {
       protos.google.cloud.translation.v3.UpdateGlossaryMetadata
     >
   > {
+    this._log.info('updateGlossary long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -3462,8 +4156,40 @@ export class TranslationServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.deleteGlossary(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.translation.v3.IDeleteGlossaryResponse,
+            protos.google.cloud.translation.v3.IDeleteGlossaryMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('deleteGlossary response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('deleteGlossary request %j', request);
+    return this.innerApiCalls
+      .deleteGlossary(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.translation.v3.IDeleteGlossaryResponse,
+            protos.google.cloud.translation.v3.IDeleteGlossaryMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteGlossary response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `deleteGlossary()`.
@@ -3484,6 +4210,7 @@ export class TranslationServiceClient {
       protos.google.cloud.translation.v3.DeleteGlossaryMetadata
     >
   > {
+    this._log.info('deleteGlossary long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -3600,8 +4327,40 @@ export class TranslationServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.createDataset(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.translation.v3.IDataset,
+            protos.google.cloud.translation.v3.ICreateDatasetMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('createDataset response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('createDataset request %j', request);
+    return this.innerApiCalls
+      .createDataset(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.translation.v3.IDataset,
+            protos.google.cloud.translation.v3.ICreateDatasetMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createDataset response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `createDataset()`.
@@ -3622,6 +4381,7 @@ export class TranslationServiceClient {
       protos.google.cloud.translation.v3.CreateDatasetMetadata
     >
   > {
+    this._log.info('createDataset long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -3736,8 +4496,40 @@ export class TranslationServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.deleteDataset(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.translation.v3.IDeleteDatasetMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('deleteDataset response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('deleteDataset request %j', request);
+    return this.innerApiCalls
+      .deleteDataset(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.translation.v3.IDeleteDatasetMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteDataset response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `deleteDataset()`.
@@ -3758,6 +4550,7 @@ export class TranslationServiceClient {
       protos.google.cloud.translation.v3.DeleteDatasetMetadata
     >
   > {
+    this._log.info('deleteDataset long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -3875,8 +4668,40 @@ export class TranslationServiceClient {
       this._gaxModule.routingHeader.fromParams({
         dataset: request.dataset ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.importData(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.translation.v3.IImportDataMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('importData response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('importData request %j', request);
+    return this.innerApiCalls
+      .importData(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.translation.v3.IImportDataMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('importData response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `importData()`.
@@ -3897,6 +4722,7 @@ export class TranslationServiceClient {
       protos.google.cloud.translation.v3.ImportDataMetadata
     >
   > {
+    this._log.info('importData long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -4014,8 +4840,40 @@ export class TranslationServiceClient {
       this._gaxModule.routingHeader.fromParams({
         dataset: request.dataset ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.exportData(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.translation.v3.IExportDataMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('exportData response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('exportData request %j', request);
+    return this.innerApiCalls
+      .exportData(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.translation.v3.IExportDataMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('exportData response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `exportData()`.
@@ -4036,6 +4894,7 @@ export class TranslationServiceClient {
       protos.google.cloud.translation.v3.ExportDataMetadata
     >
   > {
+    this._log.info('exportData long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -4153,8 +5012,40 @@ export class TranslationServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.createModel(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.translation.v3.IModel,
+            protos.google.cloud.translation.v3.ICreateModelMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('createModel response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('createModel request %j', request);
+    return this.innerApiCalls
+      .createModel(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.translation.v3.IModel,
+            protos.google.cloud.translation.v3.ICreateModelMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createModel response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `createModel()`.
@@ -4175,6 +5066,7 @@ export class TranslationServiceClient {
       protos.google.cloud.translation.v3.CreateModelMetadata
     >
   > {
+    this._log.info('createModel long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -4289,8 +5181,40 @@ export class TranslationServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.deleteModel(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.translation.v3.IDeleteModelMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('deleteModel response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('deleteModel request %j', request);
+    return this.innerApiCalls
+      .deleteModel(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.translation.v3.IDeleteModelMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteModel response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `deleteModel()`.
@@ -4311,6 +5235,7 @@ export class TranslationServiceClient {
       protos.google.cloud.translation.v3.DeleteModelMetadata
     >
   > {
+    this._log.info('deleteModel long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -4442,8 +5367,36 @@ export class TranslationServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.listGlossaries(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.translation.v3.IListGlossariesRequest,
+          | protos.google.cloud.translation.v3.IListGlossariesResponse
+          | null
+          | undefined,
+          protos.google.cloud.translation.v3.IGlossary
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listGlossaries values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listGlossaries request %j', request);
+    return this.innerApiCalls
+      .listGlossaries(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.translation.v3.IGlossary[],
+          protos.google.cloud.translation.v3.IListGlossariesRequest | null,
+          protos.google.cloud.translation.v3.IListGlossariesResponse,
+        ]) => {
+          this._log.info('listGlossaries values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -4502,7 +5455,10 @@ export class TranslationServiceClient {
       });
     const defaultCallSettings = this._defaults['listGlossaries'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listGlossaries stream %j', request);
     return this.descriptors.page.listGlossaries.createStream(
       this.innerApiCalls.listGlossaries as GaxCall,
       request,
@@ -4569,7 +5525,10 @@ export class TranslationServiceClient {
       });
     const defaultCallSettings = this._defaults['listGlossaries'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listGlossaries iterate %j', request);
     return this.descriptors.page.listGlossaries.asyncIterate(
       this.innerApiCalls['listGlossaries'] as GaxCall,
       request as {},
@@ -4675,8 +5634,36 @@ export class TranslationServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.listGlossaryEntries(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.translation.v3.IListGlossaryEntriesRequest,
+          | protos.google.cloud.translation.v3.IListGlossaryEntriesResponse
+          | null
+          | undefined,
+          protos.google.cloud.translation.v3.IGlossaryEntry
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listGlossaryEntries values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listGlossaryEntries request %j', request);
+    return this.innerApiCalls
+      .listGlossaryEntries(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.translation.v3.IGlossaryEntry[],
+          protos.google.cloud.translation.v3.IListGlossaryEntriesRequest | null,
+          protos.google.cloud.translation.v3.IListGlossaryEntriesResponse,
+        ]) => {
+          this._log.info('listGlossaryEntries values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -4719,7 +5706,10 @@ export class TranslationServiceClient {
       });
     const defaultCallSettings = this._defaults['listGlossaryEntries'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listGlossaryEntries stream %j', request);
     return this.descriptors.page.listGlossaryEntries.createStream(
       this.innerApiCalls.listGlossaryEntries as GaxCall,
       request,
@@ -4770,7 +5760,10 @@ export class TranslationServiceClient {
       });
     const defaultCallSettings = this._defaults['listGlossaryEntries'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listGlossaryEntries iterate %j', request);
     return this.descriptors.page.listGlossaryEntries.asyncIterate(
       this.innerApiCalls['listGlossaryEntries'] as GaxCall,
       request as {},
@@ -4875,8 +5868,36 @@ export class TranslationServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.listDatasets(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.translation.v3.IListDatasetsRequest,
+          | protos.google.cloud.translation.v3.IListDatasetsResponse
+          | null
+          | undefined,
+          protos.google.cloud.translation.v3.IDataset
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listDatasets values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listDatasets request %j', request);
+    return this.innerApiCalls
+      .listDatasets(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.translation.v3.IDataset[],
+          protos.google.cloud.translation.v3.IListDatasetsRequest | null,
+          protos.google.cloud.translation.v3.IListDatasetsResponse,
+        ]) => {
+          this._log.info('listDatasets values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -4918,7 +5939,10 @@ export class TranslationServiceClient {
       });
     const defaultCallSettings = this._defaults['listDatasets'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listDatasets stream %j', request);
     return this.descriptors.page.listDatasets.createStream(
       this.innerApiCalls.listDatasets as GaxCall,
       request,
@@ -4968,7 +5992,10 @@ export class TranslationServiceClient {
       });
     const defaultCallSettings = this._defaults['listDatasets'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listDatasets iterate %j', request);
     return this.descriptors.page.listDatasets.asyncIterate(
       this.innerApiCalls['listDatasets'] as GaxCall,
       request as {},
@@ -5078,12 +6105,36 @@ export class TranslationServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.listAdaptiveMtDatasets(
-      request,
-      options,
-      callback
-    );
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.translation.v3.IListAdaptiveMtDatasetsRequest,
+          | protos.google.cloud.translation.v3.IListAdaptiveMtDatasetsResponse
+          | null
+          | undefined,
+          protos.google.cloud.translation.v3.IAdaptiveMtDataset
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listAdaptiveMtDatasets values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listAdaptiveMtDatasets request %j', request);
+    return this.innerApiCalls
+      .listAdaptiveMtDatasets(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.translation.v3.IAdaptiveMtDataset[],
+          protos.google.cloud.translation.v3.IListAdaptiveMtDatasetsRequest | null,
+          protos.google.cloud.translation.v3.IListAdaptiveMtDatasetsResponse,
+        ]) => {
+          this._log.info('listAdaptiveMtDatasets values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -5130,7 +6181,10 @@ export class TranslationServiceClient {
       });
     const defaultCallSettings = this._defaults['listAdaptiveMtDatasets'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listAdaptiveMtDatasets stream %j', request);
     return this.descriptors.page.listAdaptiveMtDatasets.createStream(
       this.innerApiCalls.listAdaptiveMtDatasets as GaxCall,
       request,
@@ -5185,7 +6239,10 @@ export class TranslationServiceClient {
       });
     const defaultCallSettings = this._defaults['listAdaptiveMtDatasets'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listAdaptiveMtDatasets iterate %j', request);
     return this.descriptors.page.listAdaptiveMtDatasets.asyncIterate(
       this.innerApiCalls['listAdaptiveMtDatasets'] as GaxCall,
       request as {},
@@ -5292,8 +6349,36 @@ export class TranslationServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.listAdaptiveMtFiles(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.translation.v3.IListAdaptiveMtFilesRequest,
+          | protos.google.cloud.translation.v3.IListAdaptiveMtFilesResponse
+          | null
+          | undefined,
+          protos.google.cloud.translation.v3.IAdaptiveMtFile
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listAdaptiveMtFiles values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listAdaptiveMtFiles request %j', request);
+    return this.innerApiCalls
+      .listAdaptiveMtFiles(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.translation.v3.IAdaptiveMtFile[],
+          protos.google.cloud.translation.v3.IListAdaptiveMtFilesRequest | null,
+          protos.google.cloud.translation.v3.IListAdaptiveMtFilesResponse,
+        ]) => {
+          this._log.info('listAdaptiveMtFiles values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -5337,7 +6422,10 @@ export class TranslationServiceClient {
       });
     const defaultCallSettings = this._defaults['listAdaptiveMtFiles'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listAdaptiveMtFiles stream %j', request);
     return this.descriptors.page.listAdaptiveMtFiles.createStream(
       this.innerApiCalls.listAdaptiveMtFiles as GaxCall,
       request,
@@ -5389,7 +6477,10 @@ export class TranslationServiceClient {
       });
     const defaultCallSettings = this._defaults['listAdaptiveMtFiles'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listAdaptiveMtFiles iterate %j', request);
     return this.descriptors.page.listAdaptiveMtFiles.asyncIterate(
       this.innerApiCalls['listAdaptiveMtFiles'] as GaxCall,
       request as {},
@@ -5497,12 +6588,36 @@ export class TranslationServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.listAdaptiveMtSentences(
-      request,
-      options,
-      callback
-    );
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.translation.v3.IListAdaptiveMtSentencesRequest,
+          | protos.google.cloud.translation.v3.IListAdaptiveMtSentencesResponse
+          | null
+          | undefined,
+          protos.google.cloud.translation.v3.IAdaptiveMtSentence
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listAdaptiveMtSentences values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listAdaptiveMtSentences request %j', request);
+    return this.innerApiCalls
+      .listAdaptiveMtSentences(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.translation.v3.IAdaptiveMtSentence[],
+          protos.google.cloud.translation.v3.IListAdaptiveMtSentencesRequest | null,
+          protos.google.cloud.translation.v3.IListAdaptiveMtSentencesResponse,
+        ]) => {
+          this._log.info('listAdaptiveMtSentences values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -5547,7 +6662,10 @@ export class TranslationServiceClient {
       });
     const defaultCallSettings = this._defaults['listAdaptiveMtSentences'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listAdaptiveMtSentences stream %j', request);
     return this.descriptors.page.listAdaptiveMtSentences.createStream(
       this.innerApiCalls.listAdaptiveMtSentences as GaxCall,
       request,
@@ -5600,7 +6718,10 @@ export class TranslationServiceClient {
       });
     const defaultCallSettings = this._defaults['listAdaptiveMtSentences'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listAdaptiveMtSentences iterate %j', request);
     return this.descriptors.page.listAdaptiveMtSentences.asyncIterate(
       this.innerApiCalls['listAdaptiveMtSentences'] as GaxCall,
       request as {},
@@ -5709,8 +6830,36 @@ export class TranslationServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.listExamples(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.translation.v3.IListExamplesRequest,
+          | protos.google.cloud.translation.v3.IListExamplesResponse
+          | null
+          | undefined,
+          protos.google.cloud.translation.v3.IExample
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listExamples values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listExamples request %j', request);
+    return this.innerApiCalls
+      .listExamples(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.translation.v3.IExample[],
+          protos.google.cloud.translation.v3.IListExamplesRequest | null,
+          protos.google.cloud.translation.v3.IListExamplesResponse,
+        ]) => {
+          this._log.info('listExamples values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -5756,7 +6905,10 @@ export class TranslationServiceClient {
       });
     const defaultCallSettings = this._defaults['listExamples'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listExamples stream %j', request);
     return this.descriptors.page.listExamples.createStream(
       this.innerApiCalls.listExamples as GaxCall,
       request,
@@ -5810,7 +6962,10 @@ export class TranslationServiceClient {
       });
     const defaultCallSettings = this._defaults['listExamples'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listExamples iterate %j', request);
     return this.descriptors.page.listExamples.asyncIterate(
       this.innerApiCalls['listExamples'] as GaxCall,
       request as {},
@@ -5913,8 +7068,36 @@ export class TranslationServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.listModels(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.translation.v3.IListModelsRequest,
+          | protos.google.cloud.translation.v3.IListModelsResponse
+          | null
+          | undefined,
+          protos.google.cloud.translation.v3.IModel
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listModels values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listModels request %j', request);
+    return this.innerApiCalls
+      .listModels(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.translation.v3.IModel[],
+          protos.google.cloud.translation.v3.IListModelsRequest | null,
+          protos.google.cloud.translation.v3.IListModelsResponse,
+        ]) => {
+          this._log.info('listModels values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -5960,7 +7143,10 @@ export class TranslationServiceClient {
       });
     const defaultCallSettings = this._defaults['listModels'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listModels stream %j', request);
     return this.descriptors.page.listModels.createStream(
       this.innerApiCalls.listModels as GaxCall,
       request,
@@ -6014,7 +7200,10 @@ export class TranslationServiceClient {
       });
     const defaultCallSettings = this._defaults['listModels'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listModels iterate %j', request);
     return this.descriptors.page.listModels.asyncIterate(
       this.innerApiCalls['listModels'] as GaxCall,
       request as {},
@@ -6331,7 +7520,7 @@ export class TranslationServiceClient {
   listOperationsAsync(
     request: protos.google.longrunning.ListOperationsRequest,
     options?: gax.CallOptions
-  ): AsyncIterable<protos.google.longrunning.ListOperationsResponse> {
+  ): AsyncIterable<protos.google.longrunning.IOperation> {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
@@ -7016,6 +8205,7 @@ export class TranslationServiceClient {
   close(): Promise<void> {
     if (this.translationServiceStub && !this._terminated) {
       return this.translationServiceStub.then(stub => {
+        this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
         this.iamClient.close();

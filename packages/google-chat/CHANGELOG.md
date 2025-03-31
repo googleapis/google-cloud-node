@@ -1,5 +1,36 @@
 # Changelog
 
+## [0.15.0](https://github.com/googleapis/google-cloud-node/compare/chat-v0.14.0...chat-v0.15.0) (2025-03-19)
+
+
+### Features
+
+* [Many APIs] await/catch promises, and update listOperationsAsync return type ([#6182](https://github.com/googleapis/google-cloud-node/issues/6182)) ([c41ff07](https://github.com/googleapis/google-cloud-node/commit/c41ff0729b65a1207978b4029d6369cc0552e0bf))
+
+## [0.14.0](https://github.com/googleapis/google-cloud-node/compare/chat-v0.13.0...chat-v0.14.0) (2025-03-18)
+
+
+### ⚠ BREAKING CHANGES
+
+* upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096))
+
+### Features
+
+* [chat] Addition of space notification setting Chat API ([#6120](https://github.com/googleapis/google-cloud-node/issues/6120)) ([062dff4](https://github.com/googleapis/google-cloud-node/commit/062dff45982bfe20c43a4f6298043576ab52b156))
+* [Many APIs] add request/response debug logging to gapics, update templates to gax 5  ([54a73fe](https://github.com/googleapis/google-cloud-node/commit/54a73fe74eab0675c006f24d5f1e4574c44d829b))
+
+
+### Miscellaneous Chores
+
+* Upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096)) ([eadae64](https://github.com/googleapis/google-cloud-node/commit/eadae64d54e07aa2c65097ea52e65008d4e87436))
+
+## [0.13.0](https://github.com/googleapis/google-cloud-node/compare/chat-v0.12.0...chat-v0.13.0) (2025-02-28)
+
+
+### Features
+
+* [chat] Add DeletionType.SPACE_MEMBER. This is returned when a message sent by an app is deleted by a human in a space ([#6030](https://github.com/googleapis/google-cloud-node/issues/6030)) ([550aafa](https://github.com/googleapis/google-cloud-node/commit/550aafa7c23eabaf2ecbe5c035294428290f7020))
+
 ## [0.12.0](https://github.com/googleapis/google-cloud-node/compare/chat-v0.11.0...chat-v0.12.0) (2025-01-29)
 
 

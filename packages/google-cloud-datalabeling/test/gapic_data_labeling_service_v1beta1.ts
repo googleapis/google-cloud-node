@@ -300,7 +300,9 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      client.initialize().catch(err => {
+        throw err;
+      });
       assert(client.dataLabelingServiceStub);
       client.close().then(() => {
         done();
@@ -363,7 +365,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.CreateDatasetRequest()
       );
@@ -372,7 +374,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.Dataset()
       );
@@ -395,7 +397,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.CreateDatasetRequest()
       );
@@ -404,7 +406,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.Dataset()
       );
@@ -443,7 +445,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.CreateDatasetRequest()
       );
@@ -452,7 +454,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createDataset = stubSimpleCall(
         undefined,
@@ -475,7 +477,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.CreateDatasetRequest()
       );
@@ -497,7 +499,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.GetDatasetRequest()
       );
@@ -506,7 +508,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.Dataset()
       );
@@ -529,7 +531,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.GetDatasetRequest()
       );
@@ -538,7 +540,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.Dataset()
       );
@@ -577,7 +579,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.GetDatasetRequest()
       );
@@ -586,7 +588,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getDataset = stubSimpleCall(
         undefined,
@@ -609,7 +611,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.GetDatasetRequest()
       );
@@ -631,7 +633,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.DeleteDatasetRequest()
       );
@@ -640,7 +642,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -663,7 +665,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.DeleteDatasetRequest()
       );
@@ -672,7 +674,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -711,7 +713,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.DeleteDatasetRequest()
       );
@@ -720,7 +722,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteDataset = stubSimpleCall(
         undefined,
@@ -743,7 +745,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.DeleteDatasetRequest()
       );
@@ -765,7 +767,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.GetDataItemRequest()
       );
@@ -774,7 +776,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.DataItem()
       );
@@ -797,7 +799,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.GetDataItemRequest()
       );
@@ -806,7 +808,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.DataItem()
       );
@@ -845,7 +847,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.GetDataItemRequest()
       );
@@ -854,7 +856,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getDataItem = stubSimpleCall(
         undefined,
@@ -877,7 +879,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.GetDataItemRequest()
       );
@@ -899,7 +901,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.GetAnnotatedDatasetRequest()
       );
@@ -908,7 +910,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.AnnotatedDataset()
       );
@@ -932,7 +934,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.GetAnnotatedDatasetRequest()
       );
@@ -941,7 +943,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.AnnotatedDataset()
       );
@@ -980,7 +982,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.GetAnnotatedDatasetRequest()
       );
@@ -989,7 +991,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getAnnotatedDataset = stubSimpleCall(
         undefined,
@@ -1012,7 +1014,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.GetAnnotatedDatasetRequest()
       );
@@ -1034,7 +1036,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.DeleteAnnotatedDatasetRequest()
       );
@@ -1043,7 +1045,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -1067,7 +1069,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.DeleteAnnotatedDatasetRequest()
       );
@@ -1076,7 +1078,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -1115,7 +1117,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.DeleteAnnotatedDatasetRequest()
       );
@@ -1124,7 +1126,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteAnnotatedDataset = stubSimpleCall(
         undefined,
@@ -1150,7 +1152,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.DeleteAnnotatedDatasetRequest()
       );
@@ -1175,7 +1177,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.GetExampleRequest()
       );
@@ -1184,7 +1186,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.Example()
       );
@@ -1207,7 +1209,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.GetExampleRequest()
       );
@@ -1216,7 +1218,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.Example()
       );
@@ -1255,7 +1257,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.GetExampleRequest()
       );
@@ -1264,7 +1266,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getExample = stubSimpleCall(
         undefined,
@@ -1287,7 +1289,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.GetExampleRequest()
       );
@@ -1309,7 +1311,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.CreateAnnotationSpecSetRequest()
       );
@@ -1318,7 +1320,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.AnnotationSpecSet()
       );
@@ -1342,7 +1344,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.CreateAnnotationSpecSetRequest()
       );
@@ -1351,7 +1353,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.AnnotationSpecSet()
       );
@@ -1390,7 +1392,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.CreateAnnotationSpecSetRequest()
       );
@@ -1399,7 +1401,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createAnnotationSpecSet = stubSimpleCall(
         undefined,
@@ -1425,7 +1427,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.CreateAnnotationSpecSetRequest()
       );
@@ -1450,7 +1452,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.GetAnnotationSpecSetRequest()
       );
@@ -1459,7 +1461,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.AnnotationSpecSet()
       );
@@ -1483,7 +1485,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.GetAnnotationSpecSetRequest()
       );
@@ -1492,7 +1494,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.AnnotationSpecSet()
       );
@@ -1531,7 +1533,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.GetAnnotationSpecSetRequest()
       );
@@ -1540,7 +1542,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getAnnotationSpecSet = stubSimpleCall(
         undefined,
@@ -1563,7 +1565,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.GetAnnotationSpecSetRequest()
       );
@@ -1585,7 +1587,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.DeleteAnnotationSpecSetRequest()
       );
@@ -1594,7 +1596,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -1618,7 +1620,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.DeleteAnnotationSpecSetRequest()
       );
@@ -1627,7 +1629,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -1666,7 +1668,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.DeleteAnnotationSpecSetRequest()
       );
@@ -1675,7 +1677,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteAnnotationSpecSet = stubSimpleCall(
         undefined,
@@ -1701,7 +1703,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.DeleteAnnotationSpecSetRequest()
       );
@@ -1726,7 +1728,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.GetInstructionRequest()
       );
@@ -1735,7 +1737,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.Instruction()
       );
@@ -1758,7 +1760,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.GetInstructionRequest()
       );
@@ -1767,7 +1769,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.Instruction()
       );
@@ -1806,7 +1808,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.GetInstructionRequest()
       );
@@ -1815,7 +1817,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getInstruction = stubSimpleCall(
         undefined,
@@ -1838,7 +1840,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.GetInstructionRequest()
       );
@@ -1860,7 +1862,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.DeleteInstructionRequest()
       );
@@ -1869,7 +1871,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -1892,7 +1894,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.DeleteInstructionRequest()
       );
@@ -1901,7 +1903,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -1940,7 +1942,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.DeleteInstructionRequest()
       );
@@ -1949,7 +1951,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteInstruction = stubSimpleCall(
         undefined,
@@ -1972,7 +1974,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.DeleteInstructionRequest()
       );
@@ -1994,7 +1996,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.GetEvaluationRequest()
       );
@@ -2003,7 +2005,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.Evaluation()
       );
@@ -2026,7 +2028,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.GetEvaluationRequest()
       );
@@ -2035,7 +2037,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.Evaluation()
       );
@@ -2074,7 +2076,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.GetEvaluationRequest()
       );
@@ -2083,7 +2085,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getEvaluation = stubSimpleCall(
         undefined,
@@ -2106,7 +2108,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.GetEvaluationRequest()
       );
@@ -2128,7 +2130,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.CreateEvaluationJobRequest()
       );
@@ -2137,7 +2139,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.EvaluationJob()
       );
@@ -2161,7 +2163,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.CreateEvaluationJobRequest()
       );
@@ -2170,7 +2172,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.EvaluationJob()
       );
@@ -2209,7 +2211,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.CreateEvaluationJobRequest()
       );
@@ -2218,7 +2220,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createEvaluationJob = stubSimpleCall(
         undefined,
@@ -2241,7 +2243,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.CreateEvaluationJobRequest()
       );
@@ -2263,7 +2265,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.UpdateEvaluationJobRequest()
       );
@@ -2273,7 +2275,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
         ['evaluationJob', 'name']
       );
       request.evaluationJob.name = defaultValue1;
-      const expectedHeaderRequestParams = `evaluation_job.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `evaluation_job.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.EvaluationJob()
       );
@@ -2297,7 +2299,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.UpdateEvaluationJobRequest()
       );
@@ -2307,7 +2309,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
         ['evaluationJob', 'name']
       );
       request.evaluationJob.name = defaultValue1;
-      const expectedHeaderRequestParams = `evaluation_job.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `evaluation_job.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.EvaluationJob()
       );
@@ -2346,7 +2348,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.UpdateEvaluationJobRequest()
       );
@@ -2356,7 +2358,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
         ['evaluationJob', 'name']
       );
       request.evaluationJob.name = defaultValue1;
-      const expectedHeaderRequestParams = `evaluation_job.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `evaluation_job.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateEvaluationJob = stubSimpleCall(
         undefined,
@@ -2379,7 +2381,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.UpdateEvaluationJobRequest()
       );
@@ -2402,7 +2404,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.GetEvaluationJobRequest()
       );
@@ -2411,7 +2413,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.EvaluationJob()
       );
@@ -2434,7 +2436,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.GetEvaluationJobRequest()
       );
@@ -2443,7 +2445,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.EvaluationJob()
       );
@@ -2482,7 +2484,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.GetEvaluationJobRequest()
       );
@@ -2491,7 +2493,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getEvaluationJob = stubSimpleCall(
         undefined,
@@ -2514,7 +2516,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.GetEvaluationJobRequest()
       );
@@ -2536,7 +2538,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.PauseEvaluationJobRequest()
       );
@@ -2545,7 +2547,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -2569,7 +2571,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.PauseEvaluationJobRequest()
       );
@@ -2578,7 +2580,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -2617,7 +2619,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.PauseEvaluationJobRequest()
       );
@@ -2626,7 +2628,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.pauseEvaluationJob = stubSimpleCall(
         undefined,
@@ -2649,7 +2651,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.PauseEvaluationJobRequest()
       );
@@ -2671,7 +2673,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.ResumeEvaluationJobRequest()
       );
@@ -2680,7 +2682,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -2704,7 +2706,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.ResumeEvaluationJobRequest()
       );
@@ -2713,7 +2715,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -2752,7 +2754,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.ResumeEvaluationJobRequest()
       );
@@ -2761,7 +2763,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.resumeEvaluationJob = stubSimpleCall(
         undefined,
@@ -2784,7 +2786,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.ResumeEvaluationJobRequest()
       );
@@ -2806,7 +2808,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.DeleteEvaluationJobRequest()
       );
@@ -2815,7 +2817,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -2839,7 +2841,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.DeleteEvaluationJobRequest()
       );
@@ -2848,7 +2850,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -2887,7 +2889,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.DeleteEvaluationJobRequest()
       );
@@ -2896,7 +2898,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteEvaluationJob = stubSimpleCall(
         undefined,
@@ -2919,7 +2921,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.DeleteEvaluationJobRequest()
       );
@@ -2941,7 +2943,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.ImportDataRequest()
       );
@@ -2950,7 +2952,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2974,7 +2976,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.ImportDataRequest()
       );
@@ -2983,7 +2985,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -3029,7 +3031,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.ImportDataRequest()
       );
@@ -3038,7 +3040,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.importData = stubLongRunningCall(
         undefined,
@@ -3061,7 +3063,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.ImportDataRequest()
       );
@@ -3070,7 +3072,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.importData = stubLongRunningCall(
         undefined,
@@ -3095,7 +3097,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -3118,7 +3120,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -3137,7 +3139,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.ExportDataRequest()
       );
@@ -3146,7 +3148,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -3170,7 +3172,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.ExportDataRequest()
       );
@@ -3179,7 +3181,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -3225,7 +3227,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.ExportDataRequest()
       );
@@ -3234,7 +3236,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.exportData = stubLongRunningCall(
         undefined,
@@ -3257,7 +3259,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.ExportDataRequest()
       );
@@ -3266,7 +3268,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.exportData = stubLongRunningCall(
         undefined,
@@ -3291,7 +3293,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -3314,7 +3316,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -3333,7 +3335,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.LabelImageRequest()
       );
@@ -3342,7 +3344,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -3366,7 +3368,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.LabelImageRequest()
       );
@@ -3375,7 +3377,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -3421,7 +3423,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.LabelImageRequest()
       );
@@ -3430,7 +3432,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.labelImage = stubLongRunningCall(
         undefined,
@@ -3453,7 +3455,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.LabelImageRequest()
       );
@@ -3462,7 +3464,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.labelImage = stubLongRunningCall(
         undefined,
@@ -3487,7 +3489,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -3510,7 +3512,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -3529,7 +3531,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.LabelVideoRequest()
       );
@@ -3538,7 +3540,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -3562,7 +3564,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.LabelVideoRequest()
       );
@@ -3571,7 +3573,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -3617,7 +3619,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.LabelVideoRequest()
       );
@@ -3626,7 +3628,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.labelVideo = stubLongRunningCall(
         undefined,
@@ -3649,7 +3651,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.LabelVideoRequest()
       );
@@ -3658,7 +3660,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.labelVideo = stubLongRunningCall(
         undefined,
@@ -3683,7 +3685,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -3706,7 +3708,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -3725,7 +3727,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.LabelTextRequest()
       );
@@ -3734,7 +3736,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -3758,7 +3760,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.LabelTextRequest()
       );
@@ -3767,7 +3769,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -3813,7 +3815,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.LabelTextRequest()
       );
@@ -3822,7 +3824,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.labelText = stubLongRunningCall(
         undefined,
@@ -3845,7 +3847,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.LabelTextRequest()
       );
@@ -3854,7 +3856,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.labelText = stubLongRunningCall(
         undefined,
@@ -3879,7 +3881,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -3902,7 +3904,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -3921,7 +3923,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.CreateInstructionRequest()
       );
@@ -3930,7 +3932,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -3955,7 +3957,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.CreateInstructionRequest()
       );
@@ -3964,7 +3966,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -4010,7 +4012,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.CreateInstructionRequest()
       );
@@ -4019,7 +4021,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createInstruction = stubLongRunningCall(
         undefined,
@@ -4042,7 +4044,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.CreateInstructionRequest()
       );
@@ -4051,7 +4053,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createInstruction = stubLongRunningCall(
         undefined,
@@ -4076,7 +4078,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -4099,7 +4101,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -4121,7 +4123,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.ListDatasetsRequest()
       );
@@ -4130,7 +4132,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.datalabeling.v1beta1.Dataset()
@@ -4161,7 +4163,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.ListDatasetsRequest()
       );
@@ -4170,7 +4172,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.datalabeling.v1beta1.Dataset()
@@ -4217,7 +4219,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.ListDatasetsRequest()
       );
@@ -4226,7 +4228,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listDatasets = stubSimpleCall(
         undefined,
@@ -4249,7 +4251,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.ListDatasetsRequest()
       );
@@ -4258,7 +4260,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.datalabeling.v1beta1.Dataset()
@@ -4311,7 +4313,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.ListDatasetsRequest()
       );
@@ -4320,7 +4322,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listDatasets.createStream = stubPageStreamingCall(
         undefined,
@@ -4364,7 +4366,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.ListDatasetsRequest()
       );
@@ -4373,7 +4375,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.datalabeling.v1beta1.Dataset()
@@ -4414,7 +4416,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.ListDatasetsRequest()
       );
@@ -4423,7 +4425,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listDatasets.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -4458,7 +4460,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.ListDataItemsRequest()
       );
@@ -4467,7 +4469,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.datalabeling.v1beta1.DataItem()
@@ -4498,7 +4500,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.ListDataItemsRequest()
       );
@@ -4507,7 +4509,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.datalabeling.v1beta1.DataItem()
@@ -4554,7 +4556,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.ListDataItemsRequest()
       );
@@ -4563,7 +4565,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listDataItems = stubSimpleCall(
         undefined,
@@ -4586,7 +4588,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.ListDataItemsRequest()
       );
@@ -4595,7 +4597,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.datalabeling.v1beta1.DataItem()
@@ -4648,7 +4650,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.ListDataItemsRequest()
       );
@@ -4657,7 +4659,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listDataItems.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -4699,7 +4701,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.ListDataItemsRequest()
       );
@@ -4708,7 +4710,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.datalabeling.v1beta1.DataItem()
@@ -4750,7 +4752,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.ListDataItemsRequest()
       );
@@ -4759,7 +4761,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listDataItems.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -4794,7 +4796,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.ListAnnotatedDatasetsRequest()
       );
@@ -4803,7 +4805,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.datalabeling.v1beta1.AnnotatedDataset()
@@ -4835,7 +4837,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.ListAnnotatedDatasetsRequest()
       );
@@ -4844,7 +4846,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.datalabeling.v1beta1.AnnotatedDataset()
@@ -4893,7 +4895,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.ListAnnotatedDatasetsRequest()
       );
@@ -4902,7 +4904,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listAnnotatedDatasets = stubSimpleCall(
         undefined,
@@ -4928,7 +4930,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.ListAnnotatedDatasetsRequest()
       );
@@ -4937,7 +4939,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.datalabeling.v1beta1.AnnotatedDataset()
@@ -4998,7 +5000,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.ListAnnotatedDatasetsRequest()
       );
@@ -5007,7 +5009,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listAnnotatedDatasets.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -5057,7 +5059,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.ListAnnotatedDatasetsRequest()
       );
@@ -5066,7 +5068,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.datalabeling.v1beta1.AnnotatedDataset()
@@ -5112,7 +5114,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.ListAnnotatedDatasetsRequest()
       );
@@ -5121,7 +5123,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listAnnotatedDatasets.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -5160,7 +5162,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.ListExamplesRequest()
       );
@@ -5169,7 +5171,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.datalabeling.v1beta1.Example()
@@ -5200,7 +5202,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.ListExamplesRequest()
       );
@@ -5209,7 +5211,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.datalabeling.v1beta1.Example()
@@ -5256,7 +5258,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.ListExamplesRequest()
       );
@@ -5265,7 +5267,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listExamples = stubSimpleCall(
         undefined,
@@ -5288,7 +5290,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.ListExamplesRequest()
       );
@@ -5297,7 +5299,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.datalabeling.v1beta1.Example()
@@ -5350,7 +5352,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.ListExamplesRequest()
       );
@@ -5359,7 +5361,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listExamples.createStream = stubPageStreamingCall(
         undefined,
@@ -5403,7 +5405,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.ListExamplesRequest()
       );
@@ -5412,7 +5414,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.datalabeling.v1beta1.Example()
@@ -5453,7 +5455,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.ListExamplesRequest()
       );
@@ -5462,7 +5464,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listExamples.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -5497,7 +5499,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.ListAnnotationSpecSetsRequest()
       );
@@ -5506,7 +5508,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.datalabeling.v1beta1.AnnotationSpecSet()
@@ -5538,7 +5540,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.ListAnnotationSpecSetsRequest()
       );
@@ -5547,7 +5549,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.datalabeling.v1beta1.AnnotationSpecSet()
@@ -5596,7 +5598,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.ListAnnotationSpecSetsRequest()
       );
@@ -5605,7 +5607,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listAnnotationSpecSets = stubSimpleCall(
         undefined,
@@ -5631,7 +5633,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.ListAnnotationSpecSetsRequest()
       );
@@ -5640,7 +5642,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.datalabeling.v1beta1.AnnotationSpecSet()
@@ -5701,7 +5703,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.ListAnnotationSpecSetsRequest()
       );
@@ -5710,7 +5712,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listAnnotationSpecSets.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -5760,7 +5762,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.ListAnnotationSpecSetsRequest()
       );
@@ -5769,7 +5771,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.datalabeling.v1beta1.AnnotationSpecSet()
@@ -5815,7 +5817,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.ListAnnotationSpecSetsRequest()
       );
@@ -5824,7 +5826,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listAnnotationSpecSets.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -5863,7 +5865,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.ListInstructionsRequest()
       );
@@ -5872,7 +5874,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.datalabeling.v1beta1.Instruction()
@@ -5903,7 +5905,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.ListInstructionsRequest()
       );
@@ -5912,7 +5914,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.datalabeling.v1beta1.Instruction()
@@ -5961,7 +5963,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.ListInstructionsRequest()
       );
@@ -5970,7 +5972,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listInstructions = stubSimpleCall(
         undefined,
@@ -5993,7 +5995,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.ListInstructionsRequest()
       );
@@ -6002,7 +6004,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.datalabeling.v1beta1.Instruction()
@@ -6055,7 +6057,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.ListInstructionsRequest()
       );
@@ -6064,7 +6066,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listInstructions.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -6106,7 +6108,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.ListInstructionsRequest()
       );
@@ -6115,7 +6117,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.datalabeling.v1beta1.Instruction()
@@ -6157,7 +6159,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.ListInstructionsRequest()
       );
@@ -6166,7 +6168,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listInstructions.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -6201,7 +6203,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.SearchEvaluationsRequest()
       );
@@ -6210,7 +6212,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.datalabeling.v1beta1.Evaluation()
@@ -6241,7 +6243,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.SearchEvaluationsRequest()
       );
@@ -6250,7 +6252,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.datalabeling.v1beta1.Evaluation()
@@ -6299,7 +6301,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.SearchEvaluationsRequest()
       );
@@ -6308,7 +6310,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.searchEvaluations = stubSimpleCall(
         undefined,
@@ -6331,7 +6333,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.SearchEvaluationsRequest()
       );
@@ -6340,7 +6342,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.datalabeling.v1beta1.Evaluation()
@@ -6393,7 +6395,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.SearchEvaluationsRequest()
       );
@@ -6402,7 +6404,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.searchEvaluations.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -6444,7 +6446,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.SearchEvaluationsRequest()
       );
@@ -6453,7 +6455,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.datalabeling.v1beta1.Evaluation()
@@ -6495,7 +6497,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.SearchEvaluationsRequest()
       );
@@ -6504,7 +6506,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.searchEvaluations.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -6539,7 +6541,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.SearchExampleComparisonsRequest()
       );
@@ -6548,7 +6550,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.datalabeling.v1beta1.SearchExampleComparisonsResponse.ExampleComparison()
@@ -6580,7 +6582,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.SearchExampleComparisonsRequest()
       );
@@ -6589,7 +6591,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.datalabeling.v1beta1.SearchExampleComparisonsResponse.ExampleComparison()
@@ -6638,7 +6640,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.SearchExampleComparisonsRequest()
       );
@@ -6647,7 +6649,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.searchExampleComparisons = stubSimpleCall(
         undefined,
@@ -6673,7 +6675,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.SearchExampleComparisonsRequest()
       );
@@ -6682,7 +6684,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.datalabeling.v1beta1.SearchExampleComparisonsResponse.ExampleComparison()
@@ -6743,7 +6745,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.SearchExampleComparisonsRequest()
       );
@@ -6752,7 +6754,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.searchExampleComparisons.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -6802,7 +6804,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.SearchExampleComparisonsRequest()
       );
@@ -6811,7 +6813,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.datalabeling.v1beta1.SearchExampleComparisonsResponse.ExampleComparison()
@@ -6857,7 +6859,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.SearchExampleComparisonsRequest()
       );
@@ -6866,7 +6868,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.searchExampleComparisons.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -6905,7 +6907,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.ListEvaluationJobsRequest()
       );
@@ -6914,7 +6916,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.datalabeling.v1beta1.EvaluationJob()
@@ -6946,7 +6948,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.ListEvaluationJobsRequest()
       );
@@ -6955,7 +6957,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.datalabeling.v1beta1.EvaluationJob()
@@ -7004,7 +7006,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.ListEvaluationJobsRequest()
       );
@@ -7013,7 +7015,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listEvaluationJobs = stubSimpleCall(
         undefined,
@@ -7036,7 +7038,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.ListEvaluationJobsRequest()
       );
@@ -7045,7 +7047,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.datalabeling.v1beta1.EvaluationJob()
@@ -7100,7 +7102,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.ListEvaluationJobsRequest()
       );
@@ -7109,7 +7111,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listEvaluationJobs.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -7153,7 +7155,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.ListEvaluationJobsRequest()
       );
@@ -7162,7 +7164,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.datalabeling.v1beta1.EvaluationJob()
@@ -7204,7 +7206,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.ListEvaluationJobsRequest()
       );
@@ -7213,7 +7215,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listEvaluationJobs.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -7242,7 +7244,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
   });
 
   describe('Path templates', () => {
-    describe('annotatedDataset', () => {
+    describe('annotatedDataset', async () => {
       const fakePath = '/rendered/path/annotatedDataset';
       const expectedParameters = {
         project: 'projectValue',
@@ -7254,7 +7256,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.annotatedDatasetPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -7311,7 +7313,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
       });
     });
 
-    describe('annotationSpecSet', () => {
+    describe('annotationSpecSet', async () => {
       const fakePath = '/rendered/path/annotationSpecSet';
       const expectedParameters = {
         project: 'projectValue',
@@ -7322,7 +7324,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.annotationSpecSetPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -7374,7 +7376,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
       });
     });
 
-    describe('dataItem', () => {
+    describe('dataItem', async () => {
       const fakePath = '/rendered/path/dataItem';
       const expectedParameters = {
         project: 'projectValue',
@@ -7386,7 +7388,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.dataItemPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -7439,7 +7441,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
       });
     });
 
-    describe('dataset', () => {
+    describe('dataset', async () => {
       const fakePath = '/rendered/path/dataset';
       const expectedParameters = {
         project: 'projectValue',
@@ -7450,7 +7452,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.datasetPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -7489,7 +7491,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
       });
     });
 
-    describe('evaluation', () => {
+    describe('evaluation', async () => {
       const fakePath = '/rendered/path/evaluation';
       const expectedParameters = {
         project: 'projectValue',
@@ -7501,7 +7503,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.evaluationPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -7554,7 +7556,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
       });
     });
 
-    describe('evaluationJob', () => {
+    describe('evaluationJob', async () => {
       const fakePath = '/rendered/path/evaluationJob';
       const expectedParameters = {
         project: 'projectValue',
@@ -7565,7 +7567,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.evaluationJobPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -7607,7 +7609,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
       });
     });
 
-    describe('example', () => {
+    describe('example', async () => {
       const fakePath = '/rendered/path/example';
       const expectedParameters = {
         project: 'projectValue',
@@ -7620,7 +7622,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.examplePathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -7684,7 +7686,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
       });
     });
 
-    describe('instruction', () => {
+    describe('instruction', async () => {
       const fakePath = '/rendered/path/instruction';
       const expectedParameters = {
         project: 'projectValue',
@@ -7695,7 +7697,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.instructionPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -7737,7 +7739,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
       });
     });
 
-    describe('project', () => {
+    describe('project', async () => {
       const fakePath = '/rendered/path/project';
       const expectedParameters = {
         project: 'projectValue',
@@ -7747,7 +7749,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectPathTemplate.render = sinon
         .stub()
         .returns(fakePath);

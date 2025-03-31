@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -264,8 +264,7 @@ message MaintenanceWindow {
   int32 lead_time_week = 6 [(google.api.field_behavior) = OPTIONAL];
 
   // Optional. Cloud CloudExadataInfrastructure node patching method, either
-  // "ROLLING"
-  //  or "NONROLLING". Default value is ROLLING.
+  // "ROLLING" or "NONROLLING". Default value is ROLLING.
   PatchingMode patching_mode = 7 [(google.api.field_behavior) = OPTIONAL];
 
   // Optional. Determines the amount of time the system will wait before the

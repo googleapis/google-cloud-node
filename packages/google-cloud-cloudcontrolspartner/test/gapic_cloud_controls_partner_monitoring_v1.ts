@@ -274,7 +274,9 @@ describe('v1.CloudControlsPartnerMonitoringClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      client.initialize().catch(err => {
+        throw err;
+      });
       assert(client.cloudControlsPartnerMonitoringStub);
       client.close().then(() => {
         done();
@@ -345,7 +347,7 @@ describe('v1.CloudControlsPartnerMonitoringClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.cloudcontrolspartner.v1.GetViolationRequest()
       );
@@ -354,7 +356,7 @@ describe('v1.CloudControlsPartnerMonitoringClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.cloudcontrolspartner.v1.Violation()
       );
@@ -379,7 +381,7 @@ describe('v1.CloudControlsPartnerMonitoringClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.cloudcontrolspartner.v1.GetViolationRequest()
       );
@@ -388,7 +390,7 @@ describe('v1.CloudControlsPartnerMonitoringClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.cloudcontrolspartner.v1.Violation()
       );
@@ -429,7 +431,7 @@ describe('v1.CloudControlsPartnerMonitoringClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.cloudcontrolspartner.v1.GetViolationRequest()
       );
@@ -438,7 +440,7 @@ describe('v1.CloudControlsPartnerMonitoringClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getViolation = stubSimpleCall(
         undefined,
@@ -463,7 +465,7 @@ describe('v1.CloudControlsPartnerMonitoringClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.cloudcontrolspartner.v1.GetViolationRequest()
       );
@@ -487,7 +489,7 @@ describe('v1.CloudControlsPartnerMonitoringClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.cloudcontrolspartner.v1.ListViolationsRequest()
       );
@@ -496,7 +498,7 @@ describe('v1.CloudControlsPartnerMonitoringClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.cloudcontrolspartner.v1.Violation()
@@ -529,7 +531,7 @@ describe('v1.CloudControlsPartnerMonitoringClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.cloudcontrolspartner.v1.ListViolationsRequest()
       );
@@ -538,7 +540,7 @@ describe('v1.CloudControlsPartnerMonitoringClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.cloudcontrolspartner.v1.Violation()
@@ -589,7 +591,7 @@ describe('v1.CloudControlsPartnerMonitoringClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.cloudcontrolspartner.v1.ListViolationsRequest()
       );
@@ -598,7 +600,7 @@ describe('v1.CloudControlsPartnerMonitoringClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listViolations = stubSimpleCall(
         undefined,
@@ -623,7 +625,7 @@ describe('v1.CloudControlsPartnerMonitoringClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.cloudcontrolspartner.v1.ListViolationsRequest()
       );
@@ -632,7 +634,7 @@ describe('v1.CloudControlsPartnerMonitoringClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.cloudcontrolspartner.v1.Violation()
@@ -687,7 +689,7 @@ describe('v1.CloudControlsPartnerMonitoringClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.cloudcontrolspartner.v1.ListViolationsRequest()
       );
@@ -696,7 +698,7 @@ describe('v1.CloudControlsPartnerMonitoringClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listViolations.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -740,7 +742,7 @@ describe('v1.CloudControlsPartnerMonitoringClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.cloudcontrolspartner.v1.ListViolationsRequest()
       );
@@ -749,7 +751,7 @@ describe('v1.CloudControlsPartnerMonitoringClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.cloudcontrolspartner.v1.Violation()
@@ -793,7 +795,7 @@ describe('v1.CloudControlsPartnerMonitoringClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.cloudcontrolspartner.v1.ListViolationsRequest()
       );
@@ -802,7 +804,7 @@ describe('v1.CloudControlsPartnerMonitoringClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listViolations.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -831,7 +833,7 @@ describe('v1.CloudControlsPartnerMonitoringClient', () => {
   });
 
   describe('Path templates', () => {
-    describe('accessApprovalRequest', () => {
+    describe('accessApprovalRequest', async () => {
       const fakePath = '/rendered/path/accessApprovalRequest';
       const expectedParameters = {
         organization: 'organizationValue',
@@ -847,7 +849,7 @@ describe('v1.CloudControlsPartnerMonitoringClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.accessApprovalRequestPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -947,7 +949,7 @@ describe('v1.CloudControlsPartnerMonitoringClient', () => {
       });
     });
 
-    describe('customer', () => {
+    describe('customer', async () => {
       const fakePath = '/rendered/path/customer';
       const expectedParameters = {
         organization: 'organizationValue',
@@ -961,7 +963,7 @@ describe('v1.CloudControlsPartnerMonitoringClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.customerPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -1014,7 +1016,7 @@ describe('v1.CloudControlsPartnerMonitoringClient', () => {
       });
     });
 
-    describe('ekmConnections', () => {
+    describe('ekmConnections', async () => {
       const fakePath = '/rendered/path/ekmConnections';
       const expectedParameters = {
         organization: 'organizationValue',
@@ -1029,7 +1031,7 @@ describe('v1.CloudControlsPartnerMonitoringClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.ekmConnectionsPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -1093,7 +1095,7 @@ describe('v1.CloudControlsPartnerMonitoringClient', () => {
       });
     });
 
-    describe('partner', () => {
+    describe('partner', async () => {
       const fakePath = '/rendered/path/partner';
       const expectedParameters = {
         organization: 'organizationValue',
@@ -1106,7 +1108,7 @@ describe('v1.CloudControlsPartnerMonitoringClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.partnerPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -1145,7 +1147,7 @@ describe('v1.CloudControlsPartnerMonitoringClient', () => {
       });
     });
 
-    describe('partnerPermissions', () => {
+    describe('partnerPermissions', async () => {
       const fakePath = '/rendered/path/partnerPermissions';
       const expectedParameters = {
         organization: 'organizationValue',
@@ -1160,7 +1162,7 @@ describe('v1.CloudControlsPartnerMonitoringClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.partnerPermissionsPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -1240,7 +1242,7 @@ describe('v1.CloudControlsPartnerMonitoringClient', () => {
       });
     });
 
-    describe('violation', () => {
+    describe('violation', async () => {
       const fakePath = '/rendered/path/violation';
       const expectedParameters = {
         organization: 'organizationValue',
@@ -1256,7 +1258,7 @@ describe('v1.CloudControlsPartnerMonitoringClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.violationPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -1331,7 +1333,7 @@ describe('v1.CloudControlsPartnerMonitoringClient', () => {
       });
     });
 
-    describe('workload', () => {
+    describe('workload', async () => {
       const fakePath = '/rendered/path/workload';
       const expectedParameters = {
         organization: 'organizationValue',
@@ -1346,7 +1348,7 @@ describe('v1.CloudControlsPartnerMonitoringClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.workloadPathTemplate.render = sinon
         .stub()
         .returns(fakePath);

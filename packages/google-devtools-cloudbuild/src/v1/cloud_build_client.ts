@@ -31,6 +31,7 @@ import type {
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
+import {loggingUtils as logging} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -62,6 +63,8 @@ export class CloudBuildClient {
   private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
+  private _log = logging.log('cloudbuild');
+
   auth: gax.GoogleAuth;
   descriptors: Descriptors = {
     page: {},
@@ -97,7 +100,7 @@ export class CloudBuildClient {
    *     Developer's Console, e.g. 'grape-spaceship-123'. We will also check
    *     the environment variable GCLOUD_PROJECT for your project ID. If your
    *     app is running in an environment which supports
-   *     {@link https://developers.google.com/identity/protocols/application-default-credentials Application Default Credentials},
+   *     {@link https://cloud.google.com/docs/authentication/application-default-credentials Application Default Credentials},
    *     your project ID will be detected automatically.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
@@ -682,8 +685,36 @@ export class CloudBuildClient {
     }
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams(routingParameter);
-    this.initialize();
-    return this.innerApiCalls.getBuild(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('getBuild request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.devtools.cloudbuild.v1.IBuild,
+          | protos.google.devtools.cloudbuild.v1.IGetBuildRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getBuild response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getBuild(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.devtools.cloudbuild.v1.IBuild,
+          protos.google.devtools.cloudbuild.v1.IGetBuildRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getBuild response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Cancels a build in progress.
@@ -790,8 +821,36 @@ export class CloudBuildClient {
     }
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams(routingParameter);
-    this.initialize();
-    return this.innerApiCalls.cancelBuild(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('cancelBuild request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.devtools.cloudbuild.v1.IBuild,
+          | protos.google.devtools.cloudbuild.v1.ICancelBuildRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('cancelBuild response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .cancelBuild(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.devtools.cloudbuild.v1.IBuild,
+          protos.google.devtools.cloudbuild.v1.ICancelBuildRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('cancelBuild response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Creates a new `BuildTrigger`.
@@ -904,8 +963,39 @@ export class CloudBuildClient {
     }
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams(routingParameter);
-    this.initialize();
-    return this.innerApiCalls.createBuildTrigger(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('createBuildTrigger request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.devtools.cloudbuild.v1.IBuildTrigger,
+          | protos.google.devtools.cloudbuild.v1.ICreateBuildTriggerRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('createBuildTrigger response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .createBuildTrigger(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.devtools.cloudbuild.v1.IBuildTrigger,
+          (
+            | protos.google.devtools.cloudbuild.v1.ICreateBuildTriggerRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('createBuildTrigger response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Returns information about a `BuildTrigger`.
@@ -1014,8 +1104,39 @@ export class CloudBuildClient {
     }
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams(routingParameter);
-    this.initialize();
-    return this.innerApiCalls.getBuildTrigger(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('getBuildTrigger request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.devtools.cloudbuild.v1.IBuildTrigger,
+          | protos.google.devtools.cloudbuild.v1.IGetBuildTriggerRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getBuildTrigger response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getBuildTrigger(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.devtools.cloudbuild.v1.IBuildTrigger,
+          (
+            | protos.google.devtools.cloudbuild.v1.IGetBuildTriggerRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getBuildTrigger response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Deletes a `BuildTrigger` by its project ID and trigger ID.
@@ -1130,8 +1251,39 @@ export class CloudBuildClient {
     }
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams(routingParameter);
-    this.initialize();
-    return this.innerApiCalls.deleteBuildTrigger(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('deleteBuildTrigger request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.devtools.cloudbuild.v1.IDeleteBuildTriggerRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('deleteBuildTrigger response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .deleteBuildTrigger(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.protobuf.IEmpty,
+          (
+            | protos.google.devtools.cloudbuild.v1.IDeleteBuildTriggerRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteBuildTrigger response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Updates a `BuildTrigger` by its project ID and trigger ID.
@@ -1249,8 +1401,39 @@ export class CloudBuildClient {
     }
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams(routingParameter);
-    this.initialize();
-    return this.innerApiCalls.updateBuildTrigger(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('updateBuildTrigger request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.devtools.cloudbuild.v1.IBuildTrigger,
+          | protos.google.devtools.cloudbuild.v1.IUpdateBuildTriggerRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('updateBuildTrigger response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .updateBuildTrigger(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.devtools.cloudbuild.v1.IBuildTrigger,
+          (
+            | protos.google.devtools.cloudbuild.v1.IUpdateBuildTriggerRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('updateBuildTrigger response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * ReceiveTriggerWebhook [Experimental] is called when the API receives a
@@ -1357,8 +1540,39 @@ export class CloudBuildClient {
         trigger: request.trigger ?? '',
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.receiveTriggerWebhook(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('receiveTriggerWebhook request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.devtools.cloudbuild.v1.IReceiveTriggerWebhookResponse,
+          | protos.google.devtools.cloudbuild.v1.IReceiveTriggerWebhookRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('receiveTriggerWebhook response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .receiveTriggerWebhook(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.devtools.cloudbuild.v1.IReceiveTriggerWebhookResponse,
+          (
+            | protos.google.devtools.cloudbuild.v1.IReceiveTriggerWebhookRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('receiveTriggerWebhook response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Returns details of a `WorkerPool`.
@@ -1463,8 +1677,39 @@ export class CloudBuildClient {
     }
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams(routingParameter);
-    this.initialize();
-    return this.innerApiCalls.getWorkerPool(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('getWorkerPool request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.devtools.cloudbuild.v1.IWorkerPool,
+          | protos.google.devtools.cloudbuild.v1.IGetWorkerPoolRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getWorkerPool response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getWorkerPool(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.devtools.cloudbuild.v1.IWorkerPool,
+          (
+            | protos.google.devtools.cloudbuild.v1.IGetWorkerPoolRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getWorkerPool response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
 
   /**
@@ -1586,8 +1831,40 @@ export class CloudBuildClient {
     }
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams(routingParameter);
-    this.initialize();
-    return this.innerApiCalls.createBuild(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.devtools.cloudbuild.v1.IBuild,
+            protos.google.devtools.cloudbuild.v1.IBuildOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('createBuild response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('createBuild request %j', request);
+    return this.innerApiCalls
+      .createBuild(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.devtools.cloudbuild.v1.IBuild,
+            protos.google.devtools.cloudbuild.v1.IBuildOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createBuild response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `createBuild()`.
@@ -1608,6 +1885,7 @@ export class CloudBuildClient {
       protos.google.devtools.cloudbuild.v1.BuildOperationMetadata
     >
   > {
+    this._log.info('createBuild long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -1766,8 +2044,40 @@ export class CloudBuildClient {
     }
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams(routingParameter);
-    this.initialize();
-    return this.innerApiCalls.retryBuild(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.devtools.cloudbuild.v1.IBuild,
+            protos.google.devtools.cloudbuild.v1.IBuildOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('retryBuild response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('retryBuild request %j', request);
+    return this.innerApiCalls
+      .retryBuild(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.devtools.cloudbuild.v1.IBuild,
+            protos.google.devtools.cloudbuild.v1.IBuildOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('retryBuild response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `retryBuild()`.
@@ -1788,6 +2098,7 @@ export class CloudBuildClient {
       protos.google.devtools.cloudbuild.v1.BuildOperationMetadata
     >
   > {
+    this._log.info('retryBuild long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -1923,8 +2234,40 @@ export class CloudBuildClient {
     }
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams(routingParameter);
-    this.initialize();
-    return this.innerApiCalls.approveBuild(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.devtools.cloudbuild.v1.IBuild,
+            protos.google.devtools.cloudbuild.v1.IBuildOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('approveBuild response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('approveBuild request %j', request);
+    return this.innerApiCalls
+      .approveBuild(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.devtools.cloudbuild.v1.IBuild,
+            protos.google.devtools.cloudbuild.v1.IBuildOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('approveBuild response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `approveBuild()`.
@@ -1945,6 +2288,7 @@ export class CloudBuildClient {
       protos.google.devtools.cloudbuild.v1.BuildOperationMetadata
     >
   > {
+    this._log.info('approveBuild long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -2086,8 +2430,40 @@ export class CloudBuildClient {
     }
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams(routingParameter);
-    this.initialize();
-    return this.innerApiCalls.runBuildTrigger(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.devtools.cloudbuild.v1.IBuild,
+            protos.google.devtools.cloudbuild.v1.IBuildOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('runBuildTrigger response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('runBuildTrigger request %j', request);
+    return this.innerApiCalls
+      .runBuildTrigger(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.devtools.cloudbuild.v1.IBuild,
+            protos.google.devtools.cloudbuild.v1.IBuildOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('runBuildTrigger response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `runBuildTrigger()`.
@@ -2108,6 +2484,7 @@ export class CloudBuildClient {
       protos.google.devtools.cloudbuild.v1.BuildOperationMetadata
     >
   > {
+    this._log.info('runBuildTrigger long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -2245,8 +2622,40 @@ export class CloudBuildClient {
     }
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams(routingParameter);
-    this.initialize();
-    return this.innerApiCalls.createWorkerPool(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.devtools.cloudbuild.v1.IWorkerPool,
+            protos.google.devtools.cloudbuild.v1.ICreateWorkerPoolOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('createWorkerPool response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('createWorkerPool request %j', request);
+    return this.innerApiCalls
+      .createWorkerPool(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.devtools.cloudbuild.v1.IWorkerPool,
+            protos.google.devtools.cloudbuild.v1.ICreateWorkerPoolOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createWorkerPool response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `createWorkerPool()`.
@@ -2267,6 +2676,7 @@ export class CloudBuildClient {
       protos.google.devtools.cloudbuild.v1.CreateWorkerPoolOperationMetadata
     >
   > {
+    this._log.info('createWorkerPool long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -2407,8 +2817,40 @@ export class CloudBuildClient {
     }
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams(routingParameter);
-    this.initialize();
-    return this.innerApiCalls.deleteWorkerPool(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.devtools.cloudbuild.v1.IDeleteWorkerPoolOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('deleteWorkerPool response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('deleteWorkerPool request %j', request);
+    return this.innerApiCalls
+      .deleteWorkerPool(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.devtools.cloudbuild.v1.IDeleteWorkerPoolOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteWorkerPool response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `deleteWorkerPool()`.
@@ -2429,6 +2871,7 @@ export class CloudBuildClient {
       protos.google.devtools.cloudbuild.v1.DeleteWorkerPoolOperationMetadata
     >
   > {
+    this._log.info('deleteWorkerPool long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -2566,8 +3009,40 @@ export class CloudBuildClient {
     }
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams(routingParameter);
-    this.initialize();
-    return this.innerApiCalls.updateWorkerPool(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.devtools.cloudbuild.v1.IWorkerPool,
+            protos.google.devtools.cloudbuild.v1.IUpdateWorkerPoolOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('updateWorkerPool response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('updateWorkerPool request %j', request);
+    return this.innerApiCalls
+      .updateWorkerPool(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.devtools.cloudbuild.v1.IWorkerPool,
+            protos.google.devtools.cloudbuild.v1.IUpdateWorkerPoolOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('updateWorkerPool response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `updateWorkerPool()`.
@@ -2588,6 +3063,7 @@ export class CloudBuildClient {
       protos.google.devtools.cloudbuild.v1.UpdateWorkerPoolOperationMetadata
     >
   > {
+    this._log.info('updateWorkerPool long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -2724,8 +3200,36 @@ export class CloudBuildClient {
     }
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams(routingParameter);
-    this.initialize();
-    return this.innerApiCalls.listBuilds(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.devtools.cloudbuild.v1.IListBuildsRequest,
+          | protos.google.devtools.cloudbuild.v1.IListBuildsResponse
+          | null
+          | undefined,
+          protos.google.devtools.cloudbuild.v1.IBuild
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listBuilds values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listBuilds request %j', request);
+    return this.innerApiCalls
+      .listBuilds(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.devtools.cloudbuild.v1.IBuild[],
+          protos.google.devtools.cloudbuild.v1.IListBuildsRequest | null,
+          protos.google.devtools.cloudbuild.v1.IListBuildsResponse,
+        ]) => {
+          this._log.info('listBuilds values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -2787,7 +3291,10 @@ export class CloudBuildClient {
       this._gaxModule.routingHeader.fromParams(routingParameter);
     const defaultCallSettings = this._defaults['listBuilds'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listBuilds stream %j', request);
     return this.descriptors.page.listBuilds.createStream(
       this.innerApiCalls.listBuilds as GaxCall,
       request,
@@ -2857,7 +3364,10 @@ export class CloudBuildClient {
       this._gaxModule.routingHeader.fromParams(routingParameter);
     const defaultCallSettings = this._defaults['listBuilds'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listBuilds iterate %j', request);
     return this.descriptors.page.listBuilds.asyncIterate(
       this.innerApiCalls['listBuilds'] as GaxCall,
       request as {},
@@ -2974,8 +3484,36 @@ export class CloudBuildClient {
     }
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams(routingParameter);
-    this.initialize();
-    return this.innerApiCalls.listBuildTriggers(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.devtools.cloudbuild.v1.IListBuildTriggersRequest,
+          | protos.google.devtools.cloudbuild.v1.IListBuildTriggersResponse
+          | null
+          | undefined,
+          protos.google.devtools.cloudbuild.v1.IBuildTrigger
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listBuildTriggers values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listBuildTriggers request %j', request);
+    return this.innerApiCalls
+      .listBuildTriggers(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.devtools.cloudbuild.v1.IBuildTrigger[],
+          protos.google.devtools.cloudbuild.v1.IListBuildTriggersRequest | null,
+          protos.google.devtools.cloudbuild.v1.IListBuildTriggersResponse,
+        ]) => {
+          this._log.info('listBuildTriggers values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -3027,7 +3565,10 @@ export class CloudBuildClient {
       this._gaxModule.routingHeader.fromParams(routingParameter);
     const defaultCallSettings = this._defaults['listBuildTriggers'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listBuildTriggers stream %j', request);
     return this.descriptors.page.listBuildTriggers.createStream(
       this.innerApiCalls.listBuildTriggers as GaxCall,
       request,
@@ -3087,7 +3628,10 @@ export class CloudBuildClient {
       this._gaxModule.routingHeader.fromParams(routingParameter);
     const defaultCallSettings = this._defaults['listBuildTriggers'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listBuildTriggers iterate %j', request);
     return this.descriptors.page.listBuildTriggers.asyncIterate(
       this.innerApiCalls['listBuildTriggers'] as GaxCall,
       request as {},
@@ -3202,8 +3746,36 @@ export class CloudBuildClient {
     }
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams(routingParameter);
-    this.initialize();
-    return this.innerApiCalls.listWorkerPools(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.devtools.cloudbuild.v1.IListWorkerPoolsRequest,
+          | protos.google.devtools.cloudbuild.v1.IListWorkerPoolsResponse
+          | null
+          | undefined,
+          protos.google.devtools.cloudbuild.v1.IWorkerPool
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listWorkerPools values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listWorkerPools request %j', request);
+    return this.innerApiCalls
+      .listWorkerPools(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.devtools.cloudbuild.v1.IWorkerPool[],
+          protos.google.devtools.cloudbuild.v1.IListWorkerPoolsRequest | null,
+          protos.google.devtools.cloudbuild.v1.IListWorkerPoolsResponse,
+        ]) => {
+          this._log.info('listWorkerPools values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -3255,7 +3827,10 @@ export class CloudBuildClient {
       this._gaxModule.routingHeader.fromParams(routingParameter);
     const defaultCallSettings = this._defaults['listWorkerPools'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listWorkerPools stream %j', request);
     return this.descriptors.page.listWorkerPools.createStream(
       this.innerApiCalls.listWorkerPools as GaxCall,
       request,
@@ -3315,7 +3890,10 @@ export class CloudBuildClient {
       this._gaxModule.routingHeader.fromParams(routingParameter);
     const defaultCallSettings = this._defaults['listWorkerPools'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listWorkerPools iterate %j', request);
     return this.descriptors.page.listWorkerPools.asyncIterate(
       this.innerApiCalls['listWorkerPools'] as GaxCall,
       request as {},
@@ -4082,6 +4660,7 @@ export class CloudBuildClient {
   close(): Promise<void> {
     if (this.cloudBuildStub && !this._terminated) {
       return this.cloudBuildStub.then(stub => {
+        this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
         this.operationsClient.close();

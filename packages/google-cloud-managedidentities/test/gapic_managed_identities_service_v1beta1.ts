@@ -306,7 +306,9 @@ describe('v1beta1.ManagedIdentitiesServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      client.initialize().catch(err => {
+        throw err;
+      });
       assert(client.managedIdentitiesServiceStub);
       client.close().then(() => {
         done();
@@ -377,7 +379,7 @@ describe('v1beta1.ManagedIdentitiesServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.managedidentities.v1beta1.ResetAdminPasswordRequest()
       );
@@ -386,7 +388,7 @@ describe('v1beta1.ManagedIdentitiesServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.managedidentities.v1beta1.ResetAdminPasswordResponse()
       );
@@ -412,7 +414,7 @@ describe('v1beta1.ManagedIdentitiesServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.managedidentities.v1beta1.ResetAdminPasswordRequest()
       );
@@ -421,7 +423,7 @@ describe('v1beta1.ManagedIdentitiesServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.managedidentities.v1beta1.ResetAdminPasswordResponse()
       );
@@ -462,7 +464,7 @@ describe('v1beta1.ManagedIdentitiesServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.managedidentities.v1beta1.ResetAdminPasswordRequest()
       );
@@ -471,7 +473,7 @@ describe('v1beta1.ManagedIdentitiesServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.resetAdminPassword = stubSimpleCall(
         undefined,
@@ -496,7 +498,7 @@ describe('v1beta1.ManagedIdentitiesServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.managedidentities.v1beta1.ResetAdminPasswordRequest()
       );
@@ -520,7 +522,7 @@ describe('v1beta1.ManagedIdentitiesServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.managedidentities.v1beta1.GetDomainRequest()
       );
@@ -529,7 +531,7 @@ describe('v1beta1.ManagedIdentitiesServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.managedidentities.v1beta1.Domain()
       );
@@ -554,7 +556,7 @@ describe('v1beta1.ManagedIdentitiesServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.managedidentities.v1beta1.GetDomainRequest()
       );
@@ -563,7 +565,7 @@ describe('v1beta1.ManagedIdentitiesServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.managedidentities.v1beta1.Domain()
       );
@@ -604,7 +606,7 @@ describe('v1beta1.ManagedIdentitiesServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.managedidentities.v1beta1.GetDomainRequest()
       );
@@ -613,7 +615,7 @@ describe('v1beta1.ManagedIdentitiesServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getDomain = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.getDomain(request), expectedError);
@@ -635,7 +637,7 @@ describe('v1beta1.ManagedIdentitiesServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.managedidentities.v1beta1.GetDomainRequest()
       );
@@ -659,7 +661,7 @@ describe('v1beta1.ManagedIdentitiesServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.managedidentities.v1beta1.CreateMicrosoftAdDomainRequest()
       );
@@ -668,7 +670,7 @@ describe('v1beta1.ManagedIdentitiesServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -695,7 +697,7 @@ describe('v1beta1.ManagedIdentitiesServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.managedidentities.v1beta1.CreateMicrosoftAdDomainRequest()
       );
@@ -704,7 +706,7 @@ describe('v1beta1.ManagedIdentitiesServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -752,7 +754,7 @@ describe('v1beta1.ManagedIdentitiesServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.managedidentities.v1beta1.CreateMicrosoftAdDomainRequest()
       );
@@ -761,7 +763,7 @@ describe('v1beta1.ManagedIdentitiesServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createMicrosoftAdDomain = stubLongRunningCall(
         undefined,
@@ -789,7 +791,7 @@ describe('v1beta1.ManagedIdentitiesServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.managedidentities.v1beta1.CreateMicrosoftAdDomainRequest()
       );
@@ -798,7 +800,7 @@ describe('v1beta1.ManagedIdentitiesServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createMicrosoftAdDomain = stubLongRunningCall(
         undefined,
@@ -825,7 +827,7 @@ describe('v1beta1.ManagedIdentitiesServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -851,7 +853,7 @@ describe('v1beta1.ManagedIdentitiesServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -875,7 +877,7 @@ describe('v1beta1.ManagedIdentitiesServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.managedidentities.v1beta1.UpdateDomainRequest()
       );
@@ -885,7 +887,7 @@ describe('v1beta1.ManagedIdentitiesServiceClient', () => {
         ['domain', 'name']
       );
       request.domain.name = defaultValue1;
-      const expectedHeaderRequestParams = `domain.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `domain.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -911,7 +913,7 @@ describe('v1beta1.ManagedIdentitiesServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.managedidentities.v1beta1.UpdateDomainRequest()
       );
@@ -921,7 +923,7 @@ describe('v1beta1.ManagedIdentitiesServiceClient', () => {
         ['domain', 'name']
       );
       request.domain.name = defaultValue1;
-      const expectedHeaderRequestParams = `domain.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `domain.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -969,7 +971,7 @@ describe('v1beta1.ManagedIdentitiesServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.managedidentities.v1beta1.UpdateDomainRequest()
       );
@@ -979,7 +981,7 @@ describe('v1beta1.ManagedIdentitiesServiceClient', () => {
         ['domain', 'name']
       );
       request.domain.name = defaultValue1;
-      const expectedHeaderRequestParams = `domain.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `domain.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateDomain = stubLongRunningCall(
         undefined,
@@ -1004,7 +1006,7 @@ describe('v1beta1.ManagedIdentitiesServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.managedidentities.v1beta1.UpdateDomainRequest()
       );
@@ -1014,7 +1016,7 @@ describe('v1beta1.ManagedIdentitiesServiceClient', () => {
         ['domain', 'name']
       );
       request.domain.name = defaultValue1;
-      const expectedHeaderRequestParams = `domain.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `domain.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateDomain = stubLongRunningCall(
         undefined,
@@ -1041,7 +1043,7 @@ describe('v1beta1.ManagedIdentitiesServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -1066,7 +1068,7 @@ describe('v1beta1.ManagedIdentitiesServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -1087,7 +1089,7 @@ describe('v1beta1.ManagedIdentitiesServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.managedidentities.v1beta1.DeleteDomainRequest()
       );
@@ -1096,7 +1098,7 @@ describe('v1beta1.ManagedIdentitiesServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1122,7 +1124,7 @@ describe('v1beta1.ManagedIdentitiesServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.managedidentities.v1beta1.DeleteDomainRequest()
       );
@@ -1131,7 +1133,7 @@ describe('v1beta1.ManagedIdentitiesServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1179,7 +1181,7 @@ describe('v1beta1.ManagedIdentitiesServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.managedidentities.v1beta1.DeleteDomainRequest()
       );
@@ -1188,7 +1190,7 @@ describe('v1beta1.ManagedIdentitiesServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteDomain = stubLongRunningCall(
         undefined,
@@ -1213,7 +1215,7 @@ describe('v1beta1.ManagedIdentitiesServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.managedidentities.v1beta1.DeleteDomainRequest()
       );
@@ -1222,7 +1224,7 @@ describe('v1beta1.ManagedIdentitiesServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteDomain = stubLongRunningCall(
         undefined,
@@ -1249,7 +1251,7 @@ describe('v1beta1.ManagedIdentitiesServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -1274,7 +1276,7 @@ describe('v1beta1.ManagedIdentitiesServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -1295,7 +1297,7 @@ describe('v1beta1.ManagedIdentitiesServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.managedidentities.v1beta1.AttachTrustRequest()
       );
@@ -1304,7 +1306,7 @@ describe('v1beta1.ManagedIdentitiesServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1330,7 +1332,7 @@ describe('v1beta1.ManagedIdentitiesServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.managedidentities.v1beta1.AttachTrustRequest()
       );
@@ -1339,7 +1341,7 @@ describe('v1beta1.ManagedIdentitiesServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1387,7 +1389,7 @@ describe('v1beta1.ManagedIdentitiesServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.managedidentities.v1beta1.AttachTrustRequest()
       );
@@ -1396,7 +1398,7 @@ describe('v1beta1.ManagedIdentitiesServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.attachTrust = stubLongRunningCall(
         undefined,
@@ -1421,7 +1423,7 @@ describe('v1beta1.ManagedIdentitiesServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.managedidentities.v1beta1.AttachTrustRequest()
       );
@@ -1430,7 +1432,7 @@ describe('v1beta1.ManagedIdentitiesServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.attachTrust = stubLongRunningCall(
         undefined,
@@ -1457,7 +1459,7 @@ describe('v1beta1.ManagedIdentitiesServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -1482,7 +1484,7 @@ describe('v1beta1.ManagedIdentitiesServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -1503,7 +1505,7 @@ describe('v1beta1.ManagedIdentitiesServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.managedidentities.v1beta1.ReconfigureTrustRequest()
       );
@@ -1512,7 +1514,7 @@ describe('v1beta1.ManagedIdentitiesServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1539,7 +1541,7 @@ describe('v1beta1.ManagedIdentitiesServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.managedidentities.v1beta1.ReconfigureTrustRequest()
       );
@@ -1548,7 +1550,7 @@ describe('v1beta1.ManagedIdentitiesServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1596,7 +1598,7 @@ describe('v1beta1.ManagedIdentitiesServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.managedidentities.v1beta1.ReconfigureTrustRequest()
       );
@@ -1605,7 +1607,7 @@ describe('v1beta1.ManagedIdentitiesServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.reconfigureTrust = stubLongRunningCall(
         undefined,
@@ -1630,7 +1632,7 @@ describe('v1beta1.ManagedIdentitiesServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.managedidentities.v1beta1.ReconfigureTrustRequest()
       );
@@ -1639,7 +1641,7 @@ describe('v1beta1.ManagedIdentitiesServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.reconfigureTrust = stubLongRunningCall(
         undefined,
@@ -1666,7 +1668,7 @@ describe('v1beta1.ManagedIdentitiesServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -1691,7 +1693,7 @@ describe('v1beta1.ManagedIdentitiesServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -1715,7 +1717,7 @@ describe('v1beta1.ManagedIdentitiesServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.managedidentities.v1beta1.DetachTrustRequest()
       );
@@ -1724,7 +1726,7 @@ describe('v1beta1.ManagedIdentitiesServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1750,7 +1752,7 @@ describe('v1beta1.ManagedIdentitiesServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.managedidentities.v1beta1.DetachTrustRequest()
       );
@@ -1759,7 +1761,7 @@ describe('v1beta1.ManagedIdentitiesServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1807,7 +1809,7 @@ describe('v1beta1.ManagedIdentitiesServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.managedidentities.v1beta1.DetachTrustRequest()
       );
@@ -1816,7 +1818,7 @@ describe('v1beta1.ManagedIdentitiesServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.detachTrust = stubLongRunningCall(
         undefined,
@@ -1841,7 +1843,7 @@ describe('v1beta1.ManagedIdentitiesServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.managedidentities.v1beta1.DetachTrustRequest()
       );
@@ -1850,7 +1852,7 @@ describe('v1beta1.ManagedIdentitiesServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.detachTrust = stubLongRunningCall(
         undefined,
@@ -1877,7 +1879,7 @@ describe('v1beta1.ManagedIdentitiesServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -1902,7 +1904,7 @@ describe('v1beta1.ManagedIdentitiesServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -1923,7 +1925,7 @@ describe('v1beta1.ManagedIdentitiesServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.managedidentities.v1beta1.ValidateTrustRequest()
       );
@@ -1932,7 +1934,7 @@ describe('v1beta1.ManagedIdentitiesServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1959,7 +1961,7 @@ describe('v1beta1.ManagedIdentitiesServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.managedidentities.v1beta1.ValidateTrustRequest()
       );
@@ -1968,7 +1970,7 @@ describe('v1beta1.ManagedIdentitiesServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2016,7 +2018,7 @@ describe('v1beta1.ManagedIdentitiesServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.managedidentities.v1beta1.ValidateTrustRequest()
       );
@@ -2025,7 +2027,7 @@ describe('v1beta1.ManagedIdentitiesServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.validateTrust = stubLongRunningCall(
         undefined,
@@ -2050,7 +2052,7 @@ describe('v1beta1.ManagedIdentitiesServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.managedidentities.v1beta1.ValidateTrustRequest()
       );
@@ -2059,7 +2061,7 @@ describe('v1beta1.ManagedIdentitiesServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.validateTrust = stubLongRunningCall(
         undefined,
@@ -2086,7 +2088,7 @@ describe('v1beta1.ManagedIdentitiesServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -2111,7 +2113,7 @@ describe('v1beta1.ManagedIdentitiesServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -2135,7 +2137,7 @@ describe('v1beta1.ManagedIdentitiesServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.managedidentities.v1beta1.ListDomainsRequest()
       );
@@ -2144,7 +2146,7 @@ describe('v1beta1.ManagedIdentitiesServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.managedidentities.v1beta1.Domain()
@@ -2177,7 +2179,7 @@ describe('v1beta1.ManagedIdentitiesServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.managedidentities.v1beta1.ListDomainsRequest()
       );
@@ -2186,7 +2188,7 @@ describe('v1beta1.ManagedIdentitiesServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.managedidentities.v1beta1.Domain()
@@ -2237,7 +2239,7 @@ describe('v1beta1.ManagedIdentitiesServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.managedidentities.v1beta1.ListDomainsRequest()
       );
@@ -2246,7 +2248,7 @@ describe('v1beta1.ManagedIdentitiesServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listDomains = stubSimpleCall(
         undefined,
@@ -2271,7 +2273,7 @@ describe('v1beta1.ManagedIdentitiesServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.managedidentities.v1beta1.ListDomainsRequest()
       );
@@ -2280,7 +2282,7 @@ describe('v1beta1.ManagedIdentitiesServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.managedidentities.v1beta1.Domain()
@@ -2335,7 +2337,7 @@ describe('v1beta1.ManagedIdentitiesServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.managedidentities.v1beta1.ListDomainsRequest()
       );
@@ -2344,7 +2346,7 @@ describe('v1beta1.ManagedIdentitiesServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listDomains.createStream = stubPageStreamingCall(
         undefined,
@@ -2390,7 +2392,7 @@ describe('v1beta1.ManagedIdentitiesServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.managedidentities.v1beta1.ListDomainsRequest()
       );
@@ -2399,7 +2401,7 @@ describe('v1beta1.ManagedIdentitiesServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.managedidentities.v1beta1.Domain()
@@ -2443,7 +2445,7 @@ describe('v1beta1.ManagedIdentitiesServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.managedidentities.v1beta1.ListDomainsRequest()
       );
@@ -2452,7 +2454,7 @@ describe('v1beta1.ManagedIdentitiesServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listDomains.asyncIterate = stubAsyncIterationCall(
         undefined,
@@ -2483,7 +2485,7 @@ describe('v1beta1.ManagedIdentitiesServiceClient', () => {
   });
 
   describe('Path templates', () => {
-    describe('domain', () => {
+    describe('domain', async () => {
       const fakePath = '/rendered/path/domain';
       const expectedParameters = {
         project: 'projectValue',
@@ -2497,7 +2499,7 @@ describe('v1beta1.ManagedIdentitiesServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.domainPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -2550,7 +2552,7 @@ describe('v1beta1.ManagedIdentitiesServiceClient', () => {
       });
     });
 
-    describe('location', () => {
+    describe('location', async () => {
       const fakePath = '/rendered/path/location';
       const expectedParameters = {
         project: 'projectValue',
@@ -2563,7 +2565,7 @@ describe('v1beta1.ManagedIdentitiesServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.locationPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -2602,7 +2604,7 @@ describe('v1beta1.ManagedIdentitiesServiceClient', () => {
       });
     });
 
-    describe('project', () => {
+    describe('project', async () => {
       const fakePath = '/rendered/path/project';
       const expectedParameters = {
         project: 'projectValue',
@@ -2614,7 +2616,7 @@ describe('v1beta1.ManagedIdentitiesServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectPathTemplate.render = sinon
         .stub()
         .returns(fakePath);

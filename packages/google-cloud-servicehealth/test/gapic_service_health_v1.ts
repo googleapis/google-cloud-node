@@ -255,7 +255,9 @@ describe('v1.ServiceHealthClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      client.initialize().catch(err => {
+        throw err;
+      });
       assert(client.serviceHealthStub);
       client.close().then(() => {
         done();
@@ -314,7 +316,7 @@ describe('v1.ServiceHealthClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.servicehealth.v1.GetEventRequest()
       );
@@ -323,7 +325,7 @@ describe('v1.ServiceHealthClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.servicehealth.v1.Event()
       );
@@ -345,7 +347,7 @@ describe('v1.ServiceHealthClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.servicehealth.v1.GetEventRequest()
       );
@@ -354,7 +356,7 @@ describe('v1.ServiceHealthClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.servicehealth.v1.Event()
       );
@@ -392,7 +394,7 @@ describe('v1.ServiceHealthClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.servicehealth.v1.GetEventRequest()
       );
@@ -401,7 +403,7 @@ describe('v1.ServiceHealthClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getEvent = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.getEvent(request), expectedError);
@@ -420,7 +422,7 @@ describe('v1.ServiceHealthClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.servicehealth.v1.GetEventRequest()
       );
@@ -441,7 +443,7 @@ describe('v1.ServiceHealthClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.servicehealth.v1.GetOrganizationEventRequest()
       );
@@ -450,7 +452,7 @@ describe('v1.ServiceHealthClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.servicehealth.v1.OrganizationEvent()
       );
@@ -473,7 +475,7 @@ describe('v1.ServiceHealthClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.servicehealth.v1.GetOrganizationEventRequest()
       );
@@ -482,7 +484,7 @@ describe('v1.ServiceHealthClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.servicehealth.v1.OrganizationEvent()
       );
@@ -520,7 +522,7 @@ describe('v1.ServiceHealthClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.servicehealth.v1.GetOrganizationEventRequest()
       );
@@ -529,7 +531,7 @@ describe('v1.ServiceHealthClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getOrganizationEvent = stubSimpleCall(
         undefined,
@@ -551,7 +553,7 @@ describe('v1.ServiceHealthClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.servicehealth.v1.GetOrganizationEventRequest()
       );
@@ -572,7 +574,7 @@ describe('v1.ServiceHealthClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.servicehealth.v1.GetOrganizationImpactRequest()
       );
@@ -581,7 +583,7 @@ describe('v1.ServiceHealthClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.servicehealth.v1.OrganizationImpact()
       );
@@ -604,7 +606,7 @@ describe('v1.ServiceHealthClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.servicehealth.v1.GetOrganizationImpactRequest()
       );
@@ -613,7 +615,7 @@ describe('v1.ServiceHealthClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.servicehealth.v1.OrganizationImpact()
       );
@@ -651,7 +653,7 @@ describe('v1.ServiceHealthClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.servicehealth.v1.GetOrganizationImpactRequest()
       );
@@ -660,7 +662,7 @@ describe('v1.ServiceHealthClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getOrganizationImpact = stubSimpleCall(
         undefined,
@@ -685,7 +687,7 @@ describe('v1.ServiceHealthClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.servicehealth.v1.GetOrganizationImpactRequest()
       );
@@ -709,7 +711,7 @@ describe('v1.ServiceHealthClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.servicehealth.v1.ListEventsRequest()
       );
@@ -718,7 +720,7 @@ describe('v1.ServiceHealthClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.servicehealth.v1.Event()),
         generateSampleMessage(new protos.google.cloud.servicehealth.v1.Event()),
@@ -742,7 +744,7 @@ describe('v1.ServiceHealthClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.servicehealth.v1.ListEventsRequest()
       );
@@ -751,7 +753,7 @@ describe('v1.ServiceHealthClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.servicehealth.v1.Event()),
         generateSampleMessage(new protos.google.cloud.servicehealth.v1.Event()),
@@ -791,7 +793,7 @@ describe('v1.ServiceHealthClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.servicehealth.v1.ListEventsRequest()
       );
@@ -800,7 +802,7 @@ describe('v1.ServiceHealthClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listEvents = stubSimpleCall(
         undefined,
@@ -822,7 +824,7 @@ describe('v1.ServiceHealthClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.servicehealth.v1.ListEventsRequest()
       );
@@ -831,7 +833,7 @@ describe('v1.ServiceHealthClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.servicehealth.v1.Event()),
         generateSampleMessage(new protos.google.cloud.servicehealth.v1.Event()),
@@ -876,7 +878,7 @@ describe('v1.ServiceHealthClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.servicehealth.v1.ListEventsRequest()
       );
@@ -885,7 +887,7 @@ describe('v1.ServiceHealthClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listEvents.createStream = stubPageStreamingCall(
         undefined,
@@ -927,7 +929,7 @@ describe('v1.ServiceHealthClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.servicehealth.v1.ListEventsRequest()
       );
@@ -936,7 +938,7 @@ describe('v1.ServiceHealthClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.servicehealth.v1.Event()),
         generateSampleMessage(new protos.google.cloud.servicehealth.v1.Event()),
@@ -970,7 +972,7 @@ describe('v1.ServiceHealthClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.servicehealth.v1.ListEventsRequest()
       );
@@ -979,7 +981,7 @@ describe('v1.ServiceHealthClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listEvents.asyncIterate = stubAsyncIterationCall(
         undefined,
@@ -1014,7 +1016,7 @@ describe('v1.ServiceHealthClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.servicehealth.v1.ListOrganizationEventsRequest()
       );
@@ -1023,7 +1025,7 @@ describe('v1.ServiceHealthClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.servicehealth.v1.OrganizationEvent()
@@ -1054,7 +1056,7 @@ describe('v1.ServiceHealthClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.servicehealth.v1.ListOrganizationEventsRequest()
       );
@@ -1063,7 +1065,7 @@ describe('v1.ServiceHealthClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.servicehealth.v1.OrganizationEvent()
@@ -1111,7 +1113,7 @@ describe('v1.ServiceHealthClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.servicehealth.v1.ListOrganizationEventsRequest()
       );
@@ -1120,7 +1122,7 @@ describe('v1.ServiceHealthClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listOrganizationEvents = stubSimpleCall(
         undefined,
@@ -1145,7 +1147,7 @@ describe('v1.ServiceHealthClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.servicehealth.v1.ListOrganizationEventsRequest()
       );
@@ -1154,7 +1156,7 @@ describe('v1.ServiceHealthClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.servicehealth.v1.OrganizationEvent()
@@ -1214,7 +1216,7 @@ describe('v1.ServiceHealthClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.servicehealth.v1.ListOrganizationEventsRequest()
       );
@@ -1223,7 +1225,7 @@ describe('v1.ServiceHealthClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listOrganizationEvents.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -1272,7 +1274,7 @@ describe('v1.ServiceHealthClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.servicehealth.v1.ListOrganizationEventsRequest()
       );
@@ -1281,7 +1283,7 @@ describe('v1.ServiceHealthClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.servicehealth.v1.OrganizationEvent()
@@ -1326,7 +1328,7 @@ describe('v1.ServiceHealthClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.servicehealth.v1.ListOrganizationEventsRequest()
       );
@@ -1335,7 +1337,7 @@ describe('v1.ServiceHealthClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listOrganizationEvents.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -1373,7 +1375,7 @@ describe('v1.ServiceHealthClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.servicehealth.v1.ListOrganizationImpactsRequest()
       );
@@ -1382,7 +1384,7 @@ describe('v1.ServiceHealthClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.servicehealth.v1.OrganizationImpact()
@@ -1413,7 +1415,7 @@ describe('v1.ServiceHealthClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.servicehealth.v1.ListOrganizationImpactsRequest()
       );
@@ -1422,7 +1424,7 @@ describe('v1.ServiceHealthClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.servicehealth.v1.OrganizationImpact()
@@ -1470,7 +1472,7 @@ describe('v1.ServiceHealthClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.servicehealth.v1.ListOrganizationImpactsRequest()
       );
@@ -1479,7 +1481,7 @@ describe('v1.ServiceHealthClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listOrganizationImpacts = stubSimpleCall(
         undefined,
@@ -1504,7 +1506,7 @@ describe('v1.ServiceHealthClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.servicehealth.v1.ListOrganizationImpactsRequest()
       );
@@ -1513,7 +1515,7 @@ describe('v1.ServiceHealthClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.servicehealth.v1.OrganizationImpact()
@@ -1573,7 +1575,7 @@ describe('v1.ServiceHealthClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.servicehealth.v1.ListOrganizationImpactsRequest()
       );
@@ -1582,7 +1584,7 @@ describe('v1.ServiceHealthClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listOrganizationImpacts.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -1631,7 +1633,7 @@ describe('v1.ServiceHealthClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.servicehealth.v1.ListOrganizationImpactsRequest()
       );
@@ -1640,7 +1642,7 @@ describe('v1.ServiceHealthClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.servicehealth.v1.OrganizationImpact()
@@ -1685,7 +1687,7 @@ describe('v1.ServiceHealthClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.servicehealth.v1.ListOrganizationImpactsRequest()
       );
@@ -1694,7 +1696,7 @@ describe('v1.ServiceHealthClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listOrganizationImpacts.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -1731,7 +1733,7 @@ describe('v1.ServiceHealthClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.GetLocationRequest()
       );
@@ -1761,7 +1763,7 @@ describe('v1.ServiceHealthClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.GetLocationRequest()
       );
@@ -1805,7 +1807,7 @@ describe('v1.ServiceHealthClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.GetLocationRequest()
       );
@@ -1840,7 +1842,7 @@ describe('v1.ServiceHealthClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.ListLocationsRequest()
       );
@@ -1888,7 +1890,7 @@ describe('v1.ServiceHealthClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.ListLocationsRequest()
       );
@@ -1925,7 +1927,7 @@ describe('v1.ServiceHealthClient', () => {
   });
 
   describe('Path templates', () => {
-    describe('event', () => {
+    describe('event', async () => {
       const fakePath = '/rendered/path/event';
       const expectedParameters = {
         project: 'projectValue',
@@ -1936,7 +1938,7 @@ describe('v1.ServiceHealthClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.eventPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -1989,7 +1991,7 @@ describe('v1.ServiceHealthClient', () => {
       });
     });
 
-    describe('organizationEvent', () => {
+    describe('organizationEvent', async () => {
       const fakePath = '/rendered/path/organizationEvent';
       const expectedParameters = {
         organization: 'organizationValue',
@@ -2000,7 +2002,7 @@ describe('v1.ServiceHealthClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.organizationEventPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -2066,7 +2068,7 @@ describe('v1.ServiceHealthClient', () => {
       });
     });
 
-    describe('organizationImpact', () => {
+    describe('organizationImpact', async () => {
       const fakePath = '/rendered/path/organizationImpact';
       const expectedParameters = {
         organization: 'organizationValue',
@@ -2077,7 +2079,7 @@ describe('v1.ServiceHealthClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.organizationImpactPathTemplate.render = sinon
         .stub()
         .returns(fakePath);

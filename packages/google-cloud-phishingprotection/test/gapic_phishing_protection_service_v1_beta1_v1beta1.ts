@@ -214,7 +214,9 @@ describe('v1beta1.PhishingProtectionServiceV1Beta1Client', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      client.initialize().catch(err => {
+        throw err;
+      });
       assert(client.phishingProtectionServiceV1Beta1Stub);
       client.close().then(() => {
         done();
@@ -288,7 +290,7 @@ describe('v1beta1.PhishingProtectionServiceV1Beta1Client', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.phishingprotection.v1beta1.ReportPhishingRequest()
       );
@@ -297,7 +299,7 @@ describe('v1beta1.PhishingProtectionServiceV1Beta1Client', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.phishingprotection.v1beta1.ReportPhishingResponse()
       );
@@ -322,7 +324,7 @@ describe('v1beta1.PhishingProtectionServiceV1Beta1Client', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.phishingprotection.v1beta1.ReportPhishingRequest()
       );
@@ -331,7 +333,7 @@ describe('v1beta1.PhishingProtectionServiceV1Beta1Client', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.phishingprotection.v1beta1.ReportPhishingResponse()
       );
@@ -372,7 +374,7 @@ describe('v1beta1.PhishingProtectionServiceV1Beta1Client', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.phishingprotection.v1beta1.ReportPhishingRequest()
       );
@@ -381,7 +383,7 @@ describe('v1beta1.PhishingProtectionServiceV1Beta1Client', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.reportPhishing = stubSimpleCall(
         undefined,
@@ -406,7 +408,7 @@ describe('v1beta1.PhishingProtectionServiceV1Beta1Client', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.phishingprotection.v1beta1.ReportPhishingRequest()
       );
@@ -422,7 +424,7 @@ describe('v1beta1.PhishingProtectionServiceV1Beta1Client', () => {
   });
 
   describe('Path templates', () => {
-    describe('project', () => {
+    describe('project', async () => {
       const fakePath = '/rendered/path/project';
       const expectedParameters = {
         project: 'projectValue',
@@ -434,7 +436,7 @@ describe('v1beta1.PhishingProtectionServiceV1Beta1Client', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectPathTemplate.render = sinon
         .stub()
         .returns(fakePath);

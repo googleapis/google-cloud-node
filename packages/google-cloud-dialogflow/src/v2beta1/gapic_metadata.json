@@ -347,6 +347,11 @@
                 "completeConversation"
               ]
             },
+            "IngestContextReferences": {
+              "methods": [
+                "ingestContextReferences"
+              ]
+            },
             "BatchCreateMessages": {
               "methods": [
                 "batchCreateMessages"
@@ -370,6 +375,11 @@
             "SearchKnowledge": {
               "methods": [
                 "searchKnowledge"
+              ]
+            },
+            "GenerateSuggestions": {
+              "methods": [
+                "generateSuggestions"
               ]
             },
             "ListConversations": {
@@ -406,6 +416,11 @@
                 "completeConversation"
               ]
             },
+            "IngestContextReferences": {
+              "methods": [
+                "ingestContextReferences"
+              ]
+            },
             "BatchCreateMessages": {
               "methods": [
                 "batchCreateMessages"
@@ -429,6 +444,11 @@
             "SearchKnowledge": {
               "methods": [
                 "searchKnowledge"
+              ]
+            },
+            "GenerateSuggestions": {
+              "methods": [
+                "generateSuggestions"
               ]
             },
             "ListConversations": {
@@ -1160,6 +1180,64 @@
                 "listSuggestions",
                 "listSuggestionsStream",
                 "listSuggestionsAsync"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "PhoneNumbers": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "PhoneNumbersClient",
+          "rpcs": {
+            "UpdatePhoneNumber": {
+              "methods": [
+                "updatePhoneNumber"
+              ]
+            },
+            "DeletePhoneNumber": {
+              "methods": [
+                "deletePhoneNumber"
+              ]
+            },
+            "UndeletePhoneNumber": {
+              "methods": [
+                "undeletePhoneNumber"
+              ]
+            },
+            "ListPhoneNumbers": {
+              "methods": [
+                "listPhoneNumbers",
+                "listPhoneNumbersStream",
+                "listPhoneNumbersAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "PhoneNumbersClient",
+          "rpcs": {
+            "UpdatePhoneNumber": {
+              "methods": [
+                "updatePhoneNumber"
+              ]
+            },
+            "DeletePhoneNumber": {
+              "methods": [
+                "deletePhoneNumber"
+              ]
+            },
+            "UndeletePhoneNumber": {
+              "methods": [
+                "undeletePhoneNumber"
+              ]
+            },
+            "ListPhoneNumbers": {
+              "methods": [
+                "listPhoneNumbers",
+                "listPhoneNumbersStream",
+                "listPhoneNumbersAsync"
               ]
             }
           }

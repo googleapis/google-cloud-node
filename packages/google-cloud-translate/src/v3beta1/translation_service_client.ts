@@ -31,6 +31,7 @@ import type {
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
+import {loggingUtils as logging} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -55,6 +56,8 @@ export class TranslationServiceClient {
   private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
+  private _log = logging.log('translate');
+
   auth: gax.GoogleAuth;
   descriptors: Descriptors = {
     page: {},
@@ -90,7 +93,7 @@ export class TranslationServiceClient {
    *     Developer's Console, e.g. 'grape-spaceship-123'. We will also check
    *     the environment variable GCLOUD_PROJECT for your project ID. If your
    *     app is running in an environment which supports
-   *     {@link https://developers.google.com/identity/protocols/application-default-credentials Application Default Credentials},
+   *     {@link https://cloud.google.com/docs/authentication/application-default-credentials Application Default Credentials},
    *     your project ID will be detected automatically.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
@@ -647,8 +650,39 @@ export class TranslationServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.translateText(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('translateText request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.translation.v3beta1.ITranslateTextResponse,
+          | protos.google.cloud.translation.v3beta1.ITranslateTextRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('translateText response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .translateText(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.translation.v3beta1.ITranslateTextResponse,
+          (
+            | protos.google.cloud.translation.v3beta1.ITranslateTextRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('translateText response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Detects the language of text within a request.
@@ -777,8 +811,39 @@ export class TranslationServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.detectLanguage(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('detectLanguage request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.translation.v3beta1.IDetectLanguageResponse,
+          | protos.google.cloud.translation.v3beta1.IDetectLanguageRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('detectLanguage response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .detectLanguage(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.translation.v3beta1.IDetectLanguageResponse,
+          (
+            | protos.google.cloud.translation.v3beta1.IDetectLanguageRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('detectLanguage response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Returns a list of supported languages for translation.
@@ -903,8 +968,39 @@ export class TranslationServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.getSupportedLanguages(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('getSupportedLanguages request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.translation.v3beta1.ISupportedLanguages,
+          | protos.google.cloud.translation.v3beta1.IGetSupportedLanguagesRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getSupportedLanguages response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getSupportedLanguages(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.translation.v3beta1.ISupportedLanguages,
+          (
+            | protos.google.cloud.translation.v3beta1.IGetSupportedLanguagesRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getSupportedLanguages response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Translates documents in synchronous mode.
@@ -1071,8 +1167,39 @@ export class TranslationServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.translateDocument(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('translateDocument request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.translation.v3beta1.ITranslateDocumentResponse,
+          | protos.google.cloud.translation.v3beta1.ITranslateDocumentRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('translateDocument response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .translateDocument(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.translation.v3beta1.ITranslateDocumentResponse,
+          (
+            | protos.google.cloud.translation.v3beta1.ITranslateDocumentRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('translateDocument response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Gets a glossary. Returns NOT_FOUND, if the glossary doesn't
@@ -1162,8 +1289,39 @@ export class TranslationServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.getGlossary(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('getGlossary request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.translation.v3beta1.IGlossary,
+          | protos.google.cloud.translation.v3beta1.IGetGlossaryRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getGlossary response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getGlossary(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.translation.v3beta1.IGlossary,
+          (
+            | protos.google.cloud.translation.v3beta1.IGetGlossaryRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getGlossary response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
 
   /**
@@ -1320,8 +1478,40 @@ export class TranslationServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.batchTranslateText(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.translation.v3beta1.IBatchTranslateResponse,
+            protos.google.cloud.translation.v3beta1.IBatchTranslateMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('batchTranslateText response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('batchTranslateText request %j', request);
+    return this.innerApiCalls
+      .batchTranslateText(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.translation.v3beta1.IBatchTranslateResponse,
+            protos.google.cloud.translation.v3beta1.IBatchTranslateMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('batchTranslateText response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `batchTranslateText()`.
@@ -1342,6 +1532,7 @@ export class TranslationServiceClient {
       protos.google.cloud.translation.v3beta1.BatchTranslateMetadata
     >
   > {
+    this._log.info('batchTranslateText long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -1527,12 +1718,40 @@ export class TranslationServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.batchTranslateDocument(
-      request,
-      options,
-      callback
-    );
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.translation.v3beta1.IBatchTranslateDocumentResponse,
+            protos.google.cloud.translation.v3beta1.IBatchTranslateDocumentMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('batchTranslateDocument response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('batchTranslateDocument request %j', request);
+    return this.innerApiCalls
+      .batchTranslateDocument(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.translation.v3beta1.IBatchTranslateDocumentResponse,
+            protos.google.cloud.translation.v3beta1.IBatchTranslateDocumentMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('batchTranslateDocument response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `batchTranslateDocument()`.
@@ -1553,6 +1772,7 @@ export class TranslationServiceClient {
       protos.google.cloud.translation.v3beta1.BatchTranslateDocumentMetadata
     >
   > {
+    this._log.info('batchTranslateDocument long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -1670,8 +1890,40 @@ export class TranslationServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.createGlossary(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.translation.v3beta1.IGlossary,
+            protos.google.cloud.translation.v3beta1.ICreateGlossaryMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('createGlossary response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('createGlossary request %j', request);
+    return this.innerApiCalls
+      .createGlossary(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.translation.v3beta1.IGlossary,
+            protos.google.cloud.translation.v3beta1.ICreateGlossaryMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createGlossary response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `createGlossary()`.
@@ -1692,6 +1944,7 @@ export class TranslationServiceClient {
       protos.google.cloud.translation.v3beta1.CreateGlossaryMetadata
     >
   > {
+    this._log.info('createGlossary long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -1808,8 +2061,40 @@ export class TranslationServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.deleteGlossary(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.translation.v3beta1.IDeleteGlossaryResponse,
+            protos.google.cloud.translation.v3beta1.IDeleteGlossaryMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('deleteGlossary response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('deleteGlossary request %j', request);
+    return this.innerApiCalls
+      .deleteGlossary(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.translation.v3beta1.IDeleteGlossaryResponse,
+            protos.google.cloud.translation.v3beta1.IDeleteGlossaryMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteGlossary response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `deleteGlossary()`.
@@ -1830,6 +2115,7 @@ export class TranslationServiceClient {
       protos.google.cloud.translation.v3beta1.DeleteGlossaryMetadata
     >
   > {
+    this._log.info('deleteGlossary long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -1961,8 +2247,36 @@ export class TranslationServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.listGlossaries(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.translation.v3beta1.IListGlossariesRequest,
+          | protos.google.cloud.translation.v3beta1.IListGlossariesResponse
+          | null
+          | undefined,
+          protos.google.cloud.translation.v3beta1.IGlossary
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listGlossaries values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listGlossaries request %j', request);
+    return this.innerApiCalls
+      .listGlossaries(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.translation.v3beta1.IGlossary[],
+          protos.google.cloud.translation.v3beta1.IListGlossariesRequest | null,
+          protos.google.cloud.translation.v3beta1.IListGlossariesResponse,
+        ]) => {
+          this._log.info('listGlossaries values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -2021,7 +2335,10 @@ export class TranslationServiceClient {
       });
     const defaultCallSettings = this._defaults['listGlossaries'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listGlossaries stream %j', request);
     return this.descriptors.page.listGlossaries.createStream(
       this.innerApiCalls.listGlossaries as GaxCall,
       request,
@@ -2088,7 +2405,10 @@ export class TranslationServiceClient {
       });
     const defaultCallSettings = this._defaults['listGlossaries'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listGlossaries iterate %j', request);
     return this.descriptors.page.listGlossaries.asyncIterate(
       this.innerApiCalls['listGlossaries'] as GaxCall,
       request as {},
@@ -2193,6 +2513,7 @@ export class TranslationServiceClient {
   close(): Promise<void> {
     if (this.translationServiceStub && !this._terminated) {
       return this.translationServiceStub.then(stub => {
+        this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
         this.operationsClient.close();

@@ -31,6 +31,7 @@ import type {
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
+import {loggingUtils as logging} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -55,6 +56,8 @@ export class ServiceHealthClient {
   private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
+  private _log = logging.log('servicehealth');
+
   auth: gax.GoogleAuth;
   descriptors: Descriptors = {
     page: {},
@@ -90,7 +93,7 @@ export class ServiceHealthClient {
    *     Developer's Console, e.g. 'grape-spaceship-123'. We will also check
    *     the environment variable GCLOUD_PROJECT for your project ID. If your
    *     app is running in an environment which supports
-   *     {@link https://developers.google.com/identity/protocols/application-default-credentials Application Default Credentials},
+   *     {@link https://cloud.google.com/docs/authentication/application-default-credentials Application Default Credentials},
    *     your project ID will be detected automatically.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
@@ -495,8 +498,36 @@ export class ServiceHealthClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.getEvent(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('getEvent request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.servicehealth.v1.IEvent,
+          | protos.google.cloud.servicehealth.v1.IGetEventRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getEvent response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getEvent(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.servicehealth.v1.IEvent,
+          protos.google.cloud.servicehealth.v1.IGetEventRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getEvent response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Retrieves a resource containing information about an event affecting an
@@ -600,8 +631,39 @@ export class ServiceHealthClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.getOrganizationEvent(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('getOrganizationEvent request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.servicehealth.v1.IOrganizationEvent,
+          | protos.google.cloud.servicehealth.v1.IGetOrganizationEventRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getOrganizationEvent response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getOrganizationEvent(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.servicehealth.v1.IOrganizationEvent,
+          (
+            | protos.google.cloud.servicehealth.v1.IGetOrganizationEventRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getOrganizationEvent response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Retrieves a resource containing information about impact to an asset under
@@ -705,8 +767,39 @@ export class ServiceHealthClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.getOrganizationImpact(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('getOrganizationImpact request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.servicehealth.v1.IOrganizationImpact,
+          | protos.google.cloud.servicehealth.v1.IGetOrganizationImpactRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getOrganizationImpact response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getOrganizationImpact(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.servicehealth.v1.IOrganizationImpact,
+          (
+            | protos.google.cloud.servicehealth.v1.IGetOrganizationImpactRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getOrganizationImpact response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
 
   /**
@@ -836,12 +929,40 @@ export class ServiceHealthClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.listEvents(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.servicehealth.v1.IListEventsRequest,
+          | protos.google.cloud.servicehealth.v1.IListEventsResponse
+          | null
+          | undefined,
+          protos.google.cloud.servicehealth.v1.IEvent
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listEvents values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listEvents request %j', request);
+    return this.innerApiCalls
+      .listEvents(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.servicehealth.v1.IEvent[],
+          protos.google.cloud.servicehealth.v1.IListEventsRequest | null,
+          protos.google.cloud.servicehealth.v1.IListEventsResponse,
+        ]) => {
+          this._log.info('listEvents values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listEvents`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
@@ -908,7 +1029,10 @@ export class ServiceHealthClient {
       });
     const defaultCallSettings = this._defaults['listEvents'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listEvents stream %j', request);
     return this.descriptors.page.listEvents.createStream(
       this.innerApiCalls.listEvents as GaxCall,
       request,
@@ -987,7 +1111,10 @@ export class ServiceHealthClient {
       });
     const defaultCallSettings = this._defaults['listEvents'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listEvents iterate %j', request);
     return this.descriptors.page.listEvents.asyncIterate(
       this.innerApiCalls['listEvents'] as GaxCall,
       request as {},
@@ -1126,16 +1253,40 @@ export class ServiceHealthClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.listOrganizationEvents(
-      request,
-      options,
-      callback
-    );
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.servicehealth.v1.IListOrganizationEventsRequest,
+          | protos.google.cloud.servicehealth.v1.IListOrganizationEventsResponse
+          | null
+          | undefined,
+          protos.google.cloud.servicehealth.v1.IOrganizationEvent
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listOrganizationEvents values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listOrganizationEvents request %j', request);
+    return this.innerApiCalls
+      .listOrganizationEvents(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.servicehealth.v1.IOrganizationEvent[],
+          protos.google.cloud.servicehealth.v1.IListOrganizationEventsRequest | null,
+          protos.google.cloud.servicehealth.v1.IListOrganizationEventsResponse,
+        ]) => {
+          this._log.info('listOrganizationEvents values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listOrganizationEvents`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
@@ -1207,7 +1358,10 @@ export class ServiceHealthClient {
       });
     const defaultCallSettings = this._defaults['listOrganizationEvents'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listOrganizationEvents stream %j', request);
     return this.descriptors.page.listOrganizationEvents.createStream(
       this.innerApiCalls.listOrganizationEvents as GaxCall,
       request,
@@ -1291,7 +1445,10 @@ export class ServiceHealthClient {
       });
     const defaultCallSettings = this._defaults['listOrganizationEvents'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listOrganizationEvents iterate %j', request);
     return this.descriptors.page.listOrganizationEvents.asyncIterate(
       this.innerApiCalls['listOrganizationEvents'] as GaxCall,
       request as {},
@@ -1429,16 +1586,40 @@ export class ServiceHealthClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.listOrganizationImpacts(
-      request,
-      options,
-      callback
-    );
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.servicehealth.v1.IListOrganizationImpactsRequest,
+          | protos.google.cloud.servicehealth.v1.IListOrganizationImpactsResponse
+          | null
+          | undefined,
+          protos.google.cloud.servicehealth.v1.IOrganizationImpact
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listOrganizationImpacts values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listOrganizationImpacts request %j', request);
+    return this.innerApiCalls
+      .listOrganizationImpacts(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.servicehealth.v1.IOrganizationImpact[],
+          protos.google.cloud.servicehealth.v1.IListOrganizationImpactsRequest | null,
+          protos.google.cloud.servicehealth.v1.IListOrganizationImpactsResponse,
+        ]) => {
+          this._log.info('listOrganizationImpacts values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listOrganizationImpacts`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
@@ -1508,7 +1689,10 @@ export class ServiceHealthClient {
       });
     const defaultCallSettings = this._defaults['listOrganizationImpacts'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listOrganizationImpacts stream %j', request);
     return this.descriptors.page.listOrganizationImpacts.createStream(
       this.innerApiCalls.listOrganizationImpacts as GaxCall,
       request,
@@ -1590,7 +1774,10 @@ export class ServiceHealthClient {
       });
     const defaultCallSettings = this._defaults['listOrganizationImpacts'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listOrganizationImpacts iterate %j', request);
     return this.descriptors.page.listOrganizationImpacts.asyncIterate(
       this.innerApiCalls['listOrganizationImpacts'] as GaxCall,
       request as {},
@@ -1853,6 +2040,7 @@ export class ServiceHealthClient {
   close(): Promise<void> {
     if (this.serviceHealthStub && !this._terminated) {
       return this.serviceHealthStub.then(stub => {
+        this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
         this.locationsClient.close();

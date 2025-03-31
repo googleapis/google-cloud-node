@@ -265,7 +265,9 @@ describe('v1.AuthorizedCertificatesClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      client.initialize().catch(err => {
+        throw err;
+      });
       assert(client.authorizedCertificatesStub);
       client.close().then(() => {
         done();
@@ -328,7 +330,7 @@ describe('v1.AuthorizedCertificatesClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.appengine.v1.GetAuthorizedCertificateRequest()
       );
@@ -337,7 +339,7 @@ describe('v1.AuthorizedCertificatesClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.appengine.v1.AuthorizedCertificate()
       );
@@ -361,7 +363,7 @@ describe('v1.AuthorizedCertificatesClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.appengine.v1.GetAuthorizedCertificateRequest()
       );
@@ -370,7 +372,7 @@ describe('v1.AuthorizedCertificatesClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.appengine.v1.AuthorizedCertificate()
       );
@@ -409,7 +411,7 @@ describe('v1.AuthorizedCertificatesClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.appengine.v1.GetAuthorizedCertificateRequest()
       );
@@ -418,7 +420,7 @@ describe('v1.AuthorizedCertificatesClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getAuthorizedCertificate = stubSimpleCall(
         undefined,
@@ -444,7 +446,7 @@ describe('v1.AuthorizedCertificatesClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.appengine.v1.GetAuthorizedCertificateRequest()
       );
@@ -469,7 +471,7 @@ describe('v1.AuthorizedCertificatesClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.appengine.v1.CreateAuthorizedCertificateRequest()
       );
@@ -478,7 +480,7 @@ describe('v1.AuthorizedCertificatesClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.appengine.v1.AuthorizedCertificate()
       );
@@ -502,7 +504,7 @@ describe('v1.AuthorizedCertificatesClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.appengine.v1.CreateAuthorizedCertificateRequest()
       );
@@ -511,7 +513,7 @@ describe('v1.AuthorizedCertificatesClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.appengine.v1.AuthorizedCertificate()
       );
@@ -550,7 +552,7 @@ describe('v1.AuthorizedCertificatesClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.appengine.v1.CreateAuthorizedCertificateRequest()
       );
@@ -559,7 +561,7 @@ describe('v1.AuthorizedCertificatesClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createAuthorizedCertificate = stubSimpleCall(
         undefined,
@@ -585,7 +587,7 @@ describe('v1.AuthorizedCertificatesClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.appengine.v1.CreateAuthorizedCertificateRequest()
       );
@@ -610,7 +612,7 @@ describe('v1.AuthorizedCertificatesClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.appengine.v1.UpdateAuthorizedCertificateRequest()
       );
@@ -619,7 +621,7 @@ describe('v1.AuthorizedCertificatesClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.appengine.v1.AuthorizedCertificate()
       );
@@ -643,7 +645,7 @@ describe('v1.AuthorizedCertificatesClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.appengine.v1.UpdateAuthorizedCertificateRequest()
       );
@@ -652,7 +654,7 @@ describe('v1.AuthorizedCertificatesClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.appengine.v1.AuthorizedCertificate()
       );
@@ -691,7 +693,7 @@ describe('v1.AuthorizedCertificatesClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.appengine.v1.UpdateAuthorizedCertificateRequest()
       );
@@ -700,7 +702,7 @@ describe('v1.AuthorizedCertificatesClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateAuthorizedCertificate = stubSimpleCall(
         undefined,
@@ -726,7 +728,7 @@ describe('v1.AuthorizedCertificatesClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.appengine.v1.UpdateAuthorizedCertificateRequest()
       );
@@ -751,7 +753,7 @@ describe('v1.AuthorizedCertificatesClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.appengine.v1.DeleteAuthorizedCertificateRequest()
       );
@@ -760,7 +762,7 @@ describe('v1.AuthorizedCertificatesClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -784,7 +786,7 @@ describe('v1.AuthorizedCertificatesClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.appengine.v1.DeleteAuthorizedCertificateRequest()
       );
@@ -793,7 +795,7 @@ describe('v1.AuthorizedCertificatesClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -832,7 +834,7 @@ describe('v1.AuthorizedCertificatesClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.appengine.v1.DeleteAuthorizedCertificateRequest()
       );
@@ -841,7 +843,7 @@ describe('v1.AuthorizedCertificatesClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteAuthorizedCertificate = stubSimpleCall(
         undefined,
@@ -867,7 +869,7 @@ describe('v1.AuthorizedCertificatesClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.appengine.v1.DeleteAuthorizedCertificateRequest()
       );
@@ -892,7 +894,7 @@ describe('v1.AuthorizedCertificatesClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.appengine.v1.ListAuthorizedCertificatesRequest()
       );
@@ -901,7 +903,7 @@ describe('v1.AuthorizedCertificatesClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.appengine.v1.AuthorizedCertificate()
@@ -933,7 +935,7 @@ describe('v1.AuthorizedCertificatesClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.appengine.v1.ListAuthorizedCertificatesRequest()
       );
@@ -942,7 +944,7 @@ describe('v1.AuthorizedCertificatesClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.appengine.v1.AuthorizedCertificate()
@@ -989,7 +991,7 @@ describe('v1.AuthorizedCertificatesClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.appengine.v1.ListAuthorizedCertificatesRequest()
       );
@@ -998,7 +1000,7 @@ describe('v1.AuthorizedCertificatesClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listAuthorizedCertificates = stubSimpleCall(
         undefined,
@@ -1024,7 +1026,7 @@ describe('v1.AuthorizedCertificatesClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.appengine.v1.ListAuthorizedCertificatesRequest()
       );
@@ -1033,7 +1035,7 @@ describe('v1.AuthorizedCertificatesClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.appengine.v1.AuthorizedCertificate()
@@ -1092,7 +1094,7 @@ describe('v1.AuthorizedCertificatesClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.appengine.v1.ListAuthorizedCertificatesRequest()
       );
@@ -1101,7 +1103,7 @@ describe('v1.AuthorizedCertificatesClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listAuthorizedCertificates.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -1149,7 +1151,7 @@ describe('v1.AuthorizedCertificatesClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.appengine.v1.ListAuthorizedCertificatesRequest()
       );
@@ -1158,7 +1160,7 @@ describe('v1.AuthorizedCertificatesClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.appengine.v1.AuthorizedCertificate()
@@ -1203,7 +1205,7 @@ describe('v1.AuthorizedCertificatesClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.appengine.v1.ListAuthorizedCertificatesRequest()
       );
@@ -1212,7 +1214,7 @@ describe('v1.AuthorizedCertificatesClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listAuthorizedCertificates.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -1245,7 +1247,7 @@ describe('v1.AuthorizedCertificatesClient', () => {
   });
 
   describe('Path templates', () => {
-    describe('instance', () => {
+    describe('instance', async () => {
       const fakePath = '/rendered/path/instance';
       const expectedParameters = {
         app: 'appValue',
@@ -1258,7 +1260,7 @@ describe('v1.AuthorizedCertificatesClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.instancePathTemplate.render = sinon
         .stub()
         .returns(fakePath);

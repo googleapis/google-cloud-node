@@ -29,6 +29,7 @@ import type {
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
+import {loggingUtils as logging} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -53,6 +54,8 @@ export class AssetServiceClient {
   private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
+  private _log = logging.log('asset');
+
   auth: gax.GoogleAuth;
   descriptors: Descriptors = {
     page: {},
@@ -86,7 +89,7 @@ export class AssetServiceClient {
    *     Developer's Console, e.g. 'grape-spaceship-123'. We will also check
    *     the environment variable GCLOUD_PROJECT for your project ID. If your
    *     app is running in an environment which supports
-   *     {@link https://developers.google.com/identity/protocols/application-default-credentials Application Default Credentials},
+   *     {@link https://cloud.google.com/docs/authentication/application-default-credentials Application Default Credentials},
    *     your project ID will be detected automatically.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
@@ -499,8 +502,36 @@ export class AssetServiceClient {
       this._gaxModule.routingHeader.fromParams({
         scope: request.scope ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.searchAllResources(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.asset.v1p1beta1.ISearchAllResourcesRequest,
+          | protos.google.cloud.asset.v1p1beta1.ISearchAllResourcesResponse
+          | null
+          | undefined,
+          protos.google.cloud.asset.v1p1beta1.IStandardResourceMetadata
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('searchAllResources values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('searchAllResources request %j', request);
+    return this.innerApiCalls
+      .searchAllResources(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.asset.v1p1beta1.IStandardResourceMetadata[],
+          protos.google.cloud.asset.v1p1beta1.ISearchAllResourcesRequest | null,
+          protos.google.cloud.asset.v1p1beta1.ISearchAllResourcesResponse,
+        ]) => {
+          this._log.info('searchAllResources values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -561,7 +592,10 @@ export class AssetServiceClient {
       });
     const defaultCallSettings = this._defaults['searchAllResources'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('searchAllResources stream %j', request);
     return this.descriptors.page.searchAllResources.createStream(
       this.innerApiCalls.searchAllResources as GaxCall,
       request,
@@ -630,7 +664,10 @@ export class AssetServiceClient {
       });
     const defaultCallSettings = this._defaults['searchAllResources'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('searchAllResources iterate %j', request);
     return this.descriptors.page.searchAllResources.asyncIterate(
       this.innerApiCalls['searchAllResources'] as GaxCall,
       request as {},
@@ -754,8 +791,36 @@ export class AssetServiceClient {
       this._gaxModule.routingHeader.fromParams({
         scope: request.scope ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.searchAllIamPolicies(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.asset.v1p1beta1.ISearchAllIamPoliciesRequest,
+          | protos.google.cloud.asset.v1p1beta1.ISearchAllIamPoliciesResponse
+          | null
+          | undefined,
+          protos.google.cloud.asset.v1p1beta1.IIamPolicySearchResult
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('searchAllIamPolicies values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('searchAllIamPolicies request %j', request);
+    return this.innerApiCalls
+      .searchAllIamPolicies(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.asset.v1p1beta1.IIamPolicySearchResult[],
+          protos.google.cloud.asset.v1p1beta1.ISearchAllIamPoliciesRequest | null,
+          protos.google.cloud.asset.v1p1beta1.ISearchAllIamPoliciesResponse,
+        ]) => {
+          this._log.info('searchAllIamPolicies values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -811,7 +876,10 @@ export class AssetServiceClient {
       });
     const defaultCallSettings = this._defaults['searchAllIamPolicies'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('searchAllIamPolicies stream %j', request);
     return this.descriptors.page.searchAllIamPolicies.createStream(
       this.innerApiCalls.searchAllIamPolicies as GaxCall,
       request,
@@ -875,7 +943,10 @@ export class AssetServiceClient {
       });
     const defaultCallSettings = this._defaults['searchAllIamPolicies'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('searchAllIamPolicies iterate %j', request);
     return this.descriptors.page.searchAllIamPolicies.asyncIterate(
       this.innerApiCalls['searchAllIamPolicies'] as GaxCall,
       request as {},
@@ -892,6 +963,7 @@ export class AssetServiceClient {
   close(): Promise<void> {
     if (this.assetServiceStub && !this._terminated) {
       return this.assetServiceStub.then(stub => {
+        this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
       });

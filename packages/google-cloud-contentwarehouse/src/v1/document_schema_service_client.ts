@@ -29,6 +29,7 @@ import type {
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
+import {loggingUtils as logging} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -53,6 +54,8 @@ export class DocumentSchemaServiceClient {
   private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
+  private _log = logging.log('contentwarehouse');
+
   auth: gax.GoogleAuth;
   descriptors: Descriptors = {
     page: {},
@@ -87,7 +90,7 @@ export class DocumentSchemaServiceClient {
    *     Developer's Console, e.g. 'grape-spaceship-123'. We will also check
    *     the environment variable GCLOUD_PROJECT for your project ID. If your
    *     app is running in an environment which supports
-   *     {@link https://developers.google.com/identity/protocols/application-default-credentials Application Default Credentials},
+   *     {@link https://cloud.google.com/docs/authentication/application-default-credentials Application Default Credentials},
    *     your project ID will be detected automatically.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
@@ -500,8 +503,39 @@ export class DocumentSchemaServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.createDocumentSchema(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('createDocumentSchema request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.contentwarehouse.v1.IDocumentSchema,
+          | protos.google.cloud.contentwarehouse.v1.ICreateDocumentSchemaRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('createDocumentSchema response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .createDocumentSchema(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.contentwarehouse.v1.IDocumentSchema,
+          (
+            | protos.google.cloud.contentwarehouse.v1.ICreateDocumentSchemaRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('createDocumentSchema response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Updates a Document Schema. Returns INVALID_ARGUMENT if the name of the
@@ -606,8 +640,39 @@ export class DocumentSchemaServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.updateDocumentSchema(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('updateDocumentSchema request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.contentwarehouse.v1.IDocumentSchema,
+          | protos.google.cloud.contentwarehouse.v1.IUpdateDocumentSchemaRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('updateDocumentSchema response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .updateDocumentSchema(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.contentwarehouse.v1.IDocumentSchema,
+          (
+            | protos.google.cloud.contentwarehouse.v1.IUpdateDocumentSchemaRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('updateDocumentSchema response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Gets a document schema. Returns NOT_FOUND if the document schema does not
@@ -703,8 +768,39 @@ export class DocumentSchemaServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.getDocumentSchema(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('getDocumentSchema request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.contentwarehouse.v1.IDocumentSchema,
+          | protos.google.cloud.contentwarehouse.v1.IGetDocumentSchemaRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getDocumentSchema response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getDocumentSchema(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.contentwarehouse.v1.IDocumentSchema,
+          (
+            | protos.google.cloud.contentwarehouse.v1.IGetDocumentSchemaRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getDocumentSchema response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Deletes a document schema. Returns NOT_FOUND if the document schema does
@@ -801,8 +897,39 @@ export class DocumentSchemaServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.deleteDocumentSchema(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('deleteDocumentSchema request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.cloud.contentwarehouse.v1.IDeleteDocumentSchemaRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('deleteDocumentSchema response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .deleteDocumentSchema(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.protobuf.IEmpty,
+          (
+            | protos.google.cloud.contentwarehouse.v1.IDeleteDocumentSchemaRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteDocumentSchema response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
 
   /**
@@ -907,12 +1034,40 @@ export class DocumentSchemaServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.listDocumentSchemas(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.contentwarehouse.v1.IListDocumentSchemasRequest,
+          | protos.google.cloud.contentwarehouse.v1.IListDocumentSchemasResponse
+          | null
+          | undefined,
+          protos.google.cloud.contentwarehouse.v1.IDocumentSchema
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listDocumentSchemas values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listDocumentSchemas request %j', request);
+    return this.innerApiCalls
+      .listDocumentSchemas(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.contentwarehouse.v1.IDocumentSchema[],
+          protos.google.cloud.contentwarehouse.v1.IListDocumentSchemasRequest | null,
+          protos.google.cloud.contentwarehouse.v1.IListDocumentSchemasResponse,
+        ]) => {
+          this._log.info('listDocumentSchemas values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listDocumentSchemas`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
@@ -954,7 +1109,10 @@ export class DocumentSchemaServiceClient {
       });
     const defaultCallSettings = this._defaults['listDocumentSchemas'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listDocumentSchemas stream %j', request);
     return this.descriptors.page.listDocumentSchemas.createStream(
       this.innerApiCalls.listDocumentSchemas as GaxCall,
       request,
@@ -1008,7 +1166,10 @@ export class DocumentSchemaServiceClient {
       });
     const defaultCallSettings = this._defaults['listDocumentSchemas'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listDocumentSchemas iterate %j', request);
     return this.descriptors.page.listDocumentSchemas.asyncIterate(
       this.innerApiCalls['listDocumentSchemas'] as GaxCall,
       request as {},
@@ -1427,6 +1588,7 @@ export class DocumentSchemaServiceClient {
   close(): Promise<void> {
     if (this.documentSchemaServiceStub && !this._terminated) {
       return this.documentSchemaServiceStub.then(stub => {
+        this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
       });

@@ -265,7 +265,9 @@ describe('v1beta.ProductReviewsServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      client.initialize().catch(err => {
+        throw err;
+      });
       assert(client.productReviewsServiceStub);
       client.close().then(() => {
         done();
@@ -328,7 +330,7 @@ describe('v1beta.ProductReviewsServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.shopping.merchant.reviews.v1beta.GetProductReviewRequest()
       );
@@ -337,7 +339,7 @@ describe('v1beta.ProductReviewsServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.shopping.merchant.reviews.v1beta.ProductReview()
       );
@@ -360,7 +362,7 @@ describe('v1beta.ProductReviewsServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.shopping.merchant.reviews.v1beta.GetProductReviewRequest()
       );
@@ -369,7 +371,7 @@ describe('v1beta.ProductReviewsServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.shopping.merchant.reviews.v1beta.ProductReview()
       );
@@ -408,7 +410,7 @@ describe('v1beta.ProductReviewsServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.shopping.merchant.reviews.v1beta.GetProductReviewRequest()
       );
@@ -417,7 +419,7 @@ describe('v1beta.ProductReviewsServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getProductReview = stubSimpleCall(
         undefined,
@@ -440,7 +442,7 @@ describe('v1beta.ProductReviewsServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.shopping.merchant.reviews.v1beta.GetProductReviewRequest()
       );
@@ -462,7 +464,7 @@ describe('v1beta.ProductReviewsServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.shopping.merchant.reviews.v1beta.InsertProductReviewRequest()
       );
@@ -471,7 +473,7 @@ describe('v1beta.ProductReviewsServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.shopping.merchant.reviews.v1beta.ProductReview()
       );
@@ -495,7 +497,7 @@ describe('v1beta.ProductReviewsServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.shopping.merchant.reviews.v1beta.InsertProductReviewRequest()
       );
@@ -504,7 +506,7 @@ describe('v1beta.ProductReviewsServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.shopping.merchant.reviews.v1beta.ProductReview()
       );
@@ -543,7 +545,7 @@ describe('v1beta.ProductReviewsServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.shopping.merchant.reviews.v1beta.InsertProductReviewRequest()
       );
@@ -552,7 +554,7 @@ describe('v1beta.ProductReviewsServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.insertProductReview = stubSimpleCall(
         undefined,
@@ -575,7 +577,7 @@ describe('v1beta.ProductReviewsServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.shopping.merchant.reviews.v1beta.InsertProductReviewRequest()
       );
@@ -597,7 +599,7 @@ describe('v1beta.ProductReviewsServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.shopping.merchant.reviews.v1beta.DeleteProductReviewRequest()
       );
@@ -606,7 +608,7 @@ describe('v1beta.ProductReviewsServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -630,7 +632,7 @@ describe('v1beta.ProductReviewsServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.shopping.merchant.reviews.v1beta.DeleteProductReviewRequest()
       );
@@ -639,7 +641,7 @@ describe('v1beta.ProductReviewsServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -678,7 +680,7 @@ describe('v1beta.ProductReviewsServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.shopping.merchant.reviews.v1beta.DeleteProductReviewRequest()
       );
@@ -687,7 +689,7 @@ describe('v1beta.ProductReviewsServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteProductReview = stubSimpleCall(
         undefined,
@@ -710,7 +712,7 @@ describe('v1beta.ProductReviewsServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.shopping.merchant.reviews.v1beta.DeleteProductReviewRequest()
       );
@@ -732,7 +734,7 @@ describe('v1beta.ProductReviewsServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.shopping.merchant.reviews.v1beta.ListProductReviewsRequest()
       );
@@ -741,7 +743,7 @@ describe('v1beta.ProductReviewsServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.shopping.merchant.reviews.v1beta.ProductReview()
@@ -773,7 +775,7 @@ describe('v1beta.ProductReviewsServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.shopping.merchant.reviews.v1beta.ListProductReviewsRequest()
       );
@@ -782,7 +784,7 @@ describe('v1beta.ProductReviewsServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.shopping.merchant.reviews.v1beta.ProductReview()
@@ -831,7 +833,7 @@ describe('v1beta.ProductReviewsServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.shopping.merchant.reviews.v1beta.ListProductReviewsRequest()
       );
@@ -840,7 +842,7 @@ describe('v1beta.ProductReviewsServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listProductReviews = stubSimpleCall(
         undefined,
@@ -863,7 +865,7 @@ describe('v1beta.ProductReviewsServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.shopping.merchant.reviews.v1beta.ListProductReviewsRequest()
       );
@@ -872,7 +874,7 @@ describe('v1beta.ProductReviewsServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.shopping.merchant.reviews.v1beta.ProductReview()
@@ -927,7 +929,7 @@ describe('v1beta.ProductReviewsServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.shopping.merchant.reviews.v1beta.ListProductReviewsRequest()
       );
@@ -936,7 +938,7 @@ describe('v1beta.ProductReviewsServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listProductReviews.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -980,7 +982,7 @@ describe('v1beta.ProductReviewsServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.shopping.merchant.reviews.v1beta.ListProductReviewsRequest()
       );
@@ -989,7 +991,7 @@ describe('v1beta.ProductReviewsServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.shopping.merchant.reviews.v1beta.ProductReview()
@@ -1031,7 +1033,7 @@ describe('v1beta.ProductReviewsServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.shopping.merchant.reviews.v1beta.ListProductReviewsRequest()
       );
@@ -1040,7 +1042,7 @@ describe('v1beta.ProductReviewsServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listProductReviews.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -1069,7 +1071,7 @@ describe('v1beta.ProductReviewsServiceClient', () => {
   });
 
   describe('Path templates', () => {
-    describe('account', () => {
+    describe('account', async () => {
       const fakePath = '/rendered/path/account';
       const expectedParameters = {
         account: 'accountValue',
@@ -1079,7 +1081,7 @@ describe('v1beta.ProductReviewsServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.accountPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -1108,7 +1110,7 @@ describe('v1beta.ProductReviewsServiceClient', () => {
       });
     });
 
-    describe('merchantReview', () => {
+    describe('merchantReview', async () => {
       const fakePath = '/rendered/path/merchantReview';
       const expectedParameters = {
         account: 'accountValue',
@@ -1119,7 +1121,7 @@ describe('v1beta.ProductReviewsServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.merchantReviewPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -1158,7 +1160,7 @@ describe('v1beta.ProductReviewsServiceClient', () => {
       });
     });
 
-    describe('productReview', () => {
+    describe('productReview', async () => {
       const fakePath = '/rendered/path/productReview';
       const expectedParameters = {
         account: 'accountValue',
@@ -1169,7 +1171,7 @@ describe('v1beta.ProductReviewsServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.productReviewPathTemplate.render = sinon
         .stub()
         .returns(fakePath);

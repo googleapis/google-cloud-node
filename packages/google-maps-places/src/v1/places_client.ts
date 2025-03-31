@@ -27,6 +27,7 @@ import type {
 
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
+import {loggingUtils as logging} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -55,6 +56,8 @@ export class PlacesClient {
   private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
+  private _log = logging.log('places');
+
   auth: gax.GoogleAuth;
   descriptors: Descriptors = {
     page: {},
@@ -89,7 +92,7 @@ export class PlacesClient {
    *     Developer's Console, e.g. 'grape-spaceship-123'. We will also check
    *     the environment variable GCLOUD_PROJECT for your project ID. If your
    *     app is running in an environment which supports
-   *     {@link https://developers.google.com/identity/protocols/application-default-credentials Application Default Credentials},
+   *     {@link https://cloud.google.com/docs/authentication/application-default-credentials Application Default Credentials},
    *     your project ID will be detected automatically.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
@@ -559,8 +562,34 @@ export class PlacesClient {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    this.initialize();
-    return this.innerApiCalls.searchNearby(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('searchNearby request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.maps.places.v1.ISearchNearbyResponse,
+          protos.google.maps.places.v1.ISearchNearbyRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('searchNearby response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .searchNearby(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.maps.places.v1.ISearchNearbyResponse,
+          protos.google.maps.places.v1.ISearchNearbyRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('searchNearby response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Text query based place search.
@@ -705,8 +734,34 @@ export class PlacesClient {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    this.initialize();
-    return this.innerApiCalls.searchText(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('searchText request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.maps.places.v1.ISearchTextResponse,
+          protos.google.maps.places.v1.ISearchTextRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('searchText response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .searchText(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.maps.places.v1.ISearchTextResponse,
+          protos.google.maps.places.v1.ISearchTextRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('searchText response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Get a photo media with a photo reference string.
@@ -822,8 +877,34 @@ export class PlacesClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.getPhotoMedia(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('getPhotoMedia request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.maps.places.v1.IPhotoMedia,
+          protos.google.maps.places.v1.IGetPhotoMediaRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getPhotoMedia response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getPhotoMedia(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.maps.places.v1.IPhotoMedia,
+          protos.google.maps.places.v1.IGetPhotoMediaRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getPhotoMedia response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Get the details of a place based on its resource name, which is a string
@@ -948,8 +1029,34 @@ export class PlacesClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.getPlace(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('getPlace request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.maps.places.v1.IPlace,
+          protos.google.maps.places.v1.IGetPlaceRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getPlace response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getPlace(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.maps.places.v1.IPlace,
+          protos.google.maps.places.v1.IGetPlaceRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getPlace response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Returns predictions for the given input.
@@ -1118,8 +1225,36 @@ export class PlacesClient {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    this.initialize();
-    return this.innerApiCalls.autocompletePlaces(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('autocompletePlaces request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.maps.places.v1.IAutocompletePlacesResponse,
+          | protos.google.maps.places.v1.IAutocompletePlacesRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('autocompletePlaces response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .autocompletePlaces(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.maps.places.v1.IAutocompletePlacesResponse,
+          protos.google.maps.places.v1.IAutocompletePlacesRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('autocompletePlaces response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
 
   // --------------------
@@ -1268,6 +1403,7 @@ export class PlacesClient {
   close(): Promise<void> {
     if (this.placesStub && !this._terminated) {
       return this.placesStub.then(stub => {
+        this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
       });

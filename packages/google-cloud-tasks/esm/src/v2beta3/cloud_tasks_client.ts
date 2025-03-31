@@ -38,6 +38,7 @@ import {fileURLToPath} from 'url';
 import {getJSON} from '../json-helper.cjs';
 // @ts-ignore
 const dirname = path.dirname(fileURLToPath(import.meta.url));
+import {loggingUtils as logging} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -72,6 +73,7 @@ export class CloudTasksClient {
   private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
+  private _log = logging.log('tasks');
   auth: gax.GoogleAuth;
   descriptors: Descriptors = {
     page: {},
@@ -107,7 +109,7 @@ export class CloudTasksClient {
    *     Developer's Console, e.g. 'grape-spaceship-123'. We will also check
    *     the environment variable GCLOUD_PROJECT for your project ID. If your
    *     app is running in an environment which supports
-   *     {@link https://developers.google.com/identity/protocols/application-default-credentials Application Default Credentials},
+   *     {@link https://cloud.google.com/docs/authentication/application-default-credentials Application Default Credentials},
    *     your project ID will be detected automatically.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
@@ -202,10 +204,13 @@ export class CloudTasksClient {
       opts
     );
 
+    // Add ESM headers
+    const isEsm = true;
+    const isEsmString = isEsm ? '-esm' : '-cjs';
     // Determine the client header string.
     const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
     if (typeof process === 'object' && 'versions' in process) {
-      clientHeader.push(`gl-node/${process.versions.node}`);
+      clientHeader.push(`gl-node/{process.versions.node}${isEsmString}`);
     } else {
       clientHeader.push(`gl-web/${this._gaxModule.version}`);
     }
@@ -216,11 +221,6 @@ export class CloudTasksClient {
     }
     if (opts.libName && opts.libVersion) {
       clientHeader.push(`${opts.libName}/${opts.libVersion}`);
-    }
-    // Add ESM headers
-    const isEsm = true;
-    if ((opts.libVersion || version) && isEsm) {
-      clientHeader.push(`${opts.libVersion ?? version}-esm`);
     }
 
     // Load the applicable protos.
@@ -528,8 +528,34 @@ export class CloudTasksClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.getQueue(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('getQueue request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.tasks.v2beta3.IQueue,
+          protos.google.cloud.tasks.v2beta3.IGetQueueRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getQueue response %j', response);
+          callback!(error, response, options, rawResponse);
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getQueue(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.tasks.v2beta3.IQueue,
+          protos.google.cloud.tasks.v2beta3.IGetQueueRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getQueue response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Creates a queue.
@@ -633,8 +659,36 @@ export class CloudTasksClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.createQueue(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('createQueue request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.tasks.v2beta3.IQueue,
+          | protos.google.cloud.tasks.v2beta3.ICreateQueueRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('createQueue response %j', response);
+          callback!(error, response, options, rawResponse);
+        }
+      : undefined;
+    return this.innerApiCalls
+      .createQueue(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.tasks.v2beta3.IQueue,
+          protos.google.cloud.tasks.v2beta3.ICreateQueueRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createQueue response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Updates a queue.
@@ -743,8 +797,36 @@ export class CloudTasksClient {
       this._gaxModule.routingHeader.fromParams({
         'queue.name': request.queue!.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.updateQueue(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('updateQueue request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.tasks.v2beta3.IQueue,
+          | protos.google.cloud.tasks.v2beta3.IUpdateQueueRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('updateQueue response %j', response);
+          callback!(error, response, options, rawResponse);
+        }
+      : undefined;
+    return this.innerApiCalls
+      .updateQueue(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.tasks.v2beta3.IQueue,
+          protos.google.cloud.tasks.v2beta3.IUpdateQueueRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('updateQueue response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Deletes a queue.
@@ -840,8 +922,36 @@ export class CloudTasksClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.deleteQueue(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('deleteQueue request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.cloud.tasks.v2beta3.IDeleteQueueRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('deleteQueue response %j', response);
+          callback!(error, response, options, rawResponse);
+        }
+      : undefined;
+    return this.innerApiCalls
+      .deleteQueue(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.protobuf.IEmpty,
+          protos.google.cloud.tasks.v2beta3.IDeleteQueueRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteQueue response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Purges a queue by deleting all of its tasks.
@@ -930,8 +1040,36 @@ export class CloudTasksClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.purgeQueue(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('purgeQueue request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.tasks.v2beta3.IQueue,
+          | protos.google.cloud.tasks.v2beta3.IPurgeQueueRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('purgeQueue response %j', response);
+          callback!(error, response, options, rawResponse);
+        }
+      : undefined;
+    return this.innerApiCalls
+      .purgeQueue(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.tasks.v2beta3.IQueue,
+          protos.google.cloud.tasks.v2beta3.IPurgeQueueRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('purgeQueue response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Pauses the queue.
@@ -1022,8 +1160,36 @@ export class CloudTasksClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.pauseQueue(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('pauseQueue request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.tasks.v2beta3.IQueue,
+          | protos.google.cloud.tasks.v2beta3.IPauseQueueRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('pauseQueue response %j', response);
+          callback!(error, response, options, rawResponse);
+        }
+      : undefined;
+    return this.innerApiCalls
+      .pauseQueue(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.tasks.v2beta3.IQueue,
+          protos.google.cloud.tasks.v2beta3.IPauseQueueRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('pauseQueue response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Resume a queue.
@@ -1121,8 +1287,36 @@ export class CloudTasksClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.resumeQueue(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('resumeQueue request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.tasks.v2beta3.IQueue,
+          | protos.google.cloud.tasks.v2beta3.IResumeQueueRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('resumeQueue response %j', response);
+          callback!(error, response, options, rawResponse);
+        }
+      : undefined;
+    return this.innerApiCalls
+      .resumeQueue(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.tasks.v2beta3.IQueue,
+          protos.google.cloud.tasks.v2beta3.IResumeQueueRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('resumeQueue response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Gets the access control policy for a
@@ -1215,8 +1409,34 @@ export class CloudTasksClient {
       this._gaxModule.routingHeader.fromParams({
         resource: request.resource ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.getIamPolicy(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('getIamPolicy request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.iam.v1.IPolicy,
+          protos.google.iam.v1.IGetIamPolicyRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getIamPolicy response %j', response);
+          callback!(error, response, options, rawResponse);
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getIamPolicy(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.iam.v1.IPolicy,
+          protos.google.iam.v1.IGetIamPolicyRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getIamPolicy response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Sets the access control policy for a
@@ -1319,8 +1539,34 @@ export class CloudTasksClient {
       this._gaxModule.routingHeader.fromParams({
         resource: request.resource ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.setIamPolicy(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('setIamPolicy request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.iam.v1.IPolicy,
+          protos.google.iam.v1.ISetIamPolicyRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('setIamPolicy response %j', response);
+          callback!(error, response, options, rawResponse);
+        }
+      : undefined;
+    return this.innerApiCalls
+      .setIamPolicy(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.iam.v1.IPolicy,
+          protos.google.iam.v1.ISetIamPolicyRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('setIamPolicy response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Returns permissions that a caller has on a
@@ -1414,8 +1660,34 @@ export class CloudTasksClient {
       this._gaxModule.routingHeader.fromParams({
         resource: request.resource ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.testIamPermissions(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('testIamPermissions request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.iam.v1.ITestIamPermissionsResponse,
+          protos.google.iam.v1.ITestIamPermissionsRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('testIamPermissions response %j', response);
+          callback!(error, response, options, rawResponse);
+        }
+      : undefined;
+    return this.innerApiCalls
+      .testIamPermissions(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.iam.v1.ITestIamPermissionsResponse,
+          protos.google.iam.v1.ITestIamPermissionsRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('testIamPermissions response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Gets a task.
@@ -1511,8 +1783,34 @@ export class CloudTasksClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.getTask(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('getTask request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.tasks.v2beta3.ITask,
+          protos.google.cloud.tasks.v2beta3.IGetTaskRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getTask response %j', response);
+          callback!(error, response, options, rawResponse);
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getTask(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.tasks.v2beta3.ITask,
+          protos.google.cloud.tasks.v2beta3.IGetTaskRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getTask response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Creates a task and adds it to a queue.
@@ -1650,8 +1948,36 @@ export class CloudTasksClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.createTask(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('createTask request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.tasks.v2beta3.ITask,
+          | protos.google.cloud.tasks.v2beta3.ICreateTaskRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('createTask response %j', response);
+          callback!(error, response, options, rawResponse);
+        }
+      : undefined;
+    return this.innerApiCalls
+      .createTask(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.tasks.v2beta3.ITask,
+          protos.google.cloud.tasks.v2beta3.ICreateTaskRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createTask response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Deletes a task.
@@ -1739,8 +2065,36 @@ export class CloudTasksClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.deleteTask(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('deleteTask request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.cloud.tasks.v2beta3.IDeleteTaskRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('deleteTask response %j', response);
+          callback!(error, response, options, rawResponse);
+        }
+      : undefined;
+    return this.innerApiCalls
+      .deleteTask(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.protobuf.IEmpty,
+          protos.google.cloud.tasks.v2beta3.IDeleteTaskRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteTask response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Forces a task to run now.
@@ -1862,8 +2216,34 @@ export class CloudTasksClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.runTask(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('runTask request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.tasks.v2beta3.ITask,
+          protos.google.cloud.tasks.v2beta3.IRunTaskRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('runTask response %j', response);
+          callback!(error, response, options, rawResponse);
+        }
+      : undefined;
+    return this.innerApiCalls
+      .runTask(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.tasks.v2beta3.ITask,
+          protos.google.cloud.tasks.v2beta3.IRunTaskRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('runTask response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
 
   /**
@@ -1988,12 +2368,40 @@ export class CloudTasksClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.listQueues(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.tasks.v2beta3.IListQueuesRequest,
+          | protos.google.cloud.tasks.v2beta3.IListQueuesResponse
+          | null
+          | undefined,
+          protos.google.cloud.tasks.v2beta3.IQueue
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listQueues values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse);
+        }
+      : undefined;
+    this._log.info('listQueues request %j', request);
+    return this.innerApiCalls
+      .listQueues(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.tasks.v2beta3.IQueue[],
+          protos.google.cloud.tasks.v2beta3.IListQueuesRequest | null,
+          protos.google.cloud.tasks.v2beta3.IListQueuesResponse,
+        ]) => {
+          this._log.info('listQueues values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listQueues`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
@@ -2059,7 +2467,10 @@ export class CloudTasksClient {
       });
     const defaultCallSettings = this._defaults['listQueues'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listQueues stream %j', request);
     return this.descriptors.page.listQueues.createStream(
       this.innerApiCalls.listQueues as GaxCall,
       request,
@@ -2137,7 +2548,10 @@ export class CloudTasksClient {
       });
     const defaultCallSettings = this._defaults['listQueues'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listQueues iterate %j', request);
     return this.descriptors.page.listQueues.asyncIterate(
       this.innerApiCalls['listQueues'] as GaxCall,
       request as {},
@@ -2270,12 +2684,40 @@ export class CloudTasksClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.listTasks(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.tasks.v2beta3.IListTasksRequest,
+          | protos.google.cloud.tasks.v2beta3.IListTasksResponse
+          | null
+          | undefined,
+          protos.google.cloud.tasks.v2beta3.ITask
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listTasks values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse);
+        }
+      : undefined;
+    this._log.info('listTasks request %j', request);
+    return this.innerApiCalls
+      .listTasks(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.tasks.v2beta3.ITask[],
+          protos.google.cloud.tasks.v2beta3.IListTasksRequest | null,
+          protos.google.cloud.tasks.v2beta3.IListTasksResponse,
+        ]) => {
+          this._log.info('listTasks values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listTasks`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
@@ -2339,7 +2781,10 @@ export class CloudTasksClient {
       });
     const defaultCallSettings = this._defaults['listTasks'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listTasks stream %j', request);
     return this.descriptors.page.listTasks.createStream(
       this.innerApiCalls.listTasks as GaxCall,
       request,
@@ -2415,7 +2860,10 @@ export class CloudTasksClient {
       });
     const defaultCallSettings = this._defaults['listTasks'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listTasks iterate %j', request);
     return this.descriptors.page.listTasks.asyncIterate(
       this.innerApiCalls['listTasks'] as GaxCall,
       request as {},
@@ -2683,6 +3131,7 @@ export class CloudTasksClient {
   close(): Promise<void> {
     if (this.cloudTasksStub && !this._terminated) {
       return this.cloudTasksStub.then(stub => {
+        this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
         this.locationsClient.close();

@@ -1,7 +1,7 @@
 {
     "clientLibrary": {
         "name": "nodejs-budgets",
-        "version": "5.4.0",
+        "version": "6.0.1",
         "language": "TYPESCRIPT",
         "apis": [
             {
