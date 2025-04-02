@@ -4443,7 +4443,10 @@
                               "fields": {
                                 "enabled": {
                                   "type": "bool",
-                                  "id": 1
+                                  "id": 1,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL"
+                                  }
                                 },
                                 "cidrBlocks": {
                                   "rule": "repeated",
