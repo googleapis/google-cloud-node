@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/storage?activeTab=versions
 
+## [7.16.0](https://github.com/googleapis/nodejs-storage/compare/v7.15.2...v7.16.0) (2025-03-31)
+
+
+### Features
+
+* Add moveFileAtomic method ([#2586](https://github.com/googleapis/nodejs-storage/issues/2586)) ([e25fb8c](https://github.com/googleapis/nodejs-storage/commit/e25fb8c659dbdf4a08c87fe2a929c8d62e6162e1))
+
 ## [7.15.2](https://github.com/googleapis/nodejs-storage/compare/v7.15.1...v7.15.2) (2025-02-20)
 
 
