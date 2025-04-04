@@ -1,5 +1,12 @@
 # Changelog
 
+## [4.0.2](https://github.com/googleapis/google-cloud-node/compare/domains-v4.0.1...domains-v4.0.2) (2025-04-04)
+
+
+### Bug Fixes
+
+* [Many APIs] await/catch promises, and update listOperationsAsync return type ([#6185](https://github.com/googleapis/google-cloud-node/issues/6185)) ([ab30412](https://github.com/googleapis/google-cloud-node/commit/ab304122e3e825c9a76af7d6b0ef4ddc9aa6e906))
+
 ## [4.0.1](https://github.com/googleapis/google-cloud-node/compare/domains-v4.0.0...domains-v4.0.1) (2025-03-21)
 
 
