@@ -31,7 +31,7 @@
     "gapic-tools": "^1.0.0",
     "gts": "^6.0.2",
     "mocha": "^11.1.0",
-    "sinon": "^19.0.2",
+    "sinon": "^20.0.0",
     "snap-shot-it": "^7.9.10",
     "typescript": "^5.8.2"
   },
