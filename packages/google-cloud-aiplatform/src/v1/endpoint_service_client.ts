@@ -35,6 +35,7 @@ import type {
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
+import {loggingUtils as logging} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -59,6 +60,8 @@ export class EndpointServiceClient {
   private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
+  private _log = logging.log('aiplatform');
+
   auth: gax.GoogleAuth;
   descriptors: Descriptors = {
     page: {},
@@ -96,7 +99,7 @@ export class EndpointServiceClient {
    *     Developer's Console, e.g. 'grape-spaceship-123'. We will also check
    *     the environment variable GCLOUD_PROJECT for your project ID. If your
    *     app is running in an environment which supports
-   *     {@link https://developers.google.com/identity/protocols/application-default-credentials Application Default Credentials},
+   *     {@link https://cloud.google.com/docs/authentication/application-default-credentials Application Default Credentials},
    *     your project ID will be detected automatically.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
@@ -2329,8 +2332,36 @@ export class EndpointServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.getEndpoint(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('getEndpoint request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.aiplatform.v1.IEndpoint,
+          | protos.google.cloud.aiplatform.v1.IGetEndpointRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getEndpoint response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getEndpoint(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.aiplatform.v1.IEndpoint,
+          protos.google.cloud.aiplatform.v1.IGetEndpointRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getEndpoint response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Updates an Endpoint.
@@ -2422,8 +2453,36 @@ export class EndpointServiceClient {
       this._gaxModule.routingHeader.fromParams({
         'endpoint.name': request.endpoint!.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.updateEndpoint(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('updateEndpoint request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.aiplatform.v1.IEndpoint,
+          | protos.google.cloud.aiplatform.v1.IUpdateEndpointRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('updateEndpoint response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .updateEndpoint(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.aiplatform.v1.IEndpoint,
+          protos.google.cloud.aiplatform.v1.IUpdateEndpointRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('updateEndpoint response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
 
   /**
@@ -2543,8 +2602,40 @@ export class EndpointServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.createEndpoint(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.aiplatform.v1.IEndpoint,
+            protos.google.cloud.aiplatform.v1.ICreateEndpointOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('createEndpoint response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('createEndpoint request %j', request);
+    return this.innerApiCalls
+      .createEndpoint(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.aiplatform.v1.IEndpoint,
+            protos.google.cloud.aiplatform.v1.ICreateEndpointOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createEndpoint response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `createEndpoint()`.
@@ -2565,6 +2656,7 @@ export class EndpointServiceClient {
       protos.google.cloud.aiplatform.v1.CreateEndpointOperationMetadata
     >
   > {
+    this._log.info('createEndpoint long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -2681,12 +2773,40 @@ export class EndpointServiceClient {
       this._gaxModule.routingHeader.fromParams({
         'endpoint.name': request.endpoint!.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.updateEndpointLongRunning(
-      request,
-      options,
-      callback
-    );
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.aiplatform.v1.IEndpoint,
+            protos.google.cloud.aiplatform.v1.IUpdateEndpointOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('updateEndpointLongRunning response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('updateEndpointLongRunning request %j', request);
+    return this.innerApiCalls
+      .updateEndpointLongRunning(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.aiplatform.v1.IEndpoint,
+            protos.google.cloud.aiplatform.v1.IUpdateEndpointOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('updateEndpointLongRunning response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `updateEndpointLongRunning()`.
@@ -2707,6 +2827,7 @@ export class EndpointServiceClient {
       protos.google.cloud.aiplatform.v1.UpdateEndpointOperationMetadata
     >
   > {
+    this._log.info('updateEndpointLongRunning long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -2823,8 +2944,40 @@ export class EndpointServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.deleteEndpoint(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.aiplatform.v1.IDeleteOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('deleteEndpoint response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('deleteEndpoint request %j', request);
+    return this.innerApiCalls
+      .deleteEndpoint(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.aiplatform.v1.IDeleteOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteEndpoint response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `deleteEndpoint()`.
@@ -2845,6 +2998,7 @@ export class EndpointServiceClient {
       protos.google.cloud.aiplatform.v1.DeleteOperationMetadata
     >
   > {
+    this._log.info('deleteEndpoint long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -2981,8 +3135,40 @@ export class EndpointServiceClient {
       this._gaxModule.routingHeader.fromParams({
         endpoint: request.endpoint ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.deployModel(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.aiplatform.v1.IDeployModelResponse,
+            protos.google.cloud.aiplatform.v1.IDeployModelOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('deployModel response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('deployModel request %j', request);
+    return this.innerApiCalls
+      .deployModel(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.aiplatform.v1.IDeployModelResponse,
+            protos.google.cloud.aiplatform.v1.IDeployModelOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deployModel response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `deployModel()`.
@@ -3003,6 +3189,7 @@ export class EndpointServiceClient {
       protos.google.cloud.aiplatform.v1.DeployModelOperationMetadata
     >
   > {
+    this._log.info('deployModel long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -3130,8 +3317,40 @@ export class EndpointServiceClient {
       this._gaxModule.routingHeader.fromParams({
         endpoint: request.endpoint ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.undeployModel(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.aiplatform.v1.IUndeployModelResponse,
+            protos.google.cloud.aiplatform.v1.IUndeployModelOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('undeployModel response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('undeployModel request %j', request);
+    return this.innerApiCalls
+      .undeployModel(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.aiplatform.v1.IUndeployModelResponse,
+            protos.google.cloud.aiplatform.v1.IUndeployModelOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('undeployModel response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `undeployModel()`.
@@ -3152,6 +3371,7 @@ export class EndpointServiceClient {
       protos.google.cloud.aiplatform.v1.UndeployModelOperationMetadata
     >
   > {
+    this._log.info('undeployModel long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -3287,8 +3507,40 @@ export class EndpointServiceClient {
       this._gaxModule.routingHeader.fromParams({
         endpoint: request.endpoint ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.mutateDeployedModel(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.aiplatform.v1.IMutateDeployedModelResponse,
+            protos.google.cloud.aiplatform.v1.IMutateDeployedModelOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('mutateDeployedModel response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('mutateDeployedModel request %j', request);
+    return this.innerApiCalls
+      .mutateDeployedModel(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.aiplatform.v1.IMutateDeployedModelResponse,
+            protos.google.cloud.aiplatform.v1.IMutateDeployedModelOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('mutateDeployedModel response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `mutateDeployedModel()`.
@@ -3309,6 +3561,7 @@ export class EndpointServiceClient {
       protos.google.cloud.aiplatform.v1.MutateDeployedModelOperationMetadata
     >
   > {
+    this._log.info('mutateDeployedModel long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -3456,8 +3709,36 @@ export class EndpointServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.listEndpoints(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.aiplatform.v1.IListEndpointsRequest,
+          | protos.google.cloud.aiplatform.v1.IListEndpointsResponse
+          | null
+          | undefined,
+          protos.google.cloud.aiplatform.v1.IEndpoint
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listEndpoints values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listEndpoints request %j', request);
+    return this.innerApiCalls
+      .listEndpoints(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.aiplatform.v1.IEndpoint[],
+          protos.google.cloud.aiplatform.v1.IListEndpointsRequest | null,
+          protos.google.cloud.aiplatform.v1.IListEndpointsResponse,
+        ]) => {
+          this._log.info('listEndpoints values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -3533,7 +3814,10 @@ export class EndpointServiceClient {
       });
     const defaultCallSettings = this._defaults['listEndpoints'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listEndpoints stream %j', request);
     return this.descriptors.page.listEndpoints.createStream(
       this.innerApiCalls.listEndpoints as GaxCall,
       request,
@@ -3617,7 +3901,10 @@ export class EndpointServiceClient {
       });
     const defaultCallSettings = this._defaults['listEndpoints'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listEndpoints iterate %j', request);
     return this.descriptors.page.listEndpoints.asyncIterate(
       this.innerApiCalls['listEndpoints'] as GaxCall,
       request as {},
@@ -3934,7 +4221,7 @@ export class EndpointServiceClient {
   listOperationsAsync(
     request: protos.google.longrunning.ListOperationsRequest,
     options?: gax.CallOptions
-  ): AsyncIterable<protos.google.longrunning.ListOperationsResponse> {
+  ): AsyncIterable<protos.google.longrunning.IOperation> {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
@@ -7635,6 +7922,7 @@ export class EndpointServiceClient {
   close(): Promise<void> {
     if (this.endpointServiceStub && !this._terminated) {
       return this.endpointServiceStub.then(stub => {
+        this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
         this.iamClient.close();

@@ -33,6 +33,7 @@ import type {
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
+import {loggingUtils as logging} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -57,6 +58,8 @@ export class GenAiCacheServiceClient {
   private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
+  private _log = logging.log('aiplatform');
+
   auth: gax.GoogleAuth;
   descriptors: Descriptors = {
     page: {},
@@ -93,7 +96,7 @@ export class GenAiCacheServiceClient {
    *     Developer's Console, e.g. 'grape-spaceship-123'. We will also check
    *     the environment variable GCLOUD_PROJECT for your project ID. If your
    *     app is running in an environment which supports
-   *     {@link https://developers.google.com/identity/protocols/application-default-credentials Application Default Credentials},
+   *     {@link https://cloud.google.com/docs/authentication/application-default-credentials Application Default Credentials},
    *     your project ID will be detected automatically.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
@@ -655,8 +658,39 @@ export class GenAiCacheServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.createCachedContent(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('createCachedContent request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.aiplatform.v1.ICachedContent,
+          | protos.google.cloud.aiplatform.v1.ICreateCachedContentRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('createCachedContent response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .createCachedContent(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.aiplatform.v1.ICachedContent,
+          (
+            | protos.google.cloud.aiplatform.v1.ICreateCachedContentRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('createCachedContent response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Gets cached content configurations
@@ -745,8 +779,39 @@ export class GenAiCacheServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.getCachedContent(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('getCachedContent request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.aiplatform.v1.ICachedContent,
+          | protos.google.cloud.aiplatform.v1.IGetCachedContentRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getCachedContent response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getCachedContent(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.aiplatform.v1.ICachedContent,
+          (
+            | protos.google.cloud.aiplatform.v1.IGetCachedContentRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getCachedContent response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Updates cached content configurations
@@ -837,8 +902,39 @@ export class GenAiCacheServiceClient {
       this._gaxModule.routingHeader.fromParams({
         'cached_content.name': request.cachedContent!.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.updateCachedContent(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('updateCachedContent request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.aiplatform.v1.ICachedContent,
+          | protos.google.cloud.aiplatform.v1.IUpdateCachedContentRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('updateCachedContent response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .updateCachedContent(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.aiplatform.v1.ICachedContent,
+          (
+            | protos.google.cloud.aiplatform.v1.IUpdateCachedContentRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('updateCachedContent response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Deletes cached content
@@ -927,8 +1023,39 @@ export class GenAiCacheServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.deleteCachedContent(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('deleteCachedContent request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.cloud.aiplatform.v1.IDeleteCachedContentRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('deleteCachedContent response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .deleteCachedContent(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.protobuf.IEmpty,
+          (
+            | protos.google.cloud.aiplatform.v1.IDeleteCachedContentRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteCachedContent response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
 
   /**
@@ -1032,8 +1159,36 @@ export class GenAiCacheServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.listCachedContents(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.aiplatform.v1.IListCachedContentsRequest,
+          | protos.google.cloud.aiplatform.v1.IListCachedContentsResponse
+          | null
+          | undefined,
+          protos.google.cloud.aiplatform.v1.ICachedContent
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listCachedContents values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listCachedContents request %j', request);
+    return this.innerApiCalls
+      .listCachedContents(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.aiplatform.v1.ICachedContent[],
+          protos.google.cloud.aiplatform.v1.IListCachedContentsRequest | null,
+          protos.google.cloud.aiplatform.v1.IListCachedContentsResponse,
+        ]) => {
+          this._log.info('listCachedContents values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -1078,7 +1233,10 @@ export class GenAiCacheServiceClient {
       });
     const defaultCallSettings = this._defaults['listCachedContents'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listCachedContents stream %j', request);
     return this.descriptors.page.listCachedContents.createStream(
       this.innerApiCalls.listCachedContents as GaxCall,
       request,
@@ -1131,7 +1289,10 @@ export class GenAiCacheServiceClient {
       });
     const defaultCallSettings = this._defaults['listCachedContents'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listCachedContents iterate %j', request);
     return this.descriptors.page.listCachedContents.asyncIterate(
       this.innerApiCalls['listCachedContents'] as GaxCall,
       request as {},
@@ -4948,6 +5109,7 @@ export class GenAiCacheServiceClient {
   close(): Promise<void> {
     if (this.genAiCacheServiceStub && !this._terminated) {
       return this.genAiCacheServiceStub.then(stub => {
+        this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
         this.iamClient.close();

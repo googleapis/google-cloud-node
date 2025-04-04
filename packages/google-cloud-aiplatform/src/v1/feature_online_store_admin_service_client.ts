@@ -35,6 +35,7 @@ import type {
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
+import {loggingUtils as logging} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -60,6 +61,8 @@ export class FeatureOnlineStoreAdminServiceClient {
   private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
+  private _log = logging.log('aiplatform');
+
   auth: gax.GoogleAuth;
   descriptors: Descriptors = {
     page: {},
@@ -97,7 +100,7 @@ export class FeatureOnlineStoreAdminServiceClient {
    *     Developer's Console, e.g. 'grape-spaceship-123'. We will also check
    *     the environment variable GCLOUD_PROJECT for your project ID. If your
    *     app is running in an environment which supports
-   *     {@link https://developers.google.com/identity/protocols/application-default-credentials Application Default Credentials},
+   *     {@link https://cloud.google.com/docs/authentication/application-default-credentials Application Default Credentials},
    *     your project ID will be detected automatically.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
@@ -2367,8 +2370,39 @@ export class FeatureOnlineStoreAdminServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.getFeatureOnlineStore(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('getFeatureOnlineStore request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.aiplatform.v1.IFeatureOnlineStore,
+          | protos.google.cloud.aiplatform.v1.IGetFeatureOnlineStoreRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getFeatureOnlineStore response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getFeatureOnlineStore(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.aiplatform.v1.IFeatureOnlineStore,
+          (
+            | protos.google.cloud.aiplatform.v1.IGetFeatureOnlineStoreRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getFeatureOnlineStore response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Gets details of a single FeatureView.
@@ -2459,8 +2493,36 @@ export class FeatureOnlineStoreAdminServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.getFeatureView(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('getFeatureView request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.aiplatform.v1.IFeatureView,
+          | protos.google.cloud.aiplatform.v1.IGetFeatureViewRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getFeatureView response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getFeatureView(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.aiplatform.v1.IFeatureView,
+          protos.google.cloud.aiplatform.v1.IGetFeatureViewRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getFeatureView response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Triggers on-demand sync for the FeatureView.
@@ -2550,8 +2612,36 @@ export class FeatureOnlineStoreAdminServiceClient {
       this._gaxModule.routingHeader.fromParams({
         feature_view: request.featureView ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.syncFeatureView(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('syncFeatureView request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.aiplatform.v1.ISyncFeatureViewResponse,
+          | protos.google.cloud.aiplatform.v1.ISyncFeatureViewRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('syncFeatureView response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .syncFeatureView(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.aiplatform.v1.ISyncFeatureViewResponse,
+          protos.google.cloud.aiplatform.v1.ISyncFeatureViewRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('syncFeatureView response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Gets details of a single FeatureViewSync.
@@ -2642,8 +2732,39 @@ export class FeatureOnlineStoreAdminServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.getFeatureViewSync(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('getFeatureViewSync request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.aiplatform.v1.IFeatureViewSync,
+          | protos.google.cloud.aiplatform.v1.IGetFeatureViewSyncRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getFeatureViewSync response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getFeatureViewSync(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.aiplatform.v1.IFeatureViewSync,
+          (
+            | protos.google.cloud.aiplatform.v1.IGetFeatureViewSyncRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getFeatureViewSync response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
 
   /**
@@ -2757,12 +2878,40 @@ export class FeatureOnlineStoreAdminServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.createFeatureOnlineStore(
-      request,
-      options,
-      callback
-    );
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.aiplatform.v1.IFeatureOnlineStore,
+            protos.google.cloud.aiplatform.v1.ICreateFeatureOnlineStoreOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('createFeatureOnlineStore response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('createFeatureOnlineStore request %j', request);
+    return this.innerApiCalls
+      .createFeatureOnlineStore(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.aiplatform.v1.IFeatureOnlineStore,
+            protos.google.cloud.aiplatform.v1.ICreateFeatureOnlineStoreOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createFeatureOnlineStore response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `createFeatureOnlineStore()`.
@@ -2783,6 +2932,7 @@ export class FeatureOnlineStoreAdminServiceClient {
       protos.google.cloud.aiplatform.v1.CreateFeatureOnlineStoreOperationMetadata
     >
   > {
+    this._log.info('createFeatureOnlineStore long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -2915,12 +3065,40 @@ export class FeatureOnlineStoreAdminServiceClient {
       this._gaxModule.routingHeader.fromParams({
         'feature_online_store.name': request.featureOnlineStore!.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.updateFeatureOnlineStore(
-      request,
-      options,
-      callback
-    );
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.aiplatform.v1.IFeatureOnlineStore,
+            protos.google.cloud.aiplatform.v1.IUpdateFeatureOnlineStoreOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('updateFeatureOnlineStore response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('updateFeatureOnlineStore request %j', request);
+    return this.innerApiCalls
+      .updateFeatureOnlineStore(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.aiplatform.v1.IFeatureOnlineStore,
+            protos.google.cloud.aiplatform.v1.IUpdateFeatureOnlineStoreOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('updateFeatureOnlineStore response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `updateFeatureOnlineStore()`.
@@ -2941,6 +3119,7 @@ export class FeatureOnlineStoreAdminServiceClient {
       protos.google.cloud.aiplatform.v1.UpdateFeatureOnlineStoreOperationMetadata
     >
   > {
+    this._log.info('updateFeatureOnlineStore long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -3062,12 +3241,40 @@ export class FeatureOnlineStoreAdminServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.deleteFeatureOnlineStore(
-      request,
-      options,
-      callback
-    );
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.aiplatform.v1.IDeleteOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('deleteFeatureOnlineStore response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('deleteFeatureOnlineStore request %j', request);
+    return this.innerApiCalls
+      .deleteFeatureOnlineStore(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.aiplatform.v1.IDeleteOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteFeatureOnlineStore response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `deleteFeatureOnlineStore()`.
@@ -3088,6 +3295,7 @@ export class FeatureOnlineStoreAdminServiceClient {
       protos.google.cloud.aiplatform.v1.DeleteOperationMetadata
     >
   > {
+    this._log.info('deleteFeatureOnlineStore long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -3219,8 +3427,40 @@ export class FeatureOnlineStoreAdminServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.createFeatureView(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.aiplatform.v1.IFeatureView,
+            protos.google.cloud.aiplatform.v1.ICreateFeatureViewOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('createFeatureView response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('createFeatureView request %j', request);
+    return this.innerApiCalls
+      .createFeatureView(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.aiplatform.v1.IFeatureView,
+            protos.google.cloud.aiplatform.v1.ICreateFeatureViewOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createFeatureView response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `createFeatureView()`.
@@ -3241,6 +3481,7 @@ export class FeatureOnlineStoreAdminServiceClient {
       protos.google.cloud.aiplatform.v1.CreateFeatureViewOperationMetadata
     >
   > {
+    this._log.info('createFeatureView long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -3378,8 +3619,40 @@ export class FeatureOnlineStoreAdminServiceClient {
       this._gaxModule.routingHeader.fromParams({
         'feature_view.name': request.featureView!.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.updateFeatureView(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.aiplatform.v1.IFeatureView,
+            protos.google.cloud.aiplatform.v1.IUpdateFeatureViewOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('updateFeatureView response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('updateFeatureView request %j', request);
+    return this.innerApiCalls
+      .updateFeatureView(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.aiplatform.v1.IFeatureView,
+            protos.google.cloud.aiplatform.v1.IUpdateFeatureViewOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('updateFeatureView response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `updateFeatureView()`.
@@ -3400,6 +3673,7 @@ export class FeatureOnlineStoreAdminServiceClient {
       protos.google.cloud.aiplatform.v1.UpdateFeatureViewOperationMetadata
     >
   > {
+    this._log.info('updateFeatureView long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -3516,8 +3790,40 @@ export class FeatureOnlineStoreAdminServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.deleteFeatureView(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.aiplatform.v1.IDeleteOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('deleteFeatureView response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('deleteFeatureView request %j', request);
+    return this.innerApiCalls
+      .deleteFeatureView(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.aiplatform.v1.IDeleteOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteFeatureView response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `deleteFeatureView()`.
@@ -3538,6 +3844,7 @@ export class FeatureOnlineStoreAdminServiceClient {
       protos.google.cloud.aiplatform.v1.DeleteOperationMetadata
     >
   > {
+    this._log.info('deleteFeatureView long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -3683,12 +3990,36 @@ export class FeatureOnlineStoreAdminServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.listFeatureOnlineStores(
-      request,
-      options,
-      callback
-    );
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.aiplatform.v1.IListFeatureOnlineStoresRequest,
+          | protos.google.cloud.aiplatform.v1.IListFeatureOnlineStoresResponse
+          | null
+          | undefined,
+          protos.google.cloud.aiplatform.v1.IFeatureOnlineStore
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listFeatureOnlineStores values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listFeatureOnlineStores request %j', request);
+    return this.innerApiCalls
+      .listFeatureOnlineStores(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.aiplatform.v1.IFeatureOnlineStore[],
+          protos.google.cloud.aiplatform.v1.IListFeatureOnlineStoresRequest | null,
+          protos.google.cloud.aiplatform.v1.IListFeatureOnlineStoresResponse,
+        ]) => {
+          this._log.info('listFeatureOnlineStores values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -3762,7 +4093,10 @@ export class FeatureOnlineStoreAdminServiceClient {
       });
     const defaultCallSettings = this._defaults['listFeatureOnlineStores'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listFeatureOnlineStores stream %j', request);
     return this.descriptors.page.listFeatureOnlineStores.createStream(
       this.innerApiCalls.listFeatureOnlineStores as GaxCall,
       request,
@@ -3844,7 +4178,10 @@ export class FeatureOnlineStoreAdminServiceClient {
       });
     const defaultCallSettings = this._defaults['listFeatureOnlineStores'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listFeatureOnlineStores iterate %j', request);
     return this.descriptors.page.listFeatureOnlineStores.asyncIterate(
       this.innerApiCalls['listFeatureOnlineStores'] as GaxCall,
       request as {},
@@ -3984,8 +4321,36 @@ export class FeatureOnlineStoreAdminServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.listFeatureViews(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.aiplatform.v1.IListFeatureViewsRequest,
+          | protos.google.cloud.aiplatform.v1.IListFeatureViewsResponse
+          | null
+          | undefined,
+          protos.google.cloud.aiplatform.v1.IFeatureView
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listFeatureViews values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listFeatureViews request %j', request);
+    return this.innerApiCalls
+      .listFeatureViews(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.aiplatform.v1.IFeatureView[],
+          protos.google.cloud.aiplatform.v1.IListFeatureViewsRequest | null,
+          protos.google.cloud.aiplatform.v1.IListFeatureViewsResponse,
+        ]) => {
+          this._log.info('listFeatureViews values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -4062,7 +4427,10 @@ export class FeatureOnlineStoreAdminServiceClient {
       });
     const defaultCallSettings = this._defaults['listFeatureViews'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listFeatureViews stream %j', request);
     return this.descriptors.page.listFeatureViews.createStream(
       this.innerApiCalls.listFeatureViews as GaxCall,
       request,
@@ -4147,7 +4515,10 @@ export class FeatureOnlineStoreAdminServiceClient {
       });
     const defaultCallSettings = this._defaults['listFeatureViews'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listFeatureViews iterate %j', request);
     return this.descriptors.page.listFeatureViews.asyncIterate(
       this.innerApiCalls['listFeatureViews'] as GaxCall,
       request as {},
@@ -4277,8 +4648,36 @@ export class FeatureOnlineStoreAdminServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.listFeatureViewSyncs(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.aiplatform.v1.IListFeatureViewSyncsRequest,
+          | protos.google.cloud.aiplatform.v1.IListFeatureViewSyncsResponse
+          | null
+          | undefined,
+          protos.google.cloud.aiplatform.v1.IFeatureViewSync
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listFeatureViewSyncs values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listFeatureViewSyncs request %j', request);
+    return this.innerApiCalls
+      .listFeatureViewSyncs(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.aiplatform.v1.IFeatureViewSync[],
+          protos.google.cloud.aiplatform.v1.IListFeatureViewSyncsRequest | null,
+          protos.google.cloud.aiplatform.v1.IListFeatureViewSyncsResponse,
+        ]) => {
+          this._log.info('listFeatureViewSyncs values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -4345,7 +4744,10 @@ export class FeatureOnlineStoreAdminServiceClient {
       });
     const defaultCallSettings = this._defaults['listFeatureViewSyncs'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listFeatureViewSyncs stream %j', request);
     return this.descriptors.page.listFeatureViewSyncs.createStream(
       this.innerApiCalls.listFeatureViewSyncs as GaxCall,
       request,
@@ -4420,7 +4822,10 @@ export class FeatureOnlineStoreAdminServiceClient {
       });
     const defaultCallSettings = this._defaults['listFeatureViewSyncs'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listFeatureViewSyncs iterate %j', request);
     return this.descriptors.page.listFeatureViewSyncs.asyncIterate(
       this.innerApiCalls['listFeatureViewSyncs'] as GaxCall,
       request as {},
@@ -4737,7 +5142,7 @@ export class FeatureOnlineStoreAdminServiceClient {
   listOperationsAsync(
     request: protos.google.longrunning.ListOperationsRequest,
     options?: gax.CallOptions
-  ): AsyncIterable<protos.google.longrunning.ListOperationsResponse> {
+  ): AsyncIterable<protos.google.longrunning.IOperation> {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
@@ -8461,6 +8866,7 @@ export class FeatureOnlineStoreAdminServiceClient {
   close(): Promise<void> {
     if (this.featureOnlineStoreAdminServiceStub && !this._terminated) {
       return this.featureOnlineStoreAdminServiceStub.then(stub => {
+        this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
         this.iamClient.close();

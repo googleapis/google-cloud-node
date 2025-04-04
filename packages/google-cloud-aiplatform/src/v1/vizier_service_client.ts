@@ -35,6 +35,7 @@ import type {
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
+import {loggingUtils as logging} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -63,6 +64,8 @@ export class VizierServiceClient {
   private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
+  private _log = logging.log('aiplatform');
+
   auth: gax.GoogleAuth;
   descriptors: Descriptors = {
     page: {},
@@ -100,7 +103,7 @@ export class VizierServiceClient {
    *     Developer's Console, e.g. 'grape-spaceship-123'. We will also check
    *     the environment variable GCLOUD_PROJECT for your project ID. If your
    *     app is running in an environment which supports
-   *     {@link https://developers.google.com/identity/protocols/application-default-credentials Application Default Credentials},
+   *     {@link https://cloud.google.com/docs/authentication/application-default-credentials Application Default Credentials},
    *     your project ID will be detected automatically.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
@@ -2302,8 +2305,36 @@ export class VizierServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.createStudy(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('createStudy request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.aiplatform.v1.IStudy,
+          | protos.google.cloud.aiplatform.v1.ICreateStudyRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('createStudy response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .createStudy(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.aiplatform.v1.IStudy,
+          protos.google.cloud.aiplatform.v1.ICreateStudyRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createStudy response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Gets a Study by name.
@@ -2385,8 +2416,34 @@ export class VizierServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.getStudy(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('getStudy request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.aiplatform.v1.IStudy,
+          protos.google.cloud.aiplatform.v1.IGetStudyRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getStudy response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getStudy(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.aiplatform.v1.IStudy,
+          protos.google.cloud.aiplatform.v1.IGetStudyRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getStudy response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Deletes a Study.
@@ -2470,8 +2527,36 @@ export class VizierServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.deleteStudy(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('deleteStudy request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.cloud.aiplatform.v1.IDeleteStudyRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('deleteStudy response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .deleteStudy(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.protobuf.IEmpty,
+          protos.google.cloud.aiplatform.v1.IDeleteStudyRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteStudy response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Looks a study up using the user-defined display_name field instead of the
@@ -2558,8 +2643,36 @@ export class VizierServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.lookupStudy(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('lookupStudy request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.aiplatform.v1.IStudy,
+          | protos.google.cloud.aiplatform.v1.ILookupStudyRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('lookupStudy response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .lookupStudy(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.aiplatform.v1.IStudy,
+          protos.google.cloud.aiplatform.v1.ILookupStudyRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('lookupStudy response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Adds a user provided Trial to a Study.
@@ -2645,8 +2758,36 @@ export class VizierServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.createTrial(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('createTrial request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.aiplatform.v1.ITrial,
+          | protos.google.cloud.aiplatform.v1.ICreateTrialRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('createTrial response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .createTrial(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.aiplatform.v1.ITrial,
+          protos.google.cloud.aiplatform.v1.ICreateTrialRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createTrial response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Gets a Trial.
@@ -2729,8 +2870,34 @@ export class VizierServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.getTrial(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('getTrial request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.aiplatform.v1.ITrial,
+          protos.google.cloud.aiplatform.v1.IGetTrialRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getTrial response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getTrial(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.aiplatform.v1.ITrial,
+          protos.google.cloud.aiplatform.v1.IGetTrialRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getTrial response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Adds a measurement of the objective metrics to a Trial. This measurement
@@ -2824,8 +2991,39 @@ export class VizierServiceClient {
       this._gaxModule.routingHeader.fromParams({
         trial_name: request.trialName ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.addTrialMeasurement(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('addTrialMeasurement request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.aiplatform.v1.ITrial,
+          | protos.google.cloud.aiplatform.v1.IAddTrialMeasurementRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('addTrialMeasurement response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .addTrialMeasurement(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.aiplatform.v1.ITrial,
+          (
+            | protos.google.cloud.aiplatform.v1.IAddTrialMeasurementRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('addTrialMeasurement response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Marks a Trial as complete.
@@ -2926,8 +3124,36 @@ export class VizierServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.completeTrial(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('completeTrial request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.aiplatform.v1.ITrial,
+          | protos.google.cloud.aiplatform.v1.ICompleteTrialRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('completeTrial response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .completeTrial(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.aiplatform.v1.ITrial,
+          protos.google.cloud.aiplatform.v1.ICompleteTrialRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('completeTrial response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Deletes a Trial.
@@ -3012,8 +3238,36 @@ export class VizierServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.deleteTrial(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('deleteTrial request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.cloud.aiplatform.v1.IDeleteTrialRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('deleteTrial response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .deleteTrial(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.protobuf.IEmpty,
+          protos.google.cloud.aiplatform.v1.IDeleteTrialRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteTrial response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Stops a Trial.
@@ -3098,8 +3352,36 @@ export class VizierServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.stopTrial(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('stopTrial request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.aiplatform.v1.ITrial,
+          | protos.google.cloud.aiplatform.v1.IStopTrialRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('stopTrial response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .stopTrial(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.aiplatform.v1.ITrial,
+          protos.google.cloud.aiplatform.v1.IStopTrialRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('stopTrial response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Lists the pareto-optimal Trials for multi-objective Study or the
@@ -3191,8 +3473,39 @@ export class VizierServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.listOptimalTrials(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listOptimalTrials request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.aiplatform.v1.IListOptimalTrialsResponse,
+          | protos.google.cloud.aiplatform.v1.IListOptimalTrialsRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('listOptimalTrials response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .listOptimalTrials(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.aiplatform.v1.IListOptimalTrialsResponse,
+          (
+            | protos.google.cloud.aiplatform.v1.IListOptimalTrialsRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('listOptimalTrials response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
 
   /**
@@ -3345,8 +3658,40 @@ export class VizierServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.suggestTrials(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.aiplatform.v1.ISuggestTrialsResponse,
+            protos.google.cloud.aiplatform.v1.ISuggestTrialsMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('suggestTrials response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('suggestTrials request %j', request);
+    return this.innerApiCalls
+      .suggestTrials(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.aiplatform.v1.ISuggestTrialsResponse,
+            protos.google.cloud.aiplatform.v1.ISuggestTrialsMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('suggestTrials response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `suggestTrials()`.
@@ -3367,6 +3712,7 @@ export class VizierServiceClient {
       protos.google.cloud.aiplatform.v1.SuggestTrialsMetadata
     >
   > {
+    this._log.info('suggestTrials long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -3486,12 +3832,46 @@ export class VizierServiceClient {
       this._gaxModule.routingHeader.fromParams({
         trial_name: request.trialName ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.checkTrialEarlyStoppingState(
-      request,
-      options,
-      callback
-    );
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.aiplatform.v1.ICheckTrialEarlyStoppingStateResponse,
+            protos.google.cloud.aiplatform.v1.ICheckTrialEarlyStoppingStateMetatdata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info(
+            'checkTrialEarlyStoppingState response %j',
+            rawResponse
+          );
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('checkTrialEarlyStoppingState request %j', request);
+    return this.innerApiCalls
+      .checkTrialEarlyStoppingState(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.aiplatform.v1.ICheckTrialEarlyStoppingStateResponse,
+            protos.google.cloud.aiplatform.v1.ICheckTrialEarlyStoppingStateMetatdata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info(
+            'checkTrialEarlyStoppingState response %j',
+            rawResponse
+          );
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `checkTrialEarlyStoppingState()`.
@@ -3512,6 +3892,7 @@ export class VizierServiceClient {
       protos.google.cloud.aiplatform.v1.CheckTrialEarlyStoppingStateMetatdata
     >
   > {
+    this._log.info('checkTrialEarlyStoppingState long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -3618,8 +3999,36 @@ export class VizierServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.listStudies(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.aiplatform.v1.IListStudiesRequest,
+          | protos.google.cloud.aiplatform.v1.IListStudiesResponse
+          | null
+          | undefined,
+          protos.google.cloud.aiplatform.v1.IStudy
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listStudies values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listStudies request %j', request);
+    return this.innerApiCalls
+      .listStudies(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.aiplatform.v1.IStudy[],
+          protos.google.cloud.aiplatform.v1.IListStudiesRequest | null,
+          protos.google.cloud.aiplatform.v1.IListStudiesResponse,
+        ]) => {
+          this._log.info('listStudies values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -3660,7 +4069,10 @@ export class VizierServiceClient {
       });
     const defaultCallSettings = this._defaults['listStudies'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listStudies stream %j', request);
     return this.descriptors.page.listStudies.createStream(
       this.innerApiCalls.listStudies as GaxCall,
       request,
@@ -3709,7 +4121,10 @@ export class VizierServiceClient {
       });
     const defaultCallSettings = this._defaults['listStudies'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listStudies iterate %j', request);
     return this.descriptors.page.listStudies.asyncIterate(
       this.innerApiCalls['listStudies'] as GaxCall,
       request as {},
@@ -3807,8 +4222,36 @@ export class VizierServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.listTrials(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.aiplatform.v1.IListTrialsRequest,
+          | protos.google.cloud.aiplatform.v1.IListTrialsResponse
+          | null
+          | undefined,
+          protos.google.cloud.aiplatform.v1.ITrial
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listTrials values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listTrials request %j', request);
+    return this.innerApiCalls
+      .listTrials(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.aiplatform.v1.ITrial[],
+          protos.google.cloud.aiplatform.v1.IListTrialsRequest | null,
+          protos.google.cloud.aiplatform.v1.IListTrialsResponse,
+        ]) => {
+          this._log.info('listTrials values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -3849,7 +4292,10 @@ export class VizierServiceClient {
       });
     const defaultCallSettings = this._defaults['listTrials'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listTrials stream %j', request);
     return this.descriptors.page.listTrials.createStream(
       this.innerApiCalls.listTrials as GaxCall,
       request,
@@ -3898,7 +4344,10 @@ export class VizierServiceClient {
       });
     const defaultCallSettings = this._defaults['listTrials'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listTrials iterate %j', request);
     return this.descriptors.page.listTrials.asyncIterate(
       this.innerApiCalls['listTrials'] as GaxCall,
       request as {},
@@ -4215,7 +4664,7 @@ export class VizierServiceClient {
   listOperationsAsync(
     request: protos.google.longrunning.ListOperationsRequest,
     options?: gax.CallOptions
-  ): AsyncIterable<protos.google.longrunning.ListOperationsResponse> {
+  ): AsyncIterable<protos.google.longrunning.IOperation> {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
@@ -7916,6 +8365,7 @@ export class VizierServiceClient {
   close(): Promise<void> {
     if (this.vizierServiceStub && !this._terminated) {
       return this.vizierServiceStub.then(stub => {
+        this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
         this.iamClient.close();

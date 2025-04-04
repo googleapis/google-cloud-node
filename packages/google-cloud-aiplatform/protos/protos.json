@@ -2223,6 +2223,20 @@
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED"
                           }
+                        },
+                        "versionId": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "skipHfModelCache": {
+                          "type": "bool",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },
@@ -2548,6 +2562,39 @@
                         },
                         "value": {
                           "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "SecretRef": {
+                      "fields": {
+                        "secret": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "version": {
+                          "type": "string",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "SecretEnvVar": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "secretRef": {
+                          "type": "SecretRef",
                           "id": 2,
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED"
@@ -3518,6 +3565,11 @@
                         },
                         "RetrievedContext": {
                           "oneofs": {
+                            "contextDetails": {
+                              "oneof": [
+                                "ragChunk"
+                              ]
+                            },
                             "_uri": {
                               "oneof": [
                                 "uri"
@@ -3535,6 +3587,10 @@
                             }
                           },
                           "fields": {
+                            "ragChunk": {
+                              "type": "RagChunk",
+                              "id": 4
+                            },
                             "uri": {
                               "type": "string",
                               "id": 1,
@@ -3873,9 +3929,23 @@
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
                         },
+                        "googleSearch": {
+                          "type": "GoogleSearch",
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
                         "googleSearchRetrieval": {
                           "type": "GoogleSearchRetrieval",
                           "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "enterpriseWebSearch": {
+                          "type": "EnterpriseWebSearch",
+                          "id": 6,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
@@ -3889,6 +3959,9 @@
                         }
                       },
                       "nested": {
+                        "GoogleSearch": {
+                          "fields": {}
+                        },
                         "CodeExecution": {
                           "fields": {}
                         }
@@ -4121,7 +4194,14 @@
                           "type": "string",
                           "id": 1,
                           "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "engine": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
                           }
                         }
                       }
@@ -4133,6 +4213,9 @@
                           "id": 2
                         }
                       }
+                    },
+                    "EnterpriseWebSearch": {
+                      "fields": {}
                     },
                     "DynamicRetrievalConfig": {
                       "oneofs": {
@@ -4257,6 +4340,13 @@
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
+                        },
+                        "ranking": {
+                          "type": "Ranking",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       },
                       "nested": {
@@ -4291,6 +4381,608 @@
                                 "(google.api.field_behavior)": "OPTIONAL"
                               }
                             }
+                          }
+                        },
+                        "Ranking": {
+                          "oneofs": {
+                            "rankingConfig": {
+                              "oneof": [
+                                "rankService",
+                                "llmRanker"
+                              ]
+                            }
+                          },
+                          "fields": {
+                            "rankService": {
+                              "type": "RankService",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "llmRanker": {
+                              "type": "LlmRanker",
+                              "id": 3,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            }
+                          },
+                          "nested": {
+                            "RankService": {
+                              "oneofs": {
+                                "_modelName": {
+                                  "oneof": [
+                                    "modelName"
+                                  ]
+                                }
+                              },
+                              "fields": {
+                                "modelName": {
+                                  "type": "string",
+                                  "id": 1,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL",
+                                    "proto3_optional": true
+                                  }
+                                }
+                              }
+                            },
+                            "LlmRanker": {
+                              "oneofs": {
+                                "_modelName": {
+                                  "oneof": [
+                                    "modelName"
+                                  ]
+                                }
+                              },
+                              "fields": {
+                                "modelName": {
+                                  "type": "string",
+                                  "id": 1,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL",
+                                    "proto3_optional": true
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "RagEmbeddingModelConfig": {
+                      "oneofs": {
+                        "modelConfig": {
+                          "oneof": [
+                            "vertexPredictionEndpoint"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "vertexPredictionEndpoint": {
+                          "type": "VertexPredictionEndpoint",
+                          "id": 1
+                        }
+                      },
+                      "nested": {
+                        "VertexPredictionEndpoint": {
+                          "fields": {
+                            "endpoint": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED",
+                                "(google.api.resource_reference).type": "aiplatform.googleapis.com/Endpoint"
+                              }
+                            },
+                            "model": {
+                              "type": "string",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY",
+                                "(google.api.resource_reference).type": "aiplatform.googleapis.com/Model"
+                              }
+                            },
+                            "modelVersionId": {
+                              "type": "string",
+                              "id": 3,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "RagVectorDbConfig": {
+                      "oneofs": {
+                        "vectorDb": {
+                          "oneof": [
+                            "ragManagedDb",
+                            "pinecone",
+                            "vertexVectorSearch"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "ragManagedDb": {
+                          "type": "RagManagedDb",
+                          "id": 1
+                        },
+                        "pinecone": {
+                          "type": "Pinecone",
+                          "id": 3
+                        },
+                        "vertexVectorSearch": {
+                          "type": "VertexVectorSearch",
+                          "id": 6
+                        },
+                        "apiAuth": {
+                          "type": "ApiAuth",
+                          "id": 5
+                        },
+                        "ragEmbeddingModelConfig": {
+                          "type": "RagEmbeddingModelConfig",
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "IMMUTABLE"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "RagManagedDb": {
+                          "fields": {}
+                        },
+                        "Pinecone": {
+                          "fields": {
+                            "indexName": {
+                              "type": "string",
+                              "id": 1
+                            }
+                          }
+                        },
+                        "VertexVectorSearch": {
+                          "fields": {
+                            "indexEndpoint": {
+                              "type": "string",
+                              "id": 1
+                            },
+                            "index": {
+                              "type": "string",
+                              "id": 2
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "FileStatus": {
+                      "fields": {
+                        "state": {
+                          "type": "State",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "errorStatus": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "State": {
+                          "values": {
+                            "STATE_UNSPECIFIED": 0,
+                            "ACTIVE": 1,
+                            "ERROR": 2
+                          }
+                        }
+                      }
+                    },
+                    "VertexAiSearchConfig": {
+                      "fields": {
+                        "servingConfig": {
+                          "type": "string",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "CorpusStatus": {
+                      "fields": {
+                        "state": {
+                          "type": "State",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "errorStatus": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "State": {
+                          "values": {
+                            "UNKNOWN": 0,
+                            "INITIALIZED": 1,
+                            "ACTIVE": 2,
+                            "ERROR": 3
+                          }
+                        }
+                      }
+                    },
+                    "RagCorpus": {
+                      "options": {
+                        "(google.api.resource).type": "aiplatform.googleapis.com/RagCorpus",
+                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/ragCorpora/{rag_corpus}",
+                        "(google.api.resource).plural": "ragCorpora",
+                        "(google.api.resource).singular": "ragCorpus"
+                      },
+                      "oneofs": {
+                        "backendConfig": {
+                          "oneof": [
+                            "vectorDbConfig",
+                            "vertexAiSearchConfig"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "vectorDbConfig": {
+                          "type": "RagVectorDbConfig",
+                          "id": 9,
+                          "options": {
+                            "(google.api.field_behavior)": "IMMUTABLE"
+                          }
+                        },
+                        "vertexAiSearchConfig": {
+                          "type": "VertexAiSearchConfig",
+                          "id": 10,
+                          "options": {
+                            "(google.api.field_behavior)": "IMMUTABLE"
+                          }
+                        },
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "displayName": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "description": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "createTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "updateTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "corpusStatus": {
+                          "type": "CorpusStatus",
+                          "id": 8,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      }
+                    },
+                    "RagFile": {
+                      "options": {
+                        "(google.api.resource).type": "aiplatform.googleapis.com/RagFile",
+                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/ragCorpora/{rag_corpus}/ragFiles/{rag_file}",
+                        "(google.api.resource).plural": "ragFiles",
+                        "(google.api.resource).singular": "ragFile"
+                      },
+                      "oneofs": {
+                        "ragFileSource": {
+                          "oneof": [
+                            "gcsSource",
+                            "googleDriveSource",
+                            "directUploadSource",
+                            "slackSource",
+                            "jiraSource",
+                            "sharePointSources"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "gcsSource": {
+                          "type": "GcsSource",
+                          "id": 8,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "googleDriveSource": {
+                          "type": "GoogleDriveSource",
+                          "id": 9,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "directUploadSource": {
+                          "type": "DirectUploadSource",
+                          "id": 10,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "slackSource": {
+                          "type": "SlackSource",
+                          "id": 11
+                        },
+                        "jiraSource": {
+                          "type": "JiraSource",
+                          "id": 12
+                        },
+                        "sharePointSources": {
+                          "type": "SharePointSources",
+                          "id": 14
+                        },
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "displayName": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "description": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "createTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "updateTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "fileStatus": {
+                          "type": "FileStatus",
+                          "id": 13,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      }
+                    },
+                    "RagChunk": {
+                      "oneofs": {
+                        "_pageSpan": {
+                          "oneof": [
+                            "pageSpan"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "text": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "pageSpan": {
+                          "type": "PageSpan",
+                          "id": 2,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        }
+                      },
+                      "nested": {
+                        "PageSpan": {
+                          "fields": {
+                            "firstPage": {
+                              "type": "int32",
+                              "id": 1
+                            },
+                            "lastPage": {
+                              "type": "int32",
+                              "id": 2
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "RagFileChunkingConfig": {
+                      "oneofs": {
+                        "chunkingConfig": {
+                          "oneof": [
+                            "fixedLengthChunking"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "fixedLengthChunking": {
+                          "type": "FixedLengthChunking",
+                          "id": 3
+                        }
+                      },
+                      "nested": {
+                        "FixedLengthChunking": {
+                          "fields": {
+                            "chunkSize": {
+                              "type": "int32",
+                              "id": 1
+                            },
+                            "chunkOverlap": {
+                              "type": "int32",
+                              "id": 2
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "RagFileTransformationConfig": {
+                      "fields": {
+                        "ragFileChunkingConfig": {
+                          "type": "RagFileChunkingConfig",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "RagFileParsingConfig": {
+                      "oneofs": {
+                        "parser": {
+                          "oneof": [
+                            "layoutParser"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "layoutParser": {
+                          "type": "LayoutParser",
+                          "id": 4
+                        }
+                      },
+                      "nested": {
+                        "LayoutParser": {
+                          "fields": {
+                            "processorName": {
+                              "type": "string",
+                              "id": 1
+                            },
+                            "maxParsingRequestsPerMin": {
+                              "type": "int32",
+                              "id": 2
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "UploadRagFileConfig": {
+                      "fields": {
+                        "ragFileTransformationConfig": {
+                          "type": "RagFileTransformationConfig",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "ImportRagFilesConfig": {
+                      "oneofs": {
+                        "importSource": {
+                          "oneof": [
+                            "gcsSource",
+                            "googleDriveSource",
+                            "slackSource",
+                            "jiraSource",
+                            "sharePointSources"
+                          ]
+                        },
+                        "partialFailureSink": {
+                          "oneof": [
+                            "partialFailureGcsSink",
+                            "partialFailureBigquerySink"
+                          ]
+                        },
+                        "importResultSink": {
+                          "oneof": [
+                            "importResultGcsSink",
+                            "importResultBigquerySink"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "gcsSource": {
+                          "type": "GcsSource",
+                          "id": 2
+                        },
+                        "googleDriveSource": {
+                          "type": "GoogleDriveSource",
+                          "id": 3
+                        },
+                        "slackSource": {
+                          "type": "SlackSource",
+                          "id": 6
+                        },
+                        "jiraSource": {
+                          "type": "JiraSource",
+                          "id": 7
+                        },
+                        "sharePointSources": {
+                          "type": "SharePointSources",
+                          "id": 13
+                        },
+                        "partialFailureGcsSink": {
+                          "type": "GcsDestination",
+                          "id": 11,
+                          "options": {
+                            "deprecated": true
+                          }
+                        },
+                        "partialFailureBigquerySink": {
+                          "type": "BigQueryDestination",
+                          "id": 12,
+                          "options": {
+                            "deprecated": true
+                          }
+                        },
+                        "importResultGcsSink": {
+                          "type": "GcsDestination",
+                          "id": 14
+                        },
+                        "importResultBigquerySink": {
+                          "type": "BigQueryDestination",
+                          "id": 15
+                        },
+                        "ragFileTransformationConfig": {
+                          "type": "RagFileTransformationConfig",
+                          "id": 16
+                        },
+                        "ragFileParsingConfig": {
+                          "type": "RagFileParsingConfig",
+                          "id": 8,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "maxEmbeddingRequestsPerMin": {
+                          "type": "int32",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
                           }
                         }
                       }
@@ -29828,13 +30520,27 @@
                           "type": "PackageSpec",
                           "id": 2,
                           "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "deploymentSpec": {
+                          "type": "DeploymentSpec",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
                           }
                         },
                         "classMethods": {
                           "rule": "repeated",
                           "type": "google.protobuf.Struct",
                           "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "agentFramework": {
+                          "type": "string",
+                          "id": 5,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
@@ -29867,6 +30573,26 @@
                             "pythonVersion": {
                               "type": "string",
                               "id": 4,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            }
+                          }
+                        },
+                        "DeploymentSpec": {
+                          "fields": {
+                            "env": {
+                              "rule": "repeated",
+                              "type": "EnvVar",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "secretEnv": {
+                              "rule": "repeated",
+                              "type": "SecretEnvVar",
+                              "id": 2,
                               "options": {
                                 "(google.api.field_behavior)": "OPTIONAL"
                               }
@@ -29908,7 +30634,7 @@
                           "type": "ReasoningEngineSpec",
                           "id": 3,
                           "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
+                            "(google.api.field_behavior)": "OPTIONAL"
                           }
                         },
                         "createTime": {
@@ -30280,6 +31006,13 @@
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED",
                             "(google.api.resource_reference).type": "aiplatform.googleapis.com/ReasoningEngine"
+                          }
+                        },
+                        "force": {
+                          "type": "bool",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
                           }
                         }
                       }
@@ -33863,440 +34596,6 @@
                         }
                       }
                     },
-                    "RagEmbeddingModelConfig": {
-                      "oneofs": {
-                        "modelConfig": {
-                          "oneof": [
-                            "vertexPredictionEndpoint"
-                          ]
-                        }
-                      },
-                      "fields": {
-                        "vertexPredictionEndpoint": {
-                          "type": "VertexPredictionEndpoint",
-                          "id": 1
-                        }
-                      },
-                      "nested": {
-                        "VertexPredictionEndpoint": {
-                          "fields": {
-                            "endpoint": {
-                              "type": "string",
-                              "id": 1,
-                              "options": {
-                                "(google.api.field_behavior)": "REQUIRED",
-                                "(google.api.resource_reference).type": "aiplatform.googleapis.com/Endpoint"
-                              }
-                            },
-                            "model": {
-                              "type": "string",
-                              "id": 2,
-                              "options": {
-                                "(google.api.field_behavior)": "OUTPUT_ONLY",
-                                "(google.api.resource_reference).type": "aiplatform.googleapis.com/Model"
-                              }
-                            },
-                            "modelVersionId": {
-                              "type": "string",
-                              "id": 3,
-                              "options": {
-                                "(google.api.field_behavior)": "OUTPUT_ONLY"
-                              }
-                            }
-                          }
-                        }
-                      }
-                    },
-                    "RagVectorDbConfig": {
-                      "oneofs": {
-                        "vectorDb": {
-                          "oneof": [
-                            "ragManagedDb",
-                            "pinecone",
-                            "vertexVectorSearch"
-                          ]
-                        }
-                      },
-                      "fields": {
-                        "ragManagedDb": {
-                          "type": "RagManagedDb",
-                          "id": 1
-                        },
-                        "pinecone": {
-                          "type": "Pinecone",
-                          "id": 3
-                        },
-                        "vertexVectorSearch": {
-                          "type": "VertexVectorSearch",
-                          "id": 6
-                        },
-                        "apiAuth": {
-                          "type": "ApiAuth",
-                          "id": 5
-                        },
-                        "ragEmbeddingModelConfig": {
-                          "type": "RagEmbeddingModelConfig",
-                          "id": 7,
-                          "options": {
-                            "(google.api.field_behavior)": "IMMUTABLE"
-                          }
-                        }
-                      },
-                      "nested": {
-                        "RagManagedDb": {
-                          "fields": {}
-                        },
-                        "Pinecone": {
-                          "fields": {
-                            "indexName": {
-                              "type": "string",
-                              "id": 1
-                            }
-                          }
-                        },
-                        "VertexVectorSearch": {
-                          "fields": {
-                            "indexEndpoint": {
-                              "type": "string",
-                              "id": 1
-                            },
-                            "index": {
-                              "type": "string",
-                              "id": 2
-                            }
-                          }
-                        }
-                      }
-                    },
-                    "FileStatus": {
-                      "fields": {
-                        "state": {
-                          "type": "State",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
-                          }
-                        },
-                        "errorStatus": {
-                          "type": "string",
-                          "id": 2,
-                          "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
-                          }
-                        }
-                      },
-                      "nested": {
-                        "State": {
-                          "values": {
-                            "STATE_UNSPECIFIED": 0,
-                            "ACTIVE": 1,
-                            "ERROR": 2
-                          }
-                        }
-                      }
-                    },
-                    "CorpusStatus": {
-                      "fields": {
-                        "state": {
-                          "type": "State",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
-                          }
-                        },
-                        "errorStatus": {
-                          "type": "string",
-                          "id": 2,
-                          "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
-                          }
-                        }
-                      },
-                      "nested": {
-                        "State": {
-                          "values": {
-                            "UNKNOWN": 0,
-                            "INITIALIZED": 1,
-                            "ACTIVE": 2,
-                            "ERROR": 3
-                          }
-                        }
-                      }
-                    },
-                    "RagCorpus": {
-                      "options": {
-                        "(google.api.resource).type": "aiplatform.googleapis.com/RagCorpus",
-                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/ragCorpora/{rag_corpus}",
-                        "(google.api.resource).plural": "ragCorpora",
-                        "(google.api.resource).singular": "ragCorpus"
-                      },
-                      "oneofs": {
-                        "backendConfig": {
-                          "oneof": [
-                            "vectorDbConfig"
-                          ]
-                        }
-                      },
-                      "fields": {
-                        "name": {
-                          "type": "string",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
-                          }
-                        },
-                        "displayName": {
-                          "type": "string",
-                          "id": 2,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
-                          }
-                        },
-                        "description": {
-                          "type": "string",
-                          "id": 3,
-                          "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
-                          }
-                        },
-                        "createTime": {
-                          "type": "google.protobuf.Timestamp",
-                          "id": 4,
-                          "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
-                          }
-                        },
-                        "updateTime": {
-                          "type": "google.protobuf.Timestamp",
-                          "id": 5,
-                          "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
-                          }
-                        },
-                        "corpusStatus": {
-                          "type": "CorpusStatus",
-                          "id": 8,
-                          "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
-                          }
-                        },
-                        "vectorDbConfig": {
-                          "type": "RagVectorDbConfig",
-                          "id": 9,
-                          "options": {
-                            "(google.api.field_behavior)": "IMMUTABLE"
-                          }
-                        }
-                      }
-                    },
-                    "RagFile": {
-                      "options": {
-                        "(google.api.resource).type": "aiplatform.googleapis.com/RagFile",
-                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/ragCorpora/{rag_corpus}/ragFiles/{rag_file}",
-                        "(google.api.resource).plural": "ragFiles",
-                        "(google.api.resource).singular": "ragFile"
-                      },
-                      "oneofs": {
-                        "ragFileSource": {
-                          "oneof": [
-                            "gcsSource",
-                            "googleDriveSource",
-                            "directUploadSource",
-                            "slackSource",
-                            "jiraSource",
-                            "sharePointSources"
-                          ]
-                        }
-                      },
-                      "fields": {
-                        "gcsSource": {
-                          "type": "GcsSource",
-                          "id": 8,
-                          "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
-                          }
-                        },
-                        "googleDriveSource": {
-                          "type": "GoogleDriveSource",
-                          "id": 9,
-                          "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
-                          }
-                        },
-                        "directUploadSource": {
-                          "type": "DirectUploadSource",
-                          "id": 10,
-                          "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
-                          }
-                        },
-                        "slackSource": {
-                          "type": "SlackSource",
-                          "id": 11
-                        },
-                        "jiraSource": {
-                          "type": "JiraSource",
-                          "id": 12
-                        },
-                        "sharePointSources": {
-                          "type": "SharePointSources",
-                          "id": 14
-                        },
-                        "name": {
-                          "type": "string",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
-                          }
-                        },
-                        "displayName": {
-                          "type": "string",
-                          "id": 2,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
-                          }
-                        },
-                        "description": {
-                          "type": "string",
-                          "id": 3,
-                          "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
-                          }
-                        },
-                        "createTime": {
-                          "type": "google.protobuf.Timestamp",
-                          "id": 6,
-                          "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
-                          }
-                        },
-                        "updateTime": {
-                          "type": "google.protobuf.Timestamp",
-                          "id": 7,
-                          "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
-                          }
-                        },
-                        "fileStatus": {
-                          "type": "FileStatus",
-                          "id": 13,
-                          "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
-                          }
-                        }
-                      }
-                    },
-                    "RagFileChunkingConfig": {
-                      "oneofs": {
-                        "chunkingConfig": {
-                          "oneof": [
-                            "fixedLengthChunking"
-                          ]
-                        }
-                      },
-                      "fields": {
-                        "fixedLengthChunking": {
-                          "type": "FixedLengthChunking",
-                          "id": 3
-                        }
-                      },
-                      "nested": {
-                        "FixedLengthChunking": {
-                          "fields": {
-                            "chunkSize": {
-                              "type": "int32",
-                              "id": 1
-                            },
-                            "chunkOverlap": {
-                              "type": "int32",
-                              "id": 2
-                            }
-                          }
-                        }
-                      }
-                    },
-                    "RagFileTransformationConfig": {
-                      "fields": {
-                        "ragFileChunkingConfig": {
-                          "type": "RagFileChunkingConfig",
-                          "id": 1
-                        }
-                      }
-                    },
-                    "UploadRagFileConfig": {
-                      "fields": {
-                        "ragFileTransformationConfig": {
-                          "type": "RagFileTransformationConfig",
-                          "id": 3
-                        }
-                      }
-                    },
-                    "ImportRagFilesConfig": {
-                      "oneofs": {
-                        "importSource": {
-                          "oneof": [
-                            "gcsSource",
-                            "googleDriveSource",
-                            "slackSource",
-                            "jiraSource",
-                            "sharePointSources"
-                          ]
-                        },
-                        "partialFailureSink": {
-                          "oneof": [
-                            "partialFailureGcsSink",
-                            "partialFailureBigquerySink"
-                          ]
-                        }
-                      },
-                      "fields": {
-                        "gcsSource": {
-                          "type": "GcsSource",
-                          "id": 2
-                        },
-                        "googleDriveSource": {
-                          "type": "GoogleDriveSource",
-                          "id": 3
-                        },
-                        "slackSource": {
-                          "type": "SlackSource",
-                          "id": 6
-                        },
-                        "jiraSource": {
-                          "type": "JiraSource",
-                          "id": 7
-                        },
-                        "sharePointSources": {
-                          "type": "SharePointSources",
-                          "id": 13
-                        },
-                        "partialFailureGcsSink": {
-                          "type": "GcsDestination",
-                          "id": 11,
-                          "options": {
-                            "deprecated": true
-                          }
-                        },
-                        "partialFailureBigquerySink": {
-                          "type": "BigQueryDestination",
-                          "id": 12,
-                          "options": {
-                            "deprecated": true
-                          }
-                        },
-                        "ragFileTransformationConfig": {
-                          "type": "RagFileTransformationConfig",
-                          "id": 16
-                        },
-                        "maxEmbeddingRequestsPerMin": {
-                          "type": "int32",
-                          "id": 5,
-                          "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
-                          }
-                        }
-                      }
-                    },
                     "VertexRagDataService": {
                       "options": {
                         "(google.api.default_host)": "aiplatform.googleapis.com",
@@ -35043,6 +35342,10 @@
                               "options": {
                                 "proto3_optional": true
                               }
+                            },
+                            "chunk": {
+                              "type": "RagChunk",
+                              "id": 7
                             }
                           }
                         }
@@ -35240,6 +35543,11 @@
                           "oneof": [
                             "score"
                           ]
+                        },
+                        "_chunk": {
+                          "oneof": [
+                            "chunk"
+                          ]
                         }
                       },
                       "fields": {
@@ -35282,6 +35590,13 @@
                         "score": {
                           "type": "double",
                           "id": 6,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "chunk": {
+                          "type": "RagChunk",
+                          "id": 7,
                           "options": {
                             "proto3_optional": true
                           }

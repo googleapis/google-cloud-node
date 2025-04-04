@@ -35,6 +35,7 @@ import type {
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
+import {loggingUtils as logging} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -64,6 +65,8 @@ export class SpecialistPoolServiceClient {
   private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
+  private _log = logging.log('aiplatform');
+
   auth: gax.GoogleAuth;
   descriptors: Descriptors = {
     page: {},
@@ -101,7 +104,7 @@ export class SpecialistPoolServiceClient {
    *     Developer's Console, e.g. 'grape-spaceship-123'. We will also check
    *     the environment variable GCLOUD_PROJECT for your project ID. If your
    *     app is running in an environment which supports
-   *     {@link https://developers.google.com/identity/protocols/application-default-credentials Application Default Credentials},
+   *     {@link https://cloud.google.com/docs/authentication/application-default-credentials Application Default Credentials},
    *     your project ID will be detected automatically.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
@@ -2301,8 +2304,39 @@ export class SpecialistPoolServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.getSpecialistPool(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('getSpecialistPool request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.aiplatform.v1.ISpecialistPool,
+          | protos.google.cloud.aiplatform.v1.IGetSpecialistPoolRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getSpecialistPool response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getSpecialistPool(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.aiplatform.v1.ISpecialistPool,
+          (
+            | protos.google.cloud.aiplatform.v1.IGetSpecialistPoolRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getSpecialistPool response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
 
   /**
@@ -2407,8 +2441,40 @@ export class SpecialistPoolServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.createSpecialistPool(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.aiplatform.v1.ISpecialistPool,
+            protos.google.cloud.aiplatform.v1.ICreateSpecialistPoolOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('createSpecialistPool response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('createSpecialistPool request %j', request);
+    return this.innerApiCalls
+      .createSpecialistPool(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.aiplatform.v1.ISpecialistPool,
+            protos.google.cloud.aiplatform.v1.ICreateSpecialistPoolOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createSpecialistPool response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `createSpecialistPool()`.
@@ -2429,6 +2495,7 @@ export class SpecialistPoolServiceClient {
       protos.google.cloud.aiplatform.v1.CreateSpecialistPoolOperationMetadata
     >
   > {
+    this._log.info('createSpecialistPool long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -2548,8 +2615,40 @@ export class SpecialistPoolServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.deleteSpecialistPool(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.aiplatform.v1.IDeleteOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('deleteSpecialistPool response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('deleteSpecialistPool request %j', request);
+    return this.innerApiCalls
+      .deleteSpecialistPool(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.aiplatform.v1.IDeleteOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteSpecialistPool response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `deleteSpecialistPool()`.
@@ -2570,6 +2669,7 @@ export class SpecialistPoolServiceClient {
       protos.google.cloud.aiplatform.v1.DeleteOperationMetadata
     >
   > {
+    this._log.info('deleteSpecialistPool long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -2686,8 +2786,40 @@ export class SpecialistPoolServiceClient {
       this._gaxModule.routingHeader.fromParams({
         'specialist_pool.name': request.specialistPool!.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.updateSpecialistPool(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.aiplatform.v1.ISpecialistPool,
+            protos.google.cloud.aiplatform.v1.IUpdateSpecialistPoolOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('updateSpecialistPool response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('updateSpecialistPool request %j', request);
+    return this.innerApiCalls
+      .updateSpecialistPool(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.aiplatform.v1.ISpecialistPool,
+            protos.google.cloud.aiplatform.v1.IUpdateSpecialistPoolOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('updateSpecialistPool response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `updateSpecialistPool()`.
@@ -2708,6 +2840,7 @@ export class SpecialistPoolServiceClient {
       protos.google.cloud.aiplatform.v1.UpdateSpecialistPoolOperationMetadata
     >
   > {
+    this._log.info('updateSpecialistPool long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -2825,8 +2958,36 @@ export class SpecialistPoolServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.listSpecialistPools(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.aiplatform.v1.IListSpecialistPoolsRequest,
+          | protos.google.cloud.aiplatform.v1.IListSpecialistPoolsResponse
+          | null
+          | undefined,
+          protos.google.cloud.aiplatform.v1.ISpecialistPool
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listSpecialistPools values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listSpecialistPools request %j', request);
+    return this.innerApiCalls
+      .listSpecialistPools(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.aiplatform.v1.ISpecialistPool[],
+          protos.google.cloud.aiplatform.v1.IListSpecialistPoolsRequest | null,
+          protos.google.cloud.aiplatform.v1.IListSpecialistPoolsResponse,
+        ]) => {
+          this._log.info('listSpecialistPools values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -2872,7 +3033,10 @@ export class SpecialistPoolServiceClient {
       });
     const defaultCallSettings = this._defaults['listSpecialistPools'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listSpecialistPools stream %j', request);
     return this.descriptors.page.listSpecialistPools.createStream(
       this.innerApiCalls.listSpecialistPools as GaxCall,
       request,
@@ -2926,7 +3090,10 @@ export class SpecialistPoolServiceClient {
       });
     const defaultCallSettings = this._defaults['listSpecialistPools'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listSpecialistPools iterate %j', request);
     return this.descriptors.page.listSpecialistPools.asyncIterate(
       this.innerApiCalls['listSpecialistPools'] as GaxCall,
       request as {},
@@ -3243,7 +3410,7 @@ export class SpecialistPoolServiceClient {
   listOperationsAsync(
     request: protos.google.longrunning.ListOperationsRequest,
     options?: gax.CallOptions
-  ): AsyncIterable<protos.google.longrunning.ListOperationsResponse> {
+  ): AsyncIterable<protos.google.longrunning.IOperation> {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
@@ -6944,6 +7111,7 @@ export class SpecialistPoolServiceClient {
   close(): Promise<void> {
     if (this.specialistPoolServiceStub && !this._terminated) {
       return this.specialistPoolServiceStub.then(stub => {
+        this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
         this.iamClient.close();
