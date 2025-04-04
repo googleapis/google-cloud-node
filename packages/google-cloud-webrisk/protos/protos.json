@@ -104,6 +104,7 @@
                           "options": {
                             "(google.api.http).post": "/v1/{parent=projects/*}/uris:submit",
                             "(google.api.http).body": "*",
+                            "(google.api.method_signature)": "parent,submission",
                             "(google.longrunning.operation_info).response_type": "Submission",
                             "(google.longrunning.operation_info).metadata_type": "SubmitUriMetadata"
                           },
@@ -113,6 +114,9 @@
                                 "post": "/v1/{parent=projects/*}/uris:submit",
                                 "body": "*"
                               }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,submission"
                             },
                             {
                               "(google.longrunning.operation_info)": {
