@@ -1,0 +1,107 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "typescript",
+  "protoPackage": "google.cloud.functions.v2beta",
+  "libraryPackage": "@google-cloud/functions",
+  "services": {
+    "FunctionService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "FunctionServiceClient",
+          "rpcs": {
+            "GetFunction": {
+              "methods": [
+                "getFunction"
+              ]
+            },
+            "GenerateUploadUrl": {
+              "methods": [
+                "generateUploadUrl"
+              ]
+            },
+            "GenerateDownloadUrl": {
+              "methods": [
+                "generateDownloadUrl"
+              ]
+            },
+            "ListRuntimes": {
+              "methods": [
+                "listRuntimes"
+              ]
+            },
+            "CreateFunction": {
+              "methods": [
+                "createFunction"
+              ]
+            },
+            "UpdateFunction": {
+              "methods": [
+                "updateFunction"
+              ]
+            },
+            "DeleteFunction": {
+              "methods": [
+                "deleteFunction"
+              ]
+            },
+            "ListFunctions": {
+              "methods": [
+                "listFunctions",
+                "listFunctionsStream",
+                "listFunctionsAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "FunctionServiceClient",
+          "rpcs": {
+            "GetFunction": {
+              "methods": [
+                "getFunction"
+              ]
+            },
+            "GenerateUploadUrl": {
+              "methods": [
+                "generateUploadUrl"
+              ]
+            },
+            "GenerateDownloadUrl": {
+              "methods": [
+                "generateDownloadUrl"
+              ]
+            },
+            "ListRuntimes": {
+              "methods": [
+                "listRuntimes"
+              ]
+            },
+            "CreateFunction": {
+              "methods": [
+                "createFunction"
+              ]
+            },
+            "UpdateFunction": {
+              "methods": [
+                "updateFunction"
+              ]
+            },
+            "DeleteFunction": {
+              "methods": [
+                "deleteFunction"
+              ]
+            },
+            "ListFunctions": {
+              "methods": [
+                "listFunctions",
+                "listFunctionsStream",
+                "listFunctionsAsync"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}
