@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/dns?activeTab=versions
 
+## [5.1.1](https://github.com/googleapis/google-cloud-node/compare/dns-v5.1.0...dns-v5.1.1) (2025-04-04)
+
+
+### Bug Fixes
+
+* Update Record typings ([7aa1c72](https://github.com/googleapis/google-cloud-node/commit/7aa1c72d37b636a6fde876758701a9b37c7a609c))
+
 ## [5.1.0](https://github.com/googleapis/google-cloud-node/compare/dns-v5.0.0...dns-v5.1.0) (2025-03-19)
 
 

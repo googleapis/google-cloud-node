@@ -4,6 +4,14 @@
 
 [1]: https://www.npmjs.com/package/nodejs-translate?activeTab=versions
 
+## [9.0.2](https://github.com/googleapis/google-cloud-node/compare/translate-v9.0.1...translate-v9.0.2) (2025-04-04)
+
+
+### Bug Fixes
+
+* **deps:** Update dependency @google-cloud/automl to v5 ([#6206](https://github.com/googleapis/google-cloud-node/issues/6206)) ([7c12c9b](https://github.com/googleapis/google-cloud-node/commit/7c12c9b077e24bc91b8d7e3b4e94d44d92905949))
+* **deps:** Update dependency @google-cloud/vision to v5 ([#6202](https://github.com/googleapis/google-cloud-node/issues/6202)) ([dc9182d](https://github.com/googleapis/google-cloud-node/commit/dc9182d598bfd02af63e95c340e6600db4bac240))
+
 ## [9.0.1](https://github.com/googleapis/google-cloud-node/compare/translate-v9.0.0...translate-v9.0.1) (2025-03-19)
 
 
