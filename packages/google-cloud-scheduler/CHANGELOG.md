@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/scheduler?activeTab=versions
 
+## [5.0.2](https://github.com/googleapis/google-cloud-node/compare/scheduler-v5.0.1...scheduler-v5.0.2) (2025-04-04)
+
+
+### Bug Fixes
+
+* **deps:** Update dependency body-parser to v2 ([#6226](https://github.com/googleapis/google-cloud-node/issues/6226)) ([72590a4](https://github.com/googleapis/google-cloud-node/commit/72590a4b4746a787a00566b42c95f87b5023d834))
+
 ## [5.0.1](https://github.com/googleapis/google-cloud-node/compare/scheduler-v5.0.0...scheduler-v5.0.1) (2025-03-19)
 
 

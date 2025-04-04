@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.4.2](https://github.com/googleapis/google-cloud-node/compare/notifications-v0.4.1...notifications-v0.4.2) (2025-04-04)
+
+
+### Bug Fixes
+
+* [Many APIs] await/catch promises, and update listOperationsAsync return type ([#6191](https://github.com/googleapis/google-cloud-node/issues/6191)) ([c9adc61](https://github.com/googleapis/google-cloud-node/commit/c9adc6150ad09630854554c2ed7e558fb3e04315))
+
 ## [0.4.1](https://github.com/googleapis/google-cloud-node/compare/notifications-v0.4.0...notifications-v0.4.1) (2025-03-21)
 
 
