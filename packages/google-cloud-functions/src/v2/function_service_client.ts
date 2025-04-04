@@ -533,7 +533,7 @@ export class FunctionServiceClient {
    * @param {string} request.name
    *   Required. The name of the function which details should be obtained.
    * @param {string} [request.revision]
-   *   Optional. The version of the 1st gen function whose details should
+   *   Optional. The optional version of the 1st gen function whose details should
    *   be obtained. The version of a 1st gen function is an integer that starts
    *   from 1 and gets incremented on redeployments. GCF may keep historical
    *   configs for old versions of 1st gen function. This field can be specified
@@ -675,7 +675,7 @@ export class FunctionServiceClient {
    *   Required. The project and location in which the Google Cloud Storage signed
    *   URL should be generated, specified in the format `projects/* /locations/*`.
    * @param {string} request.kmsKeyName
-   *   [Preview] Resource name of a KMS crypto key (managed by the user) used to
+   *   Resource name of a KMS crypto key (managed by the user) used to
    *   encrypt/decrypt function source code objects in intermediate Cloud Storage
    *   buckets. When you generate an upload url and upload your source code, it
    *   gets copied to an intermediate Cloud Storage bucket. The source code is
@@ -1602,7 +1602,7 @@ export class FunctionServiceClient {
    *   following the syntax outlined in https://google.aip.dev/160.
    * @param {string} request.orderBy
    *   The sorting order of the resources returned. Value should be a comma
-   *   separated list of fields. The default sorting oder is ascending.
+   *   separated list of fields. The default sorting order is ascending.
    *   See https://google.aip.dev/132#ordering.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
@@ -1745,7 +1745,7 @@ export class FunctionServiceClient {
    *   following the syntax outlined in https://google.aip.dev/160.
    * @param {string} request.orderBy
    *   The sorting order of the resources returned. Value should be a comma
-   *   separated list of fields. The default sorting oder is ascending.
+   *   separated list of fields. The default sorting order is ascending.
    *   See https://google.aip.dev/132#ordering.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
@@ -1811,7 +1811,7 @@ export class FunctionServiceClient {
    *   following the syntax outlined in https://google.aip.dev/160.
    * @param {string} request.orderBy
    *   The sorting order of the resources returned. Value should be a comma
-   *   separated list of fields. The default sorting oder is ascending.
+   *   separated list of fields. The default sorting order is ascending.
    *   See https://google.aip.dev/132#ordering.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.

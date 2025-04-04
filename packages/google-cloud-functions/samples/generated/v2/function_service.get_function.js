@@ -33,7 +33,7 @@ function main(name) {
    */
   // const name = 'abc123'
   /**
-   *  Optional. The version of the 1st gen function whose details should
+   *  Optional. The optional version of the 1st gen function whose details should
    *  be obtained. The version of a 1st gen function is an integer that starts
    *  from 1 and gets incremented on redeployments. GCF may keep historical
    *  configs for old versions of 1st gen function. This field can be specified
