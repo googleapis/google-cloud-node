@@ -1195,11 +1195,9 @@ export class PolicyBindingsClient {
    *
    *   Some examples of filter queries:
    *
-   *   | Query            | Description                                         |
-   *   |------------------|-----------------------------------------------------|
-   *   | `target:ex*`     | The binding target's name starts with "ex".         |
-   *   | `target:example` | The binding target's name is `example`.             |
-   *   | `policy:example` | The binding policy's name is `example`.             |
+   *   * `target:ex*`: The binding target's name starts with "ex".
+   *   * `target:example`: The binding target's name is `example`.
+   *   * `policy:example`: The binding policy's name is `example`.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1340,11 +1338,9 @@ export class PolicyBindingsClient {
    *
    *   Some examples of filter queries:
    *
-   *   | Query            | Description                                         |
-   *   |------------------|-----------------------------------------------------|
-   *   | `target:ex*`     | The binding target's name starts with "ex".         |
-   *   | `target:example` | The binding target's name is `example`.             |
-   *   | `policy:example` | The binding policy's name is `example`.             |
+   *   * `target:ex*`: The binding target's name starts with "ex".
+   *   * `target:example`: The binding target's name is `example`.
+   *   * `policy:example`: The binding policy's name is `example`.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
@@ -1418,11 +1414,9 @@ export class PolicyBindingsClient {
    *
    *   Some examples of filter queries:
    *
-   *   | Query            | Description                                         |
-   *   |------------------|-----------------------------------------------------|
-   *   | `target:ex*`     | The binding target's name starts with "ex".         |
-   *   | `target:example` | The binding target's name is `example`.             |
-   *   | `policy:example` | The binding policy's name is `example`.             |
+   *   * `target:ex*`: The binding target's name starts with "ex".
+   *   * `target:example`: The binding target's name is `example`.
+   *   * `policy:example`: The binding policy's name is `example`.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
