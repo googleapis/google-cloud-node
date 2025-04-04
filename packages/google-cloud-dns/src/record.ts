@@ -24,17 +24,18 @@ import {Metadata} from '@google-cloud/common';
 const format = require('string-format-obj');
 
 export interface RecordObject {
-  rrdatas?: Array<{}>;
+  rrdatas?: string[];
   rrdata?: {};
-  data?: {};
+  data?: string | string[];
   type?: string;
 }
 
 export interface RecordMetadata {
   name: string;
-  data: string | string[];
+  data?: string | string[];
   ttl: number;
   type?: string;
+  rrdatas?: string[];
   signatureRrdatas?: string[];
 }
 
@@ -85,8 +86,8 @@ export class Record implements RecordObject {
   zone_: Zone;
   type: string;
   metadata: RecordMetadata;
-  rrdatas?: Array<{}>;
-  data?: {};
+  rrdatas?: string[];
+  data?: string[];
   constructor(zone: Zone, type: string, metadata: RecordMetadata) {
     this.zone_ = zone;
     /**
