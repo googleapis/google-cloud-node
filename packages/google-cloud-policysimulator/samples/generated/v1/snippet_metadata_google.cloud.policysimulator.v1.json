@@ -1,7 +1,7 @@
 {
     "clientLibrary": {
         "name": "nodejs-policysimulator",
-        "version": "0.5.1",
+        "version": "0.5.2",
         "language": "TYPESCRIPT",
         "apis": [
             {
