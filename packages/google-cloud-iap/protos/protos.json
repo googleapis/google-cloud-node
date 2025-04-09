@@ -102,6 +102,20 @@
                             }
                           ]
                         },
+                        "ValidateIapAttributeExpression": {
+                          "requestType": "ValidateIapAttributeExpressionRequest",
+                          "responseType": "ValidateIapAttributeExpressionResponse",
+                          "options": {
+                            "(google.api.http).post": "/v1/{name=**}:validateAttributeExpression"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{name=**}:validateAttributeExpression"
+                              }
+                            }
+                          ]
+                        },
                         "ListTunnelDestGroups": {
                           "requestType": "ListTunnelDestGroupsRequest",
                           "responseType": "ListTunnelDestGroupsResponse",
@@ -432,7 +446,7 @@
                           "type": "string",
                           "id": 1,
                           "options": {
-                            "(google.api.field_behavior)": "IMMUTABLE"
+                            "(google.api.field_behavior)": "IDENTIFIER"
                           }
                         },
                         "cidrs": {
@@ -440,7 +454,7 @@
                           "type": "string",
                           "id": 2,
                           "options": {
-                            "(google.api.field_behavior)": "UNORDERED_LIST"
+                            "(google.api.field_behavior)": "OPTIONAL"
                           }
                         },
                         "fqdns": {
@@ -448,7 +462,7 @@
                           "type": "string",
                           "id": 3,
                           "options": {
-                            "(google.api.field_behavior)": "UNORDERED_LIST"
+                            "(google.api.field_behavior)": "OPTIONAL"
                           }
                         }
                       }
@@ -490,11 +504,17 @@
                         },
                         "accessSettings": {
                           "type": "AccessSettings",
-                          "id": 5
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         },
                         "applicationSettings": {
                           "type": "ApplicationSettings",
-                          "id": 6
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },
@@ -502,23 +522,61 @@
                       "fields": {
                         "gcipSettings": {
                           "type": "GcipSettings",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         },
                         "corsSettings": {
                           "type": "CorsSettings",
-                          "id": 2
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         },
                         "oauthSettings": {
                           "type": "OAuthSettings",
-                          "id": 3
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         },
                         "reauthSettings": {
                           "type": "ReauthSettings",
-                          "id": 6
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         },
                         "allowedDomainsSettings": {
                           "type": "AllowedDomainsSettings",
-                          "id": 7
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "workforceIdentitySettings": {
+                          "type": "WorkforceIdentitySettings",
+                          "id": 9,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "identitySources": {
+                          "rule": "repeated",
+                          "type": "IdentitySource",
+                          "id": 10,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "IdentitySource": {
+                          "values": {
+                            "IDENTITY_SOURCE_UNSPECIFIED": 0,
+                            "WORKFORCE_IDENTITY_FEDERATION": 3
+                          }
                         }
                       }
                     },
@@ -527,7 +585,10 @@
                         "tenantIds": {
                           "rule": "repeated",
                           "type": "string",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         },
                         "loginPageUri": {
                           "type": "google.protobuf.StringValue",
@@ -552,7 +613,45 @@
                         "programmaticClients": {
                           "rule": "repeated",
                           "type": "string",
-                          "id": 5
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "WorkforceIdentitySettings": {
+                      "fields": {
+                        "workforcePools": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 1
+                        },
+                        "oauth2": {
+                          "type": "OAuth2",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "OAuth2": {
+                      "fields": {
+                        "clientId": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "clientSecret": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "INPUT_ONLY"
+                          }
+                        },
+                        "clientSecretSha256": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         }
                       }
                     },
@@ -560,15 +659,24 @@
                       "fields": {
                         "method": {
                           "type": "Method",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         },
                         "maxAge": {
                           "type": "google.protobuf.Duration",
-                          "id": 2
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         },
                         "policyType": {
                           "type": "PolicyType",
-                          "id": 3
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       },
                       "nested": {
@@ -608,13 +716,17 @@
                           "type": "bool",
                           "id": 1,
                           "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
                             "proto3_optional": true
                           }
                         },
                         "domains": {
                           "rule": "repeated",
                           "type": "string",
-                          "id": 2
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },
@@ -622,11 +734,17 @@
                       "fields": {
                         "csmSettings": {
                           "type": "CsmSettings",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         },
                         "accessDeniedPageSettings": {
                           "type": "AccessDeniedPageSettings",
-                          "id": 2
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         },
                         "cookieDomain": {
                           "type": "google.protobuf.StringValue",
@@ -634,7 +752,10 @@
                         },
                         "attributePropagationSettings": {
                           "type": "AttributePropagationSettings",
-                          "id": 4
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },
@@ -690,18 +811,23 @@
                           "type": "string",
                           "id": 1,
                           "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
                             "proto3_optional": true
                           }
                         },
                         "outputCredentials": {
                           "rule": "repeated",
                           "type": "OutputCredentials",
-                          "id": 2
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         },
                         "enable": {
                           "type": "bool",
                           "id": 3,
                           "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
                             "proto3_optional": true
                           }
                         }
@@ -716,6 +842,27 @@
                           }
                         }
                       }
+                    },
+                    "ValidateIapAttributeExpressionRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "expression": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "ValidateIapAttributeExpressionResponse": {
+                      "fields": {}
                     },
                     "ListBrandsRequest": {
                       "fields": {

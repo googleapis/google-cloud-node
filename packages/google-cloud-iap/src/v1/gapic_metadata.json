@@ -35,6 +35,11 @@
                 "updateIapSettings"
               ]
             },
+            "ValidateIapAttributeExpression": {
+              "methods": [
+                "validateIapAttributeExpression"
+              ]
+            },
             "CreateTunnelDestGroup": {
               "methods": [
                 "createTunnelDestGroup"
@@ -90,6 +95,11 @@
             "UpdateIapSettings": {
               "methods": [
                 "updateIapSettings"
+              ]
+            },
+            "ValidateIapAttributeExpression": {
+              "methods": [
+                "validateIapAttributeExpression"
               ]
             },
             "CreateTunnelDestGroup": {
