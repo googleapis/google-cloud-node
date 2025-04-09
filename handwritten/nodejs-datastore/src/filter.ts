@@ -34,18 +34,26 @@ enum CompositeOperator {
 }
 
 /**
- * Returns an AND composite filter.
+ * And filters are composed of many other filters and when they are applied
+ * then query results are only returned when they pass through all these other
+ * filters.
  *
- * @param {EntityFilter[]} filters The filters that make up the AND filter.
+ * @param {EntityFilter[]} filters The list of filters that make up the AND filter.
+ * @returns {CompositeFilter} A composite AND filter.
+ *
  */
 export function and(filters: EntityFilter[]): CompositeFilter {
   return new CompositeFilter(filters, CompositeOperator.AND);
 }
 
 /**
- * Returns an OR composite filter.
+ * Or filters are composed of many other filters and when they are applied
+ * then query results are returned when they pass through any of these other
+ * filters.
  *
- * @param {EntityFilter[]} filters The filters that make up the OR filter.
+ * @param {EntityFilter[]} filters The list of filters that make up the OR filter.
+ * @returns {CompositeFilter} A composite OR filter.
+ *
  */
 export function or(filters: EntityFilter[]): CompositeFilter {
   return new CompositeFilter(filters, CompositeOperator.OR);
