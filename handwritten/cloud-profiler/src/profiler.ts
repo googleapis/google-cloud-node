@@ -29,7 +29,7 @@ import * as r from 'teeny-request';
 import {ProfilerConfig} from './config';
 import {createLogger} from './logger';
 
-import parseDuration from 'parse-duration';
+import * as ms from 'ms';
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const pjson = require('../../package.json');
 const SCOPE = 'https://www.googleapis.com/auth/monitoring.write';
@@ -111,35 +111,16 @@ function getServerResponseBackoff(body: object): number | undefined {
         item.retryDelay &&
         typeof item.retryDelay === 'string'
       ) {
-        const backoffMillis = parseDuration(item.retryDelay)!;
+        // item is a RetryInfo
+        // https://github.com/googleapis/googleapis/blob/4ec607bd375cddbec6d28bc1931eab7da221e4bb/google/rpc/error_details.proto#L92
+        // and the ProtoJSON encoding of the duration will be a string of seconds with "s"
+        // suffix https://protobuf.dev/programming-guides/json
+        const retryDelay: `${number}s` = item.retryDelay;
+        const backoffMillis = ms(retryDelay);
         if (backoffMillis > 0) {
           return backoffMillis;
         }
       }
-    }
-  }
-  return undefined;
-}
-
-/**
- * @return if the backoff duration can be parsed, then the backoff duration in
- * ms, otherwise undefined.
- *
- * Public for testing.
- */
-export function parseBackoffDuration(
-  backoffMessage: string
-): number | undefined {
-  const backoffMessageRegex =
-    /action throttled, backoff for ((?:([0-9]+)h)?(?:([0-9]+)m)?([0-9.]+)s)$/;
-  const [, duration] = backoffMessageRegex.exec(backoffMessage) || [
-    undefined,
-    undefined,
-  ];
-  if (duration) {
-    const backoffMillis = parseDuration(duration)!;
-    if (backoffMillis > 0) {
-      return backoffMillis;
     }
   }
   return undefined;
@@ -452,7 +433,7 @@ export class Profiler extends ServiceObject {
       // Default timeout for for a request is 1 minute, but request to create
       // profile is designed to hang until it is time to collect a profile
       // (up to one hour).
-      timeout: parseDuration('1h')!,
+      timeout: ms('1h')!,
     };
 
     this.logger.debug('Attempting to create profile.');
@@ -551,7 +532,7 @@ export class Profiler extends ServiceObject {
     if (prof.duration === undefined) {
       throw Error('Cannot collect time profile, duration is undefined.');
     }
-    const durationMillis = parseDuration(prof.duration);
+    const durationMillis = ms(prof.duration as ms.StringValue);
     if (!durationMillis) {
       throw Error(
         `Cannot collect time profile, duration "${prof.duration}" cannot` +
