@@ -28,12 +28,7 @@ import * as zlib from 'zlib';
 
 import {perftools} from 'pprof/proto/profile';
 import {ProfilerConfig} from '../src/config';
-import {
-  parseBackoffDuration,
-  Profiler,
-  Retryer,
-  BackoffResponseError,
-} from '../src/profiler';
+import {Profiler, Retryer, BackoffResponseError} from '../src/profiler';
 
 import {
   decodedHeapProfile,
@@ -42,7 +37,7 @@ import {
   timeProfile,
 } from './profiles-for-tests';
 
-import parseDuration from 'parse-duration';
+import * as ms from 'ms';
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const fakeCredentials = require('../../test/fixtures/gcloud-credentials.json');
 
@@ -66,9 +61,9 @@ const testConfig: ProfilerConfig = {
   heapMaxStackDepth: 64,
   ignoreHeapSamplesPath: '@google-cloud/profiler',
   initialBackoffMillis: 1000,
-  backoffCapMillis: parseDuration('1h')!,
+  backoffCapMillis: ms('1h')!,
   backoffMultiplier: 1.3,
-  serverBackoffCapMillis: parseDuration('7d')!,
+  serverBackoffCapMillis: ms('7d')!,
   localProfilingPeriodMillis: 1000,
   localTimeDurationMillis: 1000,
   localLogPeriodMillis: 1000,
@@ -891,7 +886,7 @@ describe('Profiler', () => {
           );
         const profiler = new Profiler(testConfig);
         const delayMillis = await profiler.collectProfile();
-        assert.strictEqual(parseDuration('7d'), delayMillis);
+        assert.strictEqual(ms('7d'), delayMillis);
       }
     );
     it(
@@ -918,49 +913,5 @@ describe('Profiler', () => {
         assert.strictEqual(0, delayMillis);
       }
     );
-  });
-  describe('parseBackoffDuration', () => {
-    it('should return undefined when no duration specified', () => {
-      assert.strictEqual(undefined, parseBackoffDuration(''));
-    });
-    it('should parse backoff with minutes and seconds specified', () => {
-      assert.strictEqual(
-        62000,
-        parseBackoffDuration('action throttled, backoff for 1m2s')
-      );
-    });
-    it('should parse backoff with fraction of second', () => {
-      assert.strictEqual(
-        2500,
-        parseBackoffDuration('action throttled, backoff for 2.5s')
-      );
-    });
-    it('should parse backoff with minutes and seconds, including fraction of second', () => {
-      assert.strictEqual(
-        62500,
-        parseBackoffDuration('action throttled, backoff for 1m2.5s')
-      );
-    });
-    it('should parse backoff with hours and seconds', () => {
-      assert.strictEqual(
-        3602500,
-        parseBackoffDuration('action throttled, backoff for 1h2.5s')
-      );
-    });
-    it('should parse backoff with hours, minutes, and seconds', () => {
-      assert.strictEqual(
-        3662500,
-        parseBackoffDuration('action throttled, backoff for 1h1m2.5s')
-      );
-    });
-    it('should parse return undefined for unexpected backoff time string format', () => {
-      assert.strictEqual(
-        undefined,
-        parseBackoffDuration('action throttled, backoff for  1m2+s')
-      );
-    });
-    it('should parse return undefined for unexpected string format', () => {
-      assert.strictEqual(undefined, parseBackoffDuration('time 1m2s'));
-    });
   });
 });
