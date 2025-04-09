@@ -410,6 +410,8 @@
                             "vpnGateway",
                             "vpnTunnel",
                             "vpcConnector",
+                            "directVpcEgressConnection",
+                            "serverlessExternalConnection",
                             "deliver",
                             "forward",
                             "abort",
@@ -483,6 +485,14 @@
                         "vpcConnector": {
                           "type": "VpcConnectorInfo",
                           "id": 21
+                        },
+                        "directVpcEgressConnection": {
+                          "type": "DirectVpcEgressConnectionInfo",
+                          "id": 33
+                        },
+                        "serverlessExternalConnection": {
+                          "type": "ServerlessExternalConnectionInfo",
+                          "id": 34
                         },
                         "deliver": {
                           "type": "DeliverInfo",
@@ -598,6 +608,8 @@
                             "ARRIVE_AT_VPN_GATEWAY": 12,
                             "ARRIVE_AT_VPN_TUNNEL": 13,
                             "ARRIVE_AT_VPC_CONNECTOR": 24,
+                            "DIRECT_VPC_EGRESS_CONNECTION": 35,
+                            "SERVERLESS_EXTERNAL_CONNECTION": 36,
                             "NAT": 14,
                             "PROXY_CONNECTION": 15,
                             "DELIVER": 16,
@@ -737,7 +749,8 @@
                             "NETWORK_FIREWALL_POLICY_RULE": 5,
                             "NETWORK_REGIONAL_FIREWALL_POLICY_RULE": 6,
                             "UNSUPPORTED_FIREWALL_POLICY_RULE": 100,
-                            "TRACKING_STATE": 101
+                            "TRACKING_STATE": 101,
+                            "ANALYSIS_SKIPPED": 102
                           }
                         }
                       }
@@ -776,7 +789,10 @@
                         },
                         "routeScope": {
                           "type": "RouteScope",
-                          "id": 14
+                          "id": 14,
+                          "options": {
+                            "deprecated": true
+                          }
                         },
                         "displayName": {
                           "type": "string",
@@ -796,7 +812,10 @@
                         },
                         "nextHop": {
                           "type": "string",
-                          "id": 4
+                          "id": 4,
+                          "options": {
+                            "deprecated": true
+                          }
                         },
                         "networkUri": {
                           "type": "string",
@@ -855,8 +874,29 @@
                           "type": "string",
                           "id": 18,
                           "options": {
+                            "deprecated": true,
                             "proto3_optional": true
                           }
+                        },
+                        "nextHopUri": {
+                          "type": "string",
+                          "id": 20
+                        },
+                        "nextHopNetworkUri": {
+                          "type": "string",
+                          "id": 21
+                        },
+                        "originatingRouteUri": {
+                          "type": "string",
+                          "id": 22
+                        },
+                        "originatingRouteDisplayName": {
+                          "type": "string",
+                          "id": 23
+                        },
+                        "nccHubRouteUri": {
+                          "type": "string",
+                          "id": 24
                         }
                       },
                       "nested": {
@@ -919,7 +959,8 @@
                             "CLOUD_DNS": 3,
                             "GOOGLE_API": 4,
                             "GOOGLE_API_PSC": 5,
-                            "GOOGLE_API_VPC_SC": 6
+                            "GOOGLE_API_VPC_SC": 6,
+                            "SERVERLESS_VPC_ACCESS": 7
                           }
                         }
                       }
@@ -1350,7 +1391,8 @@
                             "SOURCE_FORWARDING_RULE_UNSUPPORTED": 21,
                             "NON_ROUTABLE_IP_ADDRESS": 22,
                             "UNKNOWN_ISSUE_IN_GOOGLE_MANAGED_PROJECT": 30,
-                            "UNSUPPORTED_GOOGLE_MANAGED_PROJECT_CONFIG": 31
+                            "UNSUPPORTED_GOOGLE_MANAGED_PROJECT_CONFIG": 31,
+                            "NO_SERVERLESS_IP_RANGES": 37
                           }
                         }
                       }
@@ -1406,6 +1448,7 @@
                             "FORWARDING_RULE_MISMATCH": 11,
                             "FORWARDING_RULE_NO_INSTANCES": 12,
                             "FIREWALL_BLOCKING_LOAD_BALANCER_BACKEND_HEALTH_CHECK": 13,
+                            "INGRESS_FIREWALL_TAGS_UNSUPPORTED_BY_DIRECT_VPC_EGRESS": 85,
                             "INSTANCE_NOT_RUNNING": 14,
                             "GKE_CLUSTER_NOT_RUNNING": 27,
                             "CLOUD_SQL_INSTANCE_NOT_RUNNING": 28,
@@ -1464,7 +1507,10 @@
                             "NO_ADVERTISED_ROUTE_TO_GCP_DESTINATION": 80,
                             "NO_TRAFFIC_SELECTOR_TO_GCP_DESTINATION": 81,
                             "NO_KNOWN_ROUTE_FROM_PEERED_NETWORK_TO_DESTINATION": 82,
-                            "PRIVATE_NAT_TO_PSC_ENDPOINT_UNSUPPORTED": 83
+                            "PRIVATE_NAT_TO_PSC_ENDPOINT_UNSUPPORTED": 83,
+                            "PSC_PORT_MAPPING_PORT_MISMATCH": 86,
+                            "PSC_PORT_MAPPING_WITHOUT_PSC_CONNECTION_UNSUPPORTED": 87,
+                            "UNSUPPORTED_ROUTE_MATCHED_FOR_NAT64_DESTINATION": 88
                           }
                         }
                       }
@@ -1656,6 +1702,47 @@
                         "location": {
                           "type": "string",
                           "id": 3
+                        }
+                      }
+                    },
+                    "DirectVpcEgressConnectionInfo": {
+                      "fields": {
+                        "networkUri": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "subnetworkUri": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "selectedIpRange": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_info).format": "IPV4_OR_IPV6"
+                          }
+                        },
+                        "selectedIpAddress": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_info).format": "IPV4_OR_IPV6"
+                          }
+                        },
+                        "region": {
+                          "type": "string",
+                          "id": 5
+                        }
+                      }
+                    },
+                    "ServerlessExternalConnectionInfo": {
+                      "fields": {
+                        "selectedIpAddress": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_info).format": "IPV4_OR_IPV6"
+                          }
                         }
                       }
                     },
@@ -3019,6 +3106,8 @@
                             "vpnGateway",
                             "vpnTunnel",
                             "vpcConnector",
+                            "directVpcEgressConnection",
+                            "serverlessExternalConnection",
                             "deliver",
                             "forward",
                             "abort",
@@ -3092,6 +3181,14 @@
                         "vpcConnector": {
                           "type": "VpcConnectorInfo",
                           "id": 21
+                        },
+                        "directVpcEgressConnection": {
+                          "type": "DirectVpcEgressConnectionInfo",
+                          "id": 33
+                        },
+                        "serverlessExternalConnection": {
+                          "type": "ServerlessExternalConnectionInfo",
+                          "id": 34
                         },
                         "deliver": {
                           "type": "DeliverInfo",
@@ -3207,6 +3304,8 @@
                             "ARRIVE_AT_VPN_GATEWAY": 12,
                             "ARRIVE_AT_VPN_TUNNEL": 13,
                             "ARRIVE_AT_VPC_CONNECTOR": 24,
+                            "DIRECT_VPC_EGRESS_CONNECTION": 35,
+                            "SERVERLESS_EXTERNAL_CONNECTION": 36,
                             "NAT": 14,
                             "PROXY_CONNECTION": 15,
                             "DELIVER": 16,
@@ -3346,7 +3445,8 @@
                             "NETWORK_FIREWALL_POLICY_RULE": 5,
                             "NETWORK_REGIONAL_FIREWALL_POLICY_RULE": 6,
                             "UNSUPPORTED_FIREWALL_POLICY_RULE": 100,
-                            "TRACKING_STATE": 101
+                            "TRACKING_STATE": 101,
+                            "ANALYSIS_SKIPPED": 102
                           }
                         }
                       }
@@ -3385,7 +3485,10 @@
                         },
                         "routeScope": {
                           "type": "RouteScope",
-                          "id": 14
+                          "id": 14,
+                          "options": {
+                            "deprecated": true
+                          }
                         },
                         "displayName": {
                           "type": "string",
@@ -3405,7 +3508,10 @@
                         },
                         "nextHop": {
                           "type": "string",
-                          "id": 4
+                          "id": 4,
+                          "options": {
+                            "deprecated": true
+                          }
                         },
                         "networkUri": {
                           "type": "string",
@@ -3464,8 +3570,29 @@
                           "type": "string",
                           "id": 18,
                           "options": {
+                            "deprecated": true,
                             "proto3_optional": true
                           }
+                        },
+                        "nextHopUri": {
+                          "type": "string",
+                          "id": 20
+                        },
+                        "nextHopNetworkUri": {
+                          "type": "string",
+                          "id": 21
+                        },
+                        "originatingRouteUri": {
+                          "type": "string",
+                          "id": 22
+                        },
+                        "originatingRouteDisplayName": {
+                          "type": "string",
+                          "id": 23
+                        },
+                        "nccHubRouteUri": {
+                          "type": "string",
+                          "id": 24
                         }
                       },
                       "nested": {
@@ -3528,7 +3655,8 @@
                             "CLOUD_DNS": 3,
                             "GOOGLE_API": 4,
                             "GOOGLE_API_PSC": 5,
-                            "GOOGLE_API_VPC_SC": 6
+                            "GOOGLE_API_VPC_SC": 6,
+                            "SERVERLESS_VPC_ACCESS": 7
                           }
                         }
                       }
@@ -3959,7 +4087,8 @@
                             "SOURCE_FORWARDING_RULE_UNSUPPORTED": 21,
                             "NON_ROUTABLE_IP_ADDRESS": 22,
                             "UNKNOWN_ISSUE_IN_GOOGLE_MANAGED_PROJECT": 30,
-                            "UNSUPPORTED_GOOGLE_MANAGED_PROJECT_CONFIG": 31
+                            "UNSUPPORTED_GOOGLE_MANAGED_PROJECT_CONFIG": 31,
+                            "NO_SERVERLESS_IP_RANGES": 37
                           }
                         }
                       }
@@ -4015,6 +4144,7 @@
                             "FORWARDING_RULE_MISMATCH": 11,
                             "FORWARDING_RULE_NO_INSTANCES": 12,
                             "FIREWALL_BLOCKING_LOAD_BALANCER_BACKEND_HEALTH_CHECK": 13,
+                            "INGRESS_FIREWALL_TAGS_UNSUPPORTED_BY_DIRECT_VPC_EGRESS": 85,
                             "INSTANCE_NOT_RUNNING": 14,
                             "GKE_CLUSTER_NOT_RUNNING": 27,
                             "CLOUD_SQL_INSTANCE_NOT_RUNNING": 28,
@@ -4073,7 +4203,10 @@
                             "NO_ADVERTISED_ROUTE_TO_GCP_DESTINATION": 80,
                             "NO_TRAFFIC_SELECTOR_TO_GCP_DESTINATION": 81,
                             "NO_KNOWN_ROUTE_FROM_PEERED_NETWORK_TO_DESTINATION": 82,
-                            "PRIVATE_NAT_TO_PSC_ENDPOINT_UNSUPPORTED": 83
+                            "PRIVATE_NAT_TO_PSC_ENDPOINT_UNSUPPORTED": 83,
+                            "PSC_PORT_MAPPING_PORT_MISMATCH": 86,
+                            "PSC_PORT_MAPPING_WITHOUT_PSC_CONNECTION_UNSUPPORTED": 87,
+                            "UNSUPPORTED_ROUTE_MATCHED_FOR_NAT64_DESTINATION": 88
                           }
                         }
                       }
@@ -4265,6 +4398,47 @@
                         "location": {
                           "type": "string",
                           "id": 3
+                        }
+                      }
+                    },
+                    "DirectVpcEgressConnectionInfo": {
+                      "fields": {
+                        "networkUri": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "subnetworkUri": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "selectedIpRange": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_info).format": "IPV4_OR_IPV6"
+                          }
+                        },
+                        "selectedIpAddress": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_info).format": "IPV4_OR_IPV6"
+                          }
+                        },
+                        "region": {
+                          "type": "string",
+                          "id": 5
+                        }
+                      }
+                    },
+                    "ServerlessExternalConnectionInfo": {
+                      "fields": {
+                        "selectedIpAddress": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_info).format": "IPV4_OR_IPV6"
+                          }
                         }
                       }
                     },
