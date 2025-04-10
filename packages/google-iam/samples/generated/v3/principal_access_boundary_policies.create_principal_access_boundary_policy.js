@@ -30,7 +30,7 @@ function main(parent, principalAccessBoundaryPolicyId, principalAccessBoundaryPo
    */
   /**
    *  Required. The parent resource where this principal access boundary policy
-   *  will be created. Only organization is supported now.
+   *  will be created. Only organizations are supported.
    *  Format:
    *    `organizations/{organization_id}/locations/{location}`
    */

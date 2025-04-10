@@ -246,6 +246,18 @@ export class HubServiceClient {
       routeTablePathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/global/hubs/{hub}/routeTables/{route_table}'
       ),
+      serviceClassPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/serviceClasses/{service_class}'
+      ),
+      serviceConnectionMapPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/serviceConnectionMaps/{service_connection_map}'
+      ),
+      serviceConnectionPolicyPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/serviceConnectionPolicies/{service_connection_policy}'
+      ),
+      serviceConnectionTokenPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/serviceConnectionTokens/{service_connection_token}'
+      ),
       spokePathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/spokes/{spoke}'
       ),
@@ -327,6 +339,15 @@ export class HubServiceClient {
             {
               get: '/v1/{resource=projects/*/locations/global/policyBasedRoutes/*}:getIamPolicy',
             },
+            {
+              get: '/v1/{resource=projects/*/locations/*/serviceConnectionMaps/*}:getIamPolicy',
+            },
+            {
+              get: '/v1/{resource=projects/*/locations/*/serviceConnectionPolicies/*}:getIamPolicy',
+            },
+            {
+              get: '/v1/{resource=projects/*/locations/*/serviceClasses/*}:getIamPolicy',
+            },
           ],
         },
         {
@@ -346,6 +367,18 @@ export class HubServiceClient {
               post: '/v1/{resource=projects/*/locations/global/policyBasedRoutes/*}:setIamPolicy',
               body: '*',
             },
+            {
+              post: '/v1/{resource=projects/*/locations/*/serviceConnectionMaps/*}:setIamPolicy',
+              body: '*',
+            },
+            {
+              post: '/v1/{resource=projects/*/locations/*/serviceConnectionPolicies/*}:setIamPolicy',
+              body: '*',
+            },
+            {
+              post: '/v1/{resource=projects/*/locations/*/serviceClasses/*}:setIamPolicy',
+              body: '*',
+            },
           ],
         },
         {
@@ -363,6 +396,18 @@ export class HubServiceClient {
             },
             {
               post: '/v1/{resource=projects/*/locations/global/policyBasedRoutes/*}:testIamPermissions',
+              body: '*',
+            },
+            {
+              post: '/v1/{resource=projects/*/locations/*/serviceConnectionMaps/*}:testIamPermissions',
+              body: '*',
+            },
+            {
+              post: '/v1/{resource=projects/*/locations/*/serviceConnectionPolicies/*}:testIamPermissions',
+              body: '*',
+            },
+            {
+              post: '/v1/{resource=projects/*/locations/*/serviceClasses/*}:testIamPermissions',
               body: '*',
             },
           ],
@@ -431,6 +476,18 @@ export class HubServiceClient {
     const acceptHubSpokeMetadata = protoFilesRoot.lookup(
       '.google.cloud.networkconnectivity.v1.OperationMetadata'
     ) as gax.protobuf.Type;
+    const acceptSpokeUpdateResponse = protoFilesRoot.lookup(
+      '.google.cloud.networkconnectivity.v1.AcceptSpokeUpdateResponse'
+    ) as gax.protobuf.Type;
+    const acceptSpokeUpdateMetadata = protoFilesRoot.lookup(
+      '.google.cloud.networkconnectivity.v1.OperationMetadata'
+    ) as gax.protobuf.Type;
+    const rejectSpokeUpdateResponse = protoFilesRoot.lookup(
+      '.google.cloud.networkconnectivity.v1.RejectSpokeUpdateResponse'
+    ) as gax.protobuf.Type;
+    const rejectSpokeUpdateMetadata = protoFilesRoot.lookup(
+      '.google.cloud.networkconnectivity.v1.OperationMetadata'
+    ) as gax.protobuf.Type;
     const deleteSpokeResponse = protoFilesRoot.lookup(
       '.google.protobuf.Empty'
     ) as gax.protobuf.Type;
@@ -479,6 +536,16 @@ export class HubServiceClient {
         this.operationsClient,
         acceptHubSpokeResponse.decode.bind(acceptHubSpokeResponse),
         acceptHubSpokeMetadata.decode.bind(acceptHubSpokeMetadata)
+      ),
+      acceptSpokeUpdate: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        acceptSpokeUpdateResponse.decode.bind(acceptSpokeUpdateResponse),
+        acceptSpokeUpdateMetadata.decode.bind(acceptSpokeUpdateMetadata)
+      ),
+      rejectSpokeUpdate: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        rejectSpokeUpdateResponse.decode.bind(rejectSpokeUpdateResponse),
+        rejectSpokeUpdateMetadata.decode.bind(rejectSpokeUpdateMetadata)
       ),
       deleteSpoke: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
@@ -555,6 +622,8 @@ export class HubServiceClient {
       'updateSpoke',
       'rejectHubSpoke',
       'acceptHubSpoke',
+      'acceptSpokeUpdate',
+      'rejectSpokeUpdate',
       'deleteSpoke',
       'getRouteTable',
       'getRoute',
@@ -2605,6 +2674,384 @@ export class HubServiceClient {
     );
     return decodeOperation as LROperation<
       protos.google.cloud.networkconnectivity.v1.AcceptHubSpokeResponse,
+      protos.google.cloud.networkconnectivity.v1.OperationMetadata
+    >;
+  }
+  /**
+   * Accepts a proposal to update a Network Connectivity Center spoke in a hub.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the hub to accept spoke update.
+   * @param {string} request.spokeUri
+   *   Required. The URI of the spoke to accept update.
+   * @param {string} request.spokeEtag
+   *   Required. The etag of the spoke to accept update.
+   * @param {string} [request.requestId]
+   *   Optional. A request ID to identify requests. Specify a unique request ID so
+   *   that if you must retry your request, the server knows to ignore the request
+   *   if it has already been completed. The server guarantees that a request
+   *   doesn't result in creation of duplicate commitments for at least 60
+   *   minutes.
+   *
+   *   For example, consider a situation where you make an initial request and
+   *   the request times out. If you make the request again with the same request
+   *   ID, the server can check to see whether the original operation
+   *   was received. If it was, the server ignores the second request. This
+   *   behavior prevents clients from mistakenly creating duplicate commitments.
+   *
+   *   The request ID must be a valid UUID, with the exception that zero UUID is
+   *   not supported (00000000-0000-0000-0000-000000000000).
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/hub_service.accept_spoke_update.js</caption>
+   * region_tag:networkconnectivity_v1_generated_HubService_AcceptSpokeUpdate_async
+   */
+  acceptSpokeUpdate(
+    request?: protos.google.cloud.networkconnectivity.v1.IAcceptSpokeUpdateRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.networkconnectivity.v1.IAcceptSpokeUpdateResponse,
+        protos.google.cloud.networkconnectivity.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
+  acceptSpokeUpdate(
+    request: protos.google.cloud.networkconnectivity.v1.IAcceptSpokeUpdateRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.networkconnectivity.v1.IAcceptSpokeUpdateResponse,
+        protos.google.cloud.networkconnectivity.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  acceptSpokeUpdate(
+    request: protos.google.cloud.networkconnectivity.v1.IAcceptSpokeUpdateRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.networkconnectivity.v1.IAcceptSpokeUpdateResponse,
+        protos.google.cloud.networkconnectivity.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  acceptSpokeUpdate(
+    request?: protos.google.cloud.networkconnectivity.v1.IAcceptSpokeUpdateRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.networkconnectivity.v1.IAcceptSpokeUpdateResponse,
+            protos.google.cloud.networkconnectivity.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.networkconnectivity.v1.IAcceptSpokeUpdateResponse,
+        protos.google.cloud.networkconnectivity.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.networkconnectivity.v1.IAcceptSpokeUpdateResponse,
+        protos.google.cloud.networkconnectivity.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.networkconnectivity.v1.IAcceptSpokeUpdateResponse,
+            protos.google.cloud.networkconnectivity.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('acceptSpokeUpdate response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('acceptSpokeUpdate request %j', request);
+    return this.innerApiCalls
+      .acceptSpokeUpdate(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.networkconnectivity.v1.IAcceptSpokeUpdateResponse,
+            protos.google.cloud.networkconnectivity.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('acceptSpokeUpdate response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
+  }
+  /**
+   * Check the status of the long running operation returned by `acceptSpokeUpdate()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/hub_service.accept_spoke_update.js</caption>
+   * region_tag:networkconnectivity_v1_generated_HubService_AcceptSpokeUpdate_async
+   */
+  async checkAcceptSpokeUpdateProgress(
+    name: string
+  ): Promise<
+    LROperation<
+      protos.google.cloud.networkconnectivity.v1.AcceptSpokeUpdateResponse,
+      protos.google.cloud.networkconnectivity.v1.OperationMetadata
+    >
+  > {
+    this._log.info('acceptSpokeUpdate long-running');
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        {name}
+      );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.acceptSpokeUpdate,
+      this._gaxModule.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.networkconnectivity.v1.AcceptSpokeUpdateResponse,
+      protos.google.cloud.networkconnectivity.v1.OperationMetadata
+    >;
+  }
+  /**
+   * Rejects a proposal to update a Network Connectivity Center spoke in a hub.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the hub to reject spoke update.
+   * @param {string} request.spokeUri
+   *   Required. The URI of the spoke to reject update.
+   * @param {string} request.spokeEtag
+   *   Required. The etag of the spoke to reject update.
+   * @param {string} [request.details]
+   *   Optional. Additional information provided by the hub administrator.
+   * @param {string} [request.requestId]
+   *   Optional. A request ID to identify requests. Specify a unique request ID so
+   *   that if you must retry your request, the server knows to ignore the request
+   *   if it has already been completed. The server guarantees that a request
+   *   doesn't result in creation of duplicate commitments for at least 60
+   *   minutes.
+   *
+   *   For example, consider a situation where you make an initial request and
+   *   the request times out. If you make the request again with the same request
+   *   ID, the server can check to see whether the original operation
+   *   was received. If it was, the server ignores the second request. This
+   *   behavior prevents clients from mistakenly creating duplicate commitments.
+   *
+   *   The request ID must be a valid UUID, with the exception that zero UUID is
+   *   not supported (00000000-0000-0000-0000-000000000000).
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/hub_service.reject_spoke_update.js</caption>
+   * region_tag:networkconnectivity_v1_generated_HubService_RejectSpokeUpdate_async
+   */
+  rejectSpokeUpdate(
+    request?: protos.google.cloud.networkconnectivity.v1.IRejectSpokeUpdateRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.networkconnectivity.v1.IRejectSpokeUpdateResponse,
+        protos.google.cloud.networkconnectivity.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
+  rejectSpokeUpdate(
+    request: protos.google.cloud.networkconnectivity.v1.IRejectSpokeUpdateRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.networkconnectivity.v1.IRejectSpokeUpdateResponse,
+        protos.google.cloud.networkconnectivity.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  rejectSpokeUpdate(
+    request: protos.google.cloud.networkconnectivity.v1.IRejectSpokeUpdateRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.networkconnectivity.v1.IRejectSpokeUpdateResponse,
+        protos.google.cloud.networkconnectivity.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  rejectSpokeUpdate(
+    request?: protos.google.cloud.networkconnectivity.v1.IRejectSpokeUpdateRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.networkconnectivity.v1.IRejectSpokeUpdateResponse,
+            protos.google.cloud.networkconnectivity.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.networkconnectivity.v1.IRejectSpokeUpdateResponse,
+        protos.google.cloud.networkconnectivity.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.networkconnectivity.v1.IRejectSpokeUpdateResponse,
+        protos.google.cloud.networkconnectivity.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.networkconnectivity.v1.IRejectSpokeUpdateResponse,
+            protos.google.cloud.networkconnectivity.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('rejectSpokeUpdate response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('rejectSpokeUpdate request %j', request);
+    return this.innerApiCalls
+      .rejectSpokeUpdate(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.networkconnectivity.v1.IRejectSpokeUpdateResponse,
+            protos.google.cloud.networkconnectivity.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('rejectSpokeUpdate response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
+  }
+  /**
+   * Check the status of the long running operation returned by `rejectSpokeUpdate()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/hub_service.reject_spoke_update.js</caption>
+   * region_tag:networkconnectivity_v1_generated_HubService_RejectSpokeUpdate_async
+   */
+  async checkRejectSpokeUpdateProgress(
+    name: string
+  ): Promise<
+    LROperation<
+      protos.google.cloud.networkconnectivity.v1.RejectSpokeUpdateResponse,
+      protos.google.cloud.networkconnectivity.v1.OperationMetadata
+    >
+  > {
+    this._log.info('rejectSpokeUpdate long-running');
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        {name}
+      );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.rejectSpokeUpdate,
+      this._gaxModule.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.networkconnectivity.v1.RejectSpokeUpdateResponse,
       protos.google.cloud.networkconnectivity.v1.OperationMetadata
     >;
   }
@@ -5600,6 +6047,249 @@ export class HubServiceClient {
   matchRouteTableFromRouteTableName(routeTableName: string) {
     return this.pathTemplates.routeTablePathTemplate.match(routeTableName)
       .route_table;
+  }
+
+  /**
+   * Return a fully-qualified serviceClass resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} service_class
+   * @returns {string} Resource name string.
+   */
+  serviceClassPath(project: string, location: string, serviceClass: string) {
+    return this.pathTemplates.serviceClassPathTemplate.render({
+      project: project,
+      location: location,
+      service_class: serviceClass,
+    });
+  }
+
+  /**
+   * Parse the project from ServiceClass resource.
+   *
+   * @param {string} serviceClassName
+   *   A fully-qualified path representing ServiceClass resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromServiceClassName(serviceClassName: string) {
+    return this.pathTemplates.serviceClassPathTemplate.match(serviceClassName)
+      .project;
+  }
+
+  /**
+   * Parse the location from ServiceClass resource.
+   *
+   * @param {string} serviceClassName
+   *   A fully-qualified path representing ServiceClass resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromServiceClassName(serviceClassName: string) {
+    return this.pathTemplates.serviceClassPathTemplate.match(serviceClassName)
+      .location;
+  }
+
+  /**
+   * Parse the service_class from ServiceClass resource.
+   *
+   * @param {string} serviceClassName
+   *   A fully-qualified path representing ServiceClass resource.
+   * @returns {string} A string representing the service_class.
+   */
+  matchServiceClassFromServiceClassName(serviceClassName: string) {
+    return this.pathTemplates.serviceClassPathTemplate.match(serviceClassName)
+      .service_class;
+  }
+
+  /**
+   * Return a fully-qualified serviceConnectionMap resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} service_connection_map
+   * @returns {string} Resource name string.
+   */
+  serviceConnectionMapPath(
+    project: string,
+    location: string,
+    serviceConnectionMap: string
+  ) {
+    return this.pathTemplates.serviceConnectionMapPathTemplate.render({
+      project: project,
+      location: location,
+      service_connection_map: serviceConnectionMap,
+    });
+  }
+
+  /**
+   * Parse the project from ServiceConnectionMap resource.
+   *
+   * @param {string} serviceConnectionMapName
+   *   A fully-qualified path representing ServiceConnectionMap resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromServiceConnectionMapName(serviceConnectionMapName: string) {
+    return this.pathTemplates.serviceConnectionMapPathTemplate.match(
+      serviceConnectionMapName
+    ).project;
+  }
+
+  /**
+   * Parse the location from ServiceConnectionMap resource.
+   *
+   * @param {string} serviceConnectionMapName
+   *   A fully-qualified path representing ServiceConnectionMap resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromServiceConnectionMapName(serviceConnectionMapName: string) {
+    return this.pathTemplates.serviceConnectionMapPathTemplate.match(
+      serviceConnectionMapName
+    ).location;
+  }
+
+  /**
+   * Parse the service_connection_map from ServiceConnectionMap resource.
+   *
+   * @param {string} serviceConnectionMapName
+   *   A fully-qualified path representing ServiceConnectionMap resource.
+   * @returns {string} A string representing the service_connection_map.
+   */
+  matchServiceConnectionMapFromServiceConnectionMapName(
+    serviceConnectionMapName: string
+  ) {
+    return this.pathTemplates.serviceConnectionMapPathTemplate.match(
+      serviceConnectionMapName
+    ).service_connection_map;
+  }
+
+  /**
+   * Return a fully-qualified serviceConnectionPolicy resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} service_connection_policy
+   * @returns {string} Resource name string.
+   */
+  serviceConnectionPolicyPath(
+    project: string,
+    location: string,
+    serviceConnectionPolicy: string
+  ) {
+    return this.pathTemplates.serviceConnectionPolicyPathTemplate.render({
+      project: project,
+      location: location,
+      service_connection_policy: serviceConnectionPolicy,
+    });
+  }
+
+  /**
+   * Parse the project from ServiceConnectionPolicy resource.
+   *
+   * @param {string} serviceConnectionPolicyName
+   *   A fully-qualified path representing ServiceConnectionPolicy resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromServiceConnectionPolicyName(
+    serviceConnectionPolicyName: string
+  ) {
+    return this.pathTemplates.serviceConnectionPolicyPathTemplate.match(
+      serviceConnectionPolicyName
+    ).project;
+  }
+
+  /**
+   * Parse the location from ServiceConnectionPolicy resource.
+   *
+   * @param {string} serviceConnectionPolicyName
+   *   A fully-qualified path representing ServiceConnectionPolicy resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromServiceConnectionPolicyName(
+    serviceConnectionPolicyName: string
+  ) {
+    return this.pathTemplates.serviceConnectionPolicyPathTemplate.match(
+      serviceConnectionPolicyName
+    ).location;
+  }
+
+  /**
+   * Parse the service_connection_policy from ServiceConnectionPolicy resource.
+   *
+   * @param {string} serviceConnectionPolicyName
+   *   A fully-qualified path representing ServiceConnectionPolicy resource.
+   * @returns {string} A string representing the service_connection_policy.
+   */
+  matchServiceConnectionPolicyFromServiceConnectionPolicyName(
+    serviceConnectionPolicyName: string
+  ) {
+    return this.pathTemplates.serviceConnectionPolicyPathTemplate.match(
+      serviceConnectionPolicyName
+    ).service_connection_policy;
+  }
+
+  /**
+   * Return a fully-qualified serviceConnectionToken resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} service_connection_token
+   * @returns {string} Resource name string.
+   */
+  serviceConnectionTokenPath(
+    project: string,
+    location: string,
+    serviceConnectionToken: string
+  ) {
+    return this.pathTemplates.serviceConnectionTokenPathTemplate.render({
+      project: project,
+      location: location,
+      service_connection_token: serviceConnectionToken,
+    });
+  }
+
+  /**
+   * Parse the project from ServiceConnectionToken resource.
+   *
+   * @param {string} serviceConnectionTokenName
+   *   A fully-qualified path representing ServiceConnectionToken resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromServiceConnectionTokenName(
+    serviceConnectionTokenName: string
+  ) {
+    return this.pathTemplates.serviceConnectionTokenPathTemplate.match(
+      serviceConnectionTokenName
+    ).project;
+  }
+
+  /**
+   * Parse the location from ServiceConnectionToken resource.
+   *
+   * @param {string} serviceConnectionTokenName
+   *   A fully-qualified path representing ServiceConnectionToken resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromServiceConnectionTokenName(
+    serviceConnectionTokenName: string
+  ) {
+    return this.pathTemplates.serviceConnectionTokenPathTemplate.match(
+      serviceConnectionTokenName
+    ).location;
+  }
+
+  /**
+   * Parse the service_connection_token from ServiceConnectionToken resource.
+   *
+   * @param {string} serviceConnectionTokenName
+   *   A fully-qualified path representing ServiceConnectionToken resource.
+   * @returns {string} A string representing the service_connection_token.
+   */
+  matchServiceConnectionTokenFromServiceConnectionTokenName(
+    serviceConnectionTokenName: string
+  ) {
+    return this.pathTemplates.serviceConnectionTokenPathTemplate.match(
+      serviceConnectionTokenName
+    ).service_connection_token;
   }
 
   /**

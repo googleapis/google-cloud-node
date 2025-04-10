@@ -32845,6 +32845,125 @@ export namespace google {
                     }
                 }
 
+                /** Properties of an EntryLinkEvent. */
+                interface IEntryLinkEvent {
+
+                    /** EntryLinkEvent message */
+                    message?: (string|null);
+
+                    /** EntryLinkEvent eventType */
+                    eventType?: (google.cloud.dataplex.v1.EntryLinkEvent.EventType|keyof typeof google.cloud.dataplex.v1.EntryLinkEvent.EventType|null);
+
+                    /** EntryLinkEvent resource */
+                    resource?: (string|null);
+                }
+
+                /** Represents an EntryLinkEvent. */
+                class EntryLinkEvent implements IEntryLinkEvent {
+
+                    /**
+                     * Constructs a new EntryLinkEvent.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.dataplex.v1.IEntryLinkEvent);
+
+                    /** EntryLinkEvent message. */
+                    public message: string;
+
+                    /** EntryLinkEvent eventType. */
+                    public eventType: (google.cloud.dataplex.v1.EntryLinkEvent.EventType|keyof typeof google.cloud.dataplex.v1.EntryLinkEvent.EventType);
+
+                    /** EntryLinkEvent resource. */
+                    public resource: string;
+
+                    /**
+                     * Creates a new EntryLinkEvent instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns EntryLinkEvent instance
+                     */
+                    public static create(properties?: google.cloud.dataplex.v1.IEntryLinkEvent): google.cloud.dataplex.v1.EntryLinkEvent;
+
+                    /**
+                     * Encodes the specified EntryLinkEvent message. Does not implicitly {@link google.cloud.dataplex.v1.EntryLinkEvent.verify|verify} messages.
+                     * @param message EntryLinkEvent message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.dataplex.v1.IEntryLinkEvent, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified EntryLinkEvent message, length delimited. Does not implicitly {@link google.cloud.dataplex.v1.EntryLinkEvent.verify|verify} messages.
+                     * @param message EntryLinkEvent message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.dataplex.v1.IEntryLinkEvent, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an EntryLinkEvent message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns EntryLinkEvent
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dataplex.v1.EntryLinkEvent;
+
+                    /**
+                     * Decodes an EntryLinkEvent message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns EntryLinkEvent
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dataplex.v1.EntryLinkEvent;
+
+                    /**
+                     * Verifies an EntryLinkEvent message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an EntryLinkEvent message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns EntryLinkEvent
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.dataplex.v1.EntryLinkEvent;
+
+                    /**
+                     * Creates a plain object from an EntryLinkEvent message. Also converts values to other types if specified.
+                     * @param message EntryLinkEvent
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.dataplex.v1.EntryLinkEvent, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this EntryLinkEvent to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for EntryLinkEvent
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace EntryLinkEvent {
+
+                    /** EventType enum. */
+                    enum EventType {
+                        EVENT_TYPE_UNSPECIFIED = 0,
+                        ENTRY_LINK_CREATE = 1,
+                        ENTRY_LINK_DELETE = 2
+                    }
+                }
+
                 /** Represents a MetadataService */
                 class MetadataService extends $protobuf.rpc.Service {
 

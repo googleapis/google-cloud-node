@@ -1464,6 +1464,12 @@ export namespace google {
                     /** Step vpcConnector */
                     vpcConnector?: (google.cloud.networkmanagement.v1.IVpcConnectorInfo|null);
 
+                    /** Step directVpcEgressConnection */
+                    directVpcEgressConnection?: (google.cloud.networkmanagement.v1.IDirectVpcEgressConnectionInfo|null);
+
+                    /** Step serverlessExternalConnection */
+                    serverlessExternalConnection?: (google.cloud.networkmanagement.v1.IServerlessExternalConnectionInfo|null);
+
                     /** Step deliver */
                     deliver?: (google.cloud.networkmanagement.v1.IDeliverInfo|null);
 
@@ -1567,6 +1573,12 @@ export namespace google {
                     /** Step vpcConnector. */
                     public vpcConnector?: (google.cloud.networkmanagement.v1.IVpcConnectorInfo|null);
 
+                    /** Step directVpcEgressConnection. */
+                    public directVpcEgressConnection?: (google.cloud.networkmanagement.v1.IDirectVpcEgressConnectionInfo|null);
+
+                    /** Step serverlessExternalConnection. */
+                    public serverlessExternalConnection?: (google.cloud.networkmanagement.v1.IServerlessExternalConnectionInfo|null);
+
                     /** Step deliver. */
                     public deliver?: (google.cloud.networkmanagement.v1.IDeliverInfo|null);
 
@@ -1622,7 +1634,7 @@ export namespace google {
                     public serverlessNeg?: (google.cloud.networkmanagement.v1.IServerlessNegInfo|null);
 
                     /** Step stepInfo. */
-                    public stepInfo?: ("instance"|"firewall"|"route"|"endpoint"|"googleService"|"forwardingRule"|"vpnGateway"|"vpnTunnel"|"vpcConnector"|"deliver"|"forward"|"abort"|"drop"|"loadBalancer"|"network"|"gkeMaster"|"cloudSqlInstance"|"redisInstance"|"redisCluster"|"cloudFunction"|"appEngineVersion"|"cloudRunRevision"|"nat"|"proxyConnection"|"loadBalancerBackendInfo"|"storageBucket"|"serverlessNeg");
+                    public stepInfo?: ("instance"|"firewall"|"route"|"endpoint"|"googleService"|"forwardingRule"|"vpnGateway"|"vpnTunnel"|"vpcConnector"|"directVpcEgressConnection"|"serverlessExternalConnection"|"deliver"|"forward"|"abort"|"drop"|"loadBalancer"|"network"|"gkeMaster"|"cloudSqlInstance"|"redisInstance"|"redisCluster"|"cloudFunction"|"appEngineVersion"|"cloudRunRevision"|"nat"|"proxyConnection"|"loadBalancerBackendInfo"|"storageBucket"|"serverlessNeg");
 
                     /**
                      * Creates a new Step instance using the specified properties.
@@ -1733,6 +1745,8 @@ export namespace google {
                         ARRIVE_AT_VPN_GATEWAY = 12,
                         ARRIVE_AT_VPN_TUNNEL = 13,
                         ARRIVE_AT_VPC_CONNECTOR = 24,
+                        DIRECT_VPC_EGRESS_CONNECTION = 35,
+                        SERVERLESS_EXTERNAL_CONNECTION = 36,
                         NAT = 14,
                         PROXY_CONNECTION = 15,
                         DELIVER = 16,
@@ -2178,7 +2192,8 @@ export namespace google {
                         NETWORK_FIREWALL_POLICY_RULE = 5,
                         NETWORK_REGIONAL_FIREWALL_POLICY_RULE = 6,
                         UNSUPPORTED_FIREWALL_POLICY_RULE = 100,
-                        TRACKING_STATE = 101
+                        TRACKING_STATE = 101,
+                        ANALYSIS_SKIPPED = 102
                     }
                 }
 
@@ -2241,6 +2256,21 @@ export namespace google {
 
                     /** RouteInfo advertisedRouteNextHopUri */
                     advertisedRouteNextHopUri?: (string|null);
+
+                    /** RouteInfo nextHopUri */
+                    nextHopUri?: (string|null);
+
+                    /** RouteInfo nextHopNetworkUri */
+                    nextHopNetworkUri?: (string|null);
+
+                    /** RouteInfo originatingRouteUri */
+                    originatingRouteUri?: (string|null);
+
+                    /** RouteInfo originatingRouteDisplayName */
+                    originatingRouteDisplayName?: (string|null);
+
+                    /** RouteInfo nccHubRouteUri */
+                    nccHubRouteUri?: (string|null);
                 }
 
                 /** Represents a RouteInfo. */
@@ -2308,6 +2338,21 @@ export namespace google {
 
                     /** RouteInfo advertisedRouteNextHopUri. */
                     public advertisedRouteNextHopUri?: (string|null);
+
+                    /** RouteInfo nextHopUri. */
+                    public nextHopUri: string;
+
+                    /** RouteInfo nextHopNetworkUri. */
+                    public nextHopNetworkUri: string;
+
+                    /** RouteInfo originatingRouteUri. */
+                    public originatingRouteUri: string;
+
+                    /** RouteInfo originatingRouteDisplayName. */
+                    public originatingRouteDisplayName: string;
+
+                    /** RouteInfo nccHubRouteUri. */
+                    public nccHubRouteUri: string;
 
                     /** RouteInfo _nccHubUri. */
                     public _nccHubUri?: "nccHubUri";
@@ -2552,7 +2597,8 @@ export namespace google {
                         CLOUD_DNS = 3,
                         GOOGLE_API = 4,
                         GOOGLE_API_PSC = 5,
-                        GOOGLE_API_VPC_SC = 6
+                        GOOGLE_API_VPC_SC = 6,
+                        SERVERLESS_VPC_ACCESS = 7
                     }
                 }
 
@@ -3834,7 +3880,8 @@ export namespace google {
                         SOURCE_FORWARDING_RULE_UNSUPPORTED = 21,
                         NON_ROUTABLE_IP_ADDRESS = 22,
                         UNKNOWN_ISSUE_IN_GOOGLE_MANAGED_PROJECT = 30,
-                        UNSUPPORTED_GOOGLE_MANAGED_PROJECT_CONFIG = 31
+                        UNSUPPORTED_GOOGLE_MANAGED_PROJECT_CONFIG = 31,
+                        NO_SERVERLESS_IP_RANGES = 37
                     }
                 }
 
@@ -3988,6 +4035,7 @@ export namespace google {
                         FORWARDING_RULE_MISMATCH = 11,
                         FORWARDING_RULE_NO_INSTANCES = 12,
                         FIREWALL_BLOCKING_LOAD_BALANCER_BACKEND_HEALTH_CHECK = 13,
+                        INGRESS_FIREWALL_TAGS_UNSUPPORTED_BY_DIRECT_VPC_EGRESS = 85,
                         INSTANCE_NOT_RUNNING = 14,
                         GKE_CLUSTER_NOT_RUNNING = 27,
                         CLOUD_SQL_INSTANCE_NOT_RUNNING = 28,
@@ -4046,7 +4094,10 @@ export namespace google {
                         NO_ADVERTISED_ROUTE_TO_GCP_DESTINATION = 80,
                         NO_TRAFFIC_SELECTOR_TO_GCP_DESTINATION = 81,
                         NO_KNOWN_ROUTE_FROM_PEERED_NETWORK_TO_DESTINATION = 82,
-                        PRIVATE_NAT_TO_PSC_ENDPOINT_UNSUPPORTED = 83
+                        PRIVATE_NAT_TO_PSC_ENDPOINT_UNSUPPORTED = 83,
+                        PSC_PORT_MAPPING_PORT_MISMATCH = 86,
+                        PSC_PORT_MAPPING_WITHOUT_PSC_CONNECTION_UNSUPPORTED = 87,
+                        UNSUPPORTED_ROUTE_MATCHED_FOR_NAT64_DESTINATION = 88
                     }
                 }
 
@@ -5000,6 +5051,224 @@ export namespace google {
 
                     /**
                      * Gets the default type url for VpcConnectorInfo
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a DirectVpcEgressConnectionInfo. */
+                interface IDirectVpcEgressConnectionInfo {
+
+                    /** DirectVpcEgressConnectionInfo networkUri */
+                    networkUri?: (string|null);
+
+                    /** DirectVpcEgressConnectionInfo subnetworkUri */
+                    subnetworkUri?: (string|null);
+
+                    /** DirectVpcEgressConnectionInfo selectedIpRange */
+                    selectedIpRange?: (string|null);
+
+                    /** DirectVpcEgressConnectionInfo selectedIpAddress */
+                    selectedIpAddress?: (string|null);
+
+                    /** DirectVpcEgressConnectionInfo region */
+                    region?: (string|null);
+                }
+
+                /** Represents a DirectVpcEgressConnectionInfo. */
+                class DirectVpcEgressConnectionInfo implements IDirectVpcEgressConnectionInfo {
+
+                    /**
+                     * Constructs a new DirectVpcEgressConnectionInfo.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.networkmanagement.v1.IDirectVpcEgressConnectionInfo);
+
+                    /** DirectVpcEgressConnectionInfo networkUri. */
+                    public networkUri: string;
+
+                    /** DirectVpcEgressConnectionInfo subnetworkUri. */
+                    public subnetworkUri: string;
+
+                    /** DirectVpcEgressConnectionInfo selectedIpRange. */
+                    public selectedIpRange: string;
+
+                    /** DirectVpcEgressConnectionInfo selectedIpAddress. */
+                    public selectedIpAddress: string;
+
+                    /** DirectVpcEgressConnectionInfo region. */
+                    public region: string;
+
+                    /**
+                     * Creates a new DirectVpcEgressConnectionInfo instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DirectVpcEgressConnectionInfo instance
+                     */
+                    public static create(properties?: google.cloud.networkmanagement.v1.IDirectVpcEgressConnectionInfo): google.cloud.networkmanagement.v1.DirectVpcEgressConnectionInfo;
+
+                    /**
+                     * Encodes the specified DirectVpcEgressConnectionInfo message. Does not implicitly {@link google.cloud.networkmanagement.v1.DirectVpcEgressConnectionInfo.verify|verify} messages.
+                     * @param message DirectVpcEgressConnectionInfo message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.networkmanagement.v1.IDirectVpcEgressConnectionInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DirectVpcEgressConnectionInfo message, length delimited. Does not implicitly {@link google.cloud.networkmanagement.v1.DirectVpcEgressConnectionInfo.verify|verify} messages.
+                     * @param message DirectVpcEgressConnectionInfo message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.networkmanagement.v1.IDirectVpcEgressConnectionInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DirectVpcEgressConnectionInfo message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DirectVpcEgressConnectionInfo
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.networkmanagement.v1.DirectVpcEgressConnectionInfo;
+
+                    /**
+                     * Decodes a DirectVpcEgressConnectionInfo message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DirectVpcEgressConnectionInfo
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.networkmanagement.v1.DirectVpcEgressConnectionInfo;
+
+                    /**
+                     * Verifies a DirectVpcEgressConnectionInfo message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DirectVpcEgressConnectionInfo message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DirectVpcEgressConnectionInfo
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.networkmanagement.v1.DirectVpcEgressConnectionInfo;
+
+                    /**
+                     * Creates a plain object from a DirectVpcEgressConnectionInfo message. Also converts values to other types if specified.
+                     * @param message DirectVpcEgressConnectionInfo
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.networkmanagement.v1.DirectVpcEgressConnectionInfo, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DirectVpcEgressConnectionInfo to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DirectVpcEgressConnectionInfo
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ServerlessExternalConnectionInfo. */
+                interface IServerlessExternalConnectionInfo {
+
+                    /** ServerlessExternalConnectionInfo selectedIpAddress */
+                    selectedIpAddress?: (string|null);
+                }
+
+                /** Represents a ServerlessExternalConnectionInfo. */
+                class ServerlessExternalConnectionInfo implements IServerlessExternalConnectionInfo {
+
+                    /**
+                     * Constructs a new ServerlessExternalConnectionInfo.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.networkmanagement.v1.IServerlessExternalConnectionInfo);
+
+                    /** ServerlessExternalConnectionInfo selectedIpAddress. */
+                    public selectedIpAddress: string;
+
+                    /**
+                     * Creates a new ServerlessExternalConnectionInfo instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ServerlessExternalConnectionInfo instance
+                     */
+                    public static create(properties?: google.cloud.networkmanagement.v1.IServerlessExternalConnectionInfo): google.cloud.networkmanagement.v1.ServerlessExternalConnectionInfo;
+
+                    /**
+                     * Encodes the specified ServerlessExternalConnectionInfo message. Does not implicitly {@link google.cloud.networkmanagement.v1.ServerlessExternalConnectionInfo.verify|verify} messages.
+                     * @param message ServerlessExternalConnectionInfo message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.networkmanagement.v1.IServerlessExternalConnectionInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ServerlessExternalConnectionInfo message, length delimited. Does not implicitly {@link google.cloud.networkmanagement.v1.ServerlessExternalConnectionInfo.verify|verify} messages.
+                     * @param message ServerlessExternalConnectionInfo message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.networkmanagement.v1.IServerlessExternalConnectionInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ServerlessExternalConnectionInfo message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ServerlessExternalConnectionInfo
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.networkmanagement.v1.ServerlessExternalConnectionInfo;
+
+                    /**
+                     * Decodes a ServerlessExternalConnectionInfo message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ServerlessExternalConnectionInfo
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.networkmanagement.v1.ServerlessExternalConnectionInfo;
+
+                    /**
+                     * Verifies a ServerlessExternalConnectionInfo message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ServerlessExternalConnectionInfo message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ServerlessExternalConnectionInfo
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.networkmanagement.v1.ServerlessExternalConnectionInfo;
+
+                    /**
+                     * Creates a plain object from a ServerlessExternalConnectionInfo message. Also converts values to other types if specified.
+                     * @param message ServerlessExternalConnectionInfo
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.networkmanagement.v1.ServerlessExternalConnectionInfo, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ServerlessExternalConnectionInfo to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ServerlessExternalConnectionInfo
                      * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                      * @returns The default type url
                      */
@@ -9174,6 +9443,12 @@ export namespace google {
                     /** Step vpcConnector */
                     vpcConnector?: (google.cloud.networkmanagement.v1beta1.IVpcConnectorInfo|null);
 
+                    /** Step directVpcEgressConnection */
+                    directVpcEgressConnection?: (google.cloud.networkmanagement.v1beta1.IDirectVpcEgressConnectionInfo|null);
+
+                    /** Step serverlessExternalConnection */
+                    serverlessExternalConnection?: (google.cloud.networkmanagement.v1beta1.IServerlessExternalConnectionInfo|null);
+
                     /** Step deliver */
                     deliver?: (google.cloud.networkmanagement.v1beta1.IDeliverInfo|null);
 
@@ -9277,6 +9552,12 @@ export namespace google {
                     /** Step vpcConnector. */
                     public vpcConnector?: (google.cloud.networkmanagement.v1beta1.IVpcConnectorInfo|null);
 
+                    /** Step directVpcEgressConnection. */
+                    public directVpcEgressConnection?: (google.cloud.networkmanagement.v1beta1.IDirectVpcEgressConnectionInfo|null);
+
+                    /** Step serverlessExternalConnection. */
+                    public serverlessExternalConnection?: (google.cloud.networkmanagement.v1beta1.IServerlessExternalConnectionInfo|null);
+
                     /** Step deliver. */
                     public deliver?: (google.cloud.networkmanagement.v1beta1.IDeliverInfo|null);
 
@@ -9332,7 +9613,7 @@ export namespace google {
                     public serverlessNeg?: (google.cloud.networkmanagement.v1beta1.IServerlessNegInfo|null);
 
                     /** Step stepInfo. */
-                    public stepInfo?: ("instance"|"firewall"|"route"|"endpoint"|"googleService"|"forwardingRule"|"vpnGateway"|"vpnTunnel"|"vpcConnector"|"deliver"|"forward"|"abort"|"drop"|"loadBalancer"|"network"|"gkeMaster"|"cloudSqlInstance"|"redisInstance"|"redisCluster"|"cloudFunction"|"appEngineVersion"|"cloudRunRevision"|"nat"|"proxyConnection"|"loadBalancerBackendInfo"|"storageBucket"|"serverlessNeg");
+                    public stepInfo?: ("instance"|"firewall"|"route"|"endpoint"|"googleService"|"forwardingRule"|"vpnGateway"|"vpnTunnel"|"vpcConnector"|"directVpcEgressConnection"|"serverlessExternalConnection"|"deliver"|"forward"|"abort"|"drop"|"loadBalancer"|"network"|"gkeMaster"|"cloudSqlInstance"|"redisInstance"|"redisCluster"|"cloudFunction"|"appEngineVersion"|"cloudRunRevision"|"nat"|"proxyConnection"|"loadBalancerBackendInfo"|"storageBucket"|"serverlessNeg");
 
                     /**
                      * Creates a new Step instance using the specified properties.
@@ -9443,6 +9724,8 @@ export namespace google {
                         ARRIVE_AT_VPN_GATEWAY = 12,
                         ARRIVE_AT_VPN_TUNNEL = 13,
                         ARRIVE_AT_VPC_CONNECTOR = 24,
+                        DIRECT_VPC_EGRESS_CONNECTION = 35,
+                        SERVERLESS_EXTERNAL_CONNECTION = 36,
                         NAT = 14,
                         PROXY_CONNECTION = 15,
                         DELIVER = 16,
@@ -9888,7 +10171,8 @@ export namespace google {
                         NETWORK_FIREWALL_POLICY_RULE = 5,
                         NETWORK_REGIONAL_FIREWALL_POLICY_RULE = 6,
                         UNSUPPORTED_FIREWALL_POLICY_RULE = 100,
-                        TRACKING_STATE = 101
+                        TRACKING_STATE = 101,
+                        ANALYSIS_SKIPPED = 102
                     }
                 }
 
@@ -9951,6 +10235,21 @@ export namespace google {
 
                     /** RouteInfo advertisedRouteNextHopUri */
                     advertisedRouteNextHopUri?: (string|null);
+
+                    /** RouteInfo nextHopUri */
+                    nextHopUri?: (string|null);
+
+                    /** RouteInfo nextHopNetworkUri */
+                    nextHopNetworkUri?: (string|null);
+
+                    /** RouteInfo originatingRouteUri */
+                    originatingRouteUri?: (string|null);
+
+                    /** RouteInfo originatingRouteDisplayName */
+                    originatingRouteDisplayName?: (string|null);
+
+                    /** RouteInfo nccHubRouteUri */
+                    nccHubRouteUri?: (string|null);
                 }
 
                 /** Represents a RouteInfo. */
@@ -10018,6 +10317,21 @@ export namespace google {
 
                     /** RouteInfo advertisedRouteNextHopUri. */
                     public advertisedRouteNextHopUri?: (string|null);
+
+                    /** RouteInfo nextHopUri. */
+                    public nextHopUri: string;
+
+                    /** RouteInfo nextHopNetworkUri. */
+                    public nextHopNetworkUri: string;
+
+                    /** RouteInfo originatingRouteUri. */
+                    public originatingRouteUri: string;
+
+                    /** RouteInfo originatingRouteDisplayName. */
+                    public originatingRouteDisplayName: string;
+
+                    /** RouteInfo nccHubRouteUri. */
+                    public nccHubRouteUri: string;
 
                     /** RouteInfo _nccHubUri. */
                     public _nccHubUri?: "nccHubUri";
@@ -10262,7 +10576,8 @@ export namespace google {
                         CLOUD_DNS = 3,
                         GOOGLE_API = 4,
                         GOOGLE_API_PSC = 5,
-                        GOOGLE_API_VPC_SC = 6
+                        GOOGLE_API_VPC_SC = 6,
+                        SERVERLESS_VPC_ACCESS = 7
                     }
                 }
 
@@ -11544,7 +11859,8 @@ export namespace google {
                         SOURCE_FORWARDING_RULE_UNSUPPORTED = 21,
                         NON_ROUTABLE_IP_ADDRESS = 22,
                         UNKNOWN_ISSUE_IN_GOOGLE_MANAGED_PROJECT = 30,
-                        UNSUPPORTED_GOOGLE_MANAGED_PROJECT_CONFIG = 31
+                        UNSUPPORTED_GOOGLE_MANAGED_PROJECT_CONFIG = 31,
+                        NO_SERVERLESS_IP_RANGES = 37
                     }
                 }
 
@@ -11698,6 +12014,7 @@ export namespace google {
                         FORWARDING_RULE_MISMATCH = 11,
                         FORWARDING_RULE_NO_INSTANCES = 12,
                         FIREWALL_BLOCKING_LOAD_BALANCER_BACKEND_HEALTH_CHECK = 13,
+                        INGRESS_FIREWALL_TAGS_UNSUPPORTED_BY_DIRECT_VPC_EGRESS = 85,
                         INSTANCE_NOT_RUNNING = 14,
                         GKE_CLUSTER_NOT_RUNNING = 27,
                         CLOUD_SQL_INSTANCE_NOT_RUNNING = 28,
@@ -11756,7 +12073,10 @@ export namespace google {
                         NO_ADVERTISED_ROUTE_TO_GCP_DESTINATION = 80,
                         NO_TRAFFIC_SELECTOR_TO_GCP_DESTINATION = 81,
                         NO_KNOWN_ROUTE_FROM_PEERED_NETWORK_TO_DESTINATION = 82,
-                        PRIVATE_NAT_TO_PSC_ENDPOINT_UNSUPPORTED = 83
+                        PRIVATE_NAT_TO_PSC_ENDPOINT_UNSUPPORTED = 83,
+                        PSC_PORT_MAPPING_PORT_MISMATCH = 86,
+                        PSC_PORT_MAPPING_WITHOUT_PSC_CONNECTION_UNSUPPORTED = 87,
+                        UNSUPPORTED_ROUTE_MATCHED_FOR_NAT64_DESTINATION = 88
                     }
                 }
 
@@ -12710,6 +13030,224 @@ export namespace google {
 
                     /**
                      * Gets the default type url for VpcConnectorInfo
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a DirectVpcEgressConnectionInfo. */
+                interface IDirectVpcEgressConnectionInfo {
+
+                    /** DirectVpcEgressConnectionInfo networkUri */
+                    networkUri?: (string|null);
+
+                    /** DirectVpcEgressConnectionInfo subnetworkUri */
+                    subnetworkUri?: (string|null);
+
+                    /** DirectVpcEgressConnectionInfo selectedIpRange */
+                    selectedIpRange?: (string|null);
+
+                    /** DirectVpcEgressConnectionInfo selectedIpAddress */
+                    selectedIpAddress?: (string|null);
+
+                    /** DirectVpcEgressConnectionInfo region */
+                    region?: (string|null);
+                }
+
+                /** Represents a DirectVpcEgressConnectionInfo. */
+                class DirectVpcEgressConnectionInfo implements IDirectVpcEgressConnectionInfo {
+
+                    /**
+                     * Constructs a new DirectVpcEgressConnectionInfo.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.networkmanagement.v1beta1.IDirectVpcEgressConnectionInfo);
+
+                    /** DirectVpcEgressConnectionInfo networkUri. */
+                    public networkUri: string;
+
+                    /** DirectVpcEgressConnectionInfo subnetworkUri. */
+                    public subnetworkUri: string;
+
+                    /** DirectVpcEgressConnectionInfo selectedIpRange. */
+                    public selectedIpRange: string;
+
+                    /** DirectVpcEgressConnectionInfo selectedIpAddress. */
+                    public selectedIpAddress: string;
+
+                    /** DirectVpcEgressConnectionInfo region. */
+                    public region: string;
+
+                    /**
+                     * Creates a new DirectVpcEgressConnectionInfo instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DirectVpcEgressConnectionInfo instance
+                     */
+                    public static create(properties?: google.cloud.networkmanagement.v1beta1.IDirectVpcEgressConnectionInfo): google.cloud.networkmanagement.v1beta1.DirectVpcEgressConnectionInfo;
+
+                    /**
+                     * Encodes the specified DirectVpcEgressConnectionInfo message. Does not implicitly {@link google.cloud.networkmanagement.v1beta1.DirectVpcEgressConnectionInfo.verify|verify} messages.
+                     * @param message DirectVpcEgressConnectionInfo message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.networkmanagement.v1beta1.IDirectVpcEgressConnectionInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DirectVpcEgressConnectionInfo message, length delimited. Does not implicitly {@link google.cloud.networkmanagement.v1beta1.DirectVpcEgressConnectionInfo.verify|verify} messages.
+                     * @param message DirectVpcEgressConnectionInfo message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.networkmanagement.v1beta1.IDirectVpcEgressConnectionInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DirectVpcEgressConnectionInfo message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DirectVpcEgressConnectionInfo
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.networkmanagement.v1beta1.DirectVpcEgressConnectionInfo;
+
+                    /**
+                     * Decodes a DirectVpcEgressConnectionInfo message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DirectVpcEgressConnectionInfo
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.networkmanagement.v1beta1.DirectVpcEgressConnectionInfo;
+
+                    /**
+                     * Verifies a DirectVpcEgressConnectionInfo message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DirectVpcEgressConnectionInfo message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DirectVpcEgressConnectionInfo
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.networkmanagement.v1beta1.DirectVpcEgressConnectionInfo;
+
+                    /**
+                     * Creates a plain object from a DirectVpcEgressConnectionInfo message. Also converts values to other types if specified.
+                     * @param message DirectVpcEgressConnectionInfo
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.networkmanagement.v1beta1.DirectVpcEgressConnectionInfo, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DirectVpcEgressConnectionInfo to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DirectVpcEgressConnectionInfo
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ServerlessExternalConnectionInfo. */
+                interface IServerlessExternalConnectionInfo {
+
+                    /** ServerlessExternalConnectionInfo selectedIpAddress */
+                    selectedIpAddress?: (string|null);
+                }
+
+                /** Represents a ServerlessExternalConnectionInfo. */
+                class ServerlessExternalConnectionInfo implements IServerlessExternalConnectionInfo {
+
+                    /**
+                     * Constructs a new ServerlessExternalConnectionInfo.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.networkmanagement.v1beta1.IServerlessExternalConnectionInfo);
+
+                    /** ServerlessExternalConnectionInfo selectedIpAddress. */
+                    public selectedIpAddress: string;
+
+                    /**
+                     * Creates a new ServerlessExternalConnectionInfo instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ServerlessExternalConnectionInfo instance
+                     */
+                    public static create(properties?: google.cloud.networkmanagement.v1beta1.IServerlessExternalConnectionInfo): google.cloud.networkmanagement.v1beta1.ServerlessExternalConnectionInfo;
+
+                    /**
+                     * Encodes the specified ServerlessExternalConnectionInfo message. Does not implicitly {@link google.cloud.networkmanagement.v1beta1.ServerlessExternalConnectionInfo.verify|verify} messages.
+                     * @param message ServerlessExternalConnectionInfo message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.networkmanagement.v1beta1.IServerlessExternalConnectionInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ServerlessExternalConnectionInfo message, length delimited. Does not implicitly {@link google.cloud.networkmanagement.v1beta1.ServerlessExternalConnectionInfo.verify|verify} messages.
+                     * @param message ServerlessExternalConnectionInfo message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.networkmanagement.v1beta1.IServerlessExternalConnectionInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ServerlessExternalConnectionInfo message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ServerlessExternalConnectionInfo
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.networkmanagement.v1beta1.ServerlessExternalConnectionInfo;
+
+                    /**
+                     * Decodes a ServerlessExternalConnectionInfo message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ServerlessExternalConnectionInfo
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.networkmanagement.v1beta1.ServerlessExternalConnectionInfo;
+
+                    /**
+                     * Verifies a ServerlessExternalConnectionInfo message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ServerlessExternalConnectionInfo message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ServerlessExternalConnectionInfo
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.networkmanagement.v1beta1.ServerlessExternalConnectionInfo;
+
+                    /**
+                     * Creates a plain object from a ServerlessExternalConnectionInfo message. Also converts values to other types if specified.
+                     * @param message ServerlessExternalConnectionInfo
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.networkmanagement.v1beta1.ServerlessExternalConnectionInfo, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ServerlessExternalConnectionInfo to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ServerlessExternalConnectionInfo
                      * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                      * @returns The default type url
                      */
