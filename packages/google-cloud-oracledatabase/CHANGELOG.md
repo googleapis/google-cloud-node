@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.5.0](https://github.com/googleapis/google-cloud-node/compare/oracledatabase-v0.4.0...oracledatabase-v0.5.0) (2025-04-11)
+
+
+### Features
+
+* [oracledatabase] add new AutonomousDatabase RPCs ([#6252](https://github.com/googleapis/google-cloud-node/issues/6252)) ([f830d44](https://github.com/googleapis/google-cloud-node/commit/f830d44de5a6e3f93a54955f01bb8e34934c5e5c))
+
 ## [0.4.0](https://github.com/googleapis/google-cloud-node/compare/oracledatabase-v0.3.0...oracledatabase-v0.4.0) (2025-03-19)
 
 

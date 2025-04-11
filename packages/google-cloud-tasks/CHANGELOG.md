@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/nodejs-tasks?activeTab=versions
 
+## [6.0.2](https://github.com/googleapis/google-cloud-node/compare/tasks-v6.0.1...tasks-v6.0.2) (2025-04-11)
+
+
+### Bug Fixes
+
+* **deps:** Update dependency body-parser to v2 ([#6226](https://github.com/googleapis/google-cloud-node/issues/6226)) ([72590a4](https://github.com/googleapis/google-cloud-node/commit/72590a4b4746a787a00566b42c95f87b5023d834))
+
 ## [6.0.1](https://github.com/googleapis/google-cloud-node/compare/tasks-v6.0.0...tasks-v6.0.1) (2025-03-19)
 
 
