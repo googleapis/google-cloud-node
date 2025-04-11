@@ -3936,6 +3936,8 @@
                          * @property {google.cloud.networkmanagement.v1.IVpnGatewayInfo|null} [vpnGateway] Step vpnGateway
                          * @property {google.cloud.networkmanagement.v1.IVpnTunnelInfo|null} [vpnTunnel] Step vpnTunnel
                          * @property {google.cloud.networkmanagement.v1.IVpcConnectorInfo|null} [vpcConnector] Step vpcConnector
+                         * @property {google.cloud.networkmanagement.v1.IDirectVpcEgressConnectionInfo|null} [directVpcEgressConnection] Step directVpcEgressConnection
+                         * @property {google.cloud.networkmanagement.v1.IServerlessExternalConnectionInfo|null} [serverlessExternalConnection] Step serverlessExternalConnection
                          * @property {google.cloud.networkmanagement.v1.IDeliverInfo|null} [deliver] Step deliver
                          * @property {google.cloud.networkmanagement.v1.IForwardInfo|null} [forward] Step forward
                          * @property {google.cloud.networkmanagement.v1.IAbortInfo|null} [abort] Step abort
@@ -4074,6 +4076,22 @@
                          * @instance
                          */
                         Step.prototype.vpcConnector = null;
+    
+                        /**
+                         * Step directVpcEgressConnection.
+                         * @member {google.cloud.networkmanagement.v1.IDirectVpcEgressConnectionInfo|null|undefined} directVpcEgressConnection
+                         * @memberof google.cloud.networkmanagement.v1.Step
+                         * @instance
+                         */
+                        Step.prototype.directVpcEgressConnection = null;
+    
+                        /**
+                         * Step serverlessExternalConnection.
+                         * @member {google.cloud.networkmanagement.v1.IServerlessExternalConnectionInfo|null|undefined} serverlessExternalConnection
+                         * @memberof google.cloud.networkmanagement.v1.Step
+                         * @instance
+                         */
+                        Step.prototype.serverlessExternalConnection = null;
     
                         /**
                          * Step deliver.
@@ -4224,12 +4242,12 @@
     
                         /**
                          * Step stepInfo.
-                         * @member {"instance"|"firewall"|"route"|"endpoint"|"googleService"|"forwardingRule"|"vpnGateway"|"vpnTunnel"|"vpcConnector"|"deliver"|"forward"|"abort"|"drop"|"loadBalancer"|"network"|"gkeMaster"|"cloudSqlInstance"|"redisInstance"|"redisCluster"|"cloudFunction"|"appEngineVersion"|"cloudRunRevision"|"nat"|"proxyConnection"|"loadBalancerBackendInfo"|"storageBucket"|"serverlessNeg"|undefined} stepInfo
+                         * @member {"instance"|"firewall"|"route"|"endpoint"|"googleService"|"forwardingRule"|"vpnGateway"|"vpnTunnel"|"vpcConnector"|"directVpcEgressConnection"|"serverlessExternalConnection"|"deliver"|"forward"|"abort"|"drop"|"loadBalancer"|"network"|"gkeMaster"|"cloudSqlInstance"|"redisInstance"|"redisCluster"|"cloudFunction"|"appEngineVersion"|"cloudRunRevision"|"nat"|"proxyConnection"|"loadBalancerBackendInfo"|"storageBucket"|"serverlessNeg"|undefined} stepInfo
                          * @memberof google.cloud.networkmanagement.v1.Step
                          * @instance
                          */
                         Object.defineProperty(Step.prototype, "stepInfo", {
-                            get: $util.oneOfGetter($oneOfFields = ["instance", "firewall", "route", "endpoint", "googleService", "forwardingRule", "vpnGateway", "vpnTunnel", "vpcConnector", "deliver", "forward", "abort", "drop", "loadBalancer", "network", "gkeMaster", "cloudSqlInstance", "redisInstance", "redisCluster", "cloudFunction", "appEngineVersion", "cloudRunRevision", "nat", "proxyConnection", "loadBalancerBackendInfo", "storageBucket", "serverlessNeg"]),
+                            get: $util.oneOfGetter($oneOfFields = ["instance", "firewall", "route", "endpoint", "googleService", "forwardingRule", "vpnGateway", "vpnTunnel", "vpcConnector", "directVpcEgressConnection", "serverlessExternalConnection", "deliver", "forward", "abort", "drop", "loadBalancer", "network", "gkeMaster", "cloudSqlInstance", "redisInstance", "redisCluster", "cloudFunction", "appEngineVersion", "cloudRunRevision", "nat", "proxyConnection", "loadBalancerBackendInfo", "storageBucket", "serverlessNeg"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
@@ -4319,6 +4337,10 @@
                                 $root.google.cloud.networkmanagement.v1.RedisInstanceInfo.encode(message.redisInstance, writer.uint32(/* id 30, wireType 2 =*/242).fork()).ldelim();
                             if (message.redisCluster != null && Object.hasOwnProperty.call(message, "redisCluster"))
                                 $root.google.cloud.networkmanagement.v1.RedisClusterInfo.encode(message.redisCluster, writer.uint32(/* id 31, wireType 2 =*/250).fork()).ldelim();
+                            if (message.directVpcEgressConnection != null && Object.hasOwnProperty.call(message, "directVpcEgressConnection"))
+                                $root.google.cloud.networkmanagement.v1.DirectVpcEgressConnectionInfo.encode(message.directVpcEgressConnection, writer.uint32(/* id 33, wireType 2 =*/266).fork()).ldelim();
+                            if (message.serverlessExternalConnection != null && Object.hasOwnProperty.call(message, "serverlessExternalConnection"))
+                                $root.google.cloud.networkmanagement.v1.ServerlessExternalConnectionInfo.encode(message.serverlessExternalConnection, writer.uint32(/* id 34, wireType 2 =*/274).fork()).ldelim();
                             return writer;
                         };
     
@@ -4403,6 +4425,14 @@
                                     }
                                 case 21: {
                                         message.vpcConnector = $root.google.cloud.networkmanagement.v1.VpcConnectorInfo.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 33: {
+                                        message.directVpcEgressConnection = $root.google.cloud.networkmanagement.v1.DirectVpcEgressConnectionInfo.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 34: {
+                                        message.serverlessExternalConnection = $root.google.cloud.networkmanagement.v1.ServerlessExternalConnectionInfo.decode(reader, reader.uint32());
                                         break;
                                     }
                                 case 12: {
@@ -4547,6 +4577,8 @@
                                 case 12:
                                 case 13:
                                 case 24:
+                                case 35:
+                                case 36:
                                 case 14:
                                 case 15:
                                 case 16:
@@ -4648,6 +4680,26 @@
                                     var error = $root.google.cloud.networkmanagement.v1.VpcConnectorInfo.verify(message.vpcConnector);
                                     if (error)
                                         return "vpcConnector." + error;
+                                }
+                            }
+                            if (message.directVpcEgressConnection != null && message.hasOwnProperty("directVpcEgressConnection")) {
+                                if (properties.stepInfo === 1)
+                                    return "stepInfo: multiple values";
+                                properties.stepInfo = 1;
+                                {
+                                    var error = $root.google.cloud.networkmanagement.v1.DirectVpcEgressConnectionInfo.verify(message.directVpcEgressConnection);
+                                    if (error)
+                                        return "directVpcEgressConnection." + error;
+                                }
+                            }
+                            if (message.serverlessExternalConnection != null && message.hasOwnProperty("serverlessExternalConnection")) {
+                                if (properties.stepInfo === 1)
+                                    return "stepInfo: multiple values";
+                                properties.stepInfo = 1;
+                                {
+                                    var error = $root.google.cloud.networkmanagement.v1.ServerlessExternalConnectionInfo.verify(message.serverlessExternalConnection);
+                                    if (error)
+                                        return "serverlessExternalConnection." + error;
                                 }
                             }
                             if (message.deliver != null && message.hasOwnProperty("deliver")) {
@@ -4962,6 +5014,14 @@
                             case 24:
                                 message.state = 24;
                                 break;
+                            case "DIRECT_VPC_EGRESS_CONNECTION":
+                            case 35:
+                                message.state = 35;
+                                break;
+                            case "SERVERLESS_EXTERNAL_CONNECTION":
+                            case 36:
+                                message.state = 36;
+                                break;
                             case "NAT":
                             case 14:
                                 message.state = 14;
@@ -5039,6 +5099,16 @@
                                 if (typeof object.vpcConnector !== "object")
                                     throw TypeError(".google.cloud.networkmanagement.v1.Step.vpcConnector: object expected");
                                 message.vpcConnector = $root.google.cloud.networkmanagement.v1.VpcConnectorInfo.fromObject(object.vpcConnector);
+                            }
+                            if (object.directVpcEgressConnection != null) {
+                                if (typeof object.directVpcEgressConnection !== "object")
+                                    throw TypeError(".google.cloud.networkmanagement.v1.Step.directVpcEgressConnection: object expected");
+                                message.directVpcEgressConnection = $root.google.cloud.networkmanagement.v1.DirectVpcEgressConnectionInfo.fromObject(object.directVpcEgressConnection);
+                            }
+                            if (object.serverlessExternalConnection != null) {
+                                if (typeof object.serverlessExternalConnection !== "object")
+                                    throw TypeError(".google.cloud.networkmanagement.v1.Step.serverlessExternalConnection: object expected");
+                                message.serverlessExternalConnection = $root.google.cloud.networkmanagement.v1.ServerlessExternalConnectionInfo.fromObject(object.serverlessExternalConnection);
                             }
                             if (object.deliver != null) {
                                 if (typeof object.deliver !== "object")
@@ -5295,6 +5365,16 @@
                                 if (options.oneofs)
                                     object.stepInfo = "redisCluster";
                             }
+                            if (message.directVpcEgressConnection != null && message.hasOwnProperty("directVpcEgressConnection")) {
+                                object.directVpcEgressConnection = $root.google.cloud.networkmanagement.v1.DirectVpcEgressConnectionInfo.toObject(message.directVpcEgressConnection, options);
+                                if (options.oneofs)
+                                    object.stepInfo = "directVpcEgressConnection";
+                            }
+                            if (message.serverlessExternalConnection != null && message.hasOwnProperty("serverlessExternalConnection")) {
+                                object.serverlessExternalConnection = $root.google.cloud.networkmanagement.v1.ServerlessExternalConnectionInfo.toObject(message.serverlessExternalConnection, options);
+                                if (options.oneofs)
+                                    object.stepInfo = "serverlessExternalConnection";
+                            }
                             return object;
                         };
     
@@ -5355,6 +5435,8 @@
                          * @property {number} ARRIVE_AT_VPN_GATEWAY=12 ARRIVE_AT_VPN_GATEWAY value
                          * @property {number} ARRIVE_AT_VPN_TUNNEL=13 ARRIVE_AT_VPN_TUNNEL value
                          * @property {number} ARRIVE_AT_VPC_CONNECTOR=24 ARRIVE_AT_VPC_CONNECTOR value
+                         * @property {number} DIRECT_VPC_EGRESS_CONNECTION=35 DIRECT_VPC_EGRESS_CONNECTION value
+                         * @property {number} SERVERLESS_EXTERNAL_CONNECTION=36 SERVERLESS_EXTERNAL_CONNECTION value
                          * @property {number} NAT=14 NAT value
                          * @property {number} PROXY_CONNECTION=15 PROXY_CONNECTION value
                          * @property {number} DELIVER=16 DELIVER value
@@ -5392,6 +5474,8 @@
                             values[valuesById[12] = "ARRIVE_AT_VPN_GATEWAY"] = 12;
                             values[valuesById[13] = "ARRIVE_AT_VPN_TUNNEL"] = 13;
                             values[valuesById[24] = "ARRIVE_AT_VPC_CONNECTOR"] = 24;
+                            values[valuesById[35] = "DIRECT_VPC_EGRESS_CONNECTION"] = 35;
+                            values[valuesById[36] = "SERVERLESS_EXTERNAL_CONNECTION"] = 36;
                             values[valuesById[14] = "NAT"] = 14;
                             values[valuesById[15] = "PROXY_CONNECTION"] = 15;
                             values[valuesById[16] = "DELIVER"] = 16;
@@ -6446,6 +6530,7 @@
                                 case 6:
                                 case 100:
                                 case 101:
+                                case 102:
                                     break;
                                 }
                             return null;
@@ -6535,6 +6620,10 @@
                             case "TRACKING_STATE":
                             case 101:
                                 message.firewallRuleType = 101;
+                                break;
+                            case "ANALYSIS_SKIPPED":
+                            case 102:
+                                message.firewallRuleType = 102;
                                 break;
                             }
                             return message;
@@ -6638,6 +6727,7 @@
                          * @property {number} NETWORK_REGIONAL_FIREWALL_POLICY_RULE=6 NETWORK_REGIONAL_FIREWALL_POLICY_RULE value
                          * @property {number} UNSUPPORTED_FIREWALL_POLICY_RULE=100 UNSUPPORTED_FIREWALL_POLICY_RULE value
                          * @property {number} TRACKING_STATE=101 TRACKING_STATE value
+                         * @property {number} ANALYSIS_SKIPPED=102 ANALYSIS_SKIPPED value
                          */
                         FirewallInfo.FirewallRuleType = (function() {
                             var valuesById = {}, values = Object.create(valuesById);
@@ -6650,6 +6740,7 @@
                             values[valuesById[6] = "NETWORK_REGIONAL_FIREWALL_POLICY_RULE"] = 6;
                             values[valuesById[100] = "UNSUPPORTED_FIREWALL_POLICY_RULE"] = 100;
                             values[valuesById[101] = "TRACKING_STATE"] = 101;
+                            values[valuesById[102] = "ANALYSIS_SKIPPED"] = 102;
                             return values;
                         })();
     
@@ -6681,6 +6772,11 @@
                          * @property {string|null} [nccSpokeUri] RouteInfo nccSpokeUri
                          * @property {string|null} [advertisedRouteSourceRouterUri] RouteInfo advertisedRouteSourceRouterUri
                          * @property {string|null} [advertisedRouteNextHopUri] RouteInfo advertisedRouteNextHopUri
+                         * @property {string|null} [nextHopUri] RouteInfo nextHopUri
+                         * @property {string|null} [nextHopNetworkUri] RouteInfo nextHopNetworkUri
+                         * @property {string|null} [originatingRouteUri] RouteInfo originatingRouteUri
+                         * @property {string|null} [originatingRouteDisplayName] RouteInfo originatingRouteDisplayName
+                         * @property {string|null} [nccHubRouteUri] RouteInfo nccHubRouteUri
                          */
     
                         /**
@@ -6854,6 +6950,46 @@
                          */
                         RouteInfo.prototype.advertisedRouteNextHopUri = null;
     
+                        /**
+                         * RouteInfo nextHopUri.
+                         * @member {string} nextHopUri
+                         * @memberof google.cloud.networkmanagement.v1.RouteInfo
+                         * @instance
+                         */
+                        RouteInfo.prototype.nextHopUri = "";
+    
+                        /**
+                         * RouteInfo nextHopNetworkUri.
+                         * @member {string} nextHopNetworkUri
+                         * @memberof google.cloud.networkmanagement.v1.RouteInfo
+                         * @instance
+                         */
+                        RouteInfo.prototype.nextHopNetworkUri = "";
+    
+                        /**
+                         * RouteInfo originatingRouteUri.
+                         * @member {string} originatingRouteUri
+                         * @memberof google.cloud.networkmanagement.v1.RouteInfo
+                         * @instance
+                         */
+                        RouteInfo.prototype.originatingRouteUri = "";
+    
+                        /**
+                         * RouteInfo originatingRouteDisplayName.
+                         * @member {string} originatingRouteDisplayName
+                         * @memberof google.cloud.networkmanagement.v1.RouteInfo
+                         * @instance
+                         */
+                        RouteInfo.prototype.originatingRouteDisplayName = "";
+    
+                        /**
+                         * RouteInfo nccHubRouteUri.
+                         * @member {string} nccHubRouteUri
+                         * @memberof google.cloud.networkmanagement.v1.RouteInfo
+                         * @instance
+                         */
+                        RouteInfo.prototype.nccHubRouteUri = "";
+    
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
@@ -6967,6 +7103,16 @@
                                 writer.uint32(/* id 18, wireType 2 =*/146).string(message.advertisedRouteNextHopUri);
                             if (message.region != null && Object.hasOwnProperty.call(message, "region"))
                                 writer.uint32(/* id 19, wireType 2 =*/154).string(message.region);
+                            if (message.nextHopUri != null && Object.hasOwnProperty.call(message, "nextHopUri"))
+                                writer.uint32(/* id 20, wireType 2 =*/162).string(message.nextHopUri);
+                            if (message.nextHopNetworkUri != null && Object.hasOwnProperty.call(message, "nextHopNetworkUri"))
+                                writer.uint32(/* id 21, wireType 2 =*/170).string(message.nextHopNetworkUri);
+                            if (message.originatingRouteUri != null && Object.hasOwnProperty.call(message, "originatingRouteUri"))
+                                writer.uint32(/* id 22, wireType 2 =*/178).string(message.originatingRouteUri);
+                            if (message.originatingRouteDisplayName != null && Object.hasOwnProperty.call(message, "originatingRouteDisplayName"))
+                                writer.uint32(/* id 23, wireType 2 =*/186).string(message.originatingRouteDisplayName);
+                            if (message.nccHubRouteUri != null && Object.hasOwnProperty.call(message, "nccHubRouteUri"))
+                                writer.uint32(/* id 24, wireType 2 =*/194).string(message.nccHubRouteUri);
                             return writer;
                         };
     
@@ -7083,6 +7229,26 @@
                                     }
                                 case 18: {
                                         message.advertisedRouteNextHopUri = reader.string();
+                                        break;
+                                    }
+                                case 20: {
+                                        message.nextHopUri = reader.string();
+                                        break;
+                                    }
+                                case 21: {
+                                        message.nextHopNetworkUri = reader.string();
+                                        break;
+                                    }
+                                case 22: {
+                                        message.originatingRouteUri = reader.string();
+                                        break;
+                                    }
+                                case 23: {
+                                        message.originatingRouteDisplayName = reader.string();
+                                        break;
+                                    }
+                                case 24: {
+                                        message.nccHubRouteUri = reader.string();
                                         break;
                                     }
                                 default:
@@ -7236,6 +7402,21 @@
                                 if (!$util.isString(message.advertisedRouteNextHopUri))
                                     return "advertisedRouteNextHopUri: string expected";
                             }
+                            if (message.nextHopUri != null && message.hasOwnProperty("nextHopUri"))
+                                if (!$util.isString(message.nextHopUri))
+                                    return "nextHopUri: string expected";
+                            if (message.nextHopNetworkUri != null && message.hasOwnProperty("nextHopNetworkUri"))
+                                if (!$util.isString(message.nextHopNetworkUri))
+                                    return "nextHopNetworkUri: string expected";
+                            if (message.originatingRouteUri != null && message.hasOwnProperty("originatingRouteUri"))
+                                if (!$util.isString(message.originatingRouteUri))
+                                    return "originatingRouteUri: string expected";
+                            if (message.originatingRouteDisplayName != null && message.hasOwnProperty("originatingRouteDisplayName"))
+                                if (!$util.isString(message.originatingRouteDisplayName))
+                                    return "originatingRouteDisplayName: string expected";
+                            if (message.nccHubRouteUri != null && message.hasOwnProperty("nccHubRouteUri"))
+                                if (!$util.isString(message.nccHubRouteUri))
+                                    return "nccHubRouteUri: string expected";
                             return null;
                         };
     
@@ -7427,6 +7608,16 @@
                                 message.advertisedRouteSourceRouterUri = String(object.advertisedRouteSourceRouterUri);
                             if (object.advertisedRouteNextHopUri != null)
                                 message.advertisedRouteNextHopUri = String(object.advertisedRouteNextHopUri);
+                            if (object.nextHopUri != null)
+                                message.nextHopUri = String(object.nextHopUri);
+                            if (object.nextHopNetworkUri != null)
+                                message.nextHopNetworkUri = String(object.nextHopNetworkUri);
+                            if (object.originatingRouteUri != null)
+                                message.originatingRouteUri = String(object.originatingRouteUri);
+                            if (object.originatingRouteDisplayName != null)
+                                message.originatingRouteDisplayName = String(object.originatingRouteDisplayName);
+                            if (object.nccHubRouteUri != null)
+                                message.nccHubRouteUri = String(object.nccHubRouteUri);
                             return message;
                         };
     
@@ -7461,6 +7652,11 @@
                                 object.srcIpRange = "";
                                 object.routeScope = options.enums === String ? "ROUTE_SCOPE_UNSPECIFIED" : 0;
                                 object.region = "";
+                                object.nextHopUri = "";
+                                object.nextHopNetworkUri = "";
+                                object.originatingRouteUri = "";
+                                object.originatingRouteDisplayName = "";
+                                object.nccHubRouteUri = "";
                             }
                             if (message.displayName != null && message.hasOwnProperty("displayName"))
                                 object.displayName = message.displayName;
@@ -7524,6 +7720,16 @@
                             }
                             if (message.region != null && message.hasOwnProperty("region"))
                                 object.region = message.region;
+                            if (message.nextHopUri != null && message.hasOwnProperty("nextHopUri"))
+                                object.nextHopUri = message.nextHopUri;
+                            if (message.nextHopNetworkUri != null && message.hasOwnProperty("nextHopNetworkUri"))
+                                object.nextHopNetworkUri = message.nextHopNetworkUri;
+                            if (message.originatingRouteUri != null && message.hasOwnProperty("originatingRouteUri"))
+                                object.originatingRouteUri = message.originatingRouteUri;
+                            if (message.originatingRouteDisplayName != null && message.hasOwnProperty("originatingRouteDisplayName"))
+                                object.originatingRouteDisplayName = message.originatingRouteDisplayName;
+                            if (message.nccHubRouteUri != null && message.hasOwnProperty("nccHubRouteUri"))
+                                object.nccHubRouteUri = message.nccHubRouteUri;
                             return object;
                         };
     
@@ -7796,6 +8002,7 @@
                                 case 4:
                                 case 5:
                                 case 6:
+                                case 7:
                                     break;
                                 }
                             return null;
@@ -7849,6 +8056,10 @@
                             case "GOOGLE_API_VPC_SC":
                             case 6:
                                 message.googleServiceType = 6;
+                                break;
+                            case "SERVERLESS_VPC_ACCESS":
+                            case 7:
+                                message.googleServiceType = 7;
                                 break;
                             }
                             return message;
@@ -7915,6 +8126,7 @@
                          * @property {number} GOOGLE_API=4 GOOGLE_API value
                          * @property {number} GOOGLE_API_PSC=5 GOOGLE_API_PSC value
                          * @property {number} GOOGLE_API_VPC_SC=6 GOOGLE_API_VPC_SC value
+                         * @property {number} SERVERLESS_VPC_ACCESS=7 SERVERLESS_VPC_ACCESS value
                          */
                         GoogleServiceInfo.GoogleServiceType = (function() {
                             var valuesById = {}, values = Object.create(valuesById);
@@ -7925,6 +8137,7 @@
                             values[valuesById[4] = "GOOGLE_API"] = 4;
                             values[valuesById[5] = "GOOGLE_API_PSC"] = 5;
                             values[valuesById[6] = "GOOGLE_API_VPC_SC"] = 6;
+                            values[valuesById[7] = "SERVERLESS_VPC_ACCESS"] = 7;
                             return values;
                         })();
     
@@ -11280,6 +11493,7 @@
                                 case 22:
                                 case 30:
                                 case 31:
+                                case 37:
                                     break;
                                 }
                             if (message.resourceUri != null && message.hasOwnProperty("resourceUri"))
@@ -11461,6 +11675,10 @@
                             case 31:
                                 message.cause = 31;
                                 break;
+                            case "NO_SERVERLESS_IP_RANGES":
+                            case 37:
+                                message.cause = 37;
+                                break;
                             }
                             if (object.resourceUri != null)
                                 message.resourceUri = String(object.resourceUri);
@@ -11576,6 +11794,7 @@
                          * @property {number} NON_ROUTABLE_IP_ADDRESS=22 NON_ROUTABLE_IP_ADDRESS value
                          * @property {number} UNKNOWN_ISSUE_IN_GOOGLE_MANAGED_PROJECT=30 UNKNOWN_ISSUE_IN_GOOGLE_MANAGED_PROJECT value
                          * @property {number} UNSUPPORTED_GOOGLE_MANAGED_PROJECT_CONFIG=31 UNSUPPORTED_GOOGLE_MANAGED_PROJECT_CONFIG value
+                         * @property {number} NO_SERVERLESS_IP_RANGES=37 NO_SERVERLESS_IP_RANGES value
                          */
                         AbortInfo.Cause = (function() {
                             var valuesById = {}, values = Object.create(valuesById);
@@ -11615,6 +11834,7 @@
                             values[valuesById[22] = "NON_ROUTABLE_IP_ADDRESS"] = 22;
                             values[valuesById[30] = "UNKNOWN_ISSUE_IN_GOOGLE_MANAGED_PROJECT"] = 30;
                             values[valuesById[31] = "UNSUPPORTED_GOOGLE_MANAGED_PROJECT_CONFIG"] = 31;
+                            values[valuesById[37] = "NO_SERVERLESS_IP_RANGES"] = 37;
                             return values;
                         })();
     
@@ -11841,6 +12061,7 @@
                                 case 11:
                                 case 12:
                                 case 13:
+                                case 85:
                                 case 14:
                                 case 27:
                                 case 28:
@@ -11900,6 +12121,9 @@
                                 case 81:
                                 case 82:
                                 case 83:
+                                case 86:
+                                case 87:
+                                case 88:
                                     break;
                                 }
                             if (message.resourceUri != null && message.hasOwnProperty("resourceUri"))
@@ -12035,6 +12259,10 @@
                             case "FIREWALL_BLOCKING_LOAD_BALANCER_BACKEND_HEALTH_CHECK":
                             case 13:
                                 message.cause = 13;
+                                break;
+                            case "INGRESS_FIREWALL_TAGS_UNSUPPORTED_BY_DIRECT_VPC_EGRESS":
+                            case 85:
+                                message.cause = 85;
                                 break;
                             case "INSTANCE_NOT_RUNNING":
                             case 14:
@@ -12272,6 +12500,18 @@
                             case 83:
                                 message.cause = 83;
                                 break;
+                            case "PSC_PORT_MAPPING_PORT_MISMATCH":
+                            case 86:
+                                message.cause = 86;
+                                break;
+                            case "PSC_PORT_MAPPING_WITHOUT_PSC_CONNECTION_UNSUPPORTED":
+                            case 87:
+                                message.cause = 87;
+                                break;
+                            case "UNSUPPORTED_ROUTE_MATCHED_FOR_NAT64_DESTINATION":
+                            case 88:
+                                message.cause = 88;
+                                break;
                             }
                             if (object.resourceUri != null)
                                 message.resourceUri = String(object.resourceUri);
@@ -12372,6 +12612,7 @@
                          * @property {number} FORWARDING_RULE_MISMATCH=11 FORWARDING_RULE_MISMATCH value
                          * @property {number} FORWARDING_RULE_NO_INSTANCES=12 FORWARDING_RULE_NO_INSTANCES value
                          * @property {number} FIREWALL_BLOCKING_LOAD_BALANCER_BACKEND_HEALTH_CHECK=13 FIREWALL_BLOCKING_LOAD_BALANCER_BACKEND_HEALTH_CHECK value
+                         * @property {number} INGRESS_FIREWALL_TAGS_UNSUPPORTED_BY_DIRECT_VPC_EGRESS=85 INGRESS_FIREWALL_TAGS_UNSUPPORTED_BY_DIRECT_VPC_EGRESS value
                          * @property {number} INSTANCE_NOT_RUNNING=14 INSTANCE_NOT_RUNNING value
                          * @property {number} GKE_CLUSTER_NOT_RUNNING=27 GKE_CLUSTER_NOT_RUNNING value
                          * @property {number} CLOUD_SQL_INSTANCE_NOT_RUNNING=28 CLOUD_SQL_INSTANCE_NOT_RUNNING value
@@ -12431,6 +12672,9 @@
                          * @property {number} NO_TRAFFIC_SELECTOR_TO_GCP_DESTINATION=81 NO_TRAFFIC_SELECTOR_TO_GCP_DESTINATION value
                          * @property {number} NO_KNOWN_ROUTE_FROM_PEERED_NETWORK_TO_DESTINATION=82 NO_KNOWN_ROUTE_FROM_PEERED_NETWORK_TO_DESTINATION value
                          * @property {number} PRIVATE_NAT_TO_PSC_ENDPOINT_UNSUPPORTED=83 PRIVATE_NAT_TO_PSC_ENDPOINT_UNSUPPORTED value
+                         * @property {number} PSC_PORT_MAPPING_PORT_MISMATCH=86 PSC_PORT_MAPPING_PORT_MISMATCH value
+                         * @property {number} PSC_PORT_MAPPING_WITHOUT_PSC_CONNECTION_UNSUPPORTED=87 PSC_PORT_MAPPING_WITHOUT_PSC_CONNECTION_UNSUPPORTED value
+                         * @property {number} UNSUPPORTED_ROUTE_MATCHED_FOR_NAT64_DESTINATION=88 UNSUPPORTED_ROUTE_MATCHED_FOR_NAT64_DESTINATION value
                          */
                         DropInfo.Cause = (function() {
                             var valuesById = {}, values = Object.create(valuesById);
@@ -12459,6 +12703,7 @@
                             values[valuesById[11] = "FORWARDING_RULE_MISMATCH"] = 11;
                             values[valuesById[12] = "FORWARDING_RULE_NO_INSTANCES"] = 12;
                             values[valuesById[13] = "FIREWALL_BLOCKING_LOAD_BALANCER_BACKEND_HEALTH_CHECK"] = 13;
+                            values[valuesById[85] = "INGRESS_FIREWALL_TAGS_UNSUPPORTED_BY_DIRECT_VPC_EGRESS"] = 85;
                             values[valuesById[14] = "INSTANCE_NOT_RUNNING"] = 14;
                             values[valuesById[27] = "GKE_CLUSTER_NOT_RUNNING"] = 27;
                             values[valuesById[28] = "CLOUD_SQL_INSTANCE_NOT_RUNNING"] = 28;
@@ -12518,6 +12763,9 @@
                             values[valuesById[81] = "NO_TRAFFIC_SELECTOR_TO_GCP_DESTINATION"] = 81;
                             values[valuesById[82] = "NO_KNOWN_ROUTE_FROM_PEERED_NETWORK_TO_DESTINATION"] = 82;
                             values[valuesById[83] = "PRIVATE_NAT_TO_PSC_ENDPOINT_UNSUPPORTED"] = 83;
+                            values[valuesById[86] = "PSC_PORT_MAPPING_PORT_MISMATCH"] = 86;
+                            values[valuesById[87] = "PSC_PORT_MAPPING_WITHOUT_PSC_CONNECTION_UNSUPPORTED"] = 87;
+                            values[valuesById[88] = "UNSUPPORTED_ROUTE_MATCHED_FOR_NAT64_DESTINATION"] = 88;
                             return values;
                         })();
     
@@ -14858,6 +15106,505 @@
                         };
     
                         return VpcConnectorInfo;
+                    })();
+    
+                    v1.DirectVpcEgressConnectionInfo = (function() {
+    
+                        /**
+                         * Properties of a DirectVpcEgressConnectionInfo.
+                         * @memberof google.cloud.networkmanagement.v1
+                         * @interface IDirectVpcEgressConnectionInfo
+                         * @property {string|null} [networkUri] DirectVpcEgressConnectionInfo networkUri
+                         * @property {string|null} [subnetworkUri] DirectVpcEgressConnectionInfo subnetworkUri
+                         * @property {string|null} [selectedIpRange] DirectVpcEgressConnectionInfo selectedIpRange
+                         * @property {string|null} [selectedIpAddress] DirectVpcEgressConnectionInfo selectedIpAddress
+                         * @property {string|null} [region] DirectVpcEgressConnectionInfo region
+                         */
+    
+                        /**
+                         * Constructs a new DirectVpcEgressConnectionInfo.
+                         * @memberof google.cloud.networkmanagement.v1
+                         * @classdesc Represents a DirectVpcEgressConnectionInfo.
+                         * @implements IDirectVpcEgressConnectionInfo
+                         * @constructor
+                         * @param {google.cloud.networkmanagement.v1.IDirectVpcEgressConnectionInfo=} [properties] Properties to set
+                         */
+                        function DirectVpcEgressConnectionInfo(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * DirectVpcEgressConnectionInfo networkUri.
+                         * @member {string} networkUri
+                         * @memberof google.cloud.networkmanagement.v1.DirectVpcEgressConnectionInfo
+                         * @instance
+                         */
+                        DirectVpcEgressConnectionInfo.prototype.networkUri = "";
+    
+                        /**
+                         * DirectVpcEgressConnectionInfo subnetworkUri.
+                         * @member {string} subnetworkUri
+                         * @memberof google.cloud.networkmanagement.v1.DirectVpcEgressConnectionInfo
+                         * @instance
+                         */
+                        DirectVpcEgressConnectionInfo.prototype.subnetworkUri = "";
+    
+                        /**
+                         * DirectVpcEgressConnectionInfo selectedIpRange.
+                         * @member {string} selectedIpRange
+                         * @memberof google.cloud.networkmanagement.v1.DirectVpcEgressConnectionInfo
+                         * @instance
+                         */
+                        DirectVpcEgressConnectionInfo.prototype.selectedIpRange = "";
+    
+                        /**
+                         * DirectVpcEgressConnectionInfo selectedIpAddress.
+                         * @member {string} selectedIpAddress
+                         * @memberof google.cloud.networkmanagement.v1.DirectVpcEgressConnectionInfo
+                         * @instance
+                         */
+                        DirectVpcEgressConnectionInfo.prototype.selectedIpAddress = "";
+    
+                        /**
+                         * DirectVpcEgressConnectionInfo region.
+                         * @member {string} region
+                         * @memberof google.cloud.networkmanagement.v1.DirectVpcEgressConnectionInfo
+                         * @instance
+                         */
+                        DirectVpcEgressConnectionInfo.prototype.region = "";
+    
+                        /**
+                         * Creates a new DirectVpcEgressConnectionInfo instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.networkmanagement.v1.DirectVpcEgressConnectionInfo
+                         * @static
+                         * @param {google.cloud.networkmanagement.v1.IDirectVpcEgressConnectionInfo=} [properties] Properties to set
+                         * @returns {google.cloud.networkmanagement.v1.DirectVpcEgressConnectionInfo} DirectVpcEgressConnectionInfo instance
+                         */
+                        DirectVpcEgressConnectionInfo.create = function create(properties) {
+                            return new DirectVpcEgressConnectionInfo(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified DirectVpcEgressConnectionInfo message. Does not implicitly {@link google.cloud.networkmanagement.v1.DirectVpcEgressConnectionInfo.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.networkmanagement.v1.DirectVpcEgressConnectionInfo
+                         * @static
+                         * @param {google.cloud.networkmanagement.v1.IDirectVpcEgressConnectionInfo} message DirectVpcEgressConnectionInfo message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DirectVpcEgressConnectionInfo.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.networkUri != null && Object.hasOwnProperty.call(message, "networkUri"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.networkUri);
+                            if (message.subnetworkUri != null && Object.hasOwnProperty.call(message, "subnetworkUri"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.subnetworkUri);
+                            if (message.selectedIpRange != null && Object.hasOwnProperty.call(message, "selectedIpRange"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.selectedIpRange);
+                            if (message.selectedIpAddress != null && Object.hasOwnProperty.call(message, "selectedIpAddress"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.selectedIpAddress);
+                            if (message.region != null && Object.hasOwnProperty.call(message, "region"))
+                                writer.uint32(/* id 5, wireType 2 =*/42).string(message.region);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified DirectVpcEgressConnectionInfo message, length delimited. Does not implicitly {@link google.cloud.networkmanagement.v1.DirectVpcEgressConnectionInfo.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.networkmanagement.v1.DirectVpcEgressConnectionInfo
+                         * @static
+                         * @param {google.cloud.networkmanagement.v1.IDirectVpcEgressConnectionInfo} message DirectVpcEgressConnectionInfo message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DirectVpcEgressConnectionInfo.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a DirectVpcEgressConnectionInfo message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.networkmanagement.v1.DirectVpcEgressConnectionInfo
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.networkmanagement.v1.DirectVpcEgressConnectionInfo} DirectVpcEgressConnectionInfo
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DirectVpcEgressConnectionInfo.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networkmanagement.v1.DirectVpcEgressConnectionInfo();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.networkUri = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.subnetworkUri = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.selectedIpRange = reader.string();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.selectedIpAddress = reader.string();
+                                        break;
+                                    }
+                                case 5: {
+                                        message.region = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a DirectVpcEgressConnectionInfo message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.networkmanagement.v1.DirectVpcEgressConnectionInfo
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.networkmanagement.v1.DirectVpcEgressConnectionInfo} DirectVpcEgressConnectionInfo
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DirectVpcEgressConnectionInfo.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a DirectVpcEgressConnectionInfo message.
+                         * @function verify
+                         * @memberof google.cloud.networkmanagement.v1.DirectVpcEgressConnectionInfo
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        DirectVpcEgressConnectionInfo.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.networkUri != null && message.hasOwnProperty("networkUri"))
+                                if (!$util.isString(message.networkUri))
+                                    return "networkUri: string expected";
+                            if (message.subnetworkUri != null && message.hasOwnProperty("subnetworkUri"))
+                                if (!$util.isString(message.subnetworkUri))
+                                    return "subnetworkUri: string expected";
+                            if (message.selectedIpRange != null && message.hasOwnProperty("selectedIpRange"))
+                                if (!$util.isString(message.selectedIpRange))
+                                    return "selectedIpRange: string expected";
+                            if (message.selectedIpAddress != null && message.hasOwnProperty("selectedIpAddress"))
+                                if (!$util.isString(message.selectedIpAddress))
+                                    return "selectedIpAddress: string expected";
+                            if (message.region != null && message.hasOwnProperty("region"))
+                                if (!$util.isString(message.region))
+                                    return "region: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a DirectVpcEgressConnectionInfo message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.networkmanagement.v1.DirectVpcEgressConnectionInfo
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.networkmanagement.v1.DirectVpcEgressConnectionInfo} DirectVpcEgressConnectionInfo
+                         */
+                        DirectVpcEgressConnectionInfo.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.networkmanagement.v1.DirectVpcEgressConnectionInfo)
+                                return object;
+                            var message = new $root.google.cloud.networkmanagement.v1.DirectVpcEgressConnectionInfo();
+                            if (object.networkUri != null)
+                                message.networkUri = String(object.networkUri);
+                            if (object.subnetworkUri != null)
+                                message.subnetworkUri = String(object.subnetworkUri);
+                            if (object.selectedIpRange != null)
+                                message.selectedIpRange = String(object.selectedIpRange);
+                            if (object.selectedIpAddress != null)
+                                message.selectedIpAddress = String(object.selectedIpAddress);
+                            if (object.region != null)
+                                message.region = String(object.region);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a DirectVpcEgressConnectionInfo message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.networkmanagement.v1.DirectVpcEgressConnectionInfo
+                         * @static
+                         * @param {google.cloud.networkmanagement.v1.DirectVpcEgressConnectionInfo} message DirectVpcEgressConnectionInfo
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        DirectVpcEgressConnectionInfo.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.networkUri = "";
+                                object.subnetworkUri = "";
+                                object.selectedIpRange = "";
+                                object.selectedIpAddress = "";
+                                object.region = "";
+                            }
+                            if (message.networkUri != null && message.hasOwnProperty("networkUri"))
+                                object.networkUri = message.networkUri;
+                            if (message.subnetworkUri != null && message.hasOwnProperty("subnetworkUri"))
+                                object.subnetworkUri = message.subnetworkUri;
+                            if (message.selectedIpRange != null && message.hasOwnProperty("selectedIpRange"))
+                                object.selectedIpRange = message.selectedIpRange;
+                            if (message.selectedIpAddress != null && message.hasOwnProperty("selectedIpAddress"))
+                                object.selectedIpAddress = message.selectedIpAddress;
+                            if (message.region != null && message.hasOwnProperty("region"))
+                                object.region = message.region;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this DirectVpcEgressConnectionInfo to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.networkmanagement.v1.DirectVpcEgressConnectionInfo
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        DirectVpcEgressConnectionInfo.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for DirectVpcEgressConnectionInfo
+                         * @function getTypeUrl
+                         * @memberof google.cloud.networkmanagement.v1.DirectVpcEgressConnectionInfo
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        DirectVpcEgressConnectionInfo.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.networkmanagement.v1.DirectVpcEgressConnectionInfo";
+                        };
+    
+                        return DirectVpcEgressConnectionInfo;
+                    })();
+    
+                    v1.ServerlessExternalConnectionInfo = (function() {
+    
+                        /**
+                         * Properties of a ServerlessExternalConnectionInfo.
+                         * @memberof google.cloud.networkmanagement.v1
+                         * @interface IServerlessExternalConnectionInfo
+                         * @property {string|null} [selectedIpAddress] ServerlessExternalConnectionInfo selectedIpAddress
+                         */
+    
+                        /**
+                         * Constructs a new ServerlessExternalConnectionInfo.
+                         * @memberof google.cloud.networkmanagement.v1
+                         * @classdesc Represents a ServerlessExternalConnectionInfo.
+                         * @implements IServerlessExternalConnectionInfo
+                         * @constructor
+                         * @param {google.cloud.networkmanagement.v1.IServerlessExternalConnectionInfo=} [properties] Properties to set
+                         */
+                        function ServerlessExternalConnectionInfo(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ServerlessExternalConnectionInfo selectedIpAddress.
+                         * @member {string} selectedIpAddress
+                         * @memberof google.cloud.networkmanagement.v1.ServerlessExternalConnectionInfo
+                         * @instance
+                         */
+                        ServerlessExternalConnectionInfo.prototype.selectedIpAddress = "";
+    
+                        /**
+                         * Creates a new ServerlessExternalConnectionInfo instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.networkmanagement.v1.ServerlessExternalConnectionInfo
+                         * @static
+                         * @param {google.cloud.networkmanagement.v1.IServerlessExternalConnectionInfo=} [properties] Properties to set
+                         * @returns {google.cloud.networkmanagement.v1.ServerlessExternalConnectionInfo} ServerlessExternalConnectionInfo instance
+                         */
+                        ServerlessExternalConnectionInfo.create = function create(properties) {
+                            return new ServerlessExternalConnectionInfo(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ServerlessExternalConnectionInfo message. Does not implicitly {@link google.cloud.networkmanagement.v1.ServerlessExternalConnectionInfo.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.networkmanagement.v1.ServerlessExternalConnectionInfo
+                         * @static
+                         * @param {google.cloud.networkmanagement.v1.IServerlessExternalConnectionInfo} message ServerlessExternalConnectionInfo message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ServerlessExternalConnectionInfo.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.selectedIpAddress != null && Object.hasOwnProperty.call(message, "selectedIpAddress"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.selectedIpAddress);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ServerlessExternalConnectionInfo message, length delimited. Does not implicitly {@link google.cloud.networkmanagement.v1.ServerlessExternalConnectionInfo.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.networkmanagement.v1.ServerlessExternalConnectionInfo
+                         * @static
+                         * @param {google.cloud.networkmanagement.v1.IServerlessExternalConnectionInfo} message ServerlessExternalConnectionInfo message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ServerlessExternalConnectionInfo.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ServerlessExternalConnectionInfo message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.networkmanagement.v1.ServerlessExternalConnectionInfo
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.networkmanagement.v1.ServerlessExternalConnectionInfo} ServerlessExternalConnectionInfo
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ServerlessExternalConnectionInfo.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networkmanagement.v1.ServerlessExternalConnectionInfo();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.selectedIpAddress = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ServerlessExternalConnectionInfo message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.networkmanagement.v1.ServerlessExternalConnectionInfo
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.networkmanagement.v1.ServerlessExternalConnectionInfo} ServerlessExternalConnectionInfo
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ServerlessExternalConnectionInfo.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ServerlessExternalConnectionInfo message.
+                         * @function verify
+                         * @memberof google.cloud.networkmanagement.v1.ServerlessExternalConnectionInfo
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ServerlessExternalConnectionInfo.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.selectedIpAddress != null && message.hasOwnProperty("selectedIpAddress"))
+                                if (!$util.isString(message.selectedIpAddress))
+                                    return "selectedIpAddress: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ServerlessExternalConnectionInfo message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.networkmanagement.v1.ServerlessExternalConnectionInfo
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.networkmanagement.v1.ServerlessExternalConnectionInfo} ServerlessExternalConnectionInfo
+                         */
+                        ServerlessExternalConnectionInfo.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.networkmanagement.v1.ServerlessExternalConnectionInfo)
+                                return object;
+                            var message = new $root.google.cloud.networkmanagement.v1.ServerlessExternalConnectionInfo();
+                            if (object.selectedIpAddress != null)
+                                message.selectedIpAddress = String(object.selectedIpAddress);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ServerlessExternalConnectionInfo message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.networkmanagement.v1.ServerlessExternalConnectionInfo
+                         * @static
+                         * @param {google.cloud.networkmanagement.v1.ServerlessExternalConnectionInfo} message ServerlessExternalConnectionInfo
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ServerlessExternalConnectionInfo.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.selectedIpAddress = "";
+                            if (message.selectedIpAddress != null && message.hasOwnProperty("selectedIpAddress"))
+                                object.selectedIpAddress = message.selectedIpAddress;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ServerlessExternalConnectionInfo to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.networkmanagement.v1.ServerlessExternalConnectionInfo
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ServerlessExternalConnectionInfo.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ServerlessExternalConnectionInfo
+                         * @function getTypeUrl
+                         * @memberof google.cloud.networkmanagement.v1.ServerlessExternalConnectionInfo
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ServerlessExternalConnectionInfo.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.networkmanagement.v1.ServerlessExternalConnectionInfo";
+                        };
+    
+                        return ServerlessExternalConnectionInfo;
                     })();
     
                     v1.NatInfo = (function() {
@@ -25456,6 +26203,8 @@
                          * @property {google.cloud.networkmanagement.v1beta1.IVpnGatewayInfo|null} [vpnGateway] Step vpnGateway
                          * @property {google.cloud.networkmanagement.v1beta1.IVpnTunnelInfo|null} [vpnTunnel] Step vpnTunnel
                          * @property {google.cloud.networkmanagement.v1beta1.IVpcConnectorInfo|null} [vpcConnector] Step vpcConnector
+                         * @property {google.cloud.networkmanagement.v1beta1.IDirectVpcEgressConnectionInfo|null} [directVpcEgressConnection] Step directVpcEgressConnection
+                         * @property {google.cloud.networkmanagement.v1beta1.IServerlessExternalConnectionInfo|null} [serverlessExternalConnection] Step serverlessExternalConnection
                          * @property {google.cloud.networkmanagement.v1beta1.IDeliverInfo|null} [deliver] Step deliver
                          * @property {google.cloud.networkmanagement.v1beta1.IForwardInfo|null} [forward] Step forward
                          * @property {google.cloud.networkmanagement.v1beta1.IAbortInfo|null} [abort] Step abort
@@ -25594,6 +26343,22 @@
                          * @instance
                          */
                         Step.prototype.vpcConnector = null;
+    
+                        /**
+                         * Step directVpcEgressConnection.
+                         * @member {google.cloud.networkmanagement.v1beta1.IDirectVpcEgressConnectionInfo|null|undefined} directVpcEgressConnection
+                         * @memberof google.cloud.networkmanagement.v1beta1.Step
+                         * @instance
+                         */
+                        Step.prototype.directVpcEgressConnection = null;
+    
+                        /**
+                         * Step serverlessExternalConnection.
+                         * @member {google.cloud.networkmanagement.v1beta1.IServerlessExternalConnectionInfo|null|undefined} serverlessExternalConnection
+                         * @memberof google.cloud.networkmanagement.v1beta1.Step
+                         * @instance
+                         */
+                        Step.prototype.serverlessExternalConnection = null;
     
                         /**
                          * Step deliver.
@@ -25744,12 +26509,12 @@
     
                         /**
                          * Step stepInfo.
-                         * @member {"instance"|"firewall"|"route"|"endpoint"|"googleService"|"forwardingRule"|"vpnGateway"|"vpnTunnel"|"vpcConnector"|"deliver"|"forward"|"abort"|"drop"|"loadBalancer"|"network"|"gkeMaster"|"cloudSqlInstance"|"redisInstance"|"redisCluster"|"cloudFunction"|"appEngineVersion"|"cloudRunRevision"|"nat"|"proxyConnection"|"loadBalancerBackendInfo"|"storageBucket"|"serverlessNeg"|undefined} stepInfo
+                         * @member {"instance"|"firewall"|"route"|"endpoint"|"googleService"|"forwardingRule"|"vpnGateway"|"vpnTunnel"|"vpcConnector"|"directVpcEgressConnection"|"serverlessExternalConnection"|"deliver"|"forward"|"abort"|"drop"|"loadBalancer"|"network"|"gkeMaster"|"cloudSqlInstance"|"redisInstance"|"redisCluster"|"cloudFunction"|"appEngineVersion"|"cloudRunRevision"|"nat"|"proxyConnection"|"loadBalancerBackendInfo"|"storageBucket"|"serverlessNeg"|undefined} stepInfo
                          * @memberof google.cloud.networkmanagement.v1beta1.Step
                          * @instance
                          */
                         Object.defineProperty(Step.prototype, "stepInfo", {
-                            get: $util.oneOfGetter($oneOfFields = ["instance", "firewall", "route", "endpoint", "googleService", "forwardingRule", "vpnGateway", "vpnTunnel", "vpcConnector", "deliver", "forward", "abort", "drop", "loadBalancer", "network", "gkeMaster", "cloudSqlInstance", "redisInstance", "redisCluster", "cloudFunction", "appEngineVersion", "cloudRunRevision", "nat", "proxyConnection", "loadBalancerBackendInfo", "storageBucket", "serverlessNeg"]),
+                            get: $util.oneOfGetter($oneOfFields = ["instance", "firewall", "route", "endpoint", "googleService", "forwardingRule", "vpnGateway", "vpnTunnel", "vpcConnector", "directVpcEgressConnection", "serverlessExternalConnection", "deliver", "forward", "abort", "drop", "loadBalancer", "network", "gkeMaster", "cloudSqlInstance", "redisInstance", "redisCluster", "cloudFunction", "appEngineVersion", "cloudRunRevision", "nat", "proxyConnection", "loadBalancerBackendInfo", "storageBucket", "serverlessNeg"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
@@ -25839,6 +26604,10 @@
                                 $root.google.cloud.networkmanagement.v1beta1.RedisInstanceInfo.encode(message.redisInstance, writer.uint32(/* id 30, wireType 2 =*/242).fork()).ldelim();
                             if (message.redisCluster != null && Object.hasOwnProperty.call(message, "redisCluster"))
                                 $root.google.cloud.networkmanagement.v1beta1.RedisClusterInfo.encode(message.redisCluster, writer.uint32(/* id 31, wireType 2 =*/250).fork()).ldelim();
+                            if (message.directVpcEgressConnection != null && Object.hasOwnProperty.call(message, "directVpcEgressConnection"))
+                                $root.google.cloud.networkmanagement.v1beta1.DirectVpcEgressConnectionInfo.encode(message.directVpcEgressConnection, writer.uint32(/* id 33, wireType 2 =*/266).fork()).ldelim();
+                            if (message.serverlessExternalConnection != null && Object.hasOwnProperty.call(message, "serverlessExternalConnection"))
+                                $root.google.cloud.networkmanagement.v1beta1.ServerlessExternalConnectionInfo.encode(message.serverlessExternalConnection, writer.uint32(/* id 34, wireType 2 =*/274).fork()).ldelim();
                             return writer;
                         };
     
@@ -25923,6 +26692,14 @@
                                     }
                                 case 21: {
                                         message.vpcConnector = $root.google.cloud.networkmanagement.v1beta1.VpcConnectorInfo.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 33: {
+                                        message.directVpcEgressConnection = $root.google.cloud.networkmanagement.v1beta1.DirectVpcEgressConnectionInfo.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 34: {
+                                        message.serverlessExternalConnection = $root.google.cloud.networkmanagement.v1beta1.ServerlessExternalConnectionInfo.decode(reader, reader.uint32());
                                         break;
                                     }
                                 case 12: {
@@ -26067,6 +26844,8 @@
                                 case 12:
                                 case 13:
                                 case 24:
+                                case 35:
+                                case 36:
                                 case 14:
                                 case 15:
                                 case 16:
@@ -26168,6 +26947,26 @@
                                     var error = $root.google.cloud.networkmanagement.v1beta1.VpcConnectorInfo.verify(message.vpcConnector);
                                     if (error)
                                         return "vpcConnector." + error;
+                                }
+                            }
+                            if (message.directVpcEgressConnection != null && message.hasOwnProperty("directVpcEgressConnection")) {
+                                if (properties.stepInfo === 1)
+                                    return "stepInfo: multiple values";
+                                properties.stepInfo = 1;
+                                {
+                                    var error = $root.google.cloud.networkmanagement.v1beta1.DirectVpcEgressConnectionInfo.verify(message.directVpcEgressConnection);
+                                    if (error)
+                                        return "directVpcEgressConnection." + error;
+                                }
+                            }
+                            if (message.serverlessExternalConnection != null && message.hasOwnProperty("serverlessExternalConnection")) {
+                                if (properties.stepInfo === 1)
+                                    return "stepInfo: multiple values";
+                                properties.stepInfo = 1;
+                                {
+                                    var error = $root.google.cloud.networkmanagement.v1beta1.ServerlessExternalConnectionInfo.verify(message.serverlessExternalConnection);
+                                    if (error)
+                                        return "serverlessExternalConnection." + error;
                                 }
                             }
                             if (message.deliver != null && message.hasOwnProperty("deliver")) {
@@ -26482,6 +27281,14 @@
                             case 24:
                                 message.state = 24;
                                 break;
+                            case "DIRECT_VPC_EGRESS_CONNECTION":
+                            case 35:
+                                message.state = 35;
+                                break;
+                            case "SERVERLESS_EXTERNAL_CONNECTION":
+                            case 36:
+                                message.state = 36;
+                                break;
                             case "NAT":
                             case 14:
                                 message.state = 14;
@@ -26559,6 +27366,16 @@
                                 if (typeof object.vpcConnector !== "object")
                                     throw TypeError(".google.cloud.networkmanagement.v1beta1.Step.vpcConnector: object expected");
                                 message.vpcConnector = $root.google.cloud.networkmanagement.v1beta1.VpcConnectorInfo.fromObject(object.vpcConnector);
+                            }
+                            if (object.directVpcEgressConnection != null) {
+                                if (typeof object.directVpcEgressConnection !== "object")
+                                    throw TypeError(".google.cloud.networkmanagement.v1beta1.Step.directVpcEgressConnection: object expected");
+                                message.directVpcEgressConnection = $root.google.cloud.networkmanagement.v1beta1.DirectVpcEgressConnectionInfo.fromObject(object.directVpcEgressConnection);
+                            }
+                            if (object.serverlessExternalConnection != null) {
+                                if (typeof object.serverlessExternalConnection !== "object")
+                                    throw TypeError(".google.cloud.networkmanagement.v1beta1.Step.serverlessExternalConnection: object expected");
+                                message.serverlessExternalConnection = $root.google.cloud.networkmanagement.v1beta1.ServerlessExternalConnectionInfo.fromObject(object.serverlessExternalConnection);
                             }
                             if (object.deliver != null) {
                                 if (typeof object.deliver !== "object")
@@ -26815,6 +27632,16 @@
                                 if (options.oneofs)
                                     object.stepInfo = "redisCluster";
                             }
+                            if (message.directVpcEgressConnection != null && message.hasOwnProperty("directVpcEgressConnection")) {
+                                object.directVpcEgressConnection = $root.google.cloud.networkmanagement.v1beta1.DirectVpcEgressConnectionInfo.toObject(message.directVpcEgressConnection, options);
+                                if (options.oneofs)
+                                    object.stepInfo = "directVpcEgressConnection";
+                            }
+                            if (message.serverlessExternalConnection != null && message.hasOwnProperty("serverlessExternalConnection")) {
+                                object.serverlessExternalConnection = $root.google.cloud.networkmanagement.v1beta1.ServerlessExternalConnectionInfo.toObject(message.serverlessExternalConnection, options);
+                                if (options.oneofs)
+                                    object.stepInfo = "serverlessExternalConnection";
+                            }
                             return object;
                         };
     
@@ -26875,6 +27702,8 @@
                          * @property {number} ARRIVE_AT_VPN_GATEWAY=12 ARRIVE_AT_VPN_GATEWAY value
                          * @property {number} ARRIVE_AT_VPN_TUNNEL=13 ARRIVE_AT_VPN_TUNNEL value
                          * @property {number} ARRIVE_AT_VPC_CONNECTOR=24 ARRIVE_AT_VPC_CONNECTOR value
+                         * @property {number} DIRECT_VPC_EGRESS_CONNECTION=35 DIRECT_VPC_EGRESS_CONNECTION value
+                         * @property {number} SERVERLESS_EXTERNAL_CONNECTION=36 SERVERLESS_EXTERNAL_CONNECTION value
                          * @property {number} NAT=14 NAT value
                          * @property {number} PROXY_CONNECTION=15 PROXY_CONNECTION value
                          * @property {number} DELIVER=16 DELIVER value
@@ -26912,6 +27741,8 @@
                             values[valuesById[12] = "ARRIVE_AT_VPN_GATEWAY"] = 12;
                             values[valuesById[13] = "ARRIVE_AT_VPN_TUNNEL"] = 13;
                             values[valuesById[24] = "ARRIVE_AT_VPC_CONNECTOR"] = 24;
+                            values[valuesById[35] = "DIRECT_VPC_EGRESS_CONNECTION"] = 35;
+                            values[valuesById[36] = "SERVERLESS_EXTERNAL_CONNECTION"] = 36;
                             values[valuesById[14] = "NAT"] = 14;
                             values[valuesById[15] = "PROXY_CONNECTION"] = 15;
                             values[valuesById[16] = "DELIVER"] = 16;
@@ -27966,6 +28797,7 @@
                                 case 6:
                                 case 100:
                                 case 101:
+                                case 102:
                                     break;
                                 }
                             return null;
@@ -28055,6 +28887,10 @@
                             case "TRACKING_STATE":
                             case 101:
                                 message.firewallRuleType = 101;
+                                break;
+                            case "ANALYSIS_SKIPPED":
+                            case 102:
+                                message.firewallRuleType = 102;
                                 break;
                             }
                             return message;
@@ -28158,6 +28994,7 @@
                          * @property {number} NETWORK_REGIONAL_FIREWALL_POLICY_RULE=6 NETWORK_REGIONAL_FIREWALL_POLICY_RULE value
                          * @property {number} UNSUPPORTED_FIREWALL_POLICY_RULE=100 UNSUPPORTED_FIREWALL_POLICY_RULE value
                          * @property {number} TRACKING_STATE=101 TRACKING_STATE value
+                         * @property {number} ANALYSIS_SKIPPED=102 ANALYSIS_SKIPPED value
                          */
                         FirewallInfo.FirewallRuleType = (function() {
                             var valuesById = {}, values = Object.create(valuesById);
@@ -28170,6 +29007,7 @@
                             values[valuesById[6] = "NETWORK_REGIONAL_FIREWALL_POLICY_RULE"] = 6;
                             values[valuesById[100] = "UNSUPPORTED_FIREWALL_POLICY_RULE"] = 100;
                             values[valuesById[101] = "TRACKING_STATE"] = 101;
+                            values[valuesById[102] = "ANALYSIS_SKIPPED"] = 102;
                             return values;
                         })();
     
@@ -28201,6 +29039,11 @@
                          * @property {string|null} [nccSpokeUri] RouteInfo nccSpokeUri
                          * @property {string|null} [advertisedRouteSourceRouterUri] RouteInfo advertisedRouteSourceRouterUri
                          * @property {string|null} [advertisedRouteNextHopUri] RouteInfo advertisedRouteNextHopUri
+                         * @property {string|null} [nextHopUri] RouteInfo nextHopUri
+                         * @property {string|null} [nextHopNetworkUri] RouteInfo nextHopNetworkUri
+                         * @property {string|null} [originatingRouteUri] RouteInfo originatingRouteUri
+                         * @property {string|null} [originatingRouteDisplayName] RouteInfo originatingRouteDisplayName
+                         * @property {string|null} [nccHubRouteUri] RouteInfo nccHubRouteUri
                          */
     
                         /**
@@ -28374,6 +29217,46 @@
                          */
                         RouteInfo.prototype.advertisedRouteNextHopUri = null;
     
+                        /**
+                         * RouteInfo nextHopUri.
+                         * @member {string} nextHopUri
+                         * @memberof google.cloud.networkmanagement.v1beta1.RouteInfo
+                         * @instance
+                         */
+                        RouteInfo.prototype.nextHopUri = "";
+    
+                        /**
+                         * RouteInfo nextHopNetworkUri.
+                         * @member {string} nextHopNetworkUri
+                         * @memberof google.cloud.networkmanagement.v1beta1.RouteInfo
+                         * @instance
+                         */
+                        RouteInfo.prototype.nextHopNetworkUri = "";
+    
+                        /**
+                         * RouteInfo originatingRouteUri.
+                         * @member {string} originatingRouteUri
+                         * @memberof google.cloud.networkmanagement.v1beta1.RouteInfo
+                         * @instance
+                         */
+                        RouteInfo.prototype.originatingRouteUri = "";
+    
+                        /**
+                         * RouteInfo originatingRouteDisplayName.
+                         * @member {string} originatingRouteDisplayName
+                         * @memberof google.cloud.networkmanagement.v1beta1.RouteInfo
+                         * @instance
+                         */
+                        RouteInfo.prototype.originatingRouteDisplayName = "";
+    
+                        /**
+                         * RouteInfo nccHubRouteUri.
+                         * @member {string} nccHubRouteUri
+                         * @memberof google.cloud.networkmanagement.v1beta1.RouteInfo
+                         * @instance
+                         */
+                        RouteInfo.prototype.nccHubRouteUri = "";
+    
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
@@ -28487,6 +29370,16 @@
                                 writer.uint32(/* id 18, wireType 2 =*/146).string(message.advertisedRouteNextHopUri);
                             if (message.region != null && Object.hasOwnProperty.call(message, "region"))
                                 writer.uint32(/* id 19, wireType 2 =*/154).string(message.region);
+                            if (message.nextHopUri != null && Object.hasOwnProperty.call(message, "nextHopUri"))
+                                writer.uint32(/* id 20, wireType 2 =*/162).string(message.nextHopUri);
+                            if (message.nextHopNetworkUri != null && Object.hasOwnProperty.call(message, "nextHopNetworkUri"))
+                                writer.uint32(/* id 21, wireType 2 =*/170).string(message.nextHopNetworkUri);
+                            if (message.originatingRouteUri != null && Object.hasOwnProperty.call(message, "originatingRouteUri"))
+                                writer.uint32(/* id 22, wireType 2 =*/178).string(message.originatingRouteUri);
+                            if (message.originatingRouteDisplayName != null && Object.hasOwnProperty.call(message, "originatingRouteDisplayName"))
+                                writer.uint32(/* id 23, wireType 2 =*/186).string(message.originatingRouteDisplayName);
+                            if (message.nccHubRouteUri != null && Object.hasOwnProperty.call(message, "nccHubRouteUri"))
+                                writer.uint32(/* id 24, wireType 2 =*/194).string(message.nccHubRouteUri);
                             return writer;
                         };
     
@@ -28603,6 +29496,26 @@
                                     }
                                 case 18: {
                                         message.advertisedRouteNextHopUri = reader.string();
+                                        break;
+                                    }
+                                case 20: {
+                                        message.nextHopUri = reader.string();
+                                        break;
+                                    }
+                                case 21: {
+                                        message.nextHopNetworkUri = reader.string();
+                                        break;
+                                    }
+                                case 22: {
+                                        message.originatingRouteUri = reader.string();
+                                        break;
+                                    }
+                                case 23: {
+                                        message.originatingRouteDisplayName = reader.string();
+                                        break;
+                                    }
+                                case 24: {
+                                        message.nccHubRouteUri = reader.string();
                                         break;
                                     }
                                 default:
@@ -28756,6 +29669,21 @@
                                 if (!$util.isString(message.advertisedRouteNextHopUri))
                                     return "advertisedRouteNextHopUri: string expected";
                             }
+                            if (message.nextHopUri != null && message.hasOwnProperty("nextHopUri"))
+                                if (!$util.isString(message.nextHopUri))
+                                    return "nextHopUri: string expected";
+                            if (message.nextHopNetworkUri != null && message.hasOwnProperty("nextHopNetworkUri"))
+                                if (!$util.isString(message.nextHopNetworkUri))
+                                    return "nextHopNetworkUri: string expected";
+                            if (message.originatingRouteUri != null && message.hasOwnProperty("originatingRouteUri"))
+                                if (!$util.isString(message.originatingRouteUri))
+                                    return "originatingRouteUri: string expected";
+                            if (message.originatingRouteDisplayName != null && message.hasOwnProperty("originatingRouteDisplayName"))
+                                if (!$util.isString(message.originatingRouteDisplayName))
+                                    return "originatingRouteDisplayName: string expected";
+                            if (message.nccHubRouteUri != null && message.hasOwnProperty("nccHubRouteUri"))
+                                if (!$util.isString(message.nccHubRouteUri))
+                                    return "nccHubRouteUri: string expected";
                             return null;
                         };
     
@@ -28947,6 +29875,16 @@
                                 message.advertisedRouteSourceRouterUri = String(object.advertisedRouteSourceRouterUri);
                             if (object.advertisedRouteNextHopUri != null)
                                 message.advertisedRouteNextHopUri = String(object.advertisedRouteNextHopUri);
+                            if (object.nextHopUri != null)
+                                message.nextHopUri = String(object.nextHopUri);
+                            if (object.nextHopNetworkUri != null)
+                                message.nextHopNetworkUri = String(object.nextHopNetworkUri);
+                            if (object.originatingRouteUri != null)
+                                message.originatingRouteUri = String(object.originatingRouteUri);
+                            if (object.originatingRouteDisplayName != null)
+                                message.originatingRouteDisplayName = String(object.originatingRouteDisplayName);
+                            if (object.nccHubRouteUri != null)
+                                message.nccHubRouteUri = String(object.nccHubRouteUri);
                             return message;
                         };
     
@@ -28981,6 +29919,11 @@
                                 object.srcIpRange = "";
                                 object.routeScope = options.enums === String ? "ROUTE_SCOPE_UNSPECIFIED" : 0;
                                 object.region = "";
+                                object.nextHopUri = "";
+                                object.nextHopNetworkUri = "";
+                                object.originatingRouteUri = "";
+                                object.originatingRouteDisplayName = "";
+                                object.nccHubRouteUri = "";
                             }
                             if (message.displayName != null && message.hasOwnProperty("displayName"))
                                 object.displayName = message.displayName;
@@ -29044,6 +29987,16 @@
                             }
                             if (message.region != null && message.hasOwnProperty("region"))
                                 object.region = message.region;
+                            if (message.nextHopUri != null && message.hasOwnProperty("nextHopUri"))
+                                object.nextHopUri = message.nextHopUri;
+                            if (message.nextHopNetworkUri != null && message.hasOwnProperty("nextHopNetworkUri"))
+                                object.nextHopNetworkUri = message.nextHopNetworkUri;
+                            if (message.originatingRouteUri != null && message.hasOwnProperty("originatingRouteUri"))
+                                object.originatingRouteUri = message.originatingRouteUri;
+                            if (message.originatingRouteDisplayName != null && message.hasOwnProperty("originatingRouteDisplayName"))
+                                object.originatingRouteDisplayName = message.originatingRouteDisplayName;
+                            if (message.nccHubRouteUri != null && message.hasOwnProperty("nccHubRouteUri"))
+                                object.nccHubRouteUri = message.nccHubRouteUri;
                             return object;
                         };
     
@@ -29316,6 +30269,7 @@
                                 case 4:
                                 case 5:
                                 case 6:
+                                case 7:
                                     break;
                                 }
                             return null;
@@ -29369,6 +30323,10 @@
                             case "GOOGLE_API_VPC_SC":
                             case 6:
                                 message.googleServiceType = 6;
+                                break;
+                            case "SERVERLESS_VPC_ACCESS":
+                            case 7:
+                                message.googleServiceType = 7;
                                 break;
                             }
                             return message;
@@ -29435,6 +30393,7 @@
                          * @property {number} GOOGLE_API=4 GOOGLE_API value
                          * @property {number} GOOGLE_API_PSC=5 GOOGLE_API_PSC value
                          * @property {number} GOOGLE_API_VPC_SC=6 GOOGLE_API_VPC_SC value
+                         * @property {number} SERVERLESS_VPC_ACCESS=7 SERVERLESS_VPC_ACCESS value
                          */
                         GoogleServiceInfo.GoogleServiceType = (function() {
                             var valuesById = {}, values = Object.create(valuesById);
@@ -29445,6 +30404,7 @@
                             values[valuesById[4] = "GOOGLE_API"] = 4;
                             values[valuesById[5] = "GOOGLE_API_PSC"] = 5;
                             values[valuesById[6] = "GOOGLE_API_VPC_SC"] = 6;
+                            values[valuesById[7] = "SERVERLESS_VPC_ACCESS"] = 7;
                             return values;
                         })();
     
@@ -32800,6 +33760,7 @@
                                 case 22:
                                 case 30:
                                 case 31:
+                                case 37:
                                     break;
                                 }
                             if (message.resourceUri != null && message.hasOwnProperty("resourceUri"))
@@ -32981,6 +33942,10 @@
                             case 31:
                                 message.cause = 31;
                                 break;
+                            case "NO_SERVERLESS_IP_RANGES":
+                            case 37:
+                                message.cause = 37;
+                                break;
                             }
                             if (object.resourceUri != null)
                                 message.resourceUri = String(object.resourceUri);
@@ -33096,6 +34061,7 @@
                          * @property {number} NON_ROUTABLE_IP_ADDRESS=22 NON_ROUTABLE_IP_ADDRESS value
                          * @property {number} UNKNOWN_ISSUE_IN_GOOGLE_MANAGED_PROJECT=30 UNKNOWN_ISSUE_IN_GOOGLE_MANAGED_PROJECT value
                          * @property {number} UNSUPPORTED_GOOGLE_MANAGED_PROJECT_CONFIG=31 UNSUPPORTED_GOOGLE_MANAGED_PROJECT_CONFIG value
+                         * @property {number} NO_SERVERLESS_IP_RANGES=37 NO_SERVERLESS_IP_RANGES value
                          */
                         AbortInfo.Cause = (function() {
                             var valuesById = {}, values = Object.create(valuesById);
@@ -33135,6 +34101,7 @@
                             values[valuesById[22] = "NON_ROUTABLE_IP_ADDRESS"] = 22;
                             values[valuesById[30] = "UNKNOWN_ISSUE_IN_GOOGLE_MANAGED_PROJECT"] = 30;
                             values[valuesById[31] = "UNSUPPORTED_GOOGLE_MANAGED_PROJECT_CONFIG"] = 31;
+                            values[valuesById[37] = "NO_SERVERLESS_IP_RANGES"] = 37;
                             return values;
                         })();
     
@@ -33361,6 +34328,7 @@
                                 case 11:
                                 case 12:
                                 case 13:
+                                case 85:
                                 case 14:
                                 case 27:
                                 case 28:
@@ -33420,6 +34388,9 @@
                                 case 81:
                                 case 82:
                                 case 83:
+                                case 86:
+                                case 87:
+                                case 88:
                                     break;
                                 }
                             if (message.resourceUri != null && message.hasOwnProperty("resourceUri"))
@@ -33555,6 +34526,10 @@
                             case "FIREWALL_BLOCKING_LOAD_BALANCER_BACKEND_HEALTH_CHECK":
                             case 13:
                                 message.cause = 13;
+                                break;
+                            case "INGRESS_FIREWALL_TAGS_UNSUPPORTED_BY_DIRECT_VPC_EGRESS":
+                            case 85:
+                                message.cause = 85;
                                 break;
                             case "INSTANCE_NOT_RUNNING":
                             case 14:
@@ -33792,6 +34767,18 @@
                             case 83:
                                 message.cause = 83;
                                 break;
+                            case "PSC_PORT_MAPPING_PORT_MISMATCH":
+                            case 86:
+                                message.cause = 86;
+                                break;
+                            case "PSC_PORT_MAPPING_WITHOUT_PSC_CONNECTION_UNSUPPORTED":
+                            case 87:
+                                message.cause = 87;
+                                break;
+                            case "UNSUPPORTED_ROUTE_MATCHED_FOR_NAT64_DESTINATION":
+                            case 88:
+                                message.cause = 88;
+                                break;
                             }
                             if (object.resourceUri != null)
                                 message.resourceUri = String(object.resourceUri);
@@ -33892,6 +34879,7 @@
                          * @property {number} FORWARDING_RULE_MISMATCH=11 FORWARDING_RULE_MISMATCH value
                          * @property {number} FORWARDING_RULE_NO_INSTANCES=12 FORWARDING_RULE_NO_INSTANCES value
                          * @property {number} FIREWALL_BLOCKING_LOAD_BALANCER_BACKEND_HEALTH_CHECK=13 FIREWALL_BLOCKING_LOAD_BALANCER_BACKEND_HEALTH_CHECK value
+                         * @property {number} INGRESS_FIREWALL_TAGS_UNSUPPORTED_BY_DIRECT_VPC_EGRESS=85 INGRESS_FIREWALL_TAGS_UNSUPPORTED_BY_DIRECT_VPC_EGRESS value
                          * @property {number} INSTANCE_NOT_RUNNING=14 INSTANCE_NOT_RUNNING value
                          * @property {number} GKE_CLUSTER_NOT_RUNNING=27 GKE_CLUSTER_NOT_RUNNING value
                          * @property {number} CLOUD_SQL_INSTANCE_NOT_RUNNING=28 CLOUD_SQL_INSTANCE_NOT_RUNNING value
@@ -33951,6 +34939,9 @@
                          * @property {number} NO_TRAFFIC_SELECTOR_TO_GCP_DESTINATION=81 NO_TRAFFIC_SELECTOR_TO_GCP_DESTINATION value
                          * @property {number} NO_KNOWN_ROUTE_FROM_PEERED_NETWORK_TO_DESTINATION=82 NO_KNOWN_ROUTE_FROM_PEERED_NETWORK_TO_DESTINATION value
                          * @property {number} PRIVATE_NAT_TO_PSC_ENDPOINT_UNSUPPORTED=83 PRIVATE_NAT_TO_PSC_ENDPOINT_UNSUPPORTED value
+                         * @property {number} PSC_PORT_MAPPING_PORT_MISMATCH=86 PSC_PORT_MAPPING_PORT_MISMATCH value
+                         * @property {number} PSC_PORT_MAPPING_WITHOUT_PSC_CONNECTION_UNSUPPORTED=87 PSC_PORT_MAPPING_WITHOUT_PSC_CONNECTION_UNSUPPORTED value
+                         * @property {number} UNSUPPORTED_ROUTE_MATCHED_FOR_NAT64_DESTINATION=88 UNSUPPORTED_ROUTE_MATCHED_FOR_NAT64_DESTINATION value
                          */
                         DropInfo.Cause = (function() {
                             var valuesById = {}, values = Object.create(valuesById);
@@ -33979,6 +34970,7 @@
                             values[valuesById[11] = "FORWARDING_RULE_MISMATCH"] = 11;
                             values[valuesById[12] = "FORWARDING_RULE_NO_INSTANCES"] = 12;
                             values[valuesById[13] = "FIREWALL_BLOCKING_LOAD_BALANCER_BACKEND_HEALTH_CHECK"] = 13;
+                            values[valuesById[85] = "INGRESS_FIREWALL_TAGS_UNSUPPORTED_BY_DIRECT_VPC_EGRESS"] = 85;
                             values[valuesById[14] = "INSTANCE_NOT_RUNNING"] = 14;
                             values[valuesById[27] = "GKE_CLUSTER_NOT_RUNNING"] = 27;
                             values[valuesById[28] = "CLOUD_SQL_INSTANCE_NOT_RUNNING"] = 28;
@@ -34038,6 +35030,9 @@
                             values[valuesById[81] = "NO_TRAFFIC_SELECTOR_TO_GCP_DESTINATION"] = 81;
                             values[valuesById[82] = "NO_KNOWN_ROUTE_FROM_PEERED_NETWORK_TO_DESTINATION"] = 82;
                             values[valuesById[83] = "PRIVATE_NAT_TO_PSC_ENDPOINT_UNSUPPORTED"] = 83;
+                            values[valuesById[86] = "PSC_PORT_MAPPING_PORT_MISMATCH"] = 86;
+                            values[valuesById[87] = "PSC_PORT_MAPPING_WITHOUT_PSC_CONNECTION_UNSUPPORTED"] = 87;
+                            values[valuesById[88] = "UNSUPPORTED_ROUTE_MATCHED_FOR_NAT64_DESTINATION"] = 88;
                             return values;
                         })();
     
@@ -36378,6 +37373,505 @@
                         };
     
                         return VpcConnectorInfo;
+                    })();
+    
+                    v1beta1.DirectVpcEgressConnectionInfo = (function() {
+    
+                        /**
+                         * Properties of a DirectVpcEgressConnectionInfo.
+                         * @memberof google.cloud.networkmanagement.v1beta1
+                         * @interface IDirectVpcEgressConnectionInfo
+                         * @property {string|null} [networkUri] DirectVpcEgressConnectionInfo networkUri
+                         * @property {string|null} [subnetworkUri] DirectVpcEgressConnectionInfo subnetworkUri
+                         * @property {string|null} [selectedIpRange] DirectVpcEgressConnectionInfo selectedIpRange
+                         * @property {string|null} [selectedIpAddress] DirectVpcEgressConnectionInfo selectedIpAddress
+                         * @property {string|null} [region] DirectVpcEgressConnectionInfo region
+                         */
+    
+                        /**
+                         * Constructs a new DirectVpcEgressConnectionInfo.
+                         * @memberof google.cloud.networkmanagement.v1beta1
+                         * @classdesc Represents a DirectVpcEgressConnectionInfo.
+                         * @implements IDirectVpcEgressConnectionInfo
+                         * @constructor
+                         * @param {google.cloud.networkmanagement.v1beta1.IDirectVpcEgressConnectionInfo=} [properties] Properties to set
+                         */
+                        function DirectVpcEgressConnectionInfo(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * DirectVpcEgressConnectionInfo networkUri.
+                         * @member {string} networkUri
+                         * @memberof google.cloud.networkmanagement.v1beta1.DirectVpcEgressConnectionInfo
+                         * @instance
+                         */
+                        DirectVpcEgressConnectionInfo.prototype.networkUri = "";
+    
+                        /**
+                         * DirectVpcEgressConnectionInfo subnetworkUri.
+                         * @member {string} subnetworkUri
+                         * @memberof google.cloud.networkmanagement.v1beta1.DirectVpcEgressConnectionInfo
+                         * @instance
+                         */
+                        DirectVpcEgressConnectionInfo.prototype.subnetworkUri = "";
+    
+                        /**
+                         * DirectVpcEgressConnectionInfo selectedIpRange.
+                         * @member {string} selectedIpRange
+                         * @memberof google.cloud.networkmanagement.v1beta1.DirectVpcEgressConnectionInfo
+                         * @instance
+                         */
+                        DirectVpcEgressConnectionInfo.prototype.selectedIpRange = "";
+    
+                        /**
+                         * DirectVpcEgressConnectionInfo selectedIpAddress.
+                         * @member {string} selectedIpAddress
+                         * @memberof google.cloud.networkmanagement.v1beta1.DirectVpcEgressConnectionInfo
+                         * @instance
+                         */
+                        DirectVpcEgressConnectionInfo.prototype.selectedIpAddress = "";
+    
+                        /**
+                         * DirectVpcEgressConnectionInfo region.
+                         * @member {string} region
+                         * @memberof google.cloud.networkmanagement.v1beta1.DirectVpcEgressConnectionInfo
+                         * @instance
+                         */
+                        DirectVpcEgressConnectionInfo.prototype.region = "";
+    
+                        /**
+                         * Creates a new DirectVpcEgressConnectionInfo instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.networkmanagement.v1beta1.DirectVpcEgressConnectionInfo
+                         * @static
+                         * @param {google.cloud.networkmanagement.v1beta1.IDirectVpcEgressConnectionInfo=} [properties] Properties to set
+                         * @returns {google.cloud.networkmanagement.v1beta1.DirectVpcEgressConnectionInfo} DirectVpcEgressConnectionInfo instance
+                         */
+                        DirectVpcEgressConnectionInfo.create = function create(properties) {
+                            return new DirectVpcEgressConnectionInfo(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified DirectVpcEgressConnectionInfo message. Does not implicitly {@link google.cloud.networkmanagement.v1beta1.DirectVpcEgressConnectionInfo.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.networkmanagement.v1beta1.DirectVpcEgressConnectionInfo
+                         * @static
+                         * @param {google.cloud.networkmanagement.v1beta1.IDirectVpcEgressConnectionInfo} message DirectVpcEgressConnectionInfo message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DirectVpcEgressConnectionInfo.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.networkUri != null && Object.hasOwnProperty.call(message, "networkUri"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.networkUri);
+                            if (message.subnetworkUri != null && Object.hasOwnProperty.call(message, "subnetworkUri"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.subnetworkUri);
+                            if (message.selectedIpRange != null && Object.hasOwnProperty.call(message, "selectedIpRange"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.selectedIpRange);
+                            if (message.selectedIpAddress != null && Object.hasOwnProperty.call(message, "selectedIpAddress"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.selectedIpAddress);
+                            if (message.region != null && Object.hasOwnProperty.call(message, "region"))
+                                writer.uint32(/* id 5, wireType 2 =*/42).string(message.region);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified DirectVpcEgressConnectionInfo message, length delimited. Does not implicitly {@link google.cloud.networkmanagement.v1beta1.DirectVpcEgressConnectionInfo.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.networkmanagement.v1beta1.DirectVpcEgressConnectionInfo
+                         * @static
+                         * @param {google.cloud.networkmanagement.v1beta1.IDirectVpcEgressConnectionInfo} message DirectVpcEgressConnectionInfo message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DirectVpcEgressConnectionInfo.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a DirectVpcEgressConnectionInfo message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.networkmanagement.v1beta1.DirectVpcEgressConnectionInfo
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.networkmanagement.v1beta1.DirectVpcEgressConnectionInfo} DirectVpcEgressConnectionInfo
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DirectVpcEgressConnectionInfo.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networkmanagement.v1beta1.DirectVpcEgressConnectionInfo();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.networkUri = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.subnetworkUri = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.selectedIpRange = reader.string();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.selectedIpAddress = reader.string();
+                                        break;
+                                    }
+                                case 5: {
+                                        message.region = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a DirectVpcEgressConnectionInfo message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.networkmanagement.v1beta1.DirectVpcEgressConnectionInfo
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.networkmanagement.v1beta1.DirectVpcEgressConnectionInfo} DirectVpcEgressConnectionInfo
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DirectVpcEgressConnectionInfo.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a DirectVpcEgressConnectionInfo message.
+                         * @function verify
+                         * @memberof google.cloud.networkmanagement.v1beta1.DirectVpcEgressConnectionInfo
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        DirectVpcEgressConnectionInfo.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.networkUri != null && message.hasOwnProperty("networkUri"))
+                                if (!$util.isString(message.networkUri))
+                                    return "networkUri: string expected";
+                            if (message.subnetworkUri != null && message.hasOwnProperty("subnetworkUri"))
+                                if (!$util.isString(message.subnetworkUri))
+                                    return "subnetworkUri: string expected";
+                            if (message.selectedIpRange != null && message.hasOwnProperty("selectedIpRange"))
+                                if (!$util.isString(message.selectedIpRange))
+                                    return "selectedIpRange: string expected";
+                            if (message.selectedIpAddress != null && message.hasOwnProperty("selectedIpAddress"))
+                                if (!$util.isString(message.selectedIpAddress))
+                                    return "selectedIpAddress: string expected";
+                            if (message.region != null && message.hasOwnProperty("region"))
+                                if (!$util.isString(message.region))
+                                    return "region: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a DirectVpcEgressConnectionInfo message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.networkmanagement.v1beta1.DirectVpcEgressConnectionInfo
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.networkmanagement.v1beta1.DirectVpcEgressConnectionInfo} DirectVpcEgressConnectionInfo
+                         */
+                        DirectVpcEgressConnectionInfo.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.networkmanagement.v1beta1.DirectVpcEgressConnectionInfo)
+                                return object;
+                            var message = new $root.google.cloud.networkmanagement.v1beta1.DirectVpcEgressConnectionInfo();
+                            if (object.networkUri != null)
+                                message.networkUri = String(object.networkUri);
+                            if (object.subnetworkUri != null)
+                                message.subnetworkUri = String(object.subnetworkUri);
+                            if (object.selectedIpRange != null)
+                                message.selectedIpRange = String(object.selectedIpRange);
+                            if (object.selectedIpAddress != null)
+                                message.selectedIpAddress = String(object.selectedIpAddress);
+                            if (object.region != null)
+                                message.region = String(object.region);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a DirectVpcEgressConnectionInfo message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.networkmanagement.v1beta1.DirectVpcEgressConnectionInfo
+                         * @static
+                         * @param {google.cloud.networkmanagement.v1beta1.DirectVpcEgressConnectionInfo} message DirectVpcEgressConnectionInfo
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        DirectVpcEgressConnectionInfo.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.networkUri = "";
+                                object.subnetworkUri = "";
+                                object.selectedIpRange = "";
+                                object.selectedIpAddress = "";
+                                object.region = "";
+                            }
+                            if (message.networkUri != null && message.hasOwnProperty("networkUri"))
+                                object.networkUri = message.networkUri;
+                            if (message.subnetworkUri != null && message.hasOwnProperty("subnetworkUri"))
+                                object.subnetworkUri = message.subnetworkUri;
+                            if (message.selectedIpRange != null && message.hasOwnProperty("selectedIpRange"))
+                                object.selectedIpRange = message.selectedIpRange;
+                            if (message.selectedIpAddress != null && message.hasOwnProperty("selectedIpAddress"))
+                                object.selectedIpAddress = message.selectedIpAddress;
+                            if (message.region != null && message.hasOwnProperty("region"))
+                                object.region = message.region;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this DirectVpcEgressConnectionInfo to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.networkmanagement.v1beta1.DirectVpcEgressConnectionInfo
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        DirectVpcEgressConnectionInfo.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for DirectVpcEgressConnectionInfo
+                         * @function getTypeUrl
+                         * @memberof google.cloud.networkmanagement.v1beta1.DirectVpcEgressConnectionInfo
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        DirectVpcEgressConnectionInfo.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.networkmanagement.v1beta1.DirectVpcEgressConnectionInfo";
+                        };
+    
+                        return DirectVpcEgressConnectionInfo;
+                    })();
+    
+                    v1beta1.ServerlessExternalConnectionInfo = (function() {
+    
+                        /**
+                         * Properties of a ServerlessExternalConnectionInfo.
+                         * @memberof google.cloud.networkmanagement.v1beta1
+                         * @interface IServerlessExternalConnectionInfo
+                         * @property {string|null} [selectedIpAddress] ServerlessExternalConnectionInfo selectedIpAddress
+                         */
+    
+                        /**
+                         * Constructs a new ServerlessExternalConnectionInfo.
+                         * @memberof google.cloud.networkmanagement.v1beta1
+                         * @classdesc Represents a ServerlessExternalConnectionInfo.
+                         * @implements IServerlessExternalConnectionInfo
+                         * @constructor
+                         * @param {google.cloud.networkmanagement.v1beta1.IServerlessExternalConnectionInfo=} [properties] Properties to set
+                         */
+                        function ServerlessExternalConnectionInfo(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ServerlessExternalConnectionInfo selectedIpAddress.
+                         * @member {string} selectedIpAddress
+                         * @memberof google.cloud.networkmanagement.v1beta1.ServerlessExternalConnectionInfo
+                         * @instance
+                         */
+                        ServerlessExternalConnectionInfo.prototype.selectedIpAddress = "";
+    
+                        /**
+                         * Creates a new ServerlessExternalConnectionInfo instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.networkmanagement.v1beta1.ServerlessExternalConnectionInfo
+                         * @static
+                         * @param {google.cloud.networkmanagement.v1beta1.IServerlessExternalConnectionInfo=} [properties] Properties to set
+                         * @returns {google.cloud.networkmanagement.v1beta1.ServerlessExternalConnectionInfo} ServerlessExternalConnectionInfo instance
+                         */
+                        ServerlessExternalConnectionInfo.create = function create(properties) {
+                            return new ServerlessExternalConnectionInfo(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ServerlessExternalConnectionInfo message. Does not implicitly {@link google.cloud.networkmanagement.v1beta1.ServerlessExternalConnectionInfo.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.networkmanagement.v1beta1.ServerlessExternalConnectionInfo
+                         * @static
+                         * @param {google.cloud.networkmanagement.v1beta1.IServerlessExternalConnectionInfo} message ServerlessExternalConnectionInfo message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ServerlessExternalConnectionInfo.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.selectedIpAddress != null && Object.hasOwnProperty.call(message, "selectedIpAddress"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.selectedIpAddress);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ServerlessExternalConnectionInfo message, length delimited. Does not implicitly {@link google.cloud.networkmanagement.v1beta1.ServerlessExternalConnectionInfo.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.networkmanagement.v1beta1.ServerlessExternalConnectionInfo
+                         * @static
+                         * @param {google.cloud.networkmanagement.v1beta1.IServerlessExternalConnectionInfo} message ServerlessExternalConnectionInfo message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ServerlessExternalConnectionInfo.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ServerlessExternalConnectionInfo message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.networkmanagement.v1beta1.ServerlessExternalConnectionInfo
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.networkmanagement.v1beta1.ServerlessExternalConnectionInfo} ServerlessExternalConnectionInfo
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ServerlessExternalConnectionInfo.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networkmanagement.v1beta1.ServerlessExternalConnectionInfo();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.selectedIpAddress = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ServerlessExternalConnectionInfo message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.networkmanagement.v1beta1.ServerlessExternalConnectionInfo
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.networkmanagement.v1beta1.ServerlessExternalConnectionInfo} ServerlessExternalConnectionInfo
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ServerlessExternalConnectionInfo.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ServerlessExternalConnectionInfo message.
+                         * @function verify
+                         * @memberof google.cloud.networkmanagement.v1beta1.ServerlessExternalConnectionInfo
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ServerlessExternalConnectionInfo.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.selectedIpAddress != null && message.hasOwnProperty("selectedIpAddress"))
+                                if (!$util.isString(message.selectedIpAddress))
+                                    return "selectedIpAddress: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ServerlessExternalConnectionInfo message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.networkmanagement.v1beta1.ServerlessExternalConnectionInfo
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.networkmanagement.v1beta1.ServerlessExternalConnectionInfo} ServerlessExternalConnectionInfo
+                         */
+                        ServerlessExternalConnectionInfo.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.networkmanagement.v1beta1.ServerlessExternalConnectionInfo)
+                                return object;
+                            var message = new $root.google.cloud.networkmanagement.v1beta1.ServerlessExternalConnectionInfo();
+                            if (object.selectedIpAddress != null)
+                                message.selectedIpAddress = String(object.selectedIpAddress);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ServerlessExternalConnectionInfo message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.networkmanagement.v1beta1.ServerlessExternalConnectionInfo
+                         * @static
+                         * @param {google.cloud.networkmanagement.v1beta1.ServerlessExternalConnectionInfo} message ServerlessExternalConnectionInfo
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ServerlessExternalConnectionInfo.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.selectedIpAddress = "";
+                            if (message.selectedIpAddress != null && message.hasOwnProperty("selectedIpAddress"))
+                                object.selectedIpAddress = message.selectedIpAddress;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ServerlessExternalConnectionInfo to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.networkmanagement.v1beta1.ServerlessExternalConnectionInfo
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ServerlessExternalConnectionInfo.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ServerlessExternalConnectionInfo
+                         * @function getTypeUrl
+                         * @memberof google.cloud.networkmanagement.v1beta1.ServerlessExternalConnectionInfo
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ServerlessExternalConnectionInfo.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.networkmanagement.v1beta1.ServerlessExternalConnectionInfo";
+                        };
+    
+                        return ServerlessExternalConnectionInfo;
                     })();
     
                     v1beta1.NatInfo = (function() {

@@ -24,6 +24,7 @@ function main() {
   const accountsServiceClient = new css.AccountsServiceClient();
   const cssProductInputsServiceClient = new css.CssProductInputsServiceClient();
   const cssProductsServiceClient = new css.CssProductsServiceClient();
+  const quotaServiceClient = new css.QuotaServiceClient();
 }
 
 main();

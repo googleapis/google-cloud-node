@@ -929,5 +929,54 @@ describe('v1.CssProductsServiceClient', () => {
         );
       });
     });
+
+    describe('quotaGroup', async () => {
+      const fakePath = '/rendered/path/quotaGroup';
+      const expectedParameters = {
+        account: 'accountValue',
+        quota_group: 'quotaGroupValue',
+      };
+      const client = new cssproductsserviceModule.v1.CssProductsServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      client.pathTemplates.quotaGroupPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.quotaGroupPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('quotaGroupPath', () => {
+        const result = client.quotaGroupPath('accountValue', 'quotaGroupValue');
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.quotaGroupPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchAccountFromQuotaGroupName', () => {
+        const result = client.matchAccountFromQuotaGroupName(fakePath);
+        assert.strictEqual(result, 'accountValue');
+        assert(
+          (client.pathTemplates.quotaGroupPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchQuotaGroupFromQuotaGroupName', () => {
+        const result = client.matchQuotaGroupFromQuotaGroupName(fakePath);
+        assert.strictEqual(result, 'quotaGroupValue');
+        assert(
+          (client.pathTemplates.quotaGroupPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
   });
 });
