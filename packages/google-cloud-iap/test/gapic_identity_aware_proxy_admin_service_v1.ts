@@ -1050,6 +1050,155 @@ describe('v1.IdentityAwareProxyAdminServiceClient', () => {
     });
   });
 
+  describe('validateIapAttributeExpression', () => {
+    it('invokes validateIapAttributeExpression without error', async () => {
+      const client =
+        new identityawareproxyadminserviceModule.v1.IdentityAwareProxyAdminServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.iap.v1.ValidateIapAttributeExpressionRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.iap.v1.ValidateIapAttributeExpressionRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.iap.v1.ValidateIapAttributeExpressionResponse()
+      );
+      client.innerApiCalls.validateIapAttributeExpression =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.validateIapAttributeExpression(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.validateIapAttributeExpression as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.validateIapAttributeExpression as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes validateIapAttributeExpression without error using callback', async () => {
+      const client =
+        new identityawareproxyadminserviceModule.v1.IdentityAwareProxyAdminServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.iap.v1.ValidateIapAttributeExpressionRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.iap.v1.ValidateIapAttributeExpressionRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.iap.v1.ValidateIapAttributeExpressionResponse()
+      );
+      client.innerApiCalls.validateIapAttributeExpression =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.validateIapAttributeExpression(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.iap.v1.IValidateIapAttributeExpressionResponse | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.validateIapAttributeExpression as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.validateIapAttributeExpression as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes validateIapAttributeExpression with error', async () => {
+      const client =
+        new identityawareproxyadminserviceModule.v1.IdentityAwareProxyAdminServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.iap.v1.ValidateIapAttributeExpressionRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.iap.v1.ValidateIapAttributeExpressionRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.validateIapAttributeExpression = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.validateIapAttributeExpression(request),
+        expectedError
+      );
+      const actualRequest = (
+        client.innerApiCalls.validateIapAttributeExpression as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.validateIapAttributeExpression as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes validateIapAttributeExpression with closed client', async () => {
+      const client =
+        new identityawareproxyadminserviceModule.v1.IdentityAwareProxyAdminServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.iap.v1.ValidateIapAttributeExpressionRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.iap.v1.ValidateIapAttributeExpressionRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(
+        client.validateIapAttributeExpression(request),
+        expectedError
+      );
+    });
+  });
+
   describe('createTunnelDestGroup', () => {
     it('invokes createTunnelDestGroup without error', async () => {
       const client =
