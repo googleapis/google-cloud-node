@@ -38,6 +38,11 @@
   * [Catalog_service.update_entry](#catalog_service.update_entry)
   * [Catalog_service.update_entry_group](#catalog_service.update_entry_group)
   * [Catalog_service.update_entry_type](#catalog_service.update_entry_type)
+  * [Cmek_service.create_encryption_config](#cmek_service.create_encryption_config)
+  * [Cmek_service.delete_encryption_config](#cmek_service.delete_encryption_config)
+  * [Cmek_service.get_encryption_config](#cmek_service.get_encryption_config)
+  * [Cmek_service.list_encryption_configs](#cmek_service.list_encryption_configs)
+  * [Cmek_service.update_encryption_config](#cmek_service.update_encryption_config)
   * [Content_service.create_content](#content_service.create_content)
   * [Content_service.delete_content](#content_service.delete_content)
   * [Content_service.get_content](#content_service.get_content)
@@ -564,6 +569,91 @@ __Usage:__
 
 
 `node packages/google-cloud-dataplex/samples/generated/v1/catalog_service.update_entry_type.js`
+
+
+-----
+
+
+
+
+### Cmek_service.create_encryption_config
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dataplex/samples/generated/v1/cmek_service.create_encryption_config.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dataplex/samples/generated/v1/cmek_service.create_encryption_config.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-dataplex/samples/generated/v1/cmek_service.create_encryption_config.js`
+
+
+-----
+
+
+
+
+### Cmek_service.delete_encryption_config
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dataplex/samples/generated/v1/cmek_service.delete_encryption_config.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dataplex/samples/generated/v1/cmek_service.delete_encryption_config.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-dataplex/samples/generated/v1/cmek_service.delete_encryption_config.js`
+
+
+-----
+
+
+
+
+### Cmek_service.get_encryption_config
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dataplex/samples/generated/v1/cmek_service.get_encryption_config.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dataplex/samples/generated/v1/cmek_service.get_encryption_config.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-dataplex/samples/generated/v1/cmek_service.get_encryption_config.js`
+
+
+-----
+
+
+
+
+### Cmek_service.list_encryption_configs
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dataplex/samples/generated/v1/cmek_service.list_encryption_configs.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dataplex/samples/generated/v1/cmek_service.list_encryption_configs.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-dataplex/samples/generated/v1/cmek_service.list_encryption_configs.js`
+
+
+-----
+
+
+
+
+### Cmek_service.update_encryption_config
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dataplex/samples/generated/v1/cmek_service.update_encryption_config.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dataplex/samples/generated/v1/cmek_service.update_encryption_config.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-dataplex/samples/generated/v1/cmek_service.update_encryption_config.js`
 
 
 -----

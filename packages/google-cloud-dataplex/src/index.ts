@@ -20,6 +20,8 @@ import * as v1 from './v1';
 
 const CatalogServiceClient = v1.CatalogServiceClient;
 type CatalogServiceClient = v1.CatalogServiceClient;
+const CmekServiceClient = v1.CmekServiceClient;
+type CmekServiceClient = v1.CmekServiceClient;
 const ContentServiceClient = v1.ContentServiceClient;
 type ContentServiceClient = v1.ContentServiceClient;
 const DataplexServiceClient = v1.DataplexServiceClient;
@@ -34,6 +36,7 @@ type MetadataServiceClient = v1.MetadataServiceClient;
 export {
   v1,
   CatalogServiceClient,
+  CmekServiceClient,
   ContentServiceClient,
   DataplexServiceClient,
   DataScanServiceClient,
@@ -43,6 +46,7 @@ export {
 export default {
   v1,
   CatalogServiceClient,
+  CmekServiceClient,
   ContentServiceClient,
   DataplexServiceClient,
   DataScanServiceClient,

@@ -238,6 +238,9 @@ export class DataScanServiceClient {
       dataTaxonomyPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/dataTaxonomies/{data_taxonomy_id}'
       ),
+      encryptionConfigPathTemplate: new this._gaxModule.PathTemplate(
+        'organizations/{organization}/locations/{location}/encryptionConfigs/{encryption_config}'
+      ),
       entityPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/lakes/{lake}/zones/{zone}/entities/{entity}'
       ),
@@ -3168,6 +3171,65 @@ export class DataScanServiceClient {
   matchDataTaxonomyIdFromDataTaxonomyName(dataTaxonomyName: string) {
     return this.pathTemplates.dataTaxonomyPathTemplate.match(dataTaxonomyName)
       .data_taxonomy_id;
+  }
+
+  /**
+   * Return a fully-qualified encryptionConfig resource name string.
+   *
+   * @param {string} organization
+   * @param {string} location
+   * @param {string} encryption_config
+   * @returns {string} Resource name string.
+   */
+  encryptionConfigPath(
+    organization: string,
+    location: string,
+    encryptionConfig: string
+  ) {
+    return this.pathTemplates.encryptionConfigPathTemplate.render({
+      organization: organization,
+      location: location,
+      encryption_config: encryptionConfig,
+    });
+  }
+
+  /**
+   * Parse the organization from EncryptionConfig resource.
+   *
+   * @param {string} encryptionConfigName
+   *   A fully-qualified path representing EncryptionConfig resource.
+   * @returns {string} A string representing the organization.
+   */
+  matchOrganizationFromEncryptionConfigName(encryptionConfigName: string) {
+    return this.pathTemplates.encryptionConfigPathTemplate.match(
+      encryptionConfigName
+    ).organization;
+  }
+
+  /**
+   * Parse the location from EncryptionConfig resource.
+   *
+   * @param {string} encryptionConfigName
+   *   A fully-qualified path representing EncryptionConfig resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromEncryptionConfigName(encryptionConfigName: string) {
+    return this.pathTemplates.encryptionConfigPathTemplate.match(
+      encryptionConfigName
+    ).location;
+  }
+
+  /**
+   * Parse the encryption_config from EncryptionConfig resource.
+   *
+   * @param {string} encryptionConfigName
+   *   A fully-qualified path representing EncryptionConfig resource.
+   * @returns {string} A string representing the encryption_config.
+   */
+  matchEncryptionConfigFromEncryptionConfigName(encryptionConfigName: string) {
+    return this.pathTemplates.encryptionConfigPathTemplate.match(
+      encryptionConfigName
+    ).encryption_config;
   }
 
   /**

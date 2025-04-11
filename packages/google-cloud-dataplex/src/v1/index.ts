@@ -17,6 +17,7 @@
 // ** All changes to this file may be overwritten. **
 
 export {CatalogServiceClient} from './catalog_service_client';
+export {CmekServiceClient} from './cmek_service_client';
 export {ContentServiceClient} from './content_service_client';
 export {DataplexServiceClient} from './dataplex_service_client';
 export {DataScanServiceClient} from './data_scan_service_client';

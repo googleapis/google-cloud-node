@@ -3507,12 +3507,14 @@
                       "oneofs": {
                         "spec": {
                           "oneof": [
-                            "importSpec"
+                            "importSpec",
+                            "exportSpec"
                           ]
                         },
                         "result": {
                           "oneof": [
-                            "importResult"
+                            "importResult",
+                            "exportResult"
                           ]
                         }
                       },
@@ -3565,9 +3567,20 @@
                           "type": "ImportJobSpec",
                           "id": 100
                         },
+                        "exportSpec": {
+                          "type": "ExportJobSpec",
+                          "id": 101
+                        },
                         "importResult": {
                           "type": "ImportJobResult",
                           "id": 200,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "exportResult": {
+                          "type": "ExportJobResult",
+                          "id": 201,
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
@@ -3621,6 +3634,24 @@
                             "updateTime": {
                               "type": "google.protobuf.Timestamp",
                               "id": 5,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            }
+                          }
+                        },
+                        "ExportJobResult": {
+                          "fields": {
+                            "exportedEntries": {
+                              "type": "int64",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "errorMessage": {
+                              "type": "string",
+                              "id": 2,
                               "options": {
                                 "(google.api.field_behavior)": "OUTPUT_ONLY"
                               }
@@ -3721,10 +3752,71 @@
                             }
                           }
                         },
+                        "ExportJobSpec": {
+                          "fields": {
+                            "scope": {
+                              "type": "ExportJobScope",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            },
+                            "outputPath": {
+                              "type": "string",
+                              "id": 3,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            }
+                          },
+                          "nested": {
+                            "ExportJobScope": {
+                              "fields": {
+                                "organizationLevel": {
+                                  "type": "bool",
+                                  "id": 1
+                                },
+                                "projects": {
+                                  "rule": "repeated",
+                                  "type": "string",
+                                  "id": 2,
+                                  "options": {
+                                    "(google.api.resource_reference).type": "cloudresourcemanager.googleapis.com/Project"
+                                  }
+                                },
+                                "entryGroups": {
+                                  "rule": "repeated",
+                                  "type": "string",
+                                  "id": 3,
+                                  "options": {
+                                    "(google.api.resource_reference).type": "dataplex.googleapis.com/EntryGroup"
+                                  }
+                                },
+                                "entryTypes": {
+                                  "rule": "repeated",
+                                  "type": "string",
+                                  "id": 4,
+                                  "options": {
+                                    "(google.api.resource_reference).type": "dataplex.googleapis.com/EntryType"
+                                  }
+                                },
+                                "aspectTypes": {
+                                  "rule": "repeated",
+                                  "type": "string",
+                                  "id": 5,
+                                  "options": {
+                                    "(google.api.resource_reference).type": "dataplex.googleapis.com/AspectType"
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        },
                         "Type": {
                           "values": {
                             "TYPE_UNSPECIFIED": 0,
-                            "IMPORT": 1
+                            "IMPORT": 1,
+                            "EXPORT": 2
                           }
                         },
                         "Status": {
@@ -6063,6 +6155,360 @@
                         }
                       }
                     },
+                    "CmekService": {
+                      "options": {
+                        "(google.api.default_host)": "dataplex.googleapis.com",
+                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/cloud-platform"
+                      },
+                      "methods": {
+                        "CreateEncryptionConfig": {
+                          "requestType": "CreateEncryptionConfigRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).post": "/v1/{parent=organizations/*/locations/*}/encryptionConfigs",
+                            "(google.api.http).body": "encryption_config",
+                            "(google.api.method_signature)": "parent,encryption_config,encryption_config_id",
+                            "(google.longrunning.operation_info).response_type": "EncryptionConfig",
+                            "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{parent=organizations/*/locations/*}/encryptionConfigs",
+                                "body": "encryption_config"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,encryption_config,encryption_config_id"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "EncryptionConfig",
+                                "metadata_type": "OperationMetadata"
+                              }
+                            }
+                          ]
+                        },
+                        "UpdateEncryptionConfig": {
+                          "requestType": "UpdateEncryptionConfigRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).patch": "/v1/{encryption_config.name=organizations/*/locations/*/encryptionConfigs/*}",
+                            "(google.api.http).body": "encryption_config",
+                            "(google.api.method_signature)": "encryption_config,update_mask",
+                            "(google.longrunning.operation_info).response_type": "EncryptionConfig",
+                            "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "patch": "/v1/{encryption_config.name=organizations/*/locations/*/encryptionConfigs/*}",
+                                "body": "encryption_config"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "encryption_config,update_mask"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "EncryptionConfig",
+                                "metadata_type": "OperationMetadata"
+                              }
+                            }
+                          ]
+                        },
+                        "DeleteEncryptionConfig": {
+                          "requestType": "DeleteEncryptionConfigRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).delete": "/v1/{name=organizations/*/locations/*/encryptionConfigs/*}",
+                            "(google.api.method_signature)": "name",
+                            "(google.longrunning.operation_info).response_type": "google.protobuf.Empty",
+                            "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "delete": "/v1/{name=organizations/*/locations/*/encryptionConfigs/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "google.protobuf.Empty",
+                                "metadata_type": "OperationMetadata"
+                              }
+                            }
+                          ]
+                        },
+                        "ListEncryptionConfigs": {
+                          "requestType": "ListEncryptionConfigsRequest",
+                          "responseType": "ListEncryptionConfigsResponse",
+                          "options": {
+                            "(google.api.http).get": "/v1/{parent=organizations/*/locations/*}/encryptionConfigs",
+                            "(google.api.method_signature)": "parent"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{parent=organizations/*/locations/*}/encryptionConfigs"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
+                            }
+                          ]
+                        },
+                        "GetEncryptionConfig": {
+                          "requestType": "GetEncryptionConfigRequest",
+                          "responseType": "EncryptionConfig",
+                          "options": {
+                            "(google.api.http).get": "/v1/{name=organizations/*/locations/*/encryptionConfigs/*}",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{name=organizations/*/locations/*/encryptionConfigs/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    "EncryptionConfig": {
+                      "options": {
+                        "(google.api.resource).type": "dataplex.googleapis.com/EncryptionConfig",
+                        "(google.api.resource).pattern": "organizations/{organization}/locations/{location}/encryptionConfigs/{encryption_config}"
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "IDENTIFIER",
+                            "(google.api.resource_reference).type": "dataplex.googleapis.com/EncryptionConfig"
+                          }
+                        },
+                        "key": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "createTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "updateTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "encryptionState": {
+                          "type": "EncryptionState",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "etag": {
+                          "type": "string",
+                          "id": 6
+                        },
+                        "failureDetails": {
+                          "type": "FailureDetails",
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "EncryptionState": {
+                          "values": {
+                            "ENCRYPTION_STATE_UNSPECIFIED": 0,
+                            "ENCRYPTING": 1,
+                            "COMPLETED": 2,
+                            "FAILED": 3
+                          }
+                        },
+                        "FailureDetails": {
+                          "fields": {
+                            "errorCode": {
+                              "type": "ErrorCode",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "errorMessage": {
+                              "type": "string",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            }
+                          },
+                          "nested": {
+                            "ErrorCode": {
+                              "values": {
+                                "UNKNOWN": 0,
+                                "INTERNAL_ERROR": 1,
+                                "REQUIRE_USER_ACTION": 2
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "CreateEncryptionConfigRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "dataplex.googleapis.com/OrganizationLocation"
+                          }
+                        },
+                        "encryptionConfigId": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "encryptionConfig": {
+                          "type": "EncryptionConfig",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "GetEncryptionConfigRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "dataplex.googleapis.com/EncryptionConfig"
+                          }
+                        }
+                      }
+                    },
+                    "UpdateEncryptionConfigRequest": {
+                      "fields": {
+                        "encryptionConfig": {
+                          "type": "EncryptionConfig",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "updateMask": {
+                          "type": "google.protobuf.FieldMask",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "DeleteEncryptionConfigRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "dataplex.googleapis.com/EncryptionConfig"
+                          }
+                        },
+                        "etag": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "ListEncryptionConfigsRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).child_type": "dataplex.googleapis.com/EncryptionConfig"
+                          }
+                        },
+                        "pageSize": {
+                          "type": "int32",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "filter": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "orderBy": {
+                          "type": "string",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "ListEncryptionConfigsResponse": {
+                      "fields": {
+                        "encryptionConfigs": {
+                          "rule": "repeated",
+                          "type": "EncryptionConfig",
+                          "id": 1
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "unreachableLocations": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.resource_reference).type": "locations.googleapis.com/Location"
+                          }
+                        }
+                      }
+                    },
                     "ContentService": {
                       "options": {
                         "(google.api.default_host)": "dataplex.googleapis.com",
@@ -6552,6 +6998,13 @@
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
+                        },
+                        "scanStatistics": {
+                          "type": "ScanStatistics",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         }
                       },
                       "nested": {
@@ -6564,6 +7017,53 @@
                                 "(google.api.field_behavior)": "OUTPUT_ONLY",
                                 "(google.api.resource_reference).type": "bigquery.googleapis.com/Dataset"
                               }
+                            },
+                            "location": {
+                              "type": "string",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            }
+                          }
+                        },
+                        "ScanStatistics": {
+                          "fields": {
+                            "scannedFileCount": {
+                              "type": "int32",
+                              "id": 1
+                            },
+                            "dataProcessedBytes": {
+                              "type": "int64",
+                              "id": 2
+                            },
+                            "filesExcluded": {
+                              "type": "int32",
+                              "id": 3
+                            },
+                            "tablesCreated": {
+                              "type": "int32",
+                              "id": 4
+                            },
+                            "tablesDeleted": {
+                              "type": "int32",
+                              "id": 5
+                            },
+                            "tablesUpdated": {
+                              "type": "int32",
+                              "id": 6
+                            },
+                            "filesetsCreated": {
+                              "type": "int32",
+                              "id": 7
+                            },
+                            "filesetsDeleted": {
+                              "type": "int32",
+                              "id": 8
+                            },
+                            "filesetsUpdated": {
+                              "type": "int32",
+                              "id": 9
                             }
                           }
                         }

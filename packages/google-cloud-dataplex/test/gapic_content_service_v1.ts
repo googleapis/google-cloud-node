@@ -2619,6 +2619,75 @@ describe('v1.ContentServiceClient', () => {
       });
     });
 
+    describe('encryptionConfig', async () => {
+      const fakePath = '/rendered/path/encryptionConfig';
+      const expectedParameters = {
+        organization: 'organizationValue',
+        location: 'locationValue',
+        encryption_config: 'encryptionConfigValue',
+      };
+      const client = new contentserviceModule.v1.ContentServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      client.pathTemplates.encryptionConfigPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.encryptionConfigPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('encryptionConfigPath', () => {
+        const result = client.encryptionConfigPath(
+          'organizationValue',
+          'locationValue',
+          'encryptionConfigValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates.encryptionConfigPathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchOrganizationFromEncryptionConfigName', () => {
+        const result =
+          client.matchOrganizationFromEncryptionConfigName(fakePath);
+        assert.strictEqual(result, 'organizationValue');
+        assert(
+          (client.pathTemplates.encryptionConfigPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromEncryptionConfigName', () => {
+        const result = client.matchLocationFromEncryptionConfigName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.encryptionConfigPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchEncryptionConfigFromEncryptionConfigName', () => {
+        const result =
+          client.matchEncryptionConfigFromEncryptionConfigName(fakePath);
+        assert.strictEqual(result, 'encryptionConfigValue');
+        assert(
+          (client.pathTemplates.encryptionConfigPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
     describe('entity', async () => {
       const fakePath = '/rendered/path/entity';
       const expectedParameters = {
