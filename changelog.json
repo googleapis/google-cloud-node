@@ -4,6 +4,1173 @@
     {
       "changes": [
         {
+          "type": "fix",
+          "sha": "c9adc6150ad09630854554c2ed7e558fb3e04315",
+          "message": "[Many APIs] await/catch promises, and update listOperationsAsync return type",
+          "issues": [
+            "6191"
+          ]
+        }
+      ],
+      "version": "0.2.2",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-shopping/reviews",
+      "id": "b3c88384-523e-48b0-863a-e7c7c1b3090a",
+      "createTime": "2025-04-11T19:13:46.962Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "f830d44de5a6e3f93a54955f01bb8e34934c5e5c",
+          "message": "[oracledatabase] add new AutonomousDatabase RPCs",
+          "issues": [
+            "6252"
+          ]
+        }
+      ],
+      "version": "0.5.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/oracledatabase",
+      "id": "b56374dc-539c-43d5-b42a-c5a4a162e15f",
+      "createTime": "2025-04-11T19:13:46.941Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "ab304122e3e825c9a76af7d6b0ef4ddc9aa6e906",
+          "message": "[Many APIs] await/catch promises, and update listOperationsAsync return type",
+          "issues": [
+            "6185"
+          ]
+        }
+      ],
+      "version": "0.5.2",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/gdchardwaremanagement",
+      "id": "13394c32-b5d8-4e1e-a770-d0cc5bc820b3",
+      "createTime": "2025-04-11T19:13:46.922Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "b33692d64bd42b99f37d0f919f2b0c06a673ab7f",
+          "message": "[Many APIs] await/catch promises, and update listOperationsAsync return type",
+          "issues": [
+            "6187"
+          ]
+        }
+      ],
+      "version": "0.3.2",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/privilegedaccessmanager",
+      "id": "8d500c65-7368-42c6-ad6f-8f498dc28012",
+      "createTime": "2025-04-11T19:13:46.904Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "c9adc6150ad09630854554c2ed7e558fb3e04315",
+          "message": "[Many APIs] await/catch promises, and update listOperationsAsync return type",
+          "issues": [
+            "6191"
+          ]
+        }
+      ],
+      "version": "0.2.2",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-shopping/promotions",
+      "id": "7529e971-679a-4065-98d3-23808a17a10e",
+      "createTime": "2025-04-11T19:13:46.882Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "c9adc6150ad09630854554c2ed7e558fb3e04315",
+          "message": "[Many APIs] await/catch promises, and update listOperationsAsync return type",
+          "issues": [
+            "6191"
+          ]
+        }
+      ],
+      "version": "0.2.2",
+      "language": "JAVASCRIPT",
+      "artifactName": "@googlemaps/streetview-publish",
+      "id": "e3a16a72-a4b8-4f94-a6b0-95ad200b2f7a",
+      "createTime": "2025-04-11T19:13:46.863Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "ab304122e3e825c9a76af7d6b0ef4ddc9aa6e906",
+          "message": "[Many APIs] await/catch promises, and update listOperationsAsync return type",
+          "issues": [
+            "6185"
+          ]
+        }
+      ],
+      "version": "0.3.2",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/developerconnect",
+      "id": "8758747c-2e0b-435f-a2d8-5839ab42ac65",
+      "createTime": "2025-04-11T19:13:46.844Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "c9adc6150ad09630854554c2ed7e558fb3e04315",
+          "message": "[Many APIs] await/catch promises, and update listOperationsAsync return type",
+          "issues": [
+            "6191"
+          ]
+        }
+      ],
+      "version": "0.4.2",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-shopping/lfp",
+      "id": "55ac2d5f-54c8-40aa-bb91-57f3948afe71",
+      "createTime": "2025-04-11T19:13:46.823Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "c9adc6150ad09630854554c2ed7e558fb3e04315",
+          "message": "[Many APIs] await/catch promises, and update listOperationsAsync return type",
+          "issues": [
+            "6191"
+          ]
+        }
+      ],
+      "version": "0.4.2",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-shopping/notifications",
+      "id": "f18006ee-3eb1-4166-8c53-bf4d58ef1e34",
+      "createTime": "2025-04-11T19:13:46.805Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "c9adc6150ad09630854554c2ed7e558fb3e04315",
+          "message": "[Many APIs] await/catch promises, and update listOperationsAsync return type",
+          "issues": [
+            "6191"
+          ]
+        }
+      ],
+      "version": "0.3.2",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-shopping/quota",
+      "id": "2cf81260-fd3d-45bf-9727-45ceaa5f9e54",
+      "createTime": "2025-04-11T19:13:46.786Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "5b4b0d3fc31b656fcbbb0661cb810b9278207ba2",
+          "message": "[apphub] add enum `Type.GLOBAL`",
+          "issues": [
+            "6215"
+          ]
+        }
+      ],
+      "version": "0.5.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/apphub",
+      "id": "32c2b460-dcc1-4329-9f49-c1fc2424b5f7",
+      "createTime": "2025-04-11T19:13:46.765Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "b33692d64bd42b99f37d0f919f2b0c06a673ab7f",
+          "message": "[Many APIs] await/catch promises, and update listOperationsAsync return type",
+          "issues": [
+            "6187"
+          ]
+        }
+      ],
+      "version": "0.8.2",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/parallelstore",
+      "id": "1b447a0f-9aa7-4281-b015-4399842d7237",
+      "createTime": "2025-04-11T19:13:46.747Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "b33692d64bd42b99f37d0f919f2b0c06a673ab7f",
+          "message": "[Many APIs] await/catch promises, and update listOperationsAsync return type",
+          "issues": [
+            "6187"
+          ]
+        }
+      ],
+      "version": "0.7.2",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/redis-cluster",
+      "id": "3c83fc06-8a65-4003-93cf-34e8d7240bf8",
+      "createTime": "2025-04-11T19:13:46.727Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "5dc634291b5ae5f427479d718bf0b961ca5f0ad8",
+          "message": "[css] Introduce QuotaService for CSS API",
+          "issues": [
+            "6249"
+          ]
+        }
+      ],
+      "version": "0.9.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-shopping/css",
+      "id": "2124b7d2-80c0-4e7b-a528-14f9e2a3e413",
+      "createTime": "2025-04-11T19:13:46.700Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "c9adc6150ad09630854554c2ed7e558fb3e04315",
+          "message": "[Many APIs] await/catch promises, and update listOperationsAsync return type",
+          "issues": [
+            "6191"
+          ]
+        }
+      ],
+      "version": "0.7.2",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-shopping/inventories",
+      "id": "0e80cf68-8047-44ee-a833-aa9b44a678f5",
+      "createTime": "2025-04-11T19:13:46.681Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "c9adc6150ad09630854554c2ed7e558fb3e04315",
+          "message": "[Many APIs] await/catch promises, and update listOperationsAsync return type",
+          "issues": [
+            "6191"
+          ]
+        }
+      ],
+      "version": "0.8.2",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-shopping/reports",
+      "id": "d368323f-a588-4a06-8eb7-05913d3a91db",
+      "createTime": "2025-04-11T19:13:46.663Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "ab304122e3e825c9a76af7d6b0ef4ddc9aa6e906",
+          "message": "[Many APIs] await/catch promises, and update listOperationsAsync return type",
+          "issues": [
+            "6185"
+          ]
+        }
+      ],
+      "version": "0.7.2",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/edgenetwork",
+      "id": "c8b37185-9dbe-46a4-b28f-0cf5d943178b",
+      "createTime": "2025-04-11T19:13:46.642Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "c9adc6150ad09630854554c2ed7e558fb3e04315",
+          "message": "[Many APIs] await/catch promises, and update listOperationsAsync return type",
+          "issues": [
+            "6191"
+          ]
+        }
+      ],
+      "version": "6.0.2",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/grafeas",
+      "id": "e8cc2936-07cd-44e0-8b08-ab3586dc5a47",
+      "createTime": "2025-04-11T19:13:46.624Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "c9adc6150ad09630854554c2ed7e558fb3e04315",
+          "message": "[Many APIs] await/catch promises, and update listOperationsAsync return type",
+          "issues": [
+            "6191"
+          ]
+        }
+      ],
+      "version": "4.0.2",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/storage-transfer",
+      "id": "fdc76147-b530-4daf-9406-4ef4efe36d22",
+      "createTime": "2025-04-11T19:13:46.600Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "6c8ef3521ba94048741a9c33c4a66506bd057812",
+          "message": "[containeranalysis] add new location-specific bindings",
+          "issues": [
+            "6222"
+          ]
+        },
+        {
+          "type": "feat",
+          "sha": "c02b1222a127a8229ae1da81e07fc2ba386dfd11",
+          "message": "[containeranalysis] add ExportSBOM API method for v1",
+          "issues": [
+            "6210"
+          ]
+        }
+      ],
+      "version": "6.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/containeranalysis",
+      "id": "3af80a23-4df0-4f01-b67c-b19147c41a2a",
+      "createTime": "2025-04-11T19:13:46.579Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "dc9182d598bfd02af63e95c340e6600db4bac240",
+          "message": "Update dependency @google-cloud/vision to v5",
+          "issues": [
+            "6202"
+          ],
+          "scope": "deps"
+        },
+        {
+          "type": "fix",
+          "sha": "7c12c9b077e24bc91b8d7e3b4e94d44d92905949",
+          "message": "Update dependency @google-cloud/automl to v5",
+          "issues": [
+            "6206"
+          ],
+          "scope": "deps"
+        }
+      ],
+      "version": "9.0.2",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/translate",
+      "id": "f8bfc9c6-569a-46bd-a75f-dc19fb624a86",
+      "createTime": "2025-04-11T19:13:46.560Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "f1f9df81259237c77433621f449c7d4325c658d8",
+          "message": "[texttospeech] Support HD voice custom pronunciations",
+          "issues": [
+            "6229"
+          ]
+        }
+      ],
+      "version": "6.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/text-to-speech",
+      "id": "d3ef860f-e9de-4a27-9b5b-7037e4ad7f30",
+      "createTime": "2025-04-11T19:13:46.541Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "72590a4b4746a787a00566b42c95f87b5023d834",
+          "message": "Update dependency body-parser to v2",
+          "issues": [
+            "6226"
+          ],
+          "scope": "deps"
+        }
+      ],
+      "version": "6.0.2",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/tasks",
+      "id": "46f220e9-5a9e-428b-9d17-5c52c75de412",
+      "createTime": "2025-04-11T19:13:46.521Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "2c5c68c6049fdb8801ee9b1bcd320a4c7e09ba12",
+          "message": "Expand types for streamingRecognize",
+          "issues": [
+            "6254"
+          ]
+        },
+        {
+          "type": "feat",
+          "sha": "fb100893835275f1cc1374385ff22764f3e622dd",
+          "message": "Expose google.cloud.location.Locations API",
+          "issues": [
+            "6243"
+          ]
+        }
+      ],
+      "version": "7.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/speech",
+      "id": "409b394f-f8a0-4ce9-bd17-81de1a5aa418",
+      "createTime": "2025-04-11T19:13:46.503Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "72590a4b4746a787a00566b42c95f87b5023d834",
+          "message": "Update dependency body-parser to v2",
+          "issues": [
+            "6226"
+          ],
+          "scope": "deps"
+        }
+      ],
+      "version": "5.0.2",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/scheduler",
+      "id": "5e064897-3829-4ce3-bfef-4c2fb959912d",
+      "createTime": "2025-04-11T19:13:46.485Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "b33692d64bd42b99f37d0f919f2b0c06a673ab7f",
+          "message": "[Many APIs] await/catch promises, and update listOperationsAsync return type",
+          "issues": [
+            "6187"
+          ]
+        }
+      ],
+      "version": "5.0.2",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/redis",
+      "id": "8171f113-68de-4910-a456-f03e2127846e",
+      "createTime": "2025-04-11T19:13:46.454Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "b33692d64bd42b99f37d0f919f2b0c06a673ab7f",
+          "message": "[Many APIs] await/catch promises, and update listOperationsAsync return type",
+          "issues": [
+            "6187"
+          ]
+        }
+      ],
+      "version": "7.0.2",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/recommender",
+      "id": "233b70a5-5d08-40c3-a621-613f6384338c",
+      "createTime": "2025-04-11T19:13:46.436Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "b33692d64bd42b99f37d0f919f2b0c06a673ab7f",
+          "message": "[Many APIs] await/catch promises, and update listOperationsAsync return type",
+          "issues": [
+            "6187"
+          ]
+        }
+      ],
+      "version": "6.0.2",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/recaptcha-enterprise",
+      "id": "de41a3a4-c6a0-41a3-b723-ea816b6c5245",
+      "createTime": "2025-04-11T19:13:46.418Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "b33692d64bd42b99f37d0f919f2b0c06a673ab7f",
+          "message": "[Many APIs] await/catch promises, and update listOperationsAsync return type",
+          "issues": [
+            "6187"
+          ]
+        }
+      ],
+      "version": "2.0.2",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/rapidmigrationassessment",
+      "id": "15760ee8-f7b9-4e9b-89f3-86022127fdac",
+      "createTime": "2025-04-11T19:13:46.398Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "b33692d64bd42b99f37d0f919f2b0c06a673ab7f",
+          "message": "[Many APIs] await/catch promises, and update listOperationsAsync return type",
+          "issues": [
+            "6187"
+          ]
+        }
+      ],
+      "version": "4.0.2",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/private-catalog",
+      "id": "e5358115-0d9f-4baa-a08e-a787c2b4174f",
+      "createTime": "2025-04-11T19:13:46.379Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "b33692d64bd42b99f37d0f919f2b0c06a673ab7f",
+          "message": "[Many APIs] await/catch promises, and update listOperationsAsync return type",
+          "issues": [
+            "6187"
+          ]
+        }
+      ],
+      "version": "0.6.2",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/policy-troubleshooter-iam",
+      "id": "3779185f-7732-4abe-ba47-eb4a90a5f2d2",
+      "createTime": "2025-04-11T19:13:46.361Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "b33692d64bd42b99f37d0f919f2b0c06a673ab7f",
+          "message": "[Many APIs] await/catch promises, and update listOperationsAsync return type",
+          "issues": [
+            "6187"
+          ]
+        }
+      ],
+      "version": "4.0.2",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/policy-troubleshooter",
+      "id": "39475cdf-c381-498e-aa35-1d11dbfa47e0",
+      "createTime": "2025-04-11T19:13:46.341Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "b33692d64bd42b99f37d0f919f2b0c06a673ab7f",
+          "message": "[Many APIs] await/catch promises, and update listOperationsAsync return type",
+          "issues": [
+            "6187"
+          ]
+        }
+      ],
+      "version": "0.5.2",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/policysimulator",
+      "id": "e399e4c0-0968-4eda-9fa9-d7252fd970fc",
+      "createTime": "2025-04-11T19:13:46.323Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "b33692d64bd42b99f37d0f919f2b0c06a673ab7f",
+          "message": "[Many APIs] await/catch promises, and update listOperationsAsync return type",
+          "issues": [
+            "6187"
+          ]
+        }
+      ],
+      "version": "5.0.2",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/phishing-protection",
+      "id": "f478902d-7b86-476e-a8c1-a9044d51cc8b",
+      "createTime": "2025-04-11T19:13:46.305Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "b33692d64bd42b99f37d0f919f2b0c06a673ab7f",
+          "message": "[Many APIs] await/catch promises, and update listOperationsAsync return type",
+          "issues": [
+            "6187"
+          ]
+        }
+      ],
+      "version": "6.0.2",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/os-login",
+      "id": "6555cd78-7276-4a4a-8be4-160cd215d222",
+      "createTime": "2025-04-11T19:13:46.284Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "b33692d64bd42b99f37d0f919f2b0c06a673ab7f",
+          "message": "[Many APIs] await/catch promises, and update listOperationsAsync return type",
+          "issues": [
+            "6187"
+          ]
+        }
+      ],
+      "version": "4.0.2",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/os-config",
+      "id": "6f230f8c-e4e1-48b4-b042-b77f6ddfeaf0",
+      "createTime": "2025-04-11T19:13:46.266Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "b33692d64bd42b99f37d0f919f2b0c06a673ab7f",
+          "message": "[Many APIs] await/catch promises, and update listOperationsAsync return type",
+          "issues": [
+            "6187"
+          ]
+        }
+      ],
+      "version": "4.0.2",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/org-policy",
+      "id": "e195c926-a37b-4acc-97f7-f3b4597a5416",
+      "createTime": "2025-04-11T19:13:46.248Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "b33692d64bd42b99f37d0f919f2b0c06a673ab7f",
+          "message": "[Many APIs] await/catch promises, and update listOperationsAsync return type",
+          "issues": [
+            "6187"
+          ]
+        }
+      ],
+      "version": "4.0.2",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/orchestration-airflow",
+      "id": "d53523cf-287f-48de-a95a-19a68e0f35d0",
+      "createTime": "2025-04-11T19:13:46.227Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "b33692d64bd42b99f37d0f919f2b0c06a673ab7f",
+          "message": "[Many APIs] await/catch promises, and update listOperationsAsync return type",
+          "issues": [
+            "6187"
+          ]
+        }
+      ],
+      "version": "4.0.2",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/notebooks",
+      "id": "8a3aba2f-0eba-4fa7-9f9f-e135e747cfae",
+      "createTime": "2025-04-11T19:13:46.208Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "b33692d64bd42b99f37d0f919f2b0c06a673ab7f",
+          "message": "[Many APIs] await/catch promises, and update listOperationsAsync return type",
+          "issues": [
+            "6187"
+          ]
+        }
+      ],
+      "version": "0.8.2",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/networkservices",
+      "id": "01baf4d1-4040-4519-b5f2-3fee34cc7e32",
+      "createTime": "2025-04-11T19:13:46.190Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "42630e4ccd8cacb016451dfed78060c41ac879a5",
+          "message": "[networkmanagement] add messages and fields related to Direct VPC Egress",
+          "issues": [
+            "6245"
+          ]
+        },
+        {
+          "type": "feat",
+          "sha": "42630e4ccd8cacb016451dfed78060c41ac879a5",
+          "message": "Add messages and fields related to Serverless External",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "42630e4ccd8cacb016451dfed78060c41ac879a5",
+          "message": "Add messages and fields related to Route",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "42630e4ccd8cacb016451dfed78060c41ac879a5",
+          "message": "Add enum types related to Firewall",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "42630e4ccd8cacb016451dfed78060c41ac879a5",
+          "message": "Add enum types related to Google Service",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "42630e4ccd8cacb016451dfed78060c41ac879a5",
+          "message": "Add enum types related to Abort",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "42630e4ccd8cacb016451dfed78060c41ac879a5",
+          "message": "Add enum types related to Drop",
+          "issues": []
+        }
+      ],
+      "version": "4.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/network-management",
+      "id": "3de5034b-09c2-4b32-bec0-43db26a000e0",
+      "createTime": "2025-04-11T19:13:46.169Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "34267b59998c2c9138815478d5f09b2fc434cc06",
+          "message": "[networkconnectivity] add Network Connectivity Center APIs for PSC service automation",
+          "issues": [
+            "6207"
+          ]
+        }
+      ],
+      "version": "4.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/network-connectivity",
+      "id": "3e357d40-416f-4252-9937-7fd9b1e78556",
+      "createTime": "2025-04-11T19:13:46.150Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "7c12c9b077e24bc91b8d7e3b4e94d44d92905949",
+          "message": "Update dependency @google-cloud/automl to v5",
+          "issues": [
+            "6206"
+          ],
+          "scope": "deps"
+        }
+      ],
+      "version": "7.0.2",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/language",
+      "id": "af922f0d-7c5c-4be0-b965-d10725673310",
+      "createTime": "2025-04-11T19:13:46.132Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "9e3878c2d7343821f441b7954365c90076962aa3",
+          "message": "[iap] Identity-aware Proxy (IAP) released a feature `Use IAP with Workforce Identity Federation`(https://cloud.google.com/iap/docs/use-workforce-identity-federation) at Feb 7, 2025. Two settings field are newly introduced in the feature release: ...",
+          "issues": [
+            "6251"
+          ]
+        }
+      ],
+      "version": "4.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/iap",
+      "id": "2be8dbb3-719f-4728-bbe9-7e6d24c44524",
+      "createTime": "2025-04-11T19:13:46.111Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "ab304122e3e825c9a76af7d6b0ef4ddc9aa6e906",
+          "message": "[Many APIs] await/catch promises, and update listOperationsAsync return type",
+          "issues": [
+            "6185"
+          ]
+        }
+      ],
+      "version": "2.0.2",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/gkemulticloud",
+      "id": "32e0dc6a-8645-4c26-b12b-a947472d97e6",
+      "createTime": "2025-04-11T19:13:46.092Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "ab304122e3e825c9a76af7d6b0ef4ddc9aa6e906",
+          "message": "[Many APIs] await/catch promises, and update listOperationsAsync return type",
+          "issues": [
+            "6185"
+          ]
+        }
+      ],
+      "version": "6.0.2",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/gke-hub",
+      "id": "ac0cabae-55d1-4559-afa8-40f927bac39f",
+      "createTime": "2025-04-11T19:13:46.074Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "ab304122e3e825c9a76af7d6b0ef4ddc9aa6e906",
+          "message": "[Many APIs] await/catch promises, and update listOperationsAsync return type",
+          "issues": [
+            "6185"
+          ]
+        }
+      ],
+      "version": "5.0.2",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/gke-connect-gateway",
+      "id": "ae59d71f-59d5-44f7-915f-c7ff409e6f7b",
+      "createTime": "2025-04-11T19:13:46.053Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "ab304122e3e825c9a76af7d6b0ef4ddc9aa6e906",
+          "message": "[Many APIs] await/catch promises, and update listOperationsAsync return type",
+          "issues": [
+            "6185"
+          ]
+        }
+      ],
+      "version": "2.0.2",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/gke-backup",
+      "id": "fc463fac-d501-48f9-ae36-fedc3654a769",
+      "createTime": "2025-04-11T19:13:46.034Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "ab304122e3e825c9a76af7d6b0ef4ddc9aa6e906",
+          "message": "[Many APIs] await/catch promises, and update listOperationsAsync return type",
+          "issues": [
+            "6185"
+          ]
+        }
+      ],
+      "version": "4.0.2",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/functions",
+      "id": "2d58fb12-2b97-44d5-b48b-da7c871575bc",
+      "createTime": "2025-04-11T19:13:46.016Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "ab304122e3e825c9a76af7d6b0ef4ddc9aa6e906",
+          "message": "[Many APIs] await/catch promises, and update listOperationsAsync return type",
+          "issues": [
+            "6185"
+          ]
+        }
+      ],
+      "version": "4.0.2",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/filestore",
+      "id": "c412b339-abff-401d-b947-40f4646b3d63",
+      "createTime": "2025-04-11T19:13:45.990Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "ab304122e3e825c9a76af7d6b0ef4ddc9aa6e906",
+          "message": "[Many APIs] await/catch promises, and update listOperationsAsync return type",
+          "issues": [
+            "6185"
+          ]
+        }
+      ],
+      "version": "4.0.2",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/eventarc-publishing",
+      "id": "6415096b-876e-4da9-b008-1875aeae2716",
+      "createTime": "2025-04-11T19:13:45.972Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "ab304122e3e825c9a76af7d6b0ef4ddc9aa6e906",
+          "message": "[Many APIs] await/catch promises, and update listOperationsAsync return type",
+          "issues": [
+            "6185"
+          ]
+        }
+      ],
+      "version": "4.0.2",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/eventarc",
+      "id": "a3a802f4-aaa5-46a2-9ce8-ee9e276f6484",
+      "createTime": "2025-04-11T19:13:45.954Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "ab304122e3e825c9a76af7d6b0ef4ddc9aa6e906",
+          "message": "[Many APIs] await/catch promises, and update listOperationsAsync return type",
+          "issues": [
+            "6185"
+          ]
+        }
+      ],
+      "version": "4.0.2",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/essential-contacts",
+      "id": "06b40de9-e39d-43a0-b40e-ff04c28f5a41",
+      "createTime": "2025-04-11T19:13:45.933Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "ab304122e3e825c9a76af7d6b0ef4ddc9aa6e906",
+          "message": "[Many APIs] await/catch promises, and update listOperationsAsync return type",
+          "issues": [
+            "6185"
+          ]
+        }
+      ],
+      "version": "0.6.2",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/edgecontainer",
+      "id": "7bf85474-1ead-4c9f-8e80-bbb435dfe95b",
+      "createTime": "2025-04-11T19:13:45.915Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "ab304122e3e825c9a76af7d6b0ef4ddc9aa6e906",
+          "message": "[Many APIs] await/catch promises, and update listOperationsAsync return type",
+          "issues": [
+            "6185"
+          ]
+        }
+      ],
+      "version": "4.0.2",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/domains",
+      "id": "50bfee8f-f77d-4733-894b-083391bcec1f",
+      "createTime": "2025-04-11T19:13:45.896Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "7aa1c72d37b636a6fde876758701a9b37c7a609c",
+          "message": "Update Record typings",
+          "issues": []
+        }
+      ],
+      "version": "5.1.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/dns",
+      "id": "576b22bd-9906-4a4d-9970-396b1d8760de",
+      "createTime": "2025-04-11T19:13:45.875Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "2fcdb39efdd799850847756f2dcf128d1262e1a0",
+          "message": "[discoveryengine] move serving config update API to GA",
+          "issues": [
+            "6211"
+          ]
+        },
+        {
+          "type": "fix",
+          "sha": "ab304122e3e825c9a76af7d6b0ef4ddc9aa6e906",
+          "message": "[Many APIs] await/catch promises, and update listOperationsAsync return type",
+          "issues": [
+            "6185"
+          ]
+        }
+      ],
+      "version": "2.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/discoveryengine",
+      "id": "ca9d2032-4440-4ac1-b468-d4bfa3911b2a",
+      "createTime": "2025-04-11T19:13:45.857Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "ab304122e3e825c9a76af7d6b0ef4ddc9aa6e906",
+          "message": "[Many APIs] await/catch promises, and update listOperationsAsync return type",
+          "issues": [
+            "6185"
+          ]
+        }
+      ],
+      "version": "5.0.2",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/dialogflow-cx",
+      "id": "1e5ae5df-f9d2-43f9-9d0d-4d32c8ed808f",
+      "createTime": "2025-04-11T19:13:45.839Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "ab304122e3e825c9a76af7d6b0ef4ddc9aa6e906",
+          "message": "[Many APIs] await/catch promises, and update listOperationsAsync return type",
+          "issues": [
+            "6185"
+          ]
+        }
+      ],
+      "version": "7.0.2",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/dialogflow",
+      "id": "9e2f362f-2ade-4301-a13a-9abc7288ce12",
+      "createTime": "2025-04-11T19:13:45.819Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "ab304122e3e825c9a76af7d6b0ef4ddc9aa6e906",
+          "message": "[Many APIs] await/catch promises, and update listOperationsAsync return type",
+          "issues": [
+            "6185"
+          ]
+        }
+      ],
+      "version": "5.0.2",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/deploy",
+      "id": "f114d315-fa72-41aa-8146-c73f6ae1f13e",
+      "createTime": "2025-04-11T19:13:45.800Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "f5302204749b6f3a6c4831f920b1a03386d5531a",
+          "message": "[datastream] A new field `secret_manager_stored_password` is added to multiple messages",
+          "issues": [
+            "6218"
+          ]
+        },
+        {
+          "type": "fix",
+          "sha": "ab304122e3e825c9a76af7d6b0ef4ddc9aa6e906",
+          "message": "[Many APIs] await/catch promises, and update listOperationsAsync return type",
+          "issues": [
+            "6185"
+          ]
+        }
+      ],
+      "version": "4.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/datastream",
+      "id": "90fdbec6-a1c8-46d9-b6a0-aa92e8783ada",
+      "createTime": "2025-04-11T19:13:45.781Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "8d5fcafb028a0bbc38af5b3b34de317f9be2a180",
+          "message": "[dataplex] Add Data Discovery result statistics",
+          "issues": [
+            "6235"
+          ]
+        }
+      ],
+      "version": "4.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/dataplex",
+      "id": "bba6dc29-01a5-4993-9716-58f0be6a8b44",
+      "createTime": "2025-04-11T19:13:45.758Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "130faf558ddb3c17472753a23fdb9a0a0a63053b",
+          "message": "[compute] Update Compute Engine API to revision 20250320",
+          "issues": [
+            "6216"
+          ]
+        }
+      ],
+      "version": "5.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/compute",
+      "id": "27b8876c-c412-4b58-9f84-a1b5e1542ff2",
+      "createTime": "2025-04-11T19:13:45.740Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "a369ea6db2a60caecd8d5f1e6a652834bacbd708",
+          "message": "[bigquery-analyticshub] Support new feature Sharing Cloud Pubsub Streams via AH (GA) and Subscriber Email logging feature",
+          "issues": [
+            "6219"
+          ]
+        }
+      ],
+      "version": "2.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/bigquery-analyticshub",
+      "id": "a9383125-080f-4647-aa77-c697bc3ae22a",
+      "createTime": "2025-04-11T19:13:45.721Z"
+    },
+    {
+      "changes": [
+        {
           "type": "feat",
           "sha": "83d590ec19b702c63850edccac9bc7a4a51f2c8d",
           "message": "[parametermanager] add CMEK support",
@@ -49614,5 +50781,5 @@
       "createTime": "2023-01-28T04:18:24.718Z"
     }
   ],
-  "updateTime": "2025-03-21T02:18:18.697Z"
+  "updateTime": "2025-04-11T19:13:46.962Z"
 }
