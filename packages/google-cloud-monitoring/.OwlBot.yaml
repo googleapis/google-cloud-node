@@ -15,7 +15,7 @@
 deep-remove-regex:
   - /owl-bot-staging
 deep-copy-regex:
-  - source: /google/cloud/monitoring/(v.*)/.*-nodejs
+  - source: /google/monitoring/(v.*)/.*-nodejs
     dest: /owl-bot-staging/google-cloud-monitoring/$1
 begin-after-commit-hash: ed3195d0a29ae8c2608dc5a2aa2590554a3f9d14
 api-name: monitoring
