@@ -30,7 +30,7 @@ function main(parent) {
    */
   /**
    *  Required. The account to list processed products for.
-   *  Format: accounts/{account}
+   *  Format: `accounts/{account}`
    */
   // const parent = 'abc123'
   /**

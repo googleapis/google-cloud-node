@@ -12207,6 +12207,271 @@
                             return ProductSustainabilityIncentive;
                         })();
     
+                        v1beta.AutomatedDiscounts = (function() {
+    
+                            /**
+                             * Properties of an AutomatedDiscounts.
+                             * @memberof google.shopping.merchant.products.v1beta
+                             * @interface IAutomatedDiscounts
+                             * @property {google.shopping.type.IPrice|null} [priorPrice] AutomatedDiscounts priorPrice
+                             * @property {google.shopping.type.IPrice|null} [priorPriceProgressive] AutomatedDiscounts priorPriceProgressive
+                             * @property {google.shopping.type.IPrice|null} [gadPrice] AutomatedDiscounts gadPrice
+                             */
+    
+                            /**
+                             * Constructs a new AutomatedDiscounts.
+                             * @memberof google.shopping.merchant.products.v1beta
+                             * @classdesc Represents an AutomatedDiscounts.
+                             * @implements IAutomatedDiscounts
+                             * @constructor
+                             * @param {google.shopping.merchant.products.v1beta.IAutomatedDiscounts=} [properties] Properties to set
+                             */
+                            function AutomatedDiscounts(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * AutomatedDiscounts priorPrice.
+                             * @member {google.shopping.type.IPrice|null|undefined} priorPrice
+                             * @memberof google.shopping.merchant.products.v1beta.AutomatedDiscounts
+                             * @instance
+                             */
+                            AutomatedDiscounts.prototype.priorPrice = null;
+    
+                            /**
+                             * AutomatedDiscounts priorPriceProgressive.
+                             * @member {google.shopping.type.IPrice|null|undefined} priorPriceProgressive
+                             * @memberof google.shopping.merchant.products.v1beta.AutomatedDiscounts
+                             * @instance
+                             */
+                            AutomatedDiscounts.prototype.priorPriceProgressive = null;
+    
+                            /**
+                             * AutomatedDiscounts gadPrice.
+                             * @member {google.shopping.type.IPrice|null|undefined} gadPrice
+                             * @memberof google.shopping.merchant.products.v1beta.AutomatedDiscounts
+                             * @instance
+                             */
+                            AutomatedDiscounts.prototype.gadPrice = null;
+    
+                            /**
+                             * Creates a new AutomatedDiscounts instance using the specified properties.
+                             * @function create
+                             * @memberof google.shopping.merchant.products.v1beta.AutomatedDiscounts
+                             * @static
+                             * @param {google.shopping.merchant.products.v1beta.IAutomatedDiscounts=} [properties] Properties to set
+                             * @returns {google.shopping.merchant.products.v1beta.AutomatedDiscounts} AutomatedDiscounts instance
+                             */
+                            AutomatedDiscounts.create = function create(properties) {
+                                return new AutomatedDiscounts(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified AutomatedDiscounts message. Does not implicitly {@link google.shopping.merchant.products.v1beta.AutomatedDiscounts.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.shopping.merchant.products.v1beta.AutomatedDiscounts
+                             * @static
+                             * @param {google.shopping.merchant.products.v1beta.IAutomatedDiscounts} message AutomatedDiscounts message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            AutomatedDiscounts.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.priorPrice != null && Object.hasOwnProperty.call(message, "priorPrice"))
+                                    $root.google.shopping.type.Price.encode(message.priorPrice, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                                if (message.priorPriceProgressive != null && Object.hasOwnProperty.call(message, "priorPriceProgressive"))
+                                    $root.google.shopping.type.Price.encode(message.priorPriceProgressive, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                                if (message.gadPrice != null && Object.hasOwnProperty.call(message, "gadPrice"))
+                                    $root.google.shopping.type.Price.encode(message.gadPrice, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified AutomatedDiscounts message, length delimited. Does not implicitly {@link google.shopping.merchant.products.v1beta.AutomatedDiscounts.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.shopping.merchant.products.v1beta.AutomatedDiscounts
+                             * @static
+                             * @param {google.shopping.merchant.products.v1beta.IAutomatedDiscounts} message AutomatedDiscounts message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            AutomatedDiscounts.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes an AutomatedDiscounts message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.shopping.merchant.products.v1beta.AutomatedDiscounts
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.shopping.merchant.products.v1beta.AutomatedDiscounts} AutomatedDiscounts
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            AutomatedDiscounts.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.shopping.merchant.products.v1beta.AutomatedDiscounts();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.priorPrice = $root.google.shopping.type.Price.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.priorPriceProgressive = $root.google.shopping.type.Price.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 3: {
+                                            message.gadPrice = $root.google.shopping.type.Price.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes an AutomatedDiscounts message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.shopping.merchant.products.v1beta.AutomatedDiscounts
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.shopping.merchant.products.v1beta.AutomatedDiscounts} AutomatedDiscounts
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            AutomatedDiscounts.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies an AutomatedDiscounts message.
+                             * @function verify
+                             * @memberof google.shopping.merchant.products.v1beta.AutomatedDiscounts
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            AutomatedDiscounts.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.priorPrice != null && message.hasOwnProperty("priorPrice")) {
+                                    var error = $root.google.shopping.type.Price.verify(message.priorPrice);
+                                    if (error)
+                                        return "priorPrice." + error;
+                                }
+                                if (message.priorPriceProgressive != null && message.hasOwnProperty("priorPriceProgressive")) {
+                                    var error = $root.google.shopping.type.Price.verify(message.priorPriceProgressive);
+                                    if (error)
+                                        return "priorPriceProgressive." + error;
+                                }
+                                if (message.gadPrice != null && message.hasOwnProperty("gadPrice")) {
+                                    var error = $root.google.shopping.type.Price.verify(message.gadPrice);
+                                    if (error)
+                                        return "gadPrice." + error;
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates an AutomatedDiscounts message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.shopping.merchant.products.v1beta.AutomatedDiscounts
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.shopping.merchant.products.v1beta.AutomatedDiscounts} AutomatedDiscounts
+                             */
+                            AutomatedDiscounts.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.shopping.merchant.products.v1beta.AutomatedDiscounts)
+                                    return object;
+                                var message = new $root.google.shopping.merchant.products.v1beta.AutomatedDiscounts();
+                                if (object.priorPrice != null) {
+                                    if (typeof object.priorPrice !== "object")
+                                        throw TypeError(".google.shopping.merchant.products.v1beta.AutomatedDiscounts.priorPrice: object expected");
+                                    message.priorPrice = $root.google.shopping.type.Price.fromObject(object.priorPrice);
+                                }
+                                if (object.priorPriceProgressive != null) {
+                                    if (typeof object.priorPriceProgressive !== "object")
+                                        throw TypeError(".google.shopping.merchant.products.v1beta.AutomatedDiscounts.priorPriceProgressive: object expected");
+                                    message.priorPriceProgressive = $root.google.shopping.type.Price.fromObject(object.priorPriceProgressive);
+                                }
+                                if (object.gadPrice != null) {
+                                    if (typeof object.gadPrice !== "object")
+                                        throw TypeError(".google.shopping.merchant.products.v1beta.AutomatedDiscounts.gadPrice: object expected");
+                                    message.gadPrice = $root.google.shopping.type.Price.fromObject(object.gadPrice);
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from an AutomatedDiscounts message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.shopping.merchant.products.v1beta.AutomatedDiscounts
+                             * @static
+                             * @param {google.shopping.merchant.products.v1beta.AutomatedDiscounts} message AutomatedDiscounts
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            AutomatedDiscounts.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults) {
+                                    object.priorPrice = null;
+                                    object.priorPriceProgressive = null;
+                                    object.gadPrice = null;
+                                }
+                                if (message.priorPrice != null && message.hasOwnProperty("priorPrice"))
+                                    object.priorPrice = $root.google.shopping.type.Price.toObject(message.priorPrice, options);
+                                if (message.priorPriceProgressive != null && message.hasOwnProperty("priorPriceProgressive"))
+                                    object.priorPriceProgressive = $root.google.shopping.type.Price.toObject(message.priorPriceProgressive, options);
+                                if (message.gadPrice != null && message.hasOwnProperty("gadPrice"))
+                                    object.gadPrice = $root.google.shopping.type.Price.toObject(message.gadPrice, options);
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this AutomatedDiscounts to JSON.
+                             * @function toJSON
+                             * @memberof google.shopping.merchant.products.v1beta.AutomatedDiscounts
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            AutomatedDiscounts.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for AutomatedDiscounts
+                             * @function getTypeUrl
+                             * @memberof google.shopping.merchant.products.v1beta.AutomatedDiscounts
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            AutomatedDiscounts.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.shopping.merchant.products.v1beta.AutomatedDiscounts";
+                            };
+    
+                            return AutomatedDiscounts;
+                        })();
+    
                         v1beta.ProductsService = (function() {
     
                             /**
@@ -12324,6 +12589,7 @@
                              * @property {google.shopping.merchant.products.v1beta.IAttributes|null} [attributes] Product attributes
                              * @property {Array.<google.shopping.type.ICustomAttribute>|null} [customAttributes] Product customAttributes
                              * @property {google.shopping.merchant.products.v1beta.IProductStatus|null} [productStatus] Product productStatus
+                             * @property {google.shopping.merchant.products.v1beta.IAutomatedDiscounts|null} [automatedDiscounts] Product automatedDiscounts
                              */
     
                             /**
@@ -12422,6 +12688,14 @@
                              */
                             Product.prototype.productStatus = null;
     
+                            /**
+                             * Product automatedDiscounts.
+                             * @member {google.shopping.merchant.products.v1beta.IAutomatedDiscounts|null|undefined} automatedDiscounts
+                             * @memberof google.shopping.merchant.products.v1beta.Product
+                             * @instance
+                             */
+                            Product.prototype.automatedDiscounts = null;
+    
                             // OneOf field names bound to virtual getters and setters
                             var $oneOfFields;
     
@@ -12481,6 +12755,8 @@
                                         $root.google.shopping.type.CustomAttribute.encode(message.customAttributes[i], writer.uint32(/* id 9, wireType 2 =*/74).fork()).ldelim();
                                 if (message.productStatus != null && Object.hasOwnProperty.call(message, "productStatus"))
                                     $root.google.shopping.merchant.products.v1beta.ProductStatus.encode(message.productStatus, writer.uint32(/* id 10, wireType 2 =*/82).fork()).ldelim();
+                                if (message.automatedDiscounts != null && Object.hasOwnProperty.call(message, "automatedDiscounts"))
+                                    $root.google.shopping.merchant.products.v1beta.AutomatedDiscounts.encode(message.automatedDiscounts, writer.uint32(/* id 12, wireType 2 =*/98).fork()).ldelim();
                                 return writer;
                             };
     
@@ -12555,6 +12831,10 @@
                                         }
                                     case 10: {
                                             message.productStatus = $root.google.shopping.merchant.products.v1beta.ProductStatus.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 12: {
+                                            message.automatedDiscounts = $root.google.shopping.merchant.products.v1beta.AutomatedDiscounts.decode(reader, reader.uint32());
                                             break;
                                         }
                                     default:
@@ -12641,6 +12921,11 @@
                                     if (error)
                                         return "productStatus." + error;
                                 }
+                                if (message.automatedDiscounts != null && message.hasOwnProperty("automatedDiscounts")) {
+                                    var error = $root.google.shopping.merchant.products.v1beta.AutomatedDiscounts.verify(message.automatedDiscounts);
+                                    if (error)
+                                        return "automatedDiscounts." + error;
+                                }
                                 return null;
                             };
     
@@ -12715,6 +13000,11 @@
                                         throw TypeError(".google.shopping.merchant.products.v1beta.Product.productStatus: object expected");
                                     message.productStatus = $root.google.shopping.merchant.products.v1beta.ProductStatus.fromObject(object.productStatus);
                                 }
+                                if (object.automatedDiscounts != null) {
+                                    if (typeof object.automatedDiscounts !== "object")
+                                        throw TypeError(".google.shopping.merchant.products.v1beta.Product.automatedDiscounts: object expected");
+                                    message.automatedDiscounts = $root.google.shopping.merchant.products.v1beta.AutomatedDiscounts.fromObject(object.automatedDiscounts);
+                                }
                                 return message;
                             };
     
@@ -12742,6 +13032,7 @@
                                     object.dataSource = "";
                                     object.attributes = null;
                                     object.productStatus = null;
+                                    object.automatedDiscounts = null;
                                 }
                                 if (message.name != null && message.hasOwnProperty("name"))
                                     object.name = message.name;
@@ -12772,6 +13063,8 @@
                                 }
                                 if (message.productStatus != null && message.hasOwnProperty("productStatus"))
                                     object.productStatus = $root.google.shopping.merchant.products.v1beta.ProductStatus.toObject(message.productStatus, options);
+                                if (message.automatedDiscounts != null && message.hasOwnProperty("automatedDiscounts"))
+                                    object.automatedDiscounts = $root.google.shopping.merchant.products.v1beta.AutomatedDiscounts.toObject(message.automatedDiscounts, options);
                                 return object;
                             };
     

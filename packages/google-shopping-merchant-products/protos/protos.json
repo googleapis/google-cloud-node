@@ -1791,6 +1791,22 @@
                             }
                           }
                         },
+                        "AutomatedDiscounts": {
+                          "fields": {
+                            "priorPrice": {
+                              "type": "google.shopping.type.Price",
+                              "id": 1
+                            },
+                            "priorPriceProgressive": {
+                              "type": "google.shopping.type.Price",
+                              "id": 2
+                            },
+                            "gadPrice": {
+                              "type": "google.shopping.type.Price",
+                              "id": 3
+                            }
+                          }
+                        },
                         "ProductsService": {
                           "options": {
                             "(google.api.default_host)": "merchantapi.googleapis.com",
@@ -1913,6 +1929,13 @@
                             "productStatus": {
                               "type": "ProductStatus",
                               "id": 10,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "automatedDiscounts": {
+                              "type": "AutomatedDiscounts",
+                              "id": 12,
                               "options": {
                                 "(google.api.field_behavior)": "OUTPUT_ONLY"
                               }

@@ -41,7 +41,6 @@ const version = require('../../../package.json').version;
 
 /**
  *  Service to use Product resource.
- *  This service works for products with online channel only.
  * @class
  * @memberof v1beta
  */
@@ -401,9 +400,9 @@ export class ProductsServiceClient {
    *   Required. The name of the product to retrieve.
    *   Format: `accounts/{account}/products/{product}`
    *   where the last section `product` consists of 4 parts:
-   *   channel~content_language~feed_label~offer_id
+   *   `channel~content_language~feed_label~offer_id`
    *   example for product name is
-   *   "accounts/123/products/online~en~US~sku123"
+   *   `accounts/123/products/online~en~US~sku123`
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -527,8 +526,8 @@ export class ProductsServiceClient {
 
   /**
    * Lists the processed products in your Merchant Center account. The response
-   * might contain fewer items than specified by pageSize. Rely on pageToken to
-   * determine if there are more items to be requested.
+   * might contain fewer items than specified by `pageSize`. Rely on `pageToken`
+   * to determine if there are more items to be requested.
    *
    * After inserting, updating, or deleting a product input, it may take several
    * minutes before the updated processed product can be retrieved.
@@ -537,7 +536,7 @@ export class ProductsServiceClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The account to list processed products for.
-   *   Format: accounts/{account}
+   *   Format: `accounts/{account}`
    * @param {number} request.pageSize
    *   The maximum number of products to return. The service may return fewer than
    *   this value.
@@ -670,7 +669,7 @@ export class ProductsServiceClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The account to list processed products for.
-   *   Format: accounts/{account}
+   *   Format: `accounts/{account}`
    * @param {number} request.pageSize
    *   The maximum number of products to return. The service may return fewer than
    *   this value.
@@ -726,7 +725,7 @@ export class ProductsServiceClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The account to list processed products for.
-   *   Format: accounts/{account}
+   *   Format: `accounts/{account}`
    * @param {number} request.pageSize
    *   The maximum number of products to return. The service may return fewer than
    *   this value.
