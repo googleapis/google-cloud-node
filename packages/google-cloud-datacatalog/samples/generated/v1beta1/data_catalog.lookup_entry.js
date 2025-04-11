@@ -46,7 +46,7 @@ function main() {
    *    * `bigquery.table.project_id.dataset_id.table_id`
    *    * `bigquery.dataset.project_id.dataset_id`
    *    * `datacatalog.entry.project_id.location_id.entry_group_id.entry_id`
-   *  `*_id`s should satisfy the standard SQL rules for identifiers.
+   *  `*_id`s should satisfy the GoogleSQL rules for identifiers.
    *  https://cloud.google.com/bigquery/docs/reference/standard-sql/lexical.
    */
   // const sqlResource = 'abc123'
