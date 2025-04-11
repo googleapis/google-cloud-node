@@ -58,6 +58,7 @@ export class ImprovedStreamingClient {
    */
   streamingRecognize(
     streamingConfig?:
+      | protosTypes.google.cloud.speech.v2.IStreamingRecognitionConfig
       | protosTypes.google.cloud.speech.v1.IStreamingRecognitionConfig
       | protosTypes.google.cloud.speech.v1p1beta1.IStreamingRecognitionConfig,
     options?: gax.CallOptions
@@ -78,6 +79,7 @@ export class ImprovedStreamingClient {
         'response',
         (
           response:
+            | protosTypes.google.cloud.speech.v2.StreamingRecognizeResponse
             | protosTypes.google.cloud.speech.v1.StreamingRecognizeResponse
             | protosTypes.google.cloud.speech.v1p1beta1.StreamingRecognizeResponse
         ) => {
