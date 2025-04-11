@@ -21,6 +21,7 @@ import {
   AccountsServiceClient,
   CssProductInputsServiceClient,
   CssProductsServiceClient,
+  QuotaServiceClient,
 } from '@google-shopping/css';
 
 // check that the client class type name can be used
@@ -40,6 +41,9 @@ function doStuffWithCssProductInputsServiceClient(
 function doStuffWithCssProductsServiceClient(client: CssProductsServiceClient) {
   client.close();
 }
+function doStuffWithQuotaServiceClient(client: QuotaServiceClient) {
+  client.close();
+}
 
 function main() {
   // check that the client instance can be created
@@ -54,6 +58,9 @@ function main() {
   // check that the client instance can be created
   const cssProductsServiceClient = new CssProductsServiceClient();
   doStuffWithCssProductsServiceClient(cssProductsServiceClient);
+  // check that the client instance can be created
+  const quotaServiceClient = new QuotaServiceClient();
+  doStuffWithQuotaServiceClient(quotaServiceClient);
 }
 
 main();
