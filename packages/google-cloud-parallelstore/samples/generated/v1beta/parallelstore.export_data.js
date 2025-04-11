@@ -65,6 +65,10 @@ function main(name) {
    *  `service-<PROJECT_NUMBER>@gcp-sa-parallelstore.iam.gserviceaccount.com`
    */
   // const serviceAccount = 'abc123'
+  /**
+   *  Optional. The metadata options for the export data.
+   */
+  // const metadataOptions = {}
 
   // Imports the Parallelstore library
   const {ParallelstoreClient} = require('@google-cloud/parallelstore').v1beta;

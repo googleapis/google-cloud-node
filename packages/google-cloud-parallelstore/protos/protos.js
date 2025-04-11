@@ -7954,6 +7954,7 @@
                                 case 3:
                                 case 4:
                                 case 5:
+                                case 6:
                                     break;
                                 }
                             if (message.createTime != null && message.hasOwnProperty("createTime")) {
@@ -8074,6 +8075,10 @@
                             case "UPGRADING":
                             case 5:
                                 message.state = 5;
+                                break;
+                            case "REPAIRING":
+                            case 6:
+                                message.state = 6;
                                 break;
                             }
                             if (object.createTime != null) {
@@ -8303,6 +8308,7 @@
                          * @property {number} DELETING=3 DELETING value
                          * @property {number} FAILED=4 FAILED value
                          * @property {number} UPGRADING=5 UPGRADING value
+                         * @property {number} REPAIRING=6 REPAIRING value
                          */
                         Instance.State = (function() {
                             var valuesById = {}, values = Object.create(valuesById);
@@ -8312,10 +8318,381 @@
                             values[valuesById[3] = "DELETING"] = 3;
                             values[valuesById[4] = "FAILED"] = 4;
                             values[valuesById[5] = "UPGRADING"] = 5;
+                            values[valuesById[6] = "REPAIRING"] = 6;
                             return values;
                         })();
     
                         return Instance;
+                    })();
+    
+                    v1beta.TransferMetadataOptions = (function() {
+    
+                        /**
+                         * Properties of a TransferMetadataOptions.
+                         * @memberof google.cloud.parallelstore.v1beta
+                         * @interface ITransferMetadataOptions
+                         * @property {google.cloud.parallelstore.v1beta.TransferMetadataOptions.Uid|null} [uid] TransferMetadataOptions uid
+                         * @property {google.cloud.parallelstore.v1beta.TransferMetadataOptions.Gid|null} [gid] TransferMetadataOptions gid
+                         * @property {google.cloud.parallelstore.v1beta.TransferMetadataOptions.Mode|null} [mode] TransferMetadataOptions mode
+                         */
+    
+                        /**
+                         * Constructs a new TransferMetadataOptions.
+                         * @memberof google.cloud.parallelstore.v1beta
+                         * @classdesc Represents a TransferMetadataOptions.
+                         * @implements ITransferMetadataOptions
+                         * @constructor
+                         * @param {google.cloud.parallelstore.v1beta.ITransferMetadataOptions=} [properties] Properties to set
+                         */
+                        function TransferMetadataOptions(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * TransferMetadataOptions uid.
+                         * @member {google.cloud.parallelstore.v1beta.TransferMetadataOptions.Uid} uid
+                         * @memberof google.cloud.parallelstore.v1beta.TransferMetadataOptions
+                         * @instance
+                         */
+                        TransferMetadataOptions.prototype.uid = 0;
+    
+                        /**
+                         * TransferMetadataOptions gid.
+                         * @member {google.cloud.parallelstore.v1beta.TransferMetadataOptions.Gid} gid
+                         * @memberof google.cloud.parallelstore.v1beta.TransferMetadataOptions
+                         * @instance
+                         */
+                        TransferMetadataOptions.prototype.gid = 0;
+    
+                        /**
+                         * TransferMetadataOptions mode.
+                         * @member {google.cloud.parallelstore.v1beta.TransferMetadataOptions.Mode} mode
+                         * @memberof google.cloud.parallelstore.v1beta.TransferMetadataOptions
+                         * @instance
+                         */
+                        TransferMetadataOptions.prototype.mode = 0;
+    
+                        /**
+                         * Creates a new TransferMetadataOptions instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.parallelstore.v1beta.TransferMetadataOptions
+                         * @static
+                         * @param {google.cloud.parallelstore.v1beta.ITransferMetadataOptions=} [properties] Properties to set
+                         * @returns {google.cloud.parallelstore.v1beta.TransferMetadataOptions} TransferMetadataOptions instance
+                         */
+                        TransferMetadataOptions.create = function create(properties) {
+                            return new TransferMetadataOptions(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified TransferMetadataOptions message. Does not implicitly {@link google.cloud.parallelstore.v1beta.TransferMetadataOptions.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.parallelstore.v1beta.TransferMetadataOptions
+                         * @static
+                         * @param {google.cloud.parallelstore.v1beta.ITransferMetadataOptions} message TransferMetadataOptions message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        TransferMetadataOptions.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.uid != null && Object.hasOwnProperty.call(message, "uid"))
+                                writer.uint32(/* id 1, wireType 0 =*/8).int32(message.uid);
+                            if (message.gid != null && Object.hasOwnProperty.call(message, "gid"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.gid);
+                            if (message.mode != null && Object.hasOwnProperty.call(message, "mode"))
+                                writer.uint32(/* id 3, wireType 0 =*/24).int32(message.mode);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified TransferMetadataOptions message, length delimited. Does not implicitly {@link google.cloud.parallelstore.v1beta.TransferMetadataOptions.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.parallelstore.v1beta.TransferMetadataOptions
+                         * @static
+                         * @param {google.cloud.parallelstore.v1beta.ITransferMetadataOptions} message TransferMetadataOptions message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        TransferMetadataOptions.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a TransferMetadataOptions message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.parallelstore.v1beta.TransferMetadataOptions
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.parallelstore.v1beta.TransferMetadataOptions} TransferMetadataOptions
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        TransferMetadataOptions.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.parallelstore.v1beta.TransferMetadataOptions();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.uid = reader.int32();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.gid = reader.int32();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.mode = reader.int32();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a TransferMetadataOptions message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.parallelstore.v1beta.TransferMetadataOptions
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.parallelstore.v1beta.TransferMetadataOptions} TransferMetadataOptions
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        TransferMetadataOptions.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a TransferMetadataOptions message.
+                         * @function verify
+                         * @memberof google.cloud.parallelstore.v1beta.TransferMetadataOptions
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        TransferMetadataOptions.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.uid != null && message.hasOwnProperty("uid"))
+                                switch (message.uid) {
+                                default:
+                                    return "uid: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                    break;
+                                }
+                            if (message.gid != null && message.hasOwnProperty("gid"))
+                                switch (message.gid) {
+                                default:
+                                    return "gid: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                    break;
+                                }
+                            if (message.mode != null && message.hasOwnProperty("mode"))
+                                switch (message.mode) {
+                                default:
+                                    return "mode: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                    break;
+                                }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a TransferMetadataOptions message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.parallelstore.v1beta.TransferMetadataOptions
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.parallelstore.v1beta.TransferMetadataOptions} TransferMetadataOptions
+                         */
+                        TransferMetadataOptions.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.parallelstore.v1beta.TransferMetadataOptions)
+                                return object;
+                            var message = new $root.google.cloud.parallelstore.v1beta.TransferMetadataOptions();
+                            switch (object.uid) {
+                            default:
+                                if (typeof object.uid === "number") {
+                                    message.uid = object.uid;
+                                    break;
+                                }
+                                break;
+                            case "UID_UNSPECIFIED":
+                            case 0:
+                                message.uid = 0;
+                                break;
+                            case "UID_SKIP":
+                            case 1:
+                                message.uid = 1;
+                                break;
+                            case "UID_NUMBER_PRESERVE":
+                            case 2:
+                                message.uid = 2;
+                                break;
+                            }
+                            switch (object.gid) {
+                            default:
+                                if (typeof object.gid === "number") {
+                                    message.gid = object.gid;
+                                    break;
+                                }
+                                break;
+                            case "GID_UNSPECIFIED":
+                            case 0:
+                                message.gid = 0;
+                                break;
+                            case "GID_SKIP":
+                            case 1:
+                                message.gid = 1;
+                                break;
+                            case "GID_NUMBER_PRESERVE":
+                            case 2:
+                                message.gid = 2;
+                                break;
+                            }
+                            switch (object.mode) {
+                            default:
+                                if (typeof object.mode === "number") {
+                                    message.mode = object.mode;
+                                    break;
+                                }
+                                break;
+                            case "MODE_UNSPECIFIED":
+                            case 0:
+                                message.mode = 0;
+                                break;
+                            case "MODE_SKIP":
+                            case 1:
+                                message.mode = 1;
+                                break;
+                            case "MODE_PRESERVE":
+                            case 2:
+                                message.mode = 2;
+                                break;
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a TransferMetadataOptions message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.parallelstore.v1beta.TransferMetadataOptions
+                         * @static
+                         * @param {google.cloud.parallelstore.v1beta.TransferMetadataOptions} message TransferMetadataOptions
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        TransferMetadataOptions.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.uid = options.enums === String ? "UID_UNSPECIFIED" : 0;
+                                object.gid = options.enums === String ? "GID_UNSPECIFIED" : 0;
+                                object.mode = options.enums === String ? "MODE_UNSPECIFIED" : 0;
+                            }
+                            if (message.uid != null && message.hasOwnProperty("uid"))
+                                object.uid = options.enums === String ? $root.google.cloud.parallelstore.v1beta.TransferMetadataOptions.Uid[message.uid] === undefined ? message.uid : $root.google.cloud.parallelstore.v1beta.TransferMetadataOptions.Uid[message.uid] : message.uid;
+                            if (message.gid != null && message.hasOwnProperty("gid"))
+                                object.gid = options.enums === String ? $root.google.cloud.parallelstore.v1beta.TransferMetadataOptions.Gid[message.gid] === undefined ? message.gid : $root.google.cloud.parallelstore.v1beta.TransferMetadataOptions.Gid[message.gid] : message.gid;
+                            if (message.mode != null && message.hasOwnProperty("mode"))
+                                object.mode = options.enums === String ? $root.google.cloud.parallelstore.v1beta.TransferMetadataOptions.Mode[message.mode] === undefined ? message.mode : $root.google.cloud.parallelstore.v1beta.TransferMetadataOptions.Mode[message.mode] : message.mode;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this TransferMetadataOptions to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.parallelstore.v1beta.TransferMetadataOptions
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        TransferMetadataOptions.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for TransferMetadataOptions
+                         * @function getTypeUrl
+                         * @memberof google.cloud.parallelstore.v1beta.TransferMetadataOptions
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        TransferMetadataOptions.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.parallelstore.v1beta.TransferMetadataOptions";
+                        };
+    
+                        /**
+                         * Uid enum.
+                         * @name google.cloud.parallelstore.v1beta.TransferMetadataOptions.Uid
+                         * @enum {number}
+                         * @property {number} UID_UNSPECIFIED=0 UID_UNSPECIFIED value
+                         * @property {number} UID_SKIP=1 UID_SKIP value
+                         * @property {number} UID_NUMBER_PRESERVE=2 UID_NUMBER_PRESERVE value
+                         */
+                        TransferMetadataOptions.Uid = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "UID_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "UID_SKIP"] = 1;
+                            values[valuesById[2] = "UID_NUMBER_PRESERVE"] = 2;
+                            return values;
+                        })();
+    
+                        /**
+                         * Gid enum.
+                         * @name google.cloud.parallelstore.v1beta.TransferMetadataOptions.Gid
+                         * @enum {number}
+                         * @property {number} GID_UNSPECIFIED=0 GID_UNSPECIFIED value
+                         * @property {number} GID_SKIP=1 GID_SKIP value
+                         * @property {number} GID_NUMBER_PRESERVE=2 GID_NUMBER_PRESERVE value
+                         */
+                        TransferMetadataOptions.Gid = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "GID_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "GID_SKIP"] = 1;
+                            values[valuesById[2] = "GID_NUMBER_PRESERVE"] = 2;
+                            return values;
+                        })();
+    
+                        /**
+                         * Mode enum.
+                         * @name google.cloud.parallelstore.v1beta.TransferMetadataOptions.Mode
+                         * @enum {number}
+                         * @property {number} MODE_UNSPECIFIED=0 MODE_UNSPECIFIED value
+                         * @property {number} MODE_SKIP=1 MODE_SKIP value
+                         * @property {number} MODE_PRESERVE=2 MODE_PRESERVE value
+                         */
+                        TransferMetadataOptions.Mode = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "MODE_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "MODE_SKIP"] = 1;
+                            values[valuesById[2] = "MODE_PRESERVE"] = 2;
+                            return values;
+                        })();
+    
+                        return TransferMetadataOptions;
                     })();
     
                     v1beta.ListInstancesRequest = (function() {
@@ -11045,6 +11422,7 @@
                          * @property {string|null} [name] ImportDataRequest name
                          * @property {string|null} [requestId] ImportDataRequest requestId
                          * @property {string|null} [serviceAccount] ImportDataRequest serviceAccount
+                         * @property {google.cloud.parallelstore.v1beta.ITransferMetadataOptions|null} [metadataOptions] ImportDataRequest metadataOptions
                          */
     
                         /**
@@ -11101,6 +11479,14 @@
                          * @instance
                          */
                         ImportDataRequest.prototype.serviceAccount = "";
+    
+                        /**
+                         * ImportDataRequest metadataOptions.
+                         * @member {google.cloud.parallelstore.v1beta.ITransferMetadataOptions|null|undefined} metadataOptions
+                         * @memberof google.cloud.parallelstore.v1beta.ImportDataRequest
+                         * @instance
+                         */
+                        ImportDataRequest.prototype.metadataOptions = null;
     
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
@@ -11161,6 +11547,8 @@
                                 writer.uint32(/* id 4, wireType 2 =*/34).string(message.requestId);
                             if (message.serviceAccount != null && Object.hasOwnProperty.call(message, "serviceAccount"))
                                 writer.uint32(/* id 5, wireType 2 =*/42).string(message.serviceAccount);
+                            if (message.metadataOptions != null && Object.hasOwnProperty.call(message, "metadataOptions"))
+                                $root.google.cloud.parallelstore.v1beta.TransferMetadataOptions.encode(message.metadataOptions, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
                             return writer;
                         };
     
@@ -11213,6 +11601,10 @@
                                     }
                                 case 5: {
                                         message.serviceAccount = reader.string();
+                                        break;
+                                    }
+                                case 6: {
+                                        message.metadataOptions = $root.google.cloud.parallelstore.v1beta.TransferMetadataOptions.decode(reader, reader.uint32());
                                         break;
                                     }
                                 default:
@@ -11276,6 +11668,11 @@
                             if (message.serviceAccount != null && message.hasOwnProperty("serviceAccount"))
                                 if (!$util.isString(message.serviceAccount))
                                     return "serviceAccount: string expected";
+                            if (message.metadataOptions != null && message.hasOwnProperty("metadataOptions")) {
+                                var error = $root.google.cloud.parallelstore.v1beta.TransferMetadataOptions.verify(message.metadataOptions);
+                                if (error)
+                                    return "metadataOptions." + error;
+                            }
                             return null;
                         };
     
@@ -11307,6 +11704,11 @@
                                 message.requestId = String(object.requestId);
                             if (object.serviceAccount != null)
                                 message.serviceAccount = String(object.serviceAccount);
+                            if (object.metadataOptions != null) {
+                                if (typeof object.metadataOptions !== "object")
+                                    throw TypeError(".google.cloud.parallelstore.v1beta.ImportDataRequest.metadataOptions: object expected");
+                                message.metadataOptions = $root.google.cloud.parallelstore.v1beta.TransferMetadataOptions.fromObject(object.metadataOptions);
+                            }
                             return message;
                         };
     
@@ -11327,6 +11729,7 @@
                                 object.name = "";
                                 object.requestId = "";
                                 object.serviceAccount = "";
+                                object.metadataOptions = null;
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
@@ -11344,6 +11747,8 @@
                                 object.requestId = message.requestId;
                             if (message.serviceAccount != null && message.hasOwnProperty("serviceAccount"))
                                 object.serviceAccount = message.serviceAccount;
+                            if (message.metadataOptions != null && message.hasOwnProperty("metadataOptions"))
+                                object.metadataOptions = $root.google.cloud.parallelstore.v1beta.TransferMetadataOptions.toObject(message.metadataOptions, options);
                             return object;
                         };
     
@@ -11387,6 +11792,7 @@
                          * @property {string|null} [name] ExportDataRequest name
                          * @property {string|null} [requestId] ExportDataRequest requestId
                          * @property {string|null} [serviceAccount] ExportDataRequest serviceAccount
+                         * @property {google.cloud.parallelstore.v1beta.ITransferMetadataOptions|null} [metadataOptions] ExportDataRequest metadataOptions
                          */
     
                         /**
@@ -11443,6 +11849,14 @@
                          * @instance
                          */
                         ExportDataRequest.prototype.serviceAccount = "";
+    
+                        /**
+                         * ExportDataRequest metadataOptions.
+                         * @member {google.cloud.parallelstore.v1beta.ITransferMetadataOptions|null|undefined} metadataOptions
+                         * @memberof google.cloud.parallelstore.v1beta.ExportDataRequest
+                         * @instance
+                         */
+                        ExportDataRequest.prototype.metadataOptions = null;
     
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
@@ -11503,6 +11917,8 @@
                                 writer.uint32(/* id 4, wireType 2 =*/34).string(message.requestId);
                             if (message.serviceAccount != null && Object.hasOwnProperty.call(message, "serviceAccount"))
                                 writer.uint32(/* id 5, wireType 2 =*/42).string(message.serviceAccount);
+                            if (message.metadataOptions != null && Object.hasOwnProperty.call(message, "metadataOptions"))
+                                $root.google.cloud.parallelstore.v1beta.TransferMetadataOptions.encode(message.metadataOptions, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
                             return writer;
                         };
     
@@ -11555,6 +11971,10 @@
                                     }
                                 case 5: {
                                         message.serviceAccount = reader.string();
+                                        break;
+                                    }
+                                case 6: {
+                                        message.metadataOptions = $root.google.cloud.parallelstore.v1beta.TransferMetadataOptions.decode(reader, reader.uint32());
                                         break;
                                     }
                                 default:
@@ -11618,6 +12038,11 @@
                             if (message.serviceAccount != null && message.hasOwnProperty("serviceAccount"))
                                 if (!$util.isString(message.serviceAccount))
                                     return "serviceAccount: string expected";
+                            if (message.metadataOptions != null && message.hasOwnProperty("metadataOptions")) {
+                                var error = $root.google.cloud.parallelstore.v1beta.TransferMetadataOptions.verify(message.metadataOptions);
+                                if (error)
+                                    return "metadataOptions." + error;
+                            }
                             return null;
                         };
     
@@ -11649,6 +12074,11 @@
                                 message.requestId = String(object.requestId);
                             if (object.serviceAccount != null)
                                 message.serviceAccount = String(object.serviceAccount);
+                            if (object.metadataOptions != null) {
+                                if (typeof object.metadataOptions !== "object")
+                                    throw TypeError(".google.cloud.parallelstore.v1beta.ExportDataRequest.metadataOptions: object expected");
+                                message.metadataOptions = $root.google.cloud.parallelstore.v1beta.TransferMetadataOptions.fromObject(object.metadataOptions);
+                            }
                             return message;
                         };
     
@@ -11669,6 +12099,7 @@
                                 object.name = "";
                                 object.requestId = "";
                                 object.serviceAccount = "";
+                                object.metadataOptions = null;
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
@@ -11686,6 +12117,8 @@
                                 object.requestId = message.requestId;
                             if (message.serviceAccount != null && message.hasOwnProperty("serviceAccount"))
                                 object.serviceAccount = message.serviceAccount;
+                            if (message.metadataOptions != null && message.hasOwnProperty("metadataOptions"))
+                                object.metadataOptions = $root.google.cloud.parallelstore.v1beta.TransferMetadataOptions.toObject(message.metadataOptions, options);
                             return object;
                         };
     
@@ -11891,6 +12324,629 @@
                         };
     
                         return ImportDataResponse;
+                    })();
+    
+                    v1beta.TransferErrorLogEntry = (function() {
+    
+                        /**
+                         * Properties of a TransferErrorLogEntry.
+                         * @memberof google.cloud.parallelstore.v1beta
+                         * @interface ITransferErrorLogEntry
+                         * @property {string|null} [uri] TransferErrorLogEntry uri
+                         * @property {Array.<string>|null} [errorDetails] TransferErrorLogEntry errorDetails
+                         */
+    
+                        /**
+                         * Constructs a new TransferErrorLogEntry.
+                         * @memberof google.cloud.parallelstore.v1beta
+                         * @classdesc Represents a TransferErrorLogEntry.
+                         * @implements ITransferErrorLogEntry
+                         * @constructor
+                         * @param {google.cloud.parallelstore.v1beta.ITransferErrorLogEntry=} [properties] Properties to set
+                         */
+                        function TransferErrorLogEntry(properties) {
+                            this.errorDetails = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * TransferErrorLogEntry uri.
+                         * @member {string} uri
+                         * @memberof google.cloud.parallelstore.v1beta.TransferErrorLogEntry
+                         * @instance
+                         */
+                        TransferErrorLogEntry.prototype.uri = "";
+    
+                        /**
+                         * TransferErrorLogEntry errorDetails.
+                         * @member {Array.<string>} errorDetails
+                         * @memberof google.cloud.parallelstore.v1beta.TransferErrorLogEntry
+                         * @instance
+                         */
+                        TransferErrorLogEntry.prototype.errorDetails = $util.emptyArray;
+    
+                        /**
+                         * Creates a new TransferErrorLogEntry instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.parallelstore.v1beta.TransferErrorLogEntry
+                         * @static
+                         * @param {google.cloud.parallelstore.v1beta.ITransferErrorLogEntry=} [properties] Properties to set
+                         * @returns {google.cloud.parallelstore.v1beta.TransferErrorLogEntry} TransferErrorLogEntry instance
+                         */
+                        TransferErrorLogEntry.create = function create(properties) {
+                            return new TransferErrorLogEntry(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified TransferErrorLogEntry message. Does not implicitly {@link google.cloud.parallelstore.v1beta.TransferErrorLogEntry.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.parallelstore.v1beta.TransferErrorLogEntry
+                         * @static
+                         * @param {google.cloud.parallelstore.v1beta.ITransferErrorLogEntry} message TransferErrorLogEntry message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        TransferErrorLogEntry.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.uri != null && Object.hasOwnProperty.call(message, "uri"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.uri);
+                            if (message.errorDetails != null && message.errorDetails.length)
+                                for (var i = 0; i < message.errorDetails.length; ++i)
+                                    writer.uint32(/* id 2, wireType 2 =*/18).string(message.errorDetails[i]);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified TransferErrorLogEntry message, length delimited. Does not implicitly {@link google.cloud.parallelstore.v1beta.TransferErrorLogEntry.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.parallelstore.v1beta.TransferErrorLogEntry
+                         * @static
+                         * @param {google.cloud.parallelstore.v1beta.ITransferErrorLogEntry} message TransferErrorLogEntry message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        TransferErrorLogEntry.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a TransferErrorLogEntry message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.parallelstore.v1beta.TransferErrorLogEntry
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.parallelstore.v1beta.TransferErrorLogEntry} TransferErrorLogEntry
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        TransferErrorLogEntry.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.parallelstore.v1beta.TransferErrorLogEntry();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.uri = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        if (!(message.errorDetails && message.errorDetails.length))
+                                            message.errorDetails = [];
+                                        message.errorDetails.push(reader.string());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a TransferErrorLogEntry message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.parallelstore.v1beta.TransferErrorLogEntry
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.parallelstore.v1beta.TransferErrorLogEntry} TransferErrorLogEntry
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        TransferErrorLogEntry.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a TransferErrorLogEntry message.
+                         * @function verify
+                         * @memberof google.cloud.parallelstore.v1beta.TransferErrorLogEntry
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        TransferErrorLogEntry.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.uri != null && message.hasOwnProperty("uri"))
+                                if (!$util.isString(message.uri))
+                                    return "uri: string expected";
+                            if (message.errorDetails != null && message.hasOwnProperty("errorDetails")) {
+                                if (!Array.isArray(message.errorDetails))
+                                    return "errorDetails: array expected";
+                                for (var i = 0; i < message.errorDetails.length; ++i)
+                                    if (!$util.isString(message.errorDetails[i]))
+                                        return "errorDetails: string[] expected";
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a TransferErrorLogEntry message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.parallelstore.v1beta.TransferErrorLogEntry
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.parallelstore.v1beta.TransferErrorLogEntry} TransferErrorLogEntry
+                         */
+                        TransferErrorLogEntry.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.parallelstore.v1beta.TransferErrorLogEntry)
+                                return object;
+                            var message = new $root.google.cloud.parallelstore.v1beta.TransferErrorLogEntry();
+                            if (object.uri != null)
+                                message.uri = String(object.uri);
+                            if (object.errorDetails) {
+                                if (!Array.isArray(object.errorDetails))
+                                    throw TypeError(".google.cloud.parallelstore.v1beta.TransferErrorLogEntry.errorDetails: array expected");
+                                message.errorDetails = [];
+                                for (var i = 0; i < object.errorDetails.length; ++i)
+                                    message.errorDetails[i] = String(object.errorDetails[i]);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a TransferErrorLogEntry message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.parallelstore.v1beta.TransferErrorLogEntry
+                         * @static
+                         * @param {google.cloud.parallelstore.v1beta.TransferErrorLogEntry} message TransferErrorLogEntry
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        TransferErrorLogEntry.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.errorDetails = [];
+                            if (options.defaults)
+                                object.uri = "";
+                            if (message.uri != null && message.hasOwnProperty("uri"))
+                                object.uri = message.uri;
+                            if (message.errorDetails && message.errorDetails.length) {
+                                object.errorDetails = [];
+                                for (var j = 0; j < message.errorDetails.length; ++j)
+                                    object.errorDetails[j] = message.errorDetails[j];
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this TransferErrorLogEntry to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.parallelstore.v1beta.TransferErrorLogEntry
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        TransferErrorLogEntry.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for TransferErrorLogEntry
+                         * @function getTypeUrl
+                         * @memberof google.cloud.parallelstore.v1beta.TransferErrorLogEntry
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        TransferErrorLogEntry.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.parallelstore.v1beta.TransferErrorLogEntry";
+                        };
+    
+                        return TransferErrorLogEntry;
+                    })();
+    
+                    v1beta.TransferErrorSummary = (function() {
+    
+                        /**
+                         * Properties of a TransferErrorSummary.
+                         * @memberof google.cloud.parallelstore.v1beta
+                         * @interface ITransferErrorSummary
+                         * @property {google.rpc.Code|null} [errorCode] TransferErrorSummary errorCode
+                         * @property {number|Long|null} [errorCount] TransferErrorSummary errorCount
+                         * @property {Array.<google.cloud.parallelstore.v1beta.ITransferErrorLogEntry>|null} [errorLogEntries] TransferErrorSummary errorLogEntries
+                         */
+    
+                        /**
+                         * Constructs a new TransferErrorSummary.
+                         * @memberof google.cloud.parallelstore.v1beta
+                         * @classdesc Represents a TransferErrorSummary.
+                         * @implements ITransferErrorSummary
+                         * @constructor
+                         * @param {google.cloud.parallelstore.v1beta.ITransferErrorSummary=} [properties] Properties to set
+                         */
+                        function TransferErrorSummary(properties) {
+                            this.errorLogEntries = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * TransferErrorSummary errorCode.
+                         * @member {google.rpc.Code} errorCode
+                         * @memberof google.cloud.parallelstore.v1beta.TransferErrorSummary
+                         * @instance
+                         */
+                        TransferErrorSummary.prototype.errorCode = 0;
+    
+                        /**
+                         * TransferErrorSummary errorCount.
+                         * @member {number|Long} errorCount
+                         * @memberof google.cloud.parallelstore.v1beta.TransferErrorSummary
+                         * @instance
+                         */
+                        TransferErrorSummary.prototype.errorCount = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+                        /**
+                         * TransferErrorSummary errorLogEntries.
+                         * @member {Array.<google.cloud.parallelstore.v1beta.ITransferErrorLogEntry>} errorLogEntries
+                         * @memberof google.cloud.parallelstore.v1beta.TransferErrorSummary
+                         * @instance
+                         */
+                        TransferErrorSummary.prototype.errorLogEntries = $util.emptyArray;
+    
+                        /**
+                         * Creates a new TransferErrorSummary instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.parallelstore.v1beta.TransferErrorSummary
+                         * @static
+                         * @param {google.cloud.parallelstore.v1beta.ITransferErrorSummary=} [properties] Properties to set
+                         * @returns {google.cloud.parallelstore.v1beta.TransferErrorSummary} TransferErrorSummary instance
+                         */
+                        TransferErrorSummary.create = function create(properties) {
+                            return new TransferErrorSummary(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified TransferErrorSummary message. Does not implicitly {@link google.cloud.parallelstore.v1beta.TransferErrorSummary.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.parallelstore.v1beta.TransferErrorSummary
+                         * @static
+                         * @param {google.cloud.parallelstore.v1beta.ITransferErrorSummary} message TransferErrorSummary message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        TransferErrorSummary.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.errorCode != null && Object.hasOwnProperty.call(message, "errorCode"))
+                                writer.uint32(/* id 1, wireType 0 =*/8).int32(message.errorCode);
+                            if (message.errorCount != null && Object.hasOwnProperty.call(message, "errorCount"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).int64(message.errorCount);
+                            if (message.errorLogEntries != null && message.errorLogEntries.length)
+                                for (var i = 0; i < message.errorLogEntries.length; ++i)
+                                    $root.google.cloud.parallelstore.v1beta.TransferErrorLogEntry.encode(message.errorLogEntries[i], writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified TransferErrorSummary message, length delimited. Does not implicitly {@link google.cloud.parallelstore.v1beta.TransferErrorSummary.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.parallelstore.v1beta.TransferErrorSummary
+                         * @static
+                         * @param {google.cloud.parallelstore.v1beta.ITransferErrorSummary} message TransferErrorSummary message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        TransferErrorSummary.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a TransferErrorSummary message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.parallelstore.v1beta.TransferErrorSummary
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.parallelstore.v1beta.TransferErrorSummary} TransferErrorSummary
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        TransferErrorSummary.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.parallelstore.v1beta.TransferErrorSummary();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.errorCode = reader.int32();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.errorCount = reader.int64();
+                                        break;
+                                    }
+                                case 4: {
+                                        if (!(message.errorLogEntries && message.errorLogEntries.length))
+                                            message.errorLogEntries = [];
+                                        message.errorLogEntries.push($root.google.cloud.parallelstore.v1beta.TransferErrorLogEntry.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a TransferErrorSummary message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.parallelstore.v1beta.TransferErrorSummary
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.parallelstore.v1beta.TransferErrorSummary} TransferErrorSummary
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        TransferErrorSummary.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a TransferErrorSummary message.
+                         * @function verify
+                         * @memberof google.cloud.parallelstore.v1beta.TransferErrorSummary
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        TransferErrorSummary.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.errorCode != null && message.hasOwnProperty("errorCode"))
+                                switch (message.errorCode) {
+                                default:
+                                    return "errorCode: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 3:
+                                case 4:
+                                case 5:
+                                case 6:
+                                case 7:
+                                case 16:
+                                case 8:
+                                case 9:
+                                case 10:
+                                case 11:
+                                case 12:
+                                case 13:
+                                case 14:
+                                case 15:
+                                    break;
+                                }
+                            if (message.errorCount != null && message.hasOwnProperty("errorCount"))
+                                if (!$util.isInteger(message.errorCount) && !(message.errorCount && $util.isInteger(message.errorCount.low) && $util.isInteger(message.errorCount.high)))
+                                    return "errorCount: integer|Long expected";
+                            if (message.errorLogEntries != null && message.hasOwnProperty("errorLogEntries")) {
+                                if (!Array.isArray(message.errorLogEntries))
+                                    return "errorLogEntries: array expected";
+                                for (var i = 0; i < message.errorLogEntries.length; ++i) {
+                                    var error = $root.google.cloud.parallelstore.v1beta.TransferErrorLogEntry.verify(message.errorLogEntries[i]);
+                                    if (error)
+                                        return "errorLogEntries." + error;
+                                }
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a TransferErrorSummary message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.parallelstore.v1beta.TransferErrorSummary
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.parallelstore.v1beta.TransferErrorSummary} TransferErrorSummary
+                         */
+                        TransferErrorSummary.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.parallelstore.v1beta.TransferErrorSummary)
+                                return object;
+                            var message = new $root.google.cloud.parallelstore.v1beta.TransferErrorSummary();
+                            switch (object.errorCode) {
+                            default:
+                                if (typeof object.errorCode === "number") {
+                                    message.errorCode = object.errorCode;
+                                    break;
+                                }
+                                break;
+                            case "OK":
+                            case 0:
+                                message.errorCode = 0;
+                                break;
+                            case "CANCELLED":
+                            case 1:
+                                message.errorCode = 1;
+                                break;
+                            case "UNKNOWN":
+                            case 2:
+                                message.errorCode = 2;
+                                break;
+                            case "INVALID_ARGUMENT":
+                            case 3:
+                                message.errorCode = 3;
+                                break;
+                            case "DEADLINE_EXCEEDED":
+                            case 4:
+                                message.errorCode = 4;
+                                break;
+                            case "NOT_FOUND":
+                            case 5:
+                                message.errorCode = 5;
+                                break;
+                            case "ALREADY_EXISTS":
+                            case 6:
+                                message.errorCode = 6;
+                                break;
+                            case "PERMISSION_DENIED":
+                            case 7:
+                                message.errorCode = 7;
+                                break;
+                            case "UNAUTHENTICATED":
+                            case 16:
+                                message.errorCode = 16;
+                                break;
+                            case "RESOURCE_EXHAUSTED":
+                            case 8:
+                                message.errorCode = 8;
+                                break;
+                            case "FAILED_PRECONDITION":
+                            case 9:
+                                message.errorCode = 9;
+                                break;
+                            case "ABORTED":
+                            case 10:
+                                message.errorCode = 10;
+                                break;
+                            case "OUT_OF_RANGE":
+                            case 11:
+                                message.errorCode = 11;
+                                break;
+                            case "UNIMPLEMENTED":
+                            case 12:
+                                message.errorCode = 12;
+                                break;
+                            case "INTERNAL":
+                            case 13:
+                                message.errorCode = 13;
+                                break;
+                            case "UNAVAILABLE":
+                            case 14:
+                                message.errorCode = 14;
+                                break;
+                            case "DATA_LOSS":
+                            case 15:
+                                message.errorCode = 15;
+                                break;
+                            }
+                            if (object.errorCount != null)
+                                if ($util.Long)
+                                    (message.errorCount = $util.Long.fromValue(object.errorCount)).unsigned = false;
+                                else if (typeof object.errorCount === "string")
+                                    message.errorCount = parseInt(object.errorCount, 10);
+                                else if (typeof object.errorCount === "number")
+                                    message.errorCount = object.errorCount;
+                                else if (typeof object.errorCount === "object")
+                                    message.errorCount = new $util.LongBits(object.errorCount.low >>> 0, object.errorCount.high >>> 0).toNumber();
+                            if (object.errorLogEntries) {
+                                if (!Array.isArray(object.errorLogEntries))
+                                    throw TypeError(".google.cloud.parallelstore.v1beta.TransferErrorSummary.errorLogEntries: array expected");
+                                message.errorLogEntries = [];
+                                for (var i = 0; i < object.errorLogEntries.length; ++i) {
+                                    if (typeof object.errorLogEntries[i] !== "object")
+                                        throw TypeError(".google.cloud.parallelstore.v1beta.TransferErrorSummary.errorLogEntries: object expected");
+                                    message.errorLogEntries[i] = $root.google.cloud.parallelstore.v1beta.TransferErrorLogEntry.fromObject(object.errorLogEntries[i]);
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a TransferErrorSummary message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.parallelstore.v1beta.TransferErrorSummary
+                         * @static
+                         * @param {google.cloud.parallelstore.v1beta.TransferErrorSummary} message TransferErrorSummary
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        TransferErrorSummary.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.errorLogEntries = [];
+                            if (options.defaults) {
+                                object.errorCode = options.enums === String ? "OK" : 0;
+                                if ($util.Long) {
+                                    var long = new $util.Long(0, 0, false);
+                                    object.errorCount = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                                } else
+                                    object.errorCount = options.longs === String ? "0" : 0;
+                            }
+                            if (message.errorCode != null && message.hasOwnProperty("errorCode"))
+                                object.errorCode = options.enums === String ? $root.google.rpc.Code[message.errorCode] === undefined ? message.errorCode : $root.google.rpc.Code[message.errorCode] : message.errorCode;
+                            if (message.errorCount != null && message.hasOwnProperty("errorCount"))
+                                if (typeof message.errorCount === "number")
+                                    object.errorCount = options.longs === String ? String(message.errorCount) : message.errorCount;
+                                else
+                                    object.errorCount = options.longs === String ? $util.Long.prototype.toString.call(message.errorCount) : options.longs === Number ? new $util.LongBits(message.errorCount.low >>> 0, message.errorCount.high >>> 0).toNumber() : message.errorCount;
+                            if (message.errorLogEntries && message.errorLogEntries.length) {
+                                object.errorLogEntries = [];
+                                for (var j = 0; j < message.errorLogEntries.length; ++j)
+                                    object.errorLogEntries[j] = $root.google.cloud.parallelstore.v1beta.TransferErrorLogEntry.toObject(message.errorLogEntries[j], options);
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this TransferErrorSummary to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.parallelstore.v1beta.TransferErrorSummary
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        TransferErrorSummary.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for TransferErrorSummary
+                         * @function getTypeUrl
+                         * @memberof google.cloud.parallelstore.v1beta.TransferErrorSummary
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        TransferErrorSummary.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.parallelstore.v1beta.TransferErrorSummary";
+                        };
+    
+                        return TransferErrorSummary;
                     })();
     
                     v1beta.ImportDataMetadata = (function() {
@@ -12840,6 +13896,7 @@
                          * @property {google.cloud.parallelstore.v1beta.IDestinationParallelstore|null} [destinationParallelstore] TransferOperationMetadata destinationParallelstore
                          * @property {google.cloud.parallelstore.v1beta.ITransferCounters|null} [counters] TransferOperationMetadata counters
                          * @property {google.cloud.parallelstore.v1beta.TransferType|null} [transferType] TransferOperationMetadata transferType
+                         * @property {Array.<google.cloud.parallelstore.v1beta.ITransferErrorSummary>|null} [errorSummary] TransferOperationMetadata errorSummary
                          */
     
                         /**
@@ -12851,6 +13908,7 @@
                          * @param {google.cloud.parallelstore.v1beta.ITransferOperationMetadata=} [properties] Properties to set
                          */
                         function TransferOperationMetadata(properties) {
+                            this.errorSummary = [];
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                                     if (properties[keys[i]] != null)
@@ -12904,6 +13962,14 @@
                          * @instance
                          */
                         TransferOperationMetadata.prototype.transferType = 0;
+    
+                        /**
+                         * TransferOperationMetadata errorSummary.
+                         * @member {Array.<google.cloud.parallelstore.v1beta.ITransferErrorSummary>} errorSummary
+                         * @memberof google.cloud.parallelstore.v1beta.TransferOperationMetadata
+                         * @instance
+                         */
+                        TransferOperationMetadata.prototype.errorSummary = $util.emptyArray;
     
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
@@ -12966,6 +14032,9 @@
                                 $root.google.cloud.parallelstore.v1beta.DestinationGcsBucket.encode(message.destinationGcsBucket, writer.uint32(/* id 9, wireType 2 =*/74).fork()).ldelim();
                             if (message.destinationParallelstore != null && Object.hasOwnProperty.call(message, "destinationParallelstore"))
                                 $root.google.cloud.parallelstore.v1beta.DestinationParallelstore.encode(message.destinationParallelstore, writer.uint32(/* id 10, wireType 2 =*/82).fork()).ldelim();
+                            if (message.errorSummary != null && message.errorSummary.length)
+                                for (var i = 0; i < message.errorSummary.length; ++i)
+                                    $root.google.cloud.parallelstore.v1beta.TransferErrorSummary.encode(message.errorSummary[i], writer.uint32(/* id 13, wireType 2 =*/106).fork()).ldelim();
                             return writer;
                         };
     
@@ -13022,6 +14091,12 @@
                                     }
                                 case 6: {
                                         message.transferType = reader.int32();
+                                        break;
+                                    }
+                                case 13: {
+                                        if (!(message.errorSummary && message.errorSummary.length))
+                                            message.errorSummary = [];
+                                        message.errorSummary.push($root.google.cloud.parallelstore.v1beta.TransferErrorSummary.decode(reader, reader.uint32()));
                                         break;
                                     }
                                 default:
@@ -13110,6 +14185,15 @@
                                 case 2:
                                     break;
                                 }
+                            if (message.errorSummary != null && message.hasOwnProperty("errorSummary")) {
+                                if (!Array.isArray(message.errorSummary))
+                                    return "errorSummary: array expected";
+                                for (var i = 0; i < message.errorSummary.length; ++i) {
+                                    var error = $root.google.cloud.parallelstore.v1beta.TransferErrorSummary.verify(message.errorSummary[i]);
+                                    if (error)
+                                        return "errorSummary." + error;
+                                }
+                            }
                             return null;
                         };
     
@@ -13170,6 +14254,16 @@
                                 message.transferType = 2;
                                 break;
                             }
+                            if (object.errorSummary) {
+                                if (!Array.isArray(object.errorSummary))
+                                    throw TypeError(".google.cloud.parallelstore.v1beta.TransferOperationMetadata.errorSummary: array expected");
+                                message.errorSummary = [];
+                                for (var i = 0; i < object.errorSummary.length; ++i) {
+                                    if (typeof object.errorSummary[i] !== "object")
+                                        throw TypeError(".google.cloud.parallelstore.v1beta.TransferOperationMetadata.errorSummary: object expected");
+                                    message.errorSummary[i] = $root.google.cloud.parallelstore.v1beta.TransferErrorSummary.fromObject(object.errorSummary[i]);
+                                }
+                            }
                             return message;
                         };
     
@@ -13186,6 +14280,8 @@
                             if (!options)
                                 options = {};
                             var object = {};
+                            if (options.arrays || options.defaults)
+                                object.errorSummary = [];
                             if (options.defaults) {
                                 object.counters = null;
                                 object.transferType = options.enums === String ? "TRANSFER_TYPE_UNSPECIFIED" : 0;
@@ -13213,6 +14309,11 @@
                                 object.destinationParallelstore = $root.google.cloud.parallelstore.v1beta.DestinationParallelstore.toObject(message.destinationParallelstore, options);
                                 if (options.oneofs)
                                     object.destination = "destinationParallelstore";
+                            }
+                            if (message.errorSummary && message.errorSummary.length) {
+                                object.errorSummary = [];
+                                for (var j = 0; j < message.errorSummary.length; ++j)
+                                    object.errorSummary[j] = $root.google.cloud.parallelstore.v1beta.TransferErrorSummary.toObject(message.errorSummary[j], options);
                             }
                             return object;
                         };
@@ -13258,6 +14359,8 @@
                          * @property {number|Long|null} [bytesSkipped] TransferCounters bytesSkipped
                          * @property {number|Long|null} [objectsCopied] TransferCounters objectsCopied
                          * @property {number|Long|null} [bytesCopied] TransferCounters bytesCopied
+                         * @property {number|Long|null} [objectsFailed] TransferCounters objectsFailed
+                         * @property {number|Long|null} [bytesFailed] TransferCounters bytesFailed
                          */
     
                         /**
@@ -13324,6 +14427,22 @@
                         TransferCounters.prototype.bytesCopied = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
     
                         /**
+                         * TransferCounters objectsFailed.
+                         * @member {number|Long} objectsFailed
+                         * @memberof google.cloud.parallelstore.v1beta.TransferCounters
+                         * @instance
+                         */
+                        TransferCounters.prototype.objectsFailed = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+                        /**
+                         * TransferCounters bytesFailed.
+                         * @member {number|Long} bytesFailed
+                         * @memberof google.cloud.parallelstore.v1beta.TransferCounters
+                         * @instance
+                         */
+                        TransferCounters.prototype.bytesFailed = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+                        /**
                          * Creates a new TransferCounters instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.parallelstore.v1beta.TransferCounters
@@ -13359,6 +14478,10 @@
                                 writer.uint32(/* id 5, wireType 0 =*/40).int64(message.objectsCopied);
                             if (message.bytesCopied != null && Object.hasOwnProperty.call(message, "bytesCopied"))
                                 writer.uint32(/* id 6, wireType 0 =*/48).int64(message.bytesCopied);
+                            if (message.objectsFailed != null && Object.hasOwnProperty.call(message, "objectsFailed"))
+                                writer.uint32(/* id 7, wireType 0 =*/56).int64(message.objectsFailed);
+                            if (message.bytesFailed != null && Object.hasOwnProperty.call(message, "bytesFailed"))
+                                writer.uint32(/* id 8, wireType 0 =*/64).int64(message.bytesFailed);
                             return writer;
                         };
     
@@ -13417,6 +14540,14 @@
                                         message.bytesCopied = reader.int64();
                                         break;
                                     }
+                                case 7: {
+                                        message.objectsFailed = reader.int64();
+                                        break;
+                                    }
+                                case 8: {
+                                        message.bytesFailed = reader.int64();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -13470,6 +14601,12 @@
                             if (message.bytesCopied != null && message.hasOwnProperty("bytesCopied"))
                                 if (!$util.isInteger(message.bytesCopied) && !(message.bytesCopied && $util.isInteger(message.bytesCopied.low) && $util.isInteger(message.bytesCopied.high)))
                                     return "bytesCopied: integer|Long expected";
+                            if (message.objectsFailed != null && message.hasOwnProperty("objectsFailed"))
+                                if (!$util.isInteger(message.objectsFailed) && !(message.objectsFailed && $util.isInteger(message.objectsFailed.low) && $util.isInteger(message.objectsFailed.high)))
+                                    return "objectsFailed: integer|Long expected";
+                            if (message.bytesFailed != null && message.hasOwnProperty("bytesFailed"))
+                                if (!$util.isInteger(message.bytesFailed) && !(message.bytesFailed && $util.isInteger(message.bytesFailed.low) && $util.isInteger(message.bytesFailed.high)))
+                                    return "bytesFailed: integer|Long expected";
                             return null;
                         };
     
@@ -13539,6 +14676,24 @@
                                     message.bytesCopied = object.bytesCopied;
                                 else if (typeof object.bytesCopied === "object")
                                     message.bytesCopied = new $util.LongBits(object.bytesCopied.low >>> 0, object.bytesCopied.high >>> 0).toNumber();
+                            if (object.objectsFailed != null)
+                                if ($util.Long)
+                                    (message.objectsFailed = $util.Long.fromValue(object.objectsFailed)).unsigned = false;
+                                else if (typeof object.objectsFailed === "string")
+                                    message.objectsFailed = parseInt(object.objectsFailed, 10);
+                                else if (typeof object.objectsFailed === "number")
+                                    message.objectsFailed = object.objectsFailed;
+                                else if (typeof object.objectsFailed === "object")
+                                    message.objectsFailed = new $util.LongBits(object.objectsFailed.low >>> 0, object.objectsFailed.high >>> 0).toNumber();
+                            if (object.bytesFailed != null)
+                                if ($util.Long)
+                                    (message.bytesFailed = $util.Long.fromValue(object.bytesFailed)).unsigned = false;
+                                else if (typeof object.bytesFailed === "string")
+                                    message.bytesFailed = parseInt(object.bytesFailed, 10);
+                                else if (typeof object.bytesFailed === "number")
+                                    message.bytesFailed = object.bytesFailed;
+                                else if (typeof object.bytesFailed === "object")
+                                    message.bytesFailed = new $util.LongBits(object.bytesFailed.low >>> 0, object.bytesFailed.high >>> 0).toNumber();
                             return message;
                         };
     
@@ -13586,6 +14741,16 @@
                                     object.bytesCopied = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
                                 } else
                                     object.bytesCopied = options.longs === String ? "0" : 0;
+                                if ($util.Long) {
+                                    var long = new $util.Long(0, 0, false);
+                                    object.objectsFailed = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                                } else
+                                    object.objectsFailed = options.longs === String ? "0" : 0;
+                                if ($util.Long) {
+                                    var long = new $util.Long(0, 0, false);
+                                    object.bytesFailed = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                                } else
+                                    object.bytesFailed = options.longs === String ? "0" : 0;
                             }
                             if (message.objectsFound != null && message.hasOwnProperty("objectsFound"))
                                 if (typeof message.objectsFound === "number")
@@ -13617,6 +14782,16 @@
                                     object.bytesCopied = options.longs === String ? String(message.bytesCopied) : message.bytesCopied;
                                 else
                                     object.bytesCopied = options.longs === String ? $util.Long.prototype.toString.call(message.bytesCopied) : options.longs === Number ? new $util.LongBits(message.bytesCopied.low >>> 0, message.bytesCopied.high >>> 0).toNumber() : message.bytesCopied;
+                            if (message.objectsFailed != null && message.hasOwnProperty("objectsFailed"))
+                                if (typeof message.objectsFailed === "number")
+                                    object.objectsFailed = options.longs === String ? String(message.objectsFailed) : message.objectsFailed;
+                                else
+                                    object.objectsFailed = options.longs === String ? $util.Long.prototype.toString.call(message.objectsFailed) : options.longs === Number ? new $util.LongBits(message.objectsFailed.low >>> 0, message.objectsFailed.high >>> 0).toNumber() : message.objectsFailed;
+                            if (message.bytesFailed != null && message.hasOwnProperty("bytesFailed"))
+                                if (typeof message.bytesFailed === "number")
+                                    object.bytesFailed = options.longs === String ? String(message.bytesFailed) : message.bytesFailed;
+                                else
+                                    object.bytesFailed = options.longs === String ? $util.Long.prototype.toString.call(message.bytesFailed) : options.longs === Number ? new $util.LongBits(message.bytesFailed.low >>> 0, message.bytesFailed.high >>> 0).toNumber() : message.bytesFailed;
                             return object;
                         };
     
