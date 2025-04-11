@@ -33,18 +33,18 @@ import {loggingUtils as logging} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
- * `src/v1/account_labels_service_client_config.json`.
+ * `src/v1/quota_service_client_config.json`.
  * This file defines retry strategy and timeouts for all API methods in this library.
  */
-import * as gapicConfig from './account_labels_service_client_config.json';
+import * as gapicConfig from './quota_service_client_config.json';
 const version = require('../../../package.json').version;
 
 /**
- *  Manages Merchant Center and CSS accounts labels.
+ *  Service to get method call quota information per CSS API method.
  * @class
  * @memberof v1
  */
-export class AccountLabelsServiceClient {
+export class QuotaServiceClient {
   private _terminated = false;
   private _opts: ClientOptions;
   private _providedCustomServicePath: boolean;
@@ -66,10 +66,10 @@ export class AccountLabelsServiceClient {
   warn: (code: string, message: string, warnType?: string) => void;
   innerApiCalls: {[name: string]: Function};
   pathTemplates: {[name: string]: gax.PathTemplate};
-  accountLabelsServiceStub?: Promise<{[name: string]: Function}>;
+  quotaServiceStub?: Promise<{[name: string]: Function}>;
 
   /**
-   * Construct an instance of AccountLabelsServiceClient.
+   * Construct an instance of QuotaServiceClient.
    *
    * @param {object} [options] - The configuration object.
    * The options accepted by the constructor are described in detail
@@ -104,7 +104,7 @@ export class AccountLabelsServiceClient {
    *     HTTP implementation. Load only fallback version and pass it to the constructor:
    *     ```
    *     const gax = require('google-gax/build/src/fallback'); // avoids loading google-gax with gRPC
-   *     const client = new AccountLabelsServiceClient({fallback: true}, gax);
+   *     const client = new QuotaServiceClient({fallback: true}, gax);
    *     ```
    */
   constructor(
@@ -112,7 +112,7 @@ export class AccountLabelsServiceClient {
     gaxInstance?: typeof gax | typeof gax.fallback
   ) {
     // Ensure that options include all the required fields.
-    const staticMembers = this.constructor as typeof AccountLabelsServiceClient;
+    const staticMembers = this.constructor as typeof QuotaServiceClient;
     if (
       opts?.universe_domain &&
       opts?.universeDomain &&
@@ -223,16 +223,16 @@ export class AccountLabelsServiceClient {
     // (e.g. 50 results at a time, with tokens to get subsequent
     // pages). Denote the keys used for pagination and results.
     this.descriptors.page = {
-      listAccountLabels: new this._gaxModule.PageDescriptor(
+      listQuotaGroups: new this._gaxModule.PageDescriptor(
         'pageToken',
         'nextPageToken',
-        'accountLabels'
+        'quotaGroups'
       ),
     };
 
     // Put together the default options sent with requests.
     this._defaults = this._gaxGrpc.constructSettings(
-      'google.shopping.css.v1.AccountLabelsService',
+      'google.shopping.css.v1.QuotaService',
       gapicConfig as gax.ClientConfig,
       opts.clientConfig || {},
       {'x-goog-api-client': clientHeader.join(' ')}
@@ -260,33 +260,28 @@ export class AccountLabelsServiceClient {
    */
   initialize() {
     // If the client stub promise is already initialized, return immediately.
-    if (this.accountLabelsServiceStub) {
-      return this.accountLabelsServiceStub;
+    if (this.quotaServiceStub) {
+      return this.quotaServiceStub;
     }
 
     // Put together the "service stub" for
-    // google.shopping.css.v1.AccountLabelsService.
-    this.accountLabelsServiceStub = this._gaxGrpc.createStub(
+    // google.shopping.css.v1.QuotaService.
+    this.quotaServiceStub = this._gaxGrpc.createStub(
       this._opts.fallback
         ? (this._protos as protobuf.Root).lookupService(
-            'google.shopping.css.v1.AccountLabelsService'
+            'google.shopping.css.v1.QuotaService'
           )
         : // eslint-disable-next-line @typescript-eslint/no-explicit-any
-          (this._protos as any).google.shopping.css.v1.AccountLabelsService,
+          (this._protos as any).google.shopping.css.v1.QuotaService,
       this._opts,
       this._providedCustomServicePath
     ) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    const accountLabelsServiceStubMethods = [
-      'listAccountLabels',
-      'createAccountLabel',
-      'updateAccountLabel',
-      'deleteAccountLabel',
-    ];
-    for (const methodName of accountLabelsServiceStubMethods) {
-      const callPromise = this.accountLabelsServiceStub.then(
+    const quotaServiceStubMethods = ['listQuotaGroups'];
+    for (const methodName of quotaServiceStubMethods) {
+      const callPromise = this.quotaServiceStub.then(
         stub =>
           (...args: Array<{}>) => {
             if (this._terminated) {
@@ -311,7 +306,7 @@ export class AccountLabelsServiceClient {
       this.innerApiCalls[methodName] = apiCall;
     }
 
-    return this.accountLabelsServiceStub;
+    return this.quotaServiceStub;
   }
 
   /**
@@ -398,450 +393,82 @@ export class AccountLabelsServiceClient {
   // -------------------
   // -- Service calls --
   // -------------------
-  /**
-   * Creates a new label, not assigned to any account.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The parent account.
-   *   Format: accounts/{account}
-   * @param {google.shopping.css.v1.AccountLabel} request.accountLabel
-   *   Required. The label to create.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.shopping.css.v1.AccountLabel|AccountLabel}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/account_labels_service.create_account_label.js</caption>
-   * region_tag:css_v1_generated_AccountLabelsService_CreateAccountLabel_async
-   */
-  createAccountLabel(
-    request?: protos.google.shopping.css.v1.ICreateAccountLabelRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.shopping.css.v1.IAccountLabel,
-      protos.google.shopping.css.v1.ICreateAccountLabelRequest | undefined,
-      {} | undefined,
-    ]
-  >;
-  createAccountLabel(
-    request: protos.google.shopping.css.v1.ICreateAccountLabelRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.shopping.css.v1.IAccountLabel,
-      | protos.google.shopping.css.v1.ICreateAccountLabelRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  createAccountLabel(
-    request: protos.google.shopping.css.v1.ICreateAccountLabelRequest,
-    callback: Callback<
-      protos.google.shopping.css.v1.IAccountLabel,
-      | protos.google.shopping.css.v1.ICreateAccountLabelRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  createAccountLabel(
-    request?: protos.google.shopping.css.v1.ICreateAccountLabelRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          protos.google.shopping.css.v1.IAccountLabel,
-          | protos.google.shopping.css.v1.ICreateAccountLabelRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.shopping.css.v1.IAccountLabel,
-      | protos.google.shopping.css.v1.ICreateAccountLabelRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.shopping.css.v1.IAccountLabel,
-      protos.google.shopping.css.v1.ICreateAccountLabelRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
-    request = request || {};
-    let options: CallOptions;
-    if (typeof optionsOrCallback === 'function' && callback === undefined) {
-      callback = optionsOrCallback;
-      options = {};
-    } else {
-      options = optionsOrCallback as CallOptions;
-    }
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
-    });
-    this._log.info('createAccountLabel request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.shopping.css.v1.IAccountLabel,
-          | protos.google.shopping.css.v1.ICreateAccountLabelRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
-      ? (error, response, options, rawResponse) => {
-          this._log.info('createAccountLabel response %j', response);
-          callback!(error, response, options, rawResponse); // We verified callback above.
-        }
-      : undefined;
-    return this.innerApiCalls
-      .createAccountLabel(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.shopping.css.v1.IAccountLabel,
-          protos.google.shopping.css.v1.ICreateAccountLabelRequest | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('createAccountLabel response %j', response);
-          return [response, options, rawResponse];
-        }
-      );
-  }
-  /**
-   * Updates a label.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {google.shopping.css.v1.AccountLabel} request.accountLabel
-   *   Required. The updated label. All fields must be provided.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.shopping.css.v1.AccountLabel|AccountLabel}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/account_labels_service.update_account_label.js</caption>
-   * region_tag:css_v1_generated_AccountLabelsService_UpdateAccountLabel_async
-   */
-  updateAccountLabel(
-    request?: protos.google.shopping.css.v1.IUpdateAccountLabelRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.shopping.css.v1.IAccountLabel,
-      protos.google.shopping.css.v1.IUpdateAccountLabelRequest | undefined,
-      {} | undefined,
-    ]
-  >;
-  updateAccountLabel(
-    request: protos.google.shopping.css.v1.IUpdateAccountLabelRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.shopping.css.v1.IAccountLabel,
-      | protos.google.shopping.css.v1.IUpdateAccountLabelRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  updateAccountLabel(
-    request: protos.google.shopping.css.v1.IUpdateAccountLabelRequest,
-    callback: Callback<
-      protos.google.shopping.css.v1.IAccountLabel,
-      | protos.google.shopping.css.v1.IUpdateAccountLabelRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  updateAccountLabel(
-    request?: protos.google.shopping.css.v1.IUpdateAccountLabelRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          protos.google.shopping.css.v1.IAccountLabel,
-          | protos.google.shopping.css.v1.IUpdateAccountLabelRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.shopping.css.v1.IAccountLabel,
-      | protos.google.shopping.css.v1.IUpdateAccountLabelRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.shopping.css.v1.IAccountLabel,
-      protos.google.shopping.css.v1.IUpdateAccountLabelRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
-    request = request || {};
-    let options: CallOptions;
-    if (typeof optionsOrCallback === 'function' && callback === undefined) {
-      callback = optionsOrCallback;
-      options = {};
-    } else {
-      options = optionsOrCallback as CallOptions;
-    }
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        'account_label.name': request.accountLabel!.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
-    });
-    this._log.info('updateAccountLabel request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.shopping.css.v1.IAccountLabel,
-          | protos.google.shopping.css.v1.IUpdateAccountLabelRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
-      ? (error, response, options, rawResponse) => {
-          this._log.info('updateAccountLabel response %j', response);
-          callback!(error, response, options, rawResponse); // We verified callback above.
-        }
-      : undefined;
-    return this.innerApiCalls
-      .updateAccountLabel(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.shopping.css.v1.IAccountLabel,
-          protos.google.shopping.css.v1.IUpdateAccountLabelRequest | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('updateAccountLabel response %j', response);
-          return [response, options, rawResponse];
-        }
-      );
-  }
-  /**
-   * Deletes a label and removes it from all accounts to which it was assigned.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The name of the label to delete.
-   *   Format:  accounts/{account}/labels/{label}
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/account_labels_service.delete_account_label.js</caption>
-   * region_tag:css_v1_generated_AccountLabelsService_DeleteAccountLabel_async
-   */
-  deleteAccountLabel(
-    request?: protos.google.shopping.css.v1.IDeleteAccountLabelRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.protobuf.IEmpty,
-      protos.google.shopping.css.v1.IDeleteAccountLabelRequest | undefined,
-      {} | undefined,
-    ]
-  >;
-  deleteAccountLabel(
-    request: protos.google.shopping.css.v1.IDeleteAccountLabelRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.protobuf.IEmpty,
-      | protos.google.shopping.css.v1.IDeleteAccountLabelRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  deleteAccountLabel(
-    request: protos.google.shopping.css.v1.IDeleteAccountLabelRequest,
-    callback: Callback<
-      protos.google.protobuf.IEmpty,
-      | protos.google.shopping.css.v1.IDeleteAccountLabelRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  deleteAccountLabel(
-    request?: protos.google.shopping.css.v1.IDeleteAccountLabelRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          protos.google.protobuf.IEmpty,
-          | protos.google.shopping.css.v1.IDeleteAccountLabelRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.protobuf.IEmpty,
-      | protos.google.shopping.css.v1.IDeleteAccountLabelRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.protobuf.IEmpty,
-      protos.google.shopping.css.v1.IDeleteAccountLabelRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
-    request = request || {};
-    let options: CallOptions;
-    if (typeof optionsOrCallback === 'function' && callback === undefined) {
-      callback = optionsOrCallback;
-      options = {};
-    } else {
-      options = optionsOrCallback as CallOptions;
-    }
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
-    });
-    this._log.info('deleteAccountLabel request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.protobuf.IEmpty,
-          | protos.google.shopping.css.v1.IDeleteAccountLabelRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
-      ? (error, response, options, rawResponse) => {
-          this._log.info('deleteAccountLabel response %j', response);
-          callback!(error, response, options, rawResponse); // We verified callback above.
-        }
-      : undefined;
-    return this.innerApiCalls
-      .deleteAccountLabel(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.protobuf.IEmpty,
-          protos.google.shopping.css.v1.IDeleteAccountLabelRequest | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('deleteAccountLabel response %j', response);
-          return [response, options, rawResponse];
-        }
-      );
-  }
 
   /**
-   * Lists the labels owned by an account.
+   * Lists the daily call quota and usage per group for your CSS Center account.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The parent account.
-   *   Format: accounts/{account}
-   * @param {number} request.pageSize
-   *   The maximum number of labels to return. The service may return fewer than
-   *   this value.
-   *   If unspecified, at most 50 labels will be returned.
-   *   The maximum value is 1000; values above 1000 will be coerced to 1000.
-   * @param {string} request.pageToken
-   *   A page token, received from a previous `ListAccountLabels` call.
-   *   Provide this to retrieve the subsequent page.
-   *
-   *   When paginating, all other parameters provided to `ListAccountLabels` must
-   *   match the call that provided the page token.
+   *   Required. The CSS account that owns the collection of method quotas and
+   *   resources. In most cases, this is the CSS domain. Format:
+   *   accounts/{account}
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of quotas to return in the response, used
+   *   for paging. Defaults to 500; values above 1000 will be coerced to 1000.
+   * @param {string} [request.pageToken]
+   *   Optional. Token (if provided) to retrieve the subsequent page. All other
+   *   parameters must match the original call that provided the page token.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link protos.google.shopping.css.v1.AccountLabel|AccountLabel}.
+   *   The first element of the array is Array of {@link protos.google.shopping.css.v1.QuotaGroup|QuotaGroup}.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed and will merge results from all the pages into this array.
    *   Note that it can affect your quota.
-   *   We recommend using `listAccountLabelsAsync()`
+   *   We recommend using `listQuotaGroupsAsync()`
    *   method described below for async iteration which you can stop as needed.
    *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
-  listAccountLabels(
-    request?: protos.google.shopping.css.v1.IListAccountLabelsRequest,
+  listQuotaGroups(
+    request?: protos.google.shopping.css.v1.IListQuotaGroupsRequest,
     options?: CallOptions
   ): Promise<
     [
-      protos.google.shopping.css.v1.IAccountLabel[],
-      protos.google.shopping.css.v1.IListAccountLabelsRequest | null,
-      protos.google.shopping.css.v1.IListAccountLabelsResponse,
+      protos.google.shopping.css.v1.IQuotaGroup[],
+      protos.google.shopping.css.v1.IListQuotaGroupsRequest | null,
+      protos.google.shopping.css.v1.IListQuotaGroupsResponse,
     ]
   >;
-  listAccountLabels(
-    request: protos.google.shopping.css.v1.IListAccountLabelsRequest,
+  listQuotaGroups(
+    request: protos.google.shopping.css.v1.IListQuotaGroupsRequest,
     options: CallOptions,
     callback: PaginationCallback<
-      protos.google.shopping.css.v1.IListAccountLabelsRequest,
-      | protos.google.shopping.css.v1.IListAccountLabelsResponse
-      | null
-      | undefined,
-      protos.google.shopping.css.v1.IAccountLabel
+      protos.google.shopping.css.v1.IListQuotaGroupsRequest,
+      protos.google.shopping.css.v1.IListQuotaGroupsResponse | null | undefined,
+      protos.google.shopping.css.v1.IQuotaGroup
     >
   ): void;
-  listAccountLabels(
-    request: protos.google.shopping.css.v1.IListAccountLabelsRequest,
+  listQuotaGroups(
+    request: protos.google.shopping.css.v1.IListQuotaGroupsRequest,
     callback: PaginationCallback<
-      protos.google.shopping.css.v1.IListAccountLabelsRequest,
-      | protos.google.shopping.css.v1.IListAccountLabelsResponse
-      | null
-      | undefined,
-      protos.google.shopping.css.v1.IAccountLabel
+      protos.google.shopping.css.v1.IListQuotaGroupsRequest,
+      protos.google.shopping.css.v1.IListQuotaGroupsResponse | null | undefined,
+      protos.google.shopping.css.v1.IQuotaGroup
     >
   ): void;
-  listAccountLabels(
-    request?: protos.google.shopping.css.v1.IListAccountLabelsRequest,
+  listQuotaGroups(
+    request?: protos.google.shopping.css.v1.IListQuotaGroupsRequest,
     optionsOrCallback?:
       | CallOptions
       | PaginationCallback<
-          protos.google.shopping.css.v1.IListAccountLabelsRequest,
-          | protos.google.shopping.css.v1.IListAccountLabelsResponse
+          protos.google.shopping.css.v1.IListQuotaGroupsRequest,
+          | protos.google.shopping.css.v1.IListQuotaGroupsResponse
           | null
           | undefined,
-          protos.google.shopping.css.v1.IAccountLabel
+          protos.google.shopping.css.v1.IQuotaGroup
         >,
     callback?: PaginationCallback<
-      protos.google.shopping.css.v1.IListAccountLabelsRequest,
-      | protos.google.shopping.css.v1.IListAccountLabelsResponse
-      | null
-      | undefined,
-      protos.google.shopping.css.v1.IAccountLabel
+      protos.google.shopping.css.v1.IListQuotaGroupsRequest,
+      protos.google.shopping.css.v1.IListQuotaGroupsResponse | null | undefined,
+      protos.google.shopping.css.v1.IQuotaGroup
     >
   ): Promise<
     [
-      protos.google.shopping.css.v1.IAccountLabel[],
-      protos.google.shopping.css.v1.IListAccountLabelsRequest | null,
-      protos.google.shopping.css.v1.IListAccountLabelsResponse,
+      protos.google.shopping.css.v1.IQuotaGroup[],
+      protos.google.shopping.css.v1.IListQuotaGroupsRequest | null,
+      protos.google.shopping.css.v1.IListQuotaGroupsResponse,
     ]
   > | void {
     request = request || {};
@@ -864,64 +491,60 @@ export class AccountLabelsServiceClient {
     });
     const wrappedCallback:
       | PaginationCallback<
-          protos.google.shopping.css.v1.IListAccountLabelsRequest,
-          | protos.google.shopping.css.v1.IListAccountLabelsResponse
+          protos.google.shopping.css.v1.IListQuotaGroupsRequest,
+          | protos.google.shopping.css.v1.IListQuotaGroupsResponse
           | null
           | undefined,
-          protos.google.shopping.css.v1.IAccountLabel
+          protos.google.shopping.css.v1.IQuotaGroup
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listAccountLabels values %j', values);
+          this._log.info('listQuotaGroups values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listAccountLabels request %j', request);
+    this._log.info('listQuotaGroups request %j', request);
     return this.innerApiCalls
-      .listAccountLabels(request, options, wrappedCallback)
+      .listQuotaGroups(request, options, wrappedCallback)
       ?.then(
         ([response, input, output]: [
-          protos.google.shopping.css.v1.IAccountLabel[],
-          protos.google.shopping.css.v1.IListAccountLabelsRequest | null,
-          protos.google.shopping.css.v1.IListAccountLabelsResponse,
+          protos.google.shopping.css.v1.IQuotaGroup[],
+          protos.google.shopping.css.v1.IListQuotaGroupsRequest | null,
+          protos.google.shopping.css.v1.IListQuotaGroupsResponse,
         ]) => {
-          this._log.info('listAccountLabels values %j', response);
+          this._log.info('listQuotaGroups values %j', response);
           return [response, input, output];
         }
       );
   }
 
   /**
-   * Equivalent to `listAccountLabels`, but returns a NodeJS Stream object.
+   * Equivalent to `listQuotaGroups`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The parent account.
-   *   Format: accounts/{account}
-   * @param {number} request.pageSize
-   *   The maximum number of labels to return. The service may return fewer than
-   *   this value.
-   *   If unspecified, at most 50 labels will be returned.
-   *   The maximum value is 1000; values above 1000 will be coerced to 1000.
-   * @param {string} request.pageToken
-   *   A page token, received from a previous `ListAccountLabels` call.
-   *   Provide this to retrieve the subsequent page.
-   *
-   *   When paginating, all other parameters provided to `ListAccountLabels` must
-   *   match the call that provided the page token.
+   *   Required. The CSS account that owns the collection of method quotas and
+   *   resources. In most cases, this is the CSS domain. Format:
+   *   accounts/{account}
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of quotas to return in the response, used
+   *   for paging. Defaults to 500; values above 1000 will be coerced to 1000.
+   * @param {string} [request.pageToken]
+   *   Optional. Token (if provided) to retrieve the subsequent page. All other
+   *   parameters must match the original call that provided the page token.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
-   *   An object stream which emits an object representing {@link protos.google.shopping.css.v1.AccountLabel|AccountLabel} on 'data' event.
+   *   An object stream which emits an object representing {@link protos.google.shopping.css.v1.QuotaGroup|QuotaGroup} on 'data' event.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed. Note that it can affect your quota.
-   *   We recommend using `listAccountLabelsAsync()`
+   *   We recommend using `listQuotaGroupsAsync()`
    *   method described below for async iteration which you can stop as needed.
    *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
-  listAccountLabelsStream(
-    request?: protos.google.shopping.css.v1.IListAccountLabelsRequest,
+  listQuotaGroupsStream(
+    request?: protos.google.shopping.css.v1.IListQuotaGroupsRequest,
     options?: CallOptions
   ): Transform {
     request = request || {};
@@ -932,55 +555,51 @@ export class AccountLabelsServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    const defaultCallSettings = this._defaults['listAccountLabels'];
+    const defaultCallSettings = this._defaults['listQuotaGroups'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listAccountLabels stream %j', request);
-    return this.descriptors.page.listAccountLabels.createStream(
-      this.innerApiCalls.listAccountLabels as GaxCall,
+    this._log.info('listQuotaGroups stream %j', request);
+    return this.descriptors.page.listQuotaGroups.createStream(
+      this.innerApiCalls.listQuotaGroups as GaxCall,
       request,
       callSettings
     );
   }
 
   /**
-   * Equivalent to `listAccountLabels`, but returns an iterable object.
+   * Equivalent to `listQuotaGroups`, but returns an iterable object.
    *
    * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The parent account.
-   *   Format: accounts/{account}
-   * @param {number} request.pageSize
-   *   The maximum number of labels to return. The service may return fewer than
-   *   this value.
-   *   If unspecified, at most 50 labels will be returned.
-   *   The maximum value is 1000; values above 1000 will be coerced to 1000.
-   * @param {string} request.pageToken
-   *   A page token, received from a previous `ListAccountLabels` call.
-   *   Provide this to retrieve the subsequent page.
-   *
-   *   When paginating, all other parameters provided to `ListAccountLabels` must
-   *   match the call that provided the page token.
+   *   Required. The CSS account that owns the collection of method quotas and
+   *   resources. In most cases, this is the CSS domain. Format:
+   *   accounts/{account}
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of quotas to return in the response, used
+   *   for paging. Defaults to 500; values above 1000 will be coerced to 1000.
+   * @param {string} [request.pageToken]
+   *   Optional. Token (if provided) to retrieve the subsequent page. All other
+   *   parameters must match the original call that provided the page token.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
    *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
    *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link protos.google.shopping.css.v1.AccountLabel|AccountLabel}. The API will be called under the hood as needed, once per the page,
+   *   {@link protos.google.shopping.css.v1.QuotaGroup|QuotaGroup}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
    *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/account_labels_service.list_account_labels.js</caption>
-   * region_tag:css_v1_generated_AccountLabelsService_ListAccountLabels_async
+   * @example <caption>include:samples/generated/v1/quota_service.list_quota_groups.js</caption>
+   * region_tag:css_v1_generated_QuotaService_ListQuotaGroups_async
    */
-  listAccountLabelsAsync(
-    request?: protos.google.shopping.css.v1.IListAccountLabelsRequest,
+  listQuotaGroupsAsync(
+    request?: protos.google.shopping.css.v1.IListQuotaGroupsRequest,
     options?: CallOptions
-  ): AsyncIterable<protos.google.shopping.css.v1.IAccountLabel> {
+  ): AsyncIterable<protos.google.shopping.css.v1.IQuotaGroup> {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -989,17 +608,17 @@ export class AccountLabelsServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    const defaultCallSettings = this._defaults['listAccountLabels'];
+    const defaultCallSettings = this._defaults['listQuotaGroups'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listAccountLabels iterate %j', request);
-    return this.descriptors.page.listAccountLabels.asyncIterate(
-      this.innerApiCalls['listAccountLabels'] as GaxCall,
+    this._log.info('listQuotaGroups iterate %j', request);
+    return this.descriptors.page.listQuotaGroups.asyncIterate(
+      this.innerApiCalls['listQuotaGroups'] as GaxCall,
       request as {},
       callSettings
-    ) as AsyncIterable<protos.google.shopping.css.v1.IAccountLabel>;
+    ) as AsyncIterable<protos.google.shopping.css.v1.IQuotaGroup>;
   }
   // --------------------
   // -- Path templates --
@@ -1189,8 +808,8 @@ export class AccountLabelsServiceClient {
    * @returns {Promise} A promise that resolves when the client is closed.
    */
   close(): Promise<void> {
-    if (this.accountLabelsServiceStub && !this._terminated) {
-      return this.accountLabelsServiceStub.then(stub => {
+    if (this.quotaServiceStub && !this._terminated) {
+      return this.quotaServiceStub.then(stub => {
         this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();

@@ -20,3 +20,4 @@ export {AccountLabelsServiceClient} from './account_labels_service_client';
 export {AccountsServiceClient} from './accounts_service_client';
 export {CssProductInputsServiceClient} from './css_product_inputs_service_client';
 export {CssProductsServiceClient} from './css_products_service_client';
+export {QuotaServiceClient} from './quota_service_client';

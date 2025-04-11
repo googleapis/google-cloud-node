@@ -20,8 +20,8 @@
 
 'use strict';
 
-function main(name) {
-  // [START css_v1_generated_CssProductInputsService_DeleteCssProductInput_async]
+function main(parent) {
+  // [START css_v1_generated_QuotaService_ListQuotaGroups_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
    * It will require modifications to work.
@@ -29,40 +29,43 @@ function main(name) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The name of the CSS product input resource to delete.
-   *  Format: accounts/{account}/cssProductInputs/{css_product_input}, where the
-   *  last section `css_product_input` consists of 3 parts:
-   *  contentLanguage~feedLabel~offerId. Example:
-   *  accounts/123/cssProductInputs/de~DE~rawProvidedId123
+   *  Required. The CSS account that owns the collection of method quotas and
+   *  resources. In most cases, this is the CSS domain. Format:
+   *  accounts/{account}
    */
-  // const name = 'abc123'
+  // const parent = 'abc123'
   /**
-   *  The Content API Supplemental Feed ID.
-   *  The field must not be set if the action applies to a primary feed.
-   *  If the field is set, then product action applies to a supplemental feed
-   *  instead of primary Content API feed.
+   *  Optional. The maximum number of quotas to return in the response, used
+   *  for paging. Defaults to 500; values above 1000 will be coerced to 1000.
    */
-  // const supplementalFeedId = 1234
+  // const pageSize = 1234
+  /**
+   *  Optional. Token (if provided) to retrieve the subsequent page. All other
+   *  parameters must match the original call that provided the page token.
+   */
+  // const pageToken = 'abc123'
 
   // Imports the Css library
-  const {CssProductInputsServiceClient} = require('@google-shopping/css').v1;
+  const {QuotaServiceClient} = require('@google-shopping/css').v1;
 
   // Instantiates a client
-  const cssClient = new CssProductInputsServiceClient();
+  const cssClient = new QuotaServiceClient();
 
-  async function callDeleteCssProductInput() {
+  async function callListQuotaGroups() {
     // Construct request
     const request = {
-      name,
+      parent,
     };
 
     // Run request
-    const response = await cssClient.deleteCssProductInput(request);
-    console.log(response);
+    const iterable = cssClient.listQuotaGroupsAsync(request);
+    for await (const response of iterable) {
+        console.log(response);
+    }
   }
 
-  callDeleteCssProductInput();
-  // [END css_v1_generated_CssProductInputsService_DeleteCssProductInput_async]
+  callListQuotaGroups();
+  // [END css_v1_generated_QuotaService_ListQuotaGroups_async]
 }
 
 process.on('unhandledRejection', err => {
