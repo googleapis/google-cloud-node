@@ -3994,6 +3994,224 @@ export namespace google {
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
+                /** Properties of a GoModule. */
+                interface IGoModule {
+
+                    /** GoModule name */
+                    name?: (string|null);
+
+                    /** GoModule version */
+                    version?: (string|null);
+
+                    /** GoModule createTime */
+                    createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** GoModule updateTime */
+                    updateTime?: (google.protobuf.ITimestamp|null);
+                }
+
+                /** Represents a GoModule. */
+                class GoModule implements IGoModule {
+
+                    /**
+                     * Constructs a new GoModule.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.devtools.artifactregistry.v1.IGoModule);
+
+                    /** GoModule name. */
+                    public name: string;
+
+                    /** GoModule version. */
+                    public version: string;
+
+                    /** GoModule createTime. */
+                    public createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** GoModule updateTime. */
+                    public updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /**
+                     * Creates a new GoModule instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GoModule instance
+                     */
+                    public static create(properties?: google.devtools.artifactregistry.v1.IGoModule): google.devtools.artifactregistry.v1.GoModule;
+
+                    /**
+                     * Encodes the specified GoModule message. Does not implicitly {@link google.devtools.artifactregistry.v1.GoModule.verify|verify} messages.
+                     * @param message GoModule message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.devtools.artifactregistry.v1.IGoModule, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GoModule message, length delimited. Does not implicitly {@link google.devtools.artifactregistry.v1.GoModule.verify|verify} messages.
+                     * @param message GoModule message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.devtools.artifactregistry.v1.IGoModule, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GoModule message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GoModule
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.devtools.artifactregistry.v1.GoModule;
+
+                    /**
+                     * Decodes a GoModule message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GoModule
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.devtools.artifactregistry.v1.GoModule;
+
+                    /**
+                     * Verifies a GoModule message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GoModule message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GoModule
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.devtools.artifactregistry.v1.GoModule;
+
+                    /**
+                     * Creates a plain object from a GoModule message. Also converts values to other types if specified.
+                     * @param message GoModule
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.devtools.artifactregistry.v1.GoModule, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GoModule to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GoModule
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a KfpArtifact. */
+                interface IKfpArtifact {
+
+                    /** KfpArtifact name */
+                    name?: (string|null);
+
+                    /** KfpArtifact version */
+                    version?: (string|null);
+                }
+
+                /** Represents a KfpArtifact. */
+                class KfpArtifact implements IKfpArtifact {
+
+                    /**
+                     * Constructs a new KfpArtifact.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.devtools.artifactregistry.v1.IKfpArtifact);
+
+                    /** KfpArtifact name. */
+                    public name: string;
+
+                    /** KfpArtifact version. */
+                    public version: string;
+
+                    /**
+                     * Creates a new KfpArtifact instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns KfpArtifact instance
+                     */
+                    public static create(properties?: google.devtools.artifactregistry.v1.IKfpArtifact): google.devtools.artifactregistry.v1.KfpArtifact;
+
+                    /**
+                     * Encodes the specified KfpArtifact message. Does not implicitly {@link google.devtools.artifactregistry.v1.KfpArtifact.verify|verify} messages.
+                     * @param message KfpArtifact message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.devtools.artifactregistry.v1.IKfpArtifact, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified KfpArtifact message, length delimited. Does not implicitly {@link google.devtools.artifactregistry.v1.KfpArtifact.verify|verify} messages.
+                     * @param message KfpArtifact message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.devtools.artifactregistry.v1.IKfpArtifact, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a KfpArtifact message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns KfpArtifact
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.devtools.artifactregistry.v1.KfpArtifact;
+
+                    /**
+                     * Decodes a KfpArtifact message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns KfpArtifact
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.devtools.artifactregistry.v1.KfpArtifact;
+
+                    /**
+                     * Verifies a KfpArtifact message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a KfpArtifact message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns KfpArtifact
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.devtools.artifactregistry.v1.KfpArtifact;
+
+                    /**
+                     * Creates a plain object from a KfpArtifact message. Also converts values to other types if specified.
+                     * @param message KfpArtifact
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.devtools.artifactregistry.v1.KfpArtifact, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this KfpArtifact to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for KfpArtifact
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
                 /** Properties of a Package. */
                 interface IPackage {
 
@@ -7233,6 +7451,9 @@ export namespace google {
 
                     /** Repository satisfiesPzi */
                     satisfiesPzi?: (boolean|null);
+
+                    /** Repository registryUri */
+                    registryUri?: (string|null);
                 }
 
                 /** Represents a Repository. */
@@ -7300,6 +7521,9 @@ export namespace google {
 
                     /** Repository satisfiesPzi. */
                     public satisfiesPzi: boolean;
+
+                    /** Repository registryUri. */
+                    public registryUri: string;
 
                     /** Repository formatConfig. */
                     public formatConfig?: ("mavenConfig"|"dockerConfig");
