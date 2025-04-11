@@ -11,7 +11,7 @@
                     "csharp_namespace": "Google.Shopping.Css.V1",
                     "go_package": "cloud.google.com/go/shopping/css/apiv1/csspb;csspb",
                     "java_multiple_files": true,
-                    "java_outer_classname": "CssProductsProto",
+                    "java_outer_classname": "QuotaProto",
                     "java_package": "com.google.shopping.css.v1",
                     "php_namespace": "Google\\Shopping\\Css\\V1",
                     "ruby_package": "Google::Shopping::Css::V1"
@@ -1513,6 +1513,149 @@
                         "cssProducts": {
                           "rule": "repeated",
                           "type": "CssProduct",
+                          "id": 1
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "QuotaService": {
+                      "options": {
+                        "(google.api.default_host)": "css.googleapis.com",
+                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/content"
+                      },
+                      "methods": {
+                        "ListQuotaGroups": {
+                          "requestType": "ListQuotaGroupsRequest",
+                          "responseType": "ListQuotaGroupsResponse",
+                          "options": {
+                            "(google.api.http).get": "/v1/{parent=accounts/*}/quotas",
+                            "(google.api.method_signature)": "parent"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{parent=accounts/*}/quotas"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    "QuotaGroup": {
+                      "options": {
+                        "(google.api.resource).type": "css.googleapis.com/QuotaGroup",
+                        "(google.api.resource).pattern": "accounts/{account}/quotaGroups/{quota_group}",
+                        "(google.api.resource).plural": "quotaGroups",
+                        "(google.api.resource).singular": "quotaGroup"
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "IDENTIFIER"
+                          }
+                        },
+                        "quotaUsage": {
+                          "type": "int64",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "quotaLimit": {
+                          "type": "int64",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "quotaMinuteLimit": {
+                          "type": "int64",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "methodDetails": {
+                          "rule": "repeated",
+                          "type": "MethodDetails",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      }
+                    },
+                    "MethodDetails": {
+                      "fields": {
+                        "method": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "version": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "subapi": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "path": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      }
+                    },
+                    "ListQuotaGroupsRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).child_type": "css.googleapis.com/QuotaGroup"
+                          }
+                        },
+                        "pageSize": {
+                          "type": "int32",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "ListQuotaGroupsResponse": {
+                      "fields": {
+                        "quotaGroups": {
+                          "rule": "repeated",
+                          "type": "QuotaGroup",
                           "id": 1
                         },
                         "nextPageToken": {
