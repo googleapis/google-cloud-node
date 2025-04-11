@@ -12,8 +12,8 @@
                     "java_multiple_files": true,
                     "java_outer_classname": "TargetNotificationPayloadProto",
                     "java_package": "com.google.cloud.deploy.v1",
-                    "(google.api.resource_definition).type": "run.googleapis.com/Job",
-                    "(google.api.resource_definition).pattern": "projects/{project}/locations/{location}/jobs/{job}"
+                    "(google.api.resource_definition).type": "run.googleapis.com/Revision",
+                    "(google.api.resource_definition).pattern": "projects/{project}/locations/{location}/revisions/{revision}"
                   },
                   "nested": {
                     "AutomationEvent": {
