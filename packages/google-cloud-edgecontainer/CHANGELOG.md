@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.6.2](https://github.com/googleapis/google-cloud-node/compare/edgecontainer-v0.6.1...edgecontainer-v0.6.2) (2025-04-11)
+
+
+### Bug Fixes
+
+* [Many APIs] await/catch promises, and update listOperationsAsync return type ([#6185](https://github.com/googleapis/google-cloud-node/issues/6185)) ([ab30412](https://github.com/googleapis/google-cloud-node/commit/ab304122e3e825c9a76af7d6b0ef4ddc9aa6e906))
+
 ## [0.6.1](https://github.com/googleapis/google-cloud-node/compare/edgecontainer-v0.6.0...edgecontainer-v0.6.1) (2025-03-21)
 
 
