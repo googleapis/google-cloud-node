@@ -33,7 +33,10 @@
   * [Oracle_database.list_db_system_shapes](#oracle_database.list_db_system_shapes)
   * [Oracle_database.list_entitlements](#oracle_database.list_entitlements)
   * [Oracle_database.list_gi_versions](#oracle_database.list_gi_versions)
+  * [Oracle_database.restart_autonomous_database](#oracle_database.restart_autonomous_database)
   * [Oracle_database.restore_autonomous_database](#oracle_database.restore_autonomous_database)
+  * [Oracle_database.start_autonomous_database](#oracle_database.start_autonomous_database)
+  * [Oracle_database.stop_autonomous_database](#oracle_database.stop_autonomous_database)
   * [Quickstart](#quickstart)
 
 ## Before you begin
@@ -408,6 +411,23 @@ __Usage:__
 
 
 
+### Oracle_database.restart_autonomous_database
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-oracledatabase/samples/generated/v1/oracle_database.restart_autonomous_database.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-oracledatabase/samples/generated/v1/oracle_database.restart_autonomous_database.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-oracledatabase/samples/generated/v1/oracle_database.restart_autonomous_database.js`
+
+
+-----
+
+
+
+
 ### Oracle_database.restore_autonomous_database
 
 View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-oracledatabase/samples/generated/v1/oracle_database.restore_autonomous_database.js).
@@ -418,6 +438,40 @@ __Usage:__
 
 
 `node packages/google-cloud-oracledatabase/samples/generated/v1/oracle_database.restore_autonomous_database.js`
+
+
+-----
+
+
+
+
+### Oracle_database.start_autonomous_database
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-oracledatabase/samples/generated/v1/oracle_database.start_autonomous_database.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-oracledatabase/samples/generated/v1/oracle_database.start_autonomous_database.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-oracledatabase/samples/generated/v1/oracle_database.start_autonomous_database.js`
+
+
+-----
+
+
+
+
+### Oracle_database.stop_autonomous_database
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-oracledatabase/samples/generated/v1/oracle_database.stop_autonomous_database.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-oracledatabase/samples/generated/v1/oracle_database.stop_autonomous_database.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-oracledatabase/samples/generated/v1/oracle_database.stop_autonomous_database.js`
 
 
 -----

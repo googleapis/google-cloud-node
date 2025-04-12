@@ -404,6 +404,24 @@ export class OracleDatabaseClient {
     const restoreAutonomousDatabaseMetadata = protoFilesRoot.lookup(
       '.google.cloud.oracledatabase.v1.OperationMetadata'
     ) as gax.protobuf.Type;
+    const stopAutonomousDatabaseResponse = protoFilesRoot.lookup(
+      '.google.cloud.oracledatabase.v1.AutonomousDatabase'
+    ) as gax.protobuf.Type;
+    const stopAutonomousDatabaseMetadata = protoFilesRoot.lookup(
+      '.google.cloud.oracledatabase.v1.OperationMetadata'
+    ) as gax.protobuf.Type;
+    const startAutonomousDatabaseResponse = protoFilesRoot.lookup(
+      '.google.cloud.oracledatabase.v1.AutonomousDatabase'
+    ) as gax.protobuf.Type;
+    const startAutonomousDatabaseMetadata = protoFilesRoot.lookup(
+      '.google.cloud.oracledatabase.v1.OperationMetadata'
+    ) as gax.protobuf.Type;
+    const restartAutonomousDatabaseResponse = protoFilesRoot.lookup(
+      '.google.cloud.oracledatabase.v1.AutonomousDatabase'
+    ) as gax.protobuf.Type;
+    const restartAutonomousDatabaseMetadata = protoFilesRoot.lookup(
+      '.google.cloud.oracledatabase.v1.OperationMetadata'
+    ) as gax.protobuf.Type;
 
     this.descriptors.longrunning = {
       createCloudExadataInfrastructure:
@@ -461,6 +479,33 @@ export class OracleDatabaseClient {
         ),
         restoreAutonomousDatabaseMetadata.decode.bind(
           restoreAutonomousDatabaseMetadata
+        )
+      ),
+      stopAutonomousDatabase: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        stopAutonomousDatabaseResponse.decode.bind(
+          stopAutonomousDatabaseResponse
+        ),
+        stopAutonomousDatabaseMetadata.decode.bind(
+          stopAutonomousDatabaseMetadata
+        )
+      ),
+      startAutonomousDatabase: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        startAutonomousDatabaseResponse.decode.bind(
+          startAutonomousDatabaseResponse
+        ),
+        startAutonomousDatabaseMetadata.decode.bind(
+          startAutonomousDatabaseMetadata
+        )
+      ),
+      restartAutonomousDatabase: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        restartAutonomousDatabaseResponse.decode.bind(
+          restartAutonomousDatabaseResponse
+        ),
+        restartAutonomousDatabaseMetadata.decode.bind(
+          restartAutonomousDatabaseMetadata
         )
       ),
     };
@@ -537,6 +582,9 @@ export class OracleDatabaseClient {
       'listAutonomousDbVersions',
       'listAutonomousDatabaseCharacterSets',
       'listAutonomousDatabaseBackups',
+      'stopAutonomousDatabase',
+      'startAutonomousDatabase',
+      'restartAutonomousDatabase',
     ];
     for (const methodName of oracleDatabaseStubMethods) {
       const callPromise = this.oracleDatabaseStub.then(
@@ -2464,6 +2512,516 @@ export class OracleDatabaseClient {
     const decodeOperation = new this._gaxModule.Operation(
       operation,
       this.descriptors.longrunning.restoreAutonomousDatabase,
+      this._gaxModule.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.oracledatabase.v1.AutonomousDatabase,
+      protos.google.cloud.oracledatabase.v1.OperationMetadata
+    >;
+  }
+  /**
+   * Stops an Autonomous Database.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the Autonomous Database in the following format:
+   *   projects/{project}/locations/{location}/autonomousDatabases/{autonomous_database}.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/oracle_database.stop_autonomous_database.js</caption>
+   * region_tag:oracledatabase_v1_generated_OracleDatabase_StopAutonomousDatabase_async
+   */
+  stopAutonomousDatabase(
+    request?: protos.google.cloud.oracledatabase.v1.IStopAutonomousDatabaseRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.oracledatabase.v1.IAutonomousDatabase,
+        protos.google.cloud.oracledatabase.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
+  stopAutonomousDatabase(
+    request: protos.google.cloud.oracledatabase.v1.IStopAutonomousDatabaseRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.oracledatabase.v1.IAutonomousDatabase,
+        protos.google.cloud.oracledatabase.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  stopAutonomousDatabase(
+    request: protos.google.cloud.oracledatabase.v1.IStopAutonomousDatabaseRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.oracledatabase.v1.IAutonomousDatabase,
+        protos.google.cloud.oracledatabase.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  stopAutonomousDatabase(
+    request?: protos.google.cloud.oracledatabase.v1.IStopAutonomousDatabaseRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.oracledatabase.v1.IAutonomousDatabase,
+            protos.google.cloud.oracledatabase.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.oracledatabase.v1.IAutonomousDatabase,
+        protos.google.cloud.oracledatabase.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.oracledatabase.v1.IAutonomousDatabase,
+        protos.google.cloud.oracledatabase.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.oracledatabase.v1.IAutonomousDatabase,
+            protos.google.cloud.oracledatabase.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('stopAutonomousDatabase response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('stopAutonomousDatabase request %j', request);
+    return this.innerApiCalls
+      .stopAutonomousDatabase(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.oracledatabase.v1.IAutonomousDatabase,
+            protos.google.cloud.oracledatabase.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('stopAutonomousDatabase response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
+  }
+  /**
+   * Check the status of the long running operation returned by `stopAutonomousDatabase()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/oracle_database.stop_autonomous_database.js</caption>
+   * region_tag:oracledatabase_v1_generated_OracleDatabase_StopAutonomousDatabase_async
+   */
+  async checkStopAutonomousDatabaseProgress(
+    name: string
+  ): Promise<
+    LROperation<
+      protos.google.cloud.oracledatabase.v1.AutonomousDatabase,
+      protos.google.cloud.oracledatabase.v1.OperationMetadata
+    >
+  > {
+    this._log.info('stopAutonomousDatabase long-running');
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        {name}
+      );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.stopAutonomousDatabase,
+      this._gaxModule.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.oracledatabase.v1.AutonomousDatabase,
+      protos.google.cloud.oracledatabase.v1.OperationMetadata
+    >;
+  }
+  /**
+   * Starts an Autonomous Database.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the Autonomous Database in the following format:
+   *   projects/{project}/locations/{location}/autonomousDatabases/{autonomous_database}.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/oracle_database.start_autonomous_database.js</caption>
+   * region_tag:oracledatabase_v1_generated_OracleDatabase_StartAutonomousDatabase_async
+   */
+  startAutonomousDatabase(
+    request?: protos.google.cloud.oracledatabase.v1.IStartAutonomousDatabaseRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.oracledatabase.v1.IAutonomousDatabase,
+        protos.google.cloud.oracledatabase.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
+  startAutonomousDatabase(
+    request: protos.google.cloud.oracledatabase.v1.IStartAutonomousDatabaseRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.oracledatabase.v1.IAutonomousDatabase,
+        protos.google.cloud.oracledatabase.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  startAutonomousDatabase(
+    request: protos.google.cloud.oracledatabase.v1.IStartAutonomousDatabaseRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.oracledatabase.v1.IAutonomousDatabase,
+        protos.google.cloud.oracledatabase.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  startAutonomousDatabase(
+    request?: protos.google.cloud.oracledatabase.v1.IStartAutonomousDatabaseRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.oracledatabase.v1.IAutonomousDatabase,
+            protos.google.cloud.oracledatabase.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.oracledatabase.v1.IAutonomousDatabase,
+        protos.google.cloud.oracledatabase.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.oracledatabase.v1.IAutonomousDatabase,
+        protos.google.cloud.oracledatabase.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.oracledatabase.v1.IAutonomousDatabase,
+            protos.google.cloud.oracledatabase.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('startAutonomousDatabase response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('startAutonomousDatabase request %j', request);
+    return this.innerApiCalls
+      .startAutonomousDatabase(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.oracledatabase.v1.IAutonomousDatabase,
+            protos.google.cloud.oracledatabase.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('startAutonomousDatabase response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
+  }
+  /**
+   * Check the status of the long running operation returned by `startAutonomousDatabase()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/oracle_database.start_autonomous_database.js</caption>
+   * region_tag:oracledatabase_v1_generated_OracleDatabase_StartAutonomousDatabase_async
+   */
+  async checkStartAutonomousDatabaseProgress(
+    name: string
+  ): Promise<
+    LROperation<
+      protos.google.cloud.oracledatabase.v1.AutonomousDatabase,
+      protos.google.cloud.oracledatabase.v1.OperationMetadata
+    >
+  > {
+    this._log.info('startAutonomousDatabase long-running');
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        {name}
+      );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.startAutonomousDatabase,
+      this._gaxModule.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.oracledatabase.v1.AutonomousDatabase,
+      protos.google.cloud.oracledatabase.v1.OperationMetadata
+    >;
+  }
+  /**
+   * Restarts an Autonomous Database.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the Autonomous Database in the following format:
+   *   projects/{project}/locations/{location}/autonomousDatabases/{autonomous_database}.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/oracle_database.restart_autonomous_database.js</caption>
+   * region_tag:oracledatabase_v1_generated_OracleDatabase_RestartAutonomousDatabase_async
+   */
+  restartAutonomousDatabase(
+    request?: protos.google.cloud.oracledatabase.v1.IRestartAutonomousDatabaseRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.oracledatabase.v1.IAutonomousDatabase,
+        protos.google.cloud.oracledatabase.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
+  restartAutonomousDatabase(
+    request: protos.google.cloud.oracledatabase.v1.IRestartAutonomousDatabaseRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.oracledatabase.v1.IAutonomousDatabase,
+        protos.google.cloud.oracledatabase.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  restartAutonomousDatabase(
+    request: protos.google.cloud.oracledatabase.v1.IRestartAutonomousDatabaseRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.oracledatabase.v1.IAutonomousDatabase,
+        protos.google.cloud.oracledatabase.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  restartAutonomousDatabase(
+    request?: protos.google.cloud.oracledatabase.v1.IRestartAutonomousDatabaseRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.oracledatabase.v1.IAutonomousDatabase,
+            protos.google.cloud.oracledatabase.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.oracledatabase.v1.IAutonomousDatabase,
+        protos.google.cloud.oracledatabase.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.oracledatabase.v1.IAutonomousDatabase,
+        protos.google.cloud.oracledatabase.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.oracledatabase.v1.IAutonomousDatabase,
+            protos.google.cloud.oracledatabase.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('restartAutonomousDatabase response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('restartAutonomousDatabase request %j', request);
+    return this.innerApiCalls
+      .restartAutonomousDatabase(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.oracledatabase.v1.IAutonomousDatabase,
+            protos.google.cloud.oracledatabase.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('restartAutonomousDatabase response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
+  }
+  /**
+   * Check the status of the long running operation returned by `restartAutonomousDatabase()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/oracle_database.restart_autonomous_database.js</caption>
+   * region_tag:oracledatabase_v1_generated_OracleDatabase_RestartAutonomousDatabase_async
+   */
+  async checkRestartAutonomousDatabaseProgress(
+    name: string
+  ): Promise<
+    LROperation<
+      protos.google.cloud.oracledatabase.v1.AutonomousDatabase,
+      protos.google.cloud.oracledatabase.v1.OperationMetadata
+    >
+  > {
+    this._log.info('restartAutonomousDatabase long-running');
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        {name}
+      );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.restartAutonomousDatabase,
       this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
