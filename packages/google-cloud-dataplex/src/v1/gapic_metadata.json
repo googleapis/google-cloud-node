@@ -303,6 +303,74 @@
         }
       }
     },
+    "CmekService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "CmekServiceClient",
+          "rpcs": {
+            "GetEncryptionConfig": {
+              "methods": [
+                "getEncryptionConfig"
+              ]
+            },
+            "CreateEncryptionConfig": {
+              "methods": [
+                "createEncryptionConfig"
+              ]
+            },
+            "UpdateEncryptionConfig": {
+              "methods": [
+                "updateEncryptionConfig"
+              ]
+            },
+            "DeleteEncryptionConfig": {
+              "methods": [
+                "deleteEncryptionConfig"
+              ]
+            },
+            "ListEncryptionConfigs": {
+              "methods": [
+                "listEncryptionConfigs",
+                "listEncryptionConfigsStream",
+                "listEncryptionConfigsAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "CmekServiceClient",
+          "rpcs": {
+            "GetEncryptionConfig": {
+              "methods": [
+                "getEncryptionConfig"
+              ]
+            },
+            "CreateEncryptionConfig": {
+              "methods": [
+                "createEncryptionConfig"
+              ]
+            },
+            "UpdateEncryptionConfig": {
+              "methods": [
+                "updateEncryptionConfig"
+              ]
+            },
+            "DeleteEncryptionConfig": {
+              "methods": [
+                "deleteEncryptionConfig"
+              ]
+            },
+            "ListEncryptionConfigs": {
+              "methods": [
+                "listEncryptionConfigs",
+                "listEncryptionConfigsStream",
+                "listEncryptionConfigsAsync"
+              ]
+            }
+          }
+        }
+      }
+    },
     "ContentService": {
       "clients": {
         "grpc": {

@@ -10943,8 +10943,14 @@ export namespace google {
                     /** MetadataJob importSpec */
                     importSpec?: (google.cloud.dataplex.v1.MetadataJob.IImportJobSpec|null);
 
+                    /** MetadataJob exportSpec */
+                    exportSpec?: (google.cloud.dataplex.v1.MetadataJob.IExportJobSpec|null);
+
                     /** MetadataJob importResult */
                     importResult?: (google.cloud.dataplex.v1.MetadataJob.IImportJobResult|null);
+
+                    /** MetadataJob exportResult */
+                    exportResult?: (google.cloud.dataplex.v1.MetadataJob.IExportJobResult|null);
 
                     /** MetadataJob status */
                     status?: (google.cloud.dataplex.v1.MetadataJob.IStatus|null);
@@ -10980,17 +10986,23 @@ export namespace google {
                     /** MetadataJob importSpec. */
                     public importSpec?: (google.cloud.dataplex.v1.MetadataJob.IImportJobSpec|null);
 
+                    /** MetadataJob exportSpec. */
+                    public exportSpec?: (google.cloud.dataplex.v1.MetadataJob.IExportJobSpec|null);
+
                     /** MetadataJob importResult. */
                     public importResult?: (google.cloud.dataplex.v1.MetadataJob.IImportJobResult|null);
+
+                    /** MetadataJob exportResult. */
+                    public exportResult?: (google.cloud.dataplex.v1.MetadataJob.IExportJobResult|null);
 
                     /** MetadataJob status. */
                     public status?: (google.cloud.dataplex.v1.MetadataJob.IStatus|null);
 
                     /** MetadataJob spec. */
-                    public spec?: "importSpec";
+                    public spec?: ("importSpec"|"exportSpec");
 
                     /** MetadataJob result. */
-                    public result?: "importResult";
+                    public result?: ("importResult"|"exportResult");
 
                     /**
                      * Creates a new MetadataJob instance using the specified properties.
@@ -11193,6 +11205,109 @@ export namespace google {
 
                         /**
                          * Gets the default type url for ImportJobResult
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of an ExportJobResult. */
+                    interface IExportJobResult {
+
+                        /** ExportJobResult exportedEntries */
+                        exportedEntries?: (number|Long|string|null);
+
+                        /** ExportJobResult errorMessage */
+                        errorMessage?: (string|null);
+                    }
+
+                    /** Represents an ExportJobResult. */
+                    class ExportJobResult implements IExportJobResult {
+
+                        /**
+                         * Constructs a new ExportJobResult.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.dataplex.v1.MetadataJob.IExportJobResult);
+
+                        /** ExportJobResult exportedEntries. */
+                        public exportedEntries: (number|Long|string);
+
+                        /** ExportJobResult errorMessage. */
+                        public errorMessage: string;
+
+                        /**
+                         * Creates a new ExportJobResult instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns ExportJobResult instance
+                         */
+                        public static create(properties?: google.cloud.dataplex.v1.MetadataJob.IExportJobResult): google.cloud.dataplex.v1.MetadataJob.ExportJobResult;
+
+                        /**
+                         * Encodes the specified ExportJobResult message. Does not implicitly {@link google.cloud.dataplex.v1.MetadataJob.ExportJobResult.verify|verify} messages.
+                         * @param message ExportJobResult message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.dataplex.v1.MetadataJob.IExportJobResult, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified ExportJobResult message, length delimited. Does not implicitly {@link google.cloud.dataplex.v1.MetadataJob.ExportJobResult.verify|verify} messages.
+                         * @param message ExportJobResult message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.dataplex.v1.MetadataJob.IExportJobResult, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes an ExportJobResult message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns ExportJobResult
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dataplex.v1.MetadataJob.ExportJobResult;
+
+                        /**
+                         * Decodes an ExportJobResult message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns ExportJobResult
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dataplex.v1.MetadataJob.ExportJobResult;
+
+                        /**
+                         * Verifies an ExportJobResult message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates an ExportJobResult message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns ExportJobResult
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.dataplex.v1.MetadataJob.ExportJobResult;
+
+                        /**
+                         * Creates a plain object from an ExportJobResult message. Also converts values to other types if specified.
+                         * @param message ExportJobResult
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.dataplex.v1.MetadataJob.ExportJobResult, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this ExportJobResult to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for ExportJobResult
                          * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                          * @returns The default type url
                          */
@@ -11453,10 +11568,238 @@ export namespace google {
                         }
                     }
 
+                    /** Properties of an ExportJobSpec. */
+                    interface IExportJobSpec {
+
+                        /** ExportJobSpec scope */
+                        scope?: (google.cloud.dataplex.v1.MetadataJob.ExportJobSpec.IExportJobScope|null);
+
+                        /** ExportJobSpec outputPath */
+                        outputPath?: (string|null);
+                    }
+
+                    /** Represents an ExportJobSpec. */
+                    class ExportJobSpec implements IExportJobSpec {
+
+                        /**
+                         * Constructs a new ExportJobSpec.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.dataplex.v1.MetadataJob.IExportJobSpec);
+
+                        /** ExportJobSpec scope. */
+                        public scope?: (google.cloud.dataplex.v1.MetadataJob.ExportJobSpec.IExportJobScope|null);
+
+                        /** ExportJobSpec outputPath. */
+                        public outputPath: string;
+
+                        /**
+                         * Creates a new ExportJobSpec instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns ExportJobSpec instance
+                         */
+                        public static create(properties?: google.cloud.dataplex.v1.MetadataJob.IExportJobSpec): google.cloud.dataplex.v1.MetadataJob.ExportJobSpec;
+
+                        /**
+                         * Encodes the specified ExportJobSpec message. Does not implicitly {@link google.cloud.dataplex.v1.MetadataJob.ExportJobSpec.verify|verify} messages.
+                         * @param message ExportJobSpec message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.dataplex.v1.MetadataJob.IExportJobSpec, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified ExportJobSpec message, length delimited. Does not implicitly {@link google.cloud.dataplex.v1.MetadataJob.ExportJobSpec.verify|verify} messages.
+                         * @param message ExportJobSpec message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.dataplex.v1.MetadataJob.IExportJobSpec, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes an ExportJobSpec message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns ExportJobSpec
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dataplex.v1.MetadataJob.ExportJobSpec;
+
+                        /**
+                         * Decodes an ExportJobSpec message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns ExportJobSpec
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dataplex.v1.MetadataJob.ExportJobSpec;
+
+                        /**
+                         * Verifies an ExportJobSpec message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates an ExportJobSpec message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns ExportJobSpec
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.dataplex.v1.MetadataJob.ExportJobSpec;
+
+                        /**
+                         * Creates a plain object from an ExportJobSpec message. Also converts values to other types if specified.
+                         * @param message ExportJobSpec
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.dataplex.v1.MetadataJob.ExportJobSpec, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this ExportJobSpec to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for ExportJobSpec
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    namespace ExportJobSpec {
+
+                        /** Properties of an ExportJobScope. */
+                        interface IExportJobScope {
+
+                            /** ExportJobScope organizationLevel */
+                            organizationLevel?: (boolean|null);
+
+                            /** ExportJobScope projects */
+                            projects?: (string[]|null);
+
+                            /** ExportJobScope entryGroups */
+                            entryGroups?: (string[]|null);
+
+                            /** ExportJobScope entryTypes */
+                            entryTypes?: (string[]|null);
+
+                            /** ExportJobScope aspectTypes */
+                            aspectTypes?: (string[]|null);
+                        }
+
+                        /** Represents an ExportJobScope. */
+                        class ExportJobScope implements IExportJobScope {
+
+                            /**
+                             * Constructs a new ExportJobScope.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.dataplex.v1.MetadataJob.ExportJobSpec.IExportJobScope);
+
+                            /** ExportJobScope organizationLevel. */
+                            public organizationLevel: boolean;
+
+                            /** ExportJobScope projects. */
+                            public projects: string[];
+
+                            /** ExportJobScope entryGroups. */
+                            public entryGroups: string[];
+
+                            /** ExportJobScope entryTypes. */
+                            public entryTypes: string[];
+
+                            /** ExportJobScope aspectTypes. */
+                            public aspectTypes: string[];
+
+                            /**
+                             * Creates a new ExportJobScope instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns ExportJobScope instance
+                             */
+                            public static create(properties?: google.cloud.dataplex.v1.MetadataJob.ExportJobSpec.IExportJobScope): google.cloud.dataplex.v1.MetadataJob.ExportJobSpec.ExportJobScope;
+
+                            /**
+                             * Encodes the specified ExportJobScope message. Does not implicitly {@link google.cloud.dataplex.v1.MetadataJob.ExportJobSpec.ExportJobScope.verify|verify} messages.
+                             * @param message ExportJobScope message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.dataplex.v1.MetadataJob.ExportJobSpec.IExportJobScope, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified ExportJobScope message, length delimited. Does not implicitly {@link google.cloud.dataplex.v1.MetadataJob.ExportJobSpec.ExportJobScope.verify|verify} messages.
+                             * @param message ExportJobScope message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.dataplex.v1.MetadataJob.ExportJobSpec.IExportJobScope, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes an ExportJobScope message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns ExportJobScope
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dataplex.v1.MetadataJob.ExportJobSpec.ExportJobScope;
+
+                            /**
+                             * Decodes an ExportJobScope message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns ExportJobScope
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dataplex.v1.MetadataJob.ExportJobSpec.ExportJobScope;
+
+                            /**
+                             * Verifies an ExportJobScope message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates an ExportJobScope message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns ExportJobScope
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.dataplex.v1.MetadataJob.ExportJobSpec.ExportJobScope;
+
+                            /**
+                             * Creates a plain object from an ExportJobScope message. Also converts values to other types if specified.
+                             * @param message ExportJobScope
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.dataplex.v1.MetadataJob.ExportJobSpec.ExportJobScope, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this ExportJobScope to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for ExportJobScope
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+                    }
+
                     /** Type enum. */
                     enum Type {
                         TYPE_UNSPECIFIED = 0,
-                        IMPORT = 1
+                        IMPORT = 1,
+                        EXPORT = 2
                     }
 
                     /** Properties of a Status. */
@@ -18369,6 +18712,1034 @@ export namespace google {
                     }
                 }
 
+                /** Represents a CmekService */
+                class CmekService extends $protobuf.rpc.Service {
+
+                    /**
+                     * Constructs a new CmekService service.
+                     * @param rpcImpl RPC implementation
+                     * @param [requestDelimited=false] Whether requests are length-delimited
+                     * @param [responseDelimited=false] Whether responses are length-delimited
+                     */
+                    constructor(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean);
+
+                    /**
+                     * Creates new CmekService service using the specified rpc implementation.
+                     * @param rpcImpl RPC implementation
+                     * @param [requestDelimited=false] Whether requests are length-delimited
+                     * @param [responseDelimited=false] Whether responses are length-delimited
+                     * @returns RPC service. Useful where requests and/or responses are streamed.
+                     */
+                    public static create(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean): CmekService;
+
+                    /**
+                     * Calls CreateEncryptionConfig.
+                     * @param request CreateEncryptionConfigRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public createEncryptionConfig(request: google.cloud.dataplex.v1.ICreateEncryptionConfigRequest, callback: google.cloud.dataplex.v1.CmekService.CreateEncryptionConfigCallback): void;
+
+                    /**
+                     * Calls CreateEncryptionConfig.
+                     * @param request CreateEncryptionConfigRequest message or plain object
+                     * @returns Promise
+                     */
+                    public createEncryptionConfig(request: google.cloud.dataplex.v1.ICreateEncryptionConfigRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls UpdateEncryptionConfig.
+                     * @param request UpdateEncryptionConfigRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public updateEncryptionConfig(request: google.cloud.dataplex.v1.IUpdateEncryptionConfigRequest, callback: google.cloud.dataplex.v1.CmekService.UpdateEncryptionConfigCallback): void;
+
+                    /**
+                     * Calls UpdateEncryptionConfig.
+                     * @param request UpdateEncryptionConfigRequest message or plain object
+                     * @returns Promise
+                     */
+                    public updateEncryptionConfig(request: google.cloud.dataplex.v1.IUpdateEncryptionConfigRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls DeleteEncryptionConfig.
+                     * @param request DeleteEncryptionConfigRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public deleteEncryptionConfig(request: google.cloud.dataplex.v1.IDeleteEncryptionConfigRequest, callback: google.cloud.dataplex.v1.CmekService.DeleteEncryptionConfigCallback): void;
+
+                    /**
+                     * Calls DeleteEncryptionConfig.
+                     * @param request DeleteEncryptionConfigRequest message or plain object
+                     * @returns Promise
+                     */
+                    public deleteEncryptionConfig(request: google.cloud.dataplex.v1.IDeleteEncryptionConfigRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls ListEncryptionConfigs.
+                     * @param request ListEncryptionConfigsRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ListEncryptionConfigsResponse
+                     */
+                    public listEncryptionConfigs(request: google.cloud.dataplex.v1.IListEncryptionConfigsRequest, callback: google.cloud.dataplex.v1.CmekService.ListEncryptionConfigsCallback): void;
+
+                    /**
+                     * Calls ListEncryptionConfigs.
+                     * @param request ListEncryptionConfigsRequest message or plain object
+                     * @returns Promise
+                     */
+                    public listEncryptionConfigs(request: google.cloud.dataplex.v1.IListEncryptionConfigsRequest): Promise<google.cloud.dataplex.v1.ListEncryptionConfigsResponse>;
+
+                    /**
+                     * Calls GetEncryptionConfig.
+                     * @param request GetEncryptionConfigRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and EncryptionConfig
+                     */
+                    public getEncryptionConfig(request: google.cloud.dataplex.v1.IGetEncryptionConfigRequest, callback: google.cloud.dataplex.v1.CmekService.GetEncryptionConfigCallback): void;
+
+                    /**
+                     * Calls GetEncryptionConfig.
+                     * @param request GetEncryptionConfigRequest message or plain object
+                     * @returns Promise
+                     */
+                    public getEncryptionConfig(request: google.cloud.dataplex.v1.IGetEncryptionConfigRequest): Promise<google.cloud.dataplex.v1.EncryptionConfig>;
+                }
+
+                namespace CmekService {
+
+                    /**
+                     * Callback as used by {@link google.cloud.dataplex.v1.CmekService|createEncryptionConfig}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type CreateEncryptionConfigCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.dataplex.v1.CmekService|updateEncryptionConfig}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type UpdateEncryptionConfigCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.dataplex.v1.CmekService|deleteEncryptionConfig}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type DeleteEncryptionConfigCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.dataplex.v1.CmekService|listEncryptionConfigs}.
+                     * @param error Error, if any
+                     * @param [response] ListEncryptionConfigsResponse
+                     */
+                    type ListEncryptionConfigsCallback = (error: (Error|null), response?: google.cloud.dataplex.v1.ListEncryptionConfigsResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.dataplex.v1.CmekService|getEncryptionConfig}.
+                     * @param error Error, if any
+                     * @param [response] EncryptionConfig
+                     */
+                    type GetEncryptionConfigCallback = (error: (Error|null), response?: google.cloud.dataplex.v1.EncryptionConfig) => void;
+                }
+
+                /** Properties of an EncryptionConfig. */
+                interface IEncryptionConfig {
+
+                    /** EncryptionConfig name */
+                    name?: (string|null);
+
+                    /** EncryptionConfig key */
+                    key?: (string|null);
+
+                    /** EncryptionConfig createTime */
+                    createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** EncryptionConfig updateTime */
+                    updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** EncryptionConfig encryptionState */
+                    encryptionState?: (google.cloud.dataplex.v1.EncryptionConfig.EncryptionState|keyof typeof google.cloud.dataplex.v1.EncryptionConfig.EncryptionState|null);
+
+                    /** EncryptionConfig etag */
+                    etag?: (string|null);
+
+                    /** EncryptionConfig failureDetails */
+                    failureDetails?: (google.cloud.dataplex.v1.EncryptionConfig.IFailureDetails|null);
+                }
+
+                /** Represents an EncryptionConfig. */
+                class EncryptionConfig implements IEncryptionConfig {
+
+                    /**
+                     * Constructs a new EncryptionConfig.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.dataplex.v1.IEncryptionConfig);
+
+                    /** EncryptionConfig name. */
+                    public name: string;
+
+                    /** EncryptionConfig key. */
+                    public key: string;
+
+                    /** EncryptionConfig createTime. */
+                    public createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** EncryptionConfig updateTime. */
+                    public updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** EncryptionConfig encryptionState. */
+                    public encryptionState: (google.cloud.dataplex.v1.EncryptionConfig.EncryptionState|keyof typeof google.cloud.dataplex.v1.EncryptionConfig.EncryptionState);
+
+                    /** EncryptionConfig etag. */
+                    public etag: string;
+
+                    /** EncryptionConfig failureDetails. */
+                    public failureDetails?: (google.cloud.dataplex.v1.EncryptionConfig.IFailureDetails|null);
+
+                    /**
+                     * Creates a new EncryptionConfig instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns EncryptionConfig instance
+                     */
+                    public static create(properties?: google.cloud.dataplex.v1.IEncryptionConfig): google.cloud.dataplex.v1.EncryptionConfig;
+
+                    /**
+                     * Encodes the specified EncryptionConfig message. Does not implicitly {@link google.cloud.dataplex.v1.EncryptionConfig.verify|verify} messages.
+                     * @param message EncryptionConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.dataplex.v1.IEncryptionConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified EncryptionConfig message, length delimited. Does not implicitly {@link google.cloud.dataplex.v1.EncryptionConfig.verify|verify} messages.
+                     * @param message EncryptionConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.dataplex.v1.IEncryptionConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an EncryptionConfig message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns EncryptionConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dataplex.v1.EncryptionConfig;
+
+                    /**
+                     * Decodes an EncryptionConfig message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns EncryptionConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dataplex.v1.EncryptionConfig;
+
+                    /**
+                     * Verifies an EncryptionConfig message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an EncryptionConfig message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns EncryptionConfig
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.dataplex.v1.EncryptionConfig;
+
+                    /**
+                     * Creates a plain object from an EncryptionConfig message. Also converts values to other types if specified.
+                     * @param message EncryptionConfig
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.dataplex.v1.EncryptionConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this EncryptionConfig to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for EncryptionConfig
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace EncryptionConfig {
+
+                    /** EncryptionState enum. */
+                    enum EncryptionState {
+                        ENCRYPTION_STATE_UNSPECIFIED = 0,
+                        ENCRYPTING = 1,
+                        COMPLETED = 2,
+                        FAILED = 3
+                    }
+
+                    /** Properties of a FailureDetails. */
+                    interface IFailureDetails {
+
+                        /** FailureDetails errorCode */
+                        errorCode?: (google.cloud.dataplex.v1.EncryptionConfig.FailureDetails.ErrorCode|keyof typeof google.cloud.dataplex.v1.EncryptionConfig.FailureDetails.ErrorCode|null);
+
+                        /** FailureDetails errorMessage */
+                        errorMessage?: (string|null);
+                    }
+
+                    /** Represents a FailureDetails. */
+                    class FailureDetails implements IFailureDetails {
+
+                        /**
+                         * Constructs a new FailureDetails.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.dataplex.v1.EncryptionConfig.IFailureDetails);
+
+                        /** FailureDetails errorCode. */
+                        public errorCode: (google.cloud.dataplex.v1.EncryptionConfig.FailureDetails.ErrorCode|keyof typeof google.cloud.dataplex.v1.EncryptionConfig.FailureDetails.ErrorCode);
+
+                        /** FailureDetails errorMessage. */
+                        public errorMessage: string;
+
+                        /**
+                         * Creates a new FailureDetails instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns FailureDetails instance
+                         */
+                        public static create(properties?: google.cloud.dataplex.v1.EncryptionConfig.IFailureDetails): google.cloud.dataplex.v1.EncryptionConfig.FailureDetails;
+
+                        /**
+                         * Encodes the specified FailureDetails message. Does not implicitly {@link google.cloud.dataplex.v1.EncryptionConfig.FailureDetails.verify|verify} messages.
+                         * @param message FailureDetails message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.dataplex.v1.EncryptionConfig.IFailureDetails, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified FailureDetails message, length delimited. Does not implicitly {@link google.cloud.dataplex.v1.EncryptionConfig.FailureDetails.verify|verify} messages.
+                         * @param message FailureDetails message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.dataplex.v1.EncryptionConfig.IFailureDetails, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a FailureDetails message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns FailureDetails
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dataplex.v1.EncryptionConfig.FailureDetails;
+
+                        /**
+                         * Decodes a FailureDetails message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns FailureDetails
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dataplex.v1.EncryptionConfig.FailureDetails;
+
+                        /**
+                         * Verifies a FailureDetails message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a FailureDetails message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns FailureDetails
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.dataplex.v1.EncryptionConfig.FailureDetails;
+
+                        /**
+                         * Creates a plain object from a FailureDetails message. Also converts values to other types if specified.
+                         * @param message FailureDetails
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.dataplex.v1.EncryptionConfig.FailureDetails, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this FailureDetails to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for FailureDetails
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    namespace FailureDetails {
+
+                        /** ErrorCode enum. */
+                        enum ErrorCode {
+                            UNKNOWN = 0,
+                            INTERNAL_ERROR = 1,
+                            REQUIRE_USER_ACTION = 2
+                        }
+                    }
+                }
+
+                /** Properties of a CreateEncryptionConfigRequest. */
+                interface ICreateEncryptionConfigRequest {
+
+                    /** CreateEncryptionConfigRequest parent */
+                    parent?: (string|null);
+
+                    /** CreateEncryptionConfigRequest encryptionConfigId */
+                    encryptionConfigId?: (string|null);
+
+                    /** CreateEncryptionConfigRequest encryptionConfig */
+                    encryptionConfig?: (google.cloud.dataplex.v1.IEncryptionConfig|null);
+                }
+
+                /** Represents a CreateEncryptionConfigRequest. */
+                class CreateEncryptionConfigRequest implements ICreateEncryptionConfigRequest {
+
+                    /**
+                     * Constructs a new CreateEncryptionConfigRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.dataplex.v1.ICreateEncryptionConfigRequest);
+
+                    /** CreateEncryptionConfigRequest parent. */
+                    public parent: string;
+
+                    /** CreateEncryptionConfigRequest encryptionConfigId. */
+                    public encryptionConfigId: string;
+
+                    /** CreateEncryptionConfigRequest encryptionConfig. */
+                    public encryptionConfig?: (google.cloud.dataplex.v1.IEncryptionConfig|null);
+
+                    /**
+                     * Creates a new CreateEncryptionConfigRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CreateEncryptionConfigRequest instance
+                     */
+                    public static create(properties?: google.cloud.dataplex.v1.ICreateEncryptionConfigRequest): google.cloud.dataplex.v1.CreateEncryptionConfigRequest;
+
+                    /**
+                     * Encodes the specified CreateEncryptionConfigRequest message. Does not implicitly {@link google.cloud.dataplex.v1.CreateEncryptionConfigRequest.verify|verify} messages.
+                     * @param message CreateEncryptionConfigRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.dataplex.v1.ICreateEncryptionConfigRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CreateEncryptionConfigRequest message, length delimited. Does not implicitly {@link google.cloud.dataplex.v1.CreateEncryptionConfigRequest.verify|verify} messages.
+                     * @param message CreateEncryptionConfigRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.dataplex.v1.ICreateEncryptionConfigRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CreateEncryptionConfigRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CreateEncryptionConfigRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dataplex.v1.CreateEncryptionConfigRequest;
+
+                    /**
+                     * Decodes a CreateEncryptionConfigRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CreateEncryptionConfigRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dataplex.v1.CreateEncryptionConfigRequest;
+
+                    /**
+                     * Verifies a CreateEncryptionConfigRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CreateEncryptionConfigRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CreateEncryptionConfigRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.dataplex.v1.CreateEncryptionConfigRequest;
+
+                    /**
+                     * Creates a plain object from a CreateEncryptionConfigRequest message. Also converts values to other types if specified.
+                     * @param message CreateEncryptionConfigRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.dataplex.v1.CreateEncryptionConfigRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CreateEncryptionConfigRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for CreateEncryptionConfigRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a GetEncryptionConfigRequest. */
+                interface IGetEncryptionConfigRequest {
+
+                    /** GetEncryptionConfigRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a GetEncryptionConfigRequest. */
+                class GetEncryptionConfigRequest implements IGetEncryptionConfigRequest {
+
+                    /**
+                     * Constructs a new GetEncryptionConfigRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.dataplex.v1.IGetEncryptionConfigRequest);
+
+                    /** GetEncryptionConfigRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new GetEncryptionConfigRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GetEncryptionConfigRequest instance
+                     */
+                    public static create(properties?: google.cloud.dataplex.v1.IGetEncryptionConfigRequest): google.cloud.dataplex.v1.GetEncryptionConfigRequest;
+
+                    /**
+                     * Encodes the specified GetEncryptionConfigRequest message. Does not implicitly {@link google.cloud.dataplex.v1.GetEncryptionConfigRequest.verify|verify} messages.
+                     * @param message GetEncryptionConfigRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.dataplex.v1.IGetEncryptionConfigRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GetEncryptionConfigRequest message, length delimited. Does not implicitly {@link google.cloud.dataplex.v1.GetEncryptionConfigRequest.verify|verify} messages.
+                     * @param message GetEncryptionConfigRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.dataplex.v1.IGetEncryptionConfigRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GetEncryptionConfigRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GetEncryptionConfigRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dataplex.v1.GetEncryptionConfigRequest;
+
+                    /**
+                     * Decodes a GetEncryptionConfigRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GetEncryptionConfigRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dataplex.v1.GetEncryptionConfigRequest;
+
+                    /**
+                     * Verifies a GetEncryptionConfigRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GetEncryptionConfigRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GetEncryptionConfigRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.dataplex.v1.GetEncryptionConfigRequest;
+
+                    /**
+                     * Creates a plain object from a GetEncryptionConfigRequest message. Also converts values to other types if specified.
+                     * @param message GetEncryptionConfigRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.dataplex.v1.GetEncryptionConfigRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GetEncryptionConfigRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GetEncryptionConfigRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an UpdateEncryptionConfigRequest. */
+                interface IUpdateEncryptionConfigRequest {
+
+                    /** UpdateEncryptionConfigRequest encryptionConfig */
+                    encryptionConfig?: (google.cloud.dataplex.v1.IEncryptionConfig|null);
+
+                    /** UpdateEncryptionConfigRequest updateMask */
+                    updateMask?: (google.protobuf.IFieldMask|null);
+                }
+
+                /** Represents an UpdateEncryptionConfigRequest. */
+                class UpdateEncryptionConfigRequest implements IUpdateEncryptionConfigRequest {
+
+                    /**
+                     * Constructs a new UpdateEncryptionConfigRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.dataplex.v1.IUpdateEncryptionConfigRequest);
+
+                    /** UpdateEncryptionConfigRequest encryptionConfig. */
+                    public encryptionConfig?: (google.cloud.dataplex.v1.IEncryptionConfig|null);
+
+                    /** UpdateEncryptionConfigRequest updateMask. */
+                    public updateMask?: (google.protobuf.IFieldMask|null);
+
+                    /**
+                     * Creates a new UpdateEncryptionConfigRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns UpdateEncryptionConfigRequest instance
+                     */
+                    public static create(properties?: google.cloud.dataplex.v1.IUpdateEncryptionConfigRequest): google.cloud.dataplex.v1.UpdateEncryptionConfigRequest;
+
+                    /**
+                     * Encodes the specified UpdateEncryptionConfigRequest message. Does not implicitly {@link google.cloud.dataplex.v1.UpdateEncryptionConfigRequest.verify|verify} messages.
+                     * @param message UpdateEncryptionConfigRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.dataplex.v1.IUpdateEncryptionConfigRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified UpdateEncryptionConfigRequest message, length delimited. Does not implicitly {@link google.cloud.dataplex.v1.UpdateEncryptionConfigRequest.verify|verify} messages.
+                     * @param message UpdateEncryptionConfigRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.dataplex.v1.IUpdateEncryptionConfigRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an UpdateEncryptionConfigRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns UpdateEncryptionConfigRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dataplex.v1.UpdateEncryptionConfigRequest;
+
+                    /**
+                     * Decodes an UpdateEncryptionConfigRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns UpdateEncryptionConfigRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dataplex.v1.UpdateEncryptionConfigRequest;
+
+                    /**
+                     * Verifies an UpdateEncryptionConfigRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an UpdateEncryptionConfigRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns UpdateEncryptionConfigRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.dataplex.v1.UpdateEncryptionConfigRequest;
+
+                    /**
+                     * Creates a plain object from an UpdateEncryptionConfigRequest message. Also converts values to other types if specified.
+                     * @param message UpdateEncryptionConfigRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.dataplex.v1.UpdateEncryptionConfigRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this UpdateEncryptionConfigRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for UpdateEncryptionConfigRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a DeleteEncryptionConfigRequest. */
+                interface IDeleteEncryptionConfigRequest {
+
+                    /** DeleteEncryptionConfigRequest name */
+                    name?: (string|null);
+
+                    /** DeleteEncryptionConfigRequest etag */
+                    etag?: (string|null);
+                }
+
+                /** Represents a DeleteEncryptionConfigRequest. */
+                class DeleteEncryptionConfigRequest implements IDeleteEncryptionConfigRequest {
+
+                    /**
+                     * Constructs a new DeleteEncryptionConfigRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.dataplex.v1.IDeleteEncryptionConfigRequest);
+
+                    /** DeleteEncryptionConfigRequest name. */
+                    public name: string;
+
+                    /** DeleteEncryptionConfigRequest etag. */
+                    public etag: string;
+
+                    /**
+                     * Creates a new DeleteEncryptionConfigRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DeleteEncryptionConfigRequest instance
+                     */
+                    public static create(properties?: google.cloud.dataplex.v1.IDeleteEncryptionConfigRequest): google.cloud.dataplex.v1.DeleteEncryptionConfigRequest;
+
+                    /**
+                     * Encodes the specified DeleteEncryptionConfigRequest message. Does not implicitly {@link google.cloud.dataplex.v1.DeleteEncryptionConfigRequest.verify|verify} messages.
+                     * @param message DeleteEncryptionConfigRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.dataplex.v1.IDeleteEncryptionConfigRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DeleteEncryptionConfigRequest message, length delimited. Does not implicitly {@link google.cloud.dataplex.v1.DeleteEncryptionConfigRequest.verify|verify} messages.
+                     * @param message DeleteEncryptionConfigRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.dataplex.v1.IDeleteEncryptionConfigRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DeleteEncryptionConfigRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DeleteEncryptionConfigRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dataplex.v1.DeleteEncryptionConfigRequest;
+
+                    /**
+                     * Decodes a DeleteEncryptionConfigRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DeleteEncryptionConfigRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dataplex.v1.DeleteEncryptionConfigRequest;
+
+                    /**
+                     * Verifies a DeleteEncryptionConfigRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DeleteEncryptionConfigRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DeleteEncryptionConfigRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.dataplex.v1.DeleteEncryptionConfigRequest;
+
+                    /**
+                     * Creates a plain object from a DeleteEncryptionConfigRequest message. Also converts values to other types if specified.
+                     * @param message DeleteEncryptionConfigRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.dataplex.v1.DeleteEncryptionConfigRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DeleteEncryptionConfigRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DeleteEncryptionConfigRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListEncryptionConfigsRequest. */
+                interface IListEncryptionConfigsRequest {
+
+                    /** ListEncryptionConfigsRequest parent */
+                    parent?: (string|null);
+
+                    /** ListEncryptionConfigsRequest pageSize */
+                    pageSize?: (number|null);
+
+                    /** ListEncryptionConfigsRequest pageToken */
+                    pageToken?: (string|null);
+
+                    /** ListEncryptionConfigsRequest filter */
+                    filter?: (string|null);
+
+                    /** ListEncryptionConfigsRequest orderBy */
+                    orderBy?: (string|null);
+                }
+
+                /** Represents a ListEncryptionConfigsRequest. */
+                class ListEncryptionConfigsRequest implements IListEncryptionConfigsRequest {
+
+                    /**
+                     * Constructs a new ListEncryptionConfigsRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.dataplex.v1.IListEncryptionConfigsRequest);
+
+                    /** ListEncryptionConfigsRequest parent. */
+                    public parent: string;
+
+                    /** ListEncryptionConfigsRequest pageSize. */
+                    public pageSize: number;
+
+                    /** ListEncryptionConfigsRequest pageToken. */
+                    public pageToken: string;
+
+                    /** ListEncryptionConfigsRequest filter. */
+                    public filter: string;
+
+                    /** ListEncryptionConfigsRequest orderBy. */
+                    public orderBy: string;
+
+                    /**
+                     * Creates a new ListEncryptionConfigsRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListEncryptionConfigsRequest instance
+                     */
+                    public static create(properties?: google.cloud.dataplex.v1.IListEncryptionConfigsRequest): google.cloud.dataplex.v1.ListEncryptionConfigsRequest;
+
+                    /**
+                     * Encodes the specified ListEncryptionConfigsRequest message. Does not implicitly {@link google.cloud.dataplex.v1.ListEncryptionConfigsRequest.verify|verify} messages.
+                     * @param message ListEncryptionConfigsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.dataplex.v1.IListEncryptionConfigsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListEncryptionConfigsRequest message, length delimited. Does not implicitly {@link google.cloud.dataplex.v1.ListEncryptionConfigsRequest.verify|verify} messages.
+                     * @param message ListEncryptionConfigsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.dataplex.v1.IListEncryptionConfigsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListEncryptionConfigsRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListEncryptionConfigsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dataplex.v1.ListEncryptionConfigsRequest;
+
+                    /**
+                     * Decodes a ListEncryptionConfigsRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListEncryptionConfigsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dataplex.v1.ListEncryptionConfigsRequest;
+
+                    /**
+                     * Verifies a ListEncryptionConfigsRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListEncryptionConfigsRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListEncryptionConfigsRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.dataplex.v1.ListEncryptionConfigsRequest;
+
+                    /**
+                     * Creates a plain object from a ListEncryptionConfigsRequest message. Also converts values to other types if specified.
+                     * @param message ListEncryptionConfigsRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.dataplex.v1.ListEncryptionConfigsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListEncryptionConfigsRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListEncryptionConfigsRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListEncryptionConfigsResponse. */
+                interface IListEncryptionConfigsResponse {
+
+                    /** ListEncryptionConfigsResponse encryptionConfigs */
+                    encryptionConfigs?: (google.cloud.dataplex.v1.IEncryptionConfig[]|null);
+
+                    /** ListEncryptionConfigsResponse nextPageToken */
+                    nextPageToken?: (string|null);
+
+                    /** ListEncryptionConfigsResponse unreachableLocations */
+                    unreachableLocations?: (string[]|null);
+                }
+
+                /** Represents a ListEncryptionConfigsResponse. */
+                class ListEncryptionConfigsResponse implements IListEncryptionConfigsResponse {
+
+                    /**
+                     * Constructs a new ListEncryptionConfigsResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.dataplex.v1.IListEncryptionConfigsResponse);
+
+                    /** ListEncryptionConfigsResponse encryptionConfigs. */
+                    public encryptionConfigs: google.cloud.dataplex.v1.IEncryptionConfig[];
+
+                    /** ListEncryptionConfigsResponse nextPageToken. */
+                    public nextPageToken: string;
+
+                    /** ListEncryptionConfigsResponse unreachableLocations. */
+                    public unreachableLocations: string[];
+
+                    /**
+                     * Creates a new ListEncryptionConfigsResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListEncryptionConfigsResponse instance
+                     */
+                    public static create(properties?: google.cloud.dataplex.v1.IListEncryptionConfigsResponse): google.cloud.dataplex.v1.ListEncryptionConfigsResponse;
+
+                    /**
+                     * Encodes the specified ListEncryptionConfigsResponse message. Does not implicitly {@link google.cloud.dataplex.v1.ListEncryptionConfigsResponse.verify|verify} messages.
+                     * @param message ListEncryptionConfigsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.dataplex.v1.IListEncryptionConfigsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListEncryptionConfigsResponse message, length delimited. Does not implicitly {@link google.cloud.dataplex.v1.ListEncryptionConfigsResponse.verify|verify} messages.
+                     * @param message ListEncryptionConfigsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.dataplex.v1.IListEncryptionConfigsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListEncryptionConfigsResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListEncryptionConfigsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dataplex.v1.ListEncryptionConfigsResponse;
+
+                    /**
+                     * Decodes a ListEncryptionConfigsResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListEncryptionConfigsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dataplex.v1.ListEncryptionConfigsResponse;
+
+                    /**
+                     * Verifies a ListEncryptionConfigsResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListEncryptionConfigsResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListEncryptionConfigsResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.dataplex.v1.ListEncryptionConfigsResponse;
+
+                    /**
+                     * Creates a plain object from a ListEncryptionConfigsResponse message. Also converts values to other types if specified.
+                     * @param message ListEncryptionConfigsResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.dataplex.v1.ListEncryptionConfigsResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListEncryptionConfigsResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListEncryptionConfigsResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
                 /** Represents a ContentService */
                 class ContentService extends $protobuf.rpc.Service {
 
@@ -19782,6 +21153,9 @@ export namespace google {
 
                     /** DataDiscoveryResult bigqueryPublishing */
                     bigqueryPublishing?: (google.cloud.dataplex.v1.DataDiscoveryResult.IBigQueryPublishing|null);
+
+                    /** DataDiscoveryResult scanStatistics */
+                    scanStatistics?: (google.cloud.dataplex.v1.DataDiscoveryResult.IScanStatistics|null);
                 }
 
                 /** Represents a DataDiscoveryResult. */
@@ -19795,6 +21169,9 @@ export namespace google {
 
                     /** DataDiscoveryResult bigqueryPublishing. */
                     public bigqueryPublishing?: (google.cloud.dataplex.v1.DataDiscoveryResult.IBigQueryPublishing|null);
+
+                    /** DataDiscoveryResult scanStatistics. */
+                    public scanStatistics?: (google.cloud.dataplex.v1.DataDiscoveryResult.IScanStatistics|null);
 
                     /**
                      * Creates a new DataDiscoveryResult instance using the specified properties.
@@ -19881,6 +21258,9 @@ export namespace google {
 
                         /** BigQueryPublishing dataset */
                         dataset?: (string|null);
+
+                        /** BigQueryPublishing location */
+                        location?: (string|null);
                     }
 
                     /** Represents a BigQueryPublishing. */
@@ -19894,6 +21274,9 @@ export namespace google {
 
                         /** BigQueryPublishing dataset. */
                         public dataset: string;
+
+                        /** BigQueryPublishing location. */
+                        public location: string;
 
                         /**
                          * Creates a new BigQueryPublishing instance using the specified properties.
@@ -19967,6 +21350,151 @@ export namespace google {
 
                         /**
                          * Gets the default type url for BigQueryPublishing
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a ScanStatistics. */
+                    interface IScanStatistics {
+
+                        /** ScanStatistics scannedFileCount */
+                        scannedFileCount?: (number|null);
+
+                        /** ScanStatistics dataProcessedBytes */
+                        dataProcessedBytes?: (number|Long|string|null);
+
+                        /** ScanStatistics filesExcluded */
+                        filesExcluded?: (number|null);
+
+                        /** ScanStatistics tablesCreated */
+                        tablesCreated?: (number|null);
+
+                        /** ScanStatistics tablesDeleted */
+                        tablesDeleted?: (number|null);
+
+                        /** ScanStatistics tablesUpdated */
+                        tablesUpdated?: (number|null);
+
+                        /** ScanStatistics filesetsCreated */
+                        filesetsCreated?: (number|null);
+
+                        /** ScanStatistics filesetsDeleted */
+                        filesetsDeleted?: (number|null);
+
+                        /** ScanStatistics filesetsUpdated */
+                        filesetsUpdated?: (number|null);
+                    }
+
+                    /** Represents a ScanStatistics. */
+                    class ScanStatistics implements IScanStatistics {
+
+                        /**
+                         * Constructs a new ScanStatistics.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.dataplex.v1.DataDiscoveryResult.IScanStatistics);
+
+                        /** ScanStatistics scannedFileCount. */
+                        public scannedFileCount: number;
+
+                        /** ScanStatistics dataProcessedBytes. */
+                        public dataProcessedBytes: (number|Long|string);
+
+                        /** ScanStatistics filesExcluded. */
+                        public filesExcluded: number;
+
+                        /** ScanStatistics tablesCreated. */
+                        public tablesCreated: number;
+
+                        /** ScanStatistics tablesDeleted. */
+                        public tablesDeleted: number;
+
+                        /** ScanStatistics tablesUpdated. */
+                        public tablesUpdated: number;
+
+                        /** ScanStatistics filesetsCreated. */
+                        public filesetsCreated: number;
+
+                        /** ScanStatistics filesetsDeleted. */
+                        public filesetsDeleted: number;
+
+                        /** ScanStatistics filesetsUpdated. */
+                        public filesetsUpdated: number;
+
+                        /**
+                         * Creates a new ScanStatistics instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns ScanStatistics instance
+                         */
+                        public static create(properties?: google.cloud.dataplex.v1.DataDiscoveryResult.IScanStatistics): google.cloud.dataplex.v1.DataDiscoveryResult.ScanStatistics;
+
+                        /**
+                         * Encodes the specified ScanStatistics message. Does not implicitly {@link google.cloud.dataplex.v1.DataDiscoveryResult.ScanStatistics.verify|verify} messages.
+                         * @param message ScanStatistics message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.dataplex.v1.DataDiscoveryResult.IScanStatistics, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified ScanStatistics message, length delimited. Does not implicitly {@link google.cloud.dataplex.v1.DataDiscoveryResult.ScanStatistics.verify|verify} messages.
+                         * @param message ScanStatistics message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.dataplex.v1.DataDiscoveryResult.IScanStatistics, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a ScanStatistics message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns ScanStatistics
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dataplex.v1.DataDiscoveryResult.ScanStatistics;
+
+                        /**
+                         * Decodes a ScanStatistics message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns ScanStatistics
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dataplex.v1.DataDiscoveryResult.ScanStatistics;
+
+                        /**
+                         * Verifies a ScanStatistics message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a ScanStatistics message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns ScanStatistics
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.dataplex.v1.DataDiscoveryResult.ScanStatistics;
+
+                        /**
+                         * Creates a plain object from a ScanStatistics message. Also converts values to other types if specified.
+                         * @param message ScanStatistics
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.dataplex.v1.DataDiscoveryResult.ScanStatistics, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this ScanStatistics to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for ScanStatistics
                          * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                          * @returns The default type url
                          */

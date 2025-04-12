@@ -18,6 +18,7 @@
 
 import {
   CatalogServiceClient,
+  CmekServiceClient,
   ContentServiceClient,
   DataplexServiceClient,
   DataScanServiceClient,
@@ -27,6 +28,9 @@ import {
 
 // check that the client class type name can be used
 function doStuffWithCatalogServiceClient(client: CatalogServiceClient) {
+  client.close();
+}
+function doStuffWithCmekServiceClient(client: CmekServiceClient) {
   client.close();
 }
 function doStuffWithContentServiceClient(client: ContentServiceClient) {
@@ -51,6 +55,9 @@ function main() {
   // check that the client instance can be created
   const catalogServiceClient = new CatalogServiceClient();
   doStuffWithCatalogServiceClient(catalogServiceClient);
+  // check that the client instance can be created
+  const cmekServiceClient = new CmekServiceClient();
+  doStuffWithCmekServiceClient(cmekServiceClient);
   // check that the client instance can be created
   const contentServiceClient = new ContentServiceClient();
   doStuffWithContentServiceClient(contentServiceClient);
