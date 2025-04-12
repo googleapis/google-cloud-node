@@ -264,6 +264,39 @@
                          */
     
                         /**
+                         * Callback as used by {@link google.cloud.iap.v1.IdentityAwareProxyAdminService|validateIapAttributeExpression}.
+                         * @memberof google.cloud.iap.v1.IdentityAwareProxyAdminService
+                         * @typedef ValidateIapAttributeExpressionCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.iap.v1.ValidateIapAttributeExpressionResponse} [response] ValidateIapAttributeExpressionResponse
+                         */
+    
+                        /**
+                         * Calls ValidateIapAttributeExpression.
+                         * @function validateIapAttributeExpression
+                         * @memberof google.cloud.iap.v1.IdentityAwareProxyAdminService
+                         * @instance
+                         * @param {google.cloud.iap.v1.IValidateIapAttributeExpressionRequest} request ValidateIapAttributeExpressionRequest message or plain object
+                         * @param {google.cloud.iap.v1.IdentityAwareProxyAdminService.ValidateIapAttributeExpressionCallback} callback Node-style callback called with the error, if any, and ValidateIapAttributeExpressionResponse
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(IdentityAwareProxyAdminService.prototype.validateIapAttributeExpression = function validateIapAttributeExpression(request, callback) {
+                            return this.rpcCall(validateIapAttributeExpression, $root.google.cloud.iap.v1.ValidateIapAttributeExpressionRequest, $root.google.cloud.iap.v1.ValidateIapAttributeExpressionResponse, request, callback);
+                        }, "name", { value: "ValidateIapAttributeExpression" });
+    
+                        /**
+                         * Calls ValidateIapAttributeExpression.
+                         * @function validateIapAttributeExpression
+                         * @memberof google.cloud.iap.v1.IdentityAwareProxyAdminService
+                         * @instance
+                         * @param {google.cloud.iap.v1.IValidateIapAttributeExpressionRequest} request ValidateIapAttributeExpressionRequest message or plain object
+                         * @returns {Promise<google.cloud.iap.v1.ValidateIapAttributeExpressionResponse>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
                          * Callback as used by {@link google.cloud.iap.v1.IdentityAwareProxyAdminService|listTunnelDestGroups}.
                          * @memberof google.cloud.iap.v1.IdentityAwareProxyAdminService
                          * @typedef ListTunnelDestGroupsCallback
@@ -3120,6 +3153,8 @@
                          * @property {google.cloud.iap.v1.IOAuthSettings|null} [oauthSettings] AccessSettings oauthSettings
                          * @property {google.cloud.iap.v1.IReauthSettings|null} [reauthSettings] AccessSettings reauthSettings
                          * @property {google.cloud.iap.v1.IAllowedDomainsSettings|null} [allowedDomainsSettings] AccessSettings allowedDomainsSettings
+                         * @property {google.cloud.iap.v1.IWorkforceIdentitySettings|null} [workforceIdentitySettings] AccessSettings workforceIdentitySettings
+                         * @property {Array.<google.cloud.iap.v1.AccessSettings.IdentitySource>|null} [identitySources] AccessSettings identitySources
                          */
     
                         /**
@@ -3131,6 +3166,7 @@
                          * @param {google.cloud.iap.v1.IAccessSettings=} [properties] Properties to set
                          */
                         function AccessSettings(properties) {
+                            this.identitySources = [];
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                                     if (properties[keys[i]] != null)
@@ -3178,6 +3214,22 @@
                         AccessSettings.prototype.allowedDomainsSettings = null;
     
                         /**
+                         * AccessSettings workforceIdentitySettings.
+                         * @member {google.cloud.iap.v1.IWorkforceIdentitySettings|null|undefined} workforceIdentitySettings
+                         * @memberof google.cloud.iap.v1.AccessSettings
+                         * @instance
+                         */
+                        AccessSettings.prototype.workforceIdentitySettings = null;
+    
+                        /**
+                         * AccessSettings identitySources.
+                         * @member {Array.<google.cloud.iap.v1.AccessSettings.IdentitySource>} identitySources
+                         * @memberof google.cloud.iap.v1.AccessSettings
+                         * @instance
+                         */
+                        AccessSettings.prototype.identitySources = $util.emptyArray;
+    
+                        /**
                          * Creates a new AccessSettings instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.iap.v1.AccessSettings
@@ -3211,6 +3263,14 @@
                                 $root.google.cloud.iap.v1.ReauthSettings.encode(message.reauthSettings, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
                             if (message.allowedDomainsSettings != null && Object.hasOwnProperty.call(message, "allowedDomainsSettings"))
                                 $root.google.cloud.iap.v1.AllowedDomainsSettings.encode(message.allowedDomainsSettings, writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
+                            if (message.workforceIdentitySettings != null && Object.hasOwnProperty.call(message, "workforceIdentitySettings"))
+                                $root.google.cloud.iap.v1.WorkforceIdentitySettings.encode(message.workforceIdentitySettings, writer.uint32(/* id 9, wireType 2 =*/74).fork()).ldelim();
+                            if (message.identitySources != null && message.identitySources.length) {
+                                writer.uint32(/* id 10, wireType 2 =*/82).fork();
+                                for (var i = 0; i < message.identitySources.length; ++i)
+                                    writer.int32(message.identitySources[i]);
+                                writer.ldelim();
+                            }
                             return writer;
                         };
     
@@ -3263,6 +3323,21 @@
                                     }
                                 case 7: {
                                         message.allowedDomainsSettings = $root.google.cloud.iap.v1.AllowedDomainsSettings.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 9: {
+                                        message.workforceIdentitySettings = $root.google.cloud.iap.v1.WorkforceIdentitySettings.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 10: {
+                                        if (!(message.identitySources && message.identitySources.length))
+                                            message.identitySources = [];
+                                        if ((tag & 7) === 2) {
+                                            var end2 = reader.uint32() + reader.pos;
+                                            while (reader.pos < end2)
+                                                message.identitySources.push(reader.int32());
+                                        } else
+                                            message.identitySources.push(reader.int32());
                                         break;
                                     }
                                 default:
@@ -3325,6 +3400,23 @@
                                 if (error)
                                     return "allowedDomainsSettings." + error;
                             }
+                            if (message.workforceIdentitySettings != null && message.hasOwnProperty("workforceIdentitySettings")) {
+                                var error = $root.google.cloud.iap.v1.WorkforceIdentitySettings.verify(message.workforceIdentitySettings);
+                                if (error)
+                                    return "workforceIdentitySettings." + error;
+                            }
+                            if (message.identitySources != null && message.hasOwnProperty("identitySources")) {
+                                if (!Array.isArray(message.identitySources))
+                                    return "identitySources: array expected";
+                                for (var i = 0; i < message.identitySources.length; ++i)
+                                    switch (message.identitySources[i]) {
+                                    default:
+                                        return "identitySources: enum value[] expected";
+                                    case 0:
+                                    case 3:
+                                        break;
+                                    }
+                            }
                             return null;
                         };
     
@@ -3365,6 +3457,32 @@
                                     throw TypeError(".google.cloud.iap.v1.AccessSettings.allowedDomainsSettings: object expected");
                                 message.allowedDomainsSettings = $root.google.cloud.iap.v1.AllowedDomainsSettings.fromObject(object.allowedDomainsSettings);
                             }
+                            if (object.workforceIdentitySettings != null) {
+                                if (typeof object.workforceIdentitySettings !== "object")
+                                    throw TypeError(".google.cloud.iap.v1.AccessSettings.workforceIdentitySettings: object expected");
+                                message.workforceIdentitySettings = $root.google.cloud.iap.v1.WorkforceIdentitySettings.fromObject(object.workforceIdentitySettings);
+                            }
+                            if (object.identitySources) {
+                                if (!Array.isArray(object.identitySources))
+                                    throw TypeError(".google.cloud.iap.v1.AccessSettings.identitySources: array expected");
+                                message.identitySources = [];
+                                for (var i = 0; i < object.identitySources.length; ++i)
+                                    switch (object.identitySources[i]) {
+                                    default:
+                                        if (typeof object.identitySources[i] === "number") {
+                                            message.identitySources[i] = object.identitySources[i];
+                                            break;
+                                        }
+                                    case "IDENTITY_SOURCE_UNSPECIFIED":
+                                    case 0:
+                                        message.identitySources[i] = 0;
+                                        break;
+                                    case "WORKFORCE_IDENTITY_FEDERATION":
+                                    case 3:
+                                        message.identitySources[i] = 3;
+                                        break;
+                                    }
+                            }
                             return message;
                         };
     
@@ -3381,12 +3499,15 @@
                             if (!options)
                                 options = {};
                             var object = {};
+                            if (options.arrays || options.defaults)
+                                object.identitySources = [];
                             if (options.defaults) {
                                 object.gcipSettings = null;
                                 object.corsSettings = null;
                                 object.oauthSettings = null;
                                 object.reauthSettings = null;
                                 object.allowedDomainsSettings = null;
+                                object.workforceIdentitySettings = null;
                             }
                             if (message.gcipSettings != null && message.hasOwnProperty("gcipSettings"))
                                 object.gcipSettings = $root.google.cloud.iap.v1.GcipSettings.toObject(message.gcipSettings, options);
@@ -3398,6 +3519,13 @@
                                 object.reauthSettings = $root.google.cloud.iap.v1.ReauthSettings.toObject(message.reauthSettings, options);
                             if (message.allowedDomainsSettings != null && message.hasOwnProperty("allowedDomainsSettings"))
                                 object.allowedDomainsSettings = $root.google.cloud.iap.v1.AllowedDomainsSettings.toObject(message.allowedDomainsSettings, options);
+                            if (message.workforceIdentitySettings != null && message.hasOwnProperty("workforceIdentitySettings"))
+                                object.workforceIdentitySettings = $root.google.cloud.iap.v1.WorkforceIdentitySettings.toObject(message.workforceIdentitySettings, options);
+                            if (message.identitySources && message.identitySources.length) {
+                                object.identitySources = [];
+                                for (var j = 0; j < message.identitySources.length; ++j)
+                                    object.identitySources[j] = options.enums === String ? $root.google.cloud.iap.v1.AccessSettings.IdentitySource[message.identitySources[j]] === undefined ? message.identitySources[j] : $root.google.cloud.iap.v1.AccessSettings.IdentitySource[message.identitySources[j]] : message.identitySources[j];
+                            }
                             return object;
                         };
     
@@ -3426,6 +3554,20 @@
                             }
                             return typeUrlPrefix + "/google.cloud.iap.v1.AccessSettings";
                         };
+    
+                        /**
+                         * IdentitySource enum.
+                         * @name google.cloud.iap.v1.AccessSettings.IdentitySource
+                         * @enum {number}
+                         * @property {number} IDENTITY_SOURCE_UNSPECIFIED=0 IDENTITY_SOURCE_UNSPECIFIED value
+                         * @property {number} WORKFORCE_IDENTITY_FEDERATION=3 WORKFORCE_IDENTITY_FEDERATION value
+                         */
+                        AccessSettings.IdentitySource = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "IDENTITY_SOURCE_UNSPECIFIED"] = 0;
+                            values[valuesById[3] = "WORKFORCE_IDENTITY_FEDERATION"] = 3;
+                            return values;
+                        })();
     
                         return AccessSettings;
                     })();
@@ -4132,6 +4274,504 @@
                         };
     
                         return OAuthSettings;
+                    })();
+    
+                    v1.WorkforceIdentitySettings = (function() {
+    
+                        /**
+                         * Properties of a WorkforceIdentitySettings.
+                         * @memberof google.cloud.iap.v1
+                         * @interface IWorkforceIdentitySettings
+                         * @property {Array.<string>|null} [workforcePools] WorkforceIdentitySettings workforcePools
+                         * @property {google.cloud.iap.v1.IOAuth2|null} [oauth2] WorkforceIdentitySettings oauth2
+                         */
+    
+                        /**
+                         * Constructs a new WorkforceIdentitySettings.
+                         * @memberof google.cloud.iap.v1
+                         * @classdesc Represents a WorkforceIdentitySettings.
+                         * @implements IWorkforceIdentitySettings
+                         * @constructor
+                         * @param {google.cloud.iap.v1.IWorkforceIdentitySettings=} [properties] Properties to set
+                         */
+                        function WorkforceIdentitySettings(properties) {
+                            this.workforcePools = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * WorkforceIdentitySettings workforcePools.
+                         * @member {Array.<string>} workforcePools
+                         * @memberof google.cloud.iap.v1.WorkforceIdentitySettings
+                         * @instance
+                         */
+                        WorkforceIdentitySettings.prototype.workforcePools = $util.emptyArray;
+    
+                        /**
+                         * WorkforceIdentitySettings oauth2.
+                         * @member {google.cloud.iap.v1.IOAuth2|null|undefined} oauth2
+                         * @memberof google.cloud.iap.v1.WorkforceIdentitySettings
+                         * @instance
+                         */
+                        WorkforceIdentitySettings.prototype.oauth2 = null;
+    
+                        /**
+                         * Creates a new WorkforceIdentitySettings instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.iap.v1.WorkforceIdentitySettings
+                         * @static
+                         * @param {google.cloud.iap.v1.IWorkforceIdentitySettings=} [properties] Properties to set
+                         * @returns {google.cloud.iap.v1.WorkforceIdentitySettings} WorkforceIdentitySettings instance
+                         */
+                        WorkforceIdentitySettings.create = function create(properties) {
+                            return new WorkforceIdentitySettings(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified WorkforceIdentitySettings message. Does not implicitly {@link google.cloud.iap.v1.WorkforceIdentitySettings.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.iap.v1.WorkforceIdentitySettings
+                         * @static
+                         * @param {google.cloud.iap.v1.IWorkforceIdentitySettings} message WorkforceIdentitySettings message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        WorkforceIdentitySettings.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.workforcePools != null && message.workforcePools.length)
+                                for (var i = 0; i < message.workforcePools.length; ++i)
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.workforcePools[i]);
+                            if (message.oauth2 != null && Object.hasOwnProperty.call(message, "oauth2"))
+                                $root.google.cloud.iap.v1.OAuth2.encode(message.oauth2, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified WorkforceIdentitySettings message, length delimited. Does not implicitly {@link google.cloud.iap.v1.WorkforceIdentitySettings.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.iap.v1.WorkforceIdentitySettings
+                         * @static
+                         * @param {google.cloud.iap.v1.IWorkforceIdentitySettings} message WorkforceIdentitySettings message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        WorkforceIdentitySettings.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a WorkforceIdentitySettings message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.iap.v1.WorkforceIdentitySettings
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.iap.v1.WorkforceIdentitySettings} WorkforceIdentitySettings
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        WorkforceIdentitySettings.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.iap.v1.WorkforceIdentitySettings();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        if (!(message.workforcePools && message.workforcePools.length))
+                                            message.workforcePools = [];
+                                        message.workforcePools.push(reader.string());
+                                        break;
+                                    }
+                                case 2: {
+                                        message.oauth2 = $root.google.cloud.iap.v1.OAuth2.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a WorkforceIdentitySettings message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.iap.v1.WorkforceIdentitySettings
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.iap.v1.WorkforceIdentitySettings} WorkforceIdentitySettings
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        WorkforceIdentitySettings.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a WorkforceIdentitySettings message.
+                         * @function verify
+                         * @memberof google.cloud.iap.v1.WorkforceIdentitySettings
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        WorkforceIdentitySettings.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.workforcePools != null && message.hasOwnProperty("workforcePools")) {
+                                if (!Array.isArray(message.workforcePools))
+                                    return "workforcePools: array expected";
+                                for (var i = 0; i < message.workforcePools.length; ++i)
+                                    if (!$util.isString(message.workforcePools[i]))
+                                        return "workforcePools: string[] expected";
+                            }
+                            if (message.oauth2 != null && message.hasOwnProperty("oauth2")) {
+                                var error = $root.google.cloud.iap.v1.OAuth2.verify(message.oauth2);
+                                if (error)
+                                    return "oauth2." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a WorkforceIdentitySettings message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.iap.v1.WorkforceIdentitySettings
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.iap.v1.WorkforceIdentitySettings} WorkforceIdentitySettings
+                         */
+                        WorkforceIdentitySettings.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.iap.v1.WorkforceIdentitySettings)
+                                return object;
+                            var message = new $root.google.cloud.iap.v1.WorkforceIdentitySettings();
+                            if (object.workforcePools) {
+                                if (!Array.isArray(object.workforcePools))
+                                    throw TypeError(".google.cloud.iap.v1.WorkforceIdentitySettings.workforcePools: array expected");
+                                message.workforcePools = [];
+                                for (var i = 0; i < object.workforcePools.length; ++i)
+                                    message.workforcePools[i] = String(object.workforcePools[i]);
+                            }
+                            if (object.oauth2 != null) {
+                                if (typeof object.oauth2 !== "object")
+                                    throw TypeError(".google.cloud.iap.v1.WorkforceIdentitySettings.oauth2: object expected");
+                                message.oauth2 = $root.google.cloud.iap.v1.OAuth2.fromObject(object.oauth2);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a WorkforceIdentitySettings message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.iap.v1.WorkforceIdentitySettings
+                         * @static
+                         * @param {google.cloud.iap.v1.WorkforceIdentitySettings} message WorkforceIdentitySettings
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        WorkforceIdentitySettings.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.workforcePools = [];
+                            if (options.defaults)
+                                object.oauth2 = null;
+                            if (message.workforcePools && message.workforcePools.length) {
+                                object.workforcePools = [];
+                                for (var j = 0; j < message.workforcePools.length; ++j)
+                                    object.workforcePools[j] = message.workforcePools[j];
+                            }
+                            if (message.oauth2 != null && message.hasOwnProperty("oauth2"))
+                                object.oauth2 = $root.google.cloud.iap.v1.OAuth2.toObject(message.oauth2, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this WorkforceIdentitySettings to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.iap.v1.WorkforceIdentitySettings
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        WorkforceIdentitySettings.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for WorkforceIdentitySettings
+                         * @function getTypeUrl
+                         * @memberof google.cloud.iap.v1.WorkforceIdentitySettings
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        WorkforceIdentitySettings.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.iap.v1.WorkforceIdentitySettings";
+                        };
+    
+                        return WorkforceIdentitySettings;
+                    })();
+    
+                    v1.OAuth2 = (function() {
+    
+                        /**
+                         * Properties of a OAuth2.
+                         * @memberof google.cloud.iap.v1
+                         * @interface IOAuth2
+                         * @property {string|null} [clientId] OAuth2 clientId
+                         * @property {string|null} [clientSecret] OAuth2 clientSecret
+                         * @property {string|null} [clientSecretSha256] OAuth2 clientSecretSha256
+                         */
+    
+                        /**
+                         * Constructs a new OAuth2.
+                         * @memberof google.cloud.iap.v1
+                         * @classdesc Represents a OAuth2.
+                         * @implements IOAuth2
+                         * @constructor
+                         * @param {google.cloud.iap.v1.IOAuth2=} [properties] Properties to set
+                         */
+                        function OAuth2(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * OAuth2 clientId.
+                         * @member {string} clientId
+                         * @memberof google.cloud.iap.v1.OAuth2
+                         * @instance
+                         */
+                        OAuth2.prototype.clientId = "";
+    
+                        /**
+                         * OAuth2 clientSecret.
+                         * @member {string} clientSecret
+                         * @memberof google.cloud.iap.v1.OAuth2
+                         * @instance
+                         */
+                        OAuth2.prototype.clientSecret = "";
+    
+                        /**
+                         * OAuth2 clientSecretSha256.
+                         * @member {string} clientSecretSha256
+                         * @memberof google.cloud.iap.v1.OAuth2
+                         * @instance
+                         */
+                        OAuth2.prototype.clientSecretSha256 = "";
+    
+                        /**
+                         * Creates a new OAuth2 instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.iap.v1.OAuth2
+                         * @static
+                         * @param {google.cloud.iap.v1.IOAuth2=} [properties] Properties to set
+                         * @returns {google.cloud.iap.v1.OAuth2} OAuth2 instance
+                         */
+                        OAuth2.create = function create(properties) {
+                            return new OAuth2(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified OAuth2 message. Does not implicitly {@link google.cloud.iap.v1.OAuth2.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.iap.v1.OAuth2
+                         * @static
+                         * @param {google.cloud.iap.v1.IOAuth2} message OAuth2 message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        OAuth2.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.clientId != null && Object.hasOwnProperty.call(message, "clientId"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.clientId);
+                            if (message.clientSecret != null && Object.hasOwnProperty.call(message, "clientSecret"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.clientSecret);
+                            if (message.clientSecretSha256 != null && Object.hasOwnProperty.call(message, "clientSecretSha256"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.clientSecretSha256);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified OAuth2 message, length delimited. Does not implicitly {@link google.cloud.iap.v1.OAuth2.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.iap.v1.OAuth2
+                         * @static
+                         * @param {google.cloud.iap.v1.IOAuth2} message OAuth2 message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        OAuth2.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a OAuth2 message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.iap.v1.OAuth2
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.iap.v1.OAuth2} OAuth2
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        OAuth2.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.iap.v1.OAuth2();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.clientId = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.clientSecret = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.clientSecretSha256 = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a OAuth2 message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.iap.v1.OAuth2
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.iap.v1.OAuth2} OAuth2
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        OAuth2.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a OAuth2 message.
+                         * @function verify
+                         * @memberof google.cloud.iap.v1.OAuth2
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        OAuth2.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.clientId != null && message.hasOwnProperty("clientId"))
+                                if (!$util.isString(message.clientId))
+                                    return "clientId: string expected";
+                            if (message.clientSecret != null && message.hasOwnProperty("clientSecret"))
+                                if (!$util.isString(message.clientSecret))
+                                    return "clientSecret: string expected";
+                            if (message.clientSecretSha256 != null && message.hasOwnProperty("clientSecretSha256"))
+                                if (!$util.isString(message.clientSecretSha256))
+                                    return "clientSecretSha256: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a OAuth2 message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.iap.v1.OAuth2
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.iap.v1.OAuth2} OAuth2
+                         */
+                        OAuth2.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.iap.v1.OAuth2)
+                                return object;
+                            var message = new $root.google.cloud.iap.v1.OAuth2();
+                            if (object.clientId != null)
+                                message.clientId = String(object.clientId);
+                            if (object.clientSecret != null)
+                                message.clientSecret = String(object.clientSecret);
+                            if (object.clientSecretSha256 != null)
+                                message.clientSecretSha256 = String(object.clientSecretSha256);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a OAuth2 message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.iap.v1.OAuth2
+                         * @static
+                         * @param {google.cloud.iap.v1.OAuth2} message OAuth2
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        OAuth2.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.clientId = "";
+                                object.clientSecret = "";
+                                object.clientSecretSha256 = "";
+                            }
+                            if (message.clientId != null && message.hasOwnProperty("clientId"))
+                                object.clientId = message.clientId;
+                            if (message.clientSecret != null && message.hasOwnProperty("clientSecret"))
+                                object.clientSecret = message.clientSecret;
+                            if (message.clientSecretSha256 != null && message.hasOwnProperty("clientSecretSha256"))
+                                object.clientSecretSha256 = message.clientSecretSha256;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this OAuth2 to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.iap.v1.OAuth2
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        OAuth2.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for OAuth2
+                         * @function getTypeUrl
+                         * @memberof google.cloud.iap.v1.OAuth2
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        OAuth2.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.iap.v1.OAuth2";
+                        };
+    
+                        return OAuth2;
                     })();
     
                     v1.ReauthSettings = (function() {
@@ -5882,6 +6522,408 @@
                         })();
     
                         return AttributePropagationSettings;
+                    })();
+    
+                    v1.ValidateIapAttributeExpressionRequest = (function() {
+    
+                        /**
+                         * Properties of a ValidateIapAttributeExpressionRequest.
+                         * @memberof google.cloud.iap.v1
+                         * @interface IValidateIapAttributeExpressionRequest
+                         * @property {string|null} [name] ValidateIapAttributeExpressionRequest name
+                         * @property {string|null} [expression] ValidateIapAttributeExpressionRequest expression
+                         */
+    
+                        /**
+                         * Constructs a new ValidateIapAttributeExpressionRequest.
+                         * @memberof google.cloud.iap.v1
+                         * @classdesc Represents a ValidateIapAttributeExpressionRequest.
+                         * @implements IValidateIapAttributeExpressionRequest
+                         * @constructor
+                         * @param {google.cloud.iap.v1.IValidateIapAttributeExpressionRequest=} [properties] Properties to set
+                         */
+                        function ValidateIapAttributeExpressionRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ValidateIapAttributeExpressionRequest name.
+                         * @member {string} name
+                         * @memberof google.cloud.iap.v1.ValidateIapAttributeExpressionRequest
+                         * @instance
+                         */
+                        ValidateIapAttributeExpressionRequest.prototype.name = "";
+    
+                        /**
+                         * ValidateIapAttributeExpressionRequest expression.
+                         * @member {string} expression
+                         * @memberof google.cloud.iap.v1.ValidateIapAttributeExpressionRequest
+                         * @instance
+                         */
+                        ValidateIapAttributeExpressionRequest.prototype.expression = "";
+    
+                        /**
+                         * Creates a new ValidateIapAttributeExpressionRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.iap.v1.ValidateIapAttributeExpressionRequest
+                         * @static
+                         * @param {google.cloud.iap.v1.IValidateIapAttributeExpressionRequest=} [properties] Properties to set
+                         * @returns {google.cloud.iap.v1.ValidateIapAttributeExpressionRequest} ValidateIapAttributeExpressionRequest instance
+                         */
+                        ValidateIapAttributeExpressionRequest.create = function create(properties) {
+                            return new ValidateIapAttributeExpressionRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ValidateIapAttributeExpressionRequest message. Does not implicitly {@link google.cloud.iap.v1.ValidateIapAttributeExpressionRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.iap.v1.ValidateIapAttributeExpressionRequest
+                         * @static
+                         * @param {google.cloud.iap.v1.IValidateIapAttributeExpressionRequest} message ValidateIapAttributeExpressionRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ValidateIapAttributeExpressionRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.expression != null && Object.hasOwnProperty.call(message, "expression"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.expression);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ValidateIapAttributeExpressionRequest message, length delimited. Does not implicitly {@link google.cloud.iap.v1.ValidateIapAttributeExpressionRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.iap.v1.ValidateIapAttributeExpressionRequest
+                         * @static
+                         * @param {google.cloud.iap.v1.IValidateIapAttributeExpressionRequest} message ValidateIapAttributeExpressionRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ValidateIapAttributeExpressionRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ValidateIapAttributeExpressionRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.iap.v1.ValidateIapAttributeExpressionRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.iap.v1.ValidateIapAttributeExpressionRequest} ValidateIapAttributeExpressionRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ValidateIapAttributeExpressionRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.iap.v1.ValidateIapAttributeExpressionRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.expression = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ValidateIapAttributeExpressionRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.iap.v1.ValidateIapAttributeExpressionRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.iap.v1.ValidateIapAttributeExpressionRequest} ValidateIapAttributeExpressionRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ValidateIapAttributeExpressionRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ValidateIapAttributeExpressionRequest message.
+                         * @function verify
+                         * @memberof google.cloud.iap.v1.ValidateIapAttributeExpressionRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ValidateIapAttributeExpressionRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.expression != null && message.hasOwnProperty("expression"))
+                                if (!$util.isString(message.expression))
+                                    return "expression: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ValidateIapAttributeExpressionRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.iap.v1.ValidateIapAttributeExpressionRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.iap.v1.ValidateIapAttributeExpressionRequest} ValidateIapAttributeExpressionRequest
+                         */
+                        ValidateIapAttributeExpressionRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.iap.v1.ValidateIapAttributeExpressionRequest)
+                                return object;
+                            var message = new $root.google.cloud.iap.v1.ValidateIapAttributeExpressionRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            if (object.expression != null)
+                                message.expression = String(object.expression);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ValidateIapAttributeExpressionRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.iap.v1.ValidateIapAttributeExpressionRequest
+                         * @static
+                         * @param {google.cloud.iap.v1.ValidateIapAttributeExpressionRequest} message ValidateIapAttributeExpressionRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ValidateIapAttributeExpressionRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.name = "";
+                                object.expression = "";
+                            }
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            if (message.expression != null && message.hasOwnProperty("expression"))
+                                object.expression = message.expression;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ValidateIapAttributeExpressionRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.iap.v1.ValidateIapAttributeExpressionRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ValidateIapAttributeExpressionRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ValidateIapAttributeExpressionRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.iap.v1.ValidateIapAttributeExpressionRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ValidateIapAttributeExpressionRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.iap.v1.ValidateIapAttributeExpressionRequest";
+                        };
+    
+                        return ValidateIapAttributeExpressionRequest;
+                    })();
+    
+                    v1.ValidateIapAttributeExpressionResponse = (function() {
+    
+                        /**
+                         * Properties of a ValidateIapAttributeExpressionResponse.
+                         * @memberof google.cloud.iap.v1
+                         * @interface IValidateIapAttributeExpressionResponse
+                         */
+    
+                        /**
+                         * Constructs a new ValidateIapAttributeExpressionResponse.
+                         * @memberof google.cloud.iap.v1
+                         * @classdesc Represents a ValidateIapAttributeExpressionResponse.
+                         * @implements IValidateIapAttributeExpressionResponse
+                         * @constructor
+                         * @param {google.cloud.iap.v1.IValidateIapAttributeExpressionResponse=} [properties] Properties to set
+                         */
+                        function ValidateIapAttributeExpressionResponse(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * Creates a new ValidateIapAttributeExpressionResponse instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.iap.v1.ValidateIapAttributeExpressionResponse
+                         * @static
+                         * @param {google.cloud.iap.v1.IValidateIapAttributeExpressionResponse=} [properties] Properties to set
+                         * @returns {google.cloud.iap.v1.ValidateIapAttributeExpressionResponse} ValidateIapAttributeExpressionResponse instance
+                         */
+                        ValidateIapAttributeExpressionResponse.create = function create(properties) {
+                            return new ValidateIapAttributeExpressionResponse(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ValidateIapAttributeExpressionResponse message. Does not implicitly {@link google.cloud.iap.v1.ValidateIapAttributeExpressionResponse.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.iap.v1.ValidateIapAttributeExpressionResponse
+                         * @static
+                         * @param {google.cloud.iap.v1.IValidateIapAttributeExpressionResponse} message ValidateIapAttributeExpressionResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ValidateIapAttributeExpressionResponse.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ValidateIapAttributeExpressionResponse message, length delimited. Does not implicitly {@link google.cloud.iap.v1.ValidateIapAttributeExpressionResponse.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.iap.v1.ValidateIapAttributeExpressionResponse
+                         * @static
+                         * @param {google.cloud.iap.v1.IValidateIapAttributeExpressionResponse} message ValidateIapAttributeExpressionResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ValidateIapAttributeExpressionResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ValidateIapAttributeExpressionResponse message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.iap.v1.ValidateIapAttributeExpressionResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.iap.v1.ValidateIapAttributeExpressionResponse} ValidateIapAttributeExpressionResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ValidateIapAttributeExpressionResponse.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.iap.v1.ValidateIapAttributeExpressionResponse();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ValidateIapAttributeExpressionResponse message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.iap.v1.ValidateIapAttributeExpressionResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.iap.v1.ValidateIapAttributeExpressionResponse} ValidateIapAttributeExpressionResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ValidateIapAttributeExpressionResponse.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ValidateIapAttributeExpressionResponse message.
+                         * @function verify
+                         * @memberof google.cloud.iap.v1.ValidateIapAttributeExpressionResponse
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ValidateIapAttributeExpressionResponse.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ValidateIapAttributeExpressionResponse message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.iap.v1.ValidateIapAttributeExpressionResponse
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.iap.v1.ValidateIapAttributeExpressionResponse} ValidateIapAttributeExpressionResponse
+                         */
+                        ValidateIapAttributeExpressionResponse.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.iap.v1.ValidateIapAttributeExpressionResponse)
+                                return object;
+                            return new $root.google.cloud.iap.v1.ValidateIapAttributeExpressionResponse();
+                        };
+    
+                        /**
+                         * Creates a plain object from a ValidateIapAttributeExpressionResponse message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.iap.v1.ValidateIapAttributeExpressionResponse
+                         * @static
+                         * @param {google.cloud.iap.v1.ValidateIapAttributeExpressionResponse} message ValidateIapAttributeExpressionResponse
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ValidateIapAttributeExpressionResponse.toObject = function toObject() {
+                            return {};
+                        };
+    
+                        /**
+                         * Converts this ValidateIapAttributeExpressionResponse to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.iap.v1.ValidateIapAttributeExpressionResponse
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ValidateIapAttributeExpressionResponse.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ValidateIapAttributeExpressionResponse
+                         * @function getTypeUrl
+                         * @memberof google.cloud.iap.v1.ValidateIapAttributeExpressionResponse
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ValidateIapAttributeExpressionResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.iap.v1.ValidateIapAttributeExpressionResponse";
+                        };
+    
+                        return ValidateIapAttributeExpressionResponse;
                     })();
     
                     v1.ListBrandsRequest = (function() {

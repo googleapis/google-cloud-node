@@ -1070,6 +1070,126 @@
                     }
                 }
             }
+        },
+        {
+            "regionTag": "oracledatabase_v1_generated_OracleDatabase_StopAutonomousDatabase_async",
+            "title": "OracleDatabase stopAutonomousDatabase Sample",
+            "origin": "API_DEFINITION",
+            "description": " Stops an Autonomous Database.",
+            "canonical": true,
+            "file": "oracle_database.stop_autonomous_database.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 55,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "StopAutonomousDatabase",
+                "fullName": "google.cloud.oracledatabase.v1.OracleDatabase.StopAutonomousDatabase",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "name",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.longrunning.Operation",
+                "client": {
+                    "shortName": "OracleDatabaseClient",
+                    "fullName": "google.cloud.oracledatabase.v1.OracleDatabaseClient"
+                },
+                "method": {
+                    "shortName": "StopAutonomousDatabase",
+                    "fullName": "google.cloud.oracledatabase.v1.OracleDatabase.StopAutonomousDatabase",
+                    "service": {
+                        "shortName": "OracleDatabase",
+                        "fullName": "google.cloud.oracledatabase.v1.OracleDatabase"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "oracledatabase_v1_generated_OracleDatabase_StartAutonomousDatabase_async",
+            "title": "OracleDatabase startAutonomousDatabase Sample",
+            "origin": "API_DEFINITION",
+            "description": " Starts an Autonomous Database.",
+            "canonical": true,
+            "file": "oracle_database.start_autonomous_database.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 55,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "StartAutonomousDatabase",
+                "fullName": "google.cloud.oracledatabase.v1.OracleDatabase.StartAutonomousDatabase",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "name",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.longrunning.Operation",
+                "client": {
+                    "shortName": "OracleDatabaseClient",
+                    "fullName": "google.cloud.oracledatabase.v1.OracleDatabaseClient"
+                },
+                "method": {
+                    "shortName": "StartAutonomousDatabase",
+                    "fullName": "google.cloud.oracledatabase.v1.OracleDatabase.StartAutonomousDatabase",
+                    "service": {
+                        "shortName": "OracleDatabase",
+                        "fullName": "google.cloud.oracledatabase.v1.OracleDatabase"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "oracledatabase_v1_generated_OracleDatabase_RestartAutonomousDatabase_async",
+            "title": "OracleDatabase restartAutonomousDatabase Sample",
+            "origin": "API_DEFINITION",
+            "description": " Restarts an Autonomous Database.",
+            "canonical": true,
+            "file": "oracle_database.restart_autonomous_database.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 55,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "RestartAutonomousDatabase",
+                "fullName": "google.cloud.oracledatabase.v1.OracleDatabase.RestartAutonomousDatabase",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "name",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.longrunning.Operation",
+                "client": {
+                    "shortName": "OracleDatabaseClient",
+                    "fullName": "google.cloud.oracledatabase.v1.OracleDatabaseClient"
+                },
+                "method": {
+                    "shortName": "RestartAutonomousDatabase",
+                    "fullName": "google.cloud.oracledatabase.v1.OracleDatabase.RestartAutonomousDatabase",
+                    "service": {
+                        "shortName": "OracleDatabase",
+                        "fullName": "google.cloud.oracledatabase.v1.OracleDatabase"
+                    }
+                }
+            }
         }
     ]
 }
