@@ -214,6 +214,9 @@ export class CssProductInputsServiceClient {
       cssProductInputPathTemplate: new this._gaxModule.PathTemplate(
         'accounts/{account}/cssProductInputs/{css_product_input}'
       ),
+      quotaGroupPathTemplate: new this._gaxModule.PathTemplate(
+        'accounts/{account}/quotaGroups/{quota_group}'
+      ),
     };
 
     // Put together the default options sent with requests.
@@ -672,7 +675,10 @@ export class CssProductInputsServiceClient {
    *   The request object that will be sent.
    * @param {string} request.name
    *   Required. The name of the CSS product input resource to delete.
-   *   Format: accounts/{account}/cssProductInputs/{css_product_input}
+   *   Format: accounts/{account}/cssProductInputs/{css_product_input}, where the
+   *   last section `css_product_input` consists of 3 parts:
+   *   contentLanguage~feedLabel~offerId. Example:
+   *   accounts/123/cssProductInputs/de~DE~rawProvidedId123
    * @param {number} request.supplementalFeedId
    *   The Content API Supplemental Feed ID.
    *   The field must not be set if the action applies to a primary feed.
@@ -934,6 +940,44 @@ export class CssProductInputsServiceClient {
     return this.pathTemplates.cssProductInputPathTemplate.match(
       cssProductInputName
     ).css_product_input;
+  }
+
+  /**
+   * Return a fully-qualified quotaGroup resource name string.
+   *
+   * @param {string} account
+   * @param {string} quota_group
+   * @returns {string} Resource name string.
+   */
+  quotaGroupPath(account: string, quotaGroup: string) {
+    return this.pathTemplates.quotaGroupPathTemplate.render({
+      account: account,
+      quota_group: quotaGroup,
+    });
+  }
+
+  /**
+   * Parse the account from QuotaGroup resource.
+   *
+   * @param {string} quotaGroupName
+   *   A fully-qualified path representing QuotaGroup resource.
+   * @returns {string} A string representing the account.
+   */
+  matchAccountFromQuotaGroupName(quotaGroupName: string) {
+    return this.pathTemplates.quotaGroupPathTemplate.match(quotaGroupName)
+      .account;
+  }
+
+  /**
+   * Parse the quota_group from QuotaGroup resource.
+   *
+   * @param {string} quotaGroupName
+   *   A fully-qualified path representing QuotaGroup resource.
+   * @returns {string} A string representing the quota_group.
+   */
+  matchQuotaGroupFromQuotaGroupName(quotaGroupName: string) {
+    return this.pathTemplates.quotaGroupPathTemplate.match(quotaGroupName)
+      .quota_group;
   }
 
   /**

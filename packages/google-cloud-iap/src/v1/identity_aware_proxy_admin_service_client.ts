@@ -281,6 +281,7 @@ export class IdentityAwareProxyAdminServiceClient {
       'testIamPermissions',
       'getIapSettings',
       'updateIapSettings',
+      'validateIapAttributeExpression',
       'listTunnelDestGroups',
       'createTunnelDestGroup',
       'getTunnelDestGroup',
@@ -983,6 +984,143 @@ export class IdentityAwareProxyAdminServiceClient {
           {} | undefined,
         ]) => {
           this._log.info('updateIapSettings response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
+  }
+  /**
+   * Validates that a given CEL expression conforms to IAP restrictions.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The resource name of the IAP protected resource.
+   * @param {string} request.expression
+   *   Required. User input string expression. Should be of the form
+   *   `attributes.saml_attributes.filter(attribute, attribute.name in
+   *   ['{attribute_name}', '{attribute_name}'])`
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.iap.v1.ValidateIapAttributeExpressionResponse|ValidateIapAttributeExpressionResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/identity_aware_proxy_admin_service.validate_iap_attribute_expression.js</caption>
+   * region_tag:iap_v1_generated_IdentityAwareProxyAdminService_ValidateIapAttributeExpression_async
+   */
+  validateIapAttributeExpression(
+    request?: protos.google.cloud.iap.v1.IValidateIapAttributeExpressionRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.iap.v1.IValidateIapAttributeExpressionResponse,
+      (
+        | protos.google.cloud.iap.v1.IValidateIapAttributeExpressionRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
+  validateIapAttributeExpression(
+    request: protos.google.cloud.iap.v1.IValidateIapAttributeExpressionRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.iap.v1.IValidateIapAttributeExpressionResponse,
+      | protos.google.cloud.iap.v1.IValidateIapAttributeExpressionRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  validateIapAttributeExpression(
+    request: protos.google.cloud.iap.v1.IValidateIapAttributeExpressionRequest,
+    callback: Callback<
+      protos.google.cloud.iap.v1.IValidateIapAttributeExpressionResponse,
+      | protos.google.cloud.iap.v1.IValidateIapAttributeExpressionRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  validateIapAttributeExpression(
+    request?: protos.google.cloud.iap.v1.IValidateIapAttributeExpressionRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.iap.v1.IValidateIapAttributeExpressionResponse,
+          | protos.google.cloud.iap.v1.IValidateIapAttributeExpressionRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.iap.v1.IValidateIapAttributeExpressionResponse,
+      | protos.google.cloud.iap.v1.IValidateIapAttributeExpressionRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.iap.v1.IValidateIapAttributeExpressionResponse,
+      (
+        | protos.google.cloud.iap.v1.IValidateIapAttributeExpressionRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('validateIapAttributeExpression request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.iap.v1.IValidateIapAttributeExpressionResponse,
+          | protos.google.cloud.iap.v1.IValidateIapAttributeExpressionRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info(
+            'validateIapAttributeExpression response %j',
+            response
+          );
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .validateIapAttributeExpression(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.iap.v1.IValidateIapAttributeExpressionResponse,
+          (
+            | protos.google.cloud.iap.v1.IValidateIapAttributeExpressionRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info(
+            'validateIapAttributeExpression response %j',
+            response
+          );
           return [response, options, rawResponse];
         }
       );

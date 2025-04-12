@@ -5864,7 +5864,8 @@ export namespace google {
                         OGG_OPUS = 6,
                         SPEEX_WITH_HEADER_BYTE = 7,
                         MP3 = 8,
-                        WEBM_OPUS = 9
+                        WEBM_OPUS = 9,
+                        ALAW = 10
                     }
                 }
 
@@ -6393,6 +6394,9 @@ export namespace google {
 
                     /** RecognizeResponse requestId */
                     requestId?: (number|Long|string|null);
+
+                    /** RecognizeResponse usingLegacyModels */
+                    usingLegacyModels?: (boolean|null);
                 }
 
                 /** Represents a RecognizeResponse. */
@@ -6415,6 +6419,9 @@ export namespace google {
 
                     /** RecognizeResponse requestId. */
                     public requestId: (number|Long|string);
+
+                    /** RecognizeResponse usingLegacyModels. */
+                    public usingLegacyModels: boolean;
 
                     /**
                      * Creates a new RecognizeResponse instance using the specified properties.
@@ -7255,6 +7262,9 @@ export namespace google {
 
                     /** WordInfo speakerTag */
                     speakerTag?: (number|null);
+
+                    /** WordInfo speakerLabel */
+                    speakerLabel?: (string|null);
                 }
 
                 /** Represents a WordInfo. */
@@ -7280,6 +7290,9 @@ export namespace google {
 
                     /** WordInfo speakerTag. */
                     public speakerTag: number;
+
+                    /** WordInfo speakerLabel. */
+                    public speakerLabel: string;
 
                     /**
                      * Creates a new WordInfo instance using the specified properties.
@@ -7473,6 +7486,36 @@ export namespace google {
 
                     /** CustomClass items */
                     items?: (google.cloud.speech.v1p1beta1.CustomClass.IClassItem[]|null);
+
+                    /** CustomClass kmsKeyName */
+                    kmsKeyName?: (string|null);
+
+                    /** CustomClass kmsKeyVersionName */
+                    kmsKeyVersionName?: (string|null);
+
+                    /** CustomClass uid */
+                    uid?: (string|null);
+
+                    /** CustomClass displayName */
+                    displayName?: (string|null);
+
+                    /** CustomClass state */
+                    state?: (google.cloud.speech.v1p1beta1.CustomClass.State|keyof typeof google.cloud.speech.v1p1beta1.CustomClass.State|null);
+
+                    /** CustomClass deleteTime */
+                    deleteTime?: (google.protobuf.ITimestamp|null);
+
+                    /** CustomClass expireTime */
+                    expireTime?: (google.protobuf.ITimestamp|null);
+
+                    /** CustomClass annotations */
+                    annotations?: ({ [k: string]: string }|null);
+
+                    /** CustomClass etag */
+                    etag?: (string|null);
+
+                    /** CustomClass reconciling */
+                    reconciling?: (boolean|null);
                 }
 
                 /** Represents a CustomClass. */
@@ -7492,6 +7535,36 @@ export namespace google {
 
                     /** CustomClass items. */
                     public items: google.cloud.speech.v1p1beta1.CustomClass.IClassItem[];
+
+                    /** CustomClass kmsKeyName. */
+                    public kmsKeyName: string;
+
+                    /** CustomClass kmsKeyVersionName. */
+                    public kmsKeyVersionName: string;
+
+                    /** CustomClass uid. */
+                    public uid: string;
+
+                    /** CustomClass displayName. */
+                    public displayName: string;
+
+                    /** CustomClass state. */
+                    public state: (google.cloud.speech.v1p1beta1.CustomClass.State|keyof typeof google.cloud.speech.v1p1beta1.CustomClass.State);
+
+                    /** CustomClass deleteTime. */
+                    public deleteTime?: (google.protobuf.ITimestamp|null);
+
+                    /** CustomClass expireTime. */
+                    public expireTime?: (google.protobuf.ITimestamp|null);
+
+                    /** CustomClass annotations. */
+                    public annotations: { [k: string]: string };
+
+                    /** CustomClass etag. */
+                    public etag: string;
+
+                    /** CustomClass reconciling. */
+                    public reconciling: boolean;
 
                     /**
                      * Creates a new CustomClass instance using the specified properties.
@@ -7669,6 +7742,13 @@ export namespace google {
                          */
                         public static getTypeUrl(typeUrlPrefix?: string): string;
                     }
+
+                    /** State enum. */
+                    enum State {
+                        STATE_UNSPECIFIED = 0,
+                        ACTIVE = 2,
+                        DELETED = 4
+                    }
                 }
 
                 /** Properties of a PhraseSet. */
@@ -7682,6 +7762,36 @@ export namespace google {
 
                     /** PhraseSet boost */
                     boost?: (number|null);
+
+                    /** PhraseSet kmsKeyName */
+                    kmsKeyName?: (string|null);
+
+                    /** PhraseSet kmsKeyVersionName */
+                    kmsKeyVersionName?: (string|null);
+
+                    /** PhraseSet uid */
+                    uid?: (string|null);
+
+                    /** PhraseSet displayName */
+                    displayName?: (string|null);
+
+                    /** PhraseSet state */
+                    state?: (google.cloud.speech.v1p1beta1.PhraseSet.State|keyof typeof google.cloud.speech.v1p1beta1.PhraseSet.State|null);
+
+                    /** PhraseSet deleteTime */
+                    deleteTime?: (google.protobuf.ITimestamp|null);
+
+                    /** PhraseSet expireTime */
+                    expireTime?: (google.protobuf.ITimestamp|null);
+
+                    /** PhraseSet annotations */
+                    annotations?: ({ [k: string]: string }|null);
+
+                    /** PhraseSet etag */
+                    etag?: (string|null);
+
+                    /** PhraseSet reconciling */
+                    reconciling?: (boolean|null);
                 }
 
                 /** Represents a PhraseSet. */
@@ -7701,6 +7811,36 @@ export namespace google {
 
                     /** PhraseSet boost. */
                     public boost: number;
+
+                    /** PhraseSet kmsKeyName. */
+                    public kmsKeyName: string;
+
+                    /** PhraseSet kmsKeyVersionName. */
+                    public kmsKeyVersionName: string;
+
+                    /** PhraseSet uid. */
+                    public uid: string;
+
+                    /** PhraseSet displayName. */
+                    public displayName: string;
+
+                    /** PhraseSet state. */
+                    public state: (google.cloud.speech.v1p1beta1.PhraseSet.State|keyof typeof google.cloud.speech.v1p1beta1.PhraseSet.State);
+
+                    /** PhraseSet deleteTime. */
+                    public deleteTime?: (google.protobuf.ITimestamp|null);
+
+                    /** PhraseSet expireTime. */
+                    public expireTime?: (google.protobuf.ITimestamp|null);
+
+                    /** PhraseSet annotations. */
+                    public annotations: { [k: string]: string };
+
+                    /** PhraseSet etag. */
+                    public etag: string;
+
+                    /** PhraseSet reconciling. */
+                    public reconciling: boolean;
 
                     /**
                      * Creates a new PhraseSet instance using the specified properties.
@@ -7883,6 +8023,13 @@ export namespace google {
                          * @returns The default type url
                          */
                         public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** State enum. */
+                    enum State {
+                        STATE_UNSPECIFIED = 0,
+                        ACTIVE = 2,
+                        DELETED = 4
                     }
                 }
 

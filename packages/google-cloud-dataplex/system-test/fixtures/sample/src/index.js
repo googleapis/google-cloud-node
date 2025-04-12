@@ -21,6 +21,7 @@ const dataplex = require('@google-cloud/dataplex');
 
 function main() {
   const catalogServiceClient = new dataplex.CatalogServiceClient();
+  const cmekServiceClient = new dataplex.CmekServiceClient();
   const contentServiceClient = new dataplex.ContentServiceClient();
   const dataplexServiceClient = new dataplex.DataplexServiceClient();
   const dataScanServiceClient = new dataplex.DataScanServiceClient();

@@ -45,6 +45,11 @@
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },
+        "ValidateIapAttributeExpression": {
+          "timeout_millis": 60000,
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
         "ListTunnelDestGroups": {
           "timeout_millis": 60000,
           "retry_codes_name": "non_idempotent",
