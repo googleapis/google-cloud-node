@@ -10733,6 +10733,1205 @@
                         return ListCssProductsResponse;
                     })();
     
+                    v1.QuotaService = (function() {
+    
+                        /**
+                         * Constructs a new QuotaService service.
+                         * @memberof google.shopping.css.v1
+                         * @classdesc Represents a QuotaService
+                         * @extends $protobuf.rpc.Service
+                         * @constructor
+                         * @param {$protobuf.RPCImpl} rpcImpl RPC implementation
+                         * @param {boolean} [requestDelimited=false] Whether requests are length-delimited
+                         * @param {boolean} [responseDelimited=false] Whether responses are length-delimited
+                         */
+                        function QuotaService(rpcImpl, requestDelimited, responseDelimited) {
+                            $protobuf.rpc.Service.call(this, rpcImpl, requestDelimited, responseDelimited);
+                        }
+    
+                        (QuotaService.prototype = Object.create($protobuf.rpc.Service.prototype)).constructor = QuotaService;
+    
+                        /**
+                         * Creates new QuotaService service using the specified rpc implementation.
+                         * @function create
+                         * @memberof google.shopping.css.v1.QuotaService
+                         * @static
+                         * @param {$protobuf.RPCImpl} rpcImpl RPC implementation
+                         * @param {boolean} [requestDelimited=false] Whether requests are length-delimited
+                         * @param {boolean} [responseDelimited=false] Whether responses are length-delimited
+                         * @returns {QuotaService} RPC service. Useful where requests and/or responses are streamed.
+                         */
+                        QuotaService.create = function create(rpcImpl, requestDelimited, responseDelimited) {
+                            return new this(rpcImpl, requestDelimited, responseDelimited);
+                        };
+    
+                        /**
+                         * Callback as used by {@link google.shopping.css.v1.QuotaService|listQuotaGroups}.
+                         * @memberof google.shopping.css.v1.QuotaService
+                         * @typedef ListQuotaGroupsCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.shopping.css.v1.ListQuotaGroupsResponse} [response] ListQuotaGroupsResponse
+                         */
+    
+                        /**
+                         * Calls ListQuotaGroups.
+                         * @function listQuotaGroups
+                         * @memberof google.shopping.css.v1.QuotaService
+                         * @instance
+                         * @param {google.shopping.css.v1.IListQuotaGroupsRequest} request ListQuotaGroupsRequest message or plain object
+                         * @param {google.shopping.css.v1.QuotaService.ListQuotaGroupsCallback} callback Node-style callback called with the error, if any, and ListQuotaGroupsResponse
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(QuotaService.prototype.listQuotaGroups = function listQuotaGroups(request, callback) {
+                            return this.rpcCall(listQuotaGroups, $root.google.shopping.css.v1.ListQuotaGroupsRequest, $root.google.shopping.css.v1.ListQuotaGroupsResponse, request, callback);
+                        }, "name", { value: "ListQuotaGroups" });
+    
+                        /**
+                         * Calls ListQuotaGroups.
+                         * @function listQuotaGroups
+                         * @memberof google.shopping.css.v1.QuotaService
+                         * @instance
+                         * @param {google.shopping.css.v1.IListQuotaGroupsRequest} request ListQuotaGroupsRequest message or plain object
+                         * @returns {Promise<google.shopping.css.v1.ListQuotaGroupsResponse>} Promise
+                         * @variation 2
+                         */
+    
+                        return QuotaService;
+                    })();
+    
+                    v1.QuotaGroup = (function() {
+    
+                        /**
+                         * Properties of a QuotaGroup.
+                         * @memberof google.shopping.css.v1
+                         * @interface IQuotaGroup
+                         * @property {string|null} [name] QuotaGroup name
+                         * @property {number|Long|null} [quotaUsage] QuotaGroup quotaUsage
+                         * @property {number|Long|null} [quotaLimit] QuotaGroup quotaLimit
+                         * @property {number|Long|null} [quotaMinuteLimit] QuotaGroup quotaMinuteLimit
+                         * @property {Array.<google.shopping.css.v1.IMethodDetails>|null} [methodDetails] QuotaGroup methodDetails
+                         */
+    
+                        /**
+                         * Constructs a new QuotaGroup.
+                         * @memberof google.shopping.css.v1
+                         * @classdesc Represents a QuotaGroup.
+                         * @implements IQuotaGroup
+                         * @constructor
+                         * @param {google.shopping.css.v1.IQuotaGroup=} [properties] Properties to set
+                         */
+                        function QuotaGroup(properties) {
+                            this.methodDetails = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * QuotaGroup name.
+                         * @member {string} name
+                         * @memberof google.shopping.css.v1.QuotaGroup
+                         * @instance
+                         */
+                        QuotaGroup.prototype.name = "";
+    
+                        /**
+                         * QuotaGroup quotaUsage.
+                         * @member {number|Long} quotaUsage
+                         * @memberof google.shopping.css.v1.QuotaGroup
+                         * @instance
+                         */
+                        QuotaGroup.prototype.quotaUsage = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+                        /**
+                         * QuotaGroup quotaLimit.
+                         * @member {number|Long} quotaLimit
+                         * @memberof google.shopping.css.v1.QuotaGroup
+                         * @instance
+                         */
+                        QuotaGroup.prototype.quotaLimit = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+                        /**
+                         * QuotaGroup quotaMinuteLimit.
+                         * @member {number|Long} quotaMinuteLimit
+                         * @memberof google.shopping.css.v1.QuotaGroup
+                         * @instance
+                         */
+                        QuotaGroup.prototype.quotaMinuteLimit = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+                        /**
+                         * QuotaGroup methodDetails.
+                         * @member {Array.<google.shopping.css.v1.IMethodDetails>} methodDetails
+                         * @memberof google.shopping.css.v1.QuotaGroup
+                         * @instance
+                         */
+                        QuotaGroup.prototype.methodDetails = $util.emptyArray;
+    
+                        /**
+                         * Creates a new QuotaGroup instance using the specified properties.
+                         * @function create
+                         * @memberof google.shopping.css.v1.QuotaGroup
+                         * @static
+                         * @param {google.shopping.css.v1.IQuotaGroup=} [properties] Properties to set
+                         * @returns {google.shopping.css.v1.QuotaGroup} QuotaGroup instance
+                         */
+                        QuotaGroup.create = function create(properties) {
+                            return new QuotaGroup(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified QuotaGroup message. Does not implicitly {@link google.shopping.css.v1.QuotaGroup.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.shopping.css.v1.QuotaGroup
+                         * @static
+                         * @param {google.shopping.css.v1.IQuotaGroup} message QuotaGroup message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        QuotaGroup.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.quotaUsage != null && Object.hasOwnProperty.call(message, "quotaUsage"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).int64(message.quotaUsage);
+                            if (message.quotaLimit != null && Object.hasOwnProperty.call(message, "quotaLimit"))
+                                writer.uint32(/* id 3, wireType 0 =*/24).int64(message.quotaLimit);
+                            if (message.methodDetails != null && message.methodDetails.length)
+                                for (var i = 0; i < message.methodDetails.length; ++i)
+                                    $root.google.shopping.css.v1.MethodDetails.encode(message.methodDetails[i], writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                            if (message.quotaMinuteLimit != null && Object.hasOwnProperty.call(message, "quotaMinuteLimit"))
+                                writer.uint32(/* id 5, wireType 0 =*/40).int64(message.quotaMinuteLimit);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified QuotaGroup message, length delimited. Does not implicitly {@link google.shopping.css.v1.QuotaGroup.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.shopping.css.v1.QuotaGroup
+                         * @static
+                         * @param {google.shopping.css.v1.IQuotaGroup} message QuotaGroup message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        QuotaGroup.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a QuotaGroup message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.shopping.css.v1.QuotaGroup
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.shopping.css.v1.QuotaGroup} QuotaGroup
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        QuotaGroup.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.shopping.css.v1.QuotaGroup();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.quotaUsage = reader.int64();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.quotaLimit = reader.int64();
+                                        break;
+                                    }
+                                case 5: {
+                                        message.quotaMinuteLimit = reader.int64();
+                                        break;
+                                    }
+                                case 4: {
+                                        if (!(message.methodDetails && message.methodDetails.length))
+                                            message.methodDetails = [];
+                                        message.methodDetails.push($root.google.shopping.css.v1.MethodDetails.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a QuotaGroup message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.shopping.css.v1.QuotaGroup
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.shopping.css.v1.QuotaGroup} QuotaGroup
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        QuotaGroup.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a QuotaGroup message.
+                         * @function verify
+                         * @memberof google.shopping.css.v1.QuotaGroup
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        QuotaGroup.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.quotaUsage != null && message.hasOwnProperty("quotaUsage"))
+                                if (!$util.isInteger(message.quotaUsage) && !(message.quotaUsage && $util.isInteger(message.quotaUsage.low) && $util.isInteger(message.quotaUsage.high)))
+                                    return "quotaUsage: integer|Long expected";
+                            if (message.quotaLimit != null && message.hasOwnProperty("quotaLimit"))
+                                if (!$util.isInteger(message.quotaLimit) && !(message.quotaLimit && $util.isInteger(message.quotaLimit.low) && $util.isInteger(message.quotaLimit.high)))
+                                    return "quotaLimit: integer|Long expected";
+                            if (message.quotaMinuteLimit != null && message.hasOwnProperty("quotaMinuteLimit"))
+                                if (!$util.isInteger(message.quotaMinuteLimit) && !(message.quotaMinuteLimit && $util.isInteger(message.quotaMinuteLimit.low) && $util.isInteger(message.quotaMinuteLimit.high)))
+                                    return "quotaMinuteLimit: integer|Long expected";
+                            if (message.methodDetails != null && message.hasOwnProperty("methodDetails")) {
+                                if (!Array.isArray(message.methodDetails))
+                                    return "methodDetails: array expected";
+                                for (var i = 0; i < message.methodDetails.length; ++i) {
+                                    var error = $root.google.shopping.css.v1.MethodDetails.verify(message.methodDetails[i]);
+                                    if (error)
+                                        return "methodDetails." + error;
+                                }
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a QuotaGroup message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.shopping.css.v1.QuotaGroup
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.shopping.css.v1.QuotaGroup} QuotaGroup
+                         */
+                        QuotaGroup.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.shopping.css.v1.QuotaGroup)
+                                return object;
+                            var message = new $root.google.shopping.css.v1.QuotaGroup();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            if (object.quotaUsage != null)
+                                if ($util.Long)
+                                    (message.quotaUsage = $util.Long.fromValue(object.quotaUsage)).unsigned = false;
+                                else if (typeof object.quotaUsage === "string")
+                                    message.quotaUsage = parseInt(object.quotaUsage, 10);
+                                else if (typeof object.quotaUsage === "number")
+                                    message.quotaUsage = object.quotaUsage;
+                                else if (typeof object.quotaUsage === "object")
+                                    message.quotaUsage = new $util.LongBits(object.quotaUsage.low >>> 0, object.quotaUsage.high >>> 0).toNumber();
+                            if (object.quotaLimit != null)
+                                if ($util.Long)
+                                    (message.quotaLimit = $util.Long.fromValue(object.quotaLimit)).unsigned = false;
+                                else if (typeof object.quotaLimit === "string")
+                                    message.quotaLimit = parseInt(object.quotaLimit, 10);
+                                else if (typeof object.quotaLimit === "number")
+                                    message.quotaLimit = object.quotaLimit;
+                                else if (typeof object.quotaLimit === "object")
+                                    message.quotaLimit = new $util.LongBits(object.quotaLimit.low >>> 0, object.quotaLimit.high >>> 0).toNumber();
+                            if (object.quotaMinuteLimit != null)
+                                if ($util.Long)
+                                    (message.quotaMinuteLimit = $util.Long.fromValue(object.quotaMinuteLimit)).unsigned = false;
+                                else if (typeof object.quotaMinuteLimit === "string")
+                                    message.quotaMinuteLimit = parseInt(object.quotaMinuteLimit, 10);
+                                else if (typeof object.quotaMinuteLimit === "number")
+                                    message.quotaMinuteLimit = object.quotaMinuteLimit;
+                                else if (typeof object.quotaMinuteLimit === "object")
+                                    message.quotaMinuteLimit = new $util.LongBits(object.quotaMinuteLimit.low >>> 0, object.quotaMinuteLimit.high >>> 0).toNumber();
+                            if (object.methodDetails) {
+                                if (!Array.isArray(object.methodDetails))
+                                    throw TypeError(".google.shopping.css.v1.QuotaGroup.methodDetails: array expected");
+                                message.methodDetails = [];
+                                for (var i = 0; i < object.methodDetails.length; ++i) {
+                                    if (typeof object.methodDetails[i] !== "object")
+                                        throw TypeError(".google.shopping.css.v1.QuotaGroup.methodDetails: object expected");
+                                    message.methodDetails[i] = $root.google.shopping.css.v1.MethodDetails.fromObject(object.methodDetails[i]);
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a QuotaGroup message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.shopping.css.v1.QuotaGroup
+                         * @static
+                         * @param {google.shopping.css.v1.QuotaGroup} message QuotaGroup
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        QuotaGroup.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.methodDetails = [];
+                            if (options.defaults) {
+                                object.name = "";
+                                if ($util.Long) {
+                                    var long = new $util.Long(0, 0, false);
+                                    object.quotaUsage = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                                } else
+                                    object.quotaUsage = options.longs === String ? "0" : 0;
+                                if ($util.Long) {
+                                    var long = new $util.Long(0, 0, false);
+                                    object.quotaLimit = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                                } else
+                                    object.quotaLimit = options.longs === String ? "0" : 0;
+                                if ($util.Long) {
+                                    var long = new $util.Long(0, 0, false);
+                                    object.quotaMinuteLimit = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                                } else
+                                    object.quotaMinuteLimit = options.longs === String ? "0" : 0;
+                            }
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            if (message.quotaUsage != null && message.hasOwnProperty("quotaUsage"))
+                                if (typeof message.quotaUsage === "number")
+                                    object.quotaUsage = options.longs === String ? String(message.quotaUsage) : message.quotaUsage;
+                                else
+                                    object.quotaUsage = options.longs === String ? $util.Long.prototype.toString.call(message.quotaUsage) : options.longs === Number ? new $util.LongBits(message.quotaUsage.low >>> 0, message.quotaUsage.high >>> 0).toNumber() : message.quotaUsage;
+                            if (message.quotaLimit != null && message.hasOwnProperty("quotaLimit"))
+                                if (typeof message.quotaLimit === "number")
+                                    object.quotaLimit = options.longs === String ? String(message.quotaLimit) : message.quotaLimit;
+                                else
+                                    object.quotaLimit = options.longs === String ? $util.Long.prototype.toString.call(message.quotaLimit) : options.longs === Number ? new $util.LongBits(message.quotaLimit.low >>> 0, message.quotaLimit.high >>> 0).toNumber() : message.quotaLimit;
+                            if (message.methodDetails && message.methodDetails.length) {
+                                object.methodDetails = [];
+                                for (var j = 0; j < message.methodDetails.length; ++j)
+                                    object.methodDetails[j] = $root.google.shopping.css.v1.MethodDetails.toObject(message.methodDetails[j], options);
+                            }
+                            if (message.quotaMinuteLimit != null && message.hasOwnProperty("quotaMinuteLimit"))
+                                if (typeof message.quotaMinuteLimit === "number")
+                                    object.quotaMinuteLimit = options.longs === String ? String(message.quotaMinuteLimit) : message.quotaMinuteLimit;
+                                else
+                                    object.quotaMinuteLimit = options.longs === String ? $util.Long.prototype.toString.call(message.quotaMinuteLimit) : options.longs === Number ? new $util.LongBits(message.quotaMinuteLimit.low >>> 0, message.quotaMinuteLimit.high >>> 0).toNumber() : message.quotaMinuteLimit;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this QuotaGroup to JSON.
+                         * @function toJSON
+                         * @memberof google.shopping.css.v1.QuotaGroup
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        QuotaGroup.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for QuotaGroup
+                         * @function getTypeUrl
+                         * @memberof google.shopping.css.v1.QuotaGroup
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        QuotaGroup.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.shopping.css.v1.QuotaGroup";
+                        };
+    
+                        return QuotaGroup;
+                    })();
+    
+                    v1.MethodDetails = (function() {
+    
+                        /**
+                         * Properties of a MethodDetails.
+                         * @memberof google.shopping.css.v1
+                         * @interface IMethodDetails
+                         * @property {string|null} [method] MethodDetails method
+                         * @property {string|null} [version] MethodDetails version
+                         * @property {string|null} [subapi] MethodDetails subapi
+                         * @property {string|null} [path] MethodDetails path
+                         */
+    
+                        /**
+                         * Constructs a new MethodDetails.
+                         * @memberof google.shopping.css.v1
+                         * @classdesc Represents a MethodDetails.
+                         * @implements IMethodDetails
+                         * @constructor
+                         * @param {google.shopping.css.v1.IMethodDetails=} [properties] Properties to set
+                         */
+                        function MethodDetails(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * MethodDetails method.
+                         * @member {string} method
+                         * @memberof google.shopping.css.v1.MethodDetails
+                         * @instance
+                         */
+                        MethodDetails.prototype.method = "";
+    
+                        /**
+                         * MethodDetails version.
+                         * @member {string} version
+                         * @memberof google.shopping.css.v1.MethodDetails
+                         * @instance
+                         */
+                        MethodDetails.prototype.version = "";
+    
+                        /**
+                         * MethodDetails subapi.
+                         * @member {string} subapi
+                         * @memberof google.shopping.css.v1.MethodDetails
+                         * @instance
+                         */
+                        MethodDetails.prototype.subapi = "";
+    
+                        /**
+                         * MethodDetails path.
+                         * @member {string} path
+                         * @memberof google.shopping.css.v1.MethodDetails
+                         * @instance
+                         */
+                        MethodDetails.prototype.path = "";
+    
+                        /**
+                         * Creates a new MethodDetails instance using the specified properties.
+                         * @function create
+                         * @memberof google.shopping.css.v1.MethodDetails
+                         * @static
+                         * @param {google.shopping.css.v1.IMethodDetails=} [properties] Properties to set
+                         * @returns {google.shopping.css.v1.MethodDetails} MethodDetails instance
+                         */
+                        MethodDetails.create = function create(properties) {
+                            return new MethodDetails(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified MethodDetails message. Does not implicitly {@link google.shopping.css.v1.MethodDetails.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.shopping.css.v1.MethodDetails
+                         * @static
+                         * @param {google.shopping.css.v1.IMethodDetails} message MethodDetails message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        MethodDetails.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.method != null && Object.hasOwnProperty.call(message, "method"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.method);
+                            if (message.version != null && Object.hasOwnProperty.call(message, "version"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.version);
+                            if (message.subapi != null && Object.hasOwnProperty.call(message, "subapi"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.subapi);
+                            if (message.path != null && Object.hasOwnProperty.call(message, "path"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.path);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified MethodDetails message, length delimited. Does not implicitly {@link google.shopping.css.v1.MethodDetails.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.shopping.css.v1.MethodDetails
+                         * @static
+                         * @param {google.shopping.css.v1.IMethodDetails} message MethodDetails message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        MethodDetails.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a MethodDetails message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.shopping.css.v1.MethodDetails
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.shopping.css.v1.MethodDetails} MethodDetails
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        MethodDetails.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.shopping.css.v1.MethodDetails();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.method = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.version = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.subapi = reader.string();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.path = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a MethodDetails message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.shopping.css.v1.MethodDetails
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.shopping.css.v1.MethodDetails} MethodDetails
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        MethodDetails.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a MethodDetails message.
+                         * @function verify
+                         * @memberof google.shopping.css.v1.MethodDetails
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        MethodDetails.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.method != null && message.hasOwnProperty("method"))
+                                if (!$util.isString(message.method))
+                                    return "method: string expected";
+                            if (message.version != null && message.hasOwnProperty("version"))
+                                if (!$util.isString(message.version))
+                                    return "version: string expected";
+                            if (message.subapi != null && message.hasOwnProperty("subapi"))
+                                if (!$util.isString(message.subapi))
+                                    return "subapi: string expected";
+                            if (message.path != null && message.hasOwnProperty("path"))
+                                if (!$util.isString(message.path))
+                                    return "path: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a MethodDetails message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.shopping.css.v1.MethodDetails
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.shopping.css.v1.MethodDetails} MethodDetails
+                         */
+                        MethodDetails.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.shopping.css.v1.MethodDetails)
+                                return object;
+                            var message = new $root.google.shopping.css.v1.MethodDetails();
+                            if (object.method != null)
+                                message.method = String(object.method);
+                            if (object.version != null)
+                                message.version = String(object.version);
+                            if (object.subapi != null)
+                                message.subapi = String(object.subapi);
+                            if (object.path != null)
+                                message.path = String(object.path);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a MethodDetails message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.shopping.css.v1.MethodDetails
+                         * @static
+                         * @param {google.shopping.css.v1.MethodDetails} message MethodDetails
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        MethodDetails.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.method = "";
+                                object.version = "";
+                                object.subapi = "";
+                                object.path = "";
+                            }
+                            if (message.method != null && message.hasOwnProperty("method"))
+                                object.method = message.method;
+                            if (message.version != null && message.hasOwnProperty("version"))
+                                object.version = message.version;
+                            if (message.subapi != null && message.hasOwnProperty("subapi"))
+                                object.subapi = message.subapi;
+                            if (message.path != null && message.hasOwnProperty("path"))
+                                object.path = message.path;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this MethodDetails to JSON.
+                         * @function toJSON
+                         * @memberof google.shopping.css.v1.MethodDetails
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        MethodDetails.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for MethodDetails
+                         * @function getTypeUrl
+                         * @memberof google.shopping.css.v1.MethodDetails
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        MethodDetails.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.shopping.css.v1.MethodDetails";
+                        };
+    
+                        return MethodDetails;
+                    })();
+    
+                    v1.ListQuotaGroupsRequest = (function() {
+    
+                        /**
+                         * Properties of a ListQuotaGroupsRequest.
+                         * @memberof google.shopping.css.v1
+                         * @interface IListQuotaGroupsRequest
+                         * @property {string|null} [parent] ListQuotaGroupsRequest parent
+                         * @property {number|null} [pageSize] ListQuotaGroupsRequest pageSize
+                         * @property {string|null} [pageToken] ListQuotaGroupsRequest pageToken
+                         */
+    
+                        /**
+                         * Constructs a new ListQuotaGroupsRequest.
+                         * @memberof google.shopping.css.v1
+                         * @classdesc Represents a ListQuotaGroupsRequest.
+                         * @implements IListQuotaGroupsRequest
+                         * @constructor
+                         * @param {google.shopping.css.v1.IListQuotaGroupsRequest=} [properties] Properties to set
+                         */
+                        function ListQuotaGroupsRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ListQuotaGroupsRequest parent.
+                         * @member {string} parent
+                         * @memberof google.shopping.css.v1.ListQuotaGroupsRequest
+                         * @instance
+                         */
+                        ListQuotaGroupsRequest.prototype.parent = "";
+    
+                        /**
+                         * ListQuotaGroupsRequest pageSize.
+                         * @member {number} pageSize
+                         * @memberof google.shopping.css.v1.ListQuotaGroupsRequest
+                         * @instance
+                         */
+                        ListQuotaGroupsRequest.prototype.pageSize = 0;
+    
+                        /**
+                         * ListQuotaGroupsRequest pageToken.
+                         * @member {string} pageToken
+                         * @memberof google.shopping.css.v1.ListQuotaGroupsRequest
+                         * @instance
+                         */
+                        ListQuotaGroupsRequest.prototype.pageToken = "";
+    
+                        /**
+                         * Creates a new ListQuotaGroupsRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.shopping.css.v1.ListQuotaGroupsRequest
+                         * @static
+                         * @param {google.shopping.css.v1.IListQuotaGroupsRequest=} [properties] Properties to set
+                         * @returns {google.shopping.css.v1.ListQuotaGroupsRequest} ListQuotaGroupsRequest instance
+                         */
+                        ListQuotaGroupsRequest.create = function create(properties) {
+                            return new ListQuotaGroupsRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ListQuotaGroupsRequest message. Does not implicitly {@link google.shopping.css.v1.ListQuotaGroupsRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.shopping.css.v1.ListQuotaGroupsRequest
+                         * @static
+                         * @param {google.shopping.css.v1.IListQuotaGroupsRequest} message ListQuotaGroupsRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListQuotaGroupsRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                            if (message.pageSize != null && Object.hasOwnProperty.call(message, "pageSize"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.pageSize);
+                            if (message.pageToken != null && Object.hasOwnProperty.call(message, "pageToken"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.pageToken);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ListQuotaGroupsRequest message, length delimited. Does not implicitly {@link google.shopping.css.v1.ListQuotaGroupsRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.shopping.css.v1.ListQuotaGroupsRequest
+                         * @static
+                         * @param {google.shopping.css.v1.IListQuotaGroupsRequest} message ListQuotaGroupsRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListQuotaGroupsRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ListQuotaGroupsRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.shopping.css.v1.ListQuotaGroupsRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.shopping.css.v1.ListQuotaGroupsRequest} ListQuotaGroupsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListQuotaGroupsRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.shopping.css.v1.ListQuotaGroupsRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.parent = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.pageSize = reader.int32();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.pageToken = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ListQuotaGroupsRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.shopping.css.v1.ListQuotaGroupsRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.shopping.css.v1.ListQuotaGroupsRequest} ListQuotaGroupsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListQuotaGroupsRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ListQuotaGroupsRequest message.
+                         * @function verify
+                         * @memberof google.shopping.css.v1.ListQuotaGroupsRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ListQuotaGroupsRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                if (!$util.isString(message.parent))
+                                    return "parent: string expected";
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                if (!$util.isInteger(message.pageSize))
+                                    return "pageSize: integer expected";
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                if (!$util.isString(message.pageToken))
+                                    return "pageToken: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ListQuotaGroupsRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.shopping.css.v1.ListQuotaGroupsRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.shopping.css.v1.ListQuotaGroupsRequest} ListQuotaGroupsRequest
+                         */
+                        ListQuotaGroupsRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.shopping.css.v1.ListQuotaGroupsRequest)
+                                return object;
+                            var message = new $root.google.shopping.css.v1.ListQuotaGroupsRequest();
+                            if (object.parent != null)
+                                message.parent = String(object.parent);
+                            if (object.pageSize != null)
+                                message.pageSize = object.pageSize | 0;
+                            if (object.pageToken != null)
+                                message.pageToken = String(object.pageToken);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ListQuotaGroupsRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.shopping.css.v1.ListQuotaGroupsRequest
+                         * @static
+                         * @param {google.shopping.css.v1.ListQuotaGroupsRequest} message ListQuotaGroupsRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ListQuotaGroupsRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.parent = "";
+                                object.pageSize = 0;
+                                object.pageToken = "";
+                            }
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                object.parent = message.parent;
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                object.pageSize = message.pageSize;
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                object.pageToken = message.pageToken;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ListQuotaGroupsRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.shopping.css.v1.ListQuotaGroupsRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ListQuotaGroupsRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ListQuotaGroupsRequest
+                         * @function getTypeUrl
+                         * @memberof google.shopping.css.v1.ListQuotaGroupsRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ListQuotaGroupsRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.shopping.css.v1.ListQuotaGroupsRequest";
+                        };
+    
+                        return ListQuotaGroupsRequest;
+                    })();
+    
+                    v1.ListQuotaGroupsResponse = (function() {
+    
+                        /**
+                         * Properties of a ListQuotaGroupsResponse.
+                         * @memberof google.shopping.css.v1
+                         * @interface IListQuotaGroupsResponse
+                         * @property {Array.<google.shopping.css.v1.IQuotaGroup>|null} [quotaGroups] ListQuotaGroupsResponse quotaGroups
+                         * @property {string|null} [nextPageToken] ListQuotaGroupsResponse nextPageToken
+                         */
+    
+                        /**
+                         * Constructs a new ListQuotaGroupsResponse.
+                         * @memberof google.shopping.css.v1
+                         * @classdesc Represents a ListQuotaGroupsResponse.
+                         * @implements IListQuotaGroupsResponse
+                         * @constructor
+                         * @param {google.shopping.css.v1.IListQuotaGroupsResponse=} [properties] Properties to set
+                         */
+                        function ListQuotaGroupsResponse(properties) {
+                            this.quotaGroups = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ListQuotaGroupsResponse quotaGroups.
+                         * @member {Array.<google.shopping.css.v1.IQuotaGroup>} quotaGroups
+                         * @memberof google.shopping.css.v1.ListQuotaGroupsResponse
+                         * @instance
+                         */
+                        ListQuotaGroupsResponse.prototype.quotaGroups = $util.emptyArray;
+    
+                        /**
+                         * ListQuotaGroupsResponse nextPageToken.
+                         * @member {string} nextPageToken
+                         * @memberof google.shopping.css.v1.ListQuotaGroupsResponse
+                         * @instance
+                         */
+                        ListQuotaGroupsResponse.prototype.nextPageToken = "";
+    
+                        /**
+                         * Creates a new ListQuotaGroupsResponse instance using the specified properties.
+                         * @function create
+                         * @memberof google.shopping.css.v1.ListQuotaGroupsResponse
+                         * @static
+                         * @param {google.shopping.css.v1.IListQuotaGroupsResponse=} [properties] Properties to set
+                         * @returns {google.shopping.css.v1.ListQuotaGroupsResponse} ListQuotaGroupsResponse instance
+                         */
+                        ListQuotaGroupsResponse.create = function create(properties) {
+                            return new ListQuotaGroupsResponse(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ListQuotaGroupsResponse message. Does not implicitly {@link google.shopping.css.v1.ListQuotaGroupsResponse.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.shopping.css.v1.ListQuotaGroupsResponse
+                         * @static
+                         * @param {google.shopping.css.v1.IListQuotaGroupsResponse} message ListQuotaGroupsResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListQuotaGroupsResponse.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.quotaGroups != null && message.quotaGroups.length)
+                                for (var i = 0; i < message.quotaGroups.length; ++i)
+                                    $root.google.shopping.css.v1.QuotaGroup.encode(message.quotaGroups[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.nextPageToken != null && Object.hasOwnProperty.call(message, "nextPageToken"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.nextPageToken);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ListQuotaGroupsResponse message, length delimited. Does not implicitly {@link google.shopping.css.v1.ListQuotaGroupsResponse.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.shopping.css.v1.ListQuotaGroupsResponse
+                         * @static
+                         * @param {google.shopping.css.v1.IListQuotaGroupsResponse} message ListQuotaGroupsResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListQuotaGroupsResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ListQuotaGroupsResponse message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.shopping.css.v1.ListQuotaGroupsResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.shopping.css.v1.ListQuotaGroupsResponse} ListQuotaGroupsResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListQuotaGroupsResponse.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.shopping.css.v1.ListQuotaGroupsResponse();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        if (!(message.quotaGroups && message.quotaGroups.length))
+                                            message.quotaGroups = [];
+                                        message.quotaGroups.push($root.google.shopping.css.v1.QuotaGroup.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 2: {
+                                        message.nextPageToken = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ListQuotaGroupsResponse message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.shopping.css.v1.ListQuotaGroupsResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.shopping.css.v1.ListQuotaGroupsResponse} ListQuotaGroupsResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListQuotaGroupsResponse.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ListQuotaGroupsResponse message.
+                         * @function verify
+                         * @memberof google.shopping.css.v1.ListQuotaGroupsResponse
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ListQuotaGroupsResponse.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.quotaGroups != null && message.hasOwnProperty("quotaGroups")) {
+                                if (!Array.isArray(message.quotaGroups))
+                                    return "quotaGroups: array expected";
+                                for (var i = 0; i < message.quotaGroups.length; ++i) {
+                                    var error = $root.google.shopping.css.v1.QuotaGroup.verify(message.quotaGroups[i]);
+                                    if (error)
+                                        return "quotaGroups." + error;
+                                }
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                if (!$util.isString(message.nextPageToken))
+                                    return "nextPageToken: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ListQuotaGroupsResponse message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.shopping.css.v1.ListQuotaGroupsResponse
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.shopping.css.v1.ListQuotaGroupsResponse} ListQuotaGroupsResponse
+                         */
+                        ListQuotaGroupsResponse.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.shopping.css.v1.ListQuotaGroupsResponse)
+                                return object;
+                            var message = new $root.google.shopping.css.v1.ListQuotaGroupsResponse();
+                            if (object.quotaGroups) {
+                                if (!Array.isArray(object.quotaGroups))
+                                    throw TypeError(".google.shopping.css.v1.ListQuotaGroupsResponse.quotaGroups: array expected");
+                                message.quotaGroups = [];
+                                for (var i = 0; i < object.quotaGroups.length; ++i) {
+                                    if (typeof object.quotaGroups[i] !== "object")
+                                        throw TypeError(".google.shopping.css.v1.ListQuotaGroupsResponse.quotaGroups: object expected");
+                                    message.quotaGroups[i] = $root.google.shopping.css.v1.QuotaGroup.fromObject(object.quotaGroups[i]);
+                                }
+                            }
+                            if (object.nextPageToken != null)
+                                message.nextPageToken = String(object.nextPageToken);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ListQuotaGroupsResponse message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.shopping.css.v1.ListQuotaGroupsResponse
+                         * @static
+                         * @param {google.shopping.css.v1.ListQuotaGroupsResponse} message ListQuotaGroupsResponse
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ListQuotaGroupsResponse.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.quotaGroups = [];
+                            if (options.defaults)
+                                object.nextPageToken = "";
+                            if (message.quotaGroups && message.quotaGroups.length) {
+                                object.quotaGroups = [];
+                                for (var j = 0; j < message.quotaGroups.length; ++j)
+                                    object.quotaGroups[j] = $root.google.shopping.css.v1.QuotaGroup.toObject(message.quotaGroups[j], options);
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                object.nextPageToken = message.nextPageToken;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ListQuotaGroupsResponse to JSON.
+                         * @function toJSON
+                         * @memberof google.shopping.css.v1.ListQuotaGroupsResponse
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ListQuotaGroupsResponse.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ListQuotaGroupsResponse
+                         * @function getTypeUrl
+                         * @memberof google.shopping.css.v1.ListQuotaGroupsResponse
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ListQuotaGroupsResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.shopping.css.v1.ListQuotaGroupsResponse";
+                        };
+    
+                        return ListQuotaGroupsResponse;
+                    })();
+    
                     return v1;
                 })();
     

@@ -17,6 +17,7 @@
 // ** All changes to this file may be overwritten. **
 
 import * as v1 from './v1';
+import * as v1alpha1 from './v1alpha1';
 import * as v1beta1 from './v1beta1';
 
 const PublicCertificateAuthorityServiceClient =
@@ -24,7 +25,7 @@ const PublicCertificateAuthorityServiceClient =
 type PublicCertificateAuthorityServiceClient =
   v1beta1.PublicCertificateAuthorityServiceClient;
 
-export {v1, v1beta1, PublicCertificateAuthorityServiceClient};
-export default {v1, v1beta1, PublicCertificateAuthorityServiceClient};
+export {v1, v1alpha1, v1beta1, PublicCertificateAuthorityServiceClient};
+export default {v1, v1alpha1, v1beta1, PublicCertificateAuthorityServiceClient};
 import * as protos from '../protos/protos';
 export {protos};

@@ -22,6 +22,7 @@
   * [Identity_aware_proxy_admin_service.test_iam_permissions](#identity_aware_proxy_admin_service.test_iam_permissions)
   * [Identity_aware_proxy_admin_service.update_iap_settings](#identity_aware_proxy_admin_service.update_iap_settings)
   * [Identity_aware_proxy_admin_service.update_tunnel_dest_group](#identity_aware_proxy_admin_service.update_tunnel_dest_group)
+  * [Identity_aware_proxy_admin_service.validate_iap_attribute_expression](#identity_aware_proxy_admin_service.validate_iap_attribute_expression)
   * [Identity_aware_proxy_o_auth_service.create_brand](#identity_aware_proxy_o_auth_service.create_brand)
   * [Identity_aware_proxy_o_auth_service.create_identity_aware_proxy_client](#identity_aware_proxy_o_auth_service.create_identity_aware_proxy_client)
   * [Identity_aware_proxy_o_auth_service.delete_identity_aware_proxy_client](#identity_aware_proxy_o_auth_service.delete_identity_aware_proxy_client)
@@ -213,6 +214,23 @@ __Usage:__
 
 
 `node packages/google-cloud-iap/samples/generated/v1/identity_aware_proxy_admin_service.update_tunnel_dest_group.js`
+
+
+-----
+
+
+
+
+### Identity_aware_proxy_admin_service.validate_iap_attribute_expression
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-iap/samples/generated/v1/identity_aware_proxy_admin_service.validate_iap_attribute_expression.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-iap/samples/generated/v1/identity_aware_proxy_admin_service.validate_iap_attribute_expression.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-iap/samples/generated/v1/identity_aware_proxy_admin_service.validate_iap_attribute_expression.js`
 
 
 -----

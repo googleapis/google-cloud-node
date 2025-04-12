@@ -232,6 +232,50 @@
             }
         },
         {
+            "regionTag": "iap_v1_generated_IdentityAwareProxyAdminService_ValidateIapAttributeExpression_async",
+            "title": "IdentityAwareProxyAdminService validateIapAttributeExpression Sample",
+            "origin": "API_DEFINITION",
+            "description": " Validates that a given CEL expression conforms to IAP restrictions.",
+            "canonical": true,
+            "file": "identity_aware_proxy_admin_service.validate_iap_attribute_expression.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 60,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "ValidateIapAttributeExpression",
+                "fullName": "google.cloud.iap.v1.IdentityAwareProxyAdminService.ValidateIapAttributeExpression",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "name",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "expression",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.cloud.iap.v1.ValidateIapAttributeExpressionResponse",
+                "client": {
+                    "shortName": "IdentityAwareProxyAdminServiceClient",
+                    "fullName": "google.cloud.iap.v1.IdentityAwareProxyAdminServiceClient"
+                },
+                "method": {
+                    "shortName": "ValidateIapAttributeExpression",
+                    "fullName": "google.cloud.iap.v1.IdentityAwareProxyAdminService.ValidateIapAttributeExpression",
+                    "service": {
+                        "shortName": "IdentityAwareProxyAdminService",
+                        "fullName": "google.cloud.iap.v1.IdentityAwareProxyAdminService"
+                    }
+                }
+            }
+        },
+        {
             "regionTag": "iap_v1_generated_IdentityAwareProxyAdminService_ListTunnelDestGroups_async",
             "title": "IdentityAwareProxyAdminService listTunnelDestGroups Sample",
             "origin": "API_DEFINITION",

@@ -65,6 +65,21 @@
                 "restoreAutonomousDatabase"
               ]
             },
+            "StopAutonomousDatabase": {
+              "methods": [
+                "stopAutonomousDatabase"
+              ]
+            },
+            "StartAutonomousDatabase": {
+              "methods": [
+                "startAutonomousDatabase"
+              ]
+            },
+            "RestartAutonomousDatabase": {
+              "methods": [
+                "restartAutonomousDatabase"
+              ]
+            },
             "ListCloudExadataInfrastructures": {
               "methods": [
                 "listCloudExadataInfrastructures",
@@ -200,6 +215,21 @@
             "RestoreAutonomousDatabase": {
               "methods": [
                 "restoreAutonomousDatabase"
+              ]
+            },
+            "StopAutonomousDatabase": {
+              "methods": [
+                "stopAutonomousDatabase"
+              ]
+            },
+            "StartAutonomousDatabase": {
+              "methods": [
+                "startAutonomousDatabase"
+              ]
+            },
+            "RestartAutonomousDatabase": {
+              "methods": [
+                "restartAutonomousDatabase"
               ]
             },
             "ListCloudExadataInfrastructures": {
