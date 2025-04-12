@@ -117,6 +117,20 @@ export namespace google {
                     public updateIapSettings(request: google.cloud.iap.v1.IUpdateIapSettingsRequest): Promise<google.cloud.iap.v1.IapSettings>;
 
                     /**
+                     * Calls ValidateIapAttributeExpression.
+                     * @param request ValidateIapAttributeExpressionRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ValidateIapAttributeExpressionResponse
+                     */
+                    public validateIapAttributeExpression(request: google.cloud.iap.v1.IValidateIapAttributeExpressionRequest, callback: google.cloud.iap.v1.IdentityAwareProxyAdminService.ValidateIapAttributeExpressionCallback): void;
+
+                    /**
+                     * Calls ValidateIapAttributeExpression.
+                     * @param request ValidateIapAttributeExpressionRequest message or plain object
+                     * @returns Promise
+                     */
+                    public validateIapAttributeExpression(request: google.cloud.iap.v1.IValidateIapAttributeExpressionRequest): Promise<google.cloud.iap.v1.ValidateIapAttributeExpressionResponse>;
+
+                    /**
                      * Calls ListTunnelDestGroups.
                      * @param request ListTunnelDestGroupsRequest message or plain object
                      * @param callback Node-style callback called with the error, if any, and ListTunnelDestGroupsResponse
@@ -223,6 +237,13 @@ export namespace google {
                      * @param [response] IapSettings
                      */
                     type UpdateIapSettingsCallback = (error: (Error|null), response?: google.cloud.iap.v1.IapSettings) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.iap.v1.IdentityAwareProxyAdminService|validateIapAttributeExpression}.
+                     * @param error Error, if any
+                     * @param [response] ValidateIapAttributeExpressionResponse
+                     */
+                    type ValidateIapAttributeExpressionCallback = (error: (Error|null), response?: google.cloud.iap.v1.ValidateIapAttributeExpressionResponse) => void;
 
                     /**
                      * Callback as used by {@link google.cloud.iap.v1.IdentityAwareProxyAdminService|listTunnelDestGroups}.
@@ -1505,6 +1526,12 @@ export namespace google {
 
                     /** AccessSettings allowedDomainsSettings */
                     allowedDomainsSettings?: (google.cloud.iap.v1.IAllowedDomainsSettings|null);
+
+                    /** AccessSettings workforceIdentitySettings */
+                    workforceIdentitySettings?: (google.cloud.iap.v1.IWorkforceIdentitySettings|null);
+
+                    /** AccessSettings identitySources */
+                    identitySources?: (google.cloud.iap.v1.AccessSettings.IdentitySource[]|null);
                 }
 
                 /** Represents an AccessSettings. */
@@ -1530,6 +1557,12 @@ export namespace google {
 
                     /** AccessSettings allowedDomainsSettings. */
                     public allowedDomainsSettings?: (google.cloud.iap.v1.IAllowedDomainsSettings|null);
+
+                    /** AccessSettings workforceIdentitySettings. */
+                    public workforceIdentitySettings?: (google.cloud.iap.v1.IWorkforceIdentitySettings|null);
+
+                    /** AccessSettings identitySources. */
+                    public identitySources: google.cloud.iap.v1.AccessSettings.IdentitySource[];
 
                     /**
                      * Creates a new AccessSettings instance using the specified properties.
@@ -1607,6 +1640,15 @@ export namespace google {
                      * @returns The default type url
                      */
                     public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace AccessSettings {
+
+                    /** IdentitySource enum. */
+                    enum IdentitySource {
+                        IDENTITY_SOURCE_UNSPECIFIED = 0,
+                        WORKFORCE_IDENTITY_FEDERATION = 3
+                    }
                 }
 
                 /** Properties of a GcipSettings. */
@@ -1906,6 +1948,218 @@ export namespace google {
 
                     /**
                      * Gets the default type url for OAuthSettings
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a WorkforceIdentitySettings. */
+                interface IWorkforceIdentitySettings {
+
+                    /** WorkforceIdentitySettings workforcePools */
+                    workforcePools?: (string[]|null);
+
+                    /** WorkforceIdentitySettings oauth2 */
+                    oauth2?: (google.cloud.iap.v1.IOAuth2|null);
+                }
+
+                /** Represents a WorkforceIdentitySettings. */
+                class WorkforceIdentitySettings implements IWorkforceIdentitySettings {
+
+                    /**
+                     * Constructs a new WorkforceIdentitySettings.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.iap.v1.IWorkforceIdentitySettings);
+
+                    /** WorkforceIdentitySettings workforcePools. */
+                    public workforcePools: string[];
+
+                    /** WorkforceIdentitySettings oauth2. */
+                    public oauth2?: (google.cloud.iap.v1.IOAuth2|null);
+
+                    /**
+                     * Creates a new WorkforceIdentitySettings instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns WorkforceIdentitySettings instance
+                     */
+                    public static create(properties?: google.cloud.iap.v1.IWorkforceIdentitySettings): google.cloud.iap.v1.WorkforceIdentitySettings;
+
+                    /**
+                     * Encodes the specified WorkforceIdentitySettings message. Does not implicitly {@link google.cloud.iap.v1.WorkforceIdentitySettings.verify|verify} messages.
+                     * @param message WorkforceIdentitySettings message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.iap.v1.IWorkforceIdentitySettings, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified WorkforceIdentitySettings message, length delimited. Does not implicitly {@link google.cloud.iap.v1.WorkforceIdentitySettings.verify|verify} messages.
+                     * @param message WorkforceIdentitySettings message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.iap.v1.IWorkforceIdentitySettings, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a WorkforceIdentitySettings message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns WorkforceIdentitySettings
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.iap.v1.WorkforceIdentitySettings;
+
+                    /**
+                     * Decodes a WorkforceIdentitySettings message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns WorkforceIdentitySettings
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.iap.v1.WorkforceIdentitySettings;
+
+                    /**
+                     * Verifies a WorkforceIdentitySettings message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a WorkforceIdentitySettings message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns WorkforceIdentitySettings
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.iap.v1.WorkforceIdentitySettings;
+
+                    /**
+                     * Creates a plain object from a WorkforceIdentitySettings message. Also converts values to other types if specified.
+                     * @param message WorkforceIdentitySettings
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.iap.v1.WorkforceIdentitySettings, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this WorkforceIdentitySettings to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for WorkforceIdentitySettings
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a OAuth2. */
+                interface IOAuth2 {
+
+                    /** OAuth2 clientId */
+                    clientId?: (string|null);
+
+                    /** OAuth2 clientSecret */
+                    clientSecret?: (string|null);
+
+                    /** OAuth2 clientSecretSha256 */
+                    clientSecretSha256?: (string|null);
+                }
+
+                /** Represents a OAuth2. */
+                class OAuth2 implements IOAuth2 {
+
+                    /**
+                     * Constructs a new OAuth2.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.iap.v1.IOAuth2);
+
+                    /** OAuth2 clientId. */
+                    public clientId: string;
+
+                    /** OAuth2 clientSecret. */
+                    public clientSecret: string;
+
+                    /** OAuth2 clientSecretSha256. */
+                    public clientSecretSha256: string;
+
+                    /**
+                     * Creates a new OAuth2 instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns OAuth2 instance
+                     */
+                    public static create(properties?: google.cloud.iap.v1.IOAuth2): google.cloud.iap.v1.OAuth2;
+
+                    /**
+                     * Encodes the specified OAuth2 message. Does not implicitly {@link google.cloud.iap.v1.OAuth2.verify|verify} messages.
+                     * @param message OAuth2 message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.iap.v1.IOAuth2, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified OAuth2 message, length delimited. Does not implicitly {@link google.cloud.iap.v1.OAuth2.verify|verify} messages.
+                     * @param message OAuth2 message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.iap.v1.IOAuth2, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a OAuth2 message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns OAuth2
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.iap.v1.OAuth2;
+
+                    /**
+                     * Decodes a OAuth2 message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns OAuth2
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.iap.v1.OAuth2;
+
+                    /**
+                     * Verifies a OAuth2 message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a OAuth2 message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns OAuth2
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.iap.v1.OAuth2;
+
+                    /**
+                     * Creates a plain object from a OAuth2 message. Also converts values to other types if specified.
+                     * @param message OAuth2
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.iap.v1.OAuth2, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this OAuth2 to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for OAuth2
                      * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                      * @returns The default type url
                      */
@@ -2594,6 +2848,200 @@ export namespace google {
                         JWT = 2,
                         RCTOKEN = 3
                     }
+                }
+
+                /** Properties of a ValidateIapAttributeExpressionRequest. */
+                interface IValidateIapAttributeExpressionRequest {
+
+                    /** ValidateIapAttributeExpressionRequest name */
+                    name?: (string|null);
+
+                    /** ValidateIapAttributeExpressionRequest expression */
+                    expression?: (string|null);
+                }
+
+                /** Represents a ValidateIapAttributeExpressionRequest. */
+                class ValidateIapAttributeExpressionRequest implements IValidateIapAttributeExpressionRequest {
+
+                    /**
+                     * Constructs a new ValidateIapAttributeExpressionRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.iap.v1.IValidateIapAttributeExpressionRequest);
+
+                    /** ValidateIapAttributeExpressionRequest name. */
+                    public name: string;
+
+                    /** ValidateIapAttributeExpressionRequest expression. */
+                    public expression: string;
+
+                    /**
+                     * Creates a new ValidateIapAttributeExpressionRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ValidateIapAttributeExpressionRequest instance
+                     */
+                    public static create(properties?: google.cloud.iap.v1.IValidateIapAttributeExpressionRequest): google.cloud.iap.v1.ValidateIapAttributeExpressionRequest;
+
+                    /**
+                     * Encodes the specified ValidateIapAttributeExpressionRequest message. Does not implicitly {@link google.cloud.iap.v1.ValidateIapAttributeExpressionRequest.verify|verify} messages.
+                     * @param message ValidateIapAttributeExpressionRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.iap.v1.IValidateIapAttributeExpressionRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ValidateIapAttributeExpressionRequest message, length delimited. Does not implicitly {@link google.cloud.iap.v1.ValidateIapAttributeExpressionRequest.verify|verify} messages.
+                     * @param message ValidateIapAttributeExpressionRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.iap.v1.IValidateIapAttributeExpressionRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ValidateIapAttributeExpressionRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ValidateIapAttributeExpressionRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.iap.v1.ValidateIapAttributeExpressionRequest;
+
+                    /**
+                     * Decodes a ValidateIapAttributeExpressionRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ValidateIapAttributeExpressionRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.iap.v1.ValidateIapAttributeExpressionRequest;
+
+                    /**
+                     * Verifies a ValidateIapAttributeExpressionRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ValidateIapAttributeExpressionRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ValidateIapAttributeExpressionRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.iap.v1.ValidateIapAttributeExpressionRequest;
+
+                    /**
+                     * Creates a plain object from a ValidateIapAttributeExpressionRequest message. Also converts values to other types if specified.
+                     * @param message ValidateIapAttributeExpressionRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.iap.v1.ValidateIapAttributeExpressionRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ValidateIapAttributeExpressionRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ValidateIapAttributeExpressionRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ValidateIapAttributeExpressionResponse. */
+                interface IValidateIapAttributeExpressionResponse {
+                }
+
+                /** Represents a ValidateIapAttributeExpressionResponse. */
+                class ValidateIapAttributeExpressionResponse implements IValidateIapAttributeExpressionResponse {
+
+                    /**
+                     * Constructs a new ValidateIapAttributeExpressionResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.iap.v1.IValidateIapAttributeExpressionResponse);
+
+                    /**
+                     * Creates a new ValidateIapAttributeExpressionResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ValidateIapAttributeExpressionResponse instance
+                     */
+                    public static create(properties?: google.cloud.iap.v1.IValidateIapAttributeExpressionResponse): google.cloud.iap.v1.ValidateIapAttributeExpressionResponse;
+
+                    /**
+                     * Encodes the specified ValidateIapAttributeExpressionResponse message. Does not implicitly {@link google.cloud.iap.v1.ValidateIapAttributeExpressionResponse.verify|verify} messages.
+                     * @param message ValidateIapAttributeExpressionResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.iap.v1.IValidateIapAttributeExpressionResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ValidateIapAttributeExpressionResponse message, length delimited. Does not implicitly {@link google.cloud.iap.v1.ValidateIapAttributeExpressionResponse.verify|verify} messages.
+                     * @param message ValidateIapAttributeExpressionResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.iap.v1.IValidateIapAttributeExpressionResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ValidateIapAttributeExpressionResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ValidateIapAttributeExpressionResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.iap.v1.ValidateIapAttributeExpressionResponse;
+
+                    /**
+                     * Decodes a ValidateIapAttributeExpressionResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ValidateIapAttributeExpressionResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.iap.v1.ValidateIapAttributeExpressionResponse;
+
+                    /**
+                     * Verifies a ValidateIapAttributeExpressionResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ValidateIapAttributeExpressionResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ValidateIapAttributeExpressionResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.iap.v1.ValidateIapAttributeExpressionResponse;
+
+                    /**
+                     * Creates a plain object from a ValidateIapAttributeExpressionResponse message. Also converts values to other types if specified.
+                     * @param message ValidateIapAttributeExpressionResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.iap.v1.ValidateIapAttributeExpressionResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ValidateIapAttributeExpressionResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ValidateIapAttributeExpressionResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 /** Properties of a ListBrandsRequest. */
