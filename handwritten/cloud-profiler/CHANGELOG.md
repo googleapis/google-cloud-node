@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/profiler?activeTab=versions
 
+## [6.0.3](https://github.com/googleapis/cloud-profiler-nodejs/compare/v6.0.2...v6.0.3) (2025-04-14)
+
+
+### Bug Fixes
+
+* Replace vulnerable parse-duration with CJS compatible ms library ([ef0f58c](https://github.com/googleapis/cloud-profiler-nodejs/commit/ef0f58c0ac7abf15dcf3b2a31cd0a4b9bfdb3b72))
+
 ## [6.0.2](https://github.com/googleapis/cloud-profiler-nodejs/compare/v6.0.1...v6.0.2) (2024-09-11)
 
 
