@@ -18,6 +18,7 @@
 
 import {
   LfpInventoryServiceClient,
+  LfpMerchantStateServiceClient,
   LfpSaleServiceClient,
   LfpStoreServiceClient,
 } from '@google-shopping/lfp';
@@ -25,6 +26,11 @@ import {
 // check that the client class type name can be used
 function doStuffWithLfpInventoryServiceClient(
   client: LfpInventoryServiceClient
+) {
+  client.close();
+}
+function doStuffWithLfpMerchantStateServiceClient(
+  client: LfpMerchantStateServiceClient
 ) {
   client.close();
 }
@@ -39,6 +45,9 @@ function main() {
   // check that the client instance can be created
   const lfpInventoryServiceClient = new LfpInventoryServiceClient();
   doStuffWithLfpInventoryServiceClient(lfpInventoryServiceClient);
+  // check that the client instance can be created
+  const lfpMerchantStateServiceClient = new LfpMerchantStateServiceClient();
+  doStuffWithLfpMerchantStateServiceClient(lfpMerchantStateServiceClient);
   // check that the client instance can be created
   const lfpSaleServiceClient = new LfpSaleServiceClient();
   doStuffWithLfpSaleServiceClient(lfpSaleServiceClient);

@@ -451,6 +451,62 @@ describe('v1beta.LfpSaleServiceClient', () => {
       });
     });
 
+    describe('lfpMerchantState', async () => {
+      const fakePath = '/rendered/path/lfpMerchantState';
+      const expectedParameters = {
+        account: 'accountValue',
+        lfp_merchant_state: 'lfpMerchantStateValue',
+      };
+      const client = new lfpsaleserviceModule.v1beta.LfpSaleServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      client.pathTemplates.lfpMerchantStatePathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.lfpMerchantStatePathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('lfpMerchantStatePath', () => {
+        const result = client.lfpMerchantStatePath(
+          'accountValue',
+          'lfpMerchantStateValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates.lfpMerchantStatePathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchAccountFromLfpMerchantStateName', () => {
+        const result = client.matchAccountFromLfpMerchantStateName(fakePath);
+        assert.strictEqual(result, 'accountValue');
+        assert(
+          (client.pathTemplates.lfpMerchantStatePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLfpMerchantStateFromLfpMerchantStateName', () => {
+        const result =
+          client.matchLfpMerchantStateFromLfpMerchantStateName(fakePath);
+        assert.strictEqual(result, 'lfpMerchantStateValue');
+        assert(
+          (client.pathTemplates.lfpMerchantStatePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
     describe('lfpSale', async () => {
       const fakePath = '/rendered/path/lfpSale';
       const expectedParameters = {

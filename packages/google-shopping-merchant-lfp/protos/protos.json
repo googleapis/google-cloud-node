@@ -201,6 +201,200 @@
                             }
                           }
                         },
+                        "LfpMerchantStateService": {
+                          "options": {
+                            "(google.api.default_host)": "merchantapi.googleapis.com",
+                            "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/content"
+                          },
+                          "methods": {
+                            "GetLfpMerchantState": {
+                              "requestType": "GetLfpMerchantStateRequest",
+                              "responseType": "LfpMerchantState",
+                              "options": {
+                                "(google.api.http).get": "/lfp/v1beta/{name=accounts/*/lfpMerchantStates/*}",
+                                "(google.api.method_signature)": "name"
+                              },
+                              "parsedOptions": [
+                                {
+                                  "(google.api.http)": {
+                                    "get": "/lfp/v1beta/{name=accounts/*/lfpMerchantStates/*}"
+                                  }
+                                },
+                                {
+                                  "(google.api.method_signature)": "name"
+                                }
+                              ]
+                            }
+                          }
+                        },
+                        "LfpMerchantState": {
+                          "options": {
+                            "(google.api.resource).type": "merchantapi.googleapis.com/LfpMerchantState",
+                            "(google.api.resource).pattern": "accounts/{account}/lfpMerchantStates/{lfp_merchant_state}",
+                            "(google.api.resource).plural": "lfpMerchantStates",
+                            "(google.api.resource).singular": "lfpMerchantState"
+                          },
+                          "fields": {
+                            "name": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "IDENTIFIER"
+                              }
+                            },
+                            "linkedGbps": {
+                              "type": "int64",
+                              "id": 2
+                            },
+                            "storeStates": {
+                              "rule": "repeated",
+                              "type": "LfpStoreState",
+                              "id": 3,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "inventoryStats": {
+                              "type": "InventoryStats",
+                              "id": 4
+                            },
+                            "countrySettings": {
+                              "rule": "repeated",
+                              "type": "CountrySettings",
+                              "id": 5
+                            }
+                          },
+                          "nested": {
+                            "LfpStoreState": {
+                              "fields": {
+                                "storeCode": {
+                                  "type": "string",
+                                  "id": 1,
+                                  "options": {
+                                    "(google.api.field_behavior)": "IMMUTABLE"
+                                  }
+                                },
+                                "matchingState": {
+                                  "type": "StoreMatchingState",
+                                  "id": 2,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OUTPUT_ONLY"
+                                  }
+                                },
+                                "matchingStateHint": {
+                                  "type": "string",
+                                  "id": 3
+                                }
+                              },
+                              "nested": {
+                                "StoreMatchingState": {
+                                  "values": {
+                                    "STORE_MATCHING_STATE_UNSPECIFIED": 0,
+                                    "STORE_MATCHING_STATE_MATCHED": 1,
+                                    "STORE_MATCHING_STATE_FAILED": 2
+                                  }
+                                }
+                              }
+                            },
+                            "InventoryStats": {
+                              "fields": {
+                                "submittedEntries": {
+                                  "type": "int64",
+                                  "id": 1
+                                },
+                                "submittedInStockEntries": {
+                                  "type": "int64",
+                                  "id": 2
+                                },
+                                "unsubmittedEntries": {
+                                  "type": "int64",
+                                  "id": 3
+                                },
+                                "submittedProducts": {
+                                  "type": "int64",
+                                  "id": 4
+                                }
+                              }
+                            },
+                            "CountrySettings": {
+                              "fields": {
+                                "regionCode": {
+                                  "type": "string",
+                                  "id": 1,
+                                  "options": {
+                                    "(google.api.field_behavior)": "REQUIRED"
+                                  }
+                                },
+                                "freeLocalListingsEnabled": {
+                                  "type": "bool",
+                                  "id": 2
+                                },
+                                "localInventoryAdsEnabled": {
+                                  "type": "bool",
+                                  "id": 3
+                                },
+                                "inventoryVerificationState": {
+                                  "type": "VerificationState",
+                                  "id": 4,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OUTPUT_ONLY"
+                                  }
+                                },
+                                "productPageType": {
+                                  "type": "ProductPageType",
+                                  "id": 5,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OUTPUT_ONLY"
+                                  }
+                                },
+                                "instockServingVerificationState": {
+                                  "type": "VerificationState",
+                                  "id": 6,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OUTPUT_ONLY"
+                                  }
+                                },
+                                "pickupServingVerificationState": {
+                                  "type": "VerificationState",
+                                  "id": 7,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OUTPUT_ONLY"
+                                  }
+                                }
+                              },
+                              "nested": {
+                                "VerificationState": {
+                                  "values": {
+                                    "VERIFICATION_STATE_UNSPECIFIED": 0,
+                                    "VERIFICATION_STATE_NOT_APPROVED": 1,
+                                    "VERIFICATION_STATE_IN_PROGRESS": 2,
+                                    "VERIFICATION_STATE_APPROVED": 3
+                                  }
+                                },
+                                "ProductPageType": {
+                                  "values": {
+                                    "PRODUCT_PAGE_TYPE_UNSPECIFIED": 0,
+                                    "GOOGLE_HOSTED": 1,
+                                    "MERCHANT_HOSTED": 2,
+                                    "MERCHANT_HOSTED_STORE_SPECIFIC": 3
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        },
+                        "GetLfpMerchantStateRequest": {
+                          "fields": {
+                            "name": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED",
+                                "(google.api.resource_reference).type": "merchantapi.googleapis.com/LfpMerchantState"
+                              }
+                            }
+                          }
+                        },
                         "LfpSaleService": {
                           "options": {
                             "(google.api.default_host)": "merchantapi.googleapis.com",
