@@ -856,6 +856,55 @@
                         }
                       }
                     },
+                    "GoModule": {
+                      "options": {
+                        "(google.api.resource).type": "artifactregistry.googleapis.com/GoModule",
+                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/repositories/{repository}/goModules/{go_module}"
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "version": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "createTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "updateTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      }
+                    },
+                    "KfpArtifact": {
+                      "options": {
+                        "(google.api.resource).type": "artifactregistry.googleapis.com/KfpArtifact",
+                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/repositories/{repository}/kfpArtifacts/{kfp_artifact}"
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "version": {
+                          "type": "string",
+                          "id": 2
+                        }
+                      }
+                    },
                     "Package": {
                       "options": {
                         "(google.api.resource).type": "artifactregistry.googleapis.com/Package",
@@ -1612,6 +1661,13 @@
                         "satisfiesPzi": {
                           "type": "bool",
                           "id": 22,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "registryUri": {
+                          "type": "string",
+                          "id": 26,
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
