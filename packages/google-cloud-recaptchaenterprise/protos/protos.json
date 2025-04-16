@@ -3253,19 +3253,31 @@
                       "fields": {
                         "transactionRisk": {
                           "type": "float",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         },
                         "stolenInstrumentVerdict": {
                           "type": "StolenInstrumentVerdict",
-                          "id": 2
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         },
                         "cardTestingVerdict": {
                           "type": "CardTestingVerdict",
-                          "id": 3
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         },
                         "behavioralTrustVerdict": {
                           "type": "BehavioralTrustVerdict",
-                          "id": 4
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         }
                       },
                       "nested": {
@@ -3273,7 +3285,10 @@
                           "fields": {
                             "risk": {
                               "type": "float",
-                              "id": 1
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
                             }
                           }
                         },
@@ -3281,7 +3296,10 @@
                           "fields": {
                             "risk": {
                               "type": "float",
-                              "id": 1
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
                             }
                           }
                         },
@@ -3289,7 +3307,10 @@
                           "fields": {
                             "trust": {
                               "type": "float",
-                              "id": 1
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
                             }
                           }
                         }
