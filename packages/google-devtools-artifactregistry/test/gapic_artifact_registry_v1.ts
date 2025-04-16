@@ -10469,6 +10469,158 @@ describe('v1.ArtifactRegistryClient', () => {
       });
     });
 
+    describe('goModule', async () => {
+      const fakePath = '/rendered/path/goModule';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        repository: 'repositoryValue',
+        go_module: 'goModuleValue',
+      };
+      const client = new artifactregistryModule.v1.ArtifactRegistryClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      client.pathTemplates.goModulePathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.goModulePathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('goModulePath', () => {
+        const result = client.goModulePath(
+          'projectValue',
+          'locationValue',
+          'repositoryValue',
+          'goModuleValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.goModulePathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromGoModuleName', () => {
+        const result = client.matchProjectFromGoModuleName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.goModulePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromGoModuleName', () => {
+        const result = client.matchLocationFromGoModuleName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.goModulePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchRepositoryFromGoModuleName', () => {
+        const result = client.matchRepositoryFromGoModuleName(fakePath);
+        assert.strictEqual(result, 'repositoryValue');
+        assert(
+          (client.pathTemplates.goModulePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchGoModuleFromGoModuleName', () => {
+        const result = client.matchGoModuleFromGoModuleName(fakePath);
+        assert.strictEqual(result, 'goModuleValue');
+        assert(
+          (client.pathTemplates.goModulePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('kfpArtifact', async () => {
+      const fakePath = '/rendered/path/kfpArtifact';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        repository: 'repositoryValue',
+        kfp_artifact: 'kfpArtifactValue',
+      };
+      const client = new artifactregistryModule.v1.ArtifactRegistryClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      client.pathTemplates.kfpArtifactPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.kfpArtifactPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('kfpArtifactPath', () => {
+        const result = client.kfpArtifactPath(
+          'projectValue',
+          'locationValue',
+          'repositoryValue',
+          'kfpArtifactValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.kfpArtifactPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromKfpArtifactName', () => {
+        const result = client.matchProjectFromKfpArtifactName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.kfpArtifactPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromKfpArtifactName', () => {
+        const result = client.matchLocationFromKfpArtifactName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.kfpArtifactPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchRepositoryFromKfpArtifactName', () => {
+        const result = client.matchRepositoryFromKfpArtifactName(fakePath);
+        assert.strictEqual(result, 'repositoryValue');
+        assert(
+          (client.pathTemplates.kfpArtifactPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchKfpArtifactFromKfpArtifactName', () => {
+        const result = client.matchKfpArtifactFromKfpArtifactName(fakePath);
+        assert.strictEqual(result, 'kfpArtifactValue');
+        assert(
+          (client.pathTemplates.kfpArtifactPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
     describe('mavenArtifact', async () => {
       const fakePath = '/rendered/path/mavenArtifact';
       const expectedParameters = {
