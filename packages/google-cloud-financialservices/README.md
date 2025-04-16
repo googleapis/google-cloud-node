@@ -107,7 +107,7 @@ async function callListEngineVersions() {
   // Run request
   const iterable = financialservicesClient.listEngineVersionsAsync(request);
   for await (const response of iterable) {
-      console.log(response);
+    console.log(response);
   }
 }
 
