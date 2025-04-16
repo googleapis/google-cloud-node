@@ -1256,6 +1256,8 @@ export class ParallelstoreClient {
    *
    *   If unspecified, the Parallelstore service agent is used:
    *   `service-<PROJECT_NUMBER>@gcp-sa-parallelstore.iam.gserviceaccount.com`
+   * @param {google.cloud.parallelstore.v1beta.TransferMetadataOptions} [request.metadataOptions]
+   *   Optional. The transfer metadata options for the import data.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1454,6 +1456,8 @@ export class ParallelstoreClient {
    *
    *   If unspecified, the Parallelstore service agent is used:
    *   `service-<PROJECT_NUMBER>@gcp-sa-parallelstore.iam.gserviceaccount.com`
+   * @param {google.cloud.parallelstore.v1beta.TransferMetadataOptions} [request.metadataOptions]
+   *   Optional. The metadata options for the export data.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
