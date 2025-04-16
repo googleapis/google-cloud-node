@@ -29,6 +29,30 @@
         }
       }
     },
+    "LfpMerchantStateService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "LfpMerchantStateServiceClient",
+          "rpcs": {
+            "GetLfpMerchantState": {
+              "methods": [
+                "getLfpMerchantState"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "LfpMerchantStateServiceClient",
+          "rpcs": {
+            "GetLfpMerchantState": {
+              "methods": [
+                "getLfpMerchantState"
+              ]
+            }
+          }
+        }
+      }
+    },
     "LfpSaleService": {
       "clients": {
         "grpc": {

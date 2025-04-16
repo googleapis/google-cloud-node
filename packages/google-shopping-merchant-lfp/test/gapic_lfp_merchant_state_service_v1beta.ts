@@ -21,7 +21,7 @@ import * as assert from 'assert';
 import * as sinon from 'sinon';
 import {SinonStub} from 'sinon';
 import {describe, it} from 'mocha';
-import * as lfpinventoryserviceModule from '../src';
+import * as lfpmerchantstateserviceModule from '../src';
 
 import {protobuf} from 'google-gax';
 
@@ -64,18 +64,18 @@ function stubSimpleCallWithCallback<ResponseType>(
     : sinon.stub().callsArgWith(2, null, response);
 }
 
-describe('v1beta.LfpInventoryServiceClient', () => {
+describe('v1beta.LfpMerchantStateServiceClient', () => {
   describe('Common methods', () => {
     it('has apiEndpoint', () => {
       const client =
-        new lfpinventoryserviceModule.v1beta.LfpInventoryServiceClient();
+        new lfpmerchantstateserviceModule.v1beta.LfpMerchantStateServiceClient();
       const apiEndpoint = client.apiEndpoint;
       assert.strictEqual(apiEndpoint, 'merchantapi.googleapis.com');
     });
 
     it('has universeDomain', () => {
       const client =
-        new lfpinventoryserviceModule.v1beta.LfpInventoryServiceClient();
+        new lfpmerchantstateserviceModule.v1beta.LfpMerchantStateServiceClient();
       const universeDomain = client.universeDomain;
       assert.strictEqual(universeDomain, 'googleapis.com');
     });
@@ -87,7 +87,7 @@ describe('v1beta.LfpInventoryServiceClient', () => {
       it('throws DeprecationWarning if static servicePath is used', () => {
         const stub = sinon.stub(process, 'emitWarning');
         const servicePath =
-          lfpinventoryserviceModule.v1beta.LfpInventoryServiceClient
+          lfpmerchantstateserviceModule.v1beta.LfpMerchantStateServiceClient
             .servicePath;
         assert.strictEqual(servicePath, 'merchantapi.googleapis.com');
         assert(stub.called);
@@ -97,7 +97,7 @@ describe('v1beta.LfpInventoryServiceClient', () => {
       it('throws DeprecationWarning if static apiEndpoint is used', () => {
         const stub = sinon.stub(process, 'emitWarning');
         const apiEndpoint =
-          lfpinventoryserviceModule.v1beta.LfpInventoryServiceClient
+          lfpmerchantstateserviceModule.v1beta.LfpMerchantStateServiceClient
             .apiEndpoint;
         assert.strictEqual(apiEndpoint, 'merchantapi.googleapis.com');
         assert(stub.called);
@@ -106,7 +106,7 @@ describe('v1beta.LfpInventoryServiceClient', () => {
     }
     it('sets apiEndpoint according to universe domain camelCase', () => {
       const client =
-        new lfpinventoryserviceModule.v1beta.LfpInventoryServiceClient({
+        new lfpmerchantstateserviceModule.v1beta.LfpMerchantStateServiceClient({
           universeDomain: 'example.com',
         });
       const servicePath = client.apiEndpoint;
@@ -115,7 +115,7 @@ describe('v1beta.LfpInventoryServiceClient', () => {
 
     it('sets apiEndpoint according to universe domain snakeCase', () => {
       const client =
-        new lfpinventoryserviceModule.v1beta.LfpInventoryServiceClient({
+        new lfpmerchantstateserviceModule.v1beta.LfpMerchantStateServiceClient({
           universe_domain: 'example.com',
         });
       const servicePath = client.apiEndpoint;
@@ -128,7 +128,7 @@ describe('v1beta.LfpInventoryServiceClient', () => {
           const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
           process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
           const client =
-            new lfpinventoryserviceModule.v1beta.LfpInventoryServiceClient();
+            new lfpmerchantstateserviceModule.v1beta.LfpMerchantStateServiceClient();
           const servicePath = client.apiEndpoint;
           assert.strictEqual(servicePath, 'merchantapi.example.com');
           if (saved) {
@@ -142,9 +142,9 @@ describe('v1beta.LfpInventoryServiceClient', () => {
           const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
           process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
           const client =
-            new lfpinventoryserviceModule.v1beta.LfpInventoryServiceClient({
-              universeDomain: 'configured.example.com',
-            });
+            new lfpmerchantstateserviceModule.v1beta.LfpMerchantStateServiceClient(
+              {universeDomain: 'configured.example.com'}
+            );
           const servicePath = client.apiEndpoint;
           assert.strictEqual(servicePath, 'merchantapi.configured.example.com');
           if (saved) {
@@ -157,7 +157,7 @@ describe('v1beta.LfpInventoryServiceClient', () => {
     }
     it('does not allow setting both universeDomain and universe_domain', () => {
       assert.throws(() => {
-        new lfpinventoryserviceModule.v1beta.LfpInventoryServiceClient({
+        new lfpmerchantstateserviceModule.v1beta.LfpMerchantStateServiceClient({
           universe_domain: 'example.com',
           universeDomain: 'example.net',
         });
@@ -166,20 +166,20 @@ describe('v1beta.LfpInventoryServiceClient', () => {
 
     it('has port', () => {
       const port =
-        lfpinventoryserviceModule.v1beta.LfpInventoryServiceClient.port;
+        lfpmerchantstateserviceModule.v1beta.LfpMerchantStateServiceClient.port;
       assert(port);
       assert(typeof port === 'number');
     });
 
     it('should create a client with no option', () => {
       const client =
-        new lfpinventoryserviceModule.v1beta.LfpInventoryServiceClient();
+        new lfpmerchantstateserviceModule.v1beta.LfpMerchantStateServiceClient();
       assert(client);
     });
 
     it('should create a client with gRPC fallback', () => {
       const client =
-        new lfpinventoryserviceModule.v1beta.LfpInventoryServiceClient({
+        new lfpmerchantstateserviceModule.v1beta.LfpMerchantStateServiceClient({
           fallback: true,
         });
       assert(client);
@@ -187,25 +187,25 @@ describe('v1beta.LfpInventoryServiceClient', () => {
 
     it('has initialize method and supports deferred initialization', async () => {
       const client =
-        new lfpinventoryserviceModule.v1beta.LfpInventoryServiceClient({
+        new lfpmerchantstateserviceModule.v1beta.LfpMerchantStateServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      assert.strictEqual(client.lfpInventoryServiceStub, undefined);
+      assert.strictEqual(client.lfpMerchantStateServiceStub, undefined);
       await client.initialize();
-      assert(client.lfpInventoryServiceStub);
+      assert(client.lfpMerchantStateServiceStub);
     });
 
     it('has close method for the initialized client', done => {
       const client =
-        new lfpinventoryserviceModule.v1beta.LfpInventoryServiceClient({
+        new lfpmerchantstateserviceModule.v1beta.LfpMerchantStateServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       client.initialize().catch(err => {
         throw err;
       });
-      assert(client.lfpInventoryServiceStub);
+      assert(client.lfpMerchantStateServiceStub);
       client.close().then(() => {
         done();
       });
@@ -213,11 +213,11 @@ describe('v1beta.LfpInventoryServiceClient', () => {
 
     it('has close method for the non-initialized client', done => {
       const client =
-        new lfpinventoryserviceModule.v1beta.LfpInventoryServiceClient({
+        new lfpmerchantstateserviceModule.v1beta.LfpMerchantStateServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      assert.strictEqual(client.lfpInventoryServiceStub, undefined);
+      assert.strictEqual(client.lfpMerchantStateServiceStub, undefined);
       client.close().then(() => {
         done();
       });
@@ -226,7 +226,7 @@ describe('v1beta.LfpInventoryServiceClient', () => {
     it('has getProjectId method', async () => {
       const fakeProjectId = 'fake-project-id';
       const client =
-        new lfpinventoryserviceModule.v1beta.LfpInventoryServiceClient({
+        new lfpmerchantstateserviceModule.v1beta.LfpMerchantStateServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
@@ -239,7 +239,7 @@ describe('v1beta.LfpInventoryServiceClient', () => {
     it('has getProjectId method with callback', async () => {
       const fakeProjectId = 'fake-project-id';
       const client =
-        new lfpinventoryserviceModule.v1beta.LfpInventoryServiceClient({
+        new lfpmerchantstateserviceModule.v1beta.LfpMerchantStateServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
@@ -260,67 +260,67 @@ describe('v1beta.LfpInventoryServiceClient', () => {
     });
   });
 
-  describe('insertLfpInventory', () => {
-    it('invokes insertLfpInventory without error', async () => {
+  describe('getLfpMerchantState', () => {
+    it('invokes getLfpMerchantState without error', async () => {
       const client =
-        new lfpinventoryserviceModule.v1beta.LfpInventoryServiceClient({
+        new lfpmerchantstateserviceModule.v1beta.LfpMerchantStateServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.shopping.merchant.lfp.v1beta.InsertLfpInventoryRequest()
+        new protos.google.shopping.merchant.lfp.v1beta.GetLfpMerchantStateRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.shopping.merchant.lfp.v1beta.InsertLfpInventoryRequest',
-        ['parent']
+        '.google.shopping.merchant.lfp.v1beta.GetLfpMerchantStateRequest',
+        ['name']
       );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
-        new protos.google.shopping.merchant.lfp.v1beta.LfpInventory()
+        new protos.google.shopping.merchant.lfp.v1beta.LfpMerchantState()
       );
-      client.innerApiCalls.insertLfpInventory =
+      client.innerApiCalls.getLfpMerchantState =
         stubSimpleCall(expectedResponse);
-      const [response] = await client.insertLfpInventory(request);
+      const [response] = await client.getLfpMerchantState(request);
       assert.deepStrictEqual(response, expectedResponse);
       const actualRequest = (
-        client.innerApiCalls.insertLfpInventory as SinonStub
+        client.innerApiCalls.getLfpMerchantState as SinonStub
       ).getCall(0).args[0];
       assert.deepStrictEqual(actualRequest, request);
       const actualHeaderRequestParams = (
-        client.innerApiCalls.insertLfpInventory as SinonStub
+        client.innerApiCalls.getLfpMerchantState as SinonStub
       ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
       assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
-    it('invokes insertLfpInventory without error using callback', async () => {
+    it('invokes getLfpMerchantState without error using callback', async () => {
       const client =
-        new lfpinventoryserviceModule.v1beta.LfpInventoryServiceClient({
+        new lfpmerchantstateserviceModule.v1beta.LfpMerchantStateServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.shopping.merchant.lfp.v1beta.InsertLfpInventoryRequest()
+        new protos.google.shopping.merchant.lfp.v1beta.GetLfpMerchantStateRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.shopping.merchant.lfp.v1beta.InsertLfpInventoryRequest',
-        ['parent']
+        '.google.shopping.merchant.lfp.v1beta.GetLfpMerchantStateRequest',
+        ['name']
       );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
-        new protos.google.shopping.merchant.lfp.v1beta.LfpInventory()
+        new protos.google.shopping.merchant.lfp.v1beta.LfpMerchantState()
       );
-      client.innerApiCalls.insertLfpInventory =
+      client.innerApiCalls.getLfpMerchantState =
         stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
-        client.insertLfpInventory(
+        client.getLfpMerchantState(
           request,
           (
             err?: Error | null,
-            result?: protos.google.shopping.merchant.lfp.v1beta.ILfpInventory | null
+            result?: protos.google.shopping.merchant.lfp.v1beta.ILfpMerchantState | null
           ) => {
             if (err) {
               reject(err);
@@ -333,108 +333,69 @@ describe('v1beta.LfpInventoryServiceClient', () => {
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
       const actualRequest = (
-        client.innerApiCalls.insertLfpInventory as SinonStub
+        client.innerApiCalls.getLfpMerchantState as SinonStub
       ).getCall(0).args[0];
       assert.deepStrictEqual(actualRequest, request);
       const actualHeaderRequestParams = (
-        client.innerApiCalls.insertLfpInventory as SinonStub
+        client.innerApiCalls.getLfpMerchantState as SinonStub
       ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
       assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
-    it('invokes insertLfpInventory with error', async () => {
+    it('invokes getLfpMerchantState with error', async () => {
       const client =
-        new lfpinventoryserviceModule.v1beta.LfpInventoryServiceClient({
+        new lfpmerchantstateserviceModule.v1beta.LfpMerchantStateServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.shopping.merchant.lfp.v1beta.InsertLfpInventoryRequest()
+        new protos.google.shopping.merchant.lfp.v1beta.GetLfpMerchantStateRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.shopping.merchant.lfp.v1beta.InsertLfpInventoryRequest',
-        ['parent']
+        '.google.shopping.merchant.lfp.v1beta.GetLfpMerchantStateRequest',
+        ['name']
       );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
-      client.innerApiCalls.insertLfpInventory = stubSimpleCall(
+      client.innerApiCalls.getLfpMerchantState = stubSimpleCall(
         undefined,
         expectedError
       );
-      await assert.rejects(client.insertLfpInventory(request), expectedError);
+      await assert.rejects(client.getLfpMerchantState(request), expectedError);
       const actualRequest = (
-        client.innerApiCalls.insertLfpInventory as SinonStub
+        client.innerApiCalls.getLfpMerchantState as SinonStub
       ).getCall(0).args[0];
       assert.deepStrictEqual(actualRequest, request);
       const actualHeaderRequestParams = (
-        client.innerApiCalls.insertLfpInventory as SinonStub
+        client.innerApiCalls.getLfpMerchantState as SinonStub
       ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
       assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
-    it('invokes insertLfpInventory with closed client', async () => {
+    it('invokes getLfpMerchantState with closed client', async () => {
       const client =
-        new lfpinventoryserviceModule.v1beta.LfpInventoryServiceClient({
+        new lfpmerchantstateserviceModule.v1beta.LfpMerchantStateServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.shopping.merchant.lfp.v1beta.InsertLfpInventoryRequest()
+        new protos.google.shopping.merchant.lfp.v1beta.GetLfpMerchantStateRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.shopping.merchant.lfp.v1beta.InsertLfpInventoryRequest',
-        ['parent']
+        '.google.shopping.merchant.lfp.v1beta.GetLfpMerchantStateRequest',
+        ['name']
       );
-      request.parent = defaultValue1;
+      request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
-      await assert.rejects(client.insertLfpInventory(request), expectedError);
+      await assert.rejects(client.getLfpMerchantState(request), expectedError);
     });
   });
 
   describe('Path templates', () => {
-    describe('account', async () => {
-      const fakePath = '/rendered/path/account';
-      const expectedParameters = {
-        account: 'accountValue',
-      };
-      const client =
-        new lfpinventoryserviceModule.v1beta.LfpInventoryServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      client.pathTemplates.accountPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.accountPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('accountPath', () => {
-        const result = client.accountPath('accountValue');
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.accountPathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchAccountFromAccountName', () => {
-        const result = client.matchAccountFromAccountName(fakePath);
-        assert.strictEqual(result, 'accountValue');
-        assert(
-          (client.pathTemplates.accountPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
     describe('lfpInventory', async () => {
       const fakePath = '/rendered/path/lfpInventory';
       const expectedParameters = {
@@ -444,7 +405,7 @@ describe('v1beta.LfpInventoryServiceClient', () => {
         offer: 'offerValue',
       };
       const client =
-        new lfpinventoryserviceModule.v1beta.LfpInventoryServiceClient({
+        new lfpmerchantstateserviceModule.v1beta.LfpMerchantStateServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
@@ -519,7 +480,7 @@ describe('v1beta.LfpInventoryServiceClient', () => {
         lfp_merchant_state: 'lfpMerchantStateValue',
       };
       const client =
-        new lfpinventoryserviceModule.v1beta.LfpInventoryServiceClient({
+        new lfpmerchantstateserviceModule.v1beta.LfpMerchantStateServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
@@ -576,7 +537,7 @@ describe('v1beta.LfpInventoryServiceClient', () => {
         sale: 'saleValue',
       };
       const client =
-        new lfpinventoryserviceModule.v1beta.LfpInventoryServiceClient({
+        new lfpmerchantstateserviceModule.v1beta.LfpMerchantStateServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
@@ -627,7 +588,7 @@ describe('v1beta.LfpInventoryServiceClient', () => {
         store_code: 'storeCodeValue',
       };
       const client =
-        new lfpinventoryserviceModule.v1beta.LfpInventoryServiceClient({
+        new lfpmerchantstateserviceModule.v1beta.LfpMerchantStateServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });

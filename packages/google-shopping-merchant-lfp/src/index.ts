@@ -20,6 +20,8 @@ import * as v1beta from './v1beta';
 
 const LfpInventoryServiceClient = v1beta.LfpInventoryServiceClient;
 type LfpInventoryServiceClient = v1beta.LfpInventoryServiceClient;
+const LfpMerchantStateServiceClient = v1beta.LfpMerchantStateServiceClient;
+type LfpMerchantStateServiceClient = v1beta.LfpMerchantStateServiceClient;
 const LfpSaleServiceClient = v1beta.LfpSaleServiceClient;
 type LfpSaleServiceClient = v1beta.LfpSaleServiceClient;
 const LfpStoreServiceClient = v1beta.LfpStoreServiceClient;
@@ -28,12 +30,14 @@ type LfpStoreServiceClient = v1beta.LfpStoreServiceClient;
 export {
   v1beta,
   LfpInventoryServiceClient,
+  LfpMerchantStateServiceClient,
   LfpSaleServiceClient,
   LfpStoreServiceClient,
 };
 export default {
   v1beta,
   LfpInventoryServiceClient,
+  LfpMerchantStateServiceClient,
   LfpSaleServiceClient,
   LfpStoreServiceClient,
 };

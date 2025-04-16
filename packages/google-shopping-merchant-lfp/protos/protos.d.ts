@@ -367,6 +367,658 @@ export namespace google {
                         public static getTypeUrl(typeUrlPrefix?: string): string;
                     }
 
+                    /** Represents a LfpMerchantStateService */
+                    class LfpMerchantStateService extends $protobuf.rpc.Service {
+
+                        /**
+                         * Constructs a new LfpMerchantStateService service.
+                         * @param rpcImpl RPC implementation
+                         * @param [requestDelimited=false] Whether requests are length-delimited
+                         * @param [responseDelimited=false] Whether responses are length-delimited
+                         */
+                        constructor(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean);
+
+                        /**
+                         * Creates new LfpMerchantStateService service using the specified rpc implementation.
+                         * @param rpcImpl RPC implementation
+                         * @param [requestDelimited=false] Whether requests are length-delimited
+                         * @param [responseDelimited=false] Whether responses are length-delimited
+                         * @returns RPC service. Useful where requests and/or responses are streamed.
+                         */
+                        public static create(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean): LfpMerchantStateService;
+
+                        /**
+                         * Calls GetLfpMerchantState.
+                         * @param request GetLfpMerchantStateRequest message or plain object
+                         * @param callback Node-style callback called with the error, if any, and LfpMerchantState
+                         */
+                        public getLfpMerchantState(request: google.shopping.merchant.lfp.v1beta.IGetLfpMerchantStateRequest, callback: google.shopping.merchant.lfp.v1beta.LfpMerchantStateService.GetLfpMerchantStateCallback): void;
+
+                        /**
+                         * Calls GetLfpMerchantState.
+                         * @param request GetLfpMerchantStateRequest message or plain object
+                         * @returns Promise
+                         */
+                        public getLfpMerchantState(request: google.shopping.merchant.lfp.v1beta.IGetLfpMerchantStateRequest): Promise<google.shopping.merchant.lfp.v1beta.LfpMerchantState>;
+                    }
+
+                    namespace LfpMerchantStateService {
+
+                        /**
+                         * Callback as used by {@link google.shopping.merchant.lfp.v1beta.LfpMerchantStateService|getLfpMerchantState}.
+                         * @param error Error, if any
+                         * @param [response] LfpMerchantState
+                         */
+                        type GetLfpMerchantStateCallback = (error: (Error|null), response?: google.shopping.merchant.lfp.v1beta.LfpMerchantState) => void;
+                    }
+
+                    /** Properties of a LfpMerchantState. */
+                    interface ILfpMerchantState {
+
+                        /** LfpMerchantState name */
+                        name?: (string|null);
+
+                        /** LfpMerchantState linkedGbps */
+                        linkedGbps?: (number|Long|string|null);
+
+                        /** LfpMerchantState storeStates */
+                        storeStates?: (google.shopping.merchant.lfp.v1beta.LfpMerchantState.ILfpStoreState[]|null);
+
+                        /** LfpMerchantState inventoryStats */
+                        inventoryStats?: (google.shopping.merchant.lfp.v1beta.LfpMerchantState.IInventoryStats|null);
+
+                        /** LfpMerchantState countrySettings */
+                        countrySettings?: (google.shopping.merchant.lfp.v1beta.LfpMerchantState.ICountrySettings[]|null);
+                    }
+
+                    /** Represents a LfpMerchantState. */
+                    class LfpMerchantState implements ILfpMerchantState {
+
+                        /**
+                         * Constructs a new LfpMerchantState.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.shopping.merchant.lfp.v1beta.ILfpMerchantState);
+
+                        /** LfpMerchantState name. */
+                        public name: string;
+
+                        /** LfpMerchantState linkedGbps. */
+                        public linkedGbps: (number|Long|string);
+
+                        /** LfpMerchantState storeStates. */
+                        public storeStates: google.shopping.merchant.lfp.v1beta.LfpMerchantState.ILfpStoreState[];
+
+                        /** LfpMerchantState inventoryStats. */
+                        public inventoryStats?: (google.shopping.merchant.lfp.v1beta.LfpMerchantState.IInventoryStats|null);
+
+                        /** LfpMerchantState countrySettings. */
+                        public countrySettings: google.shopping.merchant.lfp.v1beta.LfpMerchantState.ICountrySettings[];
+
+                        /**
+                         * Creates a new LfpMerchantState instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns LfpMerchantState instance
+                         */
+                        public static create(properties?: google.shopping.merchant.lfp.v1beta.ILfpMerchantState): google.shopping.merchant.lfp.v1beta.LfpMerchantState;
+
+                        /**
+                         * Encodes the specified LfpMerchantState message. Does not implicitly {@link google.shopping.merchant.lfp.v1beta.LfpMerchantState.verify|verify} messages.
+                         * @param message LfpMerchantState message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.shopping.merchant.lfp.v1beta.ILfpMerchantState, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified LfpMerchantState message, length delimited. Does not implicitly {@link google.shopping.merchant.lfp.v1beta.LfpMerchantState.verify|verify} messages.
+                         * @param message LfpMerchantState message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.shopping.merchant.lfp.v1beta.ILfpMerchantState, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a LfpMerchantState message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns LfpMerchantState
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.shopping.merchant.lfp.v1beta.LfpMerchantState;
+
+                        /**
+                         * Decodes a LfpMerchantState message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns LfpMerchantState
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.shopping.merchant.lfp.v1beta.LfpMerchantState;
+
+                        /**
+                         * Verifies a LfpMerchantState message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a LfpMerchantState message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns LfpMerchantState
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.shopping.merchant.lfp.v1beta.LfpMerchantState;
+
+                        /**
+                         * Creates a plain object from a LfpMerchantState message. Also converts values to other types if specified.
+                         * @param message LfpMerchantState
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.shopping.merchant.lfp.v1beta.LfpMerchantState, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this LfpMerchantState to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for LfpMerchantState
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    namespace LfpMerchantState {
+
+                        /** Properties of a LfpStoreState. */
+                        interface ILfpStoreState {
+
+                            /** LfpStoreState storeCode */
+                            storeCode?: (string|null);
+
+                            /** LfpStoreState matchingState */
+                            matchingState?: (google.shopping.merchant.lfp.v1beta.LfpMerchantState.LfpStoreState.StoreMatchingState|keyof typeof google.shopping.merchant.lfp.v1beta.LfpMerchantState.LfpStoreState.StoreMatchingState|null);
+
+                            /** LfpStoreState matchingStateHint */
+                            matchingStateHint?: (string|null);
+                        }
+
+                        /** Represents a LfpStoreState. */
+                        class LfpStoreState implements ILfpStoreState {
+
+                            /**
+                             * Constructs a new LfpStoreState.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.shopping.merchant.lfp.v1beta.LfpMerchantState.ILfpStoreState);
+
+                            /** LfpStoreState storeCode. */
+                            public storeCode: string;
+
+                            /** LfpStoreState matchingState. */
+                            public matchingState: (google.shopping.merchant.lfp.v1beta.LfpMerchantState.LfpStoreState.StoreMatchingState|keyof typeof google.shopping.merchant.lfp.v1beta.LfpMerchantState.LfpStoreState.StoreMatchingState);
+
+                            /** LfpStoreState matchingStateHint. */
+                            public matchingStateHint: string;
+
+                            /**
+                             * Creates a new LfpStoreState instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns LfpStoreState instance
+                             */
+                            public static create(properties?: google.shopping.merchant.lfp.v1beta.LfpMerchantState.ILfpStoreState): google.shopping.merchant.lfp.v1beta.LfpMerchantState.LfpStoreState;
+
+                            /**
+                             * Encodes the specified LfpStoreState message. Does not implicitly {@link google.shopping.merchant.lfp.v1beta.LfpMerchantState.LfpStoreState.verify|verify} messages.
+                             * @param message LfpStoreState message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.shopping.merchant.lfp.v1beta.LfpMerchantState.ILfpStoreState, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified LfpStoreState message, length delimited. Does not implicitly {@link google.shopping.merchant.lfp.v1beta.LfpMerchantState.LfpStoreState.verify|verify} messages.
+                             * @param message LfpStoreState message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.shopping.merchant.lfp.v1beta.LfpMerchantState.ILfpStoreState, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a LfpStoreState message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns LfpStoreState
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.shopping.merchant.lfp.v1beta.LfpMerchantState.LfpStoreState;
+
+                            /**
+                             * Decodes a LfpStoreState message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns LfpStoreState
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.shopping.merchant.lfp.v1beta.LfpMerchantState.LfpStoreState;
+
+                            /**
+                             * Verifies a LfpStoreState message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a LfpStoreState message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns LfpStoreState
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.shopping.merchant.lfp.v1beta.LfpMerchantState.LfpStoreState;
+
+                            /**
+                             * Creates a plain object from a LfpStoreState message. Also converts values to other types if specified.
+                             * @param message LfpStoreState
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.shopping.merchant.lfp.v1beta.LfpMerchantState.LfpStoreState, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this LfpStoreState to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for LfpStoreState
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+
+                        namespace LfpStoreState {
+
+                            /** StoreMatchingState enum. */
+                            enum StoreMatchingState {
+                                STORE_MATCHING_STATE_UNSPECIFIED = 0,
+                                STORE_MATCHING_STATE_MATCHED = 1,
+                                STORE_MATCHING_STATE_FAILED = 2
+                            }
+                        }
+
+                        /** Properties of an InventoryStats. */
+                        interface IInventoryStats {
+
+                            /** InventoryStats submittedEntries */
+                            submittedEntries?: (number|Long|string|null);
+
+                            /** InventoryStats submittedInStockEntries */
+                            submittedInStockEntries?: (number|Long|string|null);
+
+                            /** InventoryStats unsubmittedEntries */
+                            unsubmittedEntries?: (number|Long|string|null);
+
+                            /** InventoryStats submittedProducts */
+                            submittedProducts?: (number|Long|string|null);
+                        }
+
+                        /** Represents an InventoryStats. */
+                        class InventoryStats implements IInventoryStats {
+
+                            /**
+                             * Constructs a new InventoryStats.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.shopping.merchant.lfp.v1beta.LfpMerchantState.IInventoryStats);
+
+                            /** InventoryStats submittedEntries. */
+                            public submittedEntries: (number|Long|string);
+
+                            /** InventoryStats submittedInStockEntries. */
+                            public submittedInStockEntries: (number|Long|string);
+
+                            /** InventoryStats unsubmittedEntries. */
+                            public unsubmittedEntries: (number|Long|string);
+
+                            /** InventoryStats submittedProducts. */
+                            public submittedProducts: (number|Long|string);
+
+                            /**
+                             * Creates a new InventoryStats instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns InventoryStats instance
+                             */
+                            public static create(properties?: google.shopping.merchant.lfp.v1beta.LfpMerchantState.IInventoryStats): google.shopping.merchant.lfp.v1beta.LfpMerchantState.InventoryStats;
+
+                            /**
+                             * Encodes the specified InventoryStats message. Does not implicitly {@link google.shopping.merchant.lfp.v1beta.LfpMerchantState.InventoryStats.verify|verify} messages.
+                             * @param message InventoryStats message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.shopping.merchant.lfp.v1beta.LfpMerchantState.IInventoryStats, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified InventoryStats message, length delimited. Does not implicitly {@link google.shopping.merchant.lfp.v1beta.LfpMerchantState.InventoryStats.verify|verify} messages.
+                             * @param message InventoryStats message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.shopping.merchant.lfp.v1beta.LfpMerchantState.IInventoryStats, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes an InventoryStats message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns InventoryStats
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.shopping.merchant.lfp.v1beta.LfpMerchantState.InventoryStats;
+
+                            /**
+                             * Decodes an InventoryStats message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns InventoryStats
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.shopping.merchant.lfp.v1beta.LfpMerchantState.InventoryStats;
+
+                            /**
+                             * Verifies an InventoryStats message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates an InventoryStats message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns InventoryStats
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.shopping.merchant.lfp.v1beta.LfpMerchantState.InventoryStats;
+
+                            /**
+                             * Creates a plain object from an InventoryStats message. Also converts values to other types if specified.
+                             * @param message InventoryStats
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.shopping.merchant.lfp.v1beta.LfpMerchantState.InventoryStats, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this InventoryStats to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for InventoryStats
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+
+                        /** Properties of a CountrySettings. */
+                        interface ICountrySettings {
+
+                            /** CountrySettings regionCode */
+                            regionCode?: (string|null);
+
+                            /** CountrySettings freeLocalListingsEnabled */
+                            freeLocalListingsEnabled?: (boolean|null);
+
+                            /** CountrySettings localInventoryAdsEnabled */
+                            localInventoryAdsEnabled?: (boolean|null);
+
+                            /** CountrySettings inventoryVerificationState */
+                            inventoryVerificationState?: (google.shopping.merchant.lfp.v1beta.LfpMerchantState.CountrySettings.VerificationState|keyof typeof google.shopping.merchant.lfp.v1beta.LfpMerchantState.CountrySettings.VerificationState|null);
+
+                            /** CountrySettings productPageType */
+                            productPageType?: (google.shopping.merchant.lfp.v1beta.LfpMerchantState.CountrySettings.ProductPageType|keyof typeof google.shopping.merchant.lfp.v1beta.LfpMerchantState.CountrySettings.ProductPageType|null);
+
+                            /** CountrySettings instockServingVerificationState */
+                            instockServingVerificationState?: (google.shopping.merchant.lfp.v1beta.LfpMerchantState.CountrySettings.VerificationState|keyof typeof google.shopping.merchant.lfp.v1beta.LfpMerchantState.CountrySettings.VerificationState|null);
+
+                            /** CountrySettings pickupServingVerificationState */
+                            pickupServingVerificationState?: (google.shopping.merchant.lfp.v1beta.LfpMerchantState.CountrySettings.VerificationState|keyof typeof google.shopping.merchant.lfp.v1beta.LfpMerchantState.CountrySettings.VerificationState|null);
+                        }
+
+                        /** Represents a CountrySettings. */
+                        class CountrySettings implements ICountrySettings {
+
+                            /**
+                             * Constructs a new CountrySettings.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.shopping.merchant.lfp.v1beta.LfpMerchantState.ICountrySettings);
+
+                            /** CountrySettings regionCode. */
+                            public regionCode: string;
+
+                            /** CountrySettings freeLocalListingsEnabled. */
+                            public freeLocalListingsEnabled: boolean;
+
+                            /** CountrySettings localInventoryAdsEnabled. */
+                            public localInventoryAdsEnabled: boolean;
+
+                            /** CountrySettings inventoryVerificationState. */
+                            public inventoryVerificationState: (google.shopping.merchant.lfp.v1beta.LfpMerchantState.CountrySettings.VerificationState|keyof typeof google.shopping.merchant.lfp.v1beta.LfpMerchantState.CountrySettings.VerificationState);
+
+                            /** CountrySettings productPageType. */
+                            public productPageType: (google.shopping.merchant.lfp.v1beta.LfpMerchantState.CountrySettings.ProductPageType|keyof typeof google.shopping.merchant.lfp.v1beta.LfpMerchantState.CountrySettings.ProductPageType);
+
+                            /** CountrySettings instockServingVerificationState. */
+                            public instockServingVerificationState: (google.shopping.merchant.lfp.v1beta.LfpMerchantState.CountrySettings.VerificationState|keyof typeof google.shopping.merchant.lfp.v1beta.LfpMerchantState.CountrySettings.VerificationState);
+
+                            /** CountrySettings pickupServingVerificationState. */
+                            public pickupServingVerificationState: (google.shopping.merchant.lfp.v1beta.LfpMerchantState.CountrySettings.VerificationState|keyof typeof google.shopping.merchant.lfp.v1beta.LfpMerchantState.CountrySettings.VerificationState);
+
+                            /**
+                             * Creates a new CountrySettings instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns CountrySettings instance
+                             */
+                            public static create(properties?: google.shopping.merchant.lfp.v1beta.LfpMerchantState.ICountrySettings): google.shopping.merchant.lfp.v1beta.LfpMerchantState.CountrySettings;
+
+                            /**
+                             * Encodes the specified CountrySettings message. Does not implicitly {@link google.shopping.merchant.lfp.v1beta.LfpMerchantState.CountrySettings.verify|verify} messages.
+                             * @param message CountrySettings message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.shopping.merchant.lfp.v1beta.LfpMerchantState.ICountrySettings, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified CountrySettings message, length delimited. Does not implicitly {@link google.shopping.merchant.lfp.v1beta.LfpMerchantState.CountrySettings.verify|verify} messages.
+                             * @param message CountrySettings message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.shopping.merchant.lfp.v1beta.LfpMerchantState.ICountrySettings, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a CountrySettings message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns CountrySettings
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.shopping.merchant.lfp.v1beta.LfpMerchantState.CountrySettings;
+
+                            /**
+                             * Decodes a CountrySettings message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns CountrySettings
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.shopping.merchant.lfp.v1beta.LfpMerchantState.CountrySettings;
+
+                            /**
+                             * Verifies a CountrySettings message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a CountrySettings message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns CountrySettings
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.shopping.merchant.lfp.v1beta.LfpMerchantState.CountrySettings;
+
+                            /**
+                             * Creates a plain object from a CountrySettings message. Also converts values to other types if specified.
+                             * @param message CountrySettings
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.shopping.merchant.lfp.v1beta.LfpMerchantState.CountrySettings, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this CountrySettings to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for CountrySettings
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+
+                        namespace CountrySettings {
+
+                            /** VerificationState enum. */
+                            enum VerificationState {
+                                VERIFICATION_STATE_UNSPECIFIED = 0,
+                                VERIFICATION_STATE_NOT_APPROVED = 1,
+                                VERIFICATION_STATE_IN_PROGRESS = 2,
+                                VERIFICATION_STATE_APPROVED = 3
+                            }
+
+                            /** ProductPageType enum. */
+                            enum ProductPageType {
+                                PRODUCT_PAGE_TYPE_UNSPECIFIED = 0,
+                                GOOGLE_HOSTED = 1,
+                                MERCHANT_HOSTED = 2,
+                                MERCHANT_HOSTED_STORE_SPECIFIC = 3
+                            }
+                        }
+                    }
+
+                    /** Properties of a GetLfpMerchantStateRequest. */
+                    interface IGetLfpMerchantStateRequest {
+
+                        /** GetLfpMerchantStateRequest name */
+                        name?: (string|null);
+                    }
+
+                    /** Represents a GetLfpMerchantStateRequest. */
+                    class GetLfpMerchantStateRequest implements IGetLfpMerchantStateRequest {
+
+                        /**
+                         * Constructs a new GetLfpMerchantStateRequest.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.shopping.merchant.lfp.v1beta.IGetLfpMerchantStateRequest);
+
+                        /** GetLfpMerchantStateRequest name. */
+                        public name: string;
+
+                        /**
+                         * Creates a new GetLfpMerchantStateRequest instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns GetLfpMerchantStateRequest instance
+                         */
+                        public static create(properties?: google.shopping.merchant.lfp.v1beta.IGetLfpMerchantStateRequest): google.shopping.merchant.lfp.v1beta.GetLfpMerchantStateRequest;
+
+                        /**
+                         * Encodes the specified GetLfpMerchantStateRequest message. Does not implicitly {@link google.shopping.merchant.lfp.v1beta.GetLfpMerchantStateRequest.verify|verify} messages.
+                         * @param message GetLfpMerchantStateRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.shopping.merchant.lfp.v1beta.IGetLfpMerchantStateRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified GetLfpMerchantStateRequest message, length delimited. Does not implicitly {@link google.shopping.merchant.lfp.v1beta.GetLfpMerchantStateRequest.verify|verify} messages.
+                         * @param message GetLfpMerchantStateRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.shopping.merchant.lfp.v1beta.IGetLfpMerchantStateRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a GetLfpMerchantStateRequest message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns GetLfpMerchantStateRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.shopping.merchant.lfp.v1beta.GetLfpMerchantStateRequest;
+
+                        /**
+                         * Decodes a GetLfpMerchantStateRequest message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns GetLfpMerchantStateRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.shopping.merchant.lfp.v1beta.GetLfpMerchantStateRequest;
+
+                        /**
+                         * Verifies a GetLfpMerchantStateRequest message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a GetLfpMerchantStateRequest message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns GetLfpMerchantStateRequest
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.shopping.merchant.lfp.v1beta.GetLfpMerchantStateRequest;
+
+                        /**
+                         * Creates a plain object from a GetLfpMerchantStateRequest message. Also converts values to other types if specified.
+                         * @param message GetLfpMerchantStateRequest
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.shopping.merchant.lfp.v1beta.GetLfpMerchantStateRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this GetLfpMerchantStateRequest to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for GetLfpMerchantStateRequest
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
                     /** Represents a LfpSaleService */
                     class LfpSaleService extends $protobuf.rpc.Service {
 
