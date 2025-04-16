@@ -48,6 +48,7 @@
   * [Analytics_admin_service.create_key_event](#analytics_admin_service.create_key_event)
   * [Analytics_admin_service.create_measurement_protocol_secret](#analytics_admin_service.create_measurement_protocol_secret)
   * [Analytics_admin_service.create_property](#analytics_admin_service.create_property)
+  * [Analytics_admin_service.create_reporting_data_annotation](#analytics_admin_service.create_reporting_data_annotation)
   * [Analytics_admin_service.create_rollup_property](#analytics_admin_service.create_rollup_property)
   * [Analytics_admin_service.create_rollup_property_source_link](#analytics_admin_service.create_rollup_property_source_link)
   * [Analytics_admin_service.create_s_k_ad_network_conversion_value_schema](#analytics_admin_service.create_s_k_ad_network_conversion_value_schema)
@@ -77,6 +78,7 @@
   * [Analytics_admin_service.delete_key_event](#analytics_admin_service.delete_key_event)
   * [Analytics_admin_service.delete_measurement_protocol_secret](#analytics_admin_service.delete_measurement_protocol_secret)
   * [Analytics_admin_service.delete_property](#analytics_admin_service.delete_property)
+  * [Analytics_admin_service.delete_reporting_data_annotation](#analytics_admin_service.delete_reporting_data_annotation)
   * [Analytics_admin_service.delete_rollup_property_source_link](#analytics_admin_service.delete_rollup_property_source_link)
   * [Analytics_admin_service.delete_s_k_ad_network_conversion_value_schema](#analytics_admin_service.delete_s_k_ad_network_conversion_value_schema)
   * [Analytics_admin_service.delete_search_ads360_link](#analytics_admin_service.delete_search_ads360_link)
@@ -113,6 +115,7 @@
   * [Analytics_admin_service.get_key_event](#analytics_admin_service.get_key_event)
   * [Analytics_admin_service.get_measurement_protocol_secret](#analytics_admin_service.get_measurement_protocol_secret)
   * [Analytics_admin_service.get_property](#analytics_admin_service.get_property)
+  * [Analytics_admin_service.get_reporting_data_annotation](#analytics_admin_service.get_reporting_data_annotation)
   * [Analytics_admin_service.get_rollup_property_source_link](#analytics_admin_service.get_rollup_property_source_link)
   * [Analytics_admin_service.get_s_k_ad_network_conversion_value_schema](#analytics_admin_service.get_s_k_ad_network_conversion_value_schema)
   * [Analytics_admin_service.get_search_ads360_link](#analytics_admin_service.get_search_ads360_link)
@@ -144,6 +147,7 @@
   * [Analytics_admin_service.list_key_events](#analytics_admin_service.list_key_events)
   * [Analytics_admin_service.list_measurement_protocol_secrets](#analytics_admin_service.list_measurement_protocol_secrets)
   * [Analytics_admin_service.list_properties](#analytics_admin_service.list_properties)
+  * [Analytics_admin_service.list_reporting_data_annotations](#analytics_admin_service.list_reporting_data_annotations)
   * [Analytics_admin_service.list_rollup_property_source_links](#analytics_admin_service.list_rollup_property_source_links)
   * [Analytics_admin_service.list_s_k_ad_network_conversion_value_schemas](#analytics_admin_service.list_s_k_ad_network_conversion_value_schemas)
   * [Analytics_admin_service.list_search_ads360_links](#analytics_admin_service.list_search_ads360_links)
@@ -156,6 +160,7 @@
   * [Analytics_admin_service.run_access_report](#analytics_admin_service.run_access_report)
   * [Analytics_admin_service.search_change_history_events](#analytics_admin_service.search_change_history_events)
   * [Analytics_admin_service.set_automated_ga4_configuration_opt_out](#analytics_admin_service.set_automated_ga4_configuration_opt_out)
+  * [Analytics_admin_service.submit_user_deletion](#analytics_admin_service.submit_user_deletion)
   * [Analytics_admin_service.update_access_binding](#analytics_admin_service.update_access_binding)
   * [Analytics_admin_service.update_account](#analytics_admin_service.update_account)
   * [Analytics_admin_service.update_android_app_data_stream](#analytics_admin_service.update_android_app_data_stream)
@@ -181,6 +186,7 @@
   * [Analytics_admin_service.update_key_event](#analytics_admin_service.update_key_event)
   * [Analytics_admin_service.update_measurement_protocol_secret](#analytics_admin_service.update_measurement_protocol_secret)
   * [Analytics_admin_service.update_property](#analytics_admin_service.update_property)
+  * [Analytics_admin_service.update_reporting_data_annotation](#analytics_admin_service.update_reporting_data_annotation)
   * [Analytics_admin_service.update_s_k_ad_network_conversion_value_schema](#analytics_admin_service.update_s_k_ad_network_conversion_value_schema)
   * [Analytics_admin_service.update_search_ads360_link](#analytics_admin_service.update_search_ads360_link)
   * [Analytics_admin_service.update_subproperty_event_filter](#analytics_admin_service.update_subproperty_event_filter)
@@ -869,6 +875,23 @@ __Usage:__
 
 
 
+### Analytics_admin_service.create_reporting_data_annotation
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-analytics-admin/samples/generated/v1alpha/analytics_admin_service.create_reporting_data_annotation.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-analytics-admin/samples/generated/v1alpha/analytics_admin_service.create_reporting_data_annotation.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-analytics-admin/samples/generated/v1alpha/analytics_admin_service.create_reporting_data_annotation.js`
+
+
+-----
+
+
+
+
 ### Analytics_admin_service.create_rollup_property
 
 View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-analytics-admin/samples/generated/v1alpha/analytics_admin_service.create_rollup_property.js).
@@ -1355,6 +1378,23 @@ __Usage:__
 
 
 `node packages/google-analytics-admin/samples/generated/v1alpha/analytics_admin_service.delete_property.js`
+
+
+-----
+
+
+
+
+### Analytics_admin_service.delete_reporting_data_annotation
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-analytics-admin/samples/generated/v1alpha/analytics_admin_service.delete_reporting_data_annotation.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-analytics-admin/samples/generated/v1alpha/analytics_admin_service.delete_reporting_data_annotation.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-analytics-admin/samples/generated/v1alpha/analytics_admin_service.delete_reporting_data_annotation.js`
 
 
 -----
@@ -1974,6 +2014,23 @@ __Usage:__
 
 
 
+### Analytics_admin_service.get_reporting_data_annotation
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-analytics-admin/samples/generated/v1alpha/analytics_admin_service.get_reporting_data_annotation.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-analytics-admin/samples/generated/v1alpha/analytics_admin_service.get_reporting_data_annotation.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-analytics-admin/samples/generated/v1alpha/analytics_admin_service.get_reporting_data_annotation.js`
+
+
+-----
+
+
+
+
 ### Analytics_admin_service.get_rollup_property_source_link
 
 View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-analytics-admin/samples/generated/v1alpha/analytics_admin_service.get_rollup_property_source_link.js).
@@ -2501,6 +2558,23 @@ __Usage:__
 
 
 
+### Analytics_admin_service.list_reporting_data_annotations
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-analytics-admin/samples/generated/v1alpha/analytics_admin_service.list_reporting_data_annotations.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-analytics-admin/samples/generated/v1alpha/analytics_admin_service.list_reporting_data_annotations.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-analytics-admin/samples/generated/v1alpha/analytics_admin_service.list_reporting_data_annotations.js`
+
+
+-----
+
+
+
+
 ### Analytics_admin_service.list_rollup_property_source_links
 
 View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-analytics-admin/samples/generated/v1alpha/analytics_admin_service.list_rollup_property_source_links.js).
@@ -2698,6 +2772,23 @@ __Usage:__
 
 
 `node packages/google-analytics-admin/samples/generated/v1alpha/analytics_admin_service.set_automated_ga4_configuration_opt_out.js`
+
+
+-----
+
+
+
+
+### Analytics_admin_service.submit_user_deletion
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-analytics-admin/samples/generated/v1alpha/analytics_admin_service.submit_user_deletion.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-analytics-admin/samples/generated/v1alpha/analytics_admin_service.submit_user_deletion.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-analytics-admin/samples/generated/v1alpha/analytics_admin_service.submit_user_deletion.js`
 
 
 -----
@@ -3123,6 +3214,23 @@ __Usage:__
 
 
 `node packages/google-analytics-admin/samples/generated/v1alpha/analytics_admin_service.update_property.js`
+
+
+-----
+
+
+
+
+### Analytics_admin_service.update_reporting_data_annotation
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-analytics-admin/samples/generated/v1alpha/analytics_admin_service.update_reporting_data_annotation.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-analytics-admin/samples/generated/v1alpha/analytics_admin_service.update_reporting_data_annotation.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-analytics-admin/samples/generated/v1alpha/analytics_admin_service.update_reporting_data_annotation.js`
 
 
 -----

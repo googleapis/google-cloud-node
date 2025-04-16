@@ -295,6 +295,9 @@ export class AnalyticsAdminServiceClient {
       propertyAccessBindingPathTemplate: new this._gaxModule.PathTemplate(
         'properties/{property}/accessBindings/{access_binding}'
       ),
+      reportingDataAnnotationPathTemplate: new this._gaxModule.PathTemplate(
+        'properties/{property}/reportingDataAnnotations/{reporting_data_annotation}'
+      ),
       rollupPropertySourceLinkPathTemplate: new this._gaxModule.PathTemplate(
         'properties/{property}/rollupPropertySourceLinks/{rollup_property_source_link}'
       ),
@@ -449,6 +452,11 @@ export class AnalyticsAdminServiceClient {
         'pageToken',
         'nextPageToken',
         'subpropertyEventFilters'
+      ),
+      listReportingDataAnnotations: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'reportingDataAnnotations'
       ),
     };
 
@@ -653,6 +661,12 @@ export class AnalyticsAdminServiceClient {
       'listSubpropertyEventFilters',
       'updateSubpropertyEventFilter',
       'deleteSubpropertyEventFilter',
+      'createReportingDataAnnotation',
+      'getReportingDataAnnotation',
+      'listReportingDataAnnotations',
+      'updateReportingDataAnnotation',
+      'deleteReportingDataAnnotation',
+      'submitUserDeletion',
     ];
     for (const methodName of analyticsAdminServiceStubMethods) {
       const callPromise = this.analyticsAdminServiceStub.then(
@@ -16965,6 +16979,669 @@ export class AnalyticsAdminServiceClient {
         }
       );
   }
+  /**
+   * Creates a Reporting Data Annotation.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The property for which to create a Reporting Data Annotation.
+   *   Format: properties/property_id
+   *   Example: properties/123
+   * @param {google.analytics.admin.v1alpha.ReportingDataAnnotation} request.reportingDataAnnotation
+   *   Required. The Reporting Data Annotation to create.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.analytics.admin.v1alpha.ReportingDataAnnotation|ReportingDataAnnotation}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1alpha/analytics_admin_service.create_reporting_data_annotation.js</caption>
+   * region_tag:analyticsadmin_v1alpha_generated_AnalyticsAdminService_CreateReportingDataAnnotation_async
+   */
+  createReportingDataAnnotation(
+    request?: protos.google.analytics.admin.v1alpha.ICreateReportingDataAnnotationRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.analytics.admin.v1alpha.IReportingDataAnnotation,
+      (
+        | protos.google.analytics.admin.v1alpha.ICreateReportingDataAnnotationRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
+  createReportingDataAnnotation(
+    request: protos.google.analytics.admin.v1alpha.ICreateReportingDataAnnotationRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.analytics.admin.v1alpha.IReportingDataAnnotation,
+      | protos.google.analytics.admin.v1alpha.ICreateReportingDataAnnotationRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  createReportingDataAnnotation(
+    request: protos.google.analytics.admin.v1alpha.ICreateReportingDataAnnotationRequest,
+    callback: Callback<
+      protos.google.analytics.admin.v1alpha.IReportingDataAnnotation,
+      | protos.google.analytics.admin.v1alpha.ICreateReportingDataAnnotationRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  createReportingDataAnnotation(
+    request?: protos.google.analytics.admin.v1alpha.ICreateReportingDataAnnotationRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.analytics.admin.v1alpha.IReportingDataAnnotation,
+          | protos.google.analytics.admin.v1alpha.ICreateReportingDataAnnotationRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.analytics.admin.v1alpha.IReportingDataAnnotation,
+      | protos.google.analytics.admin.v1alpha.ICreateReportingDataAnnotationRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.analytics.admin.v1alpha.IReportingDataAnnotation,
+      (
+        | protos.google.analytics.admin.v1alpha.ICreateReportingDataAnnotationRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('createReportingDataAnnotation request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.analytics.admin.v1alpha.IReportingDataAnnotation,
+          | protos.google.analytics.admin.v1alpha.ICreateReportingDataAnnotationRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('createReportingDataAnnotation response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .createReportingDataAnnotation(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.analytics.admin.v1alpha.IReportingDataAnnotation,
+          (
+            | protos.google.analytics.admin.v1alpha.ICreateReportingDataAnnotationRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('createReportingDataAnnotation response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
+  }
+  /**
+   * Lookup a single Reporting Data Annotation.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. Resource name of the Reporting Data Annotation to lookup.
+   *   Format:
+   *   properties/property_id/reportingDataAnnotations/reportingDataAnnotation
+   *   Example: properties/123/reportingDataAnnotations/456
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.analytics.admin.v1alpha.ReportingDataAnnotation|ReportingDataAnnotation}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1alpha/analytics_admin_service.get_reporting_data_annotation.js</caption>
+   * region_tag:analyticsadmin_v1alpha_generated_AnalyticsAdminService_GetReportingDataAnnotation_async
+   */
+  getReportingDataAnnotation(
+    request?: protos.google.analytics.admin.v1alpha.IGetReportingDataAnnotationRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.analytics.admin.v1alpha.IReportingDataAnnotation,
+      (
+        | protos.google.analytics.admin.v1alpha.IGetReportingDataAnnotationRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
+  getReportingDataAnnotation(
+    request: protos.google.analytics.admin.v1alpha.IGetReportingDataAnnotationRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.analytics.admin.v1alpha.IReportingDataAnnotation,
+      | protos.google.analytics.admin.v1alpha.IGetReportingDataAnnotationRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  getReportingDataAnnotation(
+    request: protos.google.analytics.admin.v1alpha.IGetReportingDataAnnotationRequest,
+    callback: Callback<
+      protos.google.analytics.admin.v1alpha.IReportingDataAnnotation,
+      | protos.google.analytics.admin.v1alpha.IGetReportingDataAnnotationRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  getReportingDataAnnotation(
+    request?: protos.google.analytics.admin.v1alpha.IGetReportingDataAnnotationRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.analytics.admin.v1alpha.IReportingDataAnnotation,
+          | protos.google.analytics.admin.v1alpha.IGetReportingDataAnnotationRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.analytics.admin.v1alpha.IReportingDataAnnotation,
+      | protos.google.analytics.admin.v1alpha.IGetReportingDataAnnotationRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.analytics.admin.v1alpha.IReportingDataAnnotation,
+      (
+        | protos.google.analytics.admin.v1alpha.IGetReportingDataAnnotationRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('getReportingDataAnnotation request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.analytics.admin.v1alpha.IReportingDataAnnotation,
+          | protos.google.analytics.admin.v1alpha.IGetReportingDataAnnotationRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getReportingDataAnnotation response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getReportingDataAnnotation(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.analytics.admin.v1alpha.IReportingDataAnnotation,
+          (
+            | protos.google.analytics.admin.v1alpha.IGetReportingDataAnnotationRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getReportingDataAnnotation response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
+  }
+  /**
+   * Updates a Reporting Data Annotation.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.analytics.admin.v1alpha.ReportingDataAnnotation} request.reportingDataAnnotation
+   *   Required. The Reporting Data Annotation to update.
+   * @param {google.protobuf.FieldMask} [request.updateMask]
+   *   Optional. The list of fields to update. Field names must be in snake case
+   *   (for example, "field_to_update"). Omitted fields will not be updated. To
+   *   replace the entire entity, use one path with the string "*" to match all
+   *   fields.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.analytics.admin.v1alpha.ReportingDataAnnotation|ReportingDataAnnotation}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1alpha/analytics_admin_service.update_reporting_data_annotation.js</caption>
+   * region_tag:analyticsadmin_v1alpha_generated_AnalyticsAdminService_UpdateReportingDataAnnotation_async
+   */
+  updateReportingDataAnnotation(
+    request?: protos.google.analytics.admin.v1alpha.IUpdateReportingDataAnnotationRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.analytics.admin.v1alpha.IReportingDataAnnotation,
+      (
+        | protos.google.analytics.admin.v1alpha.IUpdateReportingDataAnnotationRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
+  updateReportingDataAnnotation(
+    request: protos.google.analytics.admin.v1alpha.IUpdateReportingDataAnnotationRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.analytics.admin.v1alpha.IReportingDataAnnotation,
+      | protos.google.analytics.admin.v1alpha.IUpdateReportingDataAnnotationRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  updateReportingDataAnnotation(
+    request: protos.google.analytics.admin.v1alpha.IUpdateReportingDataAnnotationRequest,
+    callback: Callback<
+      protos.google.analytics.admin.v1alpha.IReportingDataAnnotation,
+      | protos.google.analytics.admin.v1alpha.IUpdateReportingDataAnnotationRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  updateReportingDataAnnotation(
+    request?: protos.google.analytics.admin.v1alpha.IUpdateReportingDataAnnotationRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.analytics.admin.v1alpha.IReportingDataAnnotation,
+          | protos.google.analytics.admin.v1alpha.IUpdateReportingDataAnnotationRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.analytics.admin.v1alpha.IReportingDataAnnotation,
+      | protos.google.analytics.admin.v1alpha.IUpdateReportingDataAnnotationRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.analytics.admin.v1alpha.IReportingDataAnnotation,
+      (
+        | protos.google.analytics.admin.v1alpha.IUpdateReportingDataAnnotationRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        'reporting_data_annotation.name':
+          request.reportingDataAnnotation!.name ?? '',
+      });
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('updateReportingDataAnnotation request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.analytics.admin.v1alpha.IReportingDataAnnotation,
+          | protos.google.analytics.admin.v1alpha.IUpdateReportingDataAnnotationRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('updateReportingDataAnnotation response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .updateReportingDataAnnotation(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.analytics.admin.v1alpha.IReportingDataAnnotation,
+          (
+            | protos.google.analytics.admin.v1alpha.IUpdateReportingDataAnnotationRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('updateReportingDataAnnotation response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
+  }
+  /**
+   * Deletes a Reporting Data Annotation.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. Resource name of the Reporting Data Annotation to delete.
+   *   Format:
+   *   properties/property_id/reportingDataAnnotations/reporting_data_annotation
+   *   Example: properties/123/reportingDataAnnotations/456
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1alpha/analytics_admin_service.delete_reporting_data_annotation.js</caption>
+   * region_tag:analyticsadmin_v1alpha_generated_AnalyticsAdminService_DeleteReportingDataAnnotation_async
+   */
+  deleteReportingDataAnnotation(
+    request?: protos.google.analytics.admin.v1alpha.IDeleteReportingDataAnnotationRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.protobuf.IEmpty,
+      (
+        | protos.google.analytics.admin.v1alpha.IDeleteReportingDataAnnotationRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
+  deleteReportingDataAnnotation(
+    request: protos.google.analytics.admin.v1alpha.IDeleteReportingDataAnnotationRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.analytics.admin.v1alpha.IDeleteReportingDataAnnotationRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  deleteReportingDataAnnotation(
+    request: protos.google.analytics.admin.v1alpha.IDeleteReportingDataAnnotationRequest,
+    callback: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.analytics.admin.v1alpha.IDeleteReportingDataAnnotationRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  deleteReportingDataAnnotation(
+    request?: protos.google.analytics.admin.v1alpha.IDeleteReportingDataAnnotationRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.analytics.admin.v1alpha.IDeleteReportingDataAnnotationRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.analytics.admin.v1alpha.IDeleteReportingDataAnnotationRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.protobuf.IEmpty,
+      (
+        | protos.google.analytics.admin.v1alpha.IDeleteReportingDataAnnotationRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('deleteReportingDataAnnotation request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.analytics.admin.v1alpha.IDeleteReportingDataAnnotationRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('deleteReportingDataAnnotation response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .deleteReportingDataAnnotation(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.protobuf.IEmpty,
+          (
+            | protos.google.analytics.admin.v1alpha.IDeleteReportingDataAnnotationRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteReportingDataAnnotation response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
+  }
+  /**
+   * Submits a request for user deletion for a property.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.userId
+   *   Google Analytics [user
+   *   ID](https://firebase.google.com/docs/analytics/userid).
+   * @param {string} request.clientId
+   *   Google Analytics [client
+   *   ID](https://support.google.com/analytics/answer/11593727).
+   * @param {string} request.appInstanceId
+   *   Firebase [application instance
+   *   ID](https://firebase.google.com/docs/reference/android/com/google/firebase/analytics/FirebaseAnalytics.html#getAppInstanceId).
+   * @param {string} request.userProvidedData
+   *   The un-hashed, unencrypted, [user-provided
+   *   data](https://support.google.com/analytics/answer/14077171).
+   * @param {string} request.name
+   *   Required. The name of the property to submit user deletion for.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.analytics.admin.v1alpha.SubmitUserDeletionResponse|SubmitUserDeletionResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1alpha/analytics_admin_service.submit_user_deletion.js</caption>
+   * region_tag:analyticsadmin_v1alpha_generated_AnalyticsAdminService_SubmitUserDeletion_async
+   */
+  submitUserDeletion(
+    request?: protos.google.analytics.admin.v1alpha.ISubmitUserDeletionRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.analytics.admin.v1alpha.ISubmitUserDeletionResponse,
+      (
+        | protos.google.analytics.admin.v1alpha.ISubmitUserDeletionRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
+  submitUserDeletion(
+    request: protos.google.analytics.admin.v1alpha.ISubmitUserDeletionRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.analytics.admin.v1alpha.ISubmitUserDeletionResponse,
+      | protos.google.analytics.admin.v1alpha.ISubmitUserDeletionRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  submitUserDeletion(
+    request: protos.google.analytics.admin.v1alpha.ISubmitUserDeletionRequest,
+    callback: Callback<
+      protos.google.analytics.admin.v1alpha.ISubmitUserDeletionResponse,
+      | protos.google.analytics.admin.v1alpha.ISubmitUserDeletionRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  submitUserDeletion(
+    request?: protos.google.analytics.admin.v1alpha.ISubmitUserDeletionRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.analytics.admin.v1alpha.ISubmitUserDeletionResponse,
+          | protos.google.analytics.admin.v1alpha.ISubmitUserDeletionRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.analytics.admin.v1alpha.ISubmitUserDeletionResponse,
+      | protos.google.analytics.admin.v1alpha.ISubmitUserDeletionRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.analytics.admin.v1alpha.ISubmitUserDeletionResponse,
+      (
+        | protos.google.analytics.admin.v1alpha.ISubmitUserDeletionRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('submitUserDeletion request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.analytics.admin.v1alpha.ISubmitUserDeletionResponse,
+          | protos.google.analytics.admin.v1alpha.ISubmitUserDeletionRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('submitUserDeletion response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .submitUserDeletion(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.analytics.admin.v1alpha.ISubmitUserDeletionResponse,
+          (
+            | protos.google.analytics.admin.v1alpha.ISubmitUserDeletionRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('submitUserDeletion response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
+  }
 
   /**
    * Returns all accounts accessible by the caller.
@@ -23648,6 +24325,388 @@ export class AnalyticsAdminServiceClient {
       callSettings
     ) as AsyncIterable<protos.google.analytics.admin.v1alpha.ISubpropertyEventFilter>;
   }
+  /**
+   * List all Reporting Data Annotations on a property.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Resource name of the property.
+   *   Format: properties/property_id
+   *   Example: properties/123
+   * @param {string} [request.filter]
+   *   Optional. Filter that restricts which reporting data annotations under the
+   *   parent property are listed.
+   *
+   *   Supported fields are:
+   *
+   *     * 'name'
+   *     * `title`
+   *     * `description`
+   *     * `annotation_date`
+   *     * `annotation_date_range`
+   *     * `color`
+   *
+   *   Additionally, this API provides the following helper functions:
+   *
+   *     * annotation_duration() : the duration that this annotation marks,
+   *     [durations](https://github.com/protocolbuffers/protobuf/blob/main/src/google/protobuf/duration.proto).
+   *     expect a numeric representation of seconds followed by an `s` suffix.
+   *     * is_annotation_in_range(start_date, end_date)  : if the annotation is in
+   *     the range specified by the `start_date` and `end_date`. The dates are in
+   *     ISO-8601 format, for example `2031-06-28`.
+   *
+   *   Supported operations:
+   *
+   *   * `=` : equals
+   *   * `!=` : not equals
+   *   * `<` : less than
+   *   * `>` : greater than
+   *   * `<=` :  less than or equals
+   *   * `>=` : greater than or equals
+   *   * `:` : has operator
+   *   * `=~` : [regular expression](https://github.com/google/re2/wiki/Syntax)
+   *   match
+   *   * `!~` : [regular expression](https://github.com/google/re2/wiki/Syntax)
+   *   does not match
+   *   * `NOT` : Logical not
+   *   * `AND` : Logical and
+   *   * `OR` : Logical or
+   *
+   *   Examples:
+   *
+   *     1. `title="Holiday Sale"`
+   *     2. `description=~"[Bb]ig [Gg]ame.*[Ss]ale"`
+   *     3. `is_annotation_in_range("2025-12-25", "2026-01-16") = true`
+   *     4. `annotation_duration() >= 172800s AND title:BOGO`
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of resources to return. The service may return
+   *   fewer than this value, even if there are additional pages. If unspecified,
+   *   at most 50 resources will be returned. The maximum value is 200; (higher
+   *   values will be coerced to the maximum)
+   * @param {string} [request.pageToken]
+   *   Optional. A page token, received from a previous
+   *   `ListReportingDataAnnotations` call. Provide this to retrieve the
+   *   subsequent page. When paginating, all other parameters provided to
+   *   `ListReportingDataAnnotations` must match the call that provided the page
+   *   token.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link protos.google.analytics.admin.v1alpha.ReportingDataAnnotation|ReportingDataAnnotation}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listReportingDataAnnotationsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
+  listReportingDataAnnotations(
+    request?: protos.google.analytics.admin.v1alpha.IListReportingDataAnnotationsRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.analytics.admin.v1alpha.IReportingDataAnnotation[],
+      protos.google.analytics.admin.v1alpha.IListReportingDataAnnotationsRequest | null,
+      protos.google.analytics.admin.v1alpha.IListReportingDataAnnotationsResponse,
+    ]
+  >;
+  listReportingDataAnnotations(
+    request: protos.google.analytics.admin.v1alpha.IListReportingDataAnnotationsRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.analytics.admin.v1alpha.IListReportingDataAnnotationsRequest,
+      | protos.google.analytics.admin.v1alpha.IListReportingDataAnnotationsResponse
+      | null
+      | undefined,
+      protos.google.analytics.admin.v1alpha.IReportingDataAnnotation
+    >
+  ): void;
+  listReportingDataAnnotations(
+    request: protos.google.analytics.admin.v1alpha.IListReportingDataAnnotationsRequest,
+    callback: PaginationCallback<
+      protos.google.analytics.admin.v1alpha.IListReportingDataAnnotationsRequest,
+      | protos.google.analytics.admin.v1alpha.IListReportingDataAnnotationsResponse
+      | null
+      | undefined,
+      protos.google.analytics.admin.v1alpha.IReportingDataAnnotation
+    >
+  ): void;
+  listReportingDataAnnotations(
+    request?: protos.google.analytics.admin.v1alpha.IListReportingDataAnnotationsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
+          protos.google.analytics.admin.v1alpha.IListReportingDataAnnotationsRequest,
+          | protos.google.analytics.admin.v1alpha.IListReportingDataAnnotationsResponse
+          | null
+          | undefined,
+          protos.google.analytics.admin.v1alpha.IReportingDataAnnotation
+        >,
+    callback?: PaginationCallback<
+      protos.google.analytics.admin.v1alpha.IListReportingDataAnnotationsRequest,
+      | protos.google.analytics.admin.v1alpha.IListReportingDataAnnotationsResponse
+      | null
+      | undefined,
+      protos.google.analytics.admin.v1alpha.IReportingDataAnnotation
+    >
+  ): Promise<
+    [
+      protos.google.analytics.admin.v1alpha.IReportingDataAnnotation[],
+      protos.google.analytics.admin.v1alpha.IListReportingDataAnnotationsRequest | null,
+      protos.google.analytics.admin.v1alpha.IListReportingDataAnnotationsResponse,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.analytics.admin.v1alpha.IListReportingDataAnnotationsRequest,
+          | protos.google.analytics.admin.v1alpha.IListReportingDataAnnotationsResponse
+          | null
+          | undefined,
+          protos.google.analytics.admin.v1alpha.IReportingDataAnnotation
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listReportingDataAnnotations values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listReportingDataAnnotations request %j', request);
+    return this.innerApiCalls
+      .listReportingDataAnnotations(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.analytics.admin.v1alpha.IReportingDataAnnotation[],
+          protos.google.analytics.admin.v1alpha.IListReportingDataAnnotationsRequest | null,
+          protos.google.analytics.admin.v1alpha.IListReportingDataAnnotationsResponse,
+        ]) => {
+          this._log.info('listReportingDataAnnotations values %j', response);
+          return [response, input, output];
+        }
+      );
+  }
+
+  /**
+   * Equivalent to `listReportingDataAnnotations`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Resource name of the property.
+   *   Format: properties/property_id
+   *   Example: properties/123
+   * @param {string} [request.filter]
+   *   Optional. Filter that restricts which reporting data annotations under the
+   *   parent property are listed.
+   *
+   *   Supported fields are:
+   *
+   *     * 'name'
+   *     * `title`
+   *     * `description`
+   *     * `annotation_date`
+   *     * `annotation_date_range`
+   *     * `color`
+   *
+   *   Additionally, this API provides the following helper functions:
+   *
+   *     * annotation_duration() : the duration that this annotation marks,
+   *     [durations](https://github.com/protocolbuffers/protobuf/blob/main/src/google/protobuf/duration.proto).
+   *     expect a numeric representation of seconds followed by an `s` suffix.
+   *     * is_annotation_in_range(start_date, end_date)  : if the annotation is in
+   *     the range specified by the `start_date` and `end_date`. The dates are in
+   *     ISO-8601 format, for example `2031-06-28`.
+   *
+   *   Supported operations:
+   *
+   *   * `=` : equals
+   *   * `!=` : not equals
+   *   * `<` : less than
+   *   * `>` : greater than
+   *   * `<=` :  less than or equals
+   *   * `>=` : greater than or equals
+   *   * `:` : has operator
+   *   * `=~` : [regular expression](https://github.com/google/re2/wiki/Syntax)
+   *   match
+   *   * `!~` : [regular expression](https://github.com/google/re2/wiki/Syntax)
+   *   does not match
+   *   * `NOT` : Logical not
+   *   * `AND` : Logical and
+   *   * `OR` : Logical or
+   *
+   *   Examples:
+   *
+   *     1. `title="Holiday Sale"`
+   *     2. `description=~"[Bb]ig [Gg]ame.*[Ss]ale"`
+   *     3. `is_annotation_in_range("2025-12-25", "2026-01-16") = true`
+   *     4. `annotation_duration() >= 172800s AND title:BOGO`
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of resources to return. The service may return
+   *   fewer than this value, even if there are additional pages. If unspecified,
+   *   at most 50 resources will be returned. The maximum value is 200; (higher
+   *   values will be coerced to the maximum)
+   * @param {string} [request.pageToken]
+   *   Optional. A page token, received from a previous
+   *   `ListReportingDataAnnotations` call. Provide this to retrieve the
+   *   subsequent page. When paginating, all other parameters provided to
+   *   `ListReportingDataAnnotations` must match the call that provided the page
+   *   token.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing {@link protos.google.analytics.admin.v1alpha.ReportingDataAnnotation|ReportingDataAnnotation} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listReportingDataAnnotationsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
+  listReportingDataAnnotationsStream(
+    request?: protos.google.analytics.admin.v1alpha.IListReportingDataAnnotationsRequest,
+    options?: CallOptions
+  ): Transform {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    const defaultCallSettings = this._defaults['listReportingDataAnnotations'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listReportingDataAnnotations stream %j', request);
+    return this.descriptors.page.listReportingDataAnnotations.createStream(
+      this.innerApiCalls.listReportingDataAnnotations as GaxCall,
+      request,
+      callSettings
+    );
+  }
+
+  /**
+   * Equivalent to `listReportingDataAnnotations`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Resource name of the property.
+   *   Format: properties/property_id
+   *   Example: properties/123
+   * @param {string} [request.filter]
+   *   Optional. Filter that restricts which reporting data annotations under the
+   *   parent property are listed.
+   *
+   *   Supported fields are:
+   *
+   *     * 'name'
+   *     * `title`
+   *     * `description`
+   *     * `annotation_date`
+   *     * `annotation_date_range`
+   *     * `color`
+   *
+   *   Additionally, this API provides the following helper functions:
+   *
+   *     * annotation_duration() : the duration that this annotation marks,
+   *     [durations](https://github.com/protocolbuffers/protobuf/blob/main/src/google/protobuf/duration.proto).
+   *     expect a numeric representation of seconds followed by an `s` suffix.
+   *     * is_annotation_in_range(start_date, end_date)  : if the annotation is in
+   *     the range specified by the `start_date` and `end_date`. The dates are in
+   *     ISO-8601 format, for example `2031-06-28`.
+   *
+   *   Supported operations:
+   *
+   *   * `=` : equals
+   *   * `!=` : not equals
+   *   * `<` : less than
+   *   * `>` : greater than
+   *   * `<=` :  less than or equals
+   *   * `>=` : greater than or equals
+   *   * `:` : has operator
+   *   * `=~` : [regular expression](https://github.com/google/re2/wiki/Syntax)
+   *   match
+   *   * `!~` : [regular expression](https://github.com/google/re2/wiki/Syntax)
+   *   does not match
+   *   * `NOT` : Logical not
+   *   * `AND` : Logical and
+   *   * `OR` : Logical or
+   *
+   *   Examples:
+   *
+   *     1. `title="Holiday Sale"`
+   *     2. `description=~"[Bb]ig [Gg]ame.*[Ss]ale"`
+   *     3. `is_annotation_in_range("2025-12-25", "2026-01-16") = true`
+   *     4. `annotation_duration() >= 172800s AND title:BOGO`
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of resources to return. The service may return
+   *   fewer than this value, even if there are additional pages. If unspecified,
+   *   at most 50 resources will be returned. The maximum value is 200; (higher
+   *   values will be coerced to the maximum)
+   * @param {string} [request.pageToken]
+   *   Optional. A page token, received from a previous
+   *   `ListReportingDataAnnotations` call. Provide this to retrieve the
+   *   subsequent page. When paginating, all other parameters provided to
+   *   `ListReportingDataAnnotations` must match the call that provided the page
+   *   token.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link protos.google.analytics.admin.v1alpha.ReportingDataAnnotation|ReportingDataAnnotation}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1alpha/analytics_admin_service.list_reporting_data_annotations.js</caption>
+   * region_tag:analyticsadmin_v1alpha_generated_AnalyticsAdminService_ListReportingDataAnnotations_async
+   */
+  listReportingDataAnnotationsAsync(
+    request?: protos.google.analytics.admin.v1alpha.IListReportingDataAnnotationsRequest,
+    options?: CallOptions
+  ): AsyncIterable<protos.google.analytics.admin.v1alpha.IReportingDataAnnotation> {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    const defaultCallSettings = this._defaults['listReportingDataAnnotations'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listReportingDataAnnotations iterate %j', request);
+    return this.descriptors.page.listReportingDataAnnotations.asyncIterate(
+      this.innerApiCalls['listReportingDataAnnotations'] as GaxCall,
+      request as {},
+      callSettings
+    ) as AsyncIterable<protos.google.analytics.admin.v1alpha.IReportingDataAnnotation>;
+  }
   // --------------------
   // -- Path templates --
   // --------------------
@@ -24772,6 +25831,53 @@ export class AnalyticsAdminServiceClient {
     return this.pathTemplates.propertyAccessBindingPathTemplate.match(
       propertyAccessBindingName
     ).access_binding;
+  }
+
+  /**
+   * Return a fully-qualified reportingDataAnnotation resource name string.
+   *
+   * @param {string} property
+   * @param {string} reporting_data_annotation
+   * @returns {string} Resource name string.
+   */
+  reportingDataAnnotationPath(
+    property: string,
+    reportingDataAnnotation: string
+  ) {
+    return this.pathTemplates.reportingDataAnnotationPathTemplate.render({
+      property: property,
+      reporting_data_annotation: reportingDataAnnotation,
+    });
+  }
+
+  /**
+   * Parse the property from ReportingDataAnnotation resource.
+   *
+   * @param {string} reportingDataAnnotationName
+   *   A fully-qualified path representing ReportingDataAnnotation resource.
+   * @returns {string} A string representing the property.
+   */
+  matchPropertyFromReportingDataAnnotationName(
+    reportingDataAnnotationName: string
+  ) {
+    return this.pathTemplates.reportingDataAnnotationPathTemplate.match(
+      reportingDataAnnotationName
+    ).property;
+  }
+
+  /**
+   * Parse the reporting_data_annotation from ReportingDataAnnotation resource.
+   *
+   * @param {string} reportingDataAnnotationName
+   *   A fully-qualified path representing ReportingDataAnnotation resource.
+   * @returns {string} A string representing the reporting_data_annotation.
+   */
+  matchReportingDataAnnotationFromReportingDataAnnotationName(
+    reportingDataAnnotationName: string
+  ) {
+    return this.pathTemplates.reportingDataAnnotationPathTemplate.match(
+      reportingDataAnnotationName
+    ).reporting_data_annotation;
   }
 
   /**
