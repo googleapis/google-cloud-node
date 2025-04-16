@@ -4373,6 +4373,90 @@ export namespace google {
                      * @returns Promise
                      */
                     public deleteSubpropertyEventFilter(request: google.analytics.admin.v1alpha.IDeleteSubpropertyEventFilterRequest): Promise<google.protobuf.Empty>;
+
+                    /**
+                     * Calls CreateReportingDataAnnotation.
+                     * @param request CreateReportingDataAnnotationRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ReportingDataAnnotation
+                     */
+                    public createReportingDataAnnotation(request: google.analytics.admin.v1alpha.ICreateReportingDataAnnotationRequest, callback: google.analytics.admin.v1alpha.AnalyticsAdminService.CreateReportingDataAnnotationCallback): void;
+
+                    /**
+                     * Calls CreateReportingDataAnnotation.
+                     * @param request CreateReportingDataAnnotationRequest message or plain object
+                     * @returns Promise
+                     */
+                    public createReportingDataAnnotation(request: google.analytics.admin.v1alpha.ICreateReportingDataAnnotationRequest): Promise<google.analytics.admin.v1alpha.ReportingDataAnnotation>;
+
+                    /**
+                     * Calls GetReportingDataAnnotation.
+                     * @param request GetReportingDataAnnotationRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ReportingDataAnnotation
+                     */
+                    public getReportingDataAnnotation(request: google.analytics.admin.v1alpha.IGetReportingDataAnnotationRequest, callback: google.analytics.admin.v1alpha.AnalyticsAdminService.GetReportingDataAnnotationCallback): void;
+
+                    /**
+                     * Calls GetReportingDataAnnotation.
+                     * @param request GetReportingDataAnnotationRequest message or plain object
+                     * @returns Promise
+                     */
+                    public getReportingDataAnnotation(request: google.analytics.admin.v1alpha.IGetReportingDataAnnotationRequest): Promise<google.analytics.admin.v1alpha.ReportingDataAnnotation>;
+
+                    /**
+                     * Calls ListReportingDataAnnotations.
+                     * @param request ListReportingDataAnnotationsRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ListReportingDataAnnotationsResponse
+                     */
+                    public listReportingDataAnnotations(request: google.analytics.admin.v1alpha.IListReportingDataAnnotationsRequest, callback: google.analytics.admin.v1alpha.AnalyticsAdminService.ListReportingDataAnnotationsCallback): void;
+
+                    /**
+                     * Calls ListReportingDataAnnotations.
+                     * @param request ListReportingDataAnnotationsRequest message or plain object
+                     * @returns Promise
+                     */
+                    public listReportingDataAnnotations(request: google.analytics.admin.v1alpha.IListReportingDataAnnotationsRequest): Promise<google.analytics.admin.v1alpha.ListReportingDataAnnotationsResponse>;
+
+                    /**
+                     * Calls UpdateReportingDataAnnotation.
+                     * @param request UpdateReportingDataAnnotationRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ReportingDataAnnotation
+                     */
+                    public updateReportingDataAnnotation(request: google.analytics.admin.v1alpha.IUpdateReportingDataAnnotationRequest, callback: google.analytics.admin.v1alpha.AnalyticsAdminService.UpdateReportingDataAnnotationCallback): void;
+
+                    /**
+                     * Calls UpdateReportingDataAnnotation.
+                     * @param request UpdateReportingDataAnnotationRequest message or plain object
+                     * @returns Promise
+                     */
+                    public updateReportingDataAnnotation(request: google.analytics.admin.v1alpha.IUpdateReportingDataAnnotationRequest): Promise<google.analytics.admin.v1alpha.ReportingDataAnnotation>;
+
+                    /**
+                     * Calls DeleteReportingDataAnnotation.
+                     * @param request DeleteReportingDataAnnotationRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Empty
+                     */
+                    public deleteReportingDataAnnotation(request: google.analytics.admin.v1alpha.IDeleteReportingDataAnnotationRequest, callback: google.analytics.admin.v1alpha.AnalyticsAdminService.DeleteReportingDataAnnotationCallback): void;
+
+                    /**
+                     * Calls DeleteReportingDataAnnotation.
+                     * @param request DeleteReportingDataAnnotationRequest message or plain object
+                     * @returns Promise
+                     */
+                    public deleteReportingDataAnnotation(request: google.analytics.admin.v1alpha.IDeleteReportingDataAnnotationRequest): Promise<google.protobuf.Empty>;
+
+                    /**
+                     * Calls SubmitUserDeletion.
+                     * @param request SubmitUserDeletionRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and SubmitUserDeletionResponse
+                     */
+                    public submitUserDeletion(request: google.analytics.admin.v1alpha.ISubmitUserDeletionRequest, callback: google.analytics.admin.v1alpha.AnalyticsAdminService.SubmitUserDeletionCallback): void;
+
+                    /**
+                     * Calls SubmitUserDeletion.
+                     * @param request SubmitUserDeletionRequest message or plain object
+                     * @returns Promise
+                     */
+                    public submitUserDeletion(request: google.analytics.admin.v1alpha.ISubmitUserDeletionRequest): Promise<google.analytics.admin.v1alpha.SubmitUserDeletionResponse>;
                 }
 
                 namespace AnalyticsAdminService {
@@ -5426,6 +5510,48 @@ export namespace google {
                      * @param [response] Empty
                      */
                     type DeleteSubpropertyEventFilterCallback = (error: (Error|null), response?: google.protobuf.Empty) => void;
+
+                    /**
+                     * Callback as used by {@link google.analytics.admin.v1alpha.AnalyticsAdminService|createReportingDataAnnotation}.
+                     * @param error Error, if any
+                     * @param [response] ReportingDataAnnotation
+                     */
+                    type CreateReportingDataAnnotationCallback = (error: (Error|null), response?: google.analytics.admin.v1alpha.ReportingDataAnnotation) => void;
+
+                    /**
+                     * Callback as used by {@link google.analytics.admin.v1alpha.AnalyticsAdminService|getReportingDataAnnotation}.
+                     * @param error Error, if any
+                     * @param [response] ReportingDataAnnotation
+                     */
+                    type GetReportingDataAnnotationCallback = (error: (Error|null), response?: google.analytics.admin.v1alpha.ReportingDataAnnotation) => void;
+
+                    /**
+                     * Callback as used by {@link google.analytics.admin.v1alpha.AnalyticsAdminService|listReportingDataAnnotations}.
+                     * @param error Error, if any
+                     * @param [response] ListReportingDataAnnotationsResponse
+                     */
+                    type ListReportingDataAnnotationsCallback = (error: (Error|null), response?: google.analytics.admin.v1alpha.ListReportingDataAnnotationsResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.analytics.admin.v1alpha.AnalyticsAdminService|updateReportingDataAnnotation}.
+                     * @param error Error, if any
+                     * @param [response] ReportingDataAnnotation
+                     */
+                    type UpdateReportingDataAnnotationCallback = (error: (Error|null), response?: google.analytics.admin.v1alpha.ReportingDataAnnotation) => void;
+
+                    /**
+                     * Callback as used by {@link google.analytics.admin.v1alpha.AnalyticsAdminService|deleteReportingDataAnnotation}.
+                     * @param error Error, if any
+                     * @param [response] Empty
+                     */
+                    type DeleteReportingDataAnnotationCallback = (error: (Error|null), response?: google.protobuf.Empty) => void;
+
+                    /**
+                     * Callback as used by {@link google.analytics.admin.v1alpha.AnalyticsAdminService|submitUserDeletion}.
+                     * @param error Error, if any
+                     * @param [response] SubmitUserDeletionResponse
+                     */
+                    type SubmitUserDeletionCallback = (error: (Error|null), response?: google.analytics.admin.v1alpha.SubmitUserDeletionResponse) => void;
                 }
 
                 /** Properties of a RunAccessReportRequest. */
@@ -24933,6 +25059,845 @@ export namespace google {
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
+                /** Properties of a CreateReportingDataAnnotationRequest. */
+                interface ICreateReportingDataAnnotationRequest {
+
+                    /** CreateReportingDataAnnotationRequest parent */
+                    parent?: (string|null);
+
+                    /** CreateReportingDataAnnotationRequest reportingDataAnnotation */
+                    reportingDataAnnotation?: (google.analytics.admin.v1alpha.IReportingDataAnnotation|null);
+                }
+
+                /** Represents a CreateReportingDataAnnotationRequest. */
+                class CreateReportingDataAnnotationRequest implements ICreateReportingDataAnnotationRequest {
+
+                    /**
+                     * Constructs a new CreateReportingDataAnnotationRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.analytics.admin.v1alpha.ICreateReportingDataAnnotationRequest);
+
+                    /** CreateReportingDataAnnotationRequest parent. */
+                    public parent: string;
+
+                    /** CreateReportingDataAnnotationRequest reportingDataAnnotation. */
+                    public reportingDataAnnotation?: (google.analytics.admin.v1alpha.IReportingDataAnnotation|null);
+
+                    /**
+                     * Creates a new CreateReportingDataAnnotationRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CreateReportingDataAnnotationRequest instance
+                     */
+                    public static create(properties?: google.analytics.admin.v1alpha.ICreateReportingDataAnnotationRequest): google.analytics.admin.v1alpha.CreateReportingDataAnnotationRequest;
+
+                    /**
+                     * Encodes the specified CreateReportingDataAnnotationRequest message. Does not implicitly {@link google.analytics.admin.v1alpha.CreateReportingDataAnnotationRequest.verify|verify} messages.
+                     * @param message CreateReportingDataAnnotationRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.analytics.admin.v1alpha.ICreateReportingDataAnnotationRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CreateReportingDataAnnotationRequest message, length delimited. Does not implicitly {@link google.analytics.admin.v1alpha.CreateReportingDataAnnotationRequest.verify|verify} messages.
+                     * @param message CreateReportingDataAnnotationRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.analytics.admin.v1alpha.ICreateReportingDataAnnotationRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CreateReportingDataAnnotationRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CreateReportingDataAnnotationRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.analytics.admin.v1alpha.CreateReportingDataAnnotationRequest;
+
+                    /**
+                     * Decodes a CreateReportingDataAnnotationRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CreateReportingDataAnnotationRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.analytics.admin.v1alpha.CreateReportingDataAnnotationRequest;
+
+                    /**
+                     * Verifies a CreateReportingDataAnnotationRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CreateReportingDataAnnotationRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CreateReportingDataAnnotationRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.analytics.admin.v1alpha.CreateReportingDataAnnotationRequest;
+
+                    /**
+                     * Creates a plain object from a CreateReportingDataAnnotationRequest message. Also converts values to other types if specified.
+                     * @param message CreateReportingDataAnnotationRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.analytics.admin.v1alpha.CreateReportingDataAnnotationRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CreateReportingDataAnnotationRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for CreateReportingDataAnnotationRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a GetReportingDataAnnotationRequest. */
+                interface IGetReportingDataAnnotationRequest {
+
+                    /** GetReportingDataAnnotationRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a GetReportingDataAnnotationRequest. */
+                class GetReportingDataAnnotationRequest implements IGetReportingDataAnnotationRequest {
+
+                    /**
+                     * Constructs a new GetReportingDataAnnotationRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.analytics.admin.v1alpha.IGetReportingDataAnnotationRequest);
+
+                    /** GetReportingDataAnnotationRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new GetReportingDataAnnotationRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GetReportingDataAnnotationRequest instance
+                     */
+                    public static create(properties?: google.analytics.admin.v1alpha.IGetReportingDataAnnotationRequest): google.analytics.admin.v1alpha.GetReportingDataAnnotationRequest;
+
+                    /**
+                     * Encodes the specified GetReportingDataAnnotationRequest message. Does not implicitly {@link google.analytics.admin.v1alpha.GetReportingDataAnnotationRequest.verify|verify} messages.
+                     * @param message GetReportingDataAnnotationRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.analytics.admin.v1alpha.IGetReportingDataAnnotationRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GetReportingDataAnnotationRequest message, length delimited. Does not implicitly {@link google.analytics.admin.v1alpha.GetReportingDataAnnotationRequest.verify|verify} messages.
+                     * @param message GetReportingDataAnnotationRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.analytics.admin.v1alpha.IGetReportingDataAnnotationRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GetReportingDataAnnotationRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GetReportingDataAnnotationRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.analytics.admin.v1alpha.GetReportingDataAnnotationRequest;
+
+                    /**
+                     * Decodes a GetReportingDataAnnotationRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GetReportingDataAnnotationRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.analytics.admin.v1alpha.GetReportingDataAnnotationRequest;
+
+                    /**
+                     * Verifies a GetReportingDataAnnotationRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GetReportingDataAnnotationRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GetReportingDataAnnotationRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.analytics.admin.v1alpha.GetReportingDataAnnotationRequest;
+
+                    /**
+                     * Creates a plain object from a GetReportingDataAnnotationRequest message. Also converts values to other types if specified.
+                     * @param message GetReportingDataAnnotationRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.analytics.admin.v1alpha.GetReportingDataAnnotationRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GetReportingDataAnnotationRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GetReportingDataAnnotationRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListReportingDataAnnotationsRequest. */
+                interface IListReportingDataAnnotationsRequest {
+
+                    /** ListReportingDataAnnotationsRequest parent */
+                    parent?: (string|null);
+
+                    /** ListReportingDataAnnotationsRequest filter */
+                    filter?: (string|null);
+
+                    /** ListReportingDataAnnotationsRequest pageSize */
+                    pageSize?: (number|null);
+
+                    /** ListReportingDataAnnotationsRequest pageToken */
+                    pageToken?: (string|null);
+                }
+
+                /** Represents a ListReportingDataAnnotationsRequest. */
+                class ListReportingDataAnnotationsRequest implements IListReportingDataAnnotationsRequest {
+
+                    /**
+                     * Constructs a new ListReportingDataAnnotationsRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.analytics.admin.v1alpha.IListReportingDataAnnotationsRequest);
+
+                    /** ListReportingDataAnnotationsRequest parent. */
+                    public parent: string;
+
+                    /** ListReportingDataAnnotationsRequest filter. */
+                    public filter: string;
+
+                    /** ListReportingDataAnnotationsRequest pageSize. */
+                    public pageSize: number;
+
+                    /** ListReportingDataAnnotationsRequest pageToken. */
+                    public pageToken: string;
+
+                    /**
+                     * Creates a new ListReportingDataAnnotationsRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListReportingDataAnnotationsRequest instance
+                     */
+                    public static create(properties?: google.analytics.admin.v1alpha.IListReportingDataAnnotationsRequest): google.analytics.admin.v1alpha.ListReportingDataAnnotationsRequest;
+
+                    /**
+                     * Encodes the specified ListReportingDataAnnotationsRequest message. Does not implicitly {@link google.analytics.admin.v1alpha.ListReportingDataAnnotationsRequest.verify|verify} messages.
+                     * @param message ListReportingDataAnnotationsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.analytics.admin.v1alpha.IListReportingDataAnnotationsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListReportingDataAnnotationsRequest message, length delimited. Does not implicitly {@link google.analytics.admin.v1alpha.ListReportingDataAnnotationsRequest.verify|verify} messages.
+                     * @param message ListReportingDataAnnotationsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.analytics.admin.v1alpha.IListReportingDataAnnotationsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListReportingDataAnnotationsRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListReportingDataAnnotationsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.analytics.admin.v1alpha.ListReportingDataAnnotationsRequest;
+
+                    /**
+                     * Decodes a ListReportingDataAnnotationsRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListReportingDataAnnotationsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.analytics.admin.v1alpha.ListReportingDataAnnotationsRequest;
+
+                    /**
+                     * Verifies a ListReportingDataAnnotationsRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListReportingDataAnnotationsRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListReportingDataAnnotationsRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.analytics.admin.v1alpha.ListReportingDataAnnotationsRequest;
+
+                    /**
+                     * Creates a plain object from a ListReportingDataAnnotationsRequest message. Also converts values to other types if specified.
+                     * @param message ListReportingDataAnnotationsRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.analytics.admin.v1alpha.ListReportingDataAnnotationsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListReportingDataAnnotationsRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListReportingDataAnnotationsRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListReportingDataAnnotationsResponse. */
+                interface IListReportingDataAnnotationsResponse {
+
+                    /** ListReportingDataAnnotationsResponse reportingDataAnnotations */
+                    reportingDataAnnotations?: (google.analytics.admin.v1alpha.IReportingDataAnnotation[]|null);
+
+                    /** ListReportingDataAnnotationsResponse nextPageToken */
+                    nextPageToken?: (string|null);
+                }
+
+                /** Represents a ListReportingDataAnnotationsResponse. */
+                class ListReportingDataAnnotationsResponse implements IListReportingDataAnnotationsResponse {
+
+                    /**
+                     * Constructs a new ListReportingDataAnnotationsResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.analytics.admin.v1alpha.IListReportingDataAnnotationsResponse);
+
+                    /** ListReportingDataAnnotationsResponse reportingDataAnnotations. */
+                    public reportingDataAnnotations: google.analytics.admin.v1alpha.IReportingDataAnnotation[];
+
+                    /** ListReportingDataAnnotationsResponse nextPageToken. */
+                    public nextPageToken: string;
+
+                    /**
+                     * Creates a new ListReportingDataAnnotationsResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListReportingDataAnnotationsResponse instance
+                     */
+                    public static create(properties?: google.analytics.admin.v1alpha.IListReportingDataAnnotationsResponse): google.analytics.admin.v1alpha.ListReportingDataAnnotationsResponse;
+
+                    /**
+                     * Encodes the specified ListReportingDataAnnotationsResponse message. Does not implicitly {@link google.analytics.admin.v1alpha.ListReportingDataAnnotationsResponse.verify|verify} messages.
+                     * @param message ListReportingDataAnnotationsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.analytics.admin.v1alpha.IListReportingDataAnnotationsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListReportingDataAnnotationsResponse message, length delimited. Does not implicitly {@link google.analytics.admin.v1alpha.ListReportingDataAnnotationsResponse.verify|verify} messages.
+                     * @param message ListReportingDataAnnotationsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.analytics.admin.v1alpha.IListReportingDataAnnotationsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListReportingDataAnnotationsResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListReportingDataAnnotationsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.analytics.admin.v1alpha.ListReportingDataAnnotationsResponse;
+
+                    /**
+                     * Decodes a ListReportingDataAnnotationsResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListReportingDataAnnotationsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.analytics.admin.v1alpha.ListReportingDataAnnotationsResponse;
+
+                    /**
+                     * Verifies a ListReportingDataAnnotationsResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListReportingDataAnnotationsResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListReportingDataAnnotationsResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.analytics.admin.v1alpha.ListReportingDataAnnotationsResponse;
+
+                    /**
+                     * Creates a plain object from a ListReportingDataAnnotationsResponse message. Also converts values to other types if specified.
+                     * @param message ListReportingDataAnnotationsResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.analytics.admin.v1alpha.ListReportingDataAnnotationsResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListReportingDataAnnotationsResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListReportingDataAnnotationsResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an UpdateReportingDataAnnotationRequest. */
+                interface IUpdateReportingDataAnnotationRequest {
+
+                    /** UpdateReportingDataAnnotationRequest reportingDataAnnotation */
+                    reportingDataAnnotation?: (google.analytics.admin.v1alpha.IReportingDataAnnotation|null);
+
+                    /** UpdateReportingDataAnnotationRequest updateMask */
+                    updateMask?: (google.protobuf.IFieldMask|null);
+                }
+
+                /** Represents an UpdateReportingDataAnnotationRequest. */
+                class UpdateReportingDataAnnotationRequest implements IUpdateReportingDataAnnotationRequest {
+
+                    /**
+                     * Constructs a new UpdateReportingDataAnnotationRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.analytics.admin.v1alpha.IUpdateReportingDataAnnotationRequest);
+
+                    /** UpdateReportingDataAnnotationRequest reportingDataAnnotation. */
+                    public reportingDataAnnotation?: (google.analytics.admin.v1alpha.IReportingDataAnnotation|null);
+
+                    /** UpdateReportingDataAnnotationRequest updateMask. */
+                    public updateMask?: (google.protobuf.IFieldMask|null);
+
+                    /**
+                     * Creates a new UpdateReportingDataAnnotationRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns UpdateReportingDataAnnotationRequest instance
+                     */
+                    public static create(properties?: google.analytics.admin.v1alpha.IUpdateReportingDataAnnotationRequest): google.analytics.admin.v1alpha.UpdateReportingDataAnnotationRequest;
+
+                    /**
+                     * Encodes the specified UpdateReportingDataAnnotationRequest message. Does not implicitly {@link google.analytics.admin.v1alpha.UpdateReportingDataAnnotationRequest.verify|verify} messages.
+                     * @param message UpdateReportingDataAnnotationRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.analytics.admin.v1alpha.IUpdateReportingDataAnnotationRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified UpdateReportingDataAnnotationRequest message, length delimited. Does not implicitly {@link google.analytics.admin.v1alpha.UpdateReportingDataAnnotationRequest.verify|verify} messages.
+                     * @param message UpdateReportingDataAnnotationRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.analytics.admin.v1alpha.IUpdateReportingDataAnnotationRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an UpdateReportingDataAnnotationRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns UpdateReportingDataAnnotationRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.analytics.admin.v1alpha.UpdateReportingDataAnnotationRequest;
+
+                    /**
+                     * Decodes an UpdateReportingDataAnnotationRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns UpdateReportingDataAnnotationRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.analytics.admin.v1alpha.UpdateReportingDataAnnotationRequest;
+
+                    /**
+                     * Verifies an UpdateReportingDataAnnotationRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an UpdateReportingDataAnnotationRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns UpdateReportingDataAnnotationRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.analytics.admin.v1alpha.UpdateReportingDataAnnotationRequest;
+
+                    /**
+                     * Creates a plain object from an UpdateReportingDataAnnotationRequest message. Also converts values to other types if specified.
+                     * @param message UpdateReportingDataAnnotationRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.analytics.admin.v1alpha.UpdateReportingDataAnnotationRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this UpdateReportingDataAnnotationRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for UpdateReportingDataAnnotationRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a DeleteReportingDataAnnotationRequest. */
+                interface IDeleteReportingDataAnnotationRequest {
+
+                    /** DeleteReportingDataAnnotationRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a DeleteReportingDataAnnotationRequest. */
+                class DeleteReportingDataAnnotationRequest implements IDeleteReportingDataAnnotationRequest {
+
+                    /**
+                     * Constructs a new DeleteReportingDataAnnotationRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.analytics.admin.v1alpha.IDeleteReportingDataAnnotationRequest);
+
+                    /** DeleteReportingDataAnnotationRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new DeleteReportingDataAnnotationRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DeleteReportingDataAnnotationRequest instance
+                     */
+                    public static create(properties?: google.analytics.admin.v1alpha.IDeleteReportingDataAnnotationRequest): google.analytics.admin.v1alpha.DeleteReportingDataAnnotationRequest;
+
+                    /**
+                     * Encodes the specified DeleteReportingDataAnnotationRequest message. Does not implicitly {@link google.analytics.admin.v1alpha.DeleteReportingDataAnnotationRequest.verify|verify} messages.
+                     * @param message DeleteReportingDataAnnotationRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.analytics.admin.v1alpha.IDeleteReportingDataAnnotationRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DeleteReportingDataAnnotationRequest message, length delimited. Does not implicitly {@link google.analytics.admin.v1alpha.DeleteReportingDataAnnotationRequest.verify|verify} messages.
+                     * @param message DeleteReportingDataAnnotationRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.analytics.admin.v1alpha.IDeleteReportingDataAnnotationRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DeleteReportingDataAnnotationRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DeleteReportingDataAnnotationRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.analytics.admin.v1alpha.DeleteReportingDataAnnotationRequest;
+
+                    /**
+                     * Decodes a DeleteReportingDataAnnotationRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DeleteReportingDataAnnotationRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.analytics.admin.v1alpha.DeleteReportingDataAnnotationRequest;
+
+                    /**
+                     * Verifies a DeleteReportingDataAnnotationRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DeleteReportingDataAnnotationRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DeleteReportingDataAnnotationRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.analytics.admin.v1alpha.DeleteReportingDataAnnotationRequest;
+
+                    /**
+                     * Creates a plain object from a DeleteReportingDataAnnotationRequest message. Also converts values to other types if specified.
+                     * @param message DeleteReportingDataAnnotationRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.analytics.admin.v1alpha.DeleteReportingDataAnnotationRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DeleteReportingDataAnnotationRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DeleteReportingDataAnnotationRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a SubmitUserDeletionRequest. */
+                interface ISubmitUserDeletionRequest {
+
+                    /** SubmitUserDeletionRequest userId */
+                    userId?: (string|null);
+
+                    /** SubmitUserDeletionRequest clientId */
+                    clientId?: (string|null);
+
+                    /** SubmitUserDeletionRequest appInstanceId */
+                    appInstanceId?: (string|null);
+
+                    /** SubmitUserDeletionRequest userProvidedData */
+                    userProvidedData?: (string|null);
+
+                    /** SubmitUserDeletionRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a SubmitUserDeletionRequest. */
+                class SubmitUserDeletionRequest implements ISubmitUserDeletionRequest {
+
+                    /**
+                     * Constructs a new SubmitUserDeletionRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.analytics.admin.v1alpha.ISubmitUserDeletionRequest);
+
+                    /** SubmitUserDeletionRequest userId. */
+                    public userId?: (string|null);
+
+                    /** SubmitUserDeletionRequest clientId. */
+                    public clientId?: (string|null);
+
+                    /** SubmitUserDeletionRequest appInstanceId. */
+                    public appInstanceId?: (string|null);
+
+                    /** SubmitUserDeletionRequest userProvidedData. */
+                    public userProvidedData?: (string|null);
+
+                    /** SubmitUserDeletionRequest name. */
+                    public name: string;
+
+                    /** SubmitUserDeletionRequest user. */
+                    public user?: ("userId"|"clientId"|"appInstanceId"|"userProvidedData");
+
+                    /**
+                     * Creates a new SubmitUserDeletionRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns SubmitUserDeletionRequest instance
+                     */
+                    public static create(properties?: google.analytics.admin.v1alpha.ISubmitUserDeletionRequest): google.analytics.admin.v1alpha.SubmitUserDeletionRequest;
+
+                    /**
+                     * Encodes the specified SubmitUserDeletionRequest message. Does not implicitly {@link google.analytics.admin.v1alpha.SubmitUserDeletionRequest.verify|verify} messages.
+                     * @param message SubmitUserDeletionRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.analytics.admin.v1alpha.ISubmitUserDeletionRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified SubmitUserDeletionRequest message, length delimited. Does not implicitly {@link google.analytics.admin.v1alpha.SubmitUserDeletionRequest.verify|verify} messages.
+                     * @param message SubmitUserDeletionRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.analytics.admin.v1alpha.ISubmitUserDeletionRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a SubmitUserDeletionRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns SubmitUserDeletionRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.analytics.admin.v1alpha.SubmitUserDeletionRequest;
+
+                    /**
+                     * Decodes a SubmitUserDeletionRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns SubmitUserDeletionRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.analytics.admin.v1alpha.SubmitUserDeletionRequest;
+
+                    /**
+                     * Verifies a SubmitUserDeletionRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a SubmitUserDeletionRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns SubmitUserDeletionRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.analytics.admin.v1alpha.SubmitUserDeletionRequest;
+
+                    /**
+                     * Creates a plain object from a SubmitUserDeletionRequest message. Also converts values to other types if specified.
+                     * @param message SubmitUserDeletionRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.analytics.admin.v1alpha.SubmitUserDeletionRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this SubmitUserDeletionRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for SubmitUserDeletionRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a SubmitUserDeletionResponse. */
+                interface ISubmitUserDeletionResponse {
+
+                    /** SubmitUserDeletionResponse deletionRequestTime */
+                    deletionRequestTime?: (google.protobuf.ITimestamp|null);
+                }
+
+                /** Represents a SubmitUserDeletionResponse. */
+                class SubmitUserDeletionResponse implements ISubmitUserDeletionResponse {
+
+                    /**
+                     * Constructs a new SubmitUserDeletionResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.analytics.admin.v1alpha.ISubmitUserDeletionResponse);
+
+                    /** SubmitUserDeletionResponse deletionRequestTime. */
+                    public deletionRequestTime?: (google.protobuf.ITimestamp|null);
+
+                    /**
+                     * Creates a new SubmitUserDeletionResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns SubmitUserDeletionResponse instance
+                     */
+                    public static create(properties?: google.analytics.admin.v1alpha.ISubmitUserDeletionResponse): google.analytics.admin.v1alpha.SubmitUserDeletionResponse;
+
+                    /**
+                     * Encodes the specified SubmitUserDeletionResponse message. Does not implicitly {@link google.analytics.admin.v1alpha.SubmitUserDeletionResponse.verify|verify} messages.
+                     * @param message SubmitUserDeletionResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.analytics.admin.v1alpha.ISubmitUserDeletionResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified SubmitUserDeletionResponse message, length delimited. Does not implicitly {@link google.analytics.admin.v1alpha.SubmitUserDeletionResponse.verify|verify} messages.
+                     * @param message SubmitUserDeletionResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.analytics.admin.v1alpha.ISubmitUserDeletionResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a SubmitUserDeletionResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns SubmitUserDeletionResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.analytics.admin.v1alpha.SubmitUserDeletionResponse;
+
+                    /**
+                     * Decodes a SubmitUserDeletionResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns SubmitUserDeletionResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.analytics.admin.v1alpha.SubmitUserDeletionResponse;
+
+                    /**
+                     * Verifies a SubmitUserDeletionResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a SubmitUserDeletionResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns SubmitUserDeletionResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.analytics.admin.v1alpha.SubmitUserDeletionResponse;
+
+                    /**
+                     * Creates a plain object from a SubmitUserDeletionResponse message. Also converts values to other types if specified.
+                     * @param message SubmitUserDeletionResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.analytics.admin.v1alpha.SubmitUserDeletionResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this SubmitUserDeletionResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for SubmitUserDeletionResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
                 /** AudienceFilterScope enum. */
                 enum AudienceFilterScope {
                     AUDIENCE_FILTER_SCOPE_UNSPECIFIED = 0,
@@ -28688,8 +29653,9 @@ export namespace google {
                     ADSENSE_LINK = 27,
                     AUDIENCE = 28,
                     EVENT_CREATE_RULE = 29,
+                    KEY_EVENT = 30,
                     CALCULATED_METRIC = 31,
-                    KEY_EVENT = 32
+                    REPORTING_DATA_ANNOTATION = 32
                 }
 
                 /** GoogleSignalsState enum. */
@@ -31121,11 +32087,14 @@ export namespace google {
                         /** ChangeHistoryResource eventCreateRule */
                         eventCreateRule?: (google.analytics.admin.v1alpha.IEventCreateRule|null);
 
+                        /** ChangeHistoryResource keyEvent */
+                        keyEvent?: (google.analytics.admin.v1alpha.IKeyEvent|null);
+
                         /** ChangeHistoryResource calculatedMetric */
                         calculatedMetric?: (google.analytics.admin.v1alpha.ICalculatedMetric|null);
 
-                        /** ChangeHistoryResource keyEvent */
-                        keyEvent?: (google.analytics.admin.v1alpha.IKeyEvent|null);
+                        /** ChangeHistoryResource reportingDataAnnotation */
+                        reportingDataAnnotation?: (google.analytics.admin.v1alpha.IReportingDataAnnotation|null);
                     }
 
                     /** Represents a ChangeHistoryResource. */
@@ -31209,14 +32178,17 @@ export namespace google {
                         /** ChangeHistoryResource eventCreateRule. */
                         public eventCreateRule?: (google.analytics.admin.v1alpha.IEventCreateRule|null);
 
-                        /** ChangeHistoryResource calculatedMetric. */
-                        public calculatedMetric?: (google.analytics.admin.v1alpha.ICalculatedMetric|null);
-
                         /** ChangeHistoryResource keyEvent. */
                         public keyEvent?: (google.analytics.admin.v1alpha.IKeyEvent|null);
 
+                        /** ChangeHistoryResource calculatedMetric. */
+                        public calculatedMetric?: (google.analytics.admin.v1alpha.ICalculatedMetric|null);
+
+                        /** ChangeHistoryResource reportingDataAnnotation. */
+                        public reportingDataAnnotation?: (google.analytics.admin.v1alpha.IReportingDataAnnotation|null);
+
                         /** ChangeHistoryResource resource. */
-                        public resource?: ("account"|"property"|"firebaseLink"|"googleAdsLink"|"googleSignalsSettings"|"displayVideo_360AdvertiserLink"|"displayVideo_360AdvertiserLinkProposal"|"conversionEvent"|"measurementProtocolSecret"|"customDimension"|"customMetric"|"dataRetentionSettings"|"searchAds_360Link"|"dataStream"|"attributionSettings"|"expandedDataSet"|"channelGroup"|"bigqueryLink"|"enhancedMeasurementSettings"|"dataRedactionSettings"|"skadnetworkConversionValueSchema"|"adsenseLink"|"audience"|"eventCreateRule"|"calculatedMetric"|"keyEvent");
+                        public resource?: ("account"|"property"|"firebaseLink"|"googleAdsLink"|"googleSignalsSettings"|"displayVideo_360AdvertiserLink"|"displayVideo_360AdvertiserLinkProposal"|"conversionEvent"|"measurementProtocolSecret"|"customDimension"|"customMetric"|"dataRetentionSettings"|"searchAds_360Link"|"dataStream"|"attributionSettings"|"expandedDataSet"|"channelGroup"|"bigqueryLink"|"enhancedMeasurementSettings"|"dataRedactionSettings"|"skadnetworkConversionValueSchema"|"adsenseLink"|"audience"|"eventCreateRule"|"keyEvent"|"calculatedMetric"|"reportingDataAnnotation");
 
                         /**
                          * Creates a new ChangeHistoryResource instance using the specified properties.
@@ -34006,6 +34978,260 @@ export namespace google {
                      * @returns The default type url
                      */
                     public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ReportingDataAnnotation. */
+                interface IReportingDataAnnotation {
+
+                    /** ReportingDataAnnotation annotationDate */
+                    annotationDate?: (google.type.IDate|null);
+
+                    /** ReportingDataAnnotation annotationDateRange */
+                    annotationDateRange?: (google.analytics.admin.v1alpha.ReportingDataAnnotation.IDateRange|null);
+
+                    /** ReportingDataAnnotation name */
+                    name?: (string|null);
+
+                    /** ReportingDataAnnotation title */
+                    title?: (string|null);
+
+                    /** ReportingDataAnnotation description */
+                    description?: (string|null);
+
+                    /** ReportingDataAnnotation color */
+                    color?: (google.analytics.admin.v1alpha.ReportingDataAnnotation.Color|keyof typeof google.analytics.admin.v1alpha.ReportingDataAnnotation.Color|null);
+
+                    /** ReportingDataAnnotation systemGenerated */
+                    systemGenerated?: (boolean|null);
+                }
+
+                /** Represents a ReportingDataAnnotation. */
+                class ReportingDataAnnotation implements IReportingDataAnnotation {
+
+                    /**
+                     * Constructs a new ReportingDataAnnotation.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.analytics.admin.v1alpha.IReportingDataAnnotation);
+
+                    /** ReportingDataAnnotation annotationDate. */
+                    public annotationDate?: (google.type.IDate|null);
+
+                    /** ReportingDataAnnotation annotationDateRange. */
+                    public annotationDateRange?: (google.analytics.admin.v1alpha.ReportingDataAnnotation.IDateRange|null);
+
+                    /** ReportingDataAnnotation name. */
+                    public name: string;
+
+                    /** ReportingDataAnnotation title. */
+                    public title: string;
+
+                    /** ReportingDataAnnotation description. */
+                    public description: string;
+
+                    /** ReportingDataAnnotation color. */
+                    public color: (google.analytics.admin.v1alpha.ReportingDataAnnotation.Color|keyof typeof google.analytics.admin.v1alpha.ReportingDataAnnotation.Color);
+
+                    /** ReportingDataAnnotation systemGenerated. */
+                    public systemGenerated: boolean;
+
+                    /** ReportingDataAnnotation target. */
+                    public target?: ("annotationDate"|"annotationDateRange");
+
+                    /**
+                     * Creates a new ReportingDataAnnotation instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ReportingDataAnnotation instance
+                     */
+                    public static create(properties?: google.analytics.admin.v1alpha.IReportingDataAnnotation): google.analytics.admin.v1alpha.ReportingDataAnnotation;
+
+                    /**
+                     * Encodes the specified ReportingDataAnnotation message. Does not implicitly {@link google.analytics.admin.v1alpha.ReportingDataAnnotation.verify|verify} messages.
+                     * @param message ReportingDataAnnotation message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.analytics.admin.v1alpha.IReportingDataAnnotation, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ReportingDataAnnotation message, length delimited. Does not implicitly {@link google.analytics.admin.v1alpha.ReportingDataAnnotation.verify|verify} messages.
+                     * @param message ReportingDataAnnotation message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.analytics.admin.v1alpha.IReportingDataAnnotation, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ReportingDataAnnotation message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ReportingDataAnnotation
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.analytics.admin.v1alpha.ReportingDataAnnotation;
+
+                    /**
+                     * Decodes a ReportingDataAnnotation message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ReportingDataAnnotation
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.analytics.admin.v1alpha.ReportingDataAnnotation;
+
+                    /**
+                     * Verifies a ReportingDataAnnotation message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ReportingDataAnnotation message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ReportingDataAnnotation
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.analytics.admin.v1alpha.ReportingDataAnnotation;
+
+                    /**
+                     * Creates a plain object from a ReportingDataAnnotation message. Also converts values to other types if specified.
+                     * @param message ReportingDataAnnotation
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.analytics.admin.v1alpha.ReportingDataAnnotation, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ReportingDataAnnotation to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ReportingDataAnnotation
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace ReportingDataAnnotation {
+
+                    /** Properties of a DateRange. */
+                    interface IDateRange {
+
+                        /** DateRange startDate */
+                        startDate?: (google.type.IDate|null);
+
+                        /** DateRange endDate */
+                        endDate?: (google.type.IDate|null);
+                    }
+
+                    /** Represents a DateRange. */
+                    class DateRange implements IDateRange {
+
+                        /**
+                         * Constructs a new DateRange.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.analytics.admin.v1alpha.ReportingDataAnnotation.IDateRange);
+
+                        /** DateRange startDate. */
+                        public startDate?: (google.type.IDate|null);
+
+                        /** DateRange endDate. */
+                        public endDate?: (google.type.IDate|null);
+
+                        /**
+                         * Creates a new DateRange instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns DateRange instance
+                         */
+                        public static create(properties?: google.analytics.admin.v1alpha.ReportingDataAnnotation.IDateRange): google.analytics.admin.v1alpha.ReportingDataAnnotation.DateRange;
+
+                        /**
+                         * Encodes the specified DateRange message. Does not implicitly {@link google.analytics.admin.v1alpha.ReportingDataAnnotation.DateRange.verify|verify} messages.
+                         * @param message DateRange message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.analytics.admin.v1alpha.ReportingDataAnnotation.IDateRange, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified DateRange message, length delimited. Does not implicitly {@link google.analytics.admin.v1alpha.ReportingDataAnnotation.DateRange.verify|verify} messages.
+                         * @param message DateRange message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.analytics.admin.v1alpha.ReportingDataAnnotation.IDateRange, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a DateRange message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns DateRange
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.analytics.admin.v1alpha.ReportingDataAnnotation.DateRange;
+
+                        /**
+                         * Decodes a DateRange message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns DateRange
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.analytics.admin.v1alpha.ReportingDataAnnotation.DateRange;
+
+                        /**
+                         * Verifies a DateRange message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a DateRange message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns DateRange
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.analytics.admin.v1alpha.ReportingDataAnnotation.DateRange;
+
+                        /**
+                         * Creates a plain object from a DateRange message. Also converts values to other types if specified.
+                         * @param message DateRange
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.analytics.admin.v1alpha.ReportingDataAnnotation.DateRange, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this DateRange to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for DateRange
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Color enum. */
+                    enum Color {
+                        COLOR_UNSPECIFIED = 0,
+                        PURPLE = 1,
+                        BROWN = 2,
+                        BLUE = 3,
+                        GREEN = 4,
+                        RED = 5,
+                        CYAN = 6,
+                        ORANGE = 7
+                    }
                 }
 
                 /** Properties of a SubpropertyEventFilterCondition. */
@@ -55587,6 +56813,119 @@ export namespace google {
 
             /**
              * Gets the default type url for FieldMask
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+    }
+
+    /** Namespace type. */
+    namespace type {
+
+        /** Properties of a Date. */
+        interface IDate {
+
+            /** Date year */
+            year?: (number|null);
+
+            /** Date month */
+            month?: (number|null);
+
+            /** Date day */
+            day?: (number|null);
+        }
+
+        /** Represents a Date. */
+        class Date implements IDate {
+
+            /**
+             * Constructs a new Date.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.type.IDate);
+
+            /** Date year. */
+            public year: number;
+
+            /** Date month. */
+            public month: number;
+
+            /** Date day. */
+            public day: number;
+
+            /**
+             * Creates a new Date instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns Date instance
+             */
+            public static create(properties?: google.type.IDate): google.type.Date;
+
+            /**
+             * Encodes the specified Date message. Does not implicitly {@link google.type.Date.verify|verify} messages.
+             * @param message Date message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.type.IDate, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified Date message, length delimited. Does not implicitly {@link google.type.Date.verify|verify} messages.
+             * @param message Date message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.type.IDate, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a Date message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns Date
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.type.Date;
+
+            /**
+             * Decodes a Date message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns Date
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.type.Date;
+
+            /**
+             * Verifies a Date message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a Date message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns Date
+             */
+            public static fromObject(object: { [k: string]: any }): google.type.Date;
+
+            /**
+             * Creates a plain object from a Date message. Also converts values to other types if specified.
+             * @param message Date
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.type.Date, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this Date to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for Date
              * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
              * @returns The default type url
              */

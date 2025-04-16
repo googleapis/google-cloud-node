@@ -3178,6 +3178,120 @@
                               "(google.api.method_signature)": "name"
                             }
                           ]
+                        },
+                        "CreateReportingDataAnnotation": {
+                          "requestType": "CreateReportingDataAnnotationRequest",
+                          "responseType": "ReportingDataAnnotation",
+                          "options": {
+                            "(google.api.http).post": "/v1alpha/{parent=properties/*}/reportingDataAnnotations",
+                            "(google.api.http).body": "reporting_data_annotation",
+                            "(google.api.method_signature)": "parent,reporting_data_annotation"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1alpha/{parent=properties/*}/reportingDataAnnotations",
+                                "body": "reporting_data_annotation"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,reporting_data_annotation"
+                            }
+                          ]
+                        },
+                        "GetReportingDataAnnotation": {
+                          "requestType": "GetReportingDataAnnotationRequest",
+                          "responseType": "ReportingDataAnnotation",
+                          "options": {
+                            "(google.api.http).get": "/v1alpha/{name=properties/*/reportingDataAnnotations/*}",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1alpha/{name=properties/*/reportingDataAnnotations/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        },
+                        "ListReportingDataAnnotations": {
+                          "requestType": "ListReportingDataAnnotationsRequest",
+                          "responseType": "ListReportingDataAnnotationsResponse",
+                          "options": {
+                            "(google.api.http).get": "/v1alpha/{parent=properties/*}/reportingDataAnnotations",
+                            "(google.api.method_signature)": "parent"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1alpha/{parent=properties/*}/reportingDataAnnotations"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
+                            }
+                          ]
+                        },
+                        "UpdateReportingDataAnnotation": {
+                          "requestType": "UpdateReportingDataAnnotationRequest",
+                          "responseType": "ReportingDataAnnotation",
+                          "options": {
+                            "(google.api.http).patch": "/v1alpha/{reporting_data_annotation.name=properties/*/reportingDataAnnotations/*}",
+                            "(google.api.http).body": "reporting_data_annotation",
+                            "(google.api.method_signature)": "reporting_data_annotation,update_mask"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "patch": "/v1alpha/{reporting_data_annotation.name=properties/*/reportingDataAnnotations/*}",
+                                "body": "reporting_data_annotation"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "reporting_data_annotation,update_mask"
+                            }
+                          ]
+                        },
+                        "DeleteReportingDataAnnotation": {
+                          "requestType": "DeleteReportingDataAnnotationRequest",
+                          "responseType": "google.protobuf.Empty",
+                          "options": {
+                            "(google.api.http).delete": "/v1alpha/{name=properties/*/reportingDataAnnotations/*}",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "delete": "/v1alpha/{name=properties/*/reportingDataAnnotations/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        },
+                        "SubmitUserDeletion": {
+                          "requestType": "SubmitUserDeletionRequest",
+                          "responseType": "SubmitUserDeletionResponse",
+                          "options": {
+                            "(google.api.http).post": "/v1alpha/{name=properties/*}:submitUserDeletion",
+                            "(google.api.http).body": "*",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1alpha/{name=properties/*}:submitUserDeletion",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
                         }
                       }
                     },
@@ -6161,6 +6275,159 @@
                         }
                       }
                     },
+                    "CreateReportingDataAnnotationRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).child_type": "analyticsadmin.googleapis.com/ReportingDataAnnotation"
+                          }
+                        },
+                        "reportingDataAnnotation": {
+                          "type": "ReportingDataAnnotation",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "GetReportingDataAnnotationRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "analyticsadmin.googleapis.com/ReportingDataAnnotation"
+                          }
+                        }
+                      }
+                    },
+                    "ListReportingDataAnnotationsRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).child_type": "analyticsadmin.googleapis.com/ReportingDataAnnotation"
+                          }
+                        },
+                        "filter": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "pageSize": {
+                          "type": "int32",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "ListReportingDataAnnotationsResponse": {
+                      "fields": {
+                        "reportingDataAnnotations": {
+                          "rule": "repeated",
+                          "type": "ReportingDataAnnotation",
+                          "id": 1
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "UpdateReportingDataAnnotationRequest": {
+                      "fields": {
+                        "reportingDataAnnotation": {
+                          "type": "ReportingDataAnnotation",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "updateMask": {
+                          "type": "google.protobuf.FieldMask",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "DeleteReportingDataAnnotationRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "analyticsadmin.googleapis.com/ReportingDataAnnotation"
+                          }
+                        }
+                      }
+                    },
+                    "SubmitUserDeletionRequest": {
+                      "oneofs": {
+                        "user": {
+                          "oneof": [
+                            "userId",
+                            "clientId",
+                            "appInstanceId",
+                            "userProvidedData"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "userId": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "clientId": {
+                          "type": "string",
+                          "id": 3
+                        },
+                        "appInstanceId": {
+                          "type": "string",
+                          "id": 4
+                        },
+                        "userProvidedData": {
+                          "type": "string",
+                          "id": 5
+                        },
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "analyticsadmin.googleapis.com/Property"
+                          }
+                        }
+                      }
+                    },
+                    "SubmitUserDeletionResponse": {
+                      "fields": {
+                        "deletionRequestTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 1
+                        }
+                      }
+                    },
                     "AudienceFilterScope": {
                       "values": {
                         "AUDIENCE_FILTER_SCOPE_UNSPECIFIED": 0,
@@ -7215,8 +7482,9 @@
                         "ADSENSE_LINK": 27,
                         "AUDIENCE": 28,
                         "EVENT_CREATE_RULE": 29,
+                        "KEY_EVENT": 30,
                         "CALCULATED_METRIC": 31,
-                        "KEY_EVENT": 32
+                        "REPORTING_DATA_ANNOTATION": 32
                       }
                     },
                     "GoogleSignalsState": {
@@ -7673,7 +7941,10 @@
                         },
                         "sharingWithGoogleAnySalesEnabled": {
                           "type": "bool",
-                          "id": 4
+                          "id": 4,
+                          "options": {
+                            "deprecated": true
+                          }
                         },
                         "sharingWithGoogleProductsEnabled": {
                           "type": "bool",
@@ -7988,8 +8259,9 @@
                                 "adsenseLink",
                                 "audience",
                                 "eventCreateRule",
+                                "keyEvent",
                                 "calculatedMetric",
-                                "keyEvent"
+                                "reportingDataAnnotation"
                               ]
                             }
                           },
@@ -8090,12 +8362,16 @@
                               "type": "EventCreateRule",
                               "id": 29
                             },
+                            "keyEvent": {
+                              "type": "KeyEvent",
+                              "id": 30
+                            },
                             "calculatedMetric": {
                               "type": "CalculatedMetric",
                               "id": 31
                             },
-                            "keyEvent": {
-                              "type": "KeyEvent",
+                            "reportingDataAnnotation": {
+                              "type": "ReportingDataAnnotation",
                               "id": 32
                             }
                           }
@@ -9104,6 +9380,99 @@
                           "id": 2,
                           "options": {
                             "(google.api.field_behavior)": "IMMUTABLE"
+                          }
+                        }
+                      }
+                    },
+                    "ReportingDataAnnotation": {
+                      "options": {
+                        "(google.api.resource).type": "analyticsadmin.googleapis.com/ReportingDataAnnotation",
+                        "(google.api.resource).pattern": "properties/{property}/reportingDataAnnotations/{reporting_data_annotation}",
+                        "(google.api.resource).plural": "reportingDataAnnotations",
+                        "(google.api.resource).singular": "reportingDataAnnotation"
+                      },
+                      "oneofs": {
+                        "target": {
+                          "oneof": [
+                            "annotationDate",
+                            "annotationDateRange"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "annotationDate": {
+                          "type": "google.type.Date",
+                          "id": 4
+                        },
+                        "annotationDateRange": {
+                          "type": "DateRange",
+                          "id": 5
+                        },
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "title": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "description": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "color": {
+                          "type": "Color",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "systemGenerated": {
+                          "type": "bool",
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "DateRange": {
+                          "fields": {
+                            "startDate": {
+                              "type": "google.type.Date",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            },
+                            "endDate": {
+                              "type": "google.type.Date",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            }
+                          }
+                        },
+                        "Color": {
+                          "values": {
+                            "COLOR_UNSPECIFIED": 0,
+                            "PURPLE": 1,
+                            "BROWN": 2,
+                            "BLUE": 3,
+                            "GREEN": 4,
+                            "RED": 5,
+                            "CYAN": 6,
+                            "ORANGE": 7
                           }
                         }
                       }
@@ -14718,6 +15087,34 @@
                   "rule": "repeated",
                   "type": "string",
                   "id": 1
+                }
+              }
+            }
+          }
+        },
+        "type": {
+          "options": {
+            "cc_enable_arenas": true,
+            "go_package": "google.golang.org/genproto/googleapis/type/date;date",
+            "java_multiple_files": true,
+            "java_outer_classname": "DateProto",
+            "java_package": "com.google.type",
+            "objc_class_prefix": "GTP"
+          },
+          "nested": {
+            "Date": {
+              "fields": {
+                "year": {
+                  "type": "int32",
+                  "id": 1
+                },
+                "month": {
+                  "type": "int32",
+                  "id": 2
+                },
+                "day": {
+                  "type": "int32",
+                  "id": 3
                 }
               }
             }
