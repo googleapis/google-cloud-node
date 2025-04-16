@@ -1232,6 +1232,7 @@
                           "type": "string",
                           "id": 9,
                           "options": {
+                            "deprecated": true,
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
                         },
@@ -1297,7 +1298,56 @@
                             "ACTIVE": 2,
                             "DELETING": 3,
                             "FAILED": 4,
-                            "UPGRADING": 5
+                            "UPGRADING": 5,
+                            "REPAIRING": 6
+                          }
+                        }
+                      }
+                    },
+                    "TransferMetadataOptions": {
+                      "fields": {
+                        "uid": {
+                          "type": "Uid",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "gid": {
+                          "type": "Gid",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "mode": {
+                          "type": "Mode",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "Uid": {
+                          "values": {
+                            "UID_UNSPECIFIED": 0,
+                            "UID_SKIP": 1,
+                            "UID_NUMBER_PRESERVE": 2
+                          }
+                        },
+                        "Gid": {
+                          "values": {
+                            "GID_UNSPECIFIED": 0,
+                            "GID_SKIP": 1,
+                            "GID_NUMBER_PRESERVE": 2
+                          }
+                        },
+                        "Mode": {
+                          "values": {
+                            "MODE_UNSPECIFIED": 0,
+                            "MODE_SKIP": 1,
+                            "MODE_PRESERVE": 2
                           }
                         }
                       }
@@ -1591,6 +1641,13 @@
                             "(google.api.field_behavior)": "OPTIONAL",
                             "(google.api.resource_reference).type": "iam.googleapis.com/ServiceAccount"
                           }
+                        },
+                        "metadataOptions": {
+                          "type": "TransferMetadataOptions",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },
@@ -1639,11 +1696,48 @@
                             "(google.api.field_behavior)": "OPTIONAL",
                             "(google.api.resource_reference).type": "iam.googleapis.com/ServiceAccount"
                           }
+                        },
+                        "metadataOptions": {
+                          "type": "TransferMetadataOptions",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },
                     "ImportDataResponse": {
                       "fields": {}
+                    },
+                    "TransferErrorLogEntry": {
+                      "fields": {
+                        "uri": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "errorDetails": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "TransferErrorSummary": {
+                      "fields": {
+                        "errorCode": {
+                          "type": "google.rpc.Code",
+                          "id": 1
+                        },
+                        "errorCount": {
+                          "type": "int64",
+                          "id": 2
+                        },
+                        "errorLogEntries": {
+                          "rule": "repeated",
+                          "type": "TransferErrorLogEntry",
+                          "id": 4
+                        }
+                      }
                     },
                     "ImportDataMetadata": {
                       "fields": {
@@ -1819,6 +1913,14 @@
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
+                        },
+                        "errorSummary": {
+                          "rule": "repeated",
+                          "type": "TransferErrorSummary",
+                          "id": 13,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         }
                       }
                     },
@@ -1847,6 +1949,14 @@
                         "bytesCopied": {
                           "type": "int64",
                           "id": 6
+                        },
+                        "objectsFailed": {
+                          "type": "int64",
+                          "id": 7
+                        },
+                        "bytesFailed": {
+                          "type": "int64",
+                          "id": 8
                         }
                       }
                     }
