@@ -49,6 +49,12 @@ export namespace google {
 
                     /** Constraint supportsDryRun */
                     supportsDryRun?: (boolean|null);
+
+                    /** Constraint equivalentConstraint */
+                    equivalentConstraint?: (string|null);
+
+                    /** Constraint supportsSimulation */
+                    supportsSimulation?: (boolean|null);
                 }
 
                 /** Represents a Constraint. */
@@ -80,6 +86,12 @@ export namespace google {
 
                     /** Constraint supportsDryRun. */
                     public supportsDryRun: boolean;
+
+                    /** Constraint equivalentConstraint. */
+                    public equivalentConstraint: string;
+
+                    /** Constraint supportsSimulation. */
+                    public supportsSimulation: boolean;
 
                     /** Constraint constraintType. */
                     public constraintType?: ("listConstraint"|"booleanConstraint");
@@ -274,8 +286,381 @@ export namespace google {
                         public static getTypeUrl(typeUrlPrefix?: string): string;
                     }
 
+                    /** Properties of a CustomConstraintDefinition. */
+                    interface ICustomConstraintDefinition {
+
+                        /** CustomConstraintDefinition resourceTypes */
+                        resourceTypes?: (string[]|null);
+
+                        /** CustomConstraintDefinition methodTypes */
+                        methodTypes?: (google.cloud.orgpolicy.v2.Constraint.CustomConstraintDefinition.MethodType[]|null);
+
+                        /** CustomConstraintDefinition condition */
+                        condition?: (string|null);
+
+                        /** CustomConstraintDefinition actionType */
+                        actionType?: (google.cloud.orgpolicy.v2.Constraint.CustomConstraintDefinition.ActionType|keyof typeof google.cloud.orgpolicy.v2.Constraint.CustomConstraintDefinition.ActionType|null);
+
+                        /** CustomConstraintDefinition parameters */
+                        parameters?: ({ [k: string]: google.cloud.orgpolicy.v2.Constraint.CustomConstraintDefinition.IParameter }|null);
+                    }
+
+                    /** Represents a CustomConstraintDefinition. */
+                    class CustomConstraintDefinition implements ICustomConstraintDefinition {
+
+                        /**
+                         * Constructs a new CustomConstraintDefinition.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.orgpolicy.v2.Constraint.ICustomConstraintDefinition);
+
+                        /** CustomConstraintDefinition resourceTypes. */
+                        public resourceTypes: string[];
+
+                        /** CustomConstraintDefinition methodTypes. */
+                        public methodTypes: google.cloud.orgpolicy.v2.Constraint.CustomConstraintDefinition.MethodType[];
+
+                        /** CustomConstraintDefinition condition. */
+                        public condition: string;
+
+                        /** CustomConstraintDefinition actionType. */
+                        public actionType: (google.cloud.orgpolicy.v2.Constraint.CustomConstraintDefinition.ActionType|keyof typeof google.cloud.orgpolicy.v2.Constraint.CustomConstraintDefinition.ActionType);
+
+                        /** CustomConstraintDefinition parameters. */
+                        public parameters: { [k: string]: google.cloud.orgpolicy.v2.Constraint.CustomConstraintDefinition.IParameter };
+
+                        /**
+                         * Creates a new CustomConstraintDefinition instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns CustomConstraintDefinition instance
+                         */
+                        public static create(properties?: google.cloud.orgpolicy.v2.Constraint.ICustomConstraintDefinition): google.cloud.orgpolicy.v2.Constraint.CustomConstraintDefinition;
+
+                        /**
+                         * Encodes the specified CustomConstraintDefinition message. Does not implicitly {@link google.cloud.orgpolicy.v2.Constraint.CustomConstraintDefinition.verify|verify} messages.
+                         * @param message CustomConstraintDefinition message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.orgpolicy.v2.Constraint.ICustomConstraintDefinition, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified CustomConstraintDefinition message, length delimited. Does not implicitly {@link google.cloud.orgpolicy.v2.Constraint.CustomConstraintDefinition.verify|verify} messages.
+                         * @param message CustomConstraintDefinition message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.orgpolicy.v2.Constraint.ICustomConstraintDefinition, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a CustomConstraintDefinition message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns CustomConstraintDefinition
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.orgpolicy.v2.Constraint.CustomConstraintDefinition;
+
+                        /**
+                         * Decodes a CustomConstraintDefinition message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns CustomConstraintDefinition
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.orgpolicy.v2.Constraint.CustomConstraintDefinition;
+
+                        /**
+                         * Verifies a CustomConstraintDefinition message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a CustomConstraintDefinition message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns CustomConstraintDefinition
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.orgpolicy.v2.Constraint.CustomConstraintDefinition;
+
+                        /**
+                         * Creates a plain object from a CustomConstraintDefinition message. Also converts values to other types if specified.
+                         * @param message CustomConstraintDefinition
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.orgpolicy.v2.Constraint.CustomConstraintDefinition, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this CustomConstraintDefinition to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for CustomConstraintDefinition
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    namespace CustomConstraintDefinition {
+
+                        /** MethodType enum. */
+                        enum MethodType {
+                            METHOD_TYPE_UNSPECIFIED = 0,
+                            CREATE = 1,
+                            UPDATE = 2,
+                            DELETE = 3,
+                            REMOVE_GRANT = 4,
+                            GOVERN_TAGS = 5
+                        }
+
+                        /** ActionType enum. */
+                        enum ActionType {
+                            ACTION_TYPE_UNSPECIFIED = 0,
+                            ALLOW = 1,
+                            DENY = 2
+                        }
+
+                        /** Properties of a Parameter. */
+                        interface IParameter {
+
+                            /** Parameter type */
+                            type?: (google.cloud.orgpolicy.v2.Constraint.CustomConstraintDefinition.Parameter.Type|keyof typeof google.cloud.orgpolicy.v2.Constraint.CustomConstraintDefinition.Parameter.Type|null);
+
+                            /** Parameter defaultValue */
+                            defaultValue?: (google.protobuf.IValue|null);
+
+                            /** Parameter validValuesExpr */
+                            validValuesExpr?: (string|null);
+
+                            /** Parameter metadata */
+                            metadata?: (google.cloud.orgpolicy.v2.Constraint.CustomConstraintDefinition.Parameter.IMetadata|null);
+
+                            /** Parameter item */
+                            item?: (google.cloud.orgpolicy.v2.Constraint.CustomConstraintDefinition.Parameter.Type|keyof typeof google.cloud.orgpolicy.v2.Constraint.CustomConstraintDefinition.Parameter.Type|null);
+                        }
+
+                        /** Represents a Parameter. */
+                        class Parameter implements IParameter {
+
+                            /**
+                             * Constructs a new Parameter.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.orgpolicy.v2.Constraint.CustomConstraintDefinition.IParameter);
+
+                            /** Parameter type. */
+                            public type: (google.cloud.orgpolicy.v2.Constraint.CustomConstraintDefinition.Parameter.Type|keyof typeof google.cloud.orgpolicy.v2.Constraint.CustomConstraintDefinition.Parameter.Type);
+
+                            /** Parameter defaultValue. */
+                            public defaultValue?: (google.protobuf.IValue|null);
+
+                            /** Parameter validValuesExpr. */
+                            public validValuesExpr: string;
+
+                            /** Parameter metadata. */
+                            public metadata?: (google.cloud.orgpolicy.v2.Constraint.CustomConstraintDefinition.Parameter.IMetadata|null);
+
+                            /** Parameter item. */
+                            public item: (google.cloud.orgpolicy.v2.Constraint.CustomConstraintDefinition.Parameter.Type|keyof typeof google.cloud.orgpolicy.v2.Constraint.CustomConstraintDefinition.Parameter.Type);
+
+                            /**
+                             * Creates a new Parameter instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns Parameter instance
+                             */
+                            public static create(properties?: google.cloud.orgpolicy.v2.Constraint.CustomConstraintDefinition.IParameter): google.cloud.orgpolicy.v2.Constraint.CustomConstraintDefinition.Parameter;
+
+                            /**
+                             * Encodes the specified Parameter message. Does not implicitly {@link google.cloud.orgpolicy.v2.Constraint.CustomConstraintDefinition.Parameter.verify|verify} messages.
+                             * @param message Parameter message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.orgpolicy.v2.Constraint.CustomConstraintDefinition.IParameter, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified Parameter message, length delimited. Does not implicitly {@link google.cloud.orgpolicy.v2.Constraint.CustomConstraintDefinition.Parameter.verify|verify} messages.
+                             * @param message Parameter message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.orgpolicy.v2.Constraint.CustomConstraintDefinition.IParameter, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a Parameter message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns Parameter
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.orgpolicy.v2.Constraint.CustomConstraintDefinition.Parameter;
+
+                            /**
+                             * Decodes a Parameter message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns Parameter
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.orgpolicy.v2.Constraint.CustomConstraintDefinition.Parameter;
+
+                            /**
+                             * Verifies a Parameter message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a Parameter message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns Parameter
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.orgpolicy.v2.Constraint.CustomConstraintDefinition.Parameter;
+
+                            /**
+                             * Creates a plain object from a Parameter message. Also converts values to other types if specified.
+                             * @param message Parameter
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.orgpolicy.v2.Constraint.CustomConstraintDefinition.Parameter, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this Parameter to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for Parameter
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+
+                        namespace Parameter {
+
+                            /** Type enum. */
+                            enum Type {
+                                TYPE_UNSPECIFIED = 0,
+                                LIST = 1,
+                                STRING = 2,
+                                BOOLEAN = 3
+                            }
+
+                            /** Properties of a Metadata. */
+                            interface IMetadata {
+
+                                /** Metadata description */
+                                description?: (string|null);
+                            }
+
+                            /** Represents a Metadata. */
+                            class Metadata implements IMetadata {
+
+                                /**
+                                 * Constructs a new Metadata.
+                                 * @param [properties] Properties to set
+                                 */
+                                constructor(properties?: google.cloud.orgpolicy.v2.Constraint.CustomConstraintDefinition.Parameter.IMetadata);
+
+                                /** Metadata description. */
+                                public description: string;
+
+                                /**
+                                 * Creates a new Metadata instance using the specified properties.
+                                 * @param [properties] Properties to set
+                                 * @returns Metadata instance
+                                 */
+                                public static create(properties?: google.cloud.orgpolicy.v2.Constraint.CustomConstraintDefinition.Parameter.IMetadata): google.cloud.orgpolicy.v2.Constraint.CustomConstraintDefinition.Parameter.Metadata;
+
+                                /**
+                                 * Encodes the specified Metadata message. Does not implicitly {@link google.cloud.orgpolicy.v2.Constraint.CustomConstraintDefinition.Parameter.Metadata.verify|verify} messages.
+                                 * @param message Metadata message or plain object to encode
+                                 * @param [writer] Writer to encode to
+                                 * @returns Writer
+                                 */
+                                public static encode(message: google.cloud.orgpolicy.v2.Constraint.CustomConstraintDefinition.Parameter.IMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                                /**
+                                 * Encodes the specified Metadata message, length delimited. Does not implicitly {@link google.cloud.orgpolicy.v2.Constraint.CustomConstraintDefinition.Parameter.Metadata.verify|verify} messages.
+                                 * @param message Metadata message or plain object to encode
+                                 * @param [writer] Writer to encode to
+                                 * @returns Writer
+                                 */
+                                public static encodeDelimited(message: google.cloud.orgpolicy.v2.Constraint.CustomConstraintDefinition.Parameter.IMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                                /**
+                                 * Decodes a Metadata message from the specified reader or buffer.
+                                 * @param reader Reader or buffer to decode from
+                                 * @param [length] Message length if known beforehand
+                                 * @returns Metadata
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.orgpolicy.v2.Constraint.CustomConstraintDefinition.Parameter.Metadata;
+
+                                /**
+                                 * Decodes a Metadata message from the specified reader or buffer, length delimited.
+                                 * @param reader Reader or buffer to decode from
+                                 * @returns Metadata
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.orgpolicy.v2.Constraint.CustomConstraintDefinition.Parameter.Metadata;
+
+                                /**
+                                 * Verifies a Metadata message.
+                                 * @param message Plain object to verify
+                                 * @returns `null` if valid, otherwise the reason why it is not
+                                 */
+                                public static verify(message: { [k: string]: any }): (string|null);
+
+                                /**
+                                 * Creates a Metadata message from a plain object. Also converts values to their respective internal types.
+                                 * @param object Plain object
+                                 * @returns Metadata
+                                 */
+                                public static fromObject(object: { [k: string]: any }): google.cloud.orgpolicy.v2.Constraint.CustomConstraintDefinition.Parameter.Metadata;
+
+                                /**
+                                 * Creates a plain object from a Metadata message. Also converts values to other types if specified.
+                                 * @param message Metadata
+                                 * @param [options] Conversion options
+                                 * @returns Plain object
+                                 */
+                                public static toObject(message: google.cloud.orgpolicy.v2.Constraint.CustomConstraintDefinition.Parameter.Metadata, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                                /**
+                                 * Converts this Metadata to JSON.
+                                 * @returns JSON object
+                                 */
+                                public toJSON(): { [k: string]: any };
+
+                                /**
+                                 * Gets the default type url for Metadata
+                                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns The default type url
+                                 */
+                                public static getTypeUrl(typeUrlPrefix?: string): string;
+                            }
+                        }
+                    }
+
                     /** Properties of a BooleanConstraint. */
                     interface IBooleanConstraint {
+
+                        /** BooleanConstraint customConstraintDefinition */
+                        customConstraintDefinition?: (google.cloud.orgpolicy.v2.Constraint.ICustomConstraintDefinition|null);
                     }
 
                     /** Represents a BooleanConstraint. */
@@ -286,6 +671,9 @@ export namespace google {
                          * @param [properties] Properties to set
                          */
                         constructor(properties?: google.cloud.orgpolicy.v2.Constraint.IBooleanConstraint);
+
+                        /** BooleanConstraint customConstraintDefinition. */
+                        public customConstraintDefinition?: (google.cloud.orgpolicy.v2.Constraint.ICustomConstraintDefinition|null);
 
                         /**
                          * Creates a new BooleanConstraint instance using the specified properties.
@@ -1165,6 +1553,9 @@ export namespace google {
 
                         /** PolicyRule condition */
                         condition?: (google.type.IExpr|null);
+
+                        /** PolicyRule parameters */
+                        parameters?: (google.protobuf.IStruct|null);
                     }
 
                     /** Represents a PolicyRule. */
@@ -1190,6 +1581,9 @@ export namespace google {
 
                         /** PolicyRule condition. */
                         public condition?: (google.type.IExpr|null);
+
+                        /** PolicyRule parameters. */
+                        public parameters?: (google.protobuf.IStruct|null);
 
                         /** PolicyRule kind. */
                         public kind?: ("values"|"allowAll"|"denyAll"|"enforce");
@@ -9134,6 +9528,335 @@ export namespace google {
                     ALIAS = 2
                 }
             }
+        }
+
+        /** Properties of a Struct. */
+        interface IStruct {
+
+            /** Struct fields */
+            fields?: ({ [k: string]: google.protobuf.IValue }|null);
+        }
+
+        /** Represents a Struct. */
+        class Struct implements IStruct {
+
+            /**
+             * Constructs a new Struct.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.protobuf.IStruct);
+
+            /** Struct fields. */
+            public fields: { [k: string]: google.protobuf.IValue };
+
+            /**
+             * Creates a new Struct instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns Struct instance
+             */
+            public static create(properties?: google.protobuf.IStruct): google.protobuf.Struct;
+
+            /**
+             * Encodes the specified Struct message. Does not implicitly {@link google.protobuf.Struct.verify|verify} messages.
+             * @param message Struct message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.protobuf.IStruct, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified Struct message, length delimited. Does not implicitly {@link google.protobuf.Struct.verify|verify} messages.
+             * @param message Struct message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.protobuf.IStruct, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a Struct message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns Struct
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.protobuf.Struct;
+
+            /**
+             * Decodes a Struct message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns Struct
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.protobuf.Struct;
+
+            /**
+             * Verifies a Struct message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a Struct message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns Struct
+             */
+            public static fromObject(object: { [k: string]: any }): google.protobuf.Struct;
+
+            /**
+             * Creates a plain object from a Struct message. Also converts values to other types if specified.
+             * @param message Struct
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.protobuf.Struct, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this Struct to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for Struct
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        /** Properties of a Value. */
+        interface IValue {
+
+            /** Value nullValue */
+            nullValue?: (google.protobuf.NullValue|keyof typeof google.protobuf.NullValue|null);
+
+            /** Value numberValue */
+            numberValue?: (number|null);
+
+            /** Value stringValue */
+            stringValue?: (string|null);
+
+            /** Value boolValue */
+            boolValue?: (boolean|null);
+
+            /** Value structValue */
+            structValue?: (google.protobuf.IStruct|null);
+
+            /** Value listValue */
+            listValue?: (google.protobuf.IListValue|null);
+        }
+
+        /** Represents a Value. */
+        class Value implements IValue {
+
+            /**
+             * Constructs a new Value.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.protobuf.IValue);
+
+            /** Value nullValue. */
+            public nullValue?: (google.protobuf.NullValue|keyof typeof google.protobuf.NullValue|null);
+
+            /** Value numberValue. */
+            public numberValue?: (number|null);
+
+            /** Value stringValue. */
+            public stringValue?: (string|null);
+
+            /** Value boolValue. */
+            public boolValue?: (boolean|null);
+
+            /** Value structValue. */
+            public structValue?: (google.protobuf.IStruct|null);
+
+            /** Value listValue. */
+            public listValue?: (google.protobuf.IListValue|null);
+
+            /** Value kind. */
+            public kind?: ("nullValue"|"numberValue"|"stringValue"|"boolValue"|"structValue"|"listValue");
+
+            /**
+             * Creates a new Value instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns Value instance
+             */
+            public static create(properties?: google.protobuf.IValue): google.protobuf.Value;
+
+            /**
+             * Encodes the specified Value message. Does not implicitly {@link google.protobuf.Value.verify|verify} messages.
+             * @param message Value message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.protobuf.IValue, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified Value message, length delimited. Does not implicitly {@link google.protobuf.Value.verify|verify} messages.
+             * @param message Value message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.protobuf.IValue, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a Value message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns Value
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.protobuf.Value;
+
+            /**
+             * Decodes a Value message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns Value
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.protobuf.Value;
+
+            /**
+             * Verifies a Value message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a Value message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns Value
+             */
+            public static fromObject(object: { [k: string]: any }): google.protobuf.Value;
+
+            /**
+             * Creates a plain object from a Value message. Also converts values to other types if specified.
+             * @param message Value
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.protobuf.Value, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this Value to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for Value
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        /** NullValue enum. */
+        enum NullValue {
+            NULL_VALUE = 0
+        }
+
+        /** Properties of a ListValue. */
+        interface IListValue {
+
+            /** ListValue values */
+            values?: (google.protobuf.IValue[]|null);
+        }
+
+        /** Represents a ListValue. */
+        class ListValue implements IListValue {
+
+            /**
+             * Constructs a new ListValue.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.protobuf.IListValue);
+
+            /** ListValue values. */
+            public values: google.protobuf.IValue[];
+
+            /**
+             * Creates a new ListValue instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns ListValue instance
+             */
+            public static create(properties?: google.protobuf.IListValue): google.protobuf.ListValue;
+
+            /**
+             * Encodes the specified ListValue message. Does not implicitly {@link google.protobuf.ListValue.verify|verify} messages.
+             * @param message ListValue message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.protobuf.IListValue, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified ListValue message, length delimited. Does not implicitly {@link google.protobuf.ListValue.verify|verify} messages.
+             * @param message ListValue message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.protobuf.IListValue, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a ListValue message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns ListValue
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.protobuf.ListValue;
+
+            /**
+             * Decodes a ListValue message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns ListValue
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.protobuf.ListValue;
+
+            /**
+             * Verifies a ListValue message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a ListValue message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns ListValue
+             */
+            public static fromObject(object: { [k: string]: any }): google.protobuf.ListValue;
+
+            /**
+             * Creates a plain object from a ListValue message. Also converts values to other types if specified.
+             * @param message ListValue
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.protobuf.ListValue, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this ListValue to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for ListValue
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
         }
 
         /** Properties of a Timestamp. */

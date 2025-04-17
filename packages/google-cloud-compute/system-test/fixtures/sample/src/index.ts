@@ -90,6 +90,7 @@ import {
   RegionTargetTcpProxiesClient,
   RegionUrlMapsClient,
   RegionZonesClient,
+  ReservationBlocksClient,
   ReservationsClient,
   ResourcePoliciesClient,
   RoutersClient,
@@ -396,6 +397,9 @@ function doStuffWithRegionUrlMapsClient(client: RegionUrlMapsClient) {
   client.close();
 }
 function doStuffWithRegionZonesClient(client: RegionZonesClient) {
+  client.close();
+}
+function doStuffWithReservationBlocksClient(client: ReservationBlocksClient) {
   client.close();
 }
 function doStuffWithReservationsClient(client: ReservationsClient) {
@@ -729,6 +733,9 @@ function main() {
   // check that the client instance can be created
   const regionZonesClient = new RegionZonesClient();
   doStuffWithRegionZonesClient(regionZonesClient);
+  // check that the client instance can be created
+  const reservationBlocksClient = new ReservationBlocksClient();
+  doStuffWithReservationBlocksClient(reservationBlocksClient);
   // check that the client instance can be created
   const reservationsClient = new ReservationsClient();
   doStuffWithReservationsClient(reservationsClient);
