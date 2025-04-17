@@ -308,6 +308,7 @@
   * [Machine_images.insert](#machine_images.insert)
   * [Machine_images.list](#machine_images.list)
   * [Machine_images.set_iam_policy](#machine_images.set_iam_policy)
+  * [Machine_images.set_labels](#machine_images.set_labels)
   * [Machine_images.test_iam_permissions](#machine_images.test_iam_permissions)
   * [Machine_types.aggregated_list](#machine_types.aggregated_list)
   * [Machine_types.get](#machine_types.get)
@@ -602,12 +603,16 @@
   * [Region_zones.list](#region_zones.list)
   * [Regions.get](#regions.get)
   * [Regions.list](#regions.list)
+  * [Reservation_blocks.get](#reservation_blocks.get)
+  * [Reservation_blocks.list](#reservation_blocks.list)
+  * [Reservation_blocks.perform_maintenance](#reservation_blocks.perform_maintenance)
   * [Reservations.aggregated_list](#reservations.aggregated_list)
   * [Reservations.delete](#reservations.delete)
   * [Reservations.get](#reservations.get)
   * [Reservations.get_iam_policy](#reservations.get_iam_policy)
   * [Reservations.insert](#reservations.insert)
   * [Reservations.list](#reservations.list)
+  * [Reservations.perform_maintenance](#reservations.perform_maintenance)
   * [Reservations.resize](#reservations.resize)
   * [Reservations.set_iam_policy](#reservations.set_iam_policy)
   * [Reservations.test_iam_permissions](#reservations.test_iam_permissions)
@@ -5857,6 +5862,23 @@ __Usage:__
 
 
 
+### Machine_images.set_labels
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1/machine_images.set_labels.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-compute/samples/generated/v1/machine_images.set_labels.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-compute/samples/generated/v1/machine_images.set_labels.js`
+
+
+-----
+
+
+
+
 ### Machine_images.test_iam_permissions
 
 View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1/machine_images.test_iam_permissions.js).
@@ -10855,6 +10877,57 @@ __Usage:__
 
 
 
+### Reservation_blocks.get
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1/reservation_blocks.get.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-compute/samples/generated/v1/reservation_blocks.get.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-compute/samples/generated/v1/reservation_blocks.get.js`
+
+
+-----
+
+
+
+
+### Reservation_blocks.list
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1/reservation_blocks.list.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-compute/samples/generated/v1/reservation_blocks.list.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-compute/samples/generated/v1/reservation_blocks.list.js`
+
+
+-----
+
+
+
+
+### Reservation_blocks.perform_maintenance
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1/reservation_blocks.perform_maintenance.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-compute/samples/generated/v1/reservation_blocks.perform_maintenance.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-compute/samples/generated/v1/reservation_blocks.perform_maintenance.js`
+
+
+-----
+
+
+
+
 ### Reservations.aggregated_list
 
 View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1/reservations.aggregated_list.js).
@@ -10950,6 +11023,23 @@ __Usage:__
 
 
 `node packages/google-cloud-compute/samples/generated/v1/reservations.list.js`
+
+
+-----
+
+
+
+
+### Reservations.perform_maintenance
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1/reservations.perform_maintenance.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-compute/samples/generated/v1/reservations.perform_maintenance.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-compute/samples/generated/v1/reservations.perform_maintenance.js`
 
 
 -----
