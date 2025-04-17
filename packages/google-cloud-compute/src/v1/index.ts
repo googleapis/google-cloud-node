@@ -89,6 +89,7 @@ export {RegionTargetHttpsProxiesClient} from './region_target_https_proxies_clie
 export {RegionTargetTcpProxiesClient} from './region_target_tcp_proxies_client';
 export {RegionUrlMapsClient} from './region_url_maps_client';
 export {RegionZonesClient} from './region_zones_client';
+export {ReservationBlocksClient} from './reservation_blocks_client';
 export {ReservationsClient} from './reservations_client';
 export {ResourcePoliciesClient} from './resource_policies_client';
 export {RoutersClient} from './routers_client';

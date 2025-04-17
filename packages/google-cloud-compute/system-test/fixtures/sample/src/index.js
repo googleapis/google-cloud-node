@@ -115,6 +115,7 @@ function main() {
     new compute.RegionTargetTcpProxiesClient();
   const regionUrlMapsClient = new compute.RegionUrlMapsClient();
   const regionZonesClient = new compute.RegionZonesClient();
+  const reservationBlocksClient = new compute.ReservationBlocksClient();
   const reservationsClient = new compute.ReservationsClient();
   const resourcePoliciesClient = new compute.ResourcePoliciesClient();
   const routersClient = new compute.RoutersClient();
