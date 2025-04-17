@@ -41,6 +41,9 @@ body:
         - label: "Check out handwritten samples for many of our APIs:
             https://github.com/GoogleCloudPlatform/nodejs-docs-samples"
           required: true
+        - label: "Check the API's issue tracker:
+            https://cloud.google.com/support/docs/issue-trackers"
+          required: true
   - type: textarea
     attributes:
       label: >
