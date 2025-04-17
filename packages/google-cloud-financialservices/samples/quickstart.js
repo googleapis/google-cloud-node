@@ -70,7 +70,7 @@ function main(parent) {
     // Run request
     const iterable = financialservicesClient.listInstancesAsync(request);
     for await (const response of iterable) {
-        console.log(response);
+      console.log(response);
     }
   }
 
