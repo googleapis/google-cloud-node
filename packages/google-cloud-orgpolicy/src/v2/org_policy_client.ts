@@ -1326,16 +1326,16 @@ export class OrgPolicyClient {
       );
   }
   /**
-   * Gets a custom constraint.
+   * Gets a custom or managed constraint.
    *
    * Returns a `google.rpc.Status` with `google.rpc.Code.NOT_FOUND` if the
-   * custom constraint does not exist.
+   * custom or managed constraint does not exist.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Required. Resource name of the custom constraint. See the custom constraint
-   *   entry for naming requirements.
+   *   Required. Resource name of the custom or managed constraint. See the custom
+   *   constraint entry for naming requirements.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.

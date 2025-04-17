@@ -29,8 +29,8 @@ function main(name) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. Resource name of the custom constraint. See the custom constraint
-   *  entry for naming requirements.
+   *  Required. Resource name of the custom or managed constraint. See the custom
+   *  constraint entry for naming requirements.
    */
   // const name = 'abc123'
 

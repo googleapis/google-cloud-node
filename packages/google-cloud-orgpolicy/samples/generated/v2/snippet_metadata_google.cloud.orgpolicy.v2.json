@@ -407,7 +407,7 @@
             "regionTag": "orgpolicy_v2_generated_OrgPolicy_GetCustomConstraint_async",
             "title": "OrgPolicy getCustomConstraint Sample",
             "origin": "API_DEFINITION",
-            "description": " Gets a custom constraint. Returns a `google.rpc.Status` with `google.rpc.Code.NOT_FOUND` if the custom constraint does not exist.",
+            "description": " Gets a custom or managed constraint. Returns a `google.rpc.Status` with `google.rpc.Code.NOT_FOUND` if the custom or managed constraint does not exist.",
             "canonical": true,
             "file": "org_policy.get_custom_constraint.js",
             "language": "JAVASCRIPT",
