@@ -18,6 +18,8 @@
 
 'use strict';
 
+'use strict';
+
 function main(parent) {
   // [START financialservices_quickstart]
   /**
@@ -27,31 +29,29 @@ function main(parent) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The parent of the EngineVersion is the Instance.
+   *  Required. The parent of the Instance is the location for that Instance.
+   *  Every location has exactly one instance.
    */
   // const parent = 'abc123'
   /**
-   *  Optional. The number of resources to be included in the response. The
-   *  response contains a next_page_token, which can be used to retrieve the next
-   *  page of resources.
+   *  The number of resources to be included in the response. The response
+   *  contains a next_page_token, which can be used to retrieve the next page of
+   *  resources.
    */
   // const pageSize = 1234
   /**
-   *  Optional. In case of paginated results, this is the token that was returned
-   *  in the previous ListEngineVersionsResponse. It should be copied here to
-   *  retrieve the next page of resources. Empty will give the first page of
-   *  ListEngineVersionsRequest, and the last page will return an empty
-   *  page_token.
+   *  In case of paginated results, this is the token that was returned in the
+   *  previous ListInstancesResponse. It should be copied here to retrieve the
+   *  next page of resources. This will be empty for the first instance of
+   *  ListInstancesRequest.
    */
   // const pageToken = 'abc123'
   /**
-   *  Optional. Specify a filter to narrow search results.
-   *  If empty or unset will default to "state!=DEPRECATED",
-   *  to view deprecated versions use "state:*" or any other filter.
+   *  Specify a filter to narrow search results.
    */
   // const filter = 'abc123'
   /**
-   *  Optional. Specify a field to use for ordering.
+   *  Specify a field to use for ordering.
    */
   // const orderBy = 'abc123'
 
@@ -61,20 +61,20 @@ function main(parent) {
   // Instantiates a client
   const financialservicesClient = new AMLClient();
 
-  async function callListEngineVersions() {
+  async function callListInstances() {
     // Construct request
     const request = {
       parent,
     };
 
     // Run request
-    const iterable = financialservicesClient.listEngineVersionsAsync(request);
+    const iterable = financialservicesClient.listInstancesAsync(request);
     for await (const response of iterable) {
-      console.log(response);
+        console.log(response);
     }
   }
 
-  callListEngineVersions();
+  callListInstances();
   // [END financialservices_quickstart]
 }
 
