@@ -79,6 +79,8 @@
                          * @property {google.cloud.orgpolicy.v2.Constraint.IListConstraint|null} [listConstraint] Constraint listConstraint
                          * @property {google.cloud.orgpolicy.v2.Constraint.IBooleanConstraint|null} [booleanConstraint] Constraint booleanConstraint
                          * @property {boolean|null} [supportsDryRun] Constraint supportsDryRun
+                         * @property {string|null} [equivalentConstraint] Constraint equivalentConstraint
+                         * @property {boolean|null} [supportsSimulation] Constraint supportsSimulation
                          */
     
                         /**
@@ -152,6 +154,22 @@
                          */
                         Constraint.prototype.supportsDryRun = false;
     
+                        /**
+                         * Constraint equivalentConstraint.
+                         * @member {string} equivalentConstraint
+                         * @memberof google.cloud.orgpolicy.v2.Constraint
+                         * @instance
+                         */
+                        Constraint.prototype.equivalentConstraint = "";
+    
+                        /**
+                         * Constraint supportsSimulation.
+                         * @member {boolean} supportsSimulation
+                         * @memberof google.cloud.orgpolicy.v2.Constraint
+                         * @instance
+                         */
+                        Constraint.prototype.supportsSimulation = false;
+    
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
@@ -204,6 +222,10 @@
                                 $root.google.cloud.orgpolicy.v2.Constraint.BooleanConstraint.encode(message.booleanConstraint, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
                             if (message.supportsDryRun != null && Object.hasOwnProperty.call(message, "supportsDryRun"))
                                 writer.uint32(/* id 7, wireType 0 =*/56).bool(message.supportsDryRun);
+                            if (message.equivalentConstraint != null && Object.hasOwnProperty.call(message, "equivalentConstraint"))
+                                writer.uint32(/* id 8, wireType 2 =*/66).string(message.equivalentConstraint);
+                            if (message.supportsSimulation != null && Object.hasOwnProperty.call(message, "supportsSimulation"))
+                                writer.uint32(/* id 9, wireType 0 =*/72).bool(message.supportsSimulation);
                             return writer;
                         };
     
@@ -264,6 +286,14 @@
                                     }
                                 case 7: {
                                         message.supportsDryRun = reader.bool();
+                                        break;
+                                    }
+                                case 8: {
+                                        message.equivalentConstraint = reader.string();
+                                        break;
+                                    }
+                                case 9: {
+                                        message.supportsSimulation = reader.bool();
                                         break;
                                     }
                                 default:
@@ -341,6 +371,12 @@
                             if (message.supportsDryRun != null && message.hasOwnProperty("supportsDryRun"))
                                 if (typeof message.supportsDryRun !== "boolean")
                                     return "supportsDryRun: boolean expected";
+                            if (message.equivalentConstraint != null && message.hasOwnProperty("equivalentConstraint"))
+                                if (!$util.isString(message.equivalentConstraint))
+                                    return "equivalentConstraint: string expected";
+                            if (message.supportsSimulation != null && message.hasOwnProperty("supportsSimulation"))
+                                if (typeof message.supportsSimulation !== "boolean")
+                                    return "supportsSimulation: boolean expected";
                             return null;
                         };
     
@@ -394,6 +430,10 @@
                             }
                             if (object.supportsDryRun != null)
                                 message.supportsDryRun = Boolean(object.supportsDryRun);
+                            if (object.equivalentConstraint != null)
+                                message.equivalentConstraint = String(object.equivalentConstraint);
+                            if (object.supportsSimulation != null)
+                                message.supportsSimulation = Boolean(object.supportsSimulation);
                             return message;
                         };
     
@@ -416,6 +456,8 @@
                                 object.description = "";
                                 object.constraintDefault = options.enums === String ? "CONSTRAINT_DEFAULT_UNSPECIFIED" : 0;
                                 object.supportsDryRun = false;
+                                object.equivalentConstraint = "";
+                                object.supportsSimulation = false;
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
@@ -437,6 +479,10 @@
                             }
                             if (message.supportsDryRun != null && message.hasOwnProperty("supportsDryRun"))
                                 object.supportsDryRun = message.supportsDryRun;
+                            if (message.equivalentConstraint != null && message.hasOwnProperty("equivalentConstraint"))
+                                object.equivalentConstraint = message.equivalentConstraint;
+                            if (message.supportsSimulation != null && message.hasOwnProperty("supportsSimulation"))
+                                object.supportsSimulation = message.supportsSimulation;
                             return object;
                         };
     
@@ -709,12 +755,1080 @@
                             return ListConstraint;
                         })();
     
+                        Constraint.CustomConstraintDefinition = (function() {
+    
+                            /**
+                             * Properties of a CustomConstraintDefinition.
+                             * @memberof google.cloud.orgpolicy.v2.Constraint
+                             * @interface ICustomConstraintDefinition
+                             * @property {Array.<string>|null} [resourceTypes] CustomConstraintDefinition resourceTypes
+                             * @property {Array.<google.cloud.orgpolicy.v2.Constraint.CustomConstraintDefinition.MethodType>|null} [methodTypes] CustomConstraintDefinition methodTypes
+                             * @property {string|null} [condition] CustomConstraintDefinition condition
+                             * @property {google.cloud.orgpolicy.v2.Constraint.CustomConstraintDefinition.ActionType|null} [actionType] CustomConstraintDefinition actionType
+                             * @property {Object.<string,google.cloud.orgpolicy.v2.Constraint.CustomConstraintDefinition.IParameter>|null} [parameters] CustomConstraintDefinition parameters
+                             */
+    
+                            /**
+                             * Constructs a new CustomConstraintDefinition.
+                             * @memberof google.cloud.orgpolicy.v2.Constraint
+                             * @classdesc Represents a CustomConstraintDefinition.
+                             * @implements ICustomConstraintDefinition
+                             * @constructor
+                             * @param {google.cloud.orgpolicy.v2.Constraint.ICustomConstraintDefinition=} [properties] Properties to set
+                             */
+                            function CustomConstraintDefinition(properties) {
+                                this.resourceTypes = [];
+                                this.methodTypes = [];
+                                this.parameters = {};
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * CustomConstraintDefinition resourceTypes.
+                             * @member {Array.<string>} resourceTypes
+                             * @memberof google.cloud.orgpolicy.v2.Constraint.CustomConstraintDefinition
+                             * @instance
+                             */
+                            CustomConstraintDefinition.prototype.resourceTypes = $util.emptyArray;
+    
+                            /**
+                             * CustomConstraintDefinition methodTypes.
+                             * @member {Array.<google.cloud.orgpolicy.v2.Constraint.CustomConstraintDefinition.MethodType>} methodTypes
+                             * @memberof google.cloud.orgpolicy.v2.Constraint.CustomConstraintDefinition
+                             * @instance
+                             */
+                            CustomConstraintDefinition.prototype.methodTypes = $util.emptyArray;
+    
+                            /**
+                             * CustomConstraintDefinition condition.
+                             * @member {string} condition
+                             * @memberof google.cloud.orgpolicy.v2.Constraint.CustomConstraintDefinition
+                             * @instance
+                             */
+                            CustomConstraintDefinition.prototype.condition = "";
+    
+                            /**
+                             * CustomConstraintDefinition actionType.
+                             * @member {google.cloud.orgpolicy.v2.Constraint.CustomConstraintDefinition.ActionType} actionType
+                             * @memberof google.cloud.orgpolicy.v2.Constraint.CustomConstraintDefinition
+                             * @instance
+                             */
+                            CustomConstraintDefinition.prototype.actionType = 0;
+    
+                            /**
+                             * CustomConstraintDefinition parameters.
+                             * @member {Object.<string,google.cloud.orgpolicy.v2.Constraint.CustomConstraintDefinition.IParameter>} parameters
+                             * @memberof google.cloud.orgpolicy.v2.Constraint.CustomConstraintDefinition
+                             * @instance
+                             */
+                            CustomConstraintDefinition.prototype.parameters = $util.emptyObject;
+    
+                            /**
+                             * Creates a new CustomConstraintDefinition instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.orgpolicy.v2.Constraint.CustomConstraintDefinition
+                             * @static
+                             * @param {google.cloud.orgpolicy.v2.Constraint.ICustomConstraintDefinition=} [properties] Properties to set
+                             * @returns {google.cloud.orgpolicy.v2.Constraint.CustomConstraintDefinition} CustomConstraintDefinition instance
+                             */
+                            CustomConstraintDefinition.create = function create(properties) {
+                                return new CustomConstraintDefinition(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified CustomConstraintDefinition message. Does not implicitly {@link google.cloud.orgpolicy.v2.Constraint.CustomConstraintDefinition.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.orgpolicy.v2.Constraint.CustomConstraintDefinition
+                             * @static
+                             * @param {google.cloud.orgpolicy.v2.Constraint.ICustomConstraintDefinition} message CustomConstraintDefinition message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            CustomConstraintDefinition.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.resourceTypes != null && message.resourceTypes.length)
+                                    for (var i = 0; i < message.resourceTypes.length; ++i)
+                                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.resourceTypes[i]);
+                                if (message.methodTypes != null && message.methodTypes.length) {
+                                    writer.uint32(/* id 2, wireType 2 =*/18).fork();
+                                    for (var i = 0; i < message.methodTypes.length; ++i)
+                                        writer.int32(message.methodTypes[i]);
+                                    writer.ldelim();
+                                }
+                                if (message.condition != null && Object.hasOwnProperty.call(message, "condition"))
+                                    writer.uint32(/* id 3, wireType 2 =*/26).string(message.condition);
+                                if (message.actionType != null && Object.hasOwnProperty.call(message, "actionType"))
+                                    writer.uint32(/* id 4, wireType 0 =*/32).int32(message.actionType);
+                                if (message.parameters != null && Object.hasOwnProperty.call(message, "parameters"))
+                                    for (var keys = Object.keys(message.parameters), i = 0; i < keys.length; ++i) {
+                                        writer.uint32(/* id 5, wireType 2 =*/42).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]);
+                                        $root.google.cloud.orgpolicy.v2.Constraint.CustomConstraintDefinition.Parameter.encode(message.parameters[keys[i]], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim().ldelim();
+                                    }
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified CustomConstraintDefinition message, length delimited. Does not implicitly {@link google.cloud.orgpolicy.v2.Constraint.CustomConstraintDefinition.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.orgpolicy.v2.Constraint.CustomConstraintDefinition
+                             * @static
+                             * @param {google.cloud.orgpolicy.v2.Constraint.ICustomConstraintDefinition} message CustomConstraintDefinition message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            CustomConstraintDefinition.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a CustomConstraintDefinition message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.orgpolicy.v2.Constraint.CustomConstraintDefinition
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.orgpolicy.v2.Constraint.CustomConstraintDefinition} CustomConstraintDefinition
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            CustomConstraintDefinition.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.orgpolicy.v2.Constraint.CustomConstraintDefinition(), key, value;
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            if (!(message.resourceTypes && message.resourceTypes.length))
+                                                message.resourceTypes = [];
+                                            message.resourceTypes.push(reader.string());
+                                            break;
+                                        }
+                                    case 2: {
+                                            if (!(message.methodTypes && message.methodTypes.length))
+                                                message.methodTypes = [];
+                                            if ((tag & 7) === 2) {
+                                                var end2 = reader.uint32() + reader.pos;
+                                                while (reader.pos < end2)
+                                                    message.methodTypes.push(reader.int32());
+                                            } else
+                                                message.methodTypes.push(reader.int32());
+                                            break;
+                                        }
+                                    case 3: {
+                                            message.condition = reader.string();
+                                            break;
+                                        }
+                                    case 4: {
+                                            message.actionType = reader.int32();
+                                            break;
+                                        }
+                                    case 5: {
+                                            if (message.parameters === $util.emptyObject)
+                                                message.parameters = {};
+                                            var end2 = reader.uint32() + reader.pos;
+                                            key = "";
+                                            value = null;
+                                            while (reader.pos < end2) {
+                                                var tag2 = reader.uint32();
+                                                switch (tag2 >>> 3) {
+                                                case 1:
+                                                    key = reader.string();
+                                                    break;
+                                                case 2:
+                                                    value = $root.google.cloud.orgpolicy.v2.Constraint.CustomConstraintDefinition.Parameter.decode(reader, reader.uint32());
+                                                    break;
+                                                default:
+                                                    reader.skipType(tag2 & 7);
+                                                    break;
+                                                }
+                                            }
+                                            message.parameters[key] = value;
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a CustomConstraintDefinition message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.orgpolicy.v2.Constraint.CustomConstraintDefinition
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.orgpolicy.v2.Constraint.CustomConstraintDefinition} CustomConstraintDefinition
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            CustomConstraintDefinition.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a CustomConstraintDefinition message.
+                             * @function verify
+                             * @memberof google.cloud.orgpolicy.v2.Constraint.CustomConstraintDefinition
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            CustomConstraintDefinition.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.resourceTypes != null && message.hasOwnProperty("resourceTypes")) {
+                                    if (!Array.isArray(message.resourceTypes))
+                                        return "resourceTypes: array expected";
+                                    for (var i = 0; i < message.resourceTypes.length; ++i)
+                                        if (!$util.isString(message.resourceTypes[i]))
+                                            return "resourceTypes: string[] expected";
+                                }
+                                if (message.methodTypes != null && message.hasOwnProperty("methodTypes")) {
+                                    if (!Array.isArray(message.methodTypes))
+                                        return "methodTypes: array expected";
+                                    for (var i = 0; i < message.methodTypes.length; ++i)
+                                        switch (message.methodTypes[i]) {
+                                        default:
+                                            return "methodTypes: enum value[] expected";
+                                        case 0:
+                                        case 1:
+                                        case 2:
+                                        case 3:
+                                        case 4:
+                                        case 5:
+                                            break;
+                                        }
+                                }
+                                if (message.condition != null && message.hasOwnProperty("condition"))
+                                    if (!$util.isString(message.condition))
+                                        return "condition: string expected";
+                                if (message.actionType != null && message.hasOwnProperty("actionType"))
+                                    switch (message.actionType) {
+                                    default:
+                                        return "actionType: enum value expected";
+                                    case 0:
+                                    case 1:
+                                    case 2:
+                                        break;
+                                    }
+                                if (message.parameters != null && message.hasOwnProperty("parameters")) {
+                                    if (!$util.isObject(message.parameters))
+                                        return "parameters: object expected";
+                                    var key = Object.keys(message.parameters);
+                                    for (var i = 0; i < key.length; ++i) {
+                                        var error = $root.google.cloud.orgpolicy.v2.Constraint.CustomConstraintDefinition.Parameter.verify(message.parameters[key[i]]);
+                                        if (error)
+                                            return "parameters." + error;
+                                    }
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a CustomConstraintDefinition message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.orgpolicy.v2.Constraint.CustomConstraintDefinition
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.orgpolicy.v2.Constraint.CustomConstraintDefinition} CustomConstraintDefinition
+                             */
+                            CustomConstraintDefinition.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.orgpolicy.v2.Constraint.CustomConstraintDefinition)
+                                    return object;
+                                var message = new $root.google.cloud.orgpolicy.v2.Constraint.CustomConstraintDefinition();
+                                if (object.resourceTypes) {
+                                    if (!Array.isArray(object.resourceTypes))
+                                        throw TypeError(".google.cloud.orgpolicy.v2.Constraint.CustomConstraintDefinition.resourceTypes: array expected");
+                                    message.resourceTypes = [];
+                                    for (var i = 0; i < object.resourceTypes.length; ++i)
+                                        message.resourceTypes[i] = String(object.resourceTypes[i]);
+                                }
+                                if (object.methodTypes) {
+                                    if (!Array.isArray(object.methodTypes))
+                                        throw TypeError(".google.cloud.orgpolicy.v2.Constraint.CustomConstraintDefinition.methodTypes: array expected");
+                                    message.methodTypes = [];
+                                    for (var i = 0; i < object.methodTypes.length; ++i)
+                                        switch (object.methodTypes[i]) {
+                                        default:
+                                            if (typeof object.methodTypes[i] === "number") {
+                                                message.methodTypes[i] = object.methodTypes[i];
+                                                break;
+                                            }
+                                        case "METHOD_TYPE_UNSPECIFIED":
+                                        case 0:
+                                            message.methodTypes[i] = 0;
+                                            break;
+                                        case "CREATE":
+                                        case 1:
+                                            message.methodTypes[i] = 1;
+                                            break;
+                                        case "UPDATE":
+                                        case 2:
+                                            message.methodTypes[i] = 2;
+                                            break;
+                                        case "DELETE":
+                                        case 3:
+                                            message.methodTypes[i] = 3;
+                                            break;
+                                        case "REMOVE_GRANT":
+                                        case 4:
+                                            message.methodTypes[i] = 4;
+                                            break;
+                                        case "GOVERN_TAGS":
+                                        case 5:
+                                            message.methodTypes[i] = 5;
+                                            break;
+                                        }
+                                }
+                                if (object.condition != null)
+                                    message.condition = String(object.condition);
+                                switch (object.actionType) {
+                                default:
+                                    if (typeof object.actionType === "number") {
+                                        message.actionType = object.actionType;
+                                        break;
+                                    }
+                                    break;
+                                case "ACTION_TYPE_UNSPECIFIED":
+                                case 0:
+                                    message.actionType = 0;
+                                    break;
+                                case "ALLOW":
+                                case 1:
+                                    message.actionType = 1;
+                                    break;
+                                case "DENY":
+                                case 2:
+                                    message.actionType = 2;
+                                    break;
+                                }
+                                if (object.parameters) {
+                                    if (typeof object.parameters !== "object")
+                                        throw TypeError(".google.cloud.orgpolicy.v2.Constraint.CustomConstraintDefinition.parameters: object expected");
+                                    message.parameters = {};
+                                    for (var keys = Object.keys(object.parameters), i = 0; i < keys.length; ++i) {
+                                        if (typeof object.parameters[keys[i]] !== "object")
+                                            throw TypeError(".google.cloud.orgpolicy.v2.Constraint.CustomConstraintDefinition.parameters: object expected");
+                                        message.parameters[keys[i]] = $root.google.cloud.orgpolicy.v2.Constraint.CustomConstraintDefinition.Parameter.fromObject(object.parameters[keys[i]]);
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a CustomConstraintDefinition message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.orgpolicy.v2.Constraint.CustomConstraintDefinition
+                             * @static
+                             * @param {google.cloud.orgpolicy.v2.Constraint.CustomConstraintDefinition} message CustomConstraintDefinition
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            CustomConstraintDefinition.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.arrays || options.defaults) {
+                                    object.resourceTypes = [];
+                                    object.methodTypes = [];
+                                }
+                                if (options.objects || options.defaults)
+                                    object.parameters = {};
+                                if (options.defaults) {
+                                    object.condition = "";
+                                    object.actionType = options.enums === String ? "ACTION_TYPE_UNSPECIFIED" : 0;
+                                }
+                                if (message.resourceTypes && message.resourceTypes.length) {
+                                    object.resourceTypes = [];
+                                    for (var j = 0; j < message.resourceTypes.length; ++j)
+                                        object.resourceTypes[j] = message.resourceTypes[j];
+                                }
+                                if (message.methodTypes && message.methodTypes.length) {
+                                    object.methodTypes = [];
+                                    for (var j = 0; j < message.methodTypes.length; ++j)
+                                        object.methodTypes[j] = options.enums === String ? $root.google.cloud.orgpolicy.v2.Constraint.CustomConstraintDefinition.MethodType[message.methodTypes[j]] === undefined ? message.methodTypes[j] : $root.google.cloud.orgpolicy.v2.Constraint.CustomConstraintDefinition.MethodType[message.methodTypes[j]] : message.methodTypes[j];
+                                }
+                                if (message.condition != null && message.hasOwnProperty("condition"))
+                                    object.condition = message.condition;
+                                if (message.actionType != null && message.hasOwnProperty("actionType"))
+                                    object.actionType = options.enums === String ? $root.google.cloud.orgpolicy.v2.Constraint.CustomConstraintDefinition.ActionType[message.actionType] === undefined ? message.actionType : $root.google.cloud.orgpolicy.v2.Constraint.CustomConstraintDefinition.ActionType[message.actionType] : message.actionType;
+                                var keys2;
+                                if (message.parameters && (keys2 = Object.keys(message.parameters)).length) {
+                                    object.parameters = {};
+                                    for (var j = 0; j < keys2.length; ++j)
+                                        object.parameters[keys2[j]] = $root.google.cloud.orgpolicy.v2.Constraint.CustomConstraintDefinition.Parameter.toObject(message.parameters[keys2[j]], options);
+                                }
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this CustomConstraintDefinition to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.orgpolicy.v2.Constraint.CustomConstraintDefinition
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            CustomConstraintDefinition.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for CustomConstraintDefinition
+                             * @function getTypeUrl
+                             * @memberof google.cloud.orgpolicy.v2.Constraint.CustomConstraintDefinition
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            CustomConstraintDefinition.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.orgpolicy.v2.Constraint.CustomConstraintDefinition";
+                            };
+    
+                            /**
+                             * MethodType enum.
+                             * @name google.cloud.orgpolicy.v2.Constraint.CustomConstraintDefinition.MethodType
+                             * @enum {number}
+                             * @property {number} METHOD_TYPE_UNSPECIFIED=0 METHOD_TYPE_UNSPECIFIED value
+                             * @property {number} CREATE=1 CREATE value
+                             * @property {number} UPDATE=2 UPDATE value
+                             * @property {number} DELETE=3 DELETE value
+                             * @property {number} REMOVE_GRANT=4 REMOVE_GRANT value
+                             * @property {number} GOVERN_TAGS=5 GOVERN_TAGS value
+                             */
+                            CustomConstraintDefinition.MethodType = (function() {
+                                var valuesById = {}, values = Object.create(valuesById);
+                                values[valuesById[0] = "METHOD_TYPE_UNSPECIFIED"] = 0;
+                                values[valuesById[1] = "CREATE"] = 1;
+                                values[valuesById[2] = "UPDATE"] = 2;
+                                values[valuesById[3] = "DELETE"] = 3;
+                                values[valuesById[4] = "REMOVE_GRANT"] = 4;
+                                values[valuesById[5] = "GOVERN_TAGS"] = 5;
+                                return values;
+                            })();
+    
+                            /**
+                             * ActionType enum.
+                             * @name google.cloud.orgpolicy.v2.Constraint.CustomConstraintDefinition.ActionType
+                             * @enum {number}
+                             * @property {number} ACTION_TYPE_UNSPECIFIED=0 ACTION_TYPE_UNSPECIFIED value
+                             * @property {number} ALLOW=1 ALLOW value
+                             * @property {number} DENY=2 DENY value
+                             */
+                            CustomConstraintDefinition.ActionType = (function() {
+                                var valuesById = {}, values = Object.create(valuesById);
+                                values[valuesById[0] = "ACTION_TYPE_UNSPECIFIED"] = 0;
+                                values[valuesById[1] = "ALLOW"] = 1;
+                                values[valuesById[2] = "DENY"] = 2;
+                                return values;
+                            })();
+    
+                            CustomConstraintDefinition.Parameter = (function() {
+    
+                                /**
+                                 * Properties of a Parameter.
+                                 * @memberof google.cloud.orgpolicy.v2.Constraint.CustomConstraintDefinition
+                                 * @interface IParameter
+                                 * @property {google.cloud.orgpolicy.v2.Constraint.CustomConstraintDefinition.Parameter.Type|null} [type] Parameter type
+                                 * @property {google.protobuf.IValue|null} [defaultValue] Parameter defaultValue
+                                 * @property {string|null} [validValuesExpr] Parameter validValuesExpr
+                                 * @property {google.cloud.orgpolicy.v2.Constraint.CustomConstraintDefinition.Parameter.IMetadata|null} [metadata] Parameter metadata
+                                 * @property {google.cloud.orgpolicy.v2.Constraint.CustomConstraintDefinition.Parameter.Type|null} [item] Parameter item
+                                 */
+    
+                                /**
+                                 * Constructs a new Parameter.
+                                 * @memberof google.cloud.orgpolicy.v2.Constraint.CustomConstraintDefinition
+                                 * @classdesc Represents a Parameter.
+                                 * @implements IParameter
+                                 * @constructor
+                                 * @param {google.cloud.orgpolicy.v2.Constraint.CustomConstraintDefinition.IParameter=} [properties] Properties to set
+                                 */
+                                function Parameter(properties) {
+                                    if (properties)
+                                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                            if (properties[keys[i]] != null)
+                                                this[keys[i]] = properties[keys[i]];
+                                }
+    
+                                /**
+                                 * Parameter type.
+                                 * @member {google.cloud.orgpolicy.v2.Constraint.CustomConstraintDefinition.Parameter.Type} type
+                                 * @memberof google.cloud.orgpolicy.v2.Constraint.CustomConstraintDefinition.Parameter
+                                 * @instance
+                                 */
+                                Parameter.prototype.type = 0;
+    
+                                /**
+                                 * Parameter defaultValue.
+                                 * @member {google.protobuf.IValue|null|undefined} defaultValue
+                                 * @memberof google.cloud.orgpolicy.v2.Constraint.CustomConstraintDefinition.Parameter
+                                 * @instance
+                                 */
+                                Parameter.prototype.defaultValue = null;
+    
+                                /**
+                                 * Parameter validValuesExpr.
+                                 * @member {string} validValuesExpr
+                                 * @memberof google.cloud.orgpolicy.v2.Constraint.CustomConstraintDefinition.Parameter
+                                 * @instance
+                                 */
+                                Parameter.prototype.validValuesExpr = "";
+    
+                                /**
+                                 * Parameter metadata.
+                                 * @member {google.cloud.orgpolicy.v2.Constraint.CustomConstraintDefinition.Parameter.IMetadata|null|undefined} metadata
+                                 * @memberof google.cloud.orgpolicy.v2.Constraint.CustomConstraintDefinition.Parameter
+                                 * @instance
+                                 */
+                                Parameter.prototype.metadata = null;
+    
+                                /**
+                                 * Parameter item.
+                                 * @member {google.cloud.orgpolicy.v2.Constraint.CustomConstraintDefinition.Parameter.Type} item
+                                 * @memberof google.cloud.orgpolicy.v2.Constraint.CustomConstraintDefinition.Parameter
+                                 * @instance
+                                 */
+                                Parameter.prototype.item = 0;
+    
+                                /**
+                                 * Creates a new Parameter instance using the specified properties.
+                                 * @function create
+                                 * @memberof google.cloud.orgpolicy.v2.Constraint.CustomConstraintDefinition.Parameter
+                                 * @static
+                                 * @param {google.cloud.orgpolicy.v2.Constraint.CustomConstraintDefinition.IParameter=} [properties] Properties to set
+                                 * @returns {google.cloud.orgpolicy.v2.Constraint.CustomConstraintDefinition.Parameter} Parameter instance
+                                 */
+                                Parameter.create = function create(properties) {
+                                    return new Parameter(properties);
+                                };
+    
+                                /**
+                                 * Encodes the specified Parameter message. Does not implicitly {@link google.cloud.orgpolicy.v2.Constraint.CustomConstraintDefinition.Parameter.verify|verify} messages.
+                                 * @function encode
+                                 * @memberof google.cloud.orgpolicy.v2.Constraint.CustomConstraintDefinition.Parameter
+                                 * @static
+                                 * @param {google.cloud.orgpolicy.v2.Constraint.CustomConstraintDefinition.IParameter} message Parameter message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                Parameter.encode = function encode(message, writer) {
+                                    if (!writer)
+                                        writer = $Writer.create();
+                                    if (message.type != null && Object.hasOwnProperty.call(message, "type"))
+                                        writer.uint32(/* id 1, wireType 0 =*/8).int32(message.type);
+                                    if (message.defaultValue != null && Object.hasOwnProperty.call(message, "defaultValue"))
+                                        $root.google.protobuf.Value.encode(message.defaultValue, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                                    if (message.validValuesExpr != null && Object.hasOwnProperty.call(message, "validValuesExpr"))
+                                        writer.uint32(/* id 3, wireType 2 =*/26).string(message.validValuesExpr);
+                                    if (message.metadata != null && Object.hasOwnProperty.call(message, "metadata"))
+                                        $root.google.cloud.orgpolicy.v2.Constraint.CustomConstraintDefinition.Parameter.Metadata.encode(message.metadata, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                                    if (message.item != null && Object.hasOwnProperty.call(message, "item"))
+                                        writer.uint32(/* id 5, wireType 0 =*/40).int32(message.item);
+                                    return writer;
+                                };
+    
+                                /**
+                                 * Encodes the specified Parameter message, length delimited. Does not implicitly {@link google.cloud.orgpolicy.v2.Constraint.CustomConstraintDefinition.Parameter.verify|verify} messages.
+                                 * @function encodeDelimited
+                                 * @memberof google.cloud.orgpolicy.v2.Constraint.CustomConstraintDefinition.Parameter
+                                 * @static
+                                 * @param {google.cloud.orgpolicy.v2.Constraint.CustomConstraintDefinition.IParameter} message Parameter message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                Parameter.encodeDelimited = function encodeDelimited(message, writer) {
+                                    return this.encode(message, writer).ldelim();
+                                };
+    
+                                /**
+                                 * Decodes a Parameter message from the specified reader or buffer.
+                                 * @function decode
+                                 * @memberof google.cloud.orgpolicy.v2.Constraint.CustomConstraintDefinition.Parameter
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @param {number} [length] Message length if known beforehand
+                                 * @returns {google.cloud.orgpolicy.v2.Constraint.CustomConstraintDefinition.Parameter} Parameter
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                Parameter.decode = function decode(reader, length) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = $Reader.create(reader);
+                                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.orgpolicy.v2.Constraint.CustomConstraintDefinition.Parameter();
+                                    while (reader.pos < end) {
+                                        var tag = reader.uint32();
+                                        switch (tag >>> 3) {
+                                        case 1: {
+                                                message.type = reader.int32();
+                                                break;
+                                            }
+                                        case 2: {
+                                                message.defaultValue = $root.google.protobuf.Value.decode(reader, reader.uint32());
+                                                break;
+                                            }
+                                        case 3: {
+                                                message.validValuesExpr = reader.string();
+                                                break;
+                                            }
+                                        case 4: {
+                                                message.metadata = $root.google.cloud.orgpolicy.v2.Constraint.CustomConstraintDefinition.Parameter.Metadata.decode(reader, reader.uint32());
+                                                break;
+                                            }
+                                        case 5: {
+                                                message.item = reader.int32();
+                                                break;
+                                            }
+                                        default:
+                                            reader.skipType(tag & 7);
+                                            break;
+                                        }
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Decodes a Parameter message from the specified reader or buffer, length delimited.
+                                 * @function decodeDelimited
+                                 * @memberof google.cloud.orgpolicy.v2.Constraint.CustomConstraintDefinition.Parameter
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @returns {google.cloud.orgpolicy.v2.Constraint.CustomConstraintDefinition.Parameter} Parameter
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                Parameter.decodeDelimited = function decodeDelimited(reader) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = new $Reader(reader);
+                                    return this.decode(reader, reader.uint32());
+                                };
+    
+                                /**
+                                 * Verifies a Parameter message.
+                                 * @function verify
+                                 * @memberof google.cloud.orgpolicy.v2.Constraint.CustomConstraintDefinition.Parameter
+                                 * @static
+                                 * @param {Object.<string,*>} message Plain object to verify
+                                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                                 */
+                                Parameter.verify = function verify(message) {
+                                    if (typeof message !== "object" || message === null)
+                                        return "object expected";
+                                    if (message.type != null && message.hasOwnProperty("type"))
+                                        switch (message.type) {
+                                        default:
+                                            return "type: enum value expected";
+                                        case 0:
+                                        case 1:
+                                        case 2:
+                                        case 3:
+                                            break;
+                                        }
+                                    if (message.defaultValue != null && message.hasOwnProperty("defaultValue")) {
+                                        var error = $root.google.protobuf.Value.verify(message.defaultValue);
+                                        if (error)
+                                            return "defaultValue." + error;
+                                    }
+                                    if (message.validValuesExpr != null && message.hasOwnProperty("validValuesExpr"))
+                                        if (!$util.isString(message.validValuesExpr))
+                                            return "validValuesExpr: string expected";
+                                    if (message.metadata != null && message.hasOwnProperty("metadata")) {
+                                        var error = $root.google.cloud.orgpolicy.v2.Constraint.CustomConstraintDefinition.Parameter.Metadata.verify(message.metadata);
+                                        if (error)
+                                            return "metadata." + error;
+                                    }
+                                    if (message.item != null && message.hasOwnProperty("item"))
+                                        switch (message.item) {
+                                        default:
+                                            return "item: enum value expected";
+                                        case 0:
+                                        case 1:
+                                        case 2:
+                                        case 3:
+                                            break;
+                                        }
+                                    return null;
+                                };
+    
+                                /**
+                                 * Creates a Parameter message from a plain object. Also converts values to their respective internal types.
+                                 * @function fromObject
+                                 * @memberof google.cloud.orgpolicy.v2.Constraint.CustomConstraintDefinition.Parameter
+                                 * @static
+                                 * @param {Object.<string,*>} object Plain object
+                                 * @returns {google.cloud.orgpolicy.v2.Constraint.CustomConstraintDefinition.Parameter} Parameter
+                                 */
+                                Parameter.fromObject = function fromObject(object) {
+                                    if (object instanceof $root.google.cloud.orgpolicy.v2.Constraint.CustomConstraintDefinition.Parameter)
+                                        return object;
+                                    var message = new $root.google.cloud.orgpolicy.v2.Constraint.CustomConstraintDefinition.Parameter();
+                                    switch (object.type) {
+                                    default:
+                                        if (typeof object.type === "number") {
+                                            message.type = object.type;
+                                            break;
+                                        }
+                                        break;
+                                    case "TYPE_UNSPECIFIED":
+                                    case 0:
+                                        message.type = 0;
+                                        break;
+                                    case "LIST":
+                                    case 1:
+                                        message.type = 1;
+                                        break;
+                                    case "STRING":
+                                    case 2:
+                                        message.type = 2;
+                                        break;
+                                    case "BOOLEAN":
+                                    case 3:
+                                        message.type = 3;
+                                        break;
+                                    }
+                                    if (object.defaultValue != null) {
+                                        if (typeof object.defaultValue !== "object")
+                                            throw TypeError(".google.cloud.orgpolicy.v2.Constraint.CustomConstraintDefinition.Parameter.defaultValue: object expected");
+                                        message.defaultValue = $root.google.protobuf.Value.fromObject(object.defaultValue);
+                                    }
+                                    if (object.validValuesExpr != null)
+                                        message.validValuesExpr = String(object.validValuesExpr);
+                                    if (object.metadata != null) {
+                                        if (typeof object.metadata !== "object")
+                                            throw TypeError(".google.cloud.orgpolicy.v2.Constraint.CustomConstraintDefinition.Parameter.metadata: object expected");
+                                        message.metadata = $root.google.cloud.orgpolicy.v2.Constraint.CustomConstraintDefinition.Parameter.Metadata.fromObject(object.metadata);
+                                    }
+                                    switch (object.item) {
+                                    default:
+                                        if (typeof object.item === "number") {
+                                            message.item = object.item;
+                                            break;
+                                        }
+                                        break;
+                                    case "TYPE_UNSPECIFIED":
+                                    case 0:
+                                        message.item = 0;
+                                        break;
+                                    case "LIST":
+                                    case 1:
+                                        message.item = 1;
+                                        break;
+                                    case "STRING":
+                                    case 2:
+                                        message.item = 2;
+                                        break;
+                                    case "BOOLEAN":
+                                    case 3:
+                                        message.item = 3;
+                                        break;
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Creates a plain object from a Parameter message. Also converts values to other types if specified.
+                                 * @function toObject
+                                 * @memberof google.cloud.orgpolicy.v2.Constraint.CustomConstraintDefinition.Parameter
+                                 * @static
+                                 * @param {google.cloud.orgpolicy.v2.Constraint.CustomConstraintDefinition.Parameter} message Parameter
+                                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                                 * @returns {Object.<string,*>} Plain object
+                                 */
+                                Parameter.toObject = function toObject(message, options) {
+                                    if (!options)
+                                        options = {};
+                                    var object = {};
+                                    if (options.defaults) {
+                                        object.type = options.enums === String ? "TYPE_UNSPECIFIED" : 0;
+                                        object.defaultValue = null;
+                                        object.validValuesExpr = "";
+                                        object.metadata = null;
+                                        object.item = options.enums === String ? "TYPE_UNSPECIFIED" : 0;
+                                    }
+                                    if (message.type != null && message.hasOwnProperty("type"))
+                                        object.type = options.enums === String ? $root.google.cloud.orgpolicy.v2.Constraint.CustomConstraintDefinition.Parameter.Type[message.type] === undefined ? message.type : $root.google.cloud.orgpolicy.v2.Constraint.CustomConstraintDefinition.Parameter.Type[message.type] : message.type;
+                                    if (message.defaultValue != null && message.hasOwnProperty("defaultValue"))
+                                        object.defaultValue = $root.google.protobuf.Value.toObject(message.defaultValue, options);
+                                    if (message.validValuesExpr != null && message.hasOwnProperty("validValuesExpr"))
+                                        object.validValuesExpr = message.validValuesExpr;
+                                    if (message.metadata != null && message.hasOwnProperty("metadata"))
+                                        object.metadata = $root.google.cloud.orgpolicy.v2.Constraint.CustomConstraintDefinition.Parameter.Metadata.toObject(message.metadata, options);
+                                    if (message.item != null && message.hasOwnProperty("item"))
+                                        object.item = options.enums === String ? $root.google.cloud.orgpolicy.v2.Constraint.CustomConstraintDefinition.Parameter.Type[message.item] === undefined ? message.item : $root.google.cloud.orgpolicy.v2.Constraint.CustomConstraintDefinition.Parameter.Type[message.item] : message.item;
+                                    return object;
+                                };
+    
+                                /**
+                                 * Converts this Parameter to JSON.
+                                 * @function toJSON
+                                 * @memberof google.cloud.orgpolicy.v2.Constraint.CustomConstraintDefinition.Parameter
+                                 * @instance
+                                 * @returns {Object.<string,*>} JSON object
+                                 */
+                                Parameter.prototype.toJSON = function toJSON() {
+                                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                                };
+    
+                                /**
+                                 * Gets the default type url for Parameter
+                                 * @function getTypeUrl
+                                 * @memberof google.cloud.orgpolicy.v2.Constraint.CustomConstraintDefinition.Parameter
+                                 * @static
+                                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns {string} The default type url
+                                 */
+                                Parameter.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                    if (typeUrlPrefix === undefined) {
+                                        typeUrlPrefix = "type.googleapis.com";
+                                    }
+                                    return typeUrlPrefix + "/google.cloud.orgpolicy.v2.Constraint.CustomConstraintDefinition.Parameter";
+                                };
+    
+                                /**
+                                 * Type enum.
+                                 * @name google.cloud.orgpolicy.v2.Constraint.CustomConstraintDefinition.Parameter.Type
+                                 * @enum {number}
+                                 * @property {number} TYPE_UNSPECIFIED=0 TYPE_UNSPECIFIED value
+                                 * @property {number} LIST=1 LIST value
+                                 * @property {number} STRING=2 STRING value
+                                 * @property {number} BOOLEAN=3 BOOLEAN value
+                                 */
+                                Parameter.Type = (function() {
+                                    var valuesById = {}, values = Object.create(valuesById);
+                                    values[valuesById[0] = "TYPE_UNSPECIFIED"] = 0;
+                                    values[valuesById[1] = "LIST"] = 1;
+                                    values[valuesById[2] = "STRING"] = 2;
+                                    values[valuesById[3] = "BOOLEAN"] = 3;
+                                    return values;
+                                })();
+    
+                                Parameter.Metadata = (function() {
+    
+                                    /**
+                                     * Properties of a Metadata.
+                                     * @memberof google.cloud.orgpolicy.v2.Constraint.CustomConstraintDefinition.Parameter
+                                     * @interface IMetadata
+                                     * @property {string|null} [description] Metadata description
+                                     */
+    
+                                    /**
+                                     * Constructs a new Metadata.
+                                     * @memberof google.cloud.orgpolicy.v2.Constraint.CustomConstraintDefinition.Parameter
+                                     * @classdesc Represents a Metadata.
+                                     * @implements IMetadata
+                                     * @constructor
+                                     * @param {google.cloud.orgpolicy.v2.Constraint.CustomConstraintDefinition.Parameter.IMetadata=} [properties] Properties to set
+                                     */
+                                    function Metadata(properties) {
+                                        if (properties)
+                                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                                if (properties[keys[i]] != null)
+                                                    this[keys[i]] = properties[keys[i]];
+                                    }
+    
+                                    /**
+                                     * Metadata description.
+                                     * @member {string} description
+                                     * @memberof google.cloud.orgpolicy.v2.Constraint.CustomConstraintDefinition.Parameter.Metadata
+                                     * @instance
+                                     */
+                                    Metadata.prototype.description = "";
+    
+                                    /**
+                                     * Creates a new Metadata instance using the specified properties.
+                                     * @function create
+                                     * @memberof google.cloud.orgpolicy.v2.Constraint.CustomConstraintDefinition.Parameter.Metadata
+                                     * @static
+                                     * @param {google.cloud.orgpolicy.v2.Constraint.CustomConstraintDefinition.Parameter.IMetadata=} [properties] Properties to set
+                                     * @returns {google.cloud.orgpolicy.v2.Constraint.CustomConstraintDefinition.Parameter.Metadata} Metadata instance
+                                     */
+                                    Metadata.create = function create(properties) {
+                                        return new Metadata(properties);
+                                    };
+    
+                                    /**
+                                     * Encodes the specified Metadata message. Does not implicitly {@link google.cloud.orgpolicy.v2.Constraint.CustomConstraintDefinition.Parameter.Metadata.verify|verify} messages.
+                                     * @function encode
+                                     * @memberof google.cloud.orgpolicy.v2.Constraint.CustomConstraintDefinition.Parameter.Metadata
+                                     * @static
+                                     * @param {google.cloud.orgpolicy.v2.Constraint.CustomConstraintDefinition.Parameter.IMetadata} message Metadata message or plain object to encode
+                                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                                     * @returns {$protobuf.Writer} Writer
+                                     */
+                                    Metadata.encode = function encode(message, writer) {
+                                        if (!writer)
+                                            writer = $Writer.create();
+                                        if (message.description != null && Object.hasOwnProperty.call(message, "description"))
+                                            writer.uint32(/* id 1, wireType 2 =*/10).string(message.description);
+                                        return writer;
+                                    };
+    
+                                    /**
+                                     * Encodes the specified Metadata message, length delimited. Does not implicitly {@link google.cloud.orgpolicy.v2.Constraint.CustomConstraintDefinition.Parameter.Metadata.verify|verify} messages.
+                                     * @function encodeDelimited
+                                     * @memberof google.cloud.orgpolicy.v2.Constraint.CustomConstraintDefinition.Parameter.Metadata
+                                     * @static
+                                     * @param {google.cloud.orgpolicy.v2.Constraint.CustomConstraintDefinition.Parameter.IMetadata} message Metadata message or plain object to encode
+                                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                                     * @returns {$protobuf.Writer} Writer
+                                     */
+                                    Metadata.encodeDelimited = function encodeDelimited(message, writer) {
+                                        return this.encode(message, writer).ldelim();
+                                    };
+    
+                                    /**
+                                     * Decodes a Metadata message from the specified reader or buffer.
+                                     * @function decode
+                                     * @memberof google.cloud.orgpolicy.v2.Constraint.CustomConstraintDefinition.Parameter.Metadata
+                                     * @static
+                                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                     * @param {number} [length] Message length if known beforehand
+                                     * @returns {google.cloud.orgpolicy.v2.Constraint.CustomConstraintDefinition.Parameter.Metadata} Metadata
+                                     * @throws {Error} If the payload is not a reader or valid buffer
+                                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                     */
+                                    Metadata.decode = function decode(reader, length) {
+                                        if (!(reader instanceof $Reader))
+                                            reader = $Reader.create(reader);
+                                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.orgpolicy.v2.Constraint.CustomConstraintDefinition.Parameter.Metadata();
+                                        while (reader.pos < end) {
+                                            var tag = reader.uint32();
+                                            switch (tag >>> 3) {
+                                            case 1: {
+                                                    message.description = reader.string();
+                                                    break;
+                                                }
+                                            default:
+                                                reader.skipType(tag & 7);
+                                                break;
+                                            }
+                                        }
+                                        return message;
+                                    };
+    
+                                    /**
+                                     * Decodes a Metadata message from the specified reader or buffer, length delimited.
+                                     * @function decodeDelimited
+                                     * @memberof google.cloud.orgpolicy.v2.Constraint.CustomConstraintDefinition.Parameter.Metadata
+                                     * @static
+                                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                     * @returns {google.cloud.orgpolicy.v2.Constraint.CustomConstraintDefinition.Parameter.Metadata} Metadata
+                                     * @throws {Error} If the payload is not a reader or valid buffer
+                                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                     */
+                                    Metadata.decodeDelimited = function decodeDelimited(reader) {
+                                        if (!(reader instanceof $Reader))
+                                            reader = new $Reader(reader);
+                                        return this.decode(reader, reader.uint32());
+                                    };
+    
+                                    /**
+                                     * Verifies a Metadata message.
+                                     * @function verify
+                                     * @memberof google.cloud.orgpolicy.v2.Constraint.CustomConstraintDefinition.Parameter.Metadata
+                                     * @static
+                                     * @param {Object.<string,*>} message Plain object to verify
+                                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                                     */
+                                    Metadata.verify = function verify(message) {
+                                        if (typeof message !== "object" || message === null)
+                                            return "object expected";
+                                        if (message.description != null && message.hasOwnProperty("description"))
+                                            if (!$util.isString(message.description))
+                                                return "description: string expected";
+                                        return null;
+                                    };
+    
+                                    /**
+                                     * Creates a Metadata message from a plain object. Also converts values to their respective internal types.
+                                     * @function fromObject
+                                     * @memberof google.cloud.orgpolicy.v2.Constraint.CustomConstraintDefinition.Parameter.Metadata
+                                     * @static
+                                     * @param {Object.<string,*>} object Plain object
+                                     * @returns {google.cloud.orgpolicy.v2.Constraint.CustomConstraintDefinition.Parameter.Metadata} Metadata
+                                     */
+                                    Metadata.fromObject = function fromObject(object) {
+                                        if (object instanceof $root.google.cloud.orgpolicy.v2.Constraint.CustomConstraintDefinition.Parameter.Metadata)
+                                            return object;
+                                        var message = new $root.google.cloud.orgpolicy.v2.Constraint.CustomConstraintDefinition.Parameter.Metadata();
+                                        if (object.description != null)
+                                            message.description = String(object.description);
+                                        return message;
+                                    };
+    
+                                    /**
+                                     * Creates a plain object from a Metadata message. Also converts values to other types if specified.
+                                     * @function toObject
+                                     * @memberof google.cloud.orgpolicy.v2.Constraint.CustomConstraintDefinition.Parameter.Metadata
+                                     * @static
+                                     * @param {google.cloud.orgpolicy.v2.Constraint.CustomConstraintDefinition.Parameter.Metadata} message Metadata
+                                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                                     * @returns {Object.<string,*>} Plain object
+                                     */
+                                    Metadata.toObject = function toObject(message, options) {
+                                        if (!options)
+                                            options = {};
+                                        var object = {};
+                                        if (options.defaults)
+                                            object.description = "";
+                                        if (message.description != null && message.hasOwnProperty("description"))
+                                            object.description = message.description;
+                                        return object;
+                                    };
+    
+                                    /**
+                                     * Converts this Metadata to JSON.
+                                     * @function toJSON
+                                     * @memberof google.cloud.orgpolicy.v2.Constraint.CustomConstraintDefinition.Parameter.Metadata
+                                     * @instance
+                                     * @returns {Object.<string,*>} JSON object
+                                     */
+                                    Metadata.prototype.toJSON = function toJSON() {
+                                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                                    };
+    
+                                    /**
+                                     * Gets the default type url for Metadata
+                                     * @function getTypeUrl
+                                     * @memberof google.cloud.orgpolicy.v2.Constraint.CustomConstraintDefinition.Parameter.Metadata
+                                     * @static
+                                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                     * @returns {string} The default type url
+                                     */
+                                    Metadata.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                        if (typeUrlPrefix === undefined) {
+                                            typeUrlPrefix = "type.googleapis.com";
+                                        }
+                                        return typeUrlPrefix + "/google.cloud.orgpolicy.v2.Constraint.CustomConstraintDefinition.Parameter.Metadata";
+                                    };
+    
+                                    return Metadata;
+                                })();
+    
+                                return Parameter;
+                            })();
+    
+                            return CustomConstraintDefinition;
+                        })();
+    
                         Constraint.BooleanConstraint = (function() {
     
                             /**
                              * Properties of a BooleanConstraint.
                              * @memberof google.cloud.orgpolicy.v2.Constraint
                              * @interface IBooleanConstraint
+                             * @property {google.cloud.orgpolicy.v2.Constraint.ICustomConstraintDefinition|null} [customConstraintDefinition] BooleanConstraint customConstraintDefinition
                              */
     
                             /**
@@ -731,6 +1845,14 @@
                                         if (properties[keys[i]] != null)
                                             this[keys[i]] = properties[keys[i]];
                             }
+    
+                            /**
+                             * BooleanConstraint customConstraintDefinition.
+                             * @member {google.cloud.orgpolicy.v2.Constraint.ICustomConstraintDefinition|null|undefined} customConstraintDefinition
+                             * @memberof google.cloud.orgpolicy.v2.Constraint.BooleanConstraint
+                             * @instance
+                             */
+                            BooleanConstraint.prototype.customConstraintDefinition = null;
     
                             /**
                              * Creates a new BooleanConstraint instance using the specified properties.
@@ -756,6 +1878,8 @@
                             BooleanConstraint.encode = function encode(message, writer) {
                                 if (!writer)
                                     writer = $Writer.create();
+                                if (message.customConstraintDefinition != null && Object.hasOwnProperty.call(message, "customConstraintDefinition"))
+                                    $root.google.cloud.orgpolicy.v2.Constraint.CustomConstraintDefinition.encode(message.customConstraintDefinition, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
                                 return writer;
                             };
     
@@ -790,6 +1914,10 @@
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
                                     switch (tag >>> 3) {
+                                    case 1: {
+                                            message.customConstraintDefinition = $root.google.cloud.orgpolicy.v2.Constraint.CustomConstraintDefinition.decode(reader, reader.uint32());
+                                            break;
+                                        }
                                     default:
                                         reader.skipType(tag & 7);
                                         break;
@@ -825,6 +1953,11 @@
                             BooleanConstraint.verify = function verify(message) {
                                 if (typeof message !== "object" || message === null)
                                     return "object expected";
+                                if (message.customConstraintDefinition != null && message.hasOwnProperty("customConstraintDefinition")) {
+                                    var error = $root.google.cloud.orgpolicy.v2.Constraint.CustomConstraintDefinition.verify(message.customConstraintDefinition);
+                                    if (error)
+                                        return "customConstraintDefinition." + error;
+                                }
                                 return null;
                             };
     
@@ -839,7 +1972,13 @@
                             BooleanConstraint.fromObject = function fromObject(object) {
                                 if (object instanceof $root.google.cloud.orgpolicy.v2.Constraint.BooleanConstraint)
                                     return object;
-                                return new $root.google.cloud.orgpolicy.v2.Constraint.BooleanConstraint();
+                                var message = new $root.google.cloud.orgpolicy.v2.Constraint.BooleanConstraint();
+                                if (object.customConstraintDefinition != null) {
+                                    if (typeof object.customConstraintDefinition !== "object")
+                                        throw TypeError(".google.cloud.orgpolicy.v2.Constraint.BooleanConstraint.customConstraintDefinition: object expected");
+                                    message.customConstraintDefinition = $root.google.cloud.orgpolicy.v2.Constraint.CustomConstraintDefinition.fromObject(object.customConstraintDefinition);
+                                }
+                                return message;
                             };
     
                             /**
@@ -851,8 +1990,15 @@
                              * @param {$protobuf.IConversionOptions} [options] Conversion options
                              * @returns {Object.<string,*>} Plain object
                              */
-                            BooleanConstraint.toObject = function toObject() {
-                                return {};
+                            BooleanConstraint.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults)
+                                    object.customConstraintDefinition = null;
+                                if (message.customConstraintDefinition != null && message.hasOwnProperty("customConstraintDefinition"))
+                                    object.customConstraintDefinition = $root.google.cloud.orgpolicy.v2.Constraint.CustomConstraintDefinition.toObject(message.customConstraintDefinition, options);
+                                return object;
                             };
     
                             /**
@@ -2705,6 +3851,7 @@
                              * @property {boolean|null} [denyAll] PolicyRule denyAll
                              * @property {boolean|null} [enforce] PolicyRule enforce
                              * @property {google.type.IExpr|null} [condition] PolicyRule condition
+                             * @property {google.protobuf.IStruct|null} [parameters] PolicyRule parameters
                              */
     
                             /**
@@ -2762,6 +3909,14 @@
                              */
                             PolicyRule.prototype.condition = null;
     
+                            /**
+                             * PolicyRule parameters.
+                             * @member {google.protobuf.IStruct|null|undefined} parameters
+                             * @memberof google.cloud.orgpolicy.v2.PolicySpec.PolicyRule
+                             * @instance
+                             */
+                            PolicyRule.prototype.parameters = null;
+    
                             // OneOf field names bound to virtual getters and setters
                             var $oneOfFields;
     
@@ -2810,6 +3965,8 @@
                                     writer.uint32(/* id 4, wireType 0 =*/32).bool(message.enforce);
                                 if (message.condition != null && Object.hasOwnProperty.call(message, "condition"))
                                     $root.google.type.Expr.encode(message.condition, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                                if (message.parameters != null && Object.hasOwnProperty.call(message, "parameters"))
+                                    $root.google.protobuf.Struct.encode(message.parameters, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
                                 return writer;
                             };
     
@@ -2862,6 +4019,10 @@
                                         }
                                     case 5: {
                                             message.condition = $root.google.type.Expr.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 6: {
+                                            message.parameters = $root.google.protobuf.Struct.decode(reader, reader.uint32());
                                             break;
                                         }
                                     default:
@@ -2934,6 +4095,11 @@
                                     if (error)
                                         return "condition." + error;
                                 }
+                                if (message.parameters != null && message.hasOwnProperty("parameters")) {
+                                    var error = $root.google.protobuf.Struct.verify(message.parameters);
+                                    if (error)
+                                        return "parameters." + error;
+                                }
                                 return null;
                             };
     
@@ -2965,6 +4131,11 @@
                                         throw TypeError(".google.cloud.orgpolicy.v2.PolicySpec.PolicyRule.condition: object expected");
                                     message.condition = $root.google.type.Expr.fromObject(object.condition);
                                 }
+                                if (object.parameters != null) {
+                                    if (typeof object.parameters !== "object")
+                                        throw TypeError(".google.cloud.orgpolicy.v2.PolicySpec.PolicyRule.parameters: object expected");
+                                    message.parameters = $root.google.protobuf.Struct.fromObject(object.parameters);
+                                }
                                 return message;
                             };
     
@@ -2981,8 +4152,10 @@
                                 if (!options)
                                     options = {};
                                 var object = {};
-                                if (options.defaults)
+                                if (options.defaults) {
                                     object.condition = null;
+                                    object.parameters = null;
+                                }
                                 if (message.values != null && message.hasOwnProperty("values")) {
                                     object.values = $root.google.cloud.orgpolicy.v2.PolicySpec.PolicyRule.StringValues.toObject(message.values, options);
                                     if (options.oneofs)
@@ -3005,6 +4178,8 @@
                                 }
                                 if (message.condition != null && message.hasOwnProperty("condition"))
                                     object.condition = $root.google.type.Expr.toObject(message.condition, options);
+                                if (message.parameters != null && message.hasOwnProperty("parameters"))
+                                    object.parameters = $root.google.protobuf.Struct.toObject(message.parameters, options);
                                 return object;
                             };
     
@@ -24361,6 +25536,879 @@
                 })();
     
                 return GeneratedCodeInfo;
+            })();
+    
+            protobuf.Struct = (function() {
+    
+                /**
+                 * Properties of a Struct.
+                 * @memberof google.protobuf
+                 * @interface IStruct
+                 * @property {Object.<string,google.protobuf.IValue>|null} [fields] Struct fields
+                 */
+    
+                /**
+                 * Constructs a new Struct.
+                 * @memberof google.protobuf
+                 * @classdesc Represents a Struct.
+                 * @implements IStruct
+                 * @constructor
+                 * @param {google.protobuf.IStruct=} [properties] Properties to set
+                 */
+                function Struct(properties) {
+                    this.fields = {};
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * Struct fields.
+                 * @member {Object.<string,google.protobuf.IValue>} fields
+                 * @memberof google.protobuf.Struct
+                 * @instance
+                 */
+                Struct.prototype.fields = $util.emptyObject;
+    
+                /**
+                 * Creates a new Struct instance using the specified properties.
+                 * @function create
+                 * @memberof google.protobuf.Struct
+                 * @static
+                 * @param {google.protobuf.IStruct=} [properties] Properties to set
+                 * @returns {google.protobuf.Struct} Struct instance
+                 */
+                Struct.create = function create(properties) {
+                    return new Struct(properties);
+                };
+    
+                /**
+                 * Encodes the specified Struct message. Does not implicitly {@link google.protobuf.Struct.verify|verify} messages.
+                 * @function encode
+                 * @memberof google.protobuf.Struct
+                 * @static
+                 * @param {google.protobuf.IStruct} message Struct message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                Struct.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.fields != null && Object.hasOwnProperty.call(message, "fields"))
+                        for (var keys = Object.keys(message.fields), i = 0; i < keys.length; ++i) {
+                            writer.uint32(/* id 1, wireType 2 =*/10).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]);
+                            $root.google.protobuf.Value.encode(message.fields[keys[i]], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim().ldelim();
+                        }
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified Struct message, length delimited. Does not implicitly {@link google.protobuf.Struct.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof google.protobuf.Struct
+                 * @static
+                 * @param {google.protobuf.IStruct} message Struct message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                Struct.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes a Struct message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof google.protobuf.Struct
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {google.protobuf.Struct} Struct
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                Struct.decode = function decode(reader, length) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.Struct(), key, value;
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        switch (tag >>> 3) {
+                        case 1: {
+                                if (message.fields === $util.emptyObject)
+                                    message.fields = {};
+                                var end2 = reader.uint32() + reader.pos;
+                                key = "";
+                                value = null;
+                                while (reader.pos < end2) {
+                                    var tag2 = reader.uint32();
+                                    switch (tag2 >>> 3) {
+                                    case 1:
+                                        key = reader.string();
+                                        break;
+                                    case 2:
+                                        value = $root.google.protobuf.Value.decode(reader, reader.uint32());
+                                        break;
+                                    default:
+                                        reader.skipType(tag2 & 7);
+                                        break;
+                                    }
+                                }
+                                message.fields[key] = value;
+                                break;
+                            }
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes a Struct message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof google.protobuf.Struct
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {google.protobuf.Struct} Struct
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                Struct.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies a Struct message.
+                 * @function verify
+                 * @memberof google.protobuf.Struct
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                Struct.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.fields != null && message.hasOwnProperty("fields")) {
+                        if (!$util.isObject(message.fields))
+                            return "fields: object expected";
+                        var key = Object.keys(message.fields);
+                        for (var i = 0; i < key.length; ++i) {
+                            var error = $root.google.protobuf.Value.verify(message.fields[key[i]]);
+                            if (error)
+                                return "fields." + error;
+                        }
+                    }
+                    return null;
+                };
+    
+                /**
+                 * Creates a Struct message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof google.protobuf.Struct
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {google.protobuf.Struct} Struct
+                 */
+                Struct.fromObject = function fromObject(object) {
+                    if (object instanceof $root.google.protobuf.Struct)
+                        return object;
+                    var message = new $root.google.protobuf.Struct();
+                    if (object.fields) {
+                        if (typeof object.fields !== "object")
+                            throw TypeError(".google.protobuf.Struct.fields: object expected");
+                        message.fields = {};
+                        for (var keys = Object.keys(object.fields), i = 0; i < keys.length; ++i) {
+                            if (typeof object.fields[keys[i]] !== "object")
+                                throw TypeError(".google.protobuf.Struct.fields: object expected");
+                            message.fields[keys[i]] = $root.google.protobuf.Value.fromObject(object.fields[keys[i]]);
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Creates a plain object from a Struct message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof google.protobuf.Struct
+                 * @static
+                 * @param {google.protobuf.Struct} message Struct
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                Struct.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.objects || options.defaults)
+                        object.fields = {};
+                    var keys2;
+                    if (message.fields && (keys2 = Object.keys(message.fields)).length) {
+                        object.fields = {};
+                        for (var j = 0; j < keys2.length; ++j)
+                            object.fields[keys2[j]] = $root.google.protobuf.Value.toObject(message.fields[keys2[j]], options);
+                    }
+                    return object;
+                };
+    
+                /**
+                 * Converts this Struct to JSON.
+                 * @function toJSON
+                 * @memberof google.protobuf.Struct
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                Struct.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for Struct
+                 * @function getTypeUrl
+                 * @memberof google.protobuf.Struct
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                Struct.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.protobuf.Struct";
+                };
+    
+                return Struct;
+            })();
+    
+            protobuf.Value = (function() {
+    
+                /**
+                 * Properties of a Value.
+                 * @memberof google.protobuf
+                 * @interface IValue
+                 * @property {google.protobuf.NullValue|null} [nullValue] Value nullValue
+                 * @property {number|null} [numberValue] Value numberValue
+                 * @property {string|null} [stringValue] Value stringValue
+                 * @property {boolean|null} [boolValue] Value boolValue
+                 * @property {google.protobuf.IStruct|null} [structValue] Value structValue
+                 * @property {google.protobuf.IListValue|null} [listValue] Value listValue
+                 */
+    
+                /**
+                 * Constructs a new Value.
+                 * @memberof google.protobuf
+                 * @classdesc Represents a Value.
+                 * @implements IValue
+                 * @constructor
+                 * @param {google.protobuf.IValue=} [properties] Properties to set
+                 */
+                function Value(properties) {
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * Value nullValue.
+                 * @member {google.protobuf.NullValue|null|undefined} nullValue
+                 * @memberof google.protobuf.Value
+                 * @instance
+                 */
+                Value.prototype.nullValue = null;
+    
+                /**
+                 * Value numberValue.
+                 * @member {number|null|undefined} numberValue
+                 * @memberof google.protobuf.Value
+                 * @instance
+                 */
+                Value.prototype.numberValue = null;
+    
+                /**
+                 * Value stringValue.
+                 * @member {string|null|undefined} stringValue
+                 * @memberof google.protobuf.Value
+                 * @instance
+                 */
+                Value.prototype.stringValue = null;
+    
+                /**
+                 * Value boolValue.
+                 * @member {boolean|null|undefined} boolValue
+                 * @memberof google.protobuf.Value
+                 * @instance
+                 */
+                Value.prototype.boolValue = null;
+    
+                /**
+                 * Value structValue.
+                 * @member {google.protobuf.IStruct|null|undefined} structValue
+                 * @memberof google.protobuf.Value
+                 * @instance
+                 */
+                Value.prototype.structValue = null;
+    
+                /**
+                 * Value listValue.
+                 * @member {google.protobuf.IListValue|null|undefined} listValue
+                 * @memberof google.protobuf.Value
+                 * @instance
+                 */
+                Value.prototype.listValue = null;
+    
+                // OneOf field names bound to virtual getters and setters
+                var $oneOfFields;
+    
+                /**
+                 * Value kind.
+                 * @member {"nullValue"|"numberValue"|"stringValue"|"boolValue"|"structValue"|"listValue"|undefined} kind
+                 * @memberof google.protobuf.Value
+                 * @instance
+                 */
+                Object.defineProperty(Value.prototype, "kind", {
+                    get: $util.oneOfGetter($oneOfFields = ["nullValue", "numberValue", "stringValue", "boolValue", "structValue", "listValue"]),
+                    set: $util.oneOfSetter($oneOfFields)
+                });
+    
+                /**
+                 * Creates a new Value instance using the specified properties.
+                 * @function create
+                 * @memberof google.protobuf.Value
+                 * @static
+                 * @param {google.protobuf.IValue=} [properties] Properties to set
+                 * @returns {google.protobuf.Value} Value instance
+                 */
+                Value.create = function create(properties) {
+                    return new Value(properties);
+                };
+    
+                /**
+                 * Encodes the specified Value message. Does not implicitly {@link google.protobuf.Value.verify|verify} messages.
+                 * @function encode
+                 * @memberof google.protobuf.Value
+                 * @static
+                 * @param {google.protobuf.IValue} message Value message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                Value.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.nullValue != null && Object.hasOwnProperty.call(message, "nullValue"))
+                        writer.uint32(/* id 1, wireType 0 =*/8).int32(message.nullValue);
+                    if (message.numberValue != null && Object.hasOwnProperty.call(message, "numberValue"))
+                        writer.uint32(/* id 2, wireType 1 =*/17).double(message.numberValue);
+                    if (message.stringValue != null && Object.hasOwnProperty.call(message, "stringValue"))
+                        writer.uint32(/* id 3, wireType 2 =*/26).string(message.stringValue);
+                    if (message.boolValue != null && Object.hasOwnProperty.call(message, "boolValue"))
+                        writer.uint32(/* id 4, wireType 0 =*/32).bool(message.boolValue);
+                    if (message.structValue != null && Object.hasOwnProperty.call(message, "structValue"))
+                        $root.google.protobuf.Struct.encode(message.structValue, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                    if (message.listValue != null && Object.hasOwnProperty.call(message, "listValue"))
+                        $root.google.protobuf.ListValue.encode(message.listValue, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified Value message, length delimited. Does not implicitly {@link google.protobuf.Value.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof google.protobuf.Value
+                 * @static
+                 * @param {google.protobuf.IValue} message Value message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                Value.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes a Value message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof google.protobuf.Value
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {google.protobuf.Value} Value
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                Value.decode = function decode(reader, length) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.Value();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        switch (tag >>> 3) {
+                        case 1: {
+                                message.nullValue = reader.int32();
+                                break;
+                            }
+                        case 2: {
+                                message.numberValue = reader.double();
+                                break;
+                            }
+                        case 3: {
+                                message.stringValue = reader.string();
+                                break;
+                            }
+                        case 4: {
+                                message.boolValue = reader.bool();
+                                break;
+                            }
+                        case 5: {
+                                message.structValue = $root.google.protobuf.Struct.decode(reader, reader.uint32());
+                                break;
+                            }
+                        case 6: {
+                                message.listValue = $root.google.protobuf.ListValue.decode(reader, reader.uint32());
+                                break;
+                            }
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes a Value message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof google.protobuf.Value
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {google.protobuf.Value} Value
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                Value.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies a Value message.
+                 * @function verify
+                 * @memberof google.protobuf.Value
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                Value.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    var properties = {};
+                    if (message.nullValue != null && message.hasOwnProperty("nullValue")) {
+                        properties.kind = 1;
+                        switch (message.nullValue) {
+                        default:
+                            return "nullValue: enum value expected";
+                        case 0:
+                            break;
+                        }
+                    }
+                    if (message.numberValue != null && message.hasOwnProperty("numberValue")) {
+                        if (properties.kind === 1)
+                            return "kind: multiple values";
+                        properties.kind = 1;
+                        if (typeof message.numberValue !== "number")
+                            return "numberValue: number expected";
+                    }
+                    if (message.stringValue != null && message.hasOwnProperty("stringValue")) {
+                        if (properties.kind === 1)
+                            return "kind: multiple values";
+                        properties.kind = 1;
+                        if (!$util.isString(message.stringValue))
+                            return "stringValue: string expected";
+                    }
+                    if (message.boolValue != null && message.hasOwnProperty("boolValue")) {
+                        if (properties.kind === 1)
+                            return "kind: multiple values";
+                        properties.kind = 1;
+                        if (typeof message.boolValue !== "boolean")
+                            return "boolValue: boolean expected";
+                    }
+                    if (message.structValue != null && message.hasOwnProperty("structValue")) {
+                        if (properties.kind === 1)
+                            return "kind: multiple values";
+                        properties.kind = 1;
+                        {
+                            var error = $root.google.protobuf.Struct.verify(message.structValue);
+                            if (error)
+                                return "structValue." + error;
+                        }
+                    }
+                    if (message.listValue != null && message.hasOwnProperty("listValue")) {
+                        if (properties.kind === 1)
+                            return "kind: multiple values";
+                        properties.kind = 1;
+                        {
+                            var error = $root.google.protobuf.ListValue.verify(message.listValue);
+                            if (error)
+                                return "listValue." + error;
+                        }
+                    }
+                    return null;
+                };
+    
+                /**
+                 * Creates a Value message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof google.protobuf.Value
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {google.protobuf.Value} Value
+                 */
+                Value.fromObject = function fromObject(object) {
+                    if (object instanceof $root.google.protobuf.Value)
+                        return object;
+                    var message = new $root.google.protobuf.Value();
+                    switch (object.nullValue) {
+                    default:
+                        if (typeof object.nullValue === "number") {
+                            message.nullValue = object.nullValue;
+                            break;
+                        }
+                        break;
+                    case "NULL_VALUE":
+                    case 0:
+                        message.nullValue = 0;
+                        break;
+                    }
+                    if (object.numberValue != null)
+                        message.numberValue = Number(object.numberValue);
+                    if (object.stringValue != null)
+                        message.stringValue = String(object.stringValue);
+                    if (object.boolValue != null)
+                        message.boolValue = Boolean(object.boolValue);
+                    if (object.structValue != null) {
+                        if (typeof object.structValue !== "object")
+                            throw TypeError(".google.protobuf.Value.structValue: object expected");
+                        message.structValue = $root.google.protobuf.Struct.fromObject(object.structValue);
+                    }
+                    if (object.listValue != null) {
+                        if (typeof object.listValue !== "object")
+                            throw TypeError(".google.protobuf.Value.listValue: object expected");
+                        message.listValue = $root.google.protobuf.ListValue.fromObject(object.listValue);
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Creates a plain object from a Value message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof google.protobuf.Value
+                 * @static
+                 * @param {google.protobuf.Value} message Value
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                Value.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (message.nullValue != null && message.hasOwnProperty("nullValue")) {
+                        object.nullValue = options.enums === String ? $root.google.protobuf.NullValue[message.nullValue] === undefined ? message.nullValue : $root.google.protobuf.NullValue[message.nullValue] : message.nullValue;
+                        if (options.oneofs)
+                            object.kind = "nullValue";
+                    }
+                    if (message.numberValue != null && message.hasOwnProperty("numberValue")) {
+                        object.numberValue = options.json && !isFinite(message.numberValue) ? String(message.numberValue) : message.numberValue;
+                        if (options.oneofs)
+                            object.kind = "numberValue";
+                    }
+                    if (message.stringValue != null && message.hasOwnProperty("stringValue")) {
+                        object.stringValue = message.stringValue;
+                        if (options.oneofs)
+                            object.kind = "stringValue";
+                    }
+                    if (message.boolValue != null && message.hasOwnProperty("boolValue")) {
+                        object.boolValue = message.boolValue;
+                        if (options.oneofs)
+                            object.kind = "boolValue";
+                    }
+                    if (message.structValue != null && message.hasOwnProperty("structValue")) {
+                        object.structValue = $root.google.protobuf.Struct.toObject(message.structValue, options);
+                        if (options.oneofs)
+                            object.kind = "structValue";
+                    }
+                    if (message.listValue != null && message.hasOwnProperty("listValue")) {
+                        object.listValue = $root.google.protobuf.ListValue.toObject(message.listValue, options);
+                        if (options.oneofs)
+                            object.kind = "listValue";
+                    }
+                    return object;
+                };
+    
+                /**
+                 * Converts this Value to JSON.
+                 * @function toJSON
+                 * @memberof google.protobuf.Value
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                Value.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for Value
+                 * @function getTypeUrl
+                 * @memberof google.protobuf.Value
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                Value.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.protobuf.Value";
+                };
+    
+                return Value;
+            })();
+    
+            /**
+             * NullValue enum.
+             * @name google.protobuf.NullValue
+             * @enum {number}
+             * @property {number} NULL_VALUE=0 NULL_VALUE value
+             */
+            protobuf.NullValue = (function() {
+                var valuesById = {}, values = Object.create(valuesById);
+                values[valuesById[0] = "NULL_VALUE"] = 0;
+                return values;
+            })();
+    
+            protobuf.ListValue = (function() {
+    
+                /**
+                 * Properties of a ListValue.
+                 * @memberof google.protobuf
+                 * @interface IListValue
+                 * @property {Array.<google.protobuf.IValue>|null} [values] ListValue values
+                 */
+    
+                /**
+                 * Constructs a new ListValue.
+                 * @memberof google.protobuf
+                 * @classdesc Represents a ListValue.
+                 * @implements IListValue
+                 * @constructor
+                 * @param {google.protobuf.IListValue=} [properties] Properties to set
+                 */
+                function ListValue(properties) {
+                    this.values = [];
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * ListValue values.
+                 * @member {Array.<google.protobuf.IValue>} values
+                 * @memberof google.protobuf.ListValue
+                 * @instance
+                 */
+                ListValue.prototype.values = $util.emptyArray;
+    
+                /**
+                 * Creates a new ListValue instance using the specified properties.
+                 * @function create
+                 * @memberof google.protobuf.ListValue
+                 * @static
+                 * @param {google.protobuf.IListValue=} [properties] Properties to set
+                 * @returns {google.protobuf.ListValue} ListValue instance
+                 */
+                ListValue.create = function create(properties) {
+                    return new ListValue(properties);
+                };
+    
+                /**
+                 * Encodes the specified ListValue message. Does not implicitly {@link google.protobuf.ListValue.verify|verify} messages.
+                 * @function encode
+                 * @memberof google.protobuf.ListValue
+                 * @static
+                 * @param {google.protobuf.IListValue} message ListValue message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                ListValue.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.values != null && message.values.length)
+                        for (var i = 0; i < message.values.length; ++i)
+                            $root.google.protobuf.Value.encode(message.values[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified ListValue message, length delimited. Does not implicitly {@link google.protobuf.ListValue.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof google.protobuf.ListValue
+                 * @static
+                 * @param {google.protobuf.IListValue} message ListValue message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                ListValue.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes a ListValue message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof google.protobuf.ListValue
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {google.protobuf.ListValue} ListValue
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                ListValue.decode = function decode(reader, length) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.ListValue();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        switch (tag >>> 3) {
+                        case 1: {
+                                if (!(message.values && message.values.length))
+                                    message.values = [];
+                                message.values.push($root.google.protobuf.Value.decode(reader, reader.uint32()));
+                                break;
+                            }
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes a ListValue message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof google.protobuf.ListValue
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {google.protobuf.ListValue} ListValue
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                ListValue.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies a ListValue message.
+                 * @function verify
+                 * @memberof google.protobuf.ListValue
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                ListValue.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.values != null && message.hasOwnProperty("values")) {
+                        if (!Array.isArray(message.values))
+                            return "values: array expected";
+                        for (var i = 0; i < message.values.length; ++i) {
+                            var error = $root.google.protobuf.Value.verify(message.values[i]);
+                            if (error)
+                                return "values." + error;
+                        }
+                    }
+                    return null;
+                };
+    
+                /**
+                 * Creates a ListValue message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof google.protobuf.ListValue
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {google.protobuf.ListValue} ListValue
+                 */
+                ListValue.fromObject = function fromObject(object) {
+                    if (object instanceof $root.google.protobuf.ListValue)
+                        return object;
+                    var message = new $root.google.protobuf.ListValue();
+                    if (object.values) {
+                        if (!Array.isArray(object.values))
+                            throw TypeError(".google.protobuf.ListValue.values: array expected");
+                        message.values = [];
+                        for (var i = 0; i < object.values.length; ++i) {
+                            if (typeof object.values[i] !== "object")
+                                throw TypeError(".google.protobuf.ListValue.values: object expected");
+                            message.values[i] = $root.google.protobuf.Value.fromObject(object.values[i]);
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Creates a plain object from a ListValue message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof google.protobuf.ListValue
+                 * @static
+                 * @param {google.protobuf.ListValue} message ListValue
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                ListValue.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.arrays || options.defaults)
+                        object.values = [];
+                    if (message.values && message.values.length) {
+                        object.values = [];
+                        for (var j = 0; j < message.values.length; ++j)
+                            object.values[j] = $root.google.protobuf.Value.toObject(message.values[j], options);
+                    }
+                    return object;
+                };
+    
+                /**
+                 * Converts this ListValue to JSON.
+                 * @function toJSON
+                 * @memberof google.protobuf.ListValue
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                ListValue.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for ListValue
+                 * @function getTypeUrl
+                 * @memberof google.protobuf.ListValue
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                ListValue.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.protobuf.ListValue";
+                };
+    
+                return ListValue;
             })();
     
             protobuf.Timestamp = (function() {
