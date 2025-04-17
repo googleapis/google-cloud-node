@@ -53,8 +53,7 @@
     "test": "c8 node build/test/run.js"
   },
   "dependencies": {
-    "google-gax": "^5.0.0-rc.0",
-    "protobuf.js": "^1.1.2"
+    "google-gax": "^5.0.1-rc.0"
   },
   "devDependencies": {
     "@types/mocha": "^10.0.10",
