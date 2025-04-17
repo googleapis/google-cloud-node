@@ -23,24 +23,10 @@ const DataCatalogClient = v1.DataCatalogClient;
 type DataCatalogClient = v1.DataCatalogClient;
 const PolicyTagManagerClient = v1.PolicyTagManagerClient;
 type PolicyTagManagerClient = v1.PolicyTagManagerClient;
-const PolicyTagManagerSerializationClient =
-  v1.PolicyTagManagerSerializationClient;
-type PolicyTagManagerSerializationClient =
-  v1.PolicyTagManagerSerializationClient;
+const PolicyTagManagerSerializationClient = v1.PolicyTagManagerSerializationClient;
+type PolicyTagManagerSerializationClient = v1.PolicyTagManagerSerializationClient;
 
-export {
-  v1,
-  v1beta1,
-  DataCatalogClient,
-  PolicyTagManagerClient,
-  PolicyTagManagerSerializationClient,
-};
-export default {
-  v1,
-  v1beta1,
-  DataCatalogClient,
-  PolicyTagManagerClient,
-  PolicyTagManagerSerializationClient,
-};
+export {v1, v1beta1, DataCatalogClient, PolicyTagManagerClient, PolicyTagManagerSerializationClient};
+export default {v1, v1beta1, DataCatalogClient, PolicyTagManagerClient, PolicyTagManagerSerializationClient};
 import * as protos from '../protos/protos';
 export {protos};
