@@ -18,19 +18,11 @@
 
 /* global window */
 import type * as gax from 'google-gax';
-import type {
-  Callback,
-  CallOptions,
-  Descriptors,
-  ClientOptions,
-  IamClient,
-  IamProtos,
-  LocationsClient,
-  LocationProtos,
-} from 'google-gax';
+import type {Callback, CallOptions, Descriptors, ClientOptions, IamClient, IamProtos, LocationsClient, LocationProtos} from 'google-gax';
 import {PassThrough} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
+import {loggingUtils as logging} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -55,6 +47,8 @@ export class FeaturestoreOnlineServingServiceClient {
   private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
+  private _log = logging.log('aiplatform');
+
   auth: gax.GoogleAuth;
   descriptors: Descriptors = {
     page: {},
@@ -91,7 +85,7 @@ export class FeaturestoreOnlineServingServiceClient {
    *     Developer's Console, e.g. 'grape-spaceship-123'. We will also check
    *     the environment variable GCLOUD_PROJECT for your project ID. If your
    *     app is running in an environment which supports
-   *     {@link https://developers.google.com/identity/protocols/application-default-credentials Application Default Credentials},
+   *     {@link https://cloud.google.com/docs/authentication/application-default-credentials Application Default Credentials},
    *     your project ID will be detected automatically.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
@@ -108,42 +102,20 @@ export class FeaturestoreOnlineServingServiceClient {
    *     const client = new FeaturestoreOnlineServingServiceClient({fallback: true}, gax);
    *     ```
    */
-  constructor(
-    opts?: ClientOptions,
-    gaxInstance?: typeof gax | typeof gax.fallback
-  ) {
+  constructor(opts?: ClientOptions, gaxInstance?: typeof gax | typeof gax.fallback) {
     // Ensure that options include all the required fields.
-    const staticMembers = this
-      .constructor as typeof FeaturestoreOnlineServingServiceClient;
-    if (
-      opts?.universe_domain &&
-      opts?.universeDomain &&
-      opts?.universe_domain !== opts?.universeDomain
-    ) {
-      throw new Error(
-        'Please set either universe_domain or universeDomain, but not both.'
-      );
+    const staticMembers = this.constructor as typeof FeaturestoreOnlineServingServiceClient;
+    if (opts?.universe_domain && opts?.universeDomain && opts?.universe_domain !== opts?.universeDomain) {
+      throw new Error('Please set either universe_domain or universeDomain, but not both.');
     }
-    const universeDomainEnvVar =
-      typeof process === 'object' && typeof process.env === 'object'
-        ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN']
-        : undefined;
-    this._universeDomain =
-      opts?.universeDomain ??
-      opts?.universe_domain ??
-      universeDomainEnvVar ??
-      'googleapis.com';
+    const universeDomainEnvVar = (typeof process === 'object' && typeof process.env === 'object') ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] : undefined;
+    this._universeDomain = opts?.universeDomain ?? opts?.universe_domain ?? universeDomainEnvVar ?? 'googleapis.com';
     this._servicePath = 'aiplatform.' + this._universeDomain;
-    const servicePath =
-      opts?.servicePath || opts?.apiEndpoint || this._servicePath;
-    this._providedCustomServicePath = !!(
-      opts?.servicePath || opts?.apiEndpoint
-    );
+    const servicePath = opts?.servicePath || opts?.apiEndpoint || this._servicePath;
+    this._providedCustomServicePath = !!(opts?.servicePath || opts?.apiEndpoint);
     const port = opts?.port || staticMembers.port;
     const clientConfig = opts?.clientConfig ?? {};
-    const fallback =
-      opts?.fallback ??
-      (typeof window !== 'undefined' && typeof window?.fetch === 'function');
+    const fallback = opts?.fallback ?? (typeof window !== 'undefined' && typeof window?.fetch === 'function');
     opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
     // Request numeric enum values if REST transport is used.
@@ -169,7 +141,7 @@ export class FeaturestoreOnlineServingServiceClient {
     this._opts = opts;
 
     // Save the auth object to the client, for use by other methods.
-    this.auth = this._gaxGrpc.auth as gax.GoogleAuth;
+    this.auth = (this._gaxGrpc.auth as gax.GoogleAuth);
 
     // Set useJWTAccessWithScope on the auth object.
     this.auth.useJWTAccessWithScope = true;
@@ -182,14 +154,18 @@ export class FeaturestoreOnlineServingServiceClient {
       this.auth.defaultScopes = staticMembers.scopes;
     }
     this.iamClient = new this._gaxModule.IamClient(this._gaxGrpc, opts);
-
+  
     this.locationsClient = new this._gaxModule.LocationsClient(
       this._gaxGrpc,
       opts
     );
+  
 
     // Determine the client header string.
-    const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
+    const clientHeader = [
+      `gax/${this._gaxModule.version}`,
+      `gapic/${version}`,
+    ];
     if (typeof process === 'object' && 'versions' in process) {
       clientHeader.push(`gl-node/${process.versions.node}`);
     } else {
@@ -249,6 +225,9 @@ export class FeaturestoreOnlineServingServiceClient {
       entityTypePathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/featurestores/{featurestore}/entityTypes/{entity_type}'
       ),
+      exampleStorePathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/exampleStores/{example_store}'
+      ),
       executionPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/metadataStores/{metadata_store}/executions/{execution}'
       ),
@@ -294,10 +273,9 @@ export class FeaturestoreOnlineServingServiceClient {
       modelPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/models/{model}'
       ),
-      modelDeploymentMonitoringJobPathTemplate:
-        new this._gaxModule.PathTemplate(
-          'projects/{project}/locations/{location}/modelDeploymentMonitoringJobs/{model_deployment_monitoring_job}'
-        ),
+      modelDeploymentMonitoringJobPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/modelDeploymentMonitoringJobs/{model_deployment_monitoring_job}'
+      ),
       modelEvaluationPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/models/{model}/evaluations/{evaluation}'
       ),
@@ -334,18 +312,27 @@ export class FeaturestoreOnlineServingServiceClient {
       projectLocationEndpointPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/endpoints/{endpoint}'
       ),
-      projectLocationFeatureGroupFeaturePathTemplate:
-        new this._gaxModule.PathTemplate(
-          'projects/{project}/locations/{location}/featureGroups/{feature_group}/features/{feature}'
-        ),
-      projectLocationFeaturestoreEntityTypeFeaturePathTemplate:
-        new this._gaxModule.PathTemplate(
-          'projects/{project}/locations/{location}/featurestores/{featurestore}/entityTypes/{entity_type}/features/{feature}'
-        ),
-      projectLocationPublisherModelPathTemplate:
-        new this._gaxModule.PathTemplate(
-          'projects/{project}/locations/{location}/publishers/{publisher}/models/{model}'
-        ),
+      projectLocationFeatureGroupFeaturePathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/featureGroups/{feature_group}/features/{feature}'
+      ),
+      projectLocationFeaturestoreEntityTypeFeaturePathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/featurestores/{featurestore}/entityTypes/{entity_type}/features/{feature}'
+      ),
+      projectLocationPublisherModelPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/publishers/{publisher}/models/{model}'
+      ),
+      projectLocationReasoningEngineSessionPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/reasoningEngines/{reasoning_engine}/sessions/{session}'
+      ),
+      projectLocationReasoningEngineSessionEventPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/reasoningEngines/{reasoning_engine}/sessions/{session}/events/{event}'
+      ),
+      projectLocationSessionPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/sessions/{session}'
+      ),
+      projectLocationSessionEventPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/sessions/{session}/events/{event}'
+      ),
       publisherModelPathTemplate: new this._gaxModule.PathTemplate(
         'publishers/{publisher}/models/{model}'
       ),
@@ -396,20 +383,13 @@ export class FeaturestoreOnlineServingServiceClient {
     // Some of the methods on this service provide streaming responses.
     // Provide descriptors for these.
     this.descriptors.stream = {
-      streamingReadFeatureValues: new this._gaxModule.StreamDescriptor(
-        this._gaxModule.StreamType.SERVER_STREAMING,
-        !!opts.fallback,
-        !!opts.gaxServerStreamingRetries
-      ),
+      streamingReadFeatureValues: new this._gaxModule.StreamDescriptor(this._gaxModule.StreamType.SERVER_STREAMING, !!opts.fallback, !!opts.gaxServerStreamingRetries)
     };
 
     // Put together the default options sent with requests.
     this._defaults = this._gaxGrpc.constructSettings(
-      'google.cloud.aiplatform.v1beta1.FeaturestoreOnlineServingService',
-      gapicConfig as gax.ClientConfig,
-      opts.clientConfig || {},
-      {'x-goog-api-client': clientHeader.join(' ')}
-    );
+        'google.cloud.aiplatform.v1beta1.FeaturestoreOnlineServingService', gapicConfig as gax.ClientConfig,
+        opts.clientConfig || {}, {'x-goog-api-client': clientHeader.join(' ')});
 
     // Set up a dictionary of "inner API calls"; the core implementation
     // of calling the API is handled in `google-gax`, with this code
@@ -440,52 +420,39 @@ export class FeaturestoreOnlineServingServiceClient {
     // Put together the "service stub" for
     // google.cloud.aiplatform.v1beta1.FeaturestoreOnlineServingService.
     this.featurestoreOnlineServingServiceStub = this._gaxGrpc.createStub(
-      this._opts.fallback
-        ? (this._protos as protobuf.Root).lookupService(
-            'google.cloud.aiplatform.v1beta1.FeaturestoreOnlineServingService'
-          )
-        : // eslint-disable-next-line @typescript-eslint/no-explicit-any
-          (this._protos as any).google.cloud.aiplatform.v1beta1
-            .FeaturestoreOnlineServingService,
-      this._opts,
-      this._providedCustomServicePath
-    ) as Promise<{[method: string]: Function}>;
+        this._opts.fallback ?
+          (this._protos as protobuf.Root).lookupService('google.cloud.aiplatform.v1beta1.FeaturestoreOnlineServingService') :
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          (this._protos as any).google.cloud.aiplatform.v1beta1.FeaturestoreOnlineServingService,
+        this._opts, this._providedCustomServicePath) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    const featurestoreOnlineServingServiceStubMethods = [
-      'readFeatureValues',
-      'streamingReadFeatureValues',
-      'writeFeatureValues',
-    ];
+    const featurestoreOnlineServingServiceStubMethods =
+        ['readFeatureValues', 'streamingReadFeatureValues', 'writeFeatureValues'];
     for (const methodName of featurestoreOnlineServingServiceStubMethods) {
       const callPromise = this.featurestoreOnlineServingServiceStub.then(
-        stub =>
-          (...args: Array<{}>) => {
-            if (this._terminated) {
-              if (methodName in this.descriptors.stream) {
-                const stream = new PassThrough({objectMode: true});
-                setImmediate(() => {
-                  stream.emit(
-                    'error',
-                    new this._gaxModule.GoogleError(
-                      'The client has already been closed.'
-                    )
-                  );
-                });
-                return stream;
-              }
-              return Promise.reject('The client has already been closed.');
+        stub => (...args: Array<{}>) => {
+          if (this._terminated) {
+            if (methodName in this.descriptors.stream) {
+              const stream = new PassThrough({objectMode: true});
+              setImmediate(() => {
+                stream.emit('error', new this._gaxModule.GoogleError('The client has already been closed.'));
+              });
+              return stream;
             }
-            const func = stub[methodName];
-            return func.apply(stub, args);
-          },
-        (err: Error | null | undefined) => () => {
+            return Promise.reject('The client has already been closed.');
+          }
+          const func = stub[methodName];
+          return func.apply(stub, args);
+        },
+        (err: Error|null|undefined) => () => {
           throw err;
-        }
-      );
+        });
 
-      const descriptor = this.descriptors.stream[methodName] || undefined;
+      const descriptor =
+        this.descriptors.stream[methodName] ||
+        undefined;
       const apiCall = this._gaxModule.createApiCall(
         callPromise,
         this._defaults[methodName],
@@ -505,14 +472,8 @@ export class FeaturestoreOnlineServingServiceClient {
    * @returns {string} The DNS address for this service.
    */
   static get servicePath() {
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      process.emitWarning(
-        'Static servicePath is deprecated, please use the instance method instead.',
-        'DeprecationWarning'
-      );
+    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+      process.emitWarning('Static servicePath is deprecated, please use the instance method instead.', 'DeprecationWarning');
     }
     return 'aiplatform.googleapis.com';
   }
@@ -523,14 +484,8 @@ export class FeaturestoreOnlineServingServiceClient {
    * @returns {string} The DNS address for this service.
    */
   static get apiEndpoint() {
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      process.emitWarning(
-        'Static apiEndpoint is deprecated, please use the instance method instead.',
-        'DeprecationWarning'
-      );
+    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+      process.emitWarning('Static apiEndpoint is deprecated, please use the instance method instead.', 'DeprecationWarning');
     }
     return 'aiplatform.googleapis.com';
   }
@@ -561,7 +516,9 @@ export class FeaturestoreOnlineServingServiceClient {
    * @returns {string[]} List of default scopes.
    */
   static get scopes() {
-    return ['https://www.googleapis.com/auth/cloud-platform'];
+    return [
+      'https://www.googleapis.com/auth/cloud-platform'
+    ];
   }
 
   getProjectId(): Promise<string>;
@@ -570,9 +527,8 @@ export class FeaturestoreOnlineServingServiceClient {
    * Return the project ID used by this class.
    * @returns {Promise} A promise that resolves to string containing the project ID.
    */
-  getProjectId(
-    callback?: Callback<string, undefined, undefined>
-  ): Promise<string> | void {
+  getProjectId(callback?: Callback<string, undefined, undefined>):
+      Promise<string>|void {
     if (callback) {
       this.auth.getProjectId(callback);
       return;
@@ -583,294 +539,280 @@ export class FeaturestoreOnlineServingServiceClient {
   // -------------------
   // -- Service calls --
   // -------------------
-  /**
-   * Reads Feature values of a specific entity of an EntityType. For reading
-   * feature values of multiple entities of an EntityType, please use
-   * StreamingReadFeatureValues.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.entityType
-   *   Required. The resource name of the EntityType for the entity being read.
-   *   Value format:
-   *   `projects/{project}/locations/{location}/featurestores/{featurestore}/entityTypes/{entityType}`.
-   *   For example, for a machine learning model predicting user clicks on a
-   *   website, an EntityType ID could be `user`.
-   * @param {string} request.entityId
-   *   Required. ID for a specific entity. For example,
-   *   for a machine learning model predicting user clicks on a website, an entity
-   *   ID could be `user_123`.
-   * @param {google.cloud.aiplatform.v1beta1.FeatureSelector} request.featureSelector
-   *   Required. Selector choosing Features of the target EntityType.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.aiplatform.v1beta1.ReadFeatureValuesResponse|ReadFeatureValuesResponse}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta1/featurestore_online_serving_service.read_feature_values.js</caption>
-   * region_tag:aiplatform_v1beta1_generated_FeaturestoreOnlineServingService_ReadFeatureValues_async
-   */
+/**
+ * Reads Feature values of a specific entity of an EntityType. For reading
+ * feature values of multiple entities of an EntityType, please use
+ * StreamingReadFeatureValues.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.entityType
+ *   Required. The resource name of the EntityType for the entity being read.
+ *   Value format:
+ *   `projects/{project}/locations/{location}/featurestores/{featurestore}/entityTypes/{entityType}`.
+ *   For example, for a machine learning model predicting user clicks on a
+ *   website, an EntityType ID could be `user`.
+ * @param {string} request.entityId
+ *   Required. ID for a specific entity. For example,
+ *   for a machine learning model predicting user clicks on a website, an entity
+ *   ID could be `user_123`.
+ * @param {google.cloud.aiplatform.v1beta1.FeatureSelector} request.featureSelector
+ *   Required. Selector choosing Features of the target EntityType.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.aiplatform.v1beta1.ReadFeatureValuesResponse|ReadFeatureValuesResponse}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta1/featurestore_online_serving_service.read_feature_values.js</caption>
+ * region_tag:aiplatform_v1beta1_generated_FeaturestoreOnlineServingService_ReadFeatureValues_async
+ */
   readFeatureValues(
-    request?: protos.google.cloud.aiplatform.v1beta1.IReadFeatureValuesRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.aiplatform.v1beta1.IReadFeatureValuesResponse,
-      (
-        | protos.google.cloud.aiplatform.v1beta1.IReadFeatureValuesRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.aiplatform.v1beta1.IReadFeatureValuesRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.aiplatform.v1beta1.IReadFeatureValuesResponse,
+        protos.google.cloud.aiplatform.v1beta1.IReadFeatureValuesRequest|undefined, {}|undefined
+      ]>;
   readFeatureValues(
-    request: protos.google.cloud.aiplatform.v1beta1.IReadFeatureValuesRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.aiplatform.v1beta1.IReadFeatureValuesResponse,
-      | protos.google.cloud.aiplatform.v1beta1.IReadFeatureValuesRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  readFeatureValues(
-    request: protos.google.cloud.aiplatform.v1beta1.IReadFeatureValuesRequest,
-    callback: Callback<
-      protos.google.cloud.aiplatform.v1beta1.IReadFeatureValuesResponse,
-      | protos.google.cloud.aiplatform.v1beta1.IReadFeatureValuesRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  readFeatureValues(
-    request?: protos.google.cloud.aiplatform.v1beta1.IReadFeatureValuesRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.aiplatform.v1beta1.IReadFeatureValuesRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.aiplatform.v1beta1.IReadFeatureValuesResponse,
-          | protos.google.cloud.aiplatform.v1beta1.IReadFeatureValuesRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.aiplatform.v1beta1.IReadFeatureValuesResponse,
-      | protos.google.cloud.aiplatform.v1beta1.IReadFeatureValuesRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.aiplatform.v1beta1.IReadFeatureValuesResponse,
-      (
-        | protos.google.cloud.aiplatform.v1beta1.IReadFeatureValuesRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.aiplatform.v1beta1.IReadFeatureValuesRequest|null|undefined,
+          {}|null|undefined>): void;
+  readFeatureValues(
+      request: protos.google.cloud.aiplatform.v1beta1.IReadFeatureValuesRequest,
+      callback: Callback<
+          protos.google.cloud.aiplatform.v1beta1.IReadFeatureValuesResponse,
+          protos.google.cloud.aiplatform.v1beta1.IReadFeatureValuesRequest|null|undefined,
+          {}|null|undefined>): void;
+  readFeatureValues(
+      request?: protos.google.cloud.aiplatform.v1beta1.IReadFeatureValuesRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.aiplatform.v1beta1.IReadFeatureValuesResponse,
+          protos.google.cloud.aiplatform.v1beta1.IReadFeatureValuesRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.aiplatform.v1beta1.IReadFeatureValuesResponse,
+          protos.google.cloud.aiplatform.v1beta1.IReadFeatureValuesRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.aiplatform.v1beta1.IReadFeatureValuesResponse,
+        protos.google.cloud.aiplatform.v1beta1.IReadFeatureValuesRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        entity_type: request.entityType ?? '',
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'entity_type': request.entityType ?? '',
+    });
+    this.initialize().catch(err => {throw err});
+    this._log.info('readFeatureValues request %j', request);
+    const wrappedCallback: Callback<
+        protos.google.cloud.aiplatform.v1beta1.IReadFeatureValuesResponse,
+        protos.google.cloud.aiplatform.v1beta1.IReadFeatureValuesRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('readFeatureValues response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls.readFeatureValues(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.aiplatform.v1beta1.IReadFeatureValuesResponse,
+        protos.google.cloud.aiplatform.v1beta1.IReadFeatureValuesRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('readFeatureValues response %j', response);
+        return [response, options, rawResponse];
       });
-    this.initialize();
-    return this.innerApiCalls.readFeatureValues(request, options, callback);
   }
-  /**
-   * Writes Feature values of one or more entities of an EntityType.
-   *
-   * The Feature values are merged into existing entities if any. The Feature
-   * values to be written must have timestamp within the online storage
-   * retention.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.entityType
-   *   Required. The resource name of the EntityType for the entities being
-   *   written. Value format:
-   *   `projects/{project}/locations/{location}/featurestores/
-   *   {featurestore}/entityTypes/{entityType}`. For example,
-   *   for a machine learning model predicting user clicks on a website, an
-   *   EntityType ID could be `user`.
-   * @param {number[]} request.payloads
-   *   Required. The entities to be written. Up to 100,000 feature values can be
-   *   written across all `payloads`.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.aiplatform.v1beta1.WriteFeatureValuesResponse|WriteFeatureValuesResponse}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta1/featurestore_online_serving_service.write_feature_values.js</caption>
-   * region_tag:aiplatform_v1beta1_generated_FeaturestoreOnlineServingService_WriteFeatureValues_async
-   */
+/**
+ * Writes Feature values of one or more entities of an EntityType.
+ *
+ * The Feature values are merged into existing entities if any. The Feature
+ * values to be written must have timestamp within the online storage
+ * retention.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.entityType
+ *   Required. The resource name of the EntityType for the entities being
+ *   written. Value format:
+ *   `projects/{project}/locations/{location}/featurestores/
+ *   {featurestore}/entityTypes/{entityType}`. For example,
+ *   for a machine learning model predicting user clicks on a website, an
+ *   EntityType ID could be `user`.
+ * @param {number[]} request.payloads
+ *   Required. The entities to be written. Up to 100,000 feature values can be
+ *   written across all `payloads`.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.aiplatform.v1beta1.WriteFeatureValuesResponse|WriteFeatureValuesResponse}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta1/featurestore_online_serving_service.write_feature_values.js</caption>
+ * region_tag:aiplatform_v1beta1_generated_FeaturestoreOnlineServingService_WriteFeatureValues_async
+ */
   writeFeatureValues(
-    request?: protos.google.cloud.aiplatform.v1beta1.IWriteFeatureValuesRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.aiplatform.v1beta1.IWriteFeatureValuesResponse,
-      (
-        | protos.google.cloud.aiplatform.v1beta1.IWriteFeatureValuesRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.aiplatform.v1beta1.IWriteFeatureValuesRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.aiplatform.v1beta1.IWriteFeatureValuesResponse,
+        protos.google.cloud.aiplatform.v1beta1.IWriteFeatureValuesRequest|undefined, {}|undefined
+      ]>;
   writeFeatureValues(
-    request: protos.google.cloud.aiplatform.v1beta1.IWriteFeatureValuesRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.aiplatform.v1beta1.IWriteFeatureValuesResponse,
-      | protos.google.cloud.aiplatform.v1beta1.IWriteFeatureValuesRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  writeFeatureValues(
-    request: protos.google.cloud.aiplatform.v1beta1.IWriteFeatureValuesRequest,
-    callback: Callback<
-      protos.google.cloud.aiplatform.v1beta1.IWriteFeatureValuesResponse,
-      | protos.google.cloud.aiplatform.v1beta1.IWriteFeatureValuesRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  writeFeatureValues(
-    request?: protos.google.cloud.aiplatform.v1beta1.IWriteFeatureValuesRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.aiplatform.v1beta1.IWriteFeatureValuesRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.aiplatform.v1beta1.IWriteFeatureValuesResponse,
-          | protos.google.cloud.aiplatform.v1beta1.IWriteFeatureValuesRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.aiplatform.v1beta1.IWriteFeatureValuesResponse,
-      | protos.google.cloud.aiplatform.v1beta1.IWriteFeatureValuesRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.aiplatform.v1beta1.IWriteFeatureValuesResponse,
-      (
-        | protos.google.cloud.aiplatform.v1beta1.IWriteFeatureValuesRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.aiplatform.v1beta1.IWriteFeatureValuesRequest|null|undefined,
+          {}|null|undefined>): void;
+  writeFeatureValues(
+      request: protos.google.cloud.aiplatform.v1beta1.IWriteFeatureValuesRequest,
+      callback: Callback<
+          protos.google.cloud.aiplatform.v1beta1.IWriteFeatureValuesResponse,
+          protos.google.cloud.aiplatform.v1beta1.IWriteFeatureValuesRequest|null|undefined,
+          {}|null|undefined>): void;
+  writeFeatureValues(
+      request?: protos.google.cloud.aiplatform.v1beta1.IWriteFeatureValuesRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.aiplatform.v1beta1.IWriteFeatureValuesResponse,
+          protos.google.cloud.aiplatform.v1beta1.IWriteFeatureValuesRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.aiplatform.v1beta1.IWriteFeatureValuesResponse,
+          protos.google.cloud.aiplatform.v1beta1.IWriteFeatureValuesRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.aiplatform.v1beta1.IWriteFeatureValuesResponse,
+        protos.google.cloud.aiplatform.v1beta1.IWriteFeatureValuesRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        entity_type: request.entityType ?? '',
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'entity_type': request.entityType ?? '',
+    });
+    this.initialize().catch(err => {throw err});
+    this._log.info('writeFeatureValues request %j', request);
+    const wrappedCallback: Callback<
+        protos.google.cloud.aiplatform.v1beta1.IWriteFeatureValuesResponse,
+        protos.google.cloud.aiplatform.v1beta1.IWriteFeatureValuesRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('writeFeatureValues response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls.writeFeatureValues(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.aiplatform.v1beta1.IWriteFeatureValuesResponse,
+        protos.google.cloud.aiplatform.v1beta1.IWriteFeatureValuesRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('writeFeatureValues response %j', response);
+        return [response, options, rawResponse];
       });
-    this.initialize();
-    return this.innerApiCalls.writeFeatureValues(request, options, callback);
   }
 
-  /**
-   * Reads Feature values for multiple entities. Depending on their size, data
-   * for different entities may be broken
-   * up across multiple responses.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.entityType
-   *   Required. The resource name of the entities' type.
-   *   Value format:
-   *   `projects/{project}/locations/{location}/featurestores/{featurestore}/entityTypes/{entityType}`.
-   *   For example,
-   *   for a machine learning model predicting user clicks on a website, an
-   *   EntityType ID could be `user`.
-   * @param {string[]} request.entityIds
-   *   Required. IDs of entities to read Feature values of. The maximum number of
-   *   IDs is 100. For example, for a machine learning model predicting user
-   *   clicks on a website, an entity ID could be `user_123`.
-   * @param {google.cloud.aiplatform.v1beta1.FeatureSelector} request.featureSelector
-   *   Required. Selector choosing Features of the target EntityType. Feature IDs
-   *   will be deduplicated.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Stream}
-   *   An object stream which emits {@link protos.google.cloud.aiplatform.v1beta1.ReadFeatureValuesResponse|ReadFeatureValuesResponse} on 'data' event.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#server-streaming | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta1/featurestore_online_serving_service.streaming_read_feature_values.js</caption>
-   * region_tag:aiplatform_v1beta1_generated_FeaturestoreOnlineServingService_StreamingReadFeatureValues_async
-   */
+/**
+ * Reads Feature values for multiple entities. Depending on their size, data
+ * for different entities may be broken
+ * up across multiple responses.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.entityType
+ *   Required. The resource name of the entities' type.
+ *   Value format:
+ *   `projects/{project}/locations/{location}/featurestores/{featurestore}/entityTypes/{entityType}`.
+ *   For example,
+ *   for a machine learning model predicting user clicks on a website, an
+ *   EntityType ID could be `user`.
+ * @param {string[]} request.entityIds
+ *   Required. IDs of entities to read Feature values of. The maximum number of
+ *   IDs is 100. For example, for a machine learning model predicting user
+ *   clicks on a website, an entity ID could be `user_123`.
+ * @param {google.cloud.aiplatform.v1beta1.FeatureSelector} request.featureSelector
+ *   Required. Selector choosing Features of the target EntityType. Feature IDs
+ *   will be deduplicated.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which emits {@link protos.google.cloud.aiplatform.v1beta1.ReadFeatureValuesResponse|ReadFeatureValuesResponse} on 'data' event.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#server-streaming | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta1/featurestore_online_serving_service.streaming_read_feature_values.js</caption>
+ * region_tag:aiplatform_v1beta1_generated_FeaturestoreOnlineServingService_StreamingReadFeatureValues_async
+ */
   streamingReadFeatureValues(
-    request?: protos.google.cloud.aiplatform.v1beta1.IStreamingReadFeatureValuesRequest,
-    options?: CallOptions
-  ): gax.CancellableStream {
+      request?: protos.google.cloud.aiplatform.v1beta1.IStreamingReadFeatureValuesRequest,
+      options?: CallOptions):
+    gax.CancellableStream{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        entity_type: request.entityType ?? '',
-      });
-    this.initialize();
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'entity_type': request.entityType ?? '',
+    });
+    this.initialize().catch(err => {throw err});
+    this._log.info('streamingReadFeatureValues stream %j', options);
     return this.innerApiCalls.streamingReadFeatureValues(request, options);
   }
 
-  /**
-   * Gets the access control policy for a resource. Returns an empty policy
-   * if the resource exists and does not have a policy set.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.resource
-   *   REQUIRED: The resource for which the policy is being requested.
-   *   See the operation documentation for the appropriate value for this field.
-   * @param {Object} [request.options]
-   *   OPTIONAL: A `GetPolicyOptions` object for specifying options to
-   *   `GetIamPolicy`. This field is only used by Cloud IAM.
-   *
-   *   This object should have the same structure as {@link google.iam.v1.GetPolicyOptions | GetPolicyOptions}.
-   * @param {Object} [options]
-   *   Optional parameters. You can override the default settings for this call, e.g, timeout,
-   *   retries, paginations, etc. See {@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html | gax.CallOptions} for the details.
-   * @param {function(?Error, ?Object)} [callback]
-   *   The function which will be called with the result of the API call.
-   *
-   *   The second parameter to the callback is an object representing {@link google.iam.v1.Policy | Policy}.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.iam.v1.Policy | Policy}.
-   *   The promise has a method named "cancel" which cancels the ongoing API call.
-   */
+/**
+ * Gets the access control policy for a resource. Returns an empty policy
+ * if the resource exists and does not have a policy set.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.resource
+ *   REQUIRED: The resource for which the policy is being requested.
+ *   See the operation documentation for the appropriate value for this field.
+ * @param {Object} [request.options]
+ *   OPTIONAL: A `GetPolicyOptions` object for specifying options to
+ *   `GetIamPolicy`. This field is only used by Cloud IAM.
+ *
+ *   This object should have the same structure as {@link google.iam.v1.GetPolicyOptions | GetPolicyOptions}.
+ * @param {Object} [options]
+ *   Optional parameters. You can override the default settings for this call, e.g, timeout,
+ *   retries, paginations, etc. See {@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html | gax.CallOptions} for the details.
+ * @param {function(?Error, ?Object)} [callback]
+ *   The function which will be called with the result of the API call.
+ *
+ *   The second parameter to the callback is an object representing {@link google.iam.v1.Policy | Policy}.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link google.iam.v1.Policy | Policy}.
+ *   The promise has a method named "cancel" which cancels the ongoing API call.
+ */
   getIamPolicy(
     request: IamProtos.google.iam.v1.GetIamPolicyRequest,
     options?:
@@ -885,39 +827,39 @@ export class FeaturestoreOnlineServingServiceClient {
       IamProtos.google.iam.v1.GetIamPolicyRequest | null | undefined,
       {} | null | undefined
     >
-  ): Promise<[IamProtos.google.iam.v1.Policy]> {
+  ):Promise<[IamProtos.google.iam.v1.Policy]> {
     return this.iamClient.getIamPolicy(request, options, callback);
   }
 
-  /**
-   * Returns permissions that a caller has on the specified resource. If the
-   * resource does not exist, this will return an empty set of
-   * permissions, not a NOT_FOUND error.
-   *
-   * Note: This operation is designed to be used for building
-   * permission-aware UIs and command-line tools, not for authorization
-   * checking. This operation may "fail open" without warning.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.resource
-   *   REQUIRED: The resource for which the policy detail is being requested.
-   *   See the operation documentation for the appropriate value for this field.
-   * @param {string[]} request.permissions
-   *   The set of permissions to check for the `resource`. Permissions with
-   *   wildcards (such as '*' or 'storage.*') are not allowed. For more
-   *   information see {@link https://cloud.google.com/iam/docs/overview#permissions | IAM Overview }.
-   * @param {Object} [options]
-   *   Optional parameters. You can override the default settings for this call, e.g, timeout,
-   *   retries, paginations, etc. See {@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html | gax.CallOptions} for the details.
-   * @param {function(?Error, ?Object)} [callback]
-   *   The function which will be called with the result of the API call.
-   *
-   *   The second parameter to the callback is an object representing {@link google.iam.v1.TestIamPermissionsResponse | TestIamPermissionsResponse}.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.iam.v1.TestIamPermissionsResponse | TestIamPermissionsResponse}.
-   *   The promise has a method named "cancel" which cancels the ongoing API call.
-   */
+/**
+ * Returns permissions that a caller has on the specified resource. If the
+ * resource does not exist, this will return an empty set of
+ * permissions, not a NOT_FOUND error.
+ *
+ * Note: This operation is designed to be used for building
+ * permission-aware UIs and command-line tools, not for authorization
+ * checking. This operation may "fail open" without warning.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.resource
+ *   REQUIRED: The resource for which the policy detail is being requested.
+ *   See the operation documentation for the appropriate value for this field.
+ * @param {string[]} request.permissions
+ *   The set of permissions to check for the `resource`. Permissions with
+ *   wildcards (such as '*' or 'storage.*') are not allowed. For more
+ *   information see {@link https://cloud.google.com/iam/docs/overview#permissions | IAM Overview }.
+ * @param {Object} [options]
+ *   Optional parameters. You can override the default settings for this call, e.g, timeout,
+ *   retries, paginations, etc. See {@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html | gax.CallOptions} for the details.
+ * @param {function(?Error, ?Object)} [callback]
+ *   The function which will be called with the result of the API call.
+ *
+ *   The second parameter to the callback is an object representing {@link google.iam.v1.TestIamPermissionsResponse | TestIamPermissionsResponse}.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link google.iam.v1.TestIamPermissionsResponse | TestIamPermissionsResponse}.
+ *   The promise has a method named "cancel" which cancels the ongoing API call.
+ */
   setIamPolicy(
     request: IamProtos.google.iam.v1.SetIamPolicyRequest,
     options?:
@@ -932,40 +874,40 @@ export class FeaturestoreOnlineServingServiceClient {
       IamProtos.google.iam.v1.SetIamPolicyRequest | null | undefined,
       {} | null | undefined
     >
-  ): Promise<[IamProtos.google.iam.v1.Policy]> {
+  ):Promise<[IamProtos.google.iam.v1.Policy]> {
     return this.iamClient.setIamPolicy(request, options, callback);
   }
 
-  /**
-   * Returns permissions that a caller has on the specified resource. If the
-   * resource does not exist, this will return an empty set of
-   * permissions, not a NOT_FOUND error.
-   *
-   * Note: This operation is designed to be used for building
-   * permission-aware UIs and command-line tools, not for authorization
-   * checking. This operation may "fail open" without warning.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.resource
-   *   REQUIRED: The resource for which the policy detail is being requested.
-   *   See the operation documentation for the appropriate value for this field.
-   * @param {string[]} request.permissions
-   *   The set of permissions to check for the `resource`. Permissions with
-   *   wildcards (such as '*' or 'storage.*') are not allowed. For more
-   *   information see {@link https://cloud.google.com/iam/docs/overview#permissions | IAM Overview }.
-   * @param {Object} [options]
-   *   Optional parameters. You can override the default settings for this call, e.g, timeout,
-   *   retries, paginations, etc. See {@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html | gax.CallOptions} for the details.
-   * @param {function(?Error, ?Object)} [callback]
-   *   The function which will be called with the result of the API call.
-   *
-   *   The second parameter to the callback is an object representing {@link google.iam.v1.TestIamPermissionsResponse | TestIamPermissionsResponse}.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.iam.v1.TestIamPermissionsResponse | TestIamPermissionsResponse}.
-   *   The promise has a method named "cancel" which cancels the ongoing API call.
-   *
-   */
+/**
+ * Returns permissions that a caller has on the specified resource. If the
+ * resource does not exist, this will return an empty set of
+ * permissions, not a NOT_FOUND error.
+ *
+ * Note: This operation is designed to be used for building
+ * permission-aware UIs and command-line tools, not for authorization
+ * checking. This operation may "fail open" without warning.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.resource
+ *   REQUIRED: The resource for which the policy detail is being requested.
+ *   See the operation documentation for the appropriate value for this field.
+ * @param {string[]} request.permissions
+ *   The set of permissions to check for the `resource`. Permissions with
+ *   wildcards (such as '*' or 'storage.*') are not allowed. For more
+ *   information see {@link https://cloud.google.com/iam/docs/overview#permissions | IAM Overview }.
+ * @param {Object} [options]
+ *   Optional parameters. You can override the default settings for this call, e.g, timeout,
+ *   retries, paginations, etc. See {@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html | gax.CallOptions} for the details.
+ * @param {function(?Error, ?Object)} [callback]
+ *   The function which will be called with the result of the API call.
+ *
+ *   The second parameter to the callback is an object representing {@link google.iam.v1.TestIamPermissionsResponse | TestIamPermissionsResponse}.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link google.iam.v1.TestIamPermissionsResponse | TestIamPermissionsResponse}.
+ *   The promise has a method named "cancel" which cancels the ongoing API call.
+ *
+ */
   testIamPermissions(
     request: IamProtos.google.iam.v1.TestIamPermissionsRequest,
     options?:
@@ -980,11 +922,11 @@ export class FeaturestoreOnlineServingServiceClient {
       IamProtos.google.iam.v1.TestIamPermissionsRequest | null | undefined,
       {} | null | undefined
     >
-  ): Promise<[IamProtos.google.iam.v1.TestIamPermissionsResponse]> {
+  ):Promise<[IamProtos.google.iam.v1.TestIamPermissionsResponse]> {
     return this.iamClient.testIamPermissions(request, options, callback);
   }
 
-  /**
+/**
    * Gets information about a location.
    *
    * @param {Object} request
@@ -1024,7 +966,7 @@ export class FeaturestoreOnlineServingServiceClient {
     return this.locationsClient.getLocation(request, options, callback);
   }
 
-  /**
+/**
    * Lists information about the supported locations for this service. Returns an iterable object.
    *
    * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
@@ -1076,13 +1018,7 @@ export class FeaturestoreOnlineServingServiceClient {
    * @param {string} annotation
    * @returns {string} Resource name string.
    */
-  annotationPath(
-    project: string,
-    location: string,
-    dataset: string,
-    dataItem: string,
-    annotation: string
-  ) {
+  annotationPath(project:string,location:string,dataset:string,dataItem:string,annotation:string) {
     return this.pathTemplates.annotationPathTemplate.render({
       project: project,
       location: location,
@@ -1100,8 +1036,7 @@ export class FeaturestoreOnlineServingServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromAnnotationName(annotationName: string) {
-    return this.pathTemplates.annotationPathTemplate.match(annotationName)
-      .project;
+    return this.pathTemplates.annotationPathTemplate.match(annotationName).project;
   }
 
   /**
@@ -1112,8 +1047,7 @@ export class FeaturestoreOnlineServingServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromAnnotationName(annotationName: string) {
-    return this.pathTemplates.annotationPathTemplate.match(annotationName)
-      .location;
+    return this.pathTemplates.annotationPathTemplate.match(annotationName).location;
   }
 
   /**
@@ -1124,8 +1058,7 @@ export class FeaturestoreOnlineServingServiceClient {
    * @returns {string} A string representing the dataset.
    */
   matchDatasetFromAnnotationName(annotationName: string) {
-    return this.pathTemplates.annotationPathTemplate.match(annotationName)
-      .dataset;
+    return this.pathTemplates.annotationPathTemplate.match(annotationName).dataset;
   }
 
   /**
@@ -1136,8 +1069,7 @@ export class FeaturestoreOnlineServingServiceClient {
    * @returns {string} A string representing the data_item.
    */
   matchDataItemFromAnnotationName(annotationName: string) {
-    return this.pathTemplates.annotationPathTemplate.match(annotationName)
-      .data_item;
+    return this.pathTemplates.annotationPathTemplate.match(annotationName).data_item;
   }
 
   /**
@@ -1148,8 +1080,7 @@ export class FeaturestoreOnlineServingServiceClient {
    * @returns {string} A string representing the annotation.
    */
   matchAnnotationFromAnnotationName(annotationName: string) {
-    return this.pathTemplates.annotationPathTemplate.match(annotationName)
-      .annotation;
+    return this.pathTemplates.annotationPathTemplate.match(annotationName).annotation;
   }
 
   /**
@@ -1161,12 +1092,7 @@ export class FeaturestoreOnlineServingServiceClient {
    * @param {string} annotation_spec
    * @returns {string} Resource name string.
    */
-  annotationSpecPath(
-    project: string,
-    location: string,
-    dataset: string,
-    annotationSpec: string
-  ) {
+  annotationSpecPath(project:string,location:string,dataset:string,annotationSpec:string) {
     return this.pathTemplates.annotationSpecPathTemplate.render({
       project: project,
       location: location,
@@ -1183,9 +1109,7 @@ export class FeaturestoreOnlineServingServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromAnnotationSpecName(annotationSpecName: string) {
-    return this.pathTemplates.annotationSpecPathTemplate.match(
-      annotationSpecName
-    ).project;
+    return this.pathTemplates.annotationSpecPathTemplate.match(annotationSpecName).project;
   }
 
   /**
@@ -1196,9 +1120,7 @@ export class FeaturestoreOnlineServingServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromAnnotationSpecName(annotationSpecName: string) {
-    return this.pathTemplates.annotationSpecPathTemplate.match(
-      annotationSpecName
-    ).location;
+    return this.pathTemplates.annotationSpecPathTemplate.match(annotationSpecName).location;
   }
 
   /**
@@ -1209,9 +1131,7 @@ export class FeaturestoreOnlineServingServiceClient {
    * @returns {string} A string representing the dataset.
    */
   matchDatasetFromAnnotationSpecName(annotationSpecName: string) {
-    return this.pathTemplates.annotationSpecPathTemplate.match(
-      annotationSpecName
-    ).dataset;
+    return this.pathTemplates.annotationSpecPathTemplate.match(annotationSpecName).dataset;
   }
 
   /**
@@ -1222,9 +1142,7 @@ export class FeaturestoreOnlineServingServiceClient {
    * @returns {string} A string representing the annotation_spec.
    */
   matchAnnotationSpecFromAnnotationSpecName(annotationSpecName: string) {
-    return this.pathTemplates.annotationSpecPathTemplate.match(
-      annotationSpecName
-    ).annotation_spec;
+    return this.pathTemplates.annotationSpecPathTemplate.match(annotationSpecName).annotation_spec;
   }
 
   /**
@@ -1236,12 +1154,7 @@ export class FeaturestoreOnlineServingServiceClient {
    * @param {string} artifact
    * @returns {string} Resource name string.
    */
-  artifactPath(
-    project: string,
-    location: string,
-    metadataStore: string,
-    artifact: string
-  ) {
+  artifactPath(project:string,location:string,metadataStore:string,artifact:string) {
     return this.pathTemplates.artifactPathTemplate.render({
       project: project,
       location: location,
@@ -1280,8 +1193,7 @@ export class FeaturestoreOnlineServingServiceClient {
    * @returns {string} A string representing the metadata_store.
    */
   matchMetadataStoreFromArtifactName(artifactName: string) {
-    return this.pathTemplates.artifactPathTemplate.match(artifactName)
-      .metadata_store;
+    return this.pathTemplates.artifactPathTemplate.match(artifactName).metadata_store;
   }
 
   /**
@@ -1303,11 +1215,7 @@ export class FeaturestoreOnlineServingServiceClient {
    * @param {string} batch_prediction_job
    * @returns {string} Resource name string.
    */
-  batchPredictionJobPath(
-    project: string,
-    location: string,
-    batchPredictionJob: string
-  ) {
+  batchPredictionJobPath(project:string,location:string,batchPredictionJob:string) {
     return this.pathTemplates.batchPredictionJobPathTemplate.render({
       project: project,
       location: location,
@@ -1323,9 +1231,7 @@ export class FeaturestoreOnlineServingServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromBatchPredictionJobName(batchPredictionJobName: string) {
-    return this.pathTemplates.batchPredictionJobPathTemplate.match(
-      batchPredictionJobName
-    ).project;
+    return this.pathTemplates.batchPredictionJobPathTemplate.match(batchPredictionJobName).project;
   }
 
   /**
@@ -1336,9 +1242,7 @@ export class FeaturestoreOnlineServingServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromBatchPredictionJobName(batchPredictionJobName: string) {
-    return this.pathTemplates.batchPredictionJobPathTemplate.match(
-      batchPredictionJobName
-    ).location;
+    return this.pathTemplates.batchPredictionJobPathTemplate.match(batchPredictionJobName).location;
   }
 
   /**
@@ -1348,12 +1252,8 @@ export class FeaturestoreOnlineServingServiceClient {
    *   A fully-qualified path representing BatchPredictionJob resource.
    * @returns {string} A string representing the batch_prediction_job.
    */
-  matchBatchPredictionJobFromBatchPredictionJobName(
-    batchPredictionJobName: string
-  ) {
-    return this.pathTemplates.batchPredictionJobPathTemplate.match(
-      batchPredictionJobName
-    ).batch_prediction_job;
+  matchBatchPredictionJobFromBatchPredictionJobName(batchPredictionJobName: string) {
+    return this.pathTemplates.batchPredictionJobPathTemplate.match(batchPredictionJobName).batch_prediction_job;
   }
 
   /**
@@ -1364,7 +1264,7 @@ export class FeaturestoreOnlineServingServiceClient {
    * @param {string} cached_content
    * @returns {string} Resource name string.
    */
-  cachedContentPath(project: string, location: string, cachedContent: string) {
+  cachedContentPath(project:string,location:string,cachedContent:string) {
     return this.pathTemplates.cachedContentPathTemplate.render({
       project: project,
       location: location,
@@ -1380,8 +1280,7 @@ export class FeaturestoreOnlineServingServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromCachedContentName(cachedContentName: string) {
-    return this.pathTemplates.cachedContentPathTemplate.match(cachedContentName)
-      .project;
+    return this.pathTemplates.cachedContentPathTemplate.match(cachedContentName).project;
   }
 
   /**
@@ -1392,8 +1291,7 @@ export class FeaturestoreOnlineServingServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromCachedContentName(cachedContentName: string) {
-    return this.pathTemplates.cachedContentPathTemplate.match(cachedContentName)
-      .location;
+    return this.pathTemplates.cachedContentPathTemplate.match(cachedContentName).location;
   }
 
   /**
@@ -1404,8 +1302,7 @@ export class FeaturestoreOnlineServingServiceClient {
    * @returns {string} A string representing the cached_content.
    */
   matchCachedContentFromCachedContentName(cachedContentName: string) {
-    return this.pathTemplates.cachedContentPathTemplate.match(cachedContentName)
-      .cached_content;
+    return this.pathTemplates.cachedContentPathTemplate.match(cachedContentName).cached_content;
   }
 
   /**
@@ -1417,12 +1314,7 @@ export class FeaturestoreOnlineServingServiceClient {
    * @param {string} context
    * @returns {string} Resource name string.
    */
-  contextPath(
-    project: string,
-    location: string,
-    metadataStore: string,
-    context: string
-  ) {
+  contextPath(project:string,location:string,metadataStore:string,context:string) {
     return this.pathTemplates.contextPathTemplate.render({
       project: project,
       location: location,
@@ -1461,8 +1353,7 @@ export class FeaturestoreOnlineServingServiceClient {
    * @returns {string} A string representing the metadata_store.
    */
   matchMetadataStoreFromContextName(contextName: string) {
-    return this.pathTemplates.contextPathTemplate.match(contextName)
-      .metadata_store;
+    return this.pathTemplates.contextPathTemplate.match(contextName).metadata_store;
   }
 
   /**
@@ -1484,7 +1375,7 @@ export class FeaturestoreOnlineServingServiceClient {
    * @param {string} custom_job
    * @returns {string} Resource name string.
    */
-  customJobPath(project: string, location: string, customJob: string) {
+  customJobPath(project:string,location:string,customJob:string) {
     return this.pathTemplates.customJobPathTemplate.render({
       project: project,
       location: location,
@@ -1500,8 +1391,7 @@ export class FeaturestoreOnlineServingServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromCustomJobName(customJobName: string) {
-    return this.pathTemplates.customJobPathTemplate.match(customJobName)
-      .project;
+    return this.pathTemplates.customJobPathTemplate.match(customJobName).project;
   }
 
   /**
@@ -1512,8 +1402,7 @@ export class FeaturestoreOnlineServingServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromCustomJobName(customJobName: string) {
-    return this.pathTemplates.customJobPathTemplate.match(customJobName)
-      .location;
+    return this.pathTemplates.customJobPathTemplate.match(customJobName).location;
   }
 
   /**
@@ -1524,8 +1413,7 @@ export class FeaturestoreOnlineServingServiceClient {
    * @returns {string} A string representing the custom_job.
    */
   matchCustomJobFromCustomJobName(customJobName: string) {
-    return this.pathTemplates.customJobPathTemplate.match(customJobName)
-      .custom_job;
+    return this.pathTemplates.customJobPathTemplate.match(customJobName).custom_job;
   }
 
   /**
@@ -1537,12 +1425,7 @@ export class FeaturestoreOnlineServingServiceClient {
    * @param {string} data_item
    * @returns {string} Resource name string.
    */
-  dataItemPath(
-    project: string,
-    location: string,
-    dataset: string,
-    dataItem: string
-  ) {
+  dataItemPath(project:string,location:string,dataset:string,dataItem:string) {
     return this.pathTemplates.dataItemPathTemplate.render({
       project: project,
       location: location,
@@ -1592,8 +1475,7 @@ export class FeaturestoreOnlineServingServiceClient {
    * @returns {string} A string representing the data_item.
    */
   matchDataItemFromDataItemName(dataItemName: string) {
-    return this.pathTemplates.dataItemPathTemplate.match(dataItemName)
-      .data_item;
+    return this.pathTemplates.dataItemPathTemplate.match(dataItemName).data_item;
   }
 
   /**
@@ -1604,11 +1486,7 @@ export class FeaturestoreOnlineServingServiceClient {
    * @param {string} data_labeling_job
    * @returns {string} Resource name string.
    */
-  dataLabelingJobPath(
-    project: string,
-    location: string,
-    dataLabelingJob: string
-  ) {
+  dataLabelingJobPath(project:string,location:string,dataLabelingJob:string) {
     return this.pathTemplates.dataLabelingJobPathTemplate.render({
       project: project,
       location: location,
@@ -1624,9 +1502,7 @@ export class FeaturestoreOnlineServingServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromDataLabelingJobName(dataLabelingJobName: string) {
-    return this.pathTemplates.dataLabelingJobPathTemplate.match(
-      dataLabelingJobName
-    ).project;
+    return this.pathTemplates.dataLabelingJobPathTemplate.match(dataLabelingJobName).project;
   }
 
   /**
@@ -1637,9 +1513,7 @@ export class FeaturestoreOnlineServingServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromDataLabelingJobName(dataLabelingJobName: string) {
-    return this.pathTemplates.dataLabelingJobPathTemplate.match(
-      dataLabelingJobName
-    ).location;
+    return this.pathTemplates.dataLabelingJobPathTemplate.match(dataLabelingJobName).location;
   }
 
   /**
@@ -1650,9 +1524,7 @@ export class FeaturestoreOnlineServingServiceClient {
    * @returns {string} A string representing the data_labeling_job.
    */
   matchDataLabelingJobFromDataLabelingJobName(dataLabelingJobName: string) {
-    return this.pathTemplates.dataLabelingJobPathTemplate.match(
-      dataLabelingJobName
-    ).data_labeling_job;
+    return this.pathTemplates.dataLabelingJobPathTemplate.match(dataLabelingJobName).data_labeling_job;
   }
 
   /**
@@ -1663,7 +1535,7 @@ export class FeaturestoreOnlineServingServiceClient {
    * @param {string} dataset
    * @returns {string} Resource name string.
    */
-  datasetPath(project: string, location: string, dataset: string) {
+  datasetPath(project:string,location:string,dataset:string) {
     return this.pathTemplates.datasetPathTemplate.render({
       project: project,
       location: location,
@@ -1713,12 +1585,7 @@ export class FeaturestoreOnlineServingServiceClient {
    * @param {string} dataset_version
    * @returns {string} Resource name string.
    */
-  datasetVersionPath(
-    project: string,
-    location: string,
-    dataset: string,
-    datasetVersion: string
-  ) {
+  datasetVersionPath(project:string,location:string,dataset:string,datasetVersion:string) {
     return this.pathTemplates.datasetVersionPathTemplate.render({
       project: project,
       location: location,
@@ -1735,9 +1602,7 @@ export class FeaturestoreOnlineServingServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromDatasetVersionName(datasetVersionName: string) {
-    return this.pathTemplates.datasetVersionPathTemplate.match(
-      datasetVersionName
-    ).project;
+    return this.pathTemplates.datasetVersionPathTemplate.match(datasetVersionName).project;
   }
 
   /**
@@ -1748,9 +1613,7 @@ export class FeaturestoreOnlineServingServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromDatasetVersionName(datasetVersionName: string) {
-    return this.pathTemplates.datasetVersionPathTemplate.match(
-      datasetVersionName
-    ).location;
+    return this.pathTemplates.datasetVersionPathTemplate.match(datasetVersionName).location;
   }
 
   /**
@@ -1761,9 +1624,7 @@ export class FeaturestoreOnlineServingServiceClient {
    * @returns {string} A string representing the dataset.
    */
   matchDatasetFromDatasetVersionName(datasetVersionName: string) {
-    return this.pathTemplates.datasetVersionPathTemplate.match(
-      datasetVersionName
-    ).dataset;
+    return this.pathTemplates.datasetVersionPathTemplate.match(datasetVersionName).dataset;
   }
 
   /**
@@ -1774,9 +1635,7 @@ export class FeaturestoreOnlineServingServiceClient {
    * @returns {string} A string representing the dataset_version.
    */
   matchDatasetVersionFromDatasetVersionName(datasetVersionName: string) {
-    return this.pathTemplates.datasetVersionPathTemplate.match(
-      datasetVersionName
-    ).dataset_version;
+    return this.pathTemplates.datasetVersionPathTemplate.match(datasetVersionName).dataset_version;
   }
 
   /**
@@ -1787,11 +1646,7 @@ export class FeaturestoreOnlineServingServiceClient {
    * @param {string} deployment_resource_pool
    * @returns {string} Resource name string.
    */
-  deploymentResourcePoolPath(
-    project: string,
-    location: string,
-    deploymentResourcePool: string
-  ) {
+  deploymentResourcePoolPath(project:string,location:string,deploymentResourcePool:string) {
     return this.pathTemplates.deploymentResourcePoolPathTemplate.render({
       project: project,
       location: location,
@@ -1806,12 +1661,8 @@ export class FeaturestoreOnlineServingServiceClient {
    *   A fully-qualified path representing DeploymentResourcePool resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromDeploymentResourcePoolName(
-    deploymentResourcePoolName: string
-  ) {
-    return this.pathTemplates.deploymentResourcePoolPathTemplate.match(
-      deploymentResourcePoolName
-    ).project;
+  matchProjectFromDeploymentResourcePoolName(deploymentResourcePoolName: string) {
+    return this.pathTemplates.deploymentResourcePoolPathTemplate.match(deploymentResourcePoolName).project;
   }
 
   /**
@@ -1821,12 +1672,8 @@ export class FeaturestoreOnlineServingServiceClient {
    *   A fully-qualified path representing DeploymentResourcePool resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromDeploymentResourcePoolName(
-    deploymentResourcePoolName: string
-  ) {
-    return this.pathTemplates.deploymentResourcePoolPathTemplate.match(
-      deploymentResourcePoolName
-    ).location;
+  matchLocationFromDeploymentResourcePoolName(deploymentResourcePoolName: string) {
+    return this.pathTemplates.deploymentResourcePoolPathTemplate.match(deploymentResourcePoolName).location;
   }
 
   /**
@@ -1836,12 +1683,8 @@ export class FeaturestoreOnlineServingServiceClient {
    *   A fully-qualified path representing DeploymentResourcePool resource.
    * @returns {string} A string representing the deployment_resource_pool.
    */
-  matchDeploymentResourcePoolFromDeploymentResourcePoolName(
-    deploymentResourcePoolName: string
-  ) {
-    return this.pathTemplates.deploymentResourcePoolPathTemplate.match(
-      deploymentResourcePoolName
-    ).deployment_resource_pool;
+  matchDeploymentResourcePoolFromDeploymentResourcePoolName(deploymentResourcePoolName: string) {
+    return this.pathTemplates.deploymentResourcePoolPathTemplate.match(deploymentResourcePoolName).deployment_resource_pool;
   }
 
   /**
@@ -1853,12 +1696,7 @@ export class FeaturestoreOnlineServingServiceClient {
    * @param {string} entity_type
    * @returns {string} Resource name string.
    */
-  entityTypePath(
-    project: string,
-    location: string,
-    featurestore: string,
-    entityType: string
-  ) {
+  entityTypePath(project:string,location:string,featurestore:string,entityType:string) {
     return this.pathTemplates.entityTypePathTemplate.render({
       project: project,
       location: location,
@@ -1875,8 +1713,7 @@ export class FeaturestoreOnlineServingServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromEntityTypeName(entityTypeName: string) {
-    return this.pathTemplates.entityTypePathTemplate.match(entityTypeName)
-      .project;
+    return this.pathTemplates.entityTypePathTemplate.match(entityTypeName).project;
   }
 
   /**
@@ -1887,8 +1724,7 @@ export class FeaturestoreOnlineServingServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromEntityTypeName(entityTypeName: string) {
-    return this.pathTemplates.entityTypePathTemplate.match(entityTypeName)
-      .location;
+    return this.pathTemplates.entityTypePathTemplate.match(entityTypeName).location;
   }
 
   /**
@@ -1899,8 +1735,7 @@ export class FeaturestoreOnlineServingServiceClient {
    * @returns {string} A string representing the featurestore.
    */
   matchFeaturestoreFromEntityTypeName(entityTypeName: string) {
-    return this.pathTemplates.entityTypePathTemplate.match(entityTypeName)
-      .featurestore;
+    return this.pathTemplates.entityTypePathTemplate.match(entityTypeName).featurestore;
   }
 
   /**
@@ -1911,8 +1746,56 @@ export class FeaturestoreOnlineServingServiceClient {
    * @returns {string} A string representing the entity_type.
    */
   matchEntityTypeFromEntityTypeName(entityTypeName: string) {
-    return this.pathTemplates.entityTypePathTemplate.match(entityTypeName)
-      .entity_type;
+    return this.pathTemplates.entityTypePathTemplate.match(entityTypeName).entity_type;
+  }
+
+  /**
+   * Return a fully-qualified exampleStore resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} example_store
+   * @returns {string} Resource name string.
+   */
+  exampleStorePath(project:string,location:string,exampleStore:string) {
+    return this.pathTemplates.exampleStorePathTemplate.render({
+      project: project,
+      location: location,
+      example_store: exampleStore,
+    });
+  }
+
+  /**
+   * Parse the project from ExampleStore resource.
+   *
+   * @param {string} exampleStoreName
+   *   A fully-qualified path representing ExampleStore resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromExampleStoreName(exampleStoreName: string) {
+    return this.pathTemplates.exampleStorePathTemplate.match(exampleStoreName).project;
+  }
+
+  /**
+   * Parse the location from ExampleStore resource.
+   *
+   * @param {string} exampleStoreName
+   *   A fully-qualified path representing ExampleStore resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromExampleStoreName(exampleStoreName: string) {
+    return this.pathTemplates.exampleStorePathTemplate.match(exampleStoreName).location;
+  }
+
+  /**
+   * Parse the example_store from ExampleStore resource.
+   *
+   * @param {string} exampleStoreName
+   *   A fully-qualified path representing ExampleStore resource.
+   * @returns {string} A string representing the example_store.
+   */
+  matchExampleStoreFromExampleStoreName(exampleStoreName: string) {
+    return this.pathTemplates.exampleStorePathTemplate.match(exampleStoreName).example_store;
   }
 
   /**
@@ -1924,12 +1807,7 @@ export class FeaturestoreOnlineServingServiceClient {
    * @param {string} execution
    * @returns {string} Resource name string.
    */
-  executionPath(
-    project: string,
-    location: string,
-    metadataStore: string,
-    execution: string
-  ) {
+  executionPath(project:string,location:string,metadataStore:string,execution:string) {
     return this.pathTemplates.executionPathTemplate.render({
       project: project,
       location: location,
@@ -1946,8 +1824,7 @@ export class FeaturestoreOnlineServingServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromExecutionName(executionName: string) {
-    return this.pathTemplates.executionPathTemplate.match(executionName)
-      .project;
+    return this.pathTemplates.executionPathTemplate.match(executionName).project;
   }
 
   /**
@@ -1958,8 +1835,7 @@ export class FeaturestoreOnlineServingServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromExecutionName(executionName: string) {
-    return this.pathTemplates.executionPathTemplate.match(executionName)
-      .location;
+    return this.pathTemplates.executionPathTemplate.match(executionName).location;
   }
 
   /**
@@ -1970,8 +1846,7 @@ export class FeaturestoreOnlineServingServiceClient {
    * @returns {string} A string representing the metadata_store.
    */
   matchMetadataStoreFromExecutionName(executionName: string) {
-    return this.pathTemplates.executionPathTemplate.match(executionName)
-      .metadata_store;
+    return this.pathTemplates.executionPathTemplate.match(executionName).metadata_store;
   }
 
   /**
@@ -1982,8 +1857,7 @@ export class FeaturestoreOnlineServingServiceClient {
    * @returns {string} A string representing the execution.
    */
   matchExecutionFromExecutionName(executionName: string) {
-    return this.pathTemplates.executionPathTemplate.match(executionName)
-      .execution;
+    return this.pathTemplates.executionPathTemplate.match(executionName).execution;
   }
 
   /**
@@ -1994,7 +1868,7 @@ export class FeaturestoreOnlineServingServiceClient {
    * @param {string} extension
    * @returns {string} Resource name string.
    */
-  extensionPath(project: string, location: string, extension: string) {
+  extensionPath(project:string,location:string,extension:string) {
     return this.pathTemplates.extensionPathTemplate.render({
       project: project,
       location: location,
@@ -2010,8 +1884,7 @@ export class FeaturestoreOnlineServingServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromExtensionName(extensionName: string) {
-    return this.pathTemplates.extensionPathTemplate.match(extensionName)
-      .project;
+    return this.pathTemplates.extensionPathTemplate.match(extensionName).project;
   }
 
   /**
@@ -2022,8 +1895,7 @@ export class FeaturestoreOnlineServingServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromExtensionName(extensionName: string) {
-    return this.pathTemplates.extensionPathTemplate.match(extensionName)
-      .location;
+    return this.pathTemplates.extensionPathTemplate.match(extensionName).location;
   }
 
   /**
@@ -2034,8 +1906,7 @@ export class FeaturestoreOnlineServingServiceClient {
    * @returns {string} A string representing the extension.
    */
   matchExtensionFromExtensionName(extensionName: string) {
-    return this.pathTemplates.extensionPathTemplate.match(extensionName)
-      .extension;
+    return this.pathTemplates.extensionPathTemplate.match(extensionName).extension;
   }
 
   /**
@@ -2046,7 +1917,7 @@ export class FeaturestoreOnlineServingServiceClient {
    * @param {string} feature_group
    * @returns {string} Resource name string.
    */
-  featureGroupPath(project: string, location: string, featureGroup: string) {
+  featureGroupPath(project:string,location:string,featureGroup:string) {
     return this.pathTemplates.featureGroupPathTemplate.render({
       project: project,
       location: location,
@@ -2062,8 +1933,7 @@ export class FeaturestoreOnlineServingServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromFeatureGroupName(featureGroupName: string) {
-    return this.pathTemplates.featureGroupPathTemplate.match(featureGroupName)
-      .project;
+    return this.pathTemplates.featureGroupPathTemplate.match(featureGroupName).project;
   }
 
   /**
@@ -2074,8 +1944,7 @@ export class FeaturestoreOnlineServingServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromFeatureGroupName(featureGroupName: string) {
-    return this.pathTemplates.featureGroupPathTemplate.match(featureGroupName)
-      .location;
+    return this.pathTemplates.featureGroupPathTemplate.match(featureGroupName).location;
   }
 
   /**
@@ -2086,8 +1955,7 @@ export class FeaturestoreOnlineServingServiceClient {
    * @returns {string} A string representing the feature_group.
    */
   matchFeatureGroupFromFeatureGroupName(featureGroupName: string) {
-    return this.pathTemplates.featureGroupPathTemplate.match(featureGroupName)
-      .feature_group;
+    return this.pathTemplates.featureGroupPathTemplate.match(featureGroupName).feature_group;
   }
 
   /**
@@ -2099,12 +1967,7 @@ export class FeaturestoreOnlineServingServiceClient {
    * @param {string} feature_monitor
    * @returns {string} Resource name string.
    */
-  featureMonitorPath(
-    project: string,
-    location: string,
-    featureGroup: string,
-    featureMonitor: string
-  ) {
+  featureMonitorPath(project:string,location:string,featureGroup:string,featureMonitor:string) {
     return this.pathTemplates.featureMonitorPathTemplate.render({
       project: project,
       location: location,
@@ -2121,9 +1984,7 @@ export class FeaturestoreOnlineServingServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromFeatureMonitorName(featureMonitorName: string) {
-    return this.pathTemplates.featureMonitorPathTemplate.match(
-      featureMonitorName
-    ).project;
+    return this.pathTemplates.featureMonitorPathTemplate.match(featureMonitorName).project;
   }
 
   /**
@@ -2134,9 +1995,7 @@ export class FeaturestoreOnlineServingServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromFeatureMonitorName(featureMonitorName: string) {
-    return this.pathTemplates.featureMonitorPathTemplate.match(
-      featureMonitorName
-    ).location;
+    return this.pathTemplates.featureMonitorPathTemplate.match(featureMonitorName).location;
   }
 
   /**
@@ -2147,9 +2006,7 @@ export class FeaturestoreOnlineServingServiceClient {
    * @returns {string} A string representing the feature_group.
    */
   matchFeatureGroupFromFeatureMonitorName(featureMonitorName: string) {
-    return this.pathTemplates.featureMonitorPathTemplate.match(
-      featureMonitorName
-    ).feature_group;
+    return this.pathTemplates.featureMonitorPathTemplate.match(featureMonitorName).feature_group;
   }
 
   /**
@@ -2160,9 +2017,7 @@ export class FeaturestoreOnlineServingServiceClient {
    * @returns {string} A string representing the feature_monitor.
    */
   matchFeatureMonitorFromFeatureMonitorName(featureMonitorName: string) {
-    return this.pathTemplates.featureMonitorPathTemplate.match(
-      featureMonitorName
-    ).feature_monitor;
+    return this.pathTemplates.featureMonitorPathTemplate.match(featureMonitorName).feature_monitor;
   }
 
   /**
@@ -2175,13 +2030,7 @@ export class FeaturestoreOnlineServingServiceClient {
    * @param {string} feature_monitor_job
    * @returns {string} Resource name string.
    */
-  featureMonitorJobPath(
-    project: string,
-    location: string,
-    featureGroup: string,
-    featureMonitor: string,
-    featureMonitorJob: string
-  ) {
+  featureMonitorJobPath(project:string,location:string,featureGroup:string,featureMonitor:string,featureMonitorJob:string) {
     return this.pathTemplates.featureMonitorJobPathTemplate.render({
       project: project,
       location: location,
@@ -2199,9 +2048,7 @@ export class FeaturestoreOnlineServingServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromFeatureMonitorJobName(featureMonitorJobName: string) {
-    return this.pathTemplates.featureMonitorJobPathTemplate.match(
-      featureMonitorJobName
-    ).project;
+    return this.pathTemplates.featureMonitorJobPathTemplate.match(featureMonitorJobName).project;
   }
 
   /**
@@ -2212,9 +2059,7 @@ export class FeaturestoreOnlineServingServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromFeatureMonitorJobName(featureMonitorJobName: string) {
-    return this.pathTemplates.featureMonitorJobPathTemplate.match(
-      featureMonitorJobName
-    ).location;
+    return this.pathTemplates.featureMonitorJobPathTemplate.match(featureMonitorJobName).location;
   }
 
   /**
@@ -2225,9 +2070,7 @@ export class FeaturestoreOnlineServingServiceClient {
    * @returns {string} A string representing the feature_group.
    */
   matchFeatureGroupFromFeatureMonitorJobName(featureMonitorJobName: string) {
-    return this.pathTemplates.featureMonitorJobPathTemplate.match(
-      featureMonitorJobName
-    ).feature_group;
+    return this.pathTemplates.featureMonitorJobPathTemplate.match(featureMonitorJobName).feature_group;
   }
 
   /**
@@ -2238,9 +2081,7 @@ export class FeaturestoreOnlineServingServiceClient {
    * @returns {string} A string representing the feature_monitor.
    */
   matchFeatureMonitorFromFeatureMonitorJobName(featureMonitorJobName: string) {
-    return this.pathTemplates.featureMonitorJobPathTemplate.match(
-      featureMonitorJobName
-    ).feature_monitor;
+    return this.pathTemplates.featureMonitorJobPathTemplate.match(featureMonitorJobName).feature_monitor;
   }
 
   /**
@@ -2250,12 +2091,8 @@ export class FeaturestoreOnlineServingServiceClient {
    *   A fully-qualified path representing FeatureMonitorJob resource.
    * @returns {string} A string representing the feature_monitor_job.
    */
-  matchFeatureMonitorJobFromFeatureMonitorJobName(
-    featureMonitorJobName: string
-  ) {
-    return this.pathTemplates.featureMonitorJobPathTemplate.match(
-      featureMonitorJobName
-    ).feature_monitor_job;
+  matchFeatureMonitorJobFromFeatureMonitorJobName(featureMonitorJobName: string) {
+    return this.pathTemplates.featureMonitorJobPathTemplate.match(featureMonitorJobName).feature_monitor_job;
   }
 
   /**
@@ -2266,11 +2103,7 @@ export class FeaturestoreOnlineServingServiceClient {
    * @param {string} feature_online_store
    * @returns {string} Resource name string.
    */
-  featureOnlineStorePath(
-    project: string,
-    location: string,
-    featureOnlineStore: string
-  ) {
+  featureOnlineStorePath(project:string,location:string,featureOnlineStore:string) {
     return this.pathTemplates.featureOnlineStorePathTemplate.render({
       project: project,
       location: location,
@@ -2286,9 +2119,7 @@ export class FeaturestoreOnlineServingServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromFeatureOnlineStoreName(featureOnlineStoreName: string) {
-    return this.pathTemplates.featureOnlineStorePathTemplate.match(
-      featureOnlineStoreName
-    ).project;
+    return this.pathTemplates.featureOnlineStorePathTemplate.match(featureOnlineStoreName).project;
   }
 
   /**
@@ -2299,9 +2130,7 @@ export class FeaturestoreOnlineServingServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromFeatureOnlineStoreName(featureOnlineStoreName: string) {
-    return this.pathTemplates.featureOnlineStorePathTemplate.match(
-      featureOnlineStoreName
-    ).location;
+    return this.pathTemplates.featureOnlineStorePathTemplate.match(featureOnlineStoreName).location;
   }
 
   /**
@@ -2311,12 +2140,8 @@ export class FeaturestoreOnlineServingServiceClient {
    *   A fully-qualified path representing FeatureOnlineStore resource.
    * @returns {string} A string representing the feature_online_store.
    */
-  matchFeatureOnlineStoreFromFeatureOnlineStoreName(
-    featureOnlineStoreName: string
-  ) {
-    return this.pathTemplates.featureOnlineStorePathTemplate.match(
-      featureOnlineStoreName
-    ).feature_online_store;
+  matchFeatureOnlineStoreFromFeatureOnlineStoreName(featureOnlineStoreName: string) {
+    return this.pathTemplates.featureOnlineStorePathTemplate.match(featureOnlineStoreName).feature_online_store;
   }
 
   /**
@@ -2328,12 +2153,7 @@ export class FeaturestoreOnlineServingServiceClient {
    * @param {string} feature_view
    * @returns {string} Resource name string.
    */
-  featureViewPath(
-    project: string,
-    location: string,
-    featureOnlineStore: string,
-    featureView: string
-  ) {
+  featureViewPath(project:string,location:string,featureOnlineStore:string,featureView:string) {
     return this.pathTemplates.featureViewPathTemplate.render({
       project: project,
       location: location,
@@ -2350,8 +2170,7 @@ export class FeaturestoreOnlineServingServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromFeatureViewName(featureViewName: string) {
-    return this.pathTemplates.featureViewPathTemplate.match(featureViewName)
-      .project;
+    return this.pathTemplates.featureViewPathTemplate.match(featureViewName).project;
   }
 
   /**
@@ -2362,8 +2181,7 @@ export class FeaturestoreOnlineServingServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromFeatureViewName(featureViewName: string) {
-    return this.pathTemplates.featureViewPathTemplate.match(featureViewName)
-      .location;
+    return this.pathTemplates.featureViewPathTemplate.match(featureViewName).location;
   }
 
   /**
@@ -2374,8 +2192,7 @@ export class FeaturestoreOnlineServingServiceClient {
    * @returns {string} A string representing the feature_online_store.
    */
   matchFeatureOnlineStoreFromFeatureViewName(featureViewName: string) {
-    return this.pathTemplates.featureViewPathTemplate.match(featureViewName)
-      .feature_online_store;
+    return this.pathTemplates.featureViewPathTemplate.match(featureViewName).feature_online_store;
   }
 
   /**
@@ -2386,8 +2203,7 @@ export class FeaturestoreOnlineServingServiceClient {
    * @returns {string} A string representing the feature_view.
    */
   matchFeatureViewFromFeatureViewName(featureViewName: string) {
-    return this.pathTemplates.featureViewPathTemplate.match(featureViewName)
-      .feature_view;
+    return this.pathTemplates.featureViewPathTemplate.match(featureViewName).feature_view;
   }
 
   /**
@@ -2399,12 +2215,7 @@ export class FeaturestoreOnlineServingServiceClient {
    * @param {string} feature_view
    * @returns {string} Resource name string.
    */
-  featureViewSyncPath(
-    project: string,
-    location: string,
-    featureOnlineStore: string,
-    featureView: string
-  ) {
+  featureViewSyncPath(project:string,location:string,featureOnlineStore:string,featureView:string) {
     return this.pathTemplates.featureViewSyncPathTemplate.render({
       project: project,
       location: location,
@@ -2421,9 +2232,7 @@ export class FeaturestoreOnlineServingServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromFeatureViewSyncName(featureViewSyncName: string) {
-    return this.pathTemplates.featureViewSyncPathTemplate.match(
-      featureViewSyncName
-    ).project;
+    return this.pathTemplates.featureViewSyncPathTemplate.match(featureViewSyncName).project;
   }
 
   /**
@@ -2434,9 +2243,7 @@ export class FeaturestoreOnlineServingServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromFeatureViewSyncName(featureViewSyncName: string) {
-    return this.pathTemplates.featureViewSyncPathTemplate.match(
-      featureViewSyncName
-    ).location;
+    return this.pathTemplates.featureViewSyncPathTemplate.match(featureViewSyncName).location;
   }
 
   /**
@@ -2447,9 +2254,7 @@ export class FeaturestoreOnlineServingServiceClient {
    * @returns {string} A string representing the feature_online_store.
    */
   matchFeatureOnlineStoreFromFeatureViewSyncName(featureViewSyncName: string) {
-    return this.pathTemplates.featureViewSyncPathTemplate.match(
-      featureViewSyncName
-    ).feature_online_store;
+    return this.pathTemplates.featureViewSyncPathTemplate.match(featureViewSyncName).feature_online_store;
   }
 
   /**
@@ -2460,9 +2265,7 @@ export class FeaturestoreOnlineServingServiceClient {
    * @returns {string} A string representing the feature_view.
    */
   matchFeatureViewFromFeatureViewSyncName(featureViewSyncName: string) {
-    return this.pathTemplates.featureViewSyncPathTemplate.match(
-      featureViewSyncName
-    ).feature_view;
+    return this.pathTemplates.featureViewSyncPathTemplate.match(featureViewSyncName).feature_view;
   }
 
   /**
@@ -2473,7 +2276,7 @@ export class FeaturestoreOnlineServingServiceClient {
    * @param {string} featurestore
    * @returns {string} Resource name string.
    */
-  featurestorePath(project: string, location: string, featurestore: string) {
+  featurestorePath(project:string,location:string,featurestore:string) {
     return this.pathTemplates.featurestorePathTemplate.render({
       project: project,
       location: location,
@@ -2489,8 +2292,7 @@ export class FeaturestoreOnlineServingServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromFeaturestoreName(featurestoreName: string) {
-    return this.pathTemplates.featurestorePathTemplate.match(featurestoreName)
-      .project;
+    return this.pathTemplates.featurestorePathTemplate.match(featurestoreName).project;
   }
 
   /**
@@ -2501,8 +2303,7 @@ export class FeaturestoreOnlineServingServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromFeaturestoreName(featurestoreName: string) {
-    return this.pathTemplates.featurestorePathTemplate.match(featurestoreName)
-      .location;
+    return this.pathTemplates.featurestorePathTemplate.match(featurestoreName).location;
   }
 
   /**
@@ -2513,8 +2314,7 @@ export class FeaturestoreOnlineServingServiceClient {
    * @returns {string} A string representing the featurestore.
    */
   matchFeaturestoreFromFeaturestoreName(featurestoreName: string) {
-    return this.pathTemplates.featurestorePathTemplate.match(featurestoreName)
-      .featurestore;
+    return this.pathTemplates.featurestorePathTemplate.match(featurestoreName).featurestore;
   }
 
   /**
@@ -2525,11 +2325,7 @@ export class FeaturestoreOnlineServingServiceClient {
    * @param {string} hyperparameter_tuning_job
    * @returns {string} Resource name string.
    */
-  hyperparameterTuningJobPath(
-    project: string,
-    location: string,
-    hyperparameterTuningJob: string
-  ) {
+  hyperparameterTuningJobPath(project:string,location:string,hyperparameterTuningJob:string) {
     return this.pathTemplates.hyperparameterTuningJobPathTemplate.render({
       project: project,
       location: location,
@@ -2544,12 +2340,8 @@ export class FeaturestoreOnlineServingServiceClient {
    *   A fully-qualified path representing HyperparameterTuningJob resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromHyperparameterTuningJobName(
-    hyperparameterTuningJobName: string
-  ) {
-    return this.pathTemplates.hyperparameterTuningJobPathTemplate.match(
-      hyperparameterTuningJobName
-    ).project;
+  matchProjectFromHyperparameterTuningJobName(hyperparameterTuningJobName: string) {
+    return this.pathTemplates.hyperparameterTuningJobPathTemplate.match(hyperparameterTuningJobName).project;
   }
 
   /**
@@ -2559,12 +2351,8 @@ export class FeaturestoreOnlineServingServiceClient {
    *   A fully-qualified path representing HyperparameterTuningJob resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromHyperparameterTuningJobName(
-    hyperparameterTuningJobName: string
-  ) {
-    return this.pathTemplates.hyperparameterTuningJobPathTemplate.match(
-      hyperparameterTuningJobName
-    ).location;
+  matchLocationFromHyperparameterTuningJobName(hyperparameterTuningJobName: string) {
+    return this.pathTemplates.hyperparameterTuningJobPathTemplate.match(hyperparameterTuningJobName).location;
   }
 
   /**
@@ -2574,12 +2362,8 @@ export class FeaturestoreOnlineServingServiceClient {
    *   A fully-qualified path representing HyperparameterTuningJob resource.
    * @returns {string} A string representing the hyperparameter_tuning_job.
    */
-  matchHyperparameterTuningJobFromHyperparameterTuningJobName(
-    hyperparameterTuningJobName: string
-  ) {
-    return this.pathTemplates.hyperparameterTuningJobPathTemplate.match(
-      hyperparameterTuningJobName
-    ).hyperparameter_tuning_job;
+  matchHyperparameterTuningJobFromHyperparameterTuningJobName(hyperparameterTuningJobName: string) {
+    return this.pathTemplates.hyperparameterTuningJobPathTemplate.match(hyperparameterTuningJobName).hyperparameter_tuning_job;
   }
 
   /**
@@ -2590,7 +2374,7 @@ export class FeaturestoreOnlineServingServiceClient {
    * @param {string} index
    * @returns {string} Resource name string.
    */
-  indexPath(project: string, location: string, index: string) {
+  indexPath(project:string,location:string,index:string) {
     return this.pathTemplates.indexPathTemplate.render({
       project: project,
       location: location,
@@ -2639,7 +2423,7 @@ export class FeaturestoreOnlineServingServiceClient {
    * @param {string} index_endpoint
    * @returns {string} Resource name string.
    */
-  indexEndpointPath(project: string, location: string, indexEndpoint: string) {
+  indexEndpointPath(project:string,location:string,indexEndpoint:string) {
     return this.pathTemplates.indexEndpointPathTemplate.render({
       project: project,
       location: location,
@@ -2655,8 +2439,7 @@ export class FeaturestoreOnlineServingServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromIndexEndpointName(indexEndpointName: string) {
-    return this.pathTemplates.indexEndpointPathTemplate.match(indexEndpointName)
-      .project;
+    return this.pathTemplates.indexEndpointPathTemplate.match(indexEndpointName).project;
   }
 
   /**
@@ -2667,8 +2450,7 @@ export class FeaturestoreOnlineServingServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromIndexEndpointName(indexEndpointName: string) {
-    return this.pathTemplates.indexEndpointPathTemplate.match(indexEndpointName)
-      .location;
+    return this.pathTemplates.indexEndpointPathTemplate.match(indexEndpointName).location;
   }
 
   /**
@@ -2679,8 +2461,7 @@ export class FeaturestoreOnlineServingServiceClient {
    * @returns {string} A string representing the index_endpoint.
    */
   matchIndexEndpointFromIndexEndpointName(indexEndpointName: string) {
-    return this.pathTemplates.indexEndpointPathTemplate.match(indexEndpointName)
-      .index_endpoint;
+    return this.pathTemplates.indexEndpointPathTemplate.match(indexEndpointName).index_endpoint;
   }
 
   /**
@@ -2692,12 +2473,7 @@ export class FeaturestoreOnlineServingServiceClient {
    * @param {string} metadata_schema
    * @returns {string} Resource name string.
    */
-  metadataSchemaPath(
-    project: string,
-    location: string,
-    metadataStore: string,
-    metadataSchema: string
-  ) {
+  metadataSchemaPath(project:string,location:string,metadataStore:string,metadataSchema:string) {
     return this.pathTemplates.metadataSchemaPathTemplate.render({
       project: project,
       location: location,
@@ -2714,9 +2490,7 @@ export class FeaturestoreOnlineServingServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromMetadataSchemaName(metadataSchemaName: string) {
-    return this.pathTemplates.metadataSchemaPathTemplate.match(
-      metadataSchemaName
-    ).project;
+    return this.pathTemplates.metadataSchemaPathTemplate.match(metadataSchemaName).project;
   }
 
   /**
@@ -2727,9 +2501,7 @@ export class FeaturestoreOnlineServingServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromMetadataSchemaName(metadataSchemaName: string) {
-    return this.pathTemplates.metadataSchemaPathTemplate.match(
-      metadataSchemaName
-    ).location;
+    return this.pathTemplates.metadataSchemaPathTemplate.match(metadataSchemaName).location;
   }
 
   /**
@@ -2740,9 +2512,7 @@ export class FeaturestoreOnlineServingServiceClient {
    * @returns {string} A string representing the metadata_store.
    */
   matchMetadataStoreFromMetadataSchemaName(metadataSchemaName: string) {
-    return this.pathTemplates.metadataSchemaPathTemplate.match(
-      metadataSchemaName
-    ).metadata_store;
+    return this.pathTemplates.metadataSchemaPathTemplate.match(metadataSchemaName).metadata_store;
   }
 
   /**
@@ -2753,9 +2523,7 @@ export class FeaturestoreOnlineServingServiceClient {
    * @returns {string} A string representing the metadata_schema.
    */
   matchMetadataSchemaFromMetadataSchemaName(metadataSchemaName: string) {
-    return this.pathTemplates.metadataSchemaPathTemplate.match(
-      metadataSchemaName
-    ).metadata_schema;
+    return this.pathTemplates.metadataSchemaPathTemplate.match(metadataSchemaName).metadata_schema;
   }
 
   /**
@@ -2766,7 +2534,7 @@ export class FeaturestoreOnlineServingServiceClient {
    * @param {string} metadata_store
    * @returns {string} Resource name string.
    */
-  metadataStorePath(project: string, location: string, metadataStore: string) {
+  metadataStorePath(project:string,location:string,metadataStore:string) {
     return this.pathTemplates.metadataStorePathTemplate.render({
       project: project,
       location: location,
@@ -2782,8 +2550,7 @@ export class FeaturestoreOnlineServingServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromMetadataStoreName(metadataStoreName: string) {
-    return this.pathTemplates.metadataStorePathTemplate.match(metadataStoreName)
-      .project;
+    return this.pathTemplates.metadataStorePathTemplate.match(metadataStoreName).project;
   }
 
   /**
@@ -2794,8 +2561,7 @@ export class FeaturestoreOnlineServingServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromMetadataStoreName(metadataStoreName: string) {
-    return this.pathTemplates.metadataStorePathTemplate.match(metadataStoreName)
-      .location;
+    return this.pathTemplates.metadataStorePathTemplate.match(metadataStoreName).location;
   }
 
   /**
@@ -2806,8 +2572,7 @@ export class FeaturestoreOnlineServingServiceClient {
    * @returns {string} A string representing the metadata_store.
    */
   matchMetadataStoreFromMetadataStoreName(metadataStoreName: string) {
-    return this.pathTemplates.metadataStorePathTemplate.match(metadataStoreName)
-      .metadata_store;
+    return this.pathTemplates.metadataStorePathTemplate.match(metadataStoreName).metadata_store;
   }
 
   /**
@@ -2818,7 +2583,7 @@ export class FeaturestoreOnlineServingServiceClient {
    * @param {string} model
    * @returns {string} Resource name string.
    */
-  modelPath(project: string, location: string, model: string) {
+  modelPath(project:string,location:string,model:string) {
     return this.pathTemplates.modelPathTemplate.render({
       project: project,
       location: location,
@@ -2867,11 +2632,7 @@ export class FeaturestoreOnlineServingServiceClient {
    * @param {string} model_deployment_monitoring_job
    * @returns {string} Resource name string.
    */
-  modelDeploymentMonitoringJobPath(
-    project: string,
-    location: string,
-    modelDeploymentMonitoringJob: string
-  ) {
+  modelDeploymentMonitoringJobPath(project:string,location:string,modelDeploymentMonitoringJob:string) {
     return this.pathTemplates.modelDeploymentMonitoringJobPathTemplate.render({
       project: project,
       location: location,
@@ -2886,12 +2647,8 @@ export class FeaturestoreOnlineServingServiceClient {
    *   A fully-qualified path representing ModelDeploymentMonitoringJob resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromModelDeploymentMonitoringJobName(
-    modelDeploymentMonitoringJobName: string
-  ) {
-    return this.pathTemplates.modelDeploymentMonitoringJobPathTemplate.match(
-      modelDeploymentMonitoringJobName
-    ).project;
+  matchProjectFromModelDeploymentMonitoringJobName(modelDeploymentMonitoringJobName: string) {
+    return this.pathTemplates.modelDeploymentMonitoringJobPathTemplate.match(modelDeploymentMonitoringJobName).project;
   }
 
   /**
@@ -2901,12 +2658,8 @@ export class FeaturestoreOnlineServingServiceClient {
    *   A fully-qualified path representing ModelDeploymentMonitoringJob resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromModelDeploymentMonitoringJobName(
-    modelDeploymentMonitoringJobName: string
-  ) {
-    return this.pathTemplates.modelDeploymentMonitoringJobPathTemplate.match(
-      modelDeploymentMonitoringJobName
-    ).location;
+  matchLocationFromModelDeploymentMonitoringJobName(modelDeploymentMonitoringJobName: string) {
+    return this.pathTemplates.modelDeploymentMonitoringJobPathTemplate.match(modelDeploymentMonitoringJobName).location;
   }
 
   /**
@@ -2916,12 +2669,8 @@ export class FeaturestoreOnlineServingServiceClient {
    *   A fully-qualified path representing ModelDeploymentMonitoringJob resource.
    * @returns {string} A string representing the model_deployment_monitoring_job.
    */
-  matchModelDeploymentMonitoringJobFromModelDeploymentMonitoringJobName(
-    modelDeploymentMonitoringJobName: string
-  ) {
-    return this.pathTemplates.modelDeploymentMonitoringJobPathTemplate.match(
-      modelDeploymentMonitoringJobName
-    ).model_deployment_monitoring_job;
+  matchModelDeploymentMonitoringJobFromModelDeploymentMonitoringJobName(modelDeploymentMonitoringJobName: string) {
+    return this.pathTemplates.modelDeploymentMonitoringJobPathTemplate.match(modelDeploymentMonitoringJobName).model_deployment_monitoring_job;
   }
 
   /**
@@ -2933,12 +2682,7 @@ export class FeaturestoreOnlineServingServiceClient {
    * @param {string} evaluation
    * @returns {string} Resource name string.
    */
-  modelEvaluationPath(
-    project: string,
-    location: string,
-    model: string,
-    evaluation: string
-  ) {
+  modelEvaluationPath(project:string,location:string,model:string,evaluation:string) {
     return this.pathTemplates.modelEvaluationPathTemplate.render({
       project: project,
       location: location,
@@ -2955,9 +2699,7 @@ export class FeaturestoreOnlineServingServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromModelEvaluationName(modelEvaluationName: string) {
-    return this.pathTemplates.modelEvaluationPathTemplate.match(
-      modelEvaluationName
-    ).project;
+    return this.pathTemplates.modelEvaluationPathTemplate.match(modelEvaluationName).project;
   }
 
   /**
@@ -2968,9 +2710,7 @@ export class FeaturestoreOnlineServingServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromModelEvaluationName(modelEvaluationName: string) {
-    return this.pathTemplates.modelEvaluationPathTemplate.match(
-      modelEvaluationName
-    ).location;
+    return this.pathTemplates.modelEvaluationPathTemplate.match(modelEvaluationName).location;
   }
 
   /**
@@ -2981,9 +2721,7 @@ export class FeaturestoreOnlineServingServiceClient {
    * @returns {string} A string representing the model.
    */
   matchModelFromModelEvaluationName(modelEvaluationName: string) {
-    return this.pathTemplates.modelEvaluationPathTemplate.match(
-      modelEvaluationName
-    ).model;
+    return this.pathTemplates.modelEvaluationPathTemplate.match(modelEvaluationName).model;
   }
 
   /**
@@ -2994,9 +2732,7 @@ export class FeaturestoreOnlineServingServiceClient {
    * @returns {string} A string representing the evaluation.
    */
   matchEvaluationFromModelEvaluationName(modelEvaluationName: string) {
-    return this.pathTemplates.modelEvaluationPathTemplate.match(
-      modelEvaluationName
-    ).evaluation;
+    return this.pathTemplates.modelEvaluationPathTemplate.match(modelEvaluationName).evaluation;
   }
 
   /**
@@ -3009,13 +2745,7 @@ export class FeaturestoreOnlineServingServiceClient {
    * @param {string} slice
    * @returns {string} Resource name string.
    */
-  modelEvaluationSlicePath(
-    project: string,
-    location: string,
-    model: string,
-    evaluation: string,
-    slice: string
-  ) {
+  modelEvaluationSlicePath(project:string,location:string,model:string,evaluation:string,slice:string) {
     return this.pathTemplates.modelEvaluationSlicePathTemplate.render({
       project: project,
       location: location,
@@ -3033,9 +2763,7 @@ export class FeaturestoreOnlineServingServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromModelEvaluationSliceName(modelEvaluationSliceName: string) {
-    return this.pathTemplates.modelEvaluationSlicePathTemplate.match(
-      modelEvaluationSliceName
-    ).project;
+    return this.pathTemplates.modelEvaluationSlicePathTemplate.match(modelEvaluationSliceName).project;
   }
 
   /**
@@ -3046,9 +2774,7 @@ export class FeaturestoreOnlineServingServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromModelEvaluationSliceName(modelEvaluationSliceName: string) {
-    return this.pathTemplates.modelEvaluationSlicePathTemplate.match(
-      modelEvaluationSliceName
-    ).location;
+    return this.pathTemplates.modelEvaluationSlicePathTemplate.match(modelEvaluationSliceName).location;
   }
 
   /**
@@ -3059,9 +2785,7 @@ export class FeaturestoreOnlineServingServiceClient {
    * @returns {string} A string representing the model.
    */
   matchModelFromModelEvaluationSliceName(modelEvaluationSliceName: string) {
-    return this.pathTemplates.modelEvaluationSlicePathTemplate.match(
-      modelEvaluationSliceName
-    ).model;
+    return this.pathTemplates.modelEvaluationSlicePathTemplate.match(modelEvaluationSliceName).model;
   }
 
   /**
@@ -3071,12 +2795,8 @@ export class FeaturestoreOnlineServingServiceClient {
    *   A fully-qualified path representing ModelEvaluationSlice resource.
    * @returns {string} A string representing the evaluation.
    */
-  matchEvaluationFromModelEvaluationSliceName(
-    modelEvaluationSliceName: string
-  ) {
-    return this.pathTemplates.modelEvaluationSlicePathTemplate.match(
-      modelEvaluationSliceName
-    ).evaluation;
+  matchEvaluationFromModelEvaluationSliceName(modelEvaluationSliceName: string) {
+    return this.pathTemplates.modelEvaluationSlicePathTemplate.match(modelEvaluationSliceName).evaluation;
   }
 
   /**
@@ -3087,9 +2807,7 @@ export class FeaturestoreOnlineServingServiceClient {
    * @returns {string} A string representing the slice.
    */
   matchSliceFromModelEvaluationSliceName(modelEvaluationSliceName: string) {
-    return this.pathTemplates.modelEvaluationSlicePathTemplate.match(
-      modelEvaluationSliceName
-    ).slice;
+    return this.pathTemplates.modelEvaluationSlicePathTemplate.match(modelEvaluationSliceName).slice;
   }
 
   /**
@@ -3100,7 +2818,7 @@ export class FeaturestoreOnlineServingServiceClient {
    * @param {string} model_monitor
    * @returns {string} Resource name string.
    */
-  modelMonitorPath(project: string, location: string, modelMonitor: string) {
+  modelMonitorPath(project:string,location:string,modelMonitor:string) {
     return this.pathTemplates.modelMonitorPathTemplate.render({
       project: project,
       location: location,
@@ -3116,8 +2834,7 @@ export class FeaturestoreOnlineServingServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromModelMonitorName(modelMonitorName: string) {
-    return this.pathTemplates.modelMonitorPathTemplate.match(modelMonitorName)
-      .project;
+    return this.pathTemplates.modelMonitorPathTemplate.match(modelMonitorName).project;
   }
 
   /**
@@ -3128,8 +2845,7 @@ export class FeaturestoreOnlineServingServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromModelMonitorName(modelMonitorName: string) {
-    return this.pathTemplates.modelMonitorPathTemplate.match(modelMonitorName)
-      .location;
+    return this.pathTemplates.modelMonitorPathTemplate.match(modelMonitorName).location;
   }
 
   /**
@@ -3140,8 +2856,7 @@ export class FeaturestoreOnlineServingServiceClient {
    * @returns {string} A string representing the model_monitor.
    */
   matchModelMonitorFromModelMonitorName(modelMonitorName: string) {
-    return this.pathTemplates.modelMonitorPathTemplate.match(modelMonitorName)
-      .model_monitor;
+    return this.pathTemplates.modelMonitorPathTemplate.match(modelMonitorName).model_monitor;
   }
 
   /**
@@ -3153,12 +2868,7 @@ export class FeaturestoreOnlineServingServiceClient {
    * @param {string} model_monitoring_job
    * @returns {string} Resource name string.
    */
-  modelMonitoringJobPath(
-    project: string,
-    location: string,
-    modelMonitor: string,
-    modelMonitoringJob: string
-  ) {
+  modelMonitoringJobPath(project:string,location:string,modelMonitor:string,modelMonitoringJob:string) {
     return this.pathTemplates.modelMonitoringJobPathTemplate.render({
       project: project,
       location: location,
@@ -3175,9 +2885,7 @@ export class FeaturestoreOnlineServingServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromModelMonitoringJobName(modelMonitoringJobName: string) {
-    return this.pathTemplates.modelMonitoringJobPathTemplate.match(
-      modelMonitoringJobName
-    ).project;
+    return this.pathTemplates.modelMonitoringJobPathTemplate.match(modelMonitoringJobName).project;
   }
 
   /**
@@ -3188,9 +2896,7 @@ export class FeaturestoreOnlineServingServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromModelMonitoringJobName(modelMonitoringJobName: string) {
-    return this.pathTemplates.modelMonitoringJobPathTemplate.match(
-      modelMonitoringJobName
-    ).location;
+    return this.pathTemplates.modelMonitoringJobPathTemplate.match(modelMonitoringJobName).location;
   }
 
   /**
@@ -3201,9 +2907,7 @@ export class FeaturestoreOnlineServingServiceClient {
    * @returns {string} A string representing the model_monitor.
    */
   matchModelMonitorFromModelMonitoringJobName(modelMonitoringJobName: string) {
-    return this.pathTemplates.modelMonitoringJobPathTemplate.match(
-      modelMonitoringJobName
-    ).model_monitor;
+    return this.pathTemplates.modelMonitoringJobPathTemplate.match(modelMonitoringJobName).model_monitor;
   }
 
   /**
@@ -3213,12 +2917,8 @@ export class FeaturestoreOnlineServingServiceClient {
    *   A fully-qualified path representing ModelMonitoringJob resource.
    * @returns {string} A string representing the model_monitoring_job.
    */
-  matchModelMonitoringJobFromModelMonitoringJobName(
-    modelMonitoringJobName: string
-  ) {
-    return this.pathTemplates.modelMonitoringJobPathTemplate.match(
-      modelMonitoringJobName
-    ).model_monitoring_job;
+  matchModelMonitoringJobFromModelMonitoringJobName(modelMonitoringJobName: string) {
+    return this.pathTemplates.modelMonitoringJobPathTemplate.match(modelMonitoringJobName).model_monitoring_job;
   }
 
   /**
@@ -3229,7 +2929,7 @@ export class FeaturestoreOnlineServingServiceClient {
    * @param {string} nas_job
    * @returns {string} Resource name string.
    */
-  nasJobPath(project: string, location: string, nasJob: string) {
+  nasJobPath(project:string,location:string,nasJob:string) {
     return this.pathTemplates.nasJobPathTemplate.render({
       project: project,
       location: location,
@@ -3279,12 +2979,7 @@ export class FeaturestoreOnlineServingServiceClient {
    * @param {string} nas_trial_detail
    * @returns {string} Resource name string.
    */
-  nasTrialDetailPath(
-    project: string,
-    location: string,
-    nasJob: string,
-    nasTrialDetail: string
-  ) {
+  nasTrialDetailPath(project:string,location:string,nasJob:string,nasTrialDetail:string) {
     return this.pathTemplates.nasTrialDetailPathTemplate.render({
       project: project,
       location: location,
@@ -3301,9 +2996,7 @@ export class FeaturestoreOnlineServingServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromNasTrialDetailName(nasTrialDetailName: string) {
-    return this.pathTemplates.nasTrialDetailPathTemplate.match(
-      nasTrialDetailName
-    ).project;
+    return this.pathTemplates.nasTrialDetailPathTemplate.match(nasTrialDetailName).project;
   }
 
   /**
@@ -3314,9 +3007,7 @@ export class FeaturestoreOnlineServingServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromNasTrialDetailName(nasTrialDetailName: string) {
-    return this.pathTemplates.nasTrialDetailPathTemplate.match(
-      nasTrialDetailName
-    ).location;
+    return this.pathTemplates.nasTrialDetailPathTemplate.match(nasTrialDetailName).location;
   }
 
   /**
@@ -3327,9 +3018,7 @@ export class FeaturestoreOnlineServingServiceClient {
    * @returns {string} A string representing the nas_job.
    */
   matchNasJobFromNasTrialDetailName(nasTrialDetailName: string) {
-    return this.pathTemplates.nasTrialDetailPathTemplate.match(
-      nasTrialDetailName
-    ).nas_job;
+    return this.pathTemplates.nasTrialDetailPathTemplate.match(nasTrialDetailName).nas_job;
   }
 
   /**
@@ -3340,9 +3029,7 @@ export class FeaturestoreOnlineServingServiceClient {
    * @returns {string} A string representing the nas_trial_detail.
    */
   matchNasTrialDetailFromNasTrialDetailName(nasTrialDetailName: string) {
-    return this.pathTemplates.nasTrialDetailPathTemplate.match(
-      nasTrialDetailName
-    ).nas_trial_detail;
+    return this.pathTemplates.nasTrialDetailPathTemplate.match(nasTrialDetailName).nas_trial_detail;
   }
 
   /**
@@ -3353,11 +3040,7 @@ export class FeaturestoreOnlineServingServiceClient {
    * @param {string} notebook_execution_job
    * @returns {string} Resource name string.
    */
-  notebookExecutionJobPath(
-    project: string,
-    location: string,
-    notebookExecutionJob: string
-  ) {
+  notebookExecutionJobPath(project:string,location:string,notebookExecutionJob:string) {
     return this.pathTemplates.notebookExecutionJobPathTemplate.render({
       project: project,
       location: location,
@@ -3373,9 +3056,7 @@ export class FeaturestoreOnlineServingServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromNotebookExecutionJobName(notebookExecutionJobName: string) {
-    return this.pathTemplates.notebookExecutionJobPathTemplate.match(
-      notebookExecutionJobName
-    ).project;
+    return this.pathTemplates.notebookExecutionJobPathTemplate.match(notebookExecutionJobName).project;
   }
 
   /**
@@ -3386,9 +3067,7 @@ export class FeaturestoreOnlineServingServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromNotebookExecutionJobName(notebookExecutionJobName: string) {
-    return this.pathTemplates.notebookExecutionJobPathTemplate.match(
-      notebookExecutionJobName
-    ).location;
+    return this.pathTemplates.notebookExecutionJobPathTemplate.match(notebookExecutionJobName).location;
   }
 
   /**
@@ -3398,12 +3077,8 @@ export class FeaturestoreOnlineServingServiceClient {
    *   A fully-qualified path representing NotebookExecutionJob resource.
    * @returns {string} A string representing the notebook_execution_job.
    */
-  matchNotebookExecutionJobFromNotebookExecutionJobName(
-    notebookExecutionJobName: string
-  ) {
-    return this.pathTemplates.notebookExecutionJobPathTemplate.match(
-      notebookExecutionJobName
-    ).notebook_execution_job;
+  matchNotebookExecutionJobFromNotebookExecutionJobName(notebookExecutionJobName: string) {
+    return this.pathTemplates.notebookExecutionJobPathTemplate.match(notebookExecutionJobName).notebook_execution_job;
   }
 
   /**
@@ -3414,11 +3089,7 @@ export class FeaturestoreOnlineServingServiceClient {
    * @param {string} notebook_runtime
    * @returns {string} Resource name string.
    */
-  notebookRuntimePath(
-    project: string,
-    location: string,
-    notebookRuntime: string
-  ) {
+  notebookRuntimePath(project:string,location:string,notebookRuntime:string) {
     return this.pathTemplates.notebookRuntimePathTemplate.render({
       project: project,
       location: location,
@@ -3434,9 +3105,7 @@ export class FeaturestoreOnlineServingServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromNotebookRuntimeName(notebookRuntimeName: string) {
-    return this.pathTemplates.notebookRuntimePathTemplate.match(
-      notebookRuntimeName
-    ).project;
+    return this.pathTemplates.notebookRuntimePathTemplate.match(notebookRuntimeName).project;
   }
 
   /**
@@ -3447,9 +3116,7 @@ export class FeaturestoreOnlineServingServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromNotebookRuntimeName(notebookRuntimeName: string) {
-    return this.pathTemplates.notebookRuntimePathTemplate.match(
-      notebookRuntimeName
-    ).location;
+    return this.pathTemplates.notebookRuntimePathTemplate.match(notebookRuntimeName).location;
   }
 
   /**
@@ -3460,9 +3127,7 @@ export class FeaturestoreOnlineServingServiceClient {
    * @returns {string} A string representing the notebook_runtime.
    */
   matchNotebookRuntimeFromNotebookRuntimeName(notebookRuntimeName: string) {
-    return this.pathTemplates.notebookRuntimePathTemplate.match(
-      notebookRuntimeName
-    ).notebook_runtime;
+    return this.pathTemplates.notebookRuntimePathTemplate.match(notebookRuntimeName).notebook_runtime;
   }
 
   /**
@@ -3473,11 +3138,7 @@ export class FeaturestoreOnlineServingServiceClient {
    * @param {string} notebook_runtime_template
    * @returns {string} Resource name string.
    */
-  notebookRuntimeTemplatePath(
-    project: string,
-    location: string,
-    notebookRuntimeTemplate: string
-  ) {
+  notebookRuntimeTemplatePath(project:string,location:string,notebookRuntimeTemplate:string) {
     return this.pathTemplates.notebookRuntimeTemplatePathTemplate.render({
       project: project,
       location: location,
@@ -3492,12 +3153,8 @@ export class FeaturestoreOnlineServingServiceClient {
    *   A fully-qualified path representing NotebookRuntimeTemplate resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromNotebookRuntimeTemplateName(
-    notebookRuntimeTemplateName: string
-  ) {
-    return this.pathTemplates.notebookRuntimeTemplatePathTemplate.match(
-      notebookRuntimeTemplateName
-    ).project;
+  matchProjectFromNotebookRuntimeTemplateName(notebookRuntimeTemplateName: string) {
+    return this.pathTemplates.notebookRuntimeTemplatePathTemplate.match(notebookRuntimeTemplateName).project;
   }
 
   /**
@@ -3507,12 +3164,8 @@ export class FeaturestoreOnlineServingServiceClient {
    *   A fully-qualified path representing NotebookRuntimeTemplate resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromNotebookRuntimeTemplateName(
-    notebookRuntimeTemplateName: string
-  ) {
-    return this.pathTemplates.notebookRuntimeTemplatePathTemplate.match(
-      notebookRuntimeTemplateName
-    ).location;
+  matchLocationFromNotebookRuntimeTemplateName(notebookRuntimeTemplateName: string) {
+    return this.pathTemplates.notebookRuntimeTemplatePathTemplate.match(notebookRuntimeTemplateName).location;
   }
 
   /**
@@ -3522,12 +3175,8 @@ export class FeaturestoreOnlineServingServiceClient {
    *   A fully-qualified path representing NotebookRuntimeTemplate resource.
    * @returns {string} A string representing the notebook_runtime_template.
    */
-  matchNotebookRuntimeTemplateFromNotebookRuntimeTemplateName(
-    notebookRuntimeTemplateName: string
-  ) {
-    return this.pathTemplates.notebookRuntimeTemplatePathTemplate.match(
-      notebookRuntimeTemplateName
-    ).notebook_runtime_template;
+  matchNotebookRuntimeTemplateFromNotebookRuntimeTemplateName(notebookRuntimeTemplateName: string) {
+    return this.pathTemplates.notebookRuntimeTemplatePathTemplate.match(notebookRuntimeTemplateName).notebook_runtime_template;
   }
 
   /**
@@ -3538,11 +3187,7 @@ export class FeaturestoreOnlineServingServiceClient {
    * @param {string} persistent_resource
    * @returns {string} Resource name string.
    */
-  persistentResourcePath(
-    project: string,
-    location: string,
-    persistentResource: string
-  ) {
+  persistentResourcePath(project:string,location:string,persistentResource:string) {
     return this.pathTemplates.persistentResourcePathTemplate.render({
       project: project,
       location: location,
@@ -3558,9 +3203,7 @@ export class FeaturestoreOnlineServingServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromPersistentResourceName(persistentResourceName: string) {
-    return this.pathTemplates.persistentResourcePathTemplate.match(
-      persistentResourceName
-    ).project;
+    return this.pathTemplates.persistentResourcePathTemplate.match(persistentResourceName).project;
   }
 
   /**
@@ -3571,9 +3214,7 @@ export class FeaturestoreOnlineServingServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromPersistentResourceName(persistentResourceName: string) {
-    return this.pathTemplates.persistentResourcePathTemplate.match(
-      persistentResourceName
-    ).location;
+    return this.pathTemplates.persistentResourcePathTemplate.match(persistentResourceName).location;
   }
 
   /**
@@ -3583,12 +3224,8 @@ export class FeaturestoreOnlineServingServiceClient {
    *   A fully-qualified path representing PersistentResource resource.
    * @returns {string} A string representing the persistent_resource.
    */
-  matchPersistentResourceFromPersistentResourceName(
-    persistentResourceName: string
-  ) {
-    return this.pathTemplates.persistentResourcePathTemplate.match(
-      persistentResourceName
-    ).persistent_resource;
+  matchPersistentResourceFromPersistentResourceName(persistentResourceName: string) {
+    return this.pathTemplates.persistentResourcePathTemplate.match(persistentResourceName).persistent_resource;
   }
 
   /**
@@ -3599,7 +3236,7 @@ export class FeaturestoreOnlineServingServiceClient {
    * @param {string} pipeline_job
    * @returns {string} Resource name string.
    */
-  pipelineJobPath(project: string, location: string, pipelineJob: string) {
+  pipelineJobPath(project:string,location:string,pipelineJob:string) {
     return this.pathTemplates.pipelineJobPathTemplate.render({
       project: project,
       location: location,
@@ -3615,8 +3252,7 @@ export class FeaturestoreOnlineServingServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromPipelineJobName(pipelineJobName: string) {
-    return this.pathTemplates.pipelineJobPathTemplate.match(pipelineJobName)
-      .project;
+    return this.pathTemplates.pipelineJobPathTemplate.match(pipelineJobName).project;
   }
 
   /**
@@ -3627,8 +3263,7 @@ export class FeaturestoreOnlineServingServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromPipelineJobName(pipelineJobName: string) {
-    return this.pathTemplates.pipelineJobPathTemplate.match(pipelineJobName)
-      .location;
+    return this.pathTemplates.pipelineJobPathTemplate.match(pipelineJobName).location;
   }
 
   /**
@@ -3639,8 +3274,7 @@ export class FeaturestoreOnlineServingServiceClient {
    * @returns {string} A string representing the pipeline_job.
    */
   matchPipelineJobFromPipelineJobName(pipelineJobName: string) {
-    return this.pathTemplates.pipelineJobPathTemplate.match(pipelineJobName)
-      .pipeline_job;
+    return this.pathTemplates.pipelineJobPathTemplate.match(pipelineJobName).pipeline_job;
   }
 
   /**
@@ -3651,11 +3285,7 @@ export class FeaturestoreOnlineServingServiceClient {
    * @param {string} endpoint
    * @returns {string} Resource name string.
    */
-  projectLocationEndpointPath(
-    project: string,
-    location: string,
-    endpoint: string
-  ) {
+  projectLocationEndpointPath(project:string,location:string,endpoint:string) {
     return this.pathTemplates.projectLocationEndpointPathTemplate.render({
       project: project,
       location: location,
@@ -3670,12 +3300,8 @@ export class FeaturestoreOnlineServingServiceClient {
    *   A fully-qualified path representing project_location_endpoint resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectLocationEndpointName(
-    projectLocationEndpointName: string
-  ) {
-    return this.pathTemplates.projectLocationEndpointPathTemplate.match(
-      projectLocationEndpointName
-    ).project;
+  matchProjectFromProjectLocationEndpointName(projectLocationEndpointName: string) {
+    return this.pathTemplates.projectLocationEndpointPathTemplate.match(projectLocationEndpointName).project;
   }
 
   /**
@@ -3685,12 +3311,8 @@ export class FeaturestoreOnlineServingServiceClient {
    *   A fully-qualified path representing project_location_endpoint resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromProjectLocationEndpointName(
-    projectLocationEndpointName: string
-  ) {
-    return this.pathTemplates.projectLocationEndpointPathTemplate.match(
-      projectLocationEndpointName
-    ).location;
+  matchLocationFromProjectLocationEndpointName(projectLocationEndpointName: string) {
+    return this.pathTemplates.projectLocationEndpointPathTemplate.match(projectLocationEndpointName).location;
   }
 
   /**
@@ -3700,12 +3322,8 @@ export class FeaturestoreOnlineServingServiceClient {
    *   A fully-qualified path representing project_location_endpoint resource.
    * @returns {string} A string representing the endpoint.
    */
-  matchEndpointFromProjectLocationEndpointName(
-    projectLocationEndpointName: string
-  ) {
-    return this.pathTemplates.projectLocationEndpointPathTemplate.match(
-      projectLocationEndpointName
-    ).endpoint;
+  matchEndpointFromProjectLocationEndpointName(projectLocationEndpointName: string) {
+    return this.pathTemplates.projectLocationEndpointPathTemplate.match(projectLocationEndpointName).endpoint;
   }
 
   /**
@@ -3717,20 +3335,13 @@ export class FeaturestoreOnlineServingServiceClient {
    * @param {string} feature
    * @returns {string} Resource name string.
    */
-  projectLocationFeatureGroupFeaturePath(
-    project: string,
-    location: string,
-    featureGroup: string,
-    feature: string
-  ) {
-    return this.pathTemplates.projectLocationFeatureGroupFeaturePathTemplate.render(
-      {
-        project: project,
-        location: location,
-        feature_group: featureGroup,
-        feature: feature,
-      }
-    );
+  projectLocationFeatureGroupFeaturePath(project:string,location:string,featureGroup:string,feature:string) {
+    return this.pathTemplates.projectLocationFeatureGroupFeaturePathTemplate.render({
+      project: project,
+      location: location,
+      feature_group: featureGroup,
+      feature: feature,
+    });
   }
 
   /**
@@ -3740,12 +3351,8 @@ export class FeaturestoreOnlineServingServiceClient {
    *   A fully-qualified path representing project_location_feature_group_feature resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectLocationFeatureGroupFeatureName(
-    projectLocationFeatureGroupFeatureName: string
-  ) {
-    return this.pathTemplates.projectLocationFeatureGroupFeaturePathTemplate.match(
-      projectLocationFeatureGroupFeatureName
-    ).project;
+  matchProjectFromProjectLocationFeatureGroupFeatureName(projectLocationFeatureGroupFeatureName: string) {
+    return this.pathTemplates.projectLocationFeatureGroupFeaturePathTemplate.match(projectLocationFeatureGroupFeatureName).project;
   }
 
   /**
@@ -3755,12 +3362,8 @@ export class FeaturestoreOnlineServingServiceClient {
    *   A fully-qualified path representing project_location_feature_group_feature resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromProjectLocationFeatureGroupFeatureName(
-    projectLocationFeatureGroupFeatureName: string
-  ) {
-    return this.pathTemplates.projectLocationFeatureGroupFeaturePathTemplate.match(
-      projectLocationFeatureGroupFeatureName
-    ).location;
+  matchLocationFromProjectLocationFeatureGroupFeatureName(projectLocationFeatureGroupFeatureName: string) {
+    return this.pathTemplates.projectLocationFeatureGroupFeaturePathTemplate.match(projectLocationFeatureGroupFeatureName).location;
   }
 
   /**
@@ -3770,12 +3373,8 @@ export class FeaturestoreOnlineServingServiceClient {
    *   A fully-qualified path representing project_location_feature_group_feature resource.
    * @returns {string} A string representing the feature_group.
    */
-  matchFeatureGroupFromProjectLocationFeatureGroupFeatureName(
-    projectLocationFeatureGroupFeatureName: string
-  ) {
-    return this.pathTemplates.projectLocationFeatureGroupFeaturePathTemplate.match(
-      projectLocationFeatureGroupFeatureName
-    ).feature_group;
+  matchFeatureGroupFromProjectLocationFeatureGroupFeatureName(projectLocationFeatureGroupFeatureName: string) {
+    return this.pathTemplates.projectLocationFeatureGroupFeaturePathTemplate.match(projectLocationFeatureGroupFeatureName).feature_group;
   }
 
   /**
@@ -3785,12 +3384,8 @@ export class FeaturestoreOnlineServingServiceClient {
    *   A fully-qualified path representing project_location_feature_group_feature resource.
    * @returns {string} A string representing the feature.
    */
-  matchFeatureFromProjectLocationFeatureGroupFeatureName(
-    projectLocationFeatureGroupFeatureName: string
-  ) {
-    return this.pathTemplates.projectLocationFeatureGroupFeaturePathTemplate.match(
-      projectLocationFeatureGroupFeatureName
-    ).feature;
+  matchFeatureFromProjectLocationFeatureGroupFeatureName(projectLocationFeatureGroupFeatureName: string) {
+    return this.pathTemplates.projectLocationFeatureGroupFeaturePathTemplate.match(projectLocationFeatureGroupFeatureName).feature;
   }
 
   /**
@@ -3803,22 +3398,14 @@ export class FeaturestoreOnlineServingServiceClient {
    * @param {string} feature
    * @returns {string} Resource name string.
    */
-  projectLocationFeaturestoreEntityTypeFeaturePath(
-    project: string,
-    location: string,
-    featurestore: string,
-    entityType: string,
-    feature: string
-  ) {
-    return this.pathTemplates.projectLocationFeaturestoreEntityTypeFeaturePathTemplate.render(
-      {
-        project: project,
-        location: location,
-        featurestore: featurestore,
-        entity_type: entityType,
-        feature: feature,
-      }
-    );
+  projectLocationFeaturestoreEntityTypeFeaturePath(project:string,location:string,featurestore:string,entityType:string,feature:string) {
+    return this.pathTemplates.projectLocationFeaturestoreEntityTypeFeaturePathTemplate.render({
+      project: project,
+      location: location,
+      featurestore: featurestore,
+      entity_type: entityType,
+      feature: feature,
+    });
   }
 
   /**
@@ -3828,12 +3415,8 @@ export class FeaturestoreOnlineServingServiceClient {
    *   A fully-qualified path representing project_location_featurestore_entity_type_feature resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectLocationFeaturestoreEntityTypeFeatureName(
-    projectLocationFeaturestoreEntityTypeFeatureName: string
-  ) {
-    return this.pathTemplates.projectLocationFeaturestoreEntityTypeFeaturePathTemplate.match(
-      projectLocationFeaturestoreEntityTypeFeatureName
-    ).project;
+  matchProjectFromProjectLocationFeaturestoreEntityTypeFeatureName(projectLocationFeaturestoreEntityTypeFeatureName: string) {
+    return this.pathTemplates.projectLocationFeaturestoreEntityTypeFeaturePathTemplate.match(projectLocationFeaturestoreEntityTypeFeatureName).project;
   }
 
   /**
@@ -3843,12 +3426,8 @@ export class FeaturestoreOnlineServingServiceClient {
    *   A fully-qualified path representing project_location_featurestore_entity_type_feature resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromProjectLocationFeaturestoreEntityTypeFeatureName(
-    projectLocationFeaturestoreEntityTypeFeatureName: string
-  ) {
-    return this.pathTemplates.projectLocationFeaturestoreEntityTypeFeaturePathTemplate.match(
-      projectLocationFeaturestoreEntityTypeFeatureName
-    ).location;
+  matchLocationFromProjectLocationFeaturestoreEntityTypeFeatureName(projectLocationFeaturestoreEntityTypeFeatureName: string) {
+    return this.pathTemplates.projectLocationFeaturestoreEntityTypeFeaturePathTemplate.match(projectLocationFeaturestoreEntityTypeFeatureName).location;
   }
 
   /**
@@ -3858,12 +3437,8 @@ export class FeaturestoreOnlineServingServiceClient {
    *   A fully-qualified path representing project_location_featurestore_entity_type_feature resource.
    * @returns {string} A string representing the featurestore.
    */
-  matchFeaturestoreFromProjectLocationFeaturestoreEntityTypeFeatureName(
-    projectLocationFeaturestoreEntityTypeFeatureName: string
-  ) {
-    return this.pathTemplates.projectLocationFeaturestoreEntityTypeFeaturePathTemplate.match(
-      projectLocationFeaturestoreEntityTypeFeatureName
-    ).featurestore;
+  matchFeaturestoreFromProjectLocationFeaturestoreEntityTypeFeatureName(projectLocationFeaturestoreEntityTypeFeatureName: string) {
+    return this.pathTemplates.projectLocationFeaturestoreEntityTypeFeaturePathTemplate.match(projectLocationFeaturestoreEntityTypeFeatureName).featurestore;
   }
 
   /**
@@ -3873,12 +3448,8 @@ export class FeaturestoreOnlineServingServiceClient {
    *   A fully-qualified path representing project_location_featurestore_entity_type_feature resource.
    * @returns {string} A string representing the entity_type.
    */
-  matchEntityTypeFromProjectLocationFeaturestoreEntityTypeFeatureName(
-    projectLocationFeaturestoreEntityTypeFeatureName: string
-  ) {
-    return this.pathTemplates.projectLocationFeaturestoreEntityTypeFeaturePathTemplate.match(
-      projectLocationFeaturestoreEntityTypeFeatureName
-    ).entity_type;
+  matchEntityTypeFromProjectLocationFeaturestoreEntityTypeFeatureName(projectLocationFeaturestoreEntityTypeFeatureName: string) {
+    return this.pathTemplates.projectLocationFeaturestoreEntityTypeFeaturePathTemplate.match(projectLocationFeaturestoreEntityTypeFeatureName).entity_type;
   }
 
   /**
@@ -3888,12 +3459,8 @@ export class FeaturestoreOnlineServingServiceClient {
    *   A fully-qualified path representing project_location_featurestore_entity_type_feature resource.
    * @returns {string} A string representing the feature.
    */
-  matchFeatureFromProjectLocationFeaturestoreEntityTypeFeatureName(
-    projectLocationFeaturestoreEntityTypeFeatureName: string
-  ) {
-    return this.pathTemplates.projectLocationFeaturestoreEntityTypeFeaturePathTemplate.match(
-      projectLocationFeaturestoreEntityTypeFeatureName
-    ).feature;
+  matchFeatureFromProjectLocationFeaturestoreEntityTypeFeatureName(projectLocationFeaturestoreEntityTypeFeatureName: string) {
+    return this.pathTemplates.projectLocationFeaturestoreEntityTypeFeaturePathTemplate.match(projectLocationFeaturestoreEntityTypeFeatureName).feature;
   }
 
   /**
@@ -3905,12 +3472,7 @@ export class FeaturestoreOnlineServingServiceClient {
    * @param {string} model
    * @returns {string} Resource name string.
    */
-  projectLocationPublisherModelPath(
-    project: string,
-    location: string,
-    publisher: string,
-    model: string
-  ) {
+  projectLocationPublisherModelPath(project:string,location:string,publisher:string,model:string) {
     return this.pathTemplates.projectLocationPublisherModelPathTemplate.render({
       project: project,
       location: location,
@@ -3926,12 +3488,8 @@ export class FeaturestoreOnlineServingServiceClient {
    *   A fully-qualified path representing project_location_publisher_model resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectLocationPublisherModelName(
-    projectLocationPublisherModelName: string
-  ) {
-    return this.pathTemplates.projectLocationPublisherModelPathTemplate.match(
-      projectLocationPublisherModelName
-    ).project;
+  matchProjectFromProjectLocationPublisherModelName(projectLocationPublisherModelName: string) {
+    return this.pathTemplates.projectLocationPublisherModelPathTemplate.match(projectLocationPublisherModelName).project;
   }
 
   /**
@@ -3941,12 +3499,8 @@ export class FeaturestoreOnlineServingServiceClient {
    *   A fully-qualified path representing project_location_publisher_model resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromProjectLocationPublisherModelName(
-    projectLocationPublisherModelName: string
-  ) {
-    return this.pathTemplates.projectLocationPublisherModelPathTemplate.match(
-      projectLocationPublisherModelName
-    ).location;
+  matchLocationFromProjectLocationPublisherModelName(projectLocationPublisherModelName: string) {
+    return this.pathTemplates.projectLocationPublisherModelPathTemplate.match(projectLocationPublisherModelName).location;
   }
 
   /**
@@ -3956,12 +3510,8 @@ export class FeaturestoreOnlineServingServiceClient {
    *   A fully-qualified path representing project_location_publisher_model resource.
    * @returns {string} A string representing the publisher.
    */
-  matchPublisherFromProjectLocationPublisherModelName(
-    projectLocationPublisherModelName: string
-  ) {
-    return this.pathTemplates.projectLocationPublisherModelPathTemplate.match(
-      projectLocationPublisherModelName
-    ).publisher;
+  matchPublisherFromProjectLocationPublisherModelName(projectLocationPublisherModelName: string) {
+    return this.pathTemplates.projectLocationPublisherModelPathTemplate.match(projectLocationPublisherModelName).publisher;
   }
 
   /**
@@ -3971,12 +3521,256 @@ export class FeaturestoreOnlineServingServiceClient {
    *   A fully-qualified path representing project_location_publisher_model resource.
    * @returns {string} A string representing the model.
    */
-  matchModelFromProjectLocationPublisherModelName(
-    projectLocationPublisherModelName: string
-  ) {
-    return this.pathTemplates.projectLocationPublisherModelPathTemplate.match(
-      projectLocationPublisherModelName
-    ).model;
+  matchModelFromProjectLocationPublisherModelName(projectLocationPublisherModelName: string) {
+    return this.pathTemplates.projectLocationPublisherModelPathTemplate.match(projectLocationPublisherModelName).model;
+  }
+
+  /**
+   * Return a fully-qualified projectLocationReasoningEngineSession resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} reasoning_engine
+   * @param {string} session
+   * @returns {string} Resource name string.
+   */
+  projectLocationReasoningEngineSessionPath(project:string,location:string,reasoningEngine:string,session:string) {
+    return this.pathTemplates.projectLocationReasoningEngineSessionPathTemplate.render({
+      project: project,
+      location: location,
+      reasoning_engine: reasoningEngine,
+      session: session,
+    });
+  }
+
+  /**
+   * Parse the project from ProjectLocationReasoningEngineSession resource.
+   *
+   * @param {string} projectLocationReasoningEngineSessionName
+   *   A fully-qualified path representing project_location_reasoning_engine_session resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectLocationReasoningEngineSessionName(projectLocationReasoningEngineSessionName: string) {
+    return this.pathTemplates.projectLocationReasoningEngineSessionPathTemplate.match(projectLocationReasoningEngineSessionName).project;
+  }
+
+  /**
+   * Parse the location from ProjectLocationReasoningEngineSession resource.
+   *
+   * @param {string} projectLocationReasoningEngineSessionName
+   *   A fully-qualified path representing project_location_reasoning_engine_session resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromProjectLocationReasoningEngineSessionName(projectLocationReasoningEngineSessionName: string) {
+    return this.pathTemplates.projectLocationReasoningEngineSessionPathTemplate.match(projectLocationReasoningEngineSessionName).location;
+  }
+
+  /**
+   * Parse the reasoning_engine from ProjectLocationReasoningEngineSession resource.
+   *
+   * @param {string} projectLocationReasoningEngineSessionName
+   *   A fully-qualified path representing project_location_reasoning_engine_session resource.
+   * @returns {string} A string representing the reasoning_engine.
+   */
+  matchReasoningEngineFromProjectLocationReasoningEngineSessionName(projectLocationReasoningEngineSessionName: string) {
+    return this.pathTemplates.projectLocationReasoningEngineSessionPathTemplate.match(projectLocationReasoningEngineSessionName).reasoning_engine;
+  }
+
+  /**
+   * Parse the session from ProjectLocationReasoningEngineSession resource.
+   *
+   * @param {string} projectLocationReasoningEngineSessionName
+   *   A fully-qualified path representing project_location_reasoning_engine_session resource.
+   * @returns {string} A string representing the session.
+   */
+  matchSessionFromProjectLocationReasoningEngineSessionName(projectLocationReasoningEngineSessionName: string) {
+    return this.pathTemplates.projectLocationReasoningEngineSessionPathTemplate.match(projectLocationReasoningEngineSessionName).session;
+  }
+
+  /**
+   * Return a fully-qualified projectLocationReasoningEngineSessionEvent resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} reasoning_engine
+   * @param {string} session
+   * @param {string} event
+   * @returns {string} Resource name string.
+   */
+  projectLocationReasoningEngineSessionEventPath(project:string,location:string,reasoningEngine:string,session:string,event:string) {
+    return this.pathTemplates.projectLocationReasoningEngineSessionEventPathTemplate.render({
+      project: project,
+      location: location,
+      reasoning_engine: reasoningEngine,
+      session: session,
+      event: event,
+    });
+  }
+
+  /**
+   * Parse the project from ProjectLocationReasoningEngineSessionEvent resource.
+   *
+   * @param {string} projectLocationReasoningEngineSessionEventName
+   *   A fully-qualified path representing project_location_reasoning_engine_session_event resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectLocationReasoningEngineSessionEventName(projectLocationReasoningEngineSessionEventName: string) {
+    return this.pathTemplates.projectLocationReasoningEngineSessionEventPathTemplate.match(projectLocationReasoningEngineSessionEventName).project;
+  }
+
+  /**
+   * Parse the location from ProjectLocationReasoningEngineSessionEvent resource.
+   *
+   * @param {string} projectLocationReasoningEngineSessionEventName
+   *   A fully-qualified path representing project_location_reasoning_engine_session_event resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromProjectLocationReasoningEngineSessionEventName(projectLocationReasoningEngineSessionEventName: string) {
+    return this.pathTemplates.projectLocationReasoningEngineSessionEventPathTemplate.match(projectLocationReasoningEngineSessionEventName).location;
+  }
+
+  /**
+   * Parse the reasoning_engine from ProjectLocationReasoningEngineSessionEvent resource.
+   *
+   * @param {string} projectLocationReasoningEngineSessionEventName
+   *   A fully-qualified path representing project_location_reasoning_engine_session_event resource.
+   * @returns {string} A string representing the reasoning_engine.
+   */
+  matchReasoningEngineFromProjectLocationReasoningEngineSessionEventName(projectLocationReasoningEngineSessionEventName: string) {
+    return this.pathTemplates.projectLocationReasoningEngineSessionEventPathTemplate.match(projectLocationReasoningEngineSessionEventName).reasoning_engine;
+  }
+
+  /**
+   * Parse the session from ProjectLocationReasoningEngineSessionEvent resource.
+   *
+   * @param {string} projectLocationReasoningEngineSessionEventName
+   *   A fully-qualified path representing project_location_reasoning_engine_session_event resource.
+   * @returns {string} A string representing the session.
+   */
+  matchSessionFromProjectLocationReasoningEngineSessionEventName(projectLocationReasoningEngineSessionEventName: string) {
+    return this.pathTemplates.projectLocationReasoningEngineSessionEventPathTemplate.match(projectLocationReasoningEngineSessionEventName).session;
+  }
+
+  /**
+   * Parse the event from ProjectLocationReasoningEngineSessionEvent resource.
+   *
+   * @param {string} projectLocationReasoningEngineSessionEventName
+   *   A fully-qualified path representing project_location_reasoning_engine_session_event resource.
+   * @returns {string} A string representing the event.
+   */
+  matchEventFromProjectLocationReasoningEngineSessionEventName(projectLocationReasoningEngineSessionEventName: string) {
+    return this.pathTemplates.projectLocationReasoningEngineSessionEventPathTemplate.match(projectLocationReasoningEngineSessionEventName).event;
+  }
+
+  /**
+   * Return a fully-qualified projectLocationSession resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} session
+   * @returns {string} Resource name string.
+   */
+  projectLocationSessionPath(project:string,location:string,session:string) {
+    return this.pathTemplates.projectLocationSessionPathTemplate.render({
+      project: project,
+      location: location,
+      session: session,
+    });
+  }
+
+  /**
+   * Parse the project from ProjectLocationSession resource.
+   *
+   * @param {string} projectLocationSessionName
+   *   A fully-qualified path representing project_location_session resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectLocationSessionName(projectLocationSessionName: string) {
+    return this.pathTemplates.projectLocationSessionPathTemplate.match(projectLocationSessionName).project;
+  }
+
+  /**
+   * Parse the location from ProjectLocationSession resource.
+   *
+   * @param {string} projectLocationSessionName
+   *   A fully-qualified path representing project_location_session resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromProjectLocationSessionName(projectLocationSessionName: string) {
+    return this.pathTemplates.projectLocationSessionPathTemplate.match(projectLocationSessionName).location;
+  }
+
+  /**
+   * Parse the session from ProjectLocationSession resource.
+   *
+   * @param {string} projectLocationSessionName
+   *   A fully-qualified path representing project_location_session resource.
+   * @returns {string} A string representing the session.
+   */
+  matchSessionFromProjectLocationSessionName(projectLocationSessionName: string) {
+    return this.pathTemplates.projectLocationSessionPathTemplate.match(projectLocationSessionName).session;
+  }
+
+  /**
+   * Return a fully-qualified projectLocationSessionEvent resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} session
+   * @param {string} event
+   * @returns {string} Resource name string.
+   */
+  projectLocationSessionEventPath(project:string,location:string,session:string,event:string) {
+    return this.pathTemplates.projectLocationSessionEventPathTemplate.render({
+      project: project,
+      location: location,
+      session: session,
+      event: event,
+    });
+  }
+
+  /**
+   * Parse the project from ProjectLocationSessionEvent resource.
+   *
+   * @param {string} projectLocationSessionEventName
+   *   A fully-qualified path representing project_location_session_event resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectLocationSessionEventName(projectLocationSessionEventName: string) {
+    return this.pathTemplates.projectLocationSessionEventPathTemplate.match(projectLocationSessionEventName).project;
+  }
+
+  /**
+   * Parse the location from ProjectLocationSessionEvent resource.
+   *
+   * @param {string} projectLocationSessionEventName
+   *   A fully-qualified path representing project_location_session_event resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromProjectLocationSessionEventName(projectLocationSessionEventName: string) {
+    return this.pathTemplates.projectLocationSessionEventPathTemplate.match(projectLocationSessionEventName).location;
+  }
+
+  /**
+   * Parse the session from ProjectLocationSessionEvent resource.
+   *
+   * @param {string} projectLocationSessionEventName
+   *   A fully-qualified path representing project_location_session_event resource.
+   * @returns {string} A string representing the session.
+   */
+  matchSessionFromProjectLocationSessionEventName(projectLocationSessionEventName: string) {
+    return this.pathTemplates.projectLocationSessionEventPathTemplate.match(projectLocationSessionEventName).session;
+  }
+
+  /**
+   * Parse the event from ProjectLocationSessionEvent resource.
+   *
+   * @param {string} projectLocationSessionEventName
+   *   A fully-qualified path representing project_location_session_event resource.
+   * @returns {string} A string representing the event.
+   */
+  matchEventFromProjectLocationSessionEventName(projectLocationSessionEventName: string) {
+    return this.pathTemplates.projectLocationSessionEventPathTemplate.match(projectLocationSessionEventName).event;
   }
 
   /**
@@ -3986,7 +3780,7 @@ export class FeaturestoreOnlineServingServiceClient {
    * @param {string} model
    * @returns {string} Resource name string.
    */
-  publisherModelPath(publisher: string, model: string) {
+  publisherModelPath(publisher:string,model:string) {
     return this.pathTemplates.publisherModelPathTemplate.render({
       publisher: publisher,
       model: model,
@@ -4001,9 +3795,7 @@ export class FeaturestoreOnlineServingServiceClient {
    * @returns {string} A string representing the publisher.
    */
   matchPublisherFromPublisherModelName(publisherModelName: string) {
-    return this.pathTemplates.publisherModelPathTemplate.match(
-      publisherModelName
-    ).publisher;
+    return this.pathTemplates.publisherModelPathTemplate.match(publisherModelName).publisher;
   }
 
   /**
@@ -4014,9 +3806,7 @@ export class FeaturestoreOnlineServingServiceClient {
    * @returns {string} A string representing the model.
    */
   matchModelFromPublisherModelName(publisherModelName: string) {
-    return this.pathTemplates.publisherModelPathTemplate.match(
-      publisherModelName
-    ).model;
+    return this.pathTemplates.publisherModelPathTemplate.match(publisherModelName).model;
   }
 
   /**
@@ -4027,7 +3817,7 @@ export class FeaturestoreOnlineServingServiceClient {
    * @param {string} rag_corpus
    * @returns {string} Resource name string.
    */
-  ragCorpusPath(project: string, location: string, ragCorpus: string) {
+  ragCorpusPath(project:string,location:string,ragCorpus:string) {
     return this.pathTemplates.ragCorpusPathTemplate.render({
       project: project,
       location: location,
@@ -4043,8 +3833,7 @@ export class FeaturestoreOnlineServingServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromRagCorpusName(ragCorpusName: string) {
-    return this.pathTemplates.ragCorpusPathTemplate.match(ragCorpusName)
-      .project;
+    return this.pathTemplates.ragCorpusPathTemplate.match(ragCorpusName).project;
   }
 
   /**
@@ -4055,8 +3844,7 @@ export class FeaturestoreOnlineServingServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromRagCorpusName(ragCorpusName: string) {
-    return this.pathTemplates.ragCorpusPathTemplate.match(ragCorpusName)
-      .location;
+    return this.pathTemplates.ragCorpusPathTemplate.match(ragCorpusName).location;
   }
 
   /**
@@ -4067,8 +3855,7 @@ export class FeaturestoreOnlineServingServiceClient {
    * @returns {string} A string representing the rag_corpus.
    */
   matchRagCorpusFromRagCorpusName(ragCorpusName: string) {
-    return this.pathTemplates.ragCorpusPathTemplate.match(ragCorpusName)
-      .rag_corpus;
+    return this.pathTemplates.ragCorpusPathTemplate.match(ragCorpusName).rag_corpus;
   }
 
   /**
@@ -4080,12 +3867,7 @@ export class FeaturestoreOnlineServingServiceClient {
    * @param {string} rag_file
    * @returns {string} Resource name string.
    */
-  ragFilePath(
-    project: string,
-    location: string,
-    ragCorpus: string,
-    ragFile: string
-  ) {
+  ragFilePath(project:string,location:string,ragCorpus:string,ragFile:string) {
     return this.pathTemplates.ragFilePathTemplate.render({
       project: project,
       location: location,
@@ -4146,11 +3928,7 @@ export class FeaturestoreOnlineServingServiceClient {
    * @param {string} reasoning_engine
    * @returns {string} Resource name string.
    */
-  reasoningEnginePath(
-    project: string,
-    location: string,
-    reasoningEngine: string
-  ) {
+  reasoningEnginePath(project:string,location:string,reasoningEngine:string) {
     return this.pathTemplates.reasoningEnginePathTemplate.render({
       project: project,
       location: location,
@@ -4166,9 +3944,7 @@ export class FeaturestoreOnlineServingServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromReasoningEngineName(reasoningEngineName: string) {
-    return this.pathTemplates.reasoningEnginePathTemplate.match(
-      reasoningEngineName
-    ).project;
+    return this.pathTemplates.reasoningEnginePathTemplate.match(reasoningEngineName).project;
   }
 
   /**
@@ -4179,9 +3955,7 @@ export class FeaturestoreOnlineServingServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromReasoningEngineName(reasoningEngineName: string) {
-    return this.pathTemplates.reasoningEnginePathTemplate.match(
-      reasoningEngineName
-    ).location;
+    return this.pathTemplates.reasoningEnginePathTemplate.match(reasoningEngineName).location;
   }
 
   /**
@@ -4192,9 +3966,7 @@ export class FeaturestoreOnlineServingServiceClient {
    * @returns {string} A string representing the reasoning_engine.
    */
   matchReasoningEngineFromReasoningEngineName(reasoningEngineName: string) {
-    return this.pathTemplates.reasoningEnginePathTemplate.match(
-      reasoningEngineName
-    ).reasoning_engine;
+    return this.pathTemplates.reasoningEnginePathTemplate.match(reasoningEngineName).reasoning_engine;
   }
 
   /**
@@ -4206,12 +3978,7 @@ export class FeaturestoreOnlineServingServiceClient {
    * @param {string} saved_query
    * @returns {string} Resource name string.
    */
-  savedQueryPath(
-    project: string,
-    location: string,
-    dataset: string,
-    savedQuery: string
-  ) {
+  savedQueryPath(project:string,location:string,dataset:string,savedQuery:string) {
     return this.pathTemplates.savedQueryPathTemplate.render({
       project: project,
       location: location,
@@ -4228,8 +3995,7 @@ export class FeaturestoreOnlineServingServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromSavedQueryName(savedQueryName: string) {
-    return this.pathTemplates.savedQueryPathTemplate.match(savedQueryName)
-      .project;
+    return this.pathTemplates.savedQueryPathTemplate.match(savedQueryName).project;
   }
 
   /**
@@ -4240,8 +4006,7 @@ export class FeaturestoreOnlineServingServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromSavedQueryName(savedQueryName: string) {
-    return this.pathTemplates.savedQueryPathTemplate.match(savedQueryName)
-      .location;
+    return this.pathTemplates.savedQueryPathTemplate.match(savedQueryName).location;
   }
 
   /**
@@ -4252,8 +4017,7 @@ export class FeaturestoreOnlineServingServiceClient {
    * @returns {string} A string representing the dataset.
    */
   matchDatasetFromSavedQueryName(savedQueryName: string) {
-    return this.pathTemplates.savedQueryPathTemplate.match(savedQueryName)
-      .dataset;
+    return this.pathTemplates.savedQueryPathTemplate.match(savedQueryName).dataset;
   }
 
   /**
@@ -4264,8 +4028,7 @@ export class FeaturestoreOnlineServingServiceClient {
    * @returns {string} A string representing the saved_query.
    */
   matchSavedQueryFromSavedQueryName(savedQueryName: string) {
-    return this.pathTemplates.savedQueryPathTemplate.match(savedQueryName)
-      .saved_query;
+    return this.pathTemplates.savedQueryPathTemplate.match(savedQueryName).saved_query;
   }
 
   /**
@@ -4276,7 +4039,7 @@ export class FeaturestoreOnlineServingServiceClient {
    * @param {string} schedule
    * @returns {string} Resource name string.
    */
-  schedulePath(project: string, location: string, schedule: string) {
+  schedulePath(project:string,location:string,schedule:string) {
     return this.pathTemplates.schedulePathTemplate.render({
       project: project,
       location: location,
@@ -4325,11 +4088,7 @@ export class FeaturestoreOnlineServingServiceClient {
    * @param {string} specialist_pool
    * @returns {string} Resource name string.
    */
-  specialistPoolPath(
-    project: string,
-    location: string,
-    specialistPool: string
-  ) {
+  specialistPoolPath(project:string,location:string,specialistPool:string) {
     return this.pathTemplates.specialistPoolPathTemplate.render({
       project: project,
       location: location,
@@ -4345,9 +4104,7 @@ export class FeaturestoreOnlineServingServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromSpecialistPoolName(specialistPoolName: string) {
-    return this.pathTemplates.specialistPoolPathTemplate.match(
-      specialistPoolName
-    ).project;
+    return this.pathTemplates.specialistPoolPathTemplate.match(specialistPoolName).project;
   }
 
   /**
@@ -4358,9 +4115,7 @@ export class FeaturestoreOnlineServingServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromSpecialistPoolName(specialistPoolName: string) {
-    return this.pathTemplates.specialistPoolPathTemplate.match(
-      specialistPoolName
-    ).location;
+    return this.pathTemplates.specialistPoolPathTemplate.match(specialistPoolName).location;
   }
 
   /**
@@ -4371,9 +4126,7 @@ export class FeaturestoreOnlineServingServiceClient {
    * @returns {string} A string representing the specialist_pool.
    */
   matchSpecialistPoolFromSpecialistPoolName(specialistPoolName: string) {
-    return this.pathTemplates.specialistPoolPathTemplate.match(
-      specialistPoolName
-    ).specialist_pool;
+    return this.pathTemplates.specialistPoolPathTemplate.match(specialistPoolName).specialist_pool;
   }
 
   /**
@@ -4384,7 +4137,7 @@ export class FeaturestoreOnlineServingServiceClient {
    * @param {string} study
    * @returns {string} Resource name string.
    */
-  studyPath(project: string, location: string, study: string) {
+  studyPath(project:string,location:string,study:string) {
     return this.pathTemplates.studyPathTemplate.render({
       project: project,
       location: location,
@@ -4433,7 +4186,7 @@ export class FeaturestoreOnlineServingServiceClient {
    * @param {string} tensorboard
    * @returns {string} Resource name string.
    */
-  tensorboardPath(project: string, location: string, tensorboard: string) {
+  tensorboardPath(project:string,location:string,tensorboard:string) {
     return this.pathTemplates.tensorboardPathTemplate.render({
       project: project,
       location: location,
@@ -4449,8 +4202,7 @@ export class FeaturestoreOnlineServingServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromTensorboardName(tensorboardName: string) {
-    return this.pathTemplates.tensorboardPathTemplate.match(tensorboardName)
-      .project;
+    return this.pathTemplates.tensorboardPathTemplate.match(tensorboardName).project;
   }
 
   /**
@@ -4461,8 +4213,7 @@ export class FeaturestoreOnlineServingServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromTensorboardName(tensorboardName: string) {
-    return this.pathTemplates.tensorboardPathTemplate.match(tensorboardName)
-      .location;
+    return this.pathTemplates.tensorboardPathTemplate.match(tensorboardName).location;
   }
 
   /**
@@ -4473,8 +4224,7 @@ export class FeaturestoreOnlineServingServiceClient {
    * @returns {string} A string representing the tensorboard.
    */
   matchTensorboardFromTensorboardName(tensorboardName: string) {
-    return this.pathTemplates.tensorboardPathTemplate.match(tensorboardName)
-      .tensorboard;
+    return this.pathTemplates.tensorboardPathTemplate.match(tensorboardName).tensorboard;
   }
 
   /**
@@ -4486,12 +4236,7 @@ export class FeaturestoreOnlineServingServiceClient {
    * @param {string} experiment
    * @returns {string} Resource name string.
    */
-  tensorboardExperimentPath(
-    project: string,
-    location: string,
-    tensorboard: string,
-    experiment: string
-  ) {
+  tensorboardExperimentPath(project:string,location:string,tensorboard:string,experiment:string) {
     return this.pathTemplates.tensorboardExperimentPathTemplate.render({
       project: project,
       location: location,
@@ -4508,9 +4253,7 @@ export class FeaturestoreOnlineServingServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromTensorboardExperimentName(tensorboardExperimentName: string) {
-    return this.pathTemplates.tensorboardExperimentPathTemplate.match(
-      tensorboardExperimentName
-    ).project;
+    return this.pathTemplates.tensorboardExperimentPathTemplate.match(tensorboardExperimentName).project;
   }
 
   /**
@@ -4520,12 +4263,8 @@ export class FeaturestoreOnlineServingServiceClient {
    *   A fully-qualified path representing TensorboardExperiment resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromTensorboardExperimentName(
-    tensorboardExperimentName: string
-  ) {
-    return this.pathTemplates.tensorboardExperimentPathTemplate.match(
-      tensorboardExperimentName
-    ).location;
+  matchLocationFromTensorboardExperimentName(tensorboardExperimentName: string) {
+    return this.pathTemplates.tensorboardExperimentPathTemplate.match(tensorboardExperimentName).location;
   }
 
   /**
@@ -4535,12 +4274,8 @@ export class FeaturestoreOnlineServingServiceClient {
    *   A fully-qualified path representing TensorboardExperiment resource.
    * @returns {string} A string representing the tensorboard.
    */
-  matchTensorboardFromTensorboardExperimentName(
-    tensorboardExperimentName: string
-  ) {
-    return this.pathTemplates.tensorboardExperimentPathTemplate.match(
-      tensorboardExperimentName
-    ).tensorboard;
+  matchTensorboardFromTensorboardExperimentName(tensorboardExperimentName: string) {
+    return this.pathTemplates.tensorboardExperimentPathTemplate.match(tensorboardExperimentName).tensorboard;
   }
 
   /**
@@ -4550,12 +4285,8 @@ export class FeaturestoreOnlineServingServiceClient {
    *   A fully-qualified path representing TensorboardExperiment resource.
    * @returns {string} A string representing the experiment.
    */
-  matchExperimentFromTensorboardExperimentName(
-    tensorboardExperimentName: string
-  ) {
-    return this.pathTemplates.tensorboardExperimentPathTemplate.match(
-      tensorboardExperimentName
-    ).experiment;
+  matchExperimentFromTensorboardExperimentName(tensorboardExperimentName: string) {
+    return this.pathTemplates.tensorboardExperimentPathTemplate.match(tensorboardExperimentName).experiment;
   }
 
   /**
@@ -4568,13 +4299,7 @@ export class FeaturestoreOnlineServingServiceClient {
    * @param {string} run
    * @returns {string} Resource name string.
    */
-  tensorboardRunPath(
-    project: string,
-    location: string,
-    tensorboard: string,
-    experiment: string,
-    run: string
-  ) {
+  tensorboardRunPath(project:string,location:string,tensorboard:string,experiment:string,run:string) {
     return this.pathTemplates.tensorboardRunPathTemplate.render({
       project: project,
       location: location,
@@ -4592,9 +4317,7 @@ export class FeaturestoreOnlineServingServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromTensorboardRunName(tensorboardRunName: string) {
-    return this.pathTemplates.tensorboardRunPathTemplate.match(
-      tensorboardRunName
-    ).project;
+    return this.pathTemplates.tensorboardRunPathTemplate.match(tensorboardRunName).project;
   }
 
   /**
@@ -4605,9 +4328,7 @@ export class FeaturestoreOnlineServingServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromTensorboardRunName(tensorboardRunName: string) {
-    return this.pathTemplates.tensorboardRunPathTemplate.match(
-      tensorboardRunName
-    ).location;
+    return this.pathTemplates.tensorboardRunPathTemplate.match(tensorboardRunName).location;
   }
 
   /**
@@ -4618,9 +4339,7 @@ export class FeaturestoreOnlineServingServiceClient {
    * @returns {string} A string representing the tensorboard.
    */
   matchTensorboardFromTensorboardRunName(tensorboardRunName: string) {
-    return this.pathTemplates.tensorboardRunPathTemplate.match(
-      tensorboardRunName
-    ).tensorboard;
+    return this.pathTemplates.tensorboardRunPathTemplate.match(tensorboardRunName).tensorboard;
   }
 
   /**
@@ -4631,9 +4350,7 @@ export class FeaturestoreOnlineServingServiceClient {
    * @returns {string} A string representing the experiment.
    */
   matchExperimentFromTensorboardRunName(tensorboardRunName: string) {
-    return this.pathTemplates.tensorboardRunPathTemplate.match(
-      tensorboardRunName
-    ).experiment;
+    return this.pathTemplates.tensorboardRunPathTemplate.match(tensorboardRunName).experiment;
   }
 
   /**
@@ -4644,9 +4361,7 @@ export class FeaturestoreOnlineServingServiceClient {
    * @returns {string} A string representing the run.
    */
   matchRunFromTensorboardRunName(tensorboardRunName: string) {
-    return this.pathTemplates.tensorboardRunPathTemplate.match(
-      tensorboardRunName
-    ).run;
+    return this.pathTemplates.tensorboardRunPathTemplate.match(tensorboardRunName).run;
   }
 
   /**
@@ -4660,14 +4375,7 @@ export class FeaturestoreOnlineServingServiceClient {
    * @param {string} time_series
    * @returns {string} Resource name string.
    */
-  tensorboardTimeSeriesPath(
-    project: string,
-    location: string,
-    tensorboard: string,
-    experiment: string,
-    run: string,
-    timeSeries: string
-  ) {
+  tensorboardTimeSeriesPath(project:string,location:string,tensorboard:string,experiment:string,run:string,timeSeries:string) {
     return this.pathTemplates.tensorboardTimeSeriesPathTemplate.render({
       project: project,
       location: location,
@@ -4686,9 +4394,7 @@ export class FeaturestoreOnlineServingServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromTensorboardTimeSeriesName(tensorboardTimeSeriesName: string) {
-    return this.pathTemplates.tensorboardTimeSeriesPathTemplate.match(
-      tensorboardTimeSeriesName
-    ).project;
+    return this.pathTemplates.tensorboardTimeSeriesPathTemplate.match(tensorboardTimeSeriesName).project;
   }
 
   /**
@@ -4698,12 +4404,8 @@ export class FeaturestoreOnlineServingServiceClient {
    *   A fully-qualified path representing TensorboardTimeSeries resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromTensorboardTimeSeriesName(
-    tensorboardTimeSeriesName: string
-  ) {
-    return this.pathTemplates.tensorboardTimeSeriesPathTemplate.match(
-      tensorboardTimeSeriesName
-    ).location;
+  matchLocationFromTensorboardTimeSeriesName(tensorboardTimeSeriesName: string) {
+    return this.pathTemplates.tensorboardTimeSeriesPathTemplate.match(tensorboardTimeSeriesName).location;
   }
 
   /**
@@ -4713,12 +4415,8 @@ export class FeaturestoreOnlineServingServiceClient {
    *   A fully-qualified path representing TensorboardTimeSeries resource.
    * @returns {string} A string representing the tensorboard.
    */
-  matchTensorboardFromTensorboardTimeSeriesName(
-    tensorboardTimeSeriesName: string
-  ) {
-    return this.pathTemplates.tensorboardTimeSeriesPathTemplate.match(
-      tensorboardTimeSeriesName
-    ).tensorboard;
+  matchTensorboardFromTensorboardTimeSeriesName(tensorboardTimeSeriesName: string) {
+    return this.pathTemplates.tensorboardTimeSeriesPathTemplate.match(tensorboardTimeSeriesName).tensorboard;
   }
 
   /**
@@ -4728,12 +4426,8 @@ export class FeaturestoreOnlineServingServiceClient {
    *   A fully-qualified path representing TensorboardTimeSeries resource.
    * @returns {string} A string representing the experiment.
    */
-  matchExperimentFromTensorboardTimeSeriesName(
-    tensorboardTimeSeriesName: string
-  ) {
-    return this.pathTemplates.tensorboardTimeSeriesPathTemplate.match(
-      tensorboardTimeSeriesName
-    ).experiment;
+  matchExperimentFromTensorboardTimeSeriesName(tensorboardTimeSeriesName: string) {
+    return this.pathTemplates.tensorboardTimeSeriesPathTemplate.match(tensorboardTimeSeriesName).experiment;
   }
 
   /**
@@ -4744,9 +4438,7 @@ export class FeaturestoreOnlineServingServiceClient {
    * @returns {string} A string representing the run.
    */
   matchRunFromTensorboardTimeSeriesName(tensorboardTimeSeriesName: string) {
-    return this.pathTemplates.tensorboardTimeSeriesPathTemplate.match(
-      tensorboardTimeSeriesName
-    ).run;
+    return this.pathTemplates.tensorboardTimeSeriesPathTemplate.match(tensorboardTimeSeriesName).run;
   }
 
   /**
@@ -4756,12 +4448,8 @@ export class FeaturestoreOnlineServingServiceClient {
    *   A fully-qualified path representing TensorboardTimeSeries resource.
    * @returns {string} A string representing the time_series.
    */
-  matchTimeSeriesFromTensorboardTimeSeriesName(
-    tensorboardTimeSeriesName: string
-  ) {
-    return this.pathTemplates.tensorboardTimeSeriesPathTemplate.match(
-      tensorboardTimeSeriesName
-    ).time_series;
+  matchTimeSeriesFromTensorboardTimeSeriesName(tensorboardTimeSeriesName: string) {
+    return this.pathTemplates.tensorboardTimeSeriesPathTemplate.match(tensorboardTimeSeriesName).time_series;
   }
 
   /**
@@ -4772,11 +4460,7 @@ export class FeaturestoreOnlineServingServiceClient {
    * @param {string} training_pipeline
    * @returns {string} Resource name string.
    */
-  trainingPipelinePath(
-    project: string,
-    location: string,
-    trainingPipeline: string
-  ) {
+  trainingPipelinePath(project:string,location:string,trainingPipeline:string) {
     return this.pathTemplates.trainingPipelinePathTemplate.render({
       project: project,
       location: location,
@@ -4792,9 +4476,7 @@ export class FeaturestoreOnlineServingServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromTrainingPipelineName(trainingPipelineName: string) {
-    return this.pathTemplates.trainingPipelinePathTemplate.match(
-      trainingPipelineName
-    ).project;
+    return this.pathTemplates.trainingPipelinePathTemplate.match(trainingPipelineName).project;
   }
 
   /**
@@ -4805,9 +4487,7 @@ export class FeaturestoreOnlineServingServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromTrainingPipelineName(trainingPipelineName: string) {
-    return this.pathTemplates.trainingPipelinePathTemplate.match(
-      trainingPipelineName
-    ).location;
+    return this.pathTemplates.trainingPipelinePathTemplate.match(trainingPipelineName).location;
   }
 
   /**
@@ -4818,9 +4498,7 @@ export class FeaturestoreOnlineServingServiceClient {
    * @returns {string} A string representing the training_pipeline.
    */
   matchTrainingPipelineFromTrainingPipelineName(trainingPipelineName: string) {
-    return this.pathTemplates.trainingPipelinePathTemplate.match(
-      trainingPipelineName
-    ).training_pipeline;
+    return this.pathTemplates.trainingPipelinePathTemplate.match(trainingPipelineName).training_pipeline;
   }
 
   /**
@@ -4832,7 +4510,7 @@ export class FeaturestoreOnlineServingServiceClient {
    * @param {string} trial
    * @returns {string} Resource name string.
    */
-  trialPath(project: string, location: string, study: string, trial: string) {
+  trialPath(project:string,location:string,study:string,trial:string) {
     return this.pathTemplates.trialPathTemplate.render({
       project: project,
       location: location,
@@ -4893,7 +4571,7 @@ export class FeaturestoreOnlineServingServiceClient {
    * @param {string} tuning_job
    * @returns {string} Resource name string.
    */
-  tuningJobPath(project: string, location: string, tuningJob: string) {
+  tuningJobPath(project:string,location:string,tuningJob:string) {
     return this.pathTemplates.tuningJobPathTemplate.render({
       project: project,
       location: location,
@@ -4909,8 +4587,7 @@ export class FeaturestoreOnlineServingServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromTuningJobName(tuningJobName: string) {
-    return this.pathTemplates.tuningJobPathTemplate.match(tuningJobName)
-      .project;
+    return this.pathTemplates.tuningJobPathTemplate.match(tuningJobName).project;
   }
 
   /**
@@ -4921,8 +4598,7 @@ export class FeaturestoreOnlineServingServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromTuningJobName(tuningJobName: string) {
-    return this.pathTemplates.tuningJobPathTemplate.match(tuningJobName)
-      .location;
+    return this.pathTemplates.tuningJobPathTemplate.match(tuningJobName).location;
   }
 
   /**
@@ -4933,8 +4609,7 @@ export class FeaturestoreOnlineServingServiceClient {
    * @returns {string} A string representing the tuning_job.
    */
   matchTuningJobFromTuningJobName(tuningJobName: string) {
-    return this.pathTemplates.tuningJobPathTemplate.match(tuningJobName)
-      .tuning_job;
+    return this.pathTemplates.tuningJobPathTemplate.match(tuningJobName).tuning_job;
   }
 
   /**
@@ -4946,6 +4621,7 @@ export class FeaturestoreOnlineServingServiceClient {
   close(): Promise<void> {
     if (this.featurestoreOnlineServingServiceStub && !this._terminated) {
       return this.featurestoreOnlineServingServiceStub.then(stub => {
+        this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
         this.iamClient.close();

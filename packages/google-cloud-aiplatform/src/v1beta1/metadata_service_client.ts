@@ -18,23 +18,11 @@
 
 /* global window */
 import type * as gax from 'google-gax';
-import type {
-  Callback,
-  CallOptions,
-  Descriptors,
-  ClientOptions,
-  GrpcClientOptions,
-  LROperation,
-  PaginationCallback,
-  GaxCall,
-  IamClient,
-  IamProtos,
-  LocationsClient,
-  LocationProtos,
-} from 'google-gax';
+import type {Callback, CallOptions, Descriptors, ClientOptions, GrpcClientOptions, LROperation, PaginationCallback, GaxCall, IamClient, IamProtos, LocationsClient, LocationProtos} from 'google-gax';
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
+import {loggingUtils as logging} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -59,6 +47,8 @@ export class MetadataServiceClient {
   private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
+  private _log = logging.log('aiplatform');
+
   auth: gax.GoogleAuth;
   descriptors: Descriptors = {
     page: {},
@@ -96,7 +86,7 @@ export class MetadataServiceClient {
    *     Developer's Console, e.g. 'grape-spaceship-123'. We will also check
    *     the environment variable GCLOUD_PROJECT for your project ID. If your
    *     app is running in an environment which supports
-   *     {@link https://developers.google.com/identity/protocols/application-default-credentials Application Default Credentials},
+   *     {@link https://cloud.google.com/docs/authentication/application-default-credentials Application Default Credentials},
    *     your project ID will be detected automatically.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
@@ -113,41 +103,20 @@ export class MetadataServiceClient {
    *     const client = new MetadataServiceClient({fallback: true}, gax);
    *     ```
    */
-  constructor(
-    opts?: ClientOptions,
-    gaxInstance?: typeof gax | typeof gax.fallback
-  ) {
+  constructor(opts?: ClientOptions, gaxInstance?: typeof gax | typeof gax.fallback) {
     // Ensure that options include all the required fields.
     const staticMembers = this.constructor as typeof MetadataServiceClient;
-    if (
-      opts?.universe_domain &&
-      opts?.universeDomain &&
-      opts?.universe_domain !== opts?.universeDomain
-    ) {
-      throw new Error(
-        'Please set either universe_domain or universeDomain, but not both.'
-      );
+    if (opts?.universe_domain && opts?.universeDomain && opts?.universe_domain !== opts?.universeDomain) {
+      throw new Error('Please set either universe_domain or universeDomain, but not both.');
     }
-    const universeDomainEnvVar =
-      typeof process === 'object' && typeof process.env === 'object'
-        ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN']
-        : undefined;
-    this._universeDomain =
-      opts?.universeDomain ??
-      opts?.universe_domain ??
-      universeDomainEnvVar ??
-      'googleapis.com';
+    const universeDomainEnvVar = (typeof process === 'object' && typeof process.env === 'object') ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] : undefined;
+    this._universeDomain = opts?.universeDomain ?? opts?.universe_domain ?? universeDomainEnvVar ?? 'googleapis.com';
     this._servicePath = 'aiplatform.' + this._universeDomain;
-    const servicePath =
-      opts?.servicePath || opts?.apiEndpoint || this._servicePath;
-    this._providedCustomServicePath = !!(
-      opts?.servicePath || opts?.apiEndpoint
-    );
+    const servicePath = opts?.servicePath || opts?.apiEndpoint || this._servicePath;
+    this._providedCustomServicePath = !!(opts?.servicePath || opts?.apiEndpoint);
     const port = opts?.port || staticMembers.port;
     const clientConfig = opts?.clientConfig ?? {};
-    const fallback =
-      opts?.fallback ??
-      (typeof window !== 'undefined' && typeof window?.fetch === 'function');
+    const fallback = opts?.fallback ?? (typeof window !== 'undefined' && typeof window?.fetch === 'function');
     opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
     // Request numeric enum values if REST transport is used.
@@ -173,7 +142,7 @@ export class MetadataServiceClient {
     this._opts = opts;
 
     // Save the auth object to the client, for use by other methods.
-    this.auth = this._gaxGrpc.auth as gax.GoogleAuth;
+    this.auth = (this._gaxGrpc.auth as gax.GoogleAuth);
 
     // Set useJWTAccessWithScope on the auth object.
     this.auth.useJWTAccessWithScope = true;
@@ -186,14 +155,18 @@ export class MetadataServiceClient {
       this.auth.defaultScopes = staticMembers.scopes;
     }
     this.iamClient = new this._gaxModule.IamClient(this._gaxGrpc, opts);
-
+  
     this.locationsClient = new this._gaxModule.LocationsClient(
       this._gaxGrpc,
       opts
     );
+  
 
     // Determine the client header string.
-    const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
+    const clientHeader = [
+      `gax/${this._gaxModule.version}`,
+      `gapic/${version}`,
+    ];
     if (typeof process === 'object' && 'versions' in process) {
       clientHeader.push(`gl-node/${process.versions.node}`);
     } else {
@@ -253,6 +226,9 @@ export class MetadataServiceClient {
       entityTypePathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/featurestores/{featurestore}/entityTypes/{entity_type}'
       ),
+      exampleStorePathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/exampleStores/{example_store}'
+      ),
       executionPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/metadataStores/{metadata_store}/executions/{execution}'
       ),
@@ -301,10 +277,9 @@ export class MetadataServiceClient {
       modelPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/models/{model}'
       ),
-      modelDeploymentMonitoringJobPathTemplate:
-        new this._gaxModule.PathTemplate(
-          'projects/{project}/locations/{location}/modelDeploymentMonitoringJobs/{model_deployment_monitoring_job}'
-        ),
+      modelDeploymentMonitoringJobPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/modelDeploymentMonitoringJobs/{model_deployment_monitoring_job}'
+      ),
       modelEvaluationPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/models/{model}/evaluations/{evaluation}'
       ),
@@ -344,18 +319,27 @@ export class MetadataServiceClient {
       projectLocationEndpointPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/endpoints/{endpoint}'
       ),
-      projectLocationFeatureGroupFeaturePathTemplate:
-        new this._gaxModule.PathTemplate(
-          'projects/{project}/locations/{location}/featureGroups/{feature_group}/features/{feature}'
-        ),
-      projectLocationFeaturestoreEntityTypeFeaturePathTemplate:
-        new this._gaxModule.PathTemplate(
-          'projects/{project}/locations/{location}/featurestores/{featurestore}/entityTypes/{entity_type}/features/{feature}'
-        ),
-      projectLocationPublisherModelPathTemplate:
-        new this._gaxModule.PathTemplate(
-          'projects/{project}/locations/{location}/publishers/{publisher}/models/{model}'
-        ),
+      projectLocationFeatureGroupFeaturePathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/featureGroups/{feature_group}/features/{feature}'
+      ),
+      projectLocationFeaturestoreEntityTypeFeaturePathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/featurestores/{featurestore}/entityTypes/{entity_type}/features/{feature}'
+      ),
+      projectLocationPublisherModelPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/publishers/{publisher}/models/{model}'
+      ),
+      projectLocationReasoningEngineSessionPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/reasoningEngines/{reasoning_engine}/sessions/{session}'
+      ),
+      projectLocationReasoningEngineSessionEventPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/reasoningEngines/{reasoning_engine}/sessions/{session}/events/{event}'
+      ),
+      projectLocationSessionPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/sessions/{session}'
+      ),
+      projectLocationSessionEventPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/sessions/{session}/events/{event}'
+      ),
       publisherModelPathTemplate: new this._gaxModule.PathTemplate(
         'publishers/{publisher}/models/{model}'
       ),
@@ -407,31 +391,16 @@ export class MetadataServiceClient {
     // (e.g. 50 results at a time, with tokens to get subsequent
     // pages). Denote the keys used for pagination and results.
     this.descriptors.page = {
-      listMetadataStores: new this._gaxModule.PageDescriptor(
-        'pageToken',
-        'nextPageToken',
-        'metadataStores'
-      ),
-      listArtifacts: new this._gaxModule.PageDescriptor(
-        'pageToken',
-        'nextPageToken',
-        'artifacts'
-      ),
-      listContexts: new this._gaxModule.PageDescriptor(
-        'pageToken',
-        'nextPageToken',
-        'contexts'
-      ),
-      listExecutions: new this._gaxModule.PageDescriptor(
-        'pageToken',
-        'nextPageToken',
-        'executions'
-      ),
-      listMetadataSchemas: new this._gaxModule.PageDescriptor(
-        'pageToken',
-        'nextPageToken',
-        'metadataSchemas'
-      ),
+      listMetadataStores:
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'metadataStores'),
+      listArtifacts:
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'artifacts'),
+      listContexts:
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'contexts'),
+      listExecutions:
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'executions'),
+      listMetadataSchemas:
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'metadataSchemas')
     };
 
     const protoFilesRoot = this._gaxModule.protobuf.Root.fromJSON(jsonProtos);
@@ -440,1892 +409,95 @@ export class MetadataServiceClient {
     // rather than holding a request open.
     const lroOptions: GrpcClientOptions = {
       auth: this.auth,
-      grpc: 'grpc' in this._gaxGrpc ? this._gaxGrpc.grpc : undefined,
+      grpc: 'grpc' in this._gaxGrpc ? this._gaxGrpc.grpc : undefined
     };
     if (opts.fallback) {
       lroOptions.protoJson = protoFilesRoot;
-      lroOptions.httpRules = [
-        {
-          selector: 'google.cloud.location.Locations.GetLocation',
-          get: '/ui/{name=projects/*/locations/*}',
-          additional_bindings: [
-            {get: '/v1beta1/{name=projects/*/locations/*}'},
-          ],
-        },
-        {
-          selector: 'google.cloud.location.Locations.ListLocations',
-          get: '/ui/{name=projects/*}/locations',
-          additional_bindings: [{get: '/v1beta1/{name=projects/*}/locations'}],
-        },
-        {
-          selector: 'google.iam.v1.IAMPolicy.GetIamPolicy',
-          post: '/v1beta1/{resource=projects/*/locations/*/featurestores/*}:getIamPolicy',
-          body: '*',
-          additional_bindings: [
-            {
-              post: '/v1beta1/{resource=projects/*/locations/*/featurestores/*/entityTypes/*}:getIamPolicy',
-            },
-            {
-              post: '/v1beta1/{resource=projects/*/locations/*/models/*}:getIamPolicy',
-            },
-            {
-              post: '/v1beta1/{resource=projects/*/locations/*/endpoints/*}:getIamPolicy',
-            },
-            {
-              post: '/v1beta1/{resource=projects/*/locations/*/notebookRuntimeTemplates/*}:getIamPolicy',
-            },
-            {
-              post: '/v1beta1/{resource=projects/*/locations/*/publishers/*/models/*}:getIamPolicy',
-            },
-            {
-              post: '/v1beta1/{resource=projects/*/locations/*/featureOnlineStores/*}:getIamPolicy',
-            },
-            {
-              post: '/v1beta1/{resource=projects/*/locations/*/featureOnlineStores/*/featureViews/*}:getIamPolicy',
-            },
-            {
-              post: '/v1beta1/{resource=projects/*/locations/*/featureGroups/*}:getIamPolicy',
-            },
-            {
-              post: '/ui/{resource=projects/*/locations/*/featurestores/*}:getIamPolicy',
-            },
-            {
-              post: '/ui/{resource=projects/*/locations/*/featurestores/*/entityTypes/*}:getIamPolicy',
-            },
-            {
-              post: '/ui/{resource=projects/*/locations/*/models/*}:getIamPolicy',
-            },
-            {
-              post: '/ui/{resource=projects/*/locations/*/endpoints/*}:getIamPolicy',
-            },
-            {
-              post: '/ui/{resource=projects/*/locations/*/notebookRuntimeTemplates/*}:getIamPolicy',
-            },
-            {
-              post: '/ui/{resource=projects/*/locations/*/publishers/*/models/*}:getIamPolicy',
-            },
-            {
-              post: '/ui/{resource=projects/*/locations/*/featureOnlineStores/*}:getIamPolicy',
-            },
-            {
-              post: '/ui/{resource=projects/*/locations/*/featureOnlineStores/*/featureViews/*}:getIamPolicy',
-            },
-            {
-              post: '/ui/{resource=projects/*/locations/*/featureGroups/*}:getIamPolicy',
-            },
-          ],
-        },
-        {
-          selector: 'google.iam.v1.IAMPolicy.SetIamPolicy',
-          post: '/v1beta1/{resource=projects/*/locations/*/featurestores/*}:setIamPolicy',
-          body: '*',
-          additional_bindings: [
-            {
-              post: '/v1beta1/{resource=projects/*/locations/*/featurestores/*/entityTypes/*}:setIamPolicy',
-              body: '*',
-            },
-            {
-              post: '/v1beta1/{resource=projects/*/locations/*/models/*}:setIamPolicy',
-              body: '*',
-            },
-            {
-              post: '/v1beta1/{resource=projects/*/locations/*/endpoints/*}:setIamPolicy',
-              body: '*',
-            },
-            {
-              post: '/v1beta1/{resource=projects/*/locations/*/notebookRuntimeTemplates/*}:setIamPolicy',
-              body: '*',
-            },
-            {
-              post: '/v1beta1/{resource=projects/*/locations/*/featureOnlineStores/*}:setIamPolicy',
-              body: '*',
-            },
-            {
-              post: '/v1beta1/{resource=projects/*/locations/*/featureOnlineStores/*/featureViews/*}:setIamPolicy',
-              body: '*',
-            },
-            {
-              post: '/v1beta1/{resource=projects/*/locations/*/featureGroups/*}:setIamPolicy',
-              body: '*',
-            },
-            {
-              post: '/ui/{resource=projects/*/locations/*/featurestores/*}:setIamPolicy',
-              body: '*',
-            },
-            {
-              post: '/ui/{resource=projects/*/locations/*/featurestores/*/entityTypes/*}:setIamPolicy',
-              body: '*',
-            },
-            {
-              post: '/ui/{resource=projects/*/locations/*/models/*}:setIamPolicy',
-              body: '*',
-            },
-            {
-              post: '/ui/{resource=projects/*/locations/*/endpoints/*}:setIamPolicy',
-              body: '*',
-            },
-            {
-              post: '/ui/{resource=projects/*/locations/*/notebookRuntimeTemplates/*}:setIamPolicy',
-              body: '*',
-            },
-            {
-              post: '/ui/{resource=projects/*/locations/*/featureOnlineStores/*}:setIamPolicy',
-              body: '*',
-            },
-            {
-              post: '/ui/{resource=projects/*/locations/*/featureOnlineStores/*/featureViews/*}:setIamPolicy',
-              body: '*',
-            },
-            {
-              post: '/ui/{resource=projects/*/locations/*/featureGroups/*}:setIamPolicy',
-              body: '*',
-            },
-          ],
-        },
-        {
-          selector: 'google.iam.v1.IAMPolicy.TestIamPermissions',
-          post: '/v1beta1/{resource=projects/*/locations/*/featurestores/*}:testIamPermissions',
-          body: '*',
-          additional_bindings: [
-            {
-              post: '/v1beta1/{resource=projects/*/locations/*/featurestores/*/entityTypes/*}:testIamPermissions',
-            },
-            {
-              post: '/v1beta1/{resource=projects/*/locations/*/models/*}:testIamPermissions',
-            },
-            {
-              post: '/v1beta1/{resource=projects/*/locations/*/endpoints/*}:testIamPermissions',
-            },
-            {
-              post: '/v1beta1/{resource=projects/*/locations/*/notebookRuntimeTemplates/*}:testIamPermissions',
-            },
-            {
-              post: '/v1beta1/{resource=projects/*/locations/*/featureOnlineStores/*}:testIamPermissions',
-            },
-            {
-              post: '/v1beta1/{resource=projects/*/locations/*/featureOnlineStores/*/featureViews/*}:testIamPermissions',
-            },
-            {
-              post: '/v1beta1/{resource=projects/*/locations/*/featureGroups/*}:testIamPermissions',
-            },
-            {
-              post: '/ui/{resource=projects/*/locations/*/featurestores/*}:testIamPermissions',
-            },
-            {
-              post: '/ui/{resource=projects/*/locations/*/featurestores/*/entityTypes/*}:testIamPermissions',
-            },
-            {
-              post: '/ui/{resource=projects/*/locations/*/models/*}:testIamPermissions',
-            },
-            {
-              post: '/ui/{resource=projects/*/locations/*/endpoints/*}:testIamPermissions',
-            },
-            {
-              post: '/ui/{resource=projects/*/locations/*/notebookRuntimeTemplates/*}:testIamPermissions',
-            },
-            {
-              post: '/ui/{resource=projects/*/locations/*/featureOnlineStores/*}:testIamPermissions',
-            },
-            {
-              post: '/ui/{resource=projects/*/locations/*/featureOnlineStores/*/featureViews/*}:testIamPermissions',
-            },
-            {
-              post: '/ui/{resource=projects/*/locations/*/featureGroups/*}:testIamPermissions',
-            },
-          ],
-        },
-        {
-          selector: 'google.longrunning.Operations.CancelOperation',
-          post: '/ui/{name=projects/*/locations/*/operations/*}:cancel',
-          additional_bindings: [
-            {
-              post: '/ui/{name=projects/*/locations/*/agents/*/operations/*}:cancel',
-            },
-            {
-              post: '/ui/{name=projects/*/locations/*/apps/*/operations/*}:cancel',
-            },
-            {
-              post: '/ui/{name=projects/*/locations/*/datasets/*/operations/*}:cancel',
-            },
-            {
-              post: '/ui/{name=projects/*/locations/*/datasets/*/dataItems/*/operations/*}:cancel',
-            },
-            {
-              post: '/ui/{name=projects/*/locations/*/datasets/*/savedQueries/*/operations/*}:cancel',
-            },
-            {
-              post: '/ui/{name=projects/*/locations/*/datasets/*/annotationSpecs/*/operations/*}:cancel',
-            },
-            {
-              post: '/ui/{name=projects/*/locations/*/datasets/*/dataItems/*/annotations/*/operations/*}:cancel',
-            },
-            {
-              post: '/ui/{name=projects/*/locations/*/deploymentResourcePools/*/operations/*}:cancel',
-            },
-            {
-              post: '/ui/{name=projects/*/locations/*/edgeDevices/*/operations/*}:cancel',
-            },
-            {
-              post: '/ui/{name=projects/*/locations/*/endpoints/*/operations/*}:cancel',
-            },
-            {
-              post: '/ui/{name=projects/*/locations/*/extensionControllers/*/operations/*}:cancel',
-            },
-            {
-              post: '/ui/{name=projects/*/locations/*/extensions/*/operations/*}:cancel',
-            },
-            {
-              post: '/ui/{name=projects/*/locations/*/featurestores/*/operations/*}:cancel',
-            },
-            {
-              post: '/ui/{name=projects/*/locations/*/featurestores/*/entityTypes/*/operations/*}:cancel',
-            },
-            {
-              post: '/ui/{name=projects/*/locations/*/featurestores/*/entityTypes/*/features/*/operations/*}:cancel',
-            },
-            {
-              post: '/ui/{name=projects/*/locations/*/customJobs/*/operations/*}:cancel',
-            },
-            {
-              post: '/ui/{name=projects/*/locations/*/dataLabelingJobs/*/operations/*}:cancel',
-            },
-            {
-              post: '/ui/{name=projects/*/locations/*/hyperparameterTuningJobs/*/operations/*}:cancel',
-            },
-            {
-              post: '/ui/{name=projects/*/locations/*/tuningJobs/*/operations/*}:cancel',
-            },
-            {
-              post: '/ui/{name=projects/*/locations/*/indexes/*/operations/*}:cancel',
-            },
-            {
-              post: '/ui/{name=projects/*/locations/*/indexEndpoints/*/operations/*}:cancel',
-            },
-            {
-              post: '/ui/{name=projects/*/locations/*/metadataStores/*/operations/*}:cancel',
-            },
-            {
-              post: '/ui/{name=projects/*/locations/*/metadataStores/*/artifacts/*/operations/*}:cancel',
-            },
-            {
-              post: '/ui/{name=projects/*/locations/*/metadataStores/*/contexts/*/operations/*}:cancel',
-            },
-            {
-              post: '/ui/{name=projects/*/locations/*/metadataStores/*/executions/*/operations/*}:cancel',
-            },
-            {
-              post: '/ui/{name=projects/*/locations/*/modelDeploymentMonitoringJobs/*/operations/*}:cancel',
-            },
-            {
-              post: '/ui/{name=projects/*/locations/*/modelMonitors/*/operations/*}:cancel',
-            },
-            {
-              post: '/ui/{name=projects/*/locations/*/migratableResources/*/operations/*}:cancel',
-            },
-            {
-              post: '/ui/{name=projects/*/locations/*/models/*/operations/*}:cancel',
-            },
-            {
-              post: '/ui/{name=projects/*/locations/*/models/*/evaluations/*/operations/*}:cancel',
-            },
-            {
-              post: '/ui/{name=projects/*/locations/*/notebookExecutionJobs/*/operations/*}:cancel',
-            },
-            {
-              post: '/ui/{name=projects/*/locations/*/notebookRuntimes/*/operations/*}:cancel',
-            },
-            {
-              post: '/ui/{name=projects/*/locations/*/notebookRuntimeTemplates/*/operations/*}:cancel',
-            },
-            {
-              post: '/ui/{name=projects/*/locations/*/persistentResources/*/operations/*}:cancel',
-            },
-            {
-              post: '/ui/{name=projects/*/locations/*/studies/*/operations/*}:cancel',
-            },
-            {
-              post: '/ui/{name=projects/*/locations/*/studies/*/trials/*/operations/*}:cancel',
-            },
-            {
-              post: '/ui/{name=projects/*/locations/*/trainingPipelines/*/operations/*}:cancel',
-            },
-            {
-              post: '/ui/{name=projects/*/locations/*/pipelineJobs/*/operations/*}:cancel',
-            },
-            {
-              post: '/ui/{name=projects/*/locations/*/schedules/*/operations/*}:cancel',
-            },
-            {
-              post: '/ui/{name=projects/*/locations/*/specialistPools/*/operations/*}:cancel',
-            },
-            {
-              post: '/ui/{name=projects/*/locations/*/tensorboards/*/operations/*}:cancel',
-            },
-            {
-              post: '/ui/{name=projects/*/locations/*/tensorboards/*/experiments/*/operations/*}:cancel',
-            },
-            {
-              post: '/ui/{name=projects/*/locations/*/tensorboards/*/experiments/*/runs/*/operations/*}:cancel',
-            },
-            {
-              post: '/ui/{name=projects/*/locations/*/tensorboards/*/experiments/*/runs/*/timeSeries/*/operations/*}:cancel',
-            },
-            {
-              post: '/v1beta1/{name=projects/*/locations/*/operations/*}:cancel',
-            },
-            {
-              post: '/v1beta1/{name=projects/*/locations/*/agents/*/operations/*}:cancel',
-            },
-            {
-              post: '/v1beta1/{name=projects/*/locations/*/apps/*/operations/*}:cancel',
-            },
-            {
-              post: '/v1beta1/{name=projects/*/locations/*/datasets/*/operations/*}:cancel',
-            },
-            {
-              post: '/v1beta1/{name=projects/*/locations/*/datasets/*/dataItems/*/operations/*}:cancel',
-            },
-            {
-              post: '/v1beta1/{name=projects/*/locations/*/datasets/*/savedQueries/*/operations/*}:cancel',
-            },
-            {
-              post: '/v1beta1/{name=projects/*/locations/*/datasets/*/annotationSpecs/*/operations/*}:cancel',
-            },
-            {
-              post: '/v1beta1/{name=projects/*/locations/*/datasets/*/dataItems/*/annotations/*/operations/*}:cancel',
-            },
-            {
-              post: '/v1beta1/{name=projects/*/locations/*/deploymentResourcePools/*/operations/*}:cancel',
-            },
-            {
-              post: '/v1beta1/{name=projects/*/locations/*/edgeDevices/*/operations/*}:cancel',
-            },
-            {
-              post: '/v1beta1/{name=projects/*/locations/*/endpoints/*/operations/*}:cancel',
-            },
-            {
-              post: '/v1beta1/{name=projects/*/locations/*/exampleStores/*/operations/*}:cancel',
-            },
-            {
-              post: '/v1beta1/{name=projects/*/locations/*/extensionControllers/*/operations/*}:cancel',
-            },
-            {
-              post: '/v1beta1/{name=projects/*/locations/*/extensions/*/operations/*}:cancel',
-            },
-            {
-              post: '/v1beta1/{name=projects/*/locations/*/featurestores/*/operations/*}:cancel',
-            },
-            {
-              post: '/v1beta1/{name=projects/*/locations/*/featurestores/*/entityTypes/*/operations/*}:cancel',
-            },
-            {
-              post: '/v1beta1/{name=projects/*/locations/*/featurestores/*/entityTypes/*/features/*/operations/*}:cancel',
-            },
-            {
-              post: '/v1beta1/{name=projects/*/locations/*/customJobs/*/operations/*}:cancel',
-            },
-            {
-              post: '/v1beta1/{name=projects/*/locations/*/dataLabelingJobs/*/operations/*}:cancel',
-            },
-            {
-              post: '/v1beta1/{name=projects/*/locations/*/hyperparameterTuningJobs/*/operations/*}:cancel',
-            },
-            {
-              post: '/v1beta1/{name=projects/*/locations/*/indexes/*/operations/*}:cancel',
-            },
-            {
-              post: '/v1beta1/{name=projects/*/locations/*/indexEndpoints/*/operations/*}:cancel',
-            },
-            {
-              post: '/v1beta1/{name=projects/*/locations/*/metadataStores/*/operations/*}:cancel',
-            },
-            {
-              post: '/v1beta1/{name=projects/*/locations/*/metadataStores/*/artifacts/*/operations/*}:cancel',
-            },
-            {
-              post: '/v1beta1/{name=projects/*/locations/*/metadataStores/*/contexts/*/operations/*}:cancel',
-            },
-            {
-              post: '/v1beta1/{name=projects/*/locations/*/metadataStores/*/executions/*/operations/*}:cancel',
-            },
-            {
-              post: '/v1beta1/{name=projects/*/locations/*/modelDeploymentMonitoringJobs/*/operations/*}:cancel',
-            },
-            {
-              post: '/v1beta1/{name=projects/*/locations/*/modelMonitors/*/operations/*}:cancel',
-            },
-            {
-              post: '/v1beta1/{name=projects/*/locations/*/migratableResources/*/operations/*}:cancel',
-            },
-            {
-              post: '/v1beta1/{name=projects/*/locations/*/models/*/operations/*}:cancel',
-            },
-            {
-              post: '/v1beta1/{name=projects/*/locations/*/models/*/evaluations/*/operations/*}:cancel',
-            },
-            {
-              post: '/v1beta1/{name=projects/*/locations/*/notebookExecutionJobs/*/operations/*}:cancel',
-            },
-            {
-              post: '/v1beta1/{name=projects/*/locations/*/notebookRuntimes/*/operations/*}:cancel',
-            },
-            {
-              post: '/v1beta1/{name=projects/*/locations/*/notebookRuntimeTemplates/*/operations/*}:cancel',
-            },
-            {
-              post: '/v1beta1/{name=projects/*/locations/*/persistentResources/*/operations/*}:cancel',
-            },
-            {
-              post: '/v1beta1/{name=projects/*/locations/*/ragCorpora/*/operations/*}:cancel',
-            },
-            {
-              post: '/v1beta1/{name=projects/*/locations/*/ragCorpora/*/ragFiles/*/operations/*}:cancel',
-            },
-            {
-              post: '/v1beta1/{name=projects/*/locations/*/studies/*/operations/*}:cancel',
-            },
-            {
-              post: '/v1beta1/{name=projects/*/locations/*/studies/*/trials/*/operations/*}:cancel',
-            },
-            {
-              post: '/v1beta1/{name=projects/*/locations/*/trainingPipelines/*/operations/*}:cancel',
-            },
-            {
-              post: '/v1beta1/{name=projects/*/locations/*/pipelineJobs/*/operations/*}:cancel',
-            },
-            {
-              post: '/v1beta1/{name=projects/*/locations/*/reasoningEngines/*/operations/*}:cancel',
-            },
-            {
-              post: '/v1beta1/{name=projects/*/locations/*/schedules/*/operations/*}:cancel',
-            },
-            {
-              post: '/v1beta1/{name=projects/*/locations/*/specialistPools/*/operations/*}:cancel',
-            },
-            {
-              post: '/v1beta1/{name=projects/*/locations/*/tensorboards/*/operations/*}:cancel',
-            },
-            {
-              post: '/v1beta1/{name=projects/*/locations/*/tensorboards/*/experiments/*/operations/*}:cancel',
-            },
-            {
-              post: '/v1beta1/{name=projects/*/locations/*/tensorboards/*/experiments/*/runs/*/operations/*}:cancel',
-            },
-            {
-              post: '/v1beta1/{name=projects/*/locations/*/tensorboards/*/experiments/*/runs/*/timeSeries/*/operations/*}:cancel',
-            },
-          ],
-        },
-        {
-          selector: 'google.longrunning.Operations.DeleteOperation',
-          delete: '/ui/{name=projects/*/locations/*/operations/*}',
-          additional_bindings: [
-            {delete: '/ui/{name=projects/*/locations/*/agents/*/operations/*}'},
-            {delete: '/ui/{name=projects/*/locations/*/apps/*/operations/*}'},
-            {
-              delete:
-                '/ui/{name=projects/*/locations/*/datasets/*/operations/*}',
-            },
-            {
-              delete:
-                '/ui/{name=projects/*/locations/*/datasets/*/dataItems/*/operations/*}',
-            },
-            {
-              delete:
-                '/ui/{name=projects/*/locations/*/datasets/*/savedQueries/*/operations/*}',
-            },
-            {
-              delete:
-                '/ui/{name=projects/*/locations/*/datasets/*/annotationSpecs/*/operations/*}',
-            },
-            {
-              delete:
-                '/ui/{name=projects/*/locations/*/datasets/*/dataItems/*/annotations/*/operations/*}',
-            },
-            {
-              delete:
-                '/ui/{name=projects/*/locations/*/deploymentResourcePools/*/operations/*}',
-            },
-            {
-              delete:
-                '/ui/{name=projects/*/locations/*/edgeDevices/*/operations/*}',
-            },
-            {
-              delete:
-                '/ui/{name=projects/*/locations/*/endpoints/*/operations/*}',
-            },
-            {
-              delete:
-                '/ui/{name=projects/*/locations/*/extensionControllers/*}/operations',
-            },
-            {
-              delete:
-                '/ui/{name=projects/*/locations/*/extensions/*}/operations',
-            },
-            {
-              delete:
-                '/ui/{name=projects/*/locations/*/featurestores/*/operations/*}',
-            },
-            {
-              delete:
-                '/ui/{name=projects/*/locations/*/featurestores/*/entityTypes/*/operations/*}',
-            },
-            {
-              delete:
-                '/ui/{name=projects/*/locations/*/featurestores/*/entityTypes/*/features/*/operations/*}',
-            },
-            {
-              delete:
-                '/ui/{name=projects/*/locations/*/customJobs/*/operations/*}',
-            },
-            {
-              delete:
-                '/ui/{name=projects/*/locations/*/dataLabelingJobs/*/operations/*}',
-            },
-            {
-              delete:
-                '/ui/{name=projects/*/locations/*/hyperparameterTuningJobs/*/operations/*}',
-            },
-            {
-              delete:
-                '/ui/{name=projects/*/locations/*/indexes/*/operations/*}',
-            },
-            {
-              delete:
-                '/ui/{name=projects/*/locations/*/indexEndpoints/*/operations/*}',
-            },
-            {
-              delete:
-                '/ui/{name=projects/*/locations/*/metadataStores/*/operations/*}',
-            },
-            {
-              delete:
-                '/ui/{name=projects/*/locations/*/metadataStores/*/artifacts/*/operations/*}',
-            },
-            {
-              delete:
-                '/ui/{name=projects/*/locations/*/metadataStores/*/contexts/*/operations/*}',
-            },
-            {
-              delete:
-                '/ui/{name=projects/*/locations/*/metadataStores/*/executions/*/operations/*}',
-            },
-            {
-              delete:
-                '/ui/{name=projects/*/locations/*/modelDeploymentMonitoringJobs/*/operations/*}',
-            },
-            {
-              delete:
-                '/ui/{name=projects/*/locations/*/modelMonitors/*/operations/*}',
-            },
-            {
-              delete:
-                '/ui/{name=projects/*/locations/*/migratableResources/*/operations/*}',
-            },
-            {delete: '/ui/{name=projects/*/locations/*/models/*/operations/*}'},
-            {
-              delete:
-                '/ui/{name=projects/*/locations/*/models/*/evaluations/*/operations/*}',
-            },
-            {
-              delete:
-                '/ui/{name=projects/*/locations/*/notebookExecutionJobs/*/operations/*}',
-            },
-            {
-              delete:
-                '/ui/{name=projects/*/locations/*/notebookRuntimes/*/operations/*}',
-            },
-            {
-              delete:
-                '/ui/{name=projects/*/locations/*/notebookRuntimeTemplates/*/operations/*}',
-            },
-            {
-              delete:
-                '/ui/{name=projects/*/locations/*/persistentResources/*/operations/*}',
-            },
-            {
-              delete:
-                '/ui/{name=projects/*/locations/*/studies/*/operations/*}',
-            },
-            {
-              delete:
-                '/ui/{name=projects/*/locations/*/studies/*/trials/*/operations/*}',
-            },
-            {
-              delete:
-                '/ui/{name=projects/*/locations/*/trainingPipelines/*/operations/*}',
-            },
-            {
-              delete:
-                '/ui/{name=projects/*/locations/*/pipelineJobs/*/operations/*}',
-            },
-            {
-              delete:
-                '/ui/{name=projects/*/locations/*/schedules/*/operations/*}',
-            },
-            {
-              delete:
-                '/ui/{name=projects/*/locations/*/specialistPools/*/operations/*}',
-            },
-            {
-              delete:
-                '/ui/{name=projects/*/locations/*/tensorboards/*/operations/*}',
-            },
-            {
-              delete:
-                '/ui/{name=projects/*/locations/*/tensorboards/*/experiments/*/operations/*}',
-            },
-            {
-              delete:
-                '/ui/{name=projects/*/locations/*/tensorboards/*/experiments/*/runs/*/operations/*}',
-            },
-            {
-              delete:
-                '/ui/{name=projects/*/locations/*/tensorboards/*/experiments/*/runs/*/timeSeries/*/operations/*}',
-            },
-            {
-              delete:
-                '/ui/{name=projects/*/locations/*/featureOnlineStores/*/operations/*}',
-            },
-            {
-              delete:
-                '/ui/{name=projects/*/locations/*/featureGroups/*/operations/*}',
-            },
-            {
-              delete:
-                '/ui/{name=projects/*/locations/*/featureGroups/*/features/*/operations/*}',
-            },
-            {
-              delete:
-                '/ui/{name=projects/*/locations/*/featureGroups/*/featureMonitors/*/operations/*}',
-            },
-            {
-              delete:
-                '/ui/{name=projects/*/locations/*/featureOnlineStores/*/featureViews/*/operations/*}',
-            },
-            {delete: '/v1beta1/{name=projects/*/locations/*/operations/*}'},
-            {
-              delete:
-                '/v1beta1/{name=projects/*/locations/*/agents/*/operations/*}',
-            },
-            {
-              delete:
-                '/v1beta1/{name=projects/*/locations/*/apps/*/operations/*}',
-            },
-            {
-              delete:
-                '/v1beta1/{name=projects/*/locations/*/datasets/*/operations/*}',
-            },
-            {
-              delete:
-                '/v1beta1/{name=projects/*/locations/*/datasets/*/dataItems/*/operations/*}',
-            },
-            {
-              delete:
-                '/v1beta1/{name=projects/*/locations/*/datasets/*/savedQueries/*/operations/*}',
-            },
-            {
-              delete:
-                '/v1beta1/{name=projects/*/locations/*/datasets/*/annotationSpecs/*/operations/*}',
-            },
-            {
-              delete:
-                '/v1beta1/{name=projects/*/locations/*/datasets/*/dataItems/*/annotations/*/operations/*}',
-            },
-            {
-              delete:
-                '/v1beta1/{name=projects/*/locations/*/deploymentResourcePools/*/operations/*}',
-            },
-            {
-              delete:
-                '/v1beta1/{name=projects/*/locations/*/edgeDevices/*/operations/*}',
-            },
-            {
-              delete:
-                '/v1beta1/{name=projects/*/locations/*/endpoints/*/operations/*}',
-            },
-            {
-              delete:
-                '/v1beta1/{name=projects/*/locations/*/featurestores/*/operations/*}',
-            },
-            {
-              delete:
-                '/v1beta1/{name=projects/*/locations/*/featurestores/*/entityTypes/*/operations/*}',
-            },
-            {
-              delete:
-                '/v1beta1/{name=projects/*/locations/*/featurestores/*/entityTypes/*/features/*/operations/*}',
-            },
-            {
-              delete:
-                '/v1beta1/{name=projects/*/locations/*/customJobs/*/operations/*}',
-            },
-            {
-              delete:
-                '/v1beta1/{name=projects/*/locations/*/dataLabelingJobs/*/operations/*}',
-            },
-            {
-              delete:
-                '/v1beta1/{name=projects/*/locations/*/evaluationTasks/*/operations/*}',
-            },
-            {
-              delete:
-                '/v1beta1/{name=projects/*/locations/*/exampleStores/*/operations/*}',
-            },
-            {
-              delete:
-                '/v1beta1/{name=projects/*/locations/*/extensionControllers/*/operations/*}',
-            },
-            {
-              delete:
-                '/v1beta1/{name=projects/*/locations/*/extensions/*/operations/*}',
-            },
-            {
-              delete:
-                '/v1beta1/{name=projects/*/locations/*/hyperparameterTuningJobs/*/operations/*}',
-            },
-            {
-              delete:
-                '/v1beta1/{name=projects/*/locations/*/indexes/*/operations/*}',
-            },
-            {
-              delete:
-                '/v1beta1/{name=projects/*/locations/*/indexEndpoints/*/operations/*}',
-            },
-            {
-              delete:
-                '/v1beta1/{name=projects/*/locations/*/metadataStores/*/operations/*}',
-            },
-            {
-              delete:
-                '/v1beta1/{name=projects/*/locations/*/metadataStores/*/artifacts/*/operations/*}',
-            },
-            {
-              delete:
-                '/v1beta1/{name=projects/*/locations/*/metadataStores/*/contexts/*/operations/*}',
-            },
-            {
-              delete:
-                '/v1beta1/{name=projects/*/locations/*/metadataStores/*/executions/*/operations/*}',
-            },
-            {
-              delete:
-                '/v1beta1/{name=projects/*/locations/*/modelDeploymentMonitoringJobs/*/operations/*}',
-            },
-            {
-              delete:
-                '/v1beta1/{name=projects/*/locations/*/modelMonitors/*/operations/*}',
-            },
-            {
-              delete:
-                '/v1beta1/{name=projects/*/locations/*/migratableResources/*/operations/*}',
-            },
-            {
-              delete:
-                '/v1beta1/{name=projects/*/locations/*/models/*/operations/*}',
-            },
-            {
-              delete:
-                '/v1beta1/{name=projects/*/locations/*/models/*/evaluations/*/operations/*}',
-            },
-            {
-              delete:
-                '/v1beta1/{name=projects/*/locations/*/notebookExecutionJobs/*/operations/*}',
-            },
-            {
-              delete:
-                '/v1beta1/{name=projects/*/locations/*/notebookRuntimes/*/operations/*}',
-            },
-            {
-              delete:
-                '/v1beta1/{name=projects/*/locations/*/notebookRuntimeTemplates/*/operations/*}',
-            },
-            {
-              delete:
-                '/v1beta1/{name=projects/*/locations/*/persistentResources/*/operations/*}',
-            },
-            {
-              delete:
-                '/v1beta1/{name=projects/*/locations/*/ragCorpora/*/operations/*}',
-            },
-            {
-              delete:
-                '/v1beta1/{name=projects/*/locations/*/ragCorpora/*/ragFiles/*/operations/*}',
-            },
-            {
-              delete:
-                '/v1beta1/{name=projects/*/locations/*/reasoningEngines/*/operations/*}',
-            },
-            {
-              delete:
-                '/v1beta1/{name=projects/*/locations/*/solvers/*/operations/*}',
-            },
-            {
-              delete:
-                '/v1beta1/{name=projects/*/locations/*/studies/*/operations/*}',
-            },
-            {
-              delete:
-                '/v1beta1/{name=projects/*/locations/*/studies/*/trials/*/operations/*}',
-            },
-            {
-              delete:
-                '/v1beta1/{name=projects/*/locations/*/trainingPipelines/*/operations/*}',
-            },
-            {
-              delete:
-                '/v1beta1/{name=projects/*/locations/*/pipelineJobs/*/operations/*}',
-            },
-            {
-              delete:
-                '/v1beta1/{name=projects/*/locations/*/schedules/*/operations/*}',
-            },
-            {
-              delete:
-                '/v1beta1/{name=projects/*/locations/*/specialistPools/*/operations/*}',
-            },
-            {
-              delete:
-                '/v1beta1/{name=projects/*/locations/*/tensorboards/*/operations/*}',
-            },
-            {
-              delete:
-                '/v1beta1/{name=projects/*/locations/*/tensorboards/*/experiments/*/operations/*}',
-            },
-            {
-              delete:
-                '/v1beta1/{name=projects/*/locations/*/tensorboards/*/experiments/*/runs/*/operations/*}',
-            },
-            {
-              delete:
-                '/v1beta1/{name=projects/*/locations/*/tensorboards/*/experiments/*/runs/*/timeSeries/*/operations/*}',
-            },
-            {
-              delete:
-                '/v1beta1/{name=projects/*/locations/*/featureOnlineStores/*/operations/*}',
-            },
-            {
-              delete:
-                '/v1beta1/{name=projects/*/locations/*/featureGroups/*/operations/*}',
-            },
-            {
-              delete:
-                '/v1beta1/{name=projects/*/locations/*/featureGroups/*/features/*/operations/*}',
-            },
-            {
-              delete:
-                '/v1beta1/{name=projects/*/locations/*/featureGroups/*/featureMonitors/*/operations/*}',
-            },
-            {
-              delete:
-                '/v1beta1/{name=projects/*/locations/*/featureOnlineStores/*/featureViews/*/operations/*}',
-            },
-          ],
-        },
-        {
-          selector: 'google.longrunning.Operations.GetOperation',
-          get: '/ui/{name=projects/*/locations/*/operations/*}',
-          additional_bindings: [
-            {get: '/ui/{name=projects/*/locations/*/agents/*/operations/*}'},
-            {get: '/ui/{name=projects/*/locations/*/apps/*/operations/*}'},
-            {get: '/ui/{name=projects/*/locations/*/datasets/*/operations/*}'},
-            {
-              get: '/ui/{name=projects/*/locations/*/datasets/*/dataItems/*/operations/*}',
-            },
-            {
-              get: '/ui/{name=projects/*/locations/*/datasets/*/savedQueries/*/operations/*}',
-            },
-            {
-              get: '/ui/{name=projects/*/locations/*/datasets/*/annotationSpecs/*/operations/*}',
-            },
-            {
-              get: '/ui/{name=projects/*/locations/*/datasets/*/dataItems/*/annotations/*/operations/*}',
-            },
-            {
-              get: '/ui/{name=projects/*/locations/*/deploymentResourcePools/*/operations/*}',
-            },
-            {
-              get: '/ui/{name=projects/*/locations/*/edgeDeploymentJobs/*/operations/*}',
-            },
-            {
-              get: '/ui/{name=projects/*/locations/*/edgeDevices/*/operations/*}',
-            },
-            {get: '/ui/{name=projects/*/locations/*/endpoints/*/operations/*}'},
-            {
-              get: '/ui/{name=projects/*/locations/*/extensionControllers/*/operations/*}',
-            },
-            {
-              get: '/ui/{name=projects/*/locations/*/extensions/*/operations/*}',
-            },
-            {
-              get: '/ui/{name=projects/*/locations/*/featurestores/*/operations/*}',
-            },
-            {
-              get: '/ui/{name=projects/*/locations/*/featurestores/*/entityTypes/*/operations/*}',
-            },
-            {
-              get: '/ui/{name=projects/*/locations/*/featurestores/*/entityTypes/*/features/*/operations/*}',
-            },
-            {
-              get: '/ui/{name=projects/*/locations/*/customJobs/*/operations/*}',
-            },
-            {
-              get: '/ui/{name=projects/*/locations/*/dataLabelingJobs/*/operations/*}',
-            },
-            {
-              get: '/ui/{name=projects/*/locations/*/hyperparameterTuningJobs/*/operations/*}',
-            },
-            {
-              get: '/ui/{name=projects/*/locations/*/tuningJobs/*/operations/*}',
-            },
-            {get: '/ui/{name=projects/*/locations/*/indexes/*/operations/*}'},
-            {
-              get: '/ui/{name=projects/*/locations/*/indexEndpoints/*/operations/*}',
-            },
-            {
-              get: '/ui/{name=projects/*/locations/*/metadataStores/*/operations/*}',
-            },
-            {
-              get: '/ui/{name=projects/*/locations/*/metadataStores/*/artifacts/*/operations/*}',
-            },
-            {
-              get: '/ui/{name=projects/*/locations/*/metadataStores/*/contexts/*/operations/*}',
-            },
-            {
-              get: '/ui/{name=projects/*/locations/*/metadataStores/*/executions/*/operations/*}',
-            },
-            {
-              get: '/ui/{name=projects/*/locations/*/modelDeploymentMonitoringJobs/*/operations/*}',
-            },
-            {
-              get: '/ui/{name=projects/*/locations/*/modelMonitors/*/operations/*}',
-            },
-            {
-              get: '/ui/{name=projects/*/locations/*/migratableResources/*/operations/*}',
-            },
-            {get: '/ui/{name=projects/*/locations/*/models/*/operations/*}'},
-            {
-              get: '/ui/{name=projects/*/locations/*/models/*/evaluations/*/operations/*}',
-            },
-            {
-              get: '/ui/{name=projects/*/locations/*/notebookExecutionJobs/*/operations/*}',
-            },
-            {
-              get: '/ui/{name=projects/*/locations/*/notebookRuntimes/*/operations/*}',
-            },
-            {
-              get: '/ui/{name=projects/*/locations/*/notebookRuntimeTemplates/*/operations/*}',
-            },
-            {
-              get: '/ui/{name=projects/*/locations/*/persistentResources/*/operations/*}',
-            },
-            {get: '/ui/{name=projects/*/locations/*/studies/*/operations/*}'},
-            {
-              get: '/ui/{name=projects/*/locations/*/studies/*/trials/*/operations/*}',
-            },
-            {
-              get: '/ui/{name=projects/*/locations/*/trainingPipelines/*/operations/*}',
-            },
-            {
-              get: '/ui/{name=projects/*/locations/*/pipelineJobs/*/operations/*}',
-            },
-            {get: '/ui/{name=projects/*/locations/*/schedules/*/operations/*}'},
-            {
-              get: '/ui/{name=projects/*/locations/*/specialistPools/*/operations/*}',
-            },
-            {
-              get: '/ui/{name=projects/*/locations/*/tensorboards/*/operations/*}',
-            },
-            {
-              get: '/ui/{name=projects/*/locations/*/tensorboards/*/experiments/*/operations/*}',
-            },
-            {
-              get: '/ui/{name=projects/*/locations/*/tensorboards/*/experiments/*/runs/*/operations/*}',
-            },
-            {
-              get: '/ui/{name=projects/*/locations/*/tensorboards/*/experiments/*/runs/*/timeSeries/*/operations/*}',
-            },
-            {
-              get: '/ui/{name=projects/*/locations/*/featureOnlineStores/*/operations/*}',
-            },
-            {
-              get: '/ui/{name=projects/*/locations/*/featureOnlineStores/*/featureViews/*/operations/*}',
-            },
-            {
-              get: '/ui/{name=projects/*/locations/*/featureGroups/*/operations/*}',
-            },
-            {
-              get: '/ui/{name=projects/*/locations/*/featureGroups/*/features/*/operations/*}',
-            },
-            {
-              get: '/ui/{name=projects/*/locations/*/featureGroups/*/featureMonitors/*/operations/*}',
-            },
-            {get: '/v1beta1/{name=projects/*/locations/*/operations/*}'},
-            {
-              get: '/v1beta1/{name=projects/*/locations/*/agents/*/operations/*}',
-            },
-            {get: '/v1beta1/{name=projects/*/locations/*/apps/*/operations/*}'},
-            {
-              get: '/v1beta1/{name=projects/*/locations/*/datasets/*/operations/*}',
-            },
-            {
-              get: '/v1beta1/{name=projects/*/locations/*/datasets/*/dataItems/*/operations/*}',
-            },
-            {
-              get: '/v1beta1/{name=projects/*/locations/*/datasets/*/savedQueries/*/operations/*}',
-            },
-            {
-              get: '/v1beta1/{name=projects/*/locations/*/datasets/*/annotationSpecs/*/operations/*}',
-            },
-            {
-              get: '/v1beta1/{name=projects/*/locations/*/datasets/*/dataItems/*/annotations/*/operations/*}',
-            },
-            {
-              get: '/v1beta1/{name=projects/*/locations/*/deploymentResourcePools/*/operations/*}',
-            },
-            {
-              get: '/v1beta1/{name=projects/*/locations/*/edgeDevices/*/operations/*}',
-            },
-            {
-              get: '/v1beta1/{name=projects/*/locations/*/endpoints/*/operations/*}',
-            },
-            {
-              get: '/v1beta1/{name=projects/*/locations/*/evaluationTasks/*/operations/*}',
-            },
-            {
-              get: '/v1beta1/{name=projects/*/locations/*/exampleStores/*/operations/*}',
-            },
-            {
-              get: '/v1beta1/{name=projects/*/locations/*/extensionControllers/*/operations/*}',
-            },
-            {
-              get: '/v1beta1/{name=projects/*/locations/*/extensions/*/operations/*}',
-            },
-            {
-              get: '/v1beta1/{name=projects/*/locations/*/featurestores/*/operations/*}',
-            },
-            {
-              get: '/v1beta1/{name=projects/*/locations/*/featurestores/*/entityTypes/*/operations/*}',
-            },
-            {
-              get: '/v1beta1/{name=projects/*/locations/*/featurestores/*/entityTypes/*/features/*/operations/*}',
-            },
-            {
-              get: '/v1beta1/{name=projects/*/locations/*/customJobs/*/operations/*}',
-            },
-            {
-              get: '/v1beta1/{name=projects/*/locations/*/dataLabelingJobs/*/operations/*}',
-            },
-            {
-              get: '/v1beta1/{name=projects/*/locations/*/hyperparameterTuningJobs/*/operations/*}',
-            },
-            {
-              get: '/v1beta1/{name=projects/*/locations/*/indexes/*/operations/*}',
-            },
-            {
-              get: '/v1beta1/{name=projects/*/locations/*/indexEndpoints/*/operations/*}',
-            },
-            {
-              get: '/v1beta1/{name=projects/*/locations/*/metadataStores/*/operations/*}',
-            },
-            {
-              get: '/v1beta1/{name=projects/*/locations/*/metadataStores/*/artifacts/*/operations/*}',
-            },
-            {
-              get: '/v1beta1/{name=projects/*/locations/*/metadataStores/*/contexts/*/operations/*}',
-            },
-            {
-              get: '/v1beta1/{name=projects/*/locations/*/metadataStores/*/executions/*/operations/*}',
-            },
-            {
-              get: '/v1beta1/{name=projects/*/locations/*/modelDeploymentMonitoringJobs/*/operations/*}',
-            },
-            {
-              get: '/v1beta1/{name=projects/*/locations/*/modelMonitors/*/operations/*}',
-            },
-            {
-              get: '/v1beta1/{name=projects/*/locations/*/migratableResources/*/operations/*}',
-            },
-            {
-              get: '/v1beta1/{name=projects/*/locations/*/models/*/operations/*}',
-            },
-            {
-              get: '/v1beta1/{name=projects/*/locations/*/models/*/evaluations/*/operations/*}',
-            },
-            {
-              get: '/v1beta1/{name=projects/*/locations/*/notebookExecutionJobs/*/operations/*}',
-            },
-            {
-              get: '/v1beta1/{name=projects/*/locations/*/notebookRuntimes/*/operations/*}',
-            },
-            {
-              get: '/v1beta1/{name=projects/*/locations/*/notebookRuntimeTemplates/*/operations/*}',
-            },
-            {
-              get: '/v1beta1/{name=projects/*/locations/*/persistentResources/*/operations/*}',
-            },
-            {
-              get: '/v1beta1/{name=projects/*/locations/*/ragCorpora/*/operations/*}',
-            },
-            {
-              get: '/v1beta1/{name=projects/*/locations/*/ragCorpora/*/ragFiles/*/operations/*}',
-            },
-            {
-              get: '/v1beta1/{name=projects/*/locations/*/reasoningEngines/*/operations/*}',
-            },
-            {
-              get: '/v1beta1/{name=projects/*/locations/*/solvers/*/operations/*}',
-            },
-            {
-              get: '/v1beta1/{name=projects/*/locations/*/studies/*/operations/*}',
-            },
-            {
-              get: '/v1beta1/{name=projects/*/locations/*/studies/*/trials/*/operations/*}',
-            },
-            {
-              get: '/v1beta1/{name=projects/*/locations/*/trainingPipelines/*/operations/*}',
-            },
-            {
-              get: '/v1beta1/{name=projects/*/locations/*/pipelineJobs/*/operations/*}',
-            },
-            {
-              get: '/v1beta1/{name=projects/*/locations/*/schedules/*/operations/*}',
-            },
-            {
-              get: '/v1beta1/{name=projects/*/locations/*/specialistPools/*/operations/*}',
-            },
-            {
-              get: '/v1beta1/{name=projects/*/locations/*/tensorboards/*/operations/*}',
-            },
-            {
-              get: '/v1beta1/{name=projects/*/locations/*/tensorboards/*/experiments/*/operations/*}',
-            },
-            {
-              get: '/v1beta1/{name=projects/*/locations/*/tensorboards/*/experiments/*/runs/*/operations/*}',
-            },
-            {
-              get: '/v1beta1/{name=projects/*/locations/*/tensorboards/*/experiments/*/runs/*/timeSeries/*/operations/*}',
-            },
-            {
-              get: '/v1beta1/{name=projects/*/locations/*/featureOnlineStores/*/operations/*}',
-            },
-            {
-              get: '/v1beta1/{name=projects/*/locations/*/featureOnlineStores/*/featureViews/*/operations/*}',
-            },
-            {
-              get: '/v1beta1/{name=projects/*/locations/*/featureGroups/*/operations/*}',
-            },
-            {
-              get: '/v1beta1/{name=projects/*/locations/*/featureGroups/*/features/*/operations/*}',
-            },
-            {
-              get: '/v1beta1/{name=projects/*/locations/*/featureGroups/*/featureMonitors/*/operations/*}',
-            },
-          ],
-        },
-        {
-          selector: 'google.longrunning.Operations.ListOperations',
-          get: '/ui/{name=projects/*/locations/*}/operations',
-          additional_bindings: [
-            {get: '/ui/{name=projects/*/locations/*/agents/*}/operations'},
-            {get: '/ui/{name=projects/*/locations/*/apps/*}/operations'},
-            {get: '/ui/{name=projects/*/locations/*/datasets/*}/operations'},
-            {
-              get: '/ui/{name=projects/*/locations/*/datasets/*/dataItems/*}/operations',
-            },
-            {
-              get: '/ui/{name=projects/*/locations/*/datasets/*/savedQueries/*}/operations',
-            },
-            {
-              get: '/ui/{name=projects/*/locations/*/datasets/*/annotationSpecs/*}/operations',
-            },
-            {
-              get: '/ui/{name=projects/*/locations/*/datasets/*/dataItems/*/annotations/*}/operations',
-            },
-            {
-              get: '/ui/{name=projects/*/locations/*/deploymentResourcePools/*}/operations',
-            },
-            {get: '/ui/{name=projects/*/locations/*/edgeDevices/*}/operations'},
-            {get: '/ui/{name=projects/*/locations/*/endpoints/*}/operations'},
-            {
-              get: '/ui/{name=projects/*/locations/*/extensionControllers/*}/operations',
-            },
-            {get: '/ui/{name=projects/*/locations/*/extensions/*}/operations'},
-            {
-              get: '/ui/{name=projects/*/locations/*/featurestores/*}/operations',
-            },
-            {
-              get: '/ui/{name=projects/*/locations/*/featurestores/*/entityTypes/*}/operations',
-            },
-            {
-              get: '/ui/{name=projects/*/locations/*/featurestores/*/entityTypes/*/features/*}/operations',
-            },
-            {get: '/ui/{name=projects/*/locations/*/customJobs/*}/operations'},
-            {
-              get: '/ui/{name=projects/*/locations/*/dataLabelingJobs/*}/operations',
-            },
-            {
-              get: '/ui/{name=projects/*/locations/*/hyperparameterTuningJobs/*}/operations',
-            },
-            {get: '/ui/{name=projects/*/locations/*/tuningJobs/*}/operations'},
-            {get: '/ui/{name=projects/*/locations/*/indexes/*}/operations'},
-            {
-              get: '/ui/{name=projects/*/locations/*/indexEndpoints/*}/operations',
-            },
-            {
-              get: '/ui/{name=projects/*/locations/*/metadataStores/*}/operations',
-            },
-            {
-              get: '/ui/{name=projects/*/locations/*/metadataStores/*/artifacts/*}/operations',
-            },
-            {
-              get: '/ui/{name=projects/*/locations/*/metadataStores/*/contexts/*}/operations',
-            },
-            {
-              get: '/ui/{name=projects/*/locations/*/metadataStores/*/executions/*}/operations',
-            },
-            {
-              get: '/ui/{name=projects/*/locations/*/modelDeploymentMonitoringJobs/*}/operations',
-            },
-            {
-              get: '/ui/{name=projects/*/locations/*/modelMonitors/*}/operations',
-            },
-            {
-              get: '/ui/{name=projects/*/locations/*/migratableResources/*}/operations',
-            },
-            {get: '/ui/{name=projects/*/locations/*/models/*}/operations'},
-            {
-              get: '/ui/{name=projects/*/locations/*/models/*/evaluations/*}/operations',
-            },
-            {
-              get: '/ui/{name=projects/*/locations/*/notebookExecutionJobs/*}/operations',
-            },
-            {
-              get: '/ui/{name=projects/*/locations/*/notebookRuntimes/*}/operations',
-            },
-            {
-              get: '/ui/{name=projects/*/locations/*/notebookRuntimeTemplates/*}/operations',
-            },
-            {get: '/ui/{name=projects/*/locations/*/studies/*}/operations'},
-            {
-              get: '/ui/{name=projects/*/locations/*/studies/*/trials/*}/operations',
-            },
-            {
-              get: '/ui/{name=projects/*/locations/*/trainingPipelines/*}/operations',
-            },
-            {
-              get: '/ui/{name=projects/*/locations/*/persistentResources/*}/operations',
-            },
-            {
-              get: '/ui/{name=projects/*/locations/*/pipelineJobs/*}/operations',
-            },
-            {get: '/ui/{name=projects/*/locations/*/schedules/*}/operations'},
-            {
-              get: '/ui/{name=projects/*/locations/*/specialistPools/*}/operations',
-            },
-            {
-              get: '/ui/{name=projects/*/locations/*/tensorboards/*}/operations',
-            },
-            {
-              get: '/ui/{name=projects/*/locations/*/tensorboards/*/experiments/*}/operations',
-            },
-            {
-              get: '/ui/{name=projects/*/locations/*/tensorboards/*/experiments/*/runs/*}/operations',
-            },
-            {
-              get: '/ui/{name=projects/*/locations/*/tensorboards/*/experiments/*/runs/*/timeSeries/*}/operations',
-            },
-            {
-              get: '/ui/{name=projects/*/locations/*/featureOnlineStores/*/operations/*}:wait',
-            },
-            {
-              get: '/ui/{name=projects/*/locations/*/featureOnlineStores/*/featureViews/*/operations/*}:wait',
-            },
-            {
-              get: '/ui/{name=projects/*/locations/*/featureGroups/*/operations/*}:wait',
-            },
-            {
-              get: '/ui/{name=projects/*/locations/*/featureGroups/*/features/*/operations/*}:wait',
-            },
-            {
-              get: '/ui/{name=projects/*/locations/*/featureGroups/*/featureMonitors/*/operations/*}:wait',
-            },
-            {get: '/v1beta1/{name=projects/*/locations/*}/operations'},
-            {get: '/v1beta1/{name=projects/*/locations/*/agents/*}/operations'},
-            {get: '/v1beta1/{name=projects/*/locations/*/apps/*}/operations'},
-            {
-              get: '/v1beta1/{name=projects/*/locations/*/datasets/*}/operations',
-            },
-            {
-              get: '/v1beta1/{name=projects/*/locations/*/datasets/*/dataItems/*}/operations',
-            },
-            {
-              get: '/v1beta1/{name=projects/*/locations/*/datasets/*/savedQueries/*}/operations',
-            },
-            {
-              get: '/v1beta1/{name=projects/*/locations/*/datasets/*/annotationSpecs/*}/operations',
-            },
-            {
-              get: '/v1beta1/{name=projects/*/locations/*/datasets/*/dataItems/*/annotations/*}/operations',
-            },
-            {
-              get: '/v1beta1/{name=projects/*/locations/*/deploymentResourcePools/*}/operations',
-            },
-            {
-              get: '/v1beta1/{name=projects/*/locations/*/edgeDevices/*}/operations',
-            },
-            {
-              get: '/v1beta1/{name=projects/*/locations/*/endpoints/*}/operations',
-            },
-            {
-              get: '/v1beta1/{name=projects/*/locations/*/evaluationTasks/*}/operations',
-            },
-            {
-              get: '/v1beta1/{name=projects/*/locations/*/exampleStores/*}/operations',
-            },
-            {
-              get: '/v1beta1/{name=projects/*/locations/*/extensionControllers/*}/operations',
-            },
-            {
-              get: '/v1beta1/{name=projects/*/locations/*/extensions/*}/operations',
-            },
-            {
-              get: '/v1beta1/{name=projects/*/locations/*/featurestores/*}/operations',
-            },
-            {
-              get: '/v1beta1/{name=projects/*/locations/*/featurestores/*/entityTypes/*}/operations',
-            },
-            {
-              get: '/v1beta1/{name=projects/*/locations/*/featurestores/*/entityTypes/*/features/*}/operations',
-            },
-            {
-              get: '/v1beta1/{name=projects/*/locations/*/customJobs/*}/operations',
-            },
-            {
-              get: '/v1beta1/{name=projects/*/locations/*/dataLabelingJobs/*}/operations',
-            },
-            {
-              get: '/v1beta1/{name=projects/*/locations/*/hyperparameterTuningJobs/*}/operations',
-            },
-            {
-              get: '/v1beta1/{name=projects/*/locations/*/indexes/*}/operations',
-            },
-            {
-              get: '/v1beta1/{name=projects/*/locations/*/indexEndpoints/*}/operations',
-            },
-            {
-              get: '/v1beta1/{name=projects/*/locations/*/metadataStores/*}/operations',
-            },
-            {
-              get: '/v1beta1/{name=projects/*/locations/*/metadataStores/*/artifacts/*}/operations',
-            },
-            {
-              get: '/v1beta1/{name=projects/*/locations/*/metadataStores/*/contexts/*}/operations',
-            },
-            {
-              get: '/v1beta1/{name=projects/*/locations/*/metadataStores/*/executions/*}/operations',
-            },
-            {
-              get: '/v1beta1/{name=projects/*/locations/*/modelDeploymentMonitoringJobs/*}/operations',
-            },
-            {
-              get: '/v1beta1/{name=projects/*/locations/*/modelMonitors/*}/operations',
-            },
-            {
-              get: '/v1beta1/{name=projects/*/locations/*/migratableResources/*}/operations',
-            },
-            {get: '/v1beta1/{name=projects/*/locations/*/models/*}/operations'},
-            {
-              get: '/v1beta1/{name=projects/*/locations/*/models/*/evaluations/*}/operations',
-            },
-            {
-              get: '/v1beta1/{name=projects/*/locations/*/notebookExecutionJobs/*}/operations',
-            },
-            {
-              get: '/v1beta1/{name=projects/*/locations/*/notebookRuntimes/*}/operations',
-            },
-            {
-              get: '/v1beta1/{name=projects/*/locations/*/notebookRuntimeTemplates/*}/operations',
-            },
-            {
-              get: '/v1beta1/{name=projects/*/locations/*/persistentResources/*}/operations',
-            },
-            {
-              get: '/v1beta1/{name=projects/*/locations/*/ragCorpora/*}/operations',
-            },
-            {
-              get: '/v1beta1/{name=projects/*/locations/*/ragCorpora/*/ragFiles/*}/operations',
-            },
-            {
-              get: '/v1beta1/{name=projects/*/locations/*/reasoningEngines/*}/operations',
-            },
-            {
-              get: '/v1beta1/{name=projects/*/locations/*/solvers/*}/operations',
-            },
-            {
-              get: '/v1beta1/{name=projects/*/locations/*/studies/*}/operations',
-            },
-            {
-              get: '/v1beta1/{name=projects/*/locations/*/studies/*/trials/*}/operations',
-            },
-            {
-              get: '/v1beta1/{name=projects/*/locations/*/trainingPipelines/*}/operations',
-            },
-            {
-              get: '/v1beta1/{name=projects/*/locations/*/pipelineJobs/*}/operations',
-            },
-            {
-              get: '/v1beta1/{name=projects/*/locations/*/schedules/*}/operations',
-            },
-            {
-              get: '/v1beta1/{name=projects/*/locations/*/specialistPools/*}/operations',
-            },
-            {
-              get: '/v1beta1/{name=projects/*/locations/*/tensorboards/*}/operations',
-            },
-            {
-              get: '/v1beta1/{name=projects/*/locations/*/tensorboards/*/experiments/*}/operations',
-            },
-            {
-              get: '/v1beta1/{name=projects/*/locations/*/tensorboards/*/experiments/*/runs/*}/operations',
-            },
-            {
-              get: '/v1beta1/{name=projects/*/locations/*/tensorboards/*/experiments/*/runs/*/timeSeries/*}/operations',
-            },
-            {
-              get: '/v1beta1/{name=projects/*/locations/*/featureOnlineStores/*}/operations',
-            },
-            {
-              get: '/v1beta1/{name=projects/*/locations/*/featureOnlineStores/*/featureViews/*}/operations',
-            },
-            {
-              get: '/v1beta1/{name=projects/*/locations/*/featureGroups/*}/operations',
-            },
-            {
-              get: '/v1beta1/{name=projects/*/locations/*/featureGroups/*/features/*}/operations',
-            },
-            {
-              get: '/v1beta1/{name=projects/*/locations/*/featureGroups/*/featureMonitors/*}/operations',
-            },
-          ],
-        },
-        {
-          selector: 'google.longrunning.Operations.WaitOperation',
-          post: '/ui/{name=projects/*/locations/*/operations/*}:wait',
-          additional_bindings: [
-            {
-              post: '/ui/{name=projects/*/locations/*/agents/*/operations/*}:wait',
-            },
-            {
-              post: '/ui/{name=projects/*/locations/*/apps/*/operations/*}:wait',
-            },
-            {
-              post: '/ui/{name=projects/*/locations/*/datasets/*/operations/*}:wait',
-            },
-            {
-              post: '/ui/{name=projects/*/locations/*/datasets/*/dataItems/*/operations/*}:wait',
-            },
-            {
-              post: '/ui/{name=projects/*/locations/*/datasets/*/savedQueries/*/operations/*}:wait',
-            },
-            {
-              post: '/ui/{name=projects/*/locations/*/datasets/*/annotationSpecs/*/operations/*}:wait',
-            },
-            {
-              post: '/ui/{name=projects/*/locations/*/datasets/*/dataItems/*/annotations/*/operations/*}:wait',
-            },
-            {
-              post: '/ui/{name=projects/*/locations/*/deploymentResourcePools/*/operations/*}:wait',
-            },
-            {
-              post: '/ui/{name=projects/*/locations/*/edgeDevices/*/operations/*}:wait',
-            },
-            {
-              post: '/ui/{name=projects/*/locations/*/endpoints/*/operations/*}:wait',
-            },
-            {
-              post: '/ui/{name=projects/*/locations/*/extensionControllers/*/operations/*}:wait',
-            },
-            {
-              post: '/ui/{name=projects/*/locations/*/extensions/*/operations/*}:wait',
-            },
-            {
-              post: '/ui/{name=projects/*/locations/*/featurestores/*/operations/*}:wait',
-            },
-            {
-              post: '/ui/{name=projects/*/locations/*/featurestores/*/entityTypes/*/operations/*}:wait',
-            },
-            {
-              post: '/ui/{name=projects/*/locations/*/featurestores/*/entityTypes/*/features/*/operations/*}:wait',
-            },
-            {
-              post: '/ui/{name=projects/*/locations/*/customJobs/*/operations/*}:wait',
-            },
-            {
-              post: '/ui/{name=projects/*/locations/*/dataLabelingJobs/*/operations/*}:wait',
-            },
-            {
-              post: '/ui/{name=projects/*/locations/*/hyperparameterTuningJobs/*/operations/*}:wait',
-            },
-            {
-              post: '/ui/{name=projects/*/locations/*/tuningJobs/*/operations/*}:wait',
-            },
-            {
-              post: '/ui/{name=projects/*/locations/*/indexes/*/operations/*}:wait',
-            },
-            {
-              post: '/ui/{name=projects/*/locations/*/indexEndpoints/*/operations/*}:wait',
-            },
-            {
-              post: '/ui/{name=projects/*/locations/*/metadataStores/*/operations/*}:wait',
-            },
-            {
-              post: '/ui/{name=projects/*/locations/*/metadataStores/*/artifacts/*/operations/*}:wait',
-            },
-            {
-              post: '/ui/{name=projects/*/locations/*/metadataStores/*/contexts/*/operations/*}:wait',
-            },
-            {
-              post: '/ui/{name=projects/*/locations/*/metadataStores/*/executions/*/operations/*}:wait',
-            },
-            {
-              post: '/ui/{name=projects/*/locations/*/modelDeploymentMonitoringJobs/*/operations/*}:wait',
-            },
-            {
-              post: '/ui/{name=projects/*/locations/*/modelMonitors/*/operations/*}:wait',
-            },
-            {
-              post: '/ui/{name=projects/*/locations/*/migratableResources/*/operations/*}:wait',
-            },
-            {
-              post: '/ui/{name=projects/*/locations/*/models/*/operations/*}:wait',
-            },
-            {
-              post: '/ui/{name=projects/*/locations/*/models/*/evaluations/*/operations/*}:wait',
-            },
-            {
-              post: '/ui/{name=projects/*/locations/*/notebookExecutionJobs/*/operations/*}:wait',
-            },
-            {
-              post: '/ui/{name=projects/*/locations/*/notebookRuntimes/*/operations/*}:wait',
-            },
-            {
-              post: '/ui/{name=projects/*/locations/*/notebookRuntimeTemplates/*/operations/*}:wait',
-            },
-            {
-              post: '/ui/{name=projects/*/locations/*/studies/*/operations/*}:wait',
-            },
-            {
-              post: '/ui/{name=projects/*/locations/*/studies/*/trials/*/operations/*}:wait',
-            },
-            {
-              post: '/ui/{name=projects/*/locations/*/trainingPipelines/*/operations/*}:wait',
-            },
-            {
-              post: '/ui/{name=projects/*/locations/*/persistentResources/*/operations/*}:wait',
-            },
-            {
-              post: '/ui/{name=projects/*/locations/*/pipelineJobs/*/operations/*}:wait',
-            },
-            {
-              post: '/ui/{name=projects/*/locations/*/schedules/*/operations/*}:wait',
-            },
-            {
-              post: '/ui/{name=projects/*/locations/*/specialistPools/*/operations/*}:wait',
-            },
-            {
-              post: '/ui/{name=projects/*/locations/*/tensorboards/*/operations/*}:wait',
-            },
-            {
-              post: '/ui/{name=projects/*/locations/*/tensorboards/*/experiments/*/operations/*}:wait',
-            },
-            {
-              post: '/ui/{name=projects/*/locations/*/tensorboards/*/experiments/*/runs/*/operations/*}:wait',
-            },
-            {
-              post: '/ui/{name=projects/*/locations/*/tensorboards/*/experiments/*/runs/*/timeSeries/*/operations/*}:wait',
-            },
-            {
-              post: '/ui/{name=projects/*/locations/*/featureOnlineStores/*/operations/*}:wait',
-            },
-            {
-              post: '/ui/{name=projects/*/locations/*/featureOnlineStores/*/featureViews/*/operations/*}:wait',
-            },
-            {
-              post: '/ui/{name=projects/*/locations/*/featureGroups/*/operations/*}:wait',
-            },
-            {
-              post: '/ui/{name=projects/*/locations/*/featureGroups/*/features/*/operations/*}:wait',
-            },
-            {
-              post: '/ui/{name=projects/*/locations/*/featureGroups/*/featureMonitors/*/operations/*}:wait',
-            },
-            {post: '/v1beta1/{name=projects/*/locations/*/operations/*}:wait'},
-            {
-              post: '/v1beta1/{name=projects/*/locations/*/agents/*/operations/*}:wait',
-            },
-            {
-              post: '/v1beta1/{name=projects/*/locations/*/apps/*/operations/*}:wait',
-            },
-            {
-              post: '/v1beta1/{name=projects/*/locations/*/datasets/*/operations/*}:wait',
-            },
-            {
-              post: '/v1beta1/{name=projects/*/locations/*/datasets/*/dataItems/*/operations/*}:wait',
-            },
-            {
-              post: '/v1beta1/{name=projects/*/locations/*/datasets/*/savedQueries/*/operations/*}:wait',
-            },
-            {
-              post: '/v1beta1/{name=projects/*/locations/*/datasets/*/annotationSpecs/*/operations/*}:wait',
-            },
-            {
-              post: '/v1beta1/{name=projects/*/locations/*/datasets/*/dataItems/*/annotations/*/operations/*}:wait',
-            },
-            {
-              post: '/v1beta1/{name=projects/*/locations/*/deploymentResourcePools/*/operations/*}:wait',
-            },
-            {
-              post: '/v1beta1/{name=projects/*/locations/*/edgeDevices/*/operations/*}:wait',
-            },
-            {
-              post: '/v1beta1/{name=projects/*/locations/*/endpoints/*/operations/*}:wait',
-            },
-            {
-              post: '/v1beta1/{name=projects/*/locations/*/evaluationTasks/*/operations/*}:wait',
-            },
-            {
-              post: '/v1beta1/{name=projects/*/locations/*/exampleStores/*/operations/*}:wait',
-            },
-            {
-              post: '/v1beta1/{name=projects/*/locations/*/extensionControllers/*/operations/*}:wait',
-            },
-            {
-              post: '/v1beta1/{name=projects/*/locations/*/extensions/*/operations/*}:wait',
-            },
-            {
-              post: '/v1beta1/{name=projects/*/locations/*/featurestores/*/operations/*}:wait',
-            },
-            {
-              post: '/v1beta1/{name=projects/*/locations/*/featurestores/*/entityTypes/*/operations/*}:wait',
-            },
-            {
-              post: '/v1beta1/{name=projects/*/locations/*/featurestores/*/entityTypes/*/features/*/operations/*}:wait',
-            },
-            {
-              post: '/v1beta1/{name=projects/*/locations/*/customJobs/*/operations/*}:wait',
-            },
-            {
-              post: '/v1beta1/{name=projects/*/locations/*/dataLabelingJobs/*/operations/*}:wait',
-            },
-            {
-              post: '/v1beta1/{name=projects/*/locations/*/hyperparameterTuningJobs/*/operations/*}:wait',
-            },
-            {
-              post: '/v1beta1/{name=projects/*/locations/*/indexes/*/operations/*}:wait',
-            },
-            {
-              post: '/v1beta1/{name=projects/*/locations/*/indexEndpoints/*/operations/*}:wait',
-            },
-            {
-              post: '/v1beta1/{name=projects/*/locations/*/metadataStores/*/operations/*}:wait',
-            },
-            {
-              post: '/v1beta1/{name=projects/*/locations/*/metadataStores/*/artifacts/*/operations/*}:wait',
-            },
-            {
-              post: '/v1beta1/{name=projects/*/locations/*/metadataStores/*/contexts/*/operations/*}:wait',
-            },
-            {
-              post: '/v1beta1/{name=projects/*/locations/*/metadataStores/*/executions/*/operations/*}:wait',
-            },
-            {
-              post: '/v1beta1/{name=projects/*/locations/*/modelDeploymentMonitoringJobs/*/operations/*}:wait',
-            },
-            {
-              post: '/v1beta1/{name=projects/*/locations/*/modelMonitors/*/operations/*}:wait',
-            },
-            {
-              post: '/v1beta1/{name=projects/*/locations/*/migratableResources/*/operations/*}:wait',
-            },
-            {
-              post: '/v1beta1/{name=projects/*/locations/*/models/*/operations/*}:wait',
-            },
-            {
-              post: '/v1beta1/{name=projects/*/locations/*/models/*/evaluations/*/operations/*}:wait',
-            },
-            {
-              post: '/v1beta1/{name=projects/*/locations/*/notebookExecutionJobs/*/operations/*}:wait',
-            },
-            {
-              post: '/v1beta1/{name=projects/*/locations/*/notebookRuntimes/*/operations/*}:wait',
-            },
-            {
-              post: '/v1beta1/{name=projects/*/locations/*/notebookRuntimeTemplates/*/operations/*}:wait',
-            },
-            {
-              post: '/v1beta1/{name=projects/*/locations/*/persistentResources/*/operations/*}:wait',
-            },
-            {
-              post: '/v1beta1/{name=projects/*/locations/*/ragCorpora/*/operations/*}:wait',
-            },
-            {
-              post: '/v1beta1/{name=projects/*/locations/*/ragCorpora/*/ragFiles/*/operations/*}:wait',
-            },
-            {
-              post: '/v1beta1/{name=projects/*/locations/*/reasoningEngines/*/operations/*}:wait',
-            },
-            {
-              post: '/v1beta1/{name=projects/*/locations/*/studies/*/operations/*}:wait',
-            },
-            {
-              post: '/v1beta1/{name=projects/*/locations/*/studies/*/trials/*/operations/*}:wait',
-            },
-            {
-              post: '/v1beta1/{name=projects/*/locations/*/trainingPipelines/*/operations/*}:wait',
-            },
-            {
-              post: '/v1beta1/{name=projects/*/locations/*/pipelineJobs/*/operations/*}:wait',
-            },
-            {
-              post: '/v1beta1/{name=projects/*/locations/*/schedules/*/operations/*}:wait',
-            },
-            {
-              post: '/v1beta1/{name=projects/*/locations/*/specialistPools/*/operations/*}:wait',
-            },
-            {
-              post: '/v1beta1/{name=projects/*/locations/*/tensorboards/*/operations/*}:wait',
-            },
-            {
-              post: '/v1beta1/{name=projects/*/locations/*/tensorboards/*/experiments/*/operations/*}:wait',
-            },
-            {
-              post: '/v1beta1/{name=projects/*/locations/*/tensorboards/*/experiments/*/runs/*/operations/*}:wait',
-            },
-            {
-              post: '/v1beta1/{name=projects/*/locations/*/tensorboards/*/experiments/*/runs/*/timeSeries/*/operations/*}:wait',
-            },
-            {
-              post: '/v1beta1/{name=projects/*/locations/*/featureOnlineStores/*/operations/*}:wait',
-            },
-            {
-              post: '/v1beta1/{name=projects/*/locations/*/featureOnlineStores/*/featureViews/*/operations/*}:wait',
-            },
-            {
-              post: '/v1beta1/{name=projects/*/locations/*/featureGroups/*/operations/*}:wait',
-            },
-            {
-              post: '/v1beta1/{name=projects/*/locations/*/featureGroups/*/features/*/operations/*}:wait',
-            },
-            {
-              post: '/v1beta1/{name=projects/*/locations/*/featureGroups/*/featureMonitors/*/operations/*}:wait',
-            },
-          ],
-        },
-      ];
+      lroOptions.httpRules = [{selector: 'google.cloud.location.Locations.GetLocation',get: '/ui/{name=projects/*/locations/*}',additional_bindings: [{get: '/v1beta1/{name=projects/*/locations/*}',}],
+      },{selector: 'google.cloud.location.Locations.ListLocations',get: '/ui/{name=projects/*}/locations',additional_bindings: [{get: '/v1beta1/{name=projects/*}/locations',}],
+      },{selector: 'google.iam.v1.IAMPolicy.GetIamPolicy',post: '/v1beta1/{resource=projects/*/locations/*/featurestores/*}:getIamPolicy',body: '*',additional_bindings: [{post: '/v1beta1/{resource=projects/*/locations/*/featurestores/*/entityTypes/*}:getIamPolicy',},{post: '/v1beta1/{resource=projects/*/locations/*/models/*}:getIamPolicy',},{post: '/v1beta1/{resource=projects/*/locations/*/endpoints/*}:getIamPolicy',},{post: '/v1beta1/{resource=projects/*/locations/*/notebookRuntimeTemplates/*}:getIamPolicy',},{post: '/v1beta1/{resource=projects/*/locations/*/publishers/*/models/*}:getIamPolicy',},{post: '/v1beta1/{resource=projects/*/locations/*/featureOnlineStores/*}:getIamPolicy',},{post: '/v1beta1/{resource=projects/*/locations/*/featureOnlineStores/*/featureViews/*}:getIamPolicy',},{post: '/v1beta1/{resource=projects/*/locations/*/featureGroups/*}:getIamPolicy',},{post: '/ui/{resource=projects/*/locations/*/featurestores/*}:getIamPolicy',},{post: '/ui/{resource=projects/*/locations/*/featurestores/*/entityTypes/*}:getIamPolicy',},{post: '/ui/{resource=projects/*/locations/*/models/*}:getIamPolicy',},{post: '/ui/{resource=projects/*/locations/*/endpoints/*}:getIamPolicy',},{post: '/ui/{resource=projects/*/locations/*/notebookRuntimeTemplates/*}:getIamPolicy',},{post: '/ui/{resource=projects/*/locations/*/publishers/*/models/*}:getIamPolicy',},{post: '/ui/{resource=projects/*/locations/*/featureOnlineStores/*}:getIamPolicy',},{post: '/ui/{resource=projects/*/locations/*/featureOnlineStores/*/featureViews/*}:getIamPolicy',},{post: '/ui/{resource=projects/*/locations/*/featureGroups/*}:getIamPolicy',}],
+      },{selector: 'google.iam.v1.IAMPolicy.SetIamPolicy',post: '/v1beta1/{resource=projects/*/locations/*/featurestores/*}:setIamPolicy',body: '*',additional_bindings: [{post: '/v1beta1/{resource=projects/*/locations/*/featurestores/*/entityTypes/*}:setIamPolicy',body: '*',},{post: '/v1beta1/{resource=projects/*/locations/*/models/*}:setIamPolicy',body: '*',},{post: '/v1beta1/{resource=projects/*/locations/*/endpoints/*}:setIamPolicy',body: '*',},{post: '/v1beta1/{resource=projects/*/locations/*/notebookRuntimeTemplates/*}:setIamPolicy',body: '*',},{post: '/v1beta1/{resource=projects/*/locations/*/featureOnlineStores/*}:setIamPolicy',body: '*',},{post: '/v1beta1/{resource=projects/*/locations/*/featureOnlineStores/*/featureViews/*}:setIamPolicy',body: '*',},{post: '/v1beta1/{resource=projects/*/locations/*/featureGroups/*}:setIamPolicy',body: '*',},{post: '/ui/{resource=projects/*/locations/*/featurestores/*}:setIamPolicy',body: '*',},{post: '/ui/{resource=projects/*/locations/*/featurestores/*/entityTypes/*}:setIamPolicy',body: '*',},{post: '/ui/{resource=projects/*/locations/*/models/*}:setIamPolicy',body: '*',},{post: '/ui/{resource=projects/*/locations/*/endpoints/*}:setIamPolicy',body: '*',},{post: '/ui/{resource=projects/*/locations/*/notebookRuntimeTemplates/*}:setIamPolicy',body: '*',},{post: '/ui/{resource=projects/*/locations/*/featureOnlineStores/*}:setIamPolicy',body: '*',},{post: '/ui/{resource=projects/*/locations/*/featureOnlineStores/*/featureViews/*}:setIamPolicy',body: '*',},{post: '/ui/{resource=projects/*/locations/*/featureGroups/*}:setIamPolicy',body: '*',}],
+      },{selector: 'google.iam.v1.IAMPolicy.TestIamPermissions',post: '/v1beta1/{resource=projects/*/locations/*/featurestores/*}:testIamPermissions',body: '*',additional_bindings: [{post: '/v1beta1/{resource=projects/*/locations/*/featurestores/*/entityTypes/*}:testIamPermissions',},{post: '/v1beta1/{resource=projects/*/locations/*/models/*}:testIamPermissions',},{post: '/v1beta1/{resource=projects/*/locations/*/endpoints/*}:testIamPermissions',},{post: '/v1beta1/{resource=projects/*/locations/*/notebookRuntimeTemplates/*}:testIamPermissions',},{post: '/v1beta1/{resource=projects/*/locations/*/featureOnlineStores/*}:testIamPermissions',},{post: '/v1beta1/{resource=projects/*/locations/*/featureOnlineStores/*/featureViews/*}:testIamPermissions',},{post: '/v1beta1/{resource=projects/*/locations/*/featureGroups/*}:testIamPermissions',},{post: '/ui/{resource=projects/*/locations/*/featurestores/*}:testIamPermissions',},{post: '/ui/{resource=projects/*/locations/*/featurestores/*/entityTypes/*}:testIamPermissions',},{post: '/ui/{resource=projects/*/locations/*/models/*}:testIamPermissions',},{post: '/ui/{resource=projects/*/locations/*/endpoints/*}:testIamPermissions',},{post: '/ui/{resource=projects/*/locations/*/notebookRuntimeTemplates/*}:testIamPermissions',},{post: '/ui/{resource=projects/*/locations/*/featureOnlineStores/*}:testIamPermissions',},{post: '/ui/{resource=projects/*/locations/*/featureOnlineStores/*/featureViews/*}:testIamPermissions',},{post: '/ui/{resource=projects/*/locations/*/featureGroups/*}:testIamPermissions',}],
+      },{selector: 'google.longrunning.Operations.CancelOperation',post: '/ui/{name=projects/*/locations/*/operations/*}:cancel',additional_bindings: [{post: '/ui/{name=projects/*/locations/*/agents/*/operations/*}:cancel',},{post: '/ui/{name=projects/*/locations/*/apps/*/operations/*}:cancel',},{post: '/ui/{name=projects/*/locations/*/datasets/*/operations/*}:cancel',},{post: '/ui/{name=projects/*/locations/*/datasets/*/dataItems/*/operations/*}:cancel',},{post: '/ui/{name=projects/*/locations/*/datasets/*/savedQueries/*/operations/*}:cancel',},{post: '/ui/{name=projects/*/locations/*/datasets/*/annotationSpecs/*/operations/*}:cancel',},{post: '/ui/{name=projects/*/locations/*/datasets/*/dataItems/*/annotations/*/operations/*}:cancel',},{post: '/ui/{name=projects/*/locations/*/deploymentResourcePools/*/operations/*}:cancel',},{post: '/ui/{name=projects/*/locations/*/edgeDevices/*/operations/*}:cancel',},{post: '/ui/{name=projects/*/locations/*/endpoints/*/operations/*}:cancel',},{post: '/ui/{name=projects/*/locations/*/extensionControllers/*/operations/*}:cancel',},{post: '/ui/{name=projects/*/locations/*/extensions/*/operations/*}:cancel',},{post: '/ui/{name=projects/*/locations/*/featurestores/*/operations/*}:cancel',},{post: '/ui/{name=projects/*/locations/*/featurestores/*/entityTypes/*/operations/*}:cancel',},{post: '/ui/{name=projects/*/locations/*/featurestores/*/entityTypes/*/features/*/operations/*}:cancel',},{post: '/ui/{name=projects/*/locations/*/customJobs/*/operations/*}:cancel',},{post: '/ui/{name=projects/*/locations/*/dataLabelingJobs/*/operations/*}:cancel',},{post: '/ui/{name=projects/*/locations/*/hyperparameterTuningJobs/*/operations/*}:cancel',},{post: '/ui/{name=projects/*/locations/*/tuningJobs/*/operations/*}:cancel',},{post: '/ui/{name=projects/*/locations/*/indexes/*/operations/*}:cancel',},{post: '/ui/{name=projects/*/locations/*/indexEndpoints/*/operations/*}:cancel',},{post: '/ui/{name=projects/*/locations/*/metadataStores/*/operations/*}:cancel',},{post: '/ui/{name=projects/*/locations/*/metadataStores/*/artifacts/*/operations/*}:cancel',},{post: '/ui/{name=projects/*/locations/*/metadataStores/*/contexts/*/operations/*}:cancel',},{post: '/ui/{name=projects/*/locations/*/metadataStores/*/executions/*/operations/*}:cancel',},{post: '/ui/{name=projects/*/locations/*/modelDeploymentMonitoringJobs/*/operations/*}:cancel',},{post: '/ui/{name=projects/*/locations/*/modelMonitors/*/operations/*}:cancel',},{post: '/ui/{name=projects/*/locations/*/migratableResources/*/operations/*}:cancel',},{post: '/ui/{name=projects/*/locations/*/models/*/operations/*}:cancel',},{post: '/ui/{name=projects/*/locations/*/models/*/evaluations/*/operations/*}:cancel',},{post: '/ui/{name=projects/*/locations/*/notebookExecutionJobs/*/operations/*}:cancel',},{post: '/ui/{name=projects/*/locations/*/notebookRuntimes/*/operations/*}:cancel',},{post: '/ui/{name=projects/*/locations/*/notebookRuntimeTemplates/*/operations/*}:cancel',},{post: '/ui/{name=projects/*/locations/*/persistentResources/*/operations/*}:cancel',},{post: '/ui/{name=projects/*/locations/*/studies/*/operations/*}:cancel',},{post: '/ui/{name=projects/*/locations/*/studies/*/trials/*/operations/*}:cancel',},{post: '/ui/{name=projects/*/locations/*/trainingPipelines/*/operations/*}:cancel',},{post: '/ui/{name=projects/*/locations/*/pipelineJobs/*/operations/*}:cancel',},{post: '/ui/{name=projects/*/locations/*/schedules/*/operations/*}:cancel',},{post: '/ui/{name=projects/*/locations/*/specialistPools/*/operations/*}:cancel',},{post: '/ui/{name=projects/*/locations/*/tensorboards/*/operations/*}:cancel',},{post: '/ui/{name=projects/*/locations/*/tensorboards/*/experiments/*/operations/*}:cancel',},{post: '/ui/{name=projects/*/locations/*/tensorboards/*/experiments/*/runs/*/operations/*}:cancel',},{post: '/ui/{name=projects/*/locations/*/tensorboards/*/experiments/*/runs/*/timeSeries/*/operations/*}:cancel',},{post: '/v1beta1/{name=projects/*/locations/*/operations/*}:cancel',},{post: '/v1beta1/{name=projects/*/locations/*/agents/*/operations/*}:cancel',},{post: '/v1beta1/{name=projects/*/locations/*/apps/*/operations/*}:cancel',},{post: '/v1beta1/{name=projects/*/locations/*/datasets/*/operations/*}:cancel',},{post: '/v1beta1/{name=projects/*/locations/*/datasets/*/dataItems/*/operations/*}:cancel',},{post: '/v1beta1/{name=projects/*/locations/*/datasets/*/savedQueries/*/operations/*}:cancel',},{post: '/v1beta1/{name=projects/*/locations/*/datasets/*/annotationSpecs/*/operations/*}:cancel',},{post: '/v1beta1/{name=projects/*/locations/*/datasets/*/dataItems/*/annotations/*/operations/*}:cancel',},{post: '/v1beta1/{name=projects/*/locations/*/deploymentResourcePools/*/operations/*}:cancel',},{post: '/v1beta1/{name=projects/*/locations/*/edgeDevices/*/operations/*}:cancel',},{post: '/v1beta1/{name=projects/*/locations/*/endpoints/*/operations/*}:cancel',},{post: '/v1beta1/{name=projects/*/locations/*/exampleStores/*/operations/*}:cancel',},{post: '/v1beta1/{name=projects/*/locations/*/extensionControllers/*/operations/*}:cancel',},{post: '/v1beta1/{name=projects/*/locations/*/extensions/*/operations/*}:cancel',},{post: '/v1beta1/{name=projects/*/locations/*/featurestores/*/operations/*}:cancel',},{post: '/v1beta1/{name=projects/*/locations/*/featurestores/*/entityTypes/*/operations/*}:cancel',},{post: '/v1beta1/{name=projects/*/locations/*/featurestores/*/entityTypes/*/features/*/operations/*}:cancel',},{post: '/v1beta1/{name=projects/*/locations/*/customJobs/*/operations/*}:cancel',},{post: '/v1beta1/{name=projects/*/locations/*/dataLabelingJobs/*/operations/*}:cancel',},{post: '/v1beta1/{name=projects/*/locations/*/hyperparameterTuningJobs/*/operations/*}:cancel',},{post: '/v1beta1/{name=projects/*/locations/*/indexes/*/operations/*}:cancel',},{post: '/v1beta1/{name=projects/*/locations/*/indexEndpoints/*/operations/*}:cancel',},{post: '/v1beta1/{name=projects/*/locations/*/metadataStores/*/operations/*}:cancel',},{post: '/v1beta1/{name=projects/*/locations/*/metadataStores/*/artifacts/*/operations/*}:cancel',},{post: '/v1beta1/{name=projects/*/locations/*/metadataStores/*/contexts/*/operations/*}:cancel',},{post: '/v1beta1/{name=projects/*/locations/*/metadataStores/*/executions/*/operations/*}:cancel',},{post: '/v1beta1/{name=projects/*/locations/*/modelDeploymentMonitoringJobs/*/operations/*}:cancel',},{post: '/v1beta1/{name=projects/*/locations/*/modelMonitors/*/operations/*}:cancel',},{post: '/v1beta1/{name=projects/*/locations/*/migratableResources/*/operations/*}:cancel',},{post: '/v1beta1/{name=projects/*/locations/*/models/*/operations/*}:cancel',},{post: '/v1beta1/{name=projects/*/locations/*/models/*/evaluations/*/operations/*}:cancel',},{post: '/v1beta1/{name=projects/*/locations/*/notebookExecutionJobs/*/operations/*}:cancel',},{post: '/v1beta1/{name=projects/*/locations/*/notebookRuntimes/*/operations/*}:cancel',},{post: '/v1beta1/{name=projects/*/locations/*/notebookRuntimeTemplates/*/operations/*}:cancel',},{post: '/v1beta1/{name=projects/*/locations/*/persistentResources/*/operations/*}:cancel',},{post: '/v1beta1/{name=projects/*/locations/*/ragCorpora/*/operations/*}:cancel',},{post: '/v1beta1/{name=projects/*/locations/*/ragCorpora/*/ragFiles/*/operations/*}:cancel',},{post: '/v1beta1/{name=projects/*/locations/*/studies/*/operations/*}:cancel',},{post: '/v1beta1/{name=projects/*/locations/*/studies/*/trials/*/operations/*}:cancel',},{post: '/v1beta1/{name=projects/*/locations/*/trainingPipelines/*/operations/*}:cancel',},{post: '/v1beta1/{name=projects/*/locations/*/pipelineJobs/*/operations/*}:cancel',},{post: '/v1beta1/{name=projects/*/locations/*/reasoningEngines/*/operations/*}:cancel',},{post: '/v1beta1/{name=projects/*/locations/*/schedules/*/operations/*}:cancel',},{post: '/v1beta1/{name=projects/*/locations/*/specialistPools/*/operations/*}:cancel',},{post: '/v1beta1/{name=projects/*/locations/*/tensorboards/*/operations/*}:cancel',},{post: '/v1beta1/{name=projects/*/locations/*/tensorboards/*/experiments/*/operations/*}:cancel',},{post: '/v1beta1/{name=projects/*/locations/*/tensorboards/*/experiments/*/runs/*/operations/*}:cancel',},{post: '/v1beta1/{name=projects/*/locations/*/tensorboards/*/experiments/*/runs/*/timeSeries/*/operations/*}:cancel',}],
+      },{selector: 'google.longrunning.Operations.DeleteOperation',delete: '/ui/{name=projects/*/locations/*/operations/*}',additional_bindings: [{delete: '/ui/{name=projects/*/locations/*/agents/*/operations/*}',},{delete: '/ui/{name=projects/*/locations/*/apps/*/operations/*}',},{delete: '/ui/{name=projects/*/locations/*/datasets/*/operations/*}',},{delete: '/ui/{name=projects/*/locations/*/datasets/*/dataItems/*/operations/*}',},{delete: '/ui/{name=projects/*/locations/*/datasets/*/savedQueries/*/operations/*}',},{delete: '/ui/{name=projects/*/locations/*/datasets/*/annotationSpecs/*/operations/*}',},{delete: '/ui/{name=projects/*/locations/*/datasets/*/dataItems/*/annotations/*/operations/*}',},{delete: '/ui/{name=projects/*/locations/*/deploymentResourcePools/*/operations/*}',},{delete: '/ui/{name=projects/*/locations/*/edgeDevices/*/operations/*}',},{delete: '/ui/{name=projects/*/locations/*/endpoints/*/operations/*}',},{delete: '/ui/{name=projects/*/locations/*/extensionControllers/*}/operations',},{delete: '/ui/{name=projects/*/locations/*/extensions/*}/operations',},{delete: '/ui/{name=projects/*/locations/*/featurestores/*/operations/*}',},{delete: '/ui/{name=projects/*/locations/*/featurestores/*/entityTypes/*/operations/*}',},{delete: '/ui/{name=projects/*/locations/*/featurestores/*/entityTypes/*/features/*/operations/*}',},{delete: '/ui/{name=projects/*/locations/*/customJobs/*/operations/*}',},{delete: '/ui/{name=projects/*/locations/*/dataLabelingJobs/*/operations/*}',},{delete: '/ui/{name=projects/*/locations/*/hyperparameterTuningJobs/*/operations/*}',},{delete: '/ui/{name=projects/*/locations/*/indexes/*/operations/*}',},{delete: '/ui/{name=projects/*/locations/*/indexEndpoints/*/operations/*}',},{delete: '/ui/{name=projects/*/locations/*/metadataStores/*/operations/*}',},{delete: '/ui/{name=projects/*/locations/*/metadataStores/*/artifacts/*/operations/*}',},{delete: '/ui/{name=projects/*/locations/*/metadataStores/*/contexts/*/operations/*}',},{delete: '/ui/{name=projects/*/locations/*/metadataStores/*/executions/*/operations/*}',},{delete: '/ui/{name=projects/*/locations/*/modelDeploymentMonitoringJobs/*/operations/*}',},{delete: '/ui/{name=projects/*/locations/*/modelMonitors/*/operations/*}',},{delete: '/ui/{name=projects/*/locations/*/migratableResources/*/operations/*}',},{delete: '/ui/{name=projects/*/locations/*/models/*/operations/*}',},{delete: '/ui/{name=projects/*/locations/*/models/*/evaluations/*/operations/*}',},{delete: '/ui/{name=projects/*/locations/*/notebookExecutionJobs/*/operations/*}',},{delete: '/ui/{name=projects/*/locations/*/notebookRuntimes/*/operations/*}',},{delete: '/ui/{name=projects/*/locations/*/notebookRuntimeTemplates/*/operations/*}',},{delete: '/ui/{name=projects/*/locations/*/persistentResources/*/operations/*}',},{delete: '/ui/{name=projects/*/locations/*/studies/*/operations/*}',},{delete: '/ui/{name=projects/*/locations/*/studies/*/trials/*/operations/*}',},{delete: '/ui/{name=projects/*/locations/*/trainingPipelines/*/operations/*}',},{delete: '/ui/{name=projects/*/locations/*/pipelineJobs/*/operations/*}',},{delete: '/ui/{name=projects/*/locations/*/schedules/*/operations/*}',},{delete: '/ui/{name=projects/*/locations/*/specialistPools/*/operations/*}',},{delete: '/ui/{name=projects/*/locations/*/tensorboards/*/operations/*}',},{delete: '/ui/{name=projects/*/locations/*/tensorboards/*/experiments/*/operations/*}',},{delete: '/ui/{name=projects/*/locations/*/tensorboards/*/experiments/*/runs/*/operations/*}',},{delete: '/ui/{name=projects/*/locations/*/tensorboards/*/experiments/*/runs/*/timeSeries/*/operations/*}',},{delete: '/ui/{name=projects/*/locations/*/featureOnlineStores/*/operations/*}',},{delete: '/ui/{name=projects/*/locations/*/featureGroups/*/operations/*}',},{delete: '/ui/{name=projects/*/locations/*/featureGroups/*/features/*/operations/*}',},{delete: '/ui/{name=projects/*/locations/*/featureGroups/*/featureMonitors/*/operations/*}',},{delete: '/ui/{name=projects/*/locations/*/featureOnlineStores/*/featureViews/*/operations/*}',},{delete: '/v1beta1/{name=projects/*/locations/*/operations/*}',},{delete: '/v1beta1/{name=projects/*/locations/*/agents/*/operations/*}',},{delete: '/v1beta1/{name=projects/*/locations/*/apps/*/operations/*}',},{delete: '/v1beta1/{name=projects/*/locations/*/datasets/*/operations/*}',},{delete: '/v1beta1/{name=projects/*/locations/*/datasets/*/dataItems/*/operations/*}',},{delete: '/v1beta1/{name=projects/*/locations/*/datasets/*/savedQueries/*/operations/*}',},{delete: '/v1beta1/{name=projects/*/locations/*/datasets/*/annotationSpecs/*/operations/*}',},{delete: '/v1beta1/{name=projects/*/locations/*/datasets/*/dataItems/*/annotations/*/operations/*}',},{delete: '/v1beta1/{name=projects/*/locations/*/deploymentResourcePools/*/operations/*}',},{delete: '/v1beta1/{name=projects/*/locations/*/edgeDevices/*/operations/*}',},{delete: '/v1beta1/{name=projects/*/locations/*/endpoints/*/operations/*}',},{delete: '/v1beta1/{name=projects/*/locations/*/featurestores/*/operations/*}',},{delete: '/v1beta1/{name=projects/*/locations/*/featurestores/*/entityTypes/*/operations/*}',},{delete: '/v1beta1/{name=projects/*/locations/*/featurestores/*/entityTypes/*/features/*/operations/*}',},{delete: '/v1beta1/{name=projects/*/locations/*/customJobs/*/operations/*}',},{delete: '/v1beta1/{name=projects/*/locations/*/dataLabelingJobs/*/operations/*}',},{delete: '/v1beta1/{name=projects/*/locations/*/evaluationTasks/*/operations/*}',},{delete: '/v1beta1/{name=projects/*/locations/*/exampleStores/*/operations/*}',},{delete: '/v1beta1/{name=projects/*/locations/*/extensionControllers/*/operations/*}',},{delete: '/v1beta1/{name=projects/*/locations/*/extensions/*/operations/*}',},{delete: '/v1beta1/{name=projects/*/locations/*/hyperparameterTuningJobs/*/operations/*}',},{delete: '/v1beta1/{name=projects/*/locations/*/indexes/*/operations/*}',},{delete: '/v1beta1/{name=projects/*/locations/*/indexEndpoints/*/operations/*}',},{delete: '/v1beta1/{name=projects/*/locations/*/metadataStores/*/operations/*}',},{delete: '/v1beta1/{name=projects/*/locations/*/metadataStores/*/artifacts/*/operations/*}',},{delete: '/v1beta1/{name=projects/*/locations/*/metadataStores/*/contexts/*/operations/*}',},{delete: '/v1beta1/{name=projects/*/locations/*/metadataStores/*/executions/*/operations/*}',},{delete: '/v1beta1/{name=projects/*/locations/*/modelDeploymentMonitoringJobs/*/operations/*}',},{delete: '/v1beta1/{name=projects/*/locations/*/modelMonitors/*/operations/*}',},{delete: '/v1beta1/{name=projects/*/locations/*/migratableResources/*/operations/*}',},{delete: '/v1beta1/{name=projects/*/locations/*/models/*/operations/*}',},{delete: '/v1beta1/{name=projects/*/locations/*/models/*/evaluations/*/operations/*}',},{delete: '/v1beta1/{name=projects/*/locations/*/notebookExecutionJobs/*/operations/*}',},{delete: '/v1beta1/{name=projects/*/locations/*/notebookRuntimes/*/operations/*}',},{delete: '/v1beta1/{name=projects/*/locations/*/notebookRuntimeTemplates/*/operations/*}',},{delete: '/v1beta1/{name=projects/*/locations/*/persistentResources/*/operations/*}',},{delete: '/v1beta1/{name=projects/*/locations/*/ragCorpora/*/operations/*}',},{delete: '/v1beta1/{name=projects/*/locations/*/ragCorpora/*/ragFiles/*/operations/*}',},{delete: '/v1beta1/{name=projects/*/locations/*/reasoningEngines/*/operations/*}',},{delete: '/v1beta1/{name=projects/*/locations/*/solvers/*/operations/*}',},{delete: '/v1beta1/{name=projects/*/locations/*/studies/*/operations/*}',},{delete: '/v1beta1/{name=projects/*/locations/*/studies/*/trials/*/operations/*}',},{delete: '/v1beta1/{name=projects/*/locations/*/trainingPipelines/*/operations/*}',},{delete: '/v1beta1/{name=projects/*/locations/*/pipelineJobs/*/operations/*}',},{delete: '/v1beta1/{name=projects/*/locations/*/schedules/*/operations/*}',},{delete: '/v1beta1/{name=projects/*/locations/*/specialistPools/*/operations/*}',},{delete: '/v1beta1/{name=projects/*/locations/*/tensorboards/*/operations/*}',},{delete: '/v1beta1/{name=projects/*/locations/*/tensorboards/*/experiments/*/operations/*}',},{delete: '/v1beta1/{name=projects/*/locations/*/tensorboards/*/experiments/*/runs/*/operations/*}',},{delete: '/v1beta1/{name=projects/*/locations/*/tensorboards/*/experiments/*/runs/*/timeSeries/*/operations/*}',},{delete: '/v1beta1/{name=projects/*/locations/*/featureOnlineStores/*/operations/*}',},{delete: '/v1beta1/{name=projects/*/locations/*/featureGroups/*/operations/*}',},{delete: '/v1beta1/{name=projects/*/locations/*/featureGroups/*/features/*/operations/*}',},{delete: '/v1beta1/{name=projects/*/locations/*/featureGroups/*/featureMonitors/*/operations/*}',},{delete: '/v1beta1/{name=projects/*/locations/*/featureOnlineStores/*/featureViews/*/operations/*}',}],
+      },{selector: 'google.longrunning.Operations.GetOperation',get: '/ui/{name=projects/*/locations/*/operations/*}',additional_bindings: [{get: '/ui/{name=projects/*/locations/*/agents/*/operations/*}',},{get: '/ui/{name=projects/*/locations/*/apps/*/operations/*}',},{get: '/ui/{name=projects/*/locations/*/datasets/*/operations/*}',},{get: '/ui/{name=projects/*/locations/*/datasets/*/dataItems/*/operations/*}',},{get: '/ui/{name=projects/*/locations/*/datasets/*/savedQueries/*/operations/*}',},{get: '/ui/{name=projects/*/locations/*/datasets/*/annotationSpecs/*/operations/*}',},{get: '/ui/{name=projects/*/locations/*/datasets/*/dataItems/*/annotations/*/operations/*}',},{get: '/ui/{name=projects/*/locations/*/deploymentResourcePools/*/operations/*}',},{get: '/ui/{name=projects/*/locations/*/edgeDeploymentJobs/*/operations/*}',},{get: '/ui/{name=projects/*/locations/*/edgeDevices/*/operations/*}',},{get: '/ui/{name=projects/*/locations/*/endpoints/*/operations/*}',},{get: '/ui/{name=projects/*/locations/*/extensionControllers/*/operations/*}',},{get: '/ui/{name=projects/*/locations/*/extensions/*/operations/*}',},{get: '/ui/{name=projects/*/locations/*/featurestores/*/operations/*}',},{get: '/ui/{name=projects/*/locations/*/featurestores/*/entityTypes/*/operations/*}',},{get: '/ui/{name=projects/*/locations/*/featurestores/*/entityTypes/*/features/*/operations/*}',},{get: '/ui/{name=projects/*/locations/*/customJobs/*/operations/*}',},{get: '/ui/{name=projects/*/locations/*/dataLabelingJobs/*/operations/*}',},{get: '/ui/{name=projects/*/locations/*/hyperparameterTuningJobs/*/operations/*}',},{get: '/ui/{name=projects/*/locations/*/tuningJobs/*/operations/*}',},{get: '/ui/{name=projects/*/locations/*/indexes/*/operations/*}',},{get: '/ui/{name=projects/*/locations/*/indexEndpoints/*/operations/*}',},{get: '/ui/{name=projects/*/locations/*/metadataStores/*/operations/*}',},{get: '/ui/{name=projects/*/locations/*/metadataStores/*/artifacts/*/operations/*}',},{get: '/ui/{name=projects/*/locations/*/metadataStores/*/contexts/*/operations/*}',},{get: '/ui/{name=projects/*/locations/*/metadataStores/*/executions/*/operations/*}',},{get: '/ui/{name=projects/*/locations/*/modelDeploymentMonitoringJobs/*/operations/*}',},{get: '/ui/{name=projects/*/locations/*/modelMonitors/*/operations/*}',},{get: '/ui/{name=projects/*/locations/*/migratableResources/*/operations/*}',},{get: '/ui/{name=projects/*/locations/*/models/*/operations/*}',},{get: '/ui/{name=projects/*/locations/*/models/*/evaluations/*/operations/*}',},{get: '/ui/{name=projects/*/locations/*/notebookExecutionJobs/*/operations/*}',},{get: '/ui/{name=projects/*/locations/*/notebookRuntimes/*/operations/*}',},{get: '/ui/{name=projects/*/locations/*/notebookRuntimeTemplates/*/operations/*}',},{get: '/ui/{name=projects/*/locations/*/persistentResources/*/operations/*}',},{get: '/ui/{name=projects/*/locations/*/studies/*/operations/*}',},{get: '/ui/{name=projects/*/locations/*/studies/*/trials/*/operations/*}',},{get: '/ui/{name=projects/*/locations/*/trainingPipelines/*/operations/*}',},{get: '/ui/{name=projects/*/locations/*/pipelineJobs/*/operations/*}',},{get: '/ui/{name=projects/*/locations/*/schedules/*/operations/*}',},{get: '/ui/{name=projects/*/locations/*/specialistPools/*/operations/*}',},{get: '/ui/{name=projects/*/locations/*/tensorboards/*/operations/*}',},{get: '/ui/{name=projects/*/locations/*/tensorboards/*/experiments/*/operations/*}',},{get: '/ui/{name=projects/*/locations/*/tensorboards/*/experiments/*/runs/*/operations/*}',},{get: '/ui/{name=projects/*/locations/*/tensorboards/*/experiments/*/runs/*/timeSeries/*/operations/*}',},{get: '/ui/{name=projects/*/locations/*/featureOnlineStores/*/operations/*}',},{get: '/ui/{name=projects/*/locations/*/featureOnlineStores/*/featureViews/*/operations/*}',},{get: '/ui/{name=projects/*/locations/*/featureGroups/*/operations/*}',},{get: '/ui/{name=projects/*/locations/*/featureGroups/*/features/*/operations/*}',},{get: '/ui/{name=projects/*/locations/*/featureGroups/*/featureMonitors/*/operations/*}',},{get: '/v1beta1/{name=projects/*/locations/*/operations/*}',},{get: '/v1beta1/{name=projects/*/locations/*/agents/*/operations/*}',},{get: '/v1beta1/{name=projects/*/locations/*/apps/*/operations/*}',},{get: '/v1beta1/{name=projects/*/locations/*/datasets/*/operations/*}',},{get: '/v1beta1/{name=projects/*/locations/*/datasets/*/dataItems/*/operations/*}',},{get: '/v1beta1/{name=projects/*/locations/*/datasets/*/savedQueries/*/operations/*}',},{get: '/v1beta1/{name=projects/*/locations/*/datasets/*/annotationSpecs/*/operations/*}',},{get: '/v1beta1/{name=projects/*/locations/*/datasets/*/dataItems/*/annotations/*/operations/*}',},{get: '/v1beta1/{name=projects/*/locations/*/deploymentResourcePools/*/operations/*}',},{get: '/v1beta1/{name=projects/*/locations/*/edgeDevices/*/operations/*}',},{get: '/v1beta1/{name=projects/*/locations/*/endpoints/*/operations/*}',},{get: '/v1beta1/{name=projects/*/locations/*/evaluationTasks/*/operations/*}',},{get: '/v1beta1/{name=projects/*/locations/*/exampleStores/*/operations/*}',},{get: '/v1beta1/{name=projects/*/locations/*/extensionControllers/*/operations/*}',},{get: '/v1beta1/{name=projects/*/locations/*/extensions/*/operations/*}',},{get: '/v1beta1/{name=projects/*/locations/*/featurestores/*/operations/*}',},{get: '/v1beta1/{name=projects/*/locations/*/featurestores/*/entityTypes/*/operations/*}',},{get: '/v1beta1/{name=projects/*/locations/*/featurestores/*/entityTypes/*/features/*/operations/*}',},{get: '/v1beta1/{name=projects/*/locations/*/customJobs/*/operations/*}',},{get: '/v1beta1/{name=projects/*/locations/*/dataLabelingJobs/*/operations/*}',},{get: '/v1beta1/{name=projects/*/locations/*/hyperparameterTuningJobs/*/operations/*}',},{get: '/v1beta1/{name=projects/*/locations/*/indexes/*/operations/*}',},{get: '/v1beta1/{name=projects/*/locations/*/indexEndpoints/*/operations/*}',},{get: '/v1beta1/{name=projects/*/locations/*/metadataStores/*/operations/*}',},{get: '/v1beta1/{name=projects/*/locations/*/metadataStores/*/artifacts/*/operations/*}',},{get: '/v1beta1/{name=projects/*/locations/*/metadataStores/*/contexts/*/operations/*}',},{get: '/v1beta1/{name=projects/*/locations/*/metadataStores/*/executions/*/operations/*}',},{get: '/v1beta1/{name=projects/*/locations/*/modelDeploymentMonitoringJobs/*/operations/*}',},{get: '/v1beta1/{name=projects/*/locations/*/modelMonitors/*/operations/*}',},{get: '/v1beta1/{name=projects/*/locations/*/migratableResources/*/operations/*}',},{get: '/v1beta1/{name=projects/*/locations/*/models/*/operations/*}',},{get: '/v1beta1/{name=projects/*/locations/*/models/*/evaluations/*/operations/*}',},{get: '/v1beta1/{name=projects/*/locations/*/notebookExecutionJobs/*/operations/*}',},{get: '/v1beta1/{name=projects/*/locations/*/notebookRuntimes/*/operations/*}',},{get: '/v1beta1/{name=projects/*/locations/*/notebookRuntimeTemplates/*/operations/*}',},{get: '/v1beta1/{name=projects/*/locations/*/persistentResources/*/operations/*}',},{get: '/v1beta1/{name=projects/*/locations/*/ragCorpora/*/operations/*}',},{get: '/v1beta1/{name=projects/*/locations/*/ragCorpora/*/ragFiles/*/operations/*}',},{get: '/v1beta1/{name=projects/*/locations/*/reasoningEngines/*/operations/*}',},{get: '/v1beta1/{name=projects/*/locations/*/solvers/*/operations/*}',},{get: '/v1beta1/{name=projects/*/locations/*/studies/*/operations/*}',},{get: '/v1beta1/{name=projects/*/locations/*/studies/*/trials/*/operations/*}',},{get: '/v1beta1/{name=projects/*/locations/*/trainingPipelines/*/operations/*}',},{get: '/v1beta1/{name=projects/*/locations/*/pipelineJobs/*/operations/*}',},{get: '/v1beta1/{name=projects/*/locations/*/schedules/*/operations/*}',},{get: '/v1beta1/{name=projects/*/locations/*/specialistPools/*/operations/*}',},{get: '/v1beta1/{name=projects/*/locations/*/tensorboards/*/operations/*}',},{get: '/v1beta1/{name=projects/*/locations/*/tensorboards/*/experiments/*/operations/*}',},{get: '/v1beta1/{name=projects/*/locations/*/tensorboards/*/experiments/*/runs/*/operations/*}',},{get: '/v1beta1/{name=projects/*/locations/*/tensorboards/*/experiments/*/runs/*/timeSeries/*/operations/*}',},{get: '/v1beta1/{name=projects/*/locations/*/featureOnlineStores/*/operations/*}',},{get: '/v1beta1/{name=projects/*/locations/*/featureOnlineStores/*/featureViews/*/operations/*}',},{get: '/v1beta1/{name=projects/*/locations/*/featureGroups/*/operations/*}',},{get: '/v1beta1/{name=projects/*/locations/*/featureGroups/*/features/*/operations/*}',},{get: '/v1beta1/{name=projects/*/locations/*/featureGroups/*/featureMonitors/*/operations/*}',}],
+      },{selector: 'google.longrunning.Operations.ListOperations',get: '/ui/{name=projects/*/locations/*}/operations',additional_bindings: [{get: '/ui/{name=projects/*/locations/*/agents/*}/operations',},{get: '/ui/{name=projects/*/locations/*/apps/*}/operations',},{get: '/ui/{name=projects/*/locations/*/datasets/*}/operations',},{get: '/ui/{name=projects/*/locations/*/datasets/*/dataItems/*}/operations',},{get: '/ui/{name=projects/*/locations/*/datasets/*/savedQueries/*}/operations',},{get: '/ui/{name=projects/*/locations/*/datasets/*/annotationSpecs/*}/operations',},{get: '/ui/{name=projects/*/locations/*/datasets/*/dataItems/*/annotations/*}/operations',},{get: '/ui/{name=projects/*/locations/*/deploymentResourcePools/*}/operations',},{get: '/ui/{name=projects/*/locations/*/edgeDevices/*}/operations',},{get: '/ui/{name=projects/*/locations/*/endpoints/*}/operations',},{get: '/ui/{name=projects/*/locations/*/extensionControllers/*}/operations',},{get: '/ui/{name=projects/*/locations/*/extensions/*}/operations',},{get: '/ui/{name=projects/*/locations/*/featurestores/*}/operations',},{get: '/ui/{name=projects/*/locations/*/featurestores/*/entityTypes/*}/operations',},{get: '/ui/{name=projects/*/locations/*/featurestores/*/entityTypes/*/features/*}/operations',},{get: '/ui/{name=projects/*/locations/*/customJobs/*}/operations',},{get: '/ui/{name=projects/*/locations/*/dataLabelingJobs/*}/operations',},{get: '/ui/{name=projects/*/locations/*/hyperparameterTuningJobs/*}/operations',},{get: '/ui/{name=projects/*/locations/*/tuningJobs/*}/operations',},{get: '/ui/{name=projects/*/locations/*/indexes/*}/operations',},{get: '/ui/{name=projects/*/locations/*/indexEndpoints/*}/operations',},{get: '/ui/{name=projects/*/locations/*/metadataStores/*}/operations',},{get: '/ui/{name=projects/*/locations/*/metadataStores/*/artifacts/*}/operations',},{get: '/ui/{name=projects/*/locations/*/metadataStores/*/contexts/*}/operations',},{get: '/ui/{name=projects/*/locations/*/metadataStores/*/executions/*}/operations',},{get: '/ui/{name=projects/*/locations/*/modelDeploymentMonitoringJobs/*}/operations',},{get: '/ui/{name=projects/*/locations/*/modelMonitors/*}/operations',},{get: '/ui/{name=projects/*/locations/*/migratableResources/*}/operations',},{get: '/ui/{name=projects/*/locations/*/models/*}/operations',},{get: '/ui/{name=projects/*/locations/*/models/*/evaluations/*}/operations',},{get: '/ui/{name=projects/*/locations/*/notebookExecutionJobs/*}/operations',},{get: '/ui/{name=projects/*/locations/*/notebookRuntimes/*}/operations',},{get: '/ui/{name=projects/*/locations/*/notebookRuntimeTemplates/*}/operations',},{get: '/ui/{name=projects/*/locations/*/studies/*}/operations',},{get: '/ui/{name=projects/*/locations/*/studies/*/trials/*}/operations',},{get: '/ui/{name=projects/*/locations/*/trainingPipelines/*}/operations',},{get: '/ui/{name=projects/*/locations/*/persistentResources/*}/operations',},{get: '/ui/{name=projects/*/locations/*/pipelineJobs/*}/operations',},{get: '/ui/{name=projects/*/locations/*/schedules/*}/operations',},{get: '/ui/{name=projects/*/locations/*/specialistPools/*}/operations',},{get: '/ui/{name=projects/*/locations/*/tensorboards/*}/operations',},{get: '/ui/{name=projects/*/locations/*/tensorboards/*/experiments/*}/operations',},{get: '/ui/{name=projects/*/locations/*/tensorboards/*/experiments/*/runs/*}/operations',},{get: '/ui/{name=projects/*/locations/*/tensorboards/*/experiments/*/runs/*/timeSeries/*}/operations',},{get: '/ui/{name=projects/*/locations/*/featureOnlineStores/*/operations/*}:wait',},{get: '/ui/{name=projects/*/locations/*/featureOnlineStores/*/featureViews/*/operations/*}:wait',},{get: '/ui/{name=projects/*/locations/*/featureGroups/*/operations/*}:wait',},{get: '/ui/{name=projects/*/locations/*/featureGroups/*/features/*/operations/*}:wait',},{get: '/ui/{name=projects/*/locations/*/featureGroups/*/featureMonitors/*/operations/*}:wait',},{get: '/v1beta1/{name=projects/*/locations/*}/operations',},{get: '/v1beta1/{name=projects/*/locations/*/agents/*}/operations',},{get: '/v1beta1/{name=projects/*/locations/*/apps/*}/operations',},{get: '/v1beta1/{name=projects/*/locations/*/datasets/*}/operations',},{get: '/v1beta1/{name=projects/*/locations/*/datasets/*/dataItems/*}/operations',},{get: '/v1beta1/{name=projects/*/locations/*/datasets/*/savedQueries/*}/operations',},{get: '/v1beta1/{name=projects/*/locations/*/datasets/*/annotationSpecs/*}/operations',},{get: '/v1beta1/{name=projects/*/locations/*/datasets/*/dataItems/*/annotations/*}/operations',},{get: '/v1beta1/{name=projects/*/locations/*/deploymentResourcePools/*}/operations',},{get: '/v1beta1/{name=projects/*/locations/*/edgeDevices/*}/operations',},{get: '/v1beta1/{name=projects/*/locations/*/endpoints/*}/operations',},{get: '/v1beta1/{name=projects/*/locations/*/evaluationTasks/*}/operations',},{get: '/v1beta1/{name=projects/*/locations/*/exampleStores/*}/operations',},{get: '/v1beta1/{name=projects/*/locations/*/extensionControllers/*}/operations',},{get: '/v1beta1/{name=projects/*/locations/*/extensions/*}/operations',},{get: '/v1beta1/{name=projects/*/locations/*/featurestores/*}/operations',},{get: '/v1beta1/{name=projects/*/locations/*/featurestores/*/entityTypes/*}/operations',},{get: '/v1beta1/{name=projects/*/locations/*/featurestores/*/entityTypes/*/features/*}/operations',},{get: '/v1beta1/{name=projects/*/locations/*/customJobs/*}/operations',},{get: '/v1beta1/{name=projects/*/locations/*/dataLabelingJobs/*}/operations',},{get: '/v1beta1/{name=projects/*/locations/*/hyperparameterTuningJobs/*}/operations',},{get: '/v1beta1/{name=projects/*/locations/*/indexes/*}/operations',},{get: '/v1beta1/{name=projects/*/locations/*/indexEndpoints/*}/operations',},{get: '/v1beta1/{name=projects/*/locations/*/metadataStores/*}/operations',},{get: '/v1beta1/{name=projects/*/locations/*/metadataStores/*/artifacts/*}/operations',},{get: '/v1beta1/{name=projects/*/locations/*/metadataStores/*/contexts/*}/operations',},{get: '/v1beta1/{name=projects/*/locations/*/metadataStores/*/executions/*}/operations',},{get: '/v1beta1/{name=projects/*/locations/*/modelDeploymentMonitoringJobs/*}/operations',},{get: '/v1beta1/{name=projects/*/locations/*/modelMonitors/*}/operations',},{get: '/v1beta1/{name=projects/*/locations/*/migratableResources/*}/operations',},{get: '/v1beta1/{name=projects/*/locations/*/models/*}/operations',},{get: '/v1beta1/{name=projects/*/locations/*/models/*/evaluations/*}/operations',},{get: '/v1beta1/{name=projects/*/locations/*/notebookExecutionJobs/*}/operations',},{get: '/v1beta1/{name=projects/*/locations/*/notebookRuntimes/*}/operations',},{get: '/v1beta1/{name=projects/*/locations/*/notebookRuntimeTemplates/*}/operations',},{get: '/v1beta1/{name=projects/*/locations/*/persistentResources/*}/operations',},{get: '/v1beta1/{name=projects/*/locations/*/ragCorpora/*}/operations',},{get: '/v1beta1/{name=projects/*/locations/*/ragCorpora/*/ragFiles/*}/operations',},{get: '/v1beta1/{name=projects/*/locations/*/reasoningEngines/*}/operations',},{get: '/v1beta1/{name=projects/*/locations/*/solvers/*}/operations',},{get: '/v1beta1/{name=projects/*/locations/*/studies/*}/operations',},{get: '/v1beta1/{name=projects/*/locations/*/studies/*/trials/*}/operations',},{get: '/v1beta1/{name=projects/*/locations/*/trainingPipelines/*}/operations',},{get: '/v1beta1/{name=projects/*/locations/*/pipelineJobs/*}/operations',},{get: '/v1beta1/{name=projects/*/locations/*/schedules/*}/operations',},{get: '/v1beta1/{name=projects/*/locations/*/specialistPools/*}/operations',},{get: '/v1beta1/{name=projects/*/locations/*/tensorboards/*}/operations',},{get: '/v1beta1/{name=projects/*/locations/*/tensorboards/*/experiments/*}/operations',},{get: '/v1beta1/{name=projects/*/locations/*/tensorboards/*/experiments/*/runs/*}/operations',},{get: '/v1beta1/{name=projects/*/locations/*/tensorboards/*/experiments/*/runs/*/timeSeries/*}/operations',},{get: '/v1beta1/{name=projects/*/locations/*/featureOnlineStores/*}/operations',},{get: '/v1beta1/{name=projects/*/locations/*/featureOnlineStores/*/featureViews/*}/operations',},{get: '/v1beta1/{name=projects/*/locations/*/featureGroups/*}/operations',},{get: '/v1beta1/{name=projects/*/locations/*/featureGroups/*/features/*}/operations',},{get: '/v1beta1/{name=projects/*/locations/*/featureGroups/*/featureMonitors/*}/operations',}],
+      },{selector: 'google.longrunning.Operations.WaitOperation',post: '/ui/{name=projects/*/locations/*/operations/*}:wait',additional_bindings: [{post: '/ui/{name=projects/*/locations/*/agents/*/operations/*}:wait',},{post: '/ui/{name=projects/*/locations/*/apps/*/operations/*}:wait',},{post: '/ui/{name=projects/*/locations/*/datasets/*/operations/*}:wait',},{post: '/ui/{name=projects/*/locations/*/datasets/*/dataItems/*/operations/*}:wait',},{post: '/ui/{name=projects/*/locations/*/datasets/*/savedQueries/*/operations/*}:wait',},{post: '/ui/{name=projects/*/locations/*/datasets/*/annotationSpecs/*/operations/*}:wait',},{post: '/ui/{name=projects/*/locations/*/datasets/*/dataItems/*/annotations/*/operations/*}:wait',},{post: '/ui/{name=projects/*/locations/*/deploymentResourcePools/*/operations/*}:wait',},{post: '/ui/{name=projects/*/locations/*/edgeDevices/*/operations/*}:wait',},{post: '/ui/{name=projects/*/locations/*/endpoints/*/operations/*}:wait',},{post: '/ui/{name=projects/*/locations/*/extensionControllers/*/operations/*}:wait',},{post: '/ui/{name=projects/*/locations/*/extensions/*/operations/*}:wait',},{post: '/ui/{name=projects/*/locations/*/featurestores/*/operations/*}:wait',},{post: '/ui/{name=projects/*/locations/*/featurestores/*/entityTypes/*/operations/*}:wait',},{post: '/ui/{name=projects/*/locations/*/featurestores/*/entityTypes/*/features/*/operations/*}:wait',},{post: '/ui/{name=projects/*/locations/*/customJobs/*/operations/*}:wait',},{post: '/ui/{name=projects/*/locations/*/dataLabelingJobs/*/operations/*}:wait',},{post: '/ui/{name=projects/*/locations/*/hyperparameterTuningJobs/*/operations/*}:wait',},{post: '/ui/{name=projects/*/locations/*/tuningJobs/*/operations/*}:wait',},{post: '/ui/{name=projects/*/locations/*/indexes/*/operations/*}:wait',},{post: '/ui/{name=projects/*/locations/*/indexEndpoints/*/operations/*}:wait',},{post: '/ui/{name=projects/*/locations/*/metadataStores/*/operations/*}:wait',},{post: '/ui/{name=projects/*/locations/*/metadataStores/*/artifacts/*/operations/*}:wait',},{post: '/ui/{name=projects/*/locations/*/metadataStores/*/contexts/*/operations/*}:wait',},{post: '/ui/{name=projects/*/locations/*/metadataStores/*/executions/*/operations/*}:wait',},{post: '/ui/{name=projects/*/locations/*/modelDeploymentMonitoringJobs/*/operations/*}:wait',},{post: '/ui/{name=projects/*/locations/*/modelMonitors/*/operations/*}:wait',},{post: '/ui/{name=projects/*/locations/*/migratableResources/*/operations/*}:wait',},{post: '/ui/{name=projects/*/locations/*/models/*/operations/*}:wait',},{post: '/ui/{name=projects/*/locations/*/models/*/evaluations/*/operations/*}:wait',},{post: '/ui/{name=projects/*/locations/*/notebookExecutionJobs/*/operations/*}:wait',},{post: '/ui/{name=projects/*/locations/*/notebookRuntimes/*/operations/*}:wait',},{post: '/ui/{name=projects/*/locations/*/notebookRuntimeTemplates/*/operations/*}:wait',},{post: '/ui/{name=projects/*/locations/*/studies/*/operations/*}:wait',},{post: '/ui/{name=projects/*/locations/*/studies/*/trials/*/operations/*}:wait',},{post: '/ui/{name=projects/*/locations/*/trainingPipelines/*/operations/*}:wait',},{post: '/ui/{name=projects/*/locations/*/persistentResources/*/operations/*}:wait',},{post: '/ui/{name=projects/*/locations/*/pipelineJobs/*/operations/*}:wait',},{post: '/ui/{name=projects/*/locations/*/schedules/*/operations/*}:wait',},{post: '/ui/{name=projects/*/locations/*/specialistPools/*/operations/*}:wait',},{post: '/ui/{name=projects/*/locations/*/tensorboards/*/operations/*}:wait',},{post: '/ui/{name=projects/*/locations/*/tensorboards/*/experiments/*/operations/*}:wait',},{post: '/ui/{name=projects/*/locations/*/tensorboards/*/experiments/*/runs/*/operations/*}:wait',},{post: '/ui/{name=projects/*/locations/*/tensorboards/*/experiments/*/runs/*/timeSeries/*/operations/*}:wait',},{post: '/ui/{name=projects/*/locations/*/featureOnlineStores/*/operations/*}:wait',},{post: '/ui/{name=projects/*/locations/*/featureOnlineStores/*/featureViews/*/operations/*}:wait',},{post: '/ui/{name=projects/*/locations/*/featureGroups/*/operations/*}:wait',},{post: '/ui/{name=projects/*/locations/*/featureGroups/*/features/*/operations/*}:wait',},{post: '/ui/{name=projects/*/locations/*/featureGroups/*/featureMonitors/*/operations/*}:wait',},{post: '/v1beta1/{name=projects/*/locations/*/operations/*}:wait',},{post: '/v1beta1/{name=projects/*/locations/*/agents/*/operations/*}:wait',},{post: '/v1beta1/{name=projects/*/locations/*/apps/*/operations/*}:wait',},{post: '/v1beta1/{name=projects/*/locations/*/datasets/*/operations/*}:wait',},{post: '/v1beta1/{name=projects/*/locations/*/datasets/*/dataItems/*/operations/*}:wait',},{post: '/v1beta1/{name=projects/*/locations/*/datasets/*/savedQueries/*/operations/*}:wait',},{post: '/v1beta1/{name=projects/*/locations/*/datasets/*/annotationSpecs/*/operations/*}:wait',},{post: '/v1beta1/{name=projects/*/locations/*/datasets/*/dataItems/*/annotations/*/operations/*}:wait',},{post: '/v1beta1/{name=projects/*/locations/*/deploymentResourcePools/*/operations/*}:wait',},{post: '/v1beta1/{name=projects/*/locations/*/edgeDevices/*/operations/*}:wait',},{post: '/v1beta1/{name=projects/*/locations/*/endpoints/*/operations/*}:wait',},{post: '/v1beta1/{name=projects/*/locations/*/evaluationTasks/*/operations/*}:wait',},{post: '/v1beta1/{name=projects/*/locations/*/exampleStores/*/operations/*}:wait',},{post: '/v1beta1/{name=projects/*/locations/*/extensionControllers/*/operations/*}:wait',},{post: '/v1beta1/{name=projects/*/locations/*/extensions/*/operations/*}:wait',},{post: '/v1beta1/{name=projects/*/locations/*/featurestores/*/operations/*}:wait',},{post: '/v1beta1/{name=projects/*/locations/*/featurestores/*/entityTypes/*/operations/*}:wait',},{post: '/v1beta1/{name=projects/*/locations/*/featurestores/*/entityTypes/*/features/*/operations/*}:wait',},{post: '/v1beta1/{name=projects/*/locations/*/customJobs/*/operations/*}:wait',},{post: '/v1beta1/{name=projects/*/locations/*/dataLabelingJobs/*/operations/*}:wait',},{post: '/v1beta1/{name=projects/*/locations/*/hyperparameterTuningJobs/*/operations/*}:wait',},{post: '/v1beta1/{name=projects/*/locations/*/indexes/*/operations/*}:wait',},{post: '/v1beta1/{name=projects/*/locations/*/indexEndpoints/*/operations/*}:wait',},{post: '/v1beta1/{name=projects/*/locations/*/metadataStores/*/operations/*}:wait',},{post: '/v1beta1/{name=projects/*/locations/*/metadataStores/*/artifacts/*/operations/*}:wait',},{post: '/v1beta1/{name=projects/*/locations/*/metadataStores/*/contexts/*/operations/*}:wait',},{post: '/v1beta1/{name=projects/*/locations/*/metadataStores/*/executions/*/operations/*}:wait',},{post: '/v1beta1/{name=projects/*/locations/*/modelDeploymentMonitoringJobs/*/operations/*}:wait',},{post: '/v1beta1/{name=projects/*/locations/*/modelMonitors/*/operations/*}:wait',},{post: '/v1beta1/{name=projects/*/locations/*/migratableResources/*/operations/*}:wait',},{post: '/v1beta1/{name=projects/*/locations/*/models/*/operations/*}:wait',},{post: '/v1beta1/{name=projects/*/locations/*/models/*/evaluations/*/operations/*}:wait',},{post: '/v1beta1/{name=projects/*/locations/*/notebookExecutionJobs/*/operations/*}:wait',},{post: '/v1beta1/{name=projects/*/locations/*/notebookRuntimes/*/operations/*}:wait',},{post: '/v1beta1/{name=projects/*/locations/*/notebookRuntimeTemplates/*/operations/*}:wait',},{post: '/v1beta1/{name=projects/*/locations/*/persistentResources/*/operations/*}:wait',},{post: '/v1beta1/{name=projects/*/locations/*/ragCorpora/*/operations/*}:wait',},{post: '/v1beta1/{name=projects/*/locations/*/ragCorpora/*/ragFiles/*/operations/*}:wait',},{post: '/v1beta1/{name=projects/*/locations/*/reasoningEngines/*/operations/*}:wait',},{post: '/v1beta1/{name=projects/*/locations/*/studies/*/operations/*}:wait',},{post: '/v1beta1/{name=projects/*/locations/*/studies/*/trials/*/operations/*}:wait',},{post: '/v1beta1/{name=projects/*/locations/*/trainingPipelines/*/operations/*}:wait',},{post: '/v1beta1/{name=projects/*/locations/*/pipelineJobs/*/operations/*}:wait',},{post: '/v1beta1/{name=projects/*/locations/*/schedules/*/operations/*}:wait',},{post: '/v1beta1/{name=projects/*/locations/*/specialistPools/*/operations/*}:wait',},{post: '/v1beta1/{name=projects/*/locations/*/tensorboards/*/operations/*}:wait',},{post: '/v1beta1/{name=projects/*/locations/*/tensorboards/*/experiments/*/operations/*}:wait',},{post: '/v1beta1/{name=projects/*/locations/*/tensorboards/*/experiments/*/runs/*/operations/*}:wait',},{post: '/v1beta1/{name=projects/*/locations/*/tensorboards/*/experiments/*/runs/*/timeSeries/*/operations/*}:wait',},{post: '/v1beta1/{name=projects/*/locations/*/featureOnlineStores/*/operations/*}:wait',},{post: '/v1beta1/{name=projects/*/locations/*/featureOnlineStores/*/featureViews/*/operations/*}:wait',},{post: '/v1beta1/{name=projects/*/locations/*/featureGroups/*/operations/*}:wait',},{post: '/v1beta1/{name=projects/*/locations/*/featureGroups/*/features/*/operations/*}:wait',},{post: '/v1beta1/{name=projects/*/locations/*/featureGroups/*/featureMonitors/*/operations/*}:wait',}],
+      }];
     }
-    this.operationsClient = this._gaxModule
-      .lro(lroOptions)
-      .operationsClient(opts);
+    this.operationsClient = this._gaxModule.lro(lroOptions).operationsClient(opts);
     const createMetadataStoreResponse = protoFilesRoot.lookup(
-      '.google.cloud.aiplatform.v1beta1.MetadataStore'
-    ) as gax.protobuf.Type;
+      '.google.cloud.aiplatform.v1beta1.MetadataStore') as gax.protobuf.Type;
     const createMetadataStoreMetadata = protoFilesRoot.lookup(
-      '.google.cloud.aiplatform.v1beta1.CreateMetadataStoreOperationMetadata'
-    ) as gax.protobuf.Type;
+      '.google.cloud.aiplatform.v1beta1.CreateMetadataStoreOperationMetadata') as gax.protobuf.Type;
     const deleteMetadataStoreResponse = protoFilesRoot.lookup(
-      '.google.protobuf.Empty'
-    ) as gax.protobuf.Type;
+      '.google.protobuf.Empty') as gax.protobuf.Type;
     const deleteMetadataStoreMetadata = protoFilesRoot.lookup(
-      '.google.cloud.aiplatform.v1beta1.DeleteMetadataStoreOperationMetadata'
-    ) as gax.protobuf.Type;
+      '.google.cloud.aiplatform.v1beta1.DeleteMetadataStoreOperationMetadata') as gax.protobuf.Type;
     const deleteArtifactResponse = protoFilesRoot.lookup(
-      '.google.protobuf.Empty'
-    ) as gax.protobuf.Type;
+      '.google.protobuf.Empty') as gax.protobuf.Type;
     const deleteArtifactMetadata = protoFilesRoot.lookup(
-      '.google.cloud.aiplatform.v1beta1.DeleteOperationMetadata'
-    ) as gax.protobuf.Type;
+      '.google.cloud.aiplatform.v1beta1.DeleteOperationMetadata') as gax.protobuf.Type;
     const purgeArtifactsResponse = protoFilesRoot.lookup(
-      '.google.cloud.aiplatform.v1beta1.PurgeArtifactsResponse'
-    ) as gax.protobuf.Type;
+      '.google.cloud.aiplatform.v1beta1.PurgeArtifactsResponse') as gax.protobuf.Type;
     const purgeArtifactsMetadata = protoFilesRoot.lookup(
-      '.google.cloud.aiplatform.v1beta1.PurgeArtifactsMetadata'
-    ) as gax.protobuf.Type;
+      '.google.cloud.aiplatform.v1beta1.PurgeArtifactsMetadata') as gax.protobuf.Type;
     const deleteContextResponse = protoFilesRoot.lookup(
-      '.google.protobuf.Empty'
-    ) as gax.protobuf.Type;
+      '.google.protobuf.Empty') as gax.protobuf.Type;
     const deleteContextMetadata = protoFilesRoot.lookup(
-      '.google.cloud.aiplatform.v1beta1.DeleteOperationMetadata'
-    ) as gax.protobuf.Type;
+      '.google.cloud.aiplatform.v1beta1.DeleteOperationMetadata') as gax.protobuf.Type;
     const purgeContextsResponse = protoFilesRoot.lookup(
-      '.google.cloud.aiplatform.v1beta1.PurgeContextsResponse'
-    ) as gax.protobuf.Type;
+      '.google.cloud.aiplatform.v1beta1.PurgeContextsResponse') as gax.protobuf.Type;
     const purgeContextsMetadata = protoFilesRoot.lookup(
-      '.google.cloud.aiplatform.v1beta1.PurgeContextsMetadata'
-    ) as gax.protobuf.Type;
+      '.google.cloud.aiplatform.v1beta1.PurgeContextsMetadata') as gax.protobuf.Type;
     const deleteExecutionResponse = protoFilesRoot.lookup(
-      '.google.protobuf.Empty'
-    ) as gax.protobuf.Type;
+      '.google.protobuf.Empty') as gax.protobuf.Type;
     const deleteExecutionMetadata = protoFilesRoot.lookup(
-      '.google.cloud.aiplatform.v1beta1.DeleteOperationMetadata'
-    ) as gax.protobuf.Type;
+      '.google.cloud.aiplatform.v1beta1.DeleteOperationMetadata') as gax.protobuf.Type;
     const purgeExecutionsResponse = protoFilesRoot.lookup(
-      '.google.cloud.aiplatform.v1beta1.PurgeExecutionsResponse'
-    ) as gax.protobuf.Type;
+      '.google.cloud.aiplatform.v1beta1.PurgeExecutionsResponse') as gax.protobuf.Type;
     const purgeExecutionsMetadata = protoFilesRoot.lookup(
-      '.google.cloud.aiplatform.v1beta1.PurgeExecutionsMetadata'
-    ) as gax.protobuf.Type;
+      '.google.cloud.aiplatform.v1beta1.PurgeExecutionsMetadata') as gax.protobuf.Type;
 
     this.descriptors.longrunning = {
       createMetadataStore: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         createMetadataStoreResponse.decode.bind(createMetadataStoreResponse),
-        createMetadataStoreMetadata.decode.bind(createMetadataStoreMetadata)
-      ),
+        createMetadataStoreMetadata.decode.bind(createMetadataStoreMetadata)),
       deleteMetadataStore: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         deleteMetadataStoreResponse.decode.bind(deleteMetadataStoreResponse),
-        deleteMetadataStoreMetadata.decode.bind(deleteMetadataStoreMetadata)
-      ),
+        deleteMetadataStoreMetadata.decode.bind(deleteMetadataStoreMetadata)),
       deleteArtifact: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         deleteArtifactResponse.decode.bind(deleteArtifactResponse),
-        deleteArtifactMetadata.decode.bind(deleteArtifactMetadata)
-      ),
+        deleteArtifactMetadata.decode.bind(deleteArtifactMetadata)),
       purgeArtifacts: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         purgeArtifactsResponse.decode.bind(purgeArtifactsResponse),
-        purgeArtifactsMetadata.decode.bind(purgeArtifactsMetadata)
-      ),
+        purgeArtifactsMetadata.decode.bind(purgeArtifactsMetadata)),
       deleteContext: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         deleteContextResponse.decode.bind(deleteContextResponse),
-        deleteContextMetadata.decode.bind(deleteContextMetadata)
-      ),
+        deleteContextMetadata.decode.bind(deleteContextMetadata)),
       purgeContexts: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         purgeContextsResponse.decode.bind(purgeContextsResponse),
-        purgeContextsMetadata.decode.bind(purgeContextsMetadata)
-      ),
+        purgeContextsMetadata.decode.bind(purgeContextsMetadata)),
       deleteExecution: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         deleteExecutionResponse.decode.bind(deleteExecutionResponse),
-        deleteExecutionMetadata.decode.bind(deleteExecutionMetadata)
-      ),
+        deleteExecutionMetadata.decode.bind(deleteExecutionMetadata)),
       purgeExecutions: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         purgeExecutionsResponse.decode.bind(purgeExecutionsResponse),
-        purgeExecutionsMetadata.decode.bind(purgeExecutionsMetadata)
-      ),
+        purgeExecutionsMetadata.decode.bind(purgeExecutionsMetadata))
     };
 
     // Put together the default options sent with requests.
     this._defaults = this._gaxGrpc.constructSettings(
-      'google.cloud.aiplatform.v1beta1.MetadataService',
-      gapicConfig as gax.ClientConfig,
-      opts.clientConfig || {},
-      {'x-goog-api-client': clientHeader.join(' ')}
-    );
+        'google.cloud.aiplatform.v1beta1.MetadataService', gapicConfig as gax.ClientConfig,
+        opts.clientConfig || {}, {'x-goog-api-client': clientHeader.join(' ')});
 
     // Set up a dictionary of "inner API calls"; the core implementation
     // of calling the API is handled in `google-gax`, with this code
@@ -2356,66 +528,28 @@ export class MetadataServiceClient {
     // Put together the "service stub" for
     // google.cloud.aiplatform.v1beta1.MetadataService.
     this.metadataServiceStub = this._gaxGrpc.createStub(
-      this._opts.fallback
-        ? (this._protos as protobuf.Root).lookupService(
-            'google.cloud.aiplatform.v1beta1.MetadataService'
-          )
-        : // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        this._opts.fallback ?
+          (this._protos as protobuf.Root).lookupService('google.cloud.aiplatform.v1beta1.MetadataService') :
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
           (this._protos as any).google.cloud.aiplatform.v1beta1.MetadataService,
-      this._opts,
-      this._providedCustomServicePath
-    ) as Promise<{[method: string]: Function}>;
+        this._opts, this._providedCustomServicePath) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    const metadataServiceStubMethods = [
-      'createMetadataStore',
-      'getMetadataStore',
-      'listMetadataStores',
-      'deleteMetadataStore',
-      'createArtifact',
-      'getArtifact',
-      'listArtifacts',
-      'updateArtifact',
-      'deleteArtifact',
-      'purgeArtifacts',
-      'createContext',
-      'getContext',
-      'listContexts',
-      'updateContext',
-      'deleteContext',
-      'purgeContexts',
-      'addContextArtifactsAndExecutions',
-      'addContextChildren',
-      'removeContextChildren',
-      'queryContextLineageSubgraph',
-      'createExecution',
-      'getExecution',
-      'listExecutions',
-      'updateExecution',
-      'deleteExecution',
-      'purgeExecutions',
-      'addExecutionEvents',
-      'queryExecutionInputsAndOutputs',
-      'createMetadataSchema',
-      'getMetadataSchema',
-      'listMetadataSchemas',
-      'queryArtifactLineageSubgraph',
-    ];
+    const metadataServiceStubMethods =
+        ['createMetadataStore', 'getMetadataStore', 'listMetadataStores', 'deleteMetadataStore', 'createArtifact', 'getArtifact', 'listArtifacts', 'updateArtifact', 'deleteArtifact', 'purgeArtifacts', 'createContext', 'getContext', 'listContexts', 'updateContext', 'deleteContext', 'purgeContexts', 'addContextArtifactsAndExecutions', 'addContextChildren', 'removeContextChildren', 'queryContextLineageSubgraph', 'createExecution', 'getExecution', 'listExecutions', 'updateExecution', 'deleteExecution', 'purgeExecutions', 'addExecutionEvents', 'queryExecutionInputsAndOutputs', 'createMetadataSchema', 'getMetadataSchema', 'listMetadataSchemas', 'queryArtifactLineageSubgraph'];
     for (const methodName of metadataServiceStubMethods) {
       const callPromise = this.metadataServiceStub.then(
-        stub =>
-          (...args: Array<{}>) => {
-            if (this._terminated) {
-              return Promise.reject('The client has already been closed.');
-            }
-            const func = stub[methodName];
-            return func.apply(stub, args);
-          },
-        (err: Error | null | undefined) => () => {
+        stub => (...args: Array<{}>) => {
+          if (this._terminated) {
+            return Promise.reject('The client has already been closed.');
+          }
+          const func = stub[methodName];
+          return func.apply(stub, args);
+        },
+        (err: Error|null|undefined) => () => {
           throw err;
-        }
-      );
+        });
 
       const descriptor =
         this.descriptors.page[methodName] ||
@@ -2440,14 +574,8 @@ export class MetadataServiceClient {
    * @returns {string} The DNS address for this service.
    */
   static get servicePath() {
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      process.emitWarning(
-        'Static servicePath is deprecated, please use the instance method instead.',
-        'DeprecationWarning'
-      );
+    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+      process.emitWarning('Static servicePath is deprecated, please use the instance method instead.', 'DeprecationWarning');
     }
     return 'aiplatform.googleapis.com';
   }
@@ -2458,14 +586,8 @@ export class MetadataServiceClient {
    * @returns {string} The DNS address for this service.
    */
   static get apiEndpoint() {
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      process.emitWarning(
-        'Static apiEndpoint is deprecated, please use the instance method instead.',
-        'DeprecationWarning'
-      );
+    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+      process.emitWarning('Static apiEndpoint is deprecated, please use the instance method instead.', 'DeprecationWarning');
     }
     return 'aiplatform.googleapis.com';
   }
@@ -2496,7 +618,9 @@ export class MetadataServiceClient {
    * @returns {string[]} List of default scopes.
    */
   static get scopes() {
-    return ['https://www.googleapis.com/auth/cloud-platform'];
+    return [
+      'https://www.googleapis.com/auth/cloud-platform'
+    ];
   }
 
   getProjectId(): Promise<string>;
@@ -2505,9 +629,8 @@ export class MetadataServiceClient {
    * Return the project ID used by this class.
    * @returns {Promise} A promise that resolves to string containing the project ID.
    */
-  getProjectId(
-    callback?: Callback<string, undefined, undefined>
-  ): Promise<string> | void {
+  getProjectId(callback?: Callback<string, undefined, undefined>):
+      Promise<string>|void {
     if (callback) {
       this.auth.getProjectId(callback);
       return;
@@ -2518,3294 +641,2939 @@ export class MetadataServiceClient {
   // -------------------
   // -- Service calls --
   // -------------------
-  /**
-   * Retrieves a specific MetadataStore.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The resource name of the MetadataStore to retrieve.
-   *   Format:
-   *   `projects/{project}/locations/{location}/metadataStores/{metadatastore}`
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.aiplatform.v1beta1.MetadataStore|MetadataStore}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta1/metadata_service.get_metadata_store.js</caption>
-   * region_tag:aiplatform_v1beta1_generated_MetadataService_GetMetadataStore_async
-   */
+/**
+ * Retrieves a specific MetadataStore.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The resource name of the MetadataStore to retrieve.
+ *   Format:
+ *   `projects/{project}/locations/{location}/metadataStores/{metadatastore}`
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.aiplatform.v1beta1.MetadataStore|MetadataStore}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta1/metadata_service.get_metadata_store.js</caption>
+ * region_tag:aiplatform_v1beta1_generated_MetadataService_GetMetadataStore_async
+ */
   getMetadataStore(
-    request?: protos.google.cloud.aiplatform.v1beta1.IGetMetadataStoreRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.aiplatform.v1beta1.IMetadataStore,
-      (
-        | protos.google.cloud.aiplatform.v1beta1.IGetMetadataStoreRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.aiplatform.v1beta1.IGetMetadataStoreRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.aiplatform.v1beta1.IMetadataStore,
+        protos.google.cloud.aiplatform.v1beta1.IGetMetadataStoreRequest|undefined, {}|undefined
+      ]>;
   getMetadataStore(
-    request: protos.google.cloud.aiplatform.v1beta1.IGetMetadataStoreRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.aiplatform.v1beta1.IMetadataStore,
-      | protos.google.cloud.aiplatform.v1beta1.IGetMetadataStoreRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getMetadataStore(
-    request: protos.google.cloud.aiplatform.v1beta1.IGetMetadataStoreRequest,
-    callback: Callback<
-      protos.google.cloud.aiplatform.v1beta1.IMetadataStore,
-      | protos.google.cloud.aiplatform.v1beta1.IGetMetadataStoreRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getMetadataStore(
-    request?: protos.google.cloud.aiplatform.v1beta1.IGetMetadataStoreRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.aiplatform.v1beta1.IGetMetadataStoreRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.aiplatform.v1beta1.IMetadataStore,
-          | protos.google.cloud.aiplatform.v1beta1.IGetMetadataStoreRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.aiplatform.v1beta1.IMetadataStore,
-      | protos.google.cloud.aiplatform.v1beta1.IGetMetadataStoreRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.aiplatform.v1beta1.IMetadataStore,
-      (
-        | protos.google.cloud.aiplatform.v1beta1.IGetMetadataStoreRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.aiplatform.v1beta1.IGetMetadataStoreRequest|null|undefined,
+          {}|null|undefined>): void;
+  getMetadataStore(
+      request: protos.google.cloud.aiplatform.v1beta1.IGetMetadataStoreRequest,
+      callback: Callback<
+          protos.google.cloud.aiplatform.v1beta1.IMetadataStore,
+          protos.google.cloud.aiplatform.v1beta1.IGetMetadataStoreRequest|null|undefined,
+          {}|null|undefined>): void;
+  getMetadataStore(
+      request?: protos.google.cloud.aiplatform.v1beta1.IGetMetadataStoreRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.aiplatform.v1beta1.IMetadataStore,
+          protos.google.cloud.aiplatform.v1beta1.IGetMetadataStoreRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.aiplatform.v1beta1.IMetadataStore,
+          protos.google.cloud.aiplatform.v1beta1.IGetMetadataStoreRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.aiplatform.v1beta1.IMetadataStore,
+        protos.google.cloud.aiplatform.v1beta1.IGetMetadataStoreRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
+    });
+    this.initialize().catch(err => {throw err});
+    this._log.info('getMetadataStore request %j', request);
+    const wrappedCallback: Callback<
+        protos.google.cloud.aiplatform.v1beta1.IMetadataStore,
+        protos.google.cloud.aiplatform.v1beta1.IGetMetadataStoreRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getMetadataStore response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls.getMetadataStore(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.aiplatform.v1beta1.IMetadataStore,
+        protos.google.cloud.aiplatform.v1beta1.IGetMetadataStoreRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('getMetadataStore response %j', response);
+        return [response, options, rawResponse];
       });
-    this.initialize();
-    return this.innerApiCalls.getMetadataStore(request, options, callback);
   }
-  /**
-   * Creates an Artifact associated with a MetadataStore.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The resource name of the MetadataStore where the Artifact should
-   *   be created.
-   *   Format:
-   *   `projects/{project}/locations/{location}/metadataStores/{metadatastore}`
-   * @param {google.cloud.aiplatform.v1beta1.Artifact} request.artifact
-   *   Required. The Artifact to create.
-   * @param {string} request.artifactId
-   *   The {artifact} portion of the resource name with the format:
-   *   `projects/{project}/locations/{location}/metadataStores/{metadatastore}/artifacts/{artifact}`
-   *   If not provided, the Artifact's ID will be a UUID generated by the service.
-   *   Must be 4-128 characters in length. Valid characters are `/{@link protos.0-9|a-z}-/`.
-   *   Must be unique across all Artifacts in the parent MetadataStore. (Otherwise
-   *   the request will fail with ALREADY_EXISTS, or PERMISSION_DENIED if the
-   *   caller can't view the preexisting Artifact.)
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.aiplatform.v1beta1.Artifact|Artifact}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta1/metadata_service.create_artifact.js</caption>
-   * region_tag:aiplatform_v1beta1_generated_MetadataService_CreateArtifact_async
-   */
+/**
+ * Creates an Artifact associated with a MetadataStore.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The resource name of the MetadataStore where the Artifact should
+ *   be created.
+ *   Format:
+ *   `projects/{project}/locations/{location}/metadataStores/{metadatastore}`
+ * @param {google.cloud.aiplatform.v1beta1.Artifact} request.artifact
+ *   Required. The Artifact to create.
+ * @param {string} request.artifactId
+ *   The {artifact} portion of the resource name with the format:
+ *   `projects/{project}/locations/{location}/metadataStores/{metadatastore}/artifacts/{artifact}`
+ *   If not provided, the Artifact's ID will be a UUID generated by the service.
+ *   Must be 4-128 characters in length. Valid characters are `/{@link protos.0-9|a-z}-/`.
+ *   Must be unique across all Artifacts in the parent MetadataStore. (Otherwise
+ *   the request will fail with ALREADY_EXISTS, or PERMISSION_DENIED if the
+ *   caller can't view the preexisting Artifact.)
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.aiplatform.v1beta1.Artifact|Artifact}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta1/metadata_service.create_artifact.js</caption>
+ * region_tag:aiplatform_v1beta1_generated_MetadataService_CreateArtifact_async
+ */
   createArtifact(
-    request?: protos.google.cloud.aiplatform.v1beta1.ICreateArtifactRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.aiplatform.v1beta1.IArtifact,
-      protos.google.cloud.aiplatform.v1beta1.ICreateArtifactRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.aiplatform.v1beta1.ICreateArtifactRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.aiplatform.v1beta1.IArtifact,
+        protos.google.cloud.aiplatform.v1beta1.ICreateArtifactRequest|undefined, {}|undefined
+      ]>;
   createArtifact(
-    request: protos.google.cloud.aiplatform.v1beta1.ICreateArtifactRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.aiplatform.v1beta1.IArtifact,
-      | protos.google.cloud.aiplatform.v1beta1.ICreateArtifactRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  createArtifact(
-    request: protos.google.cloud.aiplatform.v1beta1.ICreateArtifactRequest,
-    callback: Callback<
-      protos.google.cloud.aiplatform.v1beta1.IArtifact,
-      | protos.google.cloud.aiplatform.v1beta1.ICreateArtifactRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  createArtifact(
-    request?: protos.google.cloud.aiplatform.v1beta1.ICreateArtifactRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.aiplatform.v1beta1.ICreateArtifactRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.aiplatform.v1beta1.IArtifact,
-          | protos.google.cloud.aiplatform.v1beta1.ICreateArtifactRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.aiplatform.v1beta1.IArtifact,
-      | protos.google.cloud.aiplatform.v1beta1.ICreateArtifactRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.aiplatform.v1beta1.IArtifact,
-      protos.google.cloud.aiplatform.v1beta1.ICreateArtifactRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
-    request = request || {};
-    let options: CallOptions;
-    if (typeof optionsOrCallback === 'function' && callback === undefined) {
-      callback = optionsOrCallback;
-      options = {};
-    } else {
-      options = optionsOrCallback as CallOptions;
-    }
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize();
-    return this.innerApiCalls.createArtifact(request, options, callback);
-  }
-  /**
-   * Retrieves a specific Artifact.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The resource name of the Artifact to retrieve.
-   *   Format:
-   *   `projects/{project}/locations/{location}/metadataStores/{metadatastore}/artifacts/{artifact}`
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.aiplatform.v1beta1.Artifact|Artifact}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta1/metadata_service.get_artifact.js</caption>
-   * region_tag:aiplatform_v1beta1_generated_MetadataService_GetArtifact_async
-   */
-  getArtifact(
-    request?: protos.google.cloud.aiplatform.v1beta1.IGetArtifactRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.aiplatform.v1beta1.IArtifact,
-      protos.google.cloud.aiplatform.v1beta1.IGetArtifactRequest | undefined,
-      {} | undefined,
-    ]
-  >;
-  getArtifact(
-    request: protos.google.cloud.aiplatform.v1beta1.IGetArtifactRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.aiplatform.v1beta1.IArtifact,
-      | protos.google.cloud.aiplatform.v1beta1.IGetArtifactRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getArtifact(
-    request: protos.google.cloud.aiplatform.v1beta1.IGetArtifactRequest,
-    callback: Callback<
-      protos.google.cloud.aiplatform.v1beta1.IArtifact,
-      | protos.google.cloud.aiplatform.v1beta1.IGetArtifactRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getArtifact(
-    request?: protos.google.cloud.aiplatform.v1beta1.IGetArtifactRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+          protos.google.cloud.aiplatform.v1beta1.ICreateArtifactRequest|null|undefined,
+          {}|null|undefined>): void;
+  createArtifact(
+      request: protos.google.cloud.aiplatform.v1beta1.ICreateArtifactRequest,
+      callback: Callback<
           protos.google.cloud.aiplatform.v1beta1.IArtifact,
-          | protos.google.cloud.aiplatform.v1beta1.IGetArtifactRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.aiplatform.v1beta1.IArtifact,
-      | protos.google.cloud.aiplatform.v1beta1.IGetArtifactRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.aiplatform.v1beta1.IArtifact,
-      protos.google.cloud.aiplatform.v1beta1.IGetArtifactRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
-    request = request || {};
-    let options: CallOptions;
-    if (typeof optionsOrCallback === 'function' && callback === undefined) {
-      callback = optionsOrCallback;
-      options = {};
-    } else {
-      options = optionsOrCallback as CallOptions;
-    }
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize();
-    return this.innerApiCalls.getArtifact(request, options, callback);
-  }
-  /**
-   * Updates a stored Artifact.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {google.cloud.aiplatform.v1beta1.Artifact} request.artifact
-   *   Required. The Artifact containing updates.
-   *   The Artifact's
-   *   {@link protos.google.cloud.aiplatform.v1beta1.Artifact.name|Artifact.name} field is
-   *   used to identify the Artifact to be updated. Format:
-   *   `projects/{project}/locations/{location}/metadataStores/{metadatastore}/artifacts/{artifact}`
-   * @param {google.protobuf.FieldMask} [request.updateMask]
-   *   Optional. A FieldMask indicating which fields should be updated.
-   * @param {boolean} request.allowMissing
-   *   If set to true, and the
-   *   {@link protos.google.cloud.aiplatform.v1beta1.Artifact|Artifact} is not found, a new
-   *   {@link protos.google.cloud.aiplatform.v1beta1.Artifact|Artifact} is created.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.aiplatform.v1beta1.Artifact|Artifact}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta1/metadata_service.update_artifact.js</caption>
-   * region_tag:aiplatform_v1beta1_generated_MetadataService_UpdateArtifact_async
-   */
-  updateArtifact(
-    request?: protos.google.cloud.aiplatform.v1beta1.IUpdateArtifactRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.aiplatform.v1beta1.IArtifact,
-      protos.google.cloud.aiplatform.v1beta1.IUpdateArtifactRequest | undefined,
-      {} | undefined,
-    ]
-  >;
-  updateArtifact(
-    request: protos.google.cloud.aiplatform.v1beta1.IUpdateArtifactRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.aiplatform.v1beta1.IArtifact,
-      | protos.google.cloud.aiplatform.v1beta1.IUpdateArtifactRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  updateArtifact(
-    request: protos.google.cloud.aiplatform.v1beta1.IUpdateArtifactRequest,
-    callback: Callback<
-      protos.google.cloud.aiplatform.v1beta1.IArtifact,
-      | protos.google.cloud.aiplatform.v1beta1.IUpdateArtifactRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  updateArtifact(
-    request?: protos.google.cloud.aiplatform.v1beta1.IUpdateArtifactRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+          protos.google.cloud.aiplatform.v1beta1.ICreateArtifactRequest|null|undefined,
+          {}|null|undefined>): void;
+  createArtifact(
+      request?: protos.google.cloud.aiplatform.v1beta1.ICreateArtifactRequest,
+      optionsOrCallback?: CallOptions|Callback<
           protos.google.cloud.aiplatform.v1beta1.IArtifact,
-          | protos.google.cloud.aiplatform.v1beta1.IUpdateArtifactRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.aiplatform.v1beta1.IArtifact,
-      | protos.google.cloud.aiplatform.v1beta1.IUpdateArtifactRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.aiplatform.v1beta1.IArtifact,
-      protos.google.cloud.aiplatform.v1beta1.IUpdateArtifactRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.aiplatform.v1beta1.ICreateArtifactRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.aiplatform.v1beta1.IArtifact,
+          protos.google.cloud.aiplatform.v1beta1.ICreateArtifactRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.aiplatform.v1beta1.IArtifact,
+        protos.google.cloud.aiplatform.v1beta1.ICreateArtifactRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        'artifact.name': request.artifact!.name ?? '',
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
+    this.initialize().catch(err => {throw err});
+    this._log.info('createArtifact request %j', request);
+    const wrappedCallback: Callback<
+        protos.google.cloud.aiplatform.v1beta1.IArtifact,
+        protos.google.cloud.aiplatform.v1beta1.ICreateArtifactRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('createArtifact response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls.createArtifact(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.aiplatform.v1beta1.IArtifact,
+        protos.google.cloud.aiplatform.v1beta1.ICreateArtifactRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('createArtifact response %j', response);
+        return [response, options, rawResponse];
       });
-    this.initialize();
-    return this.innerApiCalls.updateArtifact(request, options, callback);
   }
-  /**
-   * Creates a Context associated with a MetadataStore.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The resource name of the MetadataStore where the Context should
-   *   be created. Format:
-   *   `projects/{project}/locations/{location}/metadataStores/{metadatastore}`
-   * @param {google.cloud.aiplatform.v1beta1.Context} request.context
-   *   Required. The Context to create.
-   * @param {string} request.contextId
-   *   The {context} portion of the resource name with the format:
-   *   `projects/{project}/locations/{location}/metadataStores/{metadatastore}/contexts/{context}`.
-   *   If not provided, the Context's ID will be a UUID generated by the service.
-   *   Must be 4-128 characters in length. Valid characters are `/{@link protos.0-9|a-z}-/`.
-   *   Must be unique across all Contexts in the parent MetadataStore. (Otherwise
-   *   the request will fail with ALREADY_EXISTS, or PERMISSION_DENIED if the
-   *   caller can't view the preexisting Context.)
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.aiplatform.v1beta1.Context|Context}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta1/metadata_service.create_context.js</caption>
-   * region_tag:aiplatform_v1beta1_generated_MetadataService_CreateContext_async
-   */
+/**
+ * Retrieves a specific Artifact.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The resource name of the Artifact to retrieve.
+ *   Format:
+ *   `projects/{project}/locations/{location}/metadataStores/{metadatastore}/artifacts/{artifact}`
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.aiplatform.v1beta1.Artifact|Artifact}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta1/metadata_service.get_artifact.js</caption>
+ * region_tag:aiplatform_v1beta1_generated_MetadataService_GetArtifact_async
+ */
+  getArtifact(
+      request?: protos.google.cloud.aiplatform.v1beta1.IGetArtifactRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.aiplatform.v1beta1.IArtifact,
+        protos.google.cloud.aiplatform.v1beta1.IGetArtifactRequest|undefined, {}|undefined
+      ]>;
+  getArtifact(
+      request: protos.google.cloud.aiplatform.v1beta1.IGetArtifactRequest,
+      options: CallOptions,
+      callback: Callback<
+          protos.google.cloud.aiplatform.v1beta1.IArtifact,
+          protos.google.cloud.aiplatform.v1beta1.IGetArtifactRequest|null|undefined,
+          {}|null|undefined>): void;
+  getArtifact(
+      request: protos.google.cloud.aiplatform.v1beta1.IGetArtifactRequest,
+      callback: Callback<
+          protos.google.cloud.aiplatform.v1beta1.IArtifact,
+          protos.google.cloud.aiplatform.v1beta1.IGetArtifactRequest|null|undefined,
+          {}|null|undefined>): void;
+  getArtifact(
+      request?: protos.google.cloud.aiplatform.v1beta1.IGetArtifactRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.aiplatform.v1beta1.IArtifact,
+          protos.google.cloud.aiplatform.v1beta1.IGetArtifactRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.aiplatform.v1beta1.IArtifact,
+          protos.google.cloud.aiplatform.v1beta1.IGetArtifactRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.aiplatform.v1beta1.IArtifact,
+        protos.google.cloud.aiplatform.v1beta1.IGetArtifactRequest|undefined, {}|undefined
+      ]>|void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    }
+    else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
+    });
+    this.initialize().catch(err => {throw err});
+    this._log.info('getArtifact request %j', request);
+    const wrappedCallback: Callback<
+        protos.google.cloud.aiplatform.v1beta1.IArtifact,
+        protos.google.cloud.aiplatform.v1beta1.IGetArtifactRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getArtifact response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls.getArtifact(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.aiplatform.v1beta1.IArtifact,
+        protos.google.cloud.aiplatform.v1beta1.IGetArtifactRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('getArtifact response %j', response);
+        return [response, options, rawResponse];
+      });
+  }
+/**
+ * Updates a stored Artifact.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {google.cloud.aiplatform.v1beta1.Artifact} request.artifact
+ *   Required. The Artifact containing updates.
+ *   The Artifact's
+ *   {@link protos.google.cloud.aiplatform.v1beta1.Artifact.name|Artifact.name} field is
+ *   used to identify the Artifact to be updated. Format:
+ *   `projects/{project}/locations/{location}/metadataStores/{metadatastore}/artifacts/{artifact}`
+ * @param {google.protobuf.FieldMask} [request.updateMask]
+ *   Optional. A FieldMask indicating which fields should be updated.
+ * @param {boolean} request.allowMissing
+ *   If set to true, and the
+ *   {@link protos.google.cloud.aiplatform.v1beta1.Artifact|Artifact} is not found, a new
+ *   {@link protos.google.cloud.aiplatform.v1beta1.Artifact|Artifact} is created.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.aiplatform.v1beta1.Artifact|Artifact}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta1/metadata_service.update_artifact.js</caption>
+ * region_tag:aiplatform_v1beta1_generated_MetadataService_UpdateArtifact_async
+ */
+  updateArtifact(
+      request?: protos.google.cloud.aiplatform.v1beta1.IUpdateArtifactRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.aiplatform.v1beta1.IArtifact,
+        protos.google.cloud.aiplatform.v1beta1.IUpdateArtifactRequest|undefined, {}|undefined
+      ]>;
+  updateArtifact(
+      request: protos.google.cloud.aiplatform.v1beta1.IUpdateArtifactRequest,
+      options: CallOptions,
+      callback: Callback<
+          protos.google.cloud.aiplatform.v1beta1.IArtifact,
+          protos.google.cloud.aiplatform.v1beta1.IUpdateArtifactRequest|null|undefined,
+          {}|null|undefined>): void;
+  updateArtifact(
+      request: protos.google.cloud.aiplatform.v1beta1.IUpdateArtifactRequest,
+      callback: Callback<
+          protos.google.cloud.aiplatform.v1beta1.IArtifact,
+          protos.google.cloud.aiplatform.v1beta1.IUpdateArtifactRequest|null|undefined,
+          {}|null|undefined>): void;
+  updateArtifact(
+      request?: protos.google.cloud.aiplatform.v1beta1.IUpdateArtifactRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.aiplatform.v1beta1.IArtifact,
+          protos.google.cloud.aiplatform.v1beta1.IUpdateArtifactRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.aiplatform.v1beta1.IArtifact,
+          protos.google.cloud.aiplatform.v1beta1.IUpdateArtifactRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.aiplatform.v1beta1.IArtifact,
+        protos.google.cloud.aiplatform.v1beta1.IUpdateArtifactRequest|undefined, {}|undefined
+      ]>|void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    }
+    else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'artifact.name': request.artifact!.name ?? '',
+    });
+    this.initialize().catch(err => {throw err});
+    this._log.info('updateArtifact request %j', request);
+    const wrappedCallback: Callback<
+        protos.google.cloud.aiplatform.v1beta1.IArtifact,
+        protos.google.cloud.aiplatform.v1beta1.IUpdateArtifactRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('updateArtifact response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls.updateArtifact(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.aiplatform.v1beta1.IArtifact,
+        protos.google.cloud.aiplatform.v1beta1.IUpdateArtifactRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('updateArtifact response %j', response);
+        return [response, options, rawResponse];
+      });
+  }
+/**
+ * Creates a Context associated with a MetadataStore.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The resource name of the MetadataStore where the Context should
+ *   be created. Format:
+ *   `projects/{project}/locations/{location}/metadataStores/{metadatastore}`
+ * @param {google.cloud.aiplatform.v1beta1.Context} request.context
+ *   Required. The Context to create.
+ * @param {string} request.contextId
+ *   The {context} portion of the resource name with the format:
+ *   `projects/{project}/locations/{location}/metadataStores/{metadatastore}/contexts/{context}`.
+ *   If not provided, the Context's ID will be a UUID generated by the service.
+ *   Must be 4-128 characters in length. Valid characters are `/{@link protos.0-9|a-z}-/`.
+ *   Must be unique across all Contexts in the parent MetadataStore. (Otherwise
+ *   the request will fail with ALREADY_EXISTS, or PERMISSION_DENIED if the
+ *   caller can't view the preexisting Context.)
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.aiplatform.v1beta1.Context|Context}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta1/metadata_service.create_context.js</caption>
+ * region_tag:aiplatform_v1beta1_generated_MetadataService_CreateContext_async
+ */
   createContext(
-    request?: protos.google.cloud.aiplatform.v1beta1.ICreateContextRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.aiplatform.v1beta1.IContext,
-      protos.google.cloud.aiplatform.v1beta1.ICreateContextRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.aiplatform.v1beta1.ICreateContextRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.aiplatform.v1beta1.IContext,
+        protos.google.cloud.aiplatform.v1beta1.ICreateContextRequest|undefined, {}|undefined
+      ]>;
   createContext(
-    request: protos.google.cloud.aiplatform.v1beta1.ICreateContextRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.aiplatform.v1beta1.IContext,
-      | protos.google.cloud.aiplatform.v1beta1.ICreateContextRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  createContext(
-    request: protos.google.cloud.aiplatform.v1beta1.ICreateContextRequest,
-    callback: Callback<
-      protos.google.cloud.aiplatform.v1beta1.IContext,
-      | protos.google.cloud.aiplatform.v1beta1.ICreateContextRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  createContext(
-    request?: protos.google.cloud.aiplatform.v1beta1.ICreateContextRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.aiplatform.v1beta1.ICreateContextRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.aiplatform.v1beta1.IContext,
-          | protos.google.cloud.aiplatform.v1beta1.ICreateContextRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.aiplatform.v1beta1.IContext,
-      | protos.google.cloud.aiplatform.v1beta1.ICreateContextRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.aiplatform.v1beta1.IContext,
-      protos.google.cloud.aiplatform.v1beta1.ICreateContextRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
-    request = request || {};
-    let options: CallOptions;
-    if (typeof optionsOrCallback === 'function' && callback === undefined) {
-      callback = optionsOrCallback;
-      options = {};
-    } else {
-      options = optionsOrCallback as CallOptions;
-    }
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize();
-    return this.innerApiCalls.createContext(request, options, callback);
-  }
-  /**
-   * Retrieves a specific Context.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The resource name of the Context to retrieve.
-   *   Format:
-   *   `projects/{project}/locations/{location}/metadataStores/{metadatastore}/contexts/{context}`
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.aiplatform.v1beta1.Context|Context}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta1/metadata_service.get_context.js</caption>
-   * region_tag:aiplatform_v1beta1_generated_MetadataService_GetContext_async
-   */
-  getContext(
-    request?: protos.google.cloud.aiplatform.v1beta1.IGetContextRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.aiplatform.v1beta1.IContext,
-      protos.google.cloud.aiplatform.v1beta1.IGetContextRequest | undefined,
-      {} | undefined,
-    ]
-  >;
-  getContext(
-    request: protos.google.cloud.aiplatform.v1beta1.IGetContextRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.aiplatform.v1beta1.IContext,
-      | protos.google.cloud.aiplatform.v1beta1.IGetContextRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getContext(
-    request: protos.google.cloud.aiplatform.v1beta1.IGetContextRequest,
-    callback: Callback<
-      protos.google.cloud.aiplatform.v1beta1.IContext,
-      | protos.google.cloud.aiplatform.v1beta1.IGetContextRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getContext(
-    request?: protos.google.cloud.aiplatform.v1beta1.IGetContextRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+          protos.google.cloud.aiplatform.v1beta1.ICreateContextRequest|null|undefined,
+          {}|null|undefined>): void;
+  createContext(
+      request: protos.google.cloud.aiplatform.v1beta1.ICreateContextRequest,
+      callback: Callback<
           protos.google.cloud.aiplatform.v1beta1.IContext,
-          | protos.google.cloud.aiplatform.v1beta1.IGetContextRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.aiplatform.v1beta1.IContext,
-      | protos.google.cloud.aiplatform.v1beta1.IGetContextRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.aiplatform.v1beta1.IContext,
-      protos.google.cloud.aiplatform.v1beta1.IGetContextRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
-    request = request || {};
-    let options: CallOptions;
-    if (typeof optionsOrCallback === 'function' && callback === undefined) {
-      callback = optionsOrCallback;
-      options = {};
-    } else {
-      options = optionsOrCallback as CallOptions;
-    }
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize();
-    return this.innerApiCalls.getContext(request, options, callback);
-  }
-  /**
-   * Updates a stored Context.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {google.cloud.aiplatform.v1beta1.Context} request.context
-   *   Required. The Context containing updates.
-   *   The Context's {@link protos.google.cloud.aiplatform.v1beta1.Context.name|Context.name}
-   *   field is used to identify the Context to be updated. Format:
-   *   `projects/{project}/locations/{location}/metadataStores/{metadatastore}/contexts/{context}`
-   * @param {google.protobuf.FieldMask} [request.updateMask]
-   *   Optional. A FieldMask indicating which fields should be updated.
-   * @param {boolean} request.allowMissing
-   *   If set to true, and the {@link protos.google.cloud.aiplatform.v1beta1.Context|Context}
-   *   is not found, a new {@link protos.google.cloud.aiplatform.v1beta1.Context|Context} is
-   *   created.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.aiplatform.v1beta1.Context|Context}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta1/metadata_service.update_context.js</caption>
-   * region_tag:aiplatform_v1beta1_generated_MetadataService_UpdateContext_async
-   */
-  updateContext(
-    request?: protos.google.cloud.aiplatform.v1beta1.IUpdateContextRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.aiplatform.v1beta1.IContext,
-      protos.google.cloud.aiplatform.v1beta1.IUpdateContextRequest | undefined,
-      {} | undefined,
-    ]
-  >;
-  updateContext(
-    request: protos.google.cloud.aiplatform.v1beta1.IUpdateContextRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.aiplatform.v1beta1.IContext,
-      | protos.google.cloud.aiplatform.v1beta1.IUpdateContextRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  updateContext(
-    request: protos.google.cloud.aiplatform.v1beta1.IUpdateContextRequest,
-    callback: Callback<
-      protos.google.cloud.aiplatform.v1beta1.IContext,
-      | protos.google.cloud.aiplatform.v1beta1.IUpdateContextRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  updateContext(
-    request?: protos.google.cloud.aiplatform.v1beta1.IUpdateContextRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+          protos.google.cloud.aiplatform.v1beta1.ICreateContextRequest|null|undefined,
+          {}|null|undefined>): void;
+  createContext(
+      request?: protos.google.cloud.aiplatform.v1beta1.ICreateContextRequest,
+      optionsOrCallback?: CallOptions|Callback<
           protos.google.cloud.aiplatform.v1beta1.IContext,
-          | protos.google.cloud.aiplatform.v1beta1.IUpdateContextRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.aiplatform.v1beta1.IContext,
-      | protos.google.cloud.aiplatform.v1beta1.IUpdateContextRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.aiplatform.v1beta1.IContext,
-      protos.google.cloud.aiplatform.v1beta1.IUpdateContextRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.aiplatform.v1beta1.ICreateContextRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.aiplatform.v1beta1.IContext,
+          protos.google.cloud.aiplatform.v1beta1.ICreateContextRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.aiplatform.v1beta1.IContext,
+        protos.google.cloud.aiplatform.v1beta1.ICreateContextRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        'context.name': request.context!.name ?? '',
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
+    this.initialize().catch(err => {throw err});
+    this._log.info('createContext request %j', request);
+    const wrappedCallback: Callback<
+        protos.google.cloud.aiplatform.v1beta1.IContext,
+        protos.google.cloud.aiplatform.v1beta1.ICreateContextRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('createContext response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls.createContext(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.aiplatform.v1beta1.IContext,
+        protos.google.cloud.aiplatform.v1beta1.ICreateContextRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('createContext response %j', response);
+        return [response, options, rawResponse];
       });
-    this.initialize();
-    return this.innerApiCalls.updateContext(request, options, callback);
   }
-  /**
-   * Adds a set of Artifacts and Executions to a Context. If any of the
-   * Artifacts or Executions have already been added to a Context, they are
-   * simply skipped.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.context
-   *   Required. The resource name of the Context that the Artifacts and
-   *   Executions belong to. Format:
-   *   `projects/{project}/locations/{location}/metadataStores/{metadatastore}/contexts/{context}`
-   * @param {string[]} request.artifacts
-   *   The resource names of the Artifacts to attribute to the Context.
-   *
-   *   Format:
-   *   `projects/{project}/locations/{location}/metadataStores/{metadatastore}/artifacts/{artifact}`
-   * @param {string[]} request.executions
-   *   The resource names of the Executions to associate with the
-   *   Context.
-   *
-   *   Format:
-   *   `projects/{project}/locations/{location}/metadataStores/{metadatastore}/executions/{execution}`
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.aiplatform.v1beta1.AddContextArtifactsAndExecutionsResponse|AddContextArtifactsAndExecutionsResponse}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta1/metadata_service.add_context_artifacts_and_executions.js</caption>
-   * region_tag:aiplatform_v1beta1_generated_MetadataService_AddContextArtifactsAndExecutions_async
-   */
+/**
+ * Retrieves a specific Context.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The resource name of the Context to retrieve.
+ *   Format:
+ *   `projects/{project}/locations/{location}/metadataStores/{metadatastore}/contexts/{context}`
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.aiplatform.v1beta1.Context|Context}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta1/metadata_service.get_context.js</caption>
+ * region_tag:aiplatform_v1beta1_generated_MetadataService_GetContext_async
+ */
+  getContext(
+      request?: protos.google.cloud.aiplatform.v1beta1.IGetContextRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.aiplatform.v1beta1.IContext,
+        protos.google.cloud.aiplatform.v1beta1.IGetContextRequest|undefined, {}|undefined
+      ]>;
+  getContext(
+      request: protos.google.cloud.aiplatform.v1beta1.IGetContextRequest,
+      options: CallOptions,
+      callback: Callback<
+          protos.google.cloud.aiplatform.v1beta1.IContext,
+          protos.google.cloud.aiplatform.v1beta1.IGetContextRequest|null|undefined,
+          {}|null|undefined>): void;
+  getContext(
+      request: protos.google.cloud.aiplatform.v1beta1.IGetContextRequest,
+      callback: Callback<
+          protos.google.cloud.aiplatform.v1beta1.IContext,
+          protos.google.cloud.aiplatform.v1beta1.IGetContextRequest|null|undefined,
+          {}|null|undefined>): void;
+  getContext(
+      request?: protos.google.cloud.aiplatform.v1beta1.IGetContextRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.aiplatform.v1beta1.IContext,
+          protos.google.cloud.aiplatform.v1beta1.IGetContextRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.aiplatform.v1beta1.IContext,
+          protos.google.cloud.aiplatform.v1beta1.IGetContextRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.aiplatform.v1beta1.IContext,
+        protos.google.cloud.aiplatform.v1beta1.IGetContextRequest|undefined, {}|undefined
+      ]>|void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    }
+    else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
+    });
+    this.initialize().catch(err => {throw err});
+    this._log.info('getContext request %j', request);
+    const wrappedCallback: Callback<
+        protos.google.cloud.aiplatform.v1beta1.IContext,
+        protos.google.cloud.aiplatform.v1beta1.IGetContextRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getContext response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls.getContext(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.aiplatform.v1beta1.IContext,
+        protos.google.cloud.aiplatform.v1beta1.IGetContextRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('getContext response %j', response);
+        return [response, options, rawResponse];
+      });
+  }
+/**
+ * Updates a stored Context.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {google.cloud.aiplatform.v1beta1.Context} request.context
+ *   Required. The Context containing updates.
+ *   The Context's {@link protos.google.cloud.aiplatform.v1beta1.Context.name|Context.name}
+ *   field is used to identify the Context to be updated. Format:
+ *   `projects/{project}/locations/{location}/metadataStores/{metadatastore}/contexts/{context}`
+ * @param {google.protobuf.FieldMask} [request.updateMask]
+ *   Optional. A FieldMask indicating which fields should be updated.
+ * @param {boolean} request.allowMissing
+ *   If set to true, and the {@link protos.google.cloud.aiplatform.v1beta1.Context|Context}
+ *   is not found, a new {@link protos.google.cloud.aiplatform.v1beta1.Context|Context} is
+ *   created.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.aiplatform.v1beta1.Context|Context}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta1/metadata_service.update_context.js</caption>
+ * region_tag:aiplatform_v1beta1_generated_MetadataService_UpdateContext_async
+ */
+  updateContext(
+      request?: protos.google.cloud.aiplatform.v1beta1.IUpdateContextRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.aiplatform.v1beta1.IContext,
+        protos.google.cloud.aiplatform.v1beta1.IUpdateContextRequest|undefined, {}|undefined
+      ]>;
+  updateContext(
+      request: protos.google.cloud.aiplatform.v1beta1.IUpdateContextRequest,
+      options: CallOptions,
+      callback: Callback<
+          protos.google.cloud.aiplatform.v1beta1.IContext,
+          protos.google.cloud.aiplatform.v1beta1.IUpdateContextRequest|null|undefined,
+          {}|null|undefined>): void;
+  updateContext(
+      request: protos.google.cloud.aiplatform.v1beta1.IUpdateContextRequest,
+      callback: Callback<
+          protos.google.cloud.aiplatform.v1beta1.IContext,
+          protos.google.cloud.aiplatform.v1beta1.IUpdateContextRequest|null|undefined,
+          {}|null|undefined>): void;
+  updateContext(
+      request?: protos.google.cloud.aiplatform.v1beta1.IUpdateContextRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.aiplatform.v1beta1.IContext,
+          protos.google.cloud.aiplatform.v1beta1.IUpdateContextRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.aiplatform.v1beta1.IContext,
+          protos.google.cloud.aiplatform.v1beta1.IUpdateContextRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.aiplatform.v1beta1.IContext,
+        protos.google.cloud.aiplatform.v1beta1.IUpdateContextRequest|undefined, {}|undefined
+      ]>|void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    }
+    else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'context.name': request.context!.name ?? '',
+    });
+    this.initialize().catch(err => {throw err});
+    this._log.info('updateContext request %j', request);
+    const wrappedCallback: Callback<
+        protos.google.cloud.aiplatform.v1beta1.IContext,
+        protos.google.cloud.aiplatform.v1beta1.IUpdateContextRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('updateContext response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls.updateContext(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.aiplatform.v1beta1.IContext,
+        protos.google.cloud.aiplatform.v1beta1.IUpdateContextRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('updateContext response %j', response);
+        return [response, options, rawResponse];
+      });
+  }
+/**
+ * Adds a set of Artifacts and Executions to a Context. If any of the
+ * Artifacts or Executions have already been added to a Context, they are
+ * simply skipped.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.context
+ *   Required. The resource name of the Context that the Artifacts and
+ *   Executions belong to. Format:
+ *   `projects/{project}/locations/{location}/metadataStores/{metadatastore}/contexts/{context}`
+ * @param {string[]} request.artifacts
+ *   The resource names of the Artifacts to attribute to the Context.
+ *
+ *   Format:
+ *   `projects/{project}/locations/{location}/metadataStores/{metadatastore}/artifacts/{artifact}`
+ * @param {string[]} request.executions
+ *   The resource names of the Executions to associate with the
+ *   Context.
+ *
+ *   Format:
+ *   `projects/{project}/locations/{location}/metadataStores/{metadatastore}/executions/{execution}`
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.aiplatform.v1beta1.AddContextArtifactsAndExecutionsResponse|AddContextArtifactsAndExecutionsResponse}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta1/metadata_service.add_context_artifacts_and_executions.js</caption>
+ * region_tag:aiplatform_v1beta1_generated_MetadataService_AddContextArtifactsAndExecutions_async
+ */
   addContextArtifactsAndExecutions(
-    request?: protos.google.cloud.aiplatform.v1beta1.IAddContextArtifactsAndExecutionsRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.aiplatform.v1beta1.IAddContextArtifactsAndExecutionsResponse,
-      (
-        | protos.google.cloud.aiplatform.v1beta1.IAddContextArtifactsAndExecutionsRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.aiplatform.v1beta1.IAddContextArtifactsAndExecutionsRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.aiplatform.v1beta1.IAddContextArtifactsAndExecutionsResponse,
+        protos.google.cloud.aiplatform.v1beta1.IAddContextArtifactsAndExecutionsRequest|undefined, {}|undefined
+      ]>;
   addContextArtifactsAndExecutions(
-    request: protos.google.cloud.aiplatform.v1beta1.IAddContextArtifactsAndExecutionsRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.aiplatform.v1beta1.IAddContextArtifactsAndExecutionsResponse,
-      | protos.google.cloud.aiplatform.v1beta1.IAddContextArtifactsAndExecutionsRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  addContextArtifactsAndExecutions(
-    request: protos.google.cloud.aiplatform.v1beta1.IAddContextArtifactsAndExecutionsRequest,
-    callback: Callback<
-      protos.google.cloud.aiplatform.v1beta1.IAddContextArtifactsAndExecutionsResponse,
-      | protos.google.cloud.aiplatform.v1beta1.IAddContextArtifactsAndExecutionsRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  addContextArtifactsAndExecutions(
-    request?: protos.google.cloud.aiplatform.v1beta1.IAddContextArtifactsAndExecutionsRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.aiplatform.v1beta1.IAddContextArtifactsAndExecutionsRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.aiplatform.v1beta1.IAddContextArtifactsAndExecutionsResponse,
-          | protos.google.cloud.aiplatform.v1beta1.IAddContextArtifactsAndExecutionsRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.aiplatform.v1beta1.IAddContextArtifactsAndExecutionsResponse,
-      | protos.google.cloud.aiplatform.v1beta1.IAddContextArtifactsAndExecutionsRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.aiplatform.v1beta1.IAddContextArtifactsAndExecutionsResponse,
-      (
-        | protos.google.cloud.aiplatform.v1beta1.IAddContextArtifactsAndExecutionsRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.aiplatform.v1beta1.IAddContextArtifactsAndExecutionsRequest|null|undefined,
+          {}|null|undefined>): void;
+  addContextArtifactsAndExecutions(
+      request: protos.google.cloud.aiplatform.v1beta1.IAddContextArtifactsAndExecutionsRequest,
+      callback: Callback<
+          protos.google.cloud.aiplatform.v1beta1.IAddContextArtifactsAndExecutionsResponse,
+          protos.google.cloud.aiplatform.v1beta1.IAddContextArtifactsAndExecutionsRequest|null|undefined,
+          {}|null|undefined>): void;
+  addContextArtifactsAndExecutions(
+      request?: protos.google.cloud.aiplatform.v1beta1.IAddContextArtifactsAndExecutionsRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.aiplatform.v1beta1.IAddContextArtifactsAndExecutionsResponse,
+          protos.google.cloud.aiplatform.v1beta1.IAddContextArtifactsAndExecutionsRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.aiplatform.v1beta1.IAddContextArtifactsAndExecutionsResponse,
+          protos.google.cloud.aiplatform.v1beta1.IAddContextArtifactsAndExecutionsRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.aiplatform.v1beta1.IAddContextArtifactsAndExecutionsResponse,
+        protos.google.cloud.aiplatform.v1beta1.IAddContextArtifactsAndExecutionsRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        context: request.context ?? '',
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'context': request.context ?? '',
+    });
+    this.initialize().catch(err => {throw err});
+    this._log.info('addContextArtifactsAndExecutions request %j', request);
+    const wrappedCallback: Callback<
+        protos.google.cloud.aiplatform.v1beta1.IAddContextArtifactsAndExecutionsResponse,
+        protos.google.cloud.aiplatform.v1beta1.IAddContextArtifactsAndExecutionsRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('addContextArtifactsAndExecutions response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls.addContextArtifactsAndExecutions(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.aiplatform.v1beta1.IAddContextArtifactsAndExecutionsResponse,
+        protos.google.cloud.aiplatform.v1beta1.IAddContextArtifactsAndExecutionsRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('addContextArtifactsAndExecutions response %j', response);
+        return [response, options, rawResponse];
       });
-    this.initialize();
-    return this.innerApiCalls.addContextArtifactsAndExecutions(
-      request,
-      options,
-      callback
-    );
   }
-  /**
-   * Adds a set of Contexts as children to a parent Context. If any of the
-   * child Contexts have already been added to the parent Context, they are
-   * simply skipped. If this call would create a cycle or cause any Context to
-   * have more than 10 parents, the request will fail with an INVALID_ARGUMENT
-   * error.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.context
-   *   Required. The resource name of the parent Context.
-   *
-   *   Format:
-   *   `projects/{project}/locations/{location}/metadataStores/{metadatastore}/contexts/{context}`
-   * @param {string[]} request.childContexts
-   *   The resource names of the child Contexts.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.aiplatform.v1beta1.AddContextChildrenResponse|AddContextChildrenResponse}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta1/metadata_service.add_context_children.js</caption>
-   * region_tag:aiplatform_v1beta1_generated_MetadataService_AddContextChildren_async
-   */
+/**
+ * Adds a set of Contexts as children to a parent Context. If any of the
+ * child Contexts have already been added to the parent Context, they are
+ * simply skipped. If this call would create a cycle or cause any Context to
+ * have more than 10 parents, the request will fail with an INVALID_ARGUMENT
+ * error.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.context
+ *   Required. The resource name of the parent Context.
+ *
+ *   Format:
+ *   `projects/{project}/locations/{location}/metadataStores/{metadatastore}/contexts/{context}`
+ * @param {string[]} request.childContexts
+ *   The resource names of the child Contexts.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.aiplatform.v1beta1.AddContextChildrenResponse|AddContextChildrenResponse}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta1/metadata_service.add_context_children.js</caption>
+ * region_tag:aiplatform_v1beta1_generated_MetadataService_AddContextChildren_async
+ */
   addContextChildren(
-    request?: protos.google.cloud.aiplatform.v1beta1.IAddContextChildrenRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.aiplatform.v1beta1.IAddContextChildrenResponse,
-      (
-        | protos.google.cloud.aiplatform.v1beta1.IAddContextChildrenRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.aiplatform.v1beta1.IAddContextChildrenRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.aiplatform.v1beta1.IAddContextChildrenResponse,
+        protos.google.cloud.aiplatform.v1beta1.IAddContextChildrenRequest|undefined, {}|undefined
+      ]>;
   addContextChildren(
-    request: protos.google.cloud.aiplatform.v1beta1.IAddContextChildrenRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.aiplatform.v1beta1.IAddContextChildrenResponse,
-      | protos.google.cloud.aiplatform.v1beta1.IAddContextChildrenRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  addContextChildren(
-    request: protos.google.cloud.aiplatform.v1beta1.IAddContextChildrenRequest,
-    callback: Callback<
-      protos.google.cloud.aiplatform.v1beta1.IAddContextChildrenResponse,
-      | protos.google.cloud.aiplatform.v1beta1.IAddContextChildrenRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  addContextChildren(
-    request?: protos.google.cloud.aiplatform.v1beta1.IAddContextChildrenRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.aiplatform.v1beta1.IAddContextChildrenRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.aiplatform.v1beta1.IAddContextChildrenResponse,
-          | protos.google.cloud.aiplatform.v1beta1.IAddContextChildrenRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.aiplatform.v1beta1.IAddContextChildrenResponse,
-      | protos.google.cloud.aiplatform.v1beta1.IAddContextChildrenRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.aiplatform.v1beta1.IAddContextChildrenResponse,
-      (
-        | protos.google.cloud.aiplatform.v1beta1.IAddContextChildrenRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.aiplatform.v1beta1.IAddContextChildrenRequest|null|undefined,
+          {}|null|undefined>): void;
+  addContextChildren(
+      request: protos.google.cloud.aiplatform.v1beta1.IAddContextChildrenRequest,
+      callback: Callback<
+          protos.google.cloud.aiplatform.v1beta1.IAddContextChildrenResponse,
+          protos.google.cloud.aiplatform.v1beta1.IAddContextChildrenRequest|null|undefined,
+          {}|null|undefined>): void;
+  addContextChildren(
+      request?: protos.google.cloud.aiplatform.v1beta1.IAddContextChildrenRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.aiplatform.v1beta1.IAddContextChildrenResponse,
+          protos.google.cloud.aiplatform.v1beta1.IAddContextChildrenRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.aiplatform.v1beta1.IAddContextChildrenResponse,
+          protos.google.cloud.aiplatform.v1beta1.IAddContextChildrenRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.aiplatform.v1beta1.IAddContextChildrenResponse,
+        protos.google.cloud.aiplatform.v1beta1.IAddContextChildrenRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        context: request.context ?? '',
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'context': request.context ?? '',
+    });
+    this.initialize().catch(err => {throw err});
+    this._log.info('addContextChildren request %j', request);
+    const wrappedCallback: Callback<
+        protos.google.cloud.aiplatform.v1beta1.IAddContextChildrenResponse,
+        protos.google.cloud.aiplatform.v1beta1.IAddContextChildrenRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('addContextChildren response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls.addContextChildren(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.aiplatform.v1beta1.IAddContextChildrenResponse,
+        protos.google.cloud.aiplatform.v1beta1.IAddContextChildrenRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('addContextChildren response %j', response);
+        return [response, options, rawResponse];
       });
-    this.initialize();
-    return this.innerApiCalls.addContextChildren(request, options, callback);
   }
-  /**
-   * Remove a set of children contexts from a parent Context. If any of the
-   * child Contexts were NOT added to the parent Context, they are
-   * simply skipped.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.context
-   *   Required. The resource name of the parent Context.
-   *
-   *   Format:
-   *   `projects/{project}/locations/{location}/metadataStores/{metadatastore}/contexts/{context}`
-   * @param {string[]} request.childContexts
-   *   The resource names of the child Contexts.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.aiplatform.v1beta1.RemoveContextChildrenResponse|RemoveContextChildrenResponse}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta1/metadata_service.remove_context_children.js</caption>
-   * region_tag:aiplatform_v1beta1_generated_MetadataService_RemoveContextChildren_async
-   */
+/**
+ * Remove a set of children contexts from a parent Context. If any of the
+ * child Contexts were NOT added to the parent Context, they are
+ * simply skipped.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.context
+ *   Required. The resource name of the parent Context.
+ *
+ *   Format:
+ *   `projects/{project}/locations/{location}/metadataStores/{metadatastore}/contexts/{context}`
+ * @param {string[]} request.childContexts
+ *   The resource names of the child Contexts.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.aiplatform.v1beta1.RemoveContextChildrenResponse|RemoveContextChildrenResponse}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta1/metadata_service.remove_context_children.js</caption>
+ * region_tag:aiplatform_v1beta1_generated_MetadataService_RemoveContextChildren_async
+ */
   removeContextChildren(
-    request?: protos.google.cloud.aiplatform.v1beta1.IRemoveContextChildrenRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.aiplatform.v1beta1.IRemoveContextChildrenResponse,
-      (
-        | protos.google.cloud.aiplatform.v1beta1.IRemoveContextChildrenRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.aiplatform.v1beta1.IRemoveContextChildrenRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.aiplatform.v1beta1.IRemoveContextChildrenResponse,
+        protos.google.cloud.aiplatform.v1beta1.IRemoveContextChildrenRequest|undefined, {}|undefined
+      ]>;
   removeContextChildren(
-    request: protos.google.cloud.aiplatform.v1beta1.IRemoveContextChildrenRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.aiplatform.v1beta1.IRemoveContextChildrenResponse,
-      | protos.google.cloud.aiplatform.v1beta1.IRemoveContextChildrenRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  removeContextChildren(
-    request: protos.google.cloud.aiplatform.v1beta1.IRemoveContextChildrenRequest,
-    callback: Callback<
-      protos.google.cloud.aiplatform.v1beta1.IRemoveContextChildrenResponse,
-      | protos.google.cloud.aiplatform.v1beta1.IRemoveContextChildrenRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  removeContextChildren(
-    request?: protos.google.cloud.aiplatform.v1beta1.IRemoveContextChildrenRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.aiplatform.v1beta1.IRemoveContextChildrenRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.aiplatform.v1beta1.IRemoveContextChildrenResponse,
-          | protos.google.cloud.aiplatform.v1beta1.IRemoveContextChildrenRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.aiplatform.v1beta1.IRemoveContextChildrenResponse,
-      | protos.google.cloud.aiplatform.v1beta1.IRemoveContextChildrenRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.aiplatform.v1beta1.IRemoveContextChildrenResponse,
-      (
-        | protos.google.cloud.aiplatform.v1beta1.IRemoveContextChildrenRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.aiplatform.v1beta1.IRemoveContextChildrenRequest|null|undefined,
+          {}|null|undefined>): void;
+  removeContextChildren(
+      request: protos.google.cloud.aiplatform.v1beta1.IRemoveContextChildrenRequest,
+      callback: Callback<
+          protos.google.cloud.aiplatform.v1beta1.IRemoveContextChildrenResponse,
+          protos.google.cloud.aiplatform.v1beta1.IRemoveContextChildrenRequest|null|undefined,
+          {}|null|undefined>): void;
+  removeContextChildren(
+      request?: protos.google.cloud.aiplatform.v1beta1.IRemoveContextChildrenRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.aiplatform.v1beta1.IRemoveContextChildrenResponse,
+          protos.google.cloud.aiplatform.v1beta1.IRemoveContextChildrenRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.aiplatform.v1beta1.IRemoveContextChildrenResponse,
+          protos.google.cloud.aiplatform.v1beta1.IRemoveContextChildrenRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.aiplatform.v1beta1.IRemoveContextChildrenResponse,
+        protos.google.cloud.aiplatform.v1beta1.IRemoveContextChildrenRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        context: request.context ?? '',
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'context': request.context ?? '',
+    });
+    this.initialize().catch(err => {throw err});
+    this._log.info('removeContextChildren request %j', request);
+    const wrappedCallback: Callback<
+        protos.google.cloud.aiplatform.v1beta1.IRemoveContextChildrenResponse,
+        protos.google.cloud.aiplatform.v1beta1.IRemoveContextChildrenRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('removeContextChildren response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls.removeContextChildren(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.aiplatform.v1beta1.IRemoveContextChildrenResponse,
+        protos.google.cloud.aiplatform.v1beta1.IRemoveContextChildrenRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('removeContextChildren response %j', response);
+        return [response, options, rawResponse];
       });
-    this.initialize();
-    return this.innerApiCalls.removeContextChildren(request, options, callback);
   }
-  /**
-   * Retrieves Artifacts and Executions within the specified Context, connected
-   * by Event edges and returned as a LineageSubgraph.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.context
-   *   Required. The resource name of the Context whose Artifacts and Executions
-   *   should be retrieved as a LineageSubgraph.
-   *   Format:
-   *   `projects/{project}/locations/{location}/metadataStores/{metadatastore}/contexts/{context}`
-   *
-   *   The request may error with FAILED_PRECONDITION if the number of Artifacts,
-   *   the number of Executions, or the number of Events that would be returned
-   *   for the Context exceeds 1000.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.aiplatform.v1beta1.LineageSubgraph|LineageSubgraph}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta1/metadata_service.query_context_lineage_subgraph.js</caption>
-   * region_tag:aiplatform_v1beta1_generated_MetadataService_QueryContextLineageSubgraph_async
-   */
+/**
+ * Retrieves Artifacts and Executions within the specified Context, connected
+ * by Event edges and returned as a LineageSubgraph.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.context
+ *   Required. The resource name of the Context whose Artifacts and Executions
+ *   should be retrieved as a LineageSubgraph.
+ *   Format:
+ *   `projects/{project}/locations/{location}/metadataStores/{metadatastore}/contexts/{context}`
+ *
+ *   The request may error with FAILED_PRECONDITION if the number of Artifacts,
+ *   the number of Executions, or the number of Events that would be returned
+ *   for the Context exceeds 1000.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.aiplatform.v1beta1.LineageSubgraph|LineageSubgraph}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta1/metadata_service.query_context_lineage_subgraph.js</caption>
+ * region_tag:aiplatform_v1beta1_generated_MetadataService_QueryContextLineageSubgraph_async
+ */
   queryContextLineageSubgraph(
-    request?: protos.google.cloud.aiplatform.v1beta1.IQueryContextLineageSubgraphRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.aiplatform.v1beta1.ILineageSubgraph,
-      (
-        | protos.google.cloud.aiplatform.v1beta1.IQueryContextLineageSubgraphRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.aiplatform.v1beta1.IQueryContextLineageSubgraphRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.aiplatform.v1beta1.ILineageSubgraph,
+        protos.google.cloud.aiplatform.v1beta1.IQueryContextLineageSubgraphRequest|undefined, {}|undefined
+      ]>;
   queryContextLineageSubgraph(
-    request: protos.google.cloud.aiplatform.v1beta1.IQueryContextLineageSubgraphRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.aiplatform.v1beta1.ILineageSubgraph,
-      | protos.google.cloud.aiplatform.v1beta1.IQueryContextLineageSubgraphRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  queryContextLineageSubgraph(
-    request: protos.google.cloud.aiplatform.v1beta1.IQueryContextLineageSubgraphRequest,
-    callback: Callback<
-      protos.google.cloud.aiplatform.v1beta1.ILineageSubgraph,
-      | protos.google.cloud.aiplatform.v1beta1.IQueryContextLineageSubgraphRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  queryContextLineageSubgraph(
-    request?: protos.google.cloud.aiplatform.v1beta1.IQueryContextLineageSubgraphRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.aiplatform.v1beta1.IQueryContextLineageSubgraphRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.aiplatform.v1beta1.ILineageSubgraph,
-          | protos.google.cloud.aiplatform.v1beta1.IQueryContextLineageSubgraphRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.aiplatform.v1beta1.ILineageSubgraph,
-      | protos.google.cloud.aiplatform.v1beta1.IQueryContextLineageSubgraphRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.aiplatform.v1beta1.ILineageSubgraph,
-      (
-        | protos.google.cloud.aiplatform.v1beta1.IQueryContextLineageSubgraphRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.aiplatform.v1beta1.IQueryContextLineageSubgraphRequest|null|undefined,
+          {}|null|undefined>): void;
+  queryContextLineageSubgraph(
+      request: protos.google.cloud.aiplatform.v1beta1.IQueryContextLineageSubgraphRequest,
+      callback: Callback<
+          protos.google.cloud.aiplatform.v1beta1.ILineageSubgraph,
+          protos.google.cloud.aiplatform.v1beta1.IQueryContextLineageSubgraphRequest|null|undefined,
+          {}|null|undefined>): void;
+  queryContextLineageSubgraph(
+      request?: protos.google.cloud.aiplatform.v1beta1.IQueryContextLineageSubgraphRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.aiplatform.v1beta1.ILineageSubgraph,
+          protos.google.cloud.aiplatform.v1beta1.IQueryContextLineageSubgraphRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.aiplatform.v1beta1.ILineageSubgraph,
+          protos.google.cloud.aiplatform.v1beta1.IQueryContextLineageSubgraphRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.aiplatform.v1beta1.ILineageSubgraph,
+        protos.google.cloud.aiplatform.v1beta1.IQueryContextLineageSubgraphRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        context: request.context ?? '',
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'context': request.context ?? '',
+    });
+    this.initialize().catch(err => {throw err});
+    this._log.info('queryContextLineageSubgraph request %j', request);
+    const wrappedCallback: Callback<
+        protos.google.cloud.aiplatform.v1beta1.ILineageSubgraph,
+        protos.google.cloud.aiplatform.v1beta1.IQueryContextLineageSubgraphRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('queryContextLineageSubgraph response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls.queryContextLineageSubgraph(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.aiplatform.v1beta1.ILineageSubgraph,
+        protos.google.cloud.aiplatform.v1beta1.IQueryContextLineageSubgraphRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('queryContextLineageSubgraph response %j', response);
+        return [response, options, rawResponse];
       });
-    this.initialize();
-    return this.innerApiCalls.queryContextLineageSubgraph(
-      request,
-      options,
-      callback
-    );
   }
-  /**
-   * Creates an Execution associated with a MetadataStore.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The resource name of the MetadataStore where the Execution should
-   *   be created.
-   *   Format:
-   *   `projects/{project}/locations/{location}/metadataStores/{metadatastore}`
-   * @param {google.cloud.aiplatform.v1beta1.Execution} request.execution
-   *   Required. The Execution to create.
-   * @param {string} request.executionId
-   *   The {execution} portion of the resource name with the format:
-   *   `projects/{project}/locations/{location}/metadataStores/{metadatastore}/executions/{execution}`
-   *   If not provided, the Execution's ID will be a UUID generated by the
-   *   service.
-   *   Must be 4-128 characters in length. Valid characters are `/{@link protos.0-9|a-z}-/`.
-   *   Must be unique across all Executions in the parent MetadataStore.
-   *   (Otherwise the request will fail with ALREADY_EXISTS, or PERMISSION_DENIED
-   *   if the caller can't view the preexisting Execution.)
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.aiplatform.v1beta1.Execution|Execution}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta1/metadata_service.create_execution.js</caption>
-   * region_tag:aiplatform_v1beta1_generated_MetadataService_CreateExecution_async
-   */
+/**
+ * Creates an Execution associated with a MetadataStore.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The resource name of the MetadataStore where the Execution should
+ *   be created.
+ *   Format:
+ *   `projects/{project}/locations/{location}/metadataStores/{metadatastore}`
+ * @param {google.cloud.aiplatform.v1beta1.Execution} request.execution
+ *   Required. The Execution to create.
+ * @param {string} request.executionId
+ *   The {execution} portion of the resource name with the format:
+ *   `projects/{project}/locations/{location}/metadataStores/{metadatastore}/executions/{execution}`
+ *   If not provided, the Execution's ID will be a UUID generated by the
+ *   service.
+ *   Must be 4-128 characters in length. Valid characters are `/{@link protos.0-9|a-z}-/`.
+ *   Must be unique across all Executions in the parent MetadataStore.
+ *   (Otherwise the request will fail with ALREADY_EXISTS, or PERMISSION_DENIED
+ *   if the caller can't view the preexisting Execution.)
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.aiplatform.v1beta1.Execution|Execution}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta1/metadata_service.create_execution.js</caption>
+ * region_tag:aiplatform_v1beta1_generated_MetadataService_CreateExecution_async
+ */
   createExecution(
-    request?: protos.google.cloud.aiplatform.v1beta1.ICreateExecutionRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.aiplatform.v1beta1.IExecution,
-      (
-        | protos.google.cloud.aiplatform.v1beta1.ICreateExecutionRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.aiplatform.v1beta1.ICreateExecutionRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.aiplatform.v1beta1.IExecution,
+        protos.google.cloud.aiplatform.v1beta1.ICreateExecutionRequest|undefined, {}|undefined
+      ]>;
   createExecution(
-    request: protos.google.cloud.aiplatform.v1beta1.ICreateExecutionRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.aiplatform.v1beta1.IExecution,
-      | protos.google.cloud.aiplatform.v1beta1.ICreateExecutionRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  createExecution(
-    request: protos.google.cloud.aiplatform.v1beta1.ICreateExecutionRequest,
-    callback: Callback<
-      protos.google.cloud.aiplatform.v1beta1.IExecution,
-      | protos.google.cloud.aiplatform.v1beta1.ICreateExecutionRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  createExecution(
-    request?: protos.google.cloud.aiplatform.v1beta1.ICreateExecutionRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.aiplatform.v1beta1.ICreateExecutionRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.aiplatform.v1beta1.IExecution,
-          | protos.google.cloud.aiplatform.v1beta1.ICreateExecutionRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.aiplatform.v1beta1.IExecution,
-      | protos.google.cloud.aiplatform.v1beta1.ICreateExecutionRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.aiplatform.v1beta1.IExecution,
-      (
-        | protos.google.cloud.aiplatform.v1beta1.ICreateExecutionRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
-    request = request || {};
-    let options: CallOptions;
-    if (typeof optionsOrCallback === 'function' && callback === undefined) {
-      callback = optionsOrCallback;
-      options = {};
-    } else {
-      options = optionsOrCallback as CallOptions;
-    }
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize();
-    return this.innerApiCalls.createExecution(request, options, callback);
-  }
-  /**
-   * Retrieves a specific Execution.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The resource name of the Execution to retrieve.
-   *   Format:
-   *   `projects/{project}/locations/{location}/metadataStores/{metadatastore}/executions/{execution}`
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.aiplatform.v1beta1.Execution|Execution}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta1/metadata_service.get_execution.js</caption>
-   * region_tag:aiplatform_v1beta1_generated_MetadataService_GetExecution_async
-   */
-  getExecution(
-    request?: protos.google.cloud.aiplatform.v1beta1.IGetExecutionRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.aiplatform.v1beta1.IExecution,
-      protos.google.cloud.aiplatform.v1beta1.IGetExecutionRequest | undefined,
-      {} | undefined,
-    ]
-  >;
-  getExecution(
-    request: protos.google.cloud.aiplatform.v1beta1.IGetExecutionRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.aiplatform.v1beta1.IExecution,
-      | protos.google.cloud.aiplatform.v1beta1.IGetExecutionRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getExecution(
-    request: protos.google.cloud.aiplatform.v1beta1.IGetExecutionRequest,
-    callback: Callback<
-      protos.google.cloud.aiplatform.v1beta1.IExecution,
-      | protos.google.cloud.aiplatform.v1beta1.IGetExecutionRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getExecution(
-    request?: protos.google.cloud.aiplatform.v1beta1.IGetExecutionRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+          protos.google.cloud.aiplatform.v1beta1.ICreateExecutionRequest|null|undefined,
+          {}|null|undefined>): void;
+  createExecution(
+      request: protos.google.cloud.aiplatform.v1beta1.ICreateExecutionRequest,
+      callback: Callback<
           protos.google.cloud.aiplatform.v1beta1.IExecution,
-          | protos.google.cloud.aiplatform.v1beta1.IGetExecutionRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.aiplatform.v1beta1.IExecution,
-      | protos.google.cloud.aiplatform.v1beta1.IGetExecutionRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.aiplatform.v1beta1.IExecution,
-      protos.google.cloud.aiplatform.v1beta1.IGetExecutionRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
-    request = request || {};
-    let options: CallOptions;
-    if (typeof optionsOrCallback === 'function' && callback === undefined) {
-      callback = optionsOrCallback;
-      options = {};
-    } else {
-      options = optionsOrCallback as CallOptions;
-    }
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize();
-    return this.innerApiCalls.getExecution(request, options, callback);
-  }
-  /**
-   * Updates a stored Execution.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {google.cloud.aiplatform.v1beta1.Execution} request.execution
-   *   Required. The Execution containing updates.
-   *   The Execution's
-   *   {@link protos.google.cloud.aiplatform.v1beta1.Execution.name|Execution.name} field is
-   *   used to identify the Execution to be updated. Format:
-   *   `projects/{project}/locations/{location}/metadataStores/{metadatastore}/executions/{execution}`
-   * @param {google.protobuf.FieldMask} [request.updateMask]
-   *   Optional. A FieldMask indicating which fields should be updated.
-   * @param {boolean} request.allowMissing
-   *   If set to true, and the
-   *   {@link protos.google.cloud.aiplatform.v1beta1.Execution|Execution} is not found, a new
-   *   {@link protos.google.cloud.aiplatform.v1beta1.Execution|Execution} is created.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.aiplatform.v1beta1.Execution|Execution}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta1/metadata_service.update_execution.js</caption>
-   * region_tag:aiplatform_v1beta1_generated_MetadataService_UpdateExecution_async
-   */
-  updateExecution(
-    request?: protos.google.cloud.aiplatform.v1beta1.IUpdateExecutionRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.aiplatform.v1beta1.IExecution,
-      (
-        | protos.google.cloud.aiplatform.v1beta1.IUpdateExecutionRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
-  updateExecution(
-    request: protos.google.cloud.aiplatform.v1beta1.IUpdateExecutionRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.aiplatform.v1beta1.IExecution,
-      | protos.google.cloud.aiplatform.v1beta1.IUpdateExecutionRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  updateExecution(
-    request: protos.google.cloud.aiplatform.v1beta1.IUpdateExecutionRequest,
-    callback: Callback<
-      protos.google.cloud.aiplatform.v1beta1.IExecution,
-      | protos.google.cloud.aiplatform.v1beta1.IUpdateExecutionRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  updateExecution(
-    request?: protos.google.cloud.aiplatform.v1beta1.IUpdateExecutionRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+          protos.google.cloud.aiplatform.v1beta1.ICreateExecutionRequest|null|undefined,
+          {}|null|undefined>): void;
+  createExecution(
+      request?: protos.google.cloud.aiplatform.v1beta1.ICreateExecutionRequest,
+      optionsOrCallback?: CallOptions|Callback<
           protos.google.cloud.aiplatform.v1beta1.IExecution,
-          | protos.google.cloud.aiplatform.v1beta1.IUpdateExecutionRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.aiplatform.v1beta1.IExecution,
-      | protos.google.cloud.aiplatform.v1beta1.IUpdateExecutionRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.aiplatform.v1beta1.IExecution,
-      (
-        | protos.google.cloud.aiplatform.v1beta1.IUpdateExecutionRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.aiplatform.v1beta1.ICreateExecutionRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.aiplatform.v1beta1.IExecution,
+          protos.google.cloud.aiplatform.v1beta1.ICreateExecutionRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.aiplatform.v1beta1.IExecution,
+        protos.google.cloud.aiplatform.v1beta1.ICreateExecutionRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        'execution.name': request.execution!.name ?? '',
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
+    this.initialize().catch(err => {throw err});
+    this._log.info('createExecution request %j', request);
+    const wrappedCallback: Callback<
+        protos.google.cloud.aiplatform.v1beta1.IExecution,
+        protos.google.cloud.aiplatform.v1beta1.ICreateExecutionRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('createExecution response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls.createExecution(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.aiplatform.v1beta1.IExecution,
+        protos.google.cloud.aiplatform.v1beta1.ICreateExecutionRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('createExecution response %j', response);
+        return [response, options, rawResponse];
       });
-    this.initialize();
-    return this.innerApiCalls.updateExecution(request, options, callback);
   }
-  /**
-   * Adds Events to the specified Execution. An Event indicates whether an
-   * Artifact was used as an input or output for an Execution. If an Event
-   * already exists between the Execution and the Artifact, the Event is
-   * skipped.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.execution
-   *   Required. The resource name of the Execution that the Events connect
-   *   Artifacts with.
-   *   Format:
-   *   `projects/{project}/locations/{location}/metadataStores/{metadatastore}/executions/{execution}`
-   * @param {number[]} request.events
-   *   The Events to create and add.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.aiplatform.v1beta1.AddExecutionEventsResponse|AddExecutionEventsResponse}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta1/metadata_service.add_execution_events.js</caption>
-   * region_tag:aiplatform_v1beta1_generated_MetadataService_AddExecutionEvents_async
-   */
+/**
+ * Retrieves a specific Execution.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The resource name of the Execution to retrieve.
+ *   Format:
+ *   `projects/{project}/locations/{location}/metadataStores/{metadatastore}/executions/{execution}`
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.aiplatform.v1beta1.Execution|Execution}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta1/metadata_service.get_execution.js</caption>
+ * region_tag:aiplatform_v1beta1_generated_MetadataService_GetExecution_async
+ */
+  getExecution(
+      request?: protos.google.cloud.aiplatform.v1beta1.IGetExecutionRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.aiplatform.v1beta1.IExecution,
+        protos.google.cloud.aiplatform.v1beta1.IGetExecutionRequest|undefined, {}|undefined
+      ]>;
+  getExecution(
+      request: protos.google.cloud.aiplatform.v1beta1.IGetExecutionRequest,
+      options: CallOptions,
+      callback: Callback<
+          protos.google.cloud.aiplatform.v1beta1.IExecution,
+          protos.google.cloud.aiplatform.v1beta1.IGetExecutionRequest|null|undefined,
+          {}|null|undefined>): void;
+  getExecution(
+      request: protos.google.cloud.aiplatform.v1beta1.IGetExecutionRequest,
+      callback: Callback<
+          protos.google.cloud.aiplatform.v1beta1.IExecution,
+          protos.google.cloud.aiplatform.v1beta1.IGetExecutionRequest|null|undefined,
+          {}|null|undefined>): void;
+  getExecution(
+      request?: protos.google.cloud.aiplatform.v1beta1.IGetExecutionRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.aiplatform.v1beta1.IExecution,
+          protos.google.cloud.aiplatform.v1beta1.IGetExecutionRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.aiplatform.v1beta1.IExecution,
+          protos.google.cloud.aiplatform.v1beta1.IGetExecutionRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.aiplatform.v1beta1.IExecution,
+        protos.google.cloud.aiplatform.v1beta1.IGetExecutionRequest|undefined, {}|undefined
+      ]>|void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    }
+    else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
+    });
+    this.initialize().catch(err => {throw err});
+    this._log.info('getExecution request %j', request);
+    const wrappedCallback: Callback<
+        protos.google.cloud.aiplatform.v1beta1.IExecution,
+        protos.google.cloud.aiplatform.v1beta1.IGetExecutionRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getExecution response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls.getExecution(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.aiplatform.v1beta1.IExecution,
+        protos.google.cloud.aiplatform.v1beta1.IGetExecutionRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('getExecution response %j', response);
+        return [response, options, rawResponse];
+      });
+  }
+/**
+ * Updates a stored Execution.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {google.cloud.aiplatform.v1beta1.Execution} request.execution
+ *   Required. The Execution containing updates.
+ *   The Execution's
+ *   {@link protos.google.cloud.aiplatform.v1beta1.Execution.name|Execution.name} field is
+ *   used to identify the Execution to be updated. Format:
+ *   `projects/{project}/locations/{location}/metadataStores/{metadatastore}/executions/{execution}`
+ * @param {google.protobuf.FieldMask} [request.updateMask]
+ *   Optional. A FieldMask indicating which fields should be updated.
+ * @param {boolean} request.allowMissing
+ *   If set to true, and the
+ *   {@link protos.google.cloud.aiplatform.v1beta1.Execution|Execution} is not found, a new
+ *   {@link protos.google.cloud.aiplatform.v1beta1.Execution|Execution} is created.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.aiplatform.v1beta1.Execution|Execution}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta1/metadata_service.update_execution.js</caption>
+ * region_tag:aiplatform_v1beta1_generated_MetadataService_UpdateExecution_async
+ */
+  updateExecution(
+      request?: protos.google.cloud.aiplatform.v1beta1.IUpdateExecutionRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.aiplatform.v1beta1.IExecution,
+        protos.google.cloud.aiplatform.v1beta1.IUpdateExecutionRequest|undefined, {}|undefined
+      ]>;
+  updateExecution(
+      request: protos.google.cloud.aiplatform.v1beta1.IUpdateExecutionRequest,
+      options: CallOptions,
+      callback: Callback<
+          protos.google.cloud.aiplatform.v1beta1.IExecution,
+          protos.google.cloud.aiplatform.v1beta1.IUpdateExecutionRequest|null|undefined,
+          {}|null|undefined>): void;
+  updateExecution(
+      request: protos.google.cloud.aiplatform.v1beta1.IUpdateExecutionRequest,
+      callback: Callback<
+          protos.google.cloud.aiplatform.v1beta1.IExecution,
+          protos.google.cloud.aiplatform.v1beta1.IUpdateExecutionRequest|null|undefined,
+          {}|null|undefined>): void;
+  updateExecution(
+      request?: protos.google.cloud.aiplatform.v1beta1.IUpdateExecutionRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.aiplatform.v1beta1.IExecution,
+          protos.google.cloud.aiplatform.v1beta1.IUpdateExecutionRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.aiplatform.v1beta1.IExecution,
+          protos.google.cloud.aiplatform.v1beta1.IUpdateExecutionRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.aiplatform.v1beta1.IExecution,
+        protos.google.cloud.aiplatform.v1beta1.IUpdateExecutionRequest|undefined, {}|undefined
+      ]>|void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    }
+    else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'execution.name': request.execution!.name ?? '',
+    });
+    this.initialize().catch(err => {throw err});
+    this._log.info('updateExecution request %j', request);
+    const wrappedCallback: Callback<
+        protos.google.cloud.aiplatform.v1beta1.IExecution,
+        protos.google.cloud.aiplatform.v1beta1.IUpdateExecutionRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('updateExecution response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls.updateExecution(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.aiplatform.v1beta1.IExecution,
+        protos.google.cloud.aiplatform.v1beta1.IUpdateExecutionRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('updateExecution response %j', response);
+        return [response, options, rawResponse];
+      });
+  }
+/**
+ * Adds Events to the specified Execution. An Event indicates whether an
+ * Artifact was used as an input or output for an Execution. If an Event
+ * already exists between the Execution and the Artifact, the Event is
+ * skipped.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.execution
+ *   Required. The resource name of the Execution that the Events connect
+ *   Artifacts with.
+ *   Format:
+ *   `projects/{project}/locations/{location}/metadataStores/{metadatastore}/executions/{execution}`
+ * @param {number[]} request.events
+ *   The Events to create and add.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.aiplatform.v1beta1.AddExecutionEventsResponse|AddExecutionEventsResponse}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta1/metadata_service.add_execution_events.js</caption>
+ * region_tag:aiplatform_v1beta1_generated_MetadataService_AddExecutionEvents_async
+ */
   addExecutionEvents(
-    request?: protos.google.cloud.aiplatform.v1beta1.IAddExecutionEventsRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.aiplatform.v1beta1.IAddExecutionEventsResponse,
-      (
-        | protos.google.cloud.aiplatform.v1beta1.IAddExecutionEventsRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.aiplatform.v1beta1.IAddExecutionEventsRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.aiplatform.v1beta1.IAddExecutionEventsResponse,
+        protos.google.cloud.aiplatform.v1beta1.IAddExecutionEventsRequest|undefined, {}|undefined
+      ]>;
   addExecutionEvents(
-    request: protos.google.cloud.aiplatform.v1beta1.IAddExecutionEventsRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.aiplatform.v1beta1.IAddExecutionEventsResponse,
-      | protos.google.cloud.aiplatform.v1beta1.IAddExecutionEventsRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  addExecutionEvents(
-    request: protos.google.cloud.aiplatform.v1beta1.IAddExecutionEventsRequest,
-    callback: Callback<
-      protos.google.cloud.aiplatform.v1beta1.IAddExecutionEventsResponse,
-      | protos.google.cloud.aiplatform.v1beta1.IAddExecutionEventsRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  addExecutionEvents(
-    request?: protos.google.cloud.aiplatform.v1beta1.IAddExecutionEventsRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.aiplatform.v1beta1.IAddExecutionEventsRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.aiplatform.v1beta1.IAddExecutionEventsResponse,
-          | protos.google.cloud.aiplatform.v1beta1.IAddExecutionEventsRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.aiplatform.v1beta1.IAddExecutionEventsResponse,
-      | protos.google.cloud.aiplatform.v1beta1.IAddExecutionEventsRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.aiplatform.v1beta1.IAddExecutionEventsResponse,
-      (
-        | protos.google.cloud.aiplatform.v1beta1.IAddExecutionEventsRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.aiplatform.v1beta1.IAddExecutionEventsRequest|null|undefined,
+          {}|null|undefined>): void;
+  addExecutionEvents(
+      request: protos.google.cloud.aiplatform.v1beta1.IAddExecutionEventsRequest,
+      callback: Callback<
+          protos.google.cloud.aiplatform.v1beta1.IAddExecutionEventsResponse,
+          protos.google.cloud.aiplatform.v1beta1.IAddExecutionEventsRequest|null|undefined,
+          {}|null|undefined>): void;
+  addExecutionEvents(
+      request?: protos.google.cloud.aiplatform.v1beta1.IAddExecutionEventsRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.aiplatform.v1beta1.IAddExecutionEventsResponse,
+          protos.google.cloud.aiplatform.v1beta1.IAddExecutionEventsRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.aiplatform.v1beta1.IAddExecutionEventsResponse,
+          protos.google.cloud.aiplatform.v1beta1.IAddExecutionEventsRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.aiplatform.v1beta1.IAddExecutionEventsResponse,
+        protos.google.cloud.aiplatform.v1beta1.IAddExecutionEventsRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        execution: request.execution ?? '',
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'execution': request.execution ?? '',
+    });
+    this.initialize().catch(err => {throw err});
+    this._log.info('addExecutionEvents request %j', request);
+    const wrappedCallback: Callback<
+        protos.google.cloud.aiplatform.v1beta1.IAddExecutionEventsResponse,
+        protos.google.cloud.aiplatform.v1beta1.IAddExecutionEventsRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('addExecutionEvents response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls.addExecutionEvents(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.aiplatform.v1beta1.IAddExecutionEventsResponse,
+        protos.google.cloud.aiplatform.v1beta1.IAddExecutionEventsRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('addExecutionEvents response %j', response);
+        return [response, options, rawResponse];
       });
-    this.initialize();
-    return this.innerApiCalls.addExecutionEvents(request, options, callback);
   }
-  /**
-   * Obtains the set of input and output Artifacts for this Execution, in the
-   * form of LineageSubgraph that also contains the Execution and connecting
-   * Events.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.execution
-   *   Required. The resource name of the Execution whose input and output
-   *   Artifacts should be retrieved as a LineageSubgraph. Format:
-   *   `projects/{project}/locations/{location}/metadataStores/{metadatastore}/executions/{execution}`
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.aiplatform.v1beta1.LineageSubgraph|LineageSubgraph}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta1/metadata_service.query_execution_inputs_and_outputs.js</caption>
-   * region_tag:aiplatform_v1beta1_generated_MetadataService_QueryExecutionInputsAndOutputs_async
-   */
+/**
+ * Obtains the set of input and output Artifacts for this Execution, in the
+ * form of LineageSubgraph that also contains the Execution and connecting
+ * Events.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.execution
+ *   Required. The resource name of the Execution whose input and output
+ *   Artifacts should be retrieved as a LineageSubgraph. Format:
+ *   `projects/{project}/locations/{location}/metadataStores/{metadatastore}/executions/{execution}`
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.aiplatform.v1beta1.LineageSubgraph|LineageSubgraph}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta1/metadata_service.query_execution_inputs_and_outputs.js</caption>
+ * region_tag:aiplatform_v1beta1_generated_MetadataService_QueryExecutionInputsAndOutputs_async
+ */
   queryExecutionInputsAndOutputs(
-    request?: protos.google.cloud.aiplatform.v1beta1.IQueryExecutionInputsAndOutputsRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.aiplatform.v1beta1.ILineageSubgraph,
-      (
-        | protos.google.cloud.aiplatform.v1beta1.IQueryExecutionInputsAndOutputsRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.aiplatform.v1beta1.IQueryExecutionInputsAndOutputsRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.aiplatform.v1beta1.ILineageSubgraph,
+        protos.google.cloud.aiplatform.v1beta1.IQueryExecutionInputsAndOutputsRequest|undefined, {}|undefined
+      ]>;
   queryExecutionInputsAndOutputs(
-    request: protos.google.cloud.aiplatform.v1beta1.IQueryExecutionInputsAndOutputsRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.aiplatform.v1beta1.ILineageSubgraph,
-      | protos.google.cloud.aiplatform.v1beta1.IQueryExecutionInputsAndOutputsRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  queryExecutionInputsAndOutputs(
-    request: protos.google.cloud.aiplatform.v1beta1.IQueryExecutionInputsAndOutputsRequest,
-    callback: Callback<
-      protos.google.cloud.aiplatform.v1beta1.ILineageSubgraph,
-      | protos.google.cloud.aiplatform.v1beta1.IQueryExecutionInputsAndOutputsRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  queryExecutionInputsAndOutputs(
-    request?: protos.google.cloud.aiplatform.v1beta1.IQueryExecutionInputsAndOutputsRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.aiplatform.v1beta1.IQueryExecutionInputsAndOutputsRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.aiplatform.v1beta1.ILineageSubgraph,
-          | protos.google.cloud.aiplatform.v1beta1.IQueryExecutionInputsAndOutputsRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.aiplatform.v1beta1.ILineageSubgraph,
-      | protos.google.cloud.aiplatform.v1beta1.IQueryExecutionInputsAndOutputsRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.aiplatform.v1beta1.ILineageSubgraph,
-      (
-        | protos.google.cloud.aiplatform.v1beta1.IQueryExecutionInputsAndOutputsRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
-    request = request || {};
-    let options: CallOptions;
-    if (typeof optionsOrCallback === 'function' && callback === undefined) {
-      callback = optionsOrCallback;
-      options = {};
-    } else {
-      options = optionsOrCallback as CallOptions;
-    }
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        execution: request.execution ?? '',
-      });
-    this.initialize();
-    return this.innerApiCalls.queryExecutionInputsAndOutputs(
-      request,
-      options,
-      callback
-    );
-  }
-  /**
-   * Creates a MetadataSchema.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The resource name of the MetadataStore where the MetadataSchema
-   *   should be created. Format:
-   *   `projects/{project}/locations/{location}/metadataStores/{metadatastore}`
-   * @param {google.cloud.aiplatform.v1beta1.MetadataSchema} request.metadataSchema
-   *   Required. The MetadataSchema to create.
-   * @param {string} request.metadataSchemaId
-   *   The {metadata_schema} portion of the resource name with the format:
-   *   `projects/{project}/locations/{location}/metadataStores/{metadatastore}/metadataSchemas/{metadataschema}`
-   *   If not provided, the MetadataStore's ID will be a UUID generated by the
-   *   service.
-   *   Must be 4-128 characters in length. Valid characters are `/{@link protos.0-9|a-z}-/`.
-   *   Must be unique across all MetadataSchemas in the parent Location.
-   *   (Otherwise the request will fail with ALREADY_EXISTS, or PERMISSION_DENIED
-   *   if the caller can't view the preexisting MetadataSchema.)
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.aiplatform.v1beta1.MetadataSchema|MetadataSchema}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta1/metadata_service.create_metadata_schema.js</caption>
-   * region_tag:aiplatform_v1beta1_generated_MetadataService_CreateMetadataSchema_async
-   */
-  createMetadataSchema(
-    request?: protos.google.cloud.aiplatform.v1beta1.ICreateMetadataSchemaRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.aiplatform.v1beta1.IMetadataSchema,
-      (
-        | protos.google.cloud.aiplatform.v1beta1.ICreateMetadataSchemaRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
-  createMetadataSchema(
-    request: protos.google.cloud.aiplatform.v1beta1.ICreateMetadataSchemaRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.aiplatform.v1beta1.IMetadataSchema,
-      | protos.google.cloud.aiplatform.v1beta1.ICreateMetadataSchemaRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  createMetadataSchema(
-    request: protos.google.cloud.aiplatform.v1beta1.ICreateMetadataSchemaRequest,
-    callback: Callback<
-      protos.google.cloud.aiplatform.v1beta1.IMetadataSchema,
-      | protos.google.cloud.aiplatform.v1beta1.ICreateMetadataSchemaRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  createMetadataSchema(
-    request?: protos.google.cloud.aiplatform.v1beta1.ICreateMetadataSchemaRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          protos.google.cloud.aiplatform.v1beta1.IMetadataSchema,
-          | protos.google.cloud.aiplatform.v1beta1.ICreateMetadataSchemaRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.aiplatform.v1beta1.IMetadataSchema,
-      | protos.google.cloud.aiplatform.v1beta1.ICreateMetadataSchemaRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.aiplatform.v1beta1.IMetadataSchema,
-      (
-        | protos.google.cloud.aiplatform.v1beta1.ICreateMetadataSchemaRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
-    request = request || {};
-    let options: CallOptions;
-    if (typeof optionsOrCallback === 'function' && callback === undefined) {
-      callback = optionsOrCallback;
-      options = {};
-    } else {
-      options = optionsOrCallback as CallOptions;
-    }
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize();
-    return this.innerApiCalls.createMetadataSchema(request, options, callback);
-  }
-  /**
-   * Retrieves a specific MetadataSchema.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The resource name of the MetadataSchema to retrieve.
-   *   Format:
-   *   `projects/{project}/locations/{location}/metadataStores/{metadatastore}/metadataSchemas/{metadataschema}`
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.aiplatform.v1beta1.MetadataSchema|MetadataSchema}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta1/metadata_service.get_metadata_schema.js</caption>
-   * region_tag:aiplatform_v1beta1_generated_MetadataService_GetMetadataSchema_async
-   */
-  getMetadataSchema(
-    request?: protos.google.cloud.aiplatform.v1beta1.IGetMetadataSchemaRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.aiplatform.v1beta1.IMetadataSchema,
-      (
-        | protos.google.cloud.aiplatform.v1beta1.IGetMetadataSchemaRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
-  getMetadataSchema(
-    request: protos.google.cloud.aiplatform.v1beta1.IGetMetadataSchemaRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.aiplatform.v1beta1.IMetadataSchema,
-      | protos.google.cloud.aiplatform.v1beta1.IGetMetadataSchemaRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getMetadataSchema(
-    request: protos.google.cloud.aiplatform.v1beta1.IGetMetadataSchemaRequest,
-    callback: Callback<
-      protos.google.cloud.aiplatform.v1beta1.IMetadataSchema,
-      | protos.google.cloud.aiplatform.v1beta1.IGetMetadataSchemaRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getMetadataSchema(
-    request?: protos.google.cloud.aiplatform.v1beta1.IGetMetadataSchemaRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          protos.google.cloud.aiplatform.v1beta1.IMetadataSchema,
-          | protos.google.cloud.aiplatform.v1beta1.IGetMetadataSchemaRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.aiplatform.v1beta1.IMetadataSchema,
-      | protos.google.cloud.aiplatform.v1beta1.IGetMetadataSchemaRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.aiplatform.v1beta1.IMetadataSchema,
-      (
-        | protos.google.cloud.aiplatform.v1beta1.IGetMetadataSchemaRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
-    request = request || {};
-    let options: CallOptions;
-    if (typeof optionsOrCallback === 'function' && callback === undefined) {
-      callback = optionsOrCallback;
-      options = {};
-    } else {
-      options = optionsOrCallback as CallOptions;
-    }
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize();
-    return this.innerApiCalls.getMetadataSchema(request, options, callback);
-  }
-  /**
-   * Retrieves lineage of an Artifact represented through Artifacts and
-   * Executions connected by Event edges and returned as a LineageSubgraph.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.artifact
-   *   Required. The resource name of the Artifact whose Lineage needs to be
-   *   retrieved as a LineageSubgraph. Format:
-   *   `projects/{project}/locations/{location}/metadataStores/{metadatastore}/artifacts/{artifact}`
-   *
-   *   The request may error with FAILED_PRECONDITION if the number of Artifacts,
-   *   the number of Executions, or the number of Events that would be returned
-   *   for the Context exceeds 1000.
-   * @param {number} request.maxHops
-   *   Specifies the size of the lineage graph in terms of number of hops from the
-   *   specified artifact.
-   *   Negative Value: INVALID_ARGUMENT error is returned
-   *   0: Only input artifact is returned.
-   *   No value: Transitive closure is performed to return the complete graph.
-   * @param {string} request.filter
-   *   Filter specifying the boolean condition for the Artifacts to satisfy in
-   *   order to be part of the Lineage Subgraph.
-   *   The syntax to define filter query is based on https://google.aip.dev/160.
-   *   The supported set of filters include the following:
-   *
-   *   *  **Attribute filtering**:
-   *      For example: `display_name = "test"`
-   *      Supported fields include: `name`, `display_name`, `uri`, `state`,
-   *      `schema_title`, `create_time`, and `update_time`.
-   *      Time fields, such as `create_time` and `update_time`, require values
-   *      specified in RFC-3339 format.
-   *      For example: `create_time = "2020-11-19T11:30:00-04:00"`
-   *   *  **Metadata field**:
-   *      To filter on metadata fields use traversal operation as follows:
-   *      `metadata.<field_name>.<type_value>`.
-   *      For example: `metadata.field_1.number_value = 10.0`
-   *      In case the field name contains special characters (such as colon), one
-   *      can embed it inside double quote.
-   *      For example: `metadata."field:1".number_value = 10.0`
-   *
-   *   Each of the above supported filter types can be combined together using
-   *   logical operators (`AND` & `OR`). Maximum nested expression depth allowed
-   *   is 5.
-   *
-   *   For example: `display_name = "test" AND metadata.field1.bool_value = true`.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.aiplatform.v1beta1.LineageSubgraph|LineageSubgraph}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta1/metadata_service.query_artifact_lineage_subgraph.js</caption>
-   * region_tag:aiplatform_v1beta1_generated_MetadataService_QueryArtifactLineageSubgraph_async
-   */
-  queryArtifactLineageSubgraph(
-    request?: protos.google.cloud.aiplatform.v1beta1.IQueryArtifactLineageSubgraphRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.aiplatform.v1beta1.ILineageSubgraph,
-      (
-        | protos.google.cloud.aiplatform.v1beta1.IQueryArtifactLineageSubgraphRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
-  queryArtifactLineageSubgraph(
-    request: protos.google.cloud.aiplatform.v1beta1.IQueryArtifactLineageSubgraphRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.aiplatform.v1beta1.ILineageSubgraph,
-      | protos.google.cloud.aiplatform.v1beta1.IQueryArtifactLineageSubgraphRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  queryArtifactLineageSubgraph(
-    request: protos.google.cloud.aiplatform.v1beta1.IQueryArtifactLineageSubgraphRequest,
-    callback: Callback<
-      protos.google.cloud.aiplatform.v1beta1.ILineageSubgraph,
-      | protos.google.cloud.aiplatform.v1beta1.IQueryArtifactLineageSubgraphRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  queryArtifactLineageSubgraph(
-    request?: protos.google.cloud.aiplatform.v1beta1.IQueryArtifactLineageSubgraphRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+          protos.google.cloud.aiplatform.v1beta1.IQueryExecutionInputsAndOutputsRequest|null|undefined,
+          {}|null|undefined>): void;
+  queryExecutionInputsAndOutputs(
+      request: protos.google.cloud.aiplatform.v1beta1.IQueryExecutionInputsAndOutputsRequest,
+      callback: Callback<
           protos.google.cloud.aiplatform.v1beta1.ILineageSubgraph,
-          | protos.google.cloud.aiplatform.v1beta1.IQueryArtifactLineageSubgraphRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.aiplatform.v1beta1.ILineageSubgraph,
-      | protos.google.cloud.aiplatform.v1beta1.IQueryArtifactLineageSubgraphRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.aiplatform.v1beta1.ILineageSubgraph,
-      (
-        | protos.google.cloud.aiplatform.v1beta1.IQueryArtifactLineageSubgraphRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.aiplatform.v1beta1.IQueryExecutionInputsAndOutputsRequest|null|undefined,
+          {}|null|undefined>): void;
+  queryExecutionInputsAndOutputs(
+      request?: protos.google.cloud.aiplatform.v1beta1.IQueryExecutionInputsAndOutputsRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.aiplatform.v1beta1.ILineageSubgraph,
+          protos.google.cloud.aiplatform.v1beta1.IQueryExecutionInputsAndOutputsRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.aiplatform.v1beta1.ILineageSubgraph,
+          protos.google.cloud.aiplatform.v1beta1.IQueryExecutionInputsAndOutputsRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.aiplatform.v1beta1.ILineageSubgraph,
+        protos.google.cloud.aiplatform.v1beta1.IQueryExecutionInputsAndOutputsRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        artifact: request.artifact ?? '',
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'execution': request.execution ?? '',
+    });
+    this.initialize().catch(err => {throw err});
+    this._log.info('queryExecutionInputsAndOutputs request %j', request);
+    const wrappedCallback: Callback<
+        protos.google.cloud.aiplatform.v1beta1.ILineageSubgraph,
+        protos.google.cloud.aiplatform.v1beta1.IQueryExecutionInputsAndOutputsRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('queryExecutionInputsAndOutputs response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls.queryExecutionInputsAndOutputs(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.aiplatform.v1beta1.ILineageSubgraph,
+        protos.google.cloud.aiplatform.v1beta1.IQueryExecutionInputsAndOutputsRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('queryExecutionInputsAndOutputs response %j', response);
+        return [response, options, rawResponse];
       });
-    this.initialize();
-    return this.innerApiCalls.queryArtifactLineageSubgraph(
-      request,
-      options,
-      callback
-    );
+  }
+/**
+ * Creates a MetadataSchema.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The resource name of the MetadataStore where the MetadataSchema
+ *   should be created. Format:
+ *   `projects/{project}/locations/{location}/metadataStores/{metadatastore}`
+ * @param {google.cloud.aiplatform.v1beta1.MetadataSchema} request.metadataSchema
+ *   Required. The MetadataSchema to create.
+ * @param {string} request.metadataSchemaId
+ *   The {metadata_schema} portion of the resource name with the format:
+ *   `projects/{project}/locations/{location}/metadataStores/{metadatastore}/metadataSchemas/{metadataschema}`
+ *   If not provided, the MetadataStore's ID will be a UUID generated by the
+ *   service.
+ *   Must be 4-128 characters in length. Valid characters are `/{@link protos.0-9|a-z}-/`.
+ *   Must be unique across all MetadataSchemas in the parent Location.
+ *   (Otherwise the request will fail with ALREADY_EXISTS, or PERMISSION_DENIED
+ *   if the caller can't view the preexisting MetadataSchema.)
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.aiplatform.v1beta1.MetadataSchema|MetadataSchema}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta1/metadata_service.create_metadata_schema.js</caption>
+ * region_tag:aiplatform_v1beta1_generated_MetadataService_CreateMetadataSchema_async
+ */
+  createMetadataSchema(
+      request?: protos.google.cloud.aiplatform.v1beta1.ICreateMetadataSchemaRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.aiplatform.v1beta1.IMetadataSchema,
+        protos.google.cloud.aiplatform.v1beta1.ICreateMetadataSchemaRequest|undefined, {}|undefined
+      ]>;
+  createMetadataSchema(
+      request: protos.google.cloud.aiplatform.v1beta1.ICreateMetadataSchemaRequest,
+      options: CallOptions,
+      callback: Callback<
+          protos.google.cloud.aiplatform.v1beta1.IMetadataSchema,
+          protos.google.cloud.aiplatform.v1beta1.ICreateMetadataSchemaRequest|null|undefined,
+          {}|null|undefined>): void;
+  createMetadataSchema(
+      request: protos.google.cloud.aiplatform.v1beta1.ICreateMetadataSchemaRequest,
+      callback: Callback<
+          protos.google.cloud.aiplatform.v1beta1.IMetadataSchema,
+          protos.google.cloud.aiplatform.v1beta1.ICreateMetadataSchemaRequest|null|undefined,
+          {}|null|undefined>): void;
+  createMetadataSchema(
+      request?: protos.google.cloud.aiplatform.v1beta1.ICreateMetadataSchemaRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.aiplatform.v1beta1.IMetadataSchema,
+          protos.google.cloud.aiplatform.v1beta1.ICreateMetadataSchemaRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.aiplatform.v1beta1.IMetadataSchema,
+          protos.google.cloud.aiplatform.v1beta1.ICreateMetadataSchemaRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.aiplatform.v1beta1.IMetadataSchema,
+        protos.google.cloud.aiplatform.v1beta1.ICreateMetadataSchemaRequest|undefined, {}|undefined
+      ]>|void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    }
+    else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
+    this.initialize().catch(err => {throw err});
+    this._log.info('createMetadataSchema request %j', request);
+    const wrappedCallback: Callback<
+        protos.google.cloud.aiplatform.v1beta1.IMetadataSchema,
+        protos.google.cloud.aiplatform.v1beta1.ICreateMetadataSchemaRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('createMetadataSchema response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls.createMetadataSchema(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.aiplatform.v1beta1.IMetadataSchema,
+        protos.google.cloud.aiplatform.v1beta1.ICreateMetadataSchemaRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('createMetadataSchema response %j', response);
+        return [response, options, rawResponse];
+      });
+  }
+/**
+ * Retrieves a specific MetadataSchema.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The resource name of the MetadataSchema to retrieve.
+ *   Format:
+ *   `projects/{project}/locations/{location}/metadataStores/{metadatastore}/metadataSchemas/{metadataschema}`
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.aiplatform.v1beta1.MetadataSchema|MetadataSchema}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta1/metadata_service.get_metadata_schema.js</caption>
+ * region_tag:aiplatform_v1beta1_generated_MetadataService_GetMetadataSchema_async
+ */
+  getMetadataSchema(
+      request?: protos.google.cloud.aiplatform.v1beta1.IGetMetadataSchemaRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.aiplatform.v1beta1.IMetadataSchema,
+        protos.google.cloud.aiplatform.v1beta1.IGetMetadataSchemaRequest|undefined, {}|undefined
+      ]>;
+  getMetadataSchema(
+      request: protos.google.cloud.aiplatform.v1beta1.IGetMetadataSchemaRequest,
+      options: CallOptions,
+      callback: Callback<
+          protos.google.cloud.aiplatform.v1beta1.IMetadataSchema,
+          protos.google.cloud.aiplatform.v1beta1.IGetMetadataSchemaRequest|null|undefined,
+          {}|null|undefined>): void;
+  getMetadataSchema(
+      request: protos.google.cloud.aiplatform.v1beta1.IGetMetadataSchemaRequest,
+      callback: Callback<
+          protos.google.cloud.aiplatform.v1beta1.IMetadataSchema,
+          protos.google.cloud.aiplatform.v1beta1.IGetMetadataSchemaRequest|null|undefined,
+          {}|null|undefined>): void;
+  getMetadataSchema(
+      request?: protos.google.cloud.aiplatform.v1beta1.IGetMetadataSchemaRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.aiplatform.v1beta1.IMetadataSchema,
+          protos.google.cloud.aiplatform.v1beta1.IGetMetadataSchemaRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.aiplatform.v1beta1.IMetadataSchema,
+          protos.google.cloud.aiplatform.v1beta1.IGetMetadataSchemaRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.aiplatform.v1beta1.IMetadataSchema,
+        protos.google.cloud.aiplatform.v1beta1.IGetMetadataSchemaRequest|undefined, {}|undefined
+      ]>|void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    }
+    else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
+    });
+    this.initialize().catch(err => {throw err});
+    this._log.info('getMetadataSchema request %j', request);
+    const wrappedCallback: Callback<
+        protos.google.cloud.aiplatform.v1beta1.IMetadataSchema,
+        protos.google.cloud.aiplatform.v1beta1.IGetMetadataSchemaRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getMetadataSchema response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls.getMetadataSchema(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.aiplatform.v1beta1.IMetadataSchema,
+        protos.google.cloud.aiplatform.v1beta1.IGetMetadataSchemaRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('getMetadataSchema response %j', response);
+        return [response, options, rawResponse];
+      });
+  }
+/**
+ * Retrieves lineage of an Artifact represented through Artifacts and
+ * Executions connected by Event edges and returned as a LineageSubgraph.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.artifact
+ *   Required. The resource name of the Artifact whose Lineage needs to be
+ *   retrieved as a LineageSubgraph. Format:
+ *   `projects/{project}/locations/{location}/metadataStores/{metadatastore}/artifacts/{artifact}`
+ *
+ *   The request may error with FAILED_PRECONDITION if the number of Artifacts,
+ *   the number of Executions, or the number of Events that would be returned
+ *   for the Context exceeds 1000.
+ * @param {number} request.maxHops
+ *   Specifies the size of the lineage graph in terms of number of hops from the
+ *   specified artifact.
+ *   Negative Value: INVALID_ARGUMENT error is returned
+ *   0: Only input artifact is returned.
+ *   No value: Transitive closure is performed to return the complete graph.
+ * @param {string} request.filter
+ *   Filter specifying the boolean condition for the Artifacts to satisfy in
+ *   order to be part of the Lineage Subgraph.
+ *   The syntax to define filter query is based on https://google.aip.dev/160.
+ *   The supported set of filters include the following:
+ *
+ *   *  **Attribute filtering**:
+ *      For example: `display_name = "test"`
+ *      Supported fields include: `name`, `display_name`, `uri`, `state`,
+ *      `schema_title`, `create_time`, and `update_time`.
+ *      Time fields, such as `create_time` and `update_time`, require values
+ *      specified in RFC-3339 format.
+ *      For example: `create_time = "2020-11-19T11:30:00-04:00"`
+ *   *  **Metadata field**:
+ *      To filter on metadata fields use traversal operation as follows:
+ *      `metadata.<field_name>.<type_value>`.
+ *      For example: `metadata.field_1.number_value = 10.0`
+ *      In case the field name contains special characters (such as colon), one
+ *      can embed it inside double quote.
+ *      For example: `metadata."field:1".number_value = 10.0`
+ *
+ *   Each of the above supported filter types can be combined together using
+ *   logical operators (`AND` & `OR`). Maximum nested expression depth allowed
+ *   is 5.
+ *
+ *   For example: `display_name = "test" AND metadata.field1.bool_value = true`.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.aiplatform.v1beta1.LineageSubgraph|LineageSubgraph}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta1/metadata_service.query_artifact_lineage_subgraph.js</caption>
+ * region_tag:aiplatform_v1beta1_generated_MetadataService_QueryArtifactLineageSubgraph_async
+ */
+  queryArtifactLineageSubgraph(
+      request?: protos.google.cloud.aiplatform.v1beta1.IQueryArtifactLineageSubgraphRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.aiplatform.v1beta1.ILineageSubgraph,
+        protos.google.cloud.aiplatform.v1beta1.IQueryArtifactLineageSubgraphRequest|undefined, {}|undefined
+      ]>;
+  queryArtifactLineageSubgraph(
+      request: protos.google.cloud.aiplatform.v1beta1.IQueryArtifactLineageSubgraphRequest,
+      options: CallOptions,
+      callback: Callback<
+          protos.google.cloud.aiplatform.v1beta1.ILineageSubgraph,
+          protos.google.cloud.aiplatform.v1beta1.IQueryArtifactLineageSubgraphRequest|null|undefined,
+          {}|null|undefined>): void;
+  queryArtifactLineageSubgraph(
+      request: protos.google.cloud.aiplatform.v1beta1.IQueryArtifactLineageSubgraphRequest,
+      callback: Callback<
+          protos.google.cloud.aiplatform.v1beta1.ILineageSubgraph,
+          protos.google.cloud.aiplatform.v1beta1.IQueryArtifactLineageSubgraphRequest|null|undefined,
+          {}|null|undefined>): void;
+  queryArtifactLineageSubgraph(
+      request?: protos.google.cloud.aiplatform.v1beta1.IQueryArtifactLineageSubgraphRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.aiplatform.v1beta1.ILineageSubgraph,
+          protos.google.cloud.aiplatform.v1beta1.IQueryArtifactLineageSubgraphRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.aiplatform.v1beta1.ILineageSubgraph,
+          protos.google.cloud.aiplatform.v1beta1.IQueryArtifactLineageSubgraphRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.aiplatform.v1beta1.ILineageSubgraph,
+        protos.google.cloud.aiplatform.v1beta1.IQueryArtifactLineageSubgraphRequest|undefined, {}|undefined
+      ]>|void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    }
+    else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'artifact': request.artifact ?? '',
+    });
+    this.initialize().catch(err => {throw err});
+    this._log.info('queryArtifactLineageSubgraph request %j', request);
+    const wrappedCallback: Callback<
+        protos.google.cloud.aiplatform.v1beta1.ILineageSubgraph,
+        protos.google.cloud.aiplatform.v1beta1.IQueryArtifactLineageSubgraphRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('queryArtifactLineageSubgraph response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls.queryArtifactLineageSubgraph(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.aiplatform.v1beta1.ILineageSubgraph,
+        protos.google.cloud.aiplatform.v1beta1.IQueryArtifactLineageSubgraphRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('queryArtifactLineageSubgraph response %j', response);
+        return [response, options, rawResponse];
+      });
   }
 
-  /**
-   * Initializes a MetadataStore, including allocation of resources.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The resource name of the Location where the MetadataStore should
-   *   be created.
-   *   Format: `projects/{project}/locations/{location}/`
-   * @param {google.cloud.aiplatform.v1beta1.MetadataStore} request.metadataStore
-   *   Required. The MetadataStore to create.
-   * @param {string} request.metadataStoreId
-   *   The {metadatastore} portion of the resource name with the format:
-   *   `projects/{project}/locations/{location}/metadataStores/{metadatastore}`
-   *   If not provided, the MetadataStore's ID will be a UUID generated by the
-   *   service.
-   *   Must be 4-128 characters in length. Valid characters are `/{@link protos.0-9|a-z}-/`.
-   *   Must be unique across all MetadataStores in the parent Location.
-   *   (Otherwise the request will fail with ALREADY_EXISTS, or PERMISSION_DENIED
-   *   if the caller can't view the preexisting MetadataStore.)
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta1/metadata_service.create_metadata_store.js</caption>
-   * region_tag:aiplatform_v1beta1_generated_MetadataService_CreateMetadataStore_async
-   */
+/**
+ * Initializes a MetadataStore, including allocation of resources.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The resource name of the Location where the MetadataStore should
+ *   be created.
+ *   Format: `projects/{project}/locations/{location}/`
+ * @param {google.cloud.aiplatform.v1beta1.MetadataStore} request.metadataStore
+ *   Required. The MetadataStore to create.
+ * @param {string} request.metadataStoreId
+ *   The {metadatastore} portion of the resource name with the format:
+ *   `projects/{project}/locations/{location}/metadataStores/{metadatastore}`
+ *   If not provided, the MetadataStore's ID will be a UUID generated by the
+ *   service.
+ *   Must be 4-128 characters in length. Valid characters are `/{@link protos.0-9|a-z}-/`.
+ *   Must be unique across all MetadataStores in the parent Location.
+ *   (Otherwise the request will fail with ALREADY_EXISTS, or PERMISSION_DENIED
+ *   if the caller can't view the preexisting MetadataStore.)
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta1/metadata_service.create_metadata_store.js</caption>
+ * region_tag:aiplatform_v1beta1_generated_MetadataService_CreateMetadataStore_async
+ */
   createMetadataStore(
-    request?: protos.google.cloud.aiplatform.v1beta1.ICreateMetadataStoreRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.aiplatform.v1beta1.IMetadataStore,
-        protos.google.cloud.aiplatform.v1beta1.ICreateMetadataStoreOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.aiplatform.v1beta1.ICreateMetadataStoreRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.cloud.aiplatform.v1beta1.IMetadataStore, protos.google.cloud.aiplatform.v1beta1.ICreateMetadataStoreOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   createMetadataStore(
-    request: protos.google.cloud.aiplatform.v1beta1.ICreateMetadataStoreRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.aiplatform.v1beta1.IMetadataStore,
-        protos.google.cloud.aiplatform.v1beta1.ICreateMetadataStoreOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.aiplatform.v1beta1.ICreateMetadataStoreRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.cloud.aiplatform.v1beta1.IMetadataStore, protos.google.cloud.aiplatform.v1beta1.ICreateMetadataStoreOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   createMetadataStore(
-    request: protos.google.cloud.aiplatform.v1beta1.ICreateMetadataStoreRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.aiplatform.v1beta1.IMetadataStore,
-        protos.google.cloud.aiplatform.v1beta1.ICreateMetadataStoreOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.aiplatform.v1beta1.ICreateMetadataStoreRequest,
+      callback: Callback<
+          LROperation<protos.google.cloud.aiplatform.v1beta1.IMetadataStore, protos.google.cloud.aiplatform.v1beta1.ICreateMetadataStoreOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   createMetadataStore(
-    request?: protos.google.cloud.aiplatform.v1beta1.ICreateMetadataStoreRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.cloud.aiplatform.v1beta1.IMetadataStore,
-            protos.google.cloud.aiplatform.v1beta1.ICreateMetadataStoreOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.cloud.aiplatform.v1beta1.IMetadataStore,
-        protos.google.cloud.aiplatform.v1beta1.ICreateMetadataStoreOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.aiplatform.v1beta1.IMetadataStore,
-        protos.google.cloud.aiplatform.v1beta1.ICreateMetadataStoreOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+      request?: protos.google.cloud.aiplatform.v1beta1.ICreateMetadataStoreRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.cloud.aiplatform.v1beta1.IMetadataStore, protos.google.cloud.aiplatform.v1beta1.ICreateMetadataStoreOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.cloud.aiplatform.v1beta1.IMetadataStore, protos.google.cloud.aiplatform.v1beta1.ICreateMetadataStoreOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.cloud.aiplatform.v1beta1.IMetadataStore, protos.google.cloud.aiplatform.v1beta1.ICreateMetadataStoreOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize();
-    return this.innerApiCalls.createMetadataStore(request, options, callback);
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.cloud.aiplatform.v1beta1.IMetadataStore, protos.google.cloud.aiplatform.v1beta1.ICreateMetadataStoreOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('createMetadataStore response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('createMetadataStore request %j', request);
+    return this.innerApiCalls.createMetadataStore(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.cloud.aiplatform.v1beta1.IMetadataStore, protos.google.cloud.aiplatform.v1beta1.ICreateMetadataStoreOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('createMetadataStore response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
   }
-  /**
-   * Check the status of the long running operation returned by `createMetadataStore()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta1/metadata_service.create_metadata_store.js</caption>
-   * region_tag:aiplatform_v1beta1_generated_MetadataService_CreateMetadataStore_async
-   */
-  async checkCreateMetadataStoreProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.cloud.aiplatform.v1beta1.MetadataStore,
-      protos.google.cloud.aiplatform.v1beta1.CreateMetadataStoreOperationMetadata
-    >
-  > {
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
+/**
+ * Check the status of the long running operation returned by `createMetadataStore()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta1/metadata_service.create_metadata_store.js</caption>
+ * region_tag:aiplatform_v1beta1_generated_MetadataService_CreateMetadataStore_async
+ */
+  async checkCreateMetadataStoreProgress(name: string): Promise<LROperation<protos.google.cloud.aiplatform.v1beta1.MetadataStore, protos.google.cloud.aiplatform.v1beta1.CreateMetadataStoreOperationMetadata>>{
+    this._log.info('createMetadataStore long-running');
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.createMetadataStore,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.cloud.aiplatform.v1beta1.MetadataStore,
-      protos.google.cloud.aiplatform.v1beta1.CreateMetadataStoreOperationMetadata
-    >;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.createMetadataStore, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.cloud.aiplatform.v1beta1.MetadataStore, protos.google.cloud.aiplatform.v1beta1.CreateMetadataStoreOperationMetadata>;
   }
-  /**
-   * Deletes a single MetadataStore and all its child resources (Artifacts,
-   * Executions, and Contexts).
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The resource name of the MetadataStore to delete.
-   *   Format:
-   *   `projects/{project}/locations/{location}/metadataStores/{metadatastore}`
-   * @param {boolean} request.force
-   *   Deprecated: Field is no longer supported.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta1/metadata_service.delete_metadata_store.js</caption>
-   * region_tag:aiplatform_v1beta1_generated_MetadataService_DeleteMetadataStore_async
-   */
+/**
+ * Deletes a single MetadataStore and all its child resources (Artifacts,
+ * Executions, and Contexts).
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The resource name of the MetadataStore to delete.
+ *   Format:
+ *   `projects/{project}/locations/{location}/metadataStores/{metadatastore}`
+ * @param {boolean} request.force
+ *   Deprecated: Field is no longer supported.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta1/metadata_service.delete_metadata_store.js</caption>
+ * region_tag:aiplatform_v1beta1_generated_MetadataService_DeleteMetadataStore_async
+ */
   deleteMetadataStore(
-    request?: protos.google.cloud.aiplatform.v1beta1.IDeleteMetadataStoreRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.aiplatform.v1beta1.IDeleteMetadataStoreOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.aiplatform.v1beta1.IDeleteMetadataStoreRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.aiplatform.v1beta1.IDeleteMetadataStoreOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   deleteMetadataStore(
-    request: protos.google.cloud.aiplatform.v1beta1.IDeleteMetadataStoreRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.aiplatform.v1beta1.IDeleteMetadataStoreOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.aiplatform.v1beta1.IDeleteMetadataStoreRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.aiplatform.v1beta1.IDeleteMetadataStoreOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   deleteMetadataStore(
-    request: protos.google.cloud.aiplatform.v1beta1.IDeleteMetadataStoreRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.aiplatform.v1beta1.IDeleteMetadataStoreOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.aiplatform.v1beta1.IDeleteMetadataStoreRequest,
+      callback: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.aiplatform.v1beta1.IDeleteMetadataStoreOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   deleteMetadataStore(
-    request?: protos.google.cloud.aiplatform.v1beta1.IDeleteMetadataStoreRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.protobuf.IEmpty,
-            protos.google.cloud.aiplatform.v1beta1.IDeleteMetadataStoreOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.aiplatform.v1beta1.IDeleteMetadataStoreOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.aiplatform.v1beta1.IDeleteMetadataStoreOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+      request?: protos.google.cloud.aiplatform.v1beta1.IDeleteMetadataStoreRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.aiplatform.v1beta1.IDeleteMetadataStoreOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.aiplatform.v1beta1.IDeleteMetadataStoreOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.aiplatform.v1beta1.IDeleteMetadataStoreOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize();
-    return this.innerApiCalls.deleteMetadataStore(request, options, callback);
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
+    });
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.aiplatform.v1beta1.IDeleteMetadataStoreOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('deleteMetadataStore response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('deleteMetadataStore request %j', request);
+    return this.innerApiCalls.deleteMetadataStore(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.aiplatform.v1beta1.IDeleteMetadataStoreOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('deleteMetadataStore response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
   }
-  /**
-   * Check the status of the long running operation returned by `deleteMetadataStore()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta1/metadata_service.delete_metadata_store.js</caption>
-   * region_tag:aiplatform_v1beta1_generated_MetadataService_DeleteMetadataStore_async
-   */
-  async checkDeleteMetadataStoreProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.protobuf.Empty,
-      protos.google.cloud.aiplatform.v1beta1.DeleteMetadataStoreOperationMetadata
-    >
-  > {
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
+/**
+ * Check the status of the long running operation returned by `deleteMetadataStore()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta1/metadata_service.delete_metadata_store.js</caption>
+ * region_tag:aiplatform_v1beta1_generated_MetadataService_DeleteMetadataStore_async
+ */
+  async checkDeleteMetadataStoreProgress(name: string): Promise<LROperation<protos.google.protobuf.Empty, protos.google.cloud.aiplatform.v1beta1.DeleteMetadataStoreOperationMetadata>>{
+    this._log.info('deleteMetadataStore long-running');
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.deleteMetadataStore,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.protobuf.Empty,
-      protos.google.cloud.aiplatform.v1beta1.DeleteMetadataStoreOperationMetadata
-    >;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.deleteMetadataStore, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.protobuf.Empty, protos.google.cloud.aiplatform.v1beta1.DeleteMetadataStoreOperationMetadata>;
   }
-  /**
-   * Deletes an Artifact.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The resource name of the Artifact to delete.
-   *   Format:
-   *   `projects/{project}/locations/{location}/metadataStores/{metadatastore}/artifacts/{artifact}`
-   * @param {string} [request.etag]
-   *   Optional. The etag of the Artifact to delete.
-   *   If this is provided, it must match the server's etag. Otherwise, the
-   *   request will fail with a FAILED_PRECONDITION.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta1/metadata_service.delete_artifact.js</caption>
-   * region_tag:aiplatform_v1beta1_generated_MetadataService_DeleteArtifact_async
-   */
+/**
+ * Deletes an Artifact.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The resource name of the Artifact to delete.
+ *   Format:
+ *   `projects/{project}/locations/{location}/metadataStores/{metadatastore}/artifacts/{artifact}`
+ * @param {string} [request.etag]
+ *   Optional. The etag of the Artifact to delete.
+ *   If this is provided, it must match the server's etag. Otherwise, the
+ *   request will fail with a FAILED_PRECONDITION.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta1/metadata_service.delete_artifact.js</caption>
+ * region_tag:aiplatform_v1beta1_generated_MetadataService_DeleteArtifact_async
+ */
   deleteArtifact(
-    request?: protos.google.cloud.aiplatform.v1beta1.IDeleteArtifactRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.aiplatform.v1beta1.IDeleteOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.aiplatform.v1beta1.IDeleteArtifactRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.aiplatform.v1beta1.IDeleteOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   deleteArtifact(
-    request: protos.google.cloud.aiplatform.v1beta1.IDeleteArtifactRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.aiplatform.v1beta1.IDeleteOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.aiplatform.v1beta1.IDeleteArtifactRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.aiplatform.v1beta1.IDeleteOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   deleteArtifact(
-    request: protos.google.cloud.aiplatform.v1beta1.IDeleteArtifactRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.aiplatform.v1beta1.IDeleteOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.aiplatform.v1beta1.IDeleteArtifactRequest,
+      callback: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.aiplatform.v1beta1.IDeleteOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   deleteArtifact(
-    request?: protos.google.cloud.aiplatform.v1beta1.IDeleteArtifactRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.protobuf.IEmpty,
-            protos.google.cloud.aiplatform.v1beta1.IDeleteOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.aiplatform.v1beta1.IDeleteOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.aiplatform.v1beta1.IDeleteOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+      request?: protos.google.cloud.aiplatform.v1beta1.IDeleteArtifactRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.aiplatform.v1beta1.IDeleteOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.aiplatform.v1beta1.IDeleteOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.aiplatform.v1beta1.IDeleteOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize();
-    return this.innerApiCalls.deleteArtifact(request, options, callback);
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
+    });
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.aiplatform.v1beta1.IDeleteOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('deleteArtifact response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('deleteArtifact request %j', request);
+    return this.innerApiCalls.deleteArtifact(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.aiplatform.v1beta1.IDeleteOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('deleteArtifact response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
   }
-  /**
-   * Check the status of the long running operation returned by `deleteArtifact()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta1/metadata_service.delete_artifact.js</caption>
-   * region_tag:aiplatform_v1beta1_generated_MetadataService_DeleteArtifact_async
-   */
-  async checkDeleteArtifactProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.protobuf.Empty,
-      protos.google.cloud.aiplatform.v1beta1.DeleteOperationMetadata
-    >
-  > {
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
+/**
+ * Check the status of the long running operation returned by `deleteArtifact()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta1/metadata_service.delete_artifact.js</caption>
+ * region_tag:aiplatform_v1beta1_generated_MetadataService_DeleteArtifact_async
+ */
+  async checkDeleteArtifactProgress(name: string): Promise<LROperation<protos.google.protobuf.Empty, protos.google.cloud.aiplatform.v1beta1.DeleteOperationMetadata>>{
+    this._log.info('deleteArtifact long-running');
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.deleteArtifact,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.protobuf.Empty,
-      protos.google.cloud.aiplatform.v1beta1.DeleteOperationMetadata
-    >;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.deleteArtifact, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.protobuf.Empty, protos.google.cloud.aiplatform.v1beta1.DeleteOperationMetadata>;
   }
-  /**
-   * Purges Artifacts.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The metadata store to purge Artifacts from.
-   *   Format:
-   *   `projects/{project}/locations/{location}/metadataStores/{metadatastore}`
-   * @param {string} request.filter
-   *   Required. A required filter matching the Artifacts to be purged.
-   *   E.g., `update_time <= 2020-11-19T11:30:00-04:00`.
-   * @param {boolean} [request.force]
-   *   Optional. Flag to indicate to actually perform the purge.
-   *   If `force` is set to false, the method will return a sample of
-   *   Artifact names that would be deleted.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta1/metadata_service.purge_artifacts.js</caption>
-   * region_tag:aiplatform_v1beta1_generated_MetadataService_PurgeArtifacts_async
-   */
+/**
+ * Purges Artifacts.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The metadata store to purge Artifacts from.
+ *   Format:
+ *   `projects/{project}/locations/{location}/metadataStores/{metadatastore}`
+ * @param {string} request.filter
+ *   Required. A required filter matching the Artifacts to be purged.
+ *   E.g., `update_time <= 2020-11-19T11:30:00-04:00`.
+ * @param {boolean} [request.force]
+ *   Optional. Flag to indicate to actually perform the purge.
+ *   If `force` is set to false, the method will return a sample of
+ *   Artifact names that would be deleted.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta1/metadata_service.purge_artifacts.js</caption>
+ * region_tag:aiplatform_v1beta1_generated_MetadataService_PurgeArtifacts_async
+ */
   purgeArtifacts(
-    request?: protos.google.cloud.aiplatform.v1beta1.IPurgeArtifactsRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.aiplatform.v1beta1.IPurgeArtifactsResponse,
-        protos.google.cloud.aiplatform.v1beta1.IPurgeArtifactsMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.aiplatform.v1beta1.IPurgeArtifactsRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.cloud.aiplatform.v1beta1.IPurgeArtifactsResponse, protos.google.cloud.aiplatform.v1beta1.IPurgeArtifactsMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   purgeArtifacts(
-    request: protos.google.cloud.aiplatform.v1beta1.IPurgeArtifactsRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.aiplatform.v1beta1.IPurgeArtifactsResponse,
-        protos.google.cloud.aiplatform.v1beta1.IPurgeArtifactsMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.aiplatform.v1beta1.IPurgeArtifactsRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.cloud.aiplatform.v1beta1.IPurgeArtifactsResponse, protos.google.cloud.aiplatform.v1beta1.IPurgeArtifactsMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   purgeArtifacts(
-    request: protos.google.cloud.aiplatform.v1beta1.IPurgeArtifactsRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.aiplatform.v1beta1.IPurgeArtifactsResponse,
-        protos.google.cloud.aiplatform.v1beta1.IPurgeArtifactsMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.aiplatform.v1beta1.IPurgeArtifactsRequest,
+      callback: Callback<
+          LROperation<protos.google.cloud.aiplatform.v1beta1.IPurgeArtifactsResponse, protos.google.cloud.aiplatform.v1beta1.IPurgeArtifactsMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   purgeArtifacts(
-    request?: protos.google.cloud.aiplatform.v1beta1.IPurgeArtifactsRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.cloud.aiplatform.v1beta1.IPurgeArtifactsResponse,
-            protos.google.cloud.aiplatform.v1beta1.IPurgeArtifactsMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.cloud.aiplatform.v1beta1.IPurgeArtifactsResponse,
-        protos.google.cloud.aiplatform.v1beta1.IPurgeArtifactsMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.aiplatform.v1beta1.IPurgeArtifactsResponse,
-        protos.google.cloud.aiplatform.v1beta1.IPurgeArtifactsMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+      request?: protos.google.cloud.aiplatform.v1beta1.IPurgeArtifactsRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.cloud.aiplatform.v1beta1.IPurgeArtifactsResponse, protos.google.cloud.aiplatform.v1beta1.IPurgeArtifactsMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.cloud.aiplatform.v1beta1.IPurgeArtifactsResponse, protos.google.cloud.aiplatform.v1beta1.IPurgeArtifactsMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.cloud.aiplatform.v1beta1.IPurgeArtifactsResponse, protos.google.cloud.aiplatform.v1beta1.IPurgeArtifactsMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize();
-    return this.innerApiCalls.purgeArtifacts(request, options, callback);
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.cloud.aiplatform.v1beta1.IPurgeArtifactsResponse, protos.google.cloud.aiplatform.v1beta1.IPurgeArtifactsMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('purgeArtifacts response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('purgeArtifacts request %j', request);
+    return this.innerApiCalls.purgeArtifacts(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.cloud.aiplatform.v1beta1.IPurgeArtifactsResponse, protos.google.cloud.aiplatform.v1beta1.IPurgeArtifactsMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('purgeArtifacts response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
   }
-  /**
-   * Check the status of the long running operation returned by `purgeArtifacts()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta1/metadata_service.purge_artifacts.js</caption>
-   * region_tag:aiplatform_v1beta1_generated_MetadataService_PurgeArtifacts_async
-   */
-  async checkPurgeArtifactsProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.cloud.aiplatform.v1beta1.PurgeArtifactsResponse,
-      protos.google.cloud.aiplatform.v1beta1.PurgeArtifactsMetadata
-    >
-  > {
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
+/**
+ * Check the status of the long running operation returned by `purgeArtifacts()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta1/metadata_service.purge_artifacts.js</caption>
+ * region_tag:aiplatform_v1beta1_generated_MetadataService_PurgeArtifacts_async
+ */
+  async checkPurgeArtifactsProgress(name: string): Promise<LROperation<protos.google.cloud.aiplatform.v1beta1.PurgeArtifactsResponse, protos.google.cloud.aiplatform.v1beta1.PurgeArtifactsMetadata>>{
+    this._log.info('purgeArtifacts long-running');
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.purgeArtifacts,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.cloud.aiplatform.v1beta1.PurgeArtifactsResponse,
-      protos.google.cloud.aiplatform.v1beta1.PurgeArtifactsMetadata
-    >;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.purgeArtifacts, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.cloud.aiplatform.v1beta1.PurgeArtifactsResponse, protos.google.cloud.aiplatform.v1beta1.PurgeArtifactsMetadata>;
   }
-  /**
-   * Deletes a stored Context.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The resource name of the Context to delete.
-   *   Format:
-   *   `projects/{project}/locations/{location}/metadataStores/{metadatastore}/contexts/{context}`
-   * @param {boolean} request.force
-   *   The force deletion semantics is still undefined.
-   *   Users should not use this field.
-   * @param {string} [request.etag]
-   *   Optional. The etag of the Context to delete.
-   *   If this is provided, it must match the server's etag. Otherwise, the
-   *   request will fail with a FAILED_PRECONDITION.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta1/metadata_service.delete_context.js</caption>
-   * region_tag:aiplatform_v1beta1_generated_MetadataService_DeleteContext_async
-   */
+/**
+ * Deletes a stored Context.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The resource name of the Context to delete.
+ *   Format:
+ *   `projects/{project}/locations/{location}/metadataStores/{metadatastore}/contexts/{context}`
+ * @param {boolean} request.force
+ *   The force deletion semantics is still undefined.
+ *   Users should not use this field.
+ * @param {string} [request.etag]
+ *   Optional. The etag of the Context to delete.
+ *   If this is provided, it must match the server's etag. Otherwise, the
+ *   request will fail with a FAILED_PRECONDITION.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta1/metadata_service.delete_context.js</caption>
+ * region_tag:aiplatform_v1beta1_generated_MetadataService_DeleteContext_async
+ */
   deleteContext(
-    request?: protos.google.cloud.aiplatform.v1beta1.IDeleteContextRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.aiplatform.v1beta1.IDeleteOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.aiplatform.v1beta1.IDeleteContextRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.aiplatform.v1beta1.IDeleteOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   deleteContext(
-    request: protos.google.cloud.aiplatform.v1beta1.IDeleteContextRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.aiplatform.v1beta1.IDeleteOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.aiplatform.v1beta1.IDeleteContextRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.aiplatform.v1beta1.IDeleteOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   deleteContext(
-    request: protos.google.cloud.aiplatform.v1beta1.IDeleteContextRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.aiplatform.v1beta1.IDeleteOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.aiplatform.v1beta1.IDeleteContextRequest,
+      callback: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.aiplatform.v1beta1.IDeleteOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   deleteContext(
-    request?: protos.google.cloud.aiplatform.v1beta1.IDeleteContextRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.protobuf.IEmpty,
-            protos.google.cloud.aiplatform.v1beta1.IDeleteOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.aiplatform.v1beta1.IDeleteOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.aiplatform.v1beta1.IDeleteOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+      request?: protos.google.cloud.aiplatform.v1beta1.IDeleteContextRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.aiplatform.v1beta1.IDeleteOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.aiplatform.v1beta1.IDeleteOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.aiplatform.v1beta1.IDeleteOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize();
-    return this.innerApiCalls.deleteContext(request, options, callback);
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
+    });
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.aiplatform.v1beta1.IDeleteOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('deleteContext response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('deleteContext request %j', request);
+    return this.innerApiCalls.deleteContext(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.aiplatform.v1beta1.IDeleteOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('deleteContext response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
   }
-  /**
-   * Check the status of the long running operation returned by `deleteContext()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta1/metadata_service.delete_context.js</caption>
-   * region_tag:aiplatform_v1beta1_generated_MetadataService_DeleteContext_async
-   */
-  async checkDeleteContextProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.protobuf.Empty,
-      protos.google.cloud.aiplatform.v1beta1.DeleteOperationMetadata
-    >
-  > {
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
+/**
+ * Check the status of the long running operation returned by `deleteContext()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta1/metadata_service.delete_context.js</caption>
+ * region_tag:aiplatform_v1beta1_generated_MetadataService_DeleteContext_async
+ */
+  async checkDeleteContextProgress(name: string): Promise<LROperation<protos.google.protobuf.Empty, protos.google.cloud.aiplatform.v1beta1.DeleteOperationMetadata>>{
+    this._log.info('deleteContext long-running');
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.deleteContext,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.protobuf.Empty,
-      protos.google.cloud.aiplatform.v1beta1.DeleteOperationMetadata
-    >;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.deleteContext, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.protobuf.Empty, protos.google.cloud.aiplatform.v1beta1.DeleteOperationMetadata>;
   }
-  /**
-   * Purges Contexts.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The metadata store to purge Contexts from.
-   *   Format:
-   *   `projects/{project}/locations/{location}/metadataStores/{metadatastore}`
-   * @param {string} request.filter
-   *   Required. A required filter matching the Contexts to be purged.
-   *   E.g., `update_time <= 2020-11-19T11:30:00-04:00`.
-   * @param {boolean} [request.force]
-   *   Optional. Flag to indicate to actually perform the purge.
-   *   If `force` is set to false, the method will return a sample of
-   *   Context names that would be deleted.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta1/metadata_service.purge_contexts.js</caption>
-   * region_tag:aiplatform_v1beta1_generated_MetadataService_PurgeContexts_async
-   */
+/**
+ * Purges Contexts.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The metadata store to purge Contexts from.
+ *   Format:
+ *   `projects/{project}/locations/{location}/metadataStores/{metadatastore}`
+ * @param {string} request.filter
+ *   Required. A required filter matching the Contexts to be purged.
+ *   E.g., `update_time <= 2020-11-19T11:30:00-04:00`.
+ * @param {boolean} [request.force]
+ *   Optional. Flag to indicate to actually perform the purge.
+ *   If `force` is set to false, the method will return a sample of
+ *   Context names that would be deleted.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta1/metadata_service.purge_contexts.js</caption>
+ * region_tag:aiplatform_v1beta1_generated_MetadataService_PurgeContexts_async
+ */
   purgeContexts(
-    request?: protos.google.cloud.aiplatform.v1beta1.IPurgeContextsRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.aiplatform.v1beta1.IPurgeContextsResponse,
-        protos.google.cloud.aiplatform.v1beta1.IPurgeContextsMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.aiplatform.v1beta1.IPurgeContextsRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.cloud.aiplatform.v1beta1.IPurgeContextsResponse, protos.google.cloud.aiplatform.v1beta1.IPurgeContextsMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   purgeContexts(
-    request: protos.google.cloud.aiplatform.v1beta1.IPurgeContextsRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.aiplatform.v1beta1.IPurgeContextsResponse,
-        protos.google.cloud.aiplatform.v1beta1.IPurgeContextsMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.aiplatform.v1beta1.IPurgeContextsRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.cloud.aiplatform.v1beta1.IPurgeContextsResponse, protos.google.cloud.aiplatform.v1beta1.IPurgeContextsMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   purgeContexts(
-    request: protos.google.cloud.aiplatform.v1beta1.IPurgeContextsRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.aiplatform.v1beta1.IPurgeContextsResponse,
-        protos.google.cloud.aiplatform.v1beta1.IPurgeContextsMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.aiplatform.v1beta1.IPurgeContextsRequest,
+      callback: Callback<
+          LROperation<protos.google.cloud.aiplatform.v1beta1.IPurgeContextsResponse, protos.google.cloud.aiplatform.v1beta1.IPurgeContextsMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   purgeContexts(
-    request?: protos.google.cloud.aiplatform.v1beta1.IPurgeContextsRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.cloud.aiplatform.v1beta1.IPurgeContextsResponse,
-            protos.google.cloud.aiplatform.v1beta1.IPurgeContextsMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.cloud.aiplatform.v1beta1.IPurgeContextsResponse,
-        protos.google.cloud.aiplatform.v1beta1.IPurgeContextsMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.aiplatform.v1beta1.IPurgeContextsResponse,
-        protos.google.cloud.aiplatform.v1beta1.IPurgeContextsMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+      request?: protos.google.cloud.aiplatform.v1beta1.IPurgeContextsRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.cloud.aiplatform.v1beta1.IPurgeContextsResponse, protos.google.cloud.aiplatform.v1beta1.IPurgeContextsMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.cloud.aiplatform.v1beta1.IPurgeContextsResponse, protos.google.cloud.aiplatform.v1beta1.IPurgeContextsMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.cloud.aiplatform.v1beta1.IPurgeContextsResponse, protos.google.cloud.aiplatform.v1beta1.IPurgeContextsMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize();
-    return this.innerApiCalls.purgeContexts(request, options, callback);
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.cloud.aiplatform.v1beta1.IPurgeContextsResponse, protos.google.cloud.aiplatform.v1beta1.IPurgeContextsMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('purgeContexts response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('purgeContexts request %j', request);
+    return this.innerApiCalls.purgeContexts(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.cloud.aiplatform.v1beta1.IPurgeContextsResponse, protos.google.cloud.aiplatform.v1beta1.IPurgeContextsMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('purgeContexts response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
   }
-  /**
-   * Check the status of the long running operation returned by `purgeContexts()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta1/metadata_service.purge_contexts.js</caption>
-   * region_tag:aiplatform_v1beta1_generated_MetadataService_PurgeContexts_async
-   */
-  async checkPurgeContextsProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.cloud.aiplatform.v1beta1.PurgeContextsResponse,
-      protos.google.cloud.aiplatform.v1beta1.PurgeContextsMetadata
-    >
-  > {
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
+/**
+ * Check the status of the long running operation returned by `purgeContexts()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta1/metadata_service.purge_contexts.js</caption>
+ * region_tag:aiplatform_v1beta1_generated_MetadataService_PurgeContexts_async
+ */
+  async checkPurgeContextsProgress(name: string): Promise<LROperation<protos.google.cloud.aiplatform.v1beta1.PurgeContextsResponse, protos.google.cloud.aiplatform.v1beta1.PurgeContextsMetadata>>{
+    this._log.info('purgeContexts long-running');
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.purgeContexts,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.cloud.aiplatform.v1beta1.PurgeContextsResponse,
-      protos.google.cloud.aiplatform.v1beta1.PurgeContextsMetadata
-    >;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.purgeContexts, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.cloud.aiplatform.v1beta1.PurgeContextsResponse, protos.google.cloud.aiplatform.v1beta1.PurgeContextsMetadata>;
   }
-  /**
-   * Deletes an Execution.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The resource name of the Execution to delete.
-   *   Format:
-   *   `projects/{project}/locations/{location}/metadataStores/{metadatastore}/executions/{execution}`
-   * @param {string} [request.etag]
-   *   Optional. The etag of the Execution to delete.
-   *   If this is provided, it must match the server's etag. Otherwise, the
-   *   request will fail with a FAILED_PRECONDITION.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta1/metadata_service.delete_execution.js</caption>
-   * region_tag:aiplatform_v1beta1_generated_MetadataService_DeleteExecution_async
-   */
+/**
+ * Deletes an Execution.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The resource name of the Execution to delete.
+ *   Format:
+ *   `projects/{project}/locations/{location}/metadataStores/{metadatastore}/executions/{execution}`
+ * @param {string} [request.etag]
+ *   Optional. The etag of the Execution to delete.
+ *   If this is provided, it must match the server's etag. Otherwise, the
+ *   request will fail with a FAILED_PRECONDITION.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta1/metadata_service.delete_execution.js</caption>
+ * region_tag:aiplatform_v1beta1_generated_MetadataService_DeleteExecution_async
+ */
   deleteExecution(
-    request?: protos.google.cloud.aiplatform.v1beta1.IDeleteExecutionRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.aiplatform.v1beta1.IDeleteOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.aiplatform.v1beta1.IDeleteExecutionRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.aiplatform.v1beta1.IDeleteOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   deleteExecution(
-    request: protos.google.cloud.aiplatform.v1beta1.IDeleteExecutionRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.aiplatform.v1beta1.IDeleteOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.aiplatform.v1beta1.IDeleteExecutionRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.aiplatform.v1beta1.IDeleteOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   deleteExecution(
-    request: protos.google.cloud.aiplatform.v1beta1.IDeleteExecutionRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.aiplatform.v1beta1.IDeleteOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.aiplatform.v1beta1.IDeleteExecutionRequest,
+      callback: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.aiplatform.v1beta1.IDeleteOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   deleteExecution(
-    request?: protos.google.cloud.aiplatform.v1beta1.IDeleteExecutionRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.protobuf.IEmpty,
-            protos.google.cloud.aiplatform.v1beta1.IDeleteOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.aiplatform.v1beta1.IDeleteOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.aiplatform.v1beta1.IDeleteOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+      request?: protos.google.cloud.aiplatform.v1beta1.IDeleteExecutionRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.aiplatform.v1beta1.IDeleteOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.aiplatform.v1beta1.IDeleteOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.aiplatform.v1beta1.IDeleteOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize();
-    return this.innerApiCalls.deleteExecution(request, options, callback);
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
+    });
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.aiplatform.v1beta1.IDeleteOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('deleteExecution response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('deleteExecution request %j', request);
+    return this.innerApiCalls.deleteExecution(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.aiplatform.v1beta1.IDeleteOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('deleteExecution response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
   }
-  /**
-   * Check the status of the long running operation returned by `deleteExecution()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta1/metadata_service.delete_execution.js</caption>
-   * region_tag:aiplatform_v1beta1_generated_MetadataService_DeleteExecution_async
-   */
-  async checkDeleteExecutionProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.protobuf.Empty,
-      protos.google.cloud.aiplatform.v1beta1.DeleteOperationMetadata
-    >
-  > {
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
+/**
+ * Check the status of the long running operation returned by `deleteExecution()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta1/metadata_service.delete_execution.js</caption>
+ * region_tag:aiplatform_v1beta1_generated_MetadataService_DeleteExecution_async
+ */
+  async checkDeleteExecutionProgress(name: string): Promise<LROperation<protos.google.protobuf.Empty, protos.google.cloud.aiplatform.v1beta1.DeleteOperationMetadata>>{
+    this._log.info('deleteExecution long-running');
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.deleteExecution,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.protobuf.Empty,
-      protos.google.cloud.aiplatform.v1beta1.DeleteOperationMetadata
-    >;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.deleteExecution, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.protobuf.Empty, protos.google.cloud.aiplatform.v1beta1.DeleteOperationMetadata>;
   }
-  /**
-   * Purges Executions.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The metadata store to purge Executions from.
-   *   Format:
-   *   `projects/{project}/locations/{location}/metadataStores/{metadatastore}`
-   * @param {string} request.filter
-   *   Required. A required filter matching the Executions to be purged.
-   *   E.g., `update_time <= 2020-11-19T11:30:00-04:00`.
-   * @param {boolean} [request.force]
-   *   Optional. Flag to indicate to actually perform the purge.
-   *   If `force` is set to false, the method will return a sample of
-   *   Execution names that would be deleted.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta1/metadata_service.purge_executions.js</caption>
-   * region_tag:aiplatform_v1beta1_generated_MetadataService_PurgeExecutions_async
-   */
+/**
+ * Purges Executions.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The metadata store to purge Executions from.
+ *   Format:
+ *   `projects/{project}/locations/{location}/metadataStores/{metadatastore}`
+ * @param {string} request.filter
+ *   Required. A required filter matching the Executions to be purged.
+ *   E.g., `update_time <= 2020-11-19T11:30:00-04:00`.
+ * @param {boolean} [request.force]
+ *   Optional. Flag to indicate to actually perform the purge.
+ *   If `force` is set to false, the method will return a sample of
+ *   Execution names that would be deleted.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta1/metadata_service.purge_executions.js</caption>
+ * region_tag:aiplatform_v1beta1_generated_MetadataService_PurgeExecutions_async
+ */
   purgeExecutions(
-    request?: protos.google.cloud.aiplatform.v1beta1.IPurgeExecutionsRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.aiplatform.v1beta1.IPurgeExecutionsResponse,
-        protos.google.cloud.aiplatform.v1beta1.IPurgeExecutionsMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.aiplatform.v1beta1.IPurgeExecutionsRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.cloud.aiplatform.v1beta1.IPurgeExecutionsResponse, protos.google.cloud.aiplatform.v1beta1.IPurgeExecutionsMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   purgeExecutions(
-    request: protos.google.cloud.aiplatform.v1beta1.IPurgeExecutionsRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.aiplatform.v1beta1.IPurgeExecutionsResponse,
-        protos.google.cloud.aiplatform.v1beta1.IPurgeExecutionsMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.aiplatform.v1beta1.IPurgeExecutionsRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.cloud.aiplatform.v1beta1.IPurgeExecutionsResponse, protos.google.cloud.aiplatform.v1beta1.IPurgeExecutionsMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   purgeExecutions(
-    request: protos.google.cloud.aiplatform.v1beta1.IPurgeExecutionsRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.aiplatform.v1beta1.IPurgeExecutionsResponse,
-        protos.google.cloud.aiplatform.v1beta1.IPurgeExecutionsMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.aiplatform.v1beta1.IPurgeExecutionsRequest,
+      callback: Callback<
+          LROperation<protos.google.cloud.aiplatform.v1beta1.IPurgeExecutionsResponse, protos.google.cloud.aiplatform.v1beta1.IPurgeExecutionsMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   purgeExecutions(
-    request?: protos.google.cloud.aiplatform.v1beta1.IPurgeExecutionsRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.cloud.aiplatform.v1beta1.IPurgeExecutionsResponse,
-            protos.google.cloud.aiplatform.v1beta1.IPurgeExecutionsMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.cloud.aiplatform.v1beta1.IPurgeExecutionsResponse,
-        protos.google.cloud.aiplatform.v1beta1.IPurgeExecutionsMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.aiplatform.v1beta1.IPurgeExecutionsResponse,
-        protos.google.cloud.aiplatform.v1beta1.IPurgeExecutionsMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+      request?: protos.google.cloud.aiplatform.v1beta1.IPurgeExecutionsRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.cloud.aiplatform.v1beta1.IPurgeExecutionsResponse, protos.google.cloud.aiplatform.v1beta1.IPurgeExecutionsMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.cloud.aiplatform.v1beta1.IPurgeExecutionsResponse, protos.google.cloud.aiplatform.v1beta1.IPurgeExecutionsMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.cloud.aiplatform.v1beta1.IPurgeExecutionsResponse, protos.google.cloud.aiplatform.v1beta1.IPurgeExecutionsMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize();
-    return this.innerApiCalls.purgeExecutions(request, options, callback);
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.cloud.aiplatform.v1beta1.IPurgeExecutionsResponse, protos.google.cloud.aiplatform.v1beta1.IPurgeExecutionsMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('purgeExecutions response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('purgeExecutions request %j', request);
+    return this.innerApiCalls.purgeExecutions(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.cloud.aiplatform.v1beta1.IPurgeExecutionsResponse, protos.google.cloud.aiplatform.v1beta1.IPurgeExecutionsMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('purgeExecutions response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
   }
-  /**
-   * Check the status of the long running operation returned by `purgeExecutions()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta1/metadata_service.purge_executions.js</caption>
-   * region_tag:aiplatform_v1beta1_generated_MetadataService_PurgeExecutions_async
-   */
-  async checkPurgeExecutionsProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.cloud.aiplatform.v1beta1.PurgeExecutionsResponse,
-      protos.google.cloud.aiplatform.v1beta1.PurgeExecutionsMetadata
-    >
-  > {
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
+/**
+ * Check the status of the long running operation returned by `purgeExecutions()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta1/metadata_service.purge_executions.js</caption>
+ * region_tag:aiplatform_v1beta1_generated_MetadataService_PurgeExecutions_async
+ */
+  async checkPurgeExecutionsProgress(name: string): Promise<LROperation<protos.google.cloud.aiplatform.v1beta1.PurgeExecutionsResponse, protos.google.cloud.aiplatform.v1beta1.PurgeExecutionsMetadata>>{
+    this._log.info('purgeExecutions long-running');
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.purgeExecutions,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.cloud.aiplatform.v1beta1.PurgeExecutionsResponse,
-      protos.google.cloud.aiplatform.v1beta1.PurgeExecutionsMetadata
-    >;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.purgeExecutions, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.cloud.aiplatform.v1beta1.PurgeExecutionsResponse, protos.google.cloud.aiplatform.v1beta1.PurgeExecutionsMetadata>;
   }
-  /**
-   * Lists MetadataStores for a Location.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The Location whose MetadataStores should be listed.
-   *   Format:
-   *   `projects/{project}/locations/{location}`
-   * @param {number} request.pageSize
-   *   The maximum number of Metadata Stores to return. The service may return
-   *   fewer.
-   *   Must be in range 1-1000, inclusive. Defaults to 100.
-   * @param {string} request.pageToken
-   *   A page token, received from a previous
-   *   {@link protos.google.cloud.aiplatform.v1beta1.MetadataService.ListMetadataStores|MetadataService.ListMetadataStores}
-   *   call. Provide this to retrieve the subsequent page.
-   *
-   *   When paginating, all other provided parameters must match the call that
-   *   provided the page token. (Otherwise the request will fail with
-   *   INVALID_ARGUMENT error.)
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link protos.google.cloud.aiplatform.v1beta1.MetadataStore|MetadataStore}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `listMetadataStoresAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+ /**
+ * Lists MetadataStores for a Location.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The Location whose MetadataStores should be listed.
+ *   Format:
+ *   `projects/{project}/locations/{location}`
+ * @param {number} request.pageSize
+ *   The maximum number of Metadata Stores to return. The service may return
+ *   fewer.
+ *   Must be in range 1-1000, inclusive. Defaults to 100.
+ * @param {string} request.pageToken
+ *   A page token, received from a previous
+ *   {@link protos.google.cloud.aiplatform.v1beta1.MetadataService.ListMetadataStores|MetadataService.ListMetadataStores}
+ *   call. Provide this to retrieve the subsequent page.
+ *
+ *   When paginating, all other provided parameters must match the call that
+ *   provided the page token. (Otherwise the request will fail with
+ *   INVALID_ARGUMENT error.)
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is Array of {@link protos.google.cloud.aiplatform.v1beta1.MetadataStore|MetadataStore}.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed and will merge results from all the pages into this array.
+ *   Note that it can affect your quota.
+ *   We recommend using `listMetadataStoresAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listMetadataStores(
-    request?: protos.google.cloud.aiplatform.v1beta1.IListMetadataStoresRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.aiplatform.v1beta1.IMetadataStore[],
-      protos.google.cloud.aiplatform.v1beta1.IListMetadataStoresRequest | null,
-      protos.google.cloud.aiplatform.v1beta1.IListMetadataStoresResponse,
-    ]
-  >;
+      request?: protos.google.cloud.aiplatform.v1beta1.IListMetadataStoresRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.aiplatform.v1beta1.IMetadataStore[],
+        protos.google.cloud.aiplatform.v1beta1.IListMetadataStoresRequest|null,
+        protos.google.cloud.aiplatform.v1beta1.IListMetadataStoresResponse
+      ]>;
   listMetadataStores(
-    request: protos.google.cloud.aiplatform.v1beta1.IListMetadataStoresRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.cloud.aiplatform.v1beta1.IListMetadataStoresRequest,
-      | protos.google.cloud.aiplatform.v1beta1.IListMetadataStoresResponse
-      | null
-      | undefined,
-      protos.google.cloud.aiplatform.v1beta1.IMetadataStore
-    >
-  ): void;
-  listMetadataStores(
-    request: protos.google.cloud.aiplatform.v1beta1.IListMetadataStoresRequest,
-    callback: PaginationCallback<
-      protos.google.cloud.aiplatform.v1beta1.IListMetadataStoresRequest,
-      | protos.google.cloud.aiplatform.v1beta1.IListMetadataStoresResponse
-      | null
-      | undefined,
-      protos.google.cloud.aiplatform.v1beta1.IMetadataStore
-    >
-  ): void;
-  listMetadataStores(
-    request?: protos.google.cloud.aiplatform.v1beta1.IListMetadataStoresRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | PaginationCallback<
+      request: protos.google.cloud.aiplatform.v1beta1.IListMetadataStoresRequest,
+      options: CallOptions,
+      callback: PaginationCallback<
           protos.google.cloud.aiplatform.v1beta1.IListMetadataStoresRequest,
-          | protos.google.cloud.aiplatform.v1beta1.IListMetadataStoresResponse
-          | null
-          | undefined,
-          protos.google.cloud.aiplatform.v1beta1.IMetadataStore
-        >,
-    callback?: PaginationCallback<
-      protos.google.cloud.aiplatform.v1beta1.IListMetadataStoresRequest,
-      | protos.google.cloud.aiplatform.v1beta1.IListMetadataStoresResponse
-      | null
-      | undefined,
-      protos.google.cloud.aiplatform.v1beta1.IMetadataStore
-    >
-  ): Promise<
-    [
-      protos.google.cloud.aiplatform.v1beta1.IMetadataStore[],
-      protos.google.cloud.aiplatform.v1beta1.IListMetadataStoresRequest | null,
-      protos.google.cloud.aiplatform.v1beta1.IListMetadataStoresResponse,
-    ]
-  > | void {
+          protos.google.cloud.aiplatform.v1beta1.IListMetadataStoresResponse|null|undefined,
+          protos.google.cloud.aiplatform.v1beta1.IMetadataStore>): void;
+  listMetadataStores(
+      request: protos.google.cloud.aiplatform.v1beta1.IListMetadataStoresRequest,
+      callback: PaginationCallback<
+          protos.google.cloud.aiplatform.v1beta1.IListMetadataStoresRequest,
+          protos.google.cloud.aiplatform.v1beta1.IListMetadataStoresResponse|null|undefined,
+          protos.google.cloud.aiplatform.v1beta1.IMetadataStore>): void;
+  listMetadataStores(
+      request?: protos.google.cloud.aiplatform.v1beta1.IListMetadataStoresRequest,
+      optionsOrCallback?: CallOptions|PaginationCallback<
+          protos.google.cloud.aiplatform.v1beta1.IListMetadataStoresRequest,
+          protos.google.cloud.aiplatform.v1beta1.IListMetadataStoresResponse|null|undefined,
+          protos.google.cloud.aiplatform.v1beta1.IMetadataStore>,
+      callback?: PaginationCallback<
+          protos.google.cloud.aiplatform.v1beta1.IListMetadataStoresRequest,
+          protos.google.cloud.aiplatform.v1beta1.IListMetadataStoresResponse|null|undefined,
+          protos.google.cloud.aiplatform.v1beta1.IMetadataStore>):
+      Promise<[
+        protos.google.cloud.aiplatform.v1beta1.IMetadataStore[],
+        protos.google.cloud.aiplatform.v1beta1.IListMetadataStoresRequest|null,
+        protos.google.cloud.aiplatform.v1beta1.IListMetadataStoresResponse
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: PaginationCallback<
+      protos.google.cloud.aiplatform.v1beta1.IListMetadataStoresRequest,
+      protos.google.cloud.aiplatform.v1beta1.IListMetadataStoresResponse|null|undefined,
+      protos.google.cloud.aiplatform.v1beta1.IMetadataStore>|undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listMetadataStores values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listMetadataStores request %j', request);
+    return this.innerApiCalls
+      .listMetadataStores(request, options, wrappedCallback)
+      ?.then(([response, input, output]: [
+        protos.google.cloud.aiplatform.v1beta1.IMetadataStore[],
+        protos.google.cloud.aiplatform.v1beta1.IListMetadataStoresRequest|null,
+        protos.google.cloud.aiplatform.v1beta1.IListMetadataStoresResponse
+      ]) => {
+        this._log.info('listMetadataStores values %j', response);
+        return [response, input, output];
       });
-    this.initialize();
-    return this.innerApiCalls.listMetadataStores(request, options, callback);
   }
 
-  /**
-   * Equivalent to `listMetadataStores`, but returns a NodeJS Stream object.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The Location whose MetadataStores should be listed.
-   *   Format:
-   *   `projects/{project}/locations/{location}`
-   * @param {number} request.pageSize
-   *   The maximum number of Metadata Stores to return. The service may return
-   *   fewer.
-   *   Must be in range 1-1000, inclusive. Defaults to 100.
-   * @param {string} request.pageToken
-   *   A page token, received from a previous
-   *   {@link protos.google.cloud.aiplatform.v1beta1.MetadataService.ListMetadataStores|MetadataService.ListMetadataStores}
-   *   call. Provide this to retrieve the subsequent page.
-   *
-   *   When paginating, all other provided parameters must match the call that
-   *   provided the page token. (Otherwise the request will fail with
-   *   INVALID_ARGUMENT error.)
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Stream}
-   *   An object stream which emits an object representing {@link protos.google.cloud.aiplatform.v1beta1.MetadataStore|MetadataStore} on 'data' event.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed. Note that it can affect your quota.
-   *   We recommend using `listMetadataStoresAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+/**
+ * Equivalent to `listMetadataStores`, but returns a NodeJS Stream object.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The Location whose MetadataStores should be listed.
+ *   Format:
+ *   `projects/{project}/locations/{location}`
+ * @param {number} request.pageSize
+ *   The maximum number of Metadata Stores to return. The service may return
+ *   fewer.
+ *   Must be in range 1-1000, inclusive. Defaults to 100.
+ * @param {string} request.pageToken
+ *   A page token, received from a previous
+ *   {@link protos.google.cloud.aiplatform.v1beta1.MetadataService.ListMetadataStores|MetadataService.ListMetadataStores}
+ *   call. Provide this to retrieve the subsequent page.
+ *
+ *   When paginating, all other provided parameters must match the call that
+ *   provided the page token. (Otherwise the request will fail with
+ *   INVALID_ARGUMENT error.)
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which emits an object representing {@link protos.google.cloud.aiplatform.v1beta1.MetadataStore|MetadataStore} on 'data' event.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed. Note that it can affect your quota.
+ *   We recommend using `listMetadataStoresAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listMetadataStoresStream(
-    request?: protos.google.cloud.aiplatform.v1beta1.IListMetadataStoresRequest,
-    options?: CallOptions
-  ): Transform {
+      request?: protos.google.cloud.aiplatform.v1beta1.IListMetadataStoresRequest,
+      options?: CallOptions):
+    Transform{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listMetadataStores'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {throw err});
+    this._log.info('listMetadataStores stream %j', request);
     return this.descriptors.page.listMetadataStores.createStream(
       this.innerApiCalls.listMetadataStores as GaxCall,
       request,
@@ -5813,291 +3581,296 @@ export class MetadataServiceClient {
     );
   }
 
-  /**
-   * Equivalent to `listMetadataStores`, but returns an iterable object.
-   *
-   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The Location whose MetadataStores should be listed.
-   *   Format:
-   *   `projects/{project}/locations/{location}`
-   * @param {number} request.pageSize
-   *   The maximum number of Metadata Stores to return. The service may return
-   *   fewer.
-   *   Must be in range 1-1000, inclusive. Defaults to 100.
-   * @param {string} request.pageToken
-   *   A page token, received from a previous
-   *   {@link protos.google.cloud.aiplatform.v1beta1.MetadataService.ListMetadataStores|MetadataService.ListMetadataStores}
-   *   call. Provide this to retrieve the subsequent page.
-   *
-   *   When paginating, all other provided parameters must match the call that
-   *   provided the page token. (Otherwise the request will fail with
-   *   INVALID_ARGUMENT error.)
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Object}
-   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
-   *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link protos.google.cloud.aiplatform.v1beta1.MetadataStore|MetadataStore}. The API will be called under the hood as needed, once per the page,
-   *   so you can stop the iteration when you don't need more results.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta1/metadata_service.list_metadata_stores.js</caption>
-   * region_tag:aiplatform_v1beta1_generated_MetadataService_ListMetadataStores_async
-   */
+/**
+ * Equivalent to `listMetadataStores`, but returns an iterable object.
+ *
+ * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The Location whose MetadataStores should be listed.
+ *   Format:
+ *   `projects/{project}/locations/{location}`
+ * @param {number} request.pageSize
+ *   The maximum number of Metadata Stores to return. The service may return
+ *   fewer.
+ *   Must be in range 1-1000, inclusive. Defaults to 100.
+ * @param {string} request.pageToken
+ *   A page token, received from a previous
+ *   {@link protos.google.cloud.aiplatform.v1beta1.MetadataService.ListMetadataStores|MetadataService.ListMetadataStores}
+ *   call. Provide this to retrieve the subsequent page.
+ *
+ *   When paginating, all other provided parameters must match the call that
+ *   provided the page token. (Otherwise the request will fail with
+ *   INVALID_ARGUMENT error.)
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Object}
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+ *   When you iterate the returned iterable, each element will be an object representing
+ *   {@link protos.google.cloud.aiplatform.v1beta1.MetadataStore|MetadataStore}. The API will be called under the hood as needed, once per the page,
+ *   so you can stop the iteration when you don't need more results.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta1/metadata_service.list_metadata_stores.js</caption>
+ * region_tag:aiplatform_v1beta1_generated_MetadataService_ListMetadataStores_async
+ */
   listMetadataStoresAsync(
-    request?: protos.google.cloud.aiplatform.v1beta1.IListMetadataStoresRequest,
-    options?: CallOptions
-  ): AsyncIterable<protos.google.cloud.aiplatform.v1beta1.IMetadataStore> {
+      request?: protos.google.cloud.aiplatform.v1beta1.IListMetadataStoresRequest,
+      options?: CallOptions):
+    AsyncIterable<protos.google.cloud.aiplatform.v1beta1.IMetadataStore>{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listMetadataStores'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {throw err});
+    this._log.info('listMetadataStores iterate %j', request);
     return this.descriptors.page.listMetadataStores.asyncIterate(
       this.innerApiCalls['listMetadataStores'] as GaxCall,
       request as {},
       callSettings
     ) as AsyncIterable<protos.google.cloud.aiplatform.v1beta1.IMetadataStore>;
   }
-  /**
-   * Lists Artifacts in the MetadataStore.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The MetadataStore whose Artifacts should be listed.
-   *   Format:
-   *   `projects/{project}/locations/{location}/metadataStores/{metadatastore}`
-   * @param {number} request.pageSize
-   *   The maximum number of Artifacts to return. The service may return fewer.
-   *   Must be in range 1-1000, inclusive. Defaults to 100.
-   * @param {string} request.pageToken
-   *   A page token, received from a previous
-   *   {@link protos.google.cloud.aiplatform.v1beta1.MetadataService.ListArtifacts|MetadataService.ListArtifacts}
-   *   call. Provide this to retrieve the subsequent page.
-   *
-   *   When paginating, all other provided parameters must match the call that
-   *   provided the page token. (Otherwise the request will fail with
-   *   INVALID_ARGUMENT error.)
-   * @param {string} request.filter
-   *   Filter specifying the boolean condition for the Artifacts to satisfy in
-   *   order to be part of the result set.
-   *   The syntax to define filter query is based on https://google.aip.dev/160.
-   *   The supported set of filters include the following:
-   *
-   *   *   **Attribute filtering**:
-   *       For example: `display_name = "test"`.
-   *       Supported fields include: `name`, `display_name`, `uri`, `state`,
-   *       `schema_title`, `create_time`, and `update_time`.
-   *       Time fields, such as `create_time` and `update_time`, require values
-   *       specified in RFC-3339 format.
-   *       For example: `create_time = "2020-11-19T11:30:00-04:00"`
-   *   *   **Metadata field**:
-   *       To filter on metadata fields use traversal operation as follows:
-   *       `metadata.<field_name>.<type_value>`.
-   *       For example: `metadata.field_1.number_value = 10.0`
-   *       In case the field name contains special characters (such as colon), one
-   *       can embed it inside double quote.
-   *       For example: `metadata."field:1".number_value = 10.0`
-   *   *   **Context based filtering**:
-   *       To filter Artifacts based on the contexts to which they belong, use the
-   *       function operator with the full resource name
-   *       `in_context(<context-name>)`.
-   *       For example:
-   *       `in_context("projects/<project_number>/locations/<location>/metadataStores/<metadatastore_name>/contexts/<context-id>")`
-   *
-   *   Each of the above supported filter types can be combined together using
-   *   logical operators (`AND` & `OR`). Maximum nested expression depth allowed
-   *   is 5.
-   *
-   *   For example: `display_name = "test" AND metadata.field1.bool_value = true`.
-   * @param {string} request.orderBy
-   *   How the list of messages is ordered. Specify the values to order by and an
-   *   ordering operation. The default sorting order is ascending. To specify
-   *   descending order for a field, users append a " desc" suffix; for example:
-   *   "foo desc, bar".
-   *   Subfields are specified with a `.` character, such as foo.bar.
-   *   see https://google.aip.dev/132#ordering for more details.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link protos.google.cloud.aiplatform.v1beta1.Artifact|Artifact}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `listArtifactsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+ /**
+ * Lists Artifacts in the MetadataStore.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The MetadataStore whose Artifacts should be listed.
+ *   Format:
+ *   `projects/{project}/locations/{location}/metadataStores/{metadatastore}`
+ * @param {number} request.pageSize
+ *   The maximum number of Artifacts to return. The service may return fewer.
+ *   Must be in range 1-1000, inclusive. Defaults to 100.
+ * @param {string} request.pageToken
+ *   A page token, received from a previous
+ *   {@link protos.google.cloud.aiplatform.v1beta1.MetadataService.ListArtifacts|MetadataService.ListArtifacts}
+ *   call. Provide this to retrieve the subsequent page.
+ *
+ *   When paginating, all other provided parameters must match the call that
+ *   provided the page token. (Otherwise the request will fail with
+ *   INVALID_ARGUMENT error.)
+ * @param {string} request.filter
+ *   Filter specifying the boolean condition for the Artifacts to satisfy in
+ *   order to be part of the result set.
+ *   The syntax to define filter query is based on https://google.aip.dev/160.
+ *   The supported set of filters include the following:
+ *
+ *   *   **Attribute filtering**:
+ *       For example: `display_name = "test"`.
+ *       Supported fields include: `name`, `display_name`, `uri`, `state`,
+ *       `schema_title`, `create_time`, and `update_time`.
+ *       Time fields, such as `create_time` and `update_time`, require values
+ *       specified in RFC-3339 format.
+ *       For example: `create_time = "2020-11-19T11:30:00-04:00"`
+ *   *   **Metadata field**:
+ *       To filter on metadata fields use traversal operation as follows:
+ *       `metadata.<field_name>.<type_value>`.
+ *       For example: `metadata.field_1.number_value = 10.0`
+ *       In case the field name contains special characters (such as colon), one
+ *       can embed it inside double quote.
+ *       For example: `metadata."field:1".number_value = 10.0`
+ *   *   **Context based filtering**:
+ *       To filter Artifacts based on the contexts to which they belong, use the
+ *       function operator with the full resource name
+ *       `in_context(<context-name>)`.
+ *       For example:
+ *       `in_context("projects/<project_number>/locations/<location>/metadataStores/<metadatastore_name>/contexts/<context-id>")`
+ *
+ *   Each of the above supported filter types can be combined together using
+ *   logical operators (`AND` & `OR`). Maximum nested expression depth allowed
+ *   is 5.
+ *
+ *   For example: `display_name = "test" AND metadata.field1.bool_value = true`.
+ * @param {string} request.orderBy
+ *   How the list of messages is ordered. Specify the values to order by and an
+ *   ordering operation. The default sorting order is ascending. To specify
+ *   descending order for a field, users append a " desc" suffix; for example:
+ *   "foo desc, bar".
+ *   Subfields are specified with a `.` character, such as foo.bar.
+ *   see https://google.aip.dev/132#ordering for more details.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is Array of {@link protos.google.cloud.aiplatform.v1beta1.Artifact|Artifact}.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed and will merge results from all the pages into this array.
+ *   Note that it can affect your quota.
+ *   We recommend using `listArtifactsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listArtifacts(
-    request?: protos.google.cloud.aiplatform.v1beta1.IListArtifactsRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.aiplatform.v1beta1.IArtifact[],
-      protos.google.cloud.aiplatform.v1beta1.IListArtifactsRequest | null,
-      protos.google.cloud.aiplatform.v1beta1.IListArtifactsResponse,
-    ]
-  >;
+      request?: protos.google.cloud.aiplatform.v1beta1.IListArtifactsRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.aiplatform.v1beta1.IArtifact[],
+        protos.google.cloud.aiplatform.v1beta1.IListArtifactsRequest|null,
+        protos.google.cloud.aiplatform.v1beta1.IListArtifactsResponse
+      ]>;
   listArtifacts(
-    request: protos.google.cloud.aiplatform.v1beta1.IListArtifactsRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.cloud.aiplatform.v1beta1.IListArtifactsRequest,
-      | protos.google.cloud.aiplatform.v1beta1.IListArtifactsResponse
-      | null
-      | undefined,
-      protos.google.cloud.aiplatform.v1beta1.IArtifact
-    >
-  ): void;
-  listArtifacts(
-    request: protos.google.cloud.aiplatform.v1beta1.IListArtifactsRequest,
-    callback: PaginationCallback<
-      protos.google.cloud.aiplatform.v1beta1.IListArtifactsRequest,
-      | protos.google.cloud.aiplatform.v1beta1.IListArtifactsResponse
-      | null
-      | undefined,
-      protos.google.cloud.aiplatform.v1beta1.IArtifact
-    >
-  ): void;
-  listArtifacts(
-    request?: protos.google.cloud.aiplatform.v1beta1.IListArtifactsRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | PaginationCallback<
+      request: protos.google.cloud.aiplatform.v1beta1.IListArtifactsRequest,
+      options: CallOptions,
+      callback: PaginationCallback<
           protos.google.cloud.aiplatform.v1beta1.IListArtifactsRequest,
-          | protos.google.cloud.aiplatform.v1beta1.IListArtifactsResponse
-          | null
-          | undefined,
-          protos.google.cloud.aiplatform.v1beta1.IArtifact
-        >,
-    callback?: PaginationCallback<
-      protos.google.cloud.aiplatform.v1beta1.IListArtifactsRequest,
-      | protos.google.cloud.aiplatform.v1beta1.IListArtifactsResponse
-      | null
-      | undefined,
-      protos.google.cloud.aiplatform.v1beta1.IArtifact
-    >
-  ): Promise<
-    [
-      protos.google.cloud.aiplatform.v1beta1.IArtifact[],
-      protos.google.cloud.aiplatform.v1beta1.IListArtifactsRequest | null,
-      protos.google.cloud.aiplatform.v1beta1.IListArtifactsResponse,
-    ]
-  > | void {
+          protos.google.cloud.aiplatform.v1beta1.IListArtifactsResponse|null|undefined,
+          protos.google.cloud.aiplatform.v1beta1.IArtifact>): void;
+  listArtifacts(
+      request: protos.google.cloud.aiplatform.v1beta1.IListArtifactsRequest,
+      callback: PaginationCallback<
+          protos.google.cloud.aiplatform.v1beta1.IListArtifactsRequest,
+          protos.google.cloud.aiplatform.v1beta1.IListArtifactsResponse|null|undefined,
+          protos.google.cloud.aiplatform.v1beta1.IArtifact>): void;
+  listArtifacts(
+      request?: protos.google.cloud.aiplatform.v1beta1.IListArtifactsRequest,
+      optionsOrCallback?: CallOptions|PaginationCallback<
+          protos.google.cloud.aiplatform.v1beta1.IListArtifactsRequest,
+          protos.google.cloud.aiplatform.v1beta1.IListArtifactsResponse|null|undefined,
+          protos.google.cloud.aiplatform.v1beta1.IArtifact>,
+      callback?: PaginationCallback<
+          protos.google.cloud.aiplatform.v1beta1.IListArtifactsRequest,
+          protos.google.cloud.aiplatform.v1beta1.IListArtifactsResponse|null|undefined,
+          protos.google.cloud.aiplatform.v1beta1.IArtifact>):
+      Promise<[
+        protos.google.cloud.aiplatform.v1beta1.IArtifact[],
+        protos.google.cloud.aiplatform.v1beta1.IListArtifactsRequest|null,
+        protos.google.cloud.aiplatform.v1beta1.IListArtifactsResponse
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: PaginationCallback<
+      protos.google.cloud.aiplatform.v1beta1.IListArtifactsRequest,
+      protos.google.cloud.aiplatform.v1beta1.IListArtifactsResponse|null|undefined,
+      protos.google.cloud.aiplatform.v1beta1.IArtifact>|undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listArtifacts values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listArtifacts request %j', request);
+    return this.innerApiCalls
+      .listArtifacts(request, options, wrappedCallback)
+      ?.then(([response, input, output]: [
+        protos.google.cloud.aiplatform.v1beta1.IArtifact[],
+        protos.google.cloud.aiplatform.v1beta1.IListArtifactsRequest|null,
+        protos.google.cloud.aiplatform.v1beta1.IListArtifactsResponse
+      ]) => {
+        this._log.info('listArtifacts values %j', response);
+        return [response, input, output];
       });
-    this.initialize();
-    return this.innerApiCalls.listArtifacts(request, options, callback);
   }
 
-  /**
-   * Equivalent to `listArtifacts`, but returns a NodeJS Stream object.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The MetadataStore whose Artifacts should be listed.
-   *   Format:
-   *   `projects/{project}/locations/{location}/metadataStores/{metadatastore}`
-   * @param {number} request.pageSize
-   *   The maximum number of Artifacts to return. The service may return fewer.
-   *   Must be in range 1-1000, inclusive. Defaults to 100.
-   * @param {string} request.pageToken
-   *   A page token, received from a previous
-   *   {@link protos.google.cloud.aiplatform.v1beta1.MetadataService.ListArtifacts|MetadataService.ListArtifacts}
-   *   call. Provide this to retrieve the subsequent page.
-   *
-   *   When paginating, all other provided parameters must match the call that
-   *   provided the page token. (Otherwise the request will fail with
-   *   INVALID_ARGUMENT error.)
-   * @param {string} request.filter
-   *   Filter specifying the boolean condition for the Artifacts to satisfy in
-   *   order to be part of the result set.
-   *   The syntax to define filter query is based on https://google.aip.dev/160.
-   *   The supported set of filters include the following:
-   *
-   *   *   **Attribute filtering**:
-   *       For example: `display_name = "test"`.
-   *       Supported fields include: `name`, `display_name`, `uri`, `state`,
-   *       `schema_title`, `create_time`, and `update_time`.
-   *       Time fields, such as `create_time` and `update_time`, require values
-   *       specified in RFC-3339 format.
-   *       For example: `create_time = "2020-11-19T11:30:00-04:00"`
-   *   *   **Metadata field**:
-   *       To filter on metadata fields use traversal operation as follows:
-   *       `metadata.<field_name>.<type_value>`.
-   *       For example: `metadata.field_1.number_value = 10.0`
-   *       In case the field name contains special characters (such as colon), one
-   *       can embed it inside double quote.
-   *       For example: `metadata."field:1".number_value = 10.0`
-   *   *   **Context based filtering**:
-   *       To filter Artifacts based on the contexts to which they belong, use the
-   *       function operator with the full resource name
-   *       `in_context(<context-name>)`.
-   *       For example:
-   *       `in_context("projects/<project_number>/locations/<location>/metadataStores/<metadatastore_name>/contexts/<context-id>")`
-   *
-   *   Each of the above supported filter types can be combined together using
-   *   logical operators (`AND` & `OR`). Maximum nested expression depth allowed
-   *   is 5.
-   *
-   *   For example: `display_name = "test" AND metadata.field1.bool_value = true`.
-   * @param {string} request.orderBy
-   *   How the list of messages is ordered. Specify the values to order by and an
-   *   ordering operation. The default sorting order is ascending. To specify
-   *   descending order for a field, users append a " desc" suffix; for example:
-   *   "foo desc, bar".
-   *   Subfields are specified with a `.` character, such as foo.bar.
-   *   see https://google.aip.dev/132#ordering for more details.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Stream}
-   *   An object stream which emits an object representing {@link protos.google.cloud.aiplatform.v1beta1.Artifact|Artifact} on 'data' event.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed. Note that it can affect your quota.
-   *   We recommend using `listArtifactsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+/**
+ * Equivalent to `listArtifacts`, but returns a NodeJS Stream object.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The MetadataStore whose Artifacts should be listed.
+ *   Format:
+ *   `projects/{project}/locations/{location}/metadataStores/{metadatastore}`
+ * @param {number} request.pageSize
+ *   The maximum number of Artifacts to return. The service may return fewer.
+ *   Must be in range 1-1000, inclusive. Defaults to 100.
+ * @param {string} request.pageToken
+ *   A page token, received from a previous
+ *   {@link protos.google.cloud.aiplatform.v1beta1.MetadataService.ListArtifacts|MetadataService.ListArtifacts}
+ *   call. Provide this to retrieve the subsequent page.
+ *
+ *   When paginating, all other provided parameters must match the call that
+ *   provided the page token. (Otherwise the request will fail with
+ *   INVALID_ARGUMENT error.)
+ * @param {string} request.filter
+ *   Filter specifying the boolean condition for the Artifacts to satisfy in
+ *   order to be part of the result set.
+ *   The syntax to define filter query is based on https://google.aip.dev/160.
+ *   The supported set of filters include the following:
+ *
+ *   *   **Attribute filtering**:
+ *       For example: `display_name = "test"`.
+ *       Supported fields include: `name`, `display_name`, `uri`, `state`,
+ *       `schema_title`, `create_time`, and `update_time`.
+ *       Time fields, such as `create_time` and `update_time`, require values
+ *       specified in RFC-3339 format.
+ *       For example: `create_time = "2020-11-19T11:30:00-04:00"`
+ *   *   **Metadata field**:
+ *       To filter on metadata fields use traversal operation as follows:
+ *       `metadata.<field_name>.<type_value>`.
+ *       For example: `metadata.field_1.number_value = 10.0`
+ *       In case the field name contains special characters (such as colon), one
+ *       can embed it inside double quote.
+ *       For example: `metadata."field:1".number_value = 10.0`
+ *   *   **Context based filtering**:
+ *       To filter Artifacts based on the contexts to which they belong, use the
+ *       function operator with the full resource name
+ *       `in_context(<context-name>)`.
+ *       For example:
+ *       `in_context("projects/<project_number>/locations/<location>/metadataStores/<metadatastore_name>/contexts/<context-id>")`
+ *
+ *   Each of the above supported filter types can be combined together using
+ *   logical operators (`AND` & `OR`). Maximum nested expression depth allowed
+ *   is 5.
+ *
+ *   For example: `display_name = "test" AND metadata.field1.bool_value = true`.
+ * @param {string} request.orderBy
+ *   How the list of messages is ordered. Specify the values to order by and an
+ *   ordering operation. The default sorting order is ascending. To specify
+ *   descending order for a field, users append a " desc" suffix; for example:
+ *   "foo desc, bar".
+ *   Subfields are specified with a `.` character, such as foo.bar.
+ *   see https://google.aip.dev/132#ordering for more details.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which emits an object representing {@link protos.google.cloud.aiplatform.v1beta1.Artifact|Artifact} on 'data' event.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed. Note that it can affect your quota.
+ *   We recommend using `listArtifactsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listArtifactsStream(
-    request?: protos.google.cloud.aiplatform.v1beta1.IListArtifactsRequest,
-    options?: CallOptions
-  ): Transform {
+      request?: protos.google.cloud.aiplatform.v1beta1.IListArtifactsRequest,
+      options?: CallOptions):
+    Transform{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listArtifacts'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {throw err});
+    this._log.info('listArtifacts stream %j', request);
     return this.descriptors.page.listArtifacts.createStream(
       this.innerApiCalls.listArtifacts as GaxCall,
       request,
@@ -6105,337 +3878,342 @@ export class MetadataServiceClient {
     );
   }
 
-  /**
-   * Equivalent to `listArtifacts`, but returns an iterable object.
-   *
-   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The MetadataStore whose Artifacts should be listed.
-   *   Format:
-   *   `projects/{project}/locations/{location}/metadataStores/{metadatastore}`
-   * @param {number} request.pageSize
-   *   The maximum number of Artifacts to return. The service may return fewer.
-   *   Must be in range 1-1000, inclusive. Defaults to 100.
-   * @param {string} request.pageToken
-   *   A page token, received from a previous
-   *   {@link protos.google.cloud.aiplatform.v1beta1.MetadataService.ListArtifacts|MetadataService.ListArtifacts}
-   *   call. Provide this to retrieve the subsequent page.
-   *
-   *   When paginating, all other provided parameters must match the call that
-   *   provided the page token. (Otherwise the request will fail with
-   *   INVALID_ARGUMENT error.)
-   * @param {string} request.filter
-   *   Filter specifying the boolean condition for the Artifacts to satisfy in
-   *   order to be part of the result set.
-   *   The syntax to define filter query is based on https://google.aip.dev/160.
-   *   The supported set of filters include the following:
-   *
-   *   *   **Attribute filtering**:
-   *       For example: `display_name = "test"`.
-   *       Supported fields include: `name`, `display_name`, `uri`, `state`,
-   *       `schema_title`, `create_time`, and `update_time`.
-   *       Time fields, such as `create_time` and `update_time`, require values
-   *       specified in RFC-3339 format.
-   *       For example: `create_time = "2020-11-19T11:30:00-04:00"`
-   *   *   **Metadata field**:
-   *       To filter on metadata fields use traversal operation as follows:
-   *       `metadata.<field_name>.<type_value>`.
-   *       For example: `metadata.field_1.number_value = 10.0`
-   *       In case the field name contains special characters (such as colon), one
-   *       can embed it inside double quote.
-   *       For example: `metadata."field:1".number_value = 10.0`
-   *   *   **Context based filtering**:
-   *       To filter Artifacts based on the contexts to which they belong, use the
-   *       function operator with the full resource name
-   *       `in_context(<context-name>)`.
-   *       For example:
-   *       `in_context("projects/<project_number>/locations/<location>/metadataStores/<metadatastore_name>/contexts/<context-id>")`
-   *
-   *   Each of the above supported filter types can be combined together using
-   *   logical operators (`AND` & `OR`). Maximum nested expression depth allowed
-   *   is 5.
-   *
-   *   For example: `display_name = "test" AND metadata.field1.bool_value = true`.
-   * @param {string} request.orderBy
-   *   How the list of messages is ordered. Specify the values to order by and an
-   *   ordering operation. The default sorting order is ascending. To specify
-   *   descending order for a field, users append a " desc" suffix; for example:
-   *   "foo desc, bar".
-   *   Subfields are specified with a `.` character, such as foo.bar.
-   *   see https://google.aip.dev/132#ordering for more details.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Object}
-   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
-   *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link protos.google.cloud.aiplatform.v1beta1.Artifact|Artifact}. The API will be called under the hood as needed, once per the page,
-   *   so you can stop the iteration when you don't need more results.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta1/metadata_service.list_artifacts.js</caption>
-   * region_tag:aiplatform_v1beta1_generated_MetadataService_ListArtifacts_async
-   */
+/**
+ * Equivalent to `listArtifacts`, but returns an iterable object.
+ *
+ * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The MetadataStore whose Artifacts should be listed.
+ *   Format:
+ *   `projects/{project}/locations/{location}/metadataStores/{metadatastore}`
+ * @param {number} request.pageSize
+ *   The maximum number of Artifacts to return. The service may return fewer.
+ *   Must be in range 1-1000, inclusive. Defaults to 100.
+ * @param {string} request.pageToken
+ *   A page token, received from a previous
+ *   {@link protos.google.cloud.aiplatform.v1beta1.MetadataService.ListArtifacts|MetadataService.ListArtifacts}
+ *   call. Provide this to retrieve the subsequent page.
+ *
+ *   When paginating, all other provided parameters must match the call that
+ *   provided the page token. (Otherwise the request will fail with
+ *   INVALID_ARGUMENT error.)
+ * @param {string} request.filter
+ *   Filter specifying the boolean condition for the Artifacts to satisfy in
+ *   order to be part of the result set.
+ *   The syntax to define filter query is based on https://google.aip.dev/160.
+ *   The supported set of filters include the following:
+ *
+ *   *   **Attribute filtering**:
+ *       For example: `display_name = "test"`.
+ *       Supported fields include: `name`, `display_name`, `uri`, `state`,
+ *       `schema_title`, `create_time`, and `update_time`.
+ *       Time fields, such as `create_time` and `update_time`, require values
+ *       specified in RFC-3339 format.
+ *       For example: `create_time = "2020-11-19T11:30:00-04:00"`
+ *   *   **Metadata field**:
+ *       To filter on metadata fields use traversal operation as follows:
+ *       `metadata.<field_name>.<type_value>`.
+ *       For example: `metadata.field_1.number_value = 10.0`
+ *       In case the field name contains special characters (such as colon), one
+ *       can embed it inside double quote.
+ *       For example: `metadata."field:1".number_value = 10.0`
+ *   *   **Context based filtering**:
+ *       To filter Artifacts based on the contexts to which they belong, use the
+ *       function operator with the full resource name
+ *       `in_context(<context-name>)`.
+ *       For example:
+ *       `in_context("projects/<project_number>/locations/<location>/metadataStores/<metadatastore_name>/contexts/<context-id>")`
+ *
+ *   Each of the above supported filter types can be combined together using
+ *   logical operators (`AND` & `OR`). Maximum nested expression depth allowed
+ *   is 5.
+ *
+ *   For example: `display_name = "test" AND metadata.field1.bool_value = true`.
+ * @param {string} request.orderBy
+ *   How the list of messages is ordered. Specify the values to order by and an
+ *   ordering operation. The default sorting order is ascending. To specify
+ *   descending order for a field, users append a " desc" suffix; for example:
+ *   "foo desc, bar".
+ *   Subfields are specified with a `.` character, such as foo.bar.
+ *   see https://google.aip.dev/132#ordering for more details.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Object}
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+ *   When you iterate the returned iterable, each element will be an object representing
+ *   {@link protos.google.cloud.aiplatform.v1beta1.Artifact|Artifact}. The API will be called under the hood as needed, once per the page,
+ *   so you can stop the iteration when you don't need more results.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta1/metadata_service.list_artifacts.js</caption>
+ * region_tag:aiplatform_v1beta1_generated_MetadataService_ListArtifacts_async
+ */
   listArtifactsAsync(
-    request?: protos.google.cloud.aiplatform.v1beta1.IListArtifactsRequest,
-    options?: CallOptions
-  ): AsyncIterable<protos.google.cloud.aiplatform.v1beta1.IArtifact> {
+      request?: protos.google.cloud.aiplatform.v1beta1.IListArtifactsRequest,
+      options?: CallOptions):
+    AsyncIterable<protos.google.cloud.aiplatform.v1beta1.IArtifact>{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listArtifacts'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {throw err});
+    this._log.info('listArtifacts iterate %j', request);
     return this.descriptors.page.listArtifacts.asyncIterate(
       this.innerApiCalls['listArtifacts'] as GaxCall,
       request as {},
       callSettings
     ) as AsyncIterable<protos.google.cloud.aiplatform.v1beta1.IArtifact>;
   }
-  /**
-   * Lists Contexts on the MetadataStore.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The MetadataStore whose Contexts should be listed.
-   *   Format:
-   *   `projects/{project}/locations/{location}/metadataStores/{metadatastore}`
-   * @param {number} request.pageSize
-   *   The maximum number of Contexts to return. The service may return fewer.
-   *   Must be in range 1-1000, inclusive. Defaults to 100.
-   * @param {string} request.pageToken
-   *   A page token, received from a previous
-   *   {@link protos.google.cloud.aiplatform.v1beta1.MetadataService.ListContexts|MetadataService.ListContexts}
-   *   call. Provide this to retrieve the subsequent page.
-   *
-   *   When paginating, all other provided parameters must match the call that
-   *   provided the page token. (Otherwise the request will fail with
-   *   INVALID_ARGUMENT error.)
-   * @param {string} request.filter
-   *   Filter specifying the boolean condition for the Contexts to satisfy in
-   *   order to be part of the result set.
-   *   The syntax to define filter query is based on https://google.aip.dev/160.
-   *   Following are the supported set of filters:
-   *
-   *   *  **Attribute filtering**:
-   *      For example: `display_name = "test"`.
-   *      Supported fields include: `name`, `display_name`, `schema_title`,
-   *      `create_time`, and `update_time`.
-   *      Time fields, such as `create_time` and `update_time`, require values
-   *      specified in RFC-3339 format.
-   *      For example: `create_time = "2020-11-19T11:30:00-04:00"`.
-   *   *  **Metadata field**:
-   *      To filter on metadata fields use traversal operation as follows:
-   *      `metadata.<field_name>.<type_value>`.
-   *      For example: `metadata.field_1.number_value = 10.0`.
-   *      In case the field name contains special characters (such as colon), one
-   *      can embed it inside double quote.
-   *      For example: `metadata."field:1".number_value = 10.0`
-   *   *  **Parent Child filtering**:
-   *      To filter Contexts based on parent-child relationship use the HAS
-   *      operator as follows:
-   *
-   *      ```
-   *      parent_contexts:
-   *      "projects/<project_number>/locations/<location>/metadataStores/<metadatastore_name>/contexts/<context_id>"
-   *      child_contexts:
-   *      "projects/<project_number>/locations/<location>/metadataStores/<metadatastore_name>/contexts/<context_id>"
-   *      ```
-   *
-   *   Each of the above supported filters can be combined together using
-   *   logical operators (`AND` & `OR`). Maximum nested expression depth allowed
-   *   is 5.
-   *
-   *   For example: `display_name = "test" AND metadata.field1.bool_value = true`.
-   * @param {string} request.orderBy
-   *   How the list of messages is ordered. Specify the values to order by and an
-   *   ordering operation. The default sorting order is ascending. To specify
-   *   descending order for a field, users append a " desc" suffix; for example:
-   *   "foo desc, bar".
-   *   Subfields are specified with a `.` character, such as foo.bar.
-   *   see https://google.aip.dev/132#ordering for more details.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link protos.google.cloud.aiplatform.v1beta1.Context|Context}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `listContextsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+ /**
+ * Lists Contexts on the MetadataStore.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The MetadataStore whose Contexts should be listed.
+ *   Format:
+ *   `projects/{project}/locations/{location}/metadataStores/{metadatastore}`
+ * @param {number} request.pageSize
+ *   The maximum number of Contexts to return. The service may return fewer.
+ *   Must be in range 1-1000, inclusive. Defaults to 100.
+ * @param {string} request.pageToken
+ *   A page token, received from a previous
+ *   {@link protos.google.cloud.aiplatform.v1beta1.MetadataService.ListContexts|MetadataService.ListContexts}
+ *   call. Provide this to retrieve the subsequent page.
+ *
+ *   When paginating, all other provided parameters must match the call that
+ *   provided the page token. (Otherwise the request will fail with
+ *   INVALID_ARGUMENT error.)
+ * @param {string} request.filter
+ *   Filter specifying the boolean condition for the Contexts to satisfy in
+ *   order to be part of the result set.
+ *   The syntax to define filter query is based on https://google.aip.dev/160.
+ *   Following are the supported set of filters:
+ *
+ *   *  **Attribute filtering**:
+ *      For example: `display_name = "test"`.
+ *      Supported fields include: `name`, `display_name`, `schema_title`,
+ *      `create_time`, and `update_time`.
+ *      Time fields, such as `create_time` and `update_time`, require values
+ *      specified in RFC-3339 format.
+ *      For example: `create_time = "2020-11-19T11:30:00-04:00"`.
+ *   *  **Metadata field**:
+ *      To filter on metadata fields use traversal operation as follows:
+ *      `metadata.<field_name>.<type_value>`.
+ *      For example: `metadata.field_1.number_value = 10.0`.
+ *      In case the field name contains special characters (such as colon), one
+ *      can embed it inside double quote.
+ *      For example: `metadata."field:1".number_value = 10.0`
+ *   *  **Parent Child filtering**:
+ *      To filter Contexts based on parent-child relationship use the HAS
+ *      operator as follows:
+ *
+ *      ```
+ *      parent_contexts:
+ *      "projects/<project_number>/locations/<location>/metadataStores/<metadatastore_name>/contexts/<context_id>"
+ *      child_contexts:
+ *      "projects/<project_number>/locations/<location>/metadataStores/<metadatastore_name>/contexts/<context_id>"
+ *      ```
+ *
+ *   Each of the above supported filters can be combined together using
+ *   logical operators (`AND` & `OR`). Maximum nested expression depth allowed
+ *   is 5.
+ *
+ *   For example: `display_name = "test" AND metadata.field1.bool_value = true`.
+ * @param {string} request.orderBy
+ *   How the list of messages is ordered. Specify the values to order by and an
+ *   ordering operation. The default sorting order is ascending. To specify
+ *   descending order for a field, users append a " desc" suffix; for example:
+ *   "foo desc, bar".
+ *   Subfields are specified with a `.` character, such as foo.bar.
+ *   see https://google.aip.dev/132#ordering for more details.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is Array of {@link protos.google.cloud.aiplatform.v1beta1.Context|Context}.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed and will merge results from all the pages into this array.
+ *   Note that it can affect your quota.
+ *   We recommend using `listContextsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listContexts(
-    request?: protos.google.cloud.aiplatform.v1beta1.IListContextsRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.aiplatform.v1beta1.IContext[],
-      protos.google.cloud.aiplatform.v1beta1.IListContextsRequest | null,
-      protos.google.cloud.aiplatform.v1beta1.IListContextsResponse,
-    ]
-  >;
+      request?: protos.google.cloud.aiplatform.v1beta1.IListContextsRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.aiplatform.v1beta1.IContext[],
+        protos.google.cloud.aiplatform.v1beta1.IListContextsRequest|null,
+        protos.google.cloud.aiplatform.v1beta1.IListContextsResponse
+      ]>;
   listContexts(
-    request: protos.google.cloud.aiplatform.v1beta1.IListContextsRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.cloud.aiplatform.v1beta1.IListContextsRequest,
-      | protos.google.cloud.aiplatform.v1beta1.IListContextsResponse
-      | null
-      | undefined,
-      protos.google.cloud.aiplatform.v1beta1.IContext
-    >
-  ): void;
-  listContexts(
-    request: protos.google.cloud.aiplatform.v1beta1.IListContextsRequest,
-    callback: PaginationCallback<
-      protos.google.cloud.aiplatform.v1beta1.IListContextsRequest,
-      | protos.google.cloud.aiplatform.v1beta1.IListContextsResponse
-      | null
-      | undefined,
-      protos.google.cloud.aiplatform.v1beta1.IContext
-    >
-  ): void;
-  listContexts(
-    request?: protos.google.cloud.aiplatform.v1beta1.IListContextsRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | PaginationCallback<
+      request: protos.google.cloud.aiplatform.v1beta1.IListContextsRequest,
+      options: CallOptions,
+      callback: PaginationCallback<
           protos.google.cloud.aiplatform.v1beta1.IListContextsRequest,
-          | protos.google.cloud.aiplatform.v1beta1.IListContextsResponse
-          | null
-          | undefined,
-          protos.google.cloud.aiplatform.v1beta1.IContext
-        >,
-    callback?: PaginationCallback<
-      protos.google.cloud.aiplatform.v1beta1.IListContextsRequest,
-      | protos.google.cloud.aiplatform.v1beta1.IListContextsResponse
-      | null
-      | undefined,
-      protos.google.cloud.aiplatform.v1beta1.IContext
-    >
-  ): Promise<
-    [
-      protos.google.cloud.aiplatform.v1beta1.IContext[],
-      protos.google.cloud.aiplatform.v1beta1.IListContextsRequest | null,
-      protos.google.cloud.aiplatform.v1beta1.IListContextsResponse,
-    ]
-  > | void {
+          protos.google.cloud.aiplatform.v1beta1.IListContextsResponse|null|undefined,
+          protos.google.cloud.aiplatform.v1beta1.IContext>): void;
+  listContexts(
+      request: protos.google.cloud.aiplatform.v1beta1.IListContextsRequest,
+      callback: PaginationCallback<
+          protos.google.cloud.aiplatform.v1beta1.IListContextsRequest,
+          protos.google.cloud.aiplatform.v1beta1.IListContextsResponse|null|undefined,
+          protos.google.cloud.aiplatform.v1beta1.IContext>): void;
+  listContexts(
+      request?: protos.google.cloud.aiplatform.v1beta1.IListContextsRequest,
+      optionsOrCallback?: CallOptions|PaginationCallback<
+          protos.google.cloud.aiplatform.v1beta1.IListContextsRequest,
+          protos.google.cloud.aiplatform.v1beta1.IListContextsResponse|null|undefined,
+          protos.google.cloud.aiplatform.v1beta1.IContext>,
+      callback?: PaginationCallback<
+          protos.google.cloud.aiplatform.v1beta1.IListContextsRequest,
+          protos.google.cloud.aiplatform.v1beta1.IListContextsResponse|null|undefined,
+          protos.google.cloud.aiplatform.v1beta1.IContext>):
+      Promise<[
+        protos.google.cloud.aiplatform.v1beta1.IContext[],
+        protos.google.cloud.aiplatform.v1beta1.IListContextsRequest|null,
+        protos.google.cloud.aiplatform.v1beta1.IListContextsResponse
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: PaginationCallback<
+      protos.google.cloud.aiplatform.v1beta1.IListContextsRequest,
+      protos.google.cloud.aiplatform.v1beta1.IListContextsResponse|null|undefined,
+      protos.google.cloud.aiplatform.v1beta1.IContext>|undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listContexts values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listContexts request %j', request);
+    return this.innerApiCalls
+      .listContexts(request, options, wrappedCallback)
+      ?.then(([response, input, output]: [
+        protos.google.cloud.aiplatform.v1beta1.IContext[],
+        protos.google.cloud.aiplatform.v1beta1.IListContextsRequest|null,
+        protos.google.cloud.aiplatform.v1beta1.IListContextsResponse
+      ]) => {
+        this._log.info('listContexts values %j', response);
+        return [response, input, output];
       });
-    this.initialize();
-    return this.innerApiCalls.listContexts(request, options, callback);
   }
 
-  /**
-   * Equivalent to `listContexts`, but returns a NodeJS Stream object.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The MetadataStore whose Contexts should be listed.
-   *   Format:
-   *   `projects/{project}/locations/{location}/metadataStores/{metadatastore}`
-   * @param {number} request.pageSize
-   *   The maximum number of Contexts to return. The service may return fewer.
-   *   Must be in range 1-1000, inclusive. Defaults to 100.
-   * @param {string} request.pageToken
-   *   A page token, received from a previous
-   *   {@link protos.google.cloud.aiplatform.v1beta1.MetadataService.ListContexts|MetadataService.ListContexts}
-   *   call. Provide this to retrieve the subsequent page.
-   *
-   *   When paginating, all other provided parameters must match the call that
-   *   provided the page token. (Otherwise the request will fail with
-   *   INVALID_ARGUMENT error.)
-   * @param {string} request.filter
-   *   Filter specifying the boolean condition for the Contexts to satisfy in
-   *   order to be part of the result set.
-   *   The syntax to define filter query is based on https://google.aip.dev/160.
-   *   Following are the supported set of filters:
-   *
-   *   *  **Attribute filtering**:
-   *      For example: `display_name = "test"`.
-   *      Supported fields include: `name`, `display_name`, `schema_title`,
-   *      `create_time`, and `update_time`.
-   *      Time fields, such as `create_time` and `update_time`, require values
-   *      specified in RFC-3339 format.
-   *      For example: `create_time = "2020-11-19T11:30:00-04:00"`.
-   *   *  **Metadata field**:
-   *      To filter on metadata fields use traversal operation as follows:
-   *      `metadata.<field_name>.<type_value>`.
-   *      For example: `metadata.field_1.number_value = 10.0`.
-   *      In case the field name contains special characters (such as colon), one
-   *      can embed it inside double quote.
-   *      For example: `metadata."field:1".number_value = 10.0`
-   *   *  **Parent Child filtering**:
-   *      To filter Contexts based on parent-child relationship use the HAS
-   *      operator as follows:
-   *
-   *      ```
-   *      parent_contexts:
-   *      "projects/<project_number>/locations/<location>/metadataStores/<metadatastore_name>/contexts/<context_id>"
-   *      child_contexts:
-   *      "projects/<project_number>/locations/<location>/metadataStores/<metadatastore_name>/contexts/<context_id>"
-   *      ```
-   *
-   *   Each of the above supported filters can be combined together using
-   *   logical operators (`AND` & `OR`). Maximum nested expression depth allowed
-   *   is 5.
-   *
-   *   For example: `display_name = "test" AND metadata.field1.bool_value = true`.
-   * @param {string} request.orderBy
-   *   How the list of messages is ordered. Specify the values to order by and an
-   *   ordering operation. The default sorting order is ascending. To specify
-   *   descending order for a field, users append a " desc" suffix; for example:
-   *   "foo desc, bar".
-   *   Subfields are specified with a `.` character, such as foo.bar.
-   *   see https://google.aip.dev/132#ordering for more details.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Stream}
-   *   An object stream which emits an object representing {@link protos.google.cloud.aiplatform.v1beta1.Context|Context} on 'data' event.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed. Note that it can affect your quota.
-   *   We recommend using `listContextsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+/**
+ * Equivalent to `listContexts`, but returns a NodeJS Stream object.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The MetadataStore whose Contexts should be listed.
+ *   Format:
+ *   `projects/{project}/locations/{location}/metadataStores/{metadatastore}`
+ * @param {number} request.pageSize
+ *   The maximum number of Contexts to return. The service may return fewer.
+ *   Must be in range 1-1000, inclusive. Defaults to 100.
+ * @param {string} request.pageToken
+ *   A page token, received from a previous
+ *   {@link protos.google.cloud.aiplatform.v1beta1.MetadataService.ListContexts|MetadataService.ListContexts}
+ *   call. Provide this to retrieve the subsequent page.
+ *
+ *   When paginating, all other provided parameters must match the call that
+ *   provided the page token. (Otherwise the request will fail with
+ *   INVALID_ARGUMENT error.)
+ * @param {string} request.filter
+ *   Filter specifying the boolean condition for the Contexts to satisfy in
+ *   order to be part of the result set.
+ *   The syntax to define filter query is based on https://google.aip.dev/160.
+ *   Following are the supported set of filters:
+ *
+ *   *  **Attribute filtering**:
+ *      For example: `display_name = "test"`.
+ *      Supported fields include: `name`, `display_name`, `schema_title`,
+ *      `create_time`, and `update_time`.
+ *      Time fields, such as `create_time` and `update_time`, require values
+ *      specified in RFC-3339 format.
+ *      For example: `create_time = "2020-11-19T11:30:00-04:00"`.
+ *   *  **Metadata field**:
+ *      To filter on metadata fields use traversal operation as follows:
+ *      `metadata.<field_name>.<type_value>`.
+ *      For example: `metadata.field_1.number_value = 10.0`.
+ *      In case the field name contains special characters (such as colon), one
+ *      can embed it inside double quote.
+ *      For example: `metadata."field:1".number_value = 10.0`
+ *   *  **Parent Child filtering**:
+ *      To filter Contexts based on parent-child relationship use the HAS
+ *      operator as follows:
+ *
+ *      ```
+ *      parent_contexts:
+ *      "projects/<project_number>/locations/<location>/metadataStores/<metadatastore_name>/contexts/<context_id>"
+ *      child_contexts:
+ *      "projects/<project_number>/locations/<location>/metadataStores/<metadatastore_name>/contexts/<context_id>"
+ *      ```
+ *
+ *   Each of the above supported filters can be combined together using
+ *   logical operators (`AND` & `OR`). Maximum nested expression depth allowed
+ *   is 5.
+ *
+ *   For example: `display_name = "test" AND metadata.field1.bool_value = true`.
+ * @param {string} request.orderBy
+ *   How the list of messages is ordered. Specify the values to order by and an
+ *   ordering operation. The default sorting order is ascending. To specify
+ *   descending order for a field, users append a " desc" suffix; for example:
+ *   "foo desc, bar".
+ *   Subfields are specified with a `.` character, such as foo.bar.
+ *   see https://google.aip.dev/132#ordering for more details.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which emits an object representing {@link protos.google.cloud.aiplatform.v1beta1.Context|Context} on 'data' event.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed. Note that it can affect your quota.
+ *   We recommend using `listContextsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listContextsStream(
-    request?: protos.google.cloud.aiplatform.v1beta1.IListContextsRequest,
-    options?: CallOptions
-  ): Transform {
+      request?: protos.google.cloud.aiplatform.v1beta1.IListContextsRequest,
+      options?: CallOptions):
+    Transform{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listContexts'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {throw err});
+    this._log.info('listContexts stream %j', request);
     return this.descriptors.page.listContexts.createStream(
       this.innerApiCalls.listContexts as GaxCall,
       request,
@@ -6443,333 +4221,338 @@ export class MetadataServiceClient {
     );
   }
 
-  /**
-   * Equivalent to `listContexts`, but returns an iterable object.
-   *
-   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The MetadataStore whose Contexts should be listed.
-   *   Format:
-   *   `projects/{project}/locations/{location}/metadataStores/{metadatastore}`
-   * @param {number} request.pageSize
-   *   The maximum number of Contexts to return. The service may return fewer.
-   *   Must be in range 1-1000, inclusive. Defaults to 100.
-   * @param {string} request.pageToken
-   *   A page token, received from a previous
-   *   {@link protos.google.cloud.aiplatform.v1beta1.MetadataService.ListContexts|MetadataService.ListContexts}
-   *   call. Provide this to retrieve the subsequent page.
-   *
-   *   When paginating, all other provided parameters must match the call that
-   *   provided the page token. (Otherwise the request will fail with
-   *   INVALID_ARGUMENT error.)
-   * @param {string} request.filter
-   *   Filter specifying the boolean condition for the Contexts to satisfy in
-   *   order to be part of the result set.
-   *   The syntax to define filter query is based on https://google.aip.dev/160.
-   *   Following are the supported set of filters:
-   *
-   *   *  **Attribute filtering**:
-   *      For example: `display_name = "test"`.
-   *      Supported fields include: `name`, `display_name`, `schema_title`,
-   *      `create_time`, and `update_time`.
-   *      Time fields, such as `create_time` and `update_time`, require values
-   *      specified in RFC-3339 format.
-   *      For example: `create_time = "2020-11-19T11:30:00-04:00"`.
-   *   *  **Metadata field**:
-   *      To filter on metadata fields use traversal operation as follows:
-   *      `metadata.<field_name>.<type_value>`.
-   *      For example: `metadata.field_1.number_value = 10.0`.
-   *      In case the field name contains special characters (such as colon), one
-   *      can embed it inside double quote.
-   *      For example: `metadata."field:1".number_value = 10.0`
-   *   *  **Parent Child filtering**:
-   *      To filter Contexts based on parent-child relationship use the HAS
-   *      operator as follows:
-   *
-   *      ```
-   *      parent_contexts:
-   *      "projects/<project_number>/locations/<location>/metadataStores/<metadatastore_name>/contexts/<context_id>"
-   *      child_contexts:
-   *      "projects/<project_number>/locations/<location>/metadataStores/<metadatastore_name>/contexts/<context_id>"
-   *      ```
-   *
-   *   Each of the above supported filters can be combined together using
-   *   logical operators (`AND` & `OR`). Maximum nested expression depth allowed
-   *   is 5.
-   *
-   *   For example: `display_name = "test" AND metadata.field1.bool_value = true`.
-   * @param {string} request.orderBy
-   *   How the list of messages is ordered. Specify the values to order by and an
-   *   ordering operation. The default sorting order is ascending. To specify
-   *   descending order for a field, users append a " desc" suffix; for example:
-   *   "foo desc, bar".
-   *   Subfields are specified with a `.` character, such as foo.bar.
-   *   see https://google.aip.dev/132#ordering for more details.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Object}
-   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
-   *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link protos.google.cloud.aiplatform.v1beta1.Context|Context}. The API will be called under the hood as needed, once per the page,
-   *   so you can stop the iteration when you don't need more results.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta1/metadata_service.list_contexts.js</caption>
-   * region_tag:aiplatform_v1beta1_generated_MetadataService_ListContexts_async
-   */
+/**
+ * Equivalent to `listContexts`, but returns an iterable object.
+ *
+ * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The MetadataStore whose Contexts should be listed.
+ *   Format:
+ *   `projects/{project}/locations/{location}/metadataStores/{metadatastore}`
+ * @param {number} request.pageSize
+ *   The maximum number of Contexts to return. The service may return fewer.
+ *   Must be in range 1-1000, inclusive. Defaults to 100.
+ * @param {string} request.pageToken
+ *   A page token, received from a previous
+ *   {@link protos.google.cloud.aiplatform.v1beta1.MetadataService.ListContexts|MetadataService.ListContexts}
+ *   call. Provide this to retrieve the subsequent page.
+ *
+ *   When paginating, all other provided parameters must match the call that
+ *   provided the page token. (Otherwise the request will fail with
+ *   INVALID_ARGUMENT error.)
+ * @param {string} request.filter
+ *   Filter specifying the boolean condition for the Contexts to satisfy in
+ *   order to be part of the result set.
+ *   The syntax to define filter query is based on https://google.aip.dev/160.
+ *   Following are the supported set of filters:
+ *
+ *   *  **Attribute filtering**:
+ *      For example: `display_name = "test"`.
+ *      Supported fields include: `name`, `display_name`, `schema_title`,
+ *      `create_time`, and `update_time`.
+ *      Time fields, such as `create_time` and `update_time`, require values
+ *      specified in RFC-3339 format.
+ *      For example: `create_time = "2020-11-19T11:30:00-04:00"`.
+ *   *  **Metadata field**:
+ *      To filter on metadata fields use traversal operation as follows:
+ *      `metadata.<field_name>.<type_value>`.
+ *      For example: `metadata.field_1.number_value = 10.0`.
+ *      In case the field name contains special characters (such as colon), one
+ *      can embed it inside double quote.
+ *      For example: `metadata."field:1".number_value = 10.0`
+ *   *  **Parent Child filtering**:
+ *      To filter Contexts based on parent-child relationship use the HAS
+ *      operator as follows:
+ *
+ *      ```
+ *      parent_contexts:
+ *      "projects/<project_number>/locations/<location>/metadataStores/<metadatastore_name>/contexts/<context_id>"
+ *      child_contexts:
+ *      "projects/<project_number>/locations/<location>/metadataStores/<metadatastore_name>/contexts/<context_id>"
+ *      ```
+ *
+ *   Each of the above supported filters can be combined together using
+ *   logical operators (`AND` & `OR`). Maximum nested expression depth allowed
+ *   is 5.
+ *
+ *   For example: `display_name = "test" AND metadata.field1.bool_value = true`.
+ * @param {string} request.orderBy
+ *   How the list of messages is ordered. Specify the values to order by and an
+ *   ordering operation. The default sorting order is ascending. To specify
+ *   descending order for a field, users append a " desc" suffix; for example:
+ *   "foo desc, bar".
+ *   Subfields are specified with a `.` character, such as foo.bar.
+ *   see https://google.aip.dev/132#ordering for more details.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Object}
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+ *   When you iterate the returned iterable, each element will be an object representing
+ *   {@link protos.google.cloud.aiplatform.v1beta1.Context|Context}. The API will be called under the hood as needed, once per the page,
+ *   so you can stop the iteration when you don't need more results.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta1/metadata_service.list_contexts.js</caption>
+ * region_tag:aiplatform_v1beta1_generated_MetadataService_ListContexts_async
+ */
   listContextsAsync(
-    request?: protos.google.cloud.aiplatform.v1beta1.IListContextsRequest,
-    options?: CallOptions
-  ): AsyncIterable<protos.google.cloud.aiplatform.v1beta1.IContext> {
+      request?: protos.google.cloud.aiplatform.v1beta1.IListContextsRequest,
+      options?: CallOptions):
+    AsyncIterable<protos.google.cloud.aiplatform.v1beta1.IContext>{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listContexts'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {throw err});
+    this._log.info('listContexts iterate %j', request);
     return this.descriptors.page.listContexts.asyncIterate(
       this.innerApiCalls['listContexts'] as GaxCall,
       request as {},
       callSettings
     ) as AsyncIterable<protos.google.cloud.aiplatform.v1beta1.IContext>;
   }
-  /**
-   * Lists Executions in the MetadataStore.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The MetadataStore whose Executions should be listed.
-   *   Format:
-   *   `projects/{project}/locations/{location}/metadataStores/{metadatastore}`
-   * @param {number} request.pageSize
-   *   The maximum number of Executions to return. The service may return fewer.
-   *   Must be in range 1-1000, inclusive. Defaults to 100.
-   * @param {string} request.pageToken
-   *   A page token, received from a previous
-   *   {@link protos.google.cloud.aiplatform.v1beta1.MetadataService.ListExecutions|MetadataService.ListExecutions}
-   *   call. Provide this to retrieve the subsequent page.
-   *
-   *   When paginating, all other provided parameters must match the call that
-   *   provided the page token. (Otherwise the request will fail with an
-   *   INVALID_ARGUMENT error.)
-   * @param {string} request.filter
-   *   Filter specifying the boolean condition for the Executions to satisfy in
-   *   order to be part of the result set.
-   *   The syntax to define filter query is based on https://google.aip.dev/160.
-   *   Following are the supported set of filters:
-   *
-   *   *  **Attribute filtering**:
-   *      For example: `display_name = "test"`.
-   *      Supported fields include: `name`, `display_name`, `state`,
-   *      `schema_title`, `create_time`, and `update_time`.
-   *      Time fields, such as `create_time` and `update_time`, require values
-   *      specified in RFC-3339 format.
-   *      For example: `create_time = "2020-11-19T11:30:00-04:00"`.
-   *   *  **Metadata field**:
-   *      To filter on metadata fields use traversal operation as follows:
-   *      `metadata.<field_name>.<type_value>`
-   *      For example: `metadata.field_1.number_value = 10.0`
-   *      In case the field name contains special characters (such as colon), one
-   *      can embed it inside double quote.
-   *      For example: `metadata."field:1".number_value = 10.0`
-   *   *  **Context based filtering**:
-   *      To filter Executions based on the contexts to which they belong use
-   *      the function operator with the full resource name:
-   *      `in_context(<context-name>)`.
-   *      For example:
-   *      `in_context("projects/<project_number>/locations/<location>/metadataStores/<metadatastore_name>/contexts/<context-id>")`
-   *
-   *   Each of the above supported filters can be combined together using
-   *   logical operators (`AND` & `OR`). Maximum nested expression depth allowed
-   *   is 5.
-   *
-   *   For example: `display_name = "test" AND metadata.field1.bool_value = true`.
-   * @param {string} request.orderBy
-   *   How the list of messages is ordered. Specify the values to order by and an
-   *   ordering operation. The default sorting order is ascending. To specify
-   *   descending order for a field, users append a " desc" suffix; for example:
-   *   "foo desc, bar".
-   *   Subfields are specified with a `.` character, such as foo.bar.
-   *   see https://google.aip.dev/132#ordering for more details.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link protos.google.cloud.aiplatform.v1beta1.Execution|Execution}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `listExecutionsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+ /**
+ * Lists Executions in the MetadataStore.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The MetadataStore whose Executions should be listed.
+ *   Format:
+ *   `projects/{project}/locations/{location}/metadataStores/{metadatastore}`
+ * @param {number} request.pageSize
+ *   The maximum number of Executions to return. The service may return fewer.
+ *   Must be in range 1-1000, inclusive. Defaults to 100.
+ * @param {string} request.pageToken
+ *   A page token, received from a previous
+ *   {@link protos.google.cloud.aiplatform.v1beta1.MetadataService.ListExecutions|MetadataService.ListExecutions}
+ *   call. Provide this to retrieve the subsequent page.
+ *
+ *   When paginating, all other provided parameters must match the call that
+ *   provided the page token. (Otherwise the request will fail with an
+ *   INVALID_ARGUMENT error.)
+ * @param {string} request.filter
+ *   Filter specifying the boolean condition for the Executions to satisfy in
+ *   order to be part of the result set.
+ *   The syntax to define filter query is based on https://google.aip.dev/160.
+ *   Following are the supported set of filters:
+ *
+ *   *  **Attribute filtering**:
+ *      For example: `display_name = "test"`.
+ *      Supported fields include: `name`, `display_name`, `state`,
+ *      `schema_title`, `create_time`, and `update_time`.
+ *      Time fields, such as `create_time` and `update_time`, require values
+ *      specified in RFC-3339 format.
+ *      For example: `create_time = "2020-11-19T11:30:00-04:00"`.
+ *   *  **Metadata field**:
+ *      To filter on metadata fields use traversal operation as follows:
+ *      `metadata.<field_name>.<type_value>`
+ *      For example: `metadata.field_1.number_value = 10.0`
+ *      In case the field name contains special characters (such as colon), one
+ *      can embed it inside double quote.
+ *      For example: `metadata."field:1".number_value = 10.0`
+ *   *  **Context based filtering**:
+ *      To filter Executions based on the contexts to which they belong use
+ *      the function operator with the full resource name:
+ *      `in_context(<context-name>)`.
+ *      For example:
+ *      `in_context("projects/<project_number>/locations/<location>/metadataStores/<metadatastore_name>/contexts/<context-id>")`
+ *
+ *   Each of the above supported filters can be combined together using
+ *   logical operators (`AND` & `OR`). Maximum nested expression depth allowed
+ *   is 5.
+ *
+ *   For example: `display_name = "test" AND metadata.field1.bool_value = true`.
+ * @param {string} request.orderBy
+ *   How the list of messages is ordered. Specify the values to order by and an
+ *   ordering operation. The default sorting order is ascending. To specify
+ *   descending order for a field, users append a " desc" suffix; for example:
+ *   "foo desc, bar".
+ *   Subfields are specified with a `.` character, such as foo.bar.
+ *   see https://google.aip.dev/132#ordering for more details.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is Array of {@link protos.google.cloud.aiplatform.v1beta1.Execution|Execution}.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed and will merge results from all the pages into this array.
+ *   Note that it can affect your quota.
+ *   We recommend using `listExecutionsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listExecutions(
-    request?: protos.google.cloud.aiplatform.v1beta1.IListExecutionsRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.aiplatform.v1beta1.IExecution[],
-      protos.google.cloud.aiplatform.v1beta1.IListExecutionsRequest | null,
-      protos.google.cloud.aiplatform.v1beta1.IListExecutionsResponse,
-    ]
-  >;
+      request?: protos.google.cloud.aiplatform.v1beta1.IListExecutionsRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.aiplatform.v1beta1.IExecution[],
+        protos.google.cloud.aiplatform.v1beta1.IListExecutionsRequest|null,
+        protos.google.cloud.aiplatform.v1beta1.IListExecutionsResponse
+      ]>;
   listExecutions(
-    request: protos.google.cloud.aiplatform.v1beta1.IListExecutionsRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.cloud.aiplatform.v1beta1.IListExecutionsRequest,
-      | protos.google.cloud.aiplatform.v1beta1.IListExecutionsResponse
-      | null
-      | undefined,
-      protos.google.cloud.aiplatform.v1beta1.IExecution
-    >
-  ): void;
-  listExecutions(
-    request: protos.google.cloud.aiplatform.v1beta1.IListExecutionsRequest,
-    callback: PaginationCallback<
-      protos.google.cloud.aiplatform.v1beta1.IListExecutionsRequest,
-      | protos.google.cloud.aiplatform.v1beta1.IListExecutionsResponse
-      | null
-      | undefined,
-      protos.google.cloud.aiplatform.v1beta1.IExecution
-    >
-  ): void;
-  listExecutions(
-    request?: protos.google.cloud.aiplatform.v1beta1.IListExecutionsRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | PaginationCallback<
+      request: protos.google.cloud.aiplatform.v1beta1.IListExecutionsRequest,
+      options: CallOptions,
+      callback: PaginationCallback<
           protos.google.cloud.aiplatform.v1beta1.IListExecutionsRequest,
-          | protos.google.cloud.aiplatform.v1beta1.IListExecutionsResponse
-          | null
-          | undefined,
-          protos.google.cloud.aiplatform.v1beta1.IExecution
-        >,
-    callback?: PaginationCallback<
-      protos.google.cloud.aiplatform.v1beta1.IListExecutionsRequest,
-      | protos.google.cloud.aiplatform.v1beta1.IListExecutionsResponse
-      | null
-      | undefined,
-      protos.google.cloud.aiplatform.v1beta1.IExecution
-    >
-  ): Promise<
-    [
-      protos.google.cloud.aiplatform.v1beta1.IExecution[],
-      protos.google.cloud.aiplatform.v1beta1.IListExecutionsRequest | null,
-      protos.google.cloud.aiplatform.v1beta1.IListExecutionsResponse,
-    ]
-  > | void {
+          protos.google.cloud.aiplatform.v1beta1.IListExecutionsResponse|null|undefined,
+          protos.google.cloud.aiplatform.v1beta1.IExecution>): void;
+  listExecutions(
+      request: protos.google.cloud.aiplatform.v1beta1.IListExecutionsRequest,
+      callback: PaginationCallback<
+          protos.google.cloud.aiplatform.v1beta1.IListExecutionsRequest,
+          protos.google.cloud.aiplatform.v1beta1.IListExecutionsResponse|null|undefined,
+          protos.google.cloud.aiplatform.v1beta1.IExecution>): void;
+  listExecutions(
+      request?: protos.google.cloud.aiplatform.v1beta1.IListExecutionsRequest,
+      optionsOrCallback?: CallOptions|PaginationCallback<
+          protos.google.cloud.aiplatform.v1beta1.IListExecutionsRequest,
+          protos.google.cloud.aiplatform.v1beta1.IListExecutionsResponse|null|undefined,
+          protos.google.cloud.aiplatform.v1beta1.IExecution>,
+      callback?: PaginationCallback<
+          protos.google.cloud.aiplatform.v1beta1.IListExecutionsRequest,
+          protos.google.cloud.aiplatform.v1beta1.IListExecutionsResponse|null|undefined,
+          protos.google.cloud.aiplatform.v1beta1.IExecution>):
+      Promise<[
+        protos.google.cloud.aiplatform.v1beta1.IExecution[],
+        protos.google.cloud.aiplatform.v1beta1.IListExecutionsRequest|null,
+        protos.google.cloud.aiplatform.v1beta1.IListExecutionsResponse
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: PaginationCallback<
+      protos.google.cloud.aiplatform.v1beta1.IListExecutionsRequest,
+      protos.google.cloud.aiplatform.v1beta1.IListExecutionsResponse|null|undefined,
+      protos.google.cloud.aiplatform.v1beta1.IExecution>|undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listExecutions values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listExecutions request %j', request);
+    return this.innerApiCalls
+      .listExecutions(request, options, wrappedCallback)
+      ?.then(([response, input, output]: [
+        protos.google.cloud.aiplatform.v1beta1.IExecution[],
+        protos.google.cloud.aiplatform.v1beta1.IListExecutionsRequest|null,
+        protos.google.cloud.aiplatform.v1beta1.IListExecutionsResponse
+      ]) => {
+        this._log.info('listExecutions values %j', response);
+        return [response, input, output];
       });
-    this.initialize();
-    return this.innerApiCalls.listExecutions(request, options, callback);
   }
 
-  /**
-   * Equivalent to `listExecutions`, but returns a NodeJS Stream object.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The MetadataStore whose Executions should be listed.
-   *   Format:
-   *   `projects/{project}/locations/{location}/metadataStores/{metadatastore}`
-   * @param {number} request.pageSize
-   *   The maximum number of Executions to return. The service may return fewer.
-   *   Must be in range 1-1000, inclusive. Defaults to 100.
-   * @param {string} request.pageToken
-   *   A page token, received from a previous
-   *   {@link protos.google.cloud.aiplatform.v1beta1.MetadataService.ListExecutions|MetadataService.ListExecutions}
-   *   call. Provide this to retrieve the subsequent page.
-   *
-   *   When paginating, all other provided parameters must match the call that
-   *   provided the page token. (Otherwise the request will fail with an
-   *   INVALID_ARGUMENT error.)
-   * @param {string} request.filter
-   *   Filter specifying the boolean condition for the Executions to satisfy in
-   *   order to be part of the result set.
-   *   The syntax to define filter query is based on https://google.aip.dev/160.
-   *   Following are the supported set of filters:
-   *
-   *   *  **Attribute filtering**:
-   *      For example: `display_name = "test"`.
-   *      Supported fields include: `name`, `display_name`, `state`,
-   *      `schema_title`, `create_time`, and `update_time`.
-   *      Time fields, such as `create_time` and `update_time`, require values
-   *      specified in RFC-3339 format.
-   *      For example: `create_time = "2020-11-19T11:30:00-04:00"`.
-   *   *  **Metadata field**:
-   *      To filter on metadata fields use traversal operation as follows:
-   *      `metadata.<field_name>.<type_value>`
-   *      For example: `metadata.field_1.number_value = 10.0`
-   *      In case the field name contains special characters (such as colon), one
-   *      can embed it inside double quote.
-   *      For example: `metadata."field:1".number_value = 10.0`
-   *   *  **Context based filtering**:
-   *      To filter Executions based on the contexts to which they belong use
-   *      the function operator with the full resource name:
-   *      `in_context(<context-name>)`.
-   *      For example:
-   *      `in_context("projects/<project_number>/locations/<location>/metadataStores/<metadatastore_name>/contexts/<context-id>")`
-   *
-   *   Each of the above supported filters can be combined together using
-   *   logical operators (`AND` & `OR`). Maximum nested expression depth allowed
-   *   is 5.
-   *
-   *   For example: `display_name = "test" AND metadata.field1.bool_value = true`.
-   * @param {string} request.orderBy
-   *   How the list of messages is ordered. Specify the values to order by and an
-   *   ordering operation. The default sorting order is ascending. To specify
-   *   descending order for a field, users append a " desc" suffix; for example:
-   *   "foo desc, bar".
-   *   Subfields are specified with a `.` character, such as foo.bar.
-   *   see https://google.aip.dev/132#ordering for more details.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Stream}
-   *   An object stream which emits an object representing {@link protos.google.cloud.aiplatform.v1beta1.Execution|Execution} on 'data' event.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed. Note that it can affect your quota.
-   *   We recommend using `listExecutionsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+/**
+ * Equivalent to `listExecutions`, but returns a NodeJS Stream object.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The MetadataStore whose Executions should be listed.
+ *   Format:
+ *   `projects/{project}/locations/{location}/metadataStores/{metadatastore}`
+ * @param {number} request.pageSize
+ *   The maximum number of Executions to return. The service may return fewer.
+ *   Must be in range 1-1000, inclusive. Defaults to 100.
+ * @param {string} request.pageToken
+ *   A page token, received from a previous
+ *   {@link protos.google.cloud.aiplatform.v1beta1.MetadataService.ListExecutions|MetadataService.ListExecutions}
+ *   call. Provide this to retrieve the subsequent page.
+ *
+ *   When paginating, all other provided parameters must match the call that
+ *   provided the page token. (Otherwise the request will fail with an
+ *   INVALID_ARGUMENT error.)
+ * @param {string} request.filter
+ *   Filter specifying the boolean condition for the Executions to satisfy in
+ *   order to be part of the result set.
+ *   The syntax to define filter query is based on https://google.aip.dev/160.
+ *   Following are the supported set of filters:
+ *
+ *   *  **Attribute filtering**:
+ *      For example: `display_name = "test"`.
+ *      Supported fields include: `name`, `display_name`, `state`,
+ *      `schema_title`, `create_time`, and `update_time`.
+ *      Time fields, such as `create_time` and `update_time`, require values
+ *      specified in RFC-3339 format.
+ *      For example: `create_time = "2020-11-19T11:30:00-04:00"`.
+ *   *  **Metadata field**:
+ *      To filter on metadata fields use traversal operation as follows:
+ *      `metadata.<field_name>.<type_value>`
+ *      For example: `metadata.field_1.number_value = 10.0`
+ *      In case the field name contains special characters (such as colon), one
+ *      can embed it inside double quote.
+ *      For example: `metadata."field:1".number_value = 10.0`
+ *   *  **Context based filtering**:
+ *      To filter Executions based on the contexts to which they belong use
+ *      the function operator with the full resource name:
+ *      `in_context(<context-name>)`.
+ *      For example:
+ *      `in_context("projects/<project_number>/locations/<location>/metadataStores/<metadatastore_name>/contexts/<context-id>")`
+ *
+ *   Each of the above supported filters can be combined together using
+ *   logical operators (`AND` & `OR`). Maximum nested expression depth allowed
+ *   is 5.
+ *
+ *   For example: `display_name = "test" AND metadata.field1.bool_value = true`.
+ * @param {string} request.orderBy
+ *   How the list of messages is ordered. Specify the values to order by and an
+ *   ordering operation. The default sorting order is ascending. To specify
+ *   descending order for a field, users append a " desc" suffix; for example:
+ *   "foo desc, bar".
+ *   Subfields are specified with a `.` character, such as foo.bar.
+ *   see https://google.aip.dev/132#ordering for more details.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which emits an object representing {@link protos.google.cloud.aiplatform.v1beta1.Execution|Execution} on 'data' event.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed. Note that it can affect your quota.
+ *   We recommend using `listExecutionsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listExecutionsStream(
-    request?: protos.google.cloud.aiplatform.v1beta1.IListExecutionsRequest,
-    options?: CallOptions
-  ): Transform {
+      request?: protos.google.cloud.aiplatform.v1beta1.IListExecutionsRequest,
+      options?: CallOptions):
+    Transform{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listExecutions'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {throw err});
+    this._log.info('listExecutions stream %j', request);
     return this.descriptors.page.listExecutions.createStream(
       this.innerApiCalls.listExecutions as GaxCall,
       request,
@@ -6777,257 +4560,262 @@ export class MetadataServiceClient {
     );
   }
 
-  /**
-   * Equivalent to `listExecutions`, but returns an iterable object.
-   *
-   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The MetadataStore whose Executions should be listed.
-   *   Format:
-   *   `projects/{project}/locations/{location}/metadataStores/{metadatastore}`
-   * @param {number} request.pageSize
-   *   The maximum number of Executions to return. The service may return fewer.
-   *   Must be in range 1-1000, inclusive. Defaults to 100.
-   * @param {string} request.pageToken
-   *   A page token, received from a previous
-   *   {@link protos.google.cloud.aiplatform.v1beta1.MetadataService.ListExecutions|MetadataService.ListExecutions}
-   *   call. Provide this to retrieve the subsequent page.
-   *
-   *   When paginating, all other provided parameters must match the call that
-   *   provided the page token. (Otherwise the request will fail with an
-   *   INVALID_ARGUMENT error.)
-   * @param {string} request.filter
-   *   Filter specifying the boolean condition for the Executions to satisfy in
-   *   order to be part of the result set.
-   *   The syntax to define filter query is based on https://google.aip.dev/160.
-   *   Following are the supported set of filters:
-   *
-   *   *  **Attribute filtering**:
-   *      For example: `display_name = "test"`.
-   *      Supported fields include: `name`, `display_name`, `state`,
-   *      `schema_title`, `create_time`, and `update_time`.
-   *      Time fields, such as `create_time` and `update_time`, require values
-   *      specified in RFC-3339 format.
-   *      For example: `create_time = "2020-11-19T11:30:00-04:00"`.
-   *   *  **Metadata field**:
-   *      To filter on metadata fields use traversal operation as follows:
-   *      `metadata.<field_name>.<type_value>`
-   *      For example: `metadata.field_1.number_value = 10.0`
-   *      In case the field name contains special characters (such as colon), one
-   *      can embed it inside double quote.
-   *      For example: `metadata."field:1".number_value = 10.0`
-   *   *  **Context based filtering**:
-   *      To filter Executions based on the contexts to which they belong use
-   *      the function operator with the full resource name:
-   *      `in_context(<context-name>)`.
-   *      For example:
-   *      `in_context("projects/<project_number>/locations/<location>/metadataStores/<metadatastore_name>/contexts/<context-id>")`
-   *
-   *   Each of the above supported filters can be combined together using
-   *   logical operators (`AND` & `OR`). Maximum nested expression depth allowed
-   *   is 5.
-   *
-   *   For example: `display_name = "test" AND metadata.field1.bool_value = true`.
-   * @param {string} request.orderBy
-   *   How the list of messages is ordered. Specify the values to order by and an
-   *   ordering operation. The default sorting order is ascending. To specify
-   *   descending order for a field, users append a " desc" suffix; for example:
-   *   "foo desc, bar".
-   *   Subfields are specified with a `.` character, such as foo.bar.
-   *   see https://google.aip.dev/132#ordering for more details.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Object}
-   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
-   *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link protos.google.cloud.aiplatform.v1beta1.Execution|Execution}. The API will be called under the hood as needed, once per the page,
-   *   so you can stop the iteration when you don't need more results.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta1/metadata_service.list_executions.js</caption>
-   * region_tag:aiplatform_v1beta1_generated_MetadataService_ListExecutions_async
-   */
+/**
+ * Equivalent to `listExecutions`, but returns an iterable object.
+ *
+ * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The MetadataStore whose Executions should be listed.
+ *   Format:
+ *   `projects/{project}/locations/{location}/metadataStores/{metadatastore}`
+ * @param {number} request.pageSize
+ *   The maximum number of Executions to return. The service may return fewer.
+ *   Must be in range 1-1000, inclusive. Defaults to 100.
+ * @param {string} request.pageToken
+ *   A page token, received from a previous
+ *   {@link protos.google.cloud.aiplatform.v1beta1.MetadataService.ListExecutions|MetadataService.ListExecutions}
+ *   call. Provide this to retrieve the subsequent page.
+ *
+ *   When paginating, all other provided parameters must match the call that
+ *   provided the page token. (Otherwise the request will fail with an
+ *   INVALID_ARGUMENT error.)
+ * @param {string} request.filter
+ *   Filter specifying the boolean condition for the Executions to satisfy in
+ *   order to be part of the result set.
+ *   The syntax to define filter query is based on https://google.aip.dev/160.
+ *   Following are the supported set of filters:
+ *
+ *   *  **Attribute filtering**:
+ *      For example: `display_name = "test"`.
+ *      Supported fields include: `name`, `display_name`, `state`,
+ *      `schema_title`, `create_time`, and `update_time`.
+ *      Time fields, such as `create_time` and `update_time`, require values
+ *      specified in RFC-3339 format.
+ *      For example: `create_time = "2020-11-19T11:30:00-04:00"`.
+ *   *  **Metadata field**:
+ *      To filter on metadata fields use traversal operation as follows:
+ *      `metadata.<field_name>.<type_value>`
+ *      For example: `metadata.field_1.number_value = 10.0`
+ *      In case the field name contains special characters (such as colon), one
+ *      can embed it inside double quote.
+ *      For example: `metadata."field:1".number_value = 10.0`
+ *   *  **Context based filtering**:
+ *      To filter Executions based on the contexts to which they belong use
+ *      the function operator with the full resource name:
+ *      `in_context(<context-name>)`.
+ *      For example:
+ *      `in_context("projects/<project_number>/locations/<location>/metadataStores/<metadatastore_name>/contexts/<context-id>")`
+ *
+ *   Each of the above supported filters can be combined together using
+ *   logical operators (`AND` & `OR`). Maximum nested expression depth allowed
+ *   is 5.
+ *
+ *   For example: `display_name = "test" AND metadata.field1.bool_value = true`.
+ * @param {string} request.orderBy
+ *   How the list of messages is ordered. Specify the values to order by and an
+ *   ordering operation. The default sorting order is ascending. To specify
+ *   descending order for a field, users append a " desc" suffix; for example:
+ *   "foo desc, bar".
+ *   Subfields are specified with a `.` character, such as foo.bar.
+ *   see https://google.aip.dev/132#ordering for more details.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Object}
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+ *   When you iterate the returned iterable, each element will be an object representing
+ *   {@link protos.google.cloud.aiplatform.v1beta1.Execution|Execution}. The API will be called under the hood as needed, once per the page,
+ *   so you can stop the iteration when you don't need more results.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta1/metadata_service.list_executions.js</caption>
+ * region_tag:aiplatform_v1beta1_generated_MetadataService_ListExecutions_async
+ */
   listExecutionsAsync(
-    request?: protos.google.cloud.aiplatform.v1beta1.IListExecutionsRequest,
-    options?: CallOptions
-  ): AsyncIterable<protos.google.cloud.aiplatform.v1beta1.IExecution> {
+      request?: protos.google.cloud.aiplatform.v1beta1.IListExecutionsRequest,
+      options?: CallOptions):
+    AsyncIterable<protos.google.cloud.aiplatform.v1beta1.IExecution>{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listExecutions'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {throw err});
+    this._log.info('listExecutions iterate %j', request);
     return this.descriptors.page.listExecutions.asyncIterate(
       this.innerApiCalls['listExecutions'] as GaxCall,
       request as {},
       callSettings
     ) as AsyncIterable<protos.google.cloud.aiplatform.v1beta1.IExecution>;
   }
-  /**
-   * Lists MetadataSchemas.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The MetadataStore whose MetadataSchemas should be listed.
-   *   Format:
-   *   `projects/{project}/locations/{location}/metadataStores/{metadatastore}`
-   * @param {number} request.pageSize
-   *   The maximum number of MetadataSchemas to return. The service may return
-   *   fewer.
-   *   Must be in range 1-1000, inclusive. Defaults to 100.
-   * @param {string} request.pageToken
-   *   A page token, received from a previous
-   *   {@link protos.google.cloud.aiplatform.v1beta1.MetadataService.ListMetadataSchemas|MetadataService.ListMetadataSchemas}
-   *   call. Provide this to retrieve the next page.
-   *
-   *   When paginating, all other provided parameters must match the call that
-   *   provided the page token. (Otherwise the request will fail with
-   *   INVALID_ARGUMENT error.)
-   * @param {string} request.filter
-   *   A query to filter available MetadataSchemas for matching results.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link protos.google.cloud.aiplatform.v1beta1.MetadataSchema|MetadataSchema}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `listMetadataSchemasAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+ /**
+ * Lists MetadataSchemas.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The MetadataStore whose MetadataSchemas should be listed.
+ *   Format:
+ *   `projects/{project}/locations/{location}/metadataStores/{metadatastore}`
+ * @param {number} request.pageSize
+ *   The maximum number of MetadataSchemas to return. The service may return
+ *   fewer.
+ *   Must be in range 1-1000, inclusive. Defaults to 100.
+ * @param {string} request.pageToken
+ *   A page token, received from a previous
+ *   {@link protos.google.cloud.aiplatform.v1beta1.MetadataService.ListMetadataSchemas|MetadataService.ListMetadataSchemas}
+ *   call. Provide this to retrieve the next page.
+ *
+ *   When paginating, all other provided parameters must match the call that
+ *   provided the page token. (Otherwise the request will fail with
+ *   INVALID_ARGUMENT error.)
+ * @param {string} request.filter
+ *   A query to filter available MetadataSchemas for matching results.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is Array of {@link protos.google.cloud.aiplatform.v1beta1.MetadataSchema|MetadataSchema}.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed and will merge results from all the pages into this array.
+ *   Note that it can affect your quota.
+ *   We recommend using `listMetadataSchemasAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listMetadataSchemas(
-    request?: protos.google.cloud.aiplatform.v1beta1.IListMetadataSchemasRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.aiplatform.v1beta1.IMetadataSchema[],
-      protos.google.cloud.aiplatform.v1beta1.IListMetadataSchemasRequest | null,
-      protos.google.cloud.aiplatform.v1beta1.IListMetadataSchemasResponse,
-    ]
-  >;
+      request?: protos.google.cloud.aiplatform.v1beta1.IListMetadataSchemasRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.aiplatform.v1beta1.IMetadataSchema[],
+        protos.google.cloud.aiplatform.v1beta1.IListMetadataSchemasRequest|null,
+        protos.google.cloud.aiplatform.v1beta1.IListMetadataSchemasResponse
+      ]>;
   listMetadataSchemas(
-    request: protos.google.cloud.aiplatform.v1beta1.IListMetadataSchemasRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.cloud.aiplatform.v1beta1.IListMetadataSchemasRequest,
-      | protos.google.cloud.aiplatform.v1beta1.IListMetadataSchemasResponse
-      | null
-      | undefined,
-      protos.google.cloud.aiplatform.v1beta1.IMetadataSchema
-    >
-  ): void;
-  listMetadataSchemas(
-    request: protos.google.cloud.aiplatform.v1beta1.IListMetadataSchemasRequest,
-    callback: PaginationCallback<
-      protos.google.cloud.aiplatform.v1beta1.IListMetadataSchemasRequest,
-      | protos.google.cloud.aiplatform.v1beta1.IListMetadataSchemasResponse
-      | null
-      | undefined,
-      protos.google.cloud.aiplatform.v1beta1.IMetadataSchema
-    >
-  ): void;
-  listMetadataSchemas(
-    request?: protos.google.cloud.aiplatform.v1beta1.IListMetadataSchemasRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | PaginationCallback<
+      request: protos.google.cloud.aiplatform.v1beta1.IListMetadataSchemasRequest,
+      options: CallOptions,
+      callback: PaginationCallback<
           protos.google.cloud.aiplatform.v1beta1.IListMetadataSchemasRequest,
-          | protos.google.cloud.aiplatform.v1beta1.IListMetadataSchemasResponse
-          | null
-          | undefined,
-          protos.google.cloud.aiplatform.v1beta1.IMetadataSchema
-        >,
-    callback?: PaginationCallback<
-      protos.google.cloud.aiplatform.v1beta1.IListMetadataSchemasRequest,
-      | protos.google.cloud.aiplatform.v1beta1.IListMetadataSchemasResponse
-      | null
-      | undefined,
-      protos.google.cloud.aiplatform.v1beta1.IMetadataSchema
-    >
-  ): Promise<
-    [
-      protos.google.cloud.aiplatform.v1beta1.IMetadataSchema[],
-      protos.google.cloud.aiplatform.v1beta1.IListMetadataSchemasRequest | null,
-      protos.google.cloud.aiplatform.v1beta1.IListMetadataSchemasResponse,
-    ]
-  > | void {
+          protos.google.cloud.aiplatform.v1beta1.IListMetadataSchemasResponse|null|undefined,
+          protos.google.cloud.aiplatform.v1beta1.IMetadataSchema>): void;
+  listMetadataSchemas(
+      request: protos.google.cloud.aiplatform.v1beta1.IListMetadataSchemasRequest,
+      callback: PaginationCallback<
+          protos.google.cloud.aiplatform.v1beta1.IListMetadataSchemasRequest,
+          protos.google.cloud.aiplatform.v1beta1.IListMetadataSchemasResponse|null|undefined,
+          protos.google.cloud.aiplatform.v1beta1.IMetadataSchema>): void;
+  listMetadataSchemas(
+      request?: protos.google.cloud.aiplatform.v1beta1.IListMetadataSchemasRequest,
+      optionsOrCallback?: CallOptions|PaginationCallback<
+          protos.google.cloud.aiplatform.v1beta1.IListMetadataSchemasRequest,
+          protos.google.cloud.aiplatform.v1beta1.IListMetadataSchemasResponse|null|undefined,
+          protos.google.cloud.aiplatform.v1beta1.IMetadataSchema>,
+      callback?: PaginationCallback<
+          protos.google.cloud.aiplatform.v1beta1.IListMetadataSchemasRequest,
+          protos.google.cloud.aiplatform.v1beta1.IListMetadataSchemasResponse|null|undefined,
+          protos.google.cloud.aiplatform.v1beta1.IMetadataSchema>):
+      Promise<[
+        protos.google.cloud.aiplatform.v1beta1.IMetadataSchema[],
+        protos.google.cloud.aiplatform.v1beta1.IListMetadataSchemasRequest|null,
+        protos.google.cloud.aiplatform.v1beta1.IListMetadataSchemasResponse
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: PaginationCallback<
+      protos.google.cloud.aiplatform.v1beta1.IListMetadataSchemasRequest,
+      protos.google.cloud.aiplatform.v1beta1.IListMetadataSchemasResponse|null|undefined,
+      protos.google.cloud.aiplatform.v1beta1.IMetadataSchema>|undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listMetadataSchemas values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listMetadataSchemas request %j', request);
+    return this.innerApiCalls
+      .listMetadataSchemas(request, options, wrappedCallback)
+      ?.then(([response, input, output]: [
+        protos.google.cloud.aiplatform.v1beta1.IMetadataSchema[],
+        protos.google.cloud.aiplatform.v1beta1.IListMetadataSchemasRequest|null,
+        protos.google.cloud.aiplatform.v1beta1.IListMetadataSchemasResponse
+      ]) => {
+        this._log.info('listMetadataSchemas values %j', response);
+        return [response, input, output];
       });
-    this.initialize();
-    return this.innerApiCalls.listMetadataSchemas(request, options, callback);
   }
 
-  /**
-   * Equivalent to `listMetadataSchemas`, but returns a NodeJS Stream object.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The MetadataStore whose MetadataSchemas should be listed.
-   *   Format:
-   *   `projects/{project}/locations/{location}/metadataStores/{metadatastore}`
-   * @param {number} request.pageSize
-   *   The maximum number of MetadataSchemas to return. The service may return
-   *   fewer.
-   *   Must be in range 1-1000, inclusive. Defaults to 100.
-   * @param {string} request.pageToken
-   *   A page token, received from a previous
-   *   {@link protos.google.cloud.aiplatform.v1beta1.MetadataService.ListMetadataSchemas|MetadataService.ListMetadataSchemas}
-   *   call. Provide this to retrieve the next page.
-   *
-   *   When paginating, all other provided parameters must match the call that
-   *   provided the page token. (Otherwise the request will fail with
-   *   INVALID_ARGUMENT error.)
-   * @param {string} request.filter
-   *   A query to filter available MetadataSchemas for matching results.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Stream}
-   *   An object stream which emits an object representing {@link protos.google.cloud.aiplatform.v1beta1.MetadataSchema|MetadataSchema} on 'data' event.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed. Note that it can affect your quota.
-   *   We recommend using `listMetadataSchemasAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+/**
+ * Equivalent to `listMetadataSchemas`, but returns a NodeJS Stream object.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The MetadataStore whose MetadataSchemas should be listed.
+ *   Format:
+ *   `projects/{project}/locations/{location}/metadataStores/{metadatastore}`
+ * @param {number} request.pageSize
+ *   The maximum number of MetadataSchemas to return. The service may return
+ *   fewer.
+ *   Must be in range 1-1000, inclusive. Defaults to 100.
+ * @param {string} request.pageToken
+ *   A page token, received from a previous
+ *   {@link protos.google.cloud.aiplatform.v1beta1.MetadataService.ListMetadataSchemas|MetadataService.ListMetadataSchemas}
+ *   call. Provide this to retrieve the next page.
+ *
+ *   When paginating, all other provided parameters must match the call that
+ *   provided the page token. (Otherwise the request will fail with
+ *   INVALID_ARGUMENT error.)
+ * @param {string} request.filter
+ *   A query to filter available MetadataSchemas for matching results.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which emits an object representing {@link protos.google.cloud.aiplatform.v1beta1.MetadataSchema|MetadataSchema} on 'data' event.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed. Note that it can affect your quota.
+ *   We recommend using `listMetadataSchemasAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listMetadataSchemasStream(
-    request?: protos.google.cloud.aiplatform.v1beta1.IListMetadataSchemasRequest,
-    options?: CallOptions
-  ): Transform {
+      request?: protos.google.cloud.aiplatform.v1beta1.IListMetadataSchemasRequest,
+      options?: CallOptions):
+    Transform{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listMetadataSchemas'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {throw err});
+    this._log.info('listMetadataSchemas stream %j', request);
     return this.descriptors.page.listMetadataSchemas.createStream(
       this.innerApiCalls.listMetadataSchemas as GaxCall,
       request,
@@ -7035,88 +4823,90 @@ export class MetadataServiceClient {
     );
   }
 
-  /**
-   * Equivalent to `listMetadataSchemas`, but returns an iterable object.
-   *
-   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The MetadataStore whose MetadataSchemas should be listed.
-   *   Format:
-   *   `projects/{project}/locations/{location}/metadataStores/{metadatastore}`
-   * @param {number} request.pageSize
-   *   The maximum number of MetadataSchemas to return. The service may return
-   *   fewer.
-   *   Must be in range 1-1000, inclusive. Defaults to 100.
-   * @param {string} request.pageToken
-   *   A page token, received from a previous
-   *   {@link protos.google.cloud.aiplatform.v1beta1.MetadataService.ListMetadataSchemas|MetadataService.ListMetadataSchemas}
-   *   call. Provide this to retrieve the next page.
-   *
-   *   When paginating, all other provided parameters must match the call that
-   *   provided the page token. (Otherwise the request will fail with
-   *   INVALID_ARGUMENT error.)
-   * @param {string} request.filter
-   *   A query to filter available MetadataSchemas for matching results.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Object}
-   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
-   *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link protos.google.cloud.aiplatform.v1beta1.MetadataSchema|MetadataSchema}. The API will be called under the hood as needed, once per the page,
-   *   so you can stop the iteration when you don't need more results.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta1/metadata_service.list_metadata_schemas.js</caption>
-   * region_tag:aiplatform_v1beta1_generated_MetadataService_ListMetadataSchemas_async
-   */
+/**
+ * Equivalent to `listMetadataSchemas`, but returns an iterable object.
+ *
+ * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The MetadataStore whose MetadataSchemas should be listed.
+ *   Format:
+ *   `projects/{project}/locations/{location}/metadataStores/{metadatastore}`
+ * @param {number} request.pageSize
+ *   The maximum number of MetadataSchemas to return. The service may return
+ *   fewer.
+ *   Must be in range 1-1000, inclusive. Defaults to 100.
+ * @param {string} request.pageToken
+ *   A page token, received from a previous
+ *   {@link protos.google.cloud.aiplatform.v1beta1.MetadataService.ListMetadataSchemas|MetadataService.ListMetadataSchemas}
+ *   call. Provide this to retrieve the next page.
+ *
+ *   When paginating, all other provided parameters must match the call that
+ *   provided the page token. (Otherwise the request will fail with
+ *   INVALID_ARGUMENT error.)
+ * @param {string} request.filter
+ *   A query to filter available MetadataSchemas for matching results.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Object}
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+ *   When you iterate the returned iterable, each element will be an object representing
+ *   {@link protos.google.cloud.aiplatform.v1beta1.MetadataSchema|MetadataSchema}. The API will be called under the hood as needed, once per the page,
+ *   so you can stop the iteration when you don't need more results.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta1/metadata_service.list_metadata_schemas.js</caption>
+ * region_tag:aiplatform_v1beta1_generated_MetadataService_ListMetadataSchemas_async
+ */
   listMetadataSchemasAsync(
-    request?: protos.google.cloud.aiplatform.v1beta1.IListMetadataSchemasRequest,
-    options?: CallOptions
-  ): AsyncIterable<protos.google.cloud.aiplatform.v1beta1.IMetadataSchema> {
+      request?: protos.google.cloud.aiplatform.v1beta1.IListMetadataSchemasRequest,
+      options?: CallOptions):
+    AsyncIterable<protos.google.cloud.aiplatform.v1beta1.IMetadataSchema>{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listMetadataSchemas'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {throw err});
+    this._log.info('listMetadataSchemas iterate %j', request);
     return this.descriptors.page.listMetadataSchemas.asyncIterate(
       this.innerApiCalls['listMetadataSchemas'] as GaxCall,
       request as {},
       callSettings
     ) as AsyncIterable<protos.google.cloud.aiplatform.v1beta1.IMetadataSchema>;
   }
-  /**
-   * Gets the access control policy for a resource. Returns an empty policy
-   * if the resource exists and does not have a policy set.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.resource
-   *   REQUIRED: The resource for which the policy is being requested.
-   *   See the operation documentation for the appropriate value for this field.
-   * @param {Object} [request.options]
-   *   OPTIONAL: A `GetPolicyOptions` object for specifying options to
-   *   `GetIamPolicy`. This field is only used by Cloud IAM.
-   *
-   *   This object should have the same structure as {@link google.iam.v1.GetPolicyOptions | GetPolicyOptions}.
-   * @param {Object} [options]
-   *   Optional parameters. You can override the default settings for this call, e.g, timeout,
-   *   retries, paginations, etc. See {@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html | gax.CallOptions} for the details.
-   * @param {function(?Error, ?Object)} [callback]
-   *   The function which will be called with the result of the API call.
-   *
-   *   The second parameter to the callback is an object representing {@link google.iam.v1.Policy | Policy}.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.iam.v1.Policy | Policy}.
-   *   The promise has a method named "cancel" which cancels the ongoing API call.
-   */
+/**
+ * Gets the access control policy for a resource. Returns an empty policy
+ * if the resource exists and does not have a policy set.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.resource
+ *   REQUIRED: The resource for which the policy is being requested.
+ *   See the operation documentation for the appropriate value for this field.
+ * @param {Object} [request.options]
+ *   OPTIONAL: A `GetPolicyOptions` object for specifying options to
+ *   `GetIamPolicy`. This field is only used by Cloud IAM.
+ *
+ *   This object should have the same structure as {@link google.iam.v1.GetPolicyOptions | GetPolicyOptions}.
+ * @param {Object} [options]
+ *   Optional parameters. You can override the default settings for this call, e.g, timeout,
+ *   retries, paginations, etc. See {@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html | gax.CallOptions} for the details.
+ * @param {function(?Error, ?Object)} [callback]
+ *   The function which will be called with the result of the API call.
+ *
+ *   The second parameter to the callback is an object representing {@link google.iam.v1.Policy | Policy}.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link google.iam.v1.Policy | Policy}.
+ *   The promise has a method named "cancel" which cancels the ongoing API call.
+ */
   getIamPolicy(
     request: IamProtos.google.iam.v1.GetIamPolicyRequest,
     options?:
@@ -7131,39 +4921,39 @@ export class MetadataServiceClient {
       IamProtos.google.iam.v1.GetIamPolicyRequest | null | undefined,
       {} | null | undefined
     >
-  ): Promise<[IamProtos.google.iam.v1.Policy]> {
+  ):Promise<[IamProtos.google.iam.v1.Policy]> {
     return this.iamClient.getIamPolicy(request, options, callback);
   }
 
-  /**
-   * Returns permissions that a caller has on the specified resource. If the
-   * resource does not exist, this will return an empty set of
-   * permissions, not a NOT_FOUND error.
-   *
-   * Note: This operation is designed to be used for building
-   * permission-aware UIs and command-line tools, not for authorization
-   * checking. This operation may "fail open" without warning.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.resource
-   *   REQUIRED: The resource for which the policy detail is being requested.
-   *   See the operation documentation for the appropriate value for this field.
-   * @param {string[]} request.permissions
-   *   The set of permissions to check for the `resource`. Permissions with
-   *   wildcards (such as '*' or 'storage.*') are not allowed. For more
-   *   information see {@link https://cloud.google.com/iam/docs/overview#permissions | IAM Overview }.
-   * @param {Object} [options]
-   *   Optional parameters. You can override the default settings for this call, e.g, timeout,
-   *   retries, paginations, etc. See {@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html | gax.CallOptions} for the details.
-   * @param {function(?Error, ?Object)} [callback]
-   *   The function which will be called with the result of the API call.
-   *
-   *   The second parameter to the callback is an object representing {@link google.iam.v1.TestIamPermissionsResponse | TestIamPermissionsResponse}.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.iam.v1.TestIamPermissionsResponse | TestIamPermissionsResponse}.
-   *   The promise has a method named "cancel" which cancels the ongoing API call.
-   */
+/**
+ * Returns permissions that a caller has on the specified resource. If the
+ * resource does not exist, this will return an empty set of
+ * permissions, not a NOT_FOUND error.
+ *
+ * Note: This operation is designed to be used for building
+ * permission-aware UIs and command-line tools, not for authorization
+ * checking. This operation may "fail open" without warning.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.resource
+ *   REQUIRED: The resource for which the policy detail is being requested.
+ *   See the operation documentation for the appropriate value for this field.
+ * @param {string[]} request.permissions
+ *   The set of permissions to check for the `resource`. Permissions with
+ *   wildcards (such as '*' or 'storage.*') are not allowed. For more
+ *   information see {@link https://cloud.google.com/iam/docs/overview#permissions | IAM Overview }.
+ * @param {Object} [options]
+ *   Optional parameters. You can override the default settings for this call, e.g, timeout,
+ *   retries, paginations, etc. See {@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html | gax.CallOptions} for the details.
+ * @param {function(?Error, ?Object)} [callback]
+ *   The function which will be called with the result of the API call.
+ *
+ *   The second parameter to the callback is an object representing {@link google.iam.v1.TestIamPermissionsResponse | TestIamPermissionsResponse}.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link google.iam.v1.TestIamPermissionsResponse | TestIamPermissionsResponse}.
+ *   The promise has a method named "cancel" which cancels the ongoing API call.
+ */
   setIamPolicy(
     request: IamProtos.google.iam.v1.SetIamPolicyRequest,
     options?:
@@ -7178,40 +4968,40 @@ export class MetadataServiceClient {
       IamProtos.google.iam.v1.SetIamPolicyRequest | null | undefined,
       {} | null | undefined
     >
-  ): Promise<[IamProtos.google.iam.v1.Policy]> {
+  ):Promise<[IamProtos.google.iam.v1.Policy]> {
     return this.iamClient.setIamPolicy(request, options, callback);
   }
 
-  /**
-   * Returns permissions that a caller has on the specified resource. If the
-   * resource does not exist, this will return an empty set of
-   * permissions, not a NOT_FOUND error.
-   *
-   * Note: This operation is designed to be used for building
-   * permission-aware UIs and command-line tools, not for authorization
-   * checking. This operation may "fail open" without warning.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.resource
-   *   REQUIRED: The resource for which the policy detail is being requested.
-   *   See the operation documentation for the appropriate value for this field.
-   * @param {string[]} request.permissions
-   *   The set of permissions to check for the `resource`. Permissions with
-   *   wildcards (such as '*' or 'storage.*') are not allowed. For more
-   *   information see {@link https://cloud.google.com/iam/docs/overview#permissions | IAM Overview }.
-   * @param {Object} [options]
-   *   Optional parameters. You can override the default settings for this call, e.g, timeout,
-   *   retries, paginations, etc. See {@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html | gax.CallOptions} for the details.
-   * @param {function(?Error, ?Object)} [callback]
-   *   The function which will be called with the result of the API call.
-   *
-   *   The second parameter to the callback is an object representing {@link google.iam.v1.TestIamPermissionsResponse | TestIamPermissionsResponse}.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.iam.v1.TestIamPermissionsResponse | TestIamPermissionsResponse}.
-   *   The promise has a method named "cancel" which cancels the ongoing API call.
-   *
-   */
+/**
+ * Returns permissions that a caller has on the specified resource. If the
+ * resource does not exist, this will return an empty set of
+ * permissions, not a NOT_FOUND error.
+ *
+ * Note: This operation is designed to be used for building
+ * permission-aware UIs and command-line tools, not for authorization
+ * checking. This operation may "fail open" without warning.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.resource
+ *   REQUIRED: The resource for which the policy detail is being requested.
+ *   See the operation documentation for the appropriate value for this field.
+ * @param {string[]} request.permissions
+ *   The set of permissions to check for the `resource`. Permissions with
+ *   wildcards (such as '*' or 'storage.*') are not allowed. For more
+ *   information see {@link https://cloud.google.com/iam/docs/overview#permissions | IAM Overview }.
+ * @param {Object} [options]
+ *   Optional parameters. You can override the default settings for this call, e.g, timeout,
+ *   retries, paginations, etc. See {@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html | gax.CallOptions} for the details.
+ * @param {function(?Error, ?Object)} [callback]
+ *   The function which will be called with the result of the API call.
+ *
+ *   The second parameter to the callback is an object representing {@link google.iam.v1.TestIamPermissionsResponse | TestIamPermissionsResponse}.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link google.iam.v1.TestIamPermissionsResponse | TestIamPermissionsResponse}.
+ *   The promise has a method named "cancel" which cancels the ongoing API call.
+ *
+ */
   testIamPermissions(
     request: IamProtos.google.iam.v1.TestIamPermissionsRequest,
     options?:
@@ -7226,11 +5016,11 @@ export class MetadataServiceClient {
       IamProtos.google.iam.v1.TestIamPermissionsRequest | null | undefined,
       {} | null | undefined
     >
-  ): Promise<[IamProtos.google.iam.v1.TestIamPermissionsResponse]> {
+  ):Promise<[IamProtos.google.iam.v1.TestIamPermissionsResponse]> {
     return this.iamClient.testIamPermissions(request, options, callback);
   }
 
-  /**
+/**
    * Gets information about a location.
    *
    * @param {Object} request
@@ -7270,7 +5060,7 @@ export class MetadataServiceClient {
     return this.locationsClient.getLocation(request, options, callback);
   }
 
-  /**
+/**
    * Lists information about the supported locations for this service. Returns an iterable object.
    *
    * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
@@ -7308,7 +5098,7 @@ export class MetadataServiceClient {
     return this.locationsClient.listLocationsAsync(request, options);
   }
 
-  /**
+/**
    * Gets the latest state of a long-running operation.  Clients can use this
    * method to poll the operation result at intervals as recommended by the API
    * service.
@@ -7353,20 +5143,20 @@ export class MetadataServiceClient {
       {} | null | undefined
     >
   ): Promise<[protos.google.longrunning.Operation]> {
-    let options: gax.CallOptions;
-    if (typeof optionsOrCallback === 'function' && callback === undefined) {
-      callback = optionsOrCallback;
-      options = {};
-    } else {
-      options = optionsOrCallback as gax.CallOptions;
-    }
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
+     let options: gax.CallOptions;
+     if (typeof optionsOrCallback === 'function' && callback === undefined) {
+       callback = optionsOrCallback;
+       options = {};
+     } else {
+       options = optionsOrCallback as gax.CallOptions;
+     }
+     options = options || {};
+     options.otherArgs = options.otherArgs || {};
+     options.otherArgs.headers = options.otherArgs.headers || {};
+     options.otherArgs.headers['x-goog-request-params'] =
+       this._gaxModule.routingHeader.fromParams({
+         name: request.name ?? '',
+       });
     return this.operationsClient.getOperation(request, options, callback);
   }
   /**
@@ -7402,14 +5192,14 @@ export class MetadataServiceClient {
   listOperationsAsync(
     request: protos.google.longrunning.ListOperationsRequest,
     options?: gax.CallOptions
-  ): AsyncIterable<protos.google.longrunning.ListOperationsResponse> {
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
+  ): AsyncIterable<protos.google.longrunning.IOperation> {
+     options = options || {};
+     options.otherArgs = options.otherArgs || {};
+     options.otherArgs.headers = options.otherArgs.headers || {};
+     options.otherArgs.headers['x-goog-request-params'] =
+       this._gaxModule.routingHeader.fromParams({
+         name: request.name ?? '',
+       });
     return this.operationsClient.listOperationsAsync(request, options);
   }
   /**
@@ -7443,7 +5233,7 @@ export class MetadataServiceClient {
    * await client.cancelOperation({name: ''});
    * ```
    */
-  cancelOperation(
+   cancelOperation(
     request: protos.google.longrunning.CancelOperationRequest,
     optionsOrCallback?:
       | gax.CallOptions
@@ -7458,20 +5248,20 @@ export class MetadataServiceClient {
       {} | undefined | null
     >
   ): Promise<protos.google.protobuf.Empty> {
-    let options: gax.CallOptions;
-    if (typeof optionsOrCallback === 'function' && callback === undefined) {
-      callback = optionsOrCallback;
-      options = {};
-    } else {
-      options = optionsOrCallback as gax.CallOptions;
-    }
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
+     let options: gax.CallOptions;
+     if (typeof optionsOrCallback === 'function' && callback === undefined) {
+       callback = optionsOrCallback;
+       options = {};
+     } else {
+       options = optionsOrCallback as gax.CallOptions;
+     }
+     options = options || {};
+     options.otherArgs = options.otherArgs || {};
+     options.otherArgs.headers = options.otherArgs.headers || {};
+     options.otherArgs.headers['x-goog-request-params'] =
+       this._gaxModule.routingHeader.fromParams({
+         name: request.name ?? '',
+       });
     return this.operationsClient.cancelOperation(request, options, callback);
   }
 
@@ -7515,20 +5305,20 @@ export class MetadataServiceClient {
       {} | null | undefined
     >
   ): Promise<protos.google.protobuf.Empty> {
-    let options: gax.CallOptions;
-    if (typeof optionsOrCallback === 'function' && callback === undefined) {
-      callback = optionsOrCallback;
-      options = {};
-    } else {
-      options = optionsOrCallback as gax.CallOptions;
-    }
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
+     let options: gax.CallOptions;
+     if (typeof optionsOrCallback === 'function' && callback === undefined) {
+       callback = optionsOrCallback;
+       options = {};
+     } else {
+       options = optionsOrCallback as gax.CallOptions;
+     }
+     options = options || {};
+     options.otherArgs = options.otherArgs || {};
+     options.otherArgs.headers = options.otherArgs.headers || {};
+     options.otherArgs.headers['x-goog-request-params'] =
+       this._gaxModule.routingHeader.fromParams({
+         name: request.name ?? '',
+       });
     return this.operationsClient.deleteOperation(request, options, callback);
   }
 
@@ -7546,13 +5336,7 @@ export class MetadataServiceClient {
    * @param {string} annotation
    * @returns {string} Resource name string.
    */
-  annotationPath(
-    project: string,
-    location: string,
-    dataset: string,
-    dataItem: string,
-    annotation: string
-  ) {
+  annotationPath(project:string,location:string,dataset:string,dataItem:string,annotation:string) {
     return this.pathTemplates.annotationPathTemplate.render({
       project: project,
       location: location,
@@ -7570,8 +5354,7 @@ export class MetadataServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromAnnotationName(annotationName: string) {
-    return this.pathTemplates.annotationPathTemplate.match(annotationName)
-      .project;
+    return this.pathTemplates.annotationPathTemplate.match(annotationName).project;
   }
 
   /**
@@ -7582,8 +5365,7 @@ export class MetadataServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromAnnotationName(annotationName: string) {
-    return this.pathTemplates.annotationPathTemplate.match(annotationName)
-      .location;
+    return this.pathTemplates.annotationPathTemplate.match(annotationName).location;
   }
 
   /**
@@ -7594,8 +5376,7 @@ export class MetadataServiceClient {
    * @returns {string} A string representing the dataset.
    */
   matchDatasetFromAnnotationName(annotationName: string) {
-    return this.pathTemplates.annotationPathTemplate.match(annotationName)
-      .dataset;
+    return this.pathTemplates.annotationPathTemplate.match(annotationName).dataset;
   }
 
   /**
@@ -7606,8 +5387,7 @@ export class MetadataServiceClient {
    * @returns {string} A string representing the data_item.
    */
   matchDataItemFromAnnotationName(annotationName: string) {
-    return this.pathTemplates.annotationPathTemplate.match(annotationName)
-      .data_item;
+    return this.pathTemplates.annotationPathTemplate.match(annotationName).data_item;
   }
 
   /**
@@ -7618,8 +5398,7 @@ export class MetadataServiceClient {
    * @returns {string} A string representing the annotation.
    */
   matchAnnotationFromAnnotationName(annotationName: string) {
-    return this.pathTemplates.annotationPathTemplate.match(annotationName)
-      .annotation;
+    return this.pathTemplates.annotationPathTemplate.match(annotationName).annotation;
   }
 
   /**
@@ -7631,12 +5410,7 @@ export class MetadataServiceClient {
    * @param {string} annotation_spec
    * @returns {string} Resource name string.
    */
-  annotationSpecPath(
-    project: string,
-    location: string,
-    dataset: string,
-    annotationSpec: string
-  ) {
+  annotationSpecPath(project:string,location:string,dataset:string,annotationSpec:string) {
     return this.pathTemplates.annotationSpecPathTemplate.render({
       project: project,
       location: location,
@@ -7653,9 +5427,7 @@ export class MetadataServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromAnnotationSpecName(annotationSpecName: string) {
-    return this.pathTemplates.annotationSpecPathTemplate.match(
-      annotationSpecName
-    ).project;
+    return this.pathTemplates.annotationSpecPathTemplate.match(annotationSpecName).project;
   }
 
   /**
@@ -7666,9 +5438,7 @@ export class MetadataServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromAnnotationSpecName(annotationSpecName: string) {
-    return this.pathTemplates.annotationSpecPathTemplate.match(
-      annotationSpecName
-    ).location;
+    return this.pathTemplates.annotationSpecPathTemplate.match(annotationSpecName).location;
   }
 
   /**
@@ -7679,9 +5449,7 @@ export class MetadataServiceClient {
    * @returns {string} A string representing the dataset.
    */
   matchDatasetFromAnnotationSpecName(annotationSpecName: string) {
-    return this.pathTemplates.annotationSpecPathTemplate.match(
-      annotationSpecName
-    ).dataset;
+    return this.pathTemplates.annotationSpecPathTemplate.match(annotationSpecName).dataset;
   }
 
   /**
@@ -7692,9 +5460,7 @@ export class MetadataServiceClient {
    * @returns {string} A string representing the annotation_spec.
    */
   matchAnnotationSpecFromAnnotationSpecName(annotationSpecName: string) {
-    return this.pathTemplates.annotationSpecPathTemplate.match(
-      annotationSpecName
-    ).annotation_spec;
+    return this.pathTemplates.annotationSpecPathTemplate.match(annotationSpecName).annotation_spec;
   }
 
   /**
@@ -7706,12 +5472,7 @@ export class MetadataServiceClient {
    * @param {string} artifact
    * @returns {string} Resource name string.
    */
-  artifactPath(
-    project: string,
-    location: string,
-    metadataStore: string,
-    artifact: string
-  ) {
+  artifactPath(project:string,location:string,metadataStore:string,artifact:string) {
     return this.pathTemplates.artifactPathTemplate.render({
       project: project,
       location: location,
@@ -7750,8 +5511,7 @@ export class MetadataServiceClient {
    * @returns {string} A string representing the metadata_store.
    */
   matchMetadataStoreFromArtifactName(artifactName: string) {
-    return this.pathTemplates.artifactPathTemplate.match(artifactName)
-      .metadata_store;
+    return this.pathTemplates.artifactPathTemplate.match(artifactName).metadata_store;
   }
 
   /**
@@ -7773,11 +5533,7 @@ export class MetadataServiceClient {
    * @param {string} batch_prediction_job
    * @returns {string} Resource name string.
    */
-  batchPredictionJobPath(
-    project: string,
-    location: string,
-    batchPredictionJob: string
-  ) {
+  batchPredictionJobPath(project:string,location:string,batchPredictionJob:string) {
     return this.pathTemplates.batchPredictionJobPathTemplate.render({
       project: project,
       location: location,
@@ -7793,9 +5549,7 @@ export class MetadataServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromBatchPredictionJobName(batchPredictionJobName: string) {
-    return this.pathTemplates.batchPredictionJobPathTemplate.match(
-      batchPredictionJobName
-    ).project;
+    return this.pathTemplates.batchPredictionJobPathTemplate.match(batchPredictionJobName).project;
   }
 
   /**
@@ -7806,9 +5560,7 @@ export class MetadataServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromBatchPredictionJobName(batchPredictionJobName: string) {
-    return this.pathTemplates.batchPredictionJobPathTemplate.match(
-      batchPredictionJobName
-    ).location;
+    return this.pathTemplates.batchPredictionJobPathTemplate.match(batchPredictionJobName).location;
   }
 
   /**
@@ -7818,12 +5570,8 @@ export class MetadataServiceClient {
    *   A fully-qualified path representing BatchPredictionJob resource.
    * @returns {string} A string representing the batch_prediction_job.
    */
-  matchBatchPredictionJobFromBatchPredictionJobName(
-    batchPredictionJobName: string
-  ) {
-    return this.pathTemplates.batchPredictionJobPathTemplate.match(
-      batchPredictionJobName
-    ).batch_prediction_job;
+  matchBatchPredictionJobFromBatchPredictionJobName(batchPredictionJobName: string) {
+    return this.pathTemplates.batchPredictionJobPathTemplate.match(batchPredictionJobName).batch_prediction_job;
   }
 
   /**
@@ -7834,7 +5582,7 @@ export class MetadataServiceClient {
    * @param {string} cached_content
    * @returns {string} Resource name string.
    */
-  cachedContentPath(project: string, location: string, cachedContent: string) {
+  cachedContentPath(project:string,location:string,cachedContent:string) {
     return this.pathTemplates.cachedContentPathTemplate.render({
       project: project,
       location: location,
@@ -7850,8 +5598,7 @@ export class MetadataServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromCachedContentName(cachedContentName: string) {
-    return this.pathTemplates.cachedContentPathTemplate.match(cachedContentName)
-      .project;
+    return this.pathTemplates.cachedContentPathTemplate.match(cachedContentName).project;
   }
 
   /**
@@ -7862,8 +5609,7 @@ export class MetadataServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromCachedContentName(cachedContentName: string) {
-    return this.pathTemplates.cachedContentPathTemplate.match(cachedContentName)
-      .location;
+    return this.pathTemplates.cachedContentPathTemplate.match(cachedContentName).location;
   }
 
   /**
@@ -7874,8 +5620,7 @@ export class MetadataServiceClient {
    * @returns {string} A string representing the cached_content.
    */
   matchCachedContentFromCachedContentName(cachedContentName: string) {
-    return this.pathTemplates.cachedContentPathTemplate.match(cachedContentName)
-      .cached_content;
+    return this.pathTemplates.cachedContentPathTemplate.match(cachedContentName).cached_content;
   }
 
   /**
@@ -7887,12 +5632,7 @@ export class MetadataServiceClient {
    * @param {string} context
    * @returns {string} Resource name string.
    */
-  contextPath(
-    project: string,
-    location: string,
-    metadataStore: string,
-    context: string
-  ) {
+  contextPath(project:string,location:string,metadataStore:string,context:string) {
     return this.pathTemplates.contextPathTemplate.render({
       project: project,
       location: location,
@@ -7931,8 +5671,7 @@ export class MetadataServiceClient {
    * @returns {string} A string representing the metadata_store.
    */
   matchMetadataStoreFromContextName(contextName: string) {
-    return this.pathTemplates.contextPathTemplate.match(contextName)
-      .metadata_store;
+    return this.pathTemplates.contextPathTemplate.match(contextName).metadata_store;
   }
 
   /**
@@ -7954,7 +5693,7 @@ export class MetadataServiceClient {
    * @param {string} custom_job
    * @returns {string} Resource name string.
    */
-  customJobPath(project: string, location: string, customJob: string) {
+  customJobPath(project:string,location:string,customJob:string) {
     return this.pathTemplates.customJobPathTemplate.render({
       project: project,
       location: location,
@@ -7970,8 +5709,7 @@ export class MetadataServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromCustomJobName(customJobName: string) {
-    return this.pathTemplates.customJobPathTemplate.match(customJobName)
-      .project;
+    return this.pathTemplates.customJobPathTemplate.match(customJobName).project;
   }
 
   /**
@@ -7982,8 +5720,7 @@ export class MetadataServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromCustomJobName(customJobName: string) {
-    return this.pathTemplates.customJobPathTemplate.match(customJobName)
-      .location;
+    return this.pathTemplates.customJobPathTemplate.match(customJobName).location;
   }
 
   /**
@@ -7994,8 +5731,7 @@ export class MetadataServiceClient {
    * @returns {string} A string representing the custom_job.
    */
   matchCustomJobFromCustomJobName(customJobName: string) {
-    return this.pathTemplates.customJobPathTemplate.match(customJobName)
-      .custom_job;
+    return this.pathTemplates.customJobPathTemplate.match(customJobName).custom_job;
   }
 
   /**
@@ -8007,12 +5743,7 @@ export class MetadataServiceClient {
    * @param {string} data_item
    * @returns {string} Resource name string.
    */
-  dataItemPath(
-    project: string,
-    location: string,
-    dataset: string,
-    dataItem: string
-  ) {
+  dataItemPath(project:string,location:string,dataset:string,dataItem:string) {
     return this.pathTemplates.dataItemPathTemplate.render({
       project: project,
       location: location,
@@ -8062,8 +5793,7 @@ export class MetadataServiceClient {
    * @returns {string} A string representing the data_item.
    */
   matchDataItemFromDataItemName(dataItemName: string) {
-    return this.pathTemplates.dataItemPathTemplate.match(dataItemName)
-      .data_item;
+    return this.pathTemplates.dataItemPathTemplate.match(dataItemName).data_item;
   }
 
   /**
@@ -8074,11 +5804,7 @@ export class MetadataServiceClient {
    * @param {string} data_labeling_job
    * @returns {string} Resource name string.
    */
-  dataLabelingJobPath(
-    project: string,
-    location: string,
-    dataLabelingJob: string
-  ) {
+  dataLabelingJobPath(project:string,location:string,dataLabelingJob:string) {
     return this.pathTemplates.dataLabelingJobPathTemplate.render({
       project: project,
       location: location,
@@ -8094,9 +5820,7 @@ export class MetadataServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromDataLabelingJobName(dataLabelingJobName: string) {
-    return this.pathTemplates.dataLabelingJobPathTemplate.match(
-      dataLabelingJobName
-    ).project;
+    return this.pathTemplates.dataLabelingJobPathTemplate.match(dataLabelingJobName).project;
   }
 
   /**
@@ -8107,9 +5831,7 @@ export class MetadataServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromDataLabelingJobName(dataLabelingJobName: string) {
-    return this.pathTemplates.dataLabelingJobPathTemplate.match(
-      dataLabelingJobName
-    ).location;
+    return this.pathTemplates.dataLabelingJobPathTemplate.match(dataLabelingJobName).location;
   }
 
   /**
@@ -8120,9 +5842,7 @@ export class MetadataServiceClient {
    * @returns {string} A string representing the data_labeling_job.
    */
   matchDataLabelingJobFromDataLabelingJobName(dataLabelingJobName: string) {
-    return this.pathTemplates.dataLabelingJobPathTemplate.match(
-      dataLabelingJobName
-    ).data_labeling_job;
+    return this.pathTemplates.dataLabelingJobPathTemplate.match(dataLabelingJobName).data_labeling_job;
   }
 
   /**
@@ -8133,7 +5853,7 @@ export class MetadataServiceClient {
    * @param {string} dataset
    * @returns {string} Resource name string.
    */
-  datasetPath(project: string, location: string, dataset: string) {
+  datasetPath(project:string,location:string,dataset:string) {
     return this.pathTemplates.datasetPathTemplate.render({
       project: project,
       location: location,
@@ -8183,12 +5903,7 @@ export class MetadataServiceClient {
    * @param {string} dataset_version
    * @returns {string} Resource name string.
    */
-  datasetVersionPath(
-    project: string,
-    location: string,
-    dataset: string,
-    datasetVersion: string
-  ) {
+  datasetVersionPath(project:string,location:string,dataset:string,datasetVersion:string) {
     return this.pathTemplates.datasetVersionPathTemplate.render({
       project: project,
       location: location,
@@ -8205,9 +5920,7 @@ export class MetadataServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromDatasetVersionName(datasetVersionName: string) {
-    return this.pathTemplates.datasetVersionPathTemplate.match(
-      datasetVersionName
-    ).project;
+    return this.pathTemplates.datasetVersionPathTemplate.match(datasetVersionName).project;
   }
 
   /**
@@ -8218,9 +5931,7 @@ export class MetadataServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromDatasetVersionName(datasetVersionName: string) {
-    return this.pathTemplates.datasetVersionPathTemplate.match(
-      datasetVersionName
-    ).location;
+    return this.pathTemplates.datasetVersionPathTemplate.match(datasetVersionName).location;
   }
 
   /**
@@ -8231,9 +5942,7 @@ export class MetadataServiceClient {
    * @returns {string} A string representing the dataset.
    */
   matchDatasetFromDatasetVersionName(datasetVersionName: string) {
-    return this.pathTemplates.datasetVersionPathTemplate.match(
-      datasetVersionName
-    ).dataset;
+    return this.pathTemplates.datasetVersionPathTemplate.match(datasetVersionName).dataset;
   }
 
   /**
@@ -8244,9 +5953,7 @@ export class MetadataServiceClient {
    * @returns {string} A string representing the dataset_version.
    */
   matchDatasetVersionFromDatasetVersionName(datasetVersionName: string) {
-    return this.pathTemplates.datasetVersionPathTemplate.match(
-      datasetVersionName
-    ).dataset_version;
+    return this.pathTemplates.datasetVersionPathTemplate.match(datasetVersionName).dataset_version;
   }
 
   /**
@@ -8257,11 +5964,7 @@ export class MetadataServiceClient {
    * @param {string} deployment_resource_pool
    * @returns {string} Resource name string.
    */
-  deploymentResourcePoolPath(
-    project: string,
-    location: string,
-    deploymentResourcePool: string
-  ) {
+  deploymentResourcePoolPath(project:string,location:string,deploymentResourcePool:string) {
     return this.pathTemplates.deploymentResourcePoolPathTemplate.render({
       project: project,
       location: location,
@@ -8276,12 +5979,8 @@ export class MetadataServiceClient {
    *   A fully-qualified path representing DeploymentResourcePool resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromDeploymentResourcePoolName(
-    deploymentResourcePoolName: string
-  ) {
-    return this.pathTemplates.deploymentResourcePoolPathTemplate.match(
-      deploymentResourcePoolName
-    ).project;
+  matchProjectFromDeploymentResourcePoolName(deploymentResourcePoolName: string) {
+    return this.pathTemplates.deploymentResourcePoolPathTemplate.match(deploymentResourcePoolName).project;
   }
 
   /**
@@ -8291,12 +5990,8 @@ export class MetadataServiceClient {
    *   A fully-qualified path representing DeploymentResourcePool resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromDeploymentResourcePoolName(
-    deploymentResourcePoolName: string
-  ) {
-    return this.pathTemplates.deploymentResourcePoolPathTemplate.match(
-      deploymentResourcePoolName
-    ).location;
+  matchLocationFromDeploymentResourcePoolName(deploymentResourcePoolName: string) {
+    return this.pathTemplates.deploymentResourcePoolPathTemplate.match(deploymentResourcePoolName).location;
   }
 
   /**
@@ -8306,12 +6001,8 @@ export class MetadataServiceClient {
    *   A fully-qualified path representing DeploymentResourcePool resource.
    * @returns {string} A string representing the deployment_resource_pool.
    */
-  matchDeploymentResourcePoolFromDeploymentResourcePoolName(
-    deploymentResourcePoolName: string
-  ) {
-    return this.pathTemplates.deploymentResourcePoolPathTemplate.match(
-      deploymentResourcePoolName
-    ).deployment_resource_pool;
+  matchDeploymentResourcePoolFromDeploymentResourcePoolName(deploymentResourcePoolName: string) {
+    return this.pathTemplates.deploymentResourcePoolPathTemplate.match(deploymentResourcePoolName).deployment_resource_pool;
   }
 
   /**
@@ -8323,12 +6014,7 @@ export class MetadataServiceClient {
    * @param {string} entity_type
    * @returns {string} Resource name string.
    */
-  entityTypePath(
-    project: string,
-    location: string,
-    featurestore: string,
-    entityType: string
-  ) {
+  entityTypePath(project:string,location:string,featurestore:string,entityType:string) {
     return this.pathTemplates.entityTypePathTemplate.render({
       project: project,
       location: location,
@@ -8345,8 +6031,7 @@ export class MetadataServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromEntityTypeName(entityTypeName: string) {
-    return this.pathTemplates.entityTypePathTemplate.match(entityTypeName)
-      .project;
+    return this.pathTemplates.entityTypePathTemplate.match(entityTypeName).project;
   }
 
   /**
@@ -8357,8 +6042,7 @@ export class MetadataServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromEntityTypeName(entityTypeName: string) {
-    return this.pathTemplates.entityTypePathTemplate.match(entityTypeName)
-      .location;
+    return this.pathTemplates.entityTypePathTemplate.match(entityTypeName).location;
   }
 
   /**
@@ -8369,8 +6053,7 @@ export class MetadataServiceClient {
    * @returns {string} A string representing the featurestore.
    */
   matchFeaturestoreFromEntityTypeName(entityTypeName: string) {
-    return this.pathTemplates.entityTypePathTemplate.match(entityTypeName)
-      .featurestore;
+    return this.pathTemplates.entityTypePathTemplate.match(entityTypeName).featurestore;
   }
 
   /**
@@ -8381,8 +6064,56 @@ export class MetadataServiceClient {
    * @returns {string} A string representing the entity_type.
    */
   matchEntityTypeFromEntityTypeName(entityTypeName: string) {
-    return this.pathTemplates.entityTypePathTemplate.match(entityTypeName)
-      .entity_type;
+    return this.pathTemplates.entityTypePathTemplate.match(entityTypeName).entity_type;
+  }
+
+  /**
+   * Return a fully-qualified exampleStore resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} example_store
+   * @returns {string} Resource name string.
+   */
+  exampleStorePath(project:string,location:string,exampleStore:string) {
+    return this.pathTemplates.exampleStorePathTemplate.render({
+      project: project,
+      location: location,
+      example_store: exampleStore,
+    });
+  }
+
+  /**
+   * Parse the project from ExampleStore resource.
+   *
+   * @param {string} exampleStoreName
+   *   A fully-qualified path representing ExampleStore resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromExampleStoreName(exampleStoreName: string) {
+    return this.pathTemplates.exampleStorePathTemplate.match(exampleStoreName).project;
+  }
+
+  /**
+   * Parse the location from ExampleStore resource.
+   *
+   * @param {string} exampleStoreName
+   *   A fully-qualified path representing ExampleStore resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromExampleStoreName(exampleStoreName: string) {
+    return this.pathTemplates.exampleStorePathTemplate.match(exampleStoreName).location;
+  }
+
+  /**
+   * Parse the example_store from ExampleStore resource.
+   *
+   * @param {string} exampleStoreName
+   *   A fully-qualified path representing ExampleStore resource.
+   * @returns {string} A string representing the example_store.
+   */
+  matchExampleStoreFromExampleStoreName(exampleStoreName: string) {
+    return this.pathTemplates.exampleStorePathTemplate.match(exampleStoreName).example_store;
   }
 
   /**
@@ -8394,12 +6125,7 @@ export class MetadataServiceClient {
    * @param {string} execution
    * @returns {string} Resource name string.
    */
-  executionPath(
-    project: string,
-    location: string,
-    metadataStore: string,
-    execution: string
-  ) {
+  executionPath(project:string,location:string,metadataStore:string,execution:string) {
     return this.pathTemplates.executionPathTemplate.render({
       project: project,
       location: location,
@@ -8416,8 +6142,7 @@ export class MetadataServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromExecutionName(executionName: string) {
-    return this.pathTemplates.executionPathTemplate.match(executionName)
-      .project;
+    return this.pathTemplates.executionPathTemplate.match(executionName).project;
   }
 
   /**
@@ -8428,8 +6153,7 @@ export class MetadataServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromExecutionName(executionName: string) {
-    return this.pathTemplates.executionPathTemplate.match(executionName)
-      .location;
+    return this.pathTemplates.executionPathTemplate.match(executionName).location;
   }
 
   /**
@@ -8440,8 +6164,7 @@ export class MetadataServiceClient {
    * @returns {string} A string representing the metadata_store.
    */
   matchMetadataStoreFromExecutionName(executionName: string) {
-    return this.pathTemplates.executionPathTemplate.match(executionName)
-      .metadata_store;
+    return this.pathTemplates.executionPathTemplate.match(executionName).metadata_store;
   }
 
   /**
@@ -8452,8 +6175,7 @@ export class MetadataServiceClient {
    * @returns {string} A string representing the execution.
    */
   matchExecutionFromExecutionName(executionName: string) {
-    return this.pathTemplates.executionPathTemplate.match(executionName)
-      .execution;
+    return this.pathTemplates.executionPathTemplate.match(executionName).execution;
   }
 
   /**
@@ -8464,7 +6186,7 @@ export class MetadataServiceClient {
    * @param {string} extension
    * @returns {string} Resource name string.
    */
-  extensionPath(project: string, location: string, extension: string) {
+  extensionPath(project:string,location:string,extension:string) {
     return this.pathTemplates.extensionPathTemplate.render({
       project: project,
       location: location,
@@ -8480,8 +6202,7 @@ export class MetadataServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromExtensionName(extensionName: string) {
-    return this.pathTemplates.extensionPathTemplate.match(extensionName)
-      .project;
+    return this.pathTemplates.extensionPathTemplate.match(extensionName).project;
   }
 
   /**
@@ -8492,8 +6213,7 @@ export class MetadataServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromExtensionName(extensionName: string) {
-    return this.pathTemplates.extensionPathTemplate.match(extensionName)
-      .location;
+    return this.pathTemplates.extensionPathTemplate.match(extensionName).location;
   }
 
   /**
@@ -8504,8 +6224,7 @@ export class MetadataServiceClient {
    * @returns {string} A string representing the extension.
    */
   matchExtensionFromExtensionName(extensionName: string) {
-    return this.pathTemplates.extensionPathTemplate.match(extensionName)
-      .extension;
+    return this.pathTemplates.extensionPathTemplate.match(extensionName).extension;
   }
 
   /**
@@ -8516,7 +6235,7 @@ export class MetadataServiceClient {
    * @param {string} feature_group
    * @returns {string} Resource name string.
    */
-  featureGroupPath(project: string, location: string, featureGroup: string) {
+  featureGroupPath(project:string,location:string,featureGroup:string) {
     return this.pathTemplates.featureGroupPathTemplate.render({
       project: project,
       location: location,
@@ -8532,8 +6251,7 @@ export class MetadataServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromFeatureGroupName(featureGroupName: string) {
-    return this.pathTemplates.featureGroupPathTemplate.match(featureGroupName)
-      .project;
+    return this.pathTemplates.featureGroupPathTemplate.match(featureGroupName).project;
   }
 
   /**
@@ -8544,8 +6262,7 @@ export class MetadataServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromFeatureGroupName(featureGroupName: string) {
-    return this.pathTemplates.featureGroupPathTemplate.match(featureGroupName)
-      .location;
+    return this.pathTemplates.featureGroupPathTemplate.match(featureGroupName).location;
   }
 
   /**
@@ -8556,8 +6273,7 @@ export class MetadataServiceClient {
    * @returns {string} A string representing the feature_group.
    */
   matchFeatureGroupFromFeatureGroupName(featureGroupName: string) {
-    return this.pathTemplates.featureGroupPathTemplate.match(featureGroupName)
-      .feature_group;
+    return this.pathTemplates.featureGroupPathTemplate.match(featureGroupName).feature_group;
   }
 
   /**
@@ -8569,12 +6285,7 @@ export class MetadataServiceClient {
    * @param {string} feature_monitor
    * @returns {string} Resource name string.
    */
-  featureMonitorPath(
-    project: string,
-    location: string,
-    featureGroup: string,
-    featureMonitor: string
-  ) {
+  featureMonitorPath(project:string,location:string,featureGroup:string,featureMonitor:string) {
     return this.pathTemplates.featureMonitorPathTemplate.render({
       project: project,
       location: location,
@@ -8591,9 +6302,7 @@ export class MetadataServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromFeatureMonitorName(featureMonitorName: string) {
-    return this.pathTemplates.featureMonitorPathTemplate.match(
-      featureMonitorName
-    ).project;
+    return this.pathTemplates.featureMonitorPathTemplate.match(featureMonitorName).project;
   }
 
   /**
@@ -8604,9 +6313,7 @@ export class MetadataServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromFeatureMonitorName(featureMonitorName: string) {
-    return this.pathTemplates.featureMonitorPathTemplate.match(
-      featureMonitorName
-    ).location;
+    return this.pathTemplates.featureMonitorPathTemplate.match(featureMonitorName).location;
   }
 
   /**
@@ -8617,9 +6324,7 @@ export class MetadataServiceClient {
    * @returns {string} A string representing the feature_group.
    */
   matchFeatureGroupFromFeatureMonitorName(featureMonitorName: string) {
-    return this.pathTemplates.featureMonitorPathTemplate.match(
-      featureMonitorName
-    ).feature_group;
+    return this.pathTemplates.featureMonitorPathTemplate.match(featureMonitorName).feature_group;
   }
 
   /**
@@ -8630,9 +6335,7 @@ export class MetadataServiceClient {
    * @returns {string} A string representing the feature_monitor.
    */
   matchFeatureMonitorFromFeatureMonitorName(featureMonitorName: string) {
-    return this.pathTemplates.featureMonitorPathTemplate.match(
-      featureMonitorName
-    ).feature_monitor;
+    return this.pathTemplates.featureMonitorPathTemplate.match(featureMonitorName).feature_monitor;
   }
 
   /**
@@ -8645,13 +6348,7 @@ export class MetadataServiceClient {
    * @param {string} feature_monitor_job
    * @returns {string} Resource name string.
    */
-  featureMonitorJobPath(
-    project: string,
-    location: string,
-    featureGroup: string,
-    featureMonitor: string,
-    featureMonitorJob: string
-  ) {
+  featureMonitorJobPath(project:string,location:string,featureGroup:string,featureMonitor:string,featureMonitorJob:string) {
     return this.pathTemplates.featureMonitorJobPathTemplate.render({
       project: project,
       location: location,
@@ -8669,9 +6366,7 @@ export class MetadataServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromFeatureMonitorJobName(featureMonitorJobName: string) {
-    return this.pathTemplates.featureMonitorJobPathTemplate.match(
-      featureMonitorJobName
-    ).project;
+    return this.pathTemplates.featureMonitorJobPathTemplate.match(featureMonitorJobName).project;
   }
 
   /**
@@ -8682,9 +6377,7 @@ export class MetadataServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromFeatureMonitorJobName(featureMonitorJobName: string) {
-    return this.pathTemplates.featureMonitorJobPathTemplate.match(
-      featureMonitorJobName
-    ).location;
+    return this.pathTemplates.featureMonitorJobPathTemplate.match(featureMonitorJobName).location;
   }
 
   /**
@@ -8695,9 +6388,7 @@ export class MetadataServiceClient {
    * @returns {string} A string representing the feature_group.
    */
   matchFeatureGroupFromFeatureMonitorJobName(featureMonitorJobName: string) {
-    return this.pathTemplates.featureMonitorJobPathTemplate.match(
-      featureMonitorJobName
-    ).feature_group;
+    return this.pathTemplates.featureMonitorJobPathTemplate.match(featureMonitorJobName).feature_group;
   }
 
   /**
@@ -8708,9 +6399,7 @@ export class MetadataServiceClient {
    * @returns {string} A string representing the feature_monitor.
    */
   matchFeatureMonitorFromFeatureMonitorJobName(featureMonitorJobName: string) {
-    return this.pathTemplates.featureMonitorJobPathTemplate.match(
-      featureMonitorJobName
-    ).feature_monitor;
+    return this.pathTemplates.featureMonitorJobPathTemplate.match(featureMonitorJobName).feature_monitor;
   }
 
   /**
@@ -8720,12 +6409,8 @@ export class MetadataServiceClient {
    *   A fully-qualified path representing FeatureMonitorJob resource.
    * @returns {string} A string representing the feature_monitor_job.
    */
-  matchFeatureMonitorJobFromFeatureMonitorJobName(
-    featureMonitorJobName: string
-  ) {
-    return this.pathTemplates.featureMonitorJobPathTemplate.match(
-      featureMonitorJobName
-    ).feature_monitor_job;
+  matchFeatureMonitorJobFromFeatureMonitorJobName(featureMonitorJobName: string) {
+    return this.pathTemplates.featureMonitorJobPathTemplate.match(featureMonitorJobName).feature_monitor_job;
   }
 
   /**
@@ -8736,11 +6421,7 @@ export class MetadataServiceClient {
    * @param {string} feature_online_store
    * @returns {string} Resource name string.
    */
-  featureOnlineStorePath(
-    project: string,
-    location: string,
-    featureOnlineStore: string
-  ) {
+  featureOnlineStorePath(project:string,location:string,featureOnlineStore:string) {
     return this.pathTemplates.featureOnlineStorePathTemplate.render({
       project: project,
       location: location,
@@ -8756,9 +6437,7 @@ export class MetadataServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromFeatureOnlineStoreName(featureOnlineStoreName: string) {
-    return this.pathTemplates.featureOnlineStorePathTemplate.match(
-      featureOnlineStoreName
-    ).project;
+    return this.pathTemplates.featureOnlineStorePathTemplate.match(featureOnlineStoreName).project;
   }
 
   /**
@@ -8769,9 +6448,7 @@ export class MetadataServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromFeatureOnlineStoreName(featureOnlineStoreName: string) {
-    return this.pathTemplates.featureOnlineStorePathTemplate.match(
-      featureOnlineStoreName
-    ).location;
+    return this.pathTemplates.featureOnlineStorePathTemplate.match(featureOnlineStoreName).location;
   }
 
   /**
@@ -8781,12 +6458,8 @@ export class MetadataServiceClient {
    *   A fully-qualified path representing FeatureOnlineStore resource.
    * @returns {string} A string representing the feature_online_store.
    */
-  matchFeatureOnlineStoreFromFeatureOnlineStoreName(
-    featureOnlineStoreName: string
-  ) {
-    return this.pathTemplates.featureOnlineStorePathTemplate.match(
-      featureOnlineStoreName
-    ).feature_online_store;
+  matchFeatureOnlineStoreFromFeatureOnlineStoreName(featureOnlineStoreName: string) {
+    return this.pathTemplates.featureOnlineStorePathTemplate.match(featureOnlineStoreName).feature_online_store;
   }
 
   /**
@@ -8798,12 +6471,7 @@ export class MetadataServiceClient {
    * @param {string} feature_view
    * @returns {string} Resource name string.
    */
-  featureViewPath(
-    project: string,
-    location: string,
-    featureOnlineStore: string,
-    featureView: string
-  ) {
+  featureViewPath(project:string,location:string,featureOnlineStore:string,featureView:string) {
     return this.pathTemplates.featureViewPathTemplate.render({
       project: project,
       location: location,
@@ -8820,8 +6488,7 @@ export class MetadataServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromFeatureViewName(featureViewName: string) {
-    return this.pathTemplates.featureViewPathTemplate.match(featureViewName)
-      .project;
+    return this.pathTemplates.featureViewPathTemplate.match(featureViewName).project;
   }
 
   /**
@@ -8832,8 +6499,7 @@ export class MetadataServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromFeatureViewName(featureViewName: string) {
-    return this.pathTemplates.featureViewPathTemplate.match(featureViewName)
-      .location;
+    return this.pathTemplates.featureViewPathTemplate.match(featureViewName).location;
   }
 
   /**
@@ -8844,8 +6510,7 @@ export class MetadataServiceClient {
    * @returns {string} A string representing the feature_online_store.
    */
   matchFeatureOnlineStoreFromFeatureViewName(featureViewName: string) {
-    return this.pathTemplates.featureViewPathTemplate.match(featureViewName)
-      .feature_online_store;
+    return this.pathTemplates.featureViewPathTemplate.match(featureViewName).feature_online_store;
   }
 
   /**
@@ -8856,8 +6521,7 @@ export class MetadataServiceClient {
    * @returns {string} A string representing the feature_view.
    */
   matchFeatureViewFromFeatureViewName(featureViewName: string) {
-    return this.pathTemplates.featureViewPathTemplate.match(featureViewName)
-      .feature_view;
+    return this.pathTemplates.featureViewPathTemplate.match(featureViewName).feature_view;
   }
 
   /**
@@ -8869,12 +6533,7 @@ export class MetadataServiceClient {
    * @param {string} feature_view
    * @returns {string} Resource name string.
    */
-  featureViewSyncPath(
-    project: string,
-    location: string,
-    featureOnlineStore: string,
-    featureView: string
-  ) {
+  featureViewSyncPath(project:string,location:string,featureOnlineStore:string,featureView:string) {
     return this.pathTemplates.featureViewSyncPathTemplate.render({
       project: project,
       location: location,
@@ -8891,9 +6550,7 @@ export class MetadataServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromFeatureViewSyncName(featureViewSyncName: string) {
-    return this.pathTemplates.featureViewSyncPathTemplate.match(
-      featureViewSyncName
-    ).project;
+    return this.pathTemplates.featureViewSyncPathTemplate.match(featureViewSyncName).project;
   }
 
   /**
@@ -8904,9 +6561,7 @@ export class MetadataServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromFeatureViewSyncName(featureViewSyncName: string) {
-    return this.pathTemplates.featureViewSyncPathTemplate.match(
-      featureViewSyncName
-    ).location;
+    return this.pathTemplates.featureViewSyncPathTemplate.match(featureViewSyncName).location;
   }
 
   /**
@@ -8917,9 +6572,7 @@ export class MetadataServiceClient {
    * @returns {string} A string representing the feature_online_store.
    */
   matchFeatureOnlineStoreFromFeatureViewSyncName(featureViewSyncName: string) {
-    return this.pathTemplates.featureViewSyncPathTemplate.match(
-      featureViewSyncName
-    ).feature_online_store;
+    return this.pathTemplates.featureViewSyncPathTemplate.match(featureViewSyncName).feature_online_store;
   }
 
   /**
@@ -8930,9 +6583,7 @@ export class MetadataServiceClient {
    * @returns {string} A string representing the feature_view.
    */
   matchFeatureViewFromFeatureViewSyncName(featureViewSyncName: string) {
-    return this.pathTemplates.featureViewSyncPathTemplate.match(
-      featureViewSyncName
-    ).feature_view;
+    return this.pathTemplates.featureViewSyncPathTemplate.match(featureViewSyncName).feature_view;
   }
 
   /**
@@ -8943,7 +6594,7 @@ export class MetadataServiceClient {
    * @param {string} featurestore
    * @returns {string} Resource name string.
    */
-  featurestorePath(project: string, location: string, featurestore: string) {
+  featurestorePath(project:string,location:string,featurestore:string) {
     return this.pathTemplates.featurestorePathTemplate.render({
       project: project,
       location: location,
@@ -8959,8 +6610,7 @@ export class MetadataServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromFeaturestoreName(featurestoreName: string) {
-    return this.pathTemplates.featurestorePathTemplate.match(featurestoreName)
-      .project;
+    return this.pathTemplates.featurestorePathTemplate.match(featurestoreName).project;
   }
 
   /**
@@ -8971,8 +6621,7 @@ export class MetadataServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromFeaturestoreName(featurestoreName: string) {
-    return this.pathTemplates.featurestorePathTemplate.match(featurestoreName)
-      .location;
+    return this.pathTemplates.featurestorePathTemplate.match(featurestoreName).location;
   }
 
   /**
@@ -8983,8 +6632,7 @@ export class MetadataServiceClient {
    * @returns {string} A string representing the featurestore.
    */
   matchFeaturestoreFromFeaturestoreName(featurestoreName: string) {
-    return this.pathTemplates.featurestorePathTemplate.match(featurestoreName)
-      .featurestore;
+    return this.pathTemplates.featurestorePathTemplate.match(featurestoreName).featurestore;
   }
 
   /**
@@ -8995,11 +6643,7 @@ export class MetadataServiceClient {
    * @param {string} hyperparameter_tuning_job
    * @returns {string} Resource name string.
    */
-  hyperparameterTuningJobPath(
-    project: string,
-    location: string,
-    hyperparameterTuningJob: string
-  ) {
+  hyperparameterTuningJobPath(project:string,location:string,hyperparameterTuningJob:string) {
     return this.pathTemplates.hyperparameterTuningJobPathTemplate.render({
       project: project,
       location: location,
@@ -9014,12 +6658,8 @@ export class MetadataServiceClient {
    *   A fully-qualified path representing HyperparameterTuningJob resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromHyperparameterTuningJobName(
-    hyperparameterTuningJobName: string
-  ) {
-    return this.pathTemplates.hyperparameterTuningJobPathTemplate.match(
-      hyperparameterTuningJobName
-    ).project;
+  matchProjectFromHyperparameterTuningJobName(hyperparameterTuningJobName: string) {
+    return this.pathTemplates.hyperparameterTuningJobPathTemplate.match(hyperparameterTuningJobName).project;
   }
 
   /**
@@ -9029,12 +6669,8 @@ export class MetadataServiceClient {
    *   A fully-qualified path representing HyperparameterTuningJob resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromHyperparameterTuningJobName(
-    hyperparameterTuningJobName: string
-  ) {
-    return this.pathTemplates.hyperparameterTuningJobPathTemplate.match(
-      hyperparameterTuningJobName
-    ).location;
+  matchLocationFromHyperparameterTuningJobName(hyperparameterTuningJobName: string) {
+    return this.pathTemplates.hyperparameterTuningJobPathTemplate.match(hyperparameterTuningJobName).location;
   }
 
   /**
@@ -9044,12 +6680,8 @@ export class MetadataServiceClient {
    *   A fully-qualified path representing HyperparameterTuningJob resource.
    * @returns {string} A string representing the hyperparameter_tuning_job.
    */
-  matchHyperparameterTuningJobFromHyperparameterTuningJobName(
-    hyperparameterTuningJobName: string
-  ) {
-    return this.pathTemplates.hyperparameterTuningJobPathTemplate.match(
-      hyperparameterTuningJobName
-    ).hyperparameter_tuning_job;
+  matchHyperparameterTuningJobFromHyperparameterTuningJobName(hyperparameterTuningJobName: string) {
+    return this.pathTemplates.hyperparameterTuningJobPathTemplate.match(hyperparameterTuningJobName).hyperparameter_tuning_job;
   }
 
   /**
@@ -9060,7 +6692,7 @@ export class MetadataServiceClient {
    * @param {string} index
    * @returns {string} Resource name string.
    */
-  indexPath(project: string, location: string, index: string) {
+  indexPath(project:string,location:string,index:string) {
     return this.pathTemplates.indexPathTemplate.render({
       project: project,
       location: location,
@@ -9109,7 +6741,7 @@ export class MetadataServiceClient {
    * @param {string} index_endpoint
    * @returns {string} Resource name string.
    */
-  indexEndpointPath(project: string, location: string, indexEndpoint: string) {
+  indexEndpointPath(project:string,location:string,indexEndpoint:string) {
     return this.pathTemplates.indexEndpointPathTemplate.render({
       project: project,
       location: location,
@@ -9125,8 +6757,7 @@ export class MetadataServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromIndexEndpointName(indexEndpointName: string) {
-    return this.pathTemplates.indexEndpointPathTemplate.match(indexEndpointName)
-      .project;
+    return this.pathTemplates.indexEndpointPathTemplate.match(indexEndpointName).project;
   }
 
   /**
@@ -9137,8 +6768,7 @@ export class MetadataServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromIndexEndpointName(indexEndpointName: string) {
-    return this.pathTemplates.indexEndpointPathTemplate.match(indexEndpointName)
-      .location;
+    return this.pathTemplates.indexEndpointPathTemplate.match(indexEndpointName).location;
   }
 
   /**
@@ -9149,8 +6779,7 @@ export class MetadataServiceClient {
    * @returns {string} A string representing the index_endpoint.
    */
   matchIndexEndpointFromIndexEndpointName(indexEndpointName: string) {
-    return this.pathTemplates.indexEndpointPathTemplate.match(indexEndpointName)
-      .index_endpoint;
+    return this.pathTemplates.indexEndpointPathTemplate.match(indexEndpointName).index_endpoint;
   }
 
   /**
@@ -9160,7 +6789,7 @@ export class MetadataServiceClient {
    * @param {string} location
    * @returns {string} Resource name string.
    */
-  locationPath(project: string, location: string) {
+  locationPath(project:string,location:string) {
     return this.pathTemplates.locationPathTemplate.render({
       project: project,
       location: location,
@@ -9198,12 +6827,7 @@ export class MetadataServiceClient {
    * @param {string} metadata_schema
    * @returns {string} Resource name string.
    */
-  metadataSchemaPath(
-    project: string,
-    location: string,
-    metadataStore: string,
-    metadataSchema: string
-  ) {
+  metadataSchemaPath(project:string,location:string,metadataStore:string,metadataSchema:string) {
     return this.pathTemplates.metadataSchemaPathTemplate.render({
       project: project,
       location: location,
@@ -9220,9 +6844,7 @@ export class MetadataServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromMetadataSchemaName(metadataSchemaName: string) {
-    return this.pathTemplates.metadataSchemaPathTemplate.match(
-      metadataSchemaName
-    ).project;
+    return this.pathTemplates.metadataSchemaPathTemplate.match(metadataSchemaName).project;
   }
 
   /**
@@ -9233,9 +6855,7 @@ export class MetadataServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromMetadataSchemaName(metadataSchemaName: string) {
-    return this.pathTemplates.metadataSchemaPathTemplate.match(
-      metadataSchemaName
-    ).location;
+    return this.pathTemplates.metadataSchemaPathTemplate.match(metadataSchemaName).location;
   }
 
   /**
@@ -9246,9 +6866,7 @@ export class MetadataServiceClient {
    * @returns {string} A string representing the metadata_store.
    */
   matchMetadataStoreFromMetadataSchemaName(metadataSchemaName: string) {
-    return this.pathTemplates.metadataSchemaPathTemplate.match(
-      metadataSchemaName
-    ).metadata_store;
+    return this.pathTemplates.metadataSchemaPathTemplate.match(metadataSchemaName).metadata_store;
   }
 
   /**
@@ -9259,9 +6877,7 @@ export class MetadataServiceClient {
    * @returns {string} A string representing the metadata_schema.
    */
   matchMetadataSchemaFromMetadataSchemaName(metadataSchemaName: string) {
-    return this.pathTemplates.metadataSchemaPathTemplate.match(
-      metadataSchemaName
-    ).metadata_schema;
+    return this.pathTemplates.metadataSchemaPathTemplate.match(metadataSchemaName).metadata_schema;
   }
 
   /**
@@ -9272,7 +6888,7 @@ export class MetadataServiceClient {
    * @param {string} metadata_store
    * @returns {string} Resource name string.
    */
-  metadataStorePath(project: string, location: string, metadataStore: string) {
+  metadataStorePath(project:string,location:string,metadataStore:string) {
     return this.pathTemplates.metadataStorePathTemplate.render({
       project: project,
       location: location,
@@ -9288,8 +6904,7 @@ export class MetadataServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromMetadataStoreName(metadataStoreName: string) {
-    return this.pathTemplates.metadataStorePathTemplate.match(metadataStoreName)
-      .project;
+    return this.pathTemplates.metadataStorePathTemplate.match(metadataStoreName).project;
   }
 
   /**
@@ -9300,8 +6915,7 @@ export class MetadataServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromMetadataStoreName(metadataStoreName: string) {
-    return this.pathTemplates.metadataStorePathTemplate.match(metadataStoreName)
-      .location;
+    return this.pathTemplates.metadataStorePathTemplate.match(metadataStoreName).location;
   }
 
   /**
@@ -9312,8 +6926,7 @@ export class MetadataServiceClient {
    * @returns {string} A string representing the metadata_store.
    */
   matchMetadataStoreFromMetadataStoreName(metadataStoreName: string) {
-    return this.pathTemplates.metadataStorePathTemplate.match(metadataStoreName)
-      .metadata_store;
+    return this.pathTemplates.metadataStorePathTemplate.match(metadataStoreName).metadata_store;
   }
 
   /**
@@ -9324,7 +6937,7 @@ export class MetadataServiceClient {
    * @param {string} model
    * @returns {string} Resource name string.
    */
-  modelPath(project: string, location: string, model: string) {
+  modelPath(project:string,location:string,model:string) {
     return this.pathTemplates.modelPathTemplate.render({
       project: project,
       location: location,
@@ -9373,11 +6986,7 @@ export class MetadataServiceClient {
    * @param {string} model_deployment_monitoring_job
    * @returns {string} Resource name string.
    */
-  modelDeploymentMonitoringJobPath(
-    project: string,
-    location: string,
-    modelDeploymentMonitoringJob: string
-  ) {
+  modelDeploymentMonitoringJobPath(project:string,location:string,modelDeploymentMonitoringJob:string) {
     return this.pathTemplates.modelDeploymentMonitoringJobPathTemplate.render({
       project: project,
       location: location,
@@ -9392,12 +7001,8 @@ export class MetadataServiceClient {
    *   A fully-qualified path representing ModelDeploymentMonitoringJob resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromModelDeploymentMonitoringJobName(
-    modelDeploymentMonitoringJobName: string
-  ) {
-    return this.pathTemplates.modelDeploymentMonitoringJobPathTemplate.match(
-      modelDeploymentMonitoringJobName
-    ).project;
+  matchProjectFromModelDeploymentMonitoringJobName(modelDeploymentMonitoringJobName: string) {
+    return this.pathTemplates.modelDeploymentMonitoringJobPathTemplate.match(modelDeploymentMonitoringJobName).project;
   }
 
   /**
@@ -9407,12 +7012,8 @@ export class MetadataServiceClient {
    *   A fully-qualified path representing ModelDeploymentMonitoringJob resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromModelDeploymentMonitoringJobName(
-    modelDeploymentMonitoringJobName: string
-  ) {
-    return this.pathTemplates.modelDeploymentMonitoringJobPathTemplate.match(
-      modelDeploymentMonitoringJobName
-    ).location;
+  matchLocationFromModelDeploymentMonitoringJobName(modelDeploymentMonitoringJobName: string) {
+    return this.pathTemplates.modelDeploymentMonitoringJobPathTemplate.match(modelDeploymentMonitoringJobName).location;
   }
 
   /**
@@ -9422,12 +7023,8 @@ export class MetadataServiceClient {
    *   A fully-qualified path representing ModelDeploymentMonitoringJob resource.
    * @returns {string} A string representing the model_deployment_monitoring_job.
    */
-  matchModelDeploymentMonitoringJobFromModelDeploymentMonitoringJobName(
-    modelDeploymentMonitoringJobName: string
-  ) {
-    return this.pathTemplates.modelDeploymentMonitoringJobPathTemplate.match(
-      modelDeploymentMonitoringJobName
-    ).model_deployment_monitoring_job;
+  matchModelDeploymentMonitoringJobFromModelDeploymentMonitoringJobName(modelDeploymentMonitoringJobName: string) {
+    return this.pathTemplates.modelDeploymentMonitoringJobPathTemplate.match(modelDeploymentMonitoringJobName).model_deployment_monitoring_job;
   }
 
   /**
@@ -9439,12 +7036,7 @@ export class MetadataServiceClient {
    * @param {string} evaluation
    * @returns {string} Resource name string.
    */
-  modelEvaluationPath(
-    project: string,
-    location: string,
-    model: string,
-    evaluation: string
-  ) {
+  modelEvaluationPath(project:string,location:string,model:string,evaluation:string) {
     return this.pathTemplates.modelEvaluationPathTemplate.render({
       project: project,
       location: location,
@@ -9461,9 +7053,7 @@ export class MetadataServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromModelEvaluationName(modelEvaluationName: string) {
-    return this.pathTemplates.modelEvaluationPathTemplate.match(
-      modelEvaluationName
-    ).project;
+    return this.pathTemplates.modelEvaluationPathTemplate.match(modelEvaluationName).project;
   }
 
   /**
@@ -9474,9 +7064,7 @@ export class MetadataServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromModelEvaluationName(modelEvaluationName: string) {
-    return this.pathTemplates.modelEvaluationPathTemplate.match(
-      modelEvaluationName
-    ).location;
+    return this.pathTemplates.modelEvaluationPathTemplate.match(modelEvaluationName).location;
   }
 
   /**
@@ -9487,9 +7075,7 @@ export class MetadataServiceClient {
    * @returns {string} A string representing the model.
    */
   matchModelFromModelEvaluationName(modelEvaluationName: string) {
-    return this.pathTemplates.modelEvaluationPathTemplate.match(
-      modelEvaluationName
-    ).model;
+    return this.pathTemplates.modelEvaluationPathTemplate.match(modelEvaluationName).model;
   }
 
   /**
@@ -9500,9 +7086,7 @@ export class MetadataServiceClient {
    * @returns {string} A string representing the evaluation.
    */
   matchEvaluationFromModelEvaluationName(modelEvaluationName: string) {
-    return this.pathTemplates.modelEvaluationPathTemplate.match(
-      modelEvaluationName
-    ).evaluation;
+    return this.pathTemplates.modelEvaluationPathTemplate.match(modelEvaluationName).evaluation;
   }
 
   /**
@@ -9515,13 +7099,7 @@ export class MetadataServiceClient {
    * @param {string} slice
    * @returns {string} Resource name string.
    */
-  modelEvaluationSlicePath(
-    project: string,
-    location: string,
-    model: string,
-    evaluation: string,
-    slice: string
-  ) {
+  modelEvaluationSlicePath(project:string,location:string,model:string,evaluation:string,slice:string) {
     return this.pathTemplates.modelEvaluationSlicePathTemplate.render({
       project: project,
       location: location,
@@ -9539,9 +7117,7 @@ export class MetadataServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromModelEvaluationSliceName(modelEvaluationSliceName: string) {
-    return this.pathTemplates.modelEvaluationSlicePathTemplate.match(
-      modelEvaluationSliceName
-    ).project;
+    return this.pathTemplates.modelEvaluationSlicePathTemplate.match(modelEvaluationSliceName).project;
   }
 
   /**
@@ -9552,9 +7128,7 @@ export class MetadataServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromModelEvaluationSliceName(modelEvaluationSliceName: string) {
-    return this.pathTemplates.modelEvaluationSlicePathTemplate.match(
-      modelEvaluationSliceName
-    ).location;
+    return this.pathTemplates.modelEvaluationSlicePathTemplate.match(modelEvaluationSliceName).location;
   }
 
   /**
@@ -9565,9 +7139,7 @@ export class MetadataServiceClient {
    * @returns {string} A string representing the model.
    */
   matchModelFromModelEvaluationSliceName(modelEvaluationSliceName: string) {
-    return this.pathTemplates.modelEvaluationSlicePathTemplate.match(
-      modelEvaluationSliceName
-    ).model;
+    return this.pathTemplates.modelEvaluationSlicePathTemplate.match(modelEvaluationSliceName).model;
   }
 
   /**
@@ -9577,12 +7149,8 @@ export class MetadataServiceClient {
    *   A fully-qualified path representing ModelEvaluationSlice resource.
    * @returns {string} A string representing the evaluation.
    */
-  matchEvaluationFromModelEvaluationSliceName(
-    modelEvaluationSliceName: string
-  ) {
-    return this.pathTemplates.modelEvaluationSlicePathTemplate.match(
-      modelEvaluationSliceName
-    ).evaluation;
+  matchEvaluationFromModelEvaluationSliceName(modelEvaluationSliceName: string) {
+    return this.pathTemplates.modelEvaluationSlicePathTemplate.match(modelEvaluationSliceName).evaluation;
   }
 
   /**
@@ -9593,9 +7161,7 @@ export class MetadataServiceClient {
    * @returns {string} A string representing the slice.
    */
   matchSliceFromModelEvaluationSliceName(modelEvaluationSliceName: string) {
-    return this.pathTemplates.modelEvaluationSlicePathTemplate.match(
-      modelEvaluationSliceName
-    ).slice;
+    return this.pathTemplates.modelEvaluationSlicePathTemplate.match(modelEvaluationSliceName).slice;
   }
 
   /**
@@ -9606,7 +7172,7 @@ export class MetadataServiceClient {
    * @param {string} model_monitor
    * @returns {string} Resource name string.
    */
-  modelMonitorPath(project: string, location: string, modelMonitor: string) {
+  modelMonitorPath(project:string,location:string,modelMonitor:string) {
     return this.pathTemplates.modelMonitorPathTemplate.render({
       project: project,
       location: location,
@@ -9622,8 +7188,7 @@ export class MetadataServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromModelMonitorName(modelMonitorName: string) {
-    return this.pathTemplates.modelMonitorPathTemplate.match(modelMonitorName)
-      .project;
+    return this.pathTemplates.modelMonitorPathTemplate.match(modelMonitorName).project;
   }
 
   /**
@@ -9634,8 +7199,7 @@ export class MetadataServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromModelMonitorName(modelMonitorName: string) {
-    return this.pathTemplates.modelMonitorPathTemplate.match(modelMonitorName)
-      .location;
+    return this.pathTemplates.modelMonitorPathTemplate.match(modelMonitorName).location;
   }
 
   /**
@@ -9646,8 +7210,7 @@ export class MetadataServiceClient {
    * @returns {string} A string representing the model_monitor.
    */
   matchModelMonitorFromModelMonitorName(modelMonitorName: string) {
-    return this.pathTemplates.modelMonitorPathTemplate.match(modelMonitorName)
-      .model_monitor;
+    return this.pathTemplates.modelMonitorPathTemplate.match(modelMonitorName).model_monitor;
   }
 
   /**
@@ -9659,12 +7222,7 @@ export class MetadataServiceClient {
    * @param {string} model_monitoring_job
    * @returns {string} Resource name string.
    */
-  modelMonitoringJobPath(
-    project: string,
-    location: string,
-    modelMonitor: string,
-    modelMonitoringJob: string
-  ) {
+  modelMonitoringJobPath(project:string,location:string,modelMonitor:string,modelMonitoringJob:string) {
     return this.pathTemplates.modelMonitoringJobPathTemplate.render({
       project: project,
       location: location,
@@ -9681,9 +7239,7 @@ export class MetadataServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromModelMonitoringJobName(modelMonitoringJobName: string) {
-    return this.pathTemplates.modelMonitoringJobPathTemplate.match(
-      modelMonitoringJobName
-    ).project;
+    return this.pathTemplates.modelMonitoringJobPathTemplate.match(modelMonitoringJobName).project;
   }
 
   /**
@@ -9694,9 +7250,7 @@ export class MetadataServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromModelMonitoringJobName(modelMonitoringJobName: string) {
-    return this.pathTemplates.modelMonitoringJobPathTemplate.match(
-      modelMonitoringJobName
-    ).location;
+    return this.pathTemplates.modelMonitoringJobPathTemplate.match(modelMonitoringJobName).location;
   }
 
   /**
@@ -9707,9 +7261,7 @@ export class MetadataServiceClient {
    * @returns {string} A string representing the model_monitor.
    */
   matchModelMonitorFromModelMonitoringJobName(modelMonitoringJobName: string) {
-    return this.pathTemplates.modelMonitoringJobPathTemplate.match(
-      modelMonitoringJobName
-    ).model_monitor;
+    return this.pathTemplates.modelMonitoringJobPathTemplate.match(modelMonitoringJobName).model_monitor;
   }
 
   /**
@@ -9719,12 +7271,8 @@ export class MetadataServiceClient {
    *   A fully-qualified path representing ModelMonitoringJob resource.
    * @returns {string} A string representing the model_monitoring_job.
    */
-  matchModelMonitoringJobFromModelMonitoringJobName(
-    modelMonitoringJobName: string
-  ) {
-    return this.pathTemplates.modelMonitoringJobPathTemplate.match(
-      modelMonitoringJobName
-    ).model_monitoring_job;
+  matchModelMonitoringJobFromModelMonitoringJobName(modelMonitoringJobName: string) {
+    return this.pathTemplates.modelMonitoringJobPathTemplate.match(modelMonitoringJobName).model_monitoring_job;
   }
 
   /**
@@ -9735,7 +7283,7 @@ export class MetadataServiceClient {
    * @param {string} nas_job
    * @returns {string} Resource name string.
    */
-  nasJobPath(project: string, location: string, nasJob: string) {
+  nasJobPath(project:string,location:string,nasJob:string) {
     return this.pathTemplates.nasJobPathTemplate.render({
       project: project,
       location: location,
@@ -9785,12 +7333,7 @@ export class MetadataServiceClient {
    * @param {string} nas_trial_detail
    * @returns {string} Resource name string.
    */
-  nasTrialDetailPath(
-    project: string,
-    location: string,
-    nasJob: string,
-    nasTrialDetail: string
-  ) {
+  nasTrialDetailPath(project:string,location:string,nasJob:string,nasTrialDetail:string) {
     return this.pathTemplates.nasTrialDetailPathTemplate.render({
       project: project,
       location: location,
@@ -9807,9 +7350,7 @@ export class MetadataServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromNasTrialDetailName(nasTrialDetailName: string) {
-    return this.pathTemplates.nasTrialDetailPathTemplate.match(
-      nasTrialDetailName
-    ).project;
+    return this.pathTemplates.nasTrialDetailPathTemplate.match(nasTrialDetailName).project;
   }
 
   /**
@@ -9820,9 +7361,7 @@ export class MetadataServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromNasTrialDetailName(nasTrialDetailName: string) {
-    return this.pathTemplates.nasTrialDetailPathTemplate.match(
-      nasTrialDetailName
-    ).location;
+    return this.pathTemplates.nasTrialDetailPathTemplate.match(nasTrialDetailName).location;
   }
 
   /**
@@ -9833,9 +7372,7 @@ export class MetadataServiceClient {
    * @returns {string} A string representing the nas_job.
    */
   matchNasJobFromNasTrialDetailName(nasTrialDetailName: string) {
-    return this.pathTemplates.nasTrialDetailPathTemplate.match(
-      nasTrialDetailName
-    ).nas_job;
+    return this.pathTemplates.nasTrialDetailPathTemplate.match(nasTrialDetailName).nas_job;
   }
 
   /**
@@ -9846,9 +7383,7 @@ export class MetadataServiceClient {
    * @returns {string} A string representing the nas_trial_detail.
    */
   matchNasTrialDetailFromNasTrialDetailName(nasTrialDetailName: string) {
-    return this.pathTemplates.nasTrialDetailPathTemplate.match(
-      nasTrialDetailName
-    ).nas_trial_detail;
+    return this.pathTemplates.nasTrialDetailPathTemplate.match(nasTrialDetailName).nas_trial_detail;
   }
 
   /**
@@ -9859,11 +7394,7 @@ export class MetadataServiceClient {
    * @param {string} notebook_execution_job
    * @returns {string} Resource name string.
    */
-  notebookExecutionJobPath(
-    project: string,
-    location: string,
-    notebookExecutionJob: string
-  ) {
+  notebookExecutionJobPath(project:string,location:string,notebookExecutionJob:string) {
     return this.pathTemplates.notebookExecutionJobPathTemplate.render({
       project: project,
       location: location,
@@ -9879,9 +7410,7 @@ export class MetadataServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromNotebookExecutionJobName(notebookExecutionJobName: string) {
-    return this.pathTemplates.notebookExecutionJobPathTemplate.match(
-      notebookExecutionJobName
-    ).project;
+    return this.pathTemplates.notebookExecutionJobPathTemplate.match(notebookExecutionJobName).project;
   }
 
   /**
@@ -9892,9 +7421,7 @@ export class MetadataServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromNotebookExecutionJobName(notebookExecutionJobName: string) {
-    return this.pathTemplates.notebookExecutionJobPathTemplate.match(
-      notebookExecutionJobName
-    ).location;
+    return this.pathTemplates.notebookExecutionJobPathTemplate.match(notebookExecutionJobName).location;
   }
 
   /**
@@ -9904,12 +7431,8 @@ export class MetadataServiceClient {
    *   A fully-qualified path representing NotebookExecutionJob resource.
    * @returns {string} A string representing the notebook_execution_job.
    */
-  matchNotebookExecutionJobFromNotebookExecutionJobName(
-    notebookExecutionJobName: string
-  ) {
-    return this.pathTemplates.notebookExecutionJobPathTemplate.match(
-      notebookExecutionJobName
-    ).notebook_execution_job;
+  matchNotebookExecutionJobFromNotebookExecutionJobName(notebookExecutionJobName: string) {
+    return this.pathTemplates.notebookExecutionJobPathTemplate.match(notebookExecutionJobName).notebook_execution_job;
   }
 
   /**
@@ -9920,11 +7443,7 @@ export class MetadataServiceClient {
    * @param {string} notebook_runtime
    * @returns {string} Resource name string.
    */
-  notebookRuntimePath(
-    project: string,
-    location: string,
-    notebookRuntime: string
-  ) {
+  notebookRuntimePath(project:string,location:string,notebookRuntime:string) {
     return this.pathTemplates.notebookRuntimePathTemplate.render({
       project: project,
       location: location,
@@ -9940,9 +7459,7 @@ export class MetadataServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromNotebookRuntimeName(notebookRuntimeName: string) {
-    return this.pathTemplates.notebookRuntimePathTemplate.match(
-      notebookRuntimeName
-    ).project;
+    return this.pathTemplates.notebookRuntimePathTemplate.match(notebookRuntimeName).project;
   }
 
   /**
@@ -9953,9 +7470,7 @@ export class MetadataServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromNotebookRuntimeName(notebookRuntimeName: string) {
-    return this.pathTemplates.notebookRuntimePathTemplate.match(
-      notebookRuntimeName
-    ).location;
+    return this.pathTemplates.notebookRuntimePathTemplate.match(notebookRuntimeName).location;
   }
 
   /**
@@ -9966,9 +7481,7 @@ export class MetadataServiceClient {
    * @returns {string} A string representing the notebook_runtime.
    */
   matchNotebookRuntimeFromNotebookRuntimeName(notebookRuntimeName: string) {
-    return this.pathTemplates.notebookRuntimePathTemplate.match(
-      notebookRuntimeName
-    ).notebook_runtime;
+    return this.pathTemplates.notebookRuntimePathTemplate.match(notebookRuntimeName).notebook_runtime;
   }
 
   /**
@@ -9979,11 +7492,7 @@ export class MetadataServiceClient {
    * @param {string} notebook_runtime_template
    * @returns {string} Resource name string.
    */
-  notebookRuntimeTemplatePath(
-    project: string,
-    location: string,
-    notebookRuntimeTemplate: string
-  ) {
+  notebookRuntimeTemplatePath(project:string,location:string,notebookRuntimeTemplate:string) {
     return this.pathTemplates.notebookRuntimeTemplatePathTemplate.render({
       project: project,
       location: location,
@@ -9998,12 +7507,8 @@ export class MetadataServiceClient {
    *   A fully-qualified path representing NotebookRuntimeTemplate resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromNotebookRuntimeTemplateName(
-    notebookRuntimeTemplateName: string
-  ) {
-    return this.pathTemplates.notebookRuntimeTemplatePathTemplate.match(
-      notebookRuntimeTemplateName
-    ).project;
+  matchProjectFromNotebookRuntimeTemplateName(notebookRuntimeTemplateName: string) {
+    return this.pathTemplates.notebookRuntimeTemplatePathTemplate.match(notebookRuntimeTemplateName).project;
   }
 
   /**
@@ -10013,12 +7518,8 @@ export class MetadataServiceClient {
    *   A fully-qualified path representing NotebookRuntimeTemplate resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromNotebookRuntimeTemplateName(
-    notebookRuntimeTemplateName: string
-  ) {
-    return this.pathTemplates.notebookRuntimeTemplatePathTemplate.match(
-      notebookRuntimeTemplateName
-    ).location;
+  matchLocationFromNotebookRuntimeTemplateName(notebookRuntimeTemplateName: string) {
+    return this.pathTemplates.notebookRuntimeTemplatePathTemplate.match(notebookRuntimeTemplateName).location;
   }
 
   /**
@@ -10028,12 +7529,8 @@ export class MetadataServiceClient {
    *   A fully-qualified path representing NotebookRuntimeTemplate resource.
    * @returns {string} A string representing the notebook_runtime_template.
    */
-  matchNotebookRuntimeTemplateFromNotebookRuntimeTemplateName(
-    notebookRuntimeTemplateName: string
-  ) {
-    return this.pathTemplates.notebookRuntimeTemplatePathTemplate.match(
-      notebookRuntimeTemplateName
-    ).notebook_runtime_template;
+  matchNotebookRuntimeTemplateFromNotebookRuntimeTemplateName(notebookRuntimeTemplateName: string) {
+    return this.pathTemplates.notebookRuntimeTemplatePathTemplate.match(notebookRuntimeTemplateName).notebook_runtime_template;
   }
 
   /**
@@ -10044,11 +7541,7 @@ export class MetadataServiceClient {
    * @param {string} persistent_resource
    * @returns {string} Resource name string.
    */
-  persistentResourcePath(
-    project: string,
-    location: string,
-    persistentResource: string
-  ) {
+  persistentResourcePath(project:string,location:string,persistentResource:string) {
     return this.pathTemplates.persistentResourcePathTemplate.render({
       project: project,
       location: location,
@@ -10064,9 +7557,7 @@ export class MetadataServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromPersistentResourceName(persistentResourceName: string) {
-    return this.pathTemplates.persistentResourcePathTemplate.match(
-      persistentResourceName
-    ).project;
+    return this.pathTemplates.persistentResourcePathTemplate.match(persistentResourceName).project;
   }
 
   /**
@@ -10077,9 +7568,7 @@ export class MetadataServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromPersistentResourceName(persistentResourceName: string) {
-    return this.pathTemplates.persistentResourcePathTemplate.match(
-      persistentResourceName
-    ).location;
+    return this.pathTemplates.persistentResourcePathTemplate.match(persistentResourceName).location;
   }
 
   /**
@@ -10089,12 +7578,8 @@ export class MetadataServiceClient {
    *   A fully-qualified path representing PersistentResource resource.
    * @returns {string} A string representing the persistent_resource.
    */
-  matchPersistentResourceFromPersistentResourceName(
-    persistentResourceName: string
-  ) {
-    return this.pathTemplates.persistentResourcePathTemplate.match(
-      persistentResourceName
-    ).persistent_resource;
+  matchPersistentResourceFromPersistentResourceName(persistentResourceName: string) {
+    return this.pathTemplates.persistentResourcePathTemplate.match(persistentResourceName).persistent_resource;
   }
 
   /**
@@ -10105,7 +7590,7 @@ export class MetadataServiceClient {
    * @param {string} pipeline_job
    * @returns {string} Resource name string.
    */
-  pipelineJobPath(project: string, location: string, pipelineJob: string) {
+  pipelineJobPath(project:string,location:string,pipelineJob:string) {
     return this.pathTemplates.pipelineJobPathTemplate.render({
       project: project,
       location: location,
@@ -10121,8 +7606,7 @@ export class MetadataServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromPipelineJobName(pipelineJobName: string) {
-    return this.pathTemplates.pipelineJobPathTemplate.match(pipelineJobName)
-      .project;
+    return this.pathTemplates.pipelineJobPathTemplate.match(pipelineJobName).project;
   }
 
   /**
@@ -10133,8 +7617,7 @@ export class MetadataServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromPipelineJobName(pipelineJobName: string) {
-    return this.pathTemplates.pipelineJobPathTemplate.match(pipelineJobName)
-      .location;
+    return this.pathTemplates.pipelineJobPathTemplate.match(pipelineJobName).location;
   }
 
   /**
@@ -10145,8 +7628,7 @@ export class MetadataServiceClient {
    * @returns {string} A string representing the pipeline_job.
    */
   matchPipelineJobFromPipelineJobName(pipelineJobName: string) {
-    return this.pathTemplates.pipelineJobPathTemplate.match(pipelineJobName)
-      .pipeline_job;
+    return this.pathTemplates.pipelineJobPathTemplate.match(pipelineJobName).pipeline_job;
   }
 
   /**
@@ -10155,7 +7637,7 @@ export class MetadataServiceClient {
    * @param {string} project
    * @returns {string} Resource name string.
    */
-  projectPath(project: string) {
+  projectPath(project:string) {
     return this.pathTemplates.projectPathTemplate.render({
       project: project,
     });
@@ -10180,11 +7662,7 @@ export class MetadataServiceClient {
    * @param {string} endpoint
    * @returns {string} Resource name string.
    */
-  projectLocationEndpointPath(
-    project: string,
-    location: string,
-    endpoint: string
-  ) {
+  projectLocationEndpointPath(project:string,location:string,endpoint:string) {
     return this.pathTemplates.projectLocationEndpointPathTemplate.render({
       project: project,
       location: location,
@@ -10199,12 +7677,8 @@ export class MetadataServiceClient {
    *   A fully-qualified path representing project_location_endpoint resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectLocationEndpointName(
-    projectLocationEndpointName: string
-  ) {
-    return this.pathTemplates.projectLocationEndpointPathTemplate.match(
-      projectLocationEndpointName
-    ).project;
+  matchProjectFromProjectLocationEndpointName(projectLocationEndpointName: string) {
+    return this.pathTemplates.projectLocationEndpointPathTemplate.match(projectLocationEndpointName).project;
   }
 
   /**
@@ -10214,12 +7688,8 @@ export class MetadataServiceClient {
    *   A fully-qualified path representing project_location_endpoint resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromProjectLocationEndpointName(
-    projectLocationEndpointName: string
-  ) {
-    return this.pathTemplates.projectLocationEndpointPathTemplate.match(
-      projectLocationEndpointName
-    ).location;
+  matchLocationFromProjectLocationEndpointName(projectLocationEndpointName: string) {
+    return this.pathTemplates.projectLocationEndpointPathTemplate.match(projectLocationEndpointName).location;
   }
 
   /**
@@ -10229,12 +7699,8 @@ export class MetadataServiceClient {
    *   A fully-qualified path representing project_location_endpoint resource.
    * @returns {string} A string representing the endpoint.
    */
-  matchEndpointFromProjectLocationEndpointName(
-    projectLocationEndpointName: string
-  ) {
-    return this.pathTemplates.projectLocationEndpointPathTemplate.match(
-      projectLocationEndpointName
-    ).endpoint;
+  matchEndpointFromProjectLocationEndpointName(projectLocationEndpointName: string) {
+    return this.pathTemplates.projectLocationEndpointPathTemplate.match(projectLocationEndpointName).endpoint;
   }
 
   /**
@@ -10246,20 +7712,13 @@ export class MetadataServiceClient {
    * @param {string} feature
    * @returns {string} Resource name string.
    */
-  projectLocationFeatureGroupFeaturePath(
-    project: string,
-    location: string,
-    featureGroup: string,
-    feature: string
-  ) {
-    return this.pathTemplates.projectLocationFeatureGroupFeaturePathTemplate.render(
-      {
-        project: project,
-        location: location,
-        feature_group: featureGroup,
-        feature: feature,
-      }
-    );
+  projectLocationFeatureGroupFeaturePath(project:string,location:string,featureGroup:string,feature:string) {
+    return this.pathTemplates.projectLocationFeatureGroupFeaturePathTemplate.render({
+      project: project,
+      location: location,
+      feature_group: featureGroup,
+      feature: feature,
+    });
   }
 
   /**
@@ -10269,12 +7728,8 @@ export class MetadataServiceClient {
    *   A fully-qualified path representing project_location_feature_group_feature resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectLocationFeatureGroupFeatureName(
-    projectLocationFeatureGroupFeatureName: string
-  ) {
-    return this.pathTemplates.projectLocationFeatureGroupFeaturePathTemplate.match(
-      projectLocationFeatureGroupFeatureName
-    ).project;
+  matchProjectFromProjectLocationFeatureGroupFeatureName(projectLocationFeatureGroupFeatureName: string) {
+    return this.pathTemplates.projectLocationFeatureGroupFeaturePathTemplate.match(projectLocationFeatureGroupFeatureName).project;
   }
 
   /**
@@ -10284,12 +7739,8 @@ export class MetadataServiceClient {
    *   A fully-qualified path representing project_location_feature_group_feature resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromProjectLocationFeatureGroupFeatureName(
-    projectLocationFeatureGroupFeatureName: string
-  ) {
-    return this.pathTemplates.projectLocationFeatureGroupFeaturePathTemplate.match(
-      projectLocationFeatureGroupFeatureName
-    ).location;
+  matchLocationFromProjectLocationFeatureGroupFeatureName(projectLocationFeatureGroupFeatureName: string) {
+    return this.pathTemplates.projectLocationFeatureGroupFeaturePathTemplate.match(projectLocationFeatureGroupFeatureName).location;
   }
 
   /**
@@ -10299,12 +7750,8 @@ export class MetadataServiceClient {
    *   A fully-qualified path representing project_location_feature_group_feature resource.
    * @returns {string} A string representing the feature_group.
    */
-  matchFeatureGroupFromProjectLocationFeatureGroupFeatureName(
-    projectLocationFeatureGroupFeatureName: string
-  ) {
-    return this.pathTemplates.projectLocationFeatureGroupFeaturePathTemplate.match(
-      projectLocationFeatureGroupFeatureName
-    ).feature_group;
+  matchFeatureGroupFromProjectLocationFeatureGroupFeatureName(projectLocationFeatureGroupFeatureName: string) {
+    return this.pathTemplates.projectLocationFeatureGroupFeaturePathTemplate.match(projectLocationFeatureGroupFeatureName).feature_group;
   }
 
   /**
@@ -10314,12 +7761,8 @@ export class MetadataServiceClient {
    *   A fully-qualified path representing project_location_feature_group_feature resource.
    * @returns {string} A string representing the feature.
    */
-  matchFeatureFromProjectLocationFeatureGroupFeatureName(
-    projectLocationFeatureGroupFeatureName: string
-  ) {
-    return this.pathTemplates.projectLocationFeatureGroupFeaturePathTemplate.match(
-      projectLocationFeatureGroupFeatureName
-    ).feature;
+  matchFeatureFromProjectLocationFeatureGroupFeatureName(projectLocationFeatureGroupFeatureName: string) {
+    return this.pathTemplates.projectLocationFeatureGroupFeaturePathTemplate.match(projectLocationFeatureGroupFeatureName).feature;
   }
 
   /**
@@ -10332,22 +7775,14 @@ export class MetadataServiceClient {
    * @param {string} feature
    * @returns {string} Resource name string.
    */
-  projectLocationFeaturestoreEntityTypeFeaturePath(
-    project: string,
-    location: string,
-    featurestore: string,
-    entityType: string,
-    feature: string
-  ) {
-    return this.pathTemplates.projectLocationFeaturestoreEntityTypeFeaturePathTemplate.render(
-      {
-        project: project,
-        location: location,
-        featurestore: featurestore,
-        entity_type: entityType,
-        feature: feature,
-      }
-    );
+  projectLocationFeaturestoreEntityTypeFeaturePath(project:string,location:string,featurestore:string,entityType:string,feature:string) {
+    return this.pathTemplates.projectLocationFeaturestoreEntityTypeFeaturePathTemplate.render({
+      project: project,
+      location: location,
+      featurestore: featurestore,
+      entity_type: entityType,
+      feature: feature,
+    });
   }
 
   /**
@@ -10357,12 +7792,8 @@ export class MetadataServiceClient {
    *   A fully-qualified path representing project_location_featurestore_entity_type_feature resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectLocationFeaturestoreEntityTypeFeatureName(
-    projectLocationFeaturestoreEntityTypeFeatureName: string
-  ) {
-    return this.pathTemplates.projectLocationFeaturestoreEntityTypeFeaturePathTemplate.match(
-      projectLocationFeaturestoreEntityTypeFeatureName
-    ).project;
+  matchProjectFromProjectLocationFeaturestoreEntityTypeFeatureName(projectLocationFeaturestoreEntityTypeFeatureName: string) {
+    return this.pathTemplates.projectLocationFeaturestoreEntityTypeFeaturePathTemplate.match(projectLocationFeaturestoreEntityTypeFeatureName).project;
   }
 
   /**
@@ -10372,12 +7803,8 @@ export class MetadataServiceClient {
    *   A fully-qualified path representing project_location_featurestore_entity_type_feature resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromProjectLocationFeaturestoreEntityTypeFeatureName(
-    projectLocationFeaturestoreEntityTypeFeatureName: string
-  ) {
-    return this.pathTemplates.projectLocationFeaturestoreEntityTypeFeaturePathTemplate.match(
-      projectLocationFeaturestoreEntityTypeFeatureName
-    ).location;
+  matchLocationFromProjectLocationFeaturestoreEntityTypeFeatureName(projectLocationFeaturestoreEntityTypeFeatureName: string) {
+    return this.pathTemplates.projectLocationFeaturestoreEntityTypeFeaturePathTemplate.match(projectLocationFeaturestoreEntityTypeFeatureName).location;
   }
 
   /**
@@ -10387,12 +7814,8 @@ export class MetadataServiceClient {
    *   A fully-qualified path representing project_location_featurestore_entity_type_feature resource.
    * @returns {string} A string representing the featurestore.
    */
-  matchFeaturestoreFromProjectLocationFeaturestoreEntityTypeFeatureName(
-    projectLocationFeaturestoreEntityTypeFeatureName: string
-  ) {
-    return this.pathTemplates.projectLocationFeaturestoreEntityTypeFeaturePathTemplate.match(
-      projectLocationFeaturestoreEntityTypeFeatureName
-    ).featurestore;
+  matchFeaturestoreFromProjectLocationFeaturestoreEntityTypeFeatureName(projectLocationFeaturestoreEntityTypeFeatureName: string) {
+    return this.pathTemplates.projectLocationFeaturestoreEntityTypeFeaturePathTemplate.match(projectLocationFeaturestoreEntityTypeFeatureName).featurestore;
   }
 
   /**
@@ -10402,12 +7825,8 @@ export class MetadataServiceClient {
    *   A fully-qualified path representing project_location_featurestore_entity_type_feature resource.
    * @returns {string} A string representing the entity_type.
    */
-  matchEntityTypeFromProjectLocationFeaturestoreEntityTypeFeatureName(
-    projectLocationFeaturestoreEntityTypeFeatureName: string
-  ) {
-    return this.pathTemplates.projectLocationFeaturestoreEntityTypeFeaturePathTemplate.match(
-      projectLocationFeaturestoreEntityTypeFeatureName
-    ).entity_type;
+  matchEntityTypeFromProjectLocationFeaturestoreEntityTypeFeatureName(projectLocationFeaturestoreEntityTypeFeatureName: string) {
+    return this.pathTemplates.projectLocationFeaturestoreEntityTypeFeaturePathTemplate.match(projectLocationFeaturestoreEntityTypeFeatureName).entity_type;
   }
 
   /**
@@ -10417,12 +7836,8 @@ export class MetadataServiceClient {
    *   A fully-qualified path representing project_location_featurestore_entity_type_feature resource.
    * @returns {string} A string representing the feature.
    */
-  matchFeatureFromProjectLocationFeaturestoreEntityTypeFeatureName(
-    projectLocationFeaturestoreEntityTypeFeatureName: string
-  ) {
-    return this.pathTemplates.projectLocationFeaturestoreEntityTypeFeaturePathTemplate.match(
-      projectLocationFeaturestoreEntityTypeFeatureName
-    ).feature;
+  matchFeatureFromProjectLocationFeaturestoreEntityTypeFeatureName(projectLocationFeaturestoreEntityTypeFeatureName: string) {
+    return this.pathTemplates.projectLocationFeaturestoreEntityTypeFeaturePathTemplate.match(projectLocationFeaturestoreEntityTypeFeatureName).feature;
   }
 
   /**
@@ -10434,12 +7849,7 @@ export class MetadataServiceClient {
    * @param {string} model
    * @returns {string} Resource name string.
    */
-  projectLocationPublisherModelPath(
-    project: string,
-    location: string,
-    publisher: string,
-    model: string
-  ) {
+  projectLocationPublisherModelPath(project:string,location:string,publisher:string,model:string) {
     return this.pathTemplates.projectLocationPublisherModelPathTemplate.render({
       project: project,
       location: location,
@@ -10455,12 +7865,8 @@ export class MetadataServiceClient {
    *   A fully-qualified path representing project_location_publisher_model resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectLocationPublisherModelName(
-    projectLocationPublisherModelName: string
-  ) {
-    return this.pathTemplates.projectLocationPublisherModelPathTemplate.match(
-      projectLocationPublisherModelName
-    ).project;
+  matchProjectFromProjectLocationPublisherModelName(projectLocationPublisherModelName: string) {
+    return this.pathTemplates.projectLocationPublisherModelPathTemplate.match(projectLocationPublisherModelName).project;
   }
 
   /**
@@ -10470,12 +7876,8 @@ export class MetadataServiceClient {
    *   A fully-qualified path representing project_location_publisher_model resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromProjectLocationPublisherModelName(
-    projectLocationPublisherModelName: string
-  ) {
-    return this.pathTemplates.projectLocationPublisherModelPathTemplate.match(
-      projectLocationPublisherModelName
-    ).location;
+  matchLocationFromProjectLocationPublisherModelName(projectLocationPublisherModelName: string) {
+    return this.pathTemplates.projectLocationPublisherModelPathTemplate.match(projectLocationPublisherModelName).location;
   }
 
   /**
@@ -10485,12 +7887,8 @@ export class MetadataServiceClient {
    *   A fully-qualified path representing project_location_publisher_model resource.
    * @returns {string} A string representing the publisher.
    */
-  matchPublisherFromProjectLocationPublisherModelName(
-    projectLocationPublisherModelName: string
-  ) {
-    return this.pathTemplates.projectLocationPublisherModelPathTemplate.match(
-      projectLocationPublisherModelName
-    ).publisher;
+  matchPublisherFromProjectLocationPublisherModelName(projectLocationPublisherModelName: string) {
+    return this.pathTemplates.projectLocationPublisherModelPathTemplate.match(projectLocationPublisherModelName).publisher;
   }
 
   /**
@@ -10500,12 +7898,256 @@ export class MetadataServiceClient {
    *   A fully-qualified path representing project_location_publisher_model resource.
    * @returns {string} A string representing the model.
    */
-  matchModelFromProjectLocationPublisherModelName(
-    projectLocationPublisherModelName: string
-  ) {
-    return this.pathTemplates.projectLocationPublisherModelPathTemplate.match(
-      projectLocationPublisherModelName
-    ).model;
+  matchModelFromProjectLocationPublisherModelName(projectLocationPublisherModelName: string) {
+    return this.pathTemplates.projectLocationPublisherModelPathTemplate.match(projectLocationPublisherModelName).model;
+  }
+
+  /**
+   * Return a fully-qualified projectLocationReasoningEngineSession resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} reasoning_engine
+   * @param {string} session
+   * @returns {string} Resource name string.
+   */
+  projectLocationReasoningEngineSessionPath(project:string,location:string,reasoningEngine:string,session:string) {
+    return this.pathTemplates.projectLocationReasoningEngineSessionPathTemplate.render({
+      project: project,
+      location: location,
+      reasoning_engine: reasoningEngine,
+      session: session,
+    });
+  }
+
+  /**
+   * Parse the project from ProjectLocationReasoningEngineSession resource.
+   *
+   * @param {string} projectLocationReasoningEngineSessionName
+   *   A fully-qualified path representing project_location_reasoning_engine_session resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectLocationReasoningEngineSessionName(projectLocationReasoningEngineSessionName: string) {
+    return this.pathTemplates.projectLocationReasoningEngineSessionPathTemplate.match(projectLocationReasoningEngineSessionName).project;
+  }
+
+  /**
+   * Parse the location from ProjectLocationReasoningEngineSession resource.
+   *
+   * @param {string} projectLocationReasoningEngineSessionName
+   *   A fully-qualified path representing project_location_reasoning_engine_session resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromProjectLocationReasoningEngineSessionName(projectLocationReasoningEngineSessionName: string) {
+    return this.pathTemplates.projectLocationReasoningEngineSessionPathTemplate.match(projectLocationReasoningEngineSessionName).location;
+  }
+
+  /**
+   * Parse the reasoning_engine from ProjectLocationReasoningEngineSession resource.
+   *
+   * @param {string} projectLocationReasoningEngineSessionName
+   *   A fully-qualified path representing project_location_reasoning_engine_session resource.
+   * @returns {string} A string representing the reasoning_engine.
+   */
+  matchReasoningEngineFromProjectLocationReasoningEngineSessionName(projectLocationReasoningEngineSessionName: string) {
+    return this.pathTemplates.projectLocationReasoningEngineSessionPathTemplate.match(projectLocationReasoningEngineSessionName).reasoning_engine;
+  }
+
+  /**
+   * Parse the session from ProjectLocationReasoningEngineSession resource.
+   *
+   * @param {string} projectLocationReasoningEngineSessionName
+   *   A fully-qualified path representing project_location_reasoning_engine_session resource.
+   * @returns {string} A string representing the session.
+   */
+  matchSessionFromProjectLocationReasoningEngineSessionName(projectLocationReasoningEngineSessionName: string) {
+    return this.pathTemplates.projectLocationReasoningEngineSessionPathTemplate.match(projectLocationReasoningEngineSessionName).session;
+  }
+
+  /**
+   * Return a fully-qualified projectLocationReasoningEngineSessionEvent resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} reasoning_engine
+   * @param {string} session
+   * @param {string} event
+   * @returns {string} Resource name string.
+   */
+  projectLocationReasoningEngineSessionEventPath(project:string,location:string,reasoningEngine:string,session:string,event:string) {
+    return this.pathTemplates.projectLocationReasoningEngineSessionEventPathTemplate.render({
+      project: project,
+      location: location,
+      reasoning_engine: reasoningEngine,
+      session: session,
+      event: event,
+    });
+  }
+
+  /**
+   * Parse the project from ProjectLocationReasoningEngineSessionEvent resource.
+   *
+   * @param {string} projectLocationReasoningEngineSessionEventName
+   *   A fully-qualified path representing project_location_reasoning_engine_session_event resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectLocationReasoningEngineSessionEventName(projectLocationReasoningEngineSessionEventName: string) {
+    return this.pathTemplates.projectLocationReasoningEngineSessionEventPathTemplate.match(projectLocationReasoningEngineSessionEventName).project;
+  }
+
+  /**
+   * Parse the location from ProjectLocationReasoningEngineSessionEvent resource.
+   *
+   * @param {string} projectLocationReasoningEngineSessionEventName
+   *   A fully-qualified path representing project_location_reasoning_engine_session_event resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromProjectLocationReasoningEngineSessionEventName(projectLocationReasoningEngineSessionEventName: string) {
+    return this.pathTemplates.projectLocationReasoningEngineSessionEventPathTemplate.match(projectLocationReasoningEngineSessionEventName).location;
+  }
+
+  /**
+   * Parse the reasoning_engine from ProjectLocationReasoningEngineSessionEvent resource.
+   *
+   * @param {string} projectLocationReasoningEngineSessionEventName
+   *   A fully-qualified path representing project_location_reasoning_engine_session_event resource.
+   * @returns {string} A string representing the reasoning_engine.
+   */
+  matchReasoningEngineFromProjectLocationReasoningEngineSessionEventName(projectLocationReasoningEngineSessionEventName: string) {
+    return this.pathTemplates.projectLocationReasoningEngineSessionEventPathTemplate.match(projectLocationReasoningEngineSessionEventName).reasoning_engine;
+  }
+
+  /**
+   * Parse the session from ProjectLocationReasoningEngineSessionEvent resource.
+   *
+   * @param {string} projectLocationReasoningEngineSessionEventName
+   *   A fully-qualified path representing project_location_reasoning_engine_session_event resource.
+   * @returns {string} A string representing the session.
+   */
+  matchSessionFromProjectLocationReasoningEngineSessionEventName(projectLocationReasoningEngineSessionEventName: string) {
+    return this.pathTemplates.projectLocationReasoningEngineSessionEventPathTemplate.match(projectLocationReasoningEngineSessionEventName).session;
+  }
+
+  /**
+   * Parse the event from ProjectLocationReasoningEngineSessionEvent resource.
+   *
+   * @param {string} projectLocationReasoningEngineSessionEventName
+   *   A fully-qualified path representing project_location_reasoning_engine_session_event resource.
+   * @returns {string} A string representing the event.
+   */
+  matchEventFromProjectLocationReasoningEngineSessionEventName(projectLocationReasoningEngineSessionEventName: string) {
+    return this.pathTemplates.projectLocationReasoningEngineSessionEventPathTemplate.match(projectLocationReasoningEngineSessionEventName).event;
+  }
+
+  /**
+   * Return a fully-qualified projectLocationSession resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} session
+   * @returns {string} Resource name string.
+   */
+  projectLocationSessionPath(project:string,location:string,session:string) {
+    return this.pathTemplates.projectLocationSessionPathTemplate.render({
+      project: project,
+      location: location,
+      session: session,
+    });
+  }
+
+  /**
+   * Parse the project from ProjectLocationSession resource.
+   *
+   * @param {string} projectLocationSessionName
+   *   A fully-qualified path representing project_location_session resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectLocationSessionName(projectLocationSessionName: string) {
+    return this.pathTemplates.projectLocationSessionPathTemplate.match(projectLocationSessionName).project;
+  }
+
+  /**
+   * Parse the location from ProjectLocationSession resource.
+   *
+   * @param {string} projectLocationSessionName
+   *   A fully-qualified path representing project_location_session resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromProjectLocationSessionName(projectLocationSessionName: string) {
+    return this.pathTemplates.projectLocationSessionPathTemplate.match(projectLocationSessionName).location;
+  }
+
+  /**
+   * Parse the session from ProjectLocationSession resource.
+   *
+   * @param {string} projectLocationSessionName
+   *   A fully-qualified path representing project_location_session resource.
+   * @returns {string} A string representing the session.
+   */
+  matchSessionFromProjectLocationSessionName(projectLocationSessionName: string) {
+    return this.pathTemplates.projectLocationSessionPathTemplate.match(projectLocationSessionName).session;
+  }
+
+  /**
+   * Return a fully-qualified projectLocationSessionEvent resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} session
+   * @param {string} event
+   * @returns {string} Resource name string.
+   */
+  projectLocationSessionEventPath(project:string,location:string,session:string,event:string) {
+    return this.pathTemplates.projectLocationSessionEventPathTemplate.render({
+      project: project,
+      location: location,
+      session: session,
+      event: event,
+    });
+  }
+
+  /**
+   * Parse the project from ProjectLocationSessionEvent resource.
+   *
+   * @param {string} projectLocationSessionEventName
+   *   A fully-qualified path representing project_location_session_event resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectLocationSessionEventName(projectLocationSessionEventName: string) {
+    return this.pathTemplates.projectLocationSessionEventPathTemplate.match(projectLocationSessionEventName).project;
+  }
+
+  /**
+   * Parse the location from ProjectLocationSessionEvent resource.
+   *
+   * @param {string} projectLocationSessionEventName
+   *   A fully-qualified path representing project_location_session_event resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromProjectLocationSessionEventName(projectLocationSessionEventName: string) {
+    return this.pathTemplates.projectLocationSessionEventPathTemplate.match(projectLocationSessionEventName).location;
+  }
+
+  /**
+   * Parse the session from ProjectLocationSessionEvent resource.
+   *
+   * @param {string} projectLocationSessionEventName
+   *   A fully-qualified path representing project_location_session_event resource.
+   * @returns {string} A string representing the session.
+   */
+  matchSessionFromProjectLocationSessionEventName(projectLocationSessionEventName: string) {
+    return this.pathTemplates.projectLocationSessionEventPathTemplate.match(projectLocationSessionEventName).session;
+  }
+
+  /**
+   * Parse the event from ProjectLocationSessionEvent resource.
+   *
+   * @param {string} projectLocationSessionEventName
+   *   A fully-qualified path representing project_location_session_event resource.
+   * @returns {string} A string representing the event.
+   */
+  matchEventFromProjectLocationSessionEventName(projectLocationSessionEventName: string) {
+    return this.pathTemplates.projectLocationSessionEventPathTemplate.match(projectLocationSessionEventName).event;
   }
 
   /**
@@ -10515,7 +8157,7 @@ export class MetadataServiceClient {
    * @param {string} model
    * @returns {string} Resource name string.
    */
-  publisherModelPath(publisher: string, model: string) {
+  publisherModelPath(publisher:string,model:string) {
     return this.pathTemplates.publisherModelPathTemplate.render({
       publisher: publisher,
       model: model,
@@ -10530,9 +8172,7 @@ export class MetadataServiceClient {
    * @returns {string} A string representing the publisher.
    */
   matchPublisherFromPublisherModelName(publisherModelName: string) {
-    return this.pathTemplates.publisherModelPathTemplate.match(
-      publisherModelName
-    ).publisher;
+    return this.pathTemplates.publisherModelPathTemplate.match(publisherModelName).publisher;
   }
 
   /**
@@ -10543,9 +8183,7 @@ export class MetadataServiceClient {
    * @returns {string} A string representing the model.
    */
   matchModelFromPublisherModelName(publisherModelName: string) {
-    return this.pathTemplates.publisherModelPathTemplate.match(
-      publisherModelName
-    ).model;
+    return this.pathTemplates.publisherModelPathTemplate.match(publisherModelName).model;
   }
 
   /**
@@ -10556,7 +8194,7 @@ export class MetadataServiceClient {
    * @param {string} rag_corpus
    * @returns {string} Resource name string.
    */
-  ragCorpusPath(project: string, location: string, ragCorpus: string) {
+  ragCorpusPath(project:string,location:string,ragCorpus:string) {
     return this.pathTemplates.ragCorpusPathTemplate.render({
       project: project,
       location: location,
@@ -10572,8 +8210,7 @@ export class MetadataServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromRagCorpusName(ragCorpusName: string) {
-    return this.pathTemplates.ragCorpusPathTemplate.match(ragCorpusName)
-      .project;
+    return this.pathTemplates.ragCorpusPathTemplate.match(ragCorpusName).project;
   }
 
   /**
@@ -10584,8 +8221,7 @@ export class MetadataServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromRagCorpusName(ragCorpusName: string) {
-    return this.pathTemplates.ragCorpusPathTemplate.match(ragCorpusName)
-      .location;
+    return this.pathTemplates.ragCorpusPathTemplate.match(ragCorpusName).location;
   }
 
   /**
@@ -10596,8 +8232,7 @@ export class MetadataServiceClient {
    * @returns {string} A string representing the rag_corpus.
    */
   matchRagCorpusFromRagCorpusName(ragCorpusName: string) {
-    return this.pathTemplates.ragCorpusPathTemplate.match(ragCorpusName)
-      .rag_corpus;
+    return this.pathTemplates.ragCorpusPathTemplate.match(ragCorpusName).rag_corpus;
   }
 
   /**
@@ -10609,12 +8244,7 @@ export class MetadataServiceClient {
    * @param {string} rag_file
    * @returns {string} Resource name string.
    */
-  ragFilePath(
-    project: string,
-    location: string,
-    ragCorpus: string,
-    ragFile: string
-  ) {
+  ragFilePath(project:string,location:string,ragCorpus:string,ragFile:string) {
     return this.pathTemplates.ragFilePathTemplate.render({
       project: project,
       location: location,
@@ -10675,11 +8305,7 @@ export class MetadataServiceClient {
    * @param {string} reasoning_engine
    * @returns {string} Resource name string.
    */
-  reasoningEnginePath(
-    project: string,
-    location: string,
-    reasoningEngine: string
-  ) {
+  reasoningEnginePath(project:string,location:string,reasoningEngine:string) {
     return this.pathTemplates.reasoningEnginePathTemplate.render({
       project: project,
       location: location,
@@ -10695,9 +8321,7 @@ export class MetadataServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromReasoningEngineName(reasoningEngineName: string) {
-    return this.pathTemplates.reasoningEnginePathTemplate.match(
-      reasoningEngineName
-    ).project;
+    return this.pathTemplates.reasoningEnginePathTemplate.match(reasoningEngineName).project;
   }
 
   /**
@@ -10708,9 +8332,7 @@ export class MetadataServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromReasoningEngineName(reasoningEngineName: string) {
-    return this.pathTemplates.reasoningEnginePathTemplate.match(
-      reasoningEngineName
-    ).location;
+    return this.pathTemplates.reasoningEnginePathTemplate.match(reasoningEngineName).location;
   }
 
   /**
@@ -10721,9 +8343,7 @@ export class MetadataServiceClient {
    * @returns {string} A string representing the reasoning_engine.
    */
   matchReasoningEngineFromReasoningEngineName(reasoningEngineName: string) {
-    return this.pathTemplates.reasoningEnginePathTemplate.match(
-      reasoningEngineName
-    ).reasoning_engine;
+    return this.pathTemplates.reasoningEnginePathTemplate.match(reasoningEngineName).reasoning_engine;
   }
 
   /**
@@ -10735,12 +8355,7 @@ export class MetadataServiceClient {
    * @param {string} saved_query
    * @returns {string} Resource name string.
    */
-  savedQueryPath(
-    project: string,
-    location: string,
-    dataset: string,
-    savedQuery: string
-  ) {
+  savedQueryPath(project:string,location:string,dataset:string,savedQuery:string) {
     return this.pathTemplates.savedQueryPathTemplate.render({
       project: project,
       location: location,
@@ -10757,8 +8372,7 @@ export class MetadataServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromSavedQueryName(savedQueryName: string) {
-    return this.pathTemplates.savedQueryPathTemplate.match(savedQueryName)
-      .project;
+    return this.pathTemplates.savedQueryPathTemplate.match(savedQueryName).project;
   }
 
   /**
@@ -10769,8 +8383,7 @@ export class MetadataServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromSavedQueryName(savedQueryName: string) {
-    return this.pathTemplates.savedQueryPathTemplate.match(savedQueryName)
-      .location;
+    return this.pathTemplates.savedQueryPathTemplate.match(savedQueryName).location;
   }
 
   /**
@@ -10781,8 +8394,7 @@ export class MetadataServiceClient {
    * @returns {string} A string representing the dataset.
    */
   matchDatasetFromSavedQueryName(savedQueryName: string) {
-    return this.pathTemplates.savedQueryPathTemplate.match(savedQueryName)
-      .dataset;
+    return this.pathTemplates.savedQueryPathTemplate.match(savedQueryName).dataset;
   }
 
   /**
@@ -10793,8 +8405,7 @@ export class MetadataServiceClient {
    * @returns {string} A string representing the saved_query.
    */
   matchSavedQueryFromSavedQueryName(savedQueryName: string) {
-    return this.pathTemplates.savedQueryPathTemplate.match(savedQueryName)
-      .saved_query;
+    return this.pathTemplates.savedQueryPathTemplate.match(savedQueryName).saved_query;
   }
 
   /**
@@ -10805,7 +8416,7 @@ export class MetadataServiceClient {
    * @param {string} schedule
    * @returns {string} Resource name string.
    */
-  schedulePath(project: string, location: string, schedule: string) {
+  schedulePath(project:string,location:string,schedule:string) {
     return this.pathTemplates.schedulePathTemplate.render({
       project: project,
       location: location,
@@ -10854,11 +8465,7 @@ export class MetadataServiceClient {
    * @param {string} specialist_pool
    * @returns {string} Resource name string.
    */
-  specialistPoolPath(
-    project: string,
-    location: string,
-    specialistPool: string
-  ) {
+  specialistPoolPath(project:string,location:string,specialistPool:string) {
     return this.pathTemplates.specialistPoolPathTemplate.render({
       project: project,
       location: location,
@@ -10874,9 +8481,7 @@ export class MetadataServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromSpecialistPoolName(specialistPoolName: string) {
-    return this.pathTemplates.specialistPoolPathTemplate.match(
-      specialistPoolName
-    ).project;
+    return this.pathTemplates.specialistPoolPathTemplate.match(specialistPoolName).project;
   }
 
   /**
@@ -10887,9 +8492,7 @@ export class MetadataServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromSpecialistPoolName(specialistPoolName: string) {
-    return this.pathTemplates.specialistPoolPathTemplate.match(
-      specialistPoolName
-    ).location;
+    return this.pathTemplates.specialistPoolPathTemplate.match(specialistPoolName).location;
   }
 
   /**
@@ -10900,9 +8503,7 @@ export class MetadataServiceClient {
    * @returns {string} A string representing the specialist_pool.
    */
   matchSpecialistPoolFromSpecialistPoolName(specialistPoolName: string) {
-    return this.pathTemplates.specialistPoolPathTemplate.match(
-      specialistPoolName
-    ).specialist_pool;
+    return this.pathTemplates.specialistPoolPathTemplate.match(specialistPoolName).specialist_pool;
   }
 
   /**
@@ -10913,7 +8514,7 @@ export class MetadataServiceClient {
    * @param {string} study
    * @returns {string} Resource name string.
    */
-  studyPath(project: string, location: string, study: string) {
+  studyPath(project:string,location:string,study:string) {
     return this.pathTemplates.studyPathTemplate.render({
       project: project,
       location: location,
@@ -10962,7 +8563,7 @@ export class MetadataServiceClient {
    * @param {string} tensorboard
    * @returns {string} Resource name string.
    */
-  tensorboardPath(project: string, location: string, tensorboard: string) {
+  tensorboardPath(project:string,location:string,tensorboard:string) {
     return this.pathTemplates.tensorboardPathTemplate.render({
       project: project,
       location: location,
@@ -10978,8 +8579,7 @@ export class MetadataServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromTensorboardName(tensorboardName: string) {
-    return this.pathTemplates.tensorboardPathTemplate.match(tensorboardName)
-      .project;
+    return this.pathTemplates.tensorboardPathTemplate.match(tensorboardName).project;
   }
 
   /**
@@ -10990,8 +8590,7 @@ export class MetadataServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromTensorboardName(tensorboardName: string) {
-    return this.pathTemplates.tensorboardPathTemplate.match(tensorboardName)
-      .location;
+    return this.pathTemplates.tensorboardPathTemplate.match(tensorboardName).location;
   }
 
   /**
@@ -11002,8 +8601,7 @@ export class MetadataServiceClient {
    * @returns {string} A string representing the tensorboard.
    */
   matchTensorboardFromTensorboardName(tensorboardName: string) {
-    return this.pathTemplates.tensorboardPathTemplate.match(tensorboardName)
-      .tensorboard;
+    return this.pathTemplates.tensorboardPathTemplate.match(tensorboardName).tensorboard;
   }
 
   /**
@@ -11015,12 +8613,7 @@ export class MetadataServiceClient {
    * @param {string} experiment
    * @returns {string} Resource name string.
    */
-  tensorboardExperimentPath(
-    project: string,
-    location: string,
-    tensorboard: string,
-    experiment: string
-  ) {
+  tensorboardExperimentPath(project:string,location:string,tensorboard:string,experiment:string) {
     return this.pathTemplates.tensorboardExperimentPathTemplate.render({
       project: project,
       location: location,
@@ -11037,9 +8630,7 @@ export class MetadataServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromTensorboardExperimentName(tensorboardExperimentName: string) {
-    return this.pathTemplates.tensorboardExperimentPathTemplate.match(
-      tensorboardExperimentName
-    ).project;
+    return this.pathTemplates.tensorboardExperimentPathTemplate.match(tensorboardExperimentName).project;
   }
 
   /**
@@ -11049,12 +8640,8 @@ export class MetadataServiceClient {
    *   A fully-qualified path representing TensorboardExperiment resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromTensorboardExperimentName(
-    tensorboardExperimentName: string
-  ) {
-    return this.pathTemplates.tensorboardExperimentPathTemplate.match(
-      tensorboardExperimentName
-    ).location;
+  matchLocationFromTensorboardExperimentName(tensorboardExperimentName: string) {
+    return this.pathTemplates.tensorboardExperimentPathTemplate.match(tensorboardExperimentName).location;
   }
 
   /**
@@ -11064,12 +8651,8 @@ export class MetadataServiceClient {
    *   A fully-qualified path representing TensorboardExperiment resource.
    * @returns {string} A string representing the tensorboard.
    */
-  matchTensorboardFromTensorboardExperimentName(
-    tensorboardExperimentName: string
-  ) {
-    return this.pathTemplates.tensorboardExperimentPathTemplate.match(
-      tensorboardExperimentName
-    ).tensorboard;
+  matchTensorboardFromTensorboardExperimentName(tensorboardExperimentName: string) {
+    return this.pathTemplates.tensorboardExperimentPathTemplate.match(tensorboardExperimentName).tensorboard;
   }
 
   /**
@@ -11079,12 +8662,8 @@ export class MetadataServiceClient {
    *   A fully-qualified path representing TensorboardExperiment resource.
    * @returns {string} A string representing the experiment.
    */
-  matchExperimentFromTensorboardExperimentName(
-    tensorboardExperimentName: string
-  ) {
-    return this.pathTemplates.tensorboardExperimentPathTemplate.match(
-      tensorboardExperimentName
-    ).experiment;
+  matchExperimentFromTensorboardExperimentName(tensorboardExperimentName: string) {
+    return this.pathTemplates.tensorboardExperimentPathTemplate.match(tensorboardExperimentName).experiment;
   }
 
   /**
@@ -11097,13 +8676,7 @@ export class MetadataServiceClient {
    * @param {string} run
    * @returns {string} Resource name string.
    */
-  tensorboardRunPath(
-    project: string,
-    location: string,
-    tensorboard: string,
-    experiment: string,
-    run: string
-  ) {
+  tensorboardRunPath(project:string,location:string,tensorboard:string,experiment:string,run:string) {
     return this.pathTemplates.tensorboardRunPathTemplate.render({
       project: project,
       location: location,
@@ -11121,9 +8694,7 @@ export class MetadataServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromTensorboardRunName(tensorboardRunName: string) {
-    return this.pathTemplates.tensorboardRunPathTemplate.match(
-      tensorboardRunName
-    ).project;
+    return this.pathTemplates.tensorboardRunPathTemplate.match(tensorboardRunName).project;
   }
 
   /**
@@ -11134,9 +8705,7 @@ export class MetadataServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromTensorboardRunName(tensorboardRunName: string) {
-    return this.pathTemplates.tensorboardRunPathTemplate.match(
-      tensorboardRunName
-    ).location;
+    return this.pathTemplates.tensorboardRunPathTemplate.match(tensorboardRunName).location;
   }
 
   /**
@@ -11147,9 +8716,7 @@ export class MetadataServiceClient {
    * @returns {string} A string representing the tensorboard.
    */
   matchTensorboardFromTensorboardRunName(tensorboardRunName: string) {
-    return this.pathTemplates.tensorboardRunPathTemplate.match(
-      tensorboardRunName
-    ).tensorboard;
+    return this.pathTemplates.tensorboardRunPathTemplate.match(tensorboardRunName).tensorboard;
   }
 
   /**
@@ -11160,9 +8727,7 @@ export class MetadataServiceClient {
    * @returns {string} A string representing the experiment.
    */
   matchExperimentFromTensorboardRunName(tensorboardRunName: string) {
-    return this.pathTemplates.tensorboardRunPathTemplate.match(
-      tensorboardRunName
-    ).experiment;
+    return this.pathTemplates.tensorboardRunPathTemplate.match(tensorboardRunName).experiment;
   }
 
   /**
@@ -11173,9 +8738,7 @@ export class MetadataServiceClient {
    * @returns {string} A string representing the run.
    */
   matchRunFromTensorboardRunName(tensorboardRunName: string) {
-    return this.pathTemplates.tensorboardRunPathTemplate.match(
-      tensorboardRunName
-    ).run;
+    return this.pathTemplates.tensorboardRunPathTemplate.match(tensorboardRunName).run;
   }
 
   /**
@@ -11189,14 +8752,7 @@ export class MetadataServiceClient {
    * @param {string} time_series
    * @returns {string} Resource name string.
    */
-  tensorboardTimeSeriesPath(
-    project: string,
-    location: string,
-    tensorboard: string,
-    experiment: string,
-    run: string,
-    timeSeries: string
-  ) {
+  tensorboardTimeSeriesPath(project:string,location:string,tensorboard:string,experiment:string,run:string,timeSeries:string) {
     return this.pathTemplates.tensorboardTimeSeriesPathTemplate.render({
       project: project,
       location: location,
@@ -11215,9 +8771,7 @@ export class MetadataServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromTensorboardTimeSeriesName(tensorboardTimeSeriesName: string) {
-    return this.pathTemplates.tensorboardTimeSeriesPathTemplate.match(
-      tensorboardTimeSeriesName
-    ).project;
+    return this.pathTemplates.tensorboardTimeSeriesPathTemplate.match(tensorboardTimeSeriesName).project;
   }
 
   /**
@@ -11227,12 +8781,8 @@ export class MetadataServiceClient {
    *   A fully-qualified path representing TensorboardTimeSeries resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromTensorboardTimeSeriesName(
-    tensorboardTimeSeriesName: string
-  ) {
-    return this.pathTemplates.tensorboardTimeSeriesPathTemplate.match(
-      tensorboardTimeSeriesName
-    ).location;
+  matchLocationFromTensorboardTimeSeriesName(tensorboardTimeSeriesName: string) {
+    return this.pathTemplates.tensorboardTimeSeriesPathTemplate.match(tensorboardTimeSeriesName).location;
   }
 
   /**
@@ -11242,12 +8792,8 @@ export class MetadataServiceClient {
    *   A fully-qualified path representing TensorboardTimeSeries resource.
    * @returns {string} A string representing the tensorboard.
    */
-  matchTensorboardFromTensorboardTimeSeriesName(
-    tensorboardTimeSeriesName: string
-  ) {
-    return this.pathTemplates.tensorboardTimeSeriesPathTemplate.match(
-      tensorboardTimeSeriesName
-    ).tensorboard;
+  matchTensorboardFromTensorboardTimeSeriesName(tensorboardTimeSeriesName: string) {
+    return this.pathTemplates.tensorboardTimeSeriesPathTemplate.match(tensorboardTimeSeriesName).tensorboard;
   }
 
   /**
@@ -11257,12 +8803,8 @@ export class MetadataServiceClient {
    *   A fully-qualified path representing TensorboardTimeSeries resource.
    * @returns {string} A string representing the experiment.
    */
-  matchExperimentFromTensorboardTimeSeriesName(
-    tensorboardTimeSeriesName: string
-  ) {
-    return this.pathTemplates.tensorboardTimeSeriesPathTemplate.match(
-      tensorboardTimeSeriesName
-    ).experiment;
+  matchExperimentFromTensorboardTimeSeriesName(tensorboardTimeSeriesName: string) {
+    return this.pathTemplates.tensorboardTimeSeriesPathTemplate.match(tensorboardTimeSeriesName).experiment;
   }
 
   /**
@@ -11273,9 +8815,7 @@ export class MetadataServiceClient {
    * @returns {string} A string representing the run.
    */
   matchRunFromTensorboardTimeSeriesName(tensorboardTimeSeriesName: string) {
-    return this.pathTemplates.tensorboardTimeSeriesPathTemplate.match(
-      tensorboardTimeSeriesName
-    ).run;
+    return this.pathTemplates.tensorboardTimeSeriesPathTemplate.match(tensorboardTimeSeriesName).run;
   }
 
   /**
@@ -11285,12 +8825,8 @@ export class MetadataServiceClient {
    *   A fully-qualified path representing TensorboardTimeSeries resource.
    * @returns {string} A string representing the time_series.
    */
-  matchTimeSeriesFromTensorboardTimeSeriesName(
-    tensorboardTimeSeriesName: string
-  ) {
-    return this.pathTemplates.tensorboardTimeSeriesPathTemplate.match(
-      tensorboardTimeSeriesName
-    ).time_series;
+  matchTimeSeriesFromTensorboardTimeSeriesName(tensorboardTimeSeriesName: string) {
+    return this.pathTemplates.tensorboardTimeSeriesPathTemplate.match(tensorboardTimeSeriesName).time_series;
   }
 
   /**
@@ -11301,11 +8837,7 @@ export class MetadataServiceClient {
    * @param {string} training_pipeline
    * @returns {string} Resource name string.
    */
-  trainingPipelinePath(
-    project: string,
-    location: string,
-    trainingPipeline: string
-  ) {
+  trainingPipelinePath(project:string,location:string,trainingPipeline:string) {
     return this.pathTemplates.trainingPipelinePathTemplate.render({
       project: project,
       location: location,
@@ -11321,9 +8853,7 @@ export class MetadataServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromTrainingPipelineName(trainingPipelineName: string) {
-    return this.pathTemplates.trainingPipelinePathTemplate.match(
-      trainingPipelineName
-    ).project;
+    return this.pathTemplates.trainingPipelinePathTemplate.match(trainingPipelineName).project;
   }
 
   /**
@@ -11334,9 +8864,7 @@ export class MetadataServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromTrainingPipelineName(trainingPipelineName: string) {
-    return this.pathTemplates.trainingPipelinePathTemplate.match(
-      trainingPipelineName
-    ).location;
+    return this.pathTemplates.trainingPipelinePathTemplate.match(trainingPipelineName).location;
   }
 
   /**
@@ -11347,9 +8875,7 @@ export class MetadataServiceClient {
    * @returns {string} A string representing the training_pipeline.
    */
   matchTrainingPipelineFromTrainingPipelineName(trainingPipelineName: string) {
-    return this.pathTemplates.trainingPipelinePathTemplate.match(
-      trainingPipelineName
-    ).training_pipeline;
+    return this.pathTemplates.trainingPipelinePathTemplate.match(trainingPipelineName).training_pipeline;
   }
 
   /**
@@ -11361,7 +8887,7 @@ export class MetadataServiceClient {
    * @param {string} trial
    * @returns {string} Resource name string.
    */
-  trialPath(project: string, location: string, study: string, trial: string) {
+  trialPath(project:string,location:string,study:string,trial:string) {
     return this.pathTemplates.trialPathTemplate.render({
       project: project,
       location: location,
@@ -11422,7 +8948,7 @@ export class MetadataServiceClient {
    * @param {string} tuning_job
    * @returns {string} Resource name string.
    */
-  tuningJobPath(project: string, location: string, tuningJob: string) {
+  tuningJobPath(project:string,location:string,tuningJob:string) {
     return this.pathTemplates.tuningJobPathTemplate.render({
       project: project,
       location: location,
@@ -11438,8 +8964,7 @@ export class MetadataServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromTuningJobName(tuningJobName: string) {
-    return this.pathTemplates.tuningJobPathTemplate.match(tuningJobName)
-      .project;
+    return this.pathTemplates.tuningJobPathTemplate.match(tuningJobName).project;
   }
 
   /**
@@ -11450,8 +8975,7 @@ export class MetadataServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromTuningJobName(tuningJobName: string) {
-    return this.pathTemplates.tuningJobPathTemplate.match(tuningJobName)
-      .location;
+    return this.pathTemplates.tuningJobPathTemplate.match(tuningJobName).location;
   }
 
   /**
@@ -11462,8 +8986,7 @@ export class MetadataServiceClient {
    * @returns {string} A string representing the tuning_job.
    */
   matchTuningJobFromTuningJobName(tuningJobName: string) {
-    return this.pathTemplates.tuningJobPathTemplate.match(tuningJobName)
-      .tuning_job;
+    return this.pathTemplates.tuningJobPathTemplate.match(tuningJobName).tuning_job;
   }
 
   /**
@@ -11475,6 +8998,7 @@ export class MetadataServiceClient {
   close(): Promise<void> {
     if (this.metadataServiceStub && !this._terminated) {
       return this.metadataServiceStub.then(stub => {
+        this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
         this.iamClient.close();

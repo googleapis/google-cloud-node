@@ -75,6 +75,16 @@
                 "deleteSavedQuery"
               ]
             },
+            "AssessData": {
+              "methods": [
+                "assessData"
+              ]
+            },
+            "AssembleData": {
+              "methods": [
+                "assembleData"
+              ]
+            },
             "ListDatasets": {
               "methods": [
                 "listDatasets",
@@ -185,6 +195,16 @@
             "DeleteSavedQuery": {
               "methods": [
                 "deleteSavedQuery"
+              ]
+            },
+            "AssessData": {
+              "methods": [
+                "assessData"
+              ]
+            },
+            "AssembleData": {
+              "methods": [
+                "assembleData"
               ]
             },
             "ListDatasets": {
@@ -330,6 +350,11 @@
                 "updateEndpoint"
               ]
             },
+            "FetchPublisherModelConfig": {
+              "methods": [
+                "fetchPublisherModelConfig"
+              ]
+            },
             "CreateEndpoint": {
               "methods": [
                 "createEndpoint"
@@ -358,6 +383,11 @@
             "MutateDeployedModel": {
               "methods": [
                 "mutateDeployedModel"
+              ]
+            },
+            "SetPublisherModelConfig": {
+              "methods": [
+                "setPublisherModelConfig"
               ]
             },
             "ListEndpoints": {
@@ -382,6 +412,11 @@
                 "updateEndpoint"
               ]
             },
+            "FetchPublisherModelConfig": {
+              "methods": [
+                "fetchPublisherModelConfig"
+              ]
+            },
             "CreateEndpoint": {
               "methods": [
                 "createEndpoint"
@@ -410,6 +445,11 @@
             "MutateDeployedModel": {
               "methods": [
                 "mutateDeployedModel"
+              ]
+            },
+            "SetPublisherModelConfig": {
+              "methods": [
+                "setPublisherModelConfig"
               ]
             },
             "ListEndpoints": {
@@ -451,6 +491,118 @@
             "EvaluateDataset": {
               "methods": [
                 "evaluateDataset"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "ExampleStoreService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "ExampleStoreServiceClient",
+          "rpcs": {
+            "GetExampleStore": {
+              "methods": [
+                "getExampleStore"
+              ]
+            },
+            "UpsertExamples": {
+              "methods": [
+                "upsertExamples"
+              ]
+            },
+            "RemoveExamples": {
+              "methods": [
+                "removeExamples"
+              ]
+            },
+            "SearchExamples": {
+              "methods": [
+                "searchExamples"
+              ]
+            },
+            "CreateExampleStore": {
+              "methods": [
+                "createExampleStore"
+              ]
+            },
+            "UpdateExampleStore": {
+              "methods": [
+                "updateExampleStore"
+              ]
+            },
+            "DeleteExampleStore": {
+              "methods": [
+                "deleteExampleStore"
+              ]
+            },
+            "ListExampleStores": {
+              "methods": [
+                "listExampleStores",
+                "listExampleStoresStream",
+                "listExampleStoresAsync"
+              ]
+            },
+            "FetchExamples": {
+              "methods": [
+                "fetchExamples",
+                "fetchExamplesStream",
+                "fetchExamplesAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "ExampleStoreServiceClient",
+          "rpcs": {
+            "GetExampleStore": {
+              "methods": [
+                "getExampleStore"
+              ]
+            },
+            "UpsertExamples": {
+              "methods": [
+                "upsertExamples"
+              ]
+            },
+            "RemoveExamples": {
+              "methods": [
+                "removeExamples"
+              ]
+            },
+            "SearchExamples": {
+              "methods": [
+                "searchExamples"
+              ]
+            },
+            "CreateExampleStore": {
+              "methods": [
+                "createExampleStore"
+              ]
+            },
+            "UpdateExampleStore": {
+              "methods": [
+                "updateExampleStore"
+              ]
+            },
+            "DeleteExampleStore": {
+              "methods": [
+                "deleteExampleStore"
+              ]
+            },
+            "ListExampleStores": {
+              "methods": [
+                "listExampleStores",
+                "listExampleStoresStream",
+                "listExampleStoresAsync"
+              ]
+            },
+            "FetchExamples": {
+              "methods": [
+                "fetchExamples",
+                "fetchExamplesStream",
+                "fetchExamplesAsync"
               ]
             }
           }
@@ -733,6 +885,11 @@
             "StreamingFetchFeatureValues": {
               "methods": [
                 "streamingFetchFeatureValues"
+              ]
+            },
+            "FeatureViewDirectWrite": {
+              "methods": [
+                "featureViewDirectWrite"
               ]
             }
           }
@@ -2441,6 +2598,11 @@
                 "deployPublisherModel"
               ]
             },
+            "ExportPublisherModel": {
+              "methods": [
+                "exportPublisherModel"
+              ]
+            },
             "ListPublisherModels": {
               "methods": [
                 "listPublisherModels",
@@ -2466,6 +2628,11 @@
             "DeployPublisherModel": {
               "methods": [
                 "deployPublisherModel"
+              ]
+            },
+            "ExportPublisherModel": {
+              "methods": [
+                "exportPublisherModel"
               ]
             },
             "ListPublisherModels": {
@@ -3552,6 +3719,98 @@
                 "listSchedules",
                 "listSchedulesStream",
                 "listSchedulesAsync"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "SessionService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "SessionServiceClient",
+          "rpcs": {
+            "GetSession": {
+              "methods": [
+                "getSession"
+              ]
+            },
+            "UpdateSession": {
+              "methods": [
+                "updateSession"
+              ]
+            },
+            "AppendEvent": {
+              "methods": [
+                "appendEvent"
+              ]
+            },
+            "CreateSession": {
+              "methods": [
+                "createSession"
+              ]
+            },
+            "DeleteSession": {
+              "methods": [
+                "deleteSession"
+              ]
+            },
+            "ListSessions": {
+              "methods": [
+                "listSessions",
+                "listSessionsStream",
+                "listSessionsAsync"
+              ]
+            },
+            "ListEvents": {
+              "methods": [
+                "listEvents",
+                "listEventsStream",
+                "listEventsAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "SessionServiceClient",
+          "rpcs": {
+            "GetSession": {
+              "methods": [
+                "getSession"
+              ]
+            },
+            "UpdateSession": {
+              "methods": [
+                "updateSession"
+              ]
+            },
+            "AppendEvent": {
+              "methods": [
+                "appendEvent"
+              ]
+            },
+            "CreateSession": {
+              "methods": [
+                "createSession"
+              ]
+            },
+            "DeleteSession": {
+              "methods": [
+                "deleteSession"
+              ]
+            },
+            "ListSessions": {
+              "methods": [
+                "listSessions",
+                "listSessionsStream",
+                "listSessionsAsync"
+              ]
+            },
+            "ListEvents": {
+              "methods": [
+                "listEvents",
+                "listEventsStream",
+                "listEventsAsync"
               ]
             }
           }
