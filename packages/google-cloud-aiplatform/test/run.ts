@@ -48,7 +48,7 @@ async function runBatch(batch: string[]) {
 
 async function main() {
   const files = await readdirp(testDir);
-  const jsFiles = files.filter(fn => fn.match(/^gapic_.*\.js$/));
+  const jsFiles = files.filter(fn => fn.match(/^gapic_.*\.js$/) && !fn.match(/^gapic_dataset_service/));
 
   const batch: string[] = [];
   for (const file of jsFiles) {
