@@ -378,9 +378,7 @@ describe('v1beta1.NotebookServiceClient', () => {
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.GetNotebookRuntimeTemplateRequest', ['name']);
             request.name = defaultValue1;
             const expectedError = new Error('The client has already been closed.');
-            client.close().catch(err => {
-        throw err;
-      });
+            client.close();
             await assert.rejects(client.getNotebookRuntimeTemplate(request), expectedError);
         });
     });
@@ -492,9 +490,7 @@ describe('v1beta1.NotebookServiceClient', () => {
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.UpdateNotebookRuntimeTemplateRequest', ['notebookRuntimeTemplate', 'name']);
             request.notebookRuntimeTemplate.name = defaultValue1;
             const expectedError = new Error('The client has already been closed.');
-            client.close().catch(err => {
-        throw err;
-      });
+            client.close();
             await assert.rejects(client.updateNotebookRuntimeTemplate(request), expectedError);
         });
     });
@@ -602,9 +598,7 @@ describe('v1beta1.NotebookServiceClient', () => {
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.GetNotebookRuntimeRequest', ['name']);
             request.name = defaultValue1;
             const expectedError = new Error('The client has already been closed.');
-            client.close().catch(err => {
-        throw err;
-      });
+            client.close();
             await assert.rejects(client.getNotebookRuntime(request), expectedError);
         });
     });
@@ -710,13 +704,9 @@ describe('v1beta1.NotebookServiceClient', () => {
             );
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.GetNotebookExecutionJobRequest', ['name']);
-            client.close().catch(err => {
-        throw err;
-      });defaultValue1;
+            request.name = defaultValue1;
             const expectedError = new Error('The client has already been closed.');
-            client.close().catch(err => {
-        throw err;
-      });
+            client.close();
             await assert.rejects(client.getNotebookExecutionJob(request), expectedError);
         });
     });

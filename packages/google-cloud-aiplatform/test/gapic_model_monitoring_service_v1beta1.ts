@@ -378,9 +378,7 @@ describe('v1beta1.ModelMonitoringServiceClient', () => {
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.GetModelMonitorRequest', ['name']);
             request.name = defaultValue1;
             const expectedError = new Error('The client has already been closed.');
-            client.close().catch(err => {
-        throw err;
-      });
+            client.close();
             await assert.rejects(client.getModelMonitor(request), expectedError);
         });
     });
@@ -486,13 +484,9 @@ describe('v1beta1.ModelMonitoringServiceClient', () => {
             );
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.CreateModelMonitoringJobRequest', ['parent']);
-            client.close().catch(err => {
-        throw err;
-      });= defaultValue1;
+            request.parent = defaultValue1;
             const expectedError = new Error('The client has already been closed.');
-            client.close().catch(err => {
-        throw err;
-      });
+            client.close();
             await assert.rejects(client.createModelMonitoringJob(request), expectedError);
         });
     });
@@ -596,17 +590,11 @@ describe('v1beta1.ModelMonitoringServiceClient', () => {
             const request = generateSampleMessage(
               new protos.google.cloud.aiplatform.v1beta1.GetModelMonitoringJobRequest()
             );
-            client.close().catch(err => {
-        throw err;
-      });lue1 =
+            const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.GetModelMonitoringJobRequest', ['name']);
-            client.close().catch(err => {
-        throw err;
-      });defaultValue1;
+            request.name = defaultValue1;
             const expectedError = new Error('The client has already been closed.');
-            client.close().catch(err => {
-        throw err;
-      });
+            client.close();
             await assert.rejects(client.getModelMonitoringJob(request), expectedError);
         });
     });
