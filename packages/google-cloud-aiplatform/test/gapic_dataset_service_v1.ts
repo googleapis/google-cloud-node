@@ -31,6 +31,7 @@ import {
   operationsProtos,
   IamProtos,
   LocationProtos,
+  GoogleAuth,
 } from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
@@ -166,12 +167,25 @@ function stubAsyncIterationCall<ResponseType>(
 }
 
 describe('v1.DatasetServiceClient', () => {
+  let googleAuth: GoogleAuth;
+  beforeEach(() => {
+    googleAuth = {
+      getClient: sinon.stub().resolves({
+        getRequestHeaders: sinon
+          .stub()
+          .resolves({Authorization: 'Bearer SOME_TOKEN'}),
+      }),
+    } as unknown as GoogleAuth;
+  });
+  afterEach(() => {
+    sinon.restore();
+  });
   describe('Common methods', () => {
-    it.only('has apiEndpoint', async () => {
+    it.only('has apiEndpoint', () => {
       const client = new datasetserviceModule.v1.DatasetServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
       });
-      const apiEndpoint = await client.apiEndpoint;
+      const apiEndpoint = client.apiEndpoint;
       assert.strictEqual(apiEndpoint, 'aiplatform.googleapis.com');
     });
 
