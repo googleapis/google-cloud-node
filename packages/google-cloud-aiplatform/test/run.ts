@@ -37,7 +37,10 @@ function spawnp(command: string, parameters: string[]) {
 
 const testDir = join('.', 'build', 'test');
 const runCommand = 'node';
-const runParameters = ['./node_modules/mocha/bin/mocha'];
+const runParameters = [
+  '--max_old_space_size=4096',
+  './node_modules/mocha/bin/mocha',
+];
 const batchSize = 2;
 
 async function runBatch(batch: string[]) {
@@ -48,7 +51,9 @@ async function runBatch(batch: string[]) {
 
 async function main() {
   const files = await readdirp(testDir);
-  const jsFiles = files.filter(fn => fn.match(/^gapic_.*\.js$/) && !fn.match(/^gapic_dataset_service/));
+  const jsFiles = files.filter(
+    fn => fn.match(/^gapic_.*\.js$/) && !fn.match(/^gapic_dataset_service/),
+  );
 
   const batch: string[] = [];
   for (const file of jsFiles) {
