@@ -1,0 +1,97 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "typescript",
+  "protoPackage": "google.cloud.lustre.v1",
+  "libraryPackage": "@google-cloud/lustre",
+  "services": {
+    "Lustre": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "LustreClient",
+          "rpcs": {
+            "GetInstance": {
+              "methods": [
+                "getInstance"
+              ]
+            },
+            "CreateInstance": {
+              "methods": [
+                "createInstance"
+              ]
+            },
+            "UpdateInstance": {
+              "methods": [
+                "updateInstance"
+              ]
+            },
+            "DeleteInstance": {
+              "methods": [
+                "deleteInstance"
+              ]
+            },
+            "ImportData": {
+              "methods": [
+                "importData"
+              ]
+            },
+            "ExportData": {
+              "methods": [
+                "exportData"
+              ]
+            },
+            "ListInstances": {
+              "methods": [
+                "listInstances",
+                "listInstancesStream",
+                "listInstancesAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "LustreClient",
+          "rpcs": {
+            "GetInstance": {
+              "methods": [
+                "getInstance"
+              ]
+            },
+            "CreateInstance": {
+              "methods": [
+                "createInstance"
+              ]
+            },
+            "UpdateInstance": {
+              "methods": [
+                "updateInstance"
+              ]
+            },
+            "DeleteInstance": {
+              "methods": [
+                "deleteInstance"
+              ]
+            },
+            "ImportData": {
+              "methods": [
+                "importData"
+              ]
+            },
+            "ExportData": {
+              "methods": [
+                "exportData"
+              ]
+            },
+            "ListInstances": {
+              "methods": [
+                "listInstances",
+                "listInstancesStream",
+                "listInstancesAsync"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}

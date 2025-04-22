@@ -1,0 +1,5 @@
+[
+  "../../protos/google/cloud/lustre/v1/instance.proto",
+  "../../protos/google/cloud/lustre/v1/lustre.proto",
+  "../../protos/google/cloud/lustre/v1/transfer.proto"
+]
