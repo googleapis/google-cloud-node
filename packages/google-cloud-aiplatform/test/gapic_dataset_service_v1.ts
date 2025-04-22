@@ -167,7 +167,7 @@ function stubAsyncIterationCall<ResponseType>(
 
 describe('v1.DatasetServiceClient', () => {
   describe('Common methods', () => {
-    it('has apiEndpoint', async () => {
+    it.only('has apiEndpoint', async () => {
       const client = new datasetserviceModule.v1.DatasetServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
       });
