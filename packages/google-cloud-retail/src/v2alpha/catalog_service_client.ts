@@ -613,38 +613,39 @@ export class CatalogServiceClient {
   }
   /**
    * Set a specified branch id as default branch. API methods such as
-   * {@link protos.google.cloud.retail.v2alpha.SearchService.Search|SearchService.Search},
-   * {@link protos.google.cloud.retail.v2alpha.ProductService.GetProduct|ProductService.GetProduct},
-   * {@link protos.google.cloud.retail.v2alpha.ProductService.ListProducts|ProductService.ListProducts}
-   * will treat requests using "default_branch" to the actual branch id set as
-   * default.
+   *  {@link protos.google.cloud.retail.v2alpha.SearchService.Search|SearchService.Search},
+   *  {@link protos.google.cloud.retail.v2alpha.ProductService.GetProduct|ProductService.GetProduct},
+   *  {@link protos.google.cloud.retail.v2alpha.ProductService.ListProducts|ProductService.ListProducts}
+   *  will treat requests using "default_branch" to the actual branch id set as
+   *  default.
    *
-   * For example, if `projects/* /locations/* /catalogs/* /branches/1` is set as
-   * default, setting
-   * {@link protos.google.cloud.retail.v2alpha.SearchRequest.branch|SearchRequest.branch} to
-   * `projects/* /locations/* /catalogs/* /branches/default_branch` is equivalent
-   * to setting
-   * {@link protos.google.cloud.retail.v2alpha.SearchRequest.branch|SearchRequest.branch} to
-   * `projects/* /locations/* /catalogs/* /branches/1`.
+   *  For example, if `projects/* /locations/* /catalogs/* /branches/1` is set as
+   *  default, setting
+   *  {@link protos.google.cloud.retail.v2alpha.SearchRequest.branch|SearchRequest.branch}
+   *  to `projects/* /locations/* /catalogs/* /branches/default_branch` is
+   *  equivalent to setting
+   *  {@link protos.google.cloud.retail.v2alpha.SearchRequest.branch|SearchRequest.branch}
+   *  to `projects/* /locations/* /catalogs/* /branches/1`.
    *
-   * Using multiple branches can be useful when developers would like
-   * to have a staging branch to test and verify for future usage. When it
-   * becomes ready, developers switch on the staging branch using this API while
-   * keeping using `projects/* /locations/* /catalogs/* /branches/default_branch`
-   * as {@link protos.google.cloud.retail.v2alpha.SearchRequest.branch|SearchRequest.branch}
-   * to route the traffic to this staging branch.
+   *  Using multiple branches can be useful when developers would like
+   *  to have a staging branch to test and verify for future usage. When it
+   *  becomes ready, developers switch on the staging branch using this API
+   *  while keeping using
+   *  `projects/* /locations/* /catalogs/* /branches/default_branch` as
+   *  {@link protos.google.cloud.retail.v2alpha.SearchRequest.branch|SearchRequest.branch}
+   *  to route the traffic to this staging branch.
    *
-   * CAUTION: If you have live predict/search traffic, switching the default
-   * branch could potentially cause outages if the ID space of the new branch is
-   * very different from the old one.
+   *  CAUTION: If you have live predict/search traffic, switching the default
+   *  branch could potentially cause outages if the ID space of the new branch
+   *  is very different from the old one.
    *
-   * More specifically:
+   *  More specifically:
    *
-   * * PredictionService will only return product IDs from branch {newBranch}.
-   * * SearchService will only return product IDs from branch {newBranch}
-   *   (if branch is not explicitly set).
-   * * UserEventService will only join events with products from branch
-   *   {newBranch}.
+   *  * PredictionService will only return product IDs from branch {newBranch}.
+   *  * SearchService will only return product IDs from branch {newBranch}
+   *    (if branch is not explicitly set).
+   *  * UserEventService will only join events with products from branch
+   *    {newBranch}.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -787,8 +788,8 @@ export class CatalogServiceClient {
   }
   /**
    * Get which branch is currently default branch set by
-   * {@link protos.google.cloud.retail.v2alpha.CatalogService.SetDefaultBranch|CatalogService.SetDefaultBranch}
-   * method under a specified parent catalog.
+   *  {@link protos.google.cloud.retail.v2alpha.CatalogService.SetDefaultBranch|CatalogService.SetDefaultBranch}
+   *  method under a specified parent catalog.
    *
    * @param {Object} request
    *   The request object that will be sent.

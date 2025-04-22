@@ -1,4 +1,7 @@
 {
+  "options": {
+    "syntax": "proto3"
+  },
   "nested": {
     "google": {
       "nested": {
@@ -6253,7 +6256,8 @@
                             "filterAction",
                             "twowaySynonymsAction",
                             "forceReturnFacetAction",
-                            "removeFacetAction"
+                            "removeFacetAction",
+                            "pinAction"
                           ]
                         }
                       },
@@ -6297,6 +6301,10 @@
                         "removeFacetAction": {
                           "type": "RemoveFacetAction",
                           "id": 13
+                        },
+                        "pinAction": {
+                          "type": "PinAction",
+                          "id": 14
                         },
                         "condition": {
                           "type": "Condition",
@@ -6437,6 +6445,18 @@
                               "rule": "repeated",
                               "type": "string",
                               "id": 1
+                            }
+                          }
+                        },
+                        "PinAction": {
+                          "fields": {
+                            "pinMap": {
+                              "keyType": "int64",
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
                             }
                           }
                         }
@@ -6668,23 +6688,75 @@
                       "fields": {
                         "placeId": {
                           "type": "string",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         },
                         "priceInfo": {
                           "type": "PriceInfo",
-                          "id": 2
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "availability": {
+                          "type": "Availability",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         },
                         "attributes": {
                           "keyType": "string",
                           "type": "CustomAttribute",
-                          "id": 3
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         },
                         "fulfillmentTypes": {
                           "rule": "repeated",
                           "type": "string",
                           "id": 4,
                           "options": {
-                            "(google.api.field_behavior)": "INPUT_ONLY"
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "Availability": {
+                          "values": {
+                            "AVAILABILITY_UNSPECIFIED": 0,
+                            "IN_STOCK": 1,
+                            "OUT_OF_STOCK": 2,
+                            "PREORDER": 3,
+                            "BACKORDER": 4
+                          }
+                        }
+                      }
+                    },
+                    "PinControlMetadata": {
+                      "fields": {
+                        "allMatchedPins": {
+                          "keyType": "int64",
+                          "type": "ProductPins",
+                          "id": 1
+                        },
+                        "droppedPins": {
+                          "keyType": "int64",
+                          "type": "ProductPins",
+                          "id": 2
+                        }
+                      },
+                      "nested": {
+                        "ProductPins": {
+                          "fields": {
+                            "productId": {
+                              "rule": "repeated",
+                              "type": "string",
+                              "id": 1
+                            }
                           }
                         }
                       }
@@ -8541,6 +8613,27 @@
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
+                        },
+                        "languageCode": {
+                          "type": "string",
+                          "id": 43,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "regionCode": {
+                          "type": "string",
+                          "id": 44,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "placeId": {
+                          "type": "string",
+                          "id": 46,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       },
                       "nested": {
@@ -8853,6 +8946,10 @@
                           "rule": "repeated",
                           "type": "string",
                           "id": 12
+                        },
+                        "pinControlMetadata": {
+                          "type": "PinControlMetadata",
+                          "id": 22
                         },
                         "invalidConditionBoostSpecs": {
                           "rule": "repeated",
@@ -10100,26 +10197,6 @@
                             "frequentlyBoughtTogetherConfig": {
                               "type": "FrequentlyBoughtTogetherFeaturesConfig",
                               "id": 1
-                            },
-                            "llmEmbeddingConfig": {
-                              "type": "LlmEmbeddingConfig",
-                              "id": 2,
-                              "options": {
-                                "(google.api.field_behavior)": "OPTIONAL"
-                              }
-                            }
-                          },
-                          "nested": {
-                            "LlmEmbeddingConfig": {
-                              "fields": {
-                                "llmEmbeddingVersion": {
-                                  "type": "string",
-                                  "id": 1,
-                                  "options": {
-                                    "(google.api.field_behavior)": "OPTIONAL"
-                                  }
-                                }
-                              }
                             }
                           }
                         },
@@ -12197,12 +12274,18 @@
                           "requestType": "CollectUserEventRequest",
                           "responseType": "google.api.HttpBody",
                           "options": {
-                            "(google.api.http).get": "/v2alpha/{parent=projects/*/locations/*/catalogs/*}/userEvents:collect"
+                            "(google.api.http).get": "/v2alpha/{parent=projects/*/locations/*/catalogs/*}/userEvents:collect",
+                            "(google.api.http).additional_bindings.post": "/v2alpha/{parent=projects/*/locations/*/catalogs/*}/userEvents:collect",
+                            "(google.api.http).additional_bindings.body": "*"
                           },
                           "parsedOptions": [
                             {
                               "(google.api.http)": {
-                                "get": "/v2alpha/{parent=projects/*/locations/*/catalogs/*}/userEvents:collect"
+                                "get": "/v2alpha/{parent=projects/*/locations/*/catalogs/*}/userEvents:collect",
+                                "additional_bindings": {
+                                  "post": "/v2alpha/{parent=projects/*/locations/*/catalogs/*}/userEvents:collect",
+                                  "body": "*"
+                                }
                               }
                             }
                           ]
