@@ -16,10 +16,11 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-import * as v1 from './v1';
-const LustreClient = v1.LustreClient;
-type LustreClient = v1.LustreClient;
-export {v1, LustreClient};
-export default {v1, LustreClient};
-import * as protos from '../protos/protos';
-export {protos}
+/* eslint-disable node/no-missing-require, no-unused-vars */
+const lustre = require('@google-cloud/lustre');
+
+function main() {
+  const lustreClient = new lustre.LustreClient();
+}
+
+main();
