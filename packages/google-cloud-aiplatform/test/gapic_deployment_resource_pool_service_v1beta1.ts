@@ -378,7 +378,9 @@ describe('v1beta1.DeploymentResourcePoolServiceClient', () => {
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.GetDeploymentResourcePoolRequest', ['name']);
             request.name = defaultValue1;
             const expectedError = new Error('The client has already been closed.');
-            client.close();
+            client.close().catch(err => {
+        throw err;
+      });
             await assert.rejects(client.getDeploymentResourcePool(request), expectedError);
         });
     });

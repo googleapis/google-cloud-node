@@ -378,7 +378,9 @@ describe('v1beta1.VertexRagDataServiceClient', () => {
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.GetRagCorpusRequest', ['name']);
             request.name = defaultValue1;
             const expectedError = new Error('The client has already been closed.');
-            client.close();
+            client.close().catch(err => {
+        throw err;
+      });
             await assert.rejects(client.getRagCorpus(request), expectedError);
         });
     });
@@ -486,7 +488,9 @@ describe('v1beta1.VertexRagDataServiceClient', () => {
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.UploadRagFileRequest', ['parent']);
             request.parent = defaultValue1;
             const expectedError = new Error('The client has already been closed.');
-            client.close();
+            client.close().catch(err => {
+        throw err;
+      });
             await assert.rejects(client.uploadRagFile(request), expectedError);
         });
     });
@@ -594,7 +598,9 @@ describe('v1beta1.VertexRagDataServiceClient', () => {
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.GetRagFileRequest', ['name']);
             request.name = defaultValue1;
             const expectedError = new Error('The client has already been closed.');
-            client.close();
+            client.close().catch(err => {
+        throw err;
+      });
             await assert.rejects(client.getRagFile(request), expectedError);
         });
     });

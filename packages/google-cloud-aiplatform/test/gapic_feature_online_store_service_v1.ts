@@ -335,7 +335,9 @@ describe('v1.FeatureOnlineStoreServiceClient', () => {
               getTypeDefaultValue('.google.cloud.aiplatform.v1.FetchFeatureValuesRequest', ['featureView']);
             request.featureView = defaultValue1;
             const expectedError = new Error('The client has already been closed.');
-            client.close();
+            client.close().catch(err => {
+        throw err;
+      });
             await assert.rejects(client.fetchFeatureValues(request), expectedError);
         });
     });
@@ -443,7 +445,9 @@ describe('v1.FeatureOnlineStoreServiceClient', () => {
               getTypeDefaultValue('.google.cloud.aiplatform.v1.SearchNearestEntitiesRequest', ['featureView']);
             request.featureView = defaultValue1;
             const expectedError = new Error('The client has already been closed.');
-            client.close();
+            client.close().catch(err => {
+        throw err;
+      });
             await assert.rejects(client.searchNearestEntities(request), expectedError);
         });
     });

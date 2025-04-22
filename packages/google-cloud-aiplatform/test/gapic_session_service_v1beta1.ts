@@ -378,7 +378,9 @@ describe('v1beta1.SessionServiceClient', () => {
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.GetSessionRequest', ['name']);
             request.name = defaultValue1;
             const expectedError = new Error('The client has already been closed.');
-            client.close();
+            client.close().catch(err => {
+        throw err;
+      });
             await assert.rejects(client.getSession(request), expectedError);
         });
     });
@@ -488,9 +490,13 @@ describe('v1beta1.SessionServiceClient', () => {
             request.session ??= {};
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.UpdateSessionRequest', ['session', 'name']);
-            request.session.name = defaultValue1;
+            client.close().catch(err => {
+        throw err;
+      });.name = defaultValue1;
             const expectedError = new Error('The client has already been closed.');
-            client.close();
+            client.close().catch(err => {
+        throw err;
+      });
             await assert.rejects(client.updateSession(request), expectedError);
         });
     });
@@ -594,11 +600,17 @@ describe('v1beta1.SessionServiceClient', () => {
             const request = generateSampleMessage(
               new protos.google.cloud.aiplatform.v1beta1.AppendEventRequest()
             );
-            const defaultValue1 =
+            client.close().catch(err => {
+        throw err;
+      });lue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.AppendEventRequest', ['name']);
-            request.name = defaultValue1;
+            client.close().catch(err => {
+        throw err;
+      });defaultValue1;
             const expectedError = new Error('The client has already been closed.');
-            client.close();
+            client.close().catch(err => {
+        throw err;
+      });
             await assert.rejects(client.appendEvent(request), expectedError);
         });
     });

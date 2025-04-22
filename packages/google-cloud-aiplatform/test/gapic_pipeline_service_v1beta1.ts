@@ -378,7 +378,9 @@ describe('v1beta1.PipelineServiceClient', () => {
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.CreateTrainingPipelineRequest', ['parent']);
             request.parent = defaultValue1;
             const expectedError = new Error('The client has already been closed.');
-            client.close();
+            client.close().catch(err => {
+        throw err;
+      });
             await assert.rejects(client.createTrainingPipeline(request), expectedError);
         });
     });
@@ -486,7 +488,9 @@ describe('v1beta1.PipelineServiceClient', () => {
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.GetTrainingPipelineRequest', ['name']);
             request.name = defaultValue1;
             const expectedError = new Error('The client has already been closed.');
-            client.close();
+            client.close().catch(err => {
+        throw err;
+      });
             await assert.rejects(client.getTrainingPipeline(request), expectedError);
         });
     });
@@ -594,7 +598,9 @@ describe('v1beta1.PipelineServiceClient', () => {
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.CancelTrainingPipelineRequest', ['name']);
             request.name = defaultValue1;
             const expectedError = new Error('The client has already been closed.');
-            client.close();
+            client.close().catch(err => {
+        throw err;
+      });
             await assert.rejects(client.cancelTrainingPipeline(request), expectedError);
         });
     });
@@ -702,7 +708,9 @@ describe('v1beta1.PipelineServiceClient', () => {
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.CreatePipelineJobRequest', ['parent']);
             request.parent = defaultValue1;
             const expectedError = new Error('The client has already been closed.');
-            client.close();
+            client.close().catch(err => {
+        throw err;
+      });
             await assert.rejects(client.createPipelineJob(request), expectedError);
         });
     });
@@ -810,7 +818,9 @@ describe('v1beta1.PipelineServiceClient', () => {
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.GetPipelineJobRequest', ['name']);
             request.name = defaultValue1;
             const expectedError = new Error('The client has already been closed.');
-            client.close();
+            client.close().catch(err => {
+        throw err;
+      });
             await assert.rejects(client.getPipelineJob(request), expectedError);
         });
     });
@@ -918,7 +928,9 @@ describe('v1beta1.PipelineServiceClient', () => {
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.CancelPipelineJobRequest', ['name']);
             request.name = defaultValue1;
             const expectedError = new Error('The client has already been closed.');
-            client.close();
+            client.close().catch(err => {
+        throw err;
+      });
             await assert.rejects(client.cancelPipelineJob(request), expectedError);
         });
     });

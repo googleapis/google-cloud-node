@@ -378,7 +378,9 @@ describe('v1.FeaturestoreServiceClient', () => {
               getTypeDefaultValue('.google.cloud.aiplatform.v1.GetFeaturestoreRequest', ['name']);
             request.name = defaultValue1;
             const expectedError = new Error('The client has already been closed.');
-            client.close();
+            client.close().catch(err => {
+        throw err;
+      });
             await assert.rejects(client.getFeaturestore(request), expectedError);
         });
     });
@@ -486,7 +488,9 @@ describe('v1.FeaturestoreServiceClient', () => {
               getTypeDefaultValue('.google.cloud.aiplatform.v1.GetEntityTypeRequest', ['name']);
             request.name = defaultValue1;
             const expectedError = new Error('The client has already been closed.');
-            client.close();
+            client.close().catch(err => {
+        throw err;
+      });
             await assert.rejects(client.getEntityType(request), expectedError);
         });
     });
@@ -598,7 +602,9 @@ describe('v1.FeaturestoreServiceClient', () => {
               getTypeDefaultValue('.google.cloud.aiplatform.v1.UpdateEntityTypeRequest', ['entityType', 'name']);
             request.entityType.name = defaultValue1;
             const expectedError = new Error('The client has already been closed.');
-            client.close();
+            client.close().catch(err => {
+        throw err;
+      });
             await assert.rejects(client.updateEntityType(request), expectedError);
         });
     });
@@ -706,7 +712,9 @@ describe('v1.FeaturestoreServiceClient', () => {
               getTypeDefaultValue('.google.cloud.aiplatform.v1.GetFeatureRequest', ['name']);
             request.name = defaultValue1;
             const expectedError = new Error('The client has already been closed.');
-            client.close();
+            client.close().catch(err => {
+        throw err;
+      });
             await assert.rejects(client.getFeature(request), expectedError);
         });
     });
@@ -818,7 +826,9 @@ describe('v1.FeaturestoreServiceClient', () => {
               getTypeDefaultValue('.google.cloud.aiplatform.v1.UpdateFeatureRequest', ['feature', 'name']);
             request.feature.name = defaultValue1;
             const expectedError = new Error('The client has already been closed.');
-            client.close();
+            client.close().catch(err => {
+        throw err;
+      });
             await assert.rejects(client.updateFeature(request), expectedError);
         });
     });

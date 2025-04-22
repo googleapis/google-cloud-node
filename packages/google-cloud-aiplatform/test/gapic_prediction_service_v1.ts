@@ -358,7 +358,9 @@ describe('v1.PredictionServiceClient', () => {
               getTypeDefaultValue('.google.cloud.aiplatform.v1.PredictRequest', ['endpoint']);
             request.endpoint = defaultValue1;
             const expectedError = new Error('The client has already been closed.');
-            client.close();
+            client.close().catch(err => {
+        throw err;
+      });
             await assert.rejects(client.predict(request), expectedError);
         });
     });
@@ -464,9 +466,13 @@ describe('v1.PredictionServiceClient', () => {
             );
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.RawPredictRequest', ['endpoint']);
-            request.endpoint = defaultValue1;
+            client.close().catch(err => {
+        throw err;
+      });t = defaultValue1;
             const expectedError = new Error('The client has already been closed.');
-            client.close();
+            client.close().catch(err => {
+        throw err;
+      });
             await assert.rejects(client.rawPredict(request), expectedError);
         });
     });
@@ -570,11 +576,15 @@ describe('v1.PredictionServiceClient', () => {
             const request = generateSampleMessage(
               new protos.google.cloud.aiplatform.v1.DirectPredictRequest()
             );
-            const defaultValue1 =
+            client.close().catch(err => {
+        throw err;
+      });lue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.DirectPredictRequest', ['endpoint']);
             request.endpoint = defaultValue1;
             const expectedError = new Error('The client has already been closed.');
-            client.close();
+            client.close().catch(err => {
+        throw err;
+      });
             await assert.rejects(client.directPredict(request), expectedError);
         });
     });
@@ -676,13 +686,17 @@ describe('v1.PredictionServiceClient', () => {
             });
             await client.initialize();
             const request = generateSampleMessage(
-              new protos.google.cloud.aiplatform.v1.DirectRawPredictRequest()
+            client.close().catch(err => {
+        throw err;
+      });ogle.cloud.aiplatform.v1.DirectRawPredictRequest()
             );
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.DirectRawPredictRequest', ['endpoint']);
             request.endpoint = defaultValue1;
             const expectedError = new Error('The client has already been closed.');
-            client.close();
+            client.close().catch(err => {
+        throw err;
+      });
             await assert.rejects(client.directRawPredict(request), expectedError);
         });
     });
@@ -782,15 +796,21 @@ describe('v1.PredictionServiceClient', () => {
               credentials: {client_email: 'bogus', private_key: 'bogus'},
               projectId: 'bogus',
             });
-            await client.initialize();
+            client.close().catch(err => {
+        throw err;
+      });itialize();
             const request = generateSampleMessage(
               new protos.google.cloud.aiplatform.v1.ExplainRequest()
             );
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.ExplainRequest', ['endpoint']);
-            request.endpoint = defaultValue1;
+            client.close().catch(err => {
+        throw err;
+      });t = defaultValue1;
             const expectedError = new Error('The client has already been closed.');
-            client.close();
+            client.close().catch(err => {
+        throw err;
+      });
             await assert.rejects(client.explain(request), expectedError);
         });
     });
@@ -888,7 +908,9 @@ describe('v1.PredictionServiceClient', () => {
         it('invokes generateContent with closed client', async () => {
             const client = new predictionserviceModule.v1.PredictionServiceClient({
               credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
+            client.close().catch(err => {
+        throw err;
+      });ogus',
             });
             await client.initialize();
             const request = generateSampleMessage(
@@ -896,9 +918,13 @@ describe('v1.PredictionServiceClient', () => {
             );
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.GenerateContentRequest', ['model']);
-            request.model = defaultValue1;
+            client.close().catch(err => {
+        throw err;
+      }); defaultValue1;
             const expectedError = new Error('The client has already been closed.');
-            client.close();
+            client.close().catch(err => {
+        throw err;
+      });
             await assert.rejects(client.generateContent(request), expectedError);
         });
     });
@@ -1011,7 +1037,9 @@ describe('v1.PredictionServiceClient', () => {
         });
 
         it('invokes streamRawPredict with closed client', async () => {
-            const client = new predictionserviceModule.v1.PredictionServiceClient({
+            client.close().catch(err => {
+        throw err;
+      });new predictionserviceModule.v1.PredictionServiceClient({
               credentials: {client_email: 'bogus', private_key: 'bogus'},
               projectId: 'bogus',
             });
@@ -1019,11 +1047,15 @@ describe('v1.PredictionServiceClient', () => {
             const request = generateSampleMessage(
               new protos.google.cloud.aiplatform.v1.StreamRawPredictRequest()
             );
-            const defaultValue1 =
+            client.close().catch(err => {
+        throw err;
+      });lue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.StreamRawPredictRequest', ['endpoint']);
             request.endpoint = defaultValue1;
             const expectedError = new Error('The client has already been closed.');
-            client.close();
+            client.close().catch(err => {
+        throw err;
+      });
             const stream = await client.streamRawPredict(request, {retryRequestOptions: {noResponseRetries: 0}});
             const promise = new Promise((resolve, reject) => {
                 stream.on('data', (response: protos.google.api.HttpBody) => {
@@ -1149,7 +1181,9 @@ describe('v1.PredictionServiceClient', () => {
                 .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
             assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
         });
-
+client.close().catch(err => {
+        throw err;
+      });
         it('invokes serverStreamingPredict with closed client', async () => {
             const client = new predictionserviceModule.v1.PredictionServiceClient({
               credentials: {client_email: 'bogus', private_key: 'bogus'},
@@ -1157,13 +1191,17 @@ describe('v1.PredictionServiceClient', () => {
             });
             await client.initialize();
             const request = generateSampleMessage(
-              new protos.google.cloud.aiplatform.v1.StreamingPredictRequest()
+            client.close().catch(err => {
+        throw err;
+      });ogle.cloud.aiplatform.v1.StreamingPredictRequest()
             );
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.StreamingPredictRequest', ['endpoint']);
             request.endpoint = defaultValue1;
             const expectedError = new Error('The client has already been closed.');
-            client.close();
+            client.close().catch(err => {
+        throw err;
+      });
             const stream = await client.serverStreamingPredict(request, {retryRequestOptions: {noResponseRetries: 0}});
             const promise = new Promise((resolve, reject) => {
                 stream.on('data', (response: protos.google.cloud.aiplatform.v1.StreamingPredictResponse) => {
@@ -1295,15 +1333,21 @@ describe('v1.PredictionServiceClient', () => {
               credentials: {client_email: 'bogus', private_key: 'bogus'},
               projectId: 'bogus',
             });
-            await client.initialize();
+            client.close().catch(err => {
+        throw err;
+      });itialize();
             const request = generateSampleMessage(
               new protos.google.cloud.aiplatform.v1.GenerateContentRequest()
             );
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.GenerateContentRequest', ['model']);
-            request.model = defaultValue1;
+            client.close().catch(err => {
+        throw err;
+      }); defaultValue1;
             const expectedError = new Error('The client has already been closed.');
-            client.close();
+            client.close().catch(err => {
+        throw err;
+      });
             const stream = await client.streamGenerateContent(request, {retryRequestOptions: {noResponseRetries: 0}});
             const promise = new Promise((resolve, reject) => {
                 stream.on('data', (response: protos.google.cloud.aiplatform.v1.GenerateContentResponse) => {

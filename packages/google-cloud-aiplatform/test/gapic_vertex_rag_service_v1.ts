@@ -335,7 +335,9 @@ describe('v1.VertexRagServiceClient', () => {
               getTypeDefaultValue('.google.cloud.aiplatform.v1.RetrieveContextsRequest', ['parent']);
             request.parent = defaultValue1;
             const expectedError = new Error('The client has already been closed.');
-            client.close();
+            client.close().catch(err => {
+        throw err;
+      });
             await assert.rejects(client.retrieveContexts(request), expectedError);
         });
     });
@@ -443,7 +445,9 @@ describe('v1.VertexRagServiceClient', () => {
               getTypeDefaultValue('.google.cloud.aiplatform.v1.AugmentPromptRequest', ['parent']);
             request.parent = defaultValue1;
             const expectedError = new Error('The client has already been closed.');
-            client.close();
+            client.close().catch(err => {
+        throw err;
+      });
             await assert.rejects(client.augmentPrompt(request), expectedError);
         });
     });
@@ -551,7 +555,9 @@ describe('v1.VertexRagServiceClient', () => {
               getTypeDefaultValue('.google.cloud.aiplatform.v1.CorroborateContentRequest', ['parent']);
             request.parent = defaultValue1;
             const expectedError = new Error('The client has already been closed.');
-            client.close();
+            client.close().catch(err => {
+        throw err;
+      });
             await assert.rejects(client.corroborateContent(request), expectedError);
         });
     });

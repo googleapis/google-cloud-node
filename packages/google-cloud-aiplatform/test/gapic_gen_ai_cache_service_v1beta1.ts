@@ -362,7 +362,9 @@ describe('v1beta1.GenAiCacheServiceClient', () => {
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.CreateCachedContentRequest', ['parent']);
             request.parent = defaultValue1;
             const expectedError = new Error('The client has already been closed.');
-            client.close();
+            client.close().catch(err => {
+        throw err;
+      });
             await assert.rejects(client.createCachedContent(request), expectedError);
         });
     });
@@ -470,7 +472,9 @@ describe('v1beta1.GenAiCacheServiceClient', () => {
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.GetCachedContentRequest', ['name']);
             request.name = defaultValue1;
             const expectedError = new Error('The client has already been closed.');
-            client.close();
+            client.close().catch(err => {
+        throw err;
+      });
             await assert.rejects(client.getCachedContent(request), expectedError);
         });
     });
@@ -582,7 +586,9 @@ describe('v1beta1.GenAiCacheServiceClient', () => {
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.UpdateCachedContentRequest', ['cachedContent', 'name']);
             request.cachedContent.name = defaultValue1;
             const expectedError = new Error('The client has already been closed.');
-            client.close();
+            client.close().catch(err => {
+        throw err;
+      });
             await assert.rejects(client.updateCachedContent(request), expectedError);
         });
     });
@@ -688,9 +694,13 @@ describe('v1beta1.GenAiCacheServiceClient', () => {
             );
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.DeleteCachedContentRequest', ['name']);
-            request.name = defaultValue1;
+            client.close().catch(err => {
+        throw err;
+      });defaultValue1;
             const expectedError = new Error('The client has already been closed.');
-            client.close();
+            client.close().catch(err => {
+        throw err;
+      });
             await assert.rejects(client.deleteCachedContent(request), expectedError);
         });
     });

@@ -378,7 +378,9 @@ describe('v1.PipelineServiceClient', () => {
               getTypeDefaultValue('.google.cloud.aiplatform.v1.CreateTrainingPipelineRequest', ['parent']);
             request.parent = defaultValue1;
             const expectedError = new Error('The client has already been closed.');
-            client.close();
+            client.close().catch(err => {
+        throw err;
+      });
             await assert.rejects(client.createTrainingPipeline(request), expectedError);
         });
     });
@@ -484,9 +486,13 @@ describe('v1.PipelineServiceClient', () => {
             );
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.GetTrainingPipelineRequest', ['name']);
-            request.name = defaultValue1;
+            client.close().catch(err => {
+        throw err;
+      });defaultValue1;
             const expectedError = new Error('The client has already been closed.');
-            client.close();
+            client.close().catch(err => {
+        throw err;
+      });
             await assert.rejects(client.getTrainingPipeline(request), expectedError);
         });
     });
@@ -590,11 +596,15 @@ describe('v1.PipelineServiceClient', () => {
             const request = generateSampleMessage(
               new protos.google.cloud.aiplatform.v1.CancelTrainingPipelineRequest()
             );
-            const defaultValue1 =
+            client.close().catch(err => {
+        throw err;
+      });lue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.CancelTrainingPipelineRequest', ['name']);
             request.name = defaultValue1;
             const expectedError = new Error('The client has already been closed.');
-            client.close();
+            client.close().catch(err => {
+        throw err;
+      });
             await assert.rejects(client.cancelTrainingPipeline(request), expectedError);
         });
     });
@@ -698,11 +708,17 @@ describe('v1.PipelineServiceClient', () => {
             const request = generateSampleMessage(
               new protos.google.cloud.aiplatform.v1.CreatePipelineJobRequest()
             );
-            const defaultValue1 =
+            client.close().catch(err => {
+        throw err;
+      });lueclient.close().catch(err => {
+        throw err;
+      });
               getTypeDefaultValue('.google.cloud.aiplatform.v1.CreatePipelineJobRequest', ['parent']);
             request.parent = defaultValue1;
             const expectedError = new Error('The client has already been closed.');
-            client.close();
+            client.close().catch(err => {
+        throw err;
+      });
             await assert.rejects(client.createPipelineJob(request), expectedError);
         });
     });
@@ -802,15 +818,23 @@ describe('v1.PipelineServiceClient', () => {
               credentials: {client_email: 'bogus', private_key: 'bogus'},
               projectId: 'bogus',
             });
-            await client.initialize();
+            client.close().catch(err => {
+        throw err;
+      });itialize();
             const request = generateSampleMessage(
-              new protos.google.cloud.aiplatform.v1.GetPipelineJobRequest()
+            client.close().catch(err => {
+        throw err;
+      });ogle.cloud.aiplatform.v1.GetPipelineJobRequest()
             );
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.GetPipelineJobRequest', ['name']);
-            request.name = defaultValue1;
+            client.close().catch(err => {
+        throw err;
+      });defaultValue1;
             const expectedError = new Error('The client has already been closed.');
-            client.close();
+            client.close().catch(err => {
+        throw err;
+      });
             await assert.rejects(client.getPipelineJob(request), expectedError);
         });
     });
@@ -908,17 +932,25 @@ describe('v1.PipelineServiceClient', () => {
         it('invokes cancelPipelineJob with closed client', async () => {
             const client = new pipelineserviceModule.v1.PipelineServiceClient({
               credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
+            client.close().catch(err => {
+        throw err;
+      });ogus',
             });
-            await client.initialize();
+            client.close().catch(err => {
+        throw err;
+      });itialize();
             const request = generateSampleMessage(
               new protos.google.cloud.aiplatform.v1.CancelPipelineJobRequest()
             );
-            const defaultValue1 =
+            client.close().catch(err => {
+        throw err;
+      });lue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.CancelPipelineJobRequest', ['name']);
             request.name = defaultValue1;
             const expectedError = new Error('The client has already been closed.');
-            client.close();
+            client.close().catch(err => {
+        throw err;
+      });
             await assert.rejects(client.cancelPipelineJob(request), expectedError);
         });
     });

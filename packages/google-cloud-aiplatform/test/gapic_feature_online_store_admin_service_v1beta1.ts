@@ -378,7 +378,9 @@ describe('v1beta1.FeatureOnlineStoreAdminServiceClient', () => {
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.GetFeatureOnlineStoreRequest', ['name']);
             request.name = defaultValue1;
             const expectedError = new Error('The client has already been closed.');
-            client.close();
+            client.close().catch(err => {
+        throw err;
+      });
             await assert.rejects(client.getFeatureOnlineStore(request), expectedError);
         });
     });
@@ -486,7 +488,9 @@ describe('v1beta1.FeatureOnlineStoreAdminServiceClient', () => {
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.GetFeatureViewRequest', ['name']);
             request.name = defaultValue1;
             const expectedError = new Error('The client has already been closed.');
-            client.close();
+            client.close().catch(err => {
+        throw err;
+      });
             await assert.rejects(client.getFeatureView(request), expectedError);
         });
     });
@@ -594,7 +598,9 @@ describe('v1beta1.FeatureOnlineStoreAdminServiceClient', () => {
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.SyncFeatureViewRequest', ['featureView']);
             request.featureView = defaultValue1;
             const expectedError = new Error('The client has already been closed.');
-            client.close();
+            client.close().catch(err => {
+        throw err;
+      });
             await assert.rejects(client.syncFeatureView(request), expectedError);
         });
     });
@@ -702,7 +708,9 @@ describe('v1beta1.FeatureOnlineStoreAdminServiceClient', () => {
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.GetFeatureViewSyncRequest', ['name']);
             request.name = defaultValue1;
             const expectedError = new Error('The client has already been closed.');
-            client.close();
+            client.close().catch(err => {
+        throw err;
+      });
             await assert.rejects(client.getFeatureViewSync(request), expectedError);
         });
     });

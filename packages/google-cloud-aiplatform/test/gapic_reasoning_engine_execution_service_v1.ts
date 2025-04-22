@@ -349,7 +349,9 @@ describe('v1.ReasoningEngineExecutionServiceClient', () => {
               getTypeDefaultValue('.google.cloud.aiplatform.v1.QueryReasoningEngineRequest', ['name']);
             request.name = defaultValue1;
             const expectedError = new Error('The client has already been closed.');
-            client.close();
+            client.close().catch(err => {
+        throw err;
+      });
             await assert.rejects(client.queryReasoningEngine(request), expectedError);
         });
     });
@@ -474,7 +476,9 @@ describe('v1.ReasoningEngineExecutionServiceClient', () => {
               getTypeDefaultValue('.google.cloud.aiplatform.v1.StreamQueryReasoningEngineRequest', ['name']);
             request.name = defaultValue1;
             const expectedError = new Error('The client has already been closed.');
-            client.close();
+            client.close().catch(err => {
+        throw err;
+      });
             const stream = await client.streamQueryReasoningEngine(request, {retryRequestOptions: {noResponseRetries: 0}});
             const promise = new Promise((resolve, reject) => {
                 stream.on('data', (response: protos.google.api.HttpBody) => {

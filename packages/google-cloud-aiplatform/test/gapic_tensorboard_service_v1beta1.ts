@@ -390,7 +390,9 @@ describe('v1beta1.TensorboardServiceClient', () => {
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.GetTensorboardRequest', ['name']);
             request.name = defaultValue1;
             const expectedError = new Error('The client has already been closed.');
-            client.close();
+            client.close().catch(err => {
+        throw err;
+      });
             await assert.rejects(client.getTensorboard(request), expectedError);
         });
     });
@@ -498,7 +500,9 @@ describe('v1beta1.TensorboardServiceClient', () => {
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.ReadTensorboardUsageRequest', ['tensorboard']);
             request.tensorboard = defaultValue1;
             const expectedError = new Error('The client has already been closed.');
-            client.close();
+            client.close().catch(err => {
+        throw err;
+      });
             await assert.rejects(client.readTensorboardUsage(request), expectedError);
         });
     });
@@ -606,7 +610,9 @@ describe('v1beta1.TensorboardServiceClient', () => {
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.ReadTensorboardSizeRequest', ['tensorboard']);
             request.tensorboard = defaultValue1;
             const expectedError = new Error('The client has already been closed.');
-            client.close();
+            client.close().catch(err => {
+        throw err;
+      });
             await assert.rejects(client.readTensorboardSize(request), expectedError);
         });
     });
@@ -714,7 +720,9 @@ describe('v1beta1.TensorboardServiceClient', () => {
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.CreateTensorboardExperimentRequest', ['parent']);
             request.parent = defaultValue1;
             const expectedError = new Error('The client has already been closed.');
-            client.close();
+            client.close().catch(err => {
+        throw err;
+      });
             await assert.rejects(client.createTensorboardExperiment(request), expectedError);
         });
     });
@@ -822,7 +830,9 @@ describe('v1beta1.TensorboardServiceClient', () => {
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.GetTensorboardExperimentRequest', ['name']);
             request.name = defaultValue1;
             const expectedError = new Error('The client has already been closed.');
-            client.close();
+            client.close().catch(err => {
+        throw err;
+      });
             await assert.rejects(client.getTensorboardExperiment(request), expectedError);
         });
     });
@@ -934,7 +944,9 @@ describe('v1beta1.TensorboardServiceClient', () => {
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.UpdateTensorboardExperimentRequest', ['tensorboardExperiment', 'name']);
             request.tensorboardExperiment.name = defaultValue1;
             const expectedError = new Error('The client has already been closed.');
-            client.close();
+            client.close().catch(err => {
+        throw err;
+      });
             await assert.rejects(client.updateTensorboardExperiment(request), expectedError);
         });
     });
@@ -1042,7 +1054,9 @@ describe('v1beta1.TensorboardServiceClient', () => {
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.CreateTensorboardRunRequest', ['parent']);
             request.parent = defaultValue1;
             const expectedError = new Error('The client has already been closed.');
-            client.close();
+            client.close().catch(err => {
+        throw err;
+      });
             await assert.rejects(client.createTensorboardRun(request), expectedError);
         });
     });
@@ -1150,7 +1164,9 @@ describe('v1beta1.TensorboardServiceClient', () => {
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.BatchCreateTensorboardRunsRequest', ['parent']);
             request.parent = defaultValue1;
             const expectedError = new Error('The client has already been closed.');
-            client.close();
+            client.close().catch(err => {
+        throw err;
+      });
             await assert.rejects(client.batchCreateTensorboardRuns(request), expectedError);
         });
     });
@@ -1258,7 +1274,9 @@ describe('v1beta1.TensorboardServiceClient', () => {
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.GetTensorboardRunRequest', ['name']);
             request.name = defaultValue1;
             const expectedError = new Error('The client has already been closed.');
-            client.close();
+            client.close().catch(err => {
+        throw err;
+      });
             await assert.rejects(client.getTensorboardRun(request), expectedError);
         });
     });
@@ -1370,7 +1388,9 @@ describe('v1beta1.TensorboardServiceClient', () => {
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.UpdateTensorboardRunRequest', ['tensorboardRun', 'name']);
             request.tensorboardRun.name = defaultValue1;
             const expectedError = new Error('The client has already been closed.');
-            client.close();
+            client.close().catch(err => {
+        throw err;
+      });
             await assert.rejects(client.updateTensorboardRun(request), expectedError);
         });
     });
@@ -1478,7 +1498,9 @@ describe('v1beta1.TensorboardServiceClient', () => {
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.BatchCreateTensorboardTimeSeriesRequest', ['parent']);
             request.parent = defaultValue1;
             const expectedError = new Error('The client has already been closed.');
-            client.close();
+            client.close().catch(err => {
+        throw err;
+      });
             await assert.rejects(client.batchCreateTensorboardTimeSeries(request), expectedError);
         });
     });
@@ -1586,7 +1608,9 @@ describe('v1beta1.TensorboardServiceClient', () => {
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.CreateTensorboardTimeSeriesRequest', ['parent']);
             request.parent = defaultValue1;
             const expectedError = new Error('The client has already been closed.');
-            client.close();
+            client.close().catch(err => {
+        throw err;
+      });
             await assert.rejects(client.createTensorboardTimeSeries(request), expectedError);
         });
     });
@@ -1694,7 +1718,9 @@ describe('v1beta1.TensorboardServiceClient', () => {
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.GetTensorboardTimeSeriesRequest', ['name']);
             request.name = defaultValue1;
             const expectedError = new Error('The client has already been closed.');
-            client.close();
+            client.close().catch(err => {
+        throw err;
+      });
             await assert.rejects(client.getTensorboardTimeSeries(request), expectedError);
         });
     });
@@ -1806,7 +1832,9 @@ describe('v1beta1.TensorboardServiceClient', () => {
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.UpdateTensorboardTimeSeriesRequest', ['tensorboardTimeSeries', 'name']);
             request.tensorboardTimeSeries.name = defaultValue1;
             const expectedError = new Error('The client has already been closed.');
-            client.close();
+            client.close().catch(err => {
+        throw err;
+      });
             await assert.rejects(client.updateTensorboardTimeSeries(request), expectedError);
         });
     });
@@ -1914,7 +1942,9 @@ describe('v1beta1.TensorboardServiceClient', () => {
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.BatchReadTensorboardTimeSeriesDataRequest', ['tensorboard']);
             request.tensorboard = defaultValue1;
             const expectedError = new Error('The client has already been closed.');
-            client.close();
+            client.close().catch(err => {
+        throw err;
+      });
             await assert.rejects(client.batchReadTensorboardTimeSeriesData(request), expectedError);
         });
     });
@@ -2022,7 +2052,9 @@ describe('v1beta1.TensorboardServiceClient', () => {
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.ReadTensorboardTimeSeriesDataRequest', ['tensorboardTimeSeries']);
             request.tensorboardTimeSeries = defaultValue1;
             const expectedError = new Error('The client has already been closed.');
-            client.close();
+            client.close().catch(err => {
+        throw err;
+      });
             await assert.rejects(client.readTensorboardTimeSeriesData(request), expectedError);
         });
     });
@@ -2130,7 +2162,9 @@ describe('v1beta1.TensorboardServiceClient', () => {
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.WriteTensorboardExperimentDataRequest', ['tensorboardExperiment']);
             request.tensorboardExperiment = defaultValue1;
             const expectedError = new Error('The client has already been closed.');
-            client.close();
+            client.close().catch(err => {
+        throw err;
+      });
             await assert.rejects(client.writeTensorboardExperimentData(request), expectedError);
         });
     });
@@ -2238,7 +2272,9 @@ describe('v1beta1.TensorboardServiceClient', () => {
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.WriteTensorboardRunDataRequest', ['tensorboardRun']);
             request.tensorboardRun = defaultValue1;
             const expectedError = new Error('The client has already been closed.');
-            client.close();
+            client.close().catch(err => {
+        throw err;
+      });
             await assert.rejects(client.writeTensorboardRunData(request), expectedError);
         });
     });
@@ -3291,7 +3327,9 @@ describe('v1beta1.TensorboardServiceClient', () => {
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.ReadTensorboardBlobDataRequest', ['timeSeries']);
             request.timeSeries = defaultValue1;
             const expectedError = new Error('The client has already been closed.');
-            client.close();
+            client.close().catch(err => {
+        throw err;
+      });
             const stream = await client.readTensorboardBlobData(request, {retryRequestOptions: {noResponseRetries: 0}});
             const promise = new Promise((resolve, reject) => {
                 stream.on('data', (response: protos.google.cloud.aiplatform.v1beta1.ReadTensorboardBlobDataResponse) => {

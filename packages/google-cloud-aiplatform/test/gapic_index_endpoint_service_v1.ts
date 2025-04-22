@@ -378,7 +378,9 @@ describe('v1.IndexEndpointServiceClient', () => {
               getTypeDefaultValue('.google.cloud.aiplatform.v1.GetIndexEndpointRequest', ['name']);
             request.name = defaultValue1;
             const expectedError = new Error('The client has already been closed.');
-            client.close();
+            client.close().catch(err => {
+        throw err;
+      });
             await assert.rejects(client.getIndexEndpoint(request), expectedError);
         });
     });
@@ -490,7 +492,9 @@ describe('v1.IndexEndpointServiceClient', () => {
               getTypeDefaultValue('.google.cloud.aiplatform.v1.UpdateIndexEndpointRequest', ['indexEndpoint', 'name']);
             request.indexEndpoint.name = defaultValue1;
             const expectedError = new Error('The client has already been closed.');
-            client.close();
+            client.close().catch(err => {
+        throw err;
+      });
             await assert.rejects(client.updateIndexEndpoint(request), expectedError);
         });
     });

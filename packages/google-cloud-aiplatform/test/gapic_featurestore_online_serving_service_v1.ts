@@ -349,7 +349,9 @@ describe('v1.FeaturestoreOnlineServingServiceClient', () => {
               getTypeDefaultValue('.google.cloud.aiplatform.v1.ReadFeatureValuesRequest', ['entityType']);
             request.entityType = defaultValue1;
             const expectedError = new Error('The client has already been closed.');
-            client.close();
+            client.close().catch(err => {
+        throw err;
+      });
             await assert.rejects(client.readFeatureValues(request), expectedError);
         });
     });
@@ -457,7 +459,9 @@ describe('v1.FeaturestoreOnlineServingServiceClient', () => {
               getTypeDefaultValue('.google.cloud.aiplatform.v1.WriteFeatureValuesRequest', ['entityType']);
             request.entityType = defaultValue1;
             const expectedError = new Error('The client has already been closed.');
-            client.close();
+            client.close().catch(err => {
+        throw err;
+      });
             await assert.rejects(client.writeFeatureValues(request), expectedError);
         });
     });
@@ -582,7 +586,9 @@ describe('v1.FeaturestoreOnlineServingServiceClient', () => {
               getTypeDefaultValue('.google.cloud.aiplatform.v1.StreamingReadFeatureValuesRequest', ['entityType']);
             request.entityType = defaultValue1;
             const expectedError = new Error('The client has already been closed.');
-            client.close();
+            client.close().catch(err => {
+        throw err;
+      });
             const stream = await client.streamingReadFeatureValues(request, {retryRequestOptions: {noResponseRetries: 0}});
             const promise = new Promise((resolve, reject) => {
                 stream.on('data', (response: protos.google.cloud.aiplatform.v1.ReadFeatureValuesResponse) => {

@@ -378,7 +378,9 @@ describe('v1.FeatureRegistryServiceClient', () => {
               getTypeDefaultValue('.google.cloud.aiplatform.v1.GetFeatureGroupRequest', ['name']);
             request.name = defaultValue1;
             const expectedError = new Error('The client has already been closed.');
-            client.close();
+            client.close().catch(err => {
+        throw err;
+      });
             await assert.rejects(client.getFeatureGroup(request), expectedError);
         });
     });
@@ -486,7 +488,9 @@ describe('v1.FeatureRegistryServiceClient', () => {
               getTypeDefaultValue('.google.cloud.aiplatform.v1.GetFeatureRequest', ['name']);
             request.name = defaultValue1;
             const expectedError = new Error('The client has already been closed.');
-            client.close();
+            client.close().catch(err => {
+        throw err;
+      });
             await assert.rejects(client.getFeature(request), expectedError);
         });
     });

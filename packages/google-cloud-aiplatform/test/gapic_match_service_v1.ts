@@ -335,7 +335,9 @@ describe('v1.MatchServiceClient', () => {
               getTypeDefaultValue('.google.cloud.aiplatform.v1.FindNeighborsRequest', ['indexEndpoint']);
             request.indexEndpoint = defaultValue1;
             const expectedError = new Error('The client has already been closed.');
-            client.close();
+            client.close().catch(err => {
+        throw err;
+      });
             await assert.rejects(client.findNeighbors(request), expectedError);
         });
     });
@@ -443,7 +445,9 @@ describe('v1.MatchServiceClient', () => {
               getTypeDefaultValue('.google.cloud.aiplatform.v1.ReadIndexDatapointsRequest', ['indexEndpoint']);
             request.indexEndpoint = defaultValue1;
             const expectedError = new Error('The client has already been closed.');
-            client.close();
+            client.close().catch(err => {
+        throw err;
+      });
             await assert.rejects(client.readIndexDatapoints(request), expectedError);
         });
     });

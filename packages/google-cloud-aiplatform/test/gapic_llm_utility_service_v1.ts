@@ -335,7 +335,9 @@ describe('v1.LlmUtilityServiceClient', () => {
               getTypeDefaultValue('.google.cloud.aiplatform.v1.CountTokensRequest', ['endpoint']);
             request.endpoint = defaultValue1;
             const expectedError = new Error('The client has already been closed.');
-            client.close();
+            client.close().catch(err => {
+        throw err;
+      });
             await assert.rejects(client.countTokens(request), expectedError);
         });
     });
@@ -443,7 +445,9 @@ describe('v1.LlmUtilityServiceClient', () => {
               getTypeDefaultValue('.google.cloud.aiplatform.v1.ComputeTokensRequest', ['endpoint']);
             request.endpoint = defaultValue1;
             const expectedError = new Error('The client has already been closed.');
-            client.close();
+            client.close().catch(err => {
+        throw err;
+      });
             await assert.rejects(client.computeTokens(request), expectedError);
         });
     });

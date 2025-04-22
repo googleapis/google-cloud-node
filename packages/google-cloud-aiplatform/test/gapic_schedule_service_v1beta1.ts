@@ -378,7 +378,9 @@ describe('v1beta1.ScheduleServiceClient', () => {
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.CreateScheduleRequest', ['parent']);
             request.parent = defaultValue1;
             const expectedError = new Error('The client has already been closed.');
-            client.close();
+            client.close().catch(err => {
+        throw err;
+      });
             await assert.rejects(client.createSchedule(request), expectedError);
         });
     });
@@ -486,7 +488,9 @@ describe('v1beta1.ScheduleServiceClient', () => {
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.GetScheduleRequest', ['name']);
             request.name = defaultValue1;
             const expectedError = new Error('The client has already been closed.');
-            client.close();
+            client.close().catch(err => {
+        throw err;
+      });
             await assert.rejects(client.getSchedule(request), expectedError);
         });
     });
@@ -594,7 +598,9 @@ describe('v1beta1.ScheduleServiceClient', () => {
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.PauseScheduleRequest', ['name']);
             request.name = defaultValue1;
             const expectedError = new Error('The client has already been closed.');
-            client.close();
+            client.close().catch(err => {
+        throw err;
+      });
             await assert.rejects(client.pauseSchedule(request), expectedError);
         });
     });
@@ -702,7 +708,9 @@ describe('v1beta1.ScheduleServiceClient', () => {
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.ResumeScheduleRequest', ['name']);
             request.name = defaultValue1;
             const expectedError = new Error('The client has already been closed.');
-            client.close();
+            client.close().catch(err => {
+        throw err;
+      });
             await assert.rejects(client.resumeSchedule(request), expectedError);
         });
     });
@@ -814,7 +822,9 @@ describe('v1beta1.ScheduleServiceClient', () => {
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.UpdateScheduleRequest', ['schedule', 'name']);
             request.schedule.name = defaultValue1;
             const expectedError = new Error('The client has already been closed.');
-            client.close();
+            client.close().catch(err => {
+        throw err;
+      });
             await assert.rejects(client.updateSchedule(request), expectedError);
         });
     });

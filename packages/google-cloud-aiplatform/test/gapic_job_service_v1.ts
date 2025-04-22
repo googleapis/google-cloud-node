@@ -378,7 +378,9 @@ describe('v1.JobServiceClient', () => {
               getTypeDefaultValue('.google.cloud.aiplatform.v1.CreateCustomJobRequest', ['parent']);
             request.parent = defaultValue1;
             const expectedError = new Error('The client has already been closed.');
-            client.close();
+            client.close().catch(err => {
+        throw err;
+      });
             await assert.rejects(client.createCustomJob(request), expectedError);
         });
     });
@@ -486,7 +488,9 @@ describe('v1.JobServiceClient', () => {
               getTypeDefaultValue('.google.cloud.aiplatform.v1.GetCustomJobRequest', ['name']);
             request.name = defaultValue1;
             const expectedError = new Error('The client has already been closed.');
-            client.close();
+            client.close().catch(err => {
+        throw err;
+      });
             await assert.rejects(client.getCustomJob(request), expectedError);
         });
     });
@@ -592,9 +596,13 @@ describe('v1.JobServiceClient', () => {
             );
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.CancelCustomJobRequest', ['name']);
-            request.name = defaultValue1;
+            client.close().catch(err => {
+        throw err;
+      });defaultValue1;
             const expectedError = new Error('The client has already been closed.');
-            client.close();
+            client.close().catch(err => {
+        throw err;
+      });
             await assert.rejects(client.cancelCustomJob(request), expectedError);
         });
     });
@@ -698,11 +706,17 @@ describe('v1.JobServiceClient', () => {
             const request = generateSampleMessage(
               new protos.google.cloud.aiplatform.v1.CreateDataLabelingJobRequest()
             );
-            const defaultValue1 =
+            client.close().catch(err => {
+        throw err;
+      });lue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.CreateDataLabelingJobRequest', ['parent']);
-            request.parent = defaultValue1;
+            client.close().catch(err => {
+        throw err;
+      });= defaultValue1;
             const expectedError = new Error('The client has already been closed.');
-            client.close();
+            client.close().catch(err => {
+        throw err;
+      });
             await assert.rejects(client.createDataLabelingJob(request), expectedError);
         });
     });
@@ -804,13 +818,19 @@ describe('v1.JobServiceClient', () => {
             });
             await client.initialize();
             const request = generateSampleMessage(
-              new protos.google.cloud.aiplatform.v1.GetDataLabelingJobRequest()
+            client.close().catch(err => {
+        throw err;
+      });ogle.cloud.aiplatform.v1.GetDataLabelingJobRequest()
             );
-            const defaultValue1 =
+            client.close().catch(err => {
+        throw err;
+      });lue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.GetDataLabelingJobRequest', ['name']);
             request.name = defaultValue1;
             const expectedError = new Error('The client has already been closed.');
-            client.close();
+            client.close().catch(err => {
+        throw err;
+      });
             await assert.rejects(client.getDataLabelingJob(request), expectedError);
         });
     });
@@ -910,15 +930,23 @@ describe('v1.JobServiceClient', () => {
               credentials: {client_email: 'bogus', private_key: 'bogus'},
               projectId: 'bogus',
             });
-            await client.initialize();
+            client.close().catch(err => {
+        throw err;
+      });itialize();
             const request = generateSampleMessage(
-              new protos.google.cloud.aiplatform.v1.CancelDataLabelingJobRequest()
+            client.close().catch(err => {
+        throw err;
+      });ogle.cloud.aiplatform.v1.CancelDataLabelingJobRequest()
             );
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.CancelDataLabelingJobRequest', ['name']);
-            request.name = defaultValue1;
+            client.close().catch(err => {
+        throw err;
+      });defaultValue1;
             const expectedError = new Error('The client has already been closed.');
-            client.close();
+            client.close().catch(err => {
+        throw err;
+      });
             await assert.rejects(client.cancelDataLabelingJob(request), expectedError);
         });
     });
@@ -1016,17 +1044,25 @@ describe('v1.JobServiceClient', () => {
         it('invokes createHyperparameterTuningJob with closed client', async () => {
             const client = new jobserviceModule.v1.JobServiceClient({
               credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
+            client.close().catch(err => {
+        throw err;
+      });ogus',
             });
-            await client.initialize();
+            client.close().catch(err => {
+        throw err;
+      });itialize();
             const request = generateSampleMessage(
               new protos.google.cloud.aiplatform.v1.CreateHyperparameterTuningJobRequest()
             );
-            const defaultValue1 =
+            client.close().catch(err => {
+        throw err;
+      });lue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.CreateHyperparameterTuningJobRequest', ['parent']);
             request.parent = defaultValue1;
             const expectedError = new Error('The client has already been closed.');
-            client.close();
+            client.close().catch(err => {
+        throw err;
+      });
             await assert.rejects(client.createHyperparameterTuningJob(request), expectedError);
         });
     });
@@ -1122,19 +1158,27 @@ describe('v1.JobServiceClient', () => {
         });
 
         it('invokes getHyperparameterTuningJob with closed client', async () => {
-            const client = new jobserviceModule.v1.JobServiceClient({
+            client.close().catch(err => {
+        throw err;
+      });new jobserviceModule.v1.JobServiceClient({
               credentials: {client_email: 'bogus', private_key: 'bogus'},
               projectId: 'bogus',
             });
             await client.initialize();
             const request = generateSampleMessage(
-              new protos.google.cloud.aiplatform.v1.GetHyperparameterTuningJobRequest()
+            client.close().catch(err => {
+        throw err;
+      });ogle.cloud.aiplatform.v1.GetHyperparameterTuningJobRequest()
             );
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.GetHyperparameterTuningJobRequest', ['name']);
-            request.name = defaultValue1;
+            client.close().catch(err => {
+        throw err;
+      });defaultValue1;
             const expectedError = new Error('The client has already been closed.');
-            client.close();
+            client.close().catch(err => {
+        throw err;
+      });
             await assert.rejects(client.getHyperparameterTuningJob(request), expectedError);
         });
     });
@@ -1228,7 +1272,9 @@ describe('v1.JobServiceClient', () => {
                 .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
             assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
         });
-
+client.close().catch(err => {
+        throw err;
+      });
         it('invokes cancelHyperparameterTuningJob with closed client', async () => {
             const client = new jobserviceModule.v1.JobServiceClient({
               credentials: {client_email: 'bogus', private_key: 'bogus'},
@@ -1242,7 +1288,9 @@ describe('v1.JobServiceClient', () => {
               getTypeDefaultValue('.google.cloud.aiplatform.v1.CancelHyperparameterTuningJobRequest', ['name']);
             request.name = defaultValue1;
             const expectedError = new Error('The client has already been closed.');
-            client.close();
+            client.close().catch(err => {
+        throw err;
+      });
             await assert.rejects(client.cancelHyperparameterTuningJob(request), expectedError);
         });
     });
@@ -1334,7 +1382,9 @@ describe('v1.JobServiceClient', () => {
             assert.deepStrictEqual(actualRequest, request);
             const actualHeaderRequestParams = (client.innerApiCalls.createNasJob as SinonStub)
                 .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+            client.close().catch(err => {
+        throw err;
+      });aderRequestParams.includes(expectedHeaderRequestParams));
         });
 
         it('invokes createNasJob with closed client', async () => {
@@ -1350,7 +1400,9 @@ describe('v1.JobServiceClient', () => {
               getTypeDefaultValue('.google.cloud.aiplatform.v1.CreateNasJobRequest', ['parent']);
             request.parent = defaultValue1;
             const expectedError = new Error('The client has already been closed.');
-            client.close();
+            client.close().catch(err => {
+        throw err;
+      });
             await assert.rejects(client.createNasJob(request), expectedError);
         });
     });
@@ -1440,7 +1492,9 @@ describe('v1.JobServiceClient', () => {
             const actualRequest = (client.innerApiCalls.getNasJob as SinonStub)
                 .getCall(0).args[0];
             assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.getNasJob as SinonStub)
+            client.close().catch(err => {
+        throw err;
+      });derRequestParams = (client.innerApiCalls.getNasJob as SinonStub)
                 .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
             assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
         });
@@ -1458,7 +1512,9 @@ describe('v1.JobServiceClient', () => {
               getTypeDefaultValue('.google.cloud.aiplatform.v1.GetNasJobRequest', ['name']);
             request.name = defaultValue1;
             const expectedError = new Error('The client has already been closed.');
-            client.close();
+            client.close().catch(err => {
+        throw err;
+      });
             await assert.rejects(client.getNasJob(request), expectedError);
         });
     });
@@ -1546,7 +1602,9 @@ describe('v1.JobServiceClient', () => {
             client.innerApiCalls.cancelNasJob = stubSimpleCall(undefined, expectedError);
             await assert.rejects(client.cancelNasJob(request), expectedError);
             const actualRequest = (client.innerApiCalls.cancelNasJob as SinonStub)
-                .getCall(0).args[0];
+            client.close().catch(err => {
+        throw err;
+      });.args[0];
             assert.deepStrictEqual(actualRequest, request);
             const actualHeaderRequestParams = (client.innerApiCalls.cancelNasJob as SinonStub)
                 .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
@@ -1564,9 +1622,13 @@ describe('v1.JobServiceClient', () => {
             );
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.CancelNasJobRequest', ['name']);
-            request.name = defaultValue1;
+            client.close().catch(err => {
+        throw err;
+      });defaultValue1;
             const expectedError = new Error('The client has already been closed.');
-            client.close();
+            client.close().catch(err => {
+        throw err;
+      });
             await assert.rejects(client.cancelNasJob(request), expectedError);
         });
     });
@@ -1652,7 +1714,9 @@ describe('v1.JobServiceClient', () => {
             const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
             client.innerApiCalls.getNasTrialDetail = stubSimpleCall(undefined, expectedError);
-            await assert.rejects(client.getNasTrialDetail(request), expectedError);
+            client.close().catch(err => {
+        throw err;
+      });jects(client.getNasTrialDetail(request), expectedError);
             const actualRequest = (client.innerApiCalls.getNasTrialDetail as SinonStub)
                 .getCall(0).args[0];
             assert.deepStrictEqual(actualRequest, request);
@@ -1670,11 +1734,17 @@ describe('v1.JobServiceClient', () => {
             const request = generateSampleMessage(
               new protos.google.cloud.aiplatform.v1.GetNasTrialDetailRequest()
             );
-            const defaultValue1 =
+            client.close().catch(err => {
+        throw err;
+      });lue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.GetNasTrialDetailRequest', ['name']);
-            request.name = defaultValue1;
+            client.close().catch(err => {
+        throw err;
+      });defaultValue1;
             const expectedError = new Error('The client has already been closed.');
-            client.close();
+            client.close().catch(err => {
+        throw err;
+      });
             await assert.rejects(client.getNasTrialDetail(request), expectedError);
         });
     });
@@ -1758,7 +1828,9 @@ describe('v1.JobServiceClient', () => {
               getTypeDefaultValue('.google.cloud.aiplatform.v1.CreateBatchPredictionJobRequest', ['parent']);
             request.parent = defaultValue1;
             const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
-            const expectedError = new Error('expected');
+            client.close().catch(err => {
+        throw err;
+      });rror = new Error('expected');
             client.innerApiCalls.createBatchPredictionJob = stubSimpleCall(undefined, expectedError);
             await assert.rejects(client.createBatchPredictionJob(request), expectedError);
             const actualRequest = (client.innerApiCalls.createBatchPredictionJob as SinonStub)
@@ -1776,13 +1848,17 @@ describe('v1.JobServiceClient', () => {
             });
             await client.initialize();
             const request = generateSampleMessage(
-              new protos.google.cloud.aiplatform.v1.CreateBatchPredictionJobRequest()
+            client.close().catch(err => {
+        throw err;
+      });ogle.cloud.aiplatform.v1.CreateBatchPredictionJobRequest()
             );
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.CreateBatchPredictionJobRequest', ['parent']);
             request.parent = defaultValue1;
             const expectedError = new Error('The client has already been closed.');
-            client.close();
+            client.close().catch(err => {
+        throw err;
+      });
             await assert.rejects(client.createBatchPredictionJob(request), expectedError);
         });
     });
@@ -1888,9 +1964,13 @@ describe('v1.JobServiceClient', () => {
             );
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.GetBatchPredictionJobRequest', ['name']);
-            request.name = defaultValue1;
+            client.close().catch(err => {
+        throw err;
+      });defaultValue1;
             const expectedError = new Error('The client has already been closed.');
-            client.close();
+            client.close().catch(err => {
+        throw err;
+      });
             await assert.rejects(client.getBatchPredictionJob(request), expectedError);
         });
     });
@@ -1994,11 +2074,15 @@ describe('v1.JobServiceClient', () => {
             const request = generateSampleMessage(
               new protos.google.cloud.aiplatform.v1.CancelBatchPredictionJobRequest()
             );
-            const defaultValue1 =
+            client.close().catch(err => {
+        throw err;
+      });lue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.CancelBatchPredictionJobRequest', ['name']);
             request.name = defaultValue1;
             const expectedError = new Error('The client has already been closed.');
-            client.close();
+            client.close().catch(err => {
+        throw err;
+      });
             await assert.rejects(client.cancelBatchPredictionJob(request), expectedError);
         });
     });
@@ -2104,9 +2188,13 @@ describe('v1.JobServiceClient', () => {
             );
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.CreateModelDeploymentMonitoringJobRequest', ['parent']);
-            request.parent = defaultValue1;
+            client.close().catch(err => {
+        throw err;
+      });= defaultValue1;
             const expectedError = new Error('The client has already been closed.');
-            client.close();
+            client.close().catch(err => {
+        throw err;
+      });
             await assert.rejects(client.createModelDeploymentMonitoringJob(request), expectedError);
         });
     });
@@ -2210,11 +2298,15 @@ describe('v1.JobServiceClient', () => {
             const request = generateSampleMessage(
               new protos.google.cloud.aiplatform.v1.GetModelDeploymentMonitoringJobRequest()
             );
-            const defaultValue1 =
+            client.close().catch(err => {
+        throw err;
+      });lue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.GetModelDeploymentMonitoringJobRequest', ['name']);
             request.name = defaultValue1;
             const expectedError = new Error('The client has already been closed.');
-            client.close();
+            client.close().catch(err => {
+        throw err;
+      });
             await assert.rejects(client.getModelDeploymentMonitoringJob(request), expectedError);
         });
     });
@@ -2322,7 +2414,9 @@ describe('v1.JobServiceClient', () => {
               getTypeDefaultValue('.google.cloud.aiplatform.v1.PauseModelDeploymentMonitoringJobRequest', ['name']);
             request.name = defaultValue1;
             const expectedError = new Error('The client has already been closed.');
-            client.close();
+            client.close().catch(err => {
+        throw err;
+      });
             await assert.rejects(client.pauseModelDeploymentMonitoringJob(request), expectedError);
         });
     });
@@ -2428,9 +2522,13 @@ describe('v1.JobServiceClient', () => {
             );
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.ResumeModelDeploymentMonitoringJobRequest', ['name']);
-            request.name = defaultValue1;
+            client.close().catch(err => {
+        throw err;
+      });defaultValue1;
             const expectedError = new Error('The client has already been closed.');
-            client.close();
+            client.close().catch(err => {
+        throw err;
+      });
             await assert.rejects(client.resumeModelDeploymentMonitoringJob(request), expectedError);
         });
     });

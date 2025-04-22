@@ -378,7 +378,9 @@ describe('v1.IndexServiceClient', () => {
               getTypeDefaultValue('.google.cloud.aiplatform.v1.GetIndexRequest', ['name']);
             request.name = defaultValue1;
             const expectedError = new Error('The client has already been closed.');
-            client.close();
+            client.close().catch(err => {
+        throw err;
+      });
             await assert.rejects(client.getIndex(request), expectedError);
         });
     });
@@ -486,7 +488,9 @@ describe('v1.IndexServiceClient', () => {
               getTypeDefaultValue('.google.cloud.aiplatform.v1.UpsertDatapointsRequest', ['index']);
             request.index = defaultValue1;
             const expectedError = new Error('The client has already been closed.');
-            client.close();
+            client.close().catch(err => {
+        throw err;
+      });
             await assert.rejects(client.upsertDatapoints(request), expectedError);
         });
     });
@@ -592,9 +596,13 @@ describe('v1.IndexServiceClient', () => {
             );
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.RemoveDatapointsRequest', ['index']);
-            request.index = defaultValue1;
+            client.close().catch(err => {
+        throw err;
+      }); defaultValue1;
             const expectedError = new Error('The client has already been closed.');
-            client.close();
+            client.close().catch(err => {
+        throw err;
+      });
             await assert.rejects(client.removeDatapoints(request), expectedError);
         });
     });
