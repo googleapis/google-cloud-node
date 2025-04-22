@@ -1,4 +1,7 @@
 {
+  "options": {
+    "syntax": "proto3"
+  },
   "nested": {
     "google": {
       "nested": {
@@ -55,6 +58,13 @@
                         "content": {
                           "type": "bytes",
                           "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "docid": {
+                          "type": "string",
+                          "id": 15,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
@@ -1148,6 +1158,10 @@
                                 "pageSpan": {
                                   "type": "LayoutPageSpan",
                                   "id": 5
+                                },
+                                "boundingBox": {
+                                  "type": "BoundingPoly",
+                                  "id": 6
                                 }
                               },
                               "nested": {
@@ -2111,6 +2125,20 @@
                             "chunkingConfig": {
                               "type": "ChunkingConfig",
                               "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "returnImages": {
+                              "type": "bool",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "returnBoundingBoxes": {
+                              "type": "bool",
+                              "id": 3,
                               "options": {
                                 "(google.api.field_behavior)": "OPTIONAL"
                               }
