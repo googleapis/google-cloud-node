@@ -378,9 +378,7 @@ describe('v1.ScheduleServiceClient', () => {
               getTypeDefaultValue('.google.cloud.aiplatform.v1.CreateScheduleRequest', ['parent']);
             request.parent = defaultValue1;
             const expectedError = new Error('The client has already been closed.');
-            client.close().catch(err => {
-        throw err;
-      });
+            client.close();
             await assert.rejects(client.createSchedule(request), expectedError);
         });
     });
@@ -486,13 +484,9 @@ describe('v1.ScheduleServiceClient', () => {
             );
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.GetScheduleRequest', ['name']);
-            client.close().catch(err => {
-        throw err;
-      });defaultValue1;
+            request.name = defaultValue1;
             const expectedError = new Error('The client has already been closed.');
-            client.close().catch(err => {
-        throw err;
-      });
+            client.close();
             await assert.rejects(client.getSchedule(request), expectedError);
         });
     });
@@ -596,17 +590,11 @@ describe('v1.ScheduleServiceClient', () => {
             const request = generateSampleMessage(
               new protos.google.cloud.aiplatform.v1.PauseScheduleRequest()
             );
-            client.close().catch(err => {
-        throw err;
-      });lue1 =
+            const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.PauseScheduleRequest', ['name']);
-            client.close().catch(err => {
-        throw err;
-      });defaultValue1;
+            request.name = defaultValue1;
             const expectedError = new Error('The client has already been closed.');
-            client.close().catch(err => {
-        throw err;
-      });
+            client.close();
             await assert.rejects(client.pauseSchedule(request), expectedError);
         });
     });
@@ -708,21 +696,13 @@ describe('v1.ScheduleServiceClient', () => {
             });
             await client.initialize();
             const request = generateSampleMessage(
-            client.close().catch(err => {
-        throw err;
-      });ogle.cloud.aiplatform.v1.ResumeScheduleRequest()
+              new protos.google.cloud.aiplatform.v1.ResumeScheduleRequest()
             );
-            client.close().catch(err => {
-        throw err;
-      });lue1 =
+            const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.ResumeScheduleRequest', ['name']);
-            client.close().catch(err => {
-        throw err;
-      });defaultValue1;
+            request.name = defaultValue1;
             const expectedError = new Error('The client has already been closed.');
-            client.close().catch(err => {
-        throw err;
-      });
+            client.close();
             await assert.rejects(client.resumeSchedule(request), expectedError);
         });
     });
@@ -826,25 +806,15 @@ describe('v1.ScheduleServiceClient', () => {
               projectId: 'bogus',
             });
             await client.initialize();
-            client.close().catch(err => {
-        throw err;
-      }); generateSampleMessage(
+            const request = generateSampleMessage(
               new protos.google.cloud.aiplatform.v1.UpdateScheduleRequest()
-            client.close().catch(err => {
-        throw err;
-      });
+            );
             request.schedule ??= {};
-            client.close().catch(err => {
-        throw err;
-      });lue1 =
+            const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.UpdateScheduleRequest', ['schedule', 'name']);
-            client.close().catch(err => {
-        throw err;
-      });e.name = defaultValue1;
+            request.schedule.name = defaultValue1;
             const expectedError = new Error('The client has already been closed.');
-            client.close().catch(err => {
-        throw err;
-      });
+            client.close();
             await assert.rejects(client.updateSchedule(request), expectedError);
         });
     });

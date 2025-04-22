@@ -378,9 +378,7 @@ describe('v1beta1.MetadataServiceClient', () => {
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.GetMetadataStoreRequest', ['name']);
             request.name = defaultValue1;
             const expectedError = new Error('The client has already been closed.');
-            client.close().catch(err => {
-        throw err;
-      });
+            client.close();
             await assert.rejects(client.getMetadataStore(request), expectedError);
         });
     });
@@ -488,9 +486,7 @@ describe('v1beta1.MetadataServiceClient', () => {
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.CreateArtifactRequest', ['parent']);
             request.parent = defaultValue1;
             const expectedError = new Error('The client has already been closed.');
-            client.close().catch(err => {
-        throw err;
-      });
+            client.close();
             await assert.rejects(client.createArtifact(request), expectedError);
         });
     });
@@ -596,13 +592,9 @@ describe('v1beta1.MetadataServiceClient', () => {
             );
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.GetArtifactRequest', ['name']);
-            client.close().catch(err => {
-        throw err;
-      });defaultValue1;
+            request.name = defaultValue1;
             const expectedError = new Error('The client has already been closed.');
-            client.close().catch(err => {
-        throw err;
-      });
+            client.close();
             await assert.rejects(client.getArtifact(request), expectedError);
         });
     });
@@ -714,9 +706,7 @@ describe('v1beta1.MetadataServiceClient', () => {
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.UpdateArtifactRequest', ['artifact', 'name']);
             request.artifact.name = defaultValue1;
             const expectedError = new Error('The client has already been closed.');
-            client.close().catch(err => {
-        throw err;
-      });
+            client.close();
             await assert.rejects(client.updateArtifact(request), expectedError);
         });
     });
@@ -824,9 +814,7 @@ describe('v1beta1.MetadataServiceClient', () => {
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.CreateContextRequest', ['parent']);
             request.parent = defaultValue1;
             const expectedError = new Error('The client has already been closed.');
-            client.close().catch(err => {
-        throw err;
-      });
+            client.close();
             await assert.rejects(client.createContext(request), expectedError);
         });
     });
@@ -934,9 +922,7 @@ describe('v1beta1.MetadataServiceClient', () => {
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.GetContextRequest', ['name']);
             request.name = defaultValue1;
             const expectedError = new Error('The client has already been closed.');
-            client.close().catch(err => {
-        throw err;
-      });
+            client.close();
             await assert.rejects(client.getContext(request), expectedError);
         });
     });
@@ -1048,9 +1034,7 @@ describe('v1beta1.MetadataServiceClient', () => {
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.UpdateContextRequest', ['context', 'name']);
             request.context.name = defaultValue1;
             const expectedError = new Error('The client has already been closed.');
-            client.close().catch(err => {
-        throw err;
-      });
+            client.close();
             await assert.rejects(client.updateContext(request), expectedError);
         });
     });
@@ -1158,9 +1142,7 @@ describe('v1beta1.MetadataServiceClient', () => {
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.AddContextArtifactsAndExecutionsRequest', ['context']);
             request.context = defaultValue1;
             const expectedError = new Error('The client has already been closed.');
-            client.close().catch(err => {
-        throw err;
-      });
+            client.close();
             await assert.rejects(client.addContextArtifactsAndExecutions(request), expectedError);
         });
     });
@@ -1268,9 +1250,7 @@ describe('v1beta1.MetadataServiceClient', () => {
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.AddContextChildrenRequest', ['context']);
             request.context = defaultValue1;
             const expectedError = new Error('The client has already been closed.');
-            client.close().catch(err => {
-        throw err;
-      });
+            client.close();
             await assert.rejects(client.addContextChildren(request), expectedError);
         });
     });
@@ -1376,13 +1356,9 @@ describe('v1beta1.MetadataServiceClient', () => {
             );
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.RemoveContextChildrenRequest', ['context']);
-            client.close().catch(err => {
-        throw err;
-      }); = defaultValue1;
+            request.context = defaultValue1;
             const expectedError = new Error('The client has already been closed.');
-            client.close().catch(err => {
-        throw err;
-      });
+            client.close();
             await assert.rejects(client.removeContextChildren(request), expectedError);
         });
     });
@@ -1488,13 +1464,9 @@ describe('v1beta1.MetadataServiceClient', () => {
             );
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.QueryContextLineageSubgraphRequest', ['context']);
-            client.close().catch(err => {
-        throw err;
-      }); = defaultValue1;
+            request.context = defaultValue1;
             const expectedError = new Error('The client has already been closed.');
-            client.close().catch(err => {
-        throw err;
-      });
+            client.close();
             await assert.rejects(client.queryContextLineageSubgraph(request), expectedError);
         });
     });
@@ -1600,13 +1572,9 @@ describe('v1beta1.MetadataServiceClient', () => {
             );
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.CreateExecutionRequest', ['parent']);
-            client.close().catch(err => {
-        throw err;
-      });= defaultValue1;
+            request.parent = defaultValue1;
             const expectedError = new Error('The client has already been closed.');
-            client.close().catch(err => {
-        throw err;
-      });
+            client.close();
             await assert.rejects(client.createExecution(request), expectedError);
         });
     });
@@ -1710,17 +1678,11 @@ describe('v1beta1.MetadataServiceClient', () => {
             const request = generateSampleMessage(
               new protos.google.cloud.aiplatform.v1beta1.GetExecutionRequest()
             );
-            client.close().catch(err => {
-        throw err;
-      });lue1 =
+            const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.GetExecutionRequest', ['name']);
-            client.close().catch(err => {
-        throw err;
-      });defaultValue1;
+            request.name = defaultValue1;
             const expectedError = new Error('The client has already been closed.');
-            client.close().catch(err => {
-        throw err;
-      });
+            client.close();
             await assert.rejects(client.getExecution(request), expectedError);
         });
     });
@@ -1826,17 +1788,13 @@ describe('v1beta1.MetadataServiceClient', () => {
             await client.initialize();
             const request = generateSampleMessage(
               new protos.google.cloud.aiplatform.v1beta1.UpdateExecutionRequest()
-            client.close().catch(err => {
-        throw err;
-      });
+            );
             request.execution ??= {};
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.UpdateExecutionRequest', ['execution', 'name']);
             request.execution.name = defaultValue1;
             const expectedError = new Error('The client has already been closed.');
-            client.close().catch(err => {
-        throw err;
-      });
+            client.close();
             await assert.rejects(client.updateExecution(request), expectedError);
         });
     });
@@ -1942,13 +1900,9 @@ describe('v1beta1.MetadataServiceClient', () => {
             );
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.AddExecutionEventsRequest', ['execution']);
-            client.close().catch(err => {
-        throw err;
-      });on = defaultValue1;
+            request.execution = defaultValue1;
             const expectedError = new Error('The client has already been closed.');
-            client.close().catch(err => {
-        throw err;
-      });
+            client.close();
             await assert.rejects(client.addExecutionEvents(request), expectedError);
         });
     });
@@ -2052,17 +2006,11 @@ describe('v1beta1.MetadataServiceClient', () => {
             const request = generateSampleMessage(
               new protos.google.cloud.aiplatform.v1beta1.QueryExecutionInputsAndOutputsRequest()
             );
-            client.close().catch(err => {
-        throw err;
-      });lue1 =
+            const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.QueryExecutionInputsAndOutputsRequest', ['execution']);
-            client.close().catch(err => {
-        throw err;
-      });on = defaultValue1;
+            request.execution = defaultValue1;
             const expectedError = new Error('The client has already been closed.');
-            client.close().catch(err => {
-        throw err;
-      });
+            client.close();
             await assert.rejects(client.queryExecutionInputsAndOutputs(request), expectedError);
         });
     });
@@ -2166,17 +2114,11 @@ describe('v1beta1.MetadataServiceClient', () => {
             const request = generateSampleMessage(
               new protos.google.cloud.aiplatform.v1beta1.CreateMetadataSchemaRequest()
             );
-            client.close().catch(err => {
-        throw err;
-      });lue1 =
+            const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.CreateMetadataSchemaRequest', ['parent']);
-            client.close().catch(err => {
-        throw err;
-      });= defaultValue1;
+            request.parent = defaultValue1;
             const expectedError = new Error('The client has already been closed.');
-            client.close().catch(err => {
-        throw err;
-      });
+            client.close();
             await assert.rejects(client.createMetadataSchema(request), expectedError);
         });
     });
@@ -2278,19 +2220,13 @@ describe('v1beta1.MetadataServiceClient', () => {
             });
             await client.initialize();
             const request = generateSampleMessage(
-            client.close().catch(err => {
-        throw err;
-      });ogle.cloud.aiplatform.v1beta1.GetMetadataSchemaRequest()
+              new protos.google.cloud.aiplatform.v1beta1.GetMetadataSchemaRequest()
             );
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.GetMetadataSchemaRequest', ['name']);
-            client.close().catch(err => {
-        throw err;
-      });defaultValue1;
+            request.name = defaultValue1;
             const expectedError = new Error('The client has already been closed.');
-            client.close().catch(err => {
-        throw err;
-      });
+            client.close();
             await assert.rejects(client.getMetadataSchema(request), expectedError);
         });
     });
@@ -2390,23 +2326,15 @@ describe('v1beta1.MetadataServiceClient', () => {
               credentials: {client_email: 'bogus', private_key: 'bogus'},
               projectId: 'bogus',
             });
-            client.close().catch(err => {
-        throw err;
-      });itialize();
+            await client.initialize();
             const request = generateSampleMessage(
               new protos.google.cloud.aiplatform.v1beta1.QueryArtifactLineageSubgraphRequest()
             );
-            client.close().catch(err => {
-        throw err;
-      });lue1 =
+            const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.QueryArtifactLineageSubgraphRequest', ['artifact']);
-            client.close().catch(err => {
-        throw err;
-      });t = defaultValue1;
+            request.artifact = defaultValue1;
             const expectedError = new Error('The client has already been closed.');
-            client.close().catch(err => {
-        throw err;
-      });
+            client.close();
             await assert.rejects(client.queryArtifactLineageSubgraph(request), expectedError);
         });
     });

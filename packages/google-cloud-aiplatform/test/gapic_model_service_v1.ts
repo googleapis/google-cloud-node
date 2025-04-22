@@ -378,9 +378,7 @@ describe('v1.ModelServiceClient', () => {
               getTypeDefaultValue('.google.cloud.aiplatform.v1.GetModelRequest', ['name']);
             request.name = defaultValue1;
             const expectedError = new Error('The client has already been closed.');
-            client.close().catch(err => {
-        throw err;
-      });
+            client.close();
             await assert.rejects(client.getModel(request), expectedError);
         });
     });
@@ -492,9 +490,7 @@ describe('v1.ModelServiceClient', () => {
               getTypeDefaultValue('.google.cloud.aiplatform.v1.UpdateModelRequest', ['model', 'name']);
             request.model.name = defaultValue1;
             const expectedError = new Error('The client has already been closed.');
-            client.close().catch(err => {
-        throw err;
-      });
+            client.close();
             await assert.rejects(client.updateModel(request), expectedError);
         });
     });
@@ -600,13 +596,9 @@ describe('v1.ModelServiceClient', () => {
             );
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.MergeVersionAliasesRequest', ['name']);
-            client.close().catch(err => {
-        throw err;
-      });defaultValue1;
+            request.name = defaultValue1;
             const expectedError = new Error('The client has already been closed.');
-            client.close().catch(err => {
-        throw err;
-      });
+            client.close();
             await assert.rejects(client.mergeVersionAliases(request), expectedError);
         });
     });
@@ -710,17 +702,11 @@ describe('v1.ModelServiceClient', () => {
             const request = generateSampleMessage(
               new protos.google.cloud.aiplatform.v1.ImportModelEvaluationRequest()
             );
-            client.close().catch(err => {
-        throw err;
-      });lue1 =
+            const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.ImportModelEvaluationRequest', ['parent']);
-            client.close().catch(err => {
-        throw err;
-      });= defaultValue1;
+            request.parent = defaultValue1;
             const expectedError = new Error('The client has already been closed.');
-            client.close().catch(err => {
-        throw err;
-      });
+            client.close();
             await assert.rejects(client.importModelEvaluation(request), expectedError);
         });
     });
@@ -822,19 +808,13 @@ describe('v1.ModelServiceClient', () => {
             });
             await client.initialize();
             const request = generateSampleMessage(
-            client.close().catch(err => {
-        throw err;
-      });ogle.cloud.aiplatform.v1.BatchImportModelEvaluationSlicesRequest()
+              new protos.google.cloud.aiplatform.v1.BatchImportModelEvaluationSlicesRequest()
             );
-            client.close().catch(err => {
-        throw err;
-      });lue1 =
+            const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.BatchImportModelEvaluationSlicesRequest', ['parent']);
             request.parent = defaultValue1;
             const expectedError = new Error('The client has already been closed.');
-            client.close().catch(err => {
-        throw err;
-      });
+            client.close();
             await assert.rejects(client.batchImportModelEvaluationSlices(request), expectedError);
         });
     });
@@ -934,21 +914,15 @@ describe('v1.ModelServiceClient', () => {
               credentials: {client_email: 'bogus', private_key: 'bogus'},
               projectId: 'bogus',
             });
-            client.close().catch(err => {
-        throw err;
-      });itialize();
+            await client.initialize();
             const request = generateSampleMessage(
-            client.close().catch(err => {
-        throw err;
-      });ogle.cloud.aiplatform.v1.BatchImportEvaluatedAnnotationsRequest()
+              new protos.google.cloud.aiplatform.v1.BatchImportEvaluatedAnnotationsRequest()
             );
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.BatchImportEvaluatedAnnotationsRequest', ['parent']);
             request.parent = defaultValue1;
             const expectedError = new Error('The client has already been closed.');
-            client.close().catch(err => {
-        throw err;
-      });
+            client.close();
             await assert.rejects(client.batchImportEvaluatedAnnotations(request), expectedError);
         });
     });
@@ -1046,25 +1020,17 @@ describe('v1.ModelServiceClient', () => {
         it('invokes getModelEvaluation with closed client', async () => {
             const client = new modelserviceModule.v1.ModelServiceClient({
               credentials: {client_email: 'bogus', private_key: 'bogus'},
-            client.close().catch(err => {
-        throw err;
-      });ogus',
+              projectId: 'bogus',
             });
-            client.close().catch(err => {
-        throw err;
-      });itialize();
+            await client.initialize();
             const request = generateSampleMessage(
               new protos.google.cloud.aiplatform.v1.GetModelEvaluationRequest()
             );
             const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.GetModelEvaluationRequest', ['name']);
-            client.close().catch(err => {
-        throw err;
-      });defaultValue1;
+            request.name = defaultValue1;
             const expectedError = new Error('The client has already been closed.');
-            client.close().catch(err => {
-        throw err;
-      });
+            client.close();
             await assert.rejects(client.getModelEvaluation(request), expectedError);
         });
     });
@@ -1160,29 +1126,19 @@ describe('v1.ModelServiceClient', () => {
         });
 
         it('invokes getModelEvaluationSlice with closed client', async () => {
-            client.close().catch(err => {
-        throw err;
-      });new modelserviceModule.v1.ModelServiceClient({
+            const client = new modelserviceModule.v1.ModelServiceClient({
               credentials: {client_email: 'bogus', private_key: 'bogus'},
-            client.close().catch(err => {
-        throw err;
-      });ogus',
+              projectId: 'bogus',
             });
             await client.initialize();
             const request = generateSampleMessage(
               new protos.google.cloud.aiplatform.v1.GetModelEvaluationSliceRequest()
             );
-            client.close().catch(err => {
-        throw err;
-      });lue1 =
+            const defaultValue1 =
               getTypeDefaultValue('.google.cloud.aiplatform.v1.GetModelEvaluationSliceRequest', ['name']);
-            client.close().catch(err => {
-        throw err;
-      });defaultValue1;
+            request.name = defaultValue1;
             const expectedError = new Error('The client has already been closed.');
-            client.close().catch(err => {
-        throw err;
-      });
+            client.close();
             await assert.rejects(client.getModelEvaluationSlice(request), expectedError);
         });
     });
