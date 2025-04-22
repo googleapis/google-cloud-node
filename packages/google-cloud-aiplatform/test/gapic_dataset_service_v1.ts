@@ -183,7 +183,7 @@ describe('v1.DatasetServiceClient', () => {
   describe('Common methods', () => {
     it.only('has apiEndpoint', () => {
       const client = new datasetserviceModule.v1.DatasetServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        auth: googleAuth,
       });
       const apiEndpoint = client.apiEndpoint;
       assert.strictEqual(apiEndpoint, 'aiplatform.googleapis.com');
