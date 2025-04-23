@@ -182,10 +182,15 @@ describe('v1.DatasetServiceClient', () => {
   });
   describe('Common methods', () => {
     it.only('has apiEndpoint', async () => {
+      console.log('BEFORE CLIENT CREATION');
       const client = new datasetserviceModule.v1.DatasetServiceClient({
         auth: googleAuth,
       });
+      console.log('AFTER CLIENT CREATION');
+      console.log(client);
       const apiEndpoint = await client.apiEndpoint;
+      console.log('AFTER API ENDPOINT CALL');
+      console.log(apiEndpoint);
       assert.strictEqual(apiEndpoint, 'aiplatform.googleapis.com');
     });
 
