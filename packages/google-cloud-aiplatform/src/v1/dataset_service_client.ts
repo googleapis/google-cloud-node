@@ -10000,7 +10000,9 @@ export class DatasetServiceClient {
       return this.datasetServiceStub.then(stub => {
         this._log.info('ending gRPC channel');
         this._terminated = true;
-        stub.close();
+        stub.close().catch((err: any) => {
+          throw err;
+        });
         this.iamClient.close().catch(err => {
           throw err;
         });
