@@ -27,4105 +27,6376 @@ import {protobuf, IamProtos, LocationProtos} from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
-const root = protobuf.Root.fromJSON(require('../protos/protos.json')).resolveAll();
+const root = protobuf.Root.fromJSON(
+  require('../protos/protos.json')
+).resolveAll();
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 function getTypeDefaultValue(typeName: string, fields: string[]) {
-    let type = root.lookupType(typeName) as protobuf.Type;
-    for (const field of fields.slice(0, -1)) {
-        type = type.fields[field]?.resolvedType as protobuf.Type;
-    }
-    return type.fields[fields[fields.length - 1]]?.defaultValue;
+  let type = root.lookupType(typeName) as protobuf.Type;
+  for (const field of fields.slice(0, -1)) {
+    type = type.fields[field]?.resolvedType as protobuf.Type;
+  }
+  return type.fields[fields[fields.length - 1]]?.defaultValue;
 }
 
 function generateSampleMessage<T extends object>(instance: T) {
-    const filledObject = (instance.constructor as typeof protobuf.Message)
-        .toObject(instance as protobuf.Message<T>, {defaults: true});
-    return (instance.constructor as typeof protobuf.Message).fromObject(filledObject) as T;
+  const filledObject = (
+    instance.constructor as typeof protobuf.Message
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
+  return (instance.constructor as typeof protobuf.Message).fromObject(
+    filledObject
+  ) as T;
 }
 
 function stubSimpleCall<ResponseType>(response?: ResponseType, error?: Error) {
-    return error ? sinon.stub().rejects(error) : sinon.stub().resolves([response]);
+  return error
+    ? sinon.stub().rejects(error)
+    : sinon.stub().resolves([response]);
 }
 
-function stubSimpleCallWithCallback<ResponseType>(response?: ResponseType, error?: Error) {
-    return error ? sinon.stub().callsArgWith(2, error) : sinon.stub().callsArgWith(2, null, response);
+function stubSimpleCallWithCallback<ResponseType>(
+  response?: ResponseType,
+  error?: Error
+) {
+  return error
+    ? sinon.stub().callsArgWith(2, error)
+    : sinon.stub().callsArgWith(2, null, response);
 }
 
-function stubAsyncIterationCall<ResponseType>(responses?: ResponseType[], error?: Error) {
-    let counter = 0;
-    const asyncIterable = {
-        [Symbol.asyncIterator]() {
-            return {
-                async next() {
-                    if (error) {
-                        return Promise.reject(error);
-                    }
-                    if (counter >= responses!.length) {
-                        return Promise.resolve({done: true, value: undefined});
-                    }
-                    return Promise.resolve({done: false, value: responses![counter++]});
-                }
-            };
-        }
-    };
-    return sinon.stub().returns(asyncIterable);
+function stubAsyncIterationCall<ResponseType>(
+  responses?: ResponseType[],
+  error?: Error
+) {
+  let counter = 0;
+  const asyncIterable = {
+    [Symbol.asyncIterator]() {
+      return {
+        async next() {
+          if (error) {
+            return Promise.reject(error);
+          }
+          if (counter >= responses!.length) {
+            return Promise.resolve({done: true, value: undefined});
+          }
+          return Promise.resolve({done: false, value: responses![counter++]});
+        },
+      };
+    },
+  };
+  return sinon.stub().returns(asyncIterable);
 }
 
 describe('v1beta1.ExtensionExecutionServiceClient', () => {
-    describe('Common methods', () => {
-        it('has apiEndpoint', async () => {
-            const client = new extensionexecutionserviceModule.v1beta1.ExtensionExecutionServiceClient();
-            const apiEndpoint = await client.apiEndpoint;
-            assert.strictEqual(apiEndpoint, 'aiplatform.googleapis.com');
-        });
-
-        it('has universeDomain', async () => {
-            const client = new extensionexecutionserviceModule.v1beta1.ExtensionExecutionServiceClient();
-            const universeDomain = await client.universeDomain;
-            assert.strictEqual(universeDomain, "googleapis.com");
-        });
-
-        if (typeof process === 'object' && typeof process.emitWarning === 'function') {
-            it('throws DeprecationWarning if static servicePath is used', () => {
-                const stub = sinon.stub(process, 'emitWarning');
-                const servicePath = extensionexecutionserviceModule.v1beta1.ExtensionExecutionServiceClient.servicePath;
-                assert.strictEqual(servicePath, 'aiplatform.googleapis.com');
-                assert(stub.called);
-                stub.restore();
-            });
-
-            it('throws DeprecationWarning if static apiEndpoint is used', () => {
-                const stub = sinon.stub(process, 'emitWarning');
-                const apiEndpoint = extensionexecutionserviceModule.v1beta1.ExtensionExecutionServiceClient.apiEndpoint;
-                assert.strictEqual(apiEndpoint, 'aiplatform.googleapis.com');
-                assert(stub.called);
-                stub.restore();
-            });
-        }
-        it('sets apiEndpoint according to universe domain camelCase', async () => {
-            const client = new extensionexecutionserviceModule.v1beta1.ExtensionExecutionServiceClient({universeDomain: 'example.com'});
-            const servicePath = await client.apiEndpoint;
-            assert.strictEqual(servicePath, 'aiplatform.example.com');
-        });
-
-        it('sets apiEndpoint according to universe domain snakeCase', async () => {
-            const client = new extensionexecutionserviceModule.v1beta1.ExtensionExecutionServiceClient({universe_domain: 'example.com'});
-            const servicePath = await client.apiEndpoint;
-            assert.strictEqual(servicePath, 'aiplatform.example.com');
-        });
-
-        if (typeof process === 'object' && 'env' in process) {
-            describe('GOOGLE_CLOUD_UNIVERSE_DOMAIN environment variable', () => {
-                it('sets apiEndpoint from environment variable', async () => {
-                    const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
-                    process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
-                    const client = new extensionexecutionserviceModule.v1beta1.ExtensionExecutionServiceClient();
-                    const servicePath = await client.apiEndpoint;
-                    assert.strictEqual(servicePath, 'aiplatform.example.com');
-                    if (saved) {
-                        process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
-                    } else {
-                        delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
-                    }
-                });
-
-                it('value configured in code has priority over environment variable', async () => {
-                    const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
-                    process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
-                    const client = new extensionexecutionserviceModule.v1beta1.ExtensionExecutionServiceClient({universeDomain: 'configured.example.com'});
-                    const servicePath = await client.apiEndpoint;
-                    assert.strictEqual(servicePath, 'aiplatform.configured.example.com');
-                    if (saved) {
-                        process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
-                    } else {
-                        delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
-                    }
-                });
-            });
-        }
-        it('does not allow setting both universeDomain and universe_domain', () => {
-            assert.throws(() => { new extensionexecutionserviceModule.v1beta1.ExtensionExecutionServiceClient({universe_domain: 'example.com', universeDomain: 'example.net'}); });
-        });
-
-        it('has port', () => {
-            const port = extensionexecutionserviceModule.v1beta1.ExtensionExecutionServiceClient.port;
-            assert(port);
-            assert(typeof port === 'number');
-        });
-
-        it('should create a client with no option', () => {
-            const client = new extensionexecutionserviceModule.v1beta1.ExtensionExecutionServiceClient();
-            assert(client);
-        });
-
-        it('should create a client with gRPC fallback', () => {
-            const client = new extensionexecutionserviceModule.v1beta1.ExtensionExecutionServiceClient({
-                fallback: true,
-            });
-            assert(client);
-        });
-
-        it('has initialize method and supports deferred initialization', async () => {
-            const client = new extensionexecutionserviceModule.v1beta1.ExtensionExecutionServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            assert.strictEqual(client.extensionExecutionServiceStub, undefined);
-            await client.initialize();
-            assert(client.extensionExecutionServiceStub);
-        });
-
-        it('has close method for the initialized client', done => {
-            const client = new extensionexecutionserviceModule.v1beta1.ExtensionExecutionServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            client.initialize().catch(err => {throw err});
-            assert(client.extensionExecutionServiceStub);
-            client.close().then(() => {
-                done();
-            });
-        });
-
-        it('has close method for the non-initialized client', done => {
-            const client = new extensionexecutionserviceModule.v1beta1.ExtensionExecutionServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            assert.strictEqual(client.extensionExecutionServiceStub, undefined);
-            client.close().then(() => {
-                done();
-            });
-        });
-
-        it('has getProjectId method', async () => {
-            const fakeProjectId = 'fake-project-id';
-            const client = new extensionexecutionserviceModule.v1beta1.ExtensionExecutionServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
-            const result = await client.getProjectId();
-            assert.strictEqual(result, fakeProjectId);
-            assert((client.auth.getProjectId as SinonStub).calledWithExactly());
-        });
-
-        it('has getProjectId method with callback', async () => {
-            const fakeProjectId = 'fake-project-id';
-            const client = new extensionexecutionserviceModule.v1beta1.ExtensionExecutionServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            client.auth.getProjectId = sinon.stub().callsArgWith(0, null, fakeProjectId);
-            const promise = new Promise((resolve, reject) => {
-                client.getProjectId((err?: Error|null, projectId?: string|null) => {
-                    if (err) {
-                        reject(err);
-                    } else {
-                        resolve(projectId);
-                    }
-                });
-            });
-            const result = await promise;
-            assert.strictEqual(result, fakeProjectId);
-        });
+  describe('Common methods', () => {
+    it('has apiEndpoint', async () => {
+      const client =
+        new extensionexecutionserviceModule.v1beta1.ExtensionExecutionServiceClient();
+      const apiEndpoint = await client.apiEndpoint;
+      assert.strictEqual(apiEndpoint, 'aiplatform.googleapis.com');
     });
 
-    describe('executeExtension', () => {
-        it('invokes executeExtension without error', async () => {
-            const client = new extensionexecutionserviceModule.v1beta1.ExtensionExecutionServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.aiplatform.v1beta1.ExecuteExtensionRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.ExecuteExtensionRequest', ['name']);
-            request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
-            const expectedResponse = generateSampleMessage(
-              new protos.google.cloud.aiplatform.v1beta1.ExecuteExtensionResponse()
-            );
-            client.innerApiCalls.executeExtension = stubSimpleCall(expectedResponse);
-            const [response] = await client.executeExtension(request);
-            assert.deepStrictEqual(response, expectedResponse);
-            const actualRequest = (client.innerApiCalls.executeExtension as SinonStub)
-                .getCall(0).args[0];
-            assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.executeExtension as SinonStub)
-                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    it('has universeDomain', async () => {
+      const client =
+        new extensionexecutionserviceModule.v1beta1.ExtensionExecutionServiceClient();
+      const universeDomain = await client.universeDomain;
+      assert.strictEqual(universeDomain, 'googleapis.com');
+    });
+
+    if (
+      typeof process === 'object' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      it('throws DeprecationWarning if static servicePath is used', () => {
+        const stub = sinon.stub(process, 'emitWarning');
+        const servicePath =
+          extensionexecutionserviceModule.v1beta1
+            .ExtensionExecutionServiceClient.servicePath;
+        assert.strictEqual(servicePath, 'aiplatform.googleapis.com');
+        assert(stub.called);
+        stub.restore();
+      });
+
+      it('throws DeprecationWarning if static apiEndpoint is used', () => {
+        const stub = sinon.stub(process, 'emitWarning');
+        const apiEndpoint =
+          extensionexecutionserviceModule.v1beta1
+            .ExtensionExecutionServiceClient.apiEndpoint;
+        assert.strictEqual(apiEndpoint, 'aiplatform.googleapis.com');
+        assert(stub.called);
+        stub.restore();
+      });
+    }
+    it('sets apiEndpoint according to universe domain camelCase', async () => {
+      const client =
+        new extensionexecutionserviceModule.v1beta1.ExtensionExecutionServiceClient(
+          {universeDomain: 'example.com'}
+        );
+      const servicePath = await client.apiEndpoint;
+      assert.strictEqual(servicePath, 'aiplatform.example.com');
+    });
+
+    it('sets apiEndpoint according to universe domain snakeCase', async () => {
+      const client =
+        new extensionexecutionserviceModule.v1beta1.ExtensionExecutionServiceClient(
+          {universe_domain: 'example.com'}
+        );
+      const servicePath = await client.apiEndpoint;
+      assert.strictEqual(servicePath, 'aiplatform.example.com');
+    });
+
+    if (typeof process === 'object' && 'env' in process) {
+      describe('GOOGLE_CLOUD_UNIVERSE_DOMAIN environment variable', () => {
+        it('sets apiEndpoint from environment variable', async () => {
+          const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+          process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
+          const client =
+            new extensionexecutionserviceModule.v1beta1.ExtensionExecutionServiceClient();
+          const servicePath = await client.apiEndpoint;
+          assert.strictEqual(servicePath, 'aiplatform.example.com');
+          if (saved) {
+            process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
+          } else {
+            delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+          }
         });
 
-        it('invokes executeExtension without error using callback', async () => {
-            const client = new extensionexecutionserviceModule.v1beta1.ExtensionExecutionServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.aiplatform.v1beta1.ExecuteExtensionRequest()
+        it('value configured in code has priority over environment variable', async () => {
+          const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+          process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
+          const client =
+            new extensionexecutionserviceModule.v1beta1.ExtensionExecutionServiceClient(
+              {universeDomain: 'configured.example.com'}
             );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.ExecuteExtensionRequest', ['name']);
-            request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
-            const expectedResponse = generateSampleMessage(
-              new protos.google.cloud.aiplatform.v1beta1.ExecuteExtensionResponse()
-            );
-            client.innerApiCalls.executeExtension = stubSimpleCallWithCallback(expectedResponse);
-            const promise = new Promise((resolve, reject) => {
-                 client.executeExtension(
-                    request,
-                    (err?: Error|null, result?: protos.google.cloud.aiplatform.v1beta1.IExecuteExtensionResponse|null) => {
-                        if (err) {
-                            reject(err);
-                        } else {
-                            resolve(result);
-                        }
-                    });
-            });
-            const response = await promise;
-            assert.deepStrictEqual(response, expectedResponse);
-            const actualRequest = (client.innerApiCalls.executeExtension as SinonStub)
-                .getCall(0).args[0];
-            assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.executeExtension as SinonStub)
-                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+          const servicePath = await client.apiEndpoint;
+          assert.strictEqual(servicePath, 'aiplatform.configured.example.com');
+          if (saved) {
+            process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
+          } else {
+            delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+          }
         });
+      });
+    }
+    it('does not allow setting both universeDomain and universe_domain', () => {
+      assert.throws(() => {
+        new extensionexecutionserviceModule.v1beta1.ExtensionExecutionServiceClient(
+          {universe_domain: 'example.com', universeDomain: 'example.net'}
+        );
+      });
+    });
 
-        it('invokes executeExtension with error', async () => {
-            const client = new extensionexecutionserviceModule.v1beta1.ExtensionExecutionServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.aiplatform.v1beta1.ExecuteExtensionRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.ExecuteExtensionRequest', ['name']);
-            request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
-            const expectedError = new Error('expected');
-            client.innerApiCalls.executeExtension = stubSimpleCall(undefined, expectedError);
-            await assert.rejects(client.executeExtension(request), expectedError);
-            const actualRequest = (client.innerApiCalls.executeExtension as SinonStub)
-                .getCall(0).args[0];
-            assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.executeExtension as SinonStub)
-                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-        });
+    it('has port', () => {
+      const port =
+        extensionexecutionserviceModule.v1beta1.ExtensionExecutionServiceClient
+          .port;
+      assert(port);
+      assert(typeof port === 'number');
+    });
 
-        it('invokes executeExtension with closed client', async () => {
-            const client = new extensionexecutionserviceModule.v1beta1.ExtensionExecutionServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.aiplatform.v1beta1.ExecuteExtensionRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.ExecuteExtensionRequest', ['name']);
-            request.name = defaultValue1;
-            const expectedError = new Error('The client has already been closed.');
-            client.close().catch(err => {
+    it('should create a client with no option', () => {
+      const client =
+        new extensionexecutionserviceModule.v1beta1.ExtensionExecutionServiceClient();
+      assert(client);
+    });
+
+    it('should create a client with gRPC fallback', () => {
+      const client =
+        new extensionexecutionserviceModule.v1beta1.ExtensionExecutionServiceClient(
+          {
+            fallback: true,
+          }
+        );
+      assert(client);
+    });
+
+    it('has initialize method and supports deferred initialization', async () => {
+      const client =
+        new extensionexecutionserviceModule.v1beta1.ExtensionExecutionServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      assert.strictEqual(client.extensionExecutionServiceStub, undefined);
+      await client.initialize();
+      assert(client.extensionExecutionServiceStub);
+    });
+
+    it('has close method for the initialized client', done => {
+      const client =
+        new extensionexecutionserviceModule.v1beta1.ExtensionExecutionServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      client.initialize().catch(err => {
         throw err;
       });
-            await assert.rejects(client.executeExtension(request), expectedError);
-        });
-    });
-
-    describe('queryExtension', () => {
-        it('invokes queryExtension without error', async () => {
-            const client = new extensionexecutionserviceModule.v1beta1.ExtensionExecutionServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.aiplatform.v1beta1.QueryExtensionRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.QueryExtensionRequest', ['name']);
-            request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
-            const expectedResponse = generateSampleMessage(
-              new protos.google.cloud.aiplatform.v1beta1.QueryExtensionResponse()
-            );
-            client.innerApiCalls.queryExtension = stubSimpleCall(expectedResponse);
-            const [response] = await client.queryExtension(request);
-            assert.deepStrictEqual(response, expectedResponse);
-            const actualRequest = (client.innerApiCalls.queryExtension as SinonStub)
-                .getCall(0).args[0];
-            assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.queryExtension as SinonStub)
-                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-        });
-
-        it('invokes queryExtension without error using callback', async () => {
-            const client = new extensionexecutionserviceModule.v1beta1.ExtensionExecutionServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.aiplatform.v1beta1.QueryExtensionRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.QueryExtensionRequest', ['name']);
-            request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
-            const expectedResponse = generateSampleMessage(
-              new protos.google.cloud.aiplatform.v1beta1.QueryExtensionResponse()
-            );
-            client.innerApiCalls.queryExtension = stubSimpleCallWithCallback(expectedResponse);
-            const promise = new Promise((resolve, reject) => {
-                 client.queryExtension(
-                    request,
-                    (err?: Error|null, result?: protos.google.cloud.aiplatform.v1beta1.IQueryExtensionResponse|null) => {
-                        if (err) {
-                            reject(err);
-                        } else {
-                            resolve(result);
-                        }
-                    });
-            });
-            const response = await promise;
-            assert.deepStrictEqual(response, expectedResponse);
-            const actualRequest = (client.innerApiCalls.queryExtension as SinonStub)
-                .getCall(0).args[0];
-            assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.queryExtension as SinonStub)
-                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-        });
-
-        it('invokes queryExtension with error', async () => {
-            const client = new extensionexecutionserviceModule.v1beta1.ExtensionExecutionServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.aiplatform.v1beta1.QueryExtensionRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.QueryExtensionRequest', ['name']);
-            request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
-            const expectedError = new Error('expected');
-            client.innerApiCalls.queryExtension = stubSimpleCall(undefined, expectedError);
-            await assert.rejects(client.queryExtension(request), expectedError);
-            const actualRequest = (client.innerApiCalls.queryExtension as SinonStub)
-                .getCall(0).args[0];
-            assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.queryExtension as SinonStub)
-                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-        });
-
-        it('invokes queryExtension with closed client', async () => {
-            const client = new extensionexecutionserviceModule.v1beta1.ExtensionExecutionServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.aiplatform.v1beta1.QueryExtensionRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.QueryExtensionRequest', ['name']);
-            request.name = defaultValue1;
-            const expectedError = new Error('The client has already been closed.');
-            client.close().catch(err => {
-        throw err;
+      assert(client.extensionExecutionServiceStub);
+      client.close().then(() => {
+        done();
       });
-            await assert.rejects(client.queryExtension(request), expectedError);
-        });
     });
-    describe('getIamPolicy', () => {
-        it('invokes getIamPolicy without error', async () => {
-            const client = new extensionexecutionserviceModule.v1beta1.ExtensionExecutionServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new IamProtos.google.iam.v1.GetIamPolicyRequest()
-            );
-            request.resource = '';
-            const expectedHeaderRequestParams = 'resource=';
-            const expectedOptions = {
-                otherArgs: {
-                    headers: {
-                        'x-goog-request-params': expectedHeaderRequestParams,
-                    },
-                },
-            };
-            const expectedResponse = generateSampleMessage(
-              new IamProtos.google.iam.v1.Policy()
-            );
-            client.iamClient.getIamPolicy = stubSimpleCall(expectedResponse);
-            const response = await client.getIamPolicy(request, expectedOptions);
-            assert.deepStrictEqual(response, [expectedResponse]);
-            assert((client.iamClient.getIamPolicy as SinonStub)
-                .getCall(0).calledWith(request, expectedOptions, undefined));
-        });
-        it('invokes getIamPolicy without error using callback', async () => {
-            const client = new extensionexecutionserviceModule.v1beta1.ExtensionExecutionServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new IamProtos.google.iam.v1.GetIamPolicyRequest()
-            );
-            request.resource = '';
-            const expectedHeaderRequestParams = 'resource=';
-            const expectedOptions = {
-                otherArgs: {
-                    headers: {
-                        'x-goog-request-params': expectedHeaderRequestParams,
-                    },
-                },
-            };
-            const expectedResponse = generateSampleMessage(
-              new IamProtos.google.iam.v1.Policy()
-            );
-            client.iamClient.getIamPolicy = sinon.stub().callsArgWith(2, null, expectedResponse);
-            const promise = new Promise((resolve, reject) => {
-                 client.getIamPolicy(
-                    request,
-                    expectedOptions,
-                    (err?: Error|null, result?: IamProtos.google.iam.v1.Policy|null) => {
-                        if (err) {
-                            reject(err);
-                        } else {
-                            resolve(result);
-                        }
-                    });
-            });
-            const response = await promise;
-            assert.deepStrictEqual(response, expectedResponse);
-            assert((client.iamClient.getIamPolicy as SinonStub)
-                .getCall(0));
-        });
-        it('invokes getIamPolicy with error', async () => {
-            const client = new extensionexecutionserviceModule.v1beta1.ExtensionExecutionServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new IamProtos.google.iam.v1.GetIamPolicyRequest()
-            );
-            request.resource = '';
-            const expectedHeaderRequestParams = 'resource=';
-            const expectedOptions = {
-                otherArgs: {
-                    headers: {
-                        'x-goog-request-params': expectedHeaderRequestParams,
-                    },
-                },
-            };
-            const expectedError = new Error('expected');
-            client.iamClient.getIamPolicy = stubSimpleCall(undefined, expectedError);
-            await assert.rejects(client.getIamPolicy(request, expectedOptions), expectedError);
-            assert((client.iamClient.getIamPolicy as SinonStub)
-                .getCall(0).calledWith(request, expectedOptions, undefined));
-        });
+
+    it('has close method for the non-initialized client', done => {
+      const client =
+        new extensionexecutionserviceModule.v1beta1.ExtensionExecutionServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      assert.strictEqual(client.extensionExecutionServiceStub, undefined);
+      client.close().then(() => {
+        done();
+      });
     });
-    describe('setIamPolicy', () => {
-        it('invokes setIamPolicy without error', async () => {
-            const client = new extensionexecutionserviceModule.v1beta1.ExtensionExecutionServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new IamProtos.google.iam.v1.SetIamPolicyRequest()
-            );
-            request.resource = '';
-            const expectedHeaderRequestParams = 'resource=';
-            const expectedOptions = {
-                otherArgs: {
-                    headers: {
-                        'x-goog-request-params': expectedHeaderRequestParams,
-                    },
-                },
-            };
-            const expectedResponse = generateSampleMessage(
-              new IamProtos.google.iam.v1.Policy()
-            );
-            client.iamClient.setIamPolicy = stubSimpleCall(expectedResponse);
-            const response = await client.setIamPolicy(request, expectedOptions);
-            assert.deepStrictEqual(response, [expectedResponse]);
-            assert((client.iamClient.setIamPolicy as SinonStub)
-                .getCall(0).calledWith(request, expectedOptions, undefined));
-        });
-        it('invokes setIamPolicy without error using callback', async () => {
-            const client = new extensionexecutionserviceModule.v1beta1.ExtensionExecutionServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new IamProtos.google.iam.v1.SetIamPolicyRequest()
-            );
-            request.resource = '';
-            const expectedHeaderRequestParams = 'resource=';
-            const expectedOptions = {
-                otherArgs: {
-                    headers: {
-                        'x-goog-request-params': expectedHeaderRequestParams,
-                    },
-                },
-            };
-            const expectedResponse = generateSampleMessage(
-              new IamProtos.google.iam.v1.Policy()
-            );
-            client.iamClient.setIamPolicy = sinon.stub().callsArgWith(2, null, expectedResponse);
-            const promise = new Promise((resolve, reject) => {
-                 client.setIamPolicy(
-                    request,
-                    expectedOptions,
-                    (err?: Error|null, result?: IamProtos.google.iam.v1.Policy|null) => {
-                        if (err) {
-                            reject(err);
-                        } else {
-                            resolve(result);
-                        }
-                    });
-            });
-            const response = await promise;
-            assert.deepStrictEqual(response, expectedResponse);
-            assert((client.iamClient.setIamPolicy as SinonStub)
-                .getCall(0));
-        });
-        it('invokes setIamPolicy with error', async () => {
-            const client = new extensionexecutionserviceModule.v1beta1.ExtensionExecutionServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new IamProtos.google.iam.v1.SetIamPolicyRequest()
-            );
-            request.resource = '';
-            const expectedHeaderRequestParams = 'resource=';
-            const expectedOptions = {
-                otherArgs: {
-                    headers: {
-                        'x-goog-request-params': expectedHeaderRequestParams,
-                    },
-                },
-            };
-            const expectedError = new Error('expected');
-            client.iamClient.setIamPolicy = stubSimpleCall(undefined, expectedError);
-            await assert.rejects(client.setIamPolicy(request, expectedOptions), expectedError);
-            assert((client.iamClient.setIamPolicy as SinonStub)
-                .getCall(0).calledWith(request, expectedOptions, undefined));
-        });
+
+    it('has getProjectId method', async () => {
+      const fakeProjectId = 'fake-project-id';
+      const client =
+        new extensionexecutionserviceModule.v1beta1.ExtensionExecutionServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
+      const result = await client.getProjectId();
+      assert.strictEqual(result, fakeProjectId);
+      assert((client.auth.getProjectId as SinonStub).calledWithExactly());
     });
-    describe('testIamPermissions', () => {
-        it('invokes testIamPermissions without error', async () => {
-            const client = new extensionexecutionserviceModule.v1beta1.ExtensionExecutionServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new IamProtos.google.iam.v1.TestIamPermissionsRequest()
-            );
-            request.resource = '';
-            const expectedHeaderRequestParams = 'resource=';
-            const expectedOptions = {
-                otherArgs: {
-                    headers: {
-                        'x-goog-request-params': expectedHeaderRequestParams,
-                    },
-                },
-            };
-            const expectedResponse = generateSampleMessage(
-              new IamProtos.google.iam.v1.TestIamPermissionsResponse()
-            );
-            client.iamClient.testIamPermissions = stubSimpleCall(expectedResponse);
-            const response = await client.testIamPermissions(request, expectedOptions);
-            assert.deepStrictEqual(response, [expectedResponse]);
-            assert((client.iamClient.testIamPermissions as SinonStub)
-                .getCall(0).calledWith(request, expectedOptions, undefined));
+
+    it('has getProjectId method with callback', async () => {
+      const fakeProjectId = 'fake-project-id';
+      const client =
+        new extensionexecutionserviceModule.v1beta1.ExtensionExecutionServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      client.auth.getProjectId = sinon
+        .stub()
+        .callsArgWith(0, null, fakeProjectId);
+      const promise = new Promise((resolve, reject) => {
+        client.getProjectId((err?: Error | null, projectId?: string | null) => {
+          if (err) {
+            reject(err);
+          } else {
+            resolve(projectId);
+          }
         });
-        it('invokes testIamPermissions without error using callback', async () => {
-            const client = new extensionexecutionserviceModule.v1beta1.ExtensionExecutionServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new IamProtos.google.iam.v1.TestIamPermissionsRequest()
-            );
-            request.resource = '';
-            const expectedHeaderRequestParams = 'resource=';
-            const expectedOptions = {
-                otherArgs: {
-                    headers: {
-                        'x-goog-request-params': expectedHeaderRequestParams,
-                    },
-                },
-            };
-            const expectedResponse = generateSampleMessage(
-              new IamProtos.google.iam.v1.TestIamPermissionsResponse()
-            );
-            client.iamClient.testIamPermissions = sinon.stub().callsArgWith(2, null, expectedResponse);
-            const promise = new Promise((resolve, reject) => {
-                 client.testIamPermissions(
-                    request,
-                    expectedOptions,
-                    (err?: Error|null, result?: IamProtos.google.iam.v1.TestIamPermissionsResponse|null) => {
-                        if (err) {
-                            reject(err);
-                        } else {
-                            resolve(result);
-                        }
-                    });
-            });
-            const response = await promise;
-            assert.deepStrictEqual(response, expectedResponse);
-            assert((client.iamClient.testIamPermissions as SinonStub)
-                .getCall(0));
-        });
-        it('invokes testIamPermissions with error', async () => {
-            const client = new extensionexecutionserviceModule.v1beta1.ExtensionExecutionServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new IamProtos.google.iam.v1.TestIamPermissionsRequest()
-            );
-            request.resource = '';
-            const expectedHeaderRequestParams = 'resource=';
-            const expectedOptions = {
-                otherArgs: {
-                    headers: {
-                        'x-goog-request-params': expectedHeaderRequestParams,
-                    },
-                },
-            };
-            const expectedError = new Error('expected');
-            client.iamClient.testIamPermissions = stubSimpleCall(undefined, expectedError);
-            await assert.rejects(client.testIamPermissions(request, expectedOptions), expectedError);
-            assert((client.iamClient.testIamPermissions as SinonStub)
-                .getCall(0).calledWith(request, expectedOptions, undefined));
-        });
+      });
+      const result = await promise;
+      assert.strictEqual(result, fakeProjectId);
     });
-    describe('getLocation', () => {
-        it('invokes getLocation without error', async () => {
-            const client = new extensionexecutionserviceModule.v1beta1.ExtensionExecutionServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new LocationProtos.google.cloud.location.GetLocationRequest()
-            );
-            request.name = '';
-            const expectedHeaderRequestParams = 'name=';
-            const expectedOptions = {
-                otherArgs: {
-                    headers: {
-                        'x-goog-request-params': expectedHeaderRequestParams,
-                    },
-                },
-            };
-            const expectedResponse = generateSampleMessage(
-              new LocationProtos.google.cloud.location.Location()
-            );
-            client.locationsClient.getLocation = stubSimpleCall(expectedResponse);
-            const response = await client.getLocation(request, expectedOptions);
-            assert.deepStrictEqual(response, [expectedResponse]);
-            assert((client.locationsClient.getLocation as SinonStub)
-                .getCall(0).calledWith(request, expectedOptions, undefined));
-        });
-        it('invokes getLocation without error using callback', async () => {
-            const client = new extensionexecutionserviceModule.v1beta1.ExtensionExecutionServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new LocationProtos.google.cloud.location.GetLocationRequest()
-            );
-            request.name = '';
-            const expectedHeaderRequestParams = 'name=';
-            const expectedOptions = {
-                otherArgs: {
-                    headers: {
-                        'x-goog-request-params': expectedHeaderRequestParams,
-                    },
-                },
-            };
-            const expectedResponse = generateSampleMessage(
-              new LocationProtos.google.cloud.location.Location()
-            );
-            client.locationsClient.getLocation = sinon.stub().callsArgWith(2, null, expectedResponse);
-            const promise = new Promise((resolve, reject) => {
-                 client.getLocation(
-                    request,
-                    expectedOptions,
-                    (
-                        err?: Error | null,
-                        result?: LocationProtos.google.cloud.location.ILocation | null
-                    ) => {
-                        if (err) {
-                            reject(err);
-                        } else {
-                            resolve(result);
-                        }
-                    });
-            });
-            const response = await promise;
-            assert.deepStrictEqual(response, expectedResponse);
-            assert((client.locationsClient.getLocation as SinonStub)
-                .getCall(0));
-        });
-        it('invokes getLocation with error', async () => {
-            const client = new extensionexecutionserviceModule.v1beta1.ExtensionExecutionServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new LocationProtos.google.cloud.location.GetLocationRequest()
-            );
-            request.name = '';
-            const expectedHeaderRequestParams = 'name=';
-            const expectedOptions = {
-                otherArgs: {
-                    headers: {
-                        'x-goog-request-params': expectedHeaderRequestParams,
-                    },
-                },
-            };
-            const expectedError = new Error('expected');
-            client.locationsClient.getLocation = stubSimpleCall(undefined, expectedError);
-            await assert.rejects(client.getLocation(request, expectedOptions), expectedError);
-            assert((client.locationsClient.getLocation as SinonStub)
-                .getCall(0).calledWith(request, expectedOptions, undefined));
-        });
+  });
+
+  describe('executeExtension', () => {
+    it('invokes executeExtension without error', async () => {
+      const client =
+        new extensionexecutionserviceModule.v1beta1.ExtensionExecutionServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1beta1.ExecuteExtensionRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.ExecuteExtensionRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1beta1.ExecuteExtensionResponse()
+      );
+      client.innerApiCalls.executeExtension = stubSimpleCall(expectedResponse);
+      const [response] = await client.executeExtension(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.executeExtension as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.executeExtension as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
-    describe('listLocationsAsync', () => {
-        it('uses async iteration with listLocations without error', async () => {
-            const client = new extensionexecutionserviceModule.v1beta1.ExtensionExecutionServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-                new LocationProtos.google.cloud.location.ListLocationsRequest()
-            );
-            request.name = '';
-            const expectedHeaderRequestParams = 'name=';
-            const expectedResponse = [
-                generateSampleMessage(
-                    new LocationProtos.google.cloud.location.Location()
-                ),
-                generateSampleMessage(
-                    new LocationProtos.google.cloud.location.Location()
-                ),
-                generateSampleMessage(
-                    new LocationProtos.google.cloud.location.Location()
-                ),
-            ];
-            client.locationsClient.descriptors.page.listLocations.asyncIterate = stubAsyncIterationCall(expectedResponse);
-            const responses: LocationProtos.google.cloud.location.ILocation[] = [];
-            const iterable = await client.listLocationsAsync(request);
-            for await (const resource of iterable) {
-                responses.push(resource!);
+
+    it('invokes executeExtension without error using callback', async () => {
+      const client =
+        new extensionexecutionserviceModule.v1beta1.ExtensionExecutionServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1beta1.ExecuteExtensionRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.ExecuteExtensionRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1beta1.ExecuteExtensionResponse()
+      );
+      client.innerApiCalls.executeExtension =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.executeExtension(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.aiplatform.v1beta1.IExecuteExtensionResponse | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
             }
-            assert.deepStrictEqual(responses, expectedResponse);
-            assert.deepStrictEqual(
-                (client.locationsClient.descriptors.page.listLocations.asyncIterate as SinonStub)
-                    .getCall(0).args[1], request);
-            assert(
-                (client.locationsClient.descriptors.page.listLocations.asyncIterate as SinonStub)
-                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
-                        expectedHeaderRequestParams
-                    )
-            );
-        });
-        it('uses async iteration with listLocations with error', async () => {
-            const client = new extensionexecutionserviceModule.v1beta1.ExtensionExecutionServiceClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new LocationProtos.google.cloud.location.ListLocationsRequest()
-            );
-            request.name = '';
-            const expectedHeaderRequestParams = 'name=';
-            const expectedError = new Error('expected');
-            client.locationsClient.descriptors.page.listLocations.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
-            const iterable = await client.listLocationsAsync(request);
-            await assert.rejects(async () => {
-                const responses: LocationProtos.google.cloud.location.ILocation[] = [];
-                for await (const resource of iterable) {
-                    responses.push(resource!);
-                }
-            });
-            assert.deepStrictEqual(
-                (client.locationsClient.descriptors.page.listLocations.asyncIterate as SinonStub)
-                    .getCall(0).args[1], request);
-            assert(
-                (client.locationsClient.descriptors.page.listLocations.asyncIterate as SinonStub)
-                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
-                        expectedHeaderRequestParams
-                    )
-            );
-        });
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.executeExtension as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.executeExtension as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
-    describe('Path templates', () => {
-
-        describe('annotation', async () => {
-            const fakePath = "/rendered/path/annotation";
-            const expectedParameters = {
-                project: "projectValue",
-                location: "locationValue",
-                dataset: "datasetValue",
-                data_item: "dataItemValue",
-                annotation: "annotationValue",
-            };
-            const client = new extensionexecutionserviceModule.v1beta1.ExtensionExecutionServiceClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            client.pathTemplates.annotationPathTemplate.render =
-                sinon.stub().returns(fakePath);
-            client.pathTemplates.annotationPathTemplate.match =
-                sinon.stub().returns(expectedParameters);
-
-            it('annotationPath', async () => {
-                const result = await client.annotationPath("projectValue", "locationValue", "datasetValue", "dataItemValue", "annotationValue");
-                assert.strictEqual(result, fakePath);
-                assert((client.pathTemplates.annotationPathTemplate.render as SinonStub)
-                    .getCall(-1).calledWith(expectedParameters));
-            });
-
-            it('matchProjectFromAnnotationName', async () => {
-                const result = await client.matchProjectFromAnnotationName(fakePath);
-                assert.strictEqual(result, "projectValue");
-                assert((client.pathTemplates.annotationPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchLocationFromAnnotationName', async () => {
-                const result = await client.matchLocationFromAnnotationName(fakePath);
-                assert.strictEqual(result, "locationValue");
-                assert((client.pathTemplates.annotationPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchDatasetFromAnnotationName', async () => {
-                const result = await client.matchDatasetFromAnnotationName(fakePath);
-                assert.strictEqual(result, "datasetValue");
-                assert((client.pathTemplates.annotationPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchDataItemFromAnnotationName', async () => {
-                const result = await client.matchDataItemFromAnnotationName(fakePath);
-                assert.strictEqual(result, "dataItemValue");
-                assert((client.pathTemplates.annotationPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchAnnotationFromAnnotationName', async () => {
-                const result = await client.matchAnnotationFromAnnotationName(fakePath);
-                assert.strictEqual(result, "annotationValue");
-                assert((client.pathTemplates.annotationPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-        });
-
-        describe('annotationSpec', async () => {
-            const fakePath = "/rendered/path/annotationSpec";
-            const expectedParameters = {
-                project: "projectValue",
-                location: "locationValue",
-                dataset: "datasetValue",
-                annotation_spec: "annotationSpecValue",
-            };
-            const client = new extensionexecutionserviceModule.v1beta1.ExtensionExecutionServiceClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            client.pathTemplates.annotationSpecPathTemplate.render =
-                sinon.stub().returns(fakePath);
-            client.pathTemplates.annotationSpecPathTemplate.match =
-                sinon.stub().returns(expectedParameters);
-
-            it('annotationSpecPath', async () => {
-                const result = await client.annotationSpecPath("projectValue", "locationValue", "datasetValue", "annotationSpecValue");
-                assert.strictEqual(result, fakePath);
-                assert((client.pathTemplates.annotationSpecPathTemplate.render as SinonStub)
-                    .getCall(-1).calledWith(expectedParameters));
-            });
-
-            it('matchProjectFromAnnotationSpecName', async () => {
-                const result = await client.matchProjectFromAnnotationSpecName(fakePath);
-                assert.strictEqual(result, "projectValue");
-                assert((client.pathTemplates.annotationSpecPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchLocationFromAnnotationSpecName', async () => {
-                const result = await client.matchLocationFromAnnotationSpecName(fakePath);
-                assert.strictEqual(result, "locationValue");
-                assert((client.pathTemplates.annotationSpecPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchDatasetFromAnnotationSpecName', async () => {
-                const result = await client.matchDatasetFromAnnotationSpecName(fakePath);
-                assert.strictEqual(result, "datasetValue");
-                assert((client.pathTemplates.annotationSpecPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchAnnotationSpecFromAnnotationSpecName', async () => {
-                const result = await client.matchAnnotationSpecFromAnnotationSpecName(fakePath);
-                assert.strictEqual(result, "annotationSpecValue");
-                assert((client.pathTemplates.annotationSpecPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-        });
-
-        describe('artifact', async () => {
-            const fakePath = "/rendered/path/artifact";
-            const expectedParameters = {
-                project: "projectValue",
-                location: "locationValue",
-                metadata_store: "metadataStoreValue",
-                artifact: "artifactValue",
-            };
-            const client = new extensionexecutionserviceModule.v1beta1.ExtensionExecutionServiceClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            client.pathTemplates.artifactPathTemplate.render =
-                sinon.stub().returns(fakePath);
-            client.pathTemplates.artifactPathTemplate.match =
-                sinon.stub().returns(expectedParameters);
-
-            it('artifactPath', async () => {
-                const result = await client.artifactPath("projectValue", "locationValue", "metadataStoreValue", "artifactValue");
-                assert.strictEqual(result, fakePath);
-                assert((client.pathTemplates.artifactPathTemplate.render as SinonStub)
-                    .getCall(-1).calledWith(expectedParameters));
-            });
-
-            it('matchProjectFromArtifactName', async () => {
-                const result = await client.matchProjectFromArtifactName(fakePath);
-                assert.strictEqual(result, "projectValue");
-                assert((client.pathTemplates.artifactPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchLocationFromArtifactName', async () => {
-                const result = await client.matchLocationFromArtifactName(fakePath);
-                assert.strictEqual(result, "locationValue");
-                assert((client.pathTemplates.artifactPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchMetadataStoreFromArtifactName', async () => {
-                const result = await client.matchMetadataStoreFromArtifactName(fakePath);
-                assert.strictEqual(result, "metadataStoreValue");
-                assert((client.pathTemplates.artifactPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchArtifactFromArtifactName', async () => {
-                const result = await client.matchArtifactFromArtifactName(fakePath);
-                assert.strictEqual(result, "artifactValue");
-                assert((client.pathTemplates.artifactPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-        });
-
-        describe('batchPredictionJob', async () => {
-            const fakePath = "/rendered/path/batchPredictionJob";
-            const expectedParameters = {
-                project: "projectValue",
-                location: "locationValue",
-                batch_prediction_job: "batchPredictionJobValue",
-            };
-            const client = new extensionexecutionserviceModule.v1beta1.ExtensionExecutionServiceClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            client.pathTemplates.batchPredictionJobPathTemplate.render =
-                sinon.stub().returns(fakePath);
-            client.pathTemplates.batchPredictionJobPathTemplate.match =
-                sinon.stub().returns(expectedParameters);
-
-            it('batchPredictionJobPath', async () => {
-                const result = await client.batchPredictionJobPath("projectValue", "locationValue", "batchPredictionJobValue");
-                assert.strictEqual(result, fakePath);
-                assert((client.pathTemplates.batchPredictionJobPathTemplate.render as SinonStub)
-                    .getCall(-1).calledWith(expectedParameters));
-            });
-
-            it('matchProjectFromBatchPredictionJobName', async () => {
-                const result = await client.matchProjectFromBatchPredictionJobName(fakePath);
-                assert.strictEqual(result, "projectValue");
-                assert((client.pathTemplates.batchPredictionJobPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchLocationFromBatchPredictionJobName', async () => {
-                const result = await client.matchLocationFromBatchPredictionJobName(fakePath);
-                assert.strictEqual(result, "locationValue");
-                assert((client.pathTemplates.batchPredictionJobPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchBatchPredictionJobFromBatchPredictionJobName', async () => {
-                const result = await client.matchBatchPredictionJobFromBatchPredictionJobName(fakePath);
-                assert.strictEqual(result, "batchPredictionJobValue");
-                assert((client.pathTemplates.batchPredictionJobPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-        });
-
-        describe('cachedContent', async () => {
-            const fakePath = "/rendered/path/cachedContent";
-            const expectedParameters = {
-                project: "projectValue",
-                location: "locationValue",
-                cached_content: "cachedContentValue",
-            };
-            const client = new extensionexecutionserviceModule.v1beta1.ExtensionExecutionServiceClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            client.pathTemplates.cachedContentPathTemplate.render =
-                sinon.stub().returns(fakePath);
-            client.pathTemplates.cachedContentPathTemplate.match =
-                sinon.stub().returns(expectedParameters);
-
-            it('cachedContentPath', async () => {
-                const result = await client.cachedContentPath("projectValue", "locationValue", "cachedContentValue");
-                assert.strictEqual(result, fakePath);
-                assert((client.pathTemplates.cachedContentPathTemplate.render as SinonStub)
-                    .getCall(-1).calledWith(expectedParameters));
-            });
-
-            it('matchProjectFromCachedContentName', async () => {
-                const result = await client.matchProjectFromCachedContentName(fakePath);
-                assert.strictEqual(result, "projectValue");
-                assert((client.pathTemplates.cachedContentPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchLocationFromCachedContentName', async () => {
-                const result = await client.matchLocationFromCachedContentName(fakePath);
-                assert.strictEqual(result, "locationValue");
-                assert((client.pathTemplates.cachedContentPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchCachedContentFromCachedContentName', async () => {
-                const result = await client.matchCachedContentFromCachedContentName(fakePath);
-                assert.strictEqual(result, "cachedContentValue");
-                assert((client.pathTemplates.cachedContentPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-        });
-
-        describe('context', async () => {
-            const fakePath = "/rendered/path/context";
-            const expectedParameters = {
-                project: "projectValue",
-                location: "locationValue",
-                metadata_store: "metadataStoreValue",
-                context: "contextValue",
-            };
-            const client = new extensionexecutionserviceModule.v1beta1.ExtensionExecutionServiceClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            client.pathTemplates.contextPathTemplate.render =
-                sinon.stub().returns(fakePath);
-            client.pathTemplates.contextPathTemplate.match =
-                sinon.stub().returns(expectedParameters);
-
-            it('contextPath', async () => {
-                const result = await client.contextPath("projectValue", "locationValue", "metadataStoreValue", "contextValue");
-                assert.strictEqual(result, fakePath);
-                assert((client.pathTemplates.contextPathTemplate.render as SinonStub)
-                    .getCall(-1).calledWith(expectedParameters));
-            });
-
-            it('matchProjectFromContextName', async () => {
-                const result = await client.matchProjectFromContextName(fakePath);
-                assert.strictEqual(result, "projectValue");
-                assert((client.pathTemplates.contextPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchLocationFromContextName', async () => {
-                const result = await client.matchLocationFromContextName(fakePath);
-                assert.strictEqual(result, "locationValue");
-                assert((client.pathTemplates.contextPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchMetadataStoreFromContextName', async () => {
-                const result = await client.matchMetadataStoreFromContextName(fakePath);
-                assert.strictEqual(result, "metadataStoreValue");
-                assert((client.pathTemplates.contextPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchContextFromContextName', async () => {
-                const result = await client.matchContextFromContextName(fakePath);
-                assert.strictEqual(result, "contextValue");
-                assert((client.pathTemplates.contextPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-        });
-
-        describe('customJob', async () => {
-            const fakePath = "/rendered/path/customJob";
-            const expectedParameters = {
-                project: "projectValue",
-                location: "locationValue",
-                custom_job: "customJobValue",
-            };
-            const client = new extensionexecutionserviceModule.v1beta1.ExtensionExecutionServiceClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            client.pathTemplates.customJobPathTemplate.render =
-                sinon.stub().returns(fakePath);
-            client.pathTemplates.customJobPathTemplate.match =
-                sinon.stub().returns(expectedParameters);
-
-            it('customJobPath', async () => {
-                const result = await client.customJobPath("projectValue", "locationValue", "customJobValue");
-                assert.strictEqual(result, fakePath);
-                assert((client.pathTemplates.customJobPathTemplate.render as SinonStub)
-                    .getCall(-1).calledWith(expectedParameters));
-            });
-
-            it('matchProjectFromCustomJobName', async () => {
-                const result = await client.matchProjectFromCustomJobName(fakePath);
-                assert.strictEqual(result, "projectValue");
-                assert((client.pathTemplates.customJobPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchLocationFromCustomJobName', async () => {
-                const result = await client.matchLocationFromCustomJobName(fakePath);
-                assert.strictEqual(result, "locationValue");
-                assert((client.pathTemplates.customJobPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchCustomJobFromCustomJobName', async () => {
-                const result = await client.matchCustomJobFromCustomJobName(fakePath);
-                assert.strictEqual(result, "customJobValue");
-                assert((client.pathTemplates.customJobPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-        });
-
-        describe('dataItem', async () => {
-            const fakePath = "/rendered/path/dataItem";
-            const expectedParameters = {
-                project: "projectValue",
-                location: "locationValue",
-                dataset: "datasetValue",
-                data_item: "dataItemValue",
-            };
-            const client = new extensionexecutionserviceModule.v1beta1.ExtensionExecutionServiceClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            client.pathTemplates.dataItemPathTemplate.render =
-                sinon.stub().returns(fakePath);
-            client.pathTemplates.dataItemPathTemplate.match =
-                sinon.stub().returns(expectedParameters);
-
-            it('dataItemPath', async () => {
-                const result = await client.dataItemPath("projectValue", "locationValue", "datasetValue", "dataItemValue");
-                assert.strictEqual(result, fakePath);
-                assert((client.pathTemplates.dataItemPathTemplate.render as SinonStub)
-                    .getCall(-1).calledWith(expectedParameters));
-            });
-
-            it('matchProjectFromDataItemName', async () => {
-                const result = await client.matchProjectFromDataItemName(fakePath);
-                assert.strictEqual(result, "projectValue");
-                assert((client.pathTemplates.dataItemPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchLocationFromDataItemName', async () => {
-                const result = await client.matchLocationFromDataItemName(fakePath);
-                assert.strictEqual(result, "locationValue");
-                assert((client.pathTemplates.dataItemPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchDatasetFromDataItemName', async () => {
-                const result = await client.matchDatasetFromDataItemName(fakePath);
-                assert.strictEqual(result, "datasetValue");
-                assert((client.pathTemplates.dataItemPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchDataItemFromDataItemName', async () => {
-                const result = await client.matchDataItemFromDataItemName(fakePath);
-                assert.strictEqual(result, "dataItemValue");
-                assert((client.pathTemplates.dataItemPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-        });
-
-        describe('dataLabelingJob', async () => {
-            const fakePath = "/rendered/path/dataLabelingJob";
-            const expectedParameters = {
-                project: "projectValue",
-                location: "locationValue",
-                data_labeling_job: "dataLabelingJobValue",
-            };
-            const client = new extensionexecutionserviceModule.v1beta1.ExtensionExecutionServiceClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            client.pathTemplates.dataLabelingJobPathTemplate.render =
-                sinon.stub().returns(fakePath);
-            client.pathTemplates.dataLabelingJobPathTemplate.match =
-                sinon.stub().returns(expectedParameters);
-
-            it('dataLabelingJobPath', async () => {
-                const result = await client.dataLabelingJobPath("projectValue", "locationValue", "dataLabelingJobValue");
-                assert.strictEqual(result, fakePath);
-                assert((client.pathTemplates.dataLabelingJobPathTemplate.render as SinonStub)
-                    .getCall(-1).calledWith(expectedParameters));
-            });
-
-            it('matchProjectFromDataLabelingJobName', async () => {
-                const result = await client.matchProjectFromDataLabelingJobName(fakePath);
-                assert.strictEqual(result, "projectValue");
-                assert((client.pathTemplates.dataLabelingJobPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchLocationFromDataLabelingJobName', async () => {
-                const result = await client.matchLocationFromDataLabelingJobName(fakePath);
-                assert.strictEqual(result, "locationValue");
-                assert((client.pathTemplates.dataLabelingJobPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchDataLabelingJobFromDataLabelingJobName', async () => {
-                const result = await client.matchDataLabelingJobFromDataLabelingJobName(fakePath);
-                assert.strictEqual(result, "dataLabelingJobValue");
-                assert((client.pathTemplates.dataLabelingJobPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-        });
-
-        describe('dataset', async () => {
-            const fakePath = "/rendered/path/dataset";
-            const expectedParameters = {
-                project: "projectValue",
-                location: "locationValue",
-                dataset: "datasetValue",
-            };
-            const client = new extensionexecutionserviceModule.v1beta1.ExtensionExecutionServiceClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            client.pathTemplates.datasetPathTemplate.render =
-                sinon.stub().returns(fakePath);
-            client.pathTemplates.datasetPathTemplate.match =
-                sinon.stub().returns(expectedParameters);
-
-            it('datasetPath', async () => {
-                const result = await client.datasetPath("projectValue", "locationValue", "datasetValue");
-                assert.strictEqual(result, fakePath);
-                assert((client.pathTemplates.datasetPathTemplate.render as SinonStub)
-                    .getCall(-1).calledWith(expectedParameters));
-            });
-
-            it('matchProjectFromDatasetName', async () => {
-                const result = await client.matchProjectFromDatasetName(fakePath);
-                assert.strictEqual(result, "projectValue");
-                assert((client.pathTemplates.datasetPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchLocationFromDatasetName', async () => {
-                const result = await client.matchLocationFromDatasetName(fakePath);
-                assert.strictEqual(result, "locationValue");
-                assert((client.pathTemplates.datasetPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchDatasetFromDatasetName', async () => {
-                const result = await client.matchDatasetFromDatasetName(fakePath);
-                assert.strictEqual(result, "datasetValue");
-                assert((client.pathTemplates.datasetPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-        });
-
-        describe('datasetVersion', async () => {
-            const fakePath = "/rendered/path/datasetVersion";
-            const expectedParameters = {
-                project: "projectValue",
-                location: "locationValue",
-                dataset: "datasetValue",
-                dataset_version: "datasetVersionValue",
-            };
-            const client = new extensionexecutionserviceModule.v1beta1.ExtensionExecutionServiceClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            client.pathTemplates.datasetVersionPathTemplate.render =
-                sinon.stub().returns(fakePath);
-            client.pathTemplates.datasetVersionPathTemplate.match =
-                sinon.stub().returns(expectedParameters);
-
-            it('datasetVersionPath', async () => {
-                const result = await client.datasetVersionPath("projectValue", "locationValue", "datasetValue", "datasetVersionValue");
-                assert.strictEqual(result, fakePath);
-                assert((client.pathTemplates.datasetVersionPathTemplate.render as SinonStub)
-                    .getCall(-1).calledWith(expectedParameters));
-            });
-
-            it('matchProjectFromDatasetVersionName', async () => {
-                const result = await client.matchProjectFromDatasetVersionName(fakePath);
-                assert.strictEqual(result, "projectValue");
-                assert((client.pathTemplates.datasetVersionPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchLocationFromDatasetVersionName', async () => {
-                const result = await client.matchLocationFromDatasetVersionName(fakePath);
-                assert.strictEqual(result, "locationValue");
-                assert((client.pathTemplates.datasetVersionPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchDatasetFromDatasetVersionName', async () => {
-                const result = await client.matchDatasetFromDatasetVersionName(fakePath);
-                assert.strictEqual(result, "datasetValue");
-                assert((client.pathTemplates.datasetVersionPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchDatasetVersionFromDatasetVersionName', async () => {
-                const result = await client.matchDatasetVersionFromDatasetVersionName(fakePath);
-                assert.strictEqual(result, "datasetVersionValue");
-                assert((client.pathTemplates.datasetVersionPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-        });
-
-        describe('deploymentResourcePool', async () => {
-            const fakePath = "/rendered/path/deploymentResourcePool";
-            const expectedParameters = {
-                project: "projectValue",
-                location: "locationValue",
-                deployment_resource_pool: "deploymentResourcePoolValue",
-            };
-            const client = new extensionexecutionserviceModule.v1beta1.ExtensionExecutionServiceClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            client.pathTemplates.deploymentResourcePoolPathTemplate.render =
-                sinon.stub().returns(fakePath);
-            client.pathTemplates.deploymentResourcePoolPathTemplate.match =
-                sinon.stub().returns(expectedParameters);
-
-            it('deploymentResourcePoolPath', async () => {
-                const result = await client.deploymentResourcePoolPath("projectValue", "locationValue", "deploymentResourcePoolValue");
-                assert.strictEqual(result, fakePath);
-                assert((client.pathTemplates.deploymentResourcePoolPathTemplate.render as SinonStub)
-                    .getCall(-1).calledWith(expectedParameters));
-            });
-
-            it('matchProjectFromDeploymentResourcePoolName', async () => {
-                const result = await client.matchProjectFromDeploymentResourcePoolName(fakePath);
-                assert.strictEqual(result, "projectValue");
-                assert((client.pathTemplates.deploymentResourcePoolPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchLocationFromDeploymentResourcePoolName', async () => {
-                const result = await client.matchLocationFromDeploymentResourcePoolName(fakePath);
-                assert.strictEqual(result, "locationValue");
-                assert((client.pathTemplates.deploymentResourcePoolPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchDeploymentResourcePoolFromDeploymentResourcePoolName', async () => {
-                const result = await client.matchDeploymentResourcePoolFromDeploymentResourcePoolName(fakePath);
-                assert.strictEqual(result, "deploymentResourcePoolValue");
-                assert((client.pathTemplates.deploymentResourcePoolPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-        });
-
-        describe('entityType', async () => {
-            const fakePath = "/rendered/path/entityType";
-            const expectedParameters = {
-                project: "projectValue",
-                location: "locationValue",
-                featurestore: "featurestoreValue",
-                entity_type: "entityTypeValue",
-            };
-            const client = new extensionexecutionserviceModule.v1beta1.ExtensionExecutionServiceClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            client.pathTemplates.entityTypePathTemplate.render =
-                sinon.stub().returns(fakePath);
-            client.pathTemplates.entityTypePathTemplate.match =
-                sinon.stub().returns(expectedParameters);
-
-            it('entityTypePath', async () => {
-                const result = await client.entityTypePath("projectValue", "locationValue", "featurestoreValue", "entityTypeValue");
-                assert.strictEqual(result, fakePath);
-                assert((client.pathTemplates.entityTypePathTemplate.render as SinonStub)
-                    .getCall(-1).calledWith(expectedParameters));
-            });
-
-            it('matchProjectFromEntityTypeName', async () => {
-                const result = await client.matchProjectFromEntityTypeName(fakePath);
-                assert.strictEqual(result, "projectValue");
-                assert((client.pathTemplates.entityTypePathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchLocationFromEntityTypeName', async () => {
-                const result = await client.matchLocationFromEntityTypeName(fakePath);
-                assert.strictEqual(result, "locationValue");
-                assert((client.pathTemplates.entityTypePathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchFeaturestoreFromEntityTypeName', async () => {
-                const result = await client.matchFeaturestoreFromEntityTypeName(fakePath);
-                assert.strictEqual(result, "featurestoreValue");
-                assert((client.pathTemplates.entityTypePathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchEntityTypeFromEntityTypeName', async () => {
-                const result = await client.matchEntityTypeFromEntityTypeName(fakePath);
-                assert.strictEqual(result, "entityTypeValue");
-                assert((client.pathTemplates.entityTypePathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-        });
-
-        describe('exampleStore', async () => {
-            const fakePath = "/rendered/path/exampleStore";
-            const expectedParameters = {
-                project: "projectValue",
-                location: "locationValue",
-                example_store: "exampleStoreValue",
-            };
-            const client = new extensionexecutionserviceModule.v1beta1.ExtensionExecutionServiceClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            client.pathTemplates.exampleStorePathTemplate.render =
-                sinon.stub().returns(fakePath);
-            client.pathTemplates.exampleStorePathTemplate.match =
-                sinon.stub().returns(expectedParameters);
-
-            it('exampleStorePath', async () => {
-                const result = await client.exampleStorePath("projectValue", "locationValue", "exampleStoreValue");
-                assert.strictEqual(result, fakePath);
-                assert((client.pathTemplates.exampleStorePathTemplate.render as SinonStub)
-                    .getCall(-1).calledWith(expectedParameters));
-            });
-
-            it('matchProjectFromExampleStoreName', async () => {
-                const result = await client.matchProjectFromExampleStoreName(fakePath);
-                assert.strictEqual(result, "projectValue");
-                assert((client.pathTemplates.exampleStorePathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchLocationFromExampleStoreName', async () => {
-                const result = await client.matchLocationFromExampleStoreName(fakePath);
-                assert.strictEqual(result, "locationValue");
-                assert((client.pathTemplates.exampleStorePathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchExampleStoreFromExampleStoreName', async () => {
-                const result = await client.matchExampleStoreFromExampleStoreName(fakePath);
-                assert.strictEqual(result, "exampleStoreValue");
-                assert((client.pathTemplates.exampleStorePathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-        });
-
-        describe('execution', async () => {
-            const fakePath = "/rendered/path/execution";
-            const expectedParameters = {
-                project: "projectValue",
-                location: "locationValue",
-                metadata_store: "metadataStoreValue",
-                execution: "executionValue",
-            };
-            const client = new extensionexecutionserviceModule.v1beta1.ExtensionExecutionServiceClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            client.pathTemplates.executionPathTemplate.render =
-                sinon.stub().returns(fakePath);
-            client.pathTemplates.executionPathTemplate.match =
-                sinon.stub().returns(expectedParameters);
-
-            it('executionPath', async () => {
-                const result = await client.executionPath("projectValue", "locationValue", "metadataStoreValue", "executionValue");
-                assert.strictEqual(result, fakePath);
-                assert((client.pathTemplates.executionPathTemplate.render as SinonStub)
-                    .getCall(-1).calledWith(expectedParameters));
-            });
-
-            it('matchProjectFromExecutionName', async () => {
-                const result = await client.matchProjectFromExecutionName(fakePath);
-                assert.strictEqual(result, "projectValue");
-                assert((client.pathTemplates.executionPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchLocationFromExecutionName', async () => {
-                const result = await client.matchLocationFromExecutionName(fakePath);
-                assert.strictEqual(result, "locationValue");
-                assert((client.pathTemplates.executionPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchMetadataStoreFromExecutionName', async () => {
-                const result = await client.matchMetadataStoreFromExecutionName(fakePath);
-                assert.strictEqual(result, "metadataStoreValue");
-                assert((client.pathTemplates.executionPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchExecutionFromExecutionName', async () => {
-                const result = await client.matchExecutionFromExecutionName(fakePath);
-                assert.strictEqual(result, "executionValue");
-                assert((client.pathTemplates.executionPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-        });
-
-        describe('extension', async () => {
-            const fakePath = "/rendered/path/extension";
-            const expectedParameters = {
-                project: "projectValue",
-                location: "locationValue",
-                extension: "extensionValue",
-            };
-            const client = new extensionexecutionserviceModule.v1beta1.ExtensionExecutionServiceClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            client.pathTemplates.extensionPathTemplate.render =
-                sinon.stub().returns(fakePath);
-            client.pathTemplates.extensionPathTemplate.match =
-                sinon.stub().returns(expectedParameters);
-
-            it('extensionPath', async () => {
-                const result = await client.extensionPath("projectValue", "locationValue", "extensionValue");
-                assert.strictEqual(result, fakePath);
-                assert((client.pathTemplates.extensionPathTemplate.render as SinonStub)
-                    .getCall(-1).calledWith(expectedParameters));
-            });
-
-            it('matchProjectFromExtensionName', async () => {
-                const result = await client.matchProjectFromExtensionName(fakePath);
-                assert.strictEqual(result, "projectValue");
-                assert((client.pathTemplates.extensionPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchLocationFromExtensionName', async () => {
-                const result = await client.matchLocationFromExtensionName(fakePath);
-                assert.strictEqual(result, "locationValue");
-                assert((client.pathTemplates.extensionPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchExtensionFromExtensionName', async () => {
-                const result = await client.matchExtensionFromExtensionName(fakePath);
-                assert.strictEqual(result, "extensionValue");
-                assert((client.pathTemplates.extensionPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-        });
-
-        describe('featureGroup', async () => {
-            const fakePath = "/rendered/path/featureGroup";
-            const expectedParameters = {
-                project: "projectValue",
-                location: "locationValue",
-                feature_group: "featureGroupValue",
-            };
-            const client = new extensionexecutionserviceModule.v1beta1.ExtensionExecutionServiceClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            client.pathTemplates.featureGroupPathTemplate.render =
-                sinon.stub().returns(fakePath);
-            client.pathTemplates.featureGroupPathTemplate.match =
-                sinon.stub().returns(expectedParameters);
-
-            it('featureGroupPath', async () => {
-                const result = await client.featureGroupPath("projectValue", "locationValue", "featureGroupValue");
-                assert.strictEqual(result, fakePath);
-                assert((client.pathTemplates.featureGroupPathTemplate.render as SinonStub)
-                    .getCall(-1).calledWith(expectedParameters));
-            });
-
-            it('matchProjectFromFeatureGroupName', async () => {
-                const result = await client.matchProjectFromFeatureGroupName(fakePath);
-                assert.strictEqual(result, "projectValue");
-                assert((client.pathTemplates.featureGroupPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchLocationFromFeatureGroupName', async () => {
-                const result = await client.matchLocationFromFeatureGroupName(fakePath);
-                assert.strictEqual(result, "locationValue");
-                assert((client.pathTemplates.featureGroupPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchFeatureGroupFromFeatureGroupName', async () => {
-                const result = await client.matchFeatureGroupFromFeatureGroupName(fakePath);
-                assert.strictEqual(result, "featureGroupValue");
-                assert((client.pathTemplates.featureGroupPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-        });
-
-        describe('featureMonitor', async () => {
-            const fakePath = "/rendered/path/featureMonitor";
-            const expectedParameters = {
-                project: "projectValue",
-                location: "locationValue",
-                feature_group: "featureGroupValue",
-                feature_monitor: "featureMonitorValue",
-            };
-            const client = new extensionexecutionserviceModule.v1beta1.ExtensionExecutionServiceClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            client.pathTemplates.featureMonitorPathTemplate.render =
-                sinon.stub().returns(fakePath);
-            client.pathTemplates.featureMonitorPathTemplate.match =
-                sinon.stub().returns(expectedParameters);
-
-            it('featureMonitorPath', async () => {
-                const result = await client.featureMonitorPath("projectValue", "locationValue", "featureGroupValue", "featureMonitorValue");
-                assert.strictEqual(result, fakePath);
-                assert((client.pathTemplates.featureMonitorPathTemplate.render as SinonStub)
-                    .getCall(-1).calledWith(expectedParameters));
-            });
-
-            it('matchProjectFromFeatureMonitorName', async () => {
-                const result = await client.matchProjectFromFeatureMonitorName(fakePath);
-                assert.strictEqual(result, "projectValue");
-                assert((client.pathTemplates.featureMonitorPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchLocationFromFeatureMonitorName', async () => {
-                const result = await client.matchLocationFromFeatureMonitorName(fakePath);
-                assert.strictEqual(result, "locationValue");
-                assert((client.pathTemplates.featureMonitorPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchFeatureGroupFromFeatureMonitorName', async () => {
-                const result = await client.matchFeatureGroupFromFeatureMonitorName(fakePath);
-                assert.strictEqual(result, "featureGroupValue");
-                assert((client.pathTemplates.featureMonitorPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchFeatureMonitorFromFeatureMonitorName', async () => {
-                const result = await client.matchFeatureMonitorFromFeatureMonitorName(fakePath);
-                assert.strictEqual(result, "featureMonitorValue");
-                assert((client.pathTemplates.featureMonitorPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-        });
-
-        describe('featureMonitorJob', async () => {
-            const fakePath = "/rendered/path/featureMonitorJob";
-            const expectedParameters = {
-                project: "projectValue",
-                location: "locationValue",
-                feature_group: "featureGroupValue",
-                feature_monitor: "featureMonitorValue",
-                feature_monitor_job: "featureMonitorJobValue",
-            };
-            const client = new extensionexecutionserviceModule.v1beta1.ExtensionExecutionServiceClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            client.pathTemplates.featureMonitorJobPathTemplate.render =
-                sinon.stub().returns(fakePath);
-            client.pathTemplates.featureMonitorJobPathTemplate.match =
-                sinon.stub().returns(expectedParameters);
-
-            it('featureMonitorJobPath', async () => {
-                const result = await client.featureMonitorJobPath("projectValue", "locationValue", "featureGroupValue", "featureMonitorValue", "featureMonitorJobValue");
-                assert.strictEqual(result, fakePath);
-                assert((client.pathTemplates.featureMonitorJobPathTemplate.render as SinonStub)
-                    .getCall(-1).calledWith(expectedParameters));
-            });
-
-            it('matchProjectFromFeatureMonitorJobName', async () => {
-                const result = await client.matchProjectFromFeatureMonitorJobName(fakePath);
-                assert.strictEqual(result, "projectValue");
-                assert((client.pathTemplates.featureMonitorJobPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchLocationFromFeatureMonitorJobName', async () => {
-                const result = await client.matchLocationFromFeatureMonitorJobName(fakePath);
-                assert.strictEqual(result, "locationValue");
-                assert((client.pathTemplates.featureMonitorJobPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchFeatureGroupFromFeatureMonitorJobName', async () => {
-                const result = await client.matchFeatureGroupFromFeatureMonitorJobName(fakePath);
-                assert.strictEqual(result, "featureGroupValue");
-                assert((client.pathTemplates.featureMonitorJobPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchFeatureMonitorFromFeatureMonitorJobName', async () => {
-                const result = await client.matchFeatureMonitorFromFeatureMonitorJobName(fakePath);
-                assert.strictEqual(result, "featureMonitorValue");
-                assert((client.pathTemplates.featureMonitorJobPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchFeatureMonitorJobFromFeatureMonitorJobName', async () => {
-                const result = await client.matchFeatureMonitorJobFromFeatureMonitorJobName(fakePath);
-                assert.strictEqual(result, "featureMonitorJobValue");
-                assert((client.pathTemplates.featureMonitorJobPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-        });
-
-        describe('featureOnlineStore', async () => {
-            const fakePath = "/rendered/path/featureOnlineStore";
-            const expectedParameters = {
-                project: "projectValue",
-                location: "locationValue",
-                feature_online_store: "featureOnlineStoreValue",
-            };
-            const client = new extensionexecutionserviceModule.v1beta1.ExtensionExecutionServiceClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            client.pathTemplates.featureOnlineStorePathTemplate.render =
-                sinon.stub().returns(fakePath);
-            client.pathTemplates.featureOnlineStorePathTemplate.match =
-                sinon.stub().returns(expectedParameters);
-
-            it('featureOnlineStorePath', async () => {
-                const result = await client.featureOnlineStorePath("projectValue", "locationValue", "featureOnlineStoreValue");
-                assert.strictEqual(result, fakePath);
-                assert((client.pathTemplates.featureOnlineStorePathTemplate.render as SinonStub)
-                    .getCall(-1).calledWith(expectedParameters));
-            });
-
-            it('matchProjectFromFeatureOnlineStoreName', async () => {
-                const result = await client.matchProjectFromFeatureOnlineStoreName(fakePath);
-                assert.strictEqual(result, "projectValue");
-                assert((client.pathTemplates.featureOnlineStorePathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchLocationFromFeatureOnlineStoreName', async () => {
-                const result = await client.matchLocationFromFeatureOnlineStoreName(fakePath);
-                assert.strictEqual(result, "locationValue");
-                assert((client.pathTemplates.featureOnlineStorePathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchFeatureOnlineStoreFromFeatureOnlineStoreName', async () => {
-                const result = await client.matchFeatureOnlineStoreFromFeatureOnlineStoreName(fakePath);
-                assert.strictEqual(result, "featureOnlineStoreValue");
-                assert((client.pathTemplates.featureOnlineStorePathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-        });
-
-        describe('featureView', async () => {
-            const fakePath = "/rendered/path/featureView";
-            const expectedParameters = {
-                project: "projectValue",
-                location: "locationValue",
-                feature_online_store: "featureOnlineStoreValue",
-                feature_view: "featureViewValue",
-            };
-            const client = new extensionexecutionserviceModule.v1beta1.ExtensionExecutionServiceClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            client.pathTemplates.featureViewPathTemplate.render =
-                sinon.stub().returns(fakePath);
-            client.pathTemplates.featureViewPathTemplate.match =
-                sinon.stub().returns(expectedParameters);
-
-            it('featureViewPath', async () => {
-                const result = await client.featureViewPath("projectValue", "locationValue", "featureOnlineStoreValue", "featureViewValue");
-                assert.strictEqual(result, fakePath);
-                assert((client.pathTemplates.featureViewPathTemplate.render as SinonStub)
-                    .getCall(-1).calledWith(expectedParameters));
-            });
-
-            it('matchProjectFromFeatureViewName', async () => {
-                const result = await client.matchProjectFromFeatureViewName(fakePath);
-                assert.strictEqual(result, "projectValue");
-                assert((client.pathTemplates.featureViewPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchLocationFromFeatureViewName', async () => {
-                const result = await client.matchLocationFromFeatureViewName(fakePath);
-                assert.strictEqual(result, "locationValue");
-                assert((client.pathTemplates.featureViewPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchFeatureOnlineStoreFromFeatureViewName', async () => {
-                const result = await client.matchFeatureOnlineStoreFromFeatureViewName(fakePath);
-                assert.strictEqual(result, "featureOnlineStoreValue");
-                assert((client.pathTemplates.featureViewPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchFeatureViewFromFeatureViewName', async () => {
-                const result = await client.matchFeatureViewFromFeatureViewName(fakePath);
-                assert.strictEqual(result, "featureViewValue");
-                assert((client.pathTemplates.featureViewPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-        });
-
-        describe('featureViewSync', async () => {
-            const fakePath = "/rendered/path/featureViewSync";
-            const expectedParameters = {
-                project: "projectValue",
-                location: "locationValue",
-                feature_online_store: "featureOnlineStoreValue",
-                feature_view: "featureViewValue",
-            };
-            const client = new extensionexecutionserviceModule.v1beta1.ExtensionExecutionServiceClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            client.pathTemplates.featureViewSyncPathTemplate.render =
-                sinon.stub().returns(fakePath);
-            client.pathTemplates.featureViewSyncPathTemplate.match =
-                sinon.stub().returns(expectedParameters);
-
-            it('featureViewSyncPath', async () => {
-                const result = await client.featureViewSyncPath("projectValue", "locationValue", "featureOnlineStoreValue", "featureViewValue");
-                assert.strictEqual(result, fakePath);
-                assert((client.pathTemplates.featureViewSyncPathTemplate.render as SinonStub)
-                    .getCall(-1).calledWith(expectedParameters));
-            });
-
-            it('matchProjectFromFeatureViewSyncName', async () => {
-                const result = await client.matchProjectFromFeatureViewSyncName(fakePath);
-                assert.strictEqual(result, "projectValue");
-                assert((client.pathTemplates.featureViewSyncPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchLocationFromFeatureViewSyncName', async () => {
-                const result = await client.matchLocationFromFeatureViewSyncName(fakePath);
-                assert.strictEqual(result, "locationValue");
-                assert((client.pathTemplates.featureViewSyncPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchFeatureOnlineStoreFromFeatureViewSyncName', async () => {
-                const result = await client.matchFeatureOnlineStoreFromFeatureViewSyncName(fakePath);
-                assert.strictEqual(result, "featureOnlineStoreValue");
-                assert((client.pathTemplates.featureViewSyncPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchFeatureViewFromFeatureViewSyncName', async () => {
-                const result = await client.matchFeatureViewFromFeatureViewSyncName(fakePath);
-                assert.strictEqual(result, "featureViewValue");
-                assert((client.pathTemplates.featureViewSyncPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-        });
-
-        describe('featurestore', async () => {
-            const fakePath = "/rendered/path/featurestore";
-            const expectedParameters = {
-                project: "projectValue",
-                location: "locationValue",
-                featurestore: "featurestoreValue",
-            };
-            const client = new extensionexecutionserviceModule.v1beta1.ExtensionExecutionServiceClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            client.pathTemplates.featurestorePathTemplate.render =
-                sinon.stub().returns(fakePath);
-            client.pathTemplates.featurestorePathTemplate.match =
-                sinon.stub().returns(expectedParameters);
-
-            it('featurestorePath', async () => {
-                const result = await client.featurestorePath("projectValue", "locationValue", "featurestoreValue");
-                assert.strictEqual(result, fakePath);
-                assert((client.pathTemplates.featurestorePathTemplate.render as SinonStub)
-                    .getCall(-1).calledWith(expectedParameters));
-            });
-
-            it('matchProjectFromFeaturestoreName', async () => {
-                const result = await client.matchProjectFromFeaturestoreName(fakePath);
-                assert.strictEqual(result, "projectValue");
-                assert((client.pathTemplates.featurestorePathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchLocationFromFeaturestoreName', async () => {
-                const result = await client.matchLocationFromFeaturestoreName(fakePath);
-                assert.strictEqual(result, "locationValue");
-                assert((client.pathTemplates.featurestorePathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchFeaturestoreFromFeaturestoreName', async () => {
-                const result = await client.matchFeaturestoreFromFeaturestoreName(fakePath);
-                assert.strictEqual(result, "featurestoreValue");
-                assert((client.pathTemplates.featurestorePathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-        });
-
-        describe('hyperparameterTuningJob', async () => {
-            const fakePath = "/rendered/path/hyperparameterTuningJob";
-            const expectedParameters = {
-                project: "projectValue",
-                location: "locationValue",
-                hyperparameter_tuning_job: "hyperparameterTuningJobValue",
-            };
-            const client = new extensionexecutionserviceModule.v1beta1.ExtensionExecutionServiceClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            client.pathTemplates.hyperparameterTuningJobPathTemplate.render =
-                sinon.stub().returns(fakePath);
-            client.pathTemplates.hyperparameterTuningJobPathTemplate.match =
-                sinon.stub().returns(expectedParameters);
-
-            it('hyperparameterTuningJobPath', async () => {
-                const result = await client.hyperparameterTuningJobPath("projectValue", "locationValue", "hyperparameterTuningJobValue");
-                assert.strictEqual(result, fakePath);
-                assert((client.pathTemplates.hyperparameterTuningJobPathTemplate.render as SinonStub)
-                    .getCall(-1).calledWith(expectedParameters));
-            });
-
-            it('matchProjectFromHyperparameterTuningJobName', async () => {
-                const result = await client.matchProjectFromHyperparameterTuningJobName(fakePath);
-                assert.strictEqual(result, "projectValue");
-                assert((client.pathTemplates.hyperparameterTuningJobPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchLocationFromHyperparameterTuningJobName', async () => {
-                const result = await client.matchLocationFromHyperparameterTuningJobName(fakePath);
-                assert.strictEqual(result, "locationValue");
-                assert((client.pathTemplates.hyperparameterTuningJobPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchHyperparameterTuningJobFromHyperparameterTuningJobName', async () => {
-                const result = await client.matchHyperparameterTuningJobFromHyperparameterTuningJobName(fakePath);
-                assert.strictEqual(result, "hyperparameterTuningJobValue");
-                assert((client.pathTemplates.hyperparameterTuningJobPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-        });
-
-        describe('index', async () => {
-            const fakePath = "/rendered/path/index";
-            const expectedParameters = {
-                project: "projectValue",
-                location: "locationValue",
-                index: "indexValue",
-            };
-            const client = new extensionexecutionserviceModule.v1beta1.ExtensionExecutionServiceClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            client.pathTemplates.indexPathTemplate.render =
-                sinon.stub().returns(fakePath);
-            client.pathTemplates.indexPathTemplate.match =
-                sinon.stub().returns(expectedParameters);
-
-            it('indexPath', async () => {
-                const result = await client.indexPath("projectValue", "locationValue", "indexValue");
-                assert.strictEqual(result, fakePath);
-                assert((client.pathTemplates.indexPathTemplate.render as SinonStub)
-                    .getCall(-1).calledWith(expectedParameters));
-            });
-
-            it('matchProjectFromIndexName', async () => {
-                const result = await client.matchProjectFromIndexName(fakePath);
-                assert.strictEqual(result, "projectValue");
-                assert((client.pathTemplates.indexPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchLocationFromIndexName', async () => {
-                const result = await client.matchLocationFromIndexName(fakePath);
-                assert.strictEqual(result, "locationValue");
-                assert((client.pathTemplates.indexPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchIndexFromIndexName', async () => {
-                const result = await client.matchIndexFromIndexName(fakePath);
-                assert.strictEqual(result, "indexValue");
-                assert((client.pathTemplates.indexPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-        });
-
-        describe('indexEndpoint', async () => {
-            const fakePath = "/rendered/path/indexEndpoint";
-            const expectedParameters = {
-                project: "projectValue",
-                location: "locationValue",
-                index_endpoint: "indexEndpointValue",
-            };
-            const client = new extensionexecutionserviceModule.v1beta1.ExtensionExecutionServiceClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            client.pathTemplates.indexEndpointPathTemplate.render =
-                sinon.stub().returns(fakePath);
-            client.pathTemplates.indexEndpointPathTemplate.match =
-                sinon.stub().returns(expectedParameters);
-
-            it('indexEndpointPath', async () => {
-                const result = await client.indexEndpointPath("projectValue", "locationValue", "indexEndpointValue");
-                assert.strictEqual(result, fakePath);
-                assert((client.pathTemplates.indexEndpointPathTemplate.render as SinonStub)
-                    .getCall(-1).calledWith(expectedParameters));
-            });
-
-            it('matchProjectFromIndexEndpointName', async () => {
-                const result = await client.matchProjectFromIndexEndpointName(fakePath);
-                assert.strictEqual(result, "projectValue");
-                assert((client.pathTemplates.indexEndpointPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchLocationFromIndexEndpointName', async () => {
-                const result = await client.matchLocationFromIndexEndpointName(fakePath);
-                assert.strictEqual(result, "locationValue");
-                assert((client.pathTemplates.indexEndpointPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchIndexEndpointFromIndexEndpointName', async () => {
-                const result = await client.matchIndexEndpointFromIndexEndpointName(fakePath);
-                assert.strictEqual(result, "indexEndpointValue");
-                assert((client.pathTemplates.indexEndpointPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-        });
-
-        describe('metadataSchema', async () => {
-            const fakePath = "/rendered/path/metadataSchema";
-            const expectedParameters = {
-                project: "projectValue",
-                location: "locationValue",
-                metadata_store: "metadataStoreValue",
-                metadata_schema: "metadataSchemaValue",
-            };
-            const client = new extensionexecutionserviceModule.v1beta1.ExtensionExecutionServiceClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            client.pathTemplates.metadataSchemaPathTemplate.render =
-                sinon.stub().returns(fakePath);
-            client.pathTemplates.metadataSchemaPathTemplate.match =
-                sinon.stub().returns(expectedParameters);
-
-            it('metadataSchemaPath', async () => {
-                const result = await client.metadataSchemaPath("projectValue", "locationValue", "metadataStoreValue", "metadataSchemaValue");
-                assert.strictEqual(result, fakePath);
-                assert((client.pathTemplates.metadataSchemaPathTemplate.render as SinonStub)
-                    .getCall(-1).calledWith(expectedParameters));
-            });
-
-            it('matchProjectFromMetadataSchemaName', async () => {
-                const result = await client.matchProjectFromMetadataSchemaName(fakePath);
-                assert.strictEqual(result, "projectValue");
-                assert((client.pathTemplates.metadataSchemaPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchLocationFromMetadataSchemaName', async () => {
-                const result = await client.matchLocationFromMetadataSchemaName(fakePath);
-                assert.strictEqual(result, "locationValue");
-                assert((client.pathTemplates.metadataSchemaPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchMetadataStoreFromMetadataSchemaName', async () => {
-                const result = await client.matchMetadataStoreFromMetadataSchemaName(fakePath);
-                assert.strictEqual(result, "metadataStoreValue");
-                assert((client.pathTemplates.metadataSchemaPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchMetadataSchemaFromMetadataSchemaName', async () => {
-                const result = await client.matchMetadataSchemaFromMetadataSchemaName(fakePath);
-                assert.strictEqual(result, "metadataSchemaValue");
-                assert((client.pathTemplates.metadataSchemaPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-        });
-
-        describe('metadataStore', async () => {
-            const fakePath = "/rendered/path/metadataStore";
-            const expectedParameters = {
-                project: "projectValue",
-                location: "locationValue",
-                metadata_store: "metadataStoreValue",
-            };
-            const client = new extensionexecutionserviceModule.v1beta1.ExtensionExecutionServiceClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            client.pathTemplates.metadataStorePathTemplate.render =
-                sinon.stub().returns(fakePath);
-            client.pathTemplates.metadataStorePathTemplate.match =
-                sinon.stub().returns(expectedParameters);
-
-            it('metadataStorePath', async () => {
-                const result = await client.metadataStorePath("projectValue", "locationValue", "metadataStoreValue");
-                assert.strictEqual(result, fakePath);
-                assert((client.pathTemplates.metadataStorePathTemplate.render as SinonStub)
-                    .getCall(-1).calledWith(expectedParameters));
-            });
-
-            it('matchProjectFromMetadataStoreName', async () => {
-                const result = await client.matchProjectFromMetadataStoreName(fakePath);
-                assert.strictEqual(result, "projectValue");
-                assert((client.pathTemplates.metadataStorePathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchLocationFromMetadataStoreName', async () => {
-                const result = await client.matchLocationFromMetadataStoreName(fakePath);
-                assert.strictEqual(result, "locationValue");
-                assert((client.pathTemplates.metadataStorePathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchMetadataStoreFromMetadataStoreName', async () => {
-                const result = await client.matchMetadataStoreFromMetadataStoreName(fakePath);
-                assert.strictEqual(result, "metadataStoreValue");
-                assert((client.pathTemplates.metadataStorePathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-        });
-
-        describe('model', async () => {
-            const fakePath = "/rendered/path/model";
-            const expectedParameters = {
-                project: "projectValue",
-                location: "locationValue",
-                model: "modelValue",
-            };
-            const client = new extensionexecutionserviceModule.v1beta1.ExtensionExecutionServiceClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            client.pathTemplates.modelPathTemplate.render =
-                sinon.stub().returns(fakePath);
-            client.pathTemplates.modelPathTemplate.match =
-                sinon.stub().returns(expectedParameters);
-
-            it('modelPath', async () => {
-                const result = await client.modelPath("projectValue", "locationValue", "modelValue");
-                assert.strictEqual(result, fakePath);
-                assert((client.pathTemplates.modelPathTemplate.render as SinonStub)
-                    .getCall(-1).calledWith(expectedParameters));
-            });
-
-            it('matchProjectFromModelName', async () => {
-                const result = await client.matchProjectFromModelName(fakePath);
-                assert.strictEqual(result, "projectValue");
-                assert((client.pathTemplates.modelPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchLocationFromModelName', async () => {
-                const result = await client.matchLocationFromModelName(fakePath);
-                assert.strictEqual(result, "locationValue");
-                assert((client.pathTemplates.modelPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchModelFromModelName', async () => {
-                const result = await client.matchModelFromModelName(fakePath);
-                assert.strictEqual(result, "modelValue");
-                assert((client.pathTemplates.modelPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-        });
-
-        describe('modelDeploymentMonitoringJob', async () => {
-            const fakePath = "/rendered/path/modelDeploymentMonitoringJob";
-            const expectedParameters = {
-                project: "projectValue",
-                location: "locationValue",
-                model_deployment_monitoring_job: "modelDeploymentMonitoringJobValue",
-            };
-            const client = new extensionexecutionserviceModule.v1beta1.ExtensionExecutionServiceClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            client.pathTemplates.modelDeploymentMonitoringJobPathTemplate.render =
-                sinon.stub().returns(fakePath);
-            client.pathTemplates.modelDeploymentMonitoringJobPathTemplate.match =
-                sinon.stub().returns(expectedParameters);
-
-            it('modelDeploymentMonitoringJobPath', async () => {
-                const result = await client.modelDeploymentMonitoringJobPath("projectValue", "locationValue", "modelDeploymentMonitoringJobValue");
-                assert.strictEqual(result, fakePath);
-                assert((client.pathTemplates.modelDeploymentMonitoringJobPathTemplate.render as SinonStub)
-                    .getCall(-1).calledWith(expectedParameters));
-            });
-
-            it('matchProjectFromModelDeploymentMonitoringJobName', async () => {
-                const result = await client.matchProjectFromModelDeploymentMonitoringJobName(fakePath);
-                assert.strictEqual(result, "projectValue");
-                assert((client.pathTemplates.modelDeploymentMonitoringJobPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchLocationFromModelDeploymentMonitoringJobName', async () => {
-                const result = await client.matchLocationFromModelDeploymentMonitoringJobName(fakePath);
-                assert.strictEqual(result, "locationValue");
-                assert((client.pathTemplates.modelDeploymentMonitoringJobPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchModelDeploymentMonitoringJobFromModelDeploymentMonitoringJobName', async () => {
-                const result = await client.matchModelDeploymentMonitoringJobFromModelDeploymentMonitoringJobName(fakePath);
-                assert.strictEqual(result, "modelDeploymentMonitoringJobValue");
-                assert((client.pathTemplates.modelDeploymentMonitoringJobPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-        });
-
-        describe('modelEvaluation', async () => {
-            const fakePath = "/rendered/path/modelEvaluation";
-            const expectedParameters = {
-                project: "projectValue",
-                location: "locationValue",
-                model: "modelValue",
-                evaluation: "evaluationValue",
-            };
-            const client = new extensionexecutionserviceModule.v1beta1.ExtensionExecutionServiceClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            client.pathTemplates.modelEvaluationPathTemplate.render =
-                sinon.stub().returns(fakePath);
-            client.pathTemplates.modelEvaluationPathTemplate.match =
-                sinon.stub().returns(expectedParameters);
-
-            it('modelEvaluationPath', async () => {
-                const result = await client.modelEvaluationPath("projectValue", "locationValue", "modelValue", "evaluationValue");
-                assert.strictEqual(result, fakePath);
-                assert((client.pathTemplates.modelEvaluationPathTemplate.render as SinonStub)
-                    .getCall(-1).calledWith(expectedParameters));
-            });
-
-            it('matchProjectFromModelEvaluationName', async () => {
-                const result = await client.matchProjectFromModelEvaluationName(fakePath);
-                assert.strictEqual(result, "projectValue");
-                assert((client.pathTemplates.modelEvaluationPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchLocationFromModelEvaluationName', async () => {
-                const result = await client.matchLocationFromModelEvaluationName(fakePath);
-                assert.strictEqual(result, "locationValue");
-                assert((client.pathTemplates.modelEvaluationPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchModelFromModelEvaluationName', async () => {
-                const result = await client.matchModelFromModelEvaluationName(fakePath);
-                assert.strictEqual(result, "modelValue");
-                assert((client.pathTemplates.modelEvaluationPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchEvaluationFromModelEvaluationName', async () => {
-                const result = await client.matchEvaluationFromModelEvaluationName(fakePath);
-                assert.strictEqual(result, "evaluationValue");
-                assert((client.pathTemplates.modelEvaluationPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-        });
-
-        describe('modelEvaluationSlice', async () => {
-            const fakePath = "/rendered/path/modelEvaluationSlice";
-            const expectedParameters = {
-                project: "projectValue",
-                location: "locationValue",
-                model: "modelValue",
-                evaluation: "evaluationValue",
-                slice: "sliceValue",
-            };
-            const client = new extensionexecutionserviceModule.v1beta1.ExtensionExecutionServiceClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            client.pathTemplates.modelEvaluationSlicePathTemplate.render =
-                sinon.stub().returns(fakePath);
-            client.pathTemplates.modelEvaluationSlicePathTemplate.match =
-                sinon.stub().returns(expectedParameters);
-
-            it('modelEvaluationSlicePath', async () => {
-                const result = await client.modelEvaluationSlicePath("projectValue", "locationValue", "modelValue", "evaluationValue", "sliceValue");
-                assert.strictEqual(result, fakePath);
-                assert((client.pathTemplates.modelEvaluationSlicePathTemplate.render as SinonStub)
-                    .getCall(-1).calledWith(expectedParameters));
-            });
-
-            it('matchProjectFromModelEvaluationSliceName', async () => {
-                const result = await client.matchProjectFromModelEvaluationSliceName(fakePath);
-                assert.strictEqual(result, "projectValue");
-                assert((client.pathTemplates.modelEvaluationSlicePathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchLocationFromModelEvaluationSliceName', async () => {
-                const result = await client.matchLocationFromModelEvaluationSliceName(fakePath);
-                assert.strictEqual(result, "locationValue");
-                assert((client.pathTemplates.modelEvaluationSlicePathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchModelFromModelEvaluationSliceName', async () => {
-                const result = await client.matchModelFromModelEvaluationSliceName(fakePath);
-                assert.strictEqual(result, "modelValue");
-                assert((client.pathTemplates.modelEvaluationSlicePathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchEvaluationFromModelEvaluationSliceName', async () => {
-                const result = await client.matchEvaluationFromModelEvaluationSliceName(fakePath);
-                assert.strictEqual(result, "evaluationValue");
-                assert((client.pathTemplates.modelEvaluationSlicePathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchSliceFromModelEvaluationSliceName', async () => {
-                const result = await client.matchSliceFromModelEvaluationSliceName(fakePath);
-                assert.strictEqual(result, "sliceValue");
-                assert((client.pathTemplates.modelEvaluationSlicePathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-        });
-
-        describe('modelMonitor', async () => {
-            const fakePath = "/rendered/path/modelMonitor";
-            const expectedParameters = {
-                project: "projectValue",
-                location: "locationValue",
-                model_monitor: "modelMonitorValue",
-            };
-            const client = new extensionexecutionserviceModule.v1beta1.ExtensionExecutionServiceClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            client.pathTemplates.modelMonitorPathTemplate.render =
-                sinon.stub().returns(fakePath);
-            client.pathTemplates.modelMonitorPathTemplate.match =
-                sinon.stub().returns(expectedParameters);
-
-            it('modelMonitorPath', async () => {
-                const result = await client.modelMonitorPath("projectValue", "locationValue", "modelMonitorValue");
-                assert.strictEqual(result, fakePath);
-                assert((client.pathTemplates.modelMonitorPathTemplate.render as SinonStub)
-                    .getCall(-1).calledWith(expectedParameters));
-            });
-
-            it('matchProjectFromModelMonitorName', async () => {
-                const result = await client.matchProjectFromModelMonitorName(fakePath);
-                assert.strictEqual(result, "projectValue");
-                assert((client.pathTemplates.modelMonitorPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchLocationFromModelMonitorName', async () => {
-                const result = await client.matchLocationFromModelMonitorName(fakePath);
-                assert.strictEqual(result, "locationValue");
-                assert((client.pathTemplates.modelMonitorPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchModelMonitorFromModelMonitorName', async () => {
-                const result = await client.matchModelMonitorFromModelMonitorName(fakePath);
-                assert.strictEqual(result, "modelMonitorValue");
-                assert((client.pathTemplates.modelMonitorPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-        });
-
-        describe('modelMonitoringJob', async () => {
-            const fakePath = "/rendered/path/modelMonitoringJob";
-            const expectedParameters = {
-                project: "projectValue",
-                location: "locationValue",
-                model_monitor: "modelMonitorValue",
-                model_monitoring_job: "modelMonitoringJobValue",
-            };
-            const client = new extensionexecutionserviceModule.v1beta1.ExtensionExecutionServiceClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            client.pathTemplates.modelMonitoringJobPathTemplate.render =
-                sinon.stub().returns(fakePath);
-            client.pathTemplates.modelMonitoringJobPathTemplate.match =
-                sinon.stub().returns(expectedParameters);
-
-            it('modelMonitoringJobPath', async () => {
-                const result = await client.modelMonitoringJobPath("projectValue", "locationValue", "modelMonitorValue", "modelMonitoringJobValue");
-                assert.strictEqual(result, fakePath);
-                assert((client.pathTemplates.modelMonitoringJobPathTemplate.render as SinonStub)
-                    .getCall(-1).calledWith(expectedParameters));
-            });
-
-            it('matchProjectFromModelMonitoringJobName', async () => {
-                const result = await client.matchProjectFromModelMonitoringJobName(fakePath);
-                assert.strictEqual(result, "projectValue");
-                assert((client.pathTemplates.modelMonitoringJobPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchLocationFromModelMonitoringJobName', async () => {
-                const result = await client.matchLocationFromModelMonitoringJobName(fakePath);
-                assert.strictEqual(result, "locationValue");
-                assert((client.pathTemplates.modelMonitoringJobPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchModelMonitorFromModelMonitoringJobName', async () => {
-                const result = await client.matchModelMonitorFromModelMonitoringJobName(fakePath);
-                assert.strictEqual(result, "modelMonitorValue");
-                assert((client.pathTemplates.modelMonitoringJobPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchModelMonitoringJobFromModelMonitoringJobName', async () => {
-                const result = await client.matchModelMonitoringJobFromModelMonitoringJobName(fakePath);
-                assert.strictEqual(result, "modelMonitoringJobValue");
-                assert((client.pathTemplates.modelMonitoringJobPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-        });
-
-        describe('nasJob', async () => {
-            const fakePath = "/rendered/path/nasJob";
-            const expectedParameters = {
-                project: "projectValue",
-                location: "locationValue",
-                nas_job: "nasJobValue",
-            };
-            const client = new extensionexecutionserviceModule.v1beta1.ExtensionExecutionServiceClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            client.pathTemplates.nasJobPathTemplate.render =
-                sinon.stub().returns(fakePath);
-            client.pathTemplates.nasJobPathTemplate.match =
-                sinon.stub().returns(expectedParameters);
-
-            it('nasJobPath', async () => {
-                const result = await client.nasJobPath("projectValue", "locationValue", "nasJobValue");
-                assert.strictEqual(result, fakePath);
-                assert((client.pathTemplates.nasJobPathTemplate.render as SinonStub)
-                    .getCall(-1).calledWith(expectedParameters));
-            });
-
-            it('matchProjectFromNasJobName', async () => {
-                const result = await client.matchProjectFromNasJobName(fakePath);
-                assert.strictEqual(result, "projectValue");
-                assert((client.pathTemplates.nasJobPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchLocationFromNasJobName', async () => {
-                const result = await client.matchLocationFromNasJobName(fakePath);
-                assert.strictEqual(result, "locationValue");
-                assert((client.pathTemplates.nasJobPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchNasJobFromNasJobName', async () => {
-                const result = await client.matchNasJobFromNasJobName(fakePath);
-                assert.strictEqual(result, "nasJobValue");
-                assert((client.pathTemplates.nasJobPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-        });
-
-        describe('nasTrialDetail', async () => {
-            const fakePath = "/rendered/path/nasTrialDetail";
-            const expectedParameters = {
-                project: "projectValue",
-                location: "locationValue",
-                nas_job: "nasJobValue",
-                nas_trial_detail: "nasTrialDetailValue",
-            };
-            const client = new extensionexecutionserviceModule.v1beta1.ExtensionExecutionServiceClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            client.pathTemplates.nasTrialDetailPathTemplate.render =
-                sinon.stub().returns(fakePath);
-            client.pathTemplates.nasTrialDetailPathTemplate.match =
-                sinon.stub().returns(expectedParameters);
-
-            it('nasTrialDetailPath', async () => {
-                const result = await client.nasTrialDetailPath("projectValue", "locationValue", "nasJobValue", "nasTrialDetailValue");
-                assert.strictEqual(result, fakePath);
-                assert((client.pathTemplates.nasTrialDetailPathTemplate.render as SinonStub)
-                    .getCall(-1).calledWith(expectedParameters));
-            });
-
-            it('matchProjectFromNasTrialDetailName', async () => {
-                const result = await client.matchProjectFromNasTrialDetailName(fakePath);
-                assert.strictEqual(result, "projectValue");
-                assert((client.pathTemplates.nasTrialDetailPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchLocationFromNasTrialDetailName', async () => {
-                const result = await client.matchLocationFromNasTrialDetailName(fakePath);
-                assert.strictEqual(result, "locationValue");
-                assert((client.pathTemplates.nasTrialDetailPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchNasJobFromNasTrialDetailName', async () => {
-                const result = await client.matchNasJobFromNasTrialDetailName(fakePath);
-                assert.strictEqual(result, "nasJobValue");
-                assert((client.pathTemplates.nasTrialDetailPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchNasTrialDetailFromNasTrialDetailName', async () => {
-                const result = await client.matchNasTrialDetailFromNasTrialDetailName(fakePath);
-                assert.strictEqual(result, "nasTrialDetailValue");
-                assert((client.pathTemplates.nasTrialDetailPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-        });
-
-        describe('notebookExecutionJob', async () => {
-            const fakePath = "/rendered/path/notebookExecutionJob";
-            const expectedParameters = {
-                project: "projectValue",
-                location: "locationValue",
-                notebook_execution_job: "notebookExecutionJobValue",
-            };
-            const client = new extensionexecutionserviceModule.v1beta1.ExtensionExecutionServiceClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            client.pathTemplates.notebookExecutionJobPathTemplate.render =
-                sinon.stub().returns(fakePath);
-            client.pathTemplates.notebookExecutionJobPathTemplate.match =
-                sinon.stub().returns(expectedParameters);
-
-            it('notebookExecutionJobPath', async () => {
-                const result = await client.notebookExecutionJobPath("projectValue", "locationValue", "notebookExecutionJobValue");
-                assert.strictEqual(result, fakePath);
-                assert((client.pathTemplates.notebookExecutionJobPathTemplate.render as SinonStub)
-                    .getCall(-1).calledWith(expectedParameters));
-            });
-
-            it('matchProjectFromNotebookExecutionJobName', async () => {
-                const result = await client.matchProjectFromNotebookExecutionJobName(fakePath);
-                assert.strictEqual(result, "projectValue");
-                assert((client.pathTemplates.notebookExecutionJobPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchLocationFromNotebookExecutionJobName', async () => {
-                const result = await client.matchLocationFromNotebookExecutionJobName(fakePath);
-                assert.strictEqual(result, "locationValue");
-                assert((client.pathTemplates.notebookExecutionJobPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchNotebookExecutionJobFromNotebookExecutionJobName', async () => {
-                const result = await client.matchNotebookExecutionJobFromNotebookExecutionJobName(fakePath);
-                assert.strictEqual(result, "notebookExecutionJobValue");
-                assert((client.pathTemplates.notebookExecutionJobPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-        });
-
-        describe('notebookRuntime', async () => {
-            const fakePath = "/rendered/path/notebookRuntime";
-            const expectedParameters = {
-                project: "projectValue",
-                location: "locationValue",
-                notebook_runtime: "notebookRuntimeValue",
-            };
-            const client = new extensionexecutionserviceModule.v1beta1.ExtensionExecutionServiceClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            client.pathTemplates.notebookRuntimePathTemplate.render =
-                sinon.stub().returns(fakePath);
-            client.pathTemplates.notebookRuntimePathTemplate.match =
-                sinon.stub().returns(expectedParameters);
-
-            it('notebookRuntimePath', async () => {
-                const result = await client.notebookRuntimePath("projectValue", "locationValue", "notebookRuntimeValue");
-                assert.strictEqual(result, fakePath);
-                assert((client.pathTemplates.notebookRuntimePathTemplate.render as SinonStub)
-                    .getCall(-1).calledWith(expectedParameters));
-            });
-
-            it('matchProjectFromNotebookRuntimeName', async () => {
-                const result = await client.matchProjectFromNotebookRuntimeName(fakePath);
-                assert.strictEqual(result, "projectValue");
-                assert((client.pathTemplates.notebookRuntimePathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchLocationFromNotebookRuntimeName', async () => {
-                const result = await client.matchLocationFromNotebookRuntimeName(fakePath);
-                assert.strictEqual(result, "locationValue");
-                assert((client.pathTemplates.notebookRuntimePathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchNotebookRuntimeFromNotebookRuntimeName', async () => {
-                const result = await client.matchNotebookRuntimeFromNotebookRuntimeName(fakePath);
-                assert.strictEqual(result, "notebookRuntimeValue");
-                assert((client.pathTemplates.notebookRuntimePathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-        });
-
-        describe('notebookRuntimeTemplate', async () => {
-            const fakePath = "/rendered/path/notebookRuntimeTemplate";
-            const expectedParameters = {
-                project: "projectValue",
-                location: "locationValue",
-                notebook_runtime_template: "notebookRuntimeTemplateValue",
-            };
-            const client = new extensionexecutionserviceModule.v1beta1.ExtensionExecutionServiceClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            client.pathTemplates.notebookRuntimeTemplatePathTemplate.render =
-                sinon.stub().returns(fakePath);
-            client.pathTemplates.notebookRuntimeTemplatePathTemplate.match =
-                sinon.stub().returns(expectedParameters);
-
-            it('notebookRuntimeTemplatePath', async () => {
-                const result = await client.notebookRuntimeTemplatePath("projectValue", "locationValue", "notebookRuntimeTemplateValue");
-                assert.strictEqual(result, fakePath);
-                assert((client.pathTemplates.notebookRuntimeTemplatePathTemplate.render as SinonStub)
-                    .getCall(-1).calledWith(expectedParameters));
-            });
-
-            it('matchProjectFromNotebookRuntimeTemplateName', async () => {
-                const result = await client.matchProjectFromNotebookRuntimeTemplateName(fakePath);
-                assert.strictEqual(result, "projectValue");
-                assert((client.pathTemplates.notebookRuntimeTemplatePathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchLocationFromNotebookRuntimeTemplateName', async () => {
-                const result = await client.matchLocationFromNotebookRuntimeTemplateName(fakePath);
-                assert.strictEqual(result, "locationValue");
-                assert((client.pathTemplates.notebookRuntimeTemplatePathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchNotebookRuntimeTemplateFromNotebookRuntimeTemplateName', async () => {
-                const result = await client.matchNotebookRuntimeTemplateFromNotebookRuntimeTemplateName(fakePath);
-                assert.strictEqual(result, "notebookRuntimeTemplateValue");
-                assert((client.pathTemplates.notebookRuntimeTemplatePathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-        });
-
-        describe('persistentResource', async () => {
-            const fakePath = "/rendered/path/persistentResource";
-            const expectedParameters = {
-                project: "projectValue",
-                location: "locationValue",
-                persistent_resource: "persistentResourceValue",
-            };
-            const client = new extensionexecutionserviceModule.v1beta1.ExtensionExecutionServiceClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            client.pathTemplates.persistentResourcePathTemplate.render =
-                sinon.stub().returns(fakePath);
-            client.pathTemplates.persistentResourcePathTemplate.match =
-                sinon.stub().returns(expectedParameters);
-
-            it('persistentResourcePath', async () => {
-                const result = await client.persistentResourcePath("projectValue", "locationValue", "persistentResourceValue");
-                assert.strictEqual(result, fakePath);
-                assert((client.pathTemplates.persistentResourcePathTemplate.render as SinonStub)
-                    .getCall(-1).calledWith(expectedParameters));
-            });
-
-            it('matchProjectFromPersistentResourceName', async () => {
-                const result = await client.matchProjectFromPersistentResourceName(fakePath);
-                assert.strictEqual(result, "projectValue");
-                assert((client.pathTemplates.persistentResourcePathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchLocationFromPersistentResourceName', async () => {
-                const result = await client.matchLocationFromPersistentResourceName(fakePath);
-                assert.strictEqual(result, "locationValue");
-                assert((client.pathTemplates.persistentResourcePathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchPersistentResourceFromPersistentResourceName', async () => {
-                const result = await client.matchPersistentResourceFromPersistentResourceName(fakePath);
-                assert.strictEqual(result, "persistentResourceValue");
-                assert((client.pathTemplates.persistentResourcePathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-        });
-
-        describe('pipelineJob', async () => {
-            const fakePath = "/rendered/path/pipelineJob";
-            const expectedParameters = {
-                project: "projectValue",
-                location: "locationValue",
-                pipeline_job: "pipelineJobValue",
-            };
-            const client = new extensionexecutionserviceModule.v1beta1.ExtensionExecutionServiceClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            client.pathTemplates.pipelineJobPathTemplate.render =
-                sinon.stub().returns(fakePath);
-            client.pathTemplates.pipelineJobPathTemplate.match =
-                sinon.stub().returns(expectedParameters);
-
-            it('pipelineJobPath', async () => {
-                const result = await client.pipelineJobPath("projectValue", "locationValue", "pipelineJobValue");
-                assert.strictEqual(result, fakePath);
-                assert((client.pathTemplates.pipelineJobPathTemplate.render as SinonStub)
-                    .getCall(-1).calledWith(expectedParameters));
-            });
-
-            it('matchProjectFromPipelineJobName', async () => {
-                const result = await client.matchProjectFromPipelineJobName(fakePath);
-                assert.strictEqual(result, "projectValue");
-                assert((client.pathTemplates.pipelineJobPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchLocationFromPipelineJobName', async () => {
-                const result = await client.matchLocationFromPipelineJobName(fakePath);
-                assert.strictEqual(result, "locationValue");
-                assert((client.pathTemplates.pipelineJobPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchPipelineJobFromPipelineJobName', async () => {
-                const result = await client.matchPipelineJobFromPipelineJobName(fakePath);
-                assert.strictEqual(result, "pipelineJobValue");
-                assert((client.pathTemplates.pipelineJobPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-        });
-
-        describe('projectLocationEndpoint', async () => {
-            const fakePath = "/rendered/path/projectLocationEndpoint";
-            const expectedParameters = {
-                project: "projectValue",
-                location: "locationValue",
-                endpoint: "endpointValue",
-            };
-            const client = new extensionexecutionserviceModule.v1beta1.ExtensionExecutionServiceClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            client.pathTemplates.projectLocationEndpointPathTemplate.render =
-                sinon.stub().returns(fakePath);
-            client.pathTemplates.projectLocationEndpointPathTemplate.match =
-                sinon.stub().returns(expectedParameters);
-
-            it('projectLocationEndpointPath', async () => {
-                const result = await client.projectLocationEndpointPath("projectValue", "locationValue", "endpointValue");
-                assert.strictEqual(result, fakePath);
-                assert((client.pathTemplates.projectLocationEndpointPathTemplate.render as SinonStub)
-                    .getCall(-1).calledWith(expectedParameters));
-            });
-
-            it('matchProjectFromProjectLocationEndpointName', async () => {
-                const result = await client.matchProjectFromProjectLocationEndpointName(fakePath);
-                assert.strictEqual(result, "projectValue");
-                assert((client.pathTemplates.projectLocationEndpointPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchLocationFromProjectLocationEndpointName', async () => {
-                const result = await client.matchLocationFromProjectLocationEndpointName(fakePath);
-                assert.strictEqual(result, "locationValue");
-                assert((client.pathTemplates.projectLocationEndpointPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchEndpointFromProjectLocationEndpointName', async () => {
-                const result = await client.matchEndpointFromProjectLocationEndpointName(fakePath);
-                assert.strictEqual(result, "endpointValue");
-                assert((client.pathTemplates.projectLocationEndpointPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-        });
-
-        describe('projectLocationFeatureGroupFeature', async () => {
-            const fakePath = "/rendered/path/projectLocationFeatureGroupFeature";
-            const expectedParameters = {
-                project: "projectValue",
-                location: "locationValue",
-                feature_group: "featureGroupValue",
-                feature: "featureValue",
-            };
-            const client = new extensionexecutionserviceModule.v1beta1.ExtensionExecutionServiceClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            client.pathTemplates.projectLocationFeatureGroupFeaturePathTemplate.render =
-                sinon.stub().returns(fakePath);
-            client.pathTemplates.projectLocationFeatureGroupFeaturePathTemplate.match =
-                sinon.stub().returns(expectedParameters);
-
-            it('projectLocationFeatureGroupFeaturePath', async () => {
-                const result = await client.projectLocationFeatureGroupFeaturePath("projectValue", "locationValue", "featureGroupValue", "featureValue");
-                assert.strictEqual(result, fakePath);
-                assert((client.pathTemplates.projectLocationFeatureGroupFeaturePathTemplate.render as SinonStub)
-                    .getCall(-1).calledWith(expectedParameters));
-            });
-
-            it('matchProjectFromProjectLocationFeatureGroupFeatureName', async () => {
-                const result = await client.matchProjectFromProjectLocationFeatureGroupFeatureName(fakePath);
-                assert.strictEqual(result, "projectValue");
-                assert((client.pathTemplates.projectLocationFeatureGroupFeaturePathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchLocationFromProjectLocationFeatureGroupFeatureName', async () => {
-                const result = await client.matchLocationFromProjectLocationFeatureGroupFeatureName(fakePath);
-                assert.strictEqual(result, "locationValue");
-                assert((client.pathTemplates.projectLocationFeatureGroupFeaturePathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchFeatureGroupFromProjectLocationFeatureGroupFeatureName', async () => {
-                const result = await client.matchFeatureGroupFromProjectLocationFeatureGroupFeatureName(fakePath);
-                assert.strictEqual(result, "featureGroupValue");
-                assert((client.pathTemplates.projectLocationFeatureGroupFeaturePathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchFeatureFromProjectLocationFeatureGroupFeatureName', async () => {
-                const result = await client.matchFeatureFromProjectLocationFeatureGroupFeatureName(fakePath);
-                assert.strictEqual(result, "featureValue");
-                assert((client.pathTemplates.projectLocationFeatureGroupFeaturePathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-        });
-
-        describe('projectLocationFeaturestoreEntityTypeFeature', async () => {
-            const fakePath = "/rendered/path/projectLocationFeaturestoreEntityTypeFeature";
-            const expectedParameters = {
-                project: "projectValue",
-                location: "locationValue",
-                featurestore: "featurestoreValue",
-                entity_type: "entityTypeValue",
-                feature: "featureValue",
-            };
-            const client = new extensionexecutionserviceModule.v1beta1.ExtensionExecutionServiceClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            client.pathTemplates.projectLocationFeaturestoreEntityTypeFeaturePathTemplate.render =
-                sinon.stub().returns(fakePath);
-            client.pathTemplates.projectLocationFeaturestoreEntityTypeFeaturePathTemplate.match =
-                sinon.stub().returns(expectedParameters);
-
-            it('projectLocationFeaturestoreEntityTypeFeaturePath', async () => {
-                const result = await client.projectLocationFeaturestoreEntityTypeFeaturePath("projectValue", "locationValue", "featurestoreValue", "entityTypeValue", "featureValue");
-                assert.strictEqual(result, fakePath);
-                assert((client.pathTemplates.projectLocationFeaturestoreEntityTypeFeaturePathTemplate.render as SinonStub)
-                    .getCall(-1).calledWith(expectedParameters));
-            });
-
-            it('matchProjectFromProjectLocationFeaturestoreEntityTypeFeatureName', async () => {
-                const result = await client.matchProjectFromProjectLocationFeaturestoreEntityTypeFeatureName(fakePath);
-                assert.strictEqual(result, "projectValue");
-                assert((client.pathTemplates.projectLocationFeaturestoreEntityTypeFeaturePathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchLocationFromProjectLocationFeaturestoreEntityTypeFeatureName', async () => {
-                const result = await client.matchLocationFromProjectLocationFeaturestoreEntityTypeFeatureName(fakePath);
-                assert.strictEqual(result, "locationValue");
-                assert((client.pathTemplates.projectLocationFeaturestoreEntityTypeFeaturePathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchFeaturestoreFromProjectLocationFeaturestoreEntityTypeFeatureName', async () => {
-                const result = await client.matchFeaturestoreFromProjectLocationFeaturestoreEntityTypeFeatureName(fakePath);
-                assert.strictEqual(result, "featurestoreValue");
-                assert((client.pathTemplates.projectLocationFeaturestoreEntityTypeFeaturePathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchEntityTypeFromProjectLocationFeaturestoreEntityTypeFeatureName', async () => {
-                const result = await client.matchEntityTypeFromProjectLocationFeaturestoreEntityTypeFeatureName(fakePath);
-                assert.strictEqual(result, "entityTypeValue");
-                assert((client.pathTemplates.projectLocationFeaturestoreEntityTypeFeaturePathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchFeatureFromProjectLocationFeaturestoreEntityTypeFeatureName', async () => {
-                const result = await client.matchFeatureFromProjectLocationFeaturestoreEntityTypeFeatureName(fakePath);
-                assert.strictEqual(result, "featureValue");
-                assert((client.pathTemplates.projectLocationFeaturestoreEntityTypeFeaturePathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-        });
-
-        describe('projectLocationPublisherModel', async () => {
-            const fakePath = "/rendered/path/projectLocationPublisherModel";
-            const expectedParameters = {
-                project: "projectValue",
-                location: "locationValue",
-                publisher: "publisherValue",
-                model: "modelValue",
-            };
-            const client = new extensionexecutionserviceModule.v1beta1.ExtensionExecutionServiceClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            client.pathTemplates.projectLocationPublisherModelPathTemplate.render =
-                sinon.stub().returns(fakePath);
-            client.pathTemplates.projectLocationPublisherModelPathTemplate.match =
-                sinon.stub().returns(expectedParameters);
-
-            it('projectLocationPublisherModelPath', async () => {
-                const result = await client.projectLocationPublisherModelPath("projectValue", "locationValue", "publisherValue", "modelValue");
-                assert.strictEqual(result, fakePath);
-                assert((client.pathTemplates.projectLocationPublisherModelPathTemplate.render as SinonStub)
-                    .getCall(-1).calledWith(expectedParameters));
-            });
-
-            it('matchProjectFromProjectLocationPublisherModelName', async () => {
-                const result = await client.matchProjectFromProjectLocationPublisherModelName(fakePath);
-                assert.strictEqual(result, "projectValue");
-                assert((client.pathTemplates.projectLocationPublisherModelPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchLocationFromProjectLocationPublisherModelName', async () => {
-                const result = await client.matchLocationFromProjectLocationPublisherModelName(fakePath);
-                assert.strictEqual(result, "locationValue");
-                assert((client.pathTemplates.projectLocationPublisherModelPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchPublisherFromProjectLocationPublisherModelName', async () => {
-                const result = await client.matchPublisherFromProjectLocationPublisherModelName(fakePath);
-                assert.strictEqual(result, "publisherValue");
-                assert((client.pathTemplates.projectLocationPublisherModelPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchModelFromProjectLocationPublisherModelName', async () => {
-                const result = await client.matchModelFromProjectLocationPublisherModelName(fakePath);
-                assert.strictEqual(result, "modelValue");
-                assert((client.pathTemplates.projectLocationPublisherModelPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-        });
-
-        describe('projectLocationReasoningEngineSession', async () => {
-            const fakePath = "/rendered/path/projectLocationReasoningEngineSession";
-            const expectedParameters = {
-                project: "projectValue",
-                location: "locationValue",
-                reasoning_engine: "reasoningEngineValue",
-                session: "sessionValue",
-            };
-            const client = new extensionexecutionserviceModule.v1beta1.ExtensionExecutionServiceClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            client.pathTemplates.projectLocationReasoningEngineSessionPathTemplate.render =
-                sinon.stub().returns(fakePath);
-            client.pathTemplates.projectLocationReasoningEngineSessionPathTemplate.match =
-                sinon.stub().returns(expectedParameters);
-
-            it('projectLocationReasoningEngineSessionPath', async () => {
-                const result = await client.projectLocationReasoningEngineSessionPath("projectValue", "locationValue", "reasoningEngineValue", "sessionValue");
-                assert.strictEqual(result, fakePath);
-                assert((client.pathTemplates.projectLocationReasoningEngineSessionPathTemplate.render as SinonStub)
-                    .getCall(-1).calledWith(expectedParameters));
-            });
-
-            it('matchProjectFromProjectLocationReasoningEngineSessionName', async () => {
-                const result = await client.matchProjectFromProjectLocationReasoningEngineSessionName(fakePath);
-                assert.strictEqual(result, "projectValue");
-                assert((client.pathTemplates.projectLocationReasoningEngineSessionPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchLocationFromProjectLocationReasoningEngineSessionName', async () => {
-                const result = await client.matchLocationFromProjectLocationReasoningEngineSessionName(fakePath);
-                assert.strictEqual(result, "locationValue");
-                assert((client.pathTemplates.projectLocationReasoningEngineSessionPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchReasoningEngineFromProjectLocationReasoningEngineSessionName', async () => {
-                const result = await client.matchReasoningEngineFromProjectLocationReasoningEngineSessionName(fakePath);
-                assert.strictEqual(result, "reasoningEngineValue");
-                assert((client.pathTemplates.projectLocationReasoningEngineSessionPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchSessionFromProjectLocationReasoningEngineSessionName', async () => {
-                const result = await client.matchSessionFromProjectLocationReasoningEngineSessionName(fakePath);
-                assert.strictEqual(result, "sessionValue");
-                assert((client.pathTemplates.projectLocationReasoningEngineSessionPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-        });
-
-        describe('projectLocationReasoningEngineSessionEvent', async () => {
-            const fakePath = "/rendered/path/projectLocationReasoningEngineSessionEvent";
-            const expectedParameters = {
-                project: "projectValue",
-                location: "locationValue",
-                reasoning_engine: "reasoningEngineValue",
-                session: "sessionValue",
-                event: "eventValue",
-            };
-            const client = new extensionexecutionserviceModule.v1beta1.ExtensionExecutionServiceClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            client.pathTemplates.projectLocationReasoningEngineSessionEventPathTemplate.render =
-                sinon.stub().returns(fakePath);
-            client.pathTemplates.projectLocationReasoningEngineSessionEventPathTemplate.match =
-                sinon.stub().returns(expectedParameters);
-
-            it('projectLocationReasoningEngineSessionEventPath', async () => {
-                const result = await client.projectLocationReasoningEngineSessionEventPath("projectValue", "locationValue", "reasoningEngineValue", "sessionValue", "eventValue");
-                assert.strictEqual(result, fakePath);
-                assert((client.pathTemplates.projectLocationReasoningEngineSessionEventPathTemplate.render as SinonStub)
-                    .getCall(-1).calledWith(expectedParameters));
-            });
-
-            it('matchProjectFromProjectLocationReasoningEngineSessionEventName', async () => {
-                const result = await client.matchProjectFromProjectLocationReasoningEngineSessionEventName(fakePath);
-                assert.strictEqual(result, "projectValue");
-                assert((client.pathTemplates.projectLocationReasoningEngineSessionEventPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchLocationFromProjectLocationReasoningEngineSessionEventName', async () => {
-                const result = await client.matchLocationFromProjectLocationReasoningEngineSessionEventName(fakePath);
-                assert.strictEqual(result, "locationValue");
-                assert((client.pathTemplates.projectLocationReasoningEngineSessionEventPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchReasoningEngineFromProjectLocationReasoningEngineSessionEventName', async () => {
-                const result = await client.matchReasoningEngineFromProjectLocationReasoningEngineSessionEventName(fakePath);
-                assert.strictEqual(result, "reasoningEngineValue");
-                assert((client.pathTemplates.projectLocationReasoningEngineSessionEventPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchSessionFromProjectLocationReasoningEngineSessionEventName', async () => {
-                const result = await client.matchSessionFromProjectLocationReasoningEngineSessionEventName(fakePath);
-                assert.strictEqual(result, "sessionValue");
-                assert((client.pathTemplates.projectLocationReasoningEngineSessionEventPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchEventFromProjectLocationReasoningEngineSessionEventName', async () => {
-                const result = await client.matchEventFromProjectLocationReasoningEngineSessionEventName(fakePath);
-                assert.strictEqual(result, "eventValue");
-                assert((client.pathTemplates.projectLocationReasoningEngineSessionEventPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-        });
-
-        describe('projectLocationSession', async () => {
-            const fakePath = "/rendered/path/projectLocationSession";
-            const expectedParameters = {
-                project: "projectValue",
-                location: "locationValue",
-                session: "sessionValue",
-            };
-            const client = new extensionexecutionserviceModule.v1beta1.ExtensionExecutionServiceClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            client.pathTemplates.projectLocationSessionPathTemplate.render =
-                sinon.stub().returns(fakePath);
-            client.pathTemplates.projectLocationSessionPathTemplate.match =
-                sinon.stub().returns(expectedParameters);
-
-            it('projectLocationSessionPath', async () => {
-                const result = await client.projectLocationSessionPath("projectValue", "locationValue", "sessionValue");
-                assert.strictEqual(result, fakePath);
-                assert((client.pathTemplates.projectLocationSessionPathTemplate.render as SinonStub)
-                    .getCall(-1).calledWith(expectedParameters));
-            });
-
-            it('matchProjectFromProjectLocationSessionName', async () => {
-                const result = await client.matchProjectFromProjectLocationSessionName(fakePath);
-                assert.strictEqual(result, "projectValue");
-                assert((client.pathTemplates.projectLocationSessionPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchLocationFromProjectLocationSessionName', async () => {
-                const result = await client.matchLocationFromProjectLocationSessionName(fakePath);
-                assert.strictEqual(result, "locationValue");
-                assert((client.pathTemplates.projectLocationSessionPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchSessionFromProjectLocationSessionName', async () => {
-                const result = await client.matchSessionFromProjectLocationSessionName(fakePath);
-                assert.strictEqual(result, "sessionValue");
-                assert((client.pathTemplates.projectLocationSessionPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-        });
-
-        describe('projectLocationSessionEvent', async () => {
-            const fakePath = "/rendered/path/projectLocationSessionEvent";
-            const expectedParameters = {
-                project: "projectValue",
-                location: "locationValue",
-                session: "sessionValue",
-                event: "eventValue",
-            };
-            const client = new extensionexecutionserviceModule.v1beta1.ExtensionExecutionServiceClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            client.pathTemplates.projectLocationSessionEventPathTemplate.render =
-                sinon.stub().returns(fakePath);
-            client.pathTemplates.projectLocationSessionEventPathTemplate.match =
-                sinon.stub().returns(expectedParameters);
-
-            it('projectLocationSessionEventPath', async () => {
-                const result = await client.projectLocationSessionEventPath("projectValue", "locationValue", "sessionValue", "eventValue");
-                assert.strictEqual(result, fakePath);
-                assert((client.pathTemplates.projectLocationSessionEventPathTemplate.render as SinonStub)
-                    .getCall(-1).calledWith(expectedParameters));
-            });
-
-            it('matchProjectFromProjectLocationSessionEventName', async () => {
-                const result = await client.matchProjectFromProjectLocationSessionEventName(fakePath);
-                assert.strictEqual(result, "projectValue");
-                assert((client.pathTemplates.projectLocationSessionEventPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchLocationFromProjectLocationSessionEventName', async () => {
-                const result = await client.matchLocationFromProjectLocationSessionEventName(fakePath);
-                assert.strictEqual(result, "locationValue");
-                assert((client.pathTemplates.projectLocationSessionEventPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchSessionFromProjectLocationSessionEventName', async () => {
-                const result = await client.matchSessionFromProjectLocationSessionEventName(fakePath);
-                assert.strictEqual(result, "sessionValue");
-                assert((client.pathTemplates.projectLocationSessionEventPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchEventFromProjectLocationSessionEventName', async () => {
-                const result = await client.matchEventFromProjectLocationSessionEventName(fakePath);
-                assert.strictEqual(result, "eventValue");
-                assert((client.pathTemplates.projectLocationSessionEventPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-        });
-
-        describe('publisherModel', async () => {
-            const fakePath = "/rendered/path/publisherModel";
-            const expectedParameters = {
-                publisher: "publisherValue",
-                model: "modelValue",
-            };
-            const client = new extensionexecutionserviceModule.v1beta1.ExtensionExecutionServiceClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            client.pathTemplates.publisherModelPathTemplate.render =
-                sinon.stub().returns(fakePath);
-            client.pathTemplates.publisherModelPathTemplate.match =
-                sinon.stub().returns(expectedParameters);
-
-            it('publisherModelPath', async () => {
-                const result = await client.publisherModelPath("publisherValue", "modelValue");
-                assert.strictEqual(result, fakePath);
-                assert((client.pathTemplates.publisherModelPathTemplate.render as SinonStub)
-                    .getCall(-1).calledWith(expectedParameters));
-            });
-
-            it('matchPublisherFromPublisherModelName', async () => {
-                const result = await client.matchPublisherFromPublisherModelName(fakePath);
-                assert.strictEqual(result, "publisherValue");
-                assert((client.pathTemplates.publisherModelPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchModelFromPublisherModelName', async () => {
-                const result = await client.matchModelFromPublisherModelName(fakePath);
-                assert.strictEqual(result, "modelValue");
-                assert((client.pathTemplates.publisherModelPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-        });
-
-        describe('ragCorpus', async () => {
-            const fakePath = "/rendered/path/ragCorpus";
-            const expectedParameters = {
-                project: "projectValue",
-                location: "locationValue",
-                rag_corpus: "ragCorpusValue",
-            };
-            const client = new extensionexecutionserviceModule.v1beta1.ExtensionExecutionServiceClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            client.pathTemplates.ragCorpusPathTemplate.render =
-                sinon.stub().returns(fakePath);
-            client.pathTemplates.ragCorpusPathTemplate.match =
-                sinon.stub().returns(expectedParameters);
-
-            it('ragCorpusPath', async () => {
-                const result = await client.ragCorpusPath("projectValue", "locationValue", "ragCorpusValue");
-                assert.strictEqual(result, fakePath);
-                assert((client.pathTemplates.ragCorpusPathTemplate.render as SinonStub)
-                    .getCall(-1).calledWith(expectedParameters));
-            });
-
-            it('matchProjectFromRagCorpusName', async () => {
-                const result = await client.matchProjectFromRagCorpusName(fakePath);
-                assert.strictEqual(result, "projectValue");
-                assert((client.pathTemplates.ragCorpusPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchLocationFromRagCorpusName', async () => {
-                const result = await client.matchLocationFromRagCorpusName(fakePath);
-                assert.strictEqual(result, "locationValue");
-                assert((client.pathTemplates.ragCorpusPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchRagCorpusFromRagCorpusName', async () => {
-                const result = await client.matchRagCorpusFromRagCorpusName(fakePath);
-                assert.strictEqual(result, "ragCorpusValue");
-                assert((client.pathTemplates.ragCorpusPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-        });
-
-        describe('ragFile', async () => {
-            const fakePath = "/rendered/path/ragFile";
-            const expectedParameters = {
-                project: "projectValue",
-                location: "locationValue",
-                rag_corpus: "ragCorpusValue",
-                rag_file: "ragFileValue",
-            };
-            const client = new extensionexecutionserviceModule.v1beta1.ExtensionExecutionServiceClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            client.pathTemplates.ragFilePathTemplate.render =
-                sinon.stub().returns(fakePath);
-            client.pathTemplates.ragFilePathTemplate.match =
-                sinon.stub().returns(expectedParameters);
-
-            it('ragFilePath', async () => {
-                const result = await client.ragFilePath("projectValue", "locationValue", "ragCorpusValue", "ragFileValue");
-                assert.strictEqual(result, fakePath);
-                assert((client.pathTemplates.ragFilePathTemplate.render as SinonStub)
-                    .getCall(-1).calledWith(expectedParameters));
-            });
-
-            it('matchProjectFromRagFileName', async () => {
-                const result = await client.matchProjectFromRagFileName(fakePath);
-                assert.strictEqual(result, "projectValue");
-                assert((client.pathTemplates.ragFilePathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchLocationFromRagFileName', async () => {
-                const result = await client.matchLocationFromRagFileName(fakePath);
-                assert.strictEqual(result, "locationValue");
-                assert((client.pathTemplates.ragFilePathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchRagCorpusFromRagFileName', async () => {
-                const result = await client.matchRagCorpusFromRagFileName(fakePath);
-                assert.strictEqual(result, "ragCorpusValue");
-                assert((client.pathTemplates.ragFilePathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchRagFileFromRagFileName', async () => {
-                const result = await client.matchRagFileFromRagFileName(fakePath);
-                assert.strictEqual(result, "ragFileValue");
-                assert((client.pathTemplates.ragFilePathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-        });
-
-        describe('reasoningEngine', async () => {
-            const fakePath = "/rendered/path/reasoningEngine";
-            const expectedParameters = {
-                project: "projectValue",
-                location: "locationValue",
-                reasoning_engine: "reasoningEngineValue",
-            };
-            const client = new extensionexecutionserviceModule.v1beta1.ExtensionExecutionServiceClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            client.pathTemplates.reasoningEnginePathTemplate.render =
-                sinon.stub().returns(fakePath);
-            client.pathTemplates.reasoningEnginePathTemplate.match =
-                sinon.stub().returns(expectedParameters);
-
-            it('reasoningEnginePath', async () => {
-                const result = await client.reasoningEnginePath("projectValue", "locationValue", "reasoningEngineValue");
-                assert.strictEqual(result, fakePath);
-                assert((client.pathTemplates.reasoningEnginePathTemplate.render as SinonStub)
-                    .getCall(-1).calledWith(expectedParameters));
-            });
-
-            it('matchProjectFromReasoningEngineName', async () => {
-                const result = await client.matchProjectFromReasoningEngineName(fakePath);
-                assert.strictEqual(result, "projectValue");
-                assert((client.pathTemplates.reasoningEnginePathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchLocationFromReasoningEngineName', async () => {
-                const result = await client.matchLocationFromReasoningEngineName(fakePath);
-                assert.strictEqual(result, "locationValue");
-                assert((client.pathTemplates.reasoningEnginePathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchReasoningEngineFromReasoningEngineName', async () => {
-                const result = await client.matchReasoningEngineFromReasoningEngineName(fakePath);
-                assert.strictEqual(result, "reasoningEngineValue");
-                assert((client.pathTemplates.reasoningEnginePathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-        });
-
-        describe('savedQuery', async () => {
-            const fakePath = "/rendered/path/savedQuery";
-            const expectedParameters = {
-                project: "projectValue",
-                location: "locationValue",
-                dataset: "datasetValue",
-                saved_query: "savedQueryValue",
-            };
-            const client = new extensionexecutionserviceModule.v1beta1.ExtensionExecutionServiceClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            client.pathTemplates.savedQueryPathTemplate.render =
-                sinon.stub().returns(fakePath);
-            client.pathTemplates.savedQueryPathTemplate.match =
-                sinon.stub().returns(expectedParameters);
-
-            it('savedQueryPath', async () => {
-                const result = await client.savedQueryPath("projectValue", "locationValue", "datasetValue", "savedQueryValue");
-                assert.strictEqual(result, fakePath);
-                assert((client.pathTemplates.savedQueryPathTemplate.render as SinonStub)
-                    .getCall(-1).calledWith(expectedParameters));
-            });
-
-            it('matchProjectFromSavedQueryName', async () => {
-                const result = await client.matchProjectFromSavedQueryName(fakePath);
-                assert.strictEqual(result, "projectValue");
-                assert((client.pathTemplates.savedQueryPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchLocationFromSavedQueryName', async () => {
-                const result = await client.matchLocationFromSavedQueryName(fakePath);
-                assert.strictEqual(result, "locationValue");
-                assert((client.pathTemplates.savedQueryPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchDatasetFromSavedQueryName', async () => {
-                const result = await client.matchDatasetFromSavedQueryName(fakePath);
-                assert.strictEqual(result, "datasetValue");
-                assert((client.pathTemplates.savedQueryPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchSavedQueryFromSavedQueryName', async () => {
-                const result = await client.matchSavedQueryFromSavedQueryName(fakePath);
-                assert.strictEqual(result, "savedQueryValue");
-                assert((client.pathTemplates.savedQueryPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-        });
-
-        describe('schedule', async () => {
-            const fakePath = "/rendered/path/schedule";
-            const expectedParameters = {
-                project: "projectValue",
-                location: "locationValue",
-                schedule: "scheduleValue",
-            };
-            const client = new extensionexecutionserviceModule.v1beta1.ExtensionExecutionServiceClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            client.pathTemplates.schedulePathTemplate.render =
-                sinon.stub().returns(fakePath);
-            client.pathTemplates.schedulePathTemplate.match =
-                sinon.stub().returns(expectedParameters);
-
-            it('schedulePath', async () => {
-                const result = await client.schedulePath("projectValue", "locationValue", "scheduleValue");
-                assert.strictEqual(result, fakePath);
-                assert((client.pathTemplates.schedulePathTemplate.render as SinonStub)
-                    .getCall(-1).calledWith(expectedParameters));
-            });
-
-            it('matchProjectFromScheduleName', async () => {
-                const result = await client.matchProjectFromScheduleName(fakePath);
-                assert.strictEqual(result, "projectValue");
-                assert((client.pathTemplates.schedulePathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchLocationFromScheduleName', async () => {
-                const result = await client.matchLocationFromScheduleName(fakePath);
-                assert.strictEqual(result, "locationValue");
-                assert((client.pathTemplates.schedulePathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchScheduleFromScheduleName', async () => {
-                const result = await client.matchScheduleFromScheduleName(fakePath);
-                assert.strictEqual(result, "scheduleValue");
-                assert((client.pathTemplates.schedulePathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-        });
-
-        describe('specialistPool', async () => {
-            const fakePath = "/rendered/path/specialistPool";
-            const expectedParameters = {
-                project: "projectValue",
-                location: "locationValue",
-                specialist_pool: "specialistPoolValue",
-            };
-            const client = new extensionexecutionserviceModule.v1beta1.ExtensionExecutionServiceClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            client.pathTemplates.specialistPoolPathTemplate.render =
-                sinon.stub().returns(fakePath);
-            client.pathTemplates.specialistPoolPathTemplate.match =
-                sinon.stub().returns(expectedParameters);
-
-            it('specialistPoolPath', async () => {
-                const result = await client.specialistPoolPath("projectValue", "locationValue", "specialistPoolValue");
-                assert.strictEqual(result, fakePath);
-                assert((client.pathTemplates.specialistPoolPathTemplate.render as SinonStub)
-                    .getCall(-1).calledWith(expectedParameters));
-            });
-
-            it('matchProjectFromSpecialistPoolName', async () => {
-                const result = await client.matchProjectFromSpecialistPoolName(fakePath);
-                assert.strictEqual(result, "projectValue");
-                assert((client.pathTemplates.specialistPoolPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchLocationFromSpecialistPoolName', async () => {
-                const result = await client.matchLocationFromSpecialistPoolName(fakePath);
-                assert.strictEqual(result, "locationValue");
-                assert((client.pathTemplates.specialistPoolPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchSpecialistPoolFromSpecialistPoolName', async () => {
-                const result = await client.matchSpecialistPoolFromSpecialistPoolName(fakePath);
-                assert.strictEqual(result, "specialistPoolValue");
-                assert((client.pathTemplates.specialistPoolPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-        });
-
-        describe('study', async () => {
-            const fakePath = "/rendered/path/study";
-            const expectedParameters = {
-                project: "projectValue",
-                location: "locationValue",
-                study: "studyValue",
-            };
-            const client = new extensionexecutionserviceModule.v1beta1.ExtensionExecutionServiceClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            client.pathTemplates.studyPathTemplate.render =
-                sinon.stub().returns(fakePath);
-            client.pathTemplates.studyPathTemplate.match =
-                sinon.stub().returns(expectedParameters);
-
-            it('studyPath', async () => {
-                const result = await client.studyPath("projectValue", "locationValue", "studyValue");
-                assert.strictEqual(result, fakePath);
-                assert((client.pathTemplates.studyPathTemplate.render as SinonStub)
-                    .getCall(-1).calledWith(expectedParameters));
-            });
-
-            it('matchProjectFromStudyName', async () => {
-                const result = await client.matchProjectFromStudyName(fakePath);
-                assert.strictEqual(result, "projectValue");
-                assert((client.pathTemplates.studyPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchLocationFromStudyName', async () => {
-                const result = await client.matchLocationFromStudyName(fakePath);
-                assert.strictEqual(result, "locationValue");
-                assert((client.pathTemplates.studyPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchStudyFromStudyName', async () => {
-                const result = await client.matchStudyFromStudyName(fakePath);
-                assert.strictEqual(result, "studyValue");
-                assert((client.pathTemplates.studyPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-        });
-
-        describe('tensorboard', async () => {
-            const fakePath = "/rendered/path/tensorboard";
-            const expectedParameters = {
-                project: "projectValue",
-                location: "locationValue",
-                tensorboard: "tensorboardValue",
-            };
-            const client = new extensionexecutionserviceModule.v1beta1.ExtensionExecutionServiceClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            client.pathTemplates.tensorboardPathTemplate.render =
-                sinon.stub().returns(fakePath);
-            client.pathTemplates.tensorboardPathTemplate.match =
-                sinon.stub().returns(expectedParameters);
-
-            it('tensorboardPath', async () => {
-                const result = await client.tensorboardPath("projectValue", "locationValue", "tensorboardValue");
-                assert.strictEqual(result, fakePath);
-                assert((client.pathTemplates.tensorboardPathTemplate.render as SinonStub)
-                    .getCall(-1).calledWith(expectedParameters));
-            });
-
-            it('matchProjectFromTensorboardName', async () => {
-                const result = await client.matchProjectFromTensorboardName(fakePath);
-                assert.strictEqual(result, "projectValue");
-                assert((client.pathTemplates.tensorboardPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchLocationFromTensorboardName', async () => {
-                const result = await client.matchLocationFromTensorboardName(fakePath);
-                assert.strictEqual(result, "locationValue");
-                assert((client.pathTemplates.tensorboardPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchTensorboardFromTensorboardName', async () => {
-                const result = await client.matchTensorboardFromTensorboardName(fakePath);
-                assert.strictEqual(result, "tensorboardValue");
-                assert((client.pathTemplates.tensorboardPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-        });
-
-        describe('tensorboardExperiment', async () => {
-            const fakePath = "/rendered/path/tensorboardExperiment";
-            const expectedParameters = {
-                project: "projectValue",
-                location: "locationValue",
-                tensorboard: "tensorboardValue",
-                experiment: "experimentValue",
-            };
-            const client = new extensionexecutionserviceModule.v1beta1.ExtensionExecutionServiceClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            client.pathTemplates.tensorboardExperimentPathTemplate.render =
-                sinon.stub().returns(fakePath);
-            client.pathTemplates.tensorboardExperimentPathTemplate.match =
-                sinon.stub().returns(expectedParameters);
-
-            it('tensorboardExperimentPath', async () => {
-                const result = await client.tensorboardExperimentPath("projectValue", "locationValue", "tensorboardValue", "experimentValue");
-                assert.strictEqual(result, fakePath);
-                assert((client.pathTemplates.tensorboardExperimentPathTemplate.render as SinonStub)
-                    .getCall(-1).calledWith(expectedParameters));
-            });
-
-            it('matchProjectFromTensorboardExperimentName', async () => {
-                const result = await client.matchProjectFromTensorboardExperimentName(fakePath);
-                assert.strictEqual(result, "projectValue");
-                assert((client.pathTemplates.tensorboardExperimentPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchLocationFromTensorboardExperimentName', async () => {
-                const result = await client.matchLocationFromTensorboardExperimentName(fakePath);
-                assert.strictEqual(result, "locationValue");
-                assert((client.pathTemplates.tensorboardExperimentPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchTensorboardFromTensorboardExperimentName', async () => {
-                const result = await client.matchTensorboardFromTensorboardExperimentName(fakePath);
-                assert.strictEqual(result, "tensorboardValue");
-                assert((client.pathTemplates.tensorboardExperimentPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchExperimentFromTensorboardExperimentName', async () => {
-                const result = await client.matchExperimentFromTensorboardExperimentName(fakePath);
-                assert.strictEqual(result, "experimentValue");
-                assert((client.pathTemplates.tensorboardExperimentPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-        });
-
-        describe('tensorboardRun', async () => {
-            const fakePath = "/rendered/path/tensorboardRun";
-            const expectedParameters = {
-                project: "projectValue",
-                location: "locationValue",
-                tensorboard: "tensorboardValue",
-                experiment: "experimentValue",
-                run: "runValue",
-            };
-            const client = new extensionexecutionserviceModule.v1beta1.ExtensionExecutionServiceClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            client.pathTemplates.tensorboardRunPathTemplate.render =
-                sinon.stub().returns(fakePath);
-            client.pathTemplates.tensorboardRunPathTemplate.match =
-                sinon.stub().returns(expectedParameters);
-
-            it('tensorboardRunPath', async () => {
-                const result = await client.tensorboardRunPath("projectValue", "locationValue", "tensorboardValue", "experimentValue", "runValue");
-                assert.strictEqual(result, fakePath);
-                assert((client.pathTemplates.tensorboardRunPathTemplate.render as SinonStub)
-                    .getCall(-1).calledWith(expectedParameters));
-            });
-
-            it('matchProjectFromTensorboardRunName', async () => {
-                const result = await client.matchProjectFromTensorboardRunName(fakePath);
-                assert.strictEqual(result, "projectValue");
-                assert((client.pathTemplates.tensorboardRunPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchLocationFromTensorboardRunName', async () => {
-                const result = await client.matchLocationFromTensorboardRunName(fakePath);
-                assert.strictEqual(result, "locationValue");
-                assert((client.pathTemplates.tensorboardRunPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchTensorboardFromTensorboardRunName', async () => {
-                const result = await client.matchTensorboardFromTensorboardRunName(fakePath);
-                assert.strictEqual(result, "tensorboardValue");
-                assert((client.pathTemplates.tensorboardRunPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchExperimentFromTensorboardRunName', async () => {
-                const result = await client.matchExperimentFromTensorboardRunName(fakePath);
-                assert.strictEqual(result, "experimentValue");
-                assert((client.pathTemplates.tensorboardRunPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchRunFromTensorboardRunName', async () => {
-                const result = await client.matchRunFromTensorboardRunName(fakePath);
-                assert.strictEqual(result, "runValue");
-                assert((client.pathTemplates.tensorboardRunPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-        });
-
-        describe('tensorboardTimeSeries', async () => {
-            const fakePath = "/rendered/path/tensorboardTimeSeries";
-            const expectedParameters = {
-                project: "projectValue",
-                location: "locationValue",
-                tensorboard: "tensorboardValue",
-                experiment: "experimentValue",
-                run: "runValue",
-                time_series: "timeSeriesValue",
-            };
-            const client = new extensionexecutionserviceModule.v1beta1.ExtensionExecutionServiceClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            client.pathTemplates.tensorboardTimeSeriesPathTemplate.render =
-                sinon.stub().returns(fakePath);
-            client.pathTemplates.tensorboardTimeSeriesPathTemplate.match =
-                sinon.stub().returns(expectedParameters);
-
-            it('tensorboardTimeSeriesPath', async () => {
-                const result = await client.tensorboardTimeSeriesPath("projectValue", "locationValue", "tensorboardValue", "experimentValue", "runValue", "timeSeriesValue");
-                assert.strictEqual(result, fakePath);
-                assert((client.pathTemplates.tensorboardTimeSeriesPathTemplate.render as SinonStub)
-                    .getCall(-1).calledWith(expectedParameters));
-            });
-
-            it('matchProjectFromTensorboardTimeSeriesName', async () => {
-                const result = await client.matchProjectFromTensorboardTimeSeriesName(fakePath);
-                assert.strictEqual(result, "projectValue");
-                assert((client.pathTemplates.tensorboardTimeSeriesPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchLocationFromTensorboardTimeSeriesName', async () => {
-                const result = await client.matchLocationFromTensorboardTimeSeriesName(fakePath);
-                assert.strictEqual(result, "locationValue");
-                assert((client.pathTemplates.tensorboardTimeSeriesPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchTensorboardFromTensorboardTimeSeriesName', async () => {
-                const result = await client.matchTensorboardFromTensorboardTimeSeriesName(fakePath);
-                assert.strictEqual(result, "tensorboardValue");
-                assert((client.pathTemplates.tensorboardTimeSeriesPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchExperimentFromTensorboardTimeSeriesName', async () => {
-                const result = await client.matchExperimentFromTensorboardTimeSeriesName(fakePath);
-                assert.strictEqual(result, "experimentValue");
-                assert((client.pathTemplates.tensorboardTimeSeriesPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchRunFromTensorboardTimeSeriesName', async () => {
-                const result = await client.matchRunFromTensorboardTimeSeriesName(fakePath);
-                assert.strictEqual(result, "runValue");
-                assert((client.pathTemplates.tensorboardTimeSeriesPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchTimeSeriesFromTensorboardTimeSeriesName', async () => {
-                const result = await client.matchTimeSeriesFromTensorboardTimeSeriesName(fakePath);
-                assert.strictEqual(result, "timeSeriesValue");
-                assert((client.pathTemplates.tensorboardTimeSeriesPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-        });
-
-        describe('trainingPipeline', async () => {
-            const fakePath = "/rendered/path/trainingPipeline";
-            const expectedParameters = {
-                project: "projectValue",
-                location: "locationValue",
-                training_pipeline: "trainingPipelineValue",
-            };
-            const client = new extensionexecutionserviceModule.v1beta1.ExtensionExecutionServiceClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            client.pathTemplates.trainingPipelinePathTemplate.render =
-                sinon.stub().returns(fakePath);
-            client.pathTemplates.trainingPipelinePathTemplate.match =
-                sinon.stub().returns(expectedParameters);
-
-            it('trainingPipelinePath', async () => {
-                const result = await client.trainingPipelinePath("projectValue", "locationValue", "trainingPipelineValue");
-                assert.strictEqual(result, fakePath);
-                assert((client.pathTemplates.trainingPipelinePathTemplate.render as SinonStub)
-                    .getCall(-1).calledWith(expectedParameters));
-            });
-
-            it('matchProjectFromTrainingPipelineName', async () => {
-                const result = await client.matchProjectFromTrainingPipelineName(fakePath);
-                assert.strictEqual(result, "projectValue");
-                assert((client.pathTemplates.trainingPipelinePathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchLocationFromTrainingPipelineName', async () => {
-                const result = await client.matchLocationFromTrainingPipelineName(fakePath);
-                assert.strictEqual(result, "locationValue");
-                assert((client.pathTemplates.trainingPipelinePathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchTrainingPipelineFromTrainingPipelineName', async () => {
-                const result = await client.matchTrainingPipelineFromTrainingPipelineName(fakePath);
-                assert.strictEqual(result, "trainingPipelineValue");
-                assert((client.pathTemplates.trainingPipelinePathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-        });
-
-        describe('trial', async () => {
-            const fakePath = "/rendered/path/trial";
-            const expectedParameters = {
-                project: "projectValue",
-                location: "locationValue",
-                study: "studyValue",
-                trial: "trialValue",
-            };
-            const client = new extensionexecutionserviceModule.v1beta1.ExtensionExecutionServiceClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            client.pathTemplates.trialPathTemplate.render =
-                sinon.stub().returns(fakePath);
-            client.pathTemplates.trialPathTemplate.match =
-                sinon.stub().returns(expectedParameters);
-
-            it('trialPath', async () => {
-                const result = await client.trialPath("projectValue", "locationValue", "studyValue", "trialValue");
-                assert.strictEqual(result, fakePath);
-                assert((client.pathTemplates.trialPathTemplate.render as SinonStub)
-                    .getCall(-1).calledWith(expectedParameters));
-            });
-
-            it('matchProjectFromTrialName', async () => {
-                const result = await client.matchProjectFromTrialName(fakePath);
-                assert.strictEqual(result, "projectValue");
-                assert((client.pathTemplates.trialPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchLocationFromTrialName', async () => {
-                const result = await client.matchLocationFromTrialName(fakePath);
-                assert.strictEqual(result, "locationValue");
-                assert((client.pathTemplates.trialPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchStudyFromTrialName', async () => {
-                const result = await client.matchStudyFromTrialName(fakePath);
-                assert.strictEqual(result, "studyValue");
-                assert((client.pathTemplates.trialPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchTrialFromTrialName', async () => {
-                const result = await client.matchTrialFromTrialName(fakePath);
-                assert.strictEqual(result, "trialValue");
-                assert((client.pathTemplates.trialPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-        });
-
-        describe('tuningJob', async () => {
-            const fakePath = "/rendered/path/tuningJob";
-            const expectedParameters = {
-                project: "projectValue",
-                location: "locationValue",
-                tuning_job: "tuningJobValue",
-            };
-            const client = new extensionexecutionserviceModule.v1beta1.ExtensionExecutionServiceClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            client.pathTemplates.tuningJobPathTemplate.render =
-                sinon.stub().returns(fakePath);
-            client.pathTemplates.tuningJobPathTemplate.match =
-                sinon.stub().returns(expectedParameters);
-
-            it('tuningJobPath', async () => {
-                const result = await client.tuningJobPath("projectValue", "locationValue", "tuningJobValue");
-                assert.strictEqual(result, fakePath);
-                assert((client.pathTemplates.tuningJobPathTemplate.render as SinonStub)
-                    .getCall(-1).calledWith(expectedParameters));
-            });
-
-            it('matchProjectFromTuningJobName', async () => {
-                const result = await client.matchProjectFromTuningJobName(fakePath);
-                assert.strictEqual(result, "projectValue");
-                assert((client.pathTemplates.tuningJobPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchLocationFromTuningJobName', async () => {
-                const result = await client.matchLocationFromTuningJobName(fakePath);
-                assert.strictEqual(result, "locationValue");
-                assert((client.pathTemplates.tuningJobPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchTuningJobFromTuningJobName', async () => {
-                const result = await client.matchTuningJobFromTuningJobName(fakePath);
-                assert.strictEqual(result, "tuningJobValue");
-                assert((client.pathTemplates.tuningJobPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-        });
+    it('invokes executeExtension with error', async () => {
+      const client =
+        new extensionexecutionserviceModule.v1beta1.ExtensionExecutionServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1beta1.ExecuteExtensionRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.ExecuteExtensionRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.executeExtension = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.executeExtension(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.executeExtension as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.executeExtension as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
+
+    it('invokes executeExtension with closed client', async () => {
+      const client =
+        new extensionexecutionserviceModule.v1beta1.ExtensionExecutionServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1beta1.ExecuteExtensionRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.ExecuteExtensionRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close().catch(err => {
+        throw err;
+      });
+      await assert.rejects(client.executeExtension(request), expectedError);
+    });
+  });
+
+  describe('queryExtension', () => {
+    it('invokes queryExtension without error', async () => {
+      const client =
+        new extensionexecutionserviceModule.v1beta1.ExtensionExecutionServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1beta1.QueryExtensionRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.QueryExtensionRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1beta1.QueryExtensionResponse()
+      );
+      client.innerApiCalls.queryExtension = stubSimpleCall(expectedResponse);
+      const [response] = await client.queryExtension(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.queryExtension as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.queryExtension as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes queryExtension without error using callback', async () => {
+      const client =
+        new extensionexecutionserviceModule.v1beta1.ExtensionExecutionServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1beta1.QueryExtensionRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.QueryExtensionRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1beta1.QueryExtensionResponse()
+      );
+      client.innerApiCalls.queryExtension =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.queryExtension(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.aiplatform.v1beta1.IQueryExtensionResponse | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.queryExtension as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.queryExtension as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes queryExtension with error', async () => {
+      const client =
+        new extensionexecutionserviceModule.v1beta1.ExtensionExecutionServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1beta1.QueryExtensionRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.QueryExtensionRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.queryExtension = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.queryExtension(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.queryExtension as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.queryExtension as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes queryExtension with closed client', async () => {
+      const client =
+        new extensionexecutionserviceModule.v1beta1.ExtensionExecutionServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1beta1.QueryExtensionRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.QueryExtensionRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close().catch(err => {
+        throw err;
+      });
+      await assert.rejects(client.queryExtension(request), expectedError);
+    });
+  });
+  describe('getIamPolicy', () => {
+    it('invokes getIamPolicy without error', async () => {
+      const client =
+        new extensionexecutionserviceModule.v1beta1.ExtensionExecutionServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      await client.initialize();
+      const request = generateSampleMessage(
+        new IamProtos.google.iam.v1.GetIamPolicyRequest()
+      );
+      request.resource = '';
+      const expectedHeaderRequestParams = 'resource=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new IamProtos.google.iam.v1.Policy()
+      );
+      client.iamClient.getIamPolicy = stubSimpleCall(expectedResponse);
+      const response = await client.getIamPolicy(request, expectedOptions);
+      assert.deepStrictEqual(response, [expectedResponse]);
+      assert(
+        (client.iamClient.getIamPolicy as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+    it('invokes getIamPolicy without error using callback', async () => {
+      const client =
+        new extensionexecutionserviceModule.v1beta1.ExtensionExecutionServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      await client.initialize();
+      const request = generateSampleMessage(
+        new IamProtos.google.iam.v1.GetIamPolicyRequest()
+      );
+      request.resource = '';
+      const expectedHeaderRequestParams = 'resource=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new IamProtos.google.iam.v1.Policy()
+      );
+      client.iamClient.getIamPolicy = sinon
+        .stub()
+        .callsArgWith(2, null, expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.getIamPolicy(
+          request,
+          expectedOptions,
+          (
+            err?: Error | null,
+            result?: IamProtos.google.iam.v1.Policy | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      assert((client.iamClient.getIamPolicy as SinonStub).getCall(0));
+    });
+    it('invokes getIamPolicy with error', async () => {
+      const client =
+        new extensionexecutionserviceModule.v1beta1.ExtensionExecutionServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      await client.initialize();
+      const request = generateSampleMessage(
+        new IamProtos.google.iam.v1.GetIamPolicyRequest()
+      );
+      request.resource = '';
+      const expectedHeaderRequestParams = 'resource=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedError = new Error('expected');
+      client.iamClient.getIamPolicy = stubSimpleCall(undefined, expectedError);
+      await assert.rejects(
+        client.getIamPolicy(request, expectedOptions),
+        expectedError
+      );
+      assert(
+        (client.iamClient.getIamPolicy as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+  });
+  describe('setIamPolicy', () => {
+    it('invokes setIamPolicy without error', async () => {
+      const client =
+        new extensionexecutionserviceModule.v1beta1.ExtensionExecutionServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      await client.initialize();
+      const request = generateSampleMessage(
+        new IamProtos.google.iam.v1.SetIamPolicyRequest()
+      );
+      request.resource = '';
+      const expectedHeaderRequestParams = 'resource=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new IamProtos.google.iam.v1.Policy()
+      );
+      client.iamClient.setIamPolicy = stubSimpleCall(expectedResponse);
+      const response = await client.setIamPolicy(request, expectedOptions);
+      assert.deepStrictEqual(response, [expectedResponse]);
+      assert(
+        (client.iamClient.setIamPolicy as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+    it('invokes setIamPolicy without error using callback', async () => {
+      const client =
+        new extensionexecutionserviceModule.v1beta1.ExtensionExecutionServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      await client.initialize();
+      const request = generateSampleMessage(
+        new IamProtos.google.iam.v1.SetIamPolicyRequest()
+      );
+      request.resource = '';
+      const expectedHeaderRequestParams = 'resource=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new IamProtos.google.iam.v1.Policy()
+      );
+      client.iamClient.setIamPolicy = sinon
+        .stub()
+        .callsArgWith(2, null, expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.setIamPolicy(
+          request,
+          expectedOptions,
+          (
+            err?: Error | null,
+            result?: IamProtos.google.iam.v1.Policy | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      assert((client.iamClient.setIamPolicy as SinonStub).getCall(0));
+    });
+    it('invokes setIamPolicy with error', async () => {
+      const client =
+        new extensionexecutionserviceModule.v1beta1.ExtensionExecutionServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      await client.initialize();
+      const request = generateSampleMessage(
+        new IamProtos.google.iam.v1.SetIamPolicyRequest()
+      );
+      request.resource = '';
+      const expectedHeaderRequestParams = 'resource=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedError = new Error('expected');
+      client.iamClient.setIamPolicy = stubSimpleCall(undefined, expectedError);
+      await assert.rejects(
+        client.setIamPolicy(request, expectedOptions),
+        expectedError
+      );
+      assert(
+        (client.iamClient.setIamPolicy as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+  });
+  describe('testIamPermissions', () => {
+    it('invokes testIamPermissions without error', async () => {
+      const client =
+        new extensionexecutionserviceModule.v1beta1.ExtensionExecutionServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      await client.initialize();
+      const request = generateSampleMessage(
+        new IamProtos.google.iam.v1.TestIamPermissionsRequest()
+      );
+      request.resource = '';
+      const expectedHeaderRequestParams = 'resource=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new IamProtos.google.iam.v1.TestIamPermissionsResponse()
+      );
+      client.iamClient.testIamPermissions = stubSimpleCall(expectedResponse);
+      const response = await client.testIamPermissions(
+        request,
+        expectedOptions
+      );
+      assert.deepStrictEqual(response, [expectedResponse]);
+      assert(
+        (client.iamClient.testIamPermissions as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+    it('invokes testIamPermissions without error using callback', async () => {
+      const client =
+        new extensionexecutionserviceModule.v1beta1.ExtensionExecutionServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      await client.initialize();
+      const request = generateSampleMessage(
+        new IamProtos.google.iam.v1.TestIamPermissionsRequest()
+      );
+      request.resource = '';
+      const expectedHeaderRequestParams = 'resource=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new IamProtos.google.iam.v1.TestIamPermissionsResponse()
+      );
+      client.iamClient.testIamPermissions = sinon
+        .stub()
+        .callsArgWith(2, null, expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.testIamPermissions(
+          request,
+          expectedOptions,
+          (
+            err?: Error | null,
+            result?: IamProtos.google.iam.v1.TestIamPermissionsResponse | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      assert((client.iamClient.testIamPermissions as SinonStub).getCall(0));
+    });
+    it('invokes testIamPermissions with error', async () => {
+      const client =
+        new extensionexecutionserviceModule.v1beta1.ExtensionExecutionServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      await client.initialize();
+      const request = generateSampleMessage(
+        new IamProtos.google.iam.v1.TestIamPermissionsRequest()
+      );
+      request.resource = '';
+      const expectedHeaderRequestParams = 'resource=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedError = new Error('expected');
+      client.iamClient.testIamPermissions = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.testIamPermissions(request, expectedOptions),
+        expectedError
+      );
+      assert(
+        (client.iamClient.testIamPermissions as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+  });
+  describe('getLocation', () => {
+    it('invokes getLocation without error', async () => {
+      const client =
+        new extensionexecutionserviceModule.v1beta1.ExtensionExecutionServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      await client.initialize();
+      const request = generateSampleMessage(
+        new LocationProtos.google.cloud.location.GetLocationRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new LocationProtos.google.cloud.location.Location()
+      );
+      client.locationsClient.getLocation = stubSimpleCall(expectedResponse);
+      const response = await client.getLocation(request, expectedOptions);
+      assert.deepStrictEqual(response, [expectedResponse]);
+      assert(
+        (client.locationsClient.getLocation as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+    it('invokes getLocation without error using callback', async () => {
+      const client =
+        new extensionexecutionserviceModule.v1beta1.ExtensionExecutionServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      await client.initialize();
+      const request = generateSampleMessage(
+        new LocationProtos.google.cloud.location.GetLocationRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new LocationProtos.google.cloud.location.Location()
+      );
+      client.locationsClient.getLocation = sinon
+        .stub()
+        .callsArgWith(2, null, expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.getLocation(
+          request,
+          expectedOptions,
+          (
+            err?: Error | null,
+            result?: LocationProtos.google.cloud.location.ILocation | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      assert((client.locationsClient.getLocation as SinonStub).getCall(0));
+    });
+    it('invokes getLocation with error', async () => {
+      const client =
+        new extensionexecutionserviceModule.v1beta1.ExtensionExecutionServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      await client.initialize();
+      const request = generateSampleMessage(
+        new LocationProtos.google.cloud.location.GetLocationRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedError = new Error('expected');
+      client.locationsClient.getLocation = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.getLocation(request, expectedOptions),
+        expectedError
+      );
+      assert(
+        (client.locationsClient.getLocation as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+  });
+  describe('listLocationsAsync', () => {
+    it('uses async iteration with listLocations without error', async () => {
+      const client =
+        new extensionexecutionserviceModule.v1beta1.ExtensionExecutionServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      await client.initialize();
+      const request = generateSampleMessage(
+        new LocationProtos.google.cloud.location.ListLocationsRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedResponse = [
+        generateSampleMessage(
+          new LocationProtos.google.cloud.location.Location()
+        ),
+        generateSampleMessage(
+          new LocationProtos.google.cloud.location.Location()
+        ),
+        generateSampleMessage(
+          new LocationProtos.google.cloud.location.Location()
+        ),
+      ];
+      client.locationsClient.descriptors.page.listLocations.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
+      const responses: LocationProtos.google.cloud.location.ILocation[] = [];
+      const iterable = await client.listLocationsAsync(request);
+      for await (const resource of iterable) {
+        responses.push(resource!);
+      }
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert.deepStrictEqual(
+        (
+          client.locationsClient.descriptors.page.listLocations
+            .asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request
+      );
+      assert(
+        (
+          client.locationsClient.descriptors.page.listLocations
+            .asyncIterate as SinonStub
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
+      );
+    });
+    it('uses async iteration with listLocations with error', async () => {
+      const client =
+        new extensionexecutionserviceModule.v1beta1.ExtensionExecutionServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      await client.initialize();
+      const request = generateSampleMessage(
+        new LocationProtos.google.cloud.location.ListLocationsRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedError = new Error('expected');
+      client.locationsClient.descriptors.page.listLocations.asyncIterate =
+        stubAsyncIterationCall(undefined, expectedError);
+      const iterable = await client.listLocationsAsync(request);
+      await assert.rejects(async () => {
+        const responses: LocationProtos.google.cloud.location.ILocation[] = [];
+        for await (const resource of iterable) {
+          responses.push(resource!);
+        }
+      });
+      assert.deepStrictEqual(
+        (
+          client.locationsClient.descriptors.page.listLocations
+            .asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request
+      );
+      assert(
+        (
+          client.locationsClient.descriptors.page.listLocations
+            .asyncIterate as SinonStub
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
+      );
+    });
+  });
+
+  describe('Path templates', () => {
+    describe('annotation', async () => {
+      const fakePath = '/rendered/path/annotation';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        dataset: 'datasetValue',
+        data_item: 'dataItemValue',
+        annotation: 'annotationValue',
+      };
+      const client =
+        new extensionexecutionserviceModule.v1beta1.ExtensionExecutionServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      await client.initialize();
+      client.pathTemplates.annotationPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.annotationPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('annotationPath', async () => {
+        const result = await client.annotationPath(
+          'projectValue',
+          'locationValue',
+          'datasetValue',
+          'dataItemValue',
+          'annotationValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.annotationPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromAnnotationName', async () => {
+        const result = await client.matchProjectFromAnnotationName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.annotationPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromAnnotationName', async () => {
+        const result = await client.matchLocationFromAnnotationName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.annotationPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchDatasetFromAnnotationName', async () => {
+        const result = await client.matchDatasetFromAnnotationName(fakePath);
+        assert.strictEqual(result, 'datasetValue');
+        assert(
+          (client.pathTemplates.annotationPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchDataItemFromAnnotationName', async () => {
+        const result = await client.matchDataItemFromAnnotationName(fakePath);
+        assert.strictEqual(result, 'dataItemValue');
+        assert(
+          (client.pathTemplates.annotationPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchAnnotationFromAnnotationName', async () => {
+        const result = await client.matchAnnotationFromAnnotationName(fakePath);
+        assert.strictEqual(result, 'annotationValue');
+        assert(
+          (client.pathTemplates.annotationPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('annotationSpec', async () => {
+      const fakePath = '/rendered/path/annotationSpec';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        dataset: 'datasetValue',
+        annotation_spec: 'annotationSpecValue',
+      };
+      const client =
+        new extensionexecutionserviceModule.v1beta1.ExtensionExecutionServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      await client.initialize();
+      client.pathTemplates.annotationSpecPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.annotationSpecPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('annotationSpecPath', async () => {
+        const result = await client.annotationSpecPath(
+          'projectValue',
+          'locationValue',
+          'datasetValue',
+          'annotationSpecValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.annotationSpecPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromAnnotationSpecName', async () => {
+        const result =
+          await client.matchProjectFromAnnotationSpecName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.annotationSpecPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromAnnotationSpecName', async () => {
+        const result =
+          await client.matchLocationFromAnnotationSpecName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.annotationSpecPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchDatasetFromAnnotationSpecName', async () => {
+        const result =
+          await client.matchDatasetFromAnnotationSpecName(fakePath);
+        assert.strictEqual(result, 'datasetValue');
+        assert(
+          (client.pathTemplates.annotationSpecPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchAnnotationSpecFromAnnotationSpecName', async () => {
+        const result =
+          await client.matchAnnotationSpecFromAnnotationSpecName(fakePath);
+        assert.strictEqual(result, 'annotationSpecValue');
+        assert(
+          (client.pathTemplates.annotationSpecPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('artifact', async () => {
+      const fakePath = '/rendered/path/artifact';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        metadata_store: 'metadataStoreValue',
+        artifact: 'artifactValue',
+      };
+      const client =
+        new extensionexecutionserviceModule.v1beta1.ExtensionExecutionServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      await client.initialize();
+      client.pathTemplates.artifactPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.artifactPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('artifactPath', async () => {
+        const result = await client.artifactPath(
+          'projectValue',
+          'locationValue',
+          'metadataStoreValue',
+          'artifactValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.artifactPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromArtifactName', async () => {
+        const result = await client.matchProjectFromArtifactName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.artifactPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromArtifactName', async () => {
+        const result = await client.matchLocationFromArtifactName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.artifactPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchMetadataStoreFromArtifactName', async () => {
+        const result =
+          await client.matchMetadataStoreFromArtifactName(fakePath);
+        assert.strictEqual(result, 'metadataStoreValue');
+        assert(
+          (client.pathTemplates.artifactPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchArtifactFromArtifactName', async () => {
+        const result = await client.matchArtifactFromArtifactName(fakePath);
+        assert.strictEqual(result, 'artifactValue');
+        assert(
+          (client.pathTemplates.artifactPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('batchPredictionJob', async () => {
+      const fakePath = '/rendered/path/batchPredictionJob';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        batch_prediction_job: 'batchPredictionJobValue',
+      };
+      const client =
+        new extensionexecutionserviceModule.v1beta1.ExtensionExecutionServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      await client.initialize();
+      client.pathTemplates.batchPredictionJobPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.batchPredictionJobPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('batchPredictionJobPath', async () => {
+        const result = await client.batchPredictionJobPath(
+          'projectValue',
+          'locationValue',
+          'batchPredictionJobValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates.batchPredictionJobPathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromBatchPredictionJobName', async () => {
+        const result =
+          await client.matchProjectFromBatchPredictionJobName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (
+            client.pathTemplates.batchPredictionJobPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromBatchPredictionJobName', async () => {
+        const result =
+          await client.matchLocationFromBatchPredictionJobName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (
+            client.pathTemplates.batchPredictionJobPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchBatchPredictionJobFromBatchPredictionJobName', async () => {
+        const result =
+          await client.matchBatchPredictionJobFromBatchPredictionJobName(
+            fakePath
+          );
+        assert.strictEqual(result, 'batchPredictionJobValue');
+        assert(
+          (
+            client.pathTemplates.batchPredictionJobPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('cachedContent', async () => {
+      const fakePath = '/rendered/path/cachedContent';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        cached_content: 'cachedContentValue',
+      };
+      const client =
+        new extensionexecutionserviceModule.v1beta1.ExtensionExecutionServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      await client.initialize();
+      client.pathTemplates.cachedContentPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.cachedContentPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('cachedContentPath', async () => {
+        const result = await client.cachedContentPath(
+          'projectValue',
+          'locationValue',
+          'cachedContentValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.cachedContentPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromCachedContentName', async () => {
+        const result = await client.matchProjectFromCachedContentName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.cachedContentPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromCachedContentName', async () => {
+        const result =
+          await client.matchLocationFromCachedContentName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.cachedContentPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchCachedContentFromCachedContentName', async () => {
+        const result =
+          await client.matchCachedContentFromCachedContentName(fakePath);
+        assert.strictEqual(result, 'cachedContentValue');
+        assert(
+          (client.pathTemplates.cachedContentPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('context', async () => {
+      const fakePath = '/rendered/path/context';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        metadata_store: 'metadataStoreValue',
+        context: 'contextValue',
+      };
+      const client =
+        new extensionexecutionserviceModule.v1beta1.ExtensionExecutionServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      await client.initialize();
+      client.pathTemplates.contextPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.contextPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('contextPath', async () => {
+        const result = await client.contextPath(
+          'projectValue',
+          'locationValue',
+          'metadataStoreValue',
+          'contextValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.contextPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromContextName', async () => {
+        const result = await client.matchProjectFromContextName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.contextPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromContextName', async () => {
+        const result = await client.matchLocationFromContextName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.contextPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchMetadataStoreFromContextName', async () => {
+        const result = await client.matchMetadataStoreFromContextName(fakePath);
+        assert.strictEqual(result, 'metadataStoreValue');
+        assert(
+          (client.pathTemplates.contextPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchContextFromContextName', async () => {
+        const result = await client.matchContextFromContextName(fakePath);
+        assert.strictEqual(result, 'contextValue');
+        assert(
+          (client.pathTemplates.contextPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('customJob', async () => {
+      const fakePath = '/rendered/path/customJob';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        custom_job: 'customJobValue',
+      };
+      const client =
+        new extensionexecutionserviceModule.v1beta1.ExtensionExecutionServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      await client.initialize();
+      client.pathTemplates.customJobPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.customJobPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('customJobPath', async () => {
+        const result = await client.customJobPath(
+          'projectValue',
+          'locationValue',
+          'customJobValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.customJobPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromCustomJobName', async () => {
+        const result = await client.matchProjectFromCustomJobName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.customJobPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromCustomJobName', async () => {
+        const result = await client.matchLocationFromCustomJobName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.customJobPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchCustomJobFromCustomJobName', async () => {
+        const result = await client.matchCustomJobFromCustomJobName(fakePath);
+        assert.strictEqual(result, 'customJobValue');
+        assert(
+          (client.pathTemplates.customJobPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('dataItem', async () => {
+      const fakePath = '/rendered/path/dataItem';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        dataset: 'datasetValue',
+        data_item: 'dataItemValue',
+      };
+      const client =
+        new extensionexecutionserviceModule.v1beta1.ExtensionExecutionServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      await client.initialize();
+      client.pathTemplates.dataItemPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.dataItemPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('dataItemPath', async () => {
+        const result = await client.dataItemPath(
+          'projectValue',
+          'locationValue',
+          'datasetValue',
+          'dataItemValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.dataItemPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromDataItemName', async () => {
+        const result = await client.matchProjectFromDataItemName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.dataItemPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromDataItemName', async () => {
+        const result = await client.matchLocationFromDataItemName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.dataItemPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchDatasetFromDataItemName', async () => {
+        const result = await client.matchDatasetFromDataItemName(fakePath);
+        assert.strictEqual(result, 'datasetValue');
+        assert(
+          (client.pathTemplates.dataItemPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchDataItemFromDataItemName', async () => {
+        const result = await client.matchDataItemFromDataItemName(fakePath);
+        assert.strictEqual(result, 'dataItemValue');
+        assert(
+          (client.pathTemplates.dataItemPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('dataLabelingJob', async () => {
+      const fakePath = '/rendered/path/dataLabelingJob';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        data_labeling_job: 'dataLabelingJobValue',
+      };
+      const client =
+        new extensionexecutionserviceModule.v1beta1.ExtensionExecutionServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      await client.initialize();
+      client.pathTemplates.dataLabelingJobPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.dataLabelingJobPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('dataLabelingJobPath', async () => {
+        const result = await client.dataLabelingJobPath(
+          'projectValue',
+          'locationValue',
+          'dataLabelingJobValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.dataLabelingJobPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromDataLabelingJobName', async () => {
+        const result =
+          await client.matchProjectFromDataLabelingJobName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.dataLabelingJobPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromDataLabelingJobName', async () => {
+        const result =
+          await client.matchLocationFromDataLabelingJobName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.dataLabelingJobPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchDataLabelingJobFromDataLabelingJobName', async () => {
+        const result =
+          await client.matchDataLabelingJobFromDataLabelingJobName(fakePath);
+        assert.strictEqual(result, 'dataLabelingJobValue');
+        assert(
+          (client.pathTemplates.dataLabelingJobPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('dataset', async () => {
+      const fakePath = '/rendered/path/dataset';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        dataset: 'datasetValue',
+      };
+      const client =
+        new extensionexecutionserviceModule.v1beta1.ExtensionExecutionServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      await client.initialize();
+      client.pathTemplates.datasetPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.datasetPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('datasetPath', async () => {
+        const result = await client.datasetPath(
+          'projectValue',
+          'locationValue',
+          'datasetValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.datasetPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromDatasetName', async () => {
+        const result = await client.matchProjectFromDatasetName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.datasetPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromDatasetName', async () => {
+        const result = await client.matchLocationFromDatasetName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.datasetPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchDatasetFromDatasetName', async () => {
+        const result = await client.matchDatasetFromDatasetName(fakePath);
+        assert.strictEqual(result, 'datasetValue');
+        assert(
+          (client.pathTemplates.datasetPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('datasetVersion', async () => {
+      const fakePath = '/rendered/path/datasetVersion';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        dataset: 'datasetValue',
+        dataset_version: 'datasetVersionValue',
+      };
+      const client =
+        new extensionexecutionserviceModule.v1beta1.ExtensionExecutionServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      await client.initialize();
+      client.pathTemplates.datasetVersionPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.datasetVersionPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('datasetVersionPath', async () => {
+        const result = await client.datasetVersionPath(
+          'projectValue',
+          'locationValue',
+          'datasetValue',
+          'datasetVersionValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.datasetVersionPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromDatasetVersionName', async () => {
+        const result =
+          await client.matchProjectFromDatasetVersionName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.datasetVersionPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromDatasetVersionName', async () => {
+        const result =
+          await client.matchLocationFromDatasetVersionName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.datasetVersionPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchDatasetFromDatasetVersionName', async () => {
+        const result =
+          await client.matchDatasetFromDatasetVersionName(fakePath);
+        assert.strictEqual(result, 'datasetValue');
+        assert(
+          (client.pathTemplates.datasetVersionPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchDatasetVersionFromDatasetVersionName', async () => {
+        const result =
+          await client.matchDatasetVersionFromDatasetVersionName(fakePath);
+        assert.strictEqual(result, 'datasetVersionValue');
+        assert(
+          (client.pathTemplates.datasetVersionPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('deploymentResourcePool', async () => {
+      const fakePath = '/rendered/path/deploymentResourcePool';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        deployment_resource_pool: 'deploymentResourcePoolValue',
+      };
+      const client =
+        new extensionexecutionserviceModule.v1beta1.ExtensionExecutionServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      await client.initialize();
+      client.pathTemplates.deploymentResourcePoolPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.deploymentResourcePoolPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('deploymentResourcePoolPath', async () => {
+        const result = await client.deploymentResourcePoolPath(
+          'projectValue',
+          'locationValue',
+          'deploymentResourcePoolValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates.deploymentResourcePoolPathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromDeploymentResourcePoolName', async () => {
+        const result =
+          await client.matchProjectFromDeploymentResourcePoolName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (
+            client.pathTemplates.deploymentResourcePoolPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromDeploymentResourcePoolName', async () => {
+        const result =
+          await client.matchLocationFromDeploymentResourcePoolName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (
+            client.pathTemplates.deploymentResourcePoolPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchDeploymentResourcePoolFromDeploymentResourcePoolName', async () => {
+        const result =
+          await client.matchDeploymentResourcePoolFromDeploymentResourcePoolName(
+            fakePath
+          );
+        assert.strictEqual(result, 'deploymentResourcePoolValue');
+        assert(
+          (
+            client.pathTemplates.deploymentResourcePoolPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('entityType', async () => {
+      const fakePath = '/rendered/path/entityType';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        featurestore: 'featurestoreValue',
+        entity_type: 'entityTypeValue',
+      };
+      const client =
+        new extensionexecutionserviceModule.v1beta1.ExtensionExecutionServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      await client.initialize();
+      client.pathTemplates.entityTypePathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.entityTypePathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('entityTypePath', async () => {
+        const result = await client.entityTypePath(
+          'projectValue',
+          'locationValue',
+          'featurestoreValue',
+          'entityTypeValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.entityTypePathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromEntityTypeName', async () => {
+        const result = await client.matchProjectFromEntityTypeName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.entityTypePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromEntityTypeName', async () => {
+        const result = await client.matchLocationFromEntityTypeName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.entityTypePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchFeaturestoreFromEntityTypeName', async () => {
+        const result =
+          await client.matchFeaturestoreFromEntityTypeName(fakePath);
+        assert.strictEqual(result, 'featurestoreValue');
+        assert(
+          (client.pathTemplates.entityTypePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchEntityTypeFromEntityTypeName', async () => {
+        const result = await client.matchEntityTypeFromEntityTypeName(fakePath);
+        assert.strictEqual(result, 'entityTypeValue');
+        assert(
+          (client.pathTemplates.entityTypePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('exampleStore', async () => {
+      const fakePath = '/rendered/path/exampleStore';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        example_store: 'exampleStoreValue',
+      };
+      const client =
+        new extensionexecutionserviceModule.v1beta1.ExtensionExecutionServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      await client.initialize();
+      client.pathTemplates.exampleStorePathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.exampleStorePathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('exampleStorePath', async () => {
+        const result = await client.exampleStorePath(
+          'projectValue',
+          'locationValue',
+          'exampleStoreValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.exampleStorePathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromExampleStoreName', async () => {
+        const result = await client.matchProjectFromExampleStoreName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.exampleStorePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromExampleStoreName', async () => {
+        const result = await client.matchLocationFromExampleStoreName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.exampleStorePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchExampleStoreFromExampleStoreName', async () => {
+        const result =
+          await client.matchExampleStoreFromExampleStoreName(fakePath);
+        assert.strictEqual(result, 'exampleStoreValue');
+        assert(
+          (client.pathTemplates.exampleStorePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('execution', async () => {
+      const fakePath = '/rendered/path/execution';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        metadata_store: 'metadataStoreValue',
+        execution: 'executionValue',
+      };
+      const client =
+        new extensionexecutionserviceModule.v1beta1.ExtensionExecutionServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      await client.initialize();
+      client.pathTemplates.executionPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.executionPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('executionPath', async () => {
+        const result = await client.executionPath(
+          'projectValue',
+          'locationValue',
+          'metadataStoreValue',
+          'executionValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.executionPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromExecutionName', async () => {
+        const result = await client.matchProjectFromExecutionName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.executionPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromExecutionName', async () => {
+        const result = await client.matchLocationFromExecutionName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.executionPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchMetadataStoreFromExecutionName', async () => {
+        const result =
+          await client.matchMetadataStoreFromExecutionName(fakePath);
+        assert.strictEqual(result, 'metadataStoreValue');
+        assert(
+          (client.pathTemplates.executionPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchExecutionFromExecutionName', async () => {
+        const result = await client.matchExecutionFromExecutionName(fakePath);
+        assert.strictEqual(result, 'executionValue');
+        assert(
+          (client.pathTemplates.executionPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('extension', async () => {
+      const fakePath = '/rendered/path/extension';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        extension: 'extensionValue',
+      };
+      const client =
+        new extensionexecutionserviceModule.v1beta1.ExtensionExecutionServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      await client.initialize();
+      client.pathTemplates.extensionPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.extensionPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('extensionPath', async () => {
+        const result = await client.extensionPath(
+          'projectValue',
+          'locationValue',
+          'extensionValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.extensionPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromExtensionName', async () => {
+        const result = await client.matchProjectFromExtensionName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.extensionPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromExtensionName', async () => {
+        const result = await client.matchLocationFromExtensionName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.extensionPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchExtensionFromExtensionName', async () => {
+        const result = await client.matchExtensionFromExtensionName(fakePath);
+        assert.strictEqual(result, 'extensionValue');
+        assert(
+          (client.pathTemplates.extensionPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('featureGroup', async () => {
+      const fakePath = '/rendered/path/featureGroup';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        feature_group: 'featureGroupValue',
+      };
+      const client =
+        new extensionexecutionserviceModule.v1beta1.ExtensionExecutionServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      await client.initialize();
+      client.pathTemplates.featureGroupPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.featureGroupPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('featureGroupPath', async () => {
+        const result = await client.featureGroupPath(
+          'projectValue',
+          'locationValue',
+          'featureGroupValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.featureGroupPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromFeatureGroupName', async () => {
+        const result = await client.matchProjectFromFeatureGroupName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.featureGroupPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromFeatureGroupName', async () => {
+        const result = await client.matchLocationFromFeatureGroupName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.featureGroupPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchFeatureGroupFromFeatureGroupName', async () => {
+        const result =
+          await client.matchFeatureGroupFromFeatureGroupName(fakePath);
+        assert.strictEqual(result, 'featureGroupValue');
+        assert(
+          (client.pathTemplates.featureGroupPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('featureMonitor', async () => {
+      const fakePath = '/rendered/path/featureMonitor';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        feature_group: 'featureGroupValue',
+        feature_monitor: 'featureMonitorValue',
+      };
+      const client =
+        new extensionexecutionserviceModule.v1beta1.ExtensionExecutionServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      await client.initialize();
+      client.pathTemplates.featureMonitorPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.featureMonitorPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('featureMonitorPath', async () => {
+        const result = await client.featureMonitorPath(
+          'projectValue',
+          'locationValue',
+          'featureGroupValue',
+          'featureMonitorValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.featureMonitorPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromFeatureMonitorName', async () => {
+        const result =
+          await client.matchProjectFromFeatureMonitorName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.featureMonitorPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromFeatureMonitorName', async () => {
+        const result =
+          await client.matchLocationFromFeatureMonitorName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.featureMonitorPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchFeatureGroupFromFeatureMonitorName', async () => {
+        const result =
+          await client.matchFeatureGroupFromFeatureMonitorName(fakePath);
+        assert.strictEqual(result, 'featureGroupValue');
+        assert(
+          (client.pathTemplates.featureMonitorPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchFeatureMonitorFromFeatureMonitorName', async () => {
+        const result =
+          await client.matchFeatureMonitorFromFeatureMonitorName(fakePath);
+        assert.strictEqual(result, 'featureMonitorValue');
+        assert(
+          (client.pathTemplates.featureMonitorPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('featureMonitorJob', async () => {
+      const fakePath = '/rendered/path/featureMonitorJob';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        feature_group: 'featureGroupValue',
+        feature_monitor: 'featureMonitorValue',
+        feature_monitor_job: 'featureMonitorJobValue',
+      };
+      const client =
+        new extensionexecutionserviceModule.v1beta1.ExtensionExecutionServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      await client.initialize();
+      client.pathTemplates.featureMonitorJobPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.featureMonitorJobPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('featureMonitorJobPath', async () => {
+        const result = await client.featureMonitorJobPath(
+          'projectValue',
+          'locationValue',
+          'featureGroupValue',
+          'featureMonitorValue',
+          'featureMonitorJobValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates.featureMonitorJobPathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromFeatureMonitorJobName', async () => {
+        const result =
+          await client.matchProjectFromFeatureMonitorJobName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (
+            client.pathTemplates.featureMonitorJobPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromFeatureMonitorJobName', async () => {
+        const result =
+          await client.matchLocationFromFeatureMonitorJobName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (
+            client.pathTemplates.featureMonitorJobPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchFeatureGroupFromFeatureMonitorJobName', async () => {
+        const result =
+          await client.matchFeatureGroupFromFeatureMonitorJobName(fakePath);
+        assert.strictEqual(result, 'featureGroupValue');
+        assert(
+          (
+            client.pathTemplates.featureMonitorJobPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchFeatureMonitorFromFeatureMonitorJobName', async () => {
+        const result =
+          await client.matchFeatureMonitorFromFeatureMonitorJobName(fakePath);
+        assert.strictEqual(result, 'featureMonitorValue');
+        assert(
+          (
+            client.pathTemplates.featureMonitorJobPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchFeatureMonitorJobFromFeatureMonitorJobName', async () => {
+        const result =
+          await client.matchFeatureMonitorJobFromFeatureMonitorJobName(
+            fakePath
+          );
+        assert.strictEqual(result, 'featureMonitorJobValue');
+        assert(
+          (
+            client.pathTemplates.featureMonitorJobPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('featureOnlineStore', async () => {
+      const fakePath = '/rendered/path/featureOnlineStore';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        feature_online_store: 'featureOnlineStoreValue',
+      };
+      const client =
+        new extensionexecutionserviceModule.v1beta1.ExtensionExecutionServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      await client.initialize();
+      client.pathTemplates.featureOnlineStorePathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.featureOnlineStorePathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('featureOnlineStorePath', async () => {
+        const result = await client.featureOnlineStorePath(
+          'projectValue',
+          'locationValue',
+          'featureOnlineStoreValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates.featureOnlineStorePathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromFeatureOnlineStoreName', async () => {
+        const result =
+          await client.matchProjectFromFeatureOnlineStoreName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (
+            client.pathTemplates.featureOnlineStorePathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromFeatureOnlineStoreName', async () => {
+        const result =
+          await client.matchLocationFromFeatureOnlineStoreName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (
+            client.pathTemplates.featureOnlineStorePathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchFeatureOnlineStoreFromFeatureOnlineStoreName', async () => {
+        const result =
+          await client.matchFeatureOnlineStoreFromFeatureOnlineStoreName(
+            fakePath
+          );
+        assert.strictEqual(result, 'featureOnlineStoreValue');
+        assert(
+          (
+            client.pathTemplates.featureOnlineStorePathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('featureView', async () => {
+      const fakePath = '/rendered/path/featureView';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        feature_online_store: 'featureOnlineStoreValue',
+        feature_view: 'featureViewValue',
+      };
+      const client =
+        new extensionexecutionserviceModule.v1beta1.ExtensionExecutionServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      await client.initialize();
+      client.pathTemplates.featureViewPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.featureViewPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('featureViewPath', async () => {
+        const result = await client.featureViewPath(
+          'projectValue',
+          'locationValue',
+          'featureOnlineStoreValue',
+          'featureViewValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.featureViewPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromFeatureViewName', async () => {
+        const result = await client.matchProjectFromFeatureViewName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.featureViewPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromFeatureViewName', async () => {
+        const result = await client.matchLocationFromFeatureViewName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.featureViewPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchFeatureOnlineStoreFromFeatureViewName', async () => {
+        const result =
+          await client.matchFeatureOnlineStoreFromFeatureViewName(fakePath);
+        assert.strictEqual(result, 'featureOnlineStoreValue');
+        assert(
+          (client.pathTemplates.featureViewPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchFeatureViewFromFeatureViewName', async () => {
+        const result =
+          await client.matchFeatureViewFromFeatureViewName(fakePath);
+        assert.strictEqual(result, 'featureViewValue');
+        assert(
+          (client.pathTemplates.featureViewPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('featureViewSync', async () => {
+      const fakePath = '/rendered/path/featureViewSync';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        feature_online_store: 'featureOnlineStoreValue',
+        feature_view: 'featureViewValue',
+      };
+      const client =
+        new extensionexecutionserviceModule.v1beta1.ExtensionExecutionServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      await client.initialize();
+      client.pathTemplates.featureViewSyncPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.featureViewSyncPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('featureViewSyncPath', async () => {
+        const result = await client.featureViewSyncPath(
+          'projectValue',
+          'locationValue',
+          'featureOnlineStoreValue',
+          'featureViewValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.featureViewSyncPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromFeatureViewSyncName', async () => {
+        const result =
+          await client.matchProjectFromFeatureViewSyncName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.featureViewSyncPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromFeatureViewSyncName', async () => {
+        const result =
+          await client.matchLocationFromFeatureViewSyncName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.featureViewSyncPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchFeatureOnlineStoreFromFeatureViewSyncName', async () => {
+        const result =
+          await client.matchFeatureOnlineStoreFromFeatureViewSyncName(fakePath);
+        assert.strictEqual(result, 'featureOnlineStoreValue');
+        assert(
+          (client.pathTemplates.featureViewSyncPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchFeatureViewFromFeatureViewSyncName', async () => {
+        const result =
+          await client.matchFeatureViewFromFeatureViewSyncName(fakePath);
+        assert.strictEqual(result, 'featureViewValue');
+        assert(
+          (client.pathTemplates.featureViewSyncPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('featurestore', async () => {
+      const fakePath = '/rendered/path/featurestore';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        featurestore: 'featurestoreValue',
+      };
+      const client =
+        new extensionexecutionserviceModule.v1beta1.ExtensionExecutionServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      await client.initialize();
+      client.pathTemplates.featurestorePathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.featurestorePathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('featurestorePath', async () => {
+        const result = await client.featurestorePath(
+          'projectValue',
+          'locationValue',
+          'featurestoreValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.featurestorePathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromFeaturestoreName', async () => {
+        const result = await client.matchProjectFromFeaturestoreName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.featurestorePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromFeaturestoreName', async () => {
+        const result = await client.matchLocationFromFeaturestoreName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.featurestorePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchFeaturestoreFromFeaturestoreName', async () => {
+        const result =
+          await client.matchFeaturestoreFromFeaturestoreName(fakePath);
+        assert.strictEqual(result, 'featurestoreValue');
+        assert(
+          (client.pathTemplates.featurestorePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('hyperparameterTuningJob', async () => {
+      const fakePath = '/rendered/path/hyperparameterTuningJob';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        hyperparameter_tuning_job: 'hyperparameterTuningJobValue',
+      };
+      const client =
+        new extensionexecutionserviceModule.v1beta1.ExtensionExecutionServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      await client.initialize();
+      client.pathTemplates.hyperparameterTuningJobPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.hyperparameterTuningJobPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('hyperparameterTuningJobPath', async () => {
+        const result = await client.hyperparameterTuningJobPath(
+          'projectValue',
+          'locationValue',
+          'hyperparameterTuningJobValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates.hyperparameterTuningJobPathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromHyperparameterTuningJobName', async () => {
+        const result =
+          await client.matchProjectFromHyperparameterTuningJobName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (
+            client.pathTemplates.hyperparameterTuningJobPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromHyperparameterTuningJobName', async () => {
+        const result =
+          await client.matchLocationFromHyperparameterTuningJobName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (
+            client.pathTemplates.hyperparameterTuningJobPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchHyperparameterTuningJobFromHyperparameterTuningJobName', async () => {
+        const result =
+          await client.matchHyperparameterTuningJobFromHyperparameterTuningJobName(
+            fakePath
+          );
+        assert.strictEqual(result, 'hyperparameterTuningJobValue');
+        assert(
+          (
+            client.pathTemplates.hyperparameterTuningJobPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('index', async () => {
+      const fakePath = '/rendered/path/index';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        index: 'indexValue',
+      };
+      const client =
+        new extensionexecutionserviceModule.v1beta1.ExtensionExecutionServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      await client.initialize();
+      client.pathTemplates.indexPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.indexPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('indexPath', async () => {
+        const result = await client.indexPath(
+          'projectValue',
+          'locationValue',
+          'indexValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.indexPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromIndexName', async () => {
+        const result = await client.matchProjectFromIndexName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.indexPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromIndexName', async () => {
+        const result = await client.matchLocationFromIndexName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.indexPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchIndexFromIndexName', async () => {
+        const result = await client.matchIndexFromIndexName(fakePath);
+        assert.strictEqual(result, 'indexValue');
+        assert(
+          (client.pathTemplates.indexPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('indexEndpoint', async () => {
+      const fakePath = '/rendered/path/indexEndpoint';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        index_endpoint: 'indexEndpointValue',
+      };
+      const client =
+        new extensionexecutionserviceModule.v1beta1.ExtensionExecutionServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      await client.initialize();
+      client.pathTemplates.indexEndpointPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.indexEndpointPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('indexEndpointPath', async () => {
+        const result = await client.indexEndpointPath(
+          'projectValue',
+          'locationValue',
+          'indexEndpointValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.indexEndpointPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromIndexEndpointName', async () => {
+        const result = await client.matchProjectFromIndexEndpointName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.indexEndpointPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromIndexEndpointName', async () => {
+        const result =
+          await client.matchLocationFromIndexEndpointName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.indexEndpointPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchIndexEndpointFromIndexEndpointName', async () => {
+        const result =
+          await client.matchIndexEndpointFromIndexEndpointName(fakePath);
+        assert.strictEqual(result, 'indexEndpointValue');
+        assert(
+          (client.pathTemplates.indexEndpointPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('metadataSchema', async () => {
+      const fakePath = '/rendered/path/metadataSchema';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        metadata_store: 'metadataStoreValue',
+        metadata_schema: 'metadataSchemaValue',
+      };
+      const client =
+        new extensionexecutionserviceModule.v1beta1.ExtensionExecutionServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      await client.initialize();
+      client.pathTemplates.metadataSchemaPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.metadataSchemaPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('metadataSchemaPath', async () => {
+        const result = await client.metadataSchemaPath(
+          'projectValue',
+          'locationValue',
+          'metadataStoreValue',
+          'metadataSchemaValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.metadataSchemaPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromMetadataSchemaName', async () => {
+        const result =
+          await client.matchProjectFromMetadataSchemaName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.metadataSchemaPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromMetadataSchemaName', async () => {
+        const result =
+          await client.matchLocationFromMetadataSchemaName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.metadataSchemaPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchMetadataStoreFromMetadataSchemaName', async () => {
+        const result =
+          await client.matchMetadataStoreFromMetadataSchemaName(fakePath);
+        assert.strictEqual(result, 'metadataStoreValue');
+        assert(
+          (client.pathTemplates.metadataSchemaPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchMetadataSchemaFromMetadataSchemaName', async () => {
+        const result =
+          await client.matchMetadataSchemaFromMetadataSchemaName(fakePath);
+        assert.strictEqual(result, 'metadataSchemaValue');
+        assert(
+          (client.pathTemplates.metadataSchemaPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('metadataStore', async () => {
+      const fakePath = '/rendered/path/metadataStore';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        metadata_store: 'metadataStoreValue',
+      };
+      const client =
+        new extensionexecutionserviceModule.v1beta1.ExtensionExecutionServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      await client.initialize();
+      client.pathTemplates.metadataStorePathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.metadataStorePathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('metadataStorePath', async () => {
+        const result = await client.metadataStorePath(
+          'projectValue',
+          'locationValue',
+          'metadataStoreValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.metadataStorePathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromMetadataStoreName', async () => {
+        const result = await client.matchProjectFromMetadataStoreName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.metadataStorePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromMetadataStoreName', async () => {
+        const result =
+          await client.matchLocationFromMetadataStoreName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.metadataStorePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchMetadataStoreFromMetadataStoreName', async () => {
+        const result =
+          await client.matchMetadataStoreFromMetadataStoreName(fakePath);
+        assert.strictEqual(result, 'metadataStoreValue');
+        assert(
+          (client.pathTemplates.metadataStorePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('model', async () => {
+      const fakePath = '/rendered/path/model';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        model: 'modelValue',
+      };
+      const client =
+        new extensionexecutionserviceModule.v1beta1.ExtensionExecutionServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      await client.initialize();
+      client.pathTemplates.modelPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.modelPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('modelPath', async () => {
+        const result = await client.modelPath(
+          'projectValue',
+          'locationValue',
+          'modelValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.modelPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromModelName', async () => {
+        const result = await client.matchProjectFromModelName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.modelPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromModelName', async () => {
+        const result = await client.matchLocationFromModelName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.modelPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchModelFromModelName', async () => {
+        const result = await client.matchModelFromModelName(fakePath);
+        assert.strictEqual(result, 'modelValue');
+        assert(
+          (client.pathTemplates.modelPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('modelDeploymentMonitoringJob', async () => {
+      const fakePath = '/rendered/path/modelDeploymentMonitoringJob';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        model_deployment_monitoring_job: 'modelDeploymentMonitoringJobValue',
+      };
+      const client =
+        new extensionexecutionserviceModule.v1beta1.ExtensionExecutionServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      await client.initialize();
+      client.pathTemplates.modelDeploymentMonitoringJobPathTemplate.render =
+        sinon.stub().returns(fakePath);
+      client.pathTemplates.modelDeploymentMonitoringJobPathTemplate.match =
+        sinon.stub().returns(expectedParameters);
+
+      it('modelDeploymentMonitoringJobPath', async () => {
+        const result = await client.modelDeploymentMonitoringJobPath(
+          'projectValue',
+          'locationValue',
+          'modelDeploymentMonitoringJobValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates.modelDeploymentMonitoringJobPathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromModelDeploymentMonitoringJobName', async () => {
+        const result =
+          await client.matchProjectFromModelDeploymentMonitoringJobName(
+            fakePath
+          );
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (
+            client.pathTemplates.modelDeploymentMonitoringJobPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromModelDeploymentMonitoringJobName', async () => {
+        const result =
+          await client.matchLocationFromModelDeploymentMonitoringJobName(
+            fakePath
+          );
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (
+            client.pathTemplates.modelDeploymentMonitoringJobPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchModelDeploymentMonitoringJobFromModelDeploymentMonitoringJobName', async () => {
+        const result =
+          await client.matchModelDeploymentMonitoringJobFromModelDeploymentMonitoringJobName(
+            fakePath
+          );
+        assert.strictEqual(result, 'modelDeploymentMonitoringJobValue');
+        assert(
+          (
+            client.pathTemplates.modelDeploymentMonitoringJobPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('modelEvaluation', async () => {
+      const fakePath = '/rendered/path/modelEvaluation';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        model: 'modelValue',
+        evaluation: 'evaluationValue',
+      };
+      const client =
+        new extensionexecutionserviceModule.v1beta1.ExtensionExecutionServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      await client.initialize();
+      client.pathTemplates.modelEvaluationPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.modelEvaluationPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('modelEvaluationPath', async () => {
+        const result = await client.modelEvaluationPath(
+          'projectValue',
+          'locationValue',
+          'modelValue',
+          'evaluationValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.modelEvaluationPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromModelEvaluationName', async () => {
+        const result =
+          await client.matchProjectFromModelEvaluationName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.modelEvaluationPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromModelEvaluationName', async () => {
+        const result =
+          await client.matchLocationFromModelEvaluationName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.modelEvaluationPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchModelFromModelEvaluationName', async () => {
+        const result = await client.matchModelFromModelEvaluationName(fakePath);
+        assert.strictEqual(result, 'modelValue');
+        assert(
+          (client.pathTemplates.modelEvaluationPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchEvaluationFromModelEvaluationName', async () => {
+        const result =
+          await client.matchEvaluationFromModelEvaluationName(fakePath);
+        assert.strictEqual(result, 'evaluationValue');
+        assert(
+          (client.pathTemplates.modelEvaluationPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('modelEvaluationSlice', async () => {
+      const fakePath = '/rendered/path/modelEvaluationSlice';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        model: 'modelValue',
+        evaluation: 'evaluationValue',
+        slice: 'sliceValue',
+      };
+      const client =
+        new extensionexecutionserviceModule.v1beta1.ExtensionExecutionServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      await client.initialize();
+      client.pathTemplates.modelEvaluationSlicePathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.modelEvaluationSlicePathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('modelEvaluationSlicePath', async () => {
+        const result = await client.modelEvaluationSlicePath(
+          'projectValue',
+          'locationValue',
+          'modelValue',
+          'evaluationValue',
+          'sliceValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates.modelEvaluationSlicePathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromModelEvaluationSliceName', async () => {
+        const result =
+          await client.matchProjectFromModelEvaluationSliceName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (
+            client.pathTemplates.modelEvaluationSlicePathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromModelEvaluationSliceName', async () => {
+        const result =
+          await client.matchLocationFromModelEvaluationSliceName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (
+            client.pathTemplates.modelEvaluationSlicePathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchModelFromModelEvaluationSliceName', async () => {
+        const result =
+          await client.matchModelFromModelEvaluationSliceName(fakePath);
+        assert.strictEqual(result, 'modelValue');
+        assert(
+          (
+            client.pathTemplates.modelEvaluationSlicePathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchEvaluationFromModelEvaluationSliceName', async () => {
+        const result =
+          await client.matchEvaluationFromModelEvaluationSliceName(fakePath);
+        assert.strictEqual(result, 'evaluationValue');
+        assert(
+          (
+            client.pathTemplates.modelEvaluationSlicePathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchSliceFromModelEvaluationSliceName', async () => {
+        const result =
+          await client.matchSliceFromModelEvaluationSliceName(fakePath);
+        assert.strictEqual(result, 'sliceValue');
+        assert(
+          (
+            client.pathTemplates.modelEvaluationSlicePathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('modelMonitor', async () => {
+      const fakePath = '/rendered/path/modelMonitor';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        model_monitor: 'modelMonitorValue',
+      };
+      const client =
+        new extensionexecutionserviceModule.v1beta1.ExtensionExecutionServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      await client.initialize();
+      client.pathTemplates.modelMonitorPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.modelMonitorPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('modelMonitorPath', async () => {
+        const result = await client.modelMonitorPath(
+          'projectValue',
+          'locationValue',
+          'modelMonitorValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.modelMonitorPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromModelMonitorName', async () => {
+        const result = await client.matchProjectFromModelMonitorName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.modelMonitorPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromModelMonitorName', async () => {
+        const result = await client.matchLocationFromModelMonitorName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.modelMonitorPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchModelMonitorFromModelMonitorName', async () => {
+        const result =
+          await client.matchModelMonitorFromModelMonitorName(fakePath);
+        assert.strictEqual(result, 'modelMonitorValue');
+        assert(
+          (client.pathTemplates.modelMonitorPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('modelMonitoringJob', async () => {
+      const fakePath = '/rendered/path/modelMonitoringJob';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        model_monitor: 'modelMonitorValue',
+        model_monitoring_job: 'modelMonitoringJobValue',
+      };
+      const client =
+        new extensionexecutionserviceModule.v1beta1.ExtensionExecutionServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      await client.initialize();
+      client.pathTemplates.modelMonitoringJobPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.modelMonitoringJobPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('modelMonitoringJobPath', async () => {
+        const result = await client.modelMonitoringJobPath(
+          'projectValue',
+          'locationValue',
+          'modelMonitorValue',
+          'modelMonitoringJobValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates.modelMonitoringJobPathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromModelMonitoringJobName', async () => {
+        const result =
+          await client.matchProjectFromModelMonitoringJobName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (
+            client.pathTemplates.modelMonitoringJobPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromModelMonitoringJobName', async () => {
+        const result =
+          await client.matchLocationFromModelMonitoringJobName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (
+            client.pathTemplates.modelMonitoringJobPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchModelMonitorFromModelMonitoringJobName', async () => {
+        const result =
+          await client.matchModelMonitorFromModelMonitoringJobName(fakePath);
+        assert.strictEqual(result, 'modelMonitorValue');
+        assert(
+          (
+            client.pathTemplates.modelMonitoringJobPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchModelMonitoringJobFromModelMonitoringJobName', async () => {
+        const result =
+          await client.matchModelMonitoringJobFromModelMonitoringJobName(
+            fakePath
+          );
+        assert.strictEqual(result, 'modelMonitoringJobValue');
+        assert(
+          (
+            client.pathTemplates.modelMonitoringJobPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('nasJob', async () => {
+      const fakePath = '/rendered/path/nasJob';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        nas_job: 'nasJobValue',
+      };
+      const client =
+        new extensionexecutionserviceModule.v1beta1.ExtensionExecutionServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      await client.initialize();
+      client.pathTemplates.nasJobPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.nasJobPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('nasJobPath', async () => {
+        const result = await client.nasJobPath(
+          'projectValue',
+          'locationValue',
+          'nasJobValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.nasJobPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromNasJobName', async () => {
+        const result = await client.matchProjectFromNasJobName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.nasJobPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromNasJobName', async () => {
+        const result = await client.matchLocationFromNasJobName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.nasJobPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchNasJobFromNasJobName', async () => {
+        const result = await client.matchNasJobFromNasJobName(fakePath);
+        assert.strictEqual(result, 'nasJobValue');
+        assert(
+          (client.pathTemplates.nasJobPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('nasTrialDetail', async () => {
+      const fakePath = '/rendered/path/nasTrialDetail';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        nas_job: 'nasJobValue',
+        nas_trial_detail: 'nasTrialDetailValue',
+      };
+      const client =
+        new extensionexecutionserviceModule.v1beta1.ExtensionExecutionServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      await client.initialize();
+      client.pathTemplates.nasTrialDetailPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.nasTrialDetailPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('nasTrialDetailPath', async () => {
+        const result = await client.nasTrialDetailPath(
+          'projectValue',
+          'locationValue',
+          'nasJobValue',
+          'nasTrialDetailValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.nasTrialDetailPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromNasTrialDetailName', async () => {
+        const result =
+          await client.matchProjectFromNasTrialDetailName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.nasTrialDetailPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromNasTrialDetailName', async () => {
+        const result =
+          await client.matchLocationFromNasTrialDetailName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.nasTrialDetailPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchNasJobFromNasTrialDetailName', async () => {
+        const result = await client.matchNasJobFromNasTrialDetailName(fakePath);
+        assert.strictEqual(result, 'nasJobValue');
+        assert(
+          (client.pathTemplates.nasTrialDetailPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchNasTrialDetailFromNasTrialDetailName', async () => {
+        const result =
+          await client.matchNasTrialDetailFromNasTrialDetailName(fakePath);
+        assert.strictEqual(result, 'nasTrialDetailValue');
+        assert(
+          (client.pathTemplates.nasTrialDetailPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('notebookExecutionJob', async () => {
+      const fakePath = '/rendered/path/notebookExecutionJob';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        notebook_execution_job: 'notebookExecutionJobValue',
+      };
+      const client =
+        new extensionexecutionserviceModule.v1beta1.ExtensionExecutionServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      await client.initialize();
+      client.pathTemplates.notebookExecutionJobPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.notebookExecutionJobPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('notebookExecutionJobPath', async () => {
+        const result = await client.notebookExecutionJobPath(
+          'projectValue',
+          'locationValue',
+          'notebookExecutionJobValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates.notebookExecutionJobPathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromNotebookExecutionJobName', async () => {
+        const result =
+          await client.matchProjectFromNotebookExecutionJobName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (
+            client.pathTemplates.notebookExecutionJobPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromNotebookExecutionJobName', async () => {
+        const result =
+          await client.matchLocationFromNotebookExecutionJobName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (
+            client.pathTemplates.notebookExecutionJobPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchNotebookExecutionJobFromNotebookExecutionJobName', async () => {
+        const result =
+          await client.matchNotebookExecutionJobFromNotebookExecutionJobName(
+            fakePath
+          );
+        assert.strictEqual(result, 'notebookExecutionJobValue');
+        assert(
+          (
+            client.pathTemplates.notebookExecutionJobPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('notebookRuntime', async () => {
+      const fakePath = '/rendered/path/notebookRuntime';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        notebook_runtime: 'notebookRuntimeValue',
+      };
+      const client =
+        new extensionexecutionserviceModule.v1beta1.ExtensionExecutionServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      await client.initialize();
+      client.pathTemplates.notebookRuntimePathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.notebookRuntimePathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('notebookRuntimePath', async () => {
+        const result = await client.notebookRuntimePath(
+          'projectValue',
+          'locationValue',
+          'notebookRuntimeValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.notebookRuntimePathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromNotebookRuntimeName', async () => {
+        const result =
+          await client.matchProjectFromNotebookRuntimeName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.notebookRuntimePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromNotebookRuntimeName', async () => {
+        const result =
+          await client.matchLocationFromNotebookRuntimeName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.notebookRuntimePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchNotebookRuntimeFromNotebookRuntimeName', async () => {
+        const result =
+          await client.matchNotebookRuntimeFromNotebookRuntimeName(fakePath);
+        assert.strictEqual(result, 'notebookRuntimeValue');
+        assert(
+          (client.pathTemplates.notebookRuntimePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('notebookRuntimeTemplate', async () => {
+      const fakePath = '/rendered/path/notebookRuntimeTemplate';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        notebook_runtime_template: 'notebookRuntimeTemplateValue',
+      };
+      const client =
+        new extensionexecutionserviceModule.v1beta1.ExtensionExecutionServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      await client.initialize();
+      client.pathTemplates.notebookRuntimeTemplatePathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.notebookRuntimeTemplatePathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('notebookRuntimeTemplatePath', async () => {
+        const result = await client.notebookRuntimeTemplatePath(
+          'projectValue',
+          'locationValue',
+          'notebookRuntimeTemplateValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates.notebookRuntimeTemplatePathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromNotebookRuntimeTemplateName', async () => {
+        const result =
+          await client.matchProjectFromNotebookRuntimeTemplateName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (
+            client.pathTemplates.notebookRuntimeTemplatePathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromNotebookRuntimeTemplateName', async () => {
+        const result =
+          await client.matchLocationFromNotebookRuntimeTemplateName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (
+            client.pathTemplates.notebookRuntimeTemplatePathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchNotebookRuntimeTemplateFromNotebookRuntimeTemplateName', async () => {
+        const result =
+          await client.matchNotebookRuntimeTemplateFromNotebookRuntimeTemplateName(
+            fakePath
+          );
+        assert.strictEqual(result, 'notebookRuntimeTemplateValue');
+        assert(
+          (
+            client.pathTemplates.notebookRuntimeTemplatePathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('persistentResource', async () => {
+      const fakePath = '/rendered/path/persistentResource';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        persistent_resource: 'persistentResourceValue',
+      };
+      const client =
+        new extensionexecutionserviceModule.v1beta1.ExtensionExecutionServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      await client.initialize();
+      client.pathTemplates.persistentResourcePathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.persistentResourcePathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('persistentResourcePath', async () => {
+        const result = await client.persistentResourcePath(
+          'projectValue',
+          'locationValue',
+          'persistentResourceValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates.persistentResourcePathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromPersistentResourceName', async () => {
+        const result =
+          await client.matchProjectFromPersistentResourceName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (
+            client.pathTemplates.persistentResourcePathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromPersistentResourceName', async () => {
+        const result =
+          await client.matchLocationFromPersistentResourceName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (
+            client.pathTemplates.persistentResourcePathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchPersistentResourceFromPersistentResourceName', async () => {
+        const result =
+          await client.matchPersistentResourceFromPersistentResourceName(
+            fakePath
+          );
+        assert.strictEqual(result, 'persistentResourceValue');
+        assert(
+          (
+            client.pathTemplates.persistentResourcePathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('pipelineJob', async () => {
+      const fakePath = '/rendered/path/pipelineJob';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        pipeline_job: 'pipelineJobValue',
+      };
+      const client =
+        new extensionexecutionserviceModule.v1beta1.ExtensionExecutionServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      await client.initialize();
+      client.pathTemplates.pipelineJobPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.pipelineJobPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('pipelineJobPath', async () => {
+        const result = await client.pipelineJobPath(
+          'projectValue',
+          'locationValue',
+          'pipelineJobValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.pipelineJobPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromPipelineJobName', async () => {
+        const result = await client.matchProjectFromPipelineJobName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.pipelineJobPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromPipelineJobName', async () => {
+        const result = await client.matchLocationFromPipelineJobName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.pipelineJobPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchPipelineJobFromPipelineJobName', async () => {
+        const result =
+          await client.matchPipelineJobFromPipelineJobName(fakePath);
+        assert.strictEqual(result, 'pipelineJobValue');
+        assert(
+          (client.pathTemplates.pipelineJobPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('projectLocationEndpoint', async () => {
+      const fakePath = '/rendered/path/projectLocationEndpoint';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        endpoint: 'endpointValue',
+      };
+      const client =
+        new extensionexecutionserviceModule.v1beta1.ExtensionExecutionServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      await client.initialize();
+      client.pathTemplates.projectLocationEndpointPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.projectLocationEndpointPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('projectLocationEndpointPath', async () => {
+        const result = await client.projectLocationEndpointPath(
+          'projectValue',
+          'locationValue',
+          'endpointValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates.projectLocationEndpointPathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromProjectLocationEndpointName', async () => {
+        const result =
+          await client.matchProjectFromProjectLocationEndpointName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (
+            client.pathTemplates.projectLocationEndpointPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromProjectLocationEndpointName', async () => {
+        const result =
+          await client.matchLocationFromProjectLocationEndpointName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (
+            client.pathTemplates.projectLocationEndpointPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchEndpointFromProjectLocationEndpointName', async () => {
+        const result =
+          await client.matchEndpointFromProjectLocationEndpointName(fakePath);
+        assert.strictEqual(result, 'endpointValue');
+        assert(
+          (
+            client.pathTemplates.projectLocationEndpointPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('projectLocationFeatureGroupFeature', async () => {
+      const fakePath = '/rendered/path/projectLocationFeatureGroupFeature';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        feature_group: 'featureGroupValue',
+        feature: 'featureValue',
+      };
+      const client =
+        new extensionexecutionserviceModule.v1beta1.ExtensionExecutionServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      await client.initialize();
+      client.pathTemplates.projectLocationFeatureGroupFeaturePathTemplate.render =
+        sinon.stub().returns(fakePath);
+      client.pathTemplates.projectLocationFeatureGroupFeaturePathTemplate.match =
+        sinon.stub().returns(expectedParameters);
+
+      it('projectLocationFeatureGroupFeaturePath', async () => {
+        const result = await client.projectLocationFeatureGroupFeaturePath(
+          'projectValue',
+          'locationValue',
+          'featureGroupValue',
+          'featureValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates.projectLocationFeatureGroupFeaturePathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromProjectLocationFeatureGroupFeatureName', async () => {
+        const result =
+          await client.matchProjectFromProjectLocationFeatureGroupFeatureName(
+            fakePath
+          );
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (
+            client.pathTemplates.projectLocationFeatureGroupFeaturePathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromProjectLocationFeatureGroupFeatureName', async () => {
+        const result =
+          await client.matchLocationFromProjectLocationFeatureGroupFeatureName(
+            fakePath
+          );
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (
+            client.pathTemplates.projectLocationFeatureGroupFeaturePathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchFeatureGroupFromProjectLocationFeatureGroupFeatureName', async () => {
+        const result =
+          await client.matchFeatureGroupFromProjectLocationFeatureGroupFeatureName(
+            fakePath
+          );
+        assert.strictEqual(result, 'featureGroupValue');
+        assert(
+          (
+            client.pathTemplates.projectLocationFeatureGroupFeaturePathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchFeatureFromProjectLocationFeatureGroupFeatureName', async () => {
+        const result =
+          await client.matchFeatureFromProjectLocationFeatureGroupFeatureName(
+            fakePath
+          );
+        assert.strictEqual(result, 'featureValue');
+        assert(
+          (
+            client.pathTemplates.projectLocationFeatureGroupFeaturePathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('projectLocationFeaturestoreEntityTypeFeature', async () => {
+      const fakePath =
+        '/rendered/path/projectLocationFeaturestoreEntityTypeFeature';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        featurestore: 'featurestoreValue',
+        entity_type: 'entityTypeValue',
+        feature: 'featureValue',
+      };
+      const client =
+        new extensionexecutionserviceModule.v1beta1.ExtensionExecutionServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      await client.initialize();
+      client.pathTemplates.projectLocationFeaturestoreEntityTypeFeaturePathTemplate.render =
+        sinon.stub().returns(fakePath);
+      client.pathTemplates.projectLocationFeaturestoreEntityTypeFeaturePathTemplate.match =
+        sinon.stub().returns(expectedParameters);
+
+      it('projectLocationFeaturestoreEntityTypeFeaturePath', async () => {
+        const result =
+          await client.projectLocationFeaturestoreEntityTypeFeaturePath(
+            'projectValue',
+            'locationValue',
+            'featurestoreValue',
+            'entityTypeValue',
+            'featureValue'
+          );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates
+              .projectLocationFeaturestoreEntityTypeFeaturePathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromProjectLocationFeaturestoreEntityTypeFeatureName', async () => {
+        const result =
+          await client.matchProjectFromProjectLocationFeaturestoreEntityTypeFeatureName(
+            fakePath
+          );
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (
+            client.pathTemplates
+              .projectLocationFeaturestoreEntityTypeFeaturePathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromProjectLocationFeaturestoreEntityTypeFeatureName', async () => {
+        const result =
+          await client.matchLocationFromProjectLocationFeaturestoreEntityTypeFeatureName(
+            fakePath
+          );
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (
+            client.pathTemplates
+              .projectLocationFeaturestoreEntityTypeFeaturePathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchFeaturestoreFromProjectLocationFeaturestoreEntityTypeFeatureName', async () => {
+        const result =
+          await client.matchFeaturestoreFromProjectLocationFeaturestoreEntityTypeFeatureName(
+            fakePath
+          );
+        assert.strictEqual(result, 'featurestoreValue');
+        assert(
+          (
+            client.pathTemplates
+              .projectLocationFeaturestoreEntityTypeFeaturePathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchEntityTypeFromProjectLocationFeaturestoreEntityTypeFeatureName', async () => {
+        const result =
+          await client.matchEntityTypeFromProjectLocationFeaturestoreEntityTypeFeatureName(
+            fakePath
+          );
+        assert.strictEqual(result, 'entityTypeValue');
+        assert(
+          (
+            client.pathTemplates
+              .projectLocationFeaturestoreEntityTypeFeaturePathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchFeatureFromProjectLocationFeaturestoreEntityTypeFeatureName', async () => {
+        const result =
+          await client.matchFeatureFromProjectLocationFeaturestoreEntityTypeFeatureName(
+            fakePath
+          );
+        assert.strictEqual(result, 'featureValue');
+        assert(
+          (
+            client.pathTemplates
+              .projectLocationFeaturestoreEntityTypeFeaturePathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('projectLocationPublisherModel', async () => {
+      const fakePath = '/rendered/path/projectLocationPublisherModel';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        publisher: 'publisherValue',
+        model: 'modelValue',
+      };
+      const client =
+        new extensionexecutionserviceModule.v1beta1.ExtensionExecutionServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      await client.initialize();
+      client.pathTemplates.projectLocationPublisherModelPathTemplate.render =
+        sinon.stub().returns(fakePath);
+      client.pathTemplates.projectLocationPublisherModelPathTemplate.match =
+        sinon.stub().returns(expectedParameters);
+
+      it('projectLocationPublisherModelPath', async () => {
+        const result = await client.projectLocationPublisherModelPath(
+          'projectValue',
+          'locationValue',
+          'publisherValue',
+          'modelValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates.projectLocationPublisherModelPathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromProjectLocationPublisherModelName', async () => {
+        const result =
+          await client.matchProjectFromProjectLocationPublisherModelName(
+            fakePath
+          );
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (
+            client.pathTemplates.projectLocationPublisherModelPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromProjectLocationPublisherModelName', async () => {
+        const result =
+          await client.matchLocationFromProjectLocationPublisherModelName(
+            fakePath
+          );
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (
+            client.pathTemplates.projectLocationPublisherModelPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchPublisherFromProjectLocationPublisherModelName', async () => {
+        const result =
+          await client.matchPublisherFromProjectLocationPublisherModelName(
+            fakePath
+          );
+        assert.strictEqual(result, 'publisherValue');
+        assert(
+          (
+            client.pathTemplates.projectLocationPublisherModelPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchModelFromProjectLocationPublisherModelName', async () => {
+        const result =
+          await client.matchModelFromProjectLocationPublisherModelName(
+            fakePath
+          );
+        assert.strictEqual(result, 'modelValue');
+        assert(
+          (
+            client.pathTemplates.projectLocationPublisherModelPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('projectLocationReasoningEngineSession', async () => {
+      const fakePath = '/rendered/path/projectLocationReasoningEngineSession';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        reasoning_engine: 'reasoningEngineValue',
+        session: 'sessionValue',
+      };
+      const client =
+        new extensionexecutionserviceModule.v1beta1.ExtensionExecutionServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      await client.initialize();
+      client.pathTemplates.projectLocationReasoningEngineSessionPathTemplate.render =
+        sinon.stub().returns(fakePath);
+      client.pathTemplates.projectLocationReasoningEngineSessionPathTemplate.match =
+        sinon.stub().returns(expectedParameters);
+
+      it('projectLocationReasoningEngineSessionPath', async () => {
+        const result = await client.projectLocationReasoningEngineSessionPath(
+          'projectValue',
+          'locationValue',
+          'reasoningEngineValue',
+          'sessionValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates
+              .projectLocationReasoningEngineSessionPathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromProjectLocationReasoningEngineSessionName', async () => {
+        const result =
+          await client.matchProjectFromProjectLocationReasoningEngineSessionName(
+            fakePath
+          );
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (
+            client.pathTemplates
+              .projectLocationReasoningEngineSessionPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromProjectLocationReasoningEngineSessionName', async () => {
+        const result =
+          await client.matchLocationFromProjectLocationReasoningEngineSessionName(
+            fakePath
+          );
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (
+            client.pathTemplates
+              .projectLocationReasoningEngineSessionPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchReasoningEngineFromProjectLocationReasoningEngineSessionName', async () => {
+        const result =
+          await client.matchReasoningEngineFromProjectLocationReasoningEngineSessionName(
+            fakePath
+          );
+        assert.strictEqual(result, 'reasoningEngineValue');
+        assert(
+          (
+            client.pathTemplates
+              .projectLocationReasoningEngineSessionPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchSessionFromProjectLocationReasoningEngineSessionName', async () => {
+        const result =
+          await client.matchSessionFromProjectLocationReasoningEngineSessionName(
+            fakePath
+          );
+        assert.strictEqual(result, 'sessionValue');
+        assert(
+          (
+            client.pathTemplates
+              .projectLocationReasoningEngineSessionPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('projectLocationReasoningEngineSessionEvent', async () => {
+      const fakePath =
+        '/rendered/path/projectLocationReasoningEngineSessionEvent';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        reasoning_engine: 'reasoningEngineValue',
+        session: 'sessionValue',
+        event: 'eventValue',
+      };
+      const client =
+        new extensionexecutionserviceModule.v1beta1.ExtensionExecutionServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      await client.initialize();
+      client.pathTemplates.projectLocationReasoningEngineSessionEventPathTemplate.render =
+        sinon.stub().returns(fakePath);
+      client.pathTemplates.projectLocationReasoningEngineSessionEventPathTemplate.match =
+        sinon.stub().returns(expectedParameters);
+
+      it('projectLocationReasoningEngineSessionEventPath', async () => {
+        const result =
+          await client.projectLocationReasoningEngineSessionEventPath(
+            'projectValue',
+            'locationValue',
+            'reasoningEngineValue',
+            'sessionValue',
+            'eventValue'
+          );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates
+              .projectLocationReasoningEngineSessionEventPathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromProjectLocationReasoningEngineSessionEventName', async () => {
+        const result =
+          await client.matchProjectFromProjectLocationReasoningEngineSessionEventName(
+            fakePath
+          );
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (
+            client.pathTemplates
+              .projectLocationReasoningEngineSessionEventPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromProjectLocationReasoningEngineSessionEventName', async () => {
+        const result =
+          await client.matchLocationFromProjectLocationReasoningEngineSessionEventName(
+            fakePath
+          );
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (
+            client.pathTemplates
+              .projectLocationReasoningEngineSessionEventPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchReasoningEngineFromProjectLocationReasoningEngineSessionEventName', async () => {
+        const result =
+          await client.matchReasoningEngineFromProjectLocationReasoningEngineSessionEventName(
+            fakePath
+          );
+        assert.strictEqual(result, 'reasoningEngineValue');
+        assert(
+          (
+            client.pathTemplates
+              .projectLocationReasoningEngineSessionEventPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchSessionFromProjectLocationReasoningEngineSessionEventName', async () => {
+        const result =
+          await client.matchSessionFromProjectLocationReasoningEngineSessionEventName(
+            fakePath
+          );
+        assert.strictEqual(result, 'sessionValue');
+        assert(
+          (
+            client.pathTemplates
+              .projectLocationReasoningEngineSessionEventPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchEventFromProjectLocationReasoningEngineSessionEventName', async () => {
+        const result =
+          await client.matchEventFromProjectLocationReasoningEngineSessionEventName(
+            fakePath
+          );
+        assert.strictEqual(result, 'eventValue');
+        assert(
+          (
+            client.pathTemplates
+              .projectLocationReasoningEngineSessionEventPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('projectLocationSession', async () => {
+      const fakePath = '/rendered/path/projectLocationSession';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        session: 'sessionValue',
+      };
+      const client =
+        new extensionexecutionserviceModule.v1beta1.ExtensionExecutionServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      await client.initialize();
+      client.pathTemplates.projectLocationSessionPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.projectLocationSessionPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('projectLocationSessionPath', async () => {
+        const result = await client.projectLocationSessionPath(
+          'projectValue',
+          'locationValue',
+          'sessionValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates.projectLocationSessionPathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromProjectLocationSessionName', async () => {
+        const result =
+          await client.matchProjectFromProjectLocationSessionName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (
+            client.pathTemplates.projectLocationSessionPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromProjectLocationSessionName', async () => {
+        const result =
+          await client.matchLocationFromProjectLocationSessionName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (
+            client.pathTemplates.projectLocationSessionPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchSessionFromProjectLocationSessionName', async () => {
+        const result =
+          await client.matchSessionFromProjectLocationSessionName(fakePath);
+        assert.strictEqual(result, 'sessionValue');
+        assert(
+          (
+            client.pathTemplates.projectLocationSessionPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('projectLocationSessionEvent', async () => {
+      const fakePath = '/rendered/path/projectLocationSessionEvent';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        session: 'sessionValue',
+        event: 'eventValue',
+      };
+      const client =
+        new extensionexecutionserviceModule.v1beta1.ExtensionExecutionServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      await client.initialize();
+      client.pathTemplates.projectLocationSessionEventPathTemplate.render =
+        sinon.stub().returns(fakePath);
+      client.pathTemplates.projectLocationSessionEventPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('projectLocationSessionEventPath', async () => {
+        const result = await client.projectLocationSessionEventPath(
+          'projectValue',
+          'locationValue',
+          'sessionValue',
+          'eventValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates.projectLocationSessionEventPathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromProjectLocationSessionEventName', async () => {
+        const result =
+          await client.matchProjectFromProjectLocationSessionEventName(
+            fakePath
+          );
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (
+            client.pathTemplates.projectLocationSessionEventPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromProjectLocationSessionEventName', async () => {
+        const result =
+          await client.matchLocationFromProjectLocationSessionEventName(
+            fakePath
+          );
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (
+            client.pathTemplates.projectLocationSessionEventPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchSessionFromProjectLocationSessionEventName', async () => {
+        const result =
+          await client.matchSessionFromProjectLocationSessionEventName(
+            fakePath
+          );
+        assert.strictEqual(result, 'sessionValue');
+        assert(
+          (
+            client.pathTemplates.projectLocationSessionEventPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchEventFromProjectLocationSessionEventName', async () => {
+        const result =
+          await client.matchEventFromProjectLocationSessionEventName(fakePath);
+        assert.strictEqual(result, 'eventValue');
+        assert(
+          (
+            client.pathTemplates.projectLocationSessionEventPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('publisherModel', async () => {
+      const fakePath = '/rendered/path/publisherModel';
+      const expectedParameters = {
+        publisher: 'publisherValue',
+        model: 'modelValue',
+      };
+      const client =
+        new extensionexecutionserviceModule.v1beta1.ExtensionExecutionServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      await client.initialize();
+      client.pathTemplates.publisherModelPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.publisherModelPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('publisherModelPath', async () => {
+        const result = await client.publisherModelPath(
+          'publisherValue',
+          'modelValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.publisherModelPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchPublisherFromPublisherModelName', async () => {
+        const result =
+          await client.matchPublisherFromPublisherModelName(fakePath);
+        assert.strictEqual(result, 'publisherValue');
+        assert(
+          (client.pathTemplates.publisherModelPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchModelFromPublisherModelName', async () => {
+        const result = await client.matchModelFromPublisherModelName(fakePath);
+        assert.strictEqual(result, 'modelValue');
+        assert(
+          (client.pathTemplates.publisherModelPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('ragCorpus', async () => {
+      const fakePath = '/rendered/path/ragCorpus';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        rag_corpus: 'ragCorpusValue',
+      };
+      const client =
+        new extensionexecutionserviceModule.v1beta1.ExtensionExecutionServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      await client.initialize();
+      client.pathTemplates.ragCorpusPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.ragCorpusPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('ragCorpusPath', async () => {
+        const result = await client.ragCorpusPath(
+          'projectValue',
+          'locationValue',
+          'ragCorpusValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.ragCorpusPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromRagCorpusName', async () => {
+        const result = await client.matchProjectFromRagCorpusName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.ragCorpusPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromRagCorpusName', async () => {
+        const result = await client.matchLocationFromRagCorpusName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.ragCorpusPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchRagCorpusFromRagCorpusName', async () => {
+        const result = await client.matchRagCorpusFromRagCorpusName(fakePath);
+        assert.strictEqual(result, 'ragCorpusValue');
+        assert(
+          (client.pathTemplates.ragCorpusPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('ragFile', async () => {
+      const fakePath = '/rendered/path/ragFile';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        rag_corpus: 'ragCorpusValue',
+        rag_file: 'ragFileValue',
+      };
+      const client =
+        new extensionexecutionserviceModule.v1beta1.ExtensionExecutionServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      await client.initialize();
+      client.pathTemplates.ragFilePathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.ragFilePathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('ragFilePath', async () => {
+        const result = await client.ragFilePath(
+          'projectValue',
+          'locationValue',
+          'ragCorpusValue',
+          'ragFileValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.ragFilePathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromRagFileName', async () => {
+        const result = await client.matchProjectFromRagFileName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.ragFilePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromRagFileName', async () => {
+        const result = await client.matchLocationFromRagFileName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.ragFilePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchRagCorpusFromRagFileName', async () => {
+        const result = await client.matchRagCorpusFromRagFileName(fakePath);
+        assert.strictEqual(result, 'ragCorpusValue');
+        assert(
+          (client.pathTemplates.ragFilePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchRagFileFromRagFileName', async () => {
+        const result = await client.matchRagFileFromRagFileName(fakePath);
+        assert.strictEqual(result, 'ragFileValue');
+        assert(
+          (client.pathTemplates.ragFilePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('reasoningEngine', async () => {
+      const fakePath = '/rendered/path/reasoningEngine';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        reasoning_engine: 'reasoningEngineValue',
+      };
+      const client =
+        new extensionexecutionserviceModule.v1beta1.ExtensionExecutionServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      await client.initialize();
+      client.pathTemplates.reasoningEnginePathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.reasoningEnginePathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('reasoningEnginePath', async () => {
+        const result = await client.reasoningEnginePath(
+          'projectValue',
+          'locationValue',
+          'reasoningEngineValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.reasoningEnginePathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromReasoningEngineName', async () => {
+        const result =
+          await client.matchProjectFromReasoningEngineName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.reasoningEnginePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromReasoningEngineName', async () => {
+        const result =
+          await client.matchLocationFromReasoningEngineName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.reasoningEnginePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchReasoningEngineFromReasoningEngineName', async () => {
+        const result =
+          await client.matchReasoningEngineFromReasoningEngineName(fakePath);
+        assert.strictEqual(result, 'reasoningEngineValue');
+        assert(
+          (client.pathTemplates.reasoningEnginePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('savedQuery', async () => {
+      const fakePath = '/rendered/path/savedQuery';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        dataset: 'datasetValue',
+        saved_query: 'savedQueryValue',
+      };
+      const client =
+        new extensionexecutionserviceModule.v1beta1.ExtensionExecutionServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      await client.initialize();
+      client.pathTemplates.savedQueryPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.savedQueryPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('savedQueryPath', async () => {
+        const result = await client.savedQueryPath(
+          'projectValue',
+          'locationValue',
+          'datasetValue',
+          'savedQueryValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.savedQueryPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromSavedQueryName', async () => {
+        const result = await client.matchProjectFromSavedQueryName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.savedQueryPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromSavedQueryName', async () => {
+        const result = await client.matchLocationFromSavedQueryName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.savedQueryPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchDatasetFromSavedQueryName', async () => {
+        const result = await client.matchDatasetFromSavedQueryName(fakePath);
+        assert.strictEqual(result, 'datasetValue');
+        assert(
+          (client.pathTemplates.savedQueryPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchSavedQueryFromSavedQueryName', async () => {
+        const result = await client.matchSavedQueryFromSavedQueryName(fakePath);
+        assert.strictEqual(result, 'savedQueryValue');
+        assert(
+          (client.pathTemplates.savedQueryPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('schedule', async () => {
+      const fakePath = '/rendered/path/schedule';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        schedule: 'scheduleValue',
+      };
+      const client =
+        new extensionexecutionserviceModule.v1beta1.ExtensionExecutionServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      await client.initialize();
+      client.pathTemplates.schedulePathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.schedulePathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('schedulePath', async () => {
+        const result = await client.schedulePath(
+          'projectValue',
+          'locationValue',
+          'scheduleValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.schedulePathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromScheduleName', async () => {
+        const result = await client.matchProjectFromScheduleName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.schedulePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromScheduleName', async () => {
+        const result = await client.matchLocationFromScheduleName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.schedulePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchScheduleFromScheduleName', async () => {
+        const result = await client.matchScheduleFromScheduleName(fakePath);
+        assert.strictEqual(result, 'scheduleValue');
+        assert(
+          (client.pathTemplates.schedulePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('specialistPool', async () => {
+      const fakePath = '/rendered/path/specialistPool';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        specialist_pool: 'specialistPoolValue',
+      };
+      const client =
+        new extensionexecutionserviceModule.v1beta1.ExtensionExecutionServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      await client.initialize();
+      client.pathTemplates.specialistPoolPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.specialistPoolPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('specialistPoolPath', async () => {
+        const result = await client.specialistPoolPath(
+          'projectValue',
+          'locationValue',
+          'specialistPoolValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.specialistPoolPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromSpecialistPoolName', async () => {
+        const result =
+          await client.matchProjectFromSpecialistPoolName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.specialistPoolPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromSpecialistPoolName', async () => {
+        const result =
+          await client.matchLocationFromSpecialistPoolName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.specialistPoolPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchSpecialistPoolFromSpecialistPoolName', async () => {
+        const result =
+          await client.matchSpecialistPoolFromSpecialistPoolName(fakePath);
+        assert.strictEqual(result, 'specialistPoolValue');
+        assert(
+          (client.pathTemplates.specialistPoolPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('study', async () => {
+      const fakePath = '/rendered/path/study';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        study: 'studyValue',
+      };
+      const client =
+        new extensionexecutionserviceModule.v1beta1.ExtensionExecutionServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      await client.initialize();
+      client.pathTemplates.studyPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.studyPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('studyPath', async () => {
+        const result = await client.studyPath(
+          'projectValue',
+          'locationValue',
+          'studyValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.studyPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromStudyName', async () => {
+        const result = await client.matchProjectFromStudyName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.studyPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromStudyName', async () => {
+        const result = await client.matchLocationFromStudyName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.studyPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchStudyFromStudyName', async () => {
+        const result = await client.matchStudyFromStudyName(fakePath);
+        assert.strictEqual(result, 'studyValue');
+        assert(
+          (client.pathTemplates.studyPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('tensorboard', async () => {
+      const fakePath = '/rendered/path/tensorboard';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        tensorboard: 'tensorboardValue',
+      };
+      const client =
+        new extensionexecutionserviceModule.v1beta1.ExtensionExecutionServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      await client.initialize();
+      client.pathTemplates.tensorboardPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.tensorboardPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('tensorboardPath', async () => {
+        const result = await client.tensorboardPath(
+          'projectValue',
+          'locationValue',
+          'tensorboardValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.tensorboardPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromTensorboardName', async () => {
+        const result = await client.matchProjectFromTensorboardName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.tensorboardPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromTensorboardName', async () => {
+        const result = await client.matchLocationFromTensorboardName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.tensorboardPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchTensorboardFromTensorboardName', async () => {
+        const result =
+          await client.matchTensorboardFromTensorboardName(fakePath);
+        assert.strictEqual(result, 'tensorboardValue');
+        assert(
+          (client.pathTemplates.tensorboardPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('tensorboardExperiment', async () => {
+      const fakePath = '/rendered/path/tensorboardExperiment';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        tensorboard: 'tensorboardValue',
+        experiment: 'experimentValue',
+      };
+      const client =
+        new extensionexecutionserviceModule.v1beta1.ExtensionExecutionServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      await client.initialize();
+      client.pathTemplates.tensorboardExperimentPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.tensorboardExperimentPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('tensorboardExperimentPath', async () => {
+        const result = await client.tensorboardExperimentPath(
+          'projectValue',
+          'locationValue',
+          'tensorboardValue',
+          'experimentValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates.tensorboardExperimentPathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromTensorboardExperimentName', async () => {
+        const result =
+          await client.matchProjectFromTensorboardExperimentName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (
+            client.pathTemplates.tensorboardExperimentPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromTensorboardExperimentName', async () => {
+        const result =
+          await client.matchLocationFromTensorboardExperimentName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (
+            client.pathTemplates.tensorboardExperimentPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchTensorboardFromTensorboardExperimentName', async () => {
+        const result =
+          await client.matchTensorboardFromTensorboardExperimentName(fakePath);
+        assert.strictEqual(result, 'tensorboardValue');
+        assert(
+          (
+            client.pathTemplates.tensorboardExperimentPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchExperimentFromTensorboardExperimentName', async () => {
+        const result =
+          await client.matchExperimentFromTensorboardExperimentName(fakePath);
+        assert.strictEqual(result, 'experimentValue');
+        assert(
+          (
+            client.pathTemplates.tensorboardExperimentPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('tensorboardRun', async () => {
+      const fakePath = '/rendered/path/tensorboardRun';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        tensorboard: 'tensorboardValue',
+        experiment: 'experimentValue',
+        run: 'runValue',
+      };
+      const client =
+        new extensionexecutionserviceModule.v1beta1.ExtensionExecutionServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      await client.initialize();
+      client.pathTemplates.tensorboardRunPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.tensorboardRunPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('tensorboardRunPath', async () => {
+        const result = await client.tensorboardRunPath(
+          'projectValue',
+          'locationValue',
+          'tensorboardValue',
+          'experimentValue',
+          'runValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.tensorboardRunPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromTensorboardRunName', async () => {
+        const result =
+          await client.matchProjectFromTensorboardRunName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.tensorboardRunPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromTensorboardRunName', async () => {
+        const result =
+          await client.matchLocationFromTensorboardRunName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.tensorboardRunPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchTensorboardFromTensorboardRunName', async () => {
+        const result =
+          await client.matchTensorboardFromTensorboardRunName(fakePath);
+        assert.strictEqual(result, 'tensorboardValue');
+        assert(
+          (client.pathTemplates.tensorboardRunPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchExperimentFromTensorboardRunName', async () => {
+        const result =
+          await client.matchExperimentFromTensorboardRunName(fakePath);
+        assert.strictEqual(result, 'experimentValue');
+        assert(
+          (client.pathTemplates.tensorboardRunPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchRunFromTensorboardRunName', async () => {
+        const result = await client.matchRunFromTensorboardRunName(fakePath);
+        assert.strictEqual(result, 'runValue');
+        assert(
+          (client.pathTemplates.tensorboardRunPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('tensorboardTimeSeries', async () => {
+      const fakePath = '/rendered/path/tensorboardTimeSeries';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        tensorboard: 'tensorboardValue',
+        experiment: 'experimentValue',
+        run: 'runValue',
+        time_series: 'timeSeriesValue',
+      };
+      const client =
+        new extensionexecutionserviceModule.v1beta1.ExtensionExecutionServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      await client.initialize();
+      client.pathTemplates.tensorboardTimeSeriesPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.tensorboardTimeSeriesPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('tensorboardTimeSeriesPath', async () => {
+        const result = await client.tensorboardTimeSeriesPath(
+          'projectValue',
+          'locationValue',
+          'tensorboardValue',
+          'experimentValue',
+          'runValue',
+          'timeSeriesValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates.tensorboardTimeSeriesPathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromTensorboardTimeSeriesName', async () => {
+        const result =
+          await client.matchProjectFromTensorboardTimeSeriesName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (
+            client.pathTemplates.tensorboardTimeSeriesPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromTensorboardTimeSeriesName', async () => {
+        const result =
+          await client.matchLocationFromTensorboardTimeSeriesName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (
+            client.pathTemplates.tensorboardTimeSeriesPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchTensorboardFromTensorboardTimeSeriesName', async () => {
+        const result =
+          await client.matchTensorboardFromTensorboardTimeSeriesName(fakePath);
+        assert.strictEqual(result, 'tensorboardValue');
+        assert(
+          (
+            client.pathTemplates.tensorboardTimeSeriesPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchExperimentFromTensorboardTimeSeriesName', async () => {
+        const result =
+          await client.matchExperimentFromTensorboardTimeSeriesName(fakePath);
+        assert.strictEqual(result, 'experimentValue');
+        assert(
+          (
+            client.pathTemplates.tensorboardTimeSeriesPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchRunFromTensorboardTimeSeriesName', async () => {
+        const result =
+          await client.matchRunFromTensorboardTimeSeriesName(fakePath);
+        assert.strictEqual(result, 'runValue');
+        assert(
+          (
+            client.pathTemplates.tensorboardTimeSeriesPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchTimeSeriesFromTensorboardTimeSeriesName', async () => {
+        const result =
+          await client.matchTimeSeriesFromTensorboardTimeSeriesName(fakePath);
+        assert.strictEqual(result, 'timeSeriesValue');
+        assert(
+          (
+            client.pathTemplates.tensorboardTimeSeriesPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('trainingPipeline', async () => {
+      const fakePath = '/rendered/path/trainingPipeline';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        training_pipeline: 'trainingPipelineValue',
+      };
+      const client =
+        new extensionexecutionserviceModule.v1beta1.ExtensionExecutionServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      await client.initialize();
+      client.pathTemplates.trainingPipelinePathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.trainingPipelinePathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('trainingPipelinePath', async () => {
+        const result = await client.trainingPipelinePath(
+          'projectValue',
+          'locationValue',
+          'trainingPipelineValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates.trainingPipelinePathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromTrainingPipelineName', async () => {
+        const result =
+          await client.matchProjectFromTrainingPipelineName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.trainingPipelinePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromTrainingPipelineName', async () => {
+        const result =
+          await client.matchLocationFromTrainingPipelineName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.trainingPipelinePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchTrainingPipelineFromTrainingPipelineName', async () => {
+        const result =
+          await client.matchTrainingPipelineFromTrainingPipelineName(fakePath);
+        assert.strictEqual(result, 'trainingPipelineValue');
+        assert(
+          (client.pathTemplates.trainingPipelinePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('trial', async () => {
+      const fakePath = '/rendered/path/trial';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        study: 'studyValue',
+        trial: 'trialValue',
+      };
+      const client =
+        new extensionexecutionserviceModule.v1beta1.ExtensionExecutionServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      await client.initialize();
+      client.pathTemplates.trialPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.trialPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('trialPath', async () => {
+        const result = await client.trialPath(
+          'projectValue',
+          'locationValue',
+          'studyValue',
+          'trialValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.trialPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromTrialName', async () => {
+        const result = await client.matchProjectFromTrialName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.trialPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromTrialName', async () => {
+        const result = await client.matchLocationFromTrialName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.trialPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchStudyFromTrialName', async () => {
+        const result = await client.matchStudyFromTrialName(fakePath);
+        assert.strictEqual(result, 'studyValue');
+        assert(
+          (client.pathTemplates.trialPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchTrialFromTrialName', async () => {
+        const result = await client.matchTrialFromTrialName(fakePath);
+        assert.strictEqual(result, 'trialValue');
+        assert(
+          (client.pathTemplates.trialPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('tuningJob', async () => {
+      const fakePath = '/rendered/path/tuningJob';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        tuning_job: 'tuningJobValue',
+      };
+      const client =
+        new extensionexecutionserviceModule.v1beta1.ExtensionExecutionServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      await client.initialize();
+      client.pathTemplates.tuningJobPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.tuningJobPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('tuningJobPath', async () => {
+        const result = await client.tuningJobPath(
+          'projectValue',
+          'locationValue',
+          'tuningJobValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.tuningJobPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromTuningJobName', async () => {
+        const result = await client.matchProjectFromTuningJobName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.tuningJobPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromTuningJobName', async () => {
+        const result = await client.matchLocationFromTuningJobName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.tuningJobPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchTuningJobFromTuningJobName', async () => {
+        const result = await client.matchTuningJobFromTuningJobName(fakePath);
+        assert.strictEqual(result, 'tuningJobValue');
+        assert(
+          (client.pathTemplates.tuningJobPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+  });
 });

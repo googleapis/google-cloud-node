@@ -36,7 +36,7 @@ import {
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
 const root = protobuf.Root.fromJSON(
-  require('../protos/protos.json'),
+  require('../protos/protos.json')
 ).resolveAll();
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -53,7 +53,7 @@ function generateSampleMessage<T extends object>(instance: T) {
     instance.constructor as typeof protobuf.Message
   ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
-    filledObject,
+    filledObject
   ) as T;
 }
 
@@ -65,7 +65,7 @@ function stubSimpleCall<ResponseType>(response?: ResponseType, error?: Error) {
 
 function stubSimpleCallWithCallback<ResponseType>(
   response?: ResponseType,
-  error?: Error,
+  error?: Error
 ) {
   return error
     ? sinon.stub().callsArgWith(2, error)
@@ -75,7 +75,7 @@ function stubSimpleCallWithCallback<ResponseType>(
 function stubLongRunningCall<ResponseType>(
   response?: ResponseType,
   callError?: Error,
-  lroError?: Error,
+  lroError?: Error
 ) {
   const innerStub = lroError
     ? sinon.stub().rejects(lroError)
@@ -91,7 +91,7 @@ function stubLongRunningCall<ResponseType>(
 function stubLongRunningCallWithCallback<ResponseType>(
   response?: ResponseType,
   callError?: Error,
-  lroError?: Error,
+  lroError?: Error
 ) {
   const innerStub = lroError
     ? sinon.stub().rejects(lroError)
@@ -106,7 +106,7 @@ function stubLongRunningCallWithCallback<ResponseType>(
 
 function stubPageStreamingCall<ResponseType>(
   responses?: ResponseType[],
-  error?: Error,
+  error?: Error
 ) {
   const pagingStub = sinon.stub();
   if (responses) {
@@ -144,7 +144,7 @@ function stubPageStreamingCall<ResponseType>(
 
 function stubAsyncIterationCall<ResponseType>(
   responses?: ResponseType[],
-  error?: Error,
+  error?: Error
 ) {
   let counter = 0;
   const asyncIterable = {
@@ -363,16 +363,16 @@ describe('v1.VizierServiceClient', () => {
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1.CreateStudyRequest(),
+        new protos.google.cloud.aiplatform.v1.CreateStudyRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
         '.google.cloud.aiplatform.v1.CreateStudyRequest',
-        ['parent'],
+        ['parent']
       );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1.Study(),
+        new protos.google.cloud.aiplatform.v1.Study()
       );
       client.innerApiCalls.createStudy = stubSimpleCall(expectedResponse);
       const [response] = await client.createStudy(request);
@@ -394,16 +394,16 @@ describe('v1.VizierServiceClient', () => {
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1.CreateStudyRequest(),
+        new protos.google.cloud.aiplatform.v1.CreateStudyRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
         '.google.cloud.aiplatform.v1.CreateStudyRequest',
-        ['parent'],
+        ['parent']
       );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1.Study(),
+        new protos.google.cloud.aiplatform.v1.Study()
       );
       client.innerApiCalls.createStudy =
         stubSimpleCallWithCallback(expectedResponse);
@@ -412,14 +412,14 @@ describe('v1.VizierServiceClient', () => {
           request,
           (
             err?: Error | null,
-            result?: protos.google.cloud.aiplatform.v1.IStudy | null,
+            result?: protos.google.cloud.aiplatform.v1.IStudy | null
           ) => {
             if (err) {
               reject(err);
             } else {
               resolve(result);
             }
-          },
+          }
         );
       });
       const response = await promise;
@@ -441,18 +441,18 @@ describe('v1.VizierServiceClient', () => {
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1.CreateStudyRequest(),
+        new protos.google.cloud.aiplatform.v1.CreateStudyRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
         '.google.cloud.aiplatform.v1.CreateStudyRequest',
-        ['parent'],
+        ['parent']
       );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createStudy = stubSimpleCall(
         undefined,
-        expectedError,
+        expectedError
       );
       await assert.rejects(client.createStudy(request), expectedError);
       const actualRequest = (
@@ -472,11 +472,11 @@ describe('v1.VizierServiceClient', () => {
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1.CreateStudyRequest(),
+        new protos.google.cloud.aiplatform.v1.CreateStudyRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
         '.google.cloud.aiplatform.v1.CreateStudyRequest',
-        ['parent'],
+        ['parent']
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
@@ -495,16 +495,16 @@ describe('v1.VizierServiceClient', () => {
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1.GetStudyRequest(),
+        new protos.google.cloud.aiplatform.v1.GetStudyRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
         '.google.cloud.aiplatform.v1.GetStudyRequest',
-        ['name'],
+        ['name']
       );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1.Study(),
+        new protos.google.cloud.aiplatform.v1.Study()
       );
       client.innerApiCalls.getStudy = stubSimpleCall(expectedResponse);
       const [response] = await client.getStudy(request);
@@ -526,16 +526,16 @@ describe('v1.VizierServiceClient', () => {
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1.GetStudyRequest(),
+        new protos.google.cloud.aiplatform.v1.GetStudyRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
         '.google.cloud.aiplatform.v1.GetStudyRequest',
-        ['name'],
+        ['name']
       );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1.Study(),
+        new protos.google.cloud.aiplatform.v1.Study()
       );
       client.innerApiCalls.getStudy =
         stubSimpleCallWithCallback(expectedResponse);
@@ -544,14 +544,14 @@ describe('v1.VizierServiceClient', () => {
           request,
           (
             err?: Error | null,
-            result?: protos.google.cloud.aiplatform.v1.IStudy | null,
+            result?: protos.google.cloud.aiplatform.v1.IStudy | null
           ) => {
             if (err) {
               reject(err);
             } else {
               resolve(result);
             }
-          },
+          }
         );
       });
       const response = await promise;
@@ -573,11 +573,11 @@ describe('v1.VizierServiceClient', () => {
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1.GetStudyRequest(),
+        new protos.google.cloud.aiplatform.v1.GetStudyRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
         '.google.cloud.aiplatform.v1.GetStudyRequest',
-        ['name'],
+        ['name']
       );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
@@ -601,11 +601,11 @@ describe('v1.VizierServiceClient', () => {
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1.GetStudyRequest(),
+        new protos.google.cloud.aiplatform.v1.GetStudyRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
         '.google.cloud.aiplatform.v1.GetStudyRequest',
-        ['name'],
+        ['name']
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
@@ -624,16 +624,16 @@ describe('v1.VizierServiceClient', () => {
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1.DeleteStudyRequest(),
+        new protos.google.cloud.aiplatform.v1.DeleteStudyRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
         '.google.cloud.aiplatform.v1.DeleteStudyRequest',
-        ['name'],
+        ['name']
       );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
-        new protos.google.protobuf.Empty(),
+        new protos.google.protobuf.Empty()
       );
       client.innerApiCalls.deleteStudy = stubSimpleCall(expectedResponse);
       const [response] = await client.deleteStudy(request);
@@ -655,16 +655,16 @@ describe('v1.VizierServiceClient', () => {
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1.DeleteStudyRequest(),
+        new protos.google.cloud.aiplatform.v1.DeleteStudyRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
         '.google.cloud.aiplatform.v1.DeleteStudyRequest',
-        ['name'],
+        ['name']
       );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
-        new protos.google.protobuf.Empty(),
+        new protos.google.protobuf.Empty()
       );
       client.innerApiCalls.deleteStudy =
         stubSimpleCallWithCallback(expectedResponse);
@@ -673,14 +673,14 @@ describe('v1.VizierServiceClient', () => {
           request,
           (
             err?: Error | null,
-            result?: protos.google.protobuf.IEmpty | null,
+            result?: protos.google.protobuf.IEmpty | null
           ) => {
             if (err) {
               reject(err);
             } else {
               resolve(result);
             }
-          },
+          }
         );
       });
       const response = await promise;
@@ -702,18 +702,18 @@ describe('v1.VizierServiceClient', () => {
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1.DeleteStudyRequest(),
+        new protos.google.cloud.aiplatform.v1.DeleteStudyRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
         '.google.cloud.aiplatform.v1.DeleteStudyRequest',
-        ['name'],
+        ['name']
       );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteStudy = stubSimpleCall(
         undefined,
-        expectedError,
+        expectedError
       );
       await assert.rejects(client.deleteStudy(request), expectedError);
       const actualRequest = (
@@ -733,11 +733,11 @@ describe('v1.VizierServiceClient', () => {
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1.DeleteStudyRequest(),
+        new protos.google.cloud.aiplatform.v1.DeleteStudyRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
         '.google.cloud.aiplatform.v1.DeleteStudyRequest',
-        ['name'],
+        ['name']
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
@@ -756,16 +756,16 @@ describe('v1.VizierServiceClient', () => {
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1.LookupStudyRequest(),
+        new protos.google.cloud.aiplatform.v1.LookupStudyRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
         '.google.cloud.aiplatform.v1.LookupStudyRequest',
-        ['parent'],
+        ['parent']
       );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1.Study(),
+        new protos.google.cloud.aiplatform.v1.Study()
       );
       client.innerApiCalls.lookupStudy = stubSimpleCall(expectedResponse);
       const [response] = await client.lookupStudy(request);
@@ -787,16 +787,16 @@ describe('v1.VizierServiceClient', () => {
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1.LookupStudyRequest(),
+        new protos.google.cloud.aiplatform.v1.LookupStudyRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
         '.google.cloud.aiplatform.v1.LookupStudyRequest',
-        ['parent'],
+        ['parent']
       );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1.Study(),
+        new protos.google.cloud.aiplatform.v1.Study()
       );
       client.innerApiCalls.lookupStudy =
         stubSimpleCallWithCallback(expectedResponse);
@@ -805,14 +805,14 @@ describe('v1.VizierServiceClient', () => {
           request,
           (
             err?: Error | null,
-            result?: protos.google.cloud.aiplatform.v1.IStudy | null,
+            result?: protos.google.cloud.aiplatform.v1.IStudy | null
           ) => {
             if (err) {
               reject(err);
             } else {
               resolve(result);
             }
-          },
+          }
         );
       });
       const response = await promise;
@@ -834,18 +834,18 @@ describe('v1.VizierServiceClient', () => {
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1.LookupStudyRequest(),
+        new protos.google.cloud.aiplatform.v1.LookupStudyRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
         '.google.cloud.aiplatform.v1.LookupStudyRequest',
-        ['parent'],
+        ['parent']
       );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.lookupStudy = stubSimpleCall(
         undefined,
-        expectedError,
+        expectedError
       );
       await assert.rejects(client.lookupStudy(request), expectedError);
       const actualRequest = (
@@ -865,11 +865,11 @@ describe('v1.VizierServiceClient', () => {
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1.LookupStudyRequest(),
+        new protos.google.cloud.aiplatform.v1.LookupStudyRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
         '.google.cloud.aiplatform.v1.LookupStudyRequest',
-        ['parent'],
+        ['parent']
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
@@ -888,16 +888,16 @@ describe('v1.VizierServiceClient', () => {
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1.CreateTrialRequest(),
+        new protos.google.cloud.aiplatform.v1.CreateTrialRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
         '.google.cloud.aiplatform.v1.CreateTrialRequest',
-        ['parent'],
+        ['parent']
       );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1.Trial(),
+        new protos.google.cloud.aiplatform.v1.Trial()
       );
       client.innerApiCalls.createTrial = stubSimpleCall(expectedResponse);
       const [response] = await client.createTrial(request);
@@ -919,16 +919,16 @@ describe('v1.VizierServiceClient', () => {
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1.CreateTrialRequest(),
+        new protos.google.cloud.aiplatform.v1.CreateTrialRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
         '.google.cloud.aiplatform.v1.CreateTrialRequest',
-        ['parent'],
+        ['parent']
       );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1.Trial(),
+        new protos.google.cloud.aiplatform.v1.Trial()
       );
       client.innerApiCalls.createTrial =
         stubSimpleCallWithCallback(expectedResponse);
@@ -937,14 +937,14 @@ describe('v1.VizierServiceClient', () => {
           request,
           (
             err?: Error | null,
-            result?: protos.google.cloud.aiplatform.v1.ITrial | null,
+            result?: protos.google.cloud.aiplatform.v1.ITrial | null
           ) => {
             if (err) {
               reject(err);
             } else {
               resolve(result);
             }
-          },
+          }
         );
       });
       const response = await promise;
@@ -966,18 +966,18 @@ describe('v1.VizierServiceClient', () => {
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1.CreateTrialRequest(),
+        new protos.google.cloud.aiplatform.v1.CreateTrialRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
         '.google.cloud.aiplatform.v1.CreateTrialRequest',
-        ['parent'],
+        ['parent']
       );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createTrial = stubSimpleCall(
         undefined,
-        expectedError,
+        expectedError
       );
       await assert.rejects(client.createTrial(request), expectedError);
       const actualRequest = (
@@ -997,11 +997,11 @@ describe('v1.VizierServiceClient', () => {
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1.CreateTrialRequest(),
+        new protos.google.cloud.aiplatform.v1.CreateTrialRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
         '.google.cloud.aiplatform.v1.CreateTrialRequest',
-        ['parent'],
+        ['parent']
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
@@ -1020,16 +1020,16 @@ describe('v1.VizierServiceClient', () => {
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1.GetTrialRequest(),
+        new protos.google.cloud.aiplatform.v1.GetTrialRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
         '.google.cloud.aiplatform.v1.GetTrialRequest',
-        ['name'],
+        ['name']
       );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1.Trial(),
+        new protos.google.cloud.aiplatform.v1.Trial()
       );
       client.innerApiCalls.getTrial = stubSimpleCall(expectedResponse);
       const [response] = await client.getTrial(request);
@@ -1051,16 +1051,16 @@ describe('v1.VizierServiceClient', () => {
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1.GetTrialRequest(),
+        new protos.google.cloud.aiplatform.v1.GetTrialRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
         '.google.cloud.aiplatform.v1.GetTrialRequest',
-        ['name'],
+        ['name']
       );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1.Trial(),
+        new protos.google.cloud.aiplatform.v1.Trial()
       );
       client.innerApiCalls.getTrial =
         stubSimpleCallWithCallback(expectedResponse);
@@ -1069,14 +1069,14 @@ describe('v1.VizierServiceClient', () => {
           request,
           (
             err?: Error | null,
-            result?: protos.google.cloud.aiplatform.v1.ITrial | null,
+            result?: protos.google.cloud.aiplatform.v1.ITrial | null
           ) => {
             if (err) {
               reject(err);
             } else {
               resolve(result);
             }
-          },
+          }
         );
       });
       const response = await promise;
@@ -1098,11 +1098,11 @@ describe('v1.VizierServiceClient', () => {
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1.GetTrialRequest(),
+        new protos.google.cloud.aiplatform.v1.GetTrialRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
         '.google.cloud.aiplatform.v1.GetTrialRequest',
-        ['name'],
+        ['name']
       );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
@@ -1126,11 +1126,11 @@ describe('v1.VizierServiceClient', () => {
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1.GetTrialRequest(),
+        new protos.google.cloud.aiplatform.v1.GetTrialRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
         '.google.cloud.aiplatform.v1.GetTrialRequest',
-        ['name'],
+        ['name']
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
@@ -1149,16 +1149,16 @@ describe('v1.VizierServiceClient', () => {
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1.AddTrialMeasurementRequest(),
+        new protos.google.cloud.aiplatform.v1.AddTrialMeasurementRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
         '.google.cloud.aiplatform.v1.AddTrialMeasurementRequest',
-        ['trialName'],
+        ['trialName']
       );
       request.trialName = defaultValue1;
       const expectedHeaderRequestParams = `trial_name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1.Trial(),
+        new protos.google.cloud.aiplatform.v1.Trial()
       );
       client.innerApiCalls.addTrialMeasurement =
         stubSimpleCall(expectedResponse);
@@ -1181,16 +1181,16 @@ describe('v1.VizierServiceClient', () => {
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1.AddTrialMeasurementRequest(),
+        new protos.google.cloud.aiplatform.v1.AddTrialMeasurementRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
         '.google.cloud.aiplatform.v1.AddTrialMeasurementRequest',
-        ['trialName'],
+        ['trialName']
       );
       request.trialName = defaultValue1;
       const expectedHeaderRequestParams = `trial_name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1.Trial(),
+        new protos.google.cloud.aiplatform.v1.Trial()
       );
       client.innerApiCalls.addTrialMeasurement =
         stubSimpleCallWithCallback(expectedResponse);
@@ -1199,14 +1199,14 @@ describe('v1.VizierServiceClient', () => {
           request,
           (
             err?: Error | null,
-            result?: protos.google.cloud.aiplatform.v1.ITrial | null,
+            result?: protos.google.cloud.aiplatform.v1.ITrial | null
           ) => {
             if (err) {
               reject(err);
             } else {
               resolve(result);
             }
-          },
+          }
         );
       });
       const response = await promise;
@@ -1228,18 +1228,18 @@ describe('v1.VizierServiceClient', () => {
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1.AddTrialMeasurementRequest(),
+        new protos.google.cloud.aiplatform.v1.AddTrialMeasurementRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
         '.google.cloud.aiplatform.v1.AddTrialMeasurementRequest',
-        ['trialName'],
+        ['trialName']
       );
       request.trialName = defaultValue1;
       const expectedHeaderRequestParams = `trial_name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.addTrialMeasurement = stubSimpleCall(
         undefined,
-        expectedError,
+        expectedError
       );
       await assert.rejects(client.addTrialMeasurement(request), expectedError);
       const actualRequest = (
@@ -1259,11 +1259,11 @@ describe('v1.VizierServiceClient', () => {
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1.AddTrialMeasurementRequest(),
+        new protos.google.cloud.aiplatform.v1.AddTrialMeasurementRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
         '.google.cloud.aiplatform.v1.AddTrialMeasurementRequest',
-        ['trialName'],
+        ['trialName']
       );
       request.trialName = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
@@ -1282,16 +1282,16 @@ describe('v1.VizierServiceClient', () => {
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1.CompleteTrialRequest(),
+        new protos.google.cloud.aiplatform.v1.CompleteTrialRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
         '.google.cloud.aiplatform.v1.CompleteTrialRequest',
-        ['name'],
+        ['name']
       );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1.Trial(),
+        new protos.google.cloud.aiplatform.v1.Trial()
       );
       client.innerApiCalls.completeTrial = stubSimpleCall(expectedResponse);
       const [response] = await client.completeTrial(request);
@@ -1313,16 +1313,16 @@ describe('v1.VizierServiceClient', () => {
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1.CompleteTrialRequest(),
+        new protos.google.cloud.aiplatform.v1.CompleteTrialRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
         '.google.cloud.aiplatform.v1.CompleteTrialRequest',
-        ['name'],
+        ['name']
       );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1.Trial(),
+        new protos.google.cloud.aiplatform.v1.Trial()
       );
       client.innerApiCalls.completeTrial =
         stubSimpleCallWithCallback(expectedResponse);
@@ -1331,14 +1331,14 @@ describe('v1.VizierServiceClient', () => {
           request,
           (
             err?: Error | null,
-            result?: protos.google.cloud.aiplatform.v1.ITrial | null,
+            result?: protos.google.cloud.aiplatform.v1.ITrial | null
           ) => {
             if (err) {
               reject(err);
             } else {
               resolve(result);
             }
-          },
+          }
         );
       });
       const response = await promise;
@@ -1360,18 +1360,18 @@ describe('v1.VizierServiceClient', () => {
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1.CompleteTrialRequest(),
+        new protos.google.cloud.aiplatform.v1.CompleteTrialRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
         '.google.cloud.aiplatform.v1.CompleteTrialRequest',
-        ['name'],
+        ['name']
       );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.completeTrial = stubSimpleCall(
         undefined,
-        expectedError,
+        expectedError
       );
       await assert.rejects(client.completeTrial(request), expectedError);
       const actualRequest = (
@@ -1391,11 +1391,11 @@ describe('v1.VizierServiceClient', () => {
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1.CompleteTrialRequest(),
+        new protos.google.cloud.aiplatform.v1.CompleteTrialRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
         '.google.cloud.aiplatform.v1.CompleteTrialRequest',
-        ['name'],
+        ['name']
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
@@ -1414,16 +1414,16 @@ describe('v1.VizierServiceClient', () => {
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1.DeleteTrialRequest(),
+        new protos.google.cloud.aiplatform.v1.DeleteTrialRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
         '.google.cloud.aiplatform.v1.DeleteTrialRequest',
-        ['name'],
+        ['name']
       );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
-        new protos.google.protobuf.Empty(),
+        new protos.google.protobuf.Empty()
       );
       client.innerApiCalls.deleteTrial = stubSimpleCall(expectedResponse);
       const [response] = await client.deleteTrial(request);
@@ -1445,16 +1445,16 @@ describe('v1.VizierServiceClient', () => {
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1.DeleteTrialRequest(),
+        new protos.google.cloud.aiplatform.v1.DeleteTrialRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
         '.google.cloud.aiplatform.v1.DeleteTrialRequest',
-        ['name'],
+        ['name']
       );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
-        new protos.google.protobuf.Empty(),
+        new protos.google.protobuf.Empty()
       );
       client.innerApiCalls.deleteTrial =
         stubSimpleCallWithCallback(expectedResponse);
@@ -1463,14 +1463,14 @@ describe('v1.VizierServiceClient', () => {
           request,
           (
             err?: Error | null,
-            result?: protos.google.protobuf.IEmpty | null,
+            result?: protos.google.protobuf.IEmpty | null
           ) => {
             if (err) {
               reject(err);
             } else {
               resolve(result);
             }
-          },
+          }
         );
       });
       const response = await promise;
@@ -1492,18 +1492,18 @@ describe('v1.VizierServiceClient', () => {
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1.DeleteTrialRequest(),
+        new protos.google.cloud.aiplatform.v1.DeleteTrialRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
         '.google.cloud.aiplatform.v1.DeleteTrialRequest',
-        ['name'],
+        ['name']
       );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteTrial = stubSimpleCall(
         undefined,
-        expectedError,
+        expectedError
       );
       await assert.rejects(client.deleteTrial(request), expectedError);
       const actualRequest = (
@@ -1523,11 +1523,11 @@ describe('v1.VizierServiceClient', () => {
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1.DeleteTrialRequest(),
+        new protos.google.cloud.aiplatform.v1.DeleteTrialRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
         '.google.cloud.aiplatform.v1.DeleteTrialRequest',
-        ['name'],
+        ['name']
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
@@ -1546,16 +1546,16 @@ describe('v1.VizierServiceClient', () => {
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1.StopTrialRequest(),
+        new protos.google.cloud.aiplatform.v1.StopTrialRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
         '.google.cloud.aiplatform.v1.StopTrialRequest',
-        ['name'],
+        ['name']
       );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1.Trial(),
+        new protos.google.cloud.aiplatform.v1.Trial()
       );
       client.innerApiCalls.stopTrial = stubSimpleCall(expectedResponse);
       const [response] = await client.stopTrial(request);
@@ -1577,16 +1577,16 @@ describe('v1.VizierServiceClient', () => {
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1.StopTrialRequest(),
+        new protos.google.cloud.aiplatform.v1.StopTrialRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
         '.google.cloud.aiplatform.v1.StopTrialRequest',
-        ['name'],
+        ['name']
       );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1.Trial(),
+        new protos.google.cloud.aiplatform.v1.Trial()
       );
       client.innerApiCalls.stopTrial =
         stubSimpleCallWithCallback(expectedResponse);
@@ -1595,14 +1595,14 @@ describe('v1.VizierServiceClient', () => {
           request,
           (
             err?: Error | null,
-            result?: protos.google.cloud.aiplatform.v1.ITrial | null,
+            result?: protos.google.cloud.aiplatform.v1.ITrial | null
           ) => {
             if (err) {
               reject(err);
             } else {
               resolve(result);
             }
-          },
+          }
         );
       });
       const response = await promise;
@@ -1624,11 +1624,11 @@ describe('v1.VizierServiceClient', () => {
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1.StopTrialRequest(),
+        new protos.google.cloud.aiplatform.v1.StopTrialRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
         '.google.cloud.aiplatform.v1.StopTrialRequest',
-        ['name'],
+        ['name']
       );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
@@ -1652,11 +1652,11 @@ describe('v1.VizierServiceClient', () => {
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1.StopTrialRequest(),
+        new protos.google.cloud.aiplatform.v1.StopTrialRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
         '.google.cloud.aiplatform.v1.StopTrialRequest',
-        ['name'],
+        ['name']
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
@@ -1675,16 +1675,16 @@ describe('v1.VizierServiceClient', () => {
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1.ListOptimalTrialsRequest(),
+        new protos.google.cloud.aiplatform.v1.ListOptimalTrialsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
         '.google.cloud.aiplatform.v1.ListOptimalTrialsRequest',
-        ['parent'],
+        ['parent']
       );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1.ListOptimalTrialsResponse(),
+        new protos.google.cloud.aiplatform.v1.ListOptimalTrialsResponse()
       );
       client.innerApiCalls.listOptimalTrials = stubSimpleCall(expectedResponse);
       const [response] = await client.listOptimalTrials(request);
@@ -1706,16 +1706,16 @@ describe('v1.VizierServiceClient', () => {
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1.ListOptimalTrialsRequest(),
+        new protos.google.cloud.aiplatform.v1.ListOptimalTrialsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
         '.google.cloud.aiplatform.v1.ListOptimalTrialsRequest',
-        ['parent'],
+        ['parent']
       );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1.ListOptimalTrialsResponse(),
+        new protos.google.cloud.aiplatform.v1.ListOptimalTrialsResponse()
       );
       client.innerApiCalls.listOptimalTrials =
         stubSimpleCallWithCallback(expectedResponse);
@@ -1724,14 +1724,14 @@ describe('v1.VizierServiceClient', () => {
           request,
           (
             err?: Error | null,
-            result?: protos.google.cloud.aiplatform.v1.IListOptimalTrialsResponse | null,
+            result?: protos.google.cloud.aiplatform.v1.IListOptimalTrialsResponse | null
           ) => {
             if (err) {
               reject(err);
             } else {
               resolve(result);
             }
-          },
+          }
         );
       });
       const response = await promise;
@@ -1753,18 +1753,18 @@ describe('v1.VizierServiceClient', () => {
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1.ListOptimalTrialsRequest(),
+        new protos.google.cloud.aiplatform.v1.ListOptimalTrialsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
         '.google.cloud.aiplatform.v1.ListOptimalTrialsRequest',
-        ['parent'],
+        ['parent']
       );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listOptimalTrials = stubSimpleCall(
         undefined,
-        expectedError,
+        expectedError
       );
       await assert.rejects(client.listOptimalTrials(request), expectedError);
       const actualRequest = (
@@ -1784,11 +1784,11 @@ describe('v1.VizierServiceClient', () => {
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1.ListOptimalTrialsRequest(),
+        new protos.google.cloud.aiplatform.v1.ListOptimalTrialsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
         '.google.cloud.aiplatform.v1.ListOptimalTrialsRequest',
-        ['parent'],
+        ['parent']
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
@@ -1807,16 +1807,16 @@ describe('v1.VizierServiceClient', () => {
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1.SuggestTrialsRequest(),
+        new protos.google.cloud.aiplatform.v1.SuggestTrialsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
         '.google.cloud.aiplatform.v1.SuggestTrialsRequest',
-        ['parent'],
+        ['parent']
       );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation(),
+        new protos.google.longrunning.Operation()
       );
       client.innerApiCalls.suggestTrials =
         stubLongRunningCall(expectedResponse);
@@ -1840,16 +1840,16 @@ describe('v1.VizierServiceClient', () => {
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1.SuggestTrialsRequest(),
+        new protos.google.cloud.aiplatform.v1.SuggestTrialsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
         '.google.cloud.aiplatform.v1.SuggestTrialsRequest',
-        ['parent'],
+        ['parent']
       );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation(),
+        new protos.google.longrunning.Operation()
       );
       client.innerApiCalls.suggestTrials =
         stubLongRunningCallWithCallback(expectedResponse);
@@ -1861,14 +1861,14 @@ describe('v1.VizierServiceClient', () => {
             result?: LROperation<
               protos.google.cloud.aiplatform.v1.ISuggestTrialsResponse,
               protos.google.cloud.aiplatform.v1.ISuggestTrialsMetadata
-            > | null,
+            > | null
           ) => {
             if (err) {
               reject(err);
             } else {
               resolve(result);
             }
-          },
+          }
         );
       });
       const operation = (await promise) as LROperation<
@@ -1894,18 +1894,18 @@ describe('v1.VizierServiceClient', () => {
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1.SuggestTrialsRequest(),
+        new protos.google.cloud.aiplatform.v1.SuggestTrialsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
         '.google.cloud.aiplatform.v1.SuggestTrialsRequest',
-        ['parent'],
+        ['parent']
       );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.suggestTrials = stubLongRunningCall(
         undefined,
-        expectedError,
+        expectedError
       );
       await assert.rejects(client.suggestTrials(request), expectedError);
       const actualRequest = (
@@ -1925,11 +1925,11 @@ describe('v1.VizierServiceClient', () => {
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1.SuggestTrialsRequest(),
+        new protos.google.cloud.aiplatform.v1.SuggestTrialsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
         '.google.cloud.aiplatform.v1.SuggestTrialsRequest',
-        ['parent'],
+        ['parent']
       );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
@@ -1937,7 +1937,7 @@ describe('v1.VizierServiceClient', () => {
       client.innerApiCalls.suggestTrials = stubLongRunningCall(
         undefined,
         undefined,
-        expectedError,
+        expectedError
       );
       const [operation] = await client.suggestTrials(request);
       await assert.rejects(operation.promise(), expectedError);
@@ -1958,7 +1958,7 @@ describe('v1.VizierServiceClient', () => {
       });
       await client.initialize();
       const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation(),
+        new operationsProtos.google.longrunning.Operation()
       );
       expectedResponse.name = 'test';
       expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
@@ -1966,7 +1966,7 @@ describe('v1.VizierServiceClient', () => {
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkSuggestTrialsProgress(
-        expectedResponse.name,
+        expectedResponse.name
       );
       assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
       assert(decodedOperation.metadata);
@@ -1983,11 +1983,11 @@ describe('v1.VizierServiceClient', () => {
 
       client.operationsClient.getOperation = stubSimpleCall(
         undefined,
-        expectedError,
+        expectedError
       );
       await assert.rejects(
         client.checkSuggestTrialsProgress(''),
-        expectedError,
+        expectedError
       );
       assert((client.operationsClient.getOperation as SinonStub).getCall(0));
     });
@@ -2001,16 +2001,16 @@ describe('v1.VizierServiceClient', () => {
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1.CheckTrialEarlyStoppingStateRequest(),
+        new protos.google.cloud.aiplatform.v1.CheckTrialEarlyStoppingStateRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
         '.google.cloud.aiplatform.v1.CheckTrialEarlyStoppingStateRequest',
-        ['trialName'],
+        ['trialName']
       );
       request.trialName = defaultValue1;
       const expectedHeaderRequestParams = `trial_name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation(),
+        new protos.google.longrunning.Operation()
       );
       client.innerApiCalls.checkTrialEarlyStoppingState =
         stubLongRunningCall(expectedResponse);
@@ -2034,16 +2034,16 @@ describe('v1.VizierServiceClient', () => {
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1.CheckTrialEarlyStoppingStateRequest(),
+        new protos.google.cloud.aiplatform.v1.CheckTrialEarlyStoppingStateRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
         '.google.cloud.aiplatform.v1.CheckTrialEarlyStoppingStateRequest',
-        ['trialName'],
+        ['trialName']
       );
       request.trialName = defaultValue1;
       const expectedHeaderRequestParams = `trial_name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation(),
+        new protos.google.longrunning.Operation()
       );
       client.innerApiCalls.checkTrialEarlyStoppingState =
         stubLongRunningCallWithCallback(expectedResponse);
@@ -2055,14 +2055,14 @@ describe('v1.VizierServiceClient', () => {
             result?: LROperation<
               protos.google.cloud.aiplatform.v1.ICheckTrialEarlyStoppingStateResponse,
               protos.google.cloud.aiplatform.v1.ICheckTrialEarlyStoppingStateMetatdata
-            > | null,
+            > | null
           ) => {
             if (err) {
               reject(err);
             } else {
               resolve(result);
             }
-          },
+          }
         );
       });
       const operation = (await promise) as LROperation<
@@ -2088,22 +2088,22 @@ describe('v1.VizierServiceClient', () => {
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1.CheckTrialEarlyStoppingStateRequest(),
+        new protos.google.cloud.aiplatform.v1.CheckTrialEarlyStoppingStateRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
         '.google.cloud.aiplatform.v1.CheckTrialEarlyStoppingStateRequest',
-        ['trialName'],
+        ['trialName']
       );
       request.trialName = defaultValue1;
       const expectedHeaderRequestParams = `trial_name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.checkTrialEarlyStoppingState = stubLongRunningCall(
         undefined,
-        expectedError,
+        expectedError
       );
       await assert.rejects(
         client.checkTrialEarlyStoppingState(request),
-        expectedError,
+        expectedError
       );
       const actualRequest = (
         client.innerApiCalls.checkTrialEarlyStoppingState as SinonStub
@@ -2122,11 +2122,11 @@ describe('v1.VizierServiceClient', () => {
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1.CheckTrialEarlyStoppingStateRequest(),
+        new protos.google.cloud.aiplatform.v1.CheckTrialEarlyStoppingStateRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
         '.google.cloud.aiplatform.v1.CheckTrialEarlyStoppingStateRequest',
-        ['trialName'],
+        ['trialName']
       );
       request.trialName = defaultValue1;
       const expectedHeaderRequestParams = `trial_name=${defaultValue1 ?? ''}`;
@@ -2134,7 +2134,7 @@ describe('v1.VizierServiceClient', () => {
       client.innerApiCalls.checkTrialEarlyStoppingState = stubLongRunningCall(
         undefined,
         undefined,
-        expectedError,
+        expectedError
       );
       const [operation] = await client.checkTrialEarlyStoppingState(request);
       await assert.rejects(operation.promise(), expectedError);
@@ -2155,7 +2155,7 @@ describe('v1.VizierServiceClient', () => {
       });
       await client.initialize();
       const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation(),
+        new operationsProtos.google.longrunning.Operation()
       );
       expectedResponse.name = 'test';
       expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
@@ -2164,7 +2164,7 @@ describe('v1.VizierServiceClient', () => {
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation =
         await client.checkCheckTrialEarlyStoppingStateProgress(
-          expectedResponse.name,
+          expectedResponse.name
         );
       assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
       assert(decodedOperation.metadata);
@@ -2181,11 +2181,11 @@ describe('v1.VizierServiceClient', () => {
 
       client.operationsClient.getOperation = stubSimpleCall(
         undefined,
-        expectedError,
+        expectedError
       );
       await assert.rejects(
         client.checkCheckTrialEarlyStoppingStateProgress(''),
-        expectedError,
+        expectedError
       );
       assert((client.operationsClient.getOperation as SinonStub).getCall(0));
     });
@@ -2199,11 +2199,11 @@ describe('v1.VizierServiceClient', () => {
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1.ListStudiesRequest(),
+        new protos.google.cloud.aiplatform.v1.ListStudiesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
         '.google.cloud.aiplatform.v1.ListStudiesRequest',
-        ['parent'],
+        ['parent']
       );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
@@ -2232,11 +2232,11 @@ describe('v1.VizierServiceClient', () => {
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1.ListStudiesRequest(),
+        new protos.google.cloud.aiplatform.v1.ListStudiesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
         '.google.cloud.aiplatform.v1.ListStudiesRequest',
-        ['parent'],
+        ['parent']
       );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
@@ -2252,14 +2252,14 @@ describe('v1.VizierServiceClient', () => {
           request,
           (
             err?: Error | null,
-            result?: protos.google.cloud.aiplatform.v1.IStudy[] | null,
+            result?: protos.google.cloud.aiplatform.v1.IStudy[] | null
           ) => {
             if (err) {
               reject(err);
             } else {
               resolve(result);
             }
-          },
+          }
         );
       });
       const response = await promise;
@@ -2281,18 +2281,18 @@ describe('v1.VizierServiceClient', () => {
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1.ListStudiesRequest(),
+        new protos.google.cloud.aiplatform.v1.ListStudiesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
         '.google.cloud.aiplatform.v1.ListStudiesRequest',
-        ['parent'],
+        ['parent']
       );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listStudies = stubSimpleCall(
         undefined,
-        expectedError,
+        expectedError
       );
       await assert.rejects(client.listStudies(request), expectedError);
       const actualRequest = (
@@ -2312,11 +2312,11 @@ describe('v1.VizierServiceClient', () => {
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1.ListStudiesRequest(),
+        new protos.google.cloud.aiplatform.v1.ListStudiesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
         '.google.cloud.aiplatform.v1.ListStudiesRequest',
-        ['parent'],
+        ['parent']
       );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
@@ -2334,7 +2334,7 @@ describe('v1.VizierServiceClient', () => {
           'data',
           (response: protos.google.cloud.aiplatform.v1.Study) => {
             responses.push(response);
-          },
+          }
         );
         stream.on('end', () => {
           resolve(responses);
@@ -2348,14 +2348,14 @@ describe('v1.VizierServiceClient', () => {
       assert(
         (client.descriptors.page.listStudies.createStream as SinonStub)
           .getCall(0)
-          .calledWith(client.innerApiCalls.listStudies, request),
+          .calledWith(client.innerApiCalls.listStudies, request)
       );
       assert(
         (client.descriptors.page.listStudies.createStream as SinonStub)
           .getCall(0)
           .args[2].otherArgs.headers[
             'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -2366,18 +2366,18 @@ describe('v1.VizierServiceClient', () => {
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1.ListStudiesRequest(),
+        new protos.google.cloud.aiplatform.v1.ListStudiesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
         '.google.cloud.aiplatform.v1.ListStudiesRequest',
-        ['parent'],
+        ['parent']
       );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listStudies.createStream = stubPageStreamingCall(
         undefined,
-        expectedError,
+        expectedError
       );
       const stream = await client.listStudiesStream(request);
       const promise = new Promise((resolve, reject) => {
@@ -2386,7 +2386,7 @@ describe('v1.VizierServiceClient', () => {
           'data',
           (response: protos.google.cloud.aiplatform.v1.Study) => {
             responses.push(response);
-          },
+          }
         );
         stream.on('end', () => {
           resolve(responses);
@@ -2399,14 +2399,14 @@ describe('v1.VizierServiceClient', () => {
       assert(
         (client.descriptors.page.listStudies.createStream as SinonStub)
           .getCall(0)
-          .calledWith(client.innerApiCalls.listStudies, request),
+          .calledWith(client.innerApiCalls.listStudies, request)
       );
       assert(
         (client.descriptors.page.listStudies.createStream as SinonStub)
           .getCall(0)
           .args[2].otherArgs.headers[
             'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -2417,11 +2417,11 @@ describe('v1.VizierServiceClient', () => {
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1.ListStudiesRequest(),
+        new protos.google.cloud.aiplatform.v1.ListStudiesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
         '.google.cloud.aiplatform.v1.ListStudiesRequest',
-        ['parent'],
+        ['parent']
       );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
@@ -2440,16 +2440,16 @@ describe('v1.VizierServiceClient', () => {
       assert.deepStrictEqual(responses, expectedResponse);
       assert.deepStrictEqual(
         (client.descriptors.page.listStudies.asyncIterate as SinonStub).getCall(
-          0,
+          0
         ).args[1],
-        request,
+        request
       );
       assert(
         (client.descriptors.page.listStudies.asyncIterate as SinonStub)
           .getCall(0)
           .args[2].otherArgs.headers[
             'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -2460,18 +2460,18 @@ describe('v1.VizierServiceClient', () => {
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1.ListStudiesRequest(),
+        new protos.google.cloud.aiplatform.v1.ListStudiesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
         '.google.cloud.aiplatform.v1.ListStudiesRequest',
-        ['parent'],
+        ['parent']
       );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listStudies.asyncIterate = stubAsyncIterationCall(
         undefined,
-        expectedError,
+        expectedError
       );
       const iterable = await client.listStudiesAsync(request);
       await assert.rejects(async () => {
@@ -2482,16 +2482,16 @@ describe('v1.VizierServiceClient', () => {
       });
       assert.deepStrictEqual(
         (client.descriptors.page.listStudies.asyncIterate as SinonStub).getCall(
-          0,
+          0
         ).args[1],
-        request,
+        request
       );
       assert(
         (client.descriptors.page.listStudies.asyncIterate as SinonStub)
           .getCall(0)
           .args[2].otherArgs.headers[
             'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          ].includes(expectedHeaderRequestParams)
       );
     });
   });
@@ -2504,11 +2504,11 @@ describe('v1.VizierServiceClient', () => {
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1.ListTrialsRequest(),
+        new protos.google.cloud.aiplatform.v1.ListTrialsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
         '.google.cloud.aiplatform.v1.ListTrialsRequest',
-        ['parent'],
+        ['parent']
       );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
@@ -2537,11 +2537,11 @@ describe('v1.VizierServiceClient', () => {
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1.ListTrialsRequest(),
+        new protos.google.cloud.aiplatform.v1.ListTrialsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
         '.google.cloud.aiplatform.v1.ListTrialsRequest',
-        ['parent'],
+        ['parent']
       );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
@@ -2557,14 +2557,14 @@ describe('v1.VizierServiceClient', () => {
           request,
           (
             err?: Error | null,
-            result?: protos.google.cloud.aiplatform.v1.ITrial[] | null,
+            result?: protos.google.cloud.aiplatform.v1.ITrial[] | null
           ) => {
             if (err) {
               reject(err);
             } else {
               resolve(result);
             }
-          },
+          }
         );
       });
       const response = await promise;
@@ -2586,18 +2586,18 @@ describe('v1.VizierServiceClient', () => {
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1.ListTrialsRequest(),
+        new protos.google.cloud.aiplatform.v1.ListTrialsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
         '.google.cloud.aiplatform.v1.ListTrialsRequest',
-        ['parent'],
+        ['parent']
       );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listTrials = stubSimpleCall(
         undefined,
-        expectedError,
+        expectedError
       );
       await assert.rejects(client.listTrials(request), expectedError);
       const actualRequest = (
@@ -2617,11 +2617,11 @@ describe('v1.VizierServiceClient', () => {
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1.ListTrialsRequest(),
+        new protos.google.cloud.aiplatform.v1.ListTrialsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
         '.google.cloud.aiplatform.v1.ListTrialsRequest',
-        ['parent'],
+        ['parent']
       );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
@@ -2639,7 +2639,7 @@ describe('v1.VizierServiceClient', () => {
           'data',
           (response: protos.google.cloud.aiplatform.v1.Trial) => {
             responses.push(response);
-          },
+          }
         );
         stream.on('end', () => {
           resolve(responses);
@@ -2653,14 +2653,14 @@ describe('v1.VizierServiceClient', () => {
       assert(
         (client.descriptors.page.listTrials.createStream as SinonStub)
           .getCall(0)
-          .calledWith(client.innerApiCalls.listTrials, request),
+          .calledWith(client.innerApiCalls.listTrials, request)
       );
       assert(
         (client.descriptors.page.listTrials.createStream as SinonStub)
           .getCall(0)
           .args[2].otherArgs.headers[
             'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -2671,18 +2671,18 @@ describe('v1.VizierServiceClient', () => {
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1.ListTrialsRequest(),
+        new protos.google.cloud.aiplatform.v1.ListTrialsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
         '.google.cloud.aiplatform.v1.ListTrialsRequest',
-        ['parent'],
+        ['parent']
       );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listTrials.createStream = stubPageStreamingCall(
         undefined,
-        expectedError,
+        expectedError
       );
       const stream = await client.listTrialsStream(request);
       const promise = new Promise((resolve, reject) => {
@@ -2691,7 +2691,7 @@ describe('v1.VizierServiceClient', () => {
           'data',
           (response: protos.google.cloud.aiplatform.v1.Trial) => {
             responses.push(response);
-          },
+          }
         );
         stream.on('end', () => {
           resolve(responses);
@@ -2704,14 +2704,14 @@ describe('v1.VizierServiceClient', () => {
       assert(
         (client.descriptors.page.listTrials.createStream as SinonStub)
           .getCall(0)
-          .calledWith(client.innerApiCalls.listTrials, request),
+          .calledWith(client.innerApiCalls.listTrials, request)
       );
       assert(
         (client.descriptors.page.listTrials.createStream as SinonStub)
           .getCall(0)
           .args[2].otherArgs.headers[
             'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -2722,11 +2722,11 @@ describe('v1.VizierServiceClient', () => {
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1.ListTrialsRequest(),
+        new protos.google.cloud.aiplatform.v1.ListTrialsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
         '.google.cloud.aiplatform.v1.ListTrialsRequest',
-        ['parent'],
+        ['parent']
       );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
@@ -2745,16 +2745,16 @@ describe('v1.VizierServiceClient', () => {
       assert.deepStrictEqual(responses, expectedResponse);
       assert.deepStrictEqual(
         (client.descriptors.page.listTrials.asyncIterate as SinonStub).getCall(
-          0,
+          0
         ).args[1],
-        request,
+        request
       );
       assert(
         (client.descriptors.page.listTrials.asyncIterate as SinonStub)
           .getCall(0)
           .args[2].otherArgs.headers[
             'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -2765,18 +2765,18 @@ describe('v1.VizierServiceClient', () => {
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1.ListTrialsRequest(),
+        new protos.google.cloud.aiplatform.v1.ListTrialsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
         '.google.cloud.aiplatform.v1.ListTrialsRequest',
-        ['parent'],
+        ['parent']
       );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listTrials.asyncIterate = stubAsyncIterationCall(
         undefined,
-        expectedError,
+        expectedError
       );
       const iterable = await client.listTrialsAsync(request);
       await assert.rejects(async () => {
@@ -2787,16 +2787,16 @@ describe('v1.VizierServiceClient', () => {
       });
       assert.deepStrictEqual(
         (client.descriptors.page.listTrials.asyncIterate as SinonStub).getCall(
-          0,
+          0
         ).args[1],
-        request,
+        request
       );
       assert(
         (client.descriptors.page.listTrials.asyncIterate as SinonStub)
           .getCall(0)
           .args[2].otherArgs.headers[
             'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          ].includes(expectedHeaderRequestParams)
       );
     });
   });
@@ -2808,7 +2808,7 @@ describe('v1.VizierServiceClient', () => {
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new IamProtos.google.iam.v1.GetIamPolicyRequest(),
+        new IamProtos.google.iam.v1.GetIamPolicyRequest()
       );
       request.resource = '';
       const expectedHeaderRequestParams = 'resource=';
@@ -2820,7 +2820,7 @@ describe('v1.VizierServiceClient', () => {
         },
       };
       const expectedResponse = generateSampleMessage(
-        new IamProtos.google.iam.v1.Policy(),
+        new IamProtos.google.iam.v1.Policy()
       );
       client.iamClient.getIamPolicy = stubSimpleCall(expectedResponse);
       const response = await client.getIamPolicy(request, expectedOptions);
@@ -2828,7 +2828,7 @@ describe('v1.VizierServiceClient', () => {
       assert(
         (client.iamClient.getIamPolicy as SinonStub)
           .getCall(0)
-          .calledWith(request, expectedOptions, undefined),
+          .calledWith(request, expectedOptions, undefined)
       );
     });
     it('invokes getIamPolicy without error using callback', async () => {
@@ -2838,7 +2838,7 @@ describe('v1.VizierServiceClient', () => {
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new IamProtos.google.iam.v1.GetIamPolicyRequest(),
+        new IamProtos.google.iam.v1.GetIamPolicyRequest()
       );
       request.resource = '';
       const expectedHeaderRequestParams = 'resource=';
@@ -2850,7 +2850,7 @@ describe('v1.VizierServiceClient', () => {
         },
       };
       const expectedResponse = generateSampleMessage(
-        new IamProtos.google.iam.v1.Policy(),
+        new IamProtos.google.iam.v1.Policy()
       );
       client.iamClient.getIamPolicy = sinon
         .stub()
@@ -2861,14 +2861,14 @@ describe('v1.VizierServiceClient', () => {
           expectedOptions,
           (
             err?: Error | null,
-            result?: IamProtos.google.iam.v1.Policy | null,
+            result?: IamProtos.google.iam.v1.Policy | null
           ) => {
             if (err) {
               reject(err);
             } else {
               resolve(result);
             }
-          },
+          }
         );
       });
       const response = await promise;
@@ -2882,7 +2882,7 @@ describe('v1.VizierServiceClient', () => {
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new IamProtos.google.iam.v1.GetIamPolicyRequest(),
+        new IamProtos.google.iam.v1.GetIamPolicyRequest()
       );
       request.resource = '';
       const expectedHeaderRequestParams = 'resource=';
@@ -2897,12 +2897,12 @@ describe('v1.VizierServiceClient', () => {
       client.iamClient.getIamPolicy = stubSimpleCall(undefined, expectedError);
       await assert.rejects(
         client.getIamPolicy(request, expectedOptions),
-        expectedError,
+        expectedError
       );
       assert(
         (client.iamClient.getIamPolicy as SinonStub)
           .getCall(0)
-          .calledWith(request, expectedOptions, undefined),
+          .calledWith(request, expectedOptions, undefined)
       );
     });
   });
@@ -2914,7 +2914,7 @@ describe('v1.VizierServiceClient', () => {
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new IamProtos.google.iam.v1.SetIamPolicyRequest(),
+        new IamProtos.google.iam.v1.SetIamPolicyRequest()
       );
       request.resource = '';
       const expectedHeaderRequestParams = 'resource=';
@@ -2926,7 +2926,7 @@ describe('v1.VizierServiceClient', () => {
         },
       };
       const expectedResponse = generateSampleMessage(
-        new IamProtos.google.iam.v1.Policy(),
+        new IamProtos.google.iam.v1.Policy()
       );
       client.iamClient.setIamPolicy = stubSimpleCall(expectedResponse);
       const response = await client.setIamPolicy(request, expectedOptions);
@@ -2934,7 +2934,7 @@ describe('v1.VizierServiceClient', () => {
       assert(
         (client.iamClient.setIamPolicy as SinonStub)
           .getCall(0)
-          .calledWith(request, expectedOptions, undefined),
+          .calledWith(request, expectedOptions, undefined)
       );
     });
     it('invokes setIamPolicy without error using callback', async () => {
@@ -2944,7 +2944,7 @@ describe('v1.VizierServiceClient', () => {
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new IamProtos.google.iam.v1.SetIamPolicyRequest(),
+        new IamProtos.google.iam.v1.SetIamPolicyRequest()
       );
       request.resource = '';
       const expectedHeaderRequestParams = 'resource=';
@@ -2956,7 +2956,7 @@ describe('v1.VizierServiceClient', () => {
         },
       };
       const expectedResponse = generateSampleMessage(
-        new IamProtos.google.iam.v1.Policy(),
+        new IamProtos.google.iam.v1.Policy()
       );
       client.iamClient.setIamPolicy = sinon
         .stub()
@@ -2967,14 +2967,14 @@ describe('v1.VizierServiceClient', () => {
           expectedOptions,
           (
             err?: Error | null,
-            result?: IamProtos.google.iam.v1.Policy | null,
+            result?: IamProtos.google.iam.v1.Policy | null
           ) => {
             if (err) {
               reject(err);
             } else {
               resolve(result);
             }
-          },
+          }
         );
       });
       const response = await promise;
@@ -2988,7 +2988,7 @@ describe('v1.VizierServiceClient', () => {
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new IamProtos.google.iam.v1.SetIamPolicyRequest(),
+        new IamProtos.google.iam.v1.SetIamPolicyRequest()
       );
       request.resource = '';
       const expectedHeaderRequestParams = 'resource=';
@@ -3003,12 +3003,12 @@ describe('v1.VizierServiceClient', () => {
       client.iamClient.setIamPolicy = stubSimpleCall(undefined, expectedError);
       await assert.rejects(
         client.setIamPolicy(request, expectedOptions),
-        expectedError,
+        expectedError
       );
       assert(
         (client.iamClient.setIamPolicy as SinonStub)
           .getCall(0)
-          .calledWith(request, expectedOptions, undefined),
+          .calledWith(request, expectedOptions, undefined)
       );
     });
   });
@@ -3020,7 +3020,7 @@ describe('v1.VizierServiceClient', () => {
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new IamProtos.google.iam.v1.TestIamPermissionsRequest(),
+        new IamProtos.google.iam.v1.TestIamPermissionsRequest()
       );
       request.resource = '';
       const expectedHeaderRequestParams = 'resource=';
@@ -3032,18 +3032,18 @@ describe('v1.VizierServiceClient', () => {
         },
       };
       const expectedResponse = generateSampleMessage(
-        new IamProtos.google.iam.v1.TestIamPermissionsResponse(),
+        new IamProtos.google.iam.v1.TestIamPermissionsResponse()
       );
       client.iamClient.testIamPermissions = stubSimpleCall(expectedResponse);
       const response = await client.testIamPermissions(
         request,
-        expectedOptions,
+        expectedOptions
       );
       assert.deepStrictEqual(response, [expectedResponse]);
       assert(
         (client.iamClient.testIamPermissions as SinonStub)
           .getCall(0)
-          .calledWith(request, expectedOptions, undefined),
+          .calledWith(request, expectedOptions, undefined)
       );
     });
     it('invokes testIamPermissions without error using callback', async () => {
@@ -3053,7 +3053,7 @@ describe('v1.VizierServiceClient', () => {
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new IamProtos.google.iam.v1.TestIamPermissionsRequest(),
+        new IamProtos.google.iam.v1.TestIamPermissionsRequest()
       );
       request.resource = '';
       const expectedHeaderRequestParams = 'resource=';
@@ -3065,7 +3065,7 @@ describe('v1.VizierServiceClient', () => {
         },
       };
       const expectedResponse = generateSampleMessage(
-        new IamProtos.google.iam.v1.TestIamPermissionsResponse(),
+        new IamProtos.google.iam.v1.TestIamPermissionsResponse()
       );
       client.iamClient.testIamPermissions = sinon
         .stub()
@@ -3076,14 +3076,14 @@ describe('v1.VizierServiceClient', () => {
           expectedOptions,
           (
             err?: Error | null,
-            result?: IamProtos.google.iam.v1.TestIamPermissionsResponse | null,
+            result?: IamProtos.google.iam.v1.TestIamPermissionsResponse | null
           ) => {
             if (err) {
               reject(err);
             } else {
               resolve(result);
             }
-          },
+          }
         );
       });
       const response = await promise;
@@ -3097,7 +3097,7 @@ describe('v1.VizierServiceClient', () => {
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new IamProtos.google.iam.v1.TestIamPermissionsRequest(),
+        new IamProtos.google.iam.v1.TestIamPermissionsRequest()
       );
       request.resource = '';
       const expectedHeaderRequestParams = 'resource=';
@@ -3111,16 +3111,16 @@ describe('v1.VizierServiceClient', () => {
       const expectedError = new Error('expected');
       client.iamClient.testIamPermissions = stubSimpleCall(
         undefined,
-        expectedError,
+        expectedError
       );
       await assert.rejects(
         client.testIamPermissions(request, expectedOptions),
-        expectedError,
+        expectedError
       );
       assert(
         (client.iamClient.testIamPermissions as SinonStub)
           .getCall(0)
-          .calledWith(request, expectedOptions, undefined),
+          .calledWith(request, expectedOptions, undefined)
       );
     });
   });
@@ -3132,7 +3132,7 @@ describe('v1.VizierServiceClient', () => {
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new LocationProtos.google.cloud.location.GetLocationRequest(),
+        new LocationProtos.google.cloud.location.GetLocationRequest()
       );
       request.name = '';
       const expectedHeaderRequestParams = 'name=';
@@ -3144,7 +3144,7 @@ describe('v1.VizierServiceClient', () => {
         },
       };
       const expectedResponse = generateSampleMessage(
-        new LocationProtos.google.cloud.location.Location(),
+        new LocationProtos.google.cloud.location.Location()
       );
       client.locationsClient.getLocation = stubSimpleCall(expectedResponse);
       const response = await client.getLocation(request, expectedOptions);
@@ -3152,7 +3152,7 @@ describe('v1.VizierServiceClient', () => {
       assert(
         (client.locationsClient.getLocation as SinonStub)
           .getCall(0)
-          .calledWith(request, expectedOptions, undefined),
+          .calledWith(request, expectedOptions, undefined)
       );
     });
     it('invokes getLocation without error using callback', async () => {
@@ -3162,7 +3162,7 @@ describe('v1.VizierServiceClient', () => {
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new LocationProtos.google.cloud.location.GetLocationRequest(),
+        new LocationProtos.google.cloud.location.GetLocationRequest()
       );
       request.name = '';
       const expectedHeaderRequestParams = 'name=';
@@ -3174,7 +3174,7 @@ describe('v1.VizierServiceClient', () => {
         },
       };
       const expectedResponse = generateSampleMessage(
-        new LocationProtos.google.cloud.location.Location(),
+        new LocationProtos.google.cloud.location.Location()
       );
       client.locationsClient.getLocation = sinon
         .stub()
@@ -3185,14 +3185,14 @@ describe('v1.VizierServiceClient', () => {
           expectedOptions,
           (
             err?: Error | null,
-            result?: LocationProtos.google.cloud.location.ILocation | null,
+            result?: LocationProtos.google.cloud.location.ILocation | null
           ) => {
             if (err) {
               reject(err);
             } else {
               resolve(result);
             }
-          },
+          }
         );
       });
       const response = await promise;
@@ -3206,7 +3206,7 @@ describe('v1.VizierServiceClient', () => {
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new LocationProtos.google.cloud.location.GetLocationRequest(),
+        new LocationProtos.google.cloud.location.GetLocationRequest()
       );
       request.name = '';
       const expectedHeaderRequestParams = 'name=';
@@ -3220,16 +3220,16 @@ describe('v1.VizierServiceClient', () => {
       const expectedError = new Error('expected');
       client.locationsClient.getLocation = stubSimpleCall(
         undefined,
-        expectedError,
+        expectedError
       );
       await assert.rejects(
         client.getLocation(request, expectedOptions),
-        expectedError,
+        expectedError
       );
       assert(
         (client.locationsClient.getLocation as SinonStub)
           .getCall(0)
-          .calledWith(request, expectedOptions, undefined),
+          .calledWith(request, expectedOptions, undefined)
       );
     });
   });
@@ -3241,19 +3241,19 @@ describe('v1.VizierServiceClient', () => {
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new LocationProtos.google.cloud.location.ListLocationsRequest(),
+        new LocationProtos.google.cloud.location.ListLocationsRequest()
       );
       request.name = '';
       const expectedHeaderRequestParams = 'name=';
       const expectedResponse = [
         generateSampleMessage(
-          new LocationProtos.google.cloud.location.Location(),
+          new LocationProtos.google.cloud.location.Location()
         ),
         generateSampleMessage(
-          new LocationProtos.google.cloud.location.Location(),
+          new LocationProtos.google.cloud.location.Location()
         ),
         generateSampleMessage(
-          new LocationProtos.google.cloud.location.Location(),
+          new LocationProtos.google.cloud.location.Location()
         ),
       ];
       client.locationsClient.descriptors.page.listLocations.asyncIterate =
@@ -3269,7 +3269,7 @@ describe('v1.VizierServiceClient', () => {
           client.locationsClient.descriptors.page.listLocations
             .asyncIterate as SinonStub
         ).getCall(0).args[1],
-        request,
+        request
       );
       assert(
         (
@@ -3278,8 +3278,8 @@ describe('v1.VizierServiceClient', () => {
         )
           .getCall(0)
           .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams,
-          ),
+            expectedHeaderRequestParams
+          )
       );
     });
     it('uses async iteration with listLocations with error', async () => {
@@ -3289,7 +3289,7 @@ describe('v1.VizierServiceClient', () => {
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new LocationProtos.google.cloud.location.ListLocationsRequest(),
+        new LocationProtos.google.cloud.location.ListLocationsRequest()
       );
       request.name = '';
       const expectedHeaderRequestParams = 'name=';
@@ -3308,7 +3308,7 @@ describe('v1.VizierServiceClient', () => {
           client.locationsClient.descriptors.page.listLocations
             .asyncIterate as SinonStub
         ).getCall(0).args[1],
-        request,
+        request
       );
       assert(
         (
@@ -3317,8 +3317,8 @@ describe('v1.VizierServiceClient', () => {
         )
           .getCall(0)
           .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams,
-          ),
+            expectedHeaderRequestParams
+          )
       );
     });
   });
@@ -3330,10 +3330,10 @@ describe('v1.VizierServiceClient', () => {
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.GetOperationRequest(),
+        new operationsProtos.google.longrunning.GetOperationRequest()
       );
       const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation(),
+        new operationsProtos.google.longrunning.Operation()
       );
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const response = await client.getOperation(request);
@@ -3341,7 +3341,7 @@ describe('v1.VizierServiceClient', () => {
       assert(
         (client.operationsClient.getOperation as SinonStub)
           .getCall(0)
-          .calledWith(request),
+          .calledWith(request)
       );
     });
     it('invokes getOperation without error using callback', async () => {
@@ -3350,10 +3350,10 @@ describe('v1.VizierServiceClient', () => {
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.GetOperationRequest(),
+        new operationsProtos.google.longrunning.GetOperationRequest()
       );
       const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation(),
+        new operationsProtos.google.longrunning.Operation()
       );
       client.operationsClient.getOperation = sinon
         .stub()
@@ -3364,14 +3364,14 @@ describe('v1.VizierServiceClient', () => {
           undefined,
           (
             err?: Error | null,
-            result?: operationsProtos.google.longrunning.Operation | null,
+            result?: operationsProtos.google.longrunning.Operation | null
           ) => {
             if (err) {
               reject(err);
             } else {
               resolve(result);
             }
-          },
+          }
         );
       });
       const response = await promise;
@@ -3384,12 +3384,12 @@ describe('v1.VizierServiceClient', () => {
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.GetOperationRequest(),
+        new operationsProtos.google.longrunning.GetOperationRequest()
       );
       const expectedError = new Error('expected');
       client.operationsClient.getOperation = stubSimpleCall(
         undefined,
-        expectedError,
+        expectedError
       );
       await assert.rejects(async () => {
         await client.getOperation(request);
@@ -3397,7 +3397,7 @@ describe('v1.VizierServiceClient', () => {
       assert(
         (client.operationsClient.getOperation as SinonStub)
           .getCall(0)
-          .calledWith(request),
+          .calledWith(request)
       );
     });
   });
@@ -3409,10 +3409,10 @@ describe('v1.VizierServiceClient', () => {
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.CancelOperationRequest(),
+        new operationsProtos.google.longrunning.CancelOperationRequest()
       );
       const expectedResponse = generateSampleMessage(
-        new protos.google.protobuf.Empty(),
+        new protos.google.protobuf.Empty()
       );
       client.operationsClient.cancelOperation =
         stubSimpleCall(expectedResponse);
@@ -3421,7 +3421,7 @@ describe('v1.VizierServiceClient', () => {
       assert(
         (client.operationsClient.cancelOperation as SinonStub)
           .getCall(0)
-          .calledWith(request),
+          .calledWith(request)
       );
     });
     it('invokes cancelOperation without error using callback', async () => {
@@ -3430,10 +3430,10 @@ describe('v1.VizierServiceClient', () => {
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.CancelOperationRequest(),
+        new operationsProtos.google.longrunning.CancelOperationRequest()
       );
       const expectedResponse = generateSampleMessage(
-        new protos.google.protobuf.Empty(),
+        new protos.google.protobuf.Empty()
       );
       client.operationsClient.cancelOperation = sinon
         .stub()
@@ -3444,14 +3444,14 @@ describe('v1.VizierServiceClient', () => {
           undefined,
           (
             err?: Error | null,
-            result?: protos.google.protobuf.Empty | null,
+            result?: protos.google.protobuf.Empty | null
           ) => {
             if (err) {
               reject(err);
             } else {
               resolve(result);
             }
-          },
+          }
         );
       });
       const response = await promise;
@@ -3464,12 +3464,12 @@ describe('v1.VizierServiceClient', () => {
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.CancelOperationRequest(),
+        new operationsProtos.google.longrunning.CancelOperationRequest()
       );
       const expectedError = new Error('expected');
       client.operationsClient.cancelOperation = stubSimpleCall(
         undefined,
-        expectedError,
+        expectedError
       );
       await assert.rejects(async () => {
         await client.cancelOperation(request);
@@ -3477,7 +3477,7 @@ describe('v1.VizierServiceClient', () => {
       assert(
         (client.operationsClient.cancelOperation as SinonStub)
           .getCall(0)
-          .calledWith(request),
+          .calledWith(request)
       );
     });
   });
@@ -3489,10 +3489,10 @@ describe('v1.VizierServiceClient', () => {
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.DeleteOperationRequest(),
+        new operationsProtos.google.longrunning.DeleteOperationRequest()
       );
       const expectedResponse = generateSampleMessage(
-        new protos.google.protobuf.Empty(),
+        new protos.google.protobuf.Empty()
       );
       client.operationsClient.deleteOperation =
         stubSimpleCall(expectedResponse);
@@ -3501,7 +3501,7 @@ describe('v1.VizierServiceClient', () => {
       assert(
         (client.operationsClient.deleteOperation as SinonStub)
           .getCall(0)
-          .calledWith(request),
+          .calledWith(request)
       );
     });
     it('invokes deleteOperation without error using callback', async () => {
@@ -3510,10 +3510,10 @@ describe('v1.VizierServiceClient', () => {
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.DeleteOperationRequest(),
+        new operationsProtos.google.longrunning.DeleteOperationRequest()
       );
       const expectedResponse = generateSampleMessage(
-        new protos.google.protobuf.Empty(),
+        new protos.google.protobuf.Empty()
       );
       client.operationsClient.deleteOperation = sinon
         .stub()
@@ -3524,14 +3524,14 @@ describe('v1.VizierServiceClient', () => {
           undefined,
           (
             err?: Error | null,
-            result?: protos.google.protobuf.Empty | null,
+            result?: protos.google.protobuf.Empty | null
           ) => {
             if (err) {
               reject(err);
             } else {
               resolve(result);
             }
-          },
+          }
         );
       });
       const response = await promise;
@@ -3544,12 +3544,12 @@ describe('v1.VizierServiceClient', () => {
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.DeleteOperationRequest(),
+        new operationsProtos.google.longrunning.DeleteOperationRequest()
       );
       const expectedError = new Error('expected');
       client.operationsClient.deleteOperation = stubSimpleCall(
         undefined,
-        expectedError,
+        expectedError
       );
       await assert.rejects(async () => {
         await client.deleteOperation(request);
@@ -3557,7 +3557,7 @@ describe('v1.VizierServiceClient', () => {
       assert(
         (client.operationsClient.deleteOperation as SinonStub)
           .getCall(0)
-          .calledWith(request),
+          .calledWith(request)
       );
     });
   });
@@ -3568,17 +3568,17 @@ describe('v1.VizierServiceClient', () => {
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.ListOperationsRequest(),
+        new operationsProtos.google.longrunning.ListOperationsRequest()
       );
       const expectedResponse = [
         generateSampleMessage(
-          new operationsProtos.google.longrunning.ListOperationsResponse(),
+          new operationsProtos.google.longrunning.ListOperationsResponse()
         ),
         generateSampleMessage(
-          new operationsProtos.google.longrunning.ListOperationsResponse(),
+          new operationsProtos.google.longrunning.ListOperationsResponse()
         ),
         generateSampleMessage(
-          new operationsProtos.google.longrunning.ListOperationsResponse(),
+          new operationsProtos.google.longrunning.ListOperationsResponse()
         ),
       ];
       client.operationsClient.descriptor.listOperations.asyncIterate =
@@ -3595,7 +3595,7 @@ describe('v1.VizierServiceClient', () => {
           client.operationsClient.descriptor.listOperations
             .asyncIterate as SinonStub
         ).getCall(0).args[1],
-        request,
+        request
       );
     });
     it('uses async iteration with listOperations with error', async () => {
@@ -3605,7 +3605,7 @@ describe('v1.VizierServiceClient', () => {
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.ListOperationsRequest(),
+        new operationsProtos.google.longrunning.ListOperationsRequest()
       );
       const expectedError = new Error('expected');
       client.operationsClient.descriptor.listOperations.asyncIterate =
@@ -3623,7 +3623,7 @@ describe('v1.VizierServiceClient', () => {
           client.operationsClient.descriptor.listOperations
             .asyncIterate as SinonStub
         ).getCall(0).args[1],
-        request,
+        request
       );
     });
   });
@@ -3656,13 +3656,13 @@ describe('v1.VizierServiceClient', () => {
           'locationValue',
           'datasetValue',
           'dataItemValue',
-          'annotationValue',
+          'annotationValue'
         );
         assert.strictEqual(result, fakePath);
         assert(
           (client.pathTemplates.annotationPathTemplate.render as SinonStub)
             .getCall(-1)
-            .calledWith(expectedParameters),
+            .calledWith(expectedParameters)
         );
       });
 
@@ -3672,7 +3672,7 @@ describe('v1.VizierServiceClient', () => {
         assert(
           (client.pathTemplates.annotationPathTemplate.match as SinonStub)
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
 
@@ -3682,7 +3682,7 @@ describe('v1.VizierServiceClient', () => {
         assert(
           (client.pathTemplates.annotationPathTemplate.match as SinonStub)
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
 
@@ -3692,7 +3692,7 @@ describe('v1.VizierServiceClient', () => {
         assert(
           (client.pathTemplates.annotationPathTemplate.match as SinonStub)
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
 
@@ -3702,7 +3702,7 @@ describe('v1.VizierServiceClient', () => {
         assert(
           (client.pathTemplates.annotationPathTemplate.match as SinonStub)
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
 
@@ -3712,7 +3712,7 @@ describe('v1.VizierServiceClient', () => {
         assert(
           (client.pathTemplates.annotationPathTemplate.match as SinonStub)
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
     });
@@ -3742,13 +3742,13 @@ describe('v1.VizierServiceClient', () => {
           'projectValue',
           'locationValue',
           'datasetValue',
-          'annotationSpecValue',
+          'annotationSpecValue'
         );
         assert.strictEqual(result, fakePath);
         assert(
           (client.pathTemplates.annotationSpecPathTemplate.render as SinonStub)
             .getCall(-1)
-            .calledWith(expectedParameters),
+            .calledWith(expectedParameters)
         );
       });
 
@@ -3759,7 +3759,7 @@ describe('v1.VizierServiceClient', () => {
         assert(
           (client.pathTemplates.annotationSpecPathTemplate.match as SinonStub)
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
 
@@ -3770,7 +3770,7 @@ describe('v1.VizierServiceClient', () => {
         assert(
           (client.pathTemplates.annotationSpecPathTemplate.match as SinonStub)
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
 
@@ -3781,7 +3781,7 @@ describe('v1.VizierServiceClient', () => {
         assert(
           (client.pathTemplates.annotationSpecPathTemplate.match as SinonStub)
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
 
@@ -3792,7 +3792,7 @@ describe('v1.VizierServiceClient', () => {
         assert(
           (client.pathTemplates.annotationSpecPathTemplate.match as SinonStub)
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
     });
@@ -3822,13 +3822,13 @@ describe('v1.VizierServiceClient', () => {
           'projectValue',
           'locationValue',
           'metadataStoreValue',
-          'artifactValue',
+          'artifactValue'
         );
         assert.strictEqual(result, fakePath);
         assert(
           (client.pathTemplates.artifactPathTemplate.render as SinonStub)
             .getCall(-1)
-            .calledWith(expectedParameters),
+            .calledWith(expectedParameters)
         );
       });
 
@@ -3838,7 +3838,7 @@ describe('v1.VizierServiceClient', () => {
         assert(
           (client.pathTemplates.artifactPathTemplate.match as SinonStub)
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
 
@@ -3848,7 +3848,7 @@ describe('v1.VizierServiceClient', () => {
         assert(
           (client.pathTemplates.artifactPathTemplate.match as SinonStub)
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
 
@@ -3859,7 +3859,7 @@ describe('v1.VizierServiceClient', () => {
         assert(
           (client.pathTemplates.artifactPathTemplate.match as SinonStub)
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
 
@@ -3869,7 +3869,7 @@ describe('v1.VizierServiceClient', () => {
         assert(
           (client.pathTemplates.artifactPathTemplate.match as SinonStub)
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
     });
@@ -3897,7 +3897,7 @@ describe('v1.VizierServiceClient', () => {
         const result = await client.batchPredictionJobPath(
           'projectValue',
           'locationValue',
-          'batchPredictionJobValue',
+          'batchPredictionJobValue'
         );
         assert.strictEqual(result, fakePath);
         assert(
@@ -3906,7 +3906,7 @@ describe('v1.VizierServiceClient', () => {
               .render as SinonStub
           )
             .getCall(-1)
-            .calledWith(expectedParameters),
+            .calledWith(expectedParameters)
         );
       });
 
@@ -3920,7 +3920,7 @@ describe('v1.VizierServiceClient', () => {
               .match as SinonStub
           )
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
 
@@ -3934,14 +3934,14 @@ describe('v1.VizierServiceClient', () => {
               .match as SinonStub
           )
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
 
       it('matchBatchPredictionJobFromBatchPredictionJobName', async () => {
         const result =
           await client.matchBatchPredictionJobFromBatchPredictionJobName(
-            fakePath,
+            fakePath
           );
         assert.strictEqual(result, 'batchPredictionJobValue');
         assert(
@@ -3950,7 +3950,7 @@ describe('v1.VizierServiceClient', () => {
               .match as SinonStub
           )
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
     });
@@ -3978,13 +3978,13 @@ describe('v1.VizierServiceClient', () => {
         const result = await client.cachedContentPath(
           'projectValue',
           'locationValue',
-          'cachedContentValue',
+          'cachedContentValue'
         );
         assert.strictEqual(result, fakePath);
         assert(
           (client.pathTemplates.cachedContentPathTemplate.render as SinonStub)
             .getCall(-1)
-            .calledWith(expectedParameters),
+            .calledWith(expectedParameters)
         );
       });
 
@@ -3994,7 +3994,7 @@ describe('v1.VizierServiceClient', () => {
         assert(
           (client.pathTemplates.cachedContentPathTemplate.match as SinonStub)
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
 
@@ -4005,7 +4005,7 @@ describe('v1.VizierServiceClient', () => {
         assert(
           (client.pathTemplates.cachedContentPathTemplate.match as SinonStub)
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
 
@@ -4016,7 +4016,7 @@ describe('v1.VizierServiceClient', () => {
         assert(
           (client.pathTemplates.cachedContentPathTemplate.match as SinonStub)
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
     });
@@ -4046,13 +4046,13 @@ describe('v1.VizierServiceClient', () => {
           'projectValue',
           'locationValue',
           'metadataStoreValue',
-          'contextValue',
+          'contextValue'
         );
         assert.strictEqual(result, fakePath);
         assert(
           (client.pathTemplates.contextPathTemplate.render as SinonStub)
             .getCall(-1)
-            .calledWith(expectedParameters),
+            .calledWith(expectedParameters)
         );
       });
 
@@ -4062,7 +4062,7 @@ describe('v1.VizierServiceClient', () => {
         assert(
           (client.pathTemplates.contextPathTemplate.match as SinonStub)
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
 
@@ -4072,7 +4072,7 @@ describe('v1.VizierServiceClient', () => {
         assert(
           (client.pathTemplates.contextPathTemplate.match as SinonStub)
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
 
@@ -4082,7 +4082,7 @@ describe('v1.VizierServiceClient', () => {
         assert(
           (client.pathTemplates.contextPathTemplate.match as SinonStub)
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
 
@@ -4092,7 +4092,7 @@ describe('v1.VizierServiceClient', () => {
         assert(
           (client.pathTemplates.contextPathTemplate.match as SinonStub)
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
     });
@@ -4120,13 +4120,13 @@ describe('v1.VizierServiceClient', () => {
         const result = await client.customJobPath(
           'projectValue',
           'locationValue',
-          'customJobValue',
+          'customJobValue'
         );
         assert.strictEqual(result, fakePath);
         assert(
           (client.pathTemplates.customJobPathTemplate.render as SinonStub)
             .getCall(-1)
-            .calledWith(expectedParameters),
+            .calledWith(expectedParameters)
         );
       });
 
@@ -4136,7 +4136,7 @@ describe('v1.VizierServiceClient', () => {
         assert(
           (client.pathTemplates.customJobPathTemplate.match as SinonStub)
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
 
@@ -4146,7 +4146,7 @@ describe('v1.VizierServiceClient', () => {
         assert(
           (client.pathTemplates.customJobPathTemplate.match as SinonStub)
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
 
@@ -4156,7 +4156,7 @@ describe('v1.VizierServiceClient', () => {
         assert(
           (client.pathTemplates.customJobPathTemplate.match as SinonStub)
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
     });
@@ -4186,13 +4186,13 @@ describe('v1.VizierServiceClient', () => {
           'projectValue',
           'locationValue',
           'datasetValue',
-          'dataItemValue',
+          'dataItemValue'
         );
         assert.strictEqual(result, fakePath);
         assert(
           (client.pathTemplates.dataItemPathTemplate.render as SinonStub)
             .getCall(-1)
-            .calledWith(expectedParameters),
+            .calledWith(expectedParameters)
         );
       });
 
@@ -4202,7 +4202,7 @@ describe('v1.VizierServiceClient', () => {
         assert(
           (client.pathTemplates.dataItemPathTemplate.match as SinonStub)
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
 
@@ -4212,7 +4212,7 @@ describe('v1.VizierServiceClient', () => {
         assert(
           (client.pathTemplates.dataItemPathTemplate.match as SinonStub)
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
 
@@ -4222,7 +4222,7 @@ describe('v1.VizierServiceClient', () => {
         assert(
           (client.pathTemplates.dataItemPathTemplate.match as SinonStub)
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
 
@@ -4232,7 +4232,7 @@ describe('v1.VizierServiceClient', () => {
         assert(
           (client.pathTemplates.dataItemPathTemplate.match as SinonStub)
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
     });
@@ -4260,13 +4260,13 @@ describe('v1.VizierServiceClient', () => {
         const result = await client.dataLabelingJobPath(
           'projectValue',
           'locationValue',
-          'dataLabelingJobValue',
+          'dataLabelingJobValue'
         );
         assert.strictEqual(result, fakePath);
         assert(
           (client.pathTemplates.dataLabelingJobPathTemplate.render as SinonStub)
             .getCall(-1)
-            .calledWith(expectedParameters),
+            .calledWith(expectedParameters)
         );
       });
 
@@ -4277,7 +4277,7 @@ describe('v1.VizierServiceClient', () => {
         assert(
           (client.pathTemplates.dataLabelingJobPathTemplate.match as SinonStub)
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
 
@@ -4288,7 +4288,7 @@ describe('v1.VizierServiceClient', () => {
         assert(
           (client.pathTemplates.dataLabelingJobPathTemplate.match as SinonStub)
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
 
@@ -4299,7 +4299,7 @@ describe('v1.VizierServiceClient', () => {
         assert(
           (client.pathTemplates.dataLabelingJobPathTemplate.match as SinonStub)
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
     });
@@ -4327,13 +4327,13 @@ describe('v1.VizierServiceClient', () => {
         const result = await client.datasetPath(
           'projectValue',
           'locationValue',
-          'datasetValue',
+          'datasetValue'
         );
         assert.strictEqual(result, fakePath);
         assert(
           (client.pathTemplates.datasetPathTemplate.render as SinonStub)
             .getCall(-1)
-            .calledWith(expectedParameters),
+            .calledWith(expectedParameters)
         );
       });
 
@@ -4343,7 +4343,7 @@ describe('v1.VizierServiceClient', () => {
         assert(
           (client.pathTemplates.datasetPathTemplate.match as SinonStub)
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
 
@@ -4353,7 +4353,7 @@ describe('v1.VizierServiceClient', () => {
         assert(
           (client.pathTemplates.datasetPathTemplate.match as SinonStub)
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
 
@@ -4363,7 +4363,7 @@ describe('v1.VizierServiceClient', () => {
         assert(
           (client.pathTemplates.datasetPathTemplate.match as SinonStub)
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
     });
@@ -4393,13 +4393,13 @@ describe('v1.VizierServiceClient', () => {
           'projectValue',
           'locationValue',
           'datasetValue',
-          'datasetVersionValue',
+          'datasetVersionValue'
         );
         assert.strictEqual(result, fakePath);
         assert(
           (client.pathTemplates.datasetVersionPathTemplate.render as SinonStub)
             .getCall(-1)
-            .calledWith(expectedParameters),
+            .calledWith(expectedParameters)
         );
       });
 
@@ -4410,7 +4410,7 @@ describe('v1.VizierServiceClient', () => {
         assert(
           (client.pathTemplates.datasetVersionPathTemplate.match as SinonStub)
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
 
@@ -4421,7 +4421,7 @@ describe('v1.VizierServiceClient', () => {
         assert(
           (client.pathTemplates.datasetVersionPathTemplate.match as SinonStub)
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
 
@@ -4432,7 +4432,7 @@ describe('v1.VizierServiceClient', () => {
         assert(
           (client.pathTemplates.datasetVersionPathTemplate.match as SinonStub)
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
 
@@ -4443,7 +4443,7 @@ describe('v1.VizierServiceClient', () => {
         assert(
           (client.pathTemplates.datasetVersionPathTemplate.match as SinonStub)
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
     });
@@ -4471,7 +4471,7 @@ describe('v1.VizierServiceClient', () => {
         const result = await client.deploymentResourcePoolPath(
           'projectValue',
           'locationValue',
-          'deploymentResourcePoolValue',
+          'deploymentResourcePoolValue'
         );
         assert.strictEqual(result, fakePath);
         assert(
@@ -4480,7 +4480,7 @@ describe('v1.VizierServiceClient', () => {
               .render as SinonStub
           )
             .getCall(-1)
-            .calledWith(expectedParameters),
+            .calledWith(expectedParameters)
         );
       });
 
@@ -4494,7 +4494,7 @@ describe('v1.VizierServiceClient', () => {
               .match as SinonStub
           )
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
 
@@ -4508,14 +4508,14 @@ describe('v1.VizierServiceClient', () => {
               .match as SinonStub
           )
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
 
       it('matchDeploymentResourcePoolFromDeploymentResourcePoolName', async () => {
         const result =
           await client.matchDeploymentResourcePoolFromDeploymentResourcePoolName(
-            fakePath,
+            fakePath
           );
         assert.strictEqual(result, 'deploymentResourcePoolValue');
         assert(
@@ -4524,7 +4524,7 @@ describe('v1.VizierServiceClient', () => {
               .match as SinonStub
           )
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
     });
@@ -4554,13 +4554,13 @@ describe('v1.VizierServiceClient', () => {
           'projectValue',
           'locationValue',
           'featurestoreValue',
-          'entityTypeValue',
+          'entityTypeValue'
         );
         assert.strictEqual(result, fakePath);
         assert(
           (client.pathTemplates.entityTypePathTemplate.render as SinonStub)
             .getCall(-1)
-            .calledWith(expectedParameters),
+            .calledWith(expectedParameters)
         );
       });
 
@@ -4570,7 +4570,7 @@ describe('v1.VizierServiceClient', () => {
         assert(
           (client.pathTemplates.entityTypePathTemplate.match as SinonStub)
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
 
@@ -4580,7 +4580,7 @@ describe('v1.VizierServiceClient', () => {
         assert(
           (client.pathTemplates.entityTypePathTemplate.match as SinonStub)
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
 
@@ -4591,7 +4591,7 @@ describe('v1.VizierServiceClient', () => {
         assert(
           (client.pathTemplates.entityTypePathTemplate.match as SinonStub)
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
 
@@ -4601,7 +4601,7 @@ describe('v1.VizierServiceClient', () => {
         assert(
           (client.pathTemplates.entityTypePathTemplate.match as SinonStub)
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
     });
@@ -4631,13 +4631,13 @@ describe('v1.VizierServiceClient', () => {
           'projectValue',
           'locationValue',
           'metadataStoreValue',
-          'executionValue',
+          'executionValue'
         );
         assert.strictEqual(result, fakePath);
         assert(
           (client.pathTemplates.executionPathTemplate.render as SinonStub)
             .getCall(-1)
-            .calledWith(expectedParameters),
+            .calledWith(expectedParameters)
         );
       });
 
@@ -4647,7 +4647,7 @@ describe('v1.VizierServiceClient', () => {
         assert(
           (client.pathTemplates.executionPathTemplate.match as SinonStub)
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
 
@@ -4657,7 +4657,7 @@ describe('v1.VizierServiceClient', () => {
         assert(
           (client.pathTemplates.executionPathTemplate.match as SinonStub)
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
 
@@ -4668,7 +4668,7 @@ describe('v1.VizierServiceClient', () => {
         assert(
           (client.pathTemplates.executionPathTemplate.match as SinonStub)
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
 
@@ -4678,7 +4678,7 @@ describe('v1.VizierServiceClient', () => {
         assert(
           (client.pathTemplates.executionPathTemplate.match as SinonStub)
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
     });
@@ -4706,13 +4706,13 @@ describe('v1.VizierServiceClient', () => {
         const result = await client.featureGroupPath(
           'projectValue',
           'locationValue',
-          'featureGroupValue',
+          'featureGroupValue'
         );
         assert.strictEqual(result, fakePath);
         assert(
           (client.pathTemplates.featureGroupPathTemplate.render as SinonStub)
             .getCall(-1)
-            .calledWith(expectedParameters),
+            .calledWith(expectedParameters)
         );
       });
 
@@ -4722,7 +4722,7 @@ describe('v1.VizierServiceClient', () => {
         assert(
           (client.pathTemplates.featureGroupPathTemplate.match as SinonStub)
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
 
@@ -4732,7 +4732,7 @@ describe('v1.VizierServiceClient', () => {
         assert(
           (client.pathTemplates.featureGroupPathTemplate.match as SinonStub)
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
 
@@ -4743,7 +4743,7 @@ describe('v1.VizierServiceClient', () => {
         assert(
           (client.pathTemplates.featureGroupPathTemplate.match as SinonStub)
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
     });
@@ -4771,7 +4771,7 @@ describe('v1.VizierServiceClient', () => {
         const result = await client.featureOnlineStorePath(
           'projectValue',
           'locationValue',
-          'featureOnlineStoreValue',
+          'featureOnlineStoreValue'
         );
         assert.strictEqual(result, fakePath);
         assert(
@@ -4780,7 +4780,7 @@ describe('v1.VizierServiceClient', () => {
               .render as SinonStub
           )
             .getCall(-1)
-            .calledWith(expectedParameters),
+            .calledWith(expectedParameters)
         );
       });
 
@@ -4794,7 +4794,7 @@ describe('v1.VizierServiceClient', () => {
               .match as SinonStub
           )
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
 
@@ -4808,14 +4808,14 @@ describe('v1.VizierServiceClient', () => {
               .match as SinonStub
           )
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
 
       it('matchFeatureOnlineStoreFromFeatureOnlineStoreName', async () => {
         const result =
           await client.matchFeatureOnlineStoreFromFeatureOnlineStoreName(
-            fakePath,
+            fakePath
           );
         assert.strictEqual(result, 'featureOnlineStoreValue');
         assert(
@@ -4824,7 +4824,7 @@ describe('v1.VizierServiceClient', () => {
               .match as SinonStub
           )
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
     });
@@ -4854,13 +4854,13 @@ describe('v1.VizierServiceClient', () => {
           'projectValue',
           'locationValue',
           'featureOnlineStoreValue',
-          'featureViewValue',
+          'featureViewValue'
         );
         assert.strictEqual(result, fakePath);
         assert(
           (client.pathTemplates.featureViewPathTemplate.render as SinonStub)
             .getCall(-1)
-            .calledWith(expectedParameters),
+            .calledWith(expectedParameters)
         );
       });
 
@@ -4870,7 +4870,7 @@ describe('v1.VizierServiceClient', () => {
         assert(
           (client.pathTemplates.featureViewPathTemplate.match as SinonStub)
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
 
@@ -4880,7 +4880,7 @@ describe('v1.VizierServiceClient', () => {
         assert(
           (client.pathTemplates.featureViewPathTemplate.match as SinonStub)
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
 
@@ -4891,7 +4891,7 @@ describe('v1.VizierServiceClient', () => {
         assert(
           (client.pathTemplates.featureViewPathTemplate.match as SinonStub)
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
 
@@ -4902,7 +4902,7 @@ describe('v1.VizierServiceClient', () => {
         assert(
           (client.pathTemplates.featureViewPathTemplate.match as SinonStub)
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
     });
@@ -4932,13 +4932,13 @@ describe('v1.VizierServiceClient', () => {
           'projectValue',
           'locationValue',
           'featureOnlineStoreValue',
-          'featureViewValue',
+          'featureViewValue'
         );
         assert.strictEqual(result, fakePath);
         assert(
           (client.pathTemplates.featureViewSyncPathTemplate.render as SinonStub)
             .getCall(-1)
-            .calledWith(expectedParameters),
+            .calledWith(expectedParameters)
         );
       });
 
@@ -4949,7 +4949,7 @@ describe('v1.VizierServiceClient', () => {
         assert(
           (client.pathTemplates.featureViewSyncPathTemplate.match as SinonStub)
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
 
@@ -4960,7 +4960,7 @@ describe('v1.VizierServiceClient', () => {
         assert(
           (client.pathTemplates.featureViewSyncPathTemplate.match as SinonStub)
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
 
@@ -4971,7 +4971,7 @@ describe('v1.VizierServiceClient', () => {
         assert(
           (client.pathTemplates.featureViewSyncPathTemplate.match as SinonStub)
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
 
@@ -4982,7 +4982,7 @@ describe('v1.VizierServiceClient', () => {
         assert(
           (client.pathTemplates.featureViewSyncPathTemplate.match as SinonStub)
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
     });
@@ -5010,13 +5010,13 @@ describe('v1.VizierServiceClient', () => {
         const result = await client.featurestorePath(
           'projectValue',
           'locationValue',
-          'featurestoreValue',
+          'featurestoreValue'
         );
         assert.strictEqual(result, fakePath);
         assert(
           (client.pathTemplates.featurestorePathTemplate.render as SinonStub)
             .getCall(-1)
-            .calledWith(expectedParameters),
+            .calledWith(expectedParameters)
         );
       });
 
@@ -5026,7 +5026,7 @@ describe('v1.VizierServiceClient', () => {
         assert(
           (client.pathTemplates.featurestorePathTemplate.match as SinonStub)
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
 
@@ -5036,7 +5036,7 @@ describe('v1.VizierServiceClient', () => {
         assert(
           (client.pathTemplates.featurestorePathTemplate.match as SinonStub)
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
 
@@ -5047,7 +5047,7 @@ describe('v1.VizierServiceClient', () => {
         assert(
           (client.pathTemplates.featurestorePathTemplate.match as SinonStub)
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
     });
@@ -5075,7 +5075,7 @@ describe('v1.VizierServiceClient', () => {
         const result = await client.hyperparameterTuningJobPath(
           'projectValue',
           'locationValue',
-          'hyperparameterTuningJobValue',
+          'hyperparameterTuningJobValue'
         );
         assert.strictEqual(result, fakePath);
         assert(
@@ -5084,7 +5084,7 @@ describe('v1.VizierServiceClient', () => {
               .render as SinonStub
           )
             .getCall(-1)
-            .calledWith(expectedParameters),
+            .calledWith(expectedParameters)
         );
       });
 
@@ -5098,7 +5098,7 @@ describe('v1.VizierServiceClient', () => {
               .match as SinonStub
           )
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
 
@@ -5112,14 +5112,14 @@ describe('v1.VizierServiceClient', () => {
               .match as SinonStub
           )
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
 
       it('matchHyperparameterTuningJobFromHyperparameterTuningJobName', async () => {
         const result =
           await client.matchHyperparameterTuningJobFromHyperparameterTuningJobName(
-            fakePath,
+            fakePath
           );
         assert.strictEqual(result, 'hyperparameterTuningJobValue');
         assert(
@@ -5128,7 +5128,7 @@ describe('v1.VizierServiceClient', () => {
               .match as SinonStub
           )
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
     });
@@ -5156,13 +5156,13 @@ describe('v1.VizierServiceClient', () => {
         const result = await client.indexPath(
           'projectValue',
           'locationValue',
-          'indexValue',
+          'indexValue'
         );
         assert.strictEqual(result, fakePath);
         assert(
           (client.pathTemplates.indexPathTemplate.render as SinonStub)
             .getCall(-1)
-            .calledWith(expectedParameters),
+            .calledWith(expectedParameters)
         );
       });
 
@@ -5172,7 +5172,7 @@ describe('v1.VizierServiceClient', () => {
         assert(
           (client.pathTemplates.indexPathTemplate.match as SinonStub)
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
 
@@ -5182,7 +5182,7 @@ describe('v1.VizierServiceClient', () => {
         assert(
           (client.pathTemplates.indexPathTemplate.match as SinonStub)
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
 
@@ -5192,7 +5192,7 @@ describe('v1.VizierServiceClient', () => {
         assert(
           (client.pathTemplates.indexPathTemplate.match as SinonStub)
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
     });
@@ -5220,13 +5220,13 @@ describe('v1.VizierServiceClient', () => {
         const result = await client.indexEndpointPath(
           'projectValue',
           'locationValue',
-          'indexEndpointValue',
+          'indexEndpointValue'
         );
         assert.strictEqual(result, fakePath);
         assert(
           (client.pathTemplates.indexEndpointPathTemplate.render as SinonStub)
             .getCall(-1)
-            .calledWith(expectedParameters),
+            .calledWith(expectedParameters)
         );
       });
 
@@ -5236,7 +5236,7 @@ describe('v1.VizierServiceClient', () => {
         assert(
           (client.pathTemplates.indexEndpointPathTemplate.match as SinonStub)
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
 
@@ -5247,7 +5247,7 @@ describe('v1.VizierServiceClient', () => {
         assert(
           (client.pathTemplates.indexEndpointPathTemplate.match as SinonStub)
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
 
@@ -5258,7 +5258,7 @@ describe('v1.VizierServiceClient', () => {
         assert(
           (client.pathTemplates.indexEndpointPathTemplate.match as SinonStub)
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
     });
@@ -5284,13 +5284,13 @@ describe('v1.VizierServiceClient', () => {
       it('locationPath', async () => {
         const result = await client.locationPath(
           'projectValue',
-          'locationValue',
+          'locationValue'
         );
         assert.strictEqual(result, fakePath);
         assert(
           (client.pathTemplates.locationPathTemplate.render as SinonStub)
             .getCall(-1)
-            .calledWith(expectedParameters),
+            .calledWith(expectedParameters)
         );
       });
 
@@ -5300,7 +5300,7 @@ describe('v1.VizierServiceClient', () => {
         assert(
           (client.pathTemplates.locationPathTemplate.match as SinonStub)
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
 
@@ -5310,7 +5310,7 @@ describe('v1.VizierServiceClient', () => {
         assert(
           (client.pathTemplates.locationPathTemplate.match as SinonStub)
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
     });
@@ -5340,13 +5340,13 @@ describe('v1.VizierServiceClient', () => {
           'projectValue',
           'locationValue',
           'metadataStoreValue',
-          'metadataSchemaValue',
+          'metadataSchemaValue'
         );
         assert.strictEqual(result, fakePath);
         assert(
           (client.pathTemplates.metadataSchemaPathTemplate.render as SinonStub)
             .getCall(-1)
-            .calledWith(expectedParameters),
+            .calledWith(expectedParameters)
         );
       });
 
@@ -5357,7 +5357,7 @@ describe('v1.VizierServiceClient', () => {
         assert(
           (client.pathTemplates.metadataSchemaPathTemplate.match as SinonStub)
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
 
@@ -5368,7 +5368,7 @@ describe('v1.VizierServiceClient', () => {
         assert(
           (client.pathTemplates.metadataSchemaPathTemplate.match as SinonStub)
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
 
@@ -5379,7 +5379,7 @@ describe('v1.VizierServiceClient', () => {
         assert(
           (client.pathTemplates.metadataSchemaPathTemplate.match as SinonStub)
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
 
@@ -5390,7 +5390,7 @@ describe('v1.VizierServiceClient', () => {
         assert(
           (client.pathTemplates.metadataSchemaPathTemplate.match as SinonStub)
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
     });
@@ -5418,13 +5418,13 @@ describe('v1.VizierServiceClient', () => {
         const result = await client.metadataStorePath(
           'projectValue',
           'locationValue',
-          'metadataStoreValue',
+          'metadataStoreValue'
         );
         assert.strictEqual(result, fakePath);
         assert(
           (client.pathTemplates.metadataStorePathTemplate.render as SinonStub)
             .getCall(-1)
-            .calledWith(expectedParameters),
+            .calledWith(expectedParameters)
         );
       });
 
@@ -5434,7 +5434,7 @@ describe('v1.VizierServiceClient', () => {
         assert(
           (client.pathTemplates.metadataStorePathTemplate.match as SinonStub)
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
 
@@ -5445,7 +5445,7 @@ describe('v1.VizierServiceClient', () => {
         assert(
           (client.pathTemplates.metadataStorePathTemplate.match as SinonStub)
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
 
@@ -5456,7 +5456,7 @@ describe('v1.VizierServiceClient', () => {
         assert(
           (client.pathTemplates.metadataStorePathTemplate.match as SinonStub)
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
     });
@@ -5484,13 +5484,13 @@ describe('v1.VizierServiceClient', () => {
         const result = await client.modelPath(
           'projectValue',
           'locationValue',
-          'modelValue',
+          'modelValue'
         );
         assert.strictEqual(result, fakePath);
         assert(
           (client.pathTemplates.modelPathTemplate.render as SinonStub)
             .getCall(-1)
-            .calledWith(expectedParameters),
+            .calledWith(expectedParameters)
         );
       });
 
@@ -5500,7 +5500,7 @@ describe('v1.VizierServiceClient', () => {
         assert(
           (client.pathTemplates.modelPathTemplate.match as SinonStub)
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
 
@@ -5510,7 +5510,7 @@ describe('v1.VizierServiceClient', () => {
         assert(
           (client.pathTemplates.modelPathTemplate.match as SinonStub)
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
 
@@ -5520,7 +5520,7 @@ describe('v1.VizierServiceClient', () => {
         assert(
           (client.pathTemplates.modelPathTemplate.match as SinonStub)
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
     });
@@ -5546,7 +5546,7 @@ describe('v1.VizierServiceClient', () => {
         const result = await client.modelDeploymentMonitoringJobPath(
           'projectValue',
           'locationValue',
-          'modelDeploymentMonitoringJobValue',
+          'modelDeploymentMonitoringJobValue'
         );
         assert.strictEqual(result, fakePath);
         assert(
@@ -5555,14 +5555,14 @@ describe('v1.VizierServiceClient', () => {
               .render as SinonStub
           )
             .getCall(-1)
-            .calledWith(expectedParameters),
+            .calledWith(expectedParameters)
         );
       });
 
       it('matchProjectFromModelDeploymentMonitoringJobName', async () => {
         const result =
           await client.matchProjectFromModelDeploymentMonitoringJobName(
-            fakePath,
+            fakePath
           );
         assert.strictEqual(result, 'projectValue');
         assert(
@@ -5571,14 +5571,14 @@ describe('v1.VizierServiceClient', () => {
               .match as SinonStub
           )
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
 
       it('matchLocationFromModelDeploymentMonitoringJobName', async () => {
         const result =
           await client.matchLocationFromModelDeploymentMonitoringJobName(
-            fakePath,
+            fakePath
           );
         assert.strictEqual(result, 'locationValue');
         assert(
@@ -5587,14 +5587,14 @@ describe('v1.VizierServiceClient', () => {
               .match as SinonStub
           )
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
 
       it('matchModelDeploymentMonitoringJobFromModelDeploymentMonitoringJobName', async () => {
         const result =
           await client.matchModelDeploymentMonitoringJobFromModelDeploymentMonitoringJobName(
-            fakePath,
+            fakePath
           );
         assert.strictEqual(result, 'modelDeploymentMonitoringJobValue');
         assert(
@@ -5603,7 +5603,7 @@ describe('v1.VizierServiceClient', () => {
               .match as SinonStub
           )
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
     });
@@ -5633,13 +5633,13 @@ describe('v1.VizierServiceClient', () => {
           'projectValue',
           'locationValue',
           'modelValue',
-          'evaluationValue',
+          'evaluationValue'
         );
         assert.strictEqual(result, fakePath);
         assert(
           (client.pathTemplates.modelEvaluationPathTemplate.render as SinonStub)
             .getCall(-1)
-            .calledWith(expectedParameters),
+            .calledWith(expectedParameters)
         );
       });
 
@@ -5650,7 +5650,7 @@ describe('v1.VizierServiceClient', () => {
         assert(
           (client.pathTemplates.modelEvaluationPathTemplate.match as SinonStub)
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
 
@@ -5661,7 +5661,7 @@ describe('v1.VizierServiceClient', () => {
         assert(
           (client.pathTemplates.modelEvaluationPathTemplate.match as SinonStub)
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
 
@@ -5671,7 +5671,7 @@ describe('v1.VizierServiceClient', () => {
         assert(
           (client.pathTemplates.modelEvaluationPathTemplate.match as SinonStub)
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
 
@@ -5682,7 +5682,7 @@ describe('v1.VizierServiceClient', () => {
         assert(
           (client.pathTemplates.modelEvaluationPathTemplate.match as SinonStub)
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
     });
@@ -5714,7 +5714,7 @@ describe('v1.VizierServiceClient', () => {
           'locationValue',
           'modelValue',
           'evaluationValue',
-          'sliceValue',
+          'sliceValue'
         );
         assert.strictEqual(result, fakePath);
         assert(
@@ -5723,7 +5723,7 @@ describe('v1.VizierServiceClient', () => {
               .render as SinonStub
           )
             .getCall(-1)
-            .calledWith(expectedParameters),
+            .calledWith(expectedParameters)
         );
       });
 
@@ -5737,7 +5737,7 @@ describe('v1.VizierServiceClient', () => {
               .match as SinonStub
           )
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
 
@@ -5751,7 +5751,7 @@ describe('v1.VizierServiceClient', () => {
               .match as SinonStub
           )
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
 
@@ -5765,7 +5765,7 @@ describe('v1.VizierServiceClient', () => {
               .match as SinonStub
           )
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
 
@@ -5779,7 +5779,7 @@ describe('v1.VizierServiceClient', () => {
               .match as SinonStub
           )
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
 
@@ -5793,7 +5793,7 @@ describe('v1.VizierServiceClient', () => {
               .match as SinonStub
           )
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
     });
@@ -5821,13 +5821,13 @@ describe('v1.VizierServiceClient', () => {
         const result = await client.nasJobPath(
           'projectValue',
           'locationValue',
-          'nasJobValue',
+          'nasJobValue'
         );
         assert.strictEqual(result, fakePath);
         assert(
           (client.pathTemplates.nasJobPathTemplate.render as SinonStub)
             .getCall(-1)
-            .calledWith(expectedParameters),
+            .calledWith(expectedParameters)
         );
       });
 
@@ -5837,7 +5837,7 @@ describe('v1.VizierServiceClient', () => {
         assert(
           (client.pathTemplates.nasJobPathTemplate.match as SinonStub)
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
 
@@ -5847,7 +5847,7 @@ describe('v1.VizierServiceClient', () => {
         assert(
           (client.pathTemplates.nasJobPathTemplate.match as SinonStub)
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
 
@@ -5857,7 +5857,7 @@ describe('v1.VizierServiceClient', () => {
         assert(
           (client.pathTemplates.nasJobPathTemplate.match as SinonStub)
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
     });
@@ -5887,13 +5887,13 @@ describe('v1.VizierServiceClient', () => {
           'projectValue',
           'locationValue',
           'nasJobValue',
-          'nasTrialDetailValue',
+          'nasTrialDetailValue'
         );
         assert.strictEqual(result, fakePath);
         assert(
           (client.pathTemplates.nasTrialDetailPathTemplate.render as SinonStub)
             .getCall(-1)
-            .calledWith(expectedParameters),
+            .calledWith(expectedParameters)
         );
       });
 
@@ -5904,7 +5904,7 @@ describe('v1.VizierServiceClient', () => {
         assert(
           (client.pathTemplates.nasTrialDetailPathTemplate.match as SinonStub)
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
 
@@ -5915,7 +5915,7 @@ describe('v1.VizierServiceClient', () => {
         assert(
           (client.pathTemplates.nasTrialDetailPathTemplate.match as SinonStub)
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
 
@@ -5925,7 +5925,7 @@ describe('v1.VizierServiceClient', () => {
         assert(
           (client.pathTemplates.nasTrialDetailPathTemplate.match as SinonStub)
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
 
@@ -5936,7 +5936,7 @@ describe('v1.VizierServiceClient', () => {
         assert(
           (client.pathTemplates.nasTrialDetailPathTemplate.match as SinonStub)
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
     });
@@ -5964,7 +5964,7 @@ describe('v1.VizierServiceClient', () => {
         const result = await client.notebookExecutionJobPath(
           'projectValue',
           'locationValue',
-          'notebookExecutionJobValue',
+          'notebookExecutionJobValue'
         );
         assert.strictEqual(result, fakePath);
         assert(
@@ -5973,7 +5973,7 @@ describe('v1.VizierServiceClient', () => {
               .render as SinonStub
           )
             .getCall(-1)
-            .calledWith(expectedParameters),
+            .calledWith(expectedParameters)
         );
       });
 
@@ -5987,7 +5987,7 @@ describe('v1.VizierServiceClient', () => {
               .match as SinonStub
           )
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
 
@@ -6001,14 +6001,14 @@ describe('v1.VizierServiceClient', () => {
               .match as SinonStub
           )
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
 
       it('matchNotebookExecutionJobFromNotebookExecutionJobName', async () => {
         const result =
           await client.matchNotebookExecutionJobFromNotebookExecutionJobName(
-            fakePath,
+            fakePath
           );
         assert.strictEqual(result, 'notebookExecutionJobValue');
         assert(
@@ -6017,7 +6017,7 @@ describe('v1.VizierServiceClient', () => {
               .match as SinonStub
           )
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
     });
@@ -6045,13 +6045,13 @@ describe('v1.VizierServiceClient', () => {
         const result = await client.notebookRuntimePath(
           'projectValue',
           'locationValue',
-          'notebookRuntimeValue',
+          'notebookRuntimeValue'
         );
         assert.strictEqual(result, fakePath);
         assert(
           (client.pathTemplates.notebookRuntimePathTemplate.render as SinonStub)
             .getCall(-1)
-            .calledWith(expectedParameters),
+            .calledWith(expectedParameters)
         );
       });
 
@@ -6062,7 +6062,7 @@ describe('v1.VizierServiceClient', () => {
         assert(
           (client.pathTemplates.notebookRuntimePathTemplate.match as SinonStub)
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
 
@@ -6073,7 +6073,7 @@ describe('v1.VizierServiceClient', () => {
         assert(
           (client.pathTemplates.notebookRuntimePathTemplate.match as SinonStub)
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
 
@@ -6084,7 +6084,7 @@ describe('v1.VizierServiceClient', () => {
         assert(
           (client.pathTemplates.notebookRuntimePathTemplate.match as SinonStub)
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
     });
@@ -6112,7 +6112,7 @@ describe('v1.VizierServiceClient', () => {
         const result = await client.notebookRuntimeTemplatePath(
           'projectValue',
           'locationValue',
-          'notebookRuntimeTemplateValue',
+          'notebookRuntimeTemplateValue'
         );
         assert.strictEqual(result, fakePath);
         assert(
@@ -6121,7 +6121,7 @@ describe('v1.VizierServiceClient', () => {
               .render as SinonStub
           )
             .getCall(-1)
-            .calledWith(expectedParameters),
+            .calledWith(expectedParameters)
         );
       });
 
@@ -6135,7 +6135,7 @@ describe('v1.VizierServiceClient', () => {
               .match as SinonStub
           )
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
 
@@ -6149,14 +6149,14 @@ describe('v1.VizierServiceClient', () => {
               .match as SinonStub
           )
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
 
       it('matchNotebookRuntimeTemplateFromNotebookRuntimeTemplateName', async () => {
         const result =
           await client.matchNotebookRuntimeTemplateFromNotebookRuntimeTemplateName(
-            fakePath,
+            fakePath
           );
         assert.strictEqual(result, 'notebookRuntimeTemplateValue');
         assert(
@@ -6165,7 +6165,7 @@ describe('v1.VizierServiceClient', () => {
               .match as SinonStub
           )
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
     });
@@ -6193,7 +6193,7 @@ describe('v1.VizierServiceClient', () => {
         const result = await client.persistentResourcePath(
           'projectValue',
           'locationValue',
-          'persistentResourceValue',
+          'persistentResourceValue'
         );
         assert.strictEqual(result, fakePath);
         assert(
@@ -6202,7 +6202,7 @@ describe('v1.VizierServiceClient', () => {
               .render as SinonStub
           )
             .getCall(-1)
-            .calledWith(expectedParameters),
+            .calledWith(expectedParameters)
         );
       });
 
@@ -6216,7 +6216,7 @@ describe('v1.VizierServiceClient', () => {
               .match as SinonStub
           )
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
 
@@ -6230,14 +6230,14 @@ describe('v1.VizierServiceClient', () => {
               .match as SinonStub
           )
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
 
       it('matchPersistentResourceFromPersistentResourceName', async () => {
         const result =
           await client.matchPersistentResourceFromPersistentResourceName(
-            fakePath,
+            fakePath
           );
         assert.strictEqual(result, 'persistentResourceValue');
         assert(
@@ -6246,7 +6246,7 @@ describe('v1.VizierServiceClient', () => {
               .match as SinonStub
           )
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
     });
@@ -6274,13 +6274,13 @@ describe('v1.VizierServiceClient', () => {
         const result = await client.pipelineJobPath(
           'projectValue',
           'locationValue',
-          'pipelineJobValue',
+          'pipelineJobValue'
         );
         assert.strictEqual(result, fakePath);
         assert(
           (client.pathTemplates.pipelineJobPathTemplate.render as SinonStub)
             .getCall(-1)
-            .calledWith(expectedParameters),
+            .calledWith(expectedParameters)
         );
       });
 
@@ -6290,7 +6290,7 @@ describe('v1.VizierServiceClient', () => {
         assert(
           (client.pathTemplates.pipelineJobPathTemplate.match as SinonStub)
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
 
@@ -6300,7 +6300,7 @@ describe('v1.VizierServiceClient', () => {
         assert(
           (client.pathTemplates.pipelineJobPathTemplate.match as SinonStub)
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
 
@@ -6311,7 +6311,7 @@ describe('v1.VizierServiceClient', () => {
         assert(
           (client.pathTemplates.pipelineJobPathTemplate.match as SinonStub)
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
     });
@@ -6339,7 +6339,7 @@ describe('v1.VizierServiceClient', () => {
         const result = await client.projectLocationEndpointPath(
           'projectValue',
           'locationValue',
-          'endpointValue',
+          'endpointValue'
         );
         assert.strictEqual(result, fakePath);
         assert(
@@ -6348,7 +6348,7 @@ describe('v1.VizierServiceClient', () => {
               .render as SinonStub
           )
             .getCall(-1)
-            .calledWith(expectedParameters),
+            .calledWith(expectedParameters)
         );
       });
 
@@ -6362,7 +6362,7 @@ describe('v1.VizierServiceClient', () => {
               .match as SinonStub
           )
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
 
@@ -6376,7 +6376,7 @@ describe('v1.VizierServiceClient', () => {
               .match as SinonStub
           )
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
 
@@ -6390,7 +6390,7 @@ describe('v1.VizierServiceClient', () => {
               .match as SinonStub
           )
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
     });
@@ -6418,7 +6418,7 @@ describe('v1.VizierServiceClient', () => {
           'projectValue',
           'locationValue',
           'featureGroupValue',
-          'featureValue',
+          'featureValue'
         );
         assert.strictEqual(result, fakePath);
         assert(
@@ -6427,14 +6427,14 @@ describe('v1.VizierServiceClient', () => {
               .render as SinonStub
           )
             .getCall(-1)
-            .calledWith(expectedParameters),
+            .calledWith(expectedParameters)
         );
       });
 
       it('matchProjectFromProjectLocationFeatureGroupFeatureName', async () => {
         const result =
           await client.matchProjectFromProjectLocationFeatureGroupFeatureName(
-            fakePath,
+            fakePath
           );
         assert.strictEqual(result, 'projectValue');
         assert(
@@ -6443,14 +6443,14 @@ describe('v1.VizierServiceClient', () => {
               .match as SinonStub
           )
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
 
       it('matchLocationFromProjectLocationFeatureGroupFeatureName', async () => {
         const result =
           await client.matchLocationFromProjectLocationFeatureGroupFeatureName(
-            fakePath,
+            fakePath
           );
         assert.strictEqual(result, 'locationValue');
         assert(
@@ -6459,14 +6459,14 @@ describe('v1.VizierServiceClient', () => {
               .match as SinonStub
           )
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
 
       it('matchFeatureGroupFromProjectLocationFeatureGroupFeatureName', async () => {
         const result =
           await client.matchFeatureGroupFromProjectLocationFeatureGroupFeatureName(
-            fakePath,
+            fakePath
           );
         assert.strictEqual(result, 'featureGroupValue');
         assert(
@@ -6475,14 +6475,14 @@ describe('v1.VizierServiceClient', () => {
               .match as SinonStub
           )
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
 
       it('matchFeatureFromProjectLocationFeatureGroupFeatureName', async () => {
         const result =
           await client.matchFeatureFromProjectLocationFeatureGroupFeatureName(
-            fakePath,
+            fakePath
           );
         assert.strictEqual(result, 'featureValue');
         assert(
@@ -6491,7 +6491,7 @@ describe('v1.VizierServiceClient', () => {
               .match as SinonStub
           )
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
     });
@@ -6523,7 +6523,7 @@ describe('v1.VizierServiceClient', () => {
             'locationValue',
             'featurestoreValue',
             'entityTypeValue',
-            'featureValue',
+            'featureValue'
           );
         assert.strictEqual(result, fakePath);
         assert(
@@ -6533,14 +6533,14 @@ describe('v1.VizierServiceClient', () => {
               .render as SinonStub
           )
             .getCall(-1)
-            .calledWith(expectedParameters),
+            .calledWith(expectedParameters)
         );
       });
 
       it('matchProjectFromProjectLocationFeaturestoreEntityTypeFeatureName', async () => {
         const result =
           await client.matchProjectFromProjectLocationFeaturestoreEntityTypeFeatureName(
-            fakePath,
+            fakePath
           );
         assert.strictEqual(result, 'projectValue');
         assert(
@@ -6550,14 +6550,14 @@ describe('v1.VizierServiceClient', () => {
               .match as SinonStub
           )
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
 
       it('matchLocationFromProjectLocationFeaturestoreEntityTypeFeatureName', async () => {
         const result =
           await client.matchLocationFromProjectLocationFeaturestoreEntityTypeFeatureName(
-            fakePath,
+            fakePath
           );
         assert.strictEqual(result, 'locationValue');
         assert(
@@ -6567,14 +6567,14 @@ describe('v1.VizierServiceClient', () => {
               .match as SinonStub
           )
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
 
       it('matchFeaturestoreFromProjectLocationFeaturestoreEntityTypeFeatureName', async () => {
         const result =
           await client.matchFeaturestoreFromProjectLocationFeaturestoreEntityTypeFeatureName(
-            fakePath,
+            fakePath
           );
         assert.strictEqual(result, 'featurestoreValue');
         assert(
@@ -6584,14 +6584,14 @@ describe('v1.VizierServiceClient', () => {
               .match as SinonStub
           )
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
 
       it('matchEntityTypeFromProjectLocationFeaturestoreEntityTypeFeatureName', async () => {
         const result =
           await client.matchEntityTypeFromProjectLocationFeaturestoreEntityTypeFeatureName(
-            fakePath,
+            fakePath
           );
         assert.strictEqual(result, 'entityTypeValue');
         assert(
@@ -6601,14 +6601,14 @@ describe('v1.VizierServiceClient', () => {
               .match as SinonStub
           )
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
 
       it('matchFeatureFromProjectLocationFeaturestoreEntityTypeFeatureName', async () => {
         const result =
           await client.matchFeatureFromProjectLocationFeaturestoreEntityTypeFeatureName(
-            fakePath,
+            fakePath
           );
         assert.strictEqual(result, 'featureValue');
         assert(
@@ -6618,7 +6618,7 @@ describe('v1.VizierServiceClient', () => {
               .match as SinonStub
           )
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
     });
@@ -6646,7 +6646,7 @@ describe('v1.VizierServiceClient', () => {
           'projectValue',
           'locationValue',
           'publisherValue',
-          'modelValue',
+          'modelValue'
         );
         assert.strictEqual(result, fakePath);
         assert(
@@ -6655,14 +6655,14 @@ describe('v1.VizierServiceClient', () => {
               .render as SinonStub
           )
             .getCall(-1)
-            .calledWith(expectedParameters),
+            .calledWith(expectedParameters)
         );
       });
 
       it('matchProjectFromProjectLocationPublisherModelName', async () => {
         const result =
           await client.matchProjectFromProjectLocationPublisherModelName(
-            fakePath,
+            fakePath
           );
         assert.strictEqual(result, 'projectValue');
         assert(
@@ -6671,14 +6671,14 @@ describe('v1.VizierServiceClient', () => {
               .match as SinonStub
           )
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
 
       it('matchLocationFromProjectLocationPublisherModelName', async () => {
         const result =
           await client.matchLocationFromProjectLocationPublisherModelName(
-            fakePath,
+            fakePath
           );
         assert.strictEqual(result, 'locationValue');
         assert(
@@ -6687,14 +6687,14 @@ describe('v1.VizierServiceClient', () => {
               .match as SinonStub
           )
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
 
       it('matchPublisherFromProjectLocationPublisherModelName', async () => {
         const result =
           await client.matchPublisherFromProjectLocationPublisherModelName(
-            fakePath,
+            fakePath
           );
         assert.strictEqual(result, 'publisherValue');
         assert(
@@ -6703,14 +6703,14 @@ describe('v1.VizierServiceClient', () => {
               .match as SinonStub
           )
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
 
       it('matchModelFromProjectLocationPublisherModelName', async () => {
         const result =
           await client.matchModelFromProjectLocationPublisherModelName(
-            fakePath,
+            fakePath
           );
         assert.strictEqual(result, 'modelValue');
         assert(
@@ -6719,7 +6719,7 @@ describe('v1.VizierServiceClient', () => {
               .match as SinonStub
           )
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
     });
@@ -6745,13 +6745,13 @@ describe('v1.VizierServiceClient', () => {
       it('publisherModelPath', async () => {
         const result = await client.publisherModelPath(
           'publisherValue',
-          'modelValue',
+          'modelValue'
         );
         assert.strictEqual(result, fakePath);
         assert(
           (client.pathTemplates.publisherModelPathTemplate.render as SinonStub)
             .getCall(-1)
-            .calledWith(expectedParameters),
+            .calledWith(expectedParameters)
         );
       });
 
@@ -6762,7 +6762,7 @@ describe('v1.VizierServiceClient', () => {
         assert(
           (client.pathTemplates.publisherModelPathTemplate.match as SinonStub)
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
 
@@ -6772,7 +6772,7 @@ describe('v1.VizierServiceClient', () => {
         assert(
           (client.pathTemplates.publisherModelPathTemplate.match as SinonStub)
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
     });
@@ -6800,13 +6800,13 @@ describe('v1.VizierServiceClient', () => {
         const result = await client.ragCorpusPath(
           'projectValue',
           'locationValue',
-          'ragCorpusValue',
+          'ragCorpusValue'
         );
         assert.strictEqual(result, fakePath);
         assert(
           (client.pathTemplates.ragCorpusPathTemplate.render as SinonStub)
             .getCall(-1)
-            .calledWith(expectedParameters),
+            .calledWith(expectedParameters)
         );
       });
 
@@ -6816,7 +6816,7 @@ describe('v1.VizierServiceClient', () => {
         assert(
           (client.pathTemplates.ragCorpusPathTemplate.match as SinonStub)
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
 
@@ -6826,7 +6826,7 @@ describe('v1.VizierServiceClient', () => {
         assert(
           (client.pathTemplates.ragCorpusPathTemplate.match as SinonStub)
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
 
@@ -6836,7 +6836,7 @@ describe('v1.VizierServiceClient', () => {
         assert(
           (client.pathTemplates.ragCorpusPathTemplate.match as SinonStub)
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
     });
@@ -6866,13 +6866,13 @@ describe('v1.VizierServiceClient', () => {
           'projectValue',
           'locationValue',
           'ragCorpusValue',
-          'ragFileValue',
+          'ragFileValue'
         );
         assert.strictEqual(result, fakePath);
         assert(
           (client.pathTemplates.ragFilePathTemplate.render as SinonStub)
             .getCall(-1)
-            .calledWith(expectedParameters),
+            .calledWith(expectedParameters)
         );
       });
 
@@ -6882,7 +6882,7 @@ describe('v1.VizierServiceClient', () => {
         assert(
           (client.pathTemplates.ragFilePathTemplate.match as SinonStub)
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
 
@@ -6892,7 +6892,7 @@ describe('v1.VizierServiceClient', () => {
         assert(
           (client.pathTemplates.ragFilePathTemplate.match as SinonStub)
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
 
@@ -6902,7 +6902,7 @@ describe('v1.VizierServiceClient', () => {
         assert(
           (client.pathTemplates.ragFilePathTemplate.match as SinonStub)
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
 
@@ -6912,7 +6912,7 @@ describe('v1.VizierServiceClient', () => {
         assert(
           (client.pathTemplates.ragFilePathTemplate.match as SinonStub)
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
     });
@@ -6940,13 +6940,13 @@ describe('v1.VizierServiceClient', () => {
         const result = await client.reasoningEnginePath(
           'projectValue',
           'locationValue',
-          'reasoningEngineValue',
+          'reasoningEngineValue'
         );
         assert.strictEqual(result, fakePath);
         assert(
           (client.pathTemplates.reasoningEnginePathTemplate.render as SinonStub)
             .getCall(-1)
-            .calledWith(expectedParameters),
+            .calledWith(expectedParameters)
         );
       });
 
@@ -6957,7 +6957,7 @@ describe('v1.VizierServiceClient', () => {
         assert(
           (client.pathTemplates.reasoningEnginePathTemplate.match as SinonStub)
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
 
@@ -6968,7 +6968,7 @@ describe('v1.VizierServiceClient', () => {
         assert(
           (client.pathTemplates.reasoningEnginePathTemplate.match as SinonStub)
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
 
@@ -6979,7 +6979,7 @@ describe('v1.VizierServiceClient', () => {
         assert(
           (client.pathTemplates.reasoningEnginePathTemplate.match as SinonStub)
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
     });
@@ -7009,13 +7009,13 @@ describe('v1.VizierServiceClient', () => {
           'projectValue',
           'locationValue',
           'datasetValue',
-          'savedQueryValue',
+          'savedQueryValue'
         );
         assert.strictEqual(result, fakePath);
         assert(
           (client.pathTemplates.savedQueryPathTemplate.render as SinonStub)
             .getCall(-1)
-            .calledWith(expectedParameters),
+            .calledWith(expectedParameters)
         );
       });
 
@@ -7025,7 +7025,7 @@ describe('v1.VizierServiceClient', () => {
         assert(
           (client.pathTemplates.savedQueryPathTemplate.match as SinonStub)
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
 
@@ -7035,7 +7035,7 @@ describe('v1.VizierServiceClient', () => {
         assert(
           (client.pathTemplates.savedQueryPathTemplate.match as SinonStub)
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
 
@@ -7045,7 +7045,7 @@ describe('v1.VizierServiceClient', () => {
         assert(
           (client.pathTemplates.savedQueryPathTemplate.match as SinonStub)
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
 
@@ -7055,7 +7055,7 @@ describe('v1.VizierServiceClient', () => {
         assert(
           (client.pathTemplates.savedQueryPathTemplate.match as SinonStub)
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
     });
@@ -7083,13 +7083,13 @@ describe('v1.VizierServiceClient', () => {
         const result = await client.schedulePath(
           'projectValue',
           'locationValue',
-          'scheduleValue',
+          'scheduleValue'
         );
         assert.strictEqual(result, fakePath);
         assert(
           (client.pathTemplates.schedulePathTemplate.render as SinonStub)
             .getCall(-1)
-            .calledWith(expectedParameters),
+            .calledWith(expectedParameters)
         );
       });
 
@@ -7099,7 +7099,7 @@ describe('v1.VizierServiceClient', () => {
         assert(
           (client.pathTemplates.schedulePathTemplate.match as SinonStub)
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
 
@@ -7109,7 +7109,7 @@ describe('v1.VizierServiceClient', () => {
         assert(
           (client.pathTemplates.schedulePathTemplate.match as SinonStub)
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
 
@@ -7119,7 +7119,7 @@ describe('v1.VizierServiceClient', () => {
         assert(
           (client.pathTemplates.schedulePathTemplate.match as SinonStub)
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
     });
@@ -7147,13 +7147,13 @@ describe('v1.VizierServiceClient', () => {
         const result = await client.specialistPoolPath(
           'projectValue',
           'locationValue',
-          'specialistPoolValue',
+          'specialistPoolValue'
         );
         assert.strictEqual(result, fakePath);
         assert(
           (client.pathTemplates.specialistPoolPathTemplate.render as SinonStub)
             .getCall(-1)
-            .calledWith(expectedParameters),
+            .calledWith(expectedParameters)
         );
       });
 
@@ -7164,7 +7164,7 @@ describe('v1.VizierServiceClient', () => {
         assert(
           (client.pathTemplates.specialistPoolPathTemplate.match as SinonStub)
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
 
@@ -7175,7 +7175,7 @@ describe('v1.VizierServiceClient', () => {
         assert(
           (client.pathTemplates.specialistPoolPathTemplate.match as SinonStub)
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
 
@@ -7186,7 +7186,7 @@ describe('v1.VizierServiceClient', () => {
         assert(
           (client.pathTemplates.specialistPoolPathTemplate.match as SinonStub)
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
     });
@@ -7214,13 +7214,13 @@ describe('v1.VizierServiceClient', () => {
         const result = await client.studyPath(
           'projectValue',
           'locationValue',
-          'studyValue',
+          'studyValue'
         );
         assert.strictEqual(result, fakePath);
         assert(
           (client.pathTemplates.studyPathTemplate.render as SinonStub)
             .getCall(-1)
-            .calledWith(expectedParameters),
+            .calledWith(expectedParameters)
         );
       });
 
@@ -7230,7 +7230,7 @@ describe('v1.VizierServiceClient', () => {
         assert(
           (client.pathTemplates.studyPathTemplate.match as SinonStub)
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
 
@@ -7240,7 +7240,7 @@ describe('v1.VizierServiceClient', () => {
         assert(
           (client.pathTemplates.studyPathTemplate.match as SinonStub)
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
 
@@ -7250,7 +7250,7 @@ describe('v1.VizierServiceClient', () => {
         assert(
           (client.pathTemplates.studyPathTemplate.match as SinonStub)
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
     });
@@ -7278,13 +7278,13 @@ describe('v1.VizierServiceClient', () => {
         const result = await client.tensorboardPath(
           'projectValue',
           'locationValue',
-          'tensorboardValue',
+          'tensorboardValue'
         );
         assert.strictEqual(result, fakePath);
         assert(
           (client.pathTemplates.tensorboardPathTemplate.render as SinonStub)
             .getCall(-1)
-            .calledWith(expectedParameters),
+            .calledWith(expectedParameters)
         );
       });
 
@@ -7294,7 +7294,7 @@ describe('v1.VizierServiceClient', () => {
         assert(
           (client.pathTemplates.tensorboardPathTemplate.match as SinonStub)
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
 
@@ -7304,7 +7304,7 @@ describe('v1.VizierServiceClient', () => {
         assert(
           (client.pathTemplates.tensorboardPathTemplate.match as SinonStub)
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
 
@@ -7315,7 +7315,7 @@ describe('v1.VizierServiceClient', () => {
         assert(
           (client.pathTemplates.tensorboardPathTemplate.match as SinonStub)
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
     });
@@ -7345,7 +7345,7 @@ describe('v1.VizierServiceClient', () => {
           'projectValue',
           'locationValue',
           'tensorboardValue',
-          'experimentValue',
+          'experimentValue'
         );
         assert.strictEqual(result, fakePath);
         assert(
@@ -7354,7 +7354,7 @@ describe('v1.VizierServiceClient', () => {
               .render as SinonStub
           )
             .getCall(-1)
-            .calledWith(expectedParameters),
+            .calledWith(expectedParameters)
         );
       });
 
@@ -7368,7 +7368,7 @@ describe('v1.VizierServiceClient', () => {
               .match as SinonStub
           )
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
 
@@ -7382,7 +7382,7 @@ describe('v1.VizierServiceClient', () => {
               .match as SinonStub
           )
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
 
@@ -7396,7 +7396,7 @@ describe('v1.VizierServiceClient', () => {
               .match as SinonStub
           )
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
 
@@ -7410,7 +7410,7 @@ describe('v1.VizierServiceClient', () => {
               .match as SinonStub
           )
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
     });
@@ -7442,13 +7442,13 @@ describe('v1.VizierServiceClient', () => {
           'locationValue',
           'tensorboardValue',
           'experimentValue',
-          'runValue',
+          'runValue'
         );
         assert.strictEqual(result, fakePath);
         assert(
           (client.pathTemplates.tensorboardRunPathTemplate.render as SinonStub)
             .getCall(-1)
-            .calledWith(expectedParameters),
+            .calledWith(expectedParameters)
         );
       });
 
@@ -7459,7 +7459,7 @@ describe('v1.VizierServiceClient', () => {
         assert(
           (client.pathTemplates.tensorboardRunPathTemplate.match as SinonStub)
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
 
@@ -7470,7 +7470,7 @@ describe('v1.VizierServiceClient', () => {
         assert(
           (client.pathTemplates.tensorboardRunPathTemplate.match as SinonStub)
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
 
@@ -7481,7 +7481,7 @@ describe('v1.VizierServiceClient', () => {
         assert(
           (client.pathTemplates.tensorboardRunPathTemplate.match as SinonStub)
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
 
@@ -7492,7 +7492,7 @@ describe('v1.VizierServiceClient', () => {
         assert(
           (client.pathTemplates.tensorboardRunPathTemplate.match as SinonStub)
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
 
@@ -7502,7 +7502,7 @@ describe('v1.VizierServiceClient', () => {
         assert(
           (client.pathTemplates.tensorboardRunPathTemplate.match as SinonStub)
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
     });
@@ -7536,7 +7536,7 @@ describe('v1.VizierServiceClient', () => {
           'tensorboardValue',
           'experimentValue',
           'runValue',
-          'timeSeriesValue',
+          'timeSeriesValue'
         );
         assert.strictEqual(result, fakePath);
         assert(
@@ -7545,7 +7545,7 @@ describe('v1.VizierServiceClient', () => {
               .render as SinonStub
           )
             .getCall(-1)
-            .calledWith(expectedParameters),
+            .calledWith(expectedParameters)
         );
       });
 
@@ -7559,7 +7559,7 @@ describe('v1.VizierServiceClient', () => {
               .match as SinonStub
           )
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
 
@@ -7573,7 +7573,7 @@ describe('v1.VizierServiceClient', () => {
               .match as SinonStub
           )
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
 
@@ -7587,7 +7587,7 @@ describe('v1.VizierServiceClient', () => {
               .match as SinonStub
           )
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
 
@@ -7601,7 +7601,7 @@ describe('v1.VizierServiceClient', () => {
               .match as SinonStub
           )
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
 
@@ -7615,7 +7615,7 @@ describe('v1.VizierServiceClient', () => {
               .match as SinonStub
           )
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
 
@@ -7629,7 +7629,7 @@ describe('v1.VizierServiceClient', () => {
               .match as SinonStub
           )
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
     });
@@ -7657,7 +7657,7 @@ describe('v1.VizierServiceClient', () => {
         const result = await client.trainingPipelinePath(
           'projectValue',
           'locationValue',
-          'trainingPipelineValue',
+          'trainingPipelineValue'
         );
         assert.strictEqual(result, fakePath);
         assert(
@@ -7666,7 +7666,7 @@ describe('v1.VizierServiceClient', () => {
               .render as SinonStub
           )
             .getCall(-1)
-            .calledWith(expectedParameters),
+            .calledWith(expectedParameters)
         );
       });
 
@@ -7677,7 +7677,7 @@ describe('v1.VizierServiceClient', () => {
         assert(
           (client.pathTemplates.trainingPipelinePathTemplate.match as SinonStub)
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
 
@@ -7688,7 +7688,7 @@ describe('v1.VizierServiceClient', () => {
         assert(
           (client.pathTemplates.trainingPipelinePathTemplate.match as SinonStub)
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
 
@@ -7699,7 +7699,7 @@ describe('v1.VizierServiceClient', () => {
         assert(
           (client.pathTemplates.trainingPipelinePathTemplate.match as SinonStub)
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
     });
@@ -7729,13 +7729,13 @@ describe('v1.VizierServiceClient', () => {
           'projectValue',
           'locationValue',
           'studyValue',
-          'trialValue',
+          'trialValue'
         );
         assert.strictEqual(result, fakePath);
         assert(
           (client.pathTemplates.trialPathTemplate.render as SinonStub)
             .getCall(-1)
-            .calledWith(expectedParameters),
+            .calledWith(expectedParameters)
         );
       });
 
@@ -7745,7 +7745,7 @@ describe('v1.VizierServiceClient', () => {
         assert(
           (client.pathTemplates.trialPathTemplate.match as SinonStub)
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
 
@@ -7755,7 +7755,7 @@ describe('v1.VizierServiceClient', () => {
         assert(
           (client.pathTemplates.trialPathTemplate.match as SinonStub)
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
 
@@ -7765,7 +7765,7 @@ describe('v1.VizierServiceClient', () => {
         assert(
           (client.pathTemplates.trialPathTemplate.match as SinonStub)
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
 
@@ -7775,7 +7775,7 @@ describe('v1.VizierServiceClient', () => {
         assert(
           (client.pathTemplates.trialPathTemplate.match as SinonStub)
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
     });
@@ -7803,13 +7803,13 @@ describe('v1.VizierServiceClient', () => {
         const result = await client.tuningJobPath(
           'projectValue',
           'locationValue',
-          'tuningJobValue',
+          'tuningJobValue'
         );
         assert.strictEqual(result, fakePath);
         assert(
           (client.pathTemplates.tuningJobPathTemplate.render as SinonStub)
             .getCall(-1)
-            .calledWith(expectedParameters),
+            .calledWith(expectedParameters)
         );
       });
 
@@ -7819,7 +7819,7 @@ describe('v1.VizierServiceClient', () => {
         assert(
           (client.pathTemplates.tuningJobPathTemplate.match as SinonStub)
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
 
@@ -7829,7 +7829,7 @@ describe('v1.VizierServiceClient', () => {
         assert(
           (client.pathTemplates.tuningJobPathTemplate.match as SinonStub)
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
 
@@ -7839,7 +7839,7 @@ describe('v1.VizierServiceClient', () => {
         assert(
           (client.pathTemplates.tuningJobPathTemplate.match as SinonStub)
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
     });

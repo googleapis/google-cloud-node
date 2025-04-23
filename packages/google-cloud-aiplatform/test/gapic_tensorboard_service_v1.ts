@@ -25,8028 +25,11001 @@ import * as tensorboardserviceModule from '../src';
 
 import {PassThrough} from 'stream';
 
-import {protobuf, LROperation, operationsProtos, IamProtos, LocationProtos} from 'google-gax';
+import {
+  protobuf,
+  LROperation,
+  operationsProtos,
+  IamProtos,
+  LocationProtos,
+} from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
-const root = protobuf.Root.fromJSON(require('../protos/protos.json')).resolveAll();
+const root = protobuf.Root.fromJSON(
+  require('../protos/protos.json')
+).resolveAll();
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 function getTypeDefaultValue(typeName: string, fields: string[]) {
-    let type = root.lookupType(typeName) as protobuf.Type;
-    for (const field of fields.slice(0, -1)) {
-        type = type.fields[field]?.resolvedType as protobuf.Type;
-    }
-    return type.fields[fields[fields.length - 1]]?.defaultValue;
+  let type = root.lookupType(typeName) as protobuf.Type;
+  for (const field of fields.slice(0, -1)) {
+    type = type.fields[field]?.resolvedType as protobuf.Type;
+  }
+  return type.fields[fields[fields.length - 1]]?.defaultValue;
 }
 
 function generateSampleMessage<T extends object>(instance: T) {
-    const filledObject = (instance.constructor as typeof protobuf.Message)
-        .toObject(instance as protobuf.Message<T>, {defaults: true});
-    return (instance.constructor as typeof protobuf.Message).fromObject(filledObject) as T;
+  const filledObject = (
+    instance.constructor as typeof protobuf.Message
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
+  return (instance.constructor as typeof protobuf.Message).fromObject(
+    filledObject
+  ) as T;
 }
 
 function stubSimpleCall<ResponseType>(response?: ResponseType, error?: Error) {
-    return error ? sinon.stub().rejects(error) : sinon.stub().resolves([response]);
+  return error
+    ? sinon.stub().rejects(error)
+    : sinon.stub().resolves([response]);
 }
 
-function stubSimpleCallWithCallback<ResponseType>(response?: ResponseType, error?: Error) {
-    return error ? sinon.stub().callsArgWith(2, error) : sinon.stub().callsArgWith(2, null, response);
+function stubSimpleCallWithCallback<ResponseType>(
+  response?: ResponseType,
+  error?: Error
+) {
+  return error
+    ? sinon.stub().callsArgWith(2, error)
+    : sinon.stub().callsArgWith(2, null, response);
 }
 
-function stubServerStreamingCall<ResponseType>(response?: ResponseType, error?: Error) {
-    const transformStub = error ? sinon.stub().callsArgWith(2, error) : sinon.stub().callsArgWith(2, null, response);
-    const mockStream = new PassThrough({
-        objectMode: true,
-        transform: transformStub,
-    });
-    // write something to the stream to trigger transformStub and send the response back to the client
-    setImmediate(() => { mockStream.write({}); });
-    setImmediate(() => { mockStream.end(); });
-    return sinon.stub().returns(mockStream);
+function stubServerStreamingCall<ResponseType>(
+  response?: ResponseType,
+  error?: Error
+) {
+  const transformStub = error
+    ? sinon.stub().callsArgWith(2, error)
+    : sinon.stub().callsArgWith(2, null, response);
+  const mockStream = new PassThrough({
+    objectMode: true,
+    transform: transformStub,
+  });
+  // write something to the stream to trigger transformStub and send the response back to the client
+  setImmediate(() => {
+    mockStream.write({});
+  });
+  setImmediate(() => {
+    mockStream.end();
+  });
+  return sinon.stub().returns(mockStream);
 }
 
-function stubLongRunningCall<ResponseType>(response?: ResponseType, callError?: Error, lroError?: Error) {
-    const innerStub = lroError ? sinon.stub().rejects(lroError) : sinon.stub().resolves([response]);
-    const mockOperation = {
-        promise: innerStub,
-    };
-    return callError ? sinon.stub().rejects(callError) : sinon.stub().resolves([mockOperation]);
+function stubLongRunningCall<ResponseType>(
+  response?: ResponseType,
+  callError?: Error,
+  lroError?: Error
+) {
+  const innerStub = lroError
+    ? sinon.stub().rejects(lroError)
+    : sinon.stub().resolves([response]);
+  const mockOperation = {
+    promise: innerStub,
+  };
+  return callError
+    ? sinon.stub().rejects(callError)
+    : sinon.stub().resolves([mockOperation]);
 }
 
-function stubLongRunningCallWithCallback<ResponseType>(response?: ResponseType, callError?: Error, lroError?: Error) {
-    const innerStub = lroError ? sinon.stub().rejects(lroError) : sinon.stub().resolves([response]);
-    const mockOperation = {
-        promise: innerStub,
-    };
-    return callError ? sinon.stub().callsArgWith(2, callError) : sinon.stub().callsArgWith(2, null, mockOperation);
+function stubLongRunningCallWithCallback<ResponseType>(
+  response?: ResponseType,
+  callError?: Error,
+  lroError?: Error
+) {
+  const innerStub = lroError
+    ? sinon.stub().rejects(lroError)
+    : sinon.stub().resolves([response]);
+  const mockOperation = {
+    promise: innerStub,
+  };
+  return callError
+    ? sinon.stub().callsArgWith(2, callError)
+    : sinon.stub().callsArgWith(2, null, mockOperation);
 }
 
-function stubPageStreamingCall<ResponseType>(responses?: ResponseType[], error?: Error) {
-    const pagingStub = sinon.stub();
-    if (responses) {
-        for (let i = 0; i < responses.length; ++i) {
-            pagingStub.onCall(i).callsArgWith(2, null, responses[i]);
-        }
+function stubPageStreamingCall<ResponseType>(
+  responses?: ResponseType[],
+  error?: Error
+) {
+  const pagingStub = sinon.stub();
+  if (responses) {
+    for (let i = 0; i < responses.length; ++i) {
+      pagingStub.onCall(i).callsArgWith(2, null, responses[i]);
     }
-    const transformStub = error ? sinon.stub().callsArgWith(2, error) : pagingStub;
-    const mockStream = new PassThrough({
-        objectMode: true,
-        transform: transformStub,
-    });
-    // trigger as many responses as needed
-    if (responses) {
-        for (let i = 0; i < responses.length; ++i) {
-            setImmediate(() => { mockStream.write({}); });
-        }
-        setImmediate(() => { mockStream.end(); });
-    } else {
-        setImmediate(() => { mockStream.write({}); });
-        setImmediate(() => { mockStream.end(); });
+  }
+  const transformStub = error
+    ? sinon.stub().callsArgWith(2, error)
+    : pagingStub;
+  const mockStream = new PassThrough({
+    objectMode: true,
+    transform: transformStub,
+  });
+  // trigger as many responses as needed
+  if (responses) {
+    for (let i = 0; i < responses.length; ++i) {
+      setImmediate(() => {
+        mockStream.write({});
+      });
     }
-    return sinon.stub().returns(mockStream);
+    setImmediate(() => {
+      mockStream.end();
+    });
+  } else {
+    setImmediate(() => {
+      mockStream.write({});
+    });
+    setImmediate(() => {
+      mockStream.end();
+    });
+  }
+  return sinon.stub().returns(mockStream);
 }
 
-function stubAsyncIterationCall<ResponseType>(responses?: ResponseType[], error?: Error) {
-    let counter = 0;
-    const asyncIterable = {
-        [Symbol.asyncIterator]() {
-            return {
-                async next() {
-                    if (error) {
-                        return Promise.reject(error);
-                    }
-                    if (counter >= responses!.length) {
-                        return Promise.resolve({done: true, value: undefined});
-                    }
-                    return Promise.resolve({done: false, value: responses![counter++]});
-                }
-            };
-        }
-    };
-    return sinon.stub().returns(asyncIterable);
+function stubAsyncIterationCall<ResponseType>(
+  responses?: ResponseType[],
+  error?: Error
+) {
+  let counter = 0;
+  const asyncIterable = {
+    [Symbol.asyncIterator]() {
+      return {
+        async next() {
+          if (error) {
+            return Promise.reject(error);
+          }
+          if (counter >= responses!.length) {
+            return Promise.resolve({done: true, value: undefined});
+          }
+          return Promise.resolve({done: false, value: responses![counter++]});
+        },
+      };
+    },
+  };
+  return sinon.stub().returns(asyncIterable);
 }
 
 describe('v1.TensorboardServiceClient', () => {
-    describe('Common methods', () => {
-        it('has apiEndpoint', async () => {
-            const client = new tensorboardserviceModule.v1.TensorboardServiceClient();
-            const apiEndpoint = await client.apiEndpoint;
-            assert.strictEqual(apiEndpoint, 'aiplatform.googleapis.com');
+  describe('Common methods', () => {
+    it('has apiEndpoint', async () => {
+      const client = new tensorboardserviceModule.v1.TensorboardServiceClient();
+      const apiEndpoint = await client.apiEndpoint;
+      assert.strictEqual(apiEndpoint, 'aiplatform.googleapis.com');
+    });
+
+    it('has universeDomain', async () => {
+      const client = new tensorboardserviceModule.v1.TensorboardServiceClient();
+      const universeDomain = await client.universeDomain;
+      assert.strictEqual(universeDomain, 'googleapis.com');
+    });
+
+    if (
+      typeof process === 'object' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      it('throws DeprecationWarning if static servicePath is used', () => {
+        const stub = sinon.stub(process, 'emitWarning');
+        const servicePath =
+          tensorboardserviceModule.v1.TensorboardServiceClient.servicePath;
+        assert.strictEqual(servicePath, 'aiplatform.googleapis.com');
+        assert(stub.called);
+        stub.restore();
+      });
+
+      it('throws DeprecationWarning if static apiEndpoint is used', () => {
+        const stub = sinon.stub(process, 'emitWarning');
+        const apiEndpoint =
+          tensorboardserviceModule.v1.TensorboardServiceClient.apiEndpoint;
+        assert.strictEqual(apiEndpoint, 'aiplatform.googleapis.com');
+        assert(stub.called);
+        stub.restore();
+      });
+    }
+    it('sets apiEndpoint according to universe domain camelCase', async () => {
+      const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
+        universeDomain: 'example.com',
+      });
+      const servicePath = await client.apiEndpoint;
+      assert.strictEqual(servicePath, 'aiplatform.example.com');
+    });
+
+    it('sets apiEndpoint according to universe domain snakeCase', async () => {
+      const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
+        universe_domain: 'example.com',
+      });
+      const servicePath = await client.apiEndpoint;
+      assert.strictEqual(servicePath, 'aiplatform.example.com');
+    });
+
+    if (typeof process === 'object' && 'env' in process) {
+      describe('GOOGLE_CLOUD_UNIVERSE_DOMAIN environment variable', () => {
+        it('sets apiEndpoint from environment variable', async () => {
+          const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+          process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
+          const client =
+            new tensorboardserviceModule.v1.TensorboardServiceClient();
+          const servicePath = await client.apiEndpoint;
+          assert.strictEqual(servicePath, 'aiplatform.example.com');
+          if (saved) {
+            process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
+          } else {
+            delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+          }
         });
 
-        it('has universeDomain', async () => {
-            const client = new tensorboardserviceModule.v1.TensorboardServiceClient();
-            const universeDomain = await client.universeDomain;
-            assert.strictEqual(universeDomain, "googleapis.com");
+        it('value configured in code has priority over environment variable', async () => {
+          const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+          process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
+          const client =
+            new tensorboardserviceModule.v1.TensorboardServiceClient({
+              universeDomain: 'configured.example.com',
+            });
+          const servicePath = await client.apiEndpoint;
+          assert.strictEqual(servicePath, 'aiplatform.configured.example.com');
+          if (saved) {
+            process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
+          } else {
+            delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+          }
         });
+      });
+    }
+    it('does not allow setting both universeDomain and universe_domain', () => {
+      assert.throws(() => {
+        new tensorboardserviceModule.v1.TensorboardServiceClient({
+          universe_domain: 'example.com',
+          universeDomain: 'example.net',
+        });
+      });
+    });
 
-        if (typeof process === 'object' && typeof process.emitWarning === 'function') {
-            it('throws DeprecationWarning if static servicePath is used', () => {
-                const stub = sinon.stub(process, 'emitWarning');
-                const servicePath = tensorboardserviceModule.v1.TensorboardServiceClient.servicePath;
-                assert.strictEqual(servicePath, 'aiplatform.googleapis.com');
-                assert(stub.called);
-                stub.restore();
-            });
+    it('has port', () => {
+      const port = tensorboardserviceModule.v1.TensorboardServiceClient.port;
+      assert(port);
+      assert(typeof port === 'number');
+    });
 
-            it('throws DeprecationWarning if static apiEndpoint is used', () => {
-                const stub = sinon.stub(process, 'emitWarning');
-                const apiEndpoint = tensorboardserviceModule.v1.TensorboardServiceClient.apiEndpoint;
-                assert.strictEqual(apiEndpoint, 'aiplatform.googleapis.com');
-                assert(stub.called);
-                stub.restore();
-            });
+    it('should create a client with no option', () => {
+      const client = new tensorboardserviceModule.v1.TensorboardServiceClient();
+      assert(client);
+    });
+
+    it('should create a client with gRPC fallback', () => {
+      const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
+        fallback: true,
+      });
+      assert(client);
+    });
+
+    it('has initialize method and supports deferred initialization', async () => {
+      const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      assert.strictEqual(client.tensorboardServiceStub, undefined);
+      await client.initialize();
+      assert(client.tensorboardServiceStub);
+    });
+
+    it('has close method for the initialized client', done => {
+      const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize().catch(err => {
+        throw err;
+      });
+      assert(client.tensorboardServiceStub);
+      client.close().then(() => {
+        done();
+      });
+    });
+
+    it('has close method for the non-initialized client', done => {
+      const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      assert.strictEqual(client.tensorboardServiceStub, undefined);
+      client.close().then(() => {
+        done();
+      });
+    });
+
+    it('has getProjectId method', async () => {
+      const fakeProjectId = 'fake-project-id';
+      const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
+      const result = await client.getProjectId();
+      assert.strictEqual(result, fakeProjectId);
+      assert((client.auth.getProjectId as SinonStub).calledWithExactly());
+    });
+
+    it('has getProjectId method with callback', async () => {
+      const fakeProjectId = 'fake-project-id';
+      const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.auth.getProjectId = sinon
+        .stub()
+        .callsArgWith(0, null, fakeProjectId);
+      const promise = new Promise((resolve, reject) => {
+        client.getProjectId((err?: Error | null, projectId?: string | null) => {
+          if (err) {
+            reject(err);
+          } else {
+            resolve(projectId);
+          }
+        });
+      });
+      const result = await promise;
+      assert.strictEqual(result, fakeProjectId);
+    });
+  });
+
+  describe('getTensorboard', () => {
+    it('invokes getTensorboard without error', async () => {
+      const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1.GetTensorboardRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1.GetTensorboardRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1.Tensorboard()
+      );
+      client.innerApiCalls.getTensorboard = stubSimpleCall(expectedResponse);
+      const [response] = await client.getTensorboard(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.getTensorboard as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getTensorboard as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getTensorboard without error using callback', async () => {
+      const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1.GetTensorboardRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1.GetTensorboardRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1.Tensorboard()
+      );
+      client.innerApiCalls.getTensorboard =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.getTensorboard(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.aiplatform.v1.ITensorboard | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.getTensorboard as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getTensorboard as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getTensorboard with error', async () => {
+      const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1.GetTensorboardRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1.GetTensorboardRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.getTensorboard = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.getTensorboard(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.getTensorboard as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getTensorboard as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getTensorboard with closed client', async () => {
+      const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1.GetTensorboardRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1.GetTensorboardRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close().catch(err => {
+        throw err;
+      });
+      await assert.rejects(client.getTensorboard(request), expectedError);
+    });
+  });
+
+  describe('readTensorboardUsage', () => {
+    it('invokes readTensorboardUsage without error', async () => {
+      const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1.ReadTensorboardUsageRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1.ReadTensorboardUsageRequest',
+        ['tensorboard']
+      );
+      request.tensorboard = defaultValue1;
+      const expectedHeaderRequestParams = `tensorboard=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1.ReadTensorboardUsageResponse()
+      );
+      client.innerApiCalls.readTensorboardUsage =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.readTensorboardUsage(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.readTensorboardUsage as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.readTensorboardUsage as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes readTensorboardUsage without error using callback', async () => {
+      const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1.ReadTensorboardUsageRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1.ReadTensorboardUsageRequest',
+        ['tensorboard']
+      );
+      request.tensorboard = defaultValue1;
+      const expectedHeaderRequestParams = `tensorboard=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1.ReadTensorboardUsageResponse()
+      );
+      client.innerApiCalls.readTensorboardUsage =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.readTensorboardUsage(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.aiplatform.v1.IReadTensorboardUsageResponse | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.readTensorboardUsage as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.readTensorboardUsage as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes readTensorboardUsage with error', async () => {
+      const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1.ReadTensorboardUsageRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1.ReadTensorboardUsageRequest',
+        ['tensorboard']
+      );
+      request.tensorboard = defaultValue1;
+      const expectedHeaderRequestParams = `tensorboard=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.readTensorboardUsage = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.readTensorboardUsage(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.readTensorboardUsage as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.readTensorboardUsage as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes readTensorboardUsage with closed client', async () => {
+      const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1.ReadTensorboardUsageRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1.ReadTensorboardUsageRequest',
+        ['tensorboard']
+      );
+      request.tensorboard = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close().catch(err => {
+        throw err;
+      });
+      await assert.rejects(client.readTensorboardUsage(request), expectedError);
+    });
+  });
+
+  describe('readTensorboardSize', () => {
+    it('invokes readTensorboardSize without error', async () => {
+      const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1.ReadTensorboardSizeRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1.ReadTensorboardSizeRequest',
+        ['tensorboard']
+      );
+      request.tensorboard = defaultValue1;
+      const expectedHeaderRequestParams = `tensorboard=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1.ReadTensorboardSizeResponse()
+      );
+      client.innerApiCalls.readTensorboardSize =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.readTensorboardSize(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.readTensorboardSize as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.readTensorboardSize as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes readTensorboardSize without error using callback', async () => {
+      const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1.ReadTensorboardSizeRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1.ReadTensorboardSizeRequest',
+        ['tensorboard']
+      );
+      request.tensorboard = defaultValue1;
+      const expectedHeaderRequestParams = `tensorboard=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1.ReadTensorboardSizeResponse()
+      );
+      client.innerApiCalls.readTensorboardSize =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.readTensorboardSize(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.aiplatform.v1.IReadTensorboardSizeResponse | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.readTensorboardSize as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.readTensorboardSize as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes readTensorboardSize with error', async () => {
+      const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1.ReadTensorboardSizeRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1.ReadTensorboardSizeRequest',
+        ['tensorboard']
+      );
+      request.tensorboard = defaultValue1;
+      const expectedHeaderRequestParams = `tensorboard=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.readTensorboardSize = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.readTensorboardSize(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.readTensorboardSize as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.readTensorboardSize as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes readTensorboardSize with closed client', async () => {
+      const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1.ReadTensorboardSizeRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1.ReadTensorboardSizeRequest',
+        ['tensorboard']
+      );
+      request.tensorboard = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close().catch(err => {
+        throw err;
+      });
+      await assert.rejects(client.readTensorboardSize(request), expectedError);
+    });
+  });
+
+  describe('createTensorboardExperiment', () => {
+    it('invokes createTensorboardExperiment without error', async () => {
+      const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1.CreateTensorboardExperimentRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1.CreateTensorboardExperimentRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1.TensorboardExperiment()
+      );
+      client.innerApiCalls.createTensorboardExperiment =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.createTensorboardExperiment(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.createTensorboardExperiment as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createTensorboardExperiment as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes createTensorboardExperiment without error using callback', async () => {
+      const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1.CreateTensorboardExperimentRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1.CreateTensorboardExperimentRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1.TensorboardExperiment()
+      );
+      client.innerApiCalls.createTensorboardExperiment =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.createTensorboardExperiment(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.aiplatform.v1.ITensorboardExperiment | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.createTensorboardExperiment as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createTensorboardExperiment as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes createTensorboardExperiment with error', async () => {
+      const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1.CreateTensorboardExperimentRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1.CreateTensorboardExperimentRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.createTensorboardExperiment = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.createTensorboardExperiment(request),
+        expectedError
+      );
+      const actualRequest = (
+        client.innerApiCalls.createTensorboardExperiment as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createTensorboardExperiment as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes createTensorboardExperiment with closed client', async () => {
+      const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1.CreateTensorboardExperimentRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1.CreateTensorboardExperimentRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close().catch(err => {
+        throw err;
+      });
+      await assert.rejects(
+        client.createTensorboardExperiment(request),
+        expectedError
+      );
+    });
+  });
+
+  describe('getTensorboardExperiment', () => {
+    it('invokes getTensorboardExperiment without error', async () => {
+      const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1.GetTensorboardExperimentRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1.GetTensorboardExperimentRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1.TensorboardExperiment()
+      );
+      client.innerApiCalls.getTensorboardExperiment =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.getTensorboardExperiment(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.getTensorboardExperiment as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getTensorboardExperiment as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getTensorboardExperiment without error using callback', async () => {
+      const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1.GetTensorboardExperimentRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1.GetTensorboardExperimentRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1.TensorboardExperiment()
+      );
+      client.innerApiCalls.getTensorboardExperiment =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.getTensorboardExperiment(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.aiplatform.v1.ITensorboardExperiment | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.getTensorboardExperiment as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getTensorboardExperiment as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getTensorboardExperiment with error', async () => {
+      const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1.GetTensorboardExperimentRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1.GetTensorboardExperimentRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.getTensorboardExperiment = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.getTensorboardExperiment(request),
+        expectedError
+      );
+      const actualRequest = (
+        client.innerApiCalls.getTensorboardExperiment as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getTensorboardExperiment as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getTensorboardExperiment with closed client', async () => {
+      const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1.GetTensorboardExperimentRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1.GetTensorboardExperimentRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close().catch(err => {
+        throw err;
+      });
+      await assert.rejects(
+        client.getTensorboardExperiment(request),
+        expectedError
+      );
+    });
+  });
+
+  describe('updateTensorboardExperiment', () => {
+    it('invokes updateTensorboardExperiment without error', async () => {
+      const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1.UpdateTensorboardExperimentRequest()
+      );
+      request.tensorboardExperiment ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1.UpdateTensorboardExperimentRequest',
+        ['tensorboardExperiment', 'name']
+      );
+      request.tensorboardExperiment.name = defaultValue1;
+      const expectedHeaderRequestParams = `tensorboard_experiment.name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1.TensorboardExperiment()
+      );
+      client.innerApiCalls.updateTensorboardExperiment =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.updateTensorboardExperiment(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.updateTensorboardExperiment as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateTensorboardExperiment as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes updateTensorboardExperiment without error using callback', async () => {
+      const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1.UpdateTensorboardExperimentRequest()
+      );
+      request.tensorboardExperiment ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1.UpdateTensorboardExperimentRequest',
+        ['tensorboardExperiment', 'name']
+      );
+      request.tensorboardExperiment.name = defaultValue1;
+      const expectedHeaderRequestParams = `tensorboard_experiment.name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1.TensorboardExperiment()
+      );
+      client.innerApiCalls.updateTensorboardExperiment =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.updateTensorboardExperiment(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.aiplatform.v1.ITensorboardExperiment | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.updateTensorboardExperiment as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateTensorboardExperiment as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes updateTensorboardExperiment with error', async () => {
+      const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1.UpdateTensorboardExperimentRequest()
+      );
+      request.tensorboardExperiment ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1.UpdateTensorboardExperimentRequest',
+        ['tensorboardExperiment', 'name']
+      );
+      request.tensorboardExperiment.name = defaultValue1;
+      const expectedHeaderRequestParams = `tensorboard_experiment.name=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.updateTensorboardExperiment = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.updateTensorboardExperiment(request),
+        expectedError
+      );
+      const actualRequest = (
+        client.innerApiCalls.updateTensorboardExperiment as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateTensorboardExperiment as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes updateTensorboardExperiment with closed client', async () => {
+      const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1.UpdateTensorboardExperimentRequest()
+      );
+      request.tensorboardExperiment ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1.UpdateTensorboardExperimentRequest',
+        ['tensorboardExperiment', 'name']
+      );
+      request.tensorboardExperiment.name = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close().catch(err => {
+        throw err;
+      });
+      await assert.rejects(
+        client.updateTensorboardExperiment(request),
+        expectedError
+      );
+    });
+  });
+
+  describe('createTensorboardRun', () => {
+    it('invokes createTensorboardRun without error', async () => {
+      const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1.CreateTensorboardRunRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1.CreateTensorboardRunRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1.TensorboardRun()
+      );
+      client.innerApiCalls.createTensorboardRun =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.createTensorboardRun(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.createTensorboardRun as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createTensorboardRun as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes createTensorboardRun without error using callback', async () => {
+      const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1.CreateTensorboardRunRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1.CreateTensorboardRunRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1.TensorboardRun()
+      );
+      client.innerApiCalls.createTensorboardRun =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.createTensorboardRun(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.aiplatform.v1.ITensorboardRun | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.createTensorboardRun as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createTensorboardRun as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes createTensorboardRun with error', async () => {
+      const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1.CreateTensorboardRunRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1.CreateTensorboardRunRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.createTensorboardRun = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.createTensorboardRun(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.createTensorboardRun as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createTensorboardRun as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes createTensorboardRun with closed client', async () => {
+      const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1.CreateTensorboardRunRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1.CreateTensorboardRunRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close().catch(err => {
+        throw err;
+      });
+      await assert.rejects(client.createTensorboardRun(request), expectedError);
+    });
+  });
+
+  describe('batchCreateTensorboardRuns', () => {
+    it('invokes batchCreateTensorboardRuns without error', async () => {
+      const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1.BatchCreateTensorboardRunsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1.BatchCreateTensorboardRunsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1.BatchCreateTensorboardRunsResponse()
+      );
+      client.innerApiCalls.batchCreateTensorboardRuns =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.batchCreateTensorboardRuns(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.batchCreateTensorboardRuns as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.batchCreateTensorboardRuns as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes batchCreateTensorboardRuns without error using callback', async () => {
+      const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1.BatchCreateTensorboardRunsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1.BatchCreateTensorboardRunsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1.BatchCreateTensorboardRunsResponse()
+      );
+      client.innerApiCalls.batchCreateTensorboardRuns =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.batchCreateTensorboardRuns(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.aiplatform.v1.IBatchCreateTensorboardRunsResponse | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.batchCreateTensorboardRuns as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.batchCreateTensorboardRuns as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes batchCreateTensorboardRuns with error', async () => {
+      const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1.BatchCreateTensorboardRunsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1.BatchCreateTensorboardRunsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.batchCreateTensorboardRuns = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.batchCreateTensorboardRuns(request),
+        expectedError
+      );
+      const actualRequest = (
+        client.innerApiCalls.batchCreateTensorboardRuns as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.batchCreateTensorboardRuns as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes batchCreateTensorboardRuns with closed client', async () => {
+      const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1.BatchCreateTensorboardRunsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1.BatchCreateTensorboardRunsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close().catch(err => {
+        throw err;
+      });
+      await assert.rejects(
+        client.batchCreateTensorboardRuns(request),
+        expectedError
+      );
+    });
+  });
+
+  describe('getTensorboardRun', () => {
+    it('invokes getTensorboardRun without error', async () => {
+      const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1.GetTensorboardRunRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1.GetTensorboardRunRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1.TensorboardRun()
+      );
+      client.innerApiCalls.getTensorboardRun = stubSimpleCall(expectedResponse);
+      const [response] = await client.getTensorboardRun(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.getTensorboardRun as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getTensorboardRun as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getTensorboardRun without error using callback', async () => {
+      const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1.GetTensorboardRunRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1.GetTensorboardRunRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1.TensorboardRun()
+      );
+      client.innerApiCalls.getTensorboardRun =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.getTensorboardRun(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.aiplatform.v1.ITensorboardRun | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.getTensorboardRun as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getTensorboardRun as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getTensorboardRun with error', async () => {
+      const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1.GetTensorboardRunRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1.GetTensorboardRunRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.getTensorboardRun = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.getTensorboardRun(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.getTensorboardRun as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getTensorboardRun as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getTensorboardRun with closed client', async () => {
+      const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1.GetTensorboardRunRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1.GetTensorboardRunRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close().catch(err => {
+        throw err;
+      });
+      await assert.rejects(client.getTensorboardRun(request), expectedError);
+    });
+  });
+
+  describe('updateTensorboardRun', () => {
+    it('invokes updateTensorboardRun without error', async () => {
+      const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1.UpdateTensorboardRunRequest()
+      );
+      request.tensorboardRun ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1.UpdateTensorboardRunRequest',
+        ['tensorboardRun', 'name']
+      );
+      request.tensorboardRun.name = defaultValue1;
+      const expectedHeaderRequestParams = `tensorboard_run.name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1.TensorboardRun()
+      );
+      client.innerApiCalls.updateTensorboardRun =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.updateTensorboardRun(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.updateTensorboardRun as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateTensorboardRun as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes updateTensorboardRun without error using callback', async () => {
+      const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1.UpdateTensorboardRunRequest()
+      );
+      request.tensorboardRun ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1.UpdateTensorboardRunRequest',
+        ['tensorboardRun', 'name']
+      );
+      request.tensorboardRun.name = defaultValue1;
+      const expectedHeaderRequestParams = `tensorboard_run.name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1.TensorboardRun()
+      );
+      client.innerApiCalls.updateTensorboardRun =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.updateTensorboardRun(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.aiplatform.v1.ITensorboardRun | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.updateTensorboardRun as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateTensorboardRun as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes updateTensorboardRun with error', async () => {
+      const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1.UpdateTensorboardRunRequest()
+      );
+      request.tensorboardRun ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1.UpdateTensorboardRunRequest',
+        ['tensorboardRun', 'name']
+      );
+      request.tensorboardRun.name = defaultValue1;
+      const expectedHeaderRequestParams = `tensorboard_run.name=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.updateTensorboardRun = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.updateTensorboardRun(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.updateTensorboardRun as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateTensorboardRun as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes updateTensorboardRun with closed client', async () => {
+      const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1.UpdateTensorboardRunRequest()
+      );
+      request.tensorboardRun ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1.UpdateTensorboardRunRequest',
+        ['tensorboardRun', 'name']
+      );
+      request.tensorboardRun.name = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close().catch(err => {
+        throw err;
+      });
+      await assert.rejects(client.updateTensorboardRun(request), expectedError);
+    });
+  });
+
+  describe('batchCreateTensorboardTimeSeries', () => {
+    it('invokes batchCreateTensorboardTimeSeries without error', async () => {
+      const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1.BatchCreateTensorboardTimeSeriesRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1.BatchCreateTensorboardTimeSeriesRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1.BatchCreateTensorboardTimeSeriesResponse()
+      );
+      client.innerApiCalls.batchCreateTensorboardTimeSeries =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.batchCreateTensorboardTimeSeries(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.batchCreateTensorboardTimeSeries as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.batchCreateTensorboardTimeSeries as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes batchCreateTensorboardTimeSeries without error using callback', async () => {
+      const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1.BatchCreateTensorboardTimeSeriesRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1.BatchCreateTensorboardTimeSeriesRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1.BatchCreateTensorboardTimeSeriesResponse()
+      );
+      client.innerApiCalls.batchCreateTensorboardTimeSeries =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.batchCreateTensorboardTimeSeries(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.aiplatform.v1.IBatchCreateTensorboardTimeSeriesResponse | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.batchCreateTensorboardTimeSeries as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.batchCreateTensorboardTimeSeries as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes batchCreateTensorboardTimeSeries with error', async () => {
+      const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1.BatchCreateTensorboardTimeSeriesRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1.BatchCreateTensorboardTimeSeriesRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.batchCreateTensorboardTimeSeries = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.batchCreateTensorboardTimeSeries(request),
+        expectedError
+      );
+      const actualRequest = (
+        client.innerApiCalls.batchCreateTensorboardTimeSeries as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.batchCreateTensorboardTimeSeries as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes batchCreateTensorboardTimeSeries with closed client', async () => {
+      const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1.BatchCreateTensorboardTimeSeriesRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1.BatchCreateTensorboardTimeSeriesRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close().catch(err => {
+        throw err;
+      });
+      await assert.rejects(
+        client.batchCreateTensorboardTimeSeries(request),
+        expectedError
+      );
+    });
+  });
+
+  describe('createTensorboardTimeSeries', () => {
+    it('invokes createTensorboardTimeSeries without error', async () => {
+      const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1.CreateTensorboardTimeSeriesRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1.CreateTensorboardTimeSeriesRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1.TensorboardTimeSeries()
+      );
+      client.innerApiCalls.createTensorboardTimeSeries =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.createTensorboardTimeSeries(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.createTensorboardTimeSeries as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createTensorboardTimeSeries as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes createTensorboardTimeSeries without error using callback', async () => {
+      const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1.CreateTensorboardTimeSeriesRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1.CreateTensorboardTimeSeriesRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1.TensorboardTimeSeries()
+      );
+      client.innerApiCalls.createTensorboardTimeSeries =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.createTensorboardTimeSeries(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.aiplatform.v1.ITensorboardTimeSeries | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.createTensorboardTimeSeries as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createTensorboardTimeSeries as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes createTensorboardTimeSeries with error', async () => {
+      const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1.CreateTensorboardTimeSeriesRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1.CreateTensorboardTimeSeriesRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.createTensorboardTimeSeries = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.createTensorboardTimeSeries(request),
+        expectedError
+      );
+      const actualRequest = (
+        client.innerApiCalls.createTensorboardTimeSeries as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createTensorboardTimeSeries as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes createTensorboardTimeSeries with closed client', async () => {
+      const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1.CreateTensorboardTimeSeriesRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1.CreateTensorboardTimeSeriesRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close().catch(err => {
+        throw err;
+      });
+      await assert.rejects(
+        client.createTensorboardTimeSeries(request),
+        expectedError
+      );
+    });
+  });
+
+  describe('getTensorboardTimeSeries', () => {
+    it('invokes getTensorboardTimeSeries without error', async () => {
+      const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1.GetTensorboardTimeSeriesRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1.GetTensorboardTimeSeriesRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1.TensorboardTimeSeries()
+      );
+      client.innerApiCalls.getTensorboardTimeSeries =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.getTensorboardTimeSeries(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.getTensorboardTimeSeries as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getTensorboardTimeSeries as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getTensorboardTimeSeries without error using callback', async () => {
+      const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1.GetTensorboardTimeSeriesRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1.GetTensorboardTimeSeriesRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1.TensorboardTimeSeries()
+      );
+      client.innerApiCalls.getTensorboardTimeSeries =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.getTensorboardTimeSeries(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.aiplatform.v1.ITensorboardTimeSeries | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.getTensorboardTimeSeries as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getTensorboardTimeSeries as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getTensorboardTimeSeries with error', async () => {
+      const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1.GetTensorboardTimeSeriesRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1.GetTensorboardTimeSeriesRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.getTensorboardTimeSeries = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.getTensorboardTimeSeries(request),
+        expectedError
+      );
+      const actualRequest = (
+        client.innerApiCalls.getTensorboardTimeSeries as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getTensorboardTimeSeries as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getTensorboardTimeSeries with closed client', async () => {
+      const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1.GetTensorboardTimeSeriesRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1.GetTensorboardTimeSeriesRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close().catch(err => {
+        throw err;
+      });
+      await assert.rejects(
+        client.getTensorboardTimeSeries(request),
+        expectedError
+      );
+    });
+  });
+
+  describe('updateTensorboardTimeSeries', () => {
+    it('invokes updateTensorboardTimeSeries without error', async () => {
+      const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1.UpdateTensorboardTimeSeriesRequest()
+      );
+      request.tensorboardTimeSeries ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1.UpdateTensorboardTimeSeriesRequest',
+        ['tensorboardTimeSeries', 'name']
+      );
+      request.tensorboardTimeSeries.name = defaultValue1;
+      const expectedHeaderRequestParams = `tensorboard_time_series.name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1.TensorboardTimeSeries()
+      );
+      client.innerApiCalls.updateTensorboardTimeSeries =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.updateTensorboardTimeSeries(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.updateTensorboardTimeSeries as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateTensorboardTimeSeries as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes updateTensorboardTimeSeries without error using callback', async () => {
+      const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1.UpdateTensorboardTimeSeriesRequest()
+      );
+      request.tensorboardTimeSeries ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1.UpdateTensorboardTimeSeriesRequest',
+        ['tensorboardTimeSeries', 'name']
+      );
+      request.tensorboardTimeSeries.name = defaultValue1;
+      const expectedHeaderRequestParams = `tensorboard_time_series.name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1.TensorboardTimeSeries()
+      );
+      client.innerApiCalls.updateTensorboardTimeSeries =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.updateTensorboardTimeSeries(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.aiplatform.v1.ITensorboardTimeSeries | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.updateTensorboardTimeSeries as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateTensorboardTimeSeries as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes updateTensorboardTimeSeries with error', async () => {
+      const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1.UpdateTensorboardTimeSeriesRequest()
+      );
+      request.tensorboardTimeSeries ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1.UpdateTensorboardTimeSeriesRequest',
+        ['tensorboardTimeSeries', 'name']
+      );
+      request.tensorboardTimeSeries.name = defaultValue1;
+      const expectedHeaderRequestParams = `tensorboard_time_series.name=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.updateTensorboardTimeSeries = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.updateTensorboardTimeSeries(request),
+        expectedError
+      );
+      const actualRequest = (
+        client.innerApiCalls.updateTensorboardTimeSeries as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateTensorboardTimeSeries as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes updateTensorboardTimeSeries with closed client', async () => {
+      const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1.UpdateTensorboardTimeSeriesRequest()
+      );
+      request.tensorboardTimeSeries ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1.UpdateTensorboardTimeSeriesRequest',
+        ['tensorboardTimeSeries', 'name']
+      );
+      request.tensorboardTimeSeries.name = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close().catch(err => {
+        throw err;
+      });
+      await assert.rejects(
+        client.updateTensorboardTimeSeries(request),
+        expectedError
+      );
+    });
+  });
+
+  describe('batchReadTensorboardTimeSeriesData', () => {
+    it('invokes batchReadTensorboardTimeSeriesData without error', async () => {
+      const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1.BatchReadTensorboardTimeSeriesDataRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1.BatchReadTensorboardTimeSeriesDataRequest',
+        ['tensorboard']
+      );
+      request.tensorboard = defaultValue1;
+      const expectedHeaderRequestParams = `tensorboard=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1.BatchReadTensorboardTimeSeriesDataResponse()
+      );
+      client.innerApiCalls.batchReadTensorboardTimeSeriesData =
+        stubSimpleCall(expectedResponse);
+      const [response] =
+        await client.batchReadTensorboardTimeSeriesData(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.batchReadTensorboardTimeSeriesData as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.batchReadTensorboardTimeSeriesData as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes batchReadTensorboardTimeSeriesData without error using callback', async () => {
+      const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1.BatchReadTensorboardTimeSeriesDataRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1.BatchReadTensorboardTimeSeriesDataRequest',
+        ['tensorboard']
+      );
+      request.tensorboard = defaultValue1;
+      const expectedHeaderRequestParams = `tensorboard=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1.BatchReadTensorboardTimeSeriesDataResponse()
+      );
+      client.innerApiCalls.batchReadTensorboardTimeSeriesData =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.batchReadTensorboardTimeSeriesData(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.aiplatform.v1.IBatchReadTensorboardTimeSeriesDataResponse | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.batchReadTensorboardTimeSeriesData as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.batchReadTensorboardTimeSeriesData as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes batchReadTensorboardTimeSeriesData with error', async () => {
+      const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1.BatchReadTensorboardTimeSeriesDataRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1.BatchReadTensorboardTimeSeriesDataRequest',
+        ['tensorboard']
+      );
+      request.tensorboard = defaultValue1;
+      const expectedHeaderRequestParams = `tensorboard=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.batchReadTensorboardTimeSeriesData = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.batchReadTensorboardTimeSeriesData(request),
+        expectedError
+      );
+      const actualRequest = (
+        client.innerApiCalls.batchReadTensorboardTimeSeriesData as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.batchReadTensorboardTimeSeriesData as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes batchReadTensorboardTimeSeriesData with closed client', async () => {
+      const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1.BatchReadTensorboardTimeSeriesDataRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1.BatchReadTensorboardTimeSeriesDataRequest',
+        ['tensorboard']
+      );
+      request.tensorboard = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close().catch(err => {
+        throw err;
+      });
+      await assert.rejects(
+        client.batchReadTensorboardTimeSeriesData(request),
+        expectedError
+      );
+    });
+  });
+
+  describe('readTensorboardTimeSeriesData', () => {
+    it('invokes readTensorboardTimeSeriesData without error', async () => {
+      const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1.ReadTensorboardTimeSeriesDataRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1.ReadTensorboardTimeSeriesDataRequest',
+        ['tensorboardTimeSeries']
+      );
+      request.tensorboardTimeSeries = defaultValue1;
+      const expectedHeaderRequestParams = `tensorboard_time_series=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1.ReadTensorboardTimeSeriesDataResponse()
+      );
+      client.innerApiCalls.readTensorboardTimeSeriesData =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.readTensorboardTimeSeriesData(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.readTensorboardTimeSeriesData as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.readTensorboardTimeSeriesData as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes readTensorboardTimeSeriesData without error using callback', async () => {
+      const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1.ReadTensorboardTimeSeriesDataRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1.ReadTensorboardTimeSeriesDataRequest',
+        ['tensorboardTimeSeries']
+      );
+      request.tensorboardTimeSeries = defaultValue1;
+      const expectedHeaderRequestParams = `tensorboard_time_series=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1.ReadTensorboardTimeSeriesDataResponse()
+      );
+      client.innerApiCalls.readTensorboardTimeSeriesData =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.readTensorboardTimeSeriesData(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.aiplatform.v1.IReadTensorboardTimeSeriesDataResponse | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.readTensorboardTimeSeriesData as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.readTensorboardTimeSeriesData as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes readTensorboardTimeSeriesData with error', async () => {
+      const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1.ReadTensorboardTimeSeriesDataRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1.ReadTensorboardTimeSeriesDataRequest',
+        ['tensorboardTimeSeries']
+      );
+      request.tensorboardTimeSeries = defaultValue1;
+      const expectedHeaderRequestParams = `tensorboard_time_series=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.readTensorboardTimeSeriesData = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.readTensorboardTimeSeriesData(request),
+        expectedError
+      );
+      const actualRequest = (
+        client.innerApiCalls.readTensorboardTimeSeriesData as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.readTensorboardTimeSeriesData as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes readTensorboardTimeSeriesData with closed client', async () => {
+      const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1.ReadTensorboardTimeSeriesDataRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1.ReadTensorboardTimeSeriesDataRequest',
+        ['tensorboardTimeSeries']
+      );
+      request.tensorboardTimeSeries = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close().catch(err => {
+        throw err;
+      });
+      await assert.rejects(
+        client.readTensorboardTimeSeriesData(request),
+        expectedError
+      );
+    });
+  });
+
+  describe('writeTensorboardExperimentData', () => {
+    it('invokes writeTensorboardExperimentData without error', async () => {
+      const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1.WriteTensorboardExperimentDataRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1.WriteTensorboardExperimentDataRequest',
+        ['tensorboardExperiment']
+      );
+      request.tensorboardExperiment = defaultValue1;
+      const expectedHeaderRequestParams = `tensorboard_experiment=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1.WriteTensorboardExperimentDataResponse()
+      );
+      client.innerApiCalls.writeTensorboardExperimentData =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.writeTensorboardExperimentData(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.writeTensorboardExperimentData as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.writeTensorboardExperimentData as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes writeTensorboardExperimentData without error using callback', async () => {
+      const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1.WriteTensorboardExperimentDataRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1.WriteTensorboardExperimentDataRequest',
+        ['tensorboardExperiment']
+      );
+      request.tensorboardExperiment = defaultValue1;
+      const expectedHeaderRequestParams = `tensorboard_experiment=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1.WriteTensorboardExperimentDataResponse()
+      );
+      client.innerApiCalls.writeTensorboardExperimentData =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.writeTensorboardExperimentData(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.aiplatform.v1.IWriteTensorboardExperimentDataResponse | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.writeTensorboardExperimentData as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.writeTensorboardExperimentData as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes writeTensorboardExperimentData with error', async () => {
+      const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1.WriteTensorboardExperimentDataRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1.WriteTensorboardExperimentDataRequest',
+        ['tensorboardExperiment']
+      );
+      request.tensorboardExperiment = defaultValue1;
+      const expectedHeaderRequestParams = `tensorboard_experiment=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.writeTensorboardExperimentData = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.writeTensorboardExperimentData(request),
+        expectedError
+      );
+      const actualRequest = (
+        client.innerApiCalls.writeTensorboardExperimentData as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.writeTensorboardExperimentData as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes writeTensorboardExperimentData with closed client', async () => {
+      const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1.WriteTensorboardExperimentDataRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1.WriteTensorboardExperimentDataRequest',
+        ['tensorboardExperiment']
+      );
+      request.tensorboardExperiment = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close().catch(err => {
+        throw err;
+      });
+      await assert.rejects(
+        client.writeTensorboardExperimentData(request),
+        expectedError
+      );
+    });
+  });
+
+  describe('writeTensorboardRunData', () => {
+    it('invokes writeTensorboardRunData without error', async () => {
+      const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1.WriteTensorboardRunDataRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1.WriteTensorboardRunDataRequest',
+        ['tensorboardRun']
+      );
+      request.tensorboardRun = defaultValue1;
+      const expectedHeaderRequestParams = `tensorboard_run=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1.WriteTensorboardRunDataResponse()
+      );
+      client.innerApiCalls.writeTensorboardRunData =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.writeTensorboardRunData(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.writeTensorboardRunData as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.writeTensorboardRunData as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes writeTensorboardRunData without error using callback', async () => {
+      const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1.WriteTensorboardRunDataRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1.WriteTensorboardRunDataRequest',
+        ['tensorboardRun']
+      );
+      request.tensorboardRun = defaultValue1;
+      const expectedHeaderRequestParams = `tensorboard_run=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1.WriteTensorboardRunDataResponse()
+      );
+      client.innerApiCalls.writeTensorboardRunData =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.writeTensorboardRunData(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.aiplatform.v1.IWriteTensorboardRunDataResponse | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.writeTensorboardRunData as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.writeTensorboardRunData as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes writeTensorboardRunData with error', async () => {
+      const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1.WriteTensorboardRunDataRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1.WriteTensorboardRunDataRequest',
+        ['tensorboardRun']
+      );
+      request.tensorboardRun = defaultValue1;
+      const expectedHeaderRequestParams = `tensorboard_run=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.writeTensorboardRunData = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.writeTensorboardRunData(request),
+        expectedError
+      );
+      const actualRequest = (
+        client.innerApiCalls.writeTensorboardRunData as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.writeTensorboardRunData as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes writeTensorboardRunData with closed client', async () => {
+      const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1.WriteTensorboardRunDataRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1.WriteTensorboardRunDataRequest',
+        ['tensorboardRun']
+      );
+      request.tensorboardRun = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close().catch(err => {
+        throw err;
+      });
+      await assert.rejects(
+        client.writeTensorboardRunData(request),
+        expectedError
+      );
+    });
+  });
+
+  describe('createTensorboard', () => {
+    it('invokes createTensorboard without error', async () => {
+      const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1.CreateTensorboardRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1.CreateTensorboardRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation()
+      );
+      client.innerApiCalls.createTensorboard =
+        stubLongRunningCall(expectedResponse);
+      const [operation] = await client.createTensorboard(request);
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.createTensorboard as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createTensorboard as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes createTensorboard without error using callback', async () => {
+      const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1.CreateTensorboardRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1.CreateTensorboardRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation()
+      );
+      client.innerApiCalls.createTensorboard =
+        stubLongRunningCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.createTensorboard(
+          request,
+          (
+            err?: Error | null,
+            result?: LROperation<
+              protos.google.cloud.aiplatform.v1.ITensorboard,
+              protos.google.cloud.aiplatform.v1.ICreateTensorboardOperationMetadata
+            > | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const operation = (await promise) as LROperation<
+        protos.google.cloud.aiplatform.v1.ITensorboard,
+        protos.google.cloud.aiplatform.v1.ICreateTensorboardOperationMetadata
+      >;
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.createTensorboard as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createTensorboard as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes createTensorboard with call error', async () => {
+      const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1.CreateTensorboardRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1.CreateTensorboardRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.createTensorboard = stubLongRunningCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.createTensorboard(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.createTensorboard as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createTensorboard as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes createTensorboard with LRO error', async () => {
+      const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1.CreateTensorboardRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1.CreateTensorboardRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.createTensorboard = stubLongRunningCall(
+        undefined,
+        undefined,
+        expectedError
+      );
+      const [operation] = await client.createTensorboard(request);
+      await assert.rejects(operation.promise(), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.createTensorboard as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createTensorboard as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes checkCreateTensorboardProgress without error', async () => {
+      const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const expectedResponse = generateSampleMessage(
+        new operationsProtos.google.longrunning.Operation()
+      );
+      expectedResponse.name = 'test';
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
+
+      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+      const decodedOperation = await client.checkCreateTensorboardProgress(
+        expectedResponse.name
+      );
+      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+      assert(decodedOperation.metadata);
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+
+    it('invokes checkCreateTensorboardProgress with error', async () => {
+      const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const expectedError = new Error('expected');
+
+      client.operationsClient.getOperation = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.checkCreateTensorboardProgress(''),
+        expectedError
+      );
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+  });
+
+  describe('updateTensorboard', () => {
+    it('invokes updateTensorboard without error', async () => {
+      const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1.UpdateTensorboardRequest()
+      );
+      request.tensorboard ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1.UpdateTensorboardRequest',
+        ['tensorboard', 'name']
+      );
+      request.tensorboard.name = defaultValue1;
+      const expectedHeaderRequestParams = `tensorboard.name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation()
+      );
+      client.innerApiCalls.updateTensorboard =
+        stubLongRunningCall(expectedResponse);
+      const [operation] = await client.updateTensorboard(request);
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.updateTensorboard as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateTensorboard as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes updateTensorboard without error using callback', async () => {
+      const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1.UpdateTensorboardRequest()
+      );
+      request.tensorboard ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1.UpdateTensorboardRequest',
+        ['tensorboard', 'name']
+      );
+      request.tensorboard.name = defaultValue1;
+      const expectedHeaderRequestParams = `tensorboard.name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation()
+      );
+      client.innerApiCalls.updateTensorboard =
+        stubLongRunningCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.updateTensorboard(
+          request,
+          (
+            err?: Error | null,
+            result?: LROperation<
+              protos.google.cloud.aiplatform.v1.ITensorboard,
+              protos.google.cloud.aiplatform.v1.IUpdateTensorboardOperationMetadata
+            > | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const operation = (await promise) as LROperation<
+        protos.google.cloud.aiplatform.v1.ITensorboard,
+        protos.google.cloud.aiplatform.v1.IUpdateTensorboardOperationMetadata
+      >;
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.updateTensorboard as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateTensorboard as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes updateTensorboard with call error', async () => {
+      const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1.UpdateTensorboardRequest()
+      );
+      request.tensorboard ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1.UpdateTensorboardRequest',
+        ['tensorboard', 'name']
+      );
+      request.tensorboard.name = defaultValue1;
+      const expectedHeaderRequestParams = `tensorboard.name=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.updateTensorboard = stubLongRunningCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.updateTensorboard(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.updateTensorboard as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateTensorboard as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes updateTensorboard with LRO error', async () => {
+      const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1.UpdateTensorboardRequest()
+      );
+      request.tensorboard ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1.UpdateTensorboardRequest',
+        ['tensorboard', 'name']
+      );
+      request.tensorboard.name = defaultValue1;
+      const expectedHeaderRequestParams = `tensorboard.name=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.updateTensorboard = stubLongRunningCall(
+        undefined,
+        undefined,
+        expectedError
+      );
+      const [operation] = await client.updateTensorboard(request);
+      await assert.rejects(operation.promise(), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.updateTensorboard as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateTensorboard as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes checkUpdateTensorboardProgress without error', async () => {
+      const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const expectedResponse = generateSampleMessage(
+        new operationsProtos.google.longrunning.Operation()
+      );
+      expectedResponse.name = 'test';
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
+
+      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+      const decodedOperation = await client.checkUpdateTensorboardProgress(
+        expectedResponse.name
+      );
+      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+      assert(decodedOperation.metadata);
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+
+    it('invokes checkUpdateTensorboardProgress with error', async () => {
+      const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const expectedError = new Error('expected');
+
+      client.operationsClient.getOperation = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.checkUpdateTensorboardProgress(''),
+        expectedError
+      );
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+  });
+
+  describe('deleteTensorboard', () => {
+    it('invokes deleteTensorboard without error', async () => {
+      const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1.DeleteTensorboardRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1.DeleteTensorboardRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation()
+      );
+      client.innerApiCalls.deleteTensorboard =
+        stubLongRunningCall(expectedResponse);
+      const [operation] = await client.deleteTensorboard(request);
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.deleteTensorboard as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteTensorboard as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes deleteTensorboard without error using callback', async () => {
+      const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1.DeleteTensorboardRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1.DeleteTensorboardRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation()
+      );
+      client.innerApiCalls.deleteTensorboard =
+        stubLongRunningCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.deleteTensorboard(
+          request,
+          (
+            err?: Error | null,
+            result?: LROperation<
+              protos.google.protobuf.IEmpty,
+              protos.google.cloud.aiplatform.v1.IDeleteOperationMetadata
+            > | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const operation = (await promise) as LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.aiplatform.v1.IDeleteOperationMetadata
+      >;
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.deleteTensorboard as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteTensorboard as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes deleteTensorboard with call error', async () => {
+      const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1.DeleteTensorboardRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1.DeleteTensorboardRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.deleteTensorboard = stubLongRunningCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.deleteTensorboard(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.deleteTensorboard as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteTensorboard as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes deleteTensorboard with LRO error', async () => {
+      const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1.DeleteTensorboardRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1.DeleteTensorboardRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.deleteTensorboard = stubLongRunningCall(
+        undefined,
+        undefined,
+        expectedError
+      );
+      const [operation] = await client.deleteTensorboard(request);
+      await assert.rejects(operation.promise(), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.deleteTensorboard as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteTensorboard as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes checkDeleteTensorboardProgress without error', async () => {
+      const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const expectedResponse = generateSampleMessage(
+        new operationsProtos.google.longrunning.Operation()
+      );
+      expectedResponse.name = 'test';
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
+
+      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+      const decodedOperation = await client.checkDeleteTensorboardProgress(
+        expectedResponse.name
+      );
+      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+      assert(decodedOperation.metadata);
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+
+    it('invokes checkDeleteTensorboardProgress with error', async () => {
+      const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const expectedError = new Error('expected');
+
+      client.operationsClient.getOperation = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.checkDeleteTensorboardProgress(''),
+        expectedError
+      );
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+  });
+
+  describe('deleteTensorboardExperiment', () => {
+    it('invokes deleteTensorboardExperiment without error', async () => {
+      const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1.DeleteTensorboardExperimentRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1.DeleteTensorboardExperimentRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation()
+      );
+      client.innerApiCalls.deleteTensorboardExperiment =
+        stubLongRunningCall(expectedResponse);
+      const [operation] = await client.deleteTensorboardExperiment(request);
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.deleteTensorboardExperiment as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteTensorboardExperiment as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes deleteTensorboardExperiment without error using callback', async () => {
+      const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1.DeleteTensorboardExperimentRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1.DeleteTensorboardExperimentRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation()
+      );
+      client.innerApiCalls.deleteTensorboardExperiment =
+        stubLongRunningCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.deleteTensorboardExperiment(
+          request,
+          (
+            err?: Error | null,
+            result?: LROperation<
+              protos.google.protobuf.IEmpty,
+              protos.google.cloud.aiplatform.v1.IDeleteOperationMetadata
+            > | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const operation = (await promise) as LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.aiplatform.v1.IDeleteOperationMetadata
+      >;
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.deleteTensorboardExperiment as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteTensorboardExperiment as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes deleteTensorboardExperiment with call error', async () => {
+      const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1.DeleteTensorboardExperimentRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1.DeleteTensorboardExperimentRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.deleteTensorboardExperiment = stubLongRunningCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.deleteTensorboardExperiment(request),
+        expectedError
+      );
+      const actualRequest = (
+        client.innerApiCalls.deleteTensorboardExperiment as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteTensorboardExperiment as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes deleteTensorboardExperiment with LRO error', async () => {
+      const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1.DeleteTensorboardExperimentRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1.DeleteTensorboardExperimentRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.deleteTensorboardExperiment = stubLongRunningCall(
+        undefined,
+        undefined,
+        expectedError
+      );
+      const [operation] = await client.deleteTensorboardExperiment(request);
+      await assert.rejects(operation.promise(), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.deleteTensorboardExperiment as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteTensorboardExperiment as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes checkDeleteTensorboardExperimentProgress without error', async () => {
+      const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const expectedResponse = generateSampleMessage(
+        new operationsProtos.google.longrunning.Operation()
+      );
+      expectedResponse.name = 'test';
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
+
+      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+      const decodedOperation =
+        await client.checkDeleteTensorboardExperimentProgress(
+          expectedResponse.name
+        );
+      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+      assert(decodedOperation.metadata);
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+
+    it('invokes checkDeleteTensorboardExperimentProgress with error', async () => {
+      const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const expectedError = new Error('expected');
+
+      client.operationsClient.getOperation = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.checkDeleteTensorboardExperimentProgress(''),
+        expectedError
+      );
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+  });
+
+  describe('deleteTensorboardRun', () => {
+    it('invokes deleteTensorboardRun without error', async () => {
+      const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1.DeleteTensorboardRunRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1.DeleteTensorboardRunRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation()
+      );
+      client.innerApiCalls.deleteTensorboardRun =
+        stubLongRunningCall(expectedResponse);
+      const [operation] = await client.deleteTensorboardRun(request);
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.deleteTensorboardRun as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteTensorboardRun as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes deleteTensorboardRun without error using callback', async () => {
+      const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1.DeleteTensorboardRunRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1.DeleteTensorboardRunRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation()
+      );
+      client.innerApiCalls.deleteTensorboardRun =
+        stubLongRunningCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.deleteTensorboardRun(
+          request,
+          (
+            err?: Error | null,
+            result?: LROperation<
+              protos.google.protobuf.IEmpty,
+              protos.google.cloud.aiplatform.v1.IDeleteOperationMetadata
+            > | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const operation = (await promise) as LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.aiplatform.v1.IDeleteOperationMetadata
+      >;
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.deleteTensorboardRun as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteTensorboardRun as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes deleteTensorboardRun with call error', async () => {
+      const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1.DeleteTensorboardRunRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1.DeleteTensorboardRunRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.deleteTensorboardRun = stubLongRunningCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.deleteTensorboardRun(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.deleteTensorboardRun as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteTensorboardRun as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes deleteTensorboardRun with LRO error', async () => {
+      const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1.DeleteTensorboardRunRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1.DeleteTensorboardRunRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.deleteTensorboardRun = stubLongRunningCall(
+        undefined,
+        undefined,
+        expectedError
+      );
+      const [operation] = await client.deleteTensorboardRun(request);
+      await assert.rejects(operation.promise(), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.deleteTensorboardRun as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteTensorboardRun as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes checkDeleteTensorboardRunProgress without error', async () => {
+      const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const expectedResponse = generateSampleMessage(
+        new operationsProtos.google.longrunning.Operation()
+      );
+      expectedResponse.name = 'test';
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
+
+      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+      const decodedOperation = await client.checkDeleteTensorboardRunProgress(
+        expectedResponse.name
+      );
+      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+      assert(decodedOperation.metadata);
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+
+    it('invokes checkDeleteTensorboardRunProgress with error', async () => {
+      const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const expectedError = new Error('expected');
+
+      client.operationsClient.getOperation = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.checkDeleteTensorboardRunProgress(''),
+        expectedError
+      );
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+  });
+
+  describe('deleteTensorboardTimeSeries', () => {
+    it('invokes deleteTensorboardTimeSeries without error', async () => {
+      const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1.DeleteTensorboardTimeSeriesRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1.DeleteTensorboardTimeSeriesRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation()
+      );
+      client.innerApiCalls.deleteTensorboardTimeSeries =
+        stubLongRunningCall(expectedResponse);
+      const [operation] = await client.deleteTensorboardTimeSeries(request);
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.deleteTensorboardTimeSeries as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteTensorboardTimeSeries as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes deleteTensorboardTimeSeries without error using callback', async () => {
+      const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1.DeleteTensorboardTimeSeriesRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1.DeleteTensorboardTimeSeriesRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation()
+      );
+      client.innerApiCalls.deleteTensorboardTimeSeries =
+        stubLongRunningCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.deleteTensorboardTimeSeries(
+          request,
+          (
+            err?: Error | null,
+            result?: LROperation<
+              protos.google.protobuf.IEmpty,
+              protos.google.cloud.aiplatform.v1.IDeleteOperationMetadata
+            > | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const operation = (await promise) as LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.aiplatform.v1.IDeleteOperationMetadata
+      >;
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.deleteTensorboardTimeSeries as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteTensorboardTimeSeries as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes deleteTensorboardTimeSeries with call error', async () => {
+      const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1.DeleteTensorboardTimeSeriesRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1.DeleteTensorboardTimeSeriesRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.deleteTensorboardTimeSeries = stubLongRunningCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.deleteTensorboardTimeSeries(request),
+        expectedError
+      );
+      const actualRequest = (
+        client.innerApiCalls.deleteTensorboardTimeSeries as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteTensorboardTimeSeries as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes deleteTensorboardTimeSeries with LRO error', async () => {
+      const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1.DeleteTensorboardTimeSeriesRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1.DeleteTensorboardTimeSeriesRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.deleteTensorboardTimeSeries = stubLongRunningCall(
+        undefined,
+        undefined,
+        expectedError
+      );
+      const [operation] = await client.deleteTensorboardTimeSeries(request);
+      await assert.rejects(operation.promise(), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.deleteTensorboardTimeSeries as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteTensorboardTimeSeries as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes checkDeleteTensorboardTimeSeriesProgress without error', async () => {
+      const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const expectedResponse = generateSampleMessage(
+        new operationsProtos.google.longrunning.Operation()
+      );
+      expectedResponse.name = 'test';
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
+
+      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+      const decodedOperation =
+        await client.checkDeleteTensorboardTimeSeriesProgress(
+          expectedResponse.name
+        );
+      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+      assert(decodedOperation.metadata);
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+
+    it('invokes checkDeleteTensorboardTimeSeriesProgress with error', async () => {
+      const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const expectedError = new Error('expected');
+
+      client.operationsClient.getOperation = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.checkDeleteTensorboardTimeSeriesProgress(''),
+        expectedError
+      );
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+  });
+
+  describe('readTensorboardBlobData', () => {
+    it('invokes readTensorboardBlobData without error', async () => {
+      const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1.ReadTensorboardBlobDataRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1.ReadTensorboardBlobDataRequest',
+        ['timeSeries']
+      );
+      request.timeSeries = defaultValue1;
+      const expectedHeaderRequestParams = `time_series=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1.ReadTensorboardBlobDataResponse()
+      );
+      client.innerApiCalls.readTensorboardBlobData =
+        stubServerStreamingCall(expectedResponse);
+      const stream = await client.readTensorboardBlobData(request);
+      const promise = new Promise((resolve, reject) => {
+        stream.on(
+          'data',
+          (
+            response: protos.google.cloud.aiplatform.v1.ReadTensorboardBlobDataResponse
+          ) => {
+            resolve(response);
+          }
+        );
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.readTensorboardBlobData as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.readTensorboardBlobData as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes readTensorboardBlobData without error and gaxServerStreamingRetries enabled', async () => {
+      const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+        gaxServerStreamingRetries: true,
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1.ReadTensorboardBlobDataRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1.ReadTensorboardBlobDataRequest',
+        ['timeSeries']
+      );
+      request.timeSeries = defaultValue1;
+      const expectedHeaderRequestParams = `time_series=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1.ReadTensorboardBlobDataResponse()
+      );
+      client.innerApiCalls.readTensorboardBlobData =
+        stubServerStreamingCall(expectedResponse);
+      const stream = await client.readTensorboardBlobData(request);
+      const promise = new Promise((resolve, reject) => {
+        stream.on(
+          'data',
+          (
+            response: protos.google.cloud.aiplatform.v1.ReadTensorboardBlobDataResponse
+          ) => {
+            resolve(response);
+          }
+        );
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.readTensorboardBlobData as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.readTensorboardBlobData as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes readTensorboardBlobData with error', async () => {
+      const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1.ReadTensorboardBlobDataRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1.ReadTensorboardBlobDataRequest',
+        ['timeSeries']
+      );
+      request.timeSeries = defaultValue1;
+      const expectedHeaderRequestParams = `time_series=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.readTensorboardBlobData = stubServerStreamingCall(
+        undefined,
+        expectedError
+      );
+      const stream = await client.readTensorboardBlobData(request);
+      const promise = new Promise((resolve, reject) => {
+        stream.on(
+          'data',
+          (
+            response: protos.google.cloud.aiplatform.v1.ReadTensorboardBlobDataResponse
+          ) => {
+            resolve(response);
+          }
+        );
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      await assert.rejects(promise, expectedError);
+      const actualRequest = (
+        client.innerApiCalls.readTensorboardBlobData as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.readTensorboardBlobData as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes readTensorboardBlobData with closed client', async () => {
+      const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1.ReadTensorboardBlobDataRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1.ReadTensorboardBlobDataRequest',
+        ['timeSeries']
+      );
+      request.timeSeries = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close().catch(err => {
+        throw err;
+      });
+      const stream = await client.readTensorboardBlobData(request, {
+        retryRequestOptions: {noResponseRetries: 0},
+      });
+      const promise = new Promise((resolve, reject) => {
+        stream.on(
+          'data',
+          (
+            response: protos.google.cloud.aiplatform.v1.ReadTensorboardBlobDataResponse
+          ) => {
+            resolve(response);
+          }
+        );
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      await assert.rejects(promise, expectedError);
+    });
+    it('should create a client with gaxServerStreamingRetries enabled', () => {
+      const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
+        gaxServerStreamingRetries: true,
+      });
+      assert(client);
+    });
+  });
+
+  describe('listTensorboards', () => {
+    it('invokes listTensorboards without error', async () => {
+      const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1.ListTensorboardsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1.ListTensorboardsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.aiplatform.v1.Tensorboard()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.aiplatform.v1.Tensorboard()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.aiplatform.v1.Tensorboard()
+        ),
+      ];
+      client.innerApiCalls.listTensorboards = stubSimpleCall(expectedResponse);
+      const [response] = await client.listTensorboards(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.listTensorboards as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listTensorboards as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listTensorboards without error using callback', async () => {
+      const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1.ListTensorboardsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1.ListTensorboardsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.aiplatform.v1.Tensorboard()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.aiplatform.v1.Tensorboard()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.aiplatform.v1.Tensorboard()
+        ),
+      ];
+      client.innerApiCalls.listTensorboards =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.listTensorboards(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.aiplatform.v1.ITensorboard[] | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.listTensorboards as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listTensorboards as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listTensorboards with error', async () => {
+      const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1.ListTensorboardsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1.ListTensorboardsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.listTensorboards = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.listTensorboards(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.listTensorboards as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listTensorboards as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listTensorboardsStream without error', async () => {
+      const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1.ListTensorboardsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1.ListTensorboardsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.aiplatform.v1.Tensorboard()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.aiplatform.v1.Tensorboard()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.aiplatform.v1.Tensorboard()
+        ),
+      ];
+      client.descriptors.page.listTensorboards.createStream =
+        stubPageStreamingCall(expectedResponse);
+      const stream = await client.listTensorboardsStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.cloud.aiplatform.v1.Tensorboard[] = [];
+        stream.on(
+          'data',
+          (response: protos.google.cloud.aiplatform.v1.Tensorboard) => {
+            responses.push(response);
+          }
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      const responses = await promise;
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert(
+        (client.descriptors.page.listTensorboards.createStream as SinonStub)
+          .getCall(0)
+          .calledWith(client.innerApiCalls.listTensorboards, request)
+      );
+      assert(
+        (client.descriptors.page.listTensorboards.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
+      );
+    });
+
+    it('invokes listTensorboardsStream with error', async () => {
+      const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1.ListTensorboardsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1.ListTensorboardsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.descriptors.page.listTensorboards.createStream =
+        stubPageStreamingCall(undefined, expectedError);
+      const stream = await client.listTensorboardsStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.cloud.aiplatform.v1.Tensorboard[] = [];
+        stream.on(
+          'data',
+          (response: protos.google.cloud.aiplatform.v1.Tensorboard) => {
+            responses.push(response);
+          }
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      await assert.rejects(promise, expectedError);
+      assert(
+        (client.descriptors.page.listTensorboards.createStream as SinonStub)
+          .getCall(0)
+          .calledWith(client.innerApiCalls.listTensorboards, request)
+      );
+      assert(
+        (client.descriptors.page.listTensorboards.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
+      );
+    });
+
+    it('uses async iteration with listTensorboards without error', async () => {
+      const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1.ListTensorboardsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1.ListTensorboardsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.aiplatform.v1.Tensorboard()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.aiplatform.v1.Tensorboard()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.aiplatform.v1.Tensorboard()
+        ),
+      ];
+      client.descriptors.page.listTensorboards.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
+      const responses: protos.google.cloud.aiplatform.v1.ITensorboard[] = [];
+      const iterable = await client.listTensorboardsAsync(request);
+      for await (const resource of iterable) {
+        responses.push(resource!);
+      }
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.listTensorboards.asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request
+      );
+      assert(
+        (client.descriptors.page.listTensorboards.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
+      );
+    });
+
+    it('uses async iteration with listTensorboards with error', async () => {
+      const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1.ListTensorboardsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1.ListTensorboardsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.descriptors.page.listTensorboards.asyncIterate =
+        stubAsyncIterationCall(undefined, expectedError);
+      const iterable = await client.listTensorboardsAsync(request);
+      await assert.rejects(async () => {
+        const responses: protos.google.cloud.aiplatform.v1.ITensorboard[] = [];
+        for await (const resource of iterable) {
+          responses.push(resource!);
         }
-        it('sets apiEndpoint according to universe domain camelCase', async () => {
-            const client = new tensorboardserviceModule.v1.TensorboardServiceClient({universeDomain: 'example.com'});
-            const servicePath = await client.apiEndpoint;
-            assert.strictEqual(servicePath, 'aiplatform.example.com');
+      });
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.listTensorboards.asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request
+      );
+      assert(
+        (client.descriptors.page.listTensorboards.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
+      );
+    });
+  });
+
+  describe('listTensorboardExperiments', () => {
+    it('invokes listTensorboardExperiments without error', async () => {
+      const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1.ListTensorboardExperimentsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1.ListTensorboardExperimentsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.aiplatform.v1.TensorboardExperiment()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.aiplatform.v1.TensorboardExperiment()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.aiplatform.v1.TensorboardExperiment()
+        ),
+      ];
+      client.innerApiCalls.listTensorboardExperiments =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.listTensorboardExperiments(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.listTensorboardExperiments as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listTensorboardExperiments as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listTensorboardExperiments without error using callback', async () => {
+      const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1.ListTensorboardExperimentsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1.ListTensorboardExperimentsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.aiplatform.v1.TensorboardExperiment()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.aiplatform.v1.TensorboardExperiment()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.aiplatform.v1.TensorboardExperiment()
+        ),
+      ];
+      client.innerApiCalls.listTensorboardExperiments =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.listTensorboardExperiments(
+          request,
+          (
+            err?: Error | null,
+            result?:
+              | protos.google.cloud.aiplatform.v1.ITensorboardExperiment[]
+              | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.listTensorboardExperiments as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listTensorboardExperiments as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listTensorboardExperiments with error', async () => {
+      const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1.ListTensorboardExperimentsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1.ListTensorboardExperimentsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.listTensorboardExperiments = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.listTensorboardExperiments(request),
+        expectedError
+      );
+      const actualRequest = (
+        client.innerApiCalls.listTensorboardExperiments as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listTensorboardExperiments as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listTensorboardExperimentsStream without error', async () => {
+      const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1.ListTensorboardExperimentsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1.ListTensorboardExperimentsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.aiplatform.v1.TensorboardExperiment()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.aiplatform.v1.TensorboardExperiment()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.aiplatform.v1.TensorboardExperiment()
+        ),
+      ];
+      client.descriptors.page.listTensorboardExperiments.createStream =
+        stubPageStreamingCall(expectedResponse);
+      const stream = await client.listTensorboardExperimentsStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.cloud.aiplatform.v1.TensorboardExperiment[] =
+          [];
+        stream.on(
+          'data',
+          (
+            response: protos.google.cloud.aiplatform.v1.TensorboardExperiment
+          ) => {
+            responses.push(response);
+          }
+        );
+        stream.on('end', () => {
+          resolve(responses);
         });
-
-        it('sets apiEndpoint according to universe domain snakeCase', async () => {
-            const client = new tensorboardserviceModule.v1.TensorboardServiceClient({universe_domain: 'example.com'});
-            const servicePath = await client.apiEndpoint;
-            assert.strictEqual(servicePath, 'aiplatform.example.com');
+        stream.on('error', (err: Error) => {
+          reject(err);
         });
+      });
+      const responses = await promise;
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert(
+        (
+          client.descriptors.page.listTensorboardExperiments
+            .createStream as SinonStub
+        )
+          .getCall(0)
+          .calledWith(client.innerApiCalls.listTensorboardExperiments, request)
+      );
+      assert(
+        (
+          client.descriptors.page.listTensorboardExperiments
+            .createStream as SinonStub
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
+      );
+    });
 
-        if (typeof process === 'object' && 'env' in process) {
-            describe('GOOGLE_CLOUD_UNIVERSE_DOMAIN environment variable', () => {
-                it('sets apiEndpoint from environment variable', async () => {
-                    const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
-                    process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
-                    const client = new tensorboardserviceModule.v1.TensorboardServiceClient();
-                    const servicePath = await client.apiEndpoint;
-                    assert.strictEqual(servicePath, 'aiplatform.example.com');
-                    if (saved) {
-                        process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
-                    } else {
-                        delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
-                    }
-                });
+    it('invokes listTensorboardExperimentsStream with error', async () => {
+      const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1.ListTensorboardExperimentsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1.ListTensorboardExperimentsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.descriptors.page.listTensorboardExperiments.createStream =
+        stubPageStreamingCall(undefined, expectedError);
+      const stream = await client.listTensorboardExperimentsStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.cloud.aiplatform.v1.TensorboardExperiment[] =
+          [];
+        stream.on(
+          'data',
+          (
+            response: protos.google.cloud.aiplatform.v1.TensorboardExperiment
+          ) => {
+            responses.push(response);
+          }
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      await assert.rejects(promise, expectedError);
+      assert(
+        (
+          client.descriptors.page.listTensorboardExperiments
+            .createStream as SinonStub
+        )
+          .getCall(0)
+          .calledWith(client.innerApiCalls.listTensorboardExperiments, request)
+      );
+      assert(
+        (
+          client.descriptors.page.listTensorboardExperiments
+            .createStream as SinonStub
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
+      );
+    });
 
-                it('value configured in code has priority over environment variable', async () => {
-                    const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
-                    process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
-                    const client = new tensorboardserviceModule.v1.TensorboardServiceClient({universeDomain: 'configured.example.com'});
-                    const servicePath = await client.apiEndpoint;
-                    assert.strictEqual(servicePath, 'aiplatform.configured.example.com');
-                    if (saved) {
-                        process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
-                    } else {
-                        delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
-                    }
-                });
-            });
+    it('uses async iteration with listTensorboardExperiments without error', async () => {
+      const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1.ListTensorboardExperimentsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1.ListTensorboardExperimentsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.aiplatform.v1.TensorboardExperiment()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.aiplatform.v1.TensorboardExperiment()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.aiplatform.v1.TensorboardExperiment()
+        ),
+      ];
+      client.descriptors.page.listTensorboardExperiments.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
+      const responses: protos.google.cloud.aiplatform.v1.ITensorboardExperiment[] =
+        [];
+      const iterable = await client.listTensorboardExperimentsAsync(request);
+      for await (const resource of iterable) {
+        responses.push(resource!);
+      }
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.listTensorboardExperiments
+            .asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request
+      );
+      assert(
+        (
+          client.descriptors.page.listTensorboardExperiments
+            .asyncIterate as SinonStub
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
+      );
+    });
+
+    it('uses async iteration with listTensorboardExperiments with error', async () => {
+      const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1.ListTensorboardExperimentsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1.ListTensorboardExperimentsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.descriptors.page.listTensorboardExperiments.asyncIterate =
+        stubAsyncIterationCall(undefined, expectedError);
+      const iterable = await client.listTensorboardExperimentsAsync(request);
+      await assert.rejects(async () => {
+        const responses: protos.google.cloud.aiplatform.v1.ITensorboardExperiment[] =
+          [];
+        for await (const resource of iterable) {
+          responses.push(resource!);
         }
-        it('does not allow setting both universeDomain and universe_domain', () => {
-            assert.throws(() => { new tensorboardserviceModule.v1.TensorboardServiceClient({universe_domain: 'example.com', universeDomain: 'example.net'}); });
-        });
-
-        it('has port', () => {
-            const port = tensorboardserviceModule.v1.TensorboardServiceClient.port;
-            assert(port);
-            assert(typeof port === 'number');
-        });
-
-        it('should create a client with no option', () => {
-            const client = new tensorboardserviceModule.v1.TensorboardServiceClient();
-            assert(client);
-        });
-
-        it('should create a client with gRPC fallback', () => {
-            const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
-                fallback: true,
-            });
-            assert(client);
-        });
-
-        it('has initialize method and supports deferred initialization', async () => {
-            const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            assert.strictEqual(client.tensorboardServiceStub, undefined);
-            await client.initialize();
-            assert(client.tensorboardServiceStub);
-        });
-
-        it('has close method for the initialized client', done => {
-            const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            client.initialize().catch(err => {throw err});
-            assert(client.tensorboardServiceStub);
-            client.close().then(() => {
-                done();
-            });
-        });
-
-        it('has close method for the non-initialized client', done => {
-            const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            assert.strictEqual(client.tensorboardServiceStub, undefined);
-            client.close().then(() => {
-                done();
-            });
-        });
-
-        it('has getProjectId method', async () => {
-            const fakeProjectId = 'fake-project-id';
-            const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
-            const result = await client.getProjectId();
-            assert.strictEqual(result, fakeProjectId);
-            assert((client.auth.getProjectId as SinonStub).calledWithExactly());
-        });
-
-        it('has getProjectId method with callback', async () => {
-            const fakeProjectId = 'fake-project-id';
-            const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            client.auth.getProjectId = sinon.stub().callsArgWith(0, null, fakeProjectId);
-            const promise = new Promise((resolve, reject) => {
-                client.getProjectId((err?: Error|null, projectId?: string|null) => {
-                    if (err) {
-                        reject(err);
-                    } else {
-                        resolve(projectId);
-                    }
-                });
-            });
-            const result = await promise;
-            assert.strictEqual(result, fakeProjectId);
-        });
-    });
-
-    describe('getTensorboard', () => {
-        it('invokes getTensorboard without error', async () => {
-            const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.aiplatform.v1.GetTensorboardRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.aiplatform.v1.GetTensorboardRequest', ['name']);
-            request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
-            const expectedResponse = generateSampleMessage(
-              new protos.google.cloud.aiplatform.v1.Tensorboard()
-            );
-            client.innerApiCalls.getTensorboard = stubSimpleCall(expectedResponse);
-            const [response] = await client.getTensorboard(request);
-            assert.deepStrictEqual(response, expectedResponse);
-            const actualRequest = (client.innerApiCalls.getTensorboard as SinonStub)
-                .getCall(0).args[0];
-            assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.getTensorboard as SinonStub)
-                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-        });
-
-        it('invokes getTensorboard without error using callback', async () => {
-            const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.aiplatform.v1.GetTensorboardRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.aiplatform.v1.GetTensorboardRequest', ['name']);
-            request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
-            const expectedResponse = generateSampleMessage(
-              new protos.google.cloud.aiplatform.v1.Tensorboard()
-            );
-            client.innerApiCalls.getTensorboard = stubSimpleCallWithCallback(expectedResponse);
-            const promise = new Promise((resolve, reject) => {
-                 client.getTensorboard(
-                    request,
-                    (err?: Error|null, result?: protos.google.cloud.aiplatform.v1.ITensorboard|null) => {
-                        if (err) {
-                            reject(err);
-                        } else {
-                            resolve(result);
-                        }
-                    });
-            });
-            const response = await promise;
-            assert.deepStrictEqual(response, expectedResponse);
-            const actualRequest = (client.innerApiCalls.getTensorboard as SinonStub)
-                .getCall(0).args[0];
-            assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.getTensorboard as SinonStub)
-                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-        });
-
-        it('invokes getTensorboard with error', async () => {
-            const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.aiplatform.v1.GetTensorboardRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.aiplatform.v1.GetTensorboardRequest', ['name']);
-            request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
-            const expectedError = new Error('expected');
-            client.innerApiCalls.getTensorboard = stubSimpleCall(undefined, expectedError);
-            await assert.rejects(client.getTensorboard(request), expectedError);
-            const actualRequest = (client.innerApiCalls.getTensorboard as SinonStub)
-                .getCall(0).args[0];
-            assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.getTensorboard as SinonStub)
-                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-        });
-
-        it('invokes getTensorboard with closed client', async () => {
-            const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.aiplatform.v1.GetTensorboardRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.aiplatform.v1.GetTensorboardRequest', ['name']);
-            request.name = defaultValue1;
-            const expectedError = new Error('The client has already been closed.');
-            client.close().catch(err => {
-        throw err;
       });
-            await assert.rejects(client.getTensorboard(request), expectedError);
-        });
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.listTensorboardExperiments
+            .asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request
+      );
+      assert(
+        (
+          client.descriptors.page.listTensorboardExperiments
+            .asyncIterate as SinonStub
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
+      );
     });
+  });
 
-    describe('readTensorboardUsage', () => {
-        it('invokes readTensorboardUsage without error', async () => {
-            const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.aiplatform.v1.ReadTensorboardUsageRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.aiplatform.v1.ReadTensorboardUsageRequest', ['tensorboard']);
-            request.tensorboard = defaultValue1;
-            const expectedHeaderRequestParams = `tensorboard=${defaultValue1 ?? '' }`;
-            const expectedResponse = generateSampleMessage(
-              new protos.google.cloud.aiplatform.v1.ReadTensorboardUsageResponse()
-            );
-            client.innerApiCalls.readTensorboardUsage = stubSimpleCall(expectedResponse);
-            const [response] = await client.readTensorboardUsage(request);
-            assert.deepStrictEqual(response, expectedResponse);
-            const actualRequest = (client.innerApiCalls.readTensorboardUsage as SinonStub)
-                .getCall(0).args[0];
-            assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.readTensorboardUsage as SinonStub)
-                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-        });
-
-        it('invokes readTensorboardUsage without error using callback', async () => {
-            const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.aiplatform.v1.ReadTensorboardUsageRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.aiplatform.v1.ReadTensorboardUsageRequest', ['tensorboard']);
-            request.tensorboard = defaultValue1;
-            const expectedHeaderRequestParams = `tensorboard=${defaultValue1 ?? '' }`;
-            const expectedResponse = generateSampleMessage(
-              new protos.google.cloud.aiplatform.v1.ReadTensorboardUsageResponse()
-            );
-            client.innerApiCalls.readTensorboardUsage = stubSimpleCallWithCallback(expectedResponse);
-            const promise = new Promise((resolve, reject) => {
-                 client.readTensorboardUsage(
-                    request,
-                    (err?: Error|null, result?: protos.google.cloud.aiplatform.v1.IReadTensorboardUsageResponse|null) => {
-                        if (err) {
-                            reject(err);
-                        } else {
-                            resolve(result);
-                        }
-                    });
-            });
-            const response = await promise;
-            assert.deepStrictEqual(response, expectedResponse);
-            const actualRequest = (client.innerApiCalls.readTensorboardUsage as SinonStub)
-                .getCall(0).args[0];
-            assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.readTensorboardUsage as SinonStub)
-                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-        });
-
-        it('invokes readTensorboardUsage with error', async () => {
-            const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.aiplatform.v1.ReadTensorboardUsageRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.aiplatform.v1.ReadTensorboardUsageRequest', ['tensorboard']);
-            request.tensorboard = defaultValue1;
-            const expectedHeaderRequestParams = `tensorboard=${defaultValue1 ?? '' }`;
-            const expectedError = new Error('expected');
-            client.innerApiCalls.readTensorboardUsage = stubSimpleCall(undefined, expectedError);
-            await assert.rejects(client.readTensorboardUsage(request), expectedError);
-            const actualRequest = (client.innerApiCalls.readTensorboardUsage as SinonStub)
-                .getCall(0).args[0];
-            assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.readTensorboardUsage as SinonStub)
-                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-        });
-
-        it('invokes readTensorboardUsage with closed client', async () => {
-            const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.aiplatform.v1.ReadTensorboardUsageRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.aiplatform.v1.ReadTensorboardUsageRequest', ['tensorboard']);
-            request.tensorboard = defaultValue1;
-            const expectedError = new Error('The client has already been closed.');
-            client.close().catch(err => {
-        throw err;
+  describe('listTensorboardRuns', () => {
+    it('invokes listTensorboardRuns without error', async () => {
+      const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
       });
-            await assert.rejects(client.readTensorboardUsage(request), expectedError);
-        });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1.ListTensorboardRunsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1.ListTensorboardRunsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.aiplatform.v1.TensorboardRun()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.aiplatform.v1.TensorboardRun()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.aiplatform.v1.TensorboardRun()
+        ),
+      ];
+      client.innerApiCalls.listTensorboardRuns =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.listTensorboardRuns(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.listTensorboardRuns as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listTensorboardRuns as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
-    describe('readTensorboardSize', () => {
-        it('invokes readTensorboardSize without error', async () => {
-            const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.aiplatform.v1.ReadTensorboardSizeRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.aiplatform.v1.ReadTensorboardSizeRequest', ['tensorboard']);
-            request.tensorboard = defaultValue1;
-            const expectedHeaderRequestParams = `tensorboard=${defaultValue1 ?? '' }`;
-            const expectedResponse = generateSampleMessage(
-              new protos.google.cloud.aiplatform.v1.ReadTensorboardSizeResponse()
-            );
-            client.innerApiCalls.readTensorboardSize = stubSimpleCall(expectedResponse);
-            const [response] = await client.readTensorboardSize(request);
-            assert.deepStrictEqual(response, expectedResponse);
-            const actualRequest = (client.innerApiCalls.readTensorboardSize as SinonStub)
-                .getCall(0).args[0];
-            assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.readTensorboardSize as SinonStub)
-                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-        });
-
-        it('invokes readTensorboardSize without error using callback', async () => {
-            const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.aiplatform.v1.ReadTensorboardSizeRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.aiplatform.v1.ReadTensorboardSizeRequest', ['tensorboard']);
-            request.tensorboard = defaultValue1;
-            const expectedHeaderRequestParams = `tensorboard=${defaultValue1 ?? '' }`;
-            const expectedResponse = generateSampleMessage(
-              new protos.google.cloud.aiplatform.v1.ReadTensorboardSizeResponse()
-            );
-            client.innerApiCalls.readTensorboardSize = stubSimpleCallWithCallback(expectedResponse);
-            const promise = new Promise((resolve, reject) => {
-                 client.readTensorboardSize(
-                    request,
-                    (err?: Error|null, result?: protos.google.cloud.aiplatform.v1.IReadTensorboardSizeResponse|null) => {
-                        if (err) {
-                            reject(err);
-                        } else {
-                            resolve(result);
-                        }
-                    });
-            });
-            const response = await promise;
-            assert.deepStrictEqual(response, expectedResponse);
-            const actualRequest = (client.innerApiCalls.readTensorboardSize as SinonStub)
-                .getCall(0).args[0];
-            assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.readTensorboardSize as SinonStub)
-                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-        });
-
-        it('invokes readTensorboardSize with error', async () => {
-            const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.aiplatform.v1.ReadTensorboardSizeRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.aiplatform.v1.ReadTensorboardSizeRequest', ['tensorboard']);
-            request.tensorboard = defaultValue1;
-            const expectedHeaderRequestParams = `tensorboard=${defaultValue1 ?? '' }`;
-            const expectedError = new Error('expected');
-            client.innerApiCalls.readTensorboardSize = stubSimpleCall(undefined, expectedError);
-            await assert.rejects(client.readTensorboardSize(request), expectedError);
-            const actualRequest = (client.innerApiCalls.readTensorboardSize as SinonStub)
-                .getCall(0).args[0];
-            assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.readTensorboardSize as SinonStub)
-                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-        });
-
-        it('invokes readTensorboardSize with closed client', async () => {
-            const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.aiplatform.v1.ReadTensorboardSizeRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.aiplatform.v1.ReadTensorboardSizeRequest', ['tensorboard']);
-            request.tensorboard = defaultValue1;
-            const expectedError = new Error('The client has already been closed.');
-            client.close().catch(err => {
-        throw err;
+    it('invokes listTensorboardRuns without error using callback', async () => {
+      const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
       });
-            await assert.rejects(client.readTensorboardSize(request), expectedError);
-        });
-    });
-
-    describe('createTensorboardExperiment', () => {
-        it('invokes createTensorboardExperiment without error', async () => {
-            const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.aiplatform.v1.CreateTensorboardExperimentRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.aiplatform.v1.CreateTensorboardExperimentRequest', ['parent']);
-            request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
-            const expectedResponse = generateSampleMessage(
-              new protos.google.cloud.aiplatform.v1.TensorboardExperiment()
-            );
-            client.innerApiCalls.createTensorboardExperiment = stubSimpleCall(expectedResponse);
-            const [response] = await client.createTensorboardExperiment(request);
-            assert.deepStrictEqual(response, expectedResponse);
-            const actualRequest = (client.innerApiCalls.createTensorboardExperiment as SinonStub)
-                .getCall(0).args[0];
-            assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.createTensorboardExperiment as SinonStub)
-                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-        });
-
-        it('invokes createTensorboardExperiment without error using callback', async () => {
-            const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.aiplatform.v1.CreateTensorboardExperimentRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.aiplatform.v1.CreateTensorboardExperimentRequest', ['parent']);
-            request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
-            const expectedResponse = generateSampleMessage(
-              new protos.google.cloud.aiplatform.v1.TensorboardExperiment()
-            );
-            client.innerApiCalls.createTensorboardExperiment = stubSimpleCallWithCallback(expectedResponse);
-            const promise = new Promise((resolve, reject) => {
-                 client.createTensorboardExperiment(
-                    request,
-                    (err?: Error|null, result?: protos.google.cloud.aiplatform.v1.ITensorboardExperiment|null) => {
-                        if (err) {
-                            reject(err);
-                        } else {
-                            resolve(result);
-                        }
-                    });
-            });
-            const response = await promise;
-            assert.deepStrictEqual(response, expectedResponse);
-            const actualRequest = (client.innerApiCalls.createTensorboardExperiment as SinonStub)
-                .getCall(0).args[0];
-            assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.createTensorboardExperiment as SinonStub)
-                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-        });
-
-        it('invokes createTensorboardExperiment with error', async () => {
-            const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.aiplatform.v1.CreateTensorboardExperimentRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.aiplatform.v1.CreateTensorboardExperimentRequest', ['parent']);
-            request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
-            const expectedError = new Error('expected');
-            client.innerApiCalls.createTensorboardExperiment = stubSimpleCall(undefined, expectedError);
-            await assert.rejects(client.createTensorboardExperiment(request), expectedError);
-            const actualRequest = (client.innerApiCalls.createTensorboardExperiment as SinonStub)
-                .getCall(0).args[0];
-            assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.createTensorboardExperiment as SinonStub)
-                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-        });
-
-        it('invokes createTensorboardExperiment with closed client', async () => {
-            const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.aiplatform.v1.CreateTensorboardExperimentRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.aiplatform.v1.CreateTensorboardExperimentRequest', ['parent']);
-            request.parent = defaultValue1;
-            const expectedError = new Error('The client has already been closed.');
-            client.close().catch(err => {
-        throw err;
-      });
-            await assert.rejects(client.createTensorboardExperiment(request), expectedError);
-        });
-    });
-
-    describe('getTensorboardExperiment', () => {
-        it('invokes getTensorboardExperiment without error', async () => {
-            const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.aiplatform.v1.GetTensorboardExperimentRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.aiplatform.v1.GetTensorboardExperimentRequest', ['name']);
-            request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
-            const expectedResponse = generateSampleMessage(
-              new protos.google.cloud.aiplatform.v1.TensorboardExperiment()
-            );
-            client.innerApiCalls.getTensorboardExperiment = stubSimpleCall(expectedResponse);
-            const [response] = await client.getTensorboardExperiment(request);
-            assert.deepStrictEqual(response, expectedResponse);
-            const actualRequest = (client.innerApiCalls.getTensorboardExperiment as SinonStub)
-                .getCall(0).args[0];
-            assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.getTensorboardExperiment as SinonStub)
-                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-        });
-
-        it('invokes getTensorboardExperiment without error using callback', async () => {
-            const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.aiplatform.v1.GetTensorboardExperimentRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.aiplatform.v1.GetTensorboardExperimentRequest', ['name']);
-            request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
-            const expectedResponse = generateSampleMessage(
-              new protos.google.cloud.aiplatform.v1.TensorboardExperiment()
-            );
-            client.innerApiCalls.getTensorboardExperiment = stubSimpleCallWithCallback(expectedResponse);
-            const promise = new Promise((resolve, reject) => {
-                 client.getTensorboardExperiment(
-                    request,
-                    (err?: Error|null, result?: protos.google.cloud.aiplatform.v1.ITensorboardExperiment|null) => {
-                        if (err) {
-                            reject(err);
-                        } else {
-                            resolve(result);
-                        }
-                    });
-            });
-            const response = await promise;
-            assert.deepStrictEqual(response, expectedResponse);
-            const actualRequest = (client.innerApiCalls.getTensorboardExperiment as SinonStub)
-                .getCall(0).args[0];
-            assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.getTensorboardExperiment as SinonStub)
-                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-        });
-
-        it('invokes getTensorboardExperiment with error', async () => {
-            const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.aiplatform.v1.GetTensorboardExperimentRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.aiplatform.v1.GetTensorboardExperimentRequest', ['name']);
-            request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
-            const expectedError = new Error('expected');
-            client.innerApiCalls.getTensorboardExperiment = stubSimpleCall(undefined, expectedError);
-            await assert.rejects(client.getTensorboardExperiment(request), expectedError);
-            const actualRequest = (client.innerApiCalls.getTensorboardExperiment as SinonStub)
-                .getCall(0).args[0];
-            assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.getTensorboardExperiment as SinonStub)
-                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-        });
-
-        it('invokes getTensorboardExperiment with closed client', async () => {
-            const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.aiplatform.v1.GetTensorboardExperimentRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.aiplatform.v1.GetTensorboardExperimentRequest', ['name']);
-            request.name = defaultValue1;
-            const expectedError = new Error('The client has already been closed.');
-            client.close().catch(err => {
-        throw err;
-      });
-            await assert.rejects(client.getTensorboardExperiment(request), expectedError);
-        });
-    });
-
-    describe('updateTensorboardExperiment', () => {
-        it('invokes updateTensorboardExperiment without error', async () => {
-            const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.aiplatform.v1.UpdateTensorboardExperimentRequest()
-            );
-            request.tensorboardExperiment ??= {};
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.aiplatform.v1.UpdateTensorboardExperimentRequest', ['tensorboardExperiment', 'name']);
-            request.tensorboardExperiment.name = defaultValue1;
-            const expectedHeaderRequestParams = `tensorboard_experiment.name=${defaultValue1 ?? '' }`;
-            const expectedResponse = generateSampleMessage(
-              new protos.google.cloud.aiplatform.v1.TensorboardExperiment()
-            );
-            client.innerApiCalls.updateTensorboardExperiment = stubSimpleCall(expectedResponse);
-            const [response] = await client.updateTensorboardExperiment(request);
-            assert.deepStrictEqual(response, expectedResponse);
-            const actualRequest = (client.innerApiCalls.updateTensorboardExperiment as SinonStub)
-                .getCall(0).args[0];
-            assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.updateTensorboardExperiment as SinonStub)
-                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-        });
-
-        it('invokes updateTensorboardExperiment without error using callback', async () => {
-            const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.aiplatform.v1.UpdateTensorboardExperimentRequest()
-            );
-            request.tensorboardExperiment ??= {};
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.aiplatform.v1.UpdateTensorboardExperimentRequest', ['tensorboardExperiment', 'name']);
-            request.tensorboardExperiment.name = defaultValue1;
-            const expectedHeaderRequestParams = `tensorboard_experiment.name=${defaultValue1 ?? '' }`;
-            const expectedResponse = generateSampleMessage(
-              new protos.google.cloud.aiplatform.v1.TensorboardExperiment()
-            );
-            client.innerApiCalls.updateTensorboardExperiment = stubSimpleCallWithCallback(expectedResponse);
-            const promise = new Promise((resolve, reject) => {
-                 client.updateTensorboardExperiment(
-                    request,
-                    (err?: Error|null, result?: protos.google.cloud.aiplatform.v1.ITensorboardExperiment|null) => {
-                        if (err) {
-                            reject(err);
-                        } else {
-                            resolve(result);
-                        }
-                    });
-            });
-            const response = await promise;
-            assert.deepStrictEqual(response, expectedResponse);
-            const actualRequest = (client.innerApiCalls.updateTensorboardExperiment as SinonStub)
-                .getCall(0).args[0];
-            assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.updateTensorboardExperiment as SinonStub)
-                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-        });
-
-        it('invokes updateTensorboardExperiment with error', async () => {
-            const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.aiplatform.v1.UpdateTensorboardExperimentRequest()
-            );
-            request.tensorboardExperiment ??= {};
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.aiplatform.v1.UpdateTensorboardExperimentRequest', ['tensorboardExperiment', 'name']);
-            request.tensorboardExperiment.name = defaultValue1;
-            const expectedHeaderRequestParams = `tensorboard_experiment.name=${defaultValue1 ?? '' }`;
-            const expectedError = new Error('expected');
-            client.innerApiCalls.updateTensorboardExperiment = stubSimpleCall(undefined, expectedError);
-            await assert.rejects(client.updateTensorboardExperiment(request), expectedError);
-            const actualRequest = (client.innerApiCalls.updateTensorboardExperiment as SinonStub)
-                .getCall(0).args[0];
-            assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.updateTensorboardExperiment as SinonStub)
-                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-        });
-
-        it('invokes updateTensorboardExperiment with closed client', async () => {
-            const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.aiplatform.v1.UpdateTensorboardExperimentRequest()
-            );
-            request.tensorboardExperiment ??= {};
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.aiplatform.v1.UpdateTensorboardExperimentRequest', ['tensorboardExperiment', 'name']);
-            request.tensorboardExperiment.name = defaultValue1;
-            const expectedError = new Error('The client has already been closed.');
-            client.close().catch(err => {
-        throw err;
-      });
-            await assert.rejects(client.updateTensorboardExperiment(request), expectedError);
-        });
-    });
-
-    describe('createTensorboardRun', () => {
-        it('invokes createTensorboardRun without error', async () => {
-            const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.aiplatform.v1.CreateTensorboardRunRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.aiplatform.v1.CreateTensorboardRunRequest', ['parent']);
-            request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
-            const expectedResponse = generateSampleMessage(
-              new protos.google.cloud.aiplatform.v1.TensorboardRun()
-            );
-            client.innerApiCalls.createTensorboardRun = stubSimpleCall(expectedResponse);
-            const [response] = await client.createTensorboardRun(request);
-            assert.deepStrictEqual(response, expectedResponse);
-            const actualRequest = (client.innerApiCalls.createTensorboardRun as SinonStub)
-                .getCall(0).args[0];
-            assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.createTensorboardRun as SinonStub)
-                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-        });
-
-        it('invokes createTensorboardRun without error using callback', async () => {
-            const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.aiplatform.v1.CreateTensorboardRunRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.aiplatform.v1.CreateTensorboardRunRequest', ['parent']);
-            request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
-            const expectedResponse = generateSampleMessage(
-              new protos.google.cloud.aiplatform.v1.TensorboardRun()
-            );
-            client.innerApiCalls.createTensorboardRun = stubSimpleCallWithCallback(expectedResponse);
-            const promise = new Promise((resolve, reject) => {
-                 client.createTensorboardRun(
-                    request,
-                    (err?: Error|null, result?: protos.google.cloud.aiplatform.v1.ITensorboardRun|null) => {
-                        if (err) {
-                            reject(err);
-                        } else {
-                            resolve(result);
-                        }
-                    });
-            });
-            const response = await promise;
-            assert.deepStrictEqual(response, expectedResponse);
-            const actualRequest = (client.innerApiCalls.createTensorboardRun as SinonStub)
-                .getCall(0).args[0];
-            assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.createTensorboardRun as SinonStub)
-                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-        });
-
-        it('invokes createTensorboardRun with error', async () => {
-            const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.aiplatform.v1.CreateTensorboardRunRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.aiplatform.v1.CreateTensorboardRunRequest', ['parent']);
-            request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
-            const expectedError = new Error('expected');
-            client.innerApiCalls.createTensorboardRun = stubSimpleCall(undefined, expectedError);
-            await assert.rejects(client.createTensorboardRun(request), expectedError);
-            const actualRequest = (client.innerApiCalls.createTensorboardRun as SinonStub)
-                .getCall(0).args[0];
-            assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.createTensorboardRun as SinonStub)
-                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-        });
-
-        it('invokes createTensorboardRun with closed client', async () => {
-            const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.aiplatform.v1.CreateTensorboardRunRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.aiplatform.v1.CreateTensorboardRunRequest', ['parent']);
-            request.parent = defaultValue1;
-            const expectedError = new Error('The client has already been closed.');
-            client.close().catch(err => {
-        throw err;
-      });
-            await assert.rejects(client.createTensorboardRun(request), expectedError);
-        });
-    });
-
-    describe('batchCreateTensorboardRuns', () => {
-        it('invokes batchCreateTensorboardRuns without error', async () => {
-            const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.aiplatform.v1.BatchCreateTensorboardRunsRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.aiplatform.v1.BatchCreateTensorboardRunsRequest', ['parent']);
-            request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
-            const expectedResponse = generateSampleMessage(
-              new protos.google.cloud.aiplatform.v1.BatchCreateTensorboardRunsResponse()
-            );
-            client.innerApiCalls.batchCreateTensorboardRuns = stubSimpleCall(expectedResponse);
-            const [response] = await client.batchCreateTensorboardRuns(request);
-            assert.deepStrictEqual(response, expectedResponse);
-            const actualRequest = (client.innerApiCalls.batchCreateTensorboardRuns as SinonStub)
-                .getCall(0).args[0];
-            assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.batchCreateTensorboardRuns as SinonStub)
-                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-        });
-
-        it('invokes batchCreateTensorboardRuns without error using callback', async () => {
-            const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.aiplatform.v1.BatchCreateTensorboardRunsRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.aiplatform.v1.BatchCreateTensorboardRunsRequest', ['parent']);
-            request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
-            const expectedResponse = generateSampleMessage(
-              new protos.google.cloud.aiplatform.v1.BatchCreateTensorboardRunsResponse()
-            );
-            client.innerApiCalls.batchCreateTensorboardRuns = stubSimpleCallWithCallback(expectedResponse);
-            const promise = new Promise((resolve, reject) => {
-                 client.batchCreateTensorboardRuns(
-                    request,
-                    (err?: Error|null, result?: protos.google.cloud.aiplatform.v1.IBatchCreateTensorboardRunsResponse|null) => {
-                        if (err) {
-                            reject(err);
-                        } else {
-                            resolve(result);
-                        }
-                    });
-            });
-            const response = await promise;
-            assert.deepStrictEqual(response, expectedResponse);
-            const actualRequest = (client.innerApiCalls.batchCreateTensorboardRuns as SinonStub)
-                .getCall(0).args[0];
-            assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.batchCreateTensorboardRuns as SinonStub)
-                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-        });
-
-        it('invokes batchCreateTensorboardRuns with error', async () => {
-            const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.aiplatform.v1.BatchCreateTensorboardRunsRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.aiplatform.v1.BatchCreateTensorboardRunsRequest', ['parent']);
-            request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
-            const expectedError = new Error('expected');
-            client.innerApiCalls.batchCreateTensorboardRuns = stubSimpleCall(undefined, expectedError);
-            await assert.rejects(client.batchCreateTensorboardRuns(request), expectedError);
-            const actualRequest = (client.innerApiCalls.batchCreateTensorboardRuns as SinonStub)
-                .getCall(0).args[0];
-            assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.batchCreateTensorboardRuns as SinonStub)
-                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-        });
-
-        it('invokes batchCreateTensorboardRuns with closed client', async () => {
-            const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.aiplatform.v1.BatchCreateTensorboardRunsRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.aiplatform.v1.BatchCreateTensorboardRunsRequest', ['parent']);
-            request.parent = defaultValue1;
-            const expectedError = new Error('The client has already been closed.');
-            client.close().catch(err => {
-        throw err;
-      });
-            await assert.rejects(client.batchCreateTensorboardRuns(request), expectedError);
-        });
-    });
-
-    describe('getTensorboardRun', () => {
-        it('invokes getTensorboardRun without error', async () => {
-            const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.aiplatform.v1.GetTensorboardRunRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.aiplatform.v1.GetTensorboardRunRequest', ['name']);
-            request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
-            const expectedResponse = generateSampleMessage(
-              new protos.google.cloud.aiplatform.v1.TensorboardRun()
-            );
-            client.innerApiCalls.getTensorboardRun = stubSimpleCall(expectedResponse);
-            const [response] = await client.getTensorboardRun(request);
-            assert.deepStrictEqual(response, expectedResponse);
-            const actualRequest = (client.innerApiCalls.getTensorboardRun as SinonStub)
-                .getCall(0).args[0];
-            assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.getTensorboardRun as SinonStub)
-                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-        });
-
-        it('invokes getTensorboardRun without error using callback', async () => {
-            const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.aiplatform.v1.GetTensorboardRunRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.aiplatform.v1.GetTensorboardRunRequest', ['name']);
-            request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
-            const expectedResponse = generateSampleMessage(
-              new protos.google.cloud.aiplatform.v1.TensorboardRun()
-            );
-            client.innerApiCalls.getTensorboardRun = stubSimpleCallWithCallback(expectedResponse);
-            const promise = new Promise((resolve, reject) => {
-                 client.getTensorboardRun(
-                    request,
-                    (err?: Error|null, result?: protos.google.cloud.aiplatform.v1.ITensorboardRun|null) => {
-                        if (err) {
-                            reject(err);
-                        } else {
-                            resolve(result);
-                        }
-                    });
-            });
-            const response = await promise;
-            assert.deepStrictEqual(response, expectedResponse);
-            const actualRequest = (client.innerApiCalls.getTensorboardRun as SinonStub)
-                .getCall(0).args[0];
-            assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.getTensorboardRun as SinonStub)
-                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-        });
-
-        it('invokes getTensorboardRun with error', async () => {
-            const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.aiplatform.v1.GetTensorboardRunRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.aiplatform.v1.GetTensorboardRunRequest', ['name']);
-            request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
-            const expectedError = new Error('expected');
-            client.innerApiCalls.getTensorboardRun = stubSimpleCall(undefined, expectedError);
-            await assert.rejects(client.getTensorboardRun(request), expectedError);
-            const actualRequest = (client.innerApiCalls.getTensorboardRun as SinonStub)
-                .getCall(0).args[0];
-            assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.getTensorboardRun as SinonStub)
-                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-        });
-
-        it('invokes getTensorboardRun with closed client', async () => {
-            const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.aiplatform.v1.GetTensorboardRunRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.aiplatform.v1.GetTensorboardRunRequest', ['name']);
-            request.name = defaultValue1;
-            const expectedError = new Error('The client has already been closed.');
-            client.close().catch(err => {
-        throw err;
-      });
-            await assert.rejects(client.getTensorboardRun(request), expectedError);
-        });
-    });
-
-    describe('updateTensorboardRun', () => {
-        it('invokes updateTensorboardRun without error', async () => {
-            const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.aiplatform.v1.UpdateTensorboardRunRequest()
-            );
-            request.tensorboardRun ??= {};
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.aiplatform.v1.UpdateTensorboardRunRequest', ['tensorboardRun', 'name']);
-            request.tensorboardRun.name = defaultValue1;
-            const expectedHeaderRequestParams = `tensorboard_run.name=${defaultValue1 ?? '' }`;
-            const expectedResponse = generateSampleMessage(
-              new protos.google.cloud.aiplatform.v1.TensorboardRun()
-            );
-            client.innerApiCalls.updateTensorboardRun = stubSimpleCall(expectedResponse);
-            const [response] = await client.updateTensorboardRun(request);
-            assert.deepStrictEqual(response, expectedResponse);
-            const actualRequest = (client.innerApiCalls.updateTensorboardRun as SinonStub)
-                .getCall(0).args[0];
-            assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.updateTensorboardRun as SinonStub)
-                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-        });
-
-        it('invokes updateTensorboardRun without error using callback', async () => {
-            const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.aiplatform.v1.UpdateTensorboardRunRequest()
-            );
-            request.tensorboardRun ??= {};
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.aiplatform.v1.UpdateTensorboardRunRequest', ['tensorboardRun', 'name']);
-            request.tensorboardRun.name = defaultValue1;
-            const expectedHeaderRequestParams = `tensorboard_run.name=${defaultValue1 ?? '' }`;
-            const expectedResponse = generateSampleMessage(
-              new protos.google.cloud.aiplatform.v1.TensorboardRun()
-            );
-            client.innerApiCalls.updateTensorboardRun = stubSimpleCallWithCallback(expectedResponse);
-            const promise = new Promise((resolve, reject) => {
-                 client.updateTensorboardRun(
-                    request,
-                    (err?: Error|null, result?: protos.google.cloud.aiplatform.v1.ITensorboardRun|null) => {
-                        if (err) {
-                            reject(err);
-                        } else {
-                            resolve(result);
-                        }
-                    });
-            });
-            const response = await promise;
-            assert.deepStrictEqual(response, expectedResponse);
-            const actualRequest = (client.innerApiCalls.updateTensorboardRun as SinonStub)
-                .getCall(0).args[0];
-            assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.updateTensorboardRun as SinonStub)
-                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-        });
-
-        it('invokes updateTensorboardRun with error', async () => {
-            const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.aiplatform.v1.UpdateTensorboardRunRequest()
-            );
-            request.tensorboardRun ??= {};
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.aiplatform.v1.UpdateTensorboardRunRequest', ['tensorboardRun', 'name']);
-            request.tensorboardRun.name = defaultValue1;
-            const expectedHeaderRequestParams = `tensorboard_run.name=${defaultValue1 ?? '' }`;
-            const expectedError = new Error('expected');
-            client.innerApiCalls.updateTensorboardRun = stubSimpleCall(undefined, expectedError);
-            await assert.rejects(client.updateTensorboardRun(request), expectedError);
-            const actualRequest = (client.innerApiCalls.updateTensorboardRun as SinonStub)
-                .getCall(0).args[0];
-            assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.updateTensorboardRun as SinonStub)
-                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-        });
-
-        it('invokes updateTensorboardRun with closed client', async () => {
-            const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.aiplatform.v1.UpdateTensorboardRunRequest()
-            );
-            request.tensorboardRun ??= {};
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.aiplatform.v1.UpdateTensorboardRunRequest', ['tensorboardRun', 'name']);
-            request.tensorboardRun.name = defaultValue1;
-            const expectedError = new Error('The client has already been closed.');
-            client.close().catch(err => {
-        throw err;
-      });
-            await assert.rejects(client.updateTensorboardRun(request), expectedError);
-        });
-    });
-
-    describe('batchCreateTensorboardTimeSeries', () => {
-        it('invokes batchCreateTensorboardTimeSeries without error', async () => {
-            const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.aiplatform.v1.BatchCreateTensorboardTimeSeriesRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.aiplatform.v1.BatchCreateTensorboardTimeSeriesRequest', ['parent']);
-            request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
-            const expectedResponse = generateSampleMessage(
-              new protos.google.cloud.aiplatform.v1.BatchCreateTensorboardTimeSeriesResponse()
-            );
-            client.innerApiCalls.batchCreateTensorboardTimeSeries = stubSimpleCall(expectedResponse);
-            const [response] = await client.batchCreateTensorboardTimeSeries(request);
-            assert.deepStrictEqual(response, expectedResponse);
-            const actualRequest = (client.innerApiCalls.batchCreateTensorboardTimeSeries as SinonStub)
-                .getCall(0).args[0];
-            assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.batchCreateTensorboardTimeSeries as SinonStub)
-                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-        });
-
-        it('invokes batchCreateTensorboardTimeSeries without error using callback', async () => {
-            const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.aiplatform.v1.BatchCreateTensorboardTimeSeriesRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.aiplatform.v1.BatchCreateTensorboardTimeSeriesRequest', ['parent']);
-            request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
-            const expectedResponse = generateSampleMessage(
-              new protos.google.cloud.aiplatform.v1.BatchCreateTensorboardTimeSeriesResponse()
-            );
-            client.innerApiCalls.batchCreateTensorboardTimeSeries = stubSimpleCallWithCallback(expectedResponse);
-            const promise = new Promise((resolve, reject) => {
-                 client.batchCreateTensorboardTimeSeries(
-                    request,
-                    (err?: Error|null, result?: protos.google.cloud.aiplatform.v1.IBatchCreateTensorboardTimeSeriesResponse|null) => {
-                        if (err) {
-                            reject(err);
-                        } else {
-                            resolve(result);
-                        }
-                    });
-            });
-            const response = await promise;
-            assert.deepStrictEqual(response, expectedResponse);
-            const actualRequest = (client.innerApiCalls.batchCreateTensorboardTimeSeries as SinonStub)
-                .getCall(0).args[0];
-            assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.batchCreateTensorboardTimeSeries as SinonStub)
-                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-        });
-
-        it('invokes batchCreateTensorboardTimeSeries with error', async () => {
-            const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.aiplatform.v1.BatchCreateTensorboardTimeSeriesRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.aiplatform.v1.BatchCreateTensorboardTimeSeriesRequest', ['parent']);
-            request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
-            const expectedError = new Error('expected');
-            client.innerApiCalls.batchCreateTensorboardTimeSeries = stubSimpleCall(undefined, expectedError);
-            await assert.rejects(client.batchCreateTensorboardTimeSeries(request), expectedError);
-            const actualRequest = (client.innerApiCalls.batchCreateTensorboardTimeSeries as SinonStub)
-                .getCall(0).args[0];
-            assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.batchCreateTensorboardTimeSeries as SinonStub)
-                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-        });
-
-        it('invokes batchCreateTensorboardTimeSeries with closed client', async () => {
-            const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.aiplatform.v1.BatchCreateTensorboardTimeSeriesRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.aiplatform.v1.BatchCreateTensorboardTimeSeriesRequest', ['parent']);
-            request.parent = defaultValue1;
-            const expectedError = new Error('The client has already been closed.');
-            client.close().catch(err => {
-        throw err;
-      });
-            await assert.rejects(client.batchCreateTensorboardTimeSeries(request), expectedError);
-        });
-    });
-
-    describe('createTensorboardTimeSeries', () => {
-        it('invokes createTensorboardTimeSeries without error', async () => {
-            const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.aiplatform.v1.CreateTensorboardTimeSeriesRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.aiplatform.v1.CreateTensorboardTimeSeriesRequest', ['parent']);
-            request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
-            const expectedResponse = generateSampleMessage(
-              new protos.google.cloud.aiplatform.v1.TensorboardTimeSeries()
-            );
-            client.innerApiCalls.createTensorboardTimeSeries = stubSimpleCall(expectedResponse);
-            const [response] = await client.createTensorboardTimeSeries(request);
-            assert.deepStrictEqual(response, expectedResponse);
-            const actualRequest = (client.innerApiCalls.createTensorboardTimeSeries as SinonStub)
-                .getCall(0).args[0];
-            assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.createTensorboardTimeSeries as SinonStub)
-                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-        });
-
-        it('invokes createTensorboardTimeSeries without error using callback', async () => {
-            const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.aiplatform.v1.CreateTensorboardTimeSeriesRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.aiplatform.v1.CreateTensorboardTimeSeriesRequest', ['parent']);
-            request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
-            const expectedResponse = generateSampleMessage(
-              new protos.google.cloud.aiplatform.v1.TensorboardTimeSeries()
-            );
-            client.innerApiCalls.createTensorboardTimeSeries = stubSimpleCallWithCallback(expectedResponse);
-            const promise = new Promise((resolve, reject) => {
-                 client.createTensorboardTimeSeries(
-                    request,
-                    (err?: Error|null, result?: protos.google.cloud.aiplatform.v1.ITensorboardTimeSeries|null) => {
-                        if (err) {
-                            reject(err);
-                        } else {
-                            resolve(result);
-                        }
-                    });
-            });
-            const response = await promise;
-            assert.deepStrictEqual(response, expectedResponse);
-            const actualRequest = (client.innerApiCalls.createTensorboardTimeSeries as SinonStub)
-                .getCall(0).args[0];
-            assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.createTensorboardTimeSeries as SinonStub)
-                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-        });
-
-        it('invokes createTensorboardTimeSeries with error', async () => {
-            const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.aiplatform.v1.CreateTensorboardTimeSeriesRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.aiplatform.v1.CreateTensorboardTimeSeriesRequest', ['parent']);
-            request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
-            const expectedError = new Error('expected');
-            client.innerApiCalls.createTensorboardTimeSeries = stubSimpleCall(undefined, expectedError);
-            await assert.rejects(client.createTensorboardTimeSeries(request), expectedError);
-            const actualRequest = (client.innerApiCalls.createTensorboardTimeSeries as SinonStub)
-                .getCall(0).args[0];
-            assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.createTensorboardTimeSeries as SinonStub)
-                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-        });
-
-        it('invokes createTensorboardTimeSeries with closed client', async () => {
-            const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.aiplatform.v1.CreateTensorboardTimeSeriesRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.aiplatform.v1.CreateTensorboardTimeSeriesRequest', ['parent']);
-            request.parent = defaultValue1;
-            const expectedError = new Error('The client has already been closed.');
-            client.close().catch(err => {
-        throw err;
-      });
-            await assert.rejects(client.createTensorboardTimeSeries(request), expectedError);
-        });
-    });
-
-    describe('getTensorboardTimeSeries', () => {
-        it('invokes getTensorboardTimeSeries without error', async () => {
-            const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.aiplatform.v1.GetTensorboardTimeSeriesRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.aiplatform.v1.GetTensorboardTimeSeriesRequest', ['name']);
-            request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
-            const expectedResponse = generateSampleMessage(
-              new protos.google.cloud.aiplatform.v1.TensorboardTimeSeries()
-            );
-            client.innerApiCalls.getTensorboardTimeSeries = stubSimpleCall(expectedResponse);
-            const [response] = await client.getTensorboardTimeSeries(request);
-            assert.deepStrictEqual(response, expectedResponse);
-            const actualRequest = (client.innerApiCalls.getTensorboardTimeSeries as SinonStub)
-                .getCall(0).args[0];
-            assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.getTensorboardTimeSeries as SinonStub)
-                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-        });
-
-        it('invokes getTensorboardTimeSeries without error using callback', async () => {
-            const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.aiplatform.v1.GetTensorboardTimeSeriesRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.aiplatform.v1.GetTensorboardTimeSeriesRequest', ['name']);
-            request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
-            const expectedResponse = generateSampleMessage(
-              new protos.google.cloud.aiplatform.v1.TensorboardTimeSeries()
-            );
-            client.innerApiCalls.getTensorboardTimeSeries = stubSimpleCallWithCallback(expectedResponse);
-            const promise = new Promise((resolve, reject) => {
-                 client.getTensorboardTimeSeries(
-                    request,
-                    (err?: Error|null, result?: protos.google.cloud.aiplatform.v1.ITensorboardTimeSeries|null) => {
-                        if (err) {
-                            reject(err);
-                        } else {
-                            resolve(result);
-                        }
-                    });
-            });
-            const response = await promise;
-            assert.deepStrictEqual(response, expectedResponse);
-            const actualRequest = (client.innerApiCalls.getTensorboardTimeSeries as SinonStub)
-                .getCall(0).args[0];
-            assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.getTensorboardTimeSeries as SinonStub)
-                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-        });
-
-        it('invokes getTensorboardTimeSeries with error', async () => {
-            const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.aiplatform.v1.GetTensorboardTimeSeriesRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.aiplatform.v1.GetTensorboardTimeSeriesRequest', ['name']);
-            request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
-            const expectedError = new Error('expected');
-            client.innerApiCalls.getTensorboardTimeSeries = stubSimpleCall(undefined, expectedError);
-            await assert.rejects(client.getTensorboardTimeSeries(request), expectedError);
-            const actualRequest = (client.innerApiCalls.getTensorboardTimeSeries as SinonStub)
-                .getCall(0).args[0];
-            assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.getTensorboardTimeSeries as SinonStub)
-                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-        });
-
-        it('invokes getTensorboardTimeSeries with closed client', async () => {
-            const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.aiplatform.v1.GetTensorboardTimeSeriesRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.aiplatform.v1.GetTensorboardTimeSeriesRequest', ['name']);
-            request.name = defaultValue1;
-            const expectedError = new Error('The client has already been closed.');
-            client.close().catch(err => {
-        throw err;
-      });
-            await assert.rejects(client.getTensorboardTimeSeries(request), expectedError);
-        });
-    });
-
-    describe('updateTensorboardTimeSeries', () => {
-        it('invokes updateTensorboardTimeSeries without error', async () => {
-            const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.aiplatform.v1.UpdateTensorboardTimeSeriesRequest()
-            );
-            request.tensorboardTimeSeries ??= {};
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.aiplatform.v1.UpdateTensorboardTimeSeriesRequest', ['tensorboardTimeSeries', 'name']);
-            request.tensorboardTimeSeries.name = defaultValue1;
-            const expectedHeaderRequestParams = `tensorboard_time_series.name=${defaultValue1 ?? '' }`;
-            const expectedResponse = generateSampleMessage(
-              new protos.google.cloud.aiplatform.v1.TensorboardTimeSeries()
-            );
-            client.innerApiCalls.updateTensorboardTimeSeries = stubSimpleCall(expectedResponse);
-            const [response] = await client.updateTensorboardTimeSeries(request);
-            assert.deepStrictEqual(response, expectedResponse);
-            const actualRequest = (client.innerApiCalls.updateTensorboardTimeSeries as SinonStub)
-                .getCall(0).args[0];
-            assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.updateTensorboardTimeSeries as SinonStub)
-                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-        });
-
-        it('invokes updateTensorboardTimeSeries without error using callback', async () => {
-            const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.aiplatform.v1.UpdateTensorboardTimeSeriesRequest()
-            );
-            request.tensorboardTimeSeries ??= {};
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.aiplatform.v1.UpdateTensorboardTimeSeriesRequest', ['tensorboardTimeSeries', 'name']);
-            request.tensorboardTimeSeries.name = defaultValue1;
-            const expectedHeaderRequestParams = `tensorboard_time_series.name=${defaultValue1 ?? '' }`;
-            const expectedResponse = generateSampleMessage(
-              new protos.google.cloud.aiplatform.v1.TensorboardTimeSeries()
-            );
-            client.innerApiCalls.updateTensorboardTimeSeries = stubSimpleCallWithCallback(expectedResponse);
-            const promise = new Promise((resolve, reject) => {
-                 client.updateTensorboardTimeSeries(
-                    request,
-                    (err?: Error|null, result?: protos.google.cloud.aiplatform.v1.ITensorboardTimeSeries|null) => {
-                        if (err) {
-                            reject(err);
-                        } else {
-                            resolve(result);
-                        }
-                    });
-            });
-            const response = await promise;
-            assert.deepStrictEqual(response, expectedResponse);
-            const actualRequest = (client.innerApiCalls.updateTensorboardTimeSeries as SinonStub)
-                .getCall(0).args[0];
-            assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.updateTensorboardTimeSeries as SinonStub)
-                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-        });
-
-        it('invokes updateTensorboardTimeSeries with error', async () => {
-            const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.aiplatform.v1.UpdateTensorboardTimeSeriesRequest()
-            );
-            request.tensorboardTimeSeries ??= {};
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.aiplatform.v1.UpdateTensorboardTimeSeriesRequest', ['tensorboardTimeSeries', 'name']);
-            request.tensorboardTimeSeries.name = defaultValue1;
-            const expectedHeaderRequestParams = `tensorboard_time_series.name=${defaultValue1 ?? '' }`;
-            const expectedError = new Error('expected');
-            client.innerApiCalls.updateTensorboardTimeSeries = stubSimpleCall(undefined, expectedError);
-            await assert.rejects(client.updateTensorboardTimeSeries(request), expectedError);
-            const actualRequest = (client.innerApiCalls.updateTensorboardTimeSeries as SinonStub)
-                .getCall(0).args[0];
-            assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.updateTensorboardTimeSeries as SinonStub)
-                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-        });
-
-        it('invokes updateTensorboardTimeSeries with closed client', async () => {
-            const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.aiplatform.v1.UpdateTensorboardTimeSeriesRequest()
-            );
-            request.tensorboardTimeSeries ??= {};
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.aiplatform.v1.UpdateTensorboardTimeSeriesRequest', ['tensorboardTimeSeries', 'name']);
-            request.tensorboardTimeSeries.name = defaultValue1;
-            const expectedError = new Error('The client has already been closed.');
-            client.close().catch(err => {
-        throw err;
-      });
-            await assert.rejects(client.updateTensorboardTimeSeries(request), expectedError);
-        });
-    });
-
-    describe('batchReadTensorboardTimeSeriesData', () => {
-        it('invokes batchReadTensorboardTimeSeriesData without error', async () => {
-            const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.aiplatform.v1.BatchReadTensorboardTimeSeriesDataRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.aiplatform.v1.BatchReadTensorboardTimeSeriesDataRequest', ['tensorboard']);
-            request.tensorboard = defaultValue1;
-            const expectedHeaderRequestParams = `tensorboard=${defaultValue1 ?? '' }`;
-            const expectedResponse = generateSampleMessage(
-              new protos.google.cloud.aiplatform.v1.BatchReadTensorboardTimeSeriesDataResponse()
-            );
-            client.innerApiCalls.batchReadTensorboardTimeSeriesData = stubSimpleCall(expectedResponse);
-            const [response] = await client.batchReadTensorboardTimeSeriesData(request);
-            assert.deepStrictEqual(response, expectedResponse);
-            const actualRequest = (client.innerApiCalls.batchReadTensorboardTimeSeriesData as SinonStub)
-                .getCall(0).args[0];
-            assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.batchReadTensorboardTimeSeriesData as SinonStub)
-                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-        });
-
-        it('invokes batchReadTensorboardTimeSeriesData without error using callback', async () => {
-            const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.aiplatform.v1.BatchReadTensorboardTimeSeriesDataRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.aiplatform.v1.BatchReadTensorboardTimeSeriesDataRequest', ['tensorboard']);
-            request.tensorboard = defaultValue1;
-            const expectedHeaderRequestParams = `tensorboard=${defaultValue1 ?? '' }`;
-            const expectedResponse = generateSampleMessage(
-              new protos.google.cloud.aiplatform.v1.BatchReadTensorboardTimeSeriesDataResponse()
-            );
-            client.innerApiCalls.batchReadTensorboardTimeSeriesData = stubSimpleCallWithCallback(expectedResponse);
-            const promise = new Promise((resolve, reject) => {
-                 client.batchReadTensorboardTimeSeriesData(
-                    request,
-                    (err?: Error|null, result?: protos.google.cloud.aiplatform.v1.IBatchReadTensorboardTimeSeriesDataResponse|null) => {
-                        if (err) {
-                            reject(err);
-                        } else {
-                            resolve(result);
-                        }
-                    });
-            });
-            const response = await promise;
-            assert.deepStrictEqual(response, expectedResponse);
-            const actualRequest = (client.innerApiCalls.batchReadTensorboardTimeSeriesData as SinonStub)
-                .getCall(0).args[0];
-            assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.batchReadTensorboardTimeSeriesData as SinonStub)
-                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-        });
-
-        it('invokes batchReadTensorboardTimeSeriesData with error', async () => {
-            const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.aiplatform.v1.BatchReadTensorboardTimeSeriesDataRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.aiplatform.v1.BatchReadTensorboardTimeSeriesDataRequest', ['tensorboard']);
-            request.tensorboard = defaultValue1;
-            const expectedHeaderRequestParams = `tensorboard=${defaultValue1 ?? '' }`;
-            const expectedError = new Error('expected');
-            client.innerApiCalls.batchReadTensorboardTimeSeriesData = stubSimpleCall(undefined, expectedError);
-            await assert.rejects(client.batchReadTensorboardTimeSeriesData(request), expectedError);
-            const actualRequest = (client.innerApiCalls.batchReadTensorboardTimeSeriesData as SinonStub)
-                .getCall(0).args[0];
-            assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.batchReadTensorboardTimeSeriesData as SinonStub)
-                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-        });
-
-        it('invokes batchReadTensorboardTimeSeriesData with closed client', async () => {
-            const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.aiplatform.v1.BatchReadTensorboardTimeSeriesDataRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.aiplatform.v1.BatchReadTensorboardTimeSeriesDataRequest', ['tensorboard']);
-            request.tensorboard = defaultValue1;
-            const expectedError = new Error('The client has already been closed.');
-            client.close().catch(err => {
-        throw err;
-      });
-            await assert.rejects(client.batchReadTensorboardTimeSeriesData(request), expectedError);
-        });
-    });
-
-    describe('readTensorboardTimeSeriesData', () => {
-        it('invokes readTensorboardTimeSeriesData without error', async () => {
-            const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.aiplatform.v1.ReadTensorboardTimeSeriesDataRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.aiplatform.v1.ReadTensorboardTimeSeriesDataRequest', ['tensorboardTimeSeries']);
-            request.tensorboardTimeSeries = defaultValue1;
-            const expectedHeaderRequestParams = `tensorboard_time_series=${defaultValue1 ?? '' }`;
-            const expectedResponse = generateSampleMessage(
-              new protos.google.cloud.aiplatform.v1.ReadTensorboardTimeSeriesDataResponse()
-            );
-            client.innerApiCalls.readTensorboardTimeSeriesData = stubSimpleCall(expectedResponse);
-            const [response] = await client.readTensorboardTimeSeriesData(request);
-            assert.deepStrictEqual(response, expectedResponse);
-            const actualRequest = (client.innerApiCalls.readTensorboardTimeSeriesData as SinonStub)
-                .getCall(0).args[0];
-            assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.readTensorboardTimeSeriesData as SinonStub)
-                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-        });
-
-        it('invokes readTensorboardTimeSeriesData without error using callback', async () => {
-            const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.aiplatform.v1.ReadTensorboardTimeSeriesDataRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.aiplatform.v1.ReadTensorboardTimeSeriesDataRequest', ['tensorboardTimeSeries']);
-            request.tensorboardTimeSeries = defaultValue1;
-            const expectedHeaderRequestParams = `tensorboard_time_series=${defaultValue1 ?? '' }`;
-            const expectedResponse = generateSampleMessage(
-              new protos.google.cloud.aiplatform.v1.ReadTensorboardTimeSeriesDataResponse()
-            );
-            client.innerApiCalls.readTensorboardTimeSeriesData = stubSimpleCallWithCallback(expectedResponse);
-            const promise = new Promise((resolve, reject) => {
-                 client.readTensorboardTimeSeriesData(
-                    request,
-                    (err?: Error|null, result?: protos.google.cloud.aiplatform.v1.IReadTensorboardTimeSeriesDataResponse|null) => {
-                        if (err) {
-                            reject(err);
-                        } else {
-                            resolve(result);
-                        }
-                    });
-            });
-            const response = await promise;
-            assert.deepStrictEqual(response, expectedResponse);
-            const actualRequest = (client.innerApiCalls.readTensorboardTimeSeriesData as SinonStub)
-                .getCall(0).args[0];
-            assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.readTensorboardTimeSeriesData as SinonStub)
-                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-        });
-
-        it('invokes readTensorboardTimeSeriesData with error', async () => {
-            const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.aiplatform.v1.ReadTensorboardTimeSeriesDataRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.aiplatform.v1.ReadTensorboardTimeSeriesDataRequest', ['tensorboardTimeSeries']);
-            request.tensorboardTimeSeries = defaultValue1;
-            const expectedHeaderRequestParams = `tensorboard_time_series=${defaultValue1 ?? '' }`;
-            const expectedError = new Error('expected');
-            client.innerApiCalls.readTensorboardTimeSeriesData = stubSimpleCall(undefined, expectedError);
-            await assert.rejects(client.readTensorboardTimeSeriesData(request), expectedError);
-            const actualRequest = (client.innerApiCalls.readTensorboardTimeSeriesData as SinonStub)
-                .getCall(0).args[0];
-            assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.readTensorboardTimeSeriesData as SinonStub)
-                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-        });
-
-        it('invokes readTensorboardTimeSeriesData with closed client', async () => {
-            const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.aiplatform.v1.ReadTensorboardTimeSeriesDataRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.aiplatform.v1.ReadTensorboardTimeSeriesDataRequest', ['tensorboardTimeSeries']);
-            request.tensorboardTimeSeries = defaultValue1;
-            const expectedError = new Error('The client has already been closed.');
-            client.close().catch(err => {
-        throw err;
-      });
-            await assert.rejects(client.readTensorboardTimeSeriesData(request), expectedError);
-        });
-    });
-
-    describe('writeTensorboardExperimentData', () => {
-        it('invokes writeTensorboardExperimentData without error', async () => {
-            const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.aiplatform.v1.WriteTensorboardExperimentDataRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.aiplatform.v1.WriteTensorboardExperimentDataRequest', ['tensorboardExperiment']);
-            request.tensorboardExperiment = defaultValue1;
-            const expectedHeaderRequestParams = `tensorboard_experiment=${defaultValue1 ?? '' }`;
-            const expectedResponse = generateSampleMessage(
-              new protos.google.cloud.aiplatform.v1.WriteTensorboardExperimentDataResponse()
-            );
-            client.innerApiCalls.writeTensorboardExperimentData = stubSimpleCall(expectedResponse);
-            const [response] = await client.writeTensorboardExperimentData(request);
-            assert.deepStrictEqual(response, expectedResponse);
-            const actualRequest = (client.innerApiCalls.writeTensorboardExperimentData as SinonStub)
-                .getCall(0).args[0];
-            assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.writeTensorboardExperimentData as SinonStub)
-                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-        });
-
-        it('invokes writeTensorboardExperimentData without error using callback', async () => {
-            const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.aiplatform.v1.WriteTensorboardExperimentDataRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.aiplatform.v1.WriteTensorboardExperimentDataRequest', ['tensorboardExperiment']);
-            request.tensorboardExperiment = defaultValue1;
-            const expectedHeaderRequestParams = `tensorboard_experiment=${defaultValue1 ?? '' }`;
-            const expectedResponse = generateSampleMessage(
-              new protos.google.cloud.aiplatform.v1.WriteTensorboardExperimentDataResponse()
-            );
-            client.innerApiCalls.writeTensorboardExperimentData = stubSimpleCallWithCallback(expectedResponse);
-            const promise = new Promise((resolve, reject) => {
-                 client.writeTensorboardExperimentData(
-                    request,
-                    (err?: Error|null, result?: protos.google.cloud.aiplatform.v1.IWriteTensorboardExperimentDataResponse|null) => {
-                        if (err) {
-                            reject(err);
-                        } else {
-                            resolve(result);
-                        }
-                    });
-            });
-            const response = await promise;
-            assert.deepStrictEqual(response, expectedResponse);
-            const actualRequest = (client.innerApiCalls.writeTensorboardExperimentData as SinonStub)
-                .getCall(0).args[0];
-            assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.writeTensorboardExperimentData as SinonStub)
-                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-        });
-
-        it('invokes writeTensorboardExperimentData with error', async () => {
-            const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.aiplatform.v1.WriteTensorboardExperimentDataRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.aiplatform.v1.WriteTensorboardExperimentDataRequest', ['tensorboardExperiment']);
-            request.tensorboardExperiment = defaultValue1;
-            const expectedHeaderRequestParams = `tensorboard_experiment=${defaultValue1 ?? '' }`;
-            const expectedError = new Error('expected');
-            client.innerApiCalls.writeTensorboardExperimentData = stubSimpleCall(undefined, expectedError);
-            await assert.rejects(client.writeTensorboardExperimentData(request), expectedError);
-            const actualRequest = (client.innerApiCalls.writeTensorboardExperimentData as SinonStub)
-                .getCall(0).args[0];
-            assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.writeTensorboardExperimentData as SinonStub)
-                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-        });
-
-        it('invokes writeTensorboardExperimentData with closed client', async () => {
-            const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.aiplatform.v1.WriteTensorboardExperimentDataRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.aiplatform.v1.WriteTensorboardExperimentDataRequest', ['tensorboardExperiment']);
-            request.tensorboardExperiment = defaultValue1;
-            const expectedError = new Error('The client has already been closed.');
-            client.close().catch(err => {
-        throw err;
-      });
-            await assert.rejects(client.writeTensorboardExperimentData(request), expectedError);
-        });
-    });
-
-    describe('writeTensorboardRunData', () => {
-        it('invokes writeTensorboardRunData without error', async () => {
-            const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.aiplatform.v1.WriteTensorboardRunDataRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.aiplatform.v1.WriteTensorboardRunDataRequest', ['tensorboardRun']);
-            request.tensorboardRun = defaultValue1;
-            const expectedHeaderRequestParams = `tensorboard_run=${defaultValue1 ?? '' }`;
-            const expectedResponse = generateSampleMessage(
-              new protos.google.cloud.aiplatform.v1.WriteTensorboardRunDataResponse()
-            );
-            client.innerApiCalls.writeTensorboardRunData = stubSimpleCall(expectedResponse);
-            const [response] = await client.writeTensorboardRunData(request);
-            assert.deepStrictEqual(response, expectedResponse);
-            const actualRequest = (client.innerApiCalls.writeTensorboardRunData as SinonStub)
-                .getCall(0).args[0];
-            assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.writeTensorboardRunData as SinonStub)
-                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-        });
-
-        it('invokes writeTensorboardRunData without error using callback', async () => {
-            const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.aiplatform.v1.WriteTensorboardRunDataRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.aiplatform.v1.WriteTensorboardRunDataRequest', ['tensorboardRun']);
-            request.tensorboardRun = defaultValue1;
-            const expectedHeaderRequestParams = `tensorboard_run=${defaultValue1 ?? '' }`;
-            const expectedResponse = generateSampleMessage(
-              new protos.google.cloud.aiplatform.v1.WriteTensorboardRunDataResponse()
-            );
-            client.innerApiCalls.writeTensorboardRunData = stubSimpleCallWithCallback(expectedResponse);
-            const promise = new Promise((resolve, reject) => {
-                 client.writeTensorboardRunData(
-                    request,
-                    (err?: Error|null, result?: protos.google.cloud.aiplatform.v1.IWriteTensorboardRunDataResponse|null) => {
-                        if (err) {
-                            reject(err);
-                        } else {
-                            resolve(result);
-                        }
-                    });
-            });
-            const response = await promise;
-            assert.deepStrictEqual(response, expectedResponse);
-            const actualRequest = (client.innerApiCalls.writeTensorboardRunData as SinonStub)
-                .getCall(0).args[0];
-            assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.writeTensorboardRunData as SinonStub)
-                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-        });
-
-        it('invokes writeTensorboardRunData with error', async () => {
-            const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.aiplatform.v1.WriteTensorboardRunDataRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.aiplatform.v1.WriteTensorboardRunDataRequest', ['tensorboardRun']);
-            request.tensorboardRun = defaultValue1;
-            const expectedHeaderRequestParams = `tensorboard_run=${defaultValue1 ?? '' }`;
-            const expectedError = new Error('expected');
-            client.innerApiCalls.writeTensorboardRunData = stubSimpleCall(undefined, expectedError);
-            await assert.rejects(client.writeTensorboardRunData(request), expectedError);
-            const actualRequest = (client.innerApiCalls.writeTensorboardRunData as SinonStub)
-                .getCall(0).args[0];
-            assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.writeTensorboardRunData as SinonStub)
-                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-        });
-
-        it('invokes writeTensorboardRunData with closed client', async () => {
-            const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.aiplatform.v1.WriteTensorboardRunDataRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.aiplatform.v1.WriteTensorboardRunDataRequest', ['tensorboardRun']);
-            request.tensorboardRun = defaultValue1;
-            const expectedError = new Error('The client has already been closed.');
-            client.close().catch(err => {
-        throw err;
-      });
-            await assert.rejects(client.writeTensorboardRunData(request), expectedError);
-        });
-    });
-
-    describe('createTensorboard', () => {
-        it('invokes createTensorboard without error', async () => {
-            const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.aiplatform.v1.CreateTensorboardRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.aiplatform.v1.CreateTensorboardRequest', ['parent']);
-            request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
-            const expectedResponse = generateSampleMessage(
-              new protos.google.longrunning.Operation()
-            );
-            client.innerApiCalls.createTensorboard = stubLongRunningCall(expectedResponse);
-            const [operation] = await client.createTensorboard(request);
-            const [response] = await operation.promise();
-            assert.deepStrictEqual(response, expectedResponse);
-            const actualRequest = (client.innerApiCalls.createTensorboard as SinonStub)
-                .getCall(0).args[0];
-            assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.createTensorboard as SinonStub)
-                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-        });
-
-        it('invokes createTensorboard without error using callback', async () => {
-            const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.aiplatform.v1.CreateTensorboardRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.aiplatform.v1.CreateTensorboardRequest', ['parent']);
-            request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
-            const expectedResponse = generateSampleMessage(
-              new protos.google.longrunning.Operation()
-            );
-            client.innerApiCalls.createTensorboard = stubLongRunningCallWithCallback(expectedResponse);
-            const promise = new Promise((resolve, reject) => {
-                 client.createTensorboard(
-                    request,
-                    (err?: Error|null,
-                     result?: LROperation<protos.google.cloud.aiplatform.v1.ITensorboard, protos.google.cloud.aiplatform.v1.ICreateTensorboardOperationMetadata>|null
-                    ) => {
-                        if (err) {
-                            reject(err);
-                        } else {
-                            resolve(result);
-                        }
-                    });
-            });
-            const operation = await promise as LROperation<protos.google.cloud.aiplatform.v1.ITensorboard, protos.google.cloud.aiplatform.v1.ICreateTensorboardOperationMetadata>;
-            const [response] = await operation.promise();
-            assert.deepStrictEqual(response, expectedResponse);
-            const actualRequest = (client.innerApiCalls.createTensorboard as SinonStub)
-                .getCall(0).args[0];
-            assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.createTensorboard as SinonStub)
-                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-        });
-
-        it('invokes createTensorboard with call error', async () => {
-            const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.aiplatform.v1.CreateTensorboardRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.aiplatform.v1.CreateTensorboardRequest', ['parent']);
-            request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
-            const expectedError = new Error('expected');
-            client.innerApiCalls.createTensorboard = stubLongRunningCall(undefined, expectedError);
-            await assert.rejects(client.createTensorboard(request), expectedError);
-            const actualRequest = (client.innerApiCalls.createTensorboard as SinonStub)
-                .getCall(0).args[0];
-            assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.createTensorboard as SinonStub)
-                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-        });
-
-        it('invokes createTensorboard with LRO error', async () => {
-            const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.aiplatform.v1.CreateTensorboardRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.aiplatform.v1.CreateTensorboardRequest', ['parent']);
-            request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
-            const expectedError = new Error('expected');
-            client.innerApiCalls.createTensorboard = stubLongRunningCall(undefined, undefined, expectedError);
-            const [operation] = await client.createTensorboard(request);
-            await assert.rejects(operation.promise(), expectedError);
-            const actualRequest = (client.innerApiCalls.createTensorboard as SinonStub)
-                .getCall(0).args[0];
-            assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.createTensorboard as SinonStub)
-                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-        });
-
-        it('invokes checkCreateTensorboardProgress without error', async () => {
-            const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const expectedResponse = generateSampleMessage(
-              new operationsProtos.google.longrunning.Operation()
-            );
-            expectedResponse.name = 'test';
-            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
-            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
-
-            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-            const decodedOperation = await client.checkCreateTensorboardProgress(expectedResponse.name);
-            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
-            assert(decodedOperation.metadata);
-            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-        });
-
-        it('invokes checkCreateTensorboardProgress with error', async () => {
-            const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const expectedError = new Error('expected');
-
-            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
-            await assert.rejects(client.checkCreateTensorboardProgress(''), expectedError);
-            assert((client.operationsClient.getOperation as SinonStub)
-                .getCall(0));
-        });
-    });
-
-    describe('updateTensorboard', () => {
-        it('invokes updateTensorboard without error', async () => {
-            const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.aiplatform.v1.UpdateTensorboardRequest()
-            );
-            request.tensorboard ??= {};
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.aiplatform.v1.UpdateTensorboardRequest', ['tensorboard', 'name']);
-            request.tensorboard.name = defaultValue1;
-            const expectedHeaderRequestParams = `tensorboard.name=${defaultValue1 ?? '' }`;
-            const expectedResponse = generateSampleMessage(
-              new protos.google.longrunning.Operation()
-            );
-            client.innerApiCalls.updateTensorboard = stubLongRunningCall(expectedResponse);
-            const [operation] = await client.updateTensorboard(request);
-            const [response] = await operation.promise();
-            assert.deepStrictEqual(response, expectedResponse);
-            const actualRequest = (client.innerApiCalls.updateTensorboard as SinonStub)
-                .getCall(0).args[0];
-            assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.updateTensorboard as SinonStub)
-                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-        });
-
-        it('invokes updateTensorboard without error using callback', async () => {
-            const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.aiplatform.v1.UpdateTensorboardRequest()
-            );
-            request.tensorboard ??= {};
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.aiplatform.v1.UpdateTensorboardRequest', ['tensorboard', 'name']);
-            request.tensorboard.name = defaultValue1;
-            const expectedHeaderRequestParams = `tensorboard.name=${defaultValue1 ?? '' }`;
-            const expectedResponse = generateSampleMessage(
-              new protos.google.longrunning.Operation()
-            );
-            client.innerApiCalls.updateTensorboard = stubLongRunningCallWithCallback(expectedResponse);
-            const promise = new Promise((resolve, reject) => {
-                 client.updateTensorboard(
-                    request,
-                    (err?: Error|null,
-                     result?: LROperation<protos.google.cloud.aiplatform.v1.ITensorboard, protos.google.cloud.aiplatform.v1.IUpdateTensorboardOperationMetadata>|null
-                    ) => {
-                        if (err) {
-                            reject(err);
-                        } else {
-                            resolve(result);
-                        }
-                    });
-            });
-            const operation = await promise as LROperation<protos.google.cloud.aiplatform.v1.ITensorboard, protos.google.cloud.aiplatform.v1.IUpdateTensorboardOperationMetadata>;
-            const [response] = await operation.promise();
-            assert.deepStrictEqual(response, expectedResponse);
-            const actualRequest = (client.innerApiCalls.updateTensorboard as SinonStub)
-                .getCall(0).args[0];
-            assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.updateTensorboard as SinonStub)
-                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-        });
-
-        it('invokes updateTensorboard with call error', async () => {
-            const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.aiplatform.v1.UpdateTensorboardRequest()
-            );
-            request.tensorboard ??= {};
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.aiplatform.v1.UpdateTensorboardRequest', ['tensorboard', 'name']);
-            request.tensorboard.name = defaultValue1;
-            const expectedHeaderRequestParams = `tensorboard.name=${defaultValue1 ?? '' }`;
-            const expectedError = new Error('expected');
-            client.innerApiCalls.updateTensorboard = stubLongRunningCall(undefined, expectedError);
-            await assert.rejects(client.updateTensorboard(request), expectedError);
-            const actualRequest = (client.innerApiCalls.updateTensorboard as SinonStub)
-                .getCall(0).args[0];
-            assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.updateTensorboard as SinonStub)
-                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-        });
-
-        it('invokes updateTensorboard with LRO error', async () => {
-            const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.aiplatform.v1.UpdateTensorboardRequest()
-            );
-            request.tensorboard ??= {};
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.aiplatform.v1.UpdateTensorboardRequest', ['tensorboard', 'name']);
-            request.tensorboard.name = defaultValue1;
-            const expectedHeaderRequestParams = `tensorboard.name=${defaultValue1 ?? '' }`;
-            const expectedError = new Error('expected');
-            client.innerApiCalls.updateTensorboard = stubLongRunningCall(undefined, undefined, expectedError);
-            const [operation] = await client.updateTensorboard(request);
-            await assert.rejects(operation.promise(), expectedError);
-            const actualRequest = (client.innerApiCalls.updateTensorboard as SinonStub)
-                .getCall(0).args[0];
-            assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.updateTensorboard as SinonStub)
-                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-        });
-
-        it('invokes checkUpdateTensorboardProgress without error', async () => {
-            const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const expectedResponse = generateSampleMessage(
-              new operationsProtos.google.longrunning.Operation()
-            );
-            expectedResponse.name = 'test';
-            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
-            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
-
-            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-            const decodedOperation = await client.checkUpdateTensorboardProgress(expectedResponse.name);
-            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
-            assert(decodedOperation.metadata);
-            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-        });
-
-        it('invokes checkUpdateTensorboardProgress with error', async () => {
-            const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const expectedError = new Error('expected');
-
-            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
-            await assert.rejects(client.checkUpdateTensorboardProgress(''), expectedError);
-            assert((client.operationsClient.getOperation as SinonStub)
-                .getCall(0));
-        });
-    });
-
-    describe('deleteTensorboard', () => {
-        it('invokes deleteTensorboard without error', async () => {
-            const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.aiplatform.v1.DeleteTensorboardRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.aiplatform.v1.DeleteTensorboardRequest', ['name']);
-            request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
-            const expectedResponse = generateSampleMessage(
-              new protos.google.longrunning.Operation()
-            );
-            client.innerApiCalls.deleteTensorboard = stubLongRunningCall(expectedResponse);
-            const [operation] = await client.deleteTensorboard(request);
-            const [response] = await operation.promise();
-            assert.deepStrictEqual(response, expectedResponse);
-            const actualRequest = (client.innerApiCalls.deleteTensorboard as SinonStub)
-                .getCall(0).args[0];
-            assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.deleteTensorboard as SinonStub)
-                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-        });
-
-        it('invokes deleteTensorboard without error using callback', async () => {
-            const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.aiplatform.v1.DeleteTensorboardRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.aiplatform.v1.DeleteTensorboardRequest', ['name']);
-            request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
-            const expectedResponse = generateSampleMessage(
-              new protos.google.longrunning.Operation()
-            );
-            client.innerApiCalls.deleteTensorboard = stubLongRunningCallWithCallback(expectedResponse);
-            const promise = new Promise((resolve, reject) => {
-                 client.deleteTensorboard(
-                    request,
-                    (err?: Error|null,
-                     result?: LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.aiplatform.v1.IDeleteOperationMetadata>|null
-                    ) => {
-                        if (err) {
-                            reject(err);
-                        } else {
-                            resolve(result);
-                        }
-                    });
-            });
-            const operation = await promise as LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.aiplatform.v1.IDeleteOperationMetadata>;
-            const [response] = await operation.promise();
-            assert.deepStrictEqual(response, expectedResponse);
-            const actualRequest = (client.innerApiCalls.deleteTensorboard as SinonStub)
-                .getCall(0).args[0];
-            assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.deleteTensorboard as SinonStub)
-                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-        });
-
-        it('invokes deleteTensorboard with call error', async () => {
-            const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.aiplatform.v1.DeleteTensorboardRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.aiplatform.v1.DeleteTensorboardRequest', ['name']);
-            request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
-            const expectedError = new Error('expected');
-            client.innerApiCalls.deleteTensorboard = stubLongRunningCall(undefined, expectedError);
-            await assert.rejects(client.deleteTensorboard(request), expectedError);
-            const actualRequest = (client.innerApiCalls.deleteTensorboard as SinonStub)
-                .getCall(0).args[0];
-            assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.deleteTensorboard as SinonStub)
-                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-        });
-
-        it('invokes deleteTensorboard with LRO error', async () => {
-            const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.aiplatform.v1.DeleteTensorboardRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.aiplatform.v1.DeleteTensorboardRequest', ['name']);
-            request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
-            const expectedError = new Error('expected');
-            client.innerApiCalls.deleteTensorboard = stubLongRunningCall(undefined, undefined, expectedError);
-            const [operation] = await client.deleteTensorboard(request);
-            await assert.rejects(operation.promise(), expectedError);
-            const actualRequest = (client.innerApiCalls.deleteTensorboard as SinonStub)
-                .getCall(0).args[0];
-            assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.deleteTensorboard as SinonStub)
-                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-        });
-
-        it('invokes checkDeleteTensorboardProgress without error', async () => {
-            const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const expectedResponse = generateSampleMessage(
-              new operationsProtos.google.longrunning.Operation()
-            );
-            expectedResponse.name = 'test';
-            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
-            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
-
-            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-            const decodedOperation = await client.checkDeleteTensorboardProgress(expectedResponse.name);
-            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
-            assert(decodedOperation.metadata);
-            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-        });
-
-        it('invokes checkDeleteTensorboardProgress with error', async () => {
-            const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const expectedError = new Error('expected');
-
-            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
-            await assert.rejects(client.checkDeleteTensorboardProgress(''), expectedError);
-            assert((client.operationsClient.getOperation as SinonStub)
-                .getCall(0));
-        });
-    });
-
-    describe('deleteTensorboardExperiment', () => {
-        it('invokes deleteTensorboardExperiment without error', async () => {
-            const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.aiplatform.v1.DeleteTensorboardExperimentRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.aiplatform.v1.DeleteTensorboardExperimentRequest', ['name']);
-            request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
-            const expectedResponse = generateSampleMessage(
-              new protos.google.longrunning.Operation()
-            );
-            client.innerApiCalls.deleteTensorboardExperiment = stubLongRunningCall(expectedResponse);
-            const [operation] = await client.deleteTensorboardExperiment(request);
-            const [response] = await operation.promise();
-            assert.deepStrictEqual(response, expectedResponse);
-            const actualRequest = (client.innerApiCalls.deleteTensorboardExperiment as SinonStub)
-                .getCall(0).args[0];
-            assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.deleteTensorboardExperiment as SinonStub)
-                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-        });
-
-        it('invokes deleteTensorboardExperiment without error using callback', async () => {
-            const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.aiplatform.v1.DeleteTensorboardExperimentRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.aiplatform.v1.DeleteTensorboardExperimentRequest', ['name']);
-            request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
-            const expectedResponse = generateSampleMessage(
-              new protos.google.longrunning.Operation()
-            );
-            client.innerApiCalls.deleteTensorboardExperiment = stubLongRunningCallWithCallback(expectedResponse);
-            const promise = new Promise((resolve, reject) => {
-                 client.deleteTensorboardExperiment(
-                    request,
-                    (err?: Error|null,
-                     result?: LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.aiplatform.v1.IDeleteOperationMetadata>|null
-                    ) => {
-                        if (err) {
-                            reject(err);
-                        } else {
-                            resolve(result);
-                        }
-                    });
-            });
-            const operation = await promise as LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.aiplatform.v1.IDeleteOperationMetadata>;
-            const [response] = await operation.promise();
-            assert.deepStrictEqual(response, expectedResponse);
-            const actualRequest = (client.innerApiCalls.deleteTensorboardExperiment as SinonStub)
-                .getCall(0).args[0];
-            assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.deleteTensorboardExperiment as SinonStub)
-                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-        });
-
-        it('invokes deleteTensorboardExperiment with call error', async () => {
-            const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.aiplatform.v1.DeleteTensorboardExperimentRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.aiplatform.v1.DeleteTensorboardExperimentRequest', ['name']);
-            request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
-            const expectedError = new Error('expected');
-            client.innerApiCalls.deleteTensorboardExperiment = stubLongRunningCall(undefined, expectedError);
-            await assert.rejects(client.deleteTensorboardExperiment(request), expectedError);
-            const actualRequest = (client.innerApiCalls.deleteTensorboardExperiment as SinonStub)
-                .getCall(0).args[0];
-            assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.deleteTensorboardExperiment as SinonStub)
-                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-        });
-
-        it('invokes deleteTensorboardExperiment with LRO error', async () => {
-            const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.aiplatform.v1.DeleteTensorboardExperimentRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.aiplatform.v1.DeleteTensorboardExperimentRequest', ['name']);
-            request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
-            const expectedError = new Error('expected');
-            client.innerApiCalls.deleteTensorboardExperiment = stubLongRunningCall(undefined, undefined, expectedError);
-            const [operation] = await client.deleteTensorboardExperiment(request);
-            await assert.rejects(operation.promise(), expectedError);
-            const actualRequest = (client.innerApiCalls.deleteTensorboardExperiment as SinonStub)
-                .getCall(0).args[0];
-            assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.deleteTensorboardExperiment as SinonStub)
-                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-        });
-
-        it('invokes checkDeleteTensorboardExperimentProgress without error', async () => {
-            const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const expectedResponse = generateSampleMessage(
-              new operationsProtos.google.longrunning.Operation()
-            );
-            expectedResponse.name = 'test';
-            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
-            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
-
-            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-            const decodedOperation = await client.checkDeleteTensorboardExperimentProgress(expectedResponse.name);
-            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
-            assert(decodedOperation.metadata);
-            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-        });
-
-        it('invokes checkDeleteTensorboardExperimentProgress with error', async () => {
-            const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const expectedError = new Error('expected');
-
-            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
-            await assert.rejects(client.checkDeleteTensorboardExperimentProgress(''), expectedError);
-            assert((client.operationsClient.getOperation as SinonStub)
-                .getCall(0));
-        });
-    });
-
-    describe('deleteTensorboardRun', () => {
-        it('invokes deleteTensorboardRun without error', async () => {
-            const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.aiplatform.v1.DeleteTensorboardRunRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.aiplatform.v1.DeleteTensorboardRunRequest', ['name']);
-            request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
-            const expectedResponse = generateSampleMessage(
-              new protos.google.longrunning.Operation()
-            );
-            client.innerApiCalls.deleteTensorboardRun = stubLongRunningCall(expectedResponse);
-            const [operation] = await client.deleteTensorboardRun(request);
-            const [response] = await operation.promise();
-            assert.deepStrictEqual(response, expectedResponse);
-            const actualRequest = (client.innerApiCalls.deleteTensorboardRun as SinonStub)
-                .getCall(0).args[0];
-            assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.deleteTensorboardRun as SinonStub)
-                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-        });
-
-        it('invokes deleteTensorboardRun without error using callback', async () => {
-            const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.aiplatform.v1.DeleteTensorboardRunRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.aiplatform.v1.DeleteTensorboardRunRequest', ['name']);
-            request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
-            const expectedResponse = generateSampleMessage(
-              new protos.google.longrunning.Operation()
-            );
-            client.innerApiCalls.deleteTensorboardRun = stubLongRunningCallWithCallback(expectedResponse);
-            const promise = new Promise((resolve, reject) => {
-                 client.deleteTensorboardRun(
-                    request,
-                    (err?: Error|null,
-                     result?: LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.aiplatform.v1.IDeleteOperationMetadata>|null
-                    ) => {
-                        if (err) {
-                            reject(err);
-                        } else {
-                            resolve(result);
-                        }
-                    });
-            });
-            const operation = await promise as LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.aiplatform.v1.IDeleteOperationMetadata>;
-            const [response] = await operation.promise();
-            assert.deepStrictEqual(response, expectedResponse);
-            const actualRequest = (client.innerApiCalls.deleteTensorboardRun as SinonStub)
-                .getCall(0).args[0];
-            assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.deleteTensorboardRun as SinonStub)
-                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-        });
-
-        it('invokes deleteTensorboardRun with call error', async () => {
-            const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.aiplatform.v1.DeleteTensorboardRunRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.aiplatform.v1.DeleteTensorboardRunRequest', ['name']);
-            request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
-            const expectedError = new Error('expected');
-            client.innerApiCalls.deleteTensorboardRun = stubLongRunningCall(undefined, expectedError);
-            await assert.rejects(client.deleteTensorboardRun(request), expectedError);
-            const actualRequest = (client.innerApiCalls.deleteTensorboardRun as SinonStub)
-                .getCall(0).args[0];
-            assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.deleteTensorboardRun as SinonStub)
-                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-        });
-
-        it('invokes deleteTensorboardRun with LRO error', async () => {
-            const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.aiplatform.v1.DeleteTensorboardRunRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.aiplatform.v1.DeleteTensorboardRunRequest', ['name']);
-            request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
-            const expectedError = new Error('expected');
-            client.innerApiCalls.deleteTensorboardRun = stubLongRunningCall(undefined, undefined, expectedError);
-            const [operation] = await client.deleteTensorboardRun(request);
-            await assert.rejects(operation.promise(), expectedError);
-            const actualRequest = (client.innerApiCalls.deleteTensorboardRun as SinonStub)
-                .getCall(0).args[0];
-            assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.deleteTensorboardRun as SinonStub)
-                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-        });
-
-        it('invokes checkDeleteTensorboardRunProgress without error', async () => {
-            const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const expectedResponse = generateSampleMessage(
-              new operationsProtos.google.longrunning.Operation()
-            );
-            expectedResponse.name = 'test';
-            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
-            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
-
-            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-            const decodedOperation = await client.checkDeleteTensorboardRunProgress(expectedResponse.name);
-            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
-            assert(decodedOperation.metadata);
-            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-        });
-
-        it('invokes checkDeleteTensorboardRunProgress with error', async () => {
-            const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const expectedError = new Error('expected');
-
-            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
-            await assert.rejects(client.checkDeleteTensorboardRunProgress(''), expectedError);
-            assert((client.operationsClient.getOperation as SinonStub)
-                .getCall(0));
-        });
-    });
-
-    describe('deleteTensorboardTimeSeries', () => {
-        it('invokes deleteTensorboardTimeSeries without error', async () => {
-            const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.aiplatform.v1.DeleteTensorboardTimeSeriesRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.aiplatform.v1.DeleteTensorboardTimeSeriesRequest', ['name']);
-            request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
-            const expectedResponse = generateSampleMessage(
-              new protos.google.longrunning.Operation()
-            );
-            client.innerApiCalls.deleteTensorboardTimeSeries = stubLongRunningCall(expectedResponse);
-            const [operation] = await client.deleteTensorboardTimeSeries(request);
-            const [response] = await operation.promise();
-            assert.deepStrictEqual(response, expectedResponse);
-            const actualRequest = (client.innerApiCalls.deleteTensorboardTimeSeries as SinonStub)
-                .getCall(0).args[0];
-            assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.deleteTensorboardTimeSeries as SinonStub)
-                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-        });
-
-        it('invokes deleteTensorboardTimeSeries without error using callback', async () => {
-            const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.aiplatform.v1.DeleteTensorboardTimeSeriesRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.aiplatform.v1.DeleteTensorboardTimeSeriesRequest', ['name']);
-            request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
-            const expectedResponse = generateSampleMessage(
-              new protos.google.longrunning.Operation()
-            );
-            client.innerApiCalls.deleteTensorboardTimeSeries = stubLongRunningCallWithCallback(expectedResponse);
-            const promise = new Promise((resolve, reject) => {
-                 client.deleteTensorboardTimeSeries(
-                    request,
-                    (err?: Error|null,
-                     result?: LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.aiplatform.v1.IDeleteOperationMetadata>|null
-                    ) => {
-                        if (err) {
-                            reject(err);
-                        } else {
-                            resolve(result);
-                        }
-                    });
-            });
-            const operation = await promise as LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.aiplatform.v1.IDeleteOperationMetadata>;
-            const [response] = await operation.promise();
-            assert.deepStrictEqual(response, expectedResponse);
-            const actualRequest = (client.innerApiCalls.deleteTensorboardTimeSeries as SinonStub)
-                .getCall(0).args[0];
-            assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.deleteTensorboardTimeSeries as SinonStub)
-                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-        });
-
-        it('invokes deleteTensorboardTimeSeries with call error', async () => {
-            const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.aiplatform.v1.DeleteTensorboardTimeSeriesRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.aiplatform.v1.DeleteTensorboardTimeSeriesRequest', ['name']);
-            request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
-            const expectedError = new Error('expected');
-            client.innerApiCalls.deleteTensorboardTimeSeries = stubLongRunningCall(undefined, expectedError);
-            await assert.rejects(client.deleteTensorboardTimeSeries(request), expectedError);
-            const actualRequest = (client.innerApiCalls.deleteTensorboardTimeSeries as SinonStub)
-                .getCall(0).args[0];
-            assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.deleteTensorboardTimeSeries as SinonStub)
-                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-        });
-
-        it('invokes deleteTensorboardTimeSeries with LRO error', async () => {
-            const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.aiplatform.v1.DeleteTensorboardTimeSeriesRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.aiplatform.v1.DeleteTensorboardTimeSeriesRequest', ['name']);
-            request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
-            const expectedError = new Error('expected');
-            client.innerApiCalls.deleteTensorboardTimeSeries = stubLongRunningCall(undefined, undefined, expectedError);
-            const [operation] = await client.deleteTensorboardTimeSeries(request);
-            await assert.rejects(operation.promise(), expectedError);
-            const actualRequest = (client.innerApiCalls.deleteTensorboardTimeSeries as SinonStub)
-                .getCall(0).args[0];
-            assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.deleteTensorboardTimeSeries as SinonStub)
-                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-        });
-
-        it('invokes checkDeleteTensorboardTimeSeriesProgress without error', async () => {
-            const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const expectedResponse = generateSampleMessage(
-              new operationsProtos.google.longrunning.Operation()
-            );
-            expectedResponse.name = 'test';
-            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
-            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
-
-            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-            const decodedOperation = await client.checkDeleteTensorboardTimeSeriesProgress(expectedResponse.name);
-            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
-            assert(decodedOperation.metadata);
-            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-        });
-
-        it('invokes checkDeleteTensorboardTimeSeriesProgress with error', async () => {
-            const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const expectedError = new Error('expected');
-
-            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
-            await assert.rejects(client.checkDeleteTensorboardTimeSeriesProgress(''), expectedError);
-            assert((client.operationsClient.getOperation as SinonStub)
-                .getCall(0));
-        });
-    });
-
-    describe('readTensorboardBlobData', () => {
-        it('invokes readTensorboardBlobData without error', async () => {
-            const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.aiplatform.v1.ReadTensorboardBlobDataRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.aiplatform.v1.ReadTensorboardBlobDataRequest', ['timeSeries']);
-            request.timeSeries = defaultValue1;
-            const expectedHeaderRequestParams = `time_series=${defaultValue1 ?? '' }`;
-            const expectedResponse = generateSampleMessage(
-              new protos.google.cloud.aiplatform.v1.ReadTensorboardBlobDataResponse()
-            );
-            client.innerApiCalls.readTensorboardBlobData = stubServerStreamingCall(expectedResponse);
-            const stream = await client.readTensorboardBlobData(request);
-            const promise = new Promise((resolve, reject) => {
-                stream.on('data', (response: protos.google.cloud.aiplatform.v1.ReadTensorboardBlobDataResponse) => {
-                    resolve(response);
-                });
-                stream.on('error', (err: Error) => {
-                    reject(err);
-                });
-            });
-            const response = await promise;
-            assert.deepStrictEqual(response, expectedResponse);
-            const actualRequest = (client.innerApiCalls.readTensorboardBlobData as SinonStub)
-                .getCall(0).args[0];
-            assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.readTensorboardBlobData as SinonStub)
-                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-        });
-
-        it('invokes readTensorboardBlobData without error and gaxServerStreamingRetries enabled', async () => {
-            const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-              gaxServerStreamingRetries: true
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.aiplatform.v1.ReadTensorboardBlobDataRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.aiplatform.v1.ReadTensorboardBlobDataRequest', ['timeSeries']);
-            request.timeSeries = defaultValue1;
-            const expectedHeaderRequestParams = `time_series=${defaultValue1 ?? '' }`;
-            const expectedResponse = generateSampleMessage(
-              new protos.google.cloud.aiplatform.v1.ReadTensorboardBlobDataResponse()
-            );
-            client.innerApiCalls.readTensorboardBlobData = stubServerStreamingCall(expectedResponse);
-            const stream = await client.readTensorboardBlobData(request);
-            const promise = new Promise((resolve, reject) => {
-                stream.on('data', (response: protos.google.cloud.aiplatform.v1.ReadTensorboardBlobDataResponse) => {
-                    resolve(response);
-                });
-                stream.on('error', (err: Error) => {
-                    reject(err);
-                });
-            });
-            const response = await promise;
-            assert.deepStrictEqual(response, expectedResponse);
-            const actualRequest = (client.innerApiCalls.readTensorboardBlobData as SinonStub)
-                .getCall(0).args[0];
-            assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.readTensorboardBlobData as SinonStub)
-                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-        });
-
-        it('invokes readTensorboardBlobData with error', async () => {
-            const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.aiplatform.v1.ReadTensorboardBlobDataRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.aiplatform.v1.ReadTensorboardBlobDataRequest', ['timeSeries']);
-            request.timeSeries = defaultValue1;
-            const expectedHeaderRequestParams = `time_series=${defaultValue1 ?? '' }`;
-            const expectedError = new Error('expected');
-            client.innerApiCalls.readTensorboardBlobData = stubServerStreamingCall(undefined, expectedError);
-            const stream = await client.readTensorboardBlobData(request);
-            const promise = new Promise((resolve, reject) => {
-                stream.on('data', (response: protos.google.cloud.aiplatform.v1.ReadTensorboardBlobDataResponse) => {
-                    resolve(response);
-                });
-                stream.on('error', (err: Error) => {
-                    reject(err);
-                });
-            });
-            await assert.rejects(promise, expectedError);
-            const actualRequest = (client.innerApiCalls.readTensorboardBlobData as SinonStub)
-                .getCall(0).args[0];
-            assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.readTensorboardBlobData as SinonStub)
-                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-        });
-
-        it('invokes readTensorboardBlobData with closed client', async () => {
-            const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.aiplatform.v1.ReadTensorboardBlobDataRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.aiplatform.v1.ReadTensorboardBlobDataRequest', ['timeSeries']);
-            request.timeSeries = defaultValue1;
-            const expectedError = new Error('The client has already been closed.');
-            client.close().catch(err => {
-        throw err;
-      });
-            const stream = await client.readTensorboardBlobData(request, {retryRequestOptions: {noResponseRetries: 0}});
-            const promise = new Promise((resolve, reject) => {
-                stream.on('data', (response: protos.google.cloud.aiplatform.v1.ReadTensorboardBlobDataResponse) => {
-                    resolve(response);
-                });
-                stream.on('error', (err: Error) => {
-                    reject(err);
-                });
-            });
-            await assert.rejects(promise, expectedError);
-        });
-        it('should create a client with gaxServerStreamingRetries enabled', () => {
-            const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
-                gaxServerStreamingRetries: true,
-            });
-            assert(client);
-        });
-    });
-
-    describe('listTensorboards', () => {
-        it('invokes listTensorboards without error', async () => {
-            const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.aiplatform.v1.ListTensorboardsRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.aiplatform.v1.ListTensorboardsRequest', ['parent']);
-            request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
-              generateSampleMessage(new protos.google.cloud.aiplatform.v1.Tensorboard()),
-              generateSampleMessage(new protos.google.cloud.aiplatform.v1.Tensorboard()),
-              generateSampleMessage(new protos.google.cloud.aiplatform.v1.Tensorboard()),
-            ];
-            client.innerApiCalls.listTensorboards = stubSimpleCall(expectedResponse);
-            const [response] = await client.listTensorboards(request);
-            assert.deepStrictEqual(response, expectedResponse);
-            const actualRequest = (client.innerApiCalls.listTensorboards as SinonStub)
-                .getCall(0).args[0];
-            assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.listTensorboards as SinonStub)
-                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-        });
-
-        it('invokes listTensorboards without error using callback', async () => {
-            const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.aiplatform.v1.ListTensorboardsRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.aiplatform.v1.ListTensorboardsRequest', ['parent']);
-            request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
-              generateSampleMessage(new protos.google.cloud.aiplatform.v1.Tensorboard()),
-              generateSampleMessage(new protos.google.cloud.aiplatform.v1.Tensorboard()),
-              generateSampleMessage(new protos.google.cloud.aiplatform.v1.Tensorboard()),
-            ];
-            client.innerApiCalls.listTensorboards = stubSimpleCallWithCallback(expectedResponse);
-            const promise = new Promise((resolve, reject) => {
-                 client.listTensorboards(
-                    request,
-                    (err?: Error|null, result?: protos.google.cloud.aiplatform.v1.ITensorboard[]|null) => {
-                        if (err) {
-                            reject(err);
-                        } else {
-                            resolve(result);
-                        }
-                    });
-            });
-            const response = await promise;
-            assert.deepStrictEqual(response, expectedResponse);
-            const actualRequest = (client.innerApiCalls.listTensorboards as SinonStub)
-                .getCall(0).args[0];
-            assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.listTensorboards as SinonStub)
-                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-        });
-
-        it('invokes listTensorboards with error', async () => {
-            const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.aiplatform.v1.ListTensorboardsRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.aiplatform.v1.ListTensorboardsRequest', ['parent']);
-            request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
-            const expectedError = new Error('expected');
-            client.innerApiCalls.listTensorboards = stubSimpleCall(undefined, expectedError);
-            await assert.rejects(client.listTensorboards(request), expectedError);
-            const actualRequest = (client.innerApiCalls.listTensorboards as SinonStub)
-                .getCall(0).args[0];
-            assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.listTensorboards as SinonStub)
-                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-        });
-
-        it('invokes listTensorboardsStream without error', async () => {
-            const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.aiplatform.v1.ListTensorboardsRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.aiplatform.v1.ListTensorboardsRequest', ['parent']);
-            request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
-            const expectedResponse = [
-              generateSampleMessage(new protos.google.cloud.aiplatform.v1.Tensorboard()),
-              generateSampleMessage(new protos.google.cloud.aiplatform.v1.Tensorboard()),
-              generateSampleMessage(new protos.google.cloud.aiplatform.v1.Tensorboard()),
-            ];
-            client.descriptors.page.listTensorboards.createStream = stubPageStreamingCall(expectedResponse);
-            const stream = await client.listTensorboardsStream(request);
-            const promise = new Promise((resolve, reject) => {
-                const responses: protos.google.cloud.aiplatform.v1.Tensorboard[] = [];
-                stream.on('data', (response: protos.google.cloud.aiplatform.v1.Tensorboard) => {
-                    responses.push(response);
-                });
-                stream.on('end', () => {
-                    resolve(responses);
-                });
-                stream.on('error', (err: Error) => {
-                    reject(err);
-                });
-            });
-            const responses = await promise;
-            assert.deepStrictEqual(responses, expectedResponse);
-            assert((client.descriptors.page.listTensorboards.createStream as SinonStub)
-                .getCall(0).calledWith(client.innerApiCalls.listTensorboards, request));
-            assert(
-                (client.descriptors.page.listTensorboards.createStream as SinonStub)
-                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
-                        expectedHeaderRequestParams
-                    )
-            );
-        });
-
-        it('invokes listTensorboardsStream with error', async () => {
-            const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.aiplatform.v1.ListTensorboardsRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.aiplatform.v1.ListTensorboardsRequest', ['parent']);
-            request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
-            const expectedError = new Error('expected');
-            client.descriptors.page.listTensorboards.createStream = stubPageStreamingCall(undefined, expectedError);
-            const stream = await client.listTensorboardsStream(request);
-            const promise = new Promise((resolve, reject) => {
-                const responses: protos.google.cloud.aiplatform.v1.Tensorboard[] = [];
-                stream.on('data', (response: protos.google.cloud.aiplatform.v1.Tensorboard) => {
-                    responses.push(response);
-                });
-                stream.on('end', () => {
-                    resolve(responses);
-                });
-                stream.on('error', (err: Error) => {
-                    reject(err);
-                });
-            });
-            await assert.rejects(promise, expectedError);
-            assert((client.descriptors.page.listTensorboards.createStream as SinonStub)
-                .getCall(0).calledWith(client.innerApiCalls.listTensorboards, request));
-            assert(
-                (client.descriptors.page.listTensorboards.createStream as SinonStub)
-                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
-                         expectedHeaderRequestParams
-                    ) 
-            );
-        });
-
-        it('uses async iteration with listTensorboards without error', async () => {
-            const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.aiplatform.v1.ListTensorboardsRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.aiplatform.v1.ListTensorboardsRequest', ['parent']);
-            request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
-            const expectedResponse = [
-              generateSampleMessage(new protos.google.cloud.aiplatform.v1.Tensorboard()),
-              generateSampleMessage(new protos.google.cloud.aiplatform.v1.Tensorboard()),
-              generateSampleMessage(new protos.google.cloud.aiplatform.v1.Tensorboard()),
-            ];
-            client.descriptors.page.listTensorboards.asyncIterate = stubAsyncIterationCall(expectedResponse);
-            const responses: protos.google.cloud.aiplatform.v1.ITensorboard[] = [];
-            const iterable = await client.listTensorboardsAsync(request);
-            for await (const resource of iterable) {
-                responses.push(resource!);
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1.ListTensorboardRunsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1.ListTensorboardRunsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.aiplatform.v1.TensorboardRun()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.aiplatform.v1.TensorboardRun()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.aiplatform.v1.TensorboardRun()
+        ),
+      ];
+      client.innerApiCalls.listTensorboardRuns =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.listTensorboardRuns(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.aiplatform.v1.ITensorboardRun[] | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
             }
-            assert.deepStrictEqual(responses, expectedResponse);
-            assert.deepStrictEqual(
-                (client.descriptors.page.listTensorboards.asyncIterate as SinonStub)
-                    .getCall(0).args[1], request);
-            assert(
-                (client.descriptors.page.listTensorboards.asyncIterate as SinonStub)
-                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
-                        expectedHeaderRequestParams
-                    )
-            );
-        });
-
-        it('uses async iteration with listTensorboards with error', async () => {
-            const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.aiplatform.v1.ListTensorboardsRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.aiplatform.v1.ListTensorboardsRequest', ['parent']);
-            request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
-            const expectedError = new Error('expected');
-            client.descriptors.page.listTensorboards.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
-            const iterable = await client.listTensorboardsAsync(request);
-            await assert.rejects(async () => {
-                const responses: protos.google.cloud.aiplatform.v1.ITensorboard[] = [];
-                for await (const resource of iterable) {
-                    responses.push(resource!);
-                }
-            });
-            assert.deepStrictEqual(
-                (client.descriptors.page.listTensorboards.asyncIterate as SinonStub)
-                    .getCall(0).args[1], request);
-            assert(
-                (client.descriptors.page.listTensorboards.asyncIterate as SinonStub)
-                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
-                        expectedHeaderRequestParams
-                    )
-            );
-        });
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.listTensorboardRuns as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listTensorboardRuns as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
-    describe('listTensorboardExperiments', () => {
-        it('invokes listTensorboardExperiments without error', async () => {
-            const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.aiplatform.v1.ListTensorboardExperimentsRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.aiplatform.v1.ListTensorboardExperimentsRequest', ['parent']);
-            request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
-              generateSampleMessage(new protos.google.cloud.aiplatform.v1.TensorboardExperiment()),
-              generateSampleMessage(new protos.google.cloud.aiplatform.v1.TensorboardExperiment()),
-              generateSampleMessage(new protos.google.cloud.aiplatform.v1.TensorboardExperiment()),
-            ];
-            client.innerApiCalls.listTensorboardExperiments = stubSimpleCall(expectedResponse);
-            const [response] = await client.listTensorboardExperiments(request);
-            assert.deepStrictEqual(response, expectedResponse);
-            const actualRequest = (client.innerApiCalls.listTensorboardExperiments as SinonStub)
-                .getCall(0).args[0];
-            assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.listTensorboardExperiments as SinonStub)
-                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-        });
+    it('invokes listTensorboardRuns with error', async () => {
+      const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1.ListTensorboardRunsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1.ListTensorboardRunsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.listTensorboardRuns = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.listTensorboardRuns(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.listTensorboardRuns as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listTensorboardRuns as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
 
-        it('invokes listTensorboardExperiments without error using callback', async () => {
-            const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.aiplatform.v1.ListTensorboardExperimentsRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.aiplatform.v1.ListTensorboardExperimentsRequest', ['parent']);
-            request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
-              generateSampleMessage(new protos.google.cloud.aiplatform.v1.TensorboardExperiment()),
-              generateSampleMessage(new protos.google.cloud.aiplatform.v1.TensorboardExperiment()),
-              generateSampleMessage(new protos.google.cloud.aiplatform.v1.TensorboardExperiment()),
-            ];
-            client.innerApiCalls.listTensorboardExperiments = stubSimpleCallWithCallback(expectedResponse);
-            const promise = new Promise((resolve, reject) => {
-                 client.listTensorboardExperiments(
-                    request,
-                    (err?: Error|null, result?: protos.google.cloud.aiplatform.v1.ITensorboardExperiment[]|null) => {
-                        if (err) {
-                            reject(err);
-                        } else {
-                            resolve(result);
-                        }
-                    });
-            });
-            const response = await promise;
-            assert.deepStrictEqual(response, expectedResponse);
-            const actualRequest = (client.innerApiCalls.listTensorboardExperiments as SinonStub)
-                .getCall(0).args[0];
-            assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.listTensorboardExperiments as SinonStub)
-                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    it('invokes listTensorboardRunsStream without error', async () => {
+      const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1.ListTensorboardRunsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1.ListTensorboardRunsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.aiplatform.v1.TensorboardRun()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.aiplatform.v1.TensorboardRun()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.aiplatform.v1.TensorboardRun()
+        ),
+      ];
+      client.descriptors.page.listTensorboardRuns.createStream =
+        stubPageStreamingCall(expectedResponse);
+      const stream = await client.listTensorboardRunsStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.cloud.aiplatform.v1.TensorboardRun[] =
+          [];
+        stream.on(
+          'data',
+          (response: protos.google.cloud.aiplatform.v1.TensorboardRun) => {
+            responses.push(response);
+          }
+        );
+        stream.on('end', () => {
+          resolve(responses);
         });
-
-        it('invokes listTensorboardExperiments with error', async () => {
-            const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.aiplatform.v1.ListTensorboardExperimentsRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.aiplatform.v1.ListTensorboardExperimentsRequest', ['parent']);
-            request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
-            const expectedError = new Error('expected');
-            client.innerApiCalls.listTensorboardExperiments = stubSimpleCall(undefined, expectedError);
-            await assert.rejects(client.listTensorboardExperiments(request), expectedError);
-            const actualRequest = (client.innerApiCalls.listTensorboardExperiments as SinonStub)
-                .getCall(0).args[0];
-            assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.listTensorboardExperiments as SinonStub)
-                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        stream.on('error', (err: Error) => {
+          reject(err);
         });
+      });
+      const responses = await promise;
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert(
+        (client.descriptors.page.listTensorboardRuns.createStream as SinonStub)
+          .getCall(0)
+          .calledWith(client.innerApiCalls.listTensorboardRuns, request)
+      );
+      assert(
+        (client.descriptors.page.listTensorboardRuns.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
+      );
+    });
 
-        it('invokes listTensorboardExperimentsStream without error', async () => {
-            const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.aiplatform.v1.ListTensorboardExperimentsRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.aiplatform.v1.ListTensorboardExperimentsRequest', ['parent']);
-            request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
-            const expectedResponse = [
-              generateSampleMessage(new protos.google.cloud.aiplatform.v1.TensorboardExperiment()),
-              generateSampleMessage(new protos.google.cloud.aiplatform.v1.TensorboardExperiment()),
-              generateSampleMessage(new protos.google.cloud.aiplatform.v1.TensorboardExperiment()),
-            ];
-            client.descriptors.page.listTensorboardExperiments.createStream = stubPageStreamingCall(expectedResponse);
-            const stream = await client.listTensorboardExperimentsStream(request);
-            const promise = new Promise((resolve, reject) => {
-                const responses: protos.google.cloud.aiplatform.v1.TensorboardExperiment[] = [];
-                stream.on('data', (response: protos.google.cloud.aiplatform.v1.TensorboardExperiment) => {
-                    responses.push(response);
-                });
-                stream.on('end', () => {
-                    resolve(responses);
-                });
-                stream.on('error', (err: Error) => {
-                    reject(err);
-                });
-            });
-            const responses = await promise;
-            assert.deepStrictEqual(responses, expectedResponse);
-            assert((client.descriptors.page.listTensorboardExperiments.createStream as SinonStub)
-                .getCall(0).calledWith(client.innerApiCalls.listTensorboardExperiments, request));
-            assert(
-                (client.descriptors.page.listTensorboardExperiments.createStream as SinonStub)
-                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
-                        expectedHeaderRequestParams
-                    )
-            );
+    it('invokes listTensorboardRunsStream with error', async () => {
+      const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1.ListTensorboardRunsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1.ListTensorboardRunsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.descriptors.page.listTensorboardRuns.createStream =
+        stubPageStreamingCall(undefined, expectedError);
+      const stream = await client.listTensorboardRunsStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.cloud.aiplatform.v1.TensorboardRun[] =
+          [];
+        stream.on(
+          'data',
+          (response: protos.google.cloud.aiplatform.v1.TensorboardRun) => {
+            responses.push(response);
+          }
+        );
+        stream.on('end', () => {
+          resolve(responses);
         });
-
-        it('invokes listTensorboardExperimentsStream with error', async () => {
-            const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.aiplatform.v1.ListTensorboardExperimentsRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.aiplatform.v1.ListTensorboardExperimentsRequest', ['parent']);
-            request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
-            const expectedError = new Error('expected');
-            client.descriptors.page.listTensorboardExperiments.createStream = stubPageStreamingCall(undefined, expectedError);
-            const stream = await client.listTensorboardExperimentsStream(request);
-            const promise = new Promise((resolve, reject) => {
-                const responses: protos.google.cloud.aiplatform.v1.TensorboardExperiment[] = [];
-                stream.on('data', (response: protos.google.cloud.aiplatform.v1.TensorboardExperiment) => {
-                    responses.push(response);
-                });
-                stream.on('end', () => {
-                    resolve(responses);
-                });
-                stream.on('error', (err: Error) => {
-                    reject(err);
-                });
-            });
-            await assert.rejects(promise, expectedError);
-            assert((client.descriptors.page.listTensorboardExperiments.createStream as SinonStub)
-                .getCall(0).calledWith(client.innerApiCalls.listTensorboardExperiments, request));
-            assert(
-                (client.descriptors.page.listTensorboardExperiments.createStream as SinonStub)
-                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
-                         expectedHeaderRequestParams
-                    ) 
-            );
+        stream.on('error', (err: Error) => {
+          reject(err);
         });
+      });
+      await assert.rejects(promise, expectedError);
+      assert(
+        (client.descriptors.page.listTensorboardRuns.createStream as SinonStub)
+          .getCall(0)
+          .calledWith(client.innerApiCalls.listTensorboardRuns, request)
+      );
+      assert(
+        (client.descriptors.page.listTensorboardRuns.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
+      );
+    });
 
-        it('uses async iteration with listTensorboardExperiments without error', async () => {
-            const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.aiplatform.v1.ListTensorboardExperimentsRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.aiplatform.v1.ListTensorboardExperimentsRequest', ['parent']);
-            request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
-            const expectedResponse = [
-              generateSampleMessage(new protos.google.cloud.aiplatform.v1.TensorboardExperiment()),
-              generateSampleMessage(new protos.google.cloud.aiplatform.v1.TensorboardExperiment()),
-              generateSampleMessage(new protos.google.cloud.aiplatform.v1.TensorboardExperiment()),
-            ];
-            client.descriptors.page.listTensorboardExperiments.asyncIterate = stubAsyncIterationCall(expectedResponse);
-            const responses: protos.google.cloud.aiplatform.v1.ITensorboardExperiment[] = [];
-            const iterable = await client.listTensorboardExperimentsAsync(request);
-            for await (const resource of iterable) {
-                responses.push(resource!);
+    it('uses async iteration with listTensorboardRuns without error', async () => {
+      const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1.ListTensorboardRunsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1.ListTensorboardRunsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.aiplatform.v1.TensorboardRun()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.aiplatform.v1.TensorboardRun()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.aiplatform.v1.TensorboardRun()
+        ),
+      ];
+      client.descriptors.page.listTensorboardRuns.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
+      const responses: protos.google.cloud.aiplatform.v1.ITensorboardRun[] = [];
+      const iterable = await client.listTensorboardRunsAsync(request);
+      for await (const resource of iterable) {
+        responses.push(resource!);
+      }
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.listTensorboardRuns.asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request
+      );
+      assert(
+        (client.descriptors.page.listTensorboardRuns.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
+      );
+    });
+
+    it('uses async iteration with listTensorboardRuns with error', async () => {
+      const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1.ListTensorboardRunsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1.ListTensorboardRunsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.descriptors.page.listTensorboardRuns.asyncIterate =
+        stubAsyncIterationCall(undefined, expectedError);
+      const iterable = await client.listTensorboardRunsAsync(request);
+      await assert.rejects(async () => {
+        const responses: protos.google.cloud.aiplatform.v1.ITensorboardRun[] =
+          [];
+        for await (const resource of iterable) {
+          responses.push(resource!);
+        }
+      });
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.listTensorboardRuns.asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request
+      );
+      assert(
+        (client.descriptors.page.listTensorboardRuns.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
+      );
+    });
+  });
+
+  describe('listTensorboardTimeSeries', () => {
+    it('invokes listTensorboardTimeSeries without error', async () => {
+      const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1.ListTensorboardTimeSeriesRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1.ListTensorboardTimeSeriesRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.aiplatform.v1.TensorboardTimeSeries()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.aiplatform.v1.TensorboardTimeSeries()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.aiplatform.v1.TensorboardTimeSeries()
+        ),
+      ];
+      client.innerApiCalls.listTensorboardTimeSeries =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.listTensorboardTimeSeries(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.listTensorboardTimeSeries as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listTensorboardTimeSeries as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listTensorboardTimeSeries without error using callback', async () => {
+      const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1.ListTensorboardTimeSeriesRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1.ListTensorboardTimeSeriesRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.aiplatform.v1.TensorboardTimeSeries()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.aiplatform.v1.TensorboardTimeSeries()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.aiplatform.v1.TensorboardTimeSeries()
+        ),
+      ];
+      client.innerApiCalls.listTensorboardTimeSeries =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.listTensorboardTimeSeries(
+          request,
+          (
+            err?: Error | null,
+            result?:
+              | protos.google.cloud.aiplatform.v1.ITensorboardTimeSeries[]
+              | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
             }
-            assert.deepStrictEqual(responses, expectedResponse);
-            assert.deepStrictEqual(
-                (client.descriptors.page.listTensorboardExperiments.asyncIterate as SinonStub)
-                    .getCall(0).args[1], request);
-            assert(
-                (client.descriptors.page.listTensorboardExperiments.asyncIterate as SinonStub)
-                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
-                        expectedHeaderRequestParams
-                    )
-            );
-        });
-
-        it('uses async iteration with listTensorboardExperiments with error', async () => {
-            const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.aiplatform.v1.ListTensorboardExperimentsRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.aiplatform.v1.ListTensorboardExperimentsRequest', ['parent']);
-            request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
-            const expectedError = new Error('expected');
-            client.descriptors.page.listTensorboardExperiments.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
-            const iterable = await client.listTensorboardExperimentsAsync(request);
-            await assert.rejects(async () => {
-                const responses: protos.google.cloud.aiplatform.v1.ITensorboardExperiment[] = [];
-                for await (const resource of iterable) {
-                    responses.push(resource!);
-                }
-            });
-            assert.deepStrictEqual(
-                (client.descriptors.page.listTensorboardExperiments.asyncIterate as SinonStub)
-                    .getCall(0).args[1], request);
-            assert(
-                (client.descriptors.page.listTensorboardExperiments.asyncIterate as SinonStub)
-                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
-                        expectedHeaderRequestParams
-                    )
-            );
-        });
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.listTensorboardTimeSeries as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listTensorboardTimeSeries as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
-    describe('listTensorboardRuns', () => {
-        it('invokes listTensorboardRuns without error', async () => {
-            const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.aiplatform.v1.ListTensorboardRunsRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.aiplatform.v1.ListTensorboardRunsRequest', ['parent']);
-            request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
-              generateSampleMessage(new protos.google.cloud.aiplatform.v1.TensorboardRun()),
-              generateSampleMessage(new protos.google.cloud.aiplatform.v1.TensorboardRun()),
-              generateSampleMessage(new protos.google.cloud.aiplatform.v1.TensorboardRun()),
-            ];
-            client.innerApiCalls.listTensorboardRuns = stubSimpleCall(expectedResponse);
-            const [response] = await client.listTensorboardRuns(request);
-            assert.deepStrictEqual(response, expectedResponse);
-            const actualRequest = (client.innerApiCalls.listTensorboardRuns as SinonStub)
-                .getCall(0).args[0];
-            assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.listTensorboardRuns as SinonStub)
-                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-        });
+    it('invokes listTensorboardTimeSeries with error', async () => {
+      const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1.ListTensorboardTimeSeriesRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1.ListTensorboardTimeSeriesRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.listTensorboardTimeSeries = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.listTensorboardTimeSeries(request),
+        expectedError
+      );
+      const actualRequest = (
+        client.innerApiCalls.listTensorboardTimeSeries as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listTensorboardTimeSeries as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
 
-        it('invokes listTensorboardRuns without error using callback', async () => {
-            const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.aiplatform.v1.ListTensorboardRunsRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.aiplatform.v1.ListTensorboardRunsRequest', ['parent']);
-            request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
-              generateSampleMessage(new protos.google.cloud.aiplatform.v1.TensorboardRun()),
-              generateSampleMessage(new protos.google.cloud.aiplatform.v1.TensorboardRun()),
-              generateSampleMessage(new protos.google.cloud.aiplatform.v1.TensorboardRun()),
-            ];
-            client.innerApiCalls.listTensorboardRuns = stubSimpleCallWithCallback(expectedResponse);
-            const promise = new Promise((resolve, reject) => {
-                 client.listTensorboardRuns(
-                    request,
-                    (err?: Error|null, result?: protos.google.cloud.aiplatform.v1.ITensorboardRun[]|null) => {
-                        if (err) {
-                            reject(err);
-                        } else {
-                            resolve(result);
-                        }
-                    });
-            });
-            const response = await promise;
-            assert.deepStrictEqual(response, expectedResponse);
-            const actualRequest = (client.innerApiCalls.listTensorboardRuns as SinonStub)
-                .getCall(0).args[0];
-            assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.listTensorboardRuns as SinonStub)
-                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    it('invokes listTensorboardTimeSeriesStream without error', async () => {
+      const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1.ListTensorboardTimeSeriesRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1.ListTensorboardTimeSeriesRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.aiplatform.v1.TensorboardTimeSeries()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.aiplatform.v1.TensorboardTimeSeries()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.aiplatform.v1.TensorboardTimeSeries()
+        ),
+      ];
+      client.descriptors.page.listTensorboardTimeSeries.createStream =
+        stubPageStreamingCall(expectedResponse);
+      const stream = await client.listTensorboardTimeSeriesStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.cloud.aiplatform.v1.TensorboardTimeSeries[] =
+          [];
+        stream.on(
+          'data',
+          (
+            response: protos.google.cloud.aiplatform.v1.TensorboardTimeSeries
+          ) => {
+            responses.push(response);
+          }
+        );
+        stream.on('end', () => {
+          resolve(responses);
         });
-
-        it('invokes listTensorboardRuns with error', async () => {
-            const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.aiplatform.v1.ListTensorboardRunsRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.aiplatform.v1.ListTensorboardRunsRequest', ['parent']);
-            request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
-            const expectedError = new Error('expected');
-            client.innerApiCalls.listTensorboardRuns = stubSimpleCall(undefined, expectedError);
-            await assert.rejects(client.listTensorboardRuns(request), expectedError);
-            const actualRequest = (client.innerApiCalls.listTensorboardRuns as SinonStub)
-                .getCall(0).args[0];
-            assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.listTensorboardRuns as SinonStub)
-                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        stream.on('error', (err: Error) => {
+          reject(err);
         });
+      });
+      const responses = await promise;
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert(
+        (
+          client.descriptors.page.listTensorboardTimeSeries
+            .createStream as SinonStub
+        )
+          .getCall(0)
+          .calledWith(client.innerApiCalls.listTensorboardTimeSeries, request)
+      );
+      assert(
+        (
+          client.descriptors.page.listTensorboardTimeSeries
+            .createStream as SinonStub
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
+      );
+    });
 
-        it('invokes listTensorboardRunsStream without error', async () => {
-            const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.aiplatform.v1.ListTensorboardRunsRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.aiplatform.v1.ListTensorboardRunsRequest', ['parent']);
-            request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
-            const expectedResponse = [
-              generateSampleMessage(new protos.google.cloud.aiplatform.v1.TensorboardRun()),
-              generateSampleMessage(new protos.google.cloud.aiplatform.v1.TensorboardRun()),
-              generateSampleMessage(new protos.google.cloud.aiplatform.v1.TensorboardRun()),
-            ];
-            client.descriptors.page.listTensorboardRuns.createStream = stubPageStreamingCall(expectedResponse);
-            const stream = await client.listTensorboardRunsStream(request);
-            const promise = new Promise((resolve, reject) => {
-                const responses: protos.google.cloud.aiplatform.v1.TensorboardRun[] = [];
-                stream.on('data', (response: protos.google.cloud.aiplatform.v1.TensorboardRun) => {
-                    responses.push(response);
-                });
-                stream.on('end', () => {
-                    resolve(responses);
-                });
-                stream.on('error', (err: Error) => {
-                    reject(err);
-                });
-            });
-            const responses = await promise;
-            assert.deepStrictEqual(responses, expectedResponse);
-            assert((client.descriptors.page.listTensorboardRuns.createStream as SinonStub)
-                .getCall(0).calledWith(client.innerApiCalls.listTensorboardRuns, request));
-            assert(
-                (client.descriptors.page.listTensorboardRuns.createStream as SinonStub)
-                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
-                        expectedHeaderRequestParams
-                    )
-            );
+    it('invokes listTensorboardTimeSeriesStream with error', async () => {
+      const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1.ListTensorboardTimeSeriesRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1.ListTensorboardTimeSeriesRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.descriptors.page.listTensorboardTimeSeries.createStream =
+        stubPageStreamingCall(undefined, expectedError);
+      const stream = await client.listTensorboardTimeSeriesStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.cloud.aiplatform.v1.TensorboardTimeSeries[] =
+          [];
+        stream.on(
+          'data',
+          (
+            response: protos.google.cloud.aiplatform.v1.TensorboardTimeSeries
+          ) => {
+            responses.push(response);
+          }
+        );
+        stream.on('end', () => {
+          resolve(responses);
         });
-
-        it('invokes listTensorboardRunsStream with error', async () => {
-            const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.aiplatform.v1.ListTensorboardRunsRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.aiplatform.v1.ListTensorboardRunsRequest', ['parent']);
-            request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
-            const expectedError = new Error('expected');
-            client.descriptors.page.listTensorboardRuns.createStream = stubPageStreamingCall(undefined, expectedError);
-            const stream = await client.listTensorboardRunsStream(request);
-            const promise = new Promise((resolve, reject) => {
-                const responses: protos.google.cloud.aiplatform.v1.TensorboardRun[] = [];
-                stream.on('data', (response: protos.google.cloud.aiplatform.v1.TensorboardRun) => {
-                    responses.push(response);
-                });
-                stream.on('end', () => {
-                    resolve(responses);
-                });
-                stream.on('error', (err: Error) => {
-                    reject(err);
-                });
-            });
-            await assert.rejects(promise, expectedError);
-            assert((client.descriptors.page.listTensorboardRuns.createStream as SinonStub)
-                .getCall(0).calledWith(client.innerApiCalls.listTensorboardRuns, request));
-            assert(
-                (client.descriptors.page.listTensorboardRuns.createStream as SinonStub)
-                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
-                         expectedHeaderRequestParams
-                    ) 
-            );
+        stream.on('error', (err: Error) => {
+          reject(err);
         });
+      });
+      await assert.rejects(promise, expectedError);
+      assert(
+        (
+          client.descriptors.page.listTensorboardTimeSeries
+            .createStream as SinonStub
+        )
+          .getCall(0)
+          .calledWith(client.innerApiCalls.listTensorboardTimeSeries, request)
+      );
+      assert(
+        (
+          client.descriptors.page.listTensorboardTimeSeries
+            .createStream as SinonStub
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
+      );
+    });
 
-        it('uses async iteration with listTensorboardRuns without error', async () => {
-            const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.aiplatform.v1.ListTensorboardRunsRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.aiplatform.v1.ListTensorboardRunsRequest', ['parent']);
-            request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
-            const expectedResponse = [
-              generateSampleMessage(new protos.google.cloud.aiplatform.v1.TensorboardRun()),
-              generateSampleMessage(new protos.google.cloud.aiplatform.v1.TensorboardRun()),
-              generateSampleMessage(new protos.google.cloud.aiplatform.v1.TensorboardRun()),
-            ];
-            client.descriptors.page.listTensorboardRuns.asyncIterate = stubAsyncIterationCall(expectedResponse);
-            const responses: protos.google.cloud.aiplatform.v1.ITensorboardRun[] = [];
-            const iterable = await client.listTensorboardRunsAsync(request);
-            for await (const resource of iterable) {
-                responses.push(resource!);
+    it('uses async iteration with listTensorboardTimeSeries without error', async () => {
+      const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1.ListTensorboardTimeSeriesRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1.ListTensorboardTimeSeriesRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.aiplatform.v1.TensorboardTimeSeries()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.aiplatform.v1.TensorboardTimeSeries()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.aiplatform.v1.TensorboardTimeSeries()
+        ),
+      ];
+      client.descriptors.page.listTensorboardTimeSeries.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
+      const responses: protos.google.cloud.aiplatform.v1.ITensorboardTimeSeries[] =
+        [];
+      const iterable = await client.listTensorboardTimeSeriesAsync(request);
+      for await (const resource of iterable) {
+        responses.push(resource!);
+      }
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.listTensorboardTimeSeries
+            .asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request
+      );
+      assert(
+        (
+          client.descriptors.page.listTensorboardTimeSeries
+            .asyncIterate as SinonStub
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
+      );
+    });
+
+    it('uses async iteration with listTensorboardTimeSeries with error', async () => {
+      const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1.ListTensorboardTimeSeriesRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1.ListTensorboardTimeSeriesRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.descriptors.page.listTensorboardTimeSeries.asyncIterate =
+        stubAsyncIterationCall(undefined, expectedError);
+      const iterable = await client.listTensorboardTimeSeriesAsync(request);
+      await assert.rejects(async () => {
+        const responses: protos.google.cloud.aiplatform.v1.ITensorboardTimeSeries[] =
+          [];
+        for await (const resource of iterable) {
+          responses.push(resource!);
+        }
+      });
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.listTensorboardTimeSeries
+            .asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request
+      );
+      assert(
+        (
+          client.descriptors.page.listTensorboardTimeSeries
+            .asyncIterate as SinonStub
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
+      );
+    });
+  });
+
+  describe('exportTensorboardTimeSeriesData', () => {
+    it('invokes exportTensorboardTimeSeriesData without error', async () => {
+      const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1.ExportTensorboardTimeSeriesDataRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1.ExportTensorboardTimeSeriesDataRequest',
+        ['tensorboardTimeSeries']
+      );
+      request.tensorboardTimeSeries = defaultValue1;
+      const expectedHeaderRequestParams = `tensorboard_time_series=${defaultValue1 ?? ''}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.aiplatform.v1.TimeSeriesDataPoint()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.aiplatform.v1.TimeSeriesDataPoint()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.aiplatform.v1.TimeSeriesDataPoint()
+        ),
+      ];
+      client.innerApiCalls.exportTensorboardTimeSeriesData =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.exportTensorboardTimeSeriesData(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.exportTensorboardTimeSeriesData as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.exportTensorboardTimeSeriesData as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes exportTensorboardTimeSeriesData without error using callback', async () => {
+      const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1.ExportTensorboardTimeSeriesDataRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1.ExportTensorboardTimeSeriesDataRequest',
+        ['tensorboardTimeSeries']
+      );
+      request.tensorboardTimeSeries = defaultValue1;
+      const expectedHeaderRequestParams = `tensorboard_time_series=${defaultValue1 ?? ''}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.aiplatform.v1.TimeSeriesDataPoint()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.aiplatform.v1.TimeSeriesDataPoint()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.aiplatform.v1.TimeSeriesDataPoint()
+        ),
+      ];
+      client.innerApiCalls.exportTensorboardTimeSeriesData =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.exportTensorboardTimeSeriesData(
+          request,
+          (
+            err?: Error | null,
+            result?:
+              | protos.google.cloud.aiplatform.v1.ITimeSeriesDataPoint[]
+              | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
             }
-            assert.deepStrictEqual(responses, expectedResponse);
-            assert.deepStrictEqual(
-                (client.descriptors.page.listTensorboardRuns.asyncIterate as SinonStub)
-                    .getCall(0).args[1], request);
-            assert(
-                (client.descriptors.page.listTensorboardRuns.asyncIterate as SinonStub)
-                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
-                        expectedHeaderRequestParams
-                    )
-            );
-        });
-
-        it('uses async iteration with listTensorboardRuns with error', async () => {
-            const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.aiplatform.v1.ListTensorboardRunsRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.aiplatform.v1.ListTensorboardRunsRequest', ['parent']);
-            request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
-            const expectedError = new Error('expected');
-            client.descriptors.page.listTensorboardRuns.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
-            const iterable = await client.listTensorboardRunsAsync(request);
-            await assert.rejects(async () => {
-                const responses: protos.google.cloud.aiplatform.v1.ITensorboardRun[] = [];
-                for await (const resource of iterable) {
-                    responses.push(resource!);
-                }
-            });
-            assert.deepStrictEqual(
-                (client.descriptors.page.listTensorboardRuns.asyncIterate as SinonStub)
-                    .getCall(0).args[1], request);
-            assert(
-                (client.descriptors.page.listTensorboardRuns.asyncIterate as SinonStub)
-                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
-                        expectedHeaderRequestParams
-                    )
-            );
-        });
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.exportTensorboardTimeSeriesData as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.exportTensorboardTimeSeriesData as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
-    describe('listTensorboardTimeSeries', () => {
-        it('invokes listTensorboardTimeSeries without error', async () => {
-            const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.aiplatform.v1.ListTensorboardTimeSeriesRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.aiplatform.v1.ListTensorboardTimeSeriesRequest', ['parent']);
-            request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
-              generateSampleMessage(new protos.google.cloud.aiplatform.v1.TensorboardTimeSeries()),
-              generateSampleMessage(new protos.google.cloud.aiplatform.v1.TensorboardTimeSeries()),
-              generateSampleMessage(new protos.google.cloud.aiplatform.v1.TensorboardTimeSeries()),
-            ];
-            client.innerApiCalls.listTensorboardTimeSeries = stubSimpleCall(expectedResponse);
-            const [response] = await client.listTensorboardTimeSeries(request);
-            assert.deepStrictEqual(response, expectedResponse);
-            const actualRequest = (client.innerApiCalls.listTensorboardTimeSeries as SinonStub)
-                .getCall(0).args[0];
-            assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.listTensorboardTimeSeries as SinonStub)
-                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-        });
+    it('invokes exportTensorboardTimeSeriesData with error', async () => {
+      const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1.ExportTensorboardTimeSeriesDataRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1.ExportTensorboardTimeSeriesDataRequest',
+        ['tensorboardTimeSeries']
+      );
+      request.tensorboardTimeSeries = defaultValue1;
+      const expectedHeaderRequestParams = `tensorboard_time_series=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.exportTensorboardTimeSeriesData = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.exportTensorboardTimeSeriesData(request),
+        expectedError
+      );
+      const actualRequest = (
+        client.innerApiCalls.exportTensorboardTimeSeriesData as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.exportTensorboardTimeSeriesData as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
 
-        it('invokes listTensorboardTimeSeries without error using callback', async () => {
-            const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.aiplatform.v1.ListTensorboardTimeSeriesRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.aiplatform.v1.ListTensorboardTimeSeriesRequest', ['parent']);
-            request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
-              generateSampleMessage(new protos.google.cloud.aiplatform.v1.TensorboardTimeSeries()),
-              generateSampleMessage(new protos.google.cloud.aiplatform.v1.TensorboardTimeSeries()),
-              generateSampleMessage(new protos.google.cloud.aiplatform.v1.TensorboardTimeSeries()),
-            ];
-            client.innerApiCalls.listTensorboardTimeSeries = stubSimpleCallWithCallback(expectedResponse);
-            const promise = new Promise((resolve, reject) => {
-                 client.listTensorboardTimeSeries(
-                    request,
-                    (err?: Error|null, result?: protos.google.cloud.aiplatform.v1.ITensorboardTimeSeries[]|null) => {
-                        if (err) {
-                            reject(err);
-                        } else {
-                            resolve(result);
-                        }
-                    });
-            });
-            const response = await promise;
-            assert.deepStrictEqual(response, expectedResponse);
-            const actualRequest = (client.innerApiCalls.listTensorboardTimeSeries as SinonStub)
-                .getCall(0).args[0];
-            assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.listTensorboardTimeSeries as SinonStub)
-                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    it('invokes exportTensorboardTimeSeriesDataStream without error', async () => {
+      const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1.ExportTensorboardTimeSeriesDataRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1.ExportTensorboardTimeSeriesDataRequest',
+        ['tensorboardTimeSeries']
+      );
+      request.tensorboardTimeSeries = defaultValue1;
+      const expectedHeaderRequestParams = `tensorboard_time_series=${defaultValue1 ?? ''}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.aiplatform.v1.TimeSeriesDataPoint()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.aiplatform.v1.TimeSeriesDataPoint()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.aiplatform.v1.TimeSeriesDataPoint()
+        ),
+      ];
+      client.descriptors.page.exportTensorboardTimeSeriesData.createStream =
+        stubPageStreamingCall(expectedResponse);
+      const stream =
+        await client.exportTensorboardTimeSeriesDataStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.cloud.aiplatform.v1.TimeSeriesDataPoint[] =
+          [];
+        stream.on(
+          'data',
+          (response: protos.google.cloud.aiplatform.v1.TimeSeriesDataPoint) => {
+            responses.push(response);
+          }
+        );
+        stream.on('end', () => {
+          resolve(responses);
         });
-
-        it('invokes listTensorboardTimeSeries with error', async () => {
-            const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.aiplatform.v1.ListTensorboardTimeSeriesRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.aiplatform.v1.ListTensorboardTimeSeriesRequest', ['parent']);
-            request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
-            const expectedError = new Error('expected');
-            client.innerApiCalls.listTensorboardTimeSeries = stubSimpleCall(undefined, expectedError);
-            await assert.rejects(client.listTensorboardTimeSeries(request), expectedError);
-            const actualRequest = (client.innerApiCalls.listTensorboardTimeSeries as SinonStub)
-                .getCall(0).args[0];
-            assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.listTensorboardTimeSeries as SinonStub)
-                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        stream.on('error', (err: Error) => {
+          reject(err);
         });
+      });
+      const responses = await promise;
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert(
+        (
+          client.descriptors.page.exportTensorboardTimeSeriesData
+            .createStream as SinonStub
+        )
+          .getCall(0)
+          .calledWith(
+            client.innerApiCalls.exportTensorboardTimeSeriesData,
+            request
+          )
+      );
+      assert(
+        (
+          client.descriptors.page.exportTensorboardTimeSeriesData
+            .createStream as SinonStub
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
+      );
+    });
 
-        it('invokes listTensorboardTimeSeriesStream without error', async () => {
-            const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.aiplatform.v1.ListTensorboardTimeSeriesRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.aiplatform.v1.ListTensorboardTimeSeriesRequest', ['parent']);
-            request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
-            const expectedResponse = [
-              generateSampleMessage(new protos.google.cloud.aiplatform.v1.TensorboardTimeSeries()),
-              generateSampleMessage(new protos.google.cloud.aiplatform.v1.TensorboardTimeSeries()),
-              generateSampleMessage(new protos.google.cloud.aiplatform.v1.TensorboardTimeSeries()),
-            ];
-            client.descriptors.page.listTensorboardTimeSeries.createStream = stubPageStreamingCall(expectedResponse);
-            const stream = await client.listTensorboardTimeSeriesStream(request);
-            const promise = new Promise((resolve, reject) => {
-                const responses: protos.google.cloud.aiplatform.v1.TensorboardTimeSeries[] = [];
-                stream.on('data', (response: protos.google.cloud.aiplatform.v1.TensorboardTimeSeries) => {
-                    responses.push(response);
-                });
-                stream.on('end', () => {
-                    resolve(responses);
-                });
-                stream.on('error', (err: Error) => {
-                    reject(err);
-                });
-            });
-            const responses = await promise;
-            assert.deepStrictEqual(responses, expectedResponse);
-            assert((client.descriptors.page.listTensorboardTimeSeries.createStream as SinonStub)
-                .getCall(0).calledWith(client.innerApiCalls.listTensorboardTimeSeries, request));
-            assert(
-                (client.descriptors.page.listTensorboardTimeSeries.createStream as SinonStub)
-                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
-                        expectedHeaderRequestParams
-                    )
-            );
+    it('invokes exportTensorboardTimeSeriesDataStream with error', async () => {
+      const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1.ExportTensorboardTimeSeriesDataRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1.ExportTensorboardTimeSeriesDataRequest',
+        ['tensorboardTimeSeries']
+      );
+      request.tensorboardTimeSeries = defaultValue1;
+      const expectedHeaderRequestParams = `tensorboard_time_series=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.descriptors.page.exportTensorboardTimeSeriesData.createStream =
+        stubPageStreamingCall(undefined, expectedError);
+      const stream =
+        await client.exportTensorboardTimeSeriesDataStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.cloud.aiplatform.v1.TimeSeriesDataPoint[] =
+          [];
+        stream.on(
+          'data',
+          (response: protos.google.cloud.aiplatform.v1.TimeSeriesDataPoint) => {
+            responses.push(response);
+          }
+        );
+        stream.on('end', () => {
+          resolve(responses);
         });
-
-        it('invokes listTensorboardTimeSeriesStream with error', async () => {
-            const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.aiplatform.v1.ListTensorboardTimeSeriesRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.aiplatform.v1.ListTensorboardTimeSeriesRequest', ['parent']);
-            request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
-            const expectedError = new Error('expected');
-            client.descriptors.page.listTensorboardTimeSeries.createStream = stubPageStreamingCall(undefined, expectedError);
-            const stream = await client.listTensorboardTimeSeriesStream(request);
-            const promise = new Promise((resolve, reject) => {
-                const responses: protos.google.cloud.aiplatform.v1.TensorboardTimeSeries[] = [];
-                stream.on('data', (response: protos.google.cloud.aiplatform.v1.TensorboardTimeSeries) => {
-                    responses.push(response);
-                });
-                stream.on('end', () => {
-                    resolve(responses);
-                });
-                stream.on('error', (err: Error) => {
-                    reject(err);
-                });
-            });
-            await assert.rejects(promise, expectedError);
-            assert((client.descriptors.page.listTensorboardTimeSeries.createStream as SinonStub)
-                .getCall(0).calledWith(client.innerApiCalls.listTensorboardTimeSeries, request));
-            assert(
-                (client.descriptors.page.listTensorboardTimeSeries.createStream as SinonStub)
-                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
-                         expectedHeaderRequestParams
-                    ) 
-            );
+        stream.on('error', (err: Error) => {
+          reject(err);
         });
+      });
+      await assert.rejects(promise, expectedError);
+      assert(
+        (
+          client.descriptors.page.exportTensorboardTimeSeriesData
+            .createStream as SinonStub
+        )
+          .getCall(0)
+          .calledWith(
+            client.innerApiCalls.exportTensorboardTimeSeriesData,
+            request
+          )
+      );
+      assert(
+        (
+          client.descriptors.page.exportTensorboardTimeSeriesData
+            .createStream as SinonStub
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
+      );
+    });
 
-        it('uses async iteration with listTensorboardTimeSeries without error', async () => {
-            const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.aiplatform.v1.ListTensorboardTimeSeriesRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.aiplatform.v1.ListTensorboardTimeSeriesRequest', ['parent']);
-            request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
-            const expectedResponse = [
-              generateSampleMessage(new protos.google.cloud.aiplatform.v1.TensorboardTimeSeries()),
-              generateSampleMessage(new protos.google.cloud.aiplatform.v1.TensorboardTimeSeries()),
-              generateSampleMessage(new protos.google.cloud.aiplatform.v1.TensorboardTimeSeries()),
-            ];
-            client.descriptors.page.listTensorboardTimeSeries.asyncIterate = stubAsyncIterationCall(expectedResponse);
-            const responses: protos.google.cloud.aiplatform.v1.ITensorboardTimeSeries[] = [];
-            const iterable = await client.listTensorboardTimeSeriesAsync(request);
-            for await (const resource of iterable) {
-                responses.push(resource!);
+    it('uses async iteration with exportTensorboardTimeSeriesData without error', async () => {
+      const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1.ExportTensorboardTimeSeriesDataRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1.ExportTensorboardTimeSeriesDataRequest',
+        ['tensorboardTimeSeries']
+      );
+      request.tensorboardTimeSeries = defaultValue1;
+      const expectedHeaderRequestParams = `tensorboard_time_series=${defaultValue1 ?? ''}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.aiplatform.v1.TimeSeriesDataPoint()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.aiplatform.v1.TimeSeriesDataPoint()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.aiplatform.v1.TimeSeriesDataPoint()
+        ),
+      ];
+      client.descriptors.page.exportTensorboardTimeSeriesData.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
+      const responses: protos.google.cloud.aiplatform.v1.ITimeSeriesDataPoint[] =
+        [];
+      const iterable =
+        await client.exportTensorboardTimeSeriesDataAsync(request);
+      for await (const resource of iterable) {
+        responses.push(resource!);
+      }
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.exportTensorboardTimeSeriesData
+            .asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request
+      );
+      assert(
+        (
+          client.descriptors.page.exportTensorboardTimeSeriesData
+            .asyncIterate as SinonStub
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
+      );
+    });
+
+    it('uses async iteration with exportTensorboardTimeSeriesData with error', async () => {
+      const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1.ExportTensorboardTimeSeriesDataRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1.ExportTensorboardTimeSeriesDataRequest',
+        ['tensorboardTimeSeries']
+      );
+      request.tensorboardTimeSeries = defaultValue1;
+      const expectedHeaderRequestParams = `tensorboard_time_series=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.descriptors.page.exportTensorboardTimeSeriesData.asyncIterate =
+        stubAsyncIterationCall(undefined, expectedError);
+      const iterable =
+        await client.exportTensorboardTimeSeriesDataAsync(request);
+      await assert.rejects(async () => {
+        const responses: protos.google.cloud.aiplatform.v1.ITimeSeriesDataPoint[] =
+          [];
+        for await (const resource of iterable) {
+          responses.push(resource!);
+        }
+      });
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.exportTensorboardTimeSeriesData
+            .asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request
+      );
+      assert(
+        (
+          client.descriptors.page.exportTensorboardTimeSeriesData
+            .asyncIterate as SinonStub
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
+      );
+    });
+  });
+  describe('getIamPolicy', () => {
+    it('invokes getIamPolicy without error', async () => {
+      const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new IamProtos.google.iam.v1.GetIamPolicyRequest()
+      );
+      request.resource = '';
+      const expectedHeaderRequestParams = 'resource=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new IamProtos.google.iam.v1.Policy()
+      );
+      client.iamClient.getIamPolicy = stubSimpleCall(expectedResponse);
+      const response = await client.getIamPolicy(request, expectedOptions);
+      assert.deepStrictEqual(response, [expectedResponse]);
+      assert(
+        (client.iamClient.getIamPolicy as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+    it('invokes getIamPolicy without error using callback', async () => {
+      const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new IamProtos.google.iam.v1.GetIamPolicyRequest()
+      );
+      request.resource = '';
+      const expectedHeaderRequestParams = 'resource=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new IamProtos.google.iam.v1.Policy()
+      );
+      client.iamClient.getIamPolicy = sinon
+        .stub()
+        .callsArgWith(2, null, expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.getIamPolicy(
+          request,
+          expectedOptions,
+          (
+            err?: Error | null,
+            result?: IamProtos.google.iam.v1.Policy | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
             }
-            assert.deepStrictEqual(responses, expectedResponse);
-            assert.deepStrictEqual(
-                (client.descriptors.page.listTensorboardTimeSeries.asyncIterate as SinonStub)
-                    .getCall(0).args[1], request);
-            assert(
-                (client.descriptors.page.listTensorboardTimeSeries.asyncIterate as SinonStub)
-                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
-                        expectedHeaderRequestParams
-                    )
-            );
-        });
-
-        it('uses async iteration with listTensorboardTimeSeries with error', async () => {
-            const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.aiplatform.v1.ListTensorboardTimeSeriesRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.aiplatform.v1.ListTensorboardTimeSeriesRequest', ['parent']);
-            request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
-            const expectedError = new Error('expected');
-            client.descriptors.page.listTensorboardTimeSeries.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
-            const iterable = await client.listTensorboardTimeSeriesAsync(request);
-            await assert.rejects(async () => {
-                const responses: protos.google.cloud.aiplatform.v1.ITensorboardTimeSeries[] = [];
-                for await (const resource of iterable) {
-                    responses.push(resource!);
-                }
-            });
-            assert.deepStrictEqual(
-                (client.descriptors.page.listTensorboardTimeSeries.asyncIterate as SinonStub)
-                    .getCall(0).args[1], request);
-            assert(
-                (client.descriptors.page.listTensorboardTimeSeries.asyncIterate as SinonStub)
-                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
-                        expectedHeaderRequestParams
-                    )
-            );
-        });
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      assert((client.iamClient.getIamPolicy as SinonStub).getCall(0));
     });
-
-    describe('exportTensorboardTimeSeriesData', () => {
-        it('invokes exportTensorboardTimeSeriesData without error', async () => {
-            const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.aiplatform.v1.ExportTensorboardTimeSeriesDataRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.aiplatform.v1.ExportTensorboardTimeSeriesDataRequest', ['tensorboardTimeSeries']);
-            request.tensorboardTimeSeries = defaultValue1;
-            const expectedHeaderRequestParams = `tensorboard_time_series=${defaultValue1 ?? '' }`;const expectedResponse = [
-              generateSampleMessage(new protos.google.cloud.aiplatform.v1.TimeSeriesDataPoint()),
-              generateSampleMessage(new protos.google.cloud.aiplatform.v1.TimeSeriesDataPoint()),
-              generateSampleMessage(new protos.google.cloud.aiplatform.v1.TimeSeriesDataPoint()),
-            ];
-            client.innerApiCalls.exportTensorboardTimeSeriesData = stubSimpleCall(expectedResponse);
-            const [response] = await client.exportTensorboardTimeSeriesData(request);
-            assert.deepStrictEqual(response, expectedResponse);
-            const actualRequest = (client.innerApiCalls.exportTensorboardTimeSeriesData as SinonStub)
-                .getCall(0).args[0];
-            assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.exportTensorboardTimeSeriesData as SinonStub)
-                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-        });
-
-        it('invokes exportTensorboardTimeSeriesData without error using callback', async () => {
-            const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.aiplatform.v1.ExportTensorboardTimeSeriesDataRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.aiplatform.v1.ExportTensorboardTimeSeriesDataRequest', ['tensorboardTimeSeries']);
-            request.tensorboardTimeSeries = defaultValue1;
-            const expectedHeaderRequestParams = `tensorboard_time_series=${defaultValue1 ?? '' }`;const expectedResponse = [
-              generateSampleMessage(new protos.google.cloud.aiplatform.v1.TimeSeriesDataPoint()),
-              generateSampleMessage(new protos.google.cloud.aiplatform.v1.TimeSeriesDataPoint()),
-              generateSampleMessage(new protos.google.cloud.aiplatform.v1.TimeSeriesDataPoint()),
-            ];
-            client.innerApiCalls.exportTensorboardTimeSeriesData = stubSimpleCallWithCallback(expectedResponse);
-            const promise = new Promise((resolve, reject) => {
-                 client.exportTensorboardTimeSeriesData(
-                    request,
-                    (err?: Error|null, result?: protos.google.cloud.aiplatform.v1.ITimeSeriesDataPoint[]|null) => {
-                        if (err) {
-                            reject(err);
-                        } else {
-                            resolve(result);
-                        }
-                    });
-            });
-            const response = await promise;
-            assert.deepStrictEqual(response, expectedResponse);
-            const actualRequest = (client.innerApiCalls.exportTensorboardTimeSeriesData as SinonStub)
-                .getCall(0).args[0];
-            assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.exportTensorboardTimeSeriesData as SinonStub)
-                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-        });
-
-        it('invokes exportTensorboardTimeSeriesData with error', async () => {
-            const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.aiplatform.v1.ExportTensorboardTimeSeriesDataRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.aiplatform.v1.ExportTensorboardTimeSeriesDataRequest', ['tensorboardTimeSeries']);
-            request.tensorboardTimeSeries = defaultValue1;
-            const expectedHeaderRequestParams = `tensorboard_time_series=${defaultValue1 ?? '' }`;
-            const expectedError = new Error('expected');
-            client.innerApiCalls.exportTensorboardTimeSeriesData = stubSimpleCall(undefined, expectedError);
-            await assert.rejects(client.exportTensorboardTimeSeriesData(request), expectedError);
-            const actualRequest = (client.innerApiCalls.exportTensorboardTimeSeriesData as SinonStub)
-                .getCall(0).args[0];
-            assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.exportTensorboardTimeSeriesData as SinonStub)
-                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-        });
-
-        it('invokes exportTensorboardTimeSeriesDataStream without error', async () => {
-            const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.aiplatform.v1.ExportTensorboardTimeSeriesDataRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.aiplatform.v1.ExportTensorboardTimeSeriesDataRequest', ['tensorboardTimeSeries']);
-            request.tensorboardTimeSeries = defaultValue1;
-            const expectedHeaderRequestParams = `tensorboard_time_series=${defaultValue1 ?? '' }`;
-            const expectedResponse = [
-              generateSampleMessage(new protos.google.cloud.aiplatform.v1.TimeSeriesDataPoint()),
-              generateSampleMessage(new protos.google.cloud.aiplatform.v1.TimeSeriesDataPoint()),
-              generateSampleMessage(new protos.google.cloud.aiplatform.v1.TimeSeriesDataPoint()),
-            ];
-            client.descriptors.page.exportTensorboardTimeSeriesData.createStream = stubPageStreamingCall(expectedResponse);
-            const stream = await client.exportTensorboardTimeSeriesDataStream(request);
-            const promise = new Promise((resolve, reject) => {
-                const responses: protos.google.cloud.aiplatform.v1.TimeSeriesDataPoint[] = [];
-                stream.on('data', (response: protos.google.cloud.aiplatform.v1.TimeSeriesDataPoint) => {
-                    responses.push(response);
-                });
-                stream.on('end', () => {
-                    resolve(responses);
-                });
-                stream.on('error', (err: Error) => {
-                    reject(err);
-                });
-            });
-            const responses = await promise;
-            assert.deepStrictEqual(responses, expectedResponse);
-            assert((client.descriptors.page.exportTensorboardTimeSeriesData.createStream as SinonStub)
-                .getCall(0).calledWith(client.innerApiCalls.exportTensorboardTimeSeriesData, request));
-            assert(
-                (client.descriptors.page.exportTensorboardTimeSeriesData.createStream as SinonStub)
-                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
-                        expectedHeaderRequestParams
-                    )
-            );
-        });
-
-        it('invokes exportTensorboardTimeSeriesDataStream with error', async () => {
-            const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.aiplatform.v1.ExportTensorboardTimeSeriesDataRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.aiplatform.v1.ExportTensorboardTimeSeriesDataRequest', ['tensorboardTimeSeries']);
-            request.tensorboardTimeSeries = defaultValue1;
-            const expectedHeaderRequestParams = `tensorboard_time_series=${defaultValue1 ?? '' }`;
-            const expectedError = new Error('expected');
-            client.descriptors.page.exportTensorboardTimeSeriesData.createStream = stubPageStreamingCall(undefined, expectedError);
-            const stream = await client.exportTensorboardTimeSeriesDataStream(request);
-            const promise = new Promise((resolve, reject) => {
-                const responses: protos.google.cloud.aiplatform.v1.TimeSeriesDataPoint[] = [];
-                stream.on('data', (response: protos.google.cloud.aiplatform.v1.TimeSeriesDataPoint) => {
-                    responses.push(response);
-                });
-                stream.on('end', () => {
-                    resolve(responses);
-                });
-                stream.on('error', (err: Error) => {
-                    reject(err);
-                });
-            });
-            await assert.rejects(promise, expectedError);
-            assert((client.descriptors.page.exportTensorboardTimeSeriesData.createStream as SinonStub)
-                .getCall(0).calledWith(client.innerApiCalls.exportTensorboardTimeSeriesData, request));
-            assert(
-                (client.descriptors.page.exportTensorboardTimeSeriesData.createStream as SinonStub)
-                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
-                         expectedHeaderRequestParams
-                    ) 
-            );
-        });
-
-        it('uses async iteration with exportTensorboardTimeSeriesData without error', async () => {
-            const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.aiplatform.v1.ExportTensorboardTimeSeriesDataRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.aiplatform.v1.ExportTensorboardTimeSeriesDataRequest', ['tensorboardTimeSeries']);
-            request.tensorboardTimeSeries = defaultValue1;
-            const expectedHeaderRequestParams = `tensorboard_time_series=${defaultValue1 ?? '' }`;
-            const expectedResponse = [
-              generateSampleMessage(new protos.google.cloud.aiplatform.v1.TimeSeriesDataPoint()),
-              generateSampleMessage(new protos.google.cloud.aiplatform.v1.TimeSeriesDataPoint()),
-              generateSampleMessage(new protos.google.cloud.aiplatform.v1.TimeSeriesDataPoint()),
-            ];
-            client.descriptors.page.exportTensorboardTimeSeriesData.asyncIterate = stubAsyncIterationCall(expectedResponse);
-            const responses: protos.google.cloud.aiplatform.v1.ITimeSeriesDataPoint[] = [];
-            const iterable = await client.exportTensorboardTimeSeriesDataAsync(request);
-            for await (const resource of iterable) {
-                responses.push(resource!);
+    it('invokes getIamPolicy with error', async () => {
+      const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new IamProtos.google.iam.v1.GetIamPolicyRequest()
+      );
+      request.resource = '';
+      const expectedHeaderRequestParams = 'resource=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedError = new Error('expected');
+      client.iamClient.getIamPolicy = stubSimpleCall(undefined, expectedError);
+      await assert.rejects(
+        client.getIamPolicy(request, expectedOptions),
+        expectedError
+      );
+      assert(
+        (client.iamClient.getIamPolicy as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+  });
+  describe('setIamPolicy', () => {
+    it('invokes setIamPolicy without error', async () => {
+      const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new IamProtos.google.iam.v1.SetIamPolicyRequest()
+      );
+      request.resource = '';
+      const expectedHeaderRequestParams = 'resource=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new IamProtos.google.iam.v1.Policy()
+      );
+      client.iamClient.setIamPolicy = stubSimpleCall(expectedResponse);
+      const response = await client.setIamPolicy(request, expectedOptions);
+      assert.deepStrictEqual(response, [expectedResponse]);
+      assert(
+        (client.iamClient.setIamPolicy as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+    it('invokes setIamPolicy without error using callback', async () => {
+      const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new IamProtos.google.iam.v1.SetIamPolicyRequest()
+      );
+      request.resource = '';
+      const expectedHeaderRequestParams = 'resource=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new IamProtos.google.iam.v1.Policy()
+      );
+      client.iamClient.setIamPolicy = sinon
+        .stub()
+        .callsArgWith(2, null, expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.setIamPolicy(
+          request,
+          expectedOptions,
+          (
+            err?: Error | null,
+            result?: IamProtos.google.iam.v1.Policy | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
             }
-            assert.deepStrictEqual(responses, expectedResponse);
-            assert.deepStrictEqual(
-                (client.descriptors.page.exportTensorboardTimeSeriesData.asyncIterate as SinonStub)
-                    .getCall(0).args[1], request);
-            assert(
-                (client.descriptors.page.exportTensorboardTimeSeriesData.asyncIterate as SinonStub)
-                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
-                        expectedHeaderRequestParams
-                    )
-            );
-        });
-
-        it('uses async iteration with exportTensorboardTimeSeriesData with error', async () => {
-            const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.aiplatform.v1.ExportTensorboardTimeSeriesDataRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.aiplatform.v1.ExportTensorboardTimeSeriesDataRequest', ['tensorboardTimeSeries']);
-            request.tensorboardTimeSeries = defaultValue1;
-            const expectedHeaderRequestParams = `tensorboard_time_series=${defaultValue1 ?? '' }`;
-            const expectedError = new Error('expected');
-            client.descriptors.page.exportTensorboardTimeSeriesData.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
-            const iterable = await client.exportTensorboardTimeSeriesDataAsync(request);
-            await assert.rejects(async () => {
-                const responses: protos.google.cloud.aiplatform.v1.ITimeSeriesDataPoint[] = [];
-                for await (const resource of iterable) {
-                    responses.push(resource!);
-                }
-            });
-            assert.deepStrictEqual(
-                (client.descriptors.page.exportTensorboardTimeSeriesData.asyncIterate as SinonStub)
-                    .getCall(0).args[1], request);
-            assert(
-                (client.descriptors.page.exportTensorboardTimeSeriesData.asyncIterate as SinonStub)
-                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
-                        expectedHeaderRequestParams
-                    )
-            );
-        });
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      assert((client.iamClient.setIamPolicy as SinonStub).getCall(0));
     });
-    describe('getIamPolicy', () => {
-        it('invokes getIamPolicy without error', async () => {
-            const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new IamProtos.google.iam.v1.GetIamPolicyRequest()
-            );
-            request.resource = '';
-            const expectedHeaderRequestParams = 'resource=';
-            const expectedOptions = {
-                otherArgs: {
-                    headers: {
-                        'x-goog-request-params': expectedHeaderRequestParams,
-                    },
-                },
-            };
-            const expectedResponse = generateSampleMessage(
-              new IamProtos.google.iam.v1.Policy()
-            );
-            client.iamClient.getIamPolicy = stubSimpleCall(expectedResponse);
-            const response = await client.getIamPolicy(request, expectedOptions);
-            assert.deepStrictEqual(response, [expectedResponse]);
-            assert((client.iamClient.getIamPolicy as SinonStub)
-                .getCall(0).calledWith(request, expectedOptions, undefined));
-        });
-        it('invokes getIamPolicy without error using callback', async () => {
-            const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new IamProtos.google.iam.v1.GetIamPolicyRequest()
-            );
-            request.resource = '';
-            const expectedHeaderRequestParams = 'resource=';
-            const expectedOptions = {
-                otherArgs: {
-                    headers: {
-                        'x-goog-request-params': expectedHeaderRequestParams,
-                    },
-                },
-            };
-            const expectedResponse = generateSampleMessage(
-              new IamProtos.google.iam.v1.Policy()
-            );
-            client.iamClient.getIamPolicy = sinon.stub().callsArgWith(2, null, expectedResponse);
-            const promise = new Promise((resolve, reject) => {
-                 client.getIamPolicy(
-                    request,
-                    expectedOptions,
-                    (err?: Error|null, result?: IamProtos.google.iam.v1.Policy|null) => {
-                        if (err) {
-                            reject(err);
-                        } else {
-                            resolve(result);
-                        }
-                    });
-            });
-            const response = await promise;
-            assert.deepStrictEqual(response, expectedResponse);
-            assert((client.iamClient.getIamPolicy as SinonStub)
-                .getCall(0));
-        });
-        it('invokes getIamPolicy with error', async () => {
-            const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new IamProtos.google.iam.v1.GetIamPolicyRequest()
-            );
-            request.resource = '';
-            const expectedHeaderRequestParams = 'resource=';
-            const expectedOptions = {
-                otherArgs: {
-                    headers: {
-                        'x-goog-request-params': expectedHeaderRequestParams,
-                    },
-                },
-            };
-            const expectedError = new Error('expected');
-            client.iamClient.getIamPolicy = stubSimpleCall(undefined, expectedError);
-            await assert.rejects(client.getIamPolicy(request, expectedOptions), expectedError);
-            assert((client.iamClient.getIamPolicy as SinonStub)
-                .getCall(0).calledWith(request, expectedOptions, undefined));
-        });
+    it('invokes setIamPolicy with error', async () => {
+      const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new IamProtos.google.iam.v1.SetIamPolicyRequest()
+      );
+      request.resource = '';
+      const expectedHeaderRequestParams = 'resource=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedError = new Error('expected');
+      client.iamClient.setIamPolicy = stubSimpleCall(undefined, expectedError);
+      await assert.rejects(
+        client.setIamPolicy(request, expectedOptions),
+        expectedError
+      );
+      assert(
+        (client.iamClient.setIamPolicy as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
     });
-    describe('setIamPolicy', () => {
-        it('invokes setIamPolicy without error', async () => {
-            const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new IamProtos.google.iam.v1.SetIamPolicyRequest()
-            );
-            request.resource = '';
-            const expectedHeaderRequestParams = 'resource=';
-            const expectedOptions = {
-                otherArgs: {
-                    headers: {
-                        'x-goog-request-params': expectedHeaderRequestParams,
-                    },
-                },
-            };
-            const expectedResponse = generateSampleMessage(
-              new IamProtos.google.iam.v1.Policy()
-            );
-            client.iamClient.setIamPolicy = stubSimpleCall(expectedResponse);
-            const response = await client.setIamPolicy(request, expectedOptions);
-            assert.deepStrictEqual(response, [expectedResponse]);
-            assert((client.iamClient.setIamPolicy as SinonStub)
-                .getCall(0).calledWith(request, expectedOptions, undefined));
-        });
-        it('invokes setIamPolicy without error using callback', async () => {
-            const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new IamProtos.google.iam.v1.SetIamPolicyRequest()
-            );
-            request.resource = '';
-            const expectedHeaderRequestParams = 'resource=';
-            const expectedOptions = {
-                otherArgs: {
-                    headers: {
-                        'x-goog-request-params': expectedHeaderRequestParams,
-                    },
-                },
-            };
-            const expectedResponse = generateSampleMessage(
-              new IamProtos.google.iam.v1.Policy()
-            );
-            client.iamClient.setIamPolicy = sinon.stub().callsArgWith(2, null, expectedResponse);
-            const promise = new Promise((resolve, reject) => {
-                 client.setIamPolicy(
-                    request,
-                    expectedOptions,
-                    (err?: Error|null, result?: IamProtos.google.iam.v1.Policy|null) => {
-                        if (err) {
-                            reject(err);
-                        } else {
-                            resolve(result);
-                        }
-                    });
-            });
-            const response = await promise;
-            assert.deepStrictEqual(response, expectedResponse);
-            assert((client.iamClient.setIamPolicy as SinonStub)
-                .getCall(0));
-        });
-        it('invokes setIamPolicy with error', async () => {
-            const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new IamProtos.google.iam.v1.SetIamPolicyRequest()
-            );
-            request.resource = '';
-            const expectedHeaderRequestParams = 'resource=';
-            const expectedOptions = {
-                otherArgs: {
-                    headers: {
-                        'x-goog-request-params': expectedHeaderRequestParams,
-                    },
-                },
-            };
-            const expectedError = new Error('expected');
-            client.iamClient.setIamPolicy = stubSimpleCall(undefined, expectedError);
-            await assert.rejects(client.setIamPolicy(request, expectedOptions), expectedError);
-            assert((client.iamClient.setIamPolicy as SinonStub)
-                .getCall(0).calledWith(request, expectedOptions, undefined));
-        });
+  });
+  describe('testIamPermissions', () => {
+    it('invokes testIamPermissions without error', async () => {
+      const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new IamProtos.google.iam.v1.TestIamPermissionsRequest()
+      );
+      request.resource = '';
+      const expectedHeaderRequestParams = 'resource=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new IamProtos.google.iam.v1.TestIamPermissionsResponse()
+      );
+      client.iamClient.testIamPermissions = stubSimpleCall(expectedResponse);
+      const response = await client.testIamPermissions(
+        request,
+        expectedOptions
+      );
+      assert.deepStrictEqual(response, [expectedResponse]);
+      assert(
+        (client.iamClient.testIamPermissions as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
     });
-    describe('testIamPermissions', () => {
-        it('invokes testIamPermissions without error', async () => {
-            const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new IamProtos.google.iam.v1.TestIamPermissionsRequest()
-            );
-            request.resource = '';
-            const expectedHeaderRequestParams = 'resource=';
-            const expectedOptions = {
-                otherArgs: {
-                    headers: {
-                        'x-goog-request-params': expectedHeaderRequestParams,
-                    },
-                },
-            };
-            const expectedResponse = generateSampleMessage(
-              new IamProtos.google.iam.v1.TestIamPermissionsResponse()
-            );
-            client.iamClient.testIamPermissions = stubSimpleCall(expectedResponse);
-            const response = await client.testIamPermissions(request, expectedOptions);
-            assert.deepStrictEqual(response, [expectedResponse]);
-            assert((client.iamClient.testIamPermissions as SinonStub)
-                .getCall(0).calledWith(request, expectedOptions, undefined));
-        });
-        it('invokes testIamPermissions without error using callback', async () => {
-            const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new IamProtos.google.iam.v1.TestIamPermissionsRequest()
-            );
-            request.resource = '';
-            const expectedHeaderRequestParams = 'resource=';
-            const expectedOptions = {
-                otherArgs: {
-                    headers: {
-                        'x-goog-request-params': expectedHeaderRequestParams,
-                    },
-                },
-            };
-            const expectedResponse = generateSampleMessage(
-              new IamProtos.google.iam.v1.TestIamPermissionsResponse()
-            );
-            client.iamClient.testIamPermissions = sinon.stub().callsArgWith(2, null, expectedResponse);
-            const promise = new Promise((resolve, reject) => {
-                 client.testIamPermissions(
-                    request,
-                    expectedOptions,
-                    (err?: Error|null, result?: IamProtos.google.iam.v1.TestIamPermissionsResponse|null) => {
-                        if (err) {
-                            reject(err);
-                        } else {
-                            resolve(result);
-                        }
-                    });
-            });
-            const response = await promise;
-            assert.deepStrictEqual(response, expectedResponse);
-            assert((client.iamClient.testIamPermissions as SinonStub)
-                .getCall(0));
-        });
-        it('invokes testIamPermissions with error', async () => {
-            const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new IamProtos.google.iam.v1.TestIamPermissionsRequest()
-            );
-            request.resource = '';
-            const expectedHeaderRequestParams = 'resource=';
-            const expectedOptions = {
-                otherArgs: {
-                    headers: {
-                        'x-goog-request-params': expectedHeaderRequestParams,
-                    },
-                },
-            };
-            const expectedError = new Error('expected');
-            client.iamClient.testIamPermissions = stubSimpleCall(undefined, expectedError);
-            await assert.rejects(client.testIamPermissions(request, expectedOptions), expectedError);
-            assert((client.iamClient.testIamPermissions as SinonStub)
-                .getCall(0).calledWith(request, expectedOptions, undefined));
-        });
-    });
-    describe('getLocation', () => {
-        it('invokes getLocation without error', async () => {
-            const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new LocationProtos.google.cloud.location.GetLocationRequest()
-            );
-            request.name = '';
-            const expectedHeaderRequestParams = 'name=';
-            const expectedOptions = {
-                otherArgs: {
-                    headers: {
-                        'x-goog-request-params': expectedHeaderRequestParams,
-                    },
-                },
-            };
-            const expectedResponse = generateSampleMessage(
-              new LocationProtos.google.cloud.location.Location()
-            );
-            client.locationsClient.getLocation = stubSimpleCall(expectedResponse);
-            const response = await client.getLocation(request, expectedOptions);
-            assert.deepStrictEqual(response, [expectedResponse]);
-            assert((client.locationsClient.getLocation as SinonStub)
-                .getCall(0).calledWith(request, expectedOptions, undefined));
-        });
-        it('invokes getLocation without error using callback', async () => {
-            const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new LocationProtos.google.cloud.location.GetLocationRequest()
-            );
-            request.name = '';
-            const expectedHeaderRequestParams = 'name=';
-            const expectedOptions = {
-                otherArgs: {
-                    headers: {
-                        'x-goog-request-params': expectedHeaderRequestParams,
-                    },
-                },
-            };
-            const expectedResponse = generateSampleMessage(
-              new LocationProtos.google.cloud.location.Location()
-            );
-            client.locationsClient.getLocation = sinon.stub().callsArgWith(2, null, expectedResponse);
-            const promise = new Promise((resolve, reject) => {
-                 client.getLocation(
-                    request,
-                    expectedOptions,
-                    (
-                        err?: Error | null,
-                        result?: LocationProtos.google.cloud.location.ILocation | null
-                    ) => {
-                        if (err) {
-                            reject(err);
-                        } else {
-                            resolve(result);
-                        }
-                    });
-            });
-            const response = await promise;
-            assert.deepStrictEqual(response, expectedResponse);
-            assert((client.locationsClient.getLocation as SinonStub)
-                .getCall(0));
-        });
-        it('invokes getLocation with error', async () => {
-            const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new LocationProtos.google.cloud.location.GetLocationRequest()
-            );
-            request.name = '';
-            const expectedHeaderRequestParams = 'name=';
-            const expectedOptions = {
-                otherArgs: {
-                    headers: {
-                        'x-goog-request-params': expectedHeaderRequestParams,
-                    },
-                },
-            };
-            const expectedError = new Error('expected');
-            client.locationsClient.getLocation = stubSimpleCall(undefined, expectedError);
-            await assert.rejects(client.getLocation(request, expectedOptions), expectedError);
-            assert((client.locationsClient.getLocation as SinonStub)
-                .getCall(0).calledWith(request, expectedOptions, undefined));
-        });
-    });
-    describe('listLocationsAsync', () => {
-        it('uses async iteration with listLocations without error', async () => {
-            const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-                new LocationProtos.google.cloud.location.ListLocationsRequest()
-            );
-            request.name = '';
-            const expectedHeaderRequestParams = 'name=';
-            const expectedResponse = [
-                generateSampleMessage(
-                    new LocationProtos.google.cloud.location.Location()
-                ),
-                generateSampleMessage(
-                    new LocationProtos.google.cloud.location.Location()
-                ),
-                generateSampleMessage(
-                    new LocationProtos.google.cloud.location.Location()
-                ),
-            ];
-            client.locationsClient.descriptors.page.listLocations.asyncIterate = stubAsyncIterationCall(expectedResponse);
-            const responses: LocationProtos.google.cloud.location.ILocation[] = [];
-            const iterable = await client.listLocationsAsync(request);
-            for await (const resource of iterable) {
-                responses.push(resource!);
+    it('invokes testIamPermissions without error using callback', async () => {
+      const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new IamProtos.google.iam.v1.TestIamPermissionsRequest()
+      );
+      request.resource = '';
+      const expectedHeaderRequestParams = 'resource=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new IamProtos.google.iam.v1.TestIamPermissionsResponse()
+      );
+      client.iamClient.testIamPermissions = sinon
+        .stub()
+        .callsArgWith(2, null, expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.testIamPermissions(
+          request,
+          expectedOptions,
+          (
+            err?: Error | null,
+            result?: IamProtos.google.iam.v1.TestIamPermissionsResponse | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
             }
-            assert.deepStrictEqual(responses, expectedResponse);
-            assert.deepStrictEqual(
-                (client.locationsClient.descriptors.page.listLocations.asyncIterate as SinonStub)
-                    .getCall(0).args[1], request);
-            assert(
-                (client.locationsClient.descriptors.page.listLocations.asyncIterate as SinonStub)
-                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
-                        expectedHeaderRequestParams
-                    )
-            );
-        });
-        it('uses async iteration with listLocations with error', async () => {
-            const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new LocationProtos.google.cloud.location.ListLocationsRequest()
-            );
-            request.name = '';
-            const expectedHeaderRequestParams = 'name=';
-            const expectedError = new Error('expected');
-            client.locationsClient.descriptors.page.listLocations.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
-            const iterable = await client.listLocationsAsync(request);
-            await assert.rejects(async () => {
-                const responses: LocationProtos.google.cloud.location.ILocation[] = [];
-                for await (const resource of iterable) {
-                    responses.push(resource!);
-                }
-            });
-            assert.deepStrictEqual(
-                (client.locationsClient.descriptors.page.listLocations.asyncIterate as SinonStub)
-                    .getCall(0).args[1], request);
-            assert(
-                (client.locationsClient.descriptors.page.listLocations.asyncIterate as SinonStub)
-                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
-                        expectedHeaderRequestParams
-                    )
-            );
-        });
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      assert((client.iamClient.testIamPermissions as SinonStub).getCall(0));
     });
-    describe('getOperation', () => {
-        it('invokes getOperation without error', async () => {
-            const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new operationsProtos.google.longrunning.GetOperationRequest()
-            );
-            const expectedResponse = generateSampleMessage(
-                new operationsProtos.google.longrunning.Operation()
-            );
-            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-            const response = await client.getOperation(request);
-            assert.deepStrictEqual(response, [expectedResponse]);
-            assert((client.operationsClient.getOperation as SinonStub)
-                .getCall(0).calledWith(request)
-            );
-        });
-        it('invokes getOperation without error using callback', async () => {
-            const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            const request = generateSampleMessage(
-              new operationsProtos.google.longrunning.GetOperationRequest()
-            );
-            const expectedResponse = generateSampleMessage(
-                new operationsProtos.google.longrunning.Operation()
-            );
-            client.operationsClient.getOperation = sinon.stub().callsArgWith(2, null, expectedResponse);
-            const promise = new Promise((resolve, reject) => {
-                 client.operationsClient.getOperation(
-                    request,
-                    undefined,
-                    (
-                        err?: Error | null,
-                        result?: operationsProtos.google.longrunning.Operation | null
-                    ) => {
-                        if (err) {
-                            reject(err);
-                        } else {
-                            resolve(result);
-                        }
-                    });
-            });
-            const response = await promise;
-            assert.deepStrictEqual(response, expectedResponse);
-            assert((client.operationsClient.getOperation as SinonStub)
-                .getCall(0));
-        });
-        it('invokes getOperation with error', async () => {
-            const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            const request = generateSampleMessage(
-              new operationsProtos.google.longrunning.GetOperationRequest()
-            );
-            const expectedError = new Error('expected');
-            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
-            await assert.rejects(async () => {await client.getOperation(request)}, expectedError);
-            assert((client.operationsClient.getOperation as SinonStub)
-                .getCall(0).calledWith(request));
-        });
+    it('invokes testIamPermissions with error', async () => {
+      const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new IamProtos.google.iam.v1.TestIamPermissionsRequest()
+      );
+      request.resource = '';
+      const expectedHeaderRequestParams = 'resource=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedError = new Error('expected');
+      client.iamClient.testIamPermissions = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.testIamPermissions(request, expectedOptions),
+        expectedError
+      );
+      assert(
+        (client.iamClient.testIamPermissions as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
     });
-    describe('cancelOperation', () => {
-        it('invokes cancelOperation without error', async () => {
-            const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new operationsProtos.google.longrunning.CancelOperationRequest()
-            );
-            const expectedResponse = generateSampleMessage(
-                new protos.google.protobuf.Empty()
-            );
-            client.operationsClient.cancelOperation = stubSimpleCall(expectedResponse);
-            const response = await client.cancelOperation(request);
-            assert.deepStrictEqual(response, [expectedResponse]);
-            assert((client.operationsClient.cancelOperation as SinonStub)
-                .getCall(0).calledWith(request)
-            );
-        });
-        it('invokes cancelOperation without error using callback', async () => {
-            const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            const request = generateSampleMessage(
-              new operationsProtos.google.longrunning.CancelOperationRequest()
-            );
-            const expectedResponse = generateSampleMessage(
-                new protos.google.protobuf.Empty()
-            );
-            client.operationsClient.cancelOperation = sinon.stub().callsArgWith(2, null, expectedResponse);
-            const promise = new Promise((resolve, reject) => {
-                 client.operationsClient.cancelOperation(
-                    request,
-                    undefined,
-                    (
-                        err?: Error | null,
-                        result?: protos.google.protobuf.Empty | null
-                    ) => {
-                        if (err) {
-                            reject(err);
-                        } else {
-                            resolve(result);
-                        }
-                    });
-            });
-            const response = await promise;
-            assert.deepStrictEqual(response, expectedResponse);
-            assert((client.operationsClient.cancelOperation as SinonStub)
-                .getCall(0));
-        });
-        it('invokes cancelOperation with error', async () => {
-            const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            const request = generateSampleMessage(
-              new operationsProtos.google.longrunning.CancelOperationRequest()
-            );
-            const expectedError = new Error('expected');
-            client.operationsClient.cancelOperation = stubSimpleCall(undefined, expectedError);
-            await assert.rejects(async () => {await client.cancelOperation(request)}, expectedError);
-            assert((client.operationsClient.cancelOperation as SinonStub)
-                .getCall(0).calledWith(request));
-        });
+  });
+  describe('getLocation', () => {
+    it('invokes getLocation without error', async () => {
+      const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new LocationProtos.google.cloud.location.GetLocationRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new LocationProtos.google.cloud.location.Location()
+      );
+      client.locationsClient.getLocation = stubSimpleCall(expectedResponse);
+      const response = await client.getLocation(request, expectedOptions);
+      assert.deepStrictEqual(response, [expectedResponse]);
+      assert(
+        (client.locationsClient.getLocation as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
     });
-    describe('deleteOperation', () => {
-        it('invokes deleteOperation without error', async () => {
-            const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new operationsProtos.google.longrunning.DeleteOperationRequest()
-            );
-            const expectedResponse = generateSampleMessage(
-                new protos.google.protobuf.Empty()
-            );
-            client.operationsClient.deleteOperation = stubSimpleCall(expectedResponse);
-            const response = await client.deleteOperation(request);
-            assert.deepStrictEqual(response, [expectedResponse]);
-            assert((client.operationsClient.deleteOperation as SinonStub)
-                .getCall(0).calledWith(request)
-            );
-        });
-        it('invokes deleteOperation without error using callback', async () => {
-            const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            const request = generateSampleMessage(
-              new operationsProtos.google.longrunning.DeleteOperationRequest()
-            );
-            const expectedResponse = generateSampleMessage(
-                new protos.google.protobuf.Empty()
-            );
-            client.operationsClient.deleteOperation = sinon.stub().callsArgWith(2, null, expectedResponse);
-            const promise = new Promise((resolve, reject) => {
-                 client.operationsClient.deleteOperation(
-                    request,
-                    undefined,
-                    (
-                        err?: Error | null,
-                        result?: protos.google.protobuf.Empty | null
-                    ) => {
-                        if (err) {
-                            reject(err);
-                        } else {
-                            resolve(result);
-                        }
-                    });
-            });
-            const response = await promise;
-            assert.deepStrictEqual(response, expectedResponse);
-            assert((client.operationsClient.deleteOperation as SinonStub)
-                .getCall(0));
-        });
-        it('invokes deleteOperation with error', async () => {
-            const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            const request = generateSampleMessage(
-              new operationsProtos.google.longrunning.DeleteOperationRequest()
-            );
-            const expectedError = new Error('expected');
-            client.operationsClient.deleteOperation = stubSimpleCall(undefined, expectedError);
-            await assert.rejects(async () => {await client.deleteOperation(request)}, expectedError);
-            assert((client.operationsClient.deleteOperation as SinonStub)
-                .getCall(0).calledWith(request));
-        });
-    });
-    describe('listOperationsAsync', () => {
-        it('uses async iteration with listOperations without error', async () => {
-            const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            const request = generateSampleMessage(
-              new operationsProtos.google.longrunning.ListOperationsRequest()
-            );
-            const expectedResponse = [
-                generateSampleMessage(
-                    new operationsProtos.google.longrunning.ListOperationsResponse()
-                ),
-                generateSampleMessage(
-                    new operationsProtos.google.longrunning.ListOperationsResponse()
-                ),
-                generateSampleMessage(
-                    new operationsProtos.google.longrunning.ListOperationsResponse()
-                ),
-            ];
-            client.operationsClient.descriptor.listOperations.asyncIterate = stubAsyncIterationCall(expectedResponse);
-            const responses: operationsProtos.google.longrunning.IOperation[] = [];
-            const iterable = await client.operationsClient.listOperationsAsync(request);
-            for await (const resource of iterable) {
-                responses.push(resource!);
+    it('invokes getLocation without error using callback', async () => {
+      const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new LocationProtos.google.cloud.location.GetLocationRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new LocationProtos.google.cloud.location.Location()
+      );
+      client.locationsClient.getLocation = sinon
+        .stub()
+        .callsArgWith(2, null, expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.getLocation(
+          request,
+          expectedOptions,
+          (
+            err?: Error | null,
+            result?: LocationProtos.google.cloud.location.ILocation | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
             }
-            assert.deepStrictEqual(responses, expectedResponse);
-            assert.deepStrictEqual(
-                (client.operationsClient.descriptor.listOperations.asyncIterate as SinonStub)
-                    .getCall(0).args[1], request);
-        });
-        it('uses async iteration with listOperations with error', async () => {
-            const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new operationsProtos.google.longrunning.ListOperationsRequest()
-            );
-            const expectedError = new Error('expected');
-            client.operationsClient.descriptor.listOperations.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
-            const iterable = await client.operationsClient.listOperationsAsync(request);
-            await assert.rejects(async () => {
-                const responses: operationsProtos.google.longrunning.IOperation[] = [];
-                for await (const resource of iterable) {
-                    responses.push(resource!);
-                }
-            });
-            assert.deepStrictEqual(
-                (client.operationsClient.descriptor.listOperations.asyncIterate as SinonStub)
-                    .getCall(0).args[1], request);
-        });
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      assert((client.locationsClient.getLocation as SinonStub).getCall(0));
+    });
+    it('invokes getLocation with error', async () => {
+      const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new LocationProtos.google.cloud.location.GetLocationRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedError = new Error('expected');
+      client.locationsClient.getLocation = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.getLocation(request, expectedOptions),
+        expectedError
+      );
+      assert(
+        (client.locationsClient.getLocation as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+  });
+  describe('listLocationsAsync', () => {
+    it('uses async iteration with listLocations without error', async () => {
+      const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new LocationProtos.google.cloud.location.ListLocationsRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedResponse = [
+        generateSampleMessage(
+          new LocationProtos.google.cloud.location.Location()
+        ),
+        generateSampleMessage(
+          new LocationProtos.google.cloud.location.Location()
+        ),
+        generateSampleMessage(
+          new LocationProtos.google.cloud.location.Location()
+        ),
+      ];
+      client.locationsClient.descriptors.page.listLocations.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
+      const responses: LocationProtos.google.cloud.location.ILocation[] = [];
+      const iterable = await client.listLocationsAsync(request);
+      for await (const resource of iterable) {
+        responses.push(resource!);
+      }
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert.deepStrictEqual(
+        (
+          client.locationsClient.descriptors.page.listLocations
+            .asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request
+      );
+      assert(
+        (
+          client.locationsClient.descriptors.page.listLocations
+            .asyncIterate as SinonStub
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
+      );
+    });
+    it('uses async iteration with listLocations with error', async () => {
+      const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new LocationProtos.google.cloud.location.ListLocationsRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedError = new Error('expected');
+      client.locationsClient.descriptors.page.listLocations.asyncIterate =
+        stubAsyncIterationCall(undefined, expectedError);
+      const iterable = await client.listLocationsAsync(request);
+      await assert.rejects(async () => {
+        const responses: LocationProtos.google.cloud.location.ILocation[] = [];
+        for await (const resource of iterable) {
+          responses.push(resource!);
+        }
+      });
+      assert.deepStrictEqual(
+        (
+          client.locationsClient.descriptors.page.listLocations
+            .asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request
+      );
+      assert(
+        (
+          client.locationsClient.descriptors.page.listLocations
+            .asyncIterate as SinonStub
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
+      );
+    });
+  });
+  describe('getOperation', () => {
+    it('invokes getOperation without error', async () => {
+      const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new operationsProtos.google.longrunning.GetOperationRequest()
+      );
+      const expectedResponse = generateSampleMessage(
+        new operationsProtos.google.longrunning.Operation()
+      );
+      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+      const response = await client.getOperation(request);
+      assert.deepStrictEqual(response, [expectedResponse]);
+      assert(
+        (client.operationsClient.getOperation as SinonStub)
+          .getCall(0)
+          .calledWith(request)
+      );
+    });
+    it('invokes getOperation without error using callback', async () => {
+      const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      const request = generateSampleMessage(
+        new operationsProtos.google.longrunning.GetOperationRequest()
+      );
+      const expectedResponse = generateSampleMessage(
+        new operationsProtos.google.longrunning.Operation()
+      );
+      client.operationsClient.getOperation = sinon
+        .stub()
+        .callsArgWith(2, null, expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.operationsClient.getOperation(
+          request,
+          undefined,
+          (
+            err?: Error | null,
+            result?: operationsProtos.google.longrunning.Operation | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+    it('invokes getOperation with error', async () => {
+      const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      const request = generateSampleMessage(
+        new operationsProtos.google.longrunning.GetOperationRequest()
+      );
+      const expectedError = new Error('expected');
+      client.operationsClient.getOperation = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(async () => {
+        await client.getOperation(request);
+      }, expectedError);
+      assert(
+        (client.operationsClient.getOperation as SinonStub)
+          .getCall(0)
+          .calledWith(request)
+      );
+    });
+  });
+  describe('cancelOperation', () => {
+    it('invokes cancelOperation without error', async () => {
+      const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new operationsProtos.google.longrunning.CancelOperationRequest()
+      );
+      const expectedResponse = generateSampleMessage(
+        new protos.google.protobuf.Empty()
+      );
+      client.operationsClient.cancelOperation =
+        stubSimpleCall(expectedResponse);
+      const response = await client.cancelOperation(request);
+      assert.deepStrictEqual(response, [expectedResponse]);
+      assert(
+        (client.operationsClient.cancelOperation as SinonStub)
+          .getCall(0)
+          .calledWith(request)
+      );
+    });
+    it('invokes cancelOperation without error using callback', async () => {
+      const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      const request = generateSampleMessage(
+        new operationsProtos.google.longrunning.CancelOperationRequest()
+      );
+      const expectedResponse = generateSampleMessage(
+        new protos.google.protobuf.Empty()
+      );
+      client.operationsClient.cancelOperation = sinon
+        .stub()
+        .callsArgWith(2, null, expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.operationsClient.cancelOperation(
+          request,
+          undefined,
+          (
+            err?: Error | null,
+            result?: protos.google.protobuf.Empty | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      assert((client.operationsClient.cancelOperation as SinonStub).getCall(0));
+    });
+    it('invokes cancelOperation with error', async () => {
+      const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      const request = generateSampleMessage(
+        new operationsProtos.google.longrunning.CancelOperationRequest()
+      );
+      const expectedError = new Error('expected');
+      client.operationsClient.cancelOperation = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(async () => {
+        await client.cancelOperation(request);
+      }, expectedError);
+      assert(
+        (client.operationsClient.cancelOperation as SinonStub)
+          .getCall(0)
+          .calledWith(request)
+      );
+    });
+  });
+  describe('deleteOperation', () => {
+    it('invokes deleteOperation without error', async () => {
+      const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new operationsProtos.google.longrunning.DeleteOperationRequest()
+      );
+      const expectedResponse = generateSampleMessage(
+        new protos.google.protobuf.Empty()
+      );
+      client.operationsClient.deleteOperation =
+        stubSimpleCall(expectedResponse);
+      const response = await client.deleteOperation(request);
+      assert.deepStrictEqual(response, [expectedResponse]);
+      assert(
+        (client.operationsClient.deleteOperation as SinonStub)
+          .getCall(0)
+          .calledWith(request)
+      );
+    });
+    it('invokes deleteOperation without error using callback', async () => {
+      const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      const request = generateSampleMessage(
+        new operationsProtos.google.longrunning.DeleteOperationRequest()
+      );
+      const expectedResponse = generateSampleMessage(
+        new protos.google.protobuf.Empty()
+      );
+      client.operationsClient.deleteOperation = sinon
+        .stub()
+        .callsArgWith(2, null, expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.operationsClient.deleteOperation(
+          request,
+          undefined,
+          (
+            err?: Error | null,
+            result?: protos.google.protobuf.Empty | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      assert((client.operationsClient.deleteOperation as SinonStub).getCall(0));
+    });
+    it('invokes deleteOperation with error', async () => {
+      const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      const request = generateSampleMessage(
+        new operationsProtos.google.longrunning.DeleteOperationRequest()
+      );
+      const expectedError = new Error('expected');
+      client.operationsClient.deleteOperation = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(async () => {
+        await client.deleteOperation(request);
+      }, expectedError);
+      assert(
+        (client.operationsClient.deleteOperation as SinonStub)
+          .getCall(0)
+          .calledWith(request)
+      );
+    });
+  });
+  describe('listOperationsAsync', () => {
+    it('uses async iteration with listOperations without error', async () => {
+      const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      const request = generateSampleMessage(
+        new operationsProtos.google.longrunning.ListOperationsRequest()
+      );
+      const expectedResponse = [
+        generateSampleMessage(
+          new operationsProtos.google.longrunning.ListOperationsResponse()
+        ),
+        generateSampleMessage(
+          new operationsProtos.google.longrunning.ListOperationsResponse()
+        ),
+        generateSampleMessage(
+          new operationsProtos.google.longrunning.ListOperationsResponse()
+        ),
+      ];
+      client.operationsClient.descriptor.listOperations.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
+      const responses: operationsProtos.google.longrunning.IOperation[] = [];
+      const iterable =
+        await client.operationsClient.listOperationsAsync(request);
+      for await (const resource of iterable) {
+        responses.push(resource!);
+      }
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert.deepStrictEqual(
+        (
+          client.operationsClient.descriptor.listOperations
+            .asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request
+      );
+    });
+    it('uses async iteration with listOperations with error', async () => {
+      const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new operationsProtos.google.longrunning.ListOperationsRequest()
+      );
+      const expectedError = new Error('expected');
+      client.operationsClient.descriptor.listOperations.asyncIterate =
+        stubAsyncIterationCall(undefined, expectedError);
+      const iterable =
+        await client.operationsClient.listOperationsAsync(request);
+      await assert.rejects(async () => {
+        const responses: operationsProtos.google.longrunning.IOperation[] = [];
+        for await (const resource of iterable) {
+          responses.push(resource!);
+        }
+      });
+      assert.deepStrictEqual(
+        (
+          client.operationsClient.descriptor.listOperations
+            .asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request
+      );
+    });
+  });
+
+  describe('Path templates', () => {
+    describe('annotation', async () => {
+      const fakePath = '/rendered/path/annotation';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        dataset: 'datasetValue',
+        data_item: 'dataItemValue',
+        annotation: 'annotationValue',
+      };
+      const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      client.pathTemplates.annotationPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.annotationPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('annotationPath', async () => {
+        const result = await client.annotationPath(
+          'projectValue',
+          'locationValue',
+          'datasetValue',
+          'dataItemValue',
+          'annotationValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.annotationPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromAnnotationName', async () => {
+        const result = await client.matchProjectFromAnnotationName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.annotationPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromAnnotationName', async () => {
+        const result = await client.matchLocationFromAnnotationName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.annotationPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchDatasetFromAnnotationName', async () => {
+        const result = await client.matchDatasetFromAnnotationName(fakePath);
+        assert.strictEqual(result, 'datasetValue');
+        assert(
+          (client.pathTemplates.annotationPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchDataItemFromAnnotationName', async () => {
+        const result = await client.matchDataItemFromAnnotationName(fakePath);
+        assert.strictEqual(result, 'dataItemValue');
+        assert(
+          (client.pathTemplates.annotationPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchAnnotationFromAnnotationName', async () => {
+        const result = await client.matchAnnotationFromAnnotationName(fakePath);
+        assert.strictEqual(result, 'annotationValue');
+        assert(
+          (client.pathTemplates.annotationPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
     });
 
-    describe('Path templates', () => {
-
-        describe('annotation', async () => {
-            const fakePath = "/rendered/path/annotation";
-            const expectedParameters = {
-                project: "projectValue",
-                location: "locationValue",
-                dataset: "datasetValue",
-                data_item: "dataItemValue",
-                annotation: "annotationValue",
-            };
-            const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            client.pathTemplates.annotationPathTemplate.render =
-                sinon.stub().returns(fakePath);
-            client.pathTemplates.annotationPathTemplate.match =
-                sinon.stub().returns(expectedParameters);
-
-            it('annotationPath', async () => {
-                const result = await client.annotationPath("projectValue", "locationValue", "datasetValue", "dataItemValue", "annotationValue");
-                assert.strictEqual(result, fakePath);
-                assert((client.pathTemplates.annotationPathTemplate.render as SinonStub)
-                    .getCall(-1).calledWith(expectedParameters));
-            });
-
-            it('matchProjectFromAnnotationName', async () => {
-                const result = await client.matchProjectFromAnnotationName(fakePath);
-                assert.strictEqual(result, "projectValue");
-                assert((client.pathTemplates.annotationPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchLocationFromAnnotationName', async () => {
-                const result = await client.matchLocationFromAnnotationName(fakePath);
-                assert.strictEqual(result, "locationValue");
-                assert((client.pathTemplates.annotationPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchDatasetFromAnnotationName', async () => {
-                const result = await client.matchDatasetFromAnnotationName(fakePath);
-                assert.strictEqual(result, "datasetValue");
-                assert((client.pathTemplates.annotationPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchDataItemFromAnnotationName', async () => {
-                const result = await client.matchDataItemFromAnnotationName(fakePath);
-                assert.strictEqual(result, "dataItemValue");
-                assert((client.pathTemplates.annotationPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchAnnotationFromAnnotationName', async () => {
-                const result = await client.matchAnnotationFromAnnotationName(fakePath);
-                assert.strictEqual(result, "annotationValue");
-                assert((client.pathTemplates.annotationPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-        });
-
-        describe('annotationSpec', async () => {
-            const fakePath = "/rendered/path/annotationSpec";
-            const expectedParameters = {
-                project: "projectValue",
-                location: "locationValue",
-                dataset: "datasetValue",
-                annotation_spec: "annotationSpecValue",
-            };
-            const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            client.pathTemplates.annotationSpecPathTemplate.render =
-                sinon.stub().returns(fakePath);
-            client.pathTemplates.annotationSpecPathTemplate.match =
-                sinon.stub().returns(expectedParameters);
-
-            it('annotationSpecPath', async () => {
-                const result = await client.annotationSpecPath("projectValue", "locationValue", "datasetValue", "annotationSpecValue");
-                assert.strictEqual(result, fakePath);
-                assert((client.pathTemplates.annotationSpecPathTemplate.render as SinonStub)
-                    .getCall(-1).calledWith(expectedParameters));
-            });
-
-            it('matchProjectFromAnnotationSpecName', async () => {
-                const result = await client.matchProjectFromAnnotationSpecName(fakePath);
-                assert.strictEqual(result, "projectValue");
-                assert((client.pathTemplates.annotationSpecPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchLocationFromAnnotationSpecName', async () => {
-                const result = await client.matchLocationFromAnnotationSpecName(fakePath);
-                assert.strictEqual(result, "locationValue");
-                assert((client.pathTemplates.annotationSpecPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchDatasetFromAnnotationSpecName', async () => {
-                const result = await client.matchDatasetFromAnnotationSpecName(fakePath);
-                assert.strictEqual(result, "datasetValue");
-                assert((client.pathTemplates.annotationSpecPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchAnnotationSpecFromAnnotationSpecName', async () => {
-                const result = await client.matchAnnotationSpecFromAnnotationSpecName(fakePath);
-                assert.strictEqual(result, "annotationSpecValue");
-                assert((client.pathTemplates.annotationSpecPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-        });
-
-        describe('artifact', async () => {
-            const fakePath = "/rendered/path/artifact";
-            const expectedParameters = {
-                project: "projectValue",
-                location: "locationValue",
-                metadata_store: "metadataStoreValue",
-                artifact: "artifactValue",
-            };
-            const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            client.pathTemplates.artifactPathTemplate.render =
-                sinon.stub().returns(fakePath);
-            client.pathTemplates.artifactPathTemplate.match =
-                sinon.stub().returns(expectedParameters);
-
-            it('artifactPath', async () => {
-                const result = await client.artifactPath("projectValue", "locationValue", "metadataStoreValue", "artifactValue");
-                assert.strictEqual(result, fakePath);
-                assert((client.pathTemplates.artifactPathTemplate.render as SinonStub)
-                    .getCall(-1).calledWith(expectedParameters));
-            });
-
-            it('matchProjectFromArtifactName', async () => {
-                const result = await client.matchProjectFromArtifactName(fakePath);
-                assert.strictEqual(result, "projectValue");
-                assert((client.pathTemplates.artifactPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchLocationFromArtifactName', async () => {
-                const result = await client.matchLocationFromArtifactName(fakePath);
-                assert.strictEqual(result, "locationValue");
-                assert((client.pathTemplates.artifactPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchMetadataStoreFromArtifactName', async () => {
-                const result = await client.matchMetadataStoreFromArtifactName(fakePath);
-                assert.strictEqual(result, "metadataStoreValue");
-                assert((client.pathTemplates.artifactPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchArtifactFromArtifactName', async () => {
-                const result = await client.matchArtifactFromArtifactName(fakePath);
-                assert.strictEqual(result, "artifactValue");
-                assert((client.pathTemplates.artifactPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-        });
-
-        describe('batchPredictionJob', async () => {
-            const fakePath = "/rendered/path/batchPredictionJob";
-            const expectedParameters = {
-                project: "projectValue",
-                location: "locationValue",
-                batch_prediction_job: "batchPredictionJobValue",
-            };
-            const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            client.pathTemplates.batchPredictionJobPathTemplate.render =
-                sinon.stub().returns(fakePath);
-            client.pathTemplates.batchPredictionJobPathTemplate.match =
-                sinon.stub().returns(expectedParameters);
-
-            it('batchPredictionJobPath', async () => {
-                const result = await client.batchPredictionJobPath("projectValue", "locationValue", "batchPredictionJobValue");
-                assert.strictEqual(result, fakePath);
-                assert((client.pathTemplates.batchPredictionJobPathTemplate.render as SinonStub)
-                    .getCall(-1).calledWith(expectedParameters));
-            });
-
-            it('matchProjectFromBatchPredictionJobName', async () => {
-                const result = await client.matchProjectFromBatchPredictionJobName(fakePath);
-                assert.strictEqual(result, "projectValue");
-                assert((client.pathTemplates.batchPredictionJobPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchLocationFromBatchPredictionJobName', async () => {
-                const result = await client.matchLocationFromBatchPredictionJobName(fakePath);
-                assert.strictEqual(result, "locationValue");
-                assert((client.pathTemplates.batchPredictionJobPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchBatchPredictionJobFromBatchPredictionJobName', async () => {
-                const result = await client.matchBatchPredictionJobFromBatchPredictionJobName(fakePath);
-                assert.strictEqual(result, "batchPredictionJobValue");
-                assert((client.pathTemplates.batchPredictionJobPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-        });
-
-        describe('cachedContent', async () => {
-            const fakePath = "/rendered/path/cachedContent";
-            const expectedParameters = {
-                project: "projectValue",
-                location: "locationValue",
-                cached_content: "cachedContentValue",
-            };
-            const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            client.pathTemplates.cachedContentPathTemplate.render =
-                sinon.stub().returns(fakePath);
-            client.pathTemplates.cachedContentPathTemplate.match =
-                sinon.stub().returns(expectedParameters);
-
-            it('cachedContentPath', async () => {
-                const result = await client.cachedContentPath("projectValue", "locationValue", "cachedContentValue");
-                assert.strictEqual(result, fakePath);
-                assert((client.pathTemplates.cachedContentPathTemplate.render as SinonStub)
-                    .getCall(-1).calledWith(expectedParameters));
-            });
-
-            it('matchProjectFromCachedContentName', async () => {
-                const result = await client.matchProjectFromCachedContentName(fakePath);
-                assert.strictEqual(result, "projectValue");
-                assert((client.pathTemplates.cachedContentPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchLocationFromCachedContentName', async () => {
-                const result = await client.matchLocationFromCachedContentName(fakePath);
-                assert.strictEqual(result, "locationValue");
-                assert((client.pathTemplates.cachedContentPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchCachedContentFromCachedContentName', async () => {
-                const result = await client.matchCachedContentFromCachedContentName(fakePath);
-                assert.strictEqual(result, "cachedContentValue");
-                assert((client.pathTemplates.cachedContentPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-        });
-
-        describe('context', async () => {
-            const fakePath = "/rendered/path/context";
-            const expectedParameters = {
-                project: "projectValue",
-                location: "locationValue",
-                metadata_store: "metadataStoreValue",
-                context: "contextValue",
-            };
-            const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            client.pathTemplates.contextPathTemplate.render =
-                sinon.stub().returns(fakePath);
-            client.pathTemplates.contextPathTemplate.match =
-                sinon.stub().returns(expectedParameters);
-
-            it('contextPath', async () => {
-                const result = await client.contextPath("projectValue", "locationValue", "metadataStoreValue", "contextValue");
-                assert.strictEqual(result, fakePath);
-                assert((client.pathTemplates.contextPathTemplate.render as SinonStub)
-                    .getCall(-1).calledWith(expectedParameters));
-            });
-
-            it('matchProjectFromContextName', async () => {
-                const result = await client.matchProjectFromContextName(fakePath);
-                assert.strictEqual(result, "projectValue");
-                assert((client.pathTemplates.contextPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchLocationFromContextName', async () => {
-                const result = await client.matchLocationFromContextName(fakePath);
-                assert.strictEqual(result, "locationValue");
-                assert((client.pathTemplates.contextPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchMetadataStoreFromContextName', async () => {
-                const result = await client.matchMetadataStoreFromContextName(fakePath);
-                assert.strictEqual(result, "metadataStoreValue");
-                assert((client.pathTemplates.contextPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchContextFromContextName', async () => {
-                const result = await client.matchContextFromContextName(fakePath);
-                assert.strictEqual(result, "contextValue");
-                assert((client.pathTemplates.contextPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-        });
-
-        describe('customJob', async () => {
-            const fakePath = "/rendered/path/customJob";
-            const expectedParameters = {
-                project: "projectValue",
-                location: "locationValue",
-                custom_job: "customJobValue",
-            };
-            const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            client.pathTemplates.customJobPathTemplate.render =
-                sinon.stub().returns(fakePath);
-            client.pathTemplates.customJobPathTemplate.match =
-                sinon.stub().returns(expectedParameters);
-
-            it('customJobPath', async () => {
-                const result = await client.customJobPath("projectValue", "locationValue", "customJobValue");
-                assert.strictEqual(result, fakePath);
-                assert((client.pathTemplates.customJobPathTemplate.render as SinonStub)
-                    .getCall(-1).calledWith(expectedParameters));
-            });
-
-            it('matchProjectFromCustomJobName', async () => {
-                const result = await client.matchProjectFromCustomJobName(fakePath);
-                assert.strictEqual(result, "projectValue");
-                assert((client.pathTemplates.customJobPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchLocationFromCustomJobName', async () => {
-                const result = await client.matchLocationFromCustomJobName(fakePath);
-                assert.strictEqual(result, "locationValue");
-                assert((client.pathTemplates.customJobPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchCustomJobFromCustomJobName', async () => {
-                const result = await client.matchCustomJobFromCustomJobName(fakePath);
-                assert.strictEqual(result, "customJobValue");
-                assert((client.pathTemplates.customJobPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-        });
-
-        describe('dataItem', async () => {
-            const fakePath = "/rendered/path/dataItem";
-            const expectedParameters = {
-                project: "projectValue",
-                location: "locationValue",
-                dataset: "datasetValue",
-                data_item: "dataItemValue",
-            };
-            const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            client.pathTemplates.dataItemPathTemplate.render =
-                sinon.stub().returns(fakePath);
-            client.pathTemplates.dataItemPathTemplate.match =
-                sinon.stub().returns(expectedParameters);
-
-            it('dataItemPath', async () => {
-                const result = await client.dataItemPath("projectValue", "locationValue", "datasetValue", "dataItemValue");
-                assert.strictEqual(result, fakePath);
-                assert((client.pathTemplates.dataItemPathTemplate.render as SinonStub)
-                    .getCall(-1).calledWith(expectedParameters));
-            });
-
-            it('matchProjectFromDataItemName', async () => {
-                const result = await client.matchProjectFromDataItemName(fakePath);
-                assert.strictEqual(result, "projectValue");
-                assert((client.pathTemplates.dataItemPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchLocationFromDataItemName', async () => {
-                const result = await client.matchLocationFromDataItemName(fakePath);
-                assert.strictEqual(result, "locationValue");
-                assert((client.pathTemplates.dataItemPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchDatasetFromDataItemName', async () => {
-                const result = await client.matchDatasetFromDataItemName(fakePath);
-                assert.strictEqual(result, "datasetValue");
-                assert((client.pathTemplates.dataItemPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchDataItemFromDataItemName', async () => {
-                const result = await client.matchDataItemFromDataItemName(fakePath);
-                assert.strictEqual(result, "dataItemValue");
-                assert((client.pathTemplates.dataItemPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-        });
-
-        describe('dataLabelingJob', async () => {
-            const fakePath = "/rendered/path/dataLabelingJob";
-            const expectedParameters = {
-                project: "projectValue",
-                location: "locationValue",
-                data_labeling_job: "dataLabelingJobValue",
-            };
-            const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            client.pathTemplates.dataLabelingJobPathTemplate.render =
-                sinon.stub().returns(fakePath);
-            client.pathTemplates.dataLabelingJobPathTemplate.match =
-                sinon.stub().returns(expectedParameters);
-
-            it('dataLabelingJobPath', async () => {
-                const result = await client.dataLabelingJobPath("projectValue", "locationValue", "dataLabelingJobValue");
-                assert.strictEqual(result, fakePath);
-                assert((client.pathTemplates.dataLabelingJobPathTemplate.render as SinonStub)
-                    .getCall(-1).calledWith(expectedParameters));
-            });
-
-            it('matchProjectFromDataLabelingJobName', async () => {
-                const result = await client.matchProjectFromDataLabelingJobName(fakePath);
-                assert.strictEqual(result, "projectValue");
-                assert((client.pathTemplates.dataLabelingJobPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchLocationFromDataLabelingJobName', async () => {
-                const result = await client.matchLocationFromDataLabelingJobName(fakePath);
-                assert.strictEqual(result, "locationValue");
-                assert((client.pathTemplates.dataLabelingJobPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchDataLabelingJobFromDataLabelingJobName', async () => {
-                const result = await client.matchDataLabelingJobFromDataLabelingJobName(fakePath);
-                assert.strictEqual(result, "dataLabelingJobValue");
-                assert((client.pathTemplates.dataLabelingJobPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-        });
-
-        describe('dataset', async () => {
-            const fakePath = "/rendered/path/dataset";
-            const expectedParameters = {
-                project: "projectValue",
-                location: "locationValue",
-                dataset: "datasetValue",
-            };
-            const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            client.pathTemplates.datasetPathTemplate.render =
-                sinon.stub().returns(fakePath);
-            client.pathTemplates.datasetPathTemplate.match =
-                sinon.stub().returns(expectedParameters);
-
-            it('datasetPath', async () => {
-                const result = await client.datasetPath("projectValue", "locationValue", "datasetValue");
-                assert.strictEqual(result, fakePath);
-                assert((client.pathTemplates.datasetPathTemplate.render as SinonStub)
-                    .getCall(-1).calledWith(expectedParameters));
-            });
-
-            it('matchProjectFromDatasetName', async () => {
-                const result = await client.matchProjectFromDatasetName(fakePath);
-                assert.strictEqual(result, "projectValue");
-                assert((client.pathTemplates.datasetPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchLocationFromDatasetName', async () => {
-                const result = await client.matchLocationFromDatasetName(fakePath);
-                assert.strictEqual(result, "locationValue");
-                assert((client.pathTemplates.datasetPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchDatasetFromDatasetName', async () => {
-                const result = await client.matchDatasetFromDatasetName(fakePath);
-                assert.strictEqual(result, "datasetValue");
-                assert((client.pathTemplates.datasetPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-        });
-
-        describe('datasetVersion', async () => {
-            const fakePath = "/rendered/path/datasetVersion";
-            const expectedParameters = {
-                project: "projectValue",
-                location: "locationValue",
-                dataset: "datasetValue",
-                dataset_version: "datasetVersionValue",
-            };
-            const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            client.pathTemplates.datasetVersionPathTemplate.render =
-                sinon.stub().returns(fakePath);
-            client.pathTemplates.datasetVersionPathTemplate.match =
-                sinon.stub().returns(expectedParameters);
-
-            it('datasetVersionPath', async () => {
-                const result = await client.datasetVersionPath("projectValue", "locationValue", "datasetValue", "datasetVersionValue");
-                assert.strictEqual(result, fakePath);
-                assert((client.pathTemplates.datasetVersionPathTemplate.render as SinonStub)
-                    .getCall(-1).calledWith(expectedParameters));
-            });
-
-            it('matchProjectFromDatasetVersionName', async () => {
-                const result = await client.matchProjectFromDatasetVersionName(fakePath);
-                assert.strictEqual(result, "projectValue");
-                assert((client.pathTemplates.datasetVersionPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchLocationFromDatasetVersionName', async () => {
-                const result = await client.matchLocationFromDatasetVersionName(fakePath);
-                assert.strictEqual(result, "locationValue");
-                assert((client.pathTemplates.datasetVersionPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchDatasetFromDatasetVersionName', async () => {
-                const result = await client.matchDatasetFromDatasetVersionName(fakePath);
-                assert.strictEqual(result, "datasetValue");
-                assert((client.pathTemplates.datasetVersionPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchDatasetVersionFromDatasetVersionName', async () => {
-                const result = await client.matchDatasetVersionFromDatasetVersionName(fakePath);
-                assert.strictEqual(result, "datasetVersionValue");
-                assert((client.pathTemplates.datasetVersionPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-        });
-
-        describe('deploymentResourcePool', async () => {
-            const fakePath = "/rendered/path/deploymentResourcePool";
-            const expectedParameters = {
-                project: "projectValue",
-                location: "locationValue",
-                deployment_resource_pool: "deploymentResourcePoolValue",
-            };
-            const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            client.pathTemplates.deploymentResourcePoolPathTemplate.render =
-                sinon.stub().returns(fakePath);
-            client.pathTemplates.deploymentResourcePoolPathTemplate.match =
-                sinon.stub().returns(expectedParameters);
-
-            it('deploymentResourcePoolPath', async () => {
-                const result = await client.deploymentResourcePoolPath("projectValue", "locationValue", "deploymentResourcePoolValue");
-                assert.strictEqual(result, fakePath);
-                assert((client.pathTemplates.deploymentResourcePoolPathTemplate.render as SinonStub)
-                    .getCall(-1).calledWith(expectedParameters));
-            });
-
-            it('matchProjectFromDeploymentResourcePoolName', async () => {
-                const result = await client.matchProjectFromDeploymentResourcePoolName(fakePath);
-                assert.strictEqual(result, "projectValue");
-                assert((client.pathTemplates.deploymentResourcePoolPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchLocationFromDeploymentResourcePoolName', async () => {
-                const result = await client.matchLocationFromDeploymentResourcePoolName(fakePath);
-                assert.strictEqual(result, "locationValue");
-                assert((client.pathTemplates.deploymentResourcePoolPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchDeploymentResourcePoolFromDeploymentResourcePoolName', async () => {
-                const result = await client.matchDeploymentResourcePoolFromDeploymentResourcePoolName(fakePath);
-                assert.strictEqual(result, "deploymentResourcePoolValue");
-                assert((client.pathTemplates.deploymentResourcePoolPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-        });
-
-        describe('entityType', async () => {
-            const fakePath = "/rendered/path/entityType";
-            const expectedParameters = {
-                project: "projectValue",
-                location: "locationValue",
-                featurestore: "featurestoreValue",
-                entity_type: "entityTypeValue",
-            };
-            const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            client.pathTemplates.entityTypePathTemplate.render =
-                sinon.stub().returns(fakePath);
-            client.pathTemplates.entityTypePathTemplate.match =
-                sinon.stub().returns(expectedParameters);
-
-            it('entityTypePath', async () => {
-                const result = await client.entityTypePath("projectValue", "locationValue", "featurestoreValue", "entityTypeValue");
-                assert.strictEqual(result, fakePath);
-                assert((client.pathTemplates.entityTypePathTemplate.render as SinonStub)
-                    .getCall(-1).calledWith(expectedParameters));
-            });
-
-            it('matchProjectFromEntityTypeName', async () => {
-                const result = await client.matchProjectFromEntityTypeName(fakePath);
-                assert.strictEqual(result, "projectValue");
-                assert((client.pathTemplates.entityTypePathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchLocationFromEntityTypeName', async () => {
-                const result = await client.matchLocationFromEntityTypeName(fakePath);
-                assert.strictEqual(result, "locationValue");
-                assert((client.pathTemplates.entityTypePathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchFeaturestoreFromEntityTypeName', async () => {
-                const result = await client.matchFeaturestoreFromEntityTypeName(fakePath);
-                assert.strictEqual(result, "featurestoreValue");
-                assert((client.pathTemplates.entityTypePathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchEntityTypeFromEntityTypeName', async () => {
-                const result = await client.matchEntityTypeFromEntityTypeName(fakePath);
-                assert.strictEqual(result, "entityTypeValue");
-                assert((client.pathTemplates.entityTypePathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-        });
-
-        describe('execution', async () => {
-            const fakePath = "/rendered/path/execution";
-            const expectedParameters = {
-                project: "projectValue",
-                location: "locationValue",
-                metadata_store: "metadataStoreValue",
-                execution: "executionValue",
-            };
-            const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            client.pathTemplates.executionPathTemplate.render =
-                sinon.stub().returns(fakePath);
-            client.pathTemplates.executionPathTemplate.match =
-                sinon.stub().returns(expectedParameters);
-
-            it('executionPath', async () => {
-                const result = await client.executionPath("projectValue", "locationValue", "metadataStoreValue", "executionValue");
-                assert.strictEqual(result, fakePath);
-                assert((client.pathTemplates.executionPathTemplate.render as SinonStub)
-                    .getCall(-1).calledWith(expectedParameters));
-            });
-
-            it('matchProjectFromExecutionName', async () => {
-                const result = await client.matchProjectFromExecutionName(fakePath);
-                assert.strictEqual(result, "projectValue");
-                assert((client.pathTemplates.executionPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchLocationFromExecutionName', async () => {
-                const result = await client.matchLocationFromExecutionName(fakePath);
-                assert.strictEqual(result, "locationValue");
-                assert((client.pathTemplates.executionPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchMetadataStoreFromExecutionName', async () => {
-                const result = await client.matchMetadataStoreFromExecutionName(fakePath);
-                assert.strictEqual(result, "metadataStoreValue");
-                assert((client.pathTemplates.executionPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchExecutionFromExecutionName', async () => {
-                const result = await client.matchExecutionFromExecutionName(fakePath);
-                assert.strictEqual(result, "executionValue");
-                assert((client.pathTemplates.executionPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-        });
-
-        describe('featureGroup', async () => {
-            const fakePath = "/rendered/path/featureGroup";
-            const expectedParameters = {
-                project: "projectValue",
-                location: "locationValue",
-                feature_group: "featureGroupValue",
-            };
-            const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            client.pathTemplates.featureGroupPathTemplate.render =
-                sinon.stub().returns(fakePath);
-            client.pathTemplates.featureGroupPathTemplate.match =
-                sinon.stub().returns(expectedParameters);
-
-            it('featureGroupPath', async () => {
-                const result = await client.featureGroupPath("projectValue", "locationValue", "featureGroupValue");
-                assert.strictEqual(result, fakePath);
-                assert((client.pathTemplates.featureGroupPathTemplate.render as SinonStub)
-                    .getCall(-1).calledWith(expectedParameters));
-            });
-
-            it('matchProjectFromFeatureGroupName', async () => {
-                const result = await client.matchProjectFromFeatureGroupName(fakePath);
-                assert.strictEqual(result, "projectValue");
-                assert((client.pathTemplates.featureGroupPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchLocationFromFeatureGroupName', async () => {
-                const result = await client.matchLocationFromFeatureGroupName(fakePath);
-                assert.strictEqual(result, "locationValue");
-                assert((client.pathTemplates.featureGroupPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchFeatureGroupFromFeatureGroupName', async () => {
-                const result = await client.matchFeatureGroupFromFeatureGroupName(fakePath);
-                assert.strictEqual(result, "featureGroupValue");
-                assert((client.pathTemplates.featureGroupPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-        });
-
-        describe('featureOnlineStore', async () => {
-            const fakePath = "/rendered/path/featureOnlineStore";
-            const expectedParameters = {
-                project: "projectValue",
-                location: "locationValue",
-                feature_online_store: "featureOnlineStoreValue",
-            };
-            const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            client.pathTemplates.featureOnlineStorePathTemplate.render =
-                sinon.stub().returns(fakePath);
-            client.pathTemplates.featureOnlineStorePathTemplate.match =
-                sinon.stub().returns(expectedParameters);
-
-            it('featureOnlineStorePath', async () => {
-                const result = await client.featureOnlineStorePath("projectValue", "locationValue", "featureOnlineStoreValue");
-                assert.strictEqual(result, fakePath);
-                assert((client.pathTemplates.featureOnlineStorePathTemplate.render as SinonStub)
-                    .getCall(-1).calledWith(expectedParameters));
-            });
-
-            it('matchProjectFromFeatureOnlineStoreName', async () => {
-                const result = await client.matchProjectFromFeatureOnlineStoreName(fakePath);
-                assert.strictEqual(result, "projectValue");
-                assert((client.pathTemplates.featureOnlineStorePathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchLocationFromFeatureOnlineStoreName', async () => {
-                const result = await client.matchLocationFromFeatureOnlineStoreName(fakePath);
-                assert.strictEqual(result, "locationValue");
-                assert((client.pathTemplates.featureOnlineStorePathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchFeatureOnlineStoreFromFeatureOnlineStoreName', async () => {
-                const result = await client.matchFeatureOnlineStoreFromFeatureOnlineStoreName(fakePath);
-                assert.strictEqual(result, "featureOnlineStoreValue");
-                assert((client.pathTemplates.featureOnlineStorePathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-        });
-
-        describe('featureView', async () => {
-            const fakePath = "/rendered/path/featureView";
-            const expectedParameters = {
-                project: "projectValue",
-                location: "locationValue",
-                feature_online_store: "featureOnlineStoreValue",
-                feature_view: "featureViewValue",
-            };
-            const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            client.pathTemplates.featureViewPathTemplate.render =
-                sinon.stub().returns(fakePath);
-            client.pathTemplates.featureViewPathTemplate.match =
-                sinon.stub().returns(expectedParameters);
-
-            it('featureViewPath', async () => {
-                const result = await client.featureViewPath("projectValue", "locationValue", "featureOnlineStoreValue", "featureViewValue");
-                assert.strictEqual(result, fakePath);
-                assert((client.pathTemplates.featureViewPathTemplate.render as SinonStub)
-                    .getCall(-1).calledWith(expectedParameters));
-            });
-
-            it('matchProjectFromFeatureViewName', async () => {
-                const result = await client.matchProjectFromFeatureViewName(fakePath);
-                assert.strictEqual(result, "projectValue");
-                assert((client.pathTemplates.featureViewPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchLocationFromFeatureViewName', async () => {
-                const result = await client.matchLocationFromFeatureViewName(fakePath);
-                assert.strictEqual(result, "locationValue");
-                assert((client.pathTemplates.featureViewPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchFeatureOnlineStoreFromFeatureViewName', async () => {
-                const result = await client.matchFeatureOnlineStoreFromFeatureViewName(fakePath);
-                assert.strictEqual(result, "featureOnlineStoreValue");
-                assert((client.pathTemplates.featureViewPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchFeatureViewFromFeatureViewName', async () => {
-                const result = await client.matchFeatureViewFromFeatureViewName(fakePath);
-                assert.strictEqual(result, "featureViewValue");
-                assert((client.pathTemplates.featureViewPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-        });
-
-        describe('featureViewSync', async () => {
-            const fakePath = "/rendered/path/featureViewSync";
-            const expectedParameters = {
-                project: "projectValue",
-                location: "locationValue",
-                feature_online_store: "featureOnlineStoreValue",
-                feature_view: "featureViewValue",
-            };
-            const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            client.pathTemplates.featureViewSyncPathTemplate.render =
-                sinon.stub().returns(fakePath);
-            client.pathTemplates.featureViewSyncPathTemplate.match =
-                sinon.stub().returns(expectedParameters);
-
-            it('featureViewSyncPath', async () => {
-                const result = await client.featureViewSyncPath("projectValue", "locationValue", "featureOnlineStoreValue", "featureViewValue");
-                assert.strictEqual(result, fakePath);
-                assert((client.pathTemplates.featureViewSyncPathTemplate.render as SinonStub)
-                    .getCall(-1).calledWith(expectedParameters));
-            });
-
-            it('matchProjectFromFeatureViewSyncName', async () => {
-                const result = await client.matchProjectFromFeatureViewSyncName(fakePath);
-                assert.strictEqual(result, "projectValue");
-                assert((client.pathTemplates.featureViewSyncPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchLocationFromFeatureViewSyncName', async () => {
-                const result = await client.matchLocationFromFeatureViewSyncName(fakePath);
-                assert.strictEqual(result, "locationValue");
-                assert((client.pathTemplates.featureViewSyncPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchFeatureOnlineStoreFromFeatureViewSyncName', async () => {
-                const result = await client.matchFeatureOnlineStoreFromFeatureViewSyncName(fakePath);
-                assert.strictEqual(result, "featureOnlineStoreValue");
-                assert((client.pathTemplates.featureViewSyncPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchFeatureViewFromFeatureViewSyncName', async () => {
-                const result = await client.matchFeatureViewFromFeatureViewSyncName(fakePath);
-                assert.strictEqual(result, "featureViewValue");
-                assert((client.pathTemplates.featureViewSyncPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-        });
-
-        describe('featurestore', async () => {
-            const fakePath = "/rendered/path/featurestore";
-            const expectedParameters = {
-                project: "projectValue",
-                location: "locationValue",
-                featurestore: "featurestoreValue",
-            };
-            const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            client.pathTemplates.featurestorePathTemplate.render =
-                sinon.stub().returns(fakePath);
-            client.pathTemplates.featurestorePathTemplate.match =
-                sinon.stub().returns(expectedParameters);
-
-            it('featurestorePath', async () => {
-                const result = await client.featurestorePath("projectValue", "locationValue", "featurestoreValue");
-                assert.strictEqual(result, fakePath);
-                assert((client.pathTemplates.featurestorePathTemplate.render as SinonStub)
-                    .getCall(-1).calledWith(expectedParameters));
-            });
-
-            it('matchProjectFromFeaturestoreName', async () => {
-                const result = await client.matchProjectFromFeaturestoreName(fakePath);
-                assert.strictEqual(result, "projectValue");
-                assert((client.pathTemplates.featurestorePathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchLocationFromFeaturestoreName', async () => {
-                const result = await client.matchLocationFromFeaturestoreName(fakePath);
-                assert.strictEqual(result, "locationValue");
-                assert((client.pathTemplates.featurestorePathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchFeaturestoreFromFeaturestoreName', async () => {
-                const result = await client.matchFeaturestoreFromFeaturestoreName(fakePath);
-                assert.strictEqual(result, "featurestoreValue");
-                assert((client.pathTemplates.featurestorePathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-        });
-
-        describe('hyperparameterTuningJob', async () => {
-            const fakePath = "/rendered/path/hyperparameterTuningJob";
-            const expectedParameters = {
-                project: "projectValue",
-                location: "locationValue",
-                hyperparameter_tuning_job: "hyperparameterTuningJobValue",
-            };
-            const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            client.pathTemplates.hyperparameterTuningJobPathTemplate.render =
-                sinon.stub().returns(fakePath);
-            client.pathTemplates.hyperparameterTuningJobPathTemplate.match =
-                sinon.stub().returns(expectedParameters);
-
-            it('hyperparameterTuningJobPath', async () => {
-                const result = await client.hyperparameterTuningJobPath("projectValue", "locationValue", "hyperparameterTuningJobValue");
-                assert.strictEqual(result, fakePath);
-                assert((client.pathTemplates.hyperparameterTuningJobPathTemplate.render as SinonStub)
-                    .getCall(-1).calledWith(expectedParameters));
-            });
-
-            it('matchProjectFromHyperparameterTuningJobName', async () => {
-                const result = await client.matchProjectFromHyperparameterTuningJobName(fakePath);
-                assert.strictEqual(result, "projectValue");
-                assert((client.pathTemplates.hyperparameterTuningJobPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchLocationFromHyperparameterTuningJobName', async () => {
-                const result = await client.matchLocationFromHyperparameterTuningJobName(fakePath);
-                assert.strictEqual(result, "locationValue");
-                assert((client.pathTemplates.hyperparameterTuningJobPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchHyperparameterTuningJobFromHyperparameterTuningJobName', async () => {
-                const result = await client.matchHyperparameterTuningJobFromHyperparameterTuningJobName(fakePath);
-                assert.strictEqual(result, "hyperparameterTuningJobValue");
-                assert((client.pathTemplates.hyperparameterTuningJobPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-        });
-
-        describe('index', async () => {
-            const fakePath = "/rendered/path/index";
-            const expectedParameters = {
-                project: "projectValue",
-                location: "locationValue",
-                index: "indexValue",
-            };
-            const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            client.pathTemplates.indexPathTemplate.render =
-                sinon.stub().returns(fakePath);
-            client.pathTemplates.indexPathTemplate.match =
-                sinon.stub().returns(expectedParameters);
-
-            it('indexPath', async () => {
-                const result = await client.indexPath("projectValue", "locationValue", "indexValue");
-                assert.strictEqual(result, fakePath);
-                assert((client.pathTemplates.indexPathTemplate.render as SinonStub)
-                    .getCall(-1).calledWith(expectedParameters));
-            });
-
-            it('matchProjectFromIndexName', async () => {
-                const result = await client.matchProjectFromIndexName(fakePath);
-                assert.strictEqual(result, "projectValue");
-                assert((client.pathTemplates.indexPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchLocationFromIndexName', async () => {
-                const result = await client.matchLocationFromIndexName(fakePath);
-                assert.strictEqual(result, "locationValue");
-                assert((client.pathTemplates.indexPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchIndexFromIndexName', async () => {
-                const result = await client.matchIndexFromIndexName(fakePath);
-                assert.strictEqual(result, "indexValue");
-                assert((client.pathTemplates.indexPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-        });
-
-        describe('indexEndpoint', async () => {
-            const fakePath = "/rendered/path/indexEndpoint";
-            const expectedParameters = {
-                project: "projectValue",
-                location: "locationValue",
-                index_endpoint: "indexEndpointValue",
-            };
-            const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            client.pathTemplates.indexEndpointPathTemplate.render =
-                sinon.stub().returns(fakePath);
-            client.pathTemplates.indexEndpointPathTemplate.match =
-                sinon.stub().returns(expectedParameters);
-
-            it('indexEndpointPath', async () => {
-                const result = await client.indexEndpointPath("projectValue", "locationValue", "indexEndpointValue");
-                assert.strictEqual(result, fakePath);
-                assert((client.pathTemplates.indexEndpointPathTemplate.render as SinonStub)
-                    .getCall(-1).calledWith(expectedParameters));
-            });
-
-            it('matchProjectFromIndexEndpointName', async () => {
-                const result = await client.matchProjectFromIndexEndpointName(fakePath);
-                assert.strictEqual(result, "projectValue");
-                assert((client.pathTemplates.indexEndpointPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchLocationFromIndexEndpointName', async () => {
-                const result = await client.matchLocationFromIndexEndpointName(fakePath);
-                assert.strictEqual(result, "locationValue");
-                assert((client.pathTemplates.indexEndpointPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchIndexEndpointFromIndexEndpointName', async () => {
-                const result = await client.matchIndexEndpointFromIndexEndpointName(fakePath);
-                assert.strictEqual(result, "indexEndpointValue");
-                assert((client.pathTemplates.indexEndpointPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-        });
-
-        describe('location', async () => {
-            const fakePath = "/rendered/path/location";
-            const expectedParameters = {
-                project: "projectValue",
-                location: "locationValue",
-            };
-            const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            client.pathTemplates.locationPathTemplate.render =
-                sinon.stub().returns(fakePath);
-            client.pathTemplates.locationPathTemplate.match =
-                sinon.stub().returns(expectedParameters);
-
-            it('locationPath', async () => {
-                const result = await client.locationPath("projectValue", "locationValue");
-                assert.strictEqual(result, fakePath);
-                assert((client.pathTemplates.locationPathTemplate.render as SinonStub)
-                    .getCall(-1).calledWith(expectedParameters));
-            });
-
-            it('matchProjectFromLocationName', async () => {
-                const result = await client.matchProjectFromLocationName(fakePath);
-                assert.strictEqual(result, "projectValue");
-                assert((client.pathTemplates.locationPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchLocationFromLocationName', async () => {
-                const result = await client.matchLocationFromLocationName(fakePath);
-                assert.strictEqual(result, "locationValue");
-                assert((client.pathTemplates.locationPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-        });
-
-        describe('metadataSchema', async () => {
-            const fakePath = "/rendered/path/metadataSchema";
-            const expectedParameters = {
-                project: "projectValue",
-                location: "locationValue",
-                metadata_store: "metadataStoreValue",
-                metadata_schema: "metadataSchemaValue",
-            };
-            const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            client.pathTemplates.metadataSchemaPathTemplate.render =
-                sinon.stub().returns(fakePath);
-            client.pathTemplates.metadataSchemaPathTemplate.match =
-                sinon.stub().returns(expectedParameters);
-
-            it('metadataSchemaPath', async () => {
-                const result = await client.metadataSchemaPath("projectValue", "locationValue", "metadataStoreValue", "metadataSchemaValue");
-                assert.strictEqual(result, fakePath);
-                assert((client.pathTemplates.metadataSchemaPathTemplate.render as SinonStub)
-                    .getCall(-1).calledWith(expectedParameters));
-            });
-
-            it('matchProjectFromMetadataSchemaName', async () => {
-                const result = await client.matchProjectFromMetadataSchemaName(fakePath);
-                assert.strictEqual(result, "projectValue");
-                assert((client.pathTemplates.metadataSchemaPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchLocationFromMetadataSchemaName', async () => {
-                const result = await client.matchLocationFromMetadataSchemaName(fakePath);
-                assert.strictEqual(result, "locationValue");
-                assert((client.pathTemplates.metadataSchemaPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchMetadataStoreFromMetadataSchemaName', async () => {
-                const result = await client.matchMetadataStoreFromMetadataSchemaName(fakePath);
-                assert.strictEqual(result, "metadataStoreValue");
-                assert((client.pathTemplates.metadataSchemaPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchMetadataSchemaFromMetadataSchemaName', async () => {
-                const result = await client.matchMetadataSchemaFromMetadataSchemaName(fakePath);
-                assert.strictEqual(result, "metadataSchemaValue");
-                assert((client.pathTemplates.metadataSchemaPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-        });
-
-        describe('metadataStore', async () => {
-            const fakePath = "/rendered/path/metadataStore";
-            const expectedParameters = {
-                project: "projectValue",
-                location: "locationValue",
-                metadata_store: "metadataStoreValue",
-            };
-            const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            client.pathTemplates.metadataStorePathTemplate.render =
-                sinon.stub().returns(fakePath);
-            client.pathTemplates.metadataStorePathTemplate.match =
-                sinon.stub().returns(expectedParameters);
-
-            it('metadataStorePath', async () => {
-                const result = await client.metadataStorePath("projectValue", "locationValue", "metadataStoreValue");
-                assert.strictEqual(result, fakePath);
-                assert((client.pathTemplates.metadataStorePathTemplate.render as SinonStub)
-                    .getCall(-1).calledWith(expectedParameters));
-            });
-
-            it('matchProjectFromMetadataStoreName', async () => {
-                const result = await client.matchProjectFromMetadataStoreName(fakePath);
-                assert.strictEqual(result, "projectValue");
-                assert((client.pathTemplates.metadataStorePathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchLocationFromMetadataStoreName', async () => {
-                const result = await client.matchLocationFromMetadataStoreName(fakePath);
-                assert.strictEqual(result, "locationValue");
-                assert((client.pathTemplates.metadataStorePathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchMetadataStoreFromMetadataStoreName', async () => {
-                const result = await client.matchMetadataStoreFromMetadataStoreName(fakePath);
-                assert.strictEqual(result, "metadataStoreValue");
-                assert((client.pathTemplates.metadataStorePathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-        });
-
-        describe('model', async () => {
-            const fakePath = "/rendered/path/model";
-            const expectedParameters = {
-                project: "projectValue",
-                location: "locationValue",
-                model: "modelValue",
-            };
-            const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            client.pathTemplates.modelPathTemplate.render =
-                sinon.stub().returns(fakePath);
-            client.pathTemplates.modelPathTemplate.match =
-                sinon.stub().returns(expectedParameters);
-
-            it('modelPath', async () => {
-                const result = await client.modelPath("projectValue", "locationValue", "modelValue");
-                assert.strictEqual(result, fakePath);
-                assert((client.pathTemplates.modelPathTemplate.render as SinonStub)
-                    .getCall(-1).calledWith(expectedParameters));
-            });
-
-            it('matchProjectFromModelName', async () => {
-                const result = await client.matchProjectFromModelName(fakePath);
-                assert.strictEqual(result, "projectValue");
-                assert((client.pathTemplates.modelPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchLocationFromModelName', async () => {
-                const result = await client.matchLocationFromModelName(fakePath);
-                assert.strictEqual(result, "locationValue");
-                assert((client.pathTemplates.modelPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchModelFromModelName', async () => {
-                const result = await client.matchModelFromModelName(fakePath);
-                assert.strictEqual(result, "modelValue");
-                assert((client.pathTemplates.modelPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-        });
-
-        describe('modelDeploymentMonitoringJob', async () => {
-            const fakePath = "/rendered/path/modelDeploymentMonitoringJob";
-            const expectedParameters = {
-                project: "projectValue",
-                location: "locationValue",
-                model_deployment_monitoring_job: "modelDeploymentMonitoringJobValue",
-            };
-            const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            client.pathTemplates.modelDeploymentMonitoringJobPathTemplate.render =
-                sinon.stub().returns(fakePath);
-            client.pathTemplates.modelDeploymentMonitoringJobPathTemplate.match =
-                sinon.stub().returns(expectedParameters);
-
-            it('modelDeploymentMonitoringJobPath', async () => {
-                const result = await client.modelDeploymentMonitoringJobPath("projectValue", "locationValue", "modelDeploymentMonitoringJobValue");
-                assert.strictEqual(result, fakePath);
-                assert((client.pathTemplates.modelDeploymentMonitoringJobPathTemplate.render as SinonStub)
-                    .getCall(-1).calledWith(expectedParameters));
-            });
-
-            it('matchProjectFromModelDeploymentMonitoringJobName', async () => {
-                const result = await client.matchProjectFromModelDeploymentMonitoringJobName(fakePath);
-                assert.strictEqual(result, "projectValue");
-                assert((client.pathTemplates.modelDeploymentMonitoringJobPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchLocationFromModelDeploymentMonitoringJobName', async () => {
-                const result = await client.matchLocationFromModelDeploymentMonitoringJobName(fakePath);
-                assert.strictEqual(result, "locationValue");
-                assert((client.pathTemplates.modelDeploymentMonitoringJobPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchModelDeploymentMonitoringJobFromModelDeploymentMonitoringJobName', async () => {
-                const result = await client.matchModelDeploymentMonitoringJobFromModelDeploymentMonitoringJobName(fakePath);
-                assert.strictEqual(result, "modelDeploymentMonitoringJobValue");
-                assert((client.pathTemplates.modelDeploymentMonitoringJobPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-        });
-
-        describe('modelEvaluation', async () => {
-            const fakePath = "/rendered/path/modelEvaluation";
-            const expectedParameters = {
-                project: "projectValue",
-                location: "locationValue",
-                model: "modelValue",
-                evaluation: "evaluationValue",
-            };
-            const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            client.pathTemplates.modelEvaluationPathTemplate.render =
-                sinon.stub().returns(fakePath);
-            client.pathTemplates.modelEvaluationPathTemplate.match =
-                sinon.stub().returns(expectedParameters);
-
-            it('modelEvaluationPath', async () => {
-                const result = await client.modelEvaluationPath("projectValue", "locationValue", "modelValue", "evaluationValue");
-                assert.strictEqual(result, fakePath);
-                assert((client.pathTemplates.modelEvaluationPathTemplate.render as SinonStub)
-                    .getCall(-1).calledWith(expectedParameters));
-            });
-
-            it('matchProjectFromModelEvaluationName', async () => {
-                const result = await client.matchProjectFromModelEvaluationName(fakePath);
-                assert.strictEqual(result, "projectValue");
-                assert((client.pathTemplates.modelEvaluationPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchLocationFromModelEvaluationName', async () => {
-                const result = await client.matchLocationFromModelEvaluationName(fakePath);
-                assert.strictEqual(result, "locationValue");
-                assert((client.pathTemplates.modelEvaluationPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchModelFromModelEvaluationName', async () => {
-                const result = await client.matchModelFromModelEvaluationName(fakePath);
-                assert.strictEqual(result, "modelValue");
-                assert((client.pathTemplates.modelEvaluationPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchEvaluationFromModelEvaluationName', async () => {
-                const result = await client.matchEvaluationFromModelEvaluationName(fakePath);
-                assert.strictEqual(result, "evaluationValue");
-                assert((client.pathTemplates.modelEvaluationPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-        });
-
-        describe('modelEvaluationSlice', async () => {
-            const fakePath = "/rendered/path/modelEvaluationSlice";
-            const expectedParameters = {
-                project: "projectValue",
-                location: "locationValue",
-                model: "modelValue",
-                evaluation: "evaluationValue",
-                slice: "sliceValue",
-            };
-            const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            client.pathTemplates.modelEvaluationSlicePathTemplate.render =
-                sinon.stub().returns(fakePath);
-            client.pathTemplates.modelEvaluationSlicePathTemplate.match =
-                sinon.stub().returns(expectedParameters);
-
-            it('modelEvaluationSlicePath', async () => {
-                const result = await client.modelEvaluationSlicePath("projectValue", "locationValue", "modelValue", "evaluationValue", "sliceValue");
-                assert.strictEqual(result, fakePath);
-                assert((client.pathTemplates.modelEvaluationSlicePathTemplate.render as SinonStub)
-                    .getCall(-1).calledWith(expectedParameters));
-            });
-
-            it('matchProjectFromModelEvaluationSliceName', async () => {
-                const result = await client.matchProjectFromModelEvaluationSliceName(fakePath);
-                assert.strictEqual(result, "projectValue");
-                assert((client.pathTemplates.modelEvaluationSlicePathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchLocationFromModelEvaluationSliceName', async () => {
-                const result = await client.matchLocationFromModelEvaluationSliceName(fakePath);
-                assert.strictEqual(result, "locationValue");
-                assert((client.pathTemplates.modelEvaluationSlicePathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchModelFromModelEvaluationSliceName', async () => {
-                const result = await client.matchModelFromModelEvaluationSliceName(fakePath);
-                assert.strictEqual(result, "modelValue");
-                assert((client.pathTemplates.modelEvaluationSlicePathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchEvaluationFromModelEvaluationSliceName', async () => {
-                const result = await client.matchEvaluationFromModelEvaluationSliceName(fakePath);
-                assert.strictEqual(result, "evaluationValue");
-                assert((client.pathTemplates.modelEvaluationSlicePathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchSliceFromModelEvaluationSliceName', async () => {
-                const result = await client.matchSliceFromModelEvaluationSliceName(fakePath);
-                assert.strictEqual(result, "sliceValue");
-                assert((client.pathTemplates.modelEvaluationSlicePathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-        });
-
-        describe('nasJob', async () => {
-            const fakePath = "/rendered/path/nasJob";
-            const expectedParameters = {
-                project: "projectValue",
-                location: "locationValue",
-                nas_job: "nasJobValue",
-            };
-            const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            client.pathTemplates.nasJobPathTemplate.render =
-                sinon.stub().returns(fakePath);
-            client.pathTemplates.nasJobPathTemplate.match =
-                sinon.stub().returns(expectedParameters);
-
-            it('nasJobPath', async () => {
-                const result = await client.nasJobPath("projectValue", "locationValue", "nasJobValue");
-                assert.strictEqual(result, fakePath);
-                assert((client.pathTemplates.nasJobPathTemplate.render as SinonStub)
-                    .getCall(-1).calledWith(expectedParameters));
-            });
-
-            it('matchProjectFromNasJobName', async () => {
-                const result = await client.matchProjectFromNasJobName(fakePath);
-                assert.strictEqual(result, "projectValue");
-                assert((client.pathTemplates.nasJobPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchLocationFromNasJobName', async () => {
-                const result = await client.matchLocationFromNasJobName(fakePath);
-                assert.strictEqual(result, "locationValue");
-                assert((client.pathTemplates.nasJobPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchNasJobFromNasJobName', async () => {
-                const result = await client.matchNasJobFromNasJobName(fakePath);
-                assert.strictEqual(result, "nasJobValue");
-                assert((client.pathTemplates.nasJobPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-        });
-
-        describe('nasTrialDetail', async () => {
-            const fakePath = "/rendered/path/nasTrialDetail";
-            const expectedParameters = {
-                project: "projectValue",
-                location: "locationValue",
-                nas_job: "nasJobValue",
-                nas_trial_detail: "nasTrialDetailValue",
-            };
-            const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            client.pathTemplates.nasTrialDetailPathTemplate.render =
-                sinon.stub().returns(fakePath);
-            client.pathTemplates.nasTrialDetailPathTemplate.match =
-                sinon.stub().returns(expectedParameters);
-
-            it('nasTrialDetailPath', async () => {
-                const result = await client.nasTrialDetailPath("projectValue", "locationValue", "nasJobValue", "nasTrialDetailValue");
-                assert.strictEqual(result, fakePath);
-                assert((client.pathTemplates.nasTrialDetailPathTemplate.render as SinonStub)
-                    .getCall(-1).calledWith(expectedParameters));
-            });
-
-            it('matchProjectFromNasTrialDetailName', async () => {
-                const result = await client.matchProjectFromNasTrialDetailName(fakePath);
-                assert.strictEqual(result, "projectValue");
-                assert((client.pathTemplates.nasTrialDetailPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchLocationFromNasTrialDetailName', async () => {
-                const result = await client.matchLocationFromNasTrialDetailName(fakePath);
-                assert.strictEqual(result, "locationValue");
-                assert((client.pathTemplates.nasTrialDetailPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchNasJobFromNasTrialDetailName', async () => {
-                const result = await client.matchNasJobFromNasTrialDetailName(fakePath);
-                assert.strictEqual(result, "nasJobValue");
-                assert((client.pathTemplates.nasTrialDetailPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchNasTrialDetailFromNasTrialDetailName', async () => {
-                const result = await client.matchNasTrialDetailFromNasTrialDetailName(fakePath);
-                assert.strictEqual(result, "nasTrialDetailValue");
-                assert((client.pathTemplates.nasTrialDetailPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-        });
-
-        describe('notebookExecutionJob', async () => {
-            const fakePath = "/rendered/path/notebookExecutionJob";
-            const expectedParameters = {
-                project: "projectValue",
-                location: "locationValue",
-                notebook_execution_job: "notebookExecutionJobValue",
-            };
-            const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            client.pathTemplates.notebookExecutionJobPathTemplate.render =
-                sinon.stub().returns(fakePath);
-            client.pathTemplates.notebookExecutionJobPathTemplate.match =
-                sinon.stub().returns(expectedParameters);
-
-            it('notebookExecutionJobPath', async () => {
-                const result = await client.notebookExecutionJobPath("projectValue", "locationValue", "notebookExecutionJobValue");
-                assert.strictEqual(result, fakePath);
-                assert((client.pathTemplates.notebookExecutionJobPathTemplate.render as SinonStub)
-                    .getCall(-1).calledWith(expectedParameters));
-            });
-
-            it('matchProjectFromNotebookExecutionJobName', async () => {
-                const result = await client.matchProjectFromNotebookExecutionJobName(fakePath);
-                assert.strictEqual(result, "projectValue");
-                assert((client.pathTemplates.notebookExecutionJobPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchLocationFromNotebookExecutionJobName', async () => {
-                const result = await client.matchLocationFromNotebookExecutionJobName(fakePath);
-                assert.strictEqual(result, "locationValue");
-                assert((client.pathTemplates.notebookExecutionJobPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchNotebookExecutionJobFromNotebookExecutionJobName', async () => {
-                const result = await client.matchNotebookExecutionJobFromNotebookExecutionJobName(fakePath);
-                assert.strictEqual(result, "notebookExecutionJobValue");
-                assert((client.pathTemplates.notebookExecutionJobPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-        });
-
-        describe('notebookRuntime', async () => {
-            const fakePath = "/rendered/path/notebookRuntime";
-            const expectedParameters = {
-                project: "projectValue",
-                location: "locationValue",
-                notebook_runtime: "notebookRuntimeValue",
-            };
-            const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            client.pathTemplates.notebookRuntimePathTemplate.render =
-                sinon.stub().returns(fakePath);
-            client.pathTemplates.notebookRuntimePathTemplate.match =
-                sinon.stub().returns(expectedParameters);
-
-            it('notebookRuntimePath', async () => {
-                const result = await client.notebookRuntimePath("projectValue", "locationValue", "notebookRuntimeValue");
-                assert.strictEqual(result, fakePath);
-                assert((client.pathTemplates.notebookRuntimePathTemplate.render as SinonStub)
-                    .getCall(-1).calledWith(expectedParameters));
-            });
-
-            it('matchProjectFromNotebookRuntimeName', async () => {
-                const result = await client.matchProjectFromNotebookRuntimeName(fakePath);
-                assert.strictEqual(result, "projectValue");
-                assert((client.pathTemplates.notebookRuntimePathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchLocationFromNotebookRuntimeName', async () => {
-                const result = await client.matchLocationFromNotebookRuntimeName(fakePath);
-                assert.strictEqual(result, "locationValue");
-                assert((client.pathTemplates.notebookRuntimePathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchNotebookRuntimeFromNotebookRuntimeName', async () => {
-                const result = await client.matchNotebookRuntimeFromNotebookRuntimeName(fakePath);
-                assert.strictEqual(result, "notebookRuntimeValue");
-                assert((client.pathTemplates.notebookRuntimePathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-        });
-
-        describe('notebookRuntimeTemplate', async () => {
-            const fakePath = "/rendered/path/notebookRuntimeTemplate";
-            const expectedParameters = {
-                project: "projectValue",
-                location: "locationValue",
-                notebook_runtime_template: "notebookRuntimeTemplateValue",
-            };
-            const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            client.pathTemplates.notebookRuntimeTemplatePathTemplate.render =
-                sinon.stub().returns(fakePath);
-            client.pathTemplates.notebookRuntimeTemplatePathTemplate.match =
-                sinon.stub().returns(expectedParameters);
-
-            it('notebookRuntimeTemplatePath', async () => {
-                const result = await client.notebookRuntimeTemplatePath("projectValue", "locationValue", "notebookRuntimeTemplateValue");
-                assert.strictEqual(result, fakePath);
-                assert((client.pathTemplates.notebookRuntimeTemplatePathTemplate.render as SinonStub)
-                    .getCall(-1).calledWith(expectedParameters));
-            });
-
-            it('matchProjectFromNotebookRuntimeTemplateName', async () => {
-                const result = await client.matchProjectFromNotebookRuntimeTemplateName(fakePath);
-                assert.strictEqual(result, "projectValue");
-                assert((client.pathTemplates.notebookRuntimeTemplatePathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchLocationFromNotebookRuntimeTemplateName', async () => {
-                const result = await client.matchLocationFromNotebookRuntimeTemplateName(fakePath);
-                assert.strictEqual(result, "locationValue");
-                assert((client.pathTemplates.notebookRuntimeTemplatePathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchNotebookRuntimeTemplateFromNotebookRuntimeTemplateName', async () => {
-                const result = await client.matchNotebookRuntimeTemplateFromNotebookRuntimeTemplateName(fakePath);
-                assert.strictEqual(result, "notebookRuntimeTemplateValue");
-                assert((client.pathTemplates.notebookRuntimeTemplatePathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-        });
-
-        describe('persistentResource', async () => {
-            const fakePath = "/rendered/path/persistentResource";
-            const expectedParameters = {
-                project: "projectValue",
-                location: "locationValue",
-                persistent_resource: "persistentResourceValue",
-            };
-            const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            client.pathTemplates.persistentResourcePathTemplate.render =
-                sinon.stub().returns(fakePath);
-            client.pathTemplates.persistentResourcePathTemplate.match =
-                sinon.stub().returns(expectedParameters);
-
-            it('persistentResourcePath', async () => {
-                const result = await client.persistentResourcePath("projectValue", "locationValue", "persistentResourceValue");
-                assert.strictEqual(result, fakePath);
-                assert((client.pathTemplates.persistentResourcePathTemplate.render as SinonStub)
-                    .getCall(-1).calledWith(expectedParameters));
-            });
-
-            it('matchProjectFromPersistentResourceName', async () => {
-                const result = await client.matchProjectFromPersistentResourceName(fakePath);
-                assert.strictEqual(result, "projectValue");
-                assert((client.pathTemplates.persistentResourcePathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchLocationFromPersistentResourceName', async () => {
-                const result = await client.matchLocationFromPersistentResourceName(fakePath);
-                assert.strictEqual(result, "locationValue");
-                assert((client.pathTemplates.persistentResourcePathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchPersistentResourceFromPersistentResourceName', async () => {
-                const result = await client.matchPersistentResourceFromPersistentResourceName(fakePath);
-                assert.strictEqual(result, "persistentResourceValue");
-                assert((client.pathTemplates.persistentResourcePathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-        });
-
-        describe('pipelineJob', async () => {
-            const fakePath = "/rendered/path/pipelineJob";
-            const expectedParameters = {
-                project: "projectValue",
-                location: "locationValue",
-                pipeline_job: "pipelineJobValue",
-            };
-            const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            client.pathTemplates.pipelineJobPathTemplate.render =
-                sinon.stub().returns(fakePath);
-            client.pathTemplates.pipelineJobPathTemplate.match =
-                sinon.stub().returns(expectedParameters);
-
-            it('pipelineJobPath', async () => {
-                const result = await client.pipelineJobPath("projectValue", "locationValue", "pipelineJobValue");
-                assert.strictEqual(result, fakePath);
-                assert((client.pathTemplates.pipelineJobPathTemplate.render as SinonStub)
-                    .getCall(-1).calledWith(expectedParameters));
-            });
-
-            it('matchProjectFromPipelineJobName', async () => {
-                const result = await client.matchProjectFromPipelineJobName(fakePath);
-                assert.strictEqual(result, "projectValue");
-                assert((client.pathTemplates.pipelineJobPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchLocationFromPipelineJobName', async () => {
-                const result = await client.matchLocationFromPipelineJobName(fakePath);
-                assert.strictEqual(result, "locationValue");
-                assert((client.pathTemplates.pipelineJobPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchPipelineJobFromPipelineJobName', async () => {
-                const result = await client.matchPipelineJobFromPipelineJobName(fakePath);
-                assert.strictEqual(result, "pipelineJobValue");
-                assert((client.pathTemplates.pipelineJobPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-        });
-
-        describe('project', async () => {
-            const fakePath = "/rendered/path/project";
-            const expectedParameters = {
-                project: "projectValue",
-            };
-            const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            client.pathTemplates.projectPathTemplate.render =
-                sinon.stub().returns(fakePath);
-            client.pathTemplates.projectPathTemplate.match =
-                sinon.stub().returns(expectedParameters);
-
-            it('projectPath', async () => {
-                const result = await client.projectPath("projectValue");
-                assert.strictEqual(result, fakePath);
-                assert((client.pathTemplates.projectPathTemplate.render as SinonStub)
-                    .getCall(-1).calledWith(expectedParameters));
-            });
-
-            it('matchProjectFromProjectName', async () => {
-                const result = await client.matchProjectFromProjectName(fakePath);
-                assert.strictEqual(result, "projectValue");
-                assert((client.pathTemplates.projectPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-        });
-
-        describe('projectLocationEndpoint', async () => {
-            const fakePath = "/rendered/path/projectLocationEndpoint";
-            const expectedParameters = {
-                project: "projectValue",
-                location: "locationValue",
-                endpoint: "endpointValue",
-            };
-            const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            client.pathTemplates.projectLocationEndpointPathTemplate.render =
-                sinon.stub().returns(fakePath);
-            client.pathTemplates.projectLocationEndpointPathTemplate.match =
-                sinon.stub().returns(expectedParameters);
-
-            it('projectLocationEndpointPath', async () => {
-                const result = await client.projectLocationEndpointPath("projectValue", "locationValue", "endpointValue");
-                assert.strictEqual(result, fakePath);
-                assert((client.pathTemplates.projectLocationEndpointPathTemplate.render as SinonStub)
-                    .getCall(-1).calledWith(expectedParameters));
-            });
-
-            it('matchProjectFromProjectLocationEndpointName', async () => {
-                const result = await client.matchProjectFromProjectLocationEndpointName(fakePath);
-                assert.strictEqual(result, "projectValue");
-                assert((client.pathTemplates.projectLocationEndpointPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchLocationFromProjectLocationEndpointName', async () => {
-                const result = await client.matchLocationFromProjectLocationEndpointName(fakePath);
-                assert.strictEqual(result, "locationValue");
-                assert((client.pathTemplates.projectLocationEndpointPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchEndpointFromProjectLocationEndpointName', async () => {
-                const result = await client.matchEndpointFromProjectLocationEndpointName(fakePath);
-                assert.strictEqual(result, "endpointValue");
-                assert((client.pathTemplates.projectLocationEndpointPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-        });
-
-        describe('projectLocationFeatureGroupFeature', async () => {
-            const fakePath = "/rendered/path/projectLocationFeatureGroupFeature";
-            const expectedParameters = {
-                project: "projectValue",
-                location: "locationValue",
-                feature_group: "featureGroupValue",
-                feature: "featureValue",
-            };
-            const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            client.pathTemplates.projectLocationFeatureGroupFeaturePathTemplate.render =
-                sinon.stub().returns(fakePath);
-            client.pathTemplates.projectLocationFeatureGroupFeaturePathTemplate.match =
-                sinon.stub().returns(expectedParameters);
-
-            it('projectLocationFeatureGroupFeaturePath', async () => {
-                const result = await client.projectLocationFeatureGroupFeaturePath("projectValue", "locationValue", "featureGroupValue", "featureValue");
-                assert.strictEqual(result, fakePath);
-                assert((client.pathTemplates.projectLocationFeatureGroupFeaturePathTemplate.render as SinonStub)
-                    .getCall(-1).calledWith(expectedParameters));
-            });
-
-            it('matchProjectFromProjectLocationFeatureGroupFeatureName', async () => {
-                const result = await client.matchProjectFromProjectLocationFeatureGroupFeatureName(fakePath);
-                assert.strictEqual(result, "projectValue");
-                assert((client.pathTemplates.projectLocationFeatureGroupFeaturePathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchLocationFromProjectLocationFeatureGroupFeatureName', async () => {
-                const result = await client.matchLocationFromProjectLocationFeatureGroupFeatureName(fakePath);
-                assert.strictEqual(result, "locationValue");
-                assert((client.pathTemplates.projectLocationFeatureGroupFeaturePathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchFeatureGroupFromProjectLocationFeatureGroupFeatureName', async () => {
-                const result = await client.matchFeatureGroupFromProjectLocationFeatureGroupFeatureName(fakePath);
-                assert.strictEqual(result, "featureGroupValue");
-                assert((client.pathTemplates.projectLocationFeatureGroupFeaturePathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchFeatureFromProjectLocationFeatureGroupFeatureName', async () => {
-                const result = await client.matchFeatureFromProjectLocationFeatureGroupFeatureName(fakePath);
-                assert.strictEqual(result, "featureValue");
-                assert((client.pathTemplates.projectLocationFeatureGroupFeaturePathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-        });
-
-        describe('projectLocationFeaturestoreEntityTypeFeature', async () => {
-            const fakePath = "/rendered/path/projectLocationFeaturestoreEntityTypeFeature";
-            const expectedParameters = {
-                project: "projectValue",
-                location: "locationValue",
-                featurestore: "featurestoreValue",
-                entity_type: "entityTypeValue",
-                feature: "featureValue",
-            };
-            const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            client.pathTemplates.projectLocationFeaturestoreEntityTypeFeaturePathTemplate.render =
-                sinon.stub().returns(fakePath);
-            client.pathTemplates.projectLocationFeaturestoreEntityTypeFeaturePathTemplate.match =
-                sinon.stub().returns(expectedParameters);
-
-            it('projectLocationFeaturestoreEntityTypeFeaturePath', async () => {
-                const result = await client.projectLocationFeaturestoreEntityTypeFeaturePath("projectValue", "locationValue", "featurestoreValue", "entityTypeValue", "featureValue");
-                assert.strictEqual(result, fakePath);
-                assert((client.pathTemplates.projectLocationFeaturestoreEntityTypeFeaturePathTemplate.render as SinonStub)
-                    .getCall(-1).calledWith(expectedParameters));
-            });
-
-            it('matchProjectFromProjectLocationFeaturestoreEntityTypeFeatureName', async () => {
-                const result = await client.matchProjectFromProjectLocationFeaturestoreEntityTypeFeatureName(fakePath);
-                assert.strictEqual(result, "projectValue");
-                assert((client.pathTemplates.projectLocationFeaturestoreEntityTypeFeaturePathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchLocationFromProjectLocationFeaturestoreEntityTypeFeatureName', async () => {
-                const result = await client.matchLocationFromProjectLocationFeaturestoreEntityTypeFeatureName(fakePath);
-                assert.strictEqual(result, "locationValue");
-                assert((client.pathTemplates.projectLocationFeaturestoreEntityTypeFeaturePathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchFeaturestoreFromProjectLocationFeaturestoreEntityTypeFeatureName', async () => {
-                const result = await client.matchFeaturestoreFromProjectLocationFeaturestoreEntityTypeFeatureName(fakePath);
-                assert.strictEqual(result, "featurestoreValue");
-                assert((client.pathTemplates.projectLocationFeaturestoreEntityTypeFeaturePathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchEntityTypeFromProjectLocationFeaturestoreEntityTypeFeatureName', async () => {
-                const result = await client.matchEntityTypeFromProjectLocationFeaturestoreEntityTypeFeatureName(fakePath);
-                assert.strictEqual(result, "entityTypeValue");
-                assert((client.pathTemplates.projectLocationFeaturestoreEntityTypeFeaturePathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchFeatureFromProjectLocationFeaturestoreEntityTypeFeatureName', async () => {
-                const result = await client.matchFeatureFromProjectLocationFeaturestoreEntityTypeFeatureName(fakePath);
-                assert.strictEqual(result, "featureValue");
-                assert((client.pathTemplates.projectLocationFeaturestoreEntityTypeFeaturePathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-        });
-
-        describe('projectLocationPublisherModel', async () => {
-            const fakePath = "/rendered/path/projectLocationPublisherModel";
-            const expectedParameters = {
-                project: "projectValue",
-                location: "locationValue",
-                publisher: "publisherValue",
-                model: "modelValue",
-            };
-            const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            client.pathTemplates.projectLocationPublisherModelPathTemplate.render =
-                sinon.stub().returns(fakePath);
-            client.pathTemplates.projectLocationPublisherModelPathTemplate.match =
-                sinon.stub().returns(expectedParameters);
-
-            it('projectLocationPublisherModelPath', async () => {
-                const result = await client.projectLocationPublisherModelPath("projectValue", "locationValue", "publisherValue", "modelValue");
-                assert.strictEqual(result, fakePath);
-                assert((client.pathTemplates.projectLocationPublisherModelPathTemplate.render as SinonStub)
-                    .getCall(-1).calledWith(expectedParameters));
-            });
-
-            it('matchProjectFromProjectLocationPublisherModelName', async () => {
-                const result = await client.matchProjectFromProjectLocationPublisherModelName(fakePath);
-                assert.strictEqual(result, "projectValue");
-                assert((client.pathTemplates.projectLocationPublisherModelPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchLocationFromProjectLocationPublisherModelName', async () => {
-                const result = await client.matchLocationFromProjectLocationPublisherModelName(fakePath);
-                assert.strictEqual(result, "locationValue");
-                assert((client.pathTemplates.projectLocationPublisherModelPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchPublisherFromProjectLocationPublisherModelName', async () => {
-                const result = await client.matchPublisherFromProjectLocationPublisherModelName(fakePath);
-                assert.strictEqual(result, "publisherValue");
-                assert((client.pathTemplates.projectLocationPublisherModelPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchModelFromProjectLocationPublisherModelName', async () => {
-                const result = await client.matchModelFromProjectLocationPublisherModelName(fakePath);
-                assert.strictEqual(result, "modelValue");
-                assert((client.pathTemplates.projectLocationPublisherModelPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-        });
-
-        describe('publisherModel', async () => {
-            const fakePath = "/rendered/path/publisherModel";
-            const expectedParameters = {
-                publisher: "publisherValue",
-                model: "modelValue",
-            };
-            const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            client.pathTemplates.publisherModelPathTemplate.render =
-                sinon.stub().returns(fakePath);
-            client.pathTemplates.publisherModelPathTemplate.match =
-                sinon.stub().returns(expectedParameters);
-
-            it('publisherModelPath', async () => {
-                const result = await client.publisherModelPath("publisherValue", "modelValue");
-                assert.strictEqual(result, fakePath);
-                assert((client.pathTemplates.publisherModelPathTemplate.render as SinonStub)
-                    .getCall(-1).calledWith(expectedParameters));
-            });
-
-            it('matchPublisherFromPublisherModelName', async () => {
-                const result = await client.matchPublisherFromPublisherModelName(fakePath);
-                assert.strictEqual(result, "publisherValue");
-                assert((client.pathTemplates.publisherModelPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchModelFromPublisherModelName', async () => {
-                const result = await client.matchModelFromPublisherModelName(fakePath);
-                assert.strictEqual(result, "modelValue");
-                assert((client.pathTemplates.publisherModelPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-        });
-
-        describe('ragCorpus', async () => {
-            const fakePath = "/rendered/path/ragCorpus";
-            const expectedParameters = {
-                project: "projectValue",
-                location: "locationValue",
-                rag_corpus: "ragCorpusValue",
-            };
-            const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            client.pathTemplates.ragCorpusPathTemplate.render =
-                sinon.stub().returns(fakePath);
-            client.pathTemplates.ragCorpusPathTemplate.match =
-                sinon.stub().returns(expectedParameters);
-
-            it('ragCorpusPath', async () => {
-                const result = await client.ragCorpusPath("projectValue", "locationValue", "ragCorpusValue");
-                assert.strictEqual(result, fakePath);
-                assert((client.pathTemplates.ragCorpusPathTemplate.render as SinonStub)
-                    .getCall(-1).calledWith(expectedParameters));
-            });
-
-            it('matchProjectFromRagCorpusName', async () => {
-                const result = await client.matchProjectFromRagCorpusName(fakePath);
-                assert.strictEqual(result, "projectValue");
-                assert((client.pathTemplates.ragCorpusPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchLocationFromRagCorpusName', async () => {
-                const result = await client.matchLocationFromRagCorpusName(fakePath);
-                assert.strictEqual(result, "locationValue");
-                assert((client.pathTemplates.ragCorpusPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchRagCorpusFromRagCorpusName', async () => {
-                const result = await client.matchRagCorpusFromRagCorpusName(fakePath);
-                assert.strictEqual(result, "ragCorpusValue");
-                assert((client.pathTemplates.ragCorpusPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-        });
-
-        describe('ragFile', async () => {
-            const fakePath = "/rendered/path/ragFile";
-            const expectedParameters = {
-                project: "projectValue",
-                location: "locationValue",
-                rag_corpus: "ragCorpusValue",
-                rag_file: "ragFileValue",
-            };
-            const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            client.pathTemplates.ragFilePathTemplate.render =
-                sinon.stub().returns(fakePath);
-            client.pathTemplates.ragFilePathTemplate.match =
-                sinon.stub().returns(expectedParameters);
-
-            it('ragFilePath', async () => {
-                const result = await client.ragFilePath("projectValue", "locationValue", "ragCorpusValue", "ragFileValue");
-                assert.strictEqual(result, fakePath);
-                assert((client.pathTemplates.ragFilePathTemplate.render as SinonStub)
-                    .getCall(-1).calledWith(expectedParameters));
-            });
-
-            it('matchProjectFromRagFileName', async () => {
-                const result = await client.matchProjectFromRagFileName(fakePath);
-                assert.strictEqual(result, "projectValue");
-                assert((client.pathTemplates.ragFilePathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchLocationFromRagFileName', async () => {
-                const result = await client.matchLocationFromRagFileName(fakePath);
-                assert.strictEqual(result, "locationValue");
-                assert((client.pathTemplates.ragFilePathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchRagCorpusFromRagFileName', async () => {
-                const result = await client.matchRagCorpusFromRagFileName(fakePath);
-                assert.strictEqual(result, "ragCorpusValue");
-                assert((client.pathTemplates.ragFilePathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchRagFileFromRagFileName', async () => {
-                const result = await client.matchRagFileFromRagFileName(fakePath);
-                assert.strictEqual(result, "ragFileValue");
-                assert((client.pathTemplates.ragFilePathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-        });
-
-        describe('reasoningEngine', async () => {
-            const fakePath = "/rendered/path/reasoningEngine";
-            const expectedParameters = {
-                project: "projectValue",
-                location: "locationValue",
-                reasoning_engine: "reasoningEngineValue",
-            };
-            const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            client.pathTemplates.reasoningEnginePathTemplate.render =
-                sinon.stub().returns(fakePath);
-            client.pathTemplates.reasoningEnginePathTemplate.match =
-                sinon.stub().returns(expectedParameters);
-
-            it('reasoningEnginePath', async () => {
-                const result = await client.reasoningEnginePath("projectValue", "locationValue", "reasoningEngineValue");
-                assert.strictEqual(result, fakePath);
-                assert((client.pathTemplates.reasoningEnginePathTemplate.render as SinonStub)
-                    .getCall(-1).calledWith(expectedParameters));
-            });
-
-            it('matchProjectFromReasoningEngineName', async () => {
-                const result = await client.matchProjectFromReasoningEngineName(fakePath);
-                assert.strictEqual(result, "projectValue");
-                assert((client.pathTemplates.reasoningEnginePathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchLocationFromReasoningEngineName', async () => {
-                const result = await client.matchLocationFromReasoningEngineName(fakePath);
-                assert.strictEqual(result, "locationValue");
-                assert((client.pathTemplates.reasoningEnginePathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchReasoningEngineFromReasoningEngineName', async () => {
-                const result = await client.matchReasoningEngineFromReasoningEngineName(fakePath);
-                assert.strictEqual(result, "reasoningEngineValue");
-                assert((client.pathTemplates.reasoningEnginePathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-        });
-
-        describe('savedQuery', async () => {
-            const fakePath = "/rendered/path/savedQuery";
-            const expectedParameters = {
-                project: "projectValue",
-                location: "locationValue",
-                dataset: "datasetValue",
-                saved_query: "savedQueryValue",
-            };
-            const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            client.pathTemplates.savedQueryPathTemplate.render =
-                sinon.stub().returns(fakePath);
-            client.pathTemplates.savedQueryPathTemplate.match =
-                sinon.stub().returns(expectedParameters);
-
-            it('savedQueryPath', async () => {
-                const result = await client.savedQueryPath("projectValue", "locationValue", "datasetValue", "savedQueryValue");
-                assert.strictEqual(result, fakePath);
-                assert((client.pathTemplates.savedQueryPathTemplate.render as SinonStub)
-                    .getCall(-1).calledWith(expectedParameters));
-            });
-
-            it('matchProjectFromSavedQueryName', async () => {
-                const result = await client.matchProjectFromSavedQueryName(fakePath);
-                assert.strictEqual(result, "projectValue");
-                assert((client.pathTemplates.savedQueryPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchLocationFromSavedQueryName', async () => {
-                const result = await client.matchLocationFromSavedQueryName(fakePath);
-                assert.strictEqual(result, "locationValue");
-                assert((client.pathTemplates.savedQueryPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchDatasetFromSavedQueryName', async () => {
-                const result = await client.matchDatasetFromSavedQueryName(fakePath);
-                assert.strictEqual(result, "datasetValue");
-                assert((client.pathTemplates.savedQueryPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchSavedQueryFromSavedQueryName', async () => {
-                const result = await client.matchSavedQueryFromSavedQueryName(fakePath);
-                assert.strictEqual(result, "savedQueryValue");
-                assert((client.pathTemplates.savedQueryPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-        });
-
-        describe('schedule', async () => {
-            const fakePath = "/rendered/path/schedule";
-            const expectedParameters = {
-                project: "projectValue",
-                location: "locationValue",
-                schedule: "scheduleValue",
-            };
-            const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            client.pathTemplates.schedulePathTemplate.render =
-                sinon.stub().returns(fakePath);
-            client.pathTemplates.schedulePathTemplate.match =
-                sinon.stub().returns(expectedParameters);
-
-            it('schedulePath', async () => {
-                const result = await client.schedulePath("projectValue", "locationValue", "scheduleValue");
-                assert.strictEqual(result, fakePath);
-                assert((client.pathTemplates.schedulePathTemplate.render as SinonStub)
-                    .getCall(-1).calledWith(expectedParameters));
-            });
-
-            it('matchProjectFromScheduleName', async () => {
-                const result = await client.matchProjectFromScheduleName(fakePath);
-                assert.strictEqual(result, "projectValue");
-                assert((client.pathTemplates.schedulePathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchLocationFromScheduleName', async () => {
-                const result = await client.matchLocationFromScheduleName(fakePath);
-                assert.strictEqual(result, "locationValue");
-                assert((client.pathTemplates.schedulePathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchScheduleFromScheduleName', async () => {
-                const result = await client.matchScheduleFromScheduleName(fakePath);
-                assert.strictEqual(result, "scheduleValue");
-                assert((client.pathTemplates.schedulePathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-        });
-
-        describe('specialistPool', async () => {
-            const fakePath = "/rendered/path/specialistPool";
-            const expectedParameters = {
-                project: "projectValue",
-                location: "locationValue",
-                specialist_pool: "specialistPoolValue",
-            };
-            const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            client.pathTemplates.specialistPoolPathTemplate.render =
-                sinon.stub().returns(fakePath);
-            client.pathTemplates.specialistPoolPathTemplate.match =
-                sinon.stub().returns(expectedParameters);
-
-            it('specialistPoolPath', async () => {
-                const result = await client.specialistPoolPath("projectValue", "locationValue", "specialistPoolValue");
-                assert.strictEqual(result, fakePath);
-                assert((client.pathTemplates.specialistPoolPathTemplate.render as SinonStub)
-                    .getCall(-1).calledWith(expectedParameters));
-            });
-
-            it('matchProjectFromSpecialistPoolName', async () => {
-                const result = await client.matchProjectFromSpecialistPoolName(fakePath);
-                assert.strictEqual(result, "projectValue");
-                assert((client.pathTemplates.specialistPoolPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchLocationFromSpecialistPoolName', async () => {
-                const result = await client.matchLocationFromSpecialistPoolName(fakePath);
-                assert.strictEqual(result, "locationValue");
-                assert((client.pathTemplates.specialistPoolPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchSpecialistPoolFromSpecialistPoolName', async () => {
-                const result = await client.matchSpecialistPoolFromSpecialistPoolName(fakePath);
-                assert.strictEqual(result, "specialistPoolValue");
-                assert((client.pathTemplates.specialistPoolPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-        });
-
-        describe('study', async () => {
-            const fakePath = "/rendered/path/study";
-            const expectedParameters = {
-                project: "projectValue",
-                location: "locationValue",
-                study: "studyValue",
-            };
-            const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            client.pathTemplates.studyPathTemplate.render =
-                sinon.stub().returns(fakePath);
-            client.pathTemplates.studyPathTemplate.match =
-                sinon.stub().returns(expectedParameters);
-
-            it('studyPath', async () => {
-                const result = await client.studyPath("projectValue", "locationValue", "studyValue");
-                assert.strictEqual(result, fakePath);
-                assert((client.pathTemplates.studyPathTemplate.render as SinonStub)
-                    .getCall(-1).calledWith(expectedParameters));
-            });
-
-            it('matchProjectFromStudyName', async () => {
-                const result = await client.matchProjectFromStudyName(fakePath);
-                assert.strictEqual(result, "projectValue");
-                assert((client.pathTemplates.studyPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchLocationFromStudyName', async () => {
-                const result = await client.matchLocationFromStudyName(fakePath);
-                assert.strictEqual(result, "locationValue");
-                assert((client.pathTemplates.studyPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchStudyFromStudyName', async () => {
-                const result = await client.matchStudyFromStudyName(fakePath);
-                assert.strictEqual(result, "studyValue");
-                assert((client.pathTemplates.studyPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-        });
-
-        describe('tensorboard', async () => {
-            const fakePath = "/rendered/path/tensorboard";
-            const expectedParameters = {
-                project: "projectValue",
-                location: "locationValue",
-                tensorboard: "tensorboardValue",
-            };
-            const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            client.pathTemplates.tensorboardPathTemplate.render =
-                sinon.stub().returns(fakePath);
-            client.pathTemplates.tensorboardPathTemplate.match =
-                sinon.stub().returns(expectedParameters);
-
-            it('tensorboardPath', async () => {
-                const result = await client.tensorboardPath("projectValue", "locationValue", "tensorboardValue");
-                assert.strictEqual(result, fakePath);
-                assert((client.pathTemplates.tensorboardPathTemplate.render as SinonStub)
-                    .getCall(-1).calledWith(expectedParameters));
-            });
-
-            it('matchProjectFromTensorboardName', async () => {
-                const result = await client.matchProjectFromTensorboardName(fakePath);
-                assert.strictEqual(result, "projectValue");
-                assert((client.pathTemplates.tensorboardPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchLocationFromTensorboardName', async () => {
-                const result = await client.matchLocationFromTensorboardName(fakePath);
-                assert.strictEqual(result, "locationValue");
-                assert((client.pathTemplates.tensorboardPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchTensorboardFromTensorboardName', async () => {
-                const result = await client.matchTensorboardFromTensorboardName(fakePath);
-                assert.strictEqual(result, "tensorboardValue");
-                assert((client.pathTemplates.tensorboardPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-        });
-
-        describe('tensorboardExperiment', async () => {
-            const fakePath = "/rendered/path/tensorboardExperiment";
-            const expectedParameters = {
-                project: "projectValue",
-                location: "locationValue",
-                tensorboard: "tensorboardValue",
-                experiment: "experimentValue",
-            };
-            const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            client.pathTemplates.tensorboardExperimentPathTemplate.render =
-                sinon.stub().returns(fakePath);
-            client.pathTemplates.tensorboardExperimentPathTemplate.match =
-                sinon.stub().returns(expectedParameters);
-
-            it('tensorboardExperimentPath', async () => {
-                const result = await client.tensorboardExperimentPath("projectValue", "locationValue", "tensorboardValue", "experimentValue");
-                assert.strictEqual(result, fakePath);
-                assert((client.pathTemplates.tensorboardExperimentPathTemplate.render as SinonStub)
-                    .getCall(-1).calledWith(expectedParameters));
-            });
-
-            it('matchProjectFromTensorboardExperimentName', async () => {
-                const result = await client.matchProjectFromTensorboardExperimentName(fakePath);
-                assert.strictEqual(result, "projectValue");
-                assert((client.pathTemplates.tensorboardExperimentPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchLocationFromTensorboardExperimentName', async () => {
-                const result = await client.matchLocationFromTensorboardExperimentName(fakePath);
-                assert.strictEqual(result, "locationValue");
-                assert((client.pathTemplates.tensorboardExperimentPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchTensorboardFromTensorboardExperimentName', async () => {
-                const result = await client.matchTensorboardFromTensorboardExperimentName(fakePath);
-                assert.strictEqual(result, "tensorboardValue");
-                assert((client.pathTemplates.tensorboardExperimentPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchExperimentFromTensorboardExperimentName', async () => {
-                const result = await client.matchExperimentFromTensorboardExperimentName(fakePath);
-                assert.strictEqual(result, "experimentValue");
-                assert((client.pathTemplates.tensorboardExperimentPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-        });
-
-        describe('tensorboardRun', async () => {
-            const fakePath = "/rendered/path/tensorboardRun";
-            const expectedParameters = {
-                project: "projectValue",
-                location: "locationValue",
-                tensorboard: "tensorboardValue",
-                experiment: "experimentValue",
-                run: "runValue",
-            };
-            const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            client.pathTemplates.tensorboardRunPathTemplate.render =
-                sinon.stub().returns(fakePath);
-            client.pathTemplates.tensorboardRunPathTemplate.match =
-                sinon.stub().returns(expectedParameters);
-
-            it('tensorboardRunPath', async () => {
-                const result = await client.tensorboardRunPath("projectValue", "locationValue", "tensorboardValue", "experimentValue", "runValue");
-                assert.strictEqual(result, fakePath);
-                assert((client.pathTemplates.tensorboardRunPathTemplate.render as SinonStub)
-                    .getCall(-1).calledWith(expectedParameters));
-            });
-
-            it('matchProjectFromTensorboardRunName', async () => {
-                const result = await client.matchProjectFromTensorboardRunName(fakePath);
-                assert.strictEqual(result, "projectValue");
-                assert((client.pathTemplates.tensorboardRunPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchLocationFromTensorboardRunName', async () => {
-                const result = await client.matchLocationFromTensorboardRunName(fakePath);
-                assert.strictEqual(result, "locationValue");
-                assert((client.pathTemplates.tensorboardRunPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchTensorboardFromTensorboardRunName', async () => {
-                const result = await client.matchTensorboardFromTensorboardRunName(fakePath);
-                assert.strictEqual(result, "tensorboardValue");
-                assert((client.pathTemplates.tensorboardRunPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchExperimentFromTensorboardRunName', async () => {
-                const result = await client.matchExperimentFromTensorboardRunName(fakePath);
-                assert.strictEqual(result, "experimentValue");
-                assert((client.pathTemplates.tensorboardRunPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchRunFromTensorboardRunName', async () => {
-                const result = await client.matchRunFromTensorboardRunName(fakePath);
-                assert.strictEqual(result, "runValue");
-                assert((client.pathTemplates.tensorboardRunPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-        });
-
-        describe('tensorboardTimeSeries', async () => {
-            const fakePath = "/rendered/path/tensorboardTimeSeries";
-            const expectedParameters = {
-                project: "projectValue",
-                location: "locationValue",
-                tensorboard: "tensorboardValue",
-                experiment: "experimentValue",
-                run: "runValue",
-                time_series: "timeSeriesValue",
-            };
-            const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            client.pathTemplates.tensorboardTimeSeriesPathTemplate.render =
-                sinon.stub().returns(fakePath);
-            client.pathTemplates.tensorboardTimeSeriesPathTemplate.match =
-                sinon.stub().returns(expectedParameters);
-
-            it('tensorboardTimeSeriesPath', async () => {
-                const result = await client.tensorboardTimeSeriesPath("projectValue", "locationValue", "tensorboardValue", "experimentValue", "runValue", "timeSeriesValue");
-                assert.strictEqual(result, fakePath);
-                assert((client.pathTemplates.tensorboardTimeSeriesPathTemplate.render as SinonStub)
-                    .getCall(-1).calledWith(expectedParameters));
-            });
-
-            it('matchProjectFromTensorboardTimeSeriesName', async () => {
-                const result = await client.matchProjectFromTensorboardTimeSeriesName(fakePath);
-                assert.strictEqual(result, "projectValue");
-                assert((client.pathTemplates.tensorboardTimeSeriesPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchLocationFromTensorboardTimeSeriesName', async () => {
-                const result = await client.matchLocationFromTensorboardTimeSeriesName(fakePath);
-                assert.strictEqual(result, "locationValue");
-                assert((client.pathTemplates.tensorboardTimeSeriesPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchTensorboardFromTensorboardTimeSeriesName', async () => {
-                const result = await client.matchTensorboardFromTensorboardTimeSeriesName(fakePath);
-                assert.strictEqual(result, "tensorboardValue");
-                assert((client.pathTemplates.tensorboardTimeSeriesPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchExperimentFromTensorboardTimeSeriesName', async () => {
-                const result = await client.matchExperimentFromTensorboardTimeSeriesName(fakePath);
-                assert.strictEqual(result, "experimentValue");
-                assert((client.pathTemplates.tensorboardTimeSeriesPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchRunFromTensorboardTimeSeriesName', async () => {
-                const result = await client.matchRunFromTensorboardTimeSeriesName(fakePath);
-                assert.strictEqual(result, "runValue");
-                assert((client.pathTemplates.tensorboardTimeSeriesPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchTimeSeriesFromTensorboardTimeSeriesName', async () => {
-                const result = await client.matchTimeSeriesFromTensorboardTimeSeriesName(fakePath);
-                assert.strictEqual(result, "timeSeriesValue");
-                assert((client.pathTemplates.tensorboardTimeSeriesPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-        });
-
-        describe('trainingPipeline', async () => {
-            const fakePath = "/rendered/path/trainingPipeline";
-            const expectedParameters = {
-                project: "projectValue",
-                location: "locationValue",
-                training_pipeline: "trainingPipelineValue",
-            };
-            const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            client.pathTemplates.trainingPipelinePathTemplate.render =
-                sinon.stub().returns(fakePath);
-            client.pathTemplates.trainingPipelinePathTemplate.match =
-                sinon.stub().returns(expectedParameters);
-
-            it('trainingPipelinePath', async () => {
-                const result = await client.trainingPipelinePath("projectValue", "locationValue", "trainingPipelineValue");
-                assert.strictEqual(result, fakePath);
-                assert((client.pathTemplates.trainingPipelinePathTemplate.render as SinonStub)
-                    .getCall(-1).calledWith(expectedParameters));
-            });
-
-            it('matchProjectFromTrainingPipelineName', async () => {
-                const result = await client.matchProjectFromTrainingPipelineName(fakePath);
-                assert.strictEqual(result, "projectValue");
-                assert((client.pathTemplates.trainingPipelinePathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchLocationFromTrainingPipelineName', async () => {
-                const result = await client.matchLocationFromTrainingPipelineName(fakePath);
-                assert.strictEqual(result, "locationValue");
-                assert((client.pathTemplates.trainingPipelinePathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchTrainingPipelineFromTrainingPipelineName', async () => {
-                const result = await client.matchTrainingPipelineFromTrainingPipelineName(fakePath);
-                assert.strictEqual(result, "trainingPipelineValue");
-                assert((client.pathTemplates.trainingPipelinePathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-        });
-
-        describe('trial', async () => {
-            const fakePath = "/rendered/path/trial";
-            const expectedParameters = {
-                project: "projectValue",
-                location: "locationValue",
-                study: "studyValue",
-                trial: "trialValue",
-            };
-            const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            client.pathTemplates.trialPathTemplate.render =
-                sinon.stub().returns(fakePath);
-            client.pathTemplates.trialPathTemplate.match =
-                sinon.stub().returns(expectedParameters);
-
-            it('trialPath', async () => {
-                const result = await client.trialPath("projectValue", "locationValue", "studyValue", "trialValue");
-                assert.strictEqual(result, fakePath);
-                assert((client.pathTemplates.trialPathTemplate.render as SinonStub)
-                    .getCall(-1).calledWith(expectedParameters));
-            });
-
-            it('matchProjectFromTrialName', async () => {
-                const result = await client.matchProjectFromTrialName(fakePath);
-                assert.strictEqual(result, "projectValue");
-                assert((client.pathTemplates.trialPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchLocationFromTrialName', async () => {
-                const result = await client.matchLocationFromTrialName(fakePath);
-                assert.strictEqual(result, "locationValue");
-                assert((client.pathTemplates.trialPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchStudyFromTrialName', async () => {
-                const result = await client.matchStudyFromTrialName(fakePath);
-                assert.strictEqual(result, "studyValue");
-                assert((client.pathTemplates.trialPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchTrialFromTrialName', async () => {
-                const result = await client.matchTrialFromTrialName(fakePath);
-                assert.strictEqual(result, "trialValue");
-                assert((client.pathTemplates.trialPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-        });
-
-        describe('tuningJob', async () => {
-            const fakePath = "/rendered/path/tuningJob";
-            const expectedParameters = {
-                project: "projectValue",
-                location: "locationValue",
-                tuning_job: "tuningJobValue",
-            };
-            const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            client.pathTemplates.tuningJobPathTemplate.render =
-                sinon.stub().returns(fakePath);
-            client.pathTemplates.tuningJobPathTemplate.match =
-                sinon.stub().returns(expectedParameters);
-
-            it('tuningJobPath', async () => {
-                const result = await client.tuningJobPath("projectValue", "locationValue", "tuningJobValue");
-                assert.strictEqual(result, fakePath);
-                assert((client.pathTemplates.tuningJobPathTemplate.render as SinonStub)
-                    .getCall(-1).calledWith(expectedParameters));
-            });
-
-            it('matchProjectFromTuningJobName', async () => {
-                const result = await client.matchProjectFromTuningJobName(fakePath);
-                assert.strictEqual(result, "projectValue");
-                assert((client.pathTemplates.tuningJobPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchLocationFromTuningJobName', async () => {
-                const result = await client.matchLocationFromTuningJobName(fakePath);
-                assert.strictEqual(result, "locationValue");
-                assert((client.pathTemplates.tuningJobPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchTuningJobFromTuningJobName', async () => {
-                const result = await client.matchTuningJobFromTuningJobName(fakePath);
-                assert.strictEqual(result, "tuningJobValue");
-                assert((client.pathTemplates.tuningJobPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-        });
+    describe('annotationSpec', async () => {
+      const fakePath = '/rendered/path/annotationSpec';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        dataset: 'datasetValue',
+        annotation_spec: 'annotationSpecValue',
+      };
+      const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      client.pathTemplates.annotationSpecPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.annotationSpecPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('annotationSpecPath', async () => {
+        const result = await client.annotationSpecPath(
+          'projectValue',
+          'locationValue',
+          'datasetValue',
+          'annotationSpecValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.annotationSpecPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromAnnotationSpecName', async () => {
+        const result =
+          await client.matchProjectFromAnnotationSpecName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.annotationSpecPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromAnnotationSpecName', async () => {
+        const result =
+          await client.matchLocationFromAnnotationSpecName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.annotationSpecPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchDatasetFromAnnotationSpecName', async () => {
+        const result =
+          await client.matchDatasetFromAnnotationSpecName(fakePath);
+        assert.strictEqual(result, 'datasetValue');
+        assert(
+          (client.pathTemplates.annotationSpecPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchAnnotationSpecFromAnnotationSpecName', async () => {
+        const result =
+          await client.matchAnnotationSpecFromAnnotationSpecName(fakePath);
+        assert.strictEqual(result, 'annotationSpecValue');
+        assert(
+          (client.pathTemplates.annotationSpecPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
     });
+
+    describe('artifact', async () => {
+      const fakePath = '/rendered/path/artifact';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        metadata_store: 'metadataStoreValue',
+        artifact: 'artifactValue',
+      };
+      const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      client.pathTemplates.artifactPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.artifactPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('artifactPath', async () => {
+        const result = await client.artifactPath(
+          'projectValue',
+          'locationValue',
+          'metadataStoreValue',
+          'artifactValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.artifactPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromArtifactName', async () => {
+        const result = await client.matchProjectFromArtifactName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.artifactPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromArtifactName', async () => {
+        const result = await client.matchLocationFromArtifactName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.artifactPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchMetadataStoreFromArtifactName', async () => {
+        const result =
+          await client.matchMetadataStoreFromArtifactName(fakePath);
+        assert.strictEqual(result, 'metadataStoreValue');
+        assert(
+          (client.pathTemplates.artifactPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchArtifactFromArtifactName', async () => {
+        const result = await client.matchArtifactFromArtifactName(fakePath);
+        assert.strictEqual(result, 'artifactValue');
+        assert(
+          (client.pathTemplates.artifactPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('batchPredictionJob', async () => {
+      const fakePath = '/rendered/path/batchPredictionJob';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        batch_prediction_job: 'batchPredictionJobValue',
+      };
+      const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      client.pathTemplates.batchPredictionJobPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.batchPredictionJobPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('batchPredictionJobPath', async () => {
+        const result = await client.batchPredictionJobPath(
+          'projectValue',
+          'locationValue',
+          'batchPredictionJobValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates.batchPredictionJobPathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromBatchPredictionJobName', async () => {
+        const result =
+          await client.matchProjectFromBatchPredictionJobName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (
+            client.pathTemplates.batchPredictionJobPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromBatchPredictionJobName', async () => {
+        const result =
+          await client.matchLocationFromBatchPredictionJobName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (
+            client.pathTemplates.batchPredictionJobPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchBatchPredictionJobFromBatchPredictionJobName', async () => {
+        const result =
+          await client.matchBatchPredictionJobFromBatchPredictionJobName(
+            fakePath
+          );
+        assert.strictEqual(result, 'batchPredictionJobValue');
+        assert(
+          (
+            client.pathTemplates.batchPredictionJobPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('cachedContent', async () => {
+      const fakePath = '/rendered/path/cachedContent';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        cached_content: 'cachedContentValue',
+      };
+      const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      client.pathTemplates.cachedContentPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.cachedContentPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('cachedContentPath', async () => {
+        const result = await client.cachedContentPath(
+          'projectValue',
+          'locationValue',
+          'cachedContentValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.cachedContentPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromCachedContentName', async () => {
+        const result = await client.matchProjectFromCachedContentName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.cachedContentPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromCachedContentName', async () => {
+        const result =
+          await client.matchLocationFromCachedContentName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.cachedContentPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchCachedContentFromCachedContentName', async () => {
+        const result =
+          await client.matchCachedContentFromCachedContentName(fakePath);
+        assert.strictEqual(result, 'cachedContentValue');
+        assert(
+          (client.pathTemplates.cachedContentPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('context', async () => {
+      const fakePath = '/rendered/path/context';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        metadata_store: 'metadataStoreValue',
+        context: 'contextValue',
+      };
+      const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      client.pathTemplates.contextPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.contextPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('contextPath', async () => {
+        const result = await client.contextPath(
+          'projectValue',
+          'locationValue',
+          'metadataStoreValue',
+          'contextValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.contextPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromContextName', async () => {
+        const result = await client.matchProjectFromContextName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.contextPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromContextName', async () => {
+        const result = await client.matchLocationFromContextName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.contextPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchMetadataStoreFromContextName', async () => {
+        const result = await client.matchMetadataStoreFromContextName(fakePath);
+        assert.strictEqual(result, 'metadataStoreValue');
+        assert(
+          (client.pathTemplates.contextPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchContextFromContextName', async () => {
+        const result = await client.matchContextFromContextName(fakePath);
+        assert.strictEqual(result, 'contextValue');
+        assert(
+          (client.pathTemplates.contextPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('customJob', async () => {
+      const fakePath = '/rendered/path/customJob';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        custom_job: 'customJobValue',
+      };
+      const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      client.pathTemplates.customJobPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.customJobPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('customJobPath', async () => {
+        const result = await client.customJobPath(
+          'projectValue',
+          'locationValue',
+          'customJobValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.customJobPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromCustomJobName', async () => {
+        const result = await client.matchProjectFromCustomJobName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.customJobPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromCustomJobName', async () => {
+        const result = await client.matchLocationFromCustomJobName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.customJobPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchCustomJobFromCustomJobName', async () => {
+        const result = await client.matchCustomJobFromCustomJobName(fakePath);
+        assert.strictEqual(result, 'customJobValue');
+        assert(
+          (client.pathTemplates.customJobPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('dataItem', async () => {
+      const fakePath = '/rendered/path/dataItem';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        dataset: 'datasetValue',
+        data_item: 'dataItemValue',
+      };
+      const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      client.pathTemplates.dataItemPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.dataItemPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('dataItemPath', async () => {
+        const result = await client.dataItemPath(
+          'projectValue',
+          'locationValue',
+          'datasetValue',
+          'dataItemValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.dataItemPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromDataItemName', async () => {
+        const result = await client.matchProjectFromDataItemName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.dataItemPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromDataItemName', async () => {
+        const result = await client.matchLocationFromDataItemName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.dataItemPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchDatasetFromDataItemName', async () => {
+        const result = await client.matchDatasetFromDataItemName(fakePath);
+        assert.strictEqual(result, 'datasetValue');
+        assert(
+          (client.pathTemplates.dataItemPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchDataItemFromDataItemName', async () => {
+        const result = await client.matchDataItemFromDataItemName(fakePath);
+        assert.strictEqual(result, 'dataItemValue');
+        assert(
+          (client.pathTemplates.dataItemPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('dataLabelingJob', async () => {
+      const fakePath = '/rendered/path/dataLabelingJob';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        data_labeling_job: 'dataLabelingJobValue',
+      };
+      const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      client.pathTemplates.dataLabelingJobPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.dataLabelingJobPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('dataLabelingJobPath', async () => {
+        const result = await client.dataLabelingJobPath(
+          'projectValue',
+          'locationValue',
+          'dataLabelingJobValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.dataLabelingJobPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromDataLabelingJobName', async () => {
+        const result =
+          await client.matchProjectFromDataLabelingJobName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.dataLabelingJobPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromDataLabelingJobName', async () => {
+        const result =
+          await client.matchLocationFromDataLabelingJobName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.dataLabelingJobPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchDataLabelingJobFromDataLabelingJobName', async () => {
+        const result =
+          await client.matchDataLabelingJobFromDataLabelingJobName(fakePath);
+        assert.strictEqual(result, 'dataLabelingJobValue');
+        assert(
+          (client.pathTemplates.dataLabelingJobPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('dataset', async () => {
+      const fakePath = '/rendered/path/dataset';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        dataset: 'datasetValue',
+      };
+      const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      client.pathTemplates.datasetPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.datasetPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('datasetPath', async () => {
+        const result = await client.datasetPath(
+          'projectValue',
+          'locationValue',
+          'datasetValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.datasetPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromDatasetName', async () => {
+        const result = await client.matchProjectFromDatasetName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.datasetPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromDatasetName', async () => {
+        const result = await client.matchLocationFromDatasetName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.datasetPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchDatasetFromDatasetName', async () => {
+        const result = await client.matchDatasetFromDatasetName(fakePath);
+        assert.strictEqual(result, 'datasetValue');
+        assert(
+          (client.pathTemplates.datasetPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('datasetVersion', async () => {
+      const fakePath = '/rendered/path/datasetVersion';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        dataset: 'datasetValue',
+        dataset_version: 'datasetVersionValue',
+      };
+      const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      client.pathTemplates.datasetVersionPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.datasetVersionPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('datasetVersionPath', async () => {
+        const result = await client.datasetVersionPath(
+          'projectValue',
+          'locationValue',
+          'datasetValue',
+          'datasetVersionValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.datasetVersionPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromDatasetVersionName', async () => {
+        const result =
+          await client.matchProjectFromDatasetVersionName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.datasetVersionPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromDatasetVersionName', async () => {
+        const result =
+          await client.matchLocationFromDatasetVersionName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.datasetVersionPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchDatasetFromDatasetVersionName', async () => {
+        const result =
+          await client.matchDatasetFromDatasetVersionName(fakePath);
+        assert.strictEqual(result, 'datasetValue');
+        assert(
+          (client.pathTemplates.datasetVersionPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchDatasetVersionFromDatasetVersionName', async () => {
+        const result =
+          await client.matchDatasetVersionFromDatasetVersionName(fakePath);
+        assert.strictEqual(result, 'datasetVersionValue');
+        assert(
+          (client.pathTemplates.datasetVersionPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('deploymentResourcePool', async () => {
+      const fakePath = '/rendered/path/deploymentResourcePool';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        deployment_resource_pool: 'deploymentResourcePoolValue',
+      };
+      const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      client.pathTemplates.deploymentResourcePoolPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.deploymentResourcePoolPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('deploymentResourcePoolPath', async () => {
+        const result = await client.deploymentResourcePoolPath(
+          'projectValue',
+          'locationValue',
+          'deploymentResourcePoolValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates.deploymentResourcePoolPathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromDeploymentResourcePoolName', async () => {
+        const result =
+          await client.matchProjectFromDeploymentResourcePoolName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (
+            client.pathTemplates.deploymentResourcePoolPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromDeploymentResourcePoolName', async () => {
+        const result =
+          await client.matchLocationFromDeploymentResourcePoolName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (
+            client.pathTemplates.deploymentResourcePoolPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchDeploymentResourcePoolFromDeploymentResourcePoolName', async () => {
+        const result =
+          await client.matchDeploymentResourcePoolFromDeploymentResourcePoolName(
+            fakePath
+          );
+        assert.strictEqual(result, 'deploymentResourcePoolValue');
+        assert(
+          (
+            client.pathTemplates.deploymentResourcePoolPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('entityType', async () => {
+      const fakePath = '/rendered/path/entityType';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        featurestore: 'featurestoreValue',
+        entity_type: 'entityTypeValue',
+      };
+      const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      client.pathTemplates.entityTypePathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.entityTypePathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('entityTypePath', async () => {
+        const result = await client.entityTypePath(
+          'projectValue',
+          'locationValue',
+          'featurestoreValue',
+          'entityTypeValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.entityTypePathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromEntityTypeName', async () => {
+        const result = await client.matchProjectFromEntityTypeName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.entityTypePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromEntityTypeName', async () => {
+        const result = await client.matchLocationFromEntityTypeName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.entityTypePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchFeaturestoreFromEntityTypeName', async () => {
+        const result =
+          await client.matchFeaturestoreFromEntityTypeName(fakePath);
+        assert.strictEqual(result, 'featurestoreValue');
+        assert(
+          (client.pathTemplates.entityTypePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchEntityTypeFromEntityTypeName', async () => {
+        const result = await client.matchEntityTypeFromEntityTypeName(fakePath);
+        assert.strictEqual(result, 'entityTypeValue');
+        assert(
+          (client.pathTemplates.entityTypePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('execution', async () => {
+      const fakePath = '/rendered/path/execution';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        metadata_store: 'metadataStoreValue',
+        execution: 'executionValue',
+      };
+      const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      client.pathTemplates.executionPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.executionPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('executionPath', async () => {
+        const result = await client.executionPath(
+          'projectValue',
+          'locationValue',
+          'metadataStoreValue',
+          'executionValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.executionPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromExecutionName', async () => {
+        const result = await client.matchProjectFromExecutionName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.executionPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromExecutionName', async () => {
+        const result = await client.matchLocationFromExecutionName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.executionPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchMetadataStoreFromExecutionName', async () => {
+        const result =
+          await client.matchMetadataStoreFromExecutionName(fakePath);
+        assert.strictEqual(result, 'metadataStoreValue');
+        assert(
+          (client.pathTemplates.executionPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchExecutionFromExecutionName', async () => {
+        const result = await client.matchExecutionFromExecutionName(fakePath);
+        assert.strictEqual(result, 'executionValue');
+        assert(
+          (client.pathTemplates.executionPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('featureGroup', async () => {
+      const fakePath = '/rendered/path/featureGroup';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        feature_group: 'featureGroupValue',
+      };
+      const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      client.pathTemplates.featureGroupPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.featureGroupPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('featureGroupPath', async () => {
+        const result = await client.featureGroupPath(
+          'projectValue',
+          'locationValue',
+          'featureGroupValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.featureGroupPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromFeatureGroupName', async () => {
+        const result = await client.matchProjectFromFeatureGroupName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.featureGroupPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromFeatureGroupName', async () => {
+        const result = await client.matchLocationFromFeatureGroupName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.featureGroupPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchFeatureGroupFromFeatureGroupName', async () => {
+        const result =
+          await client.matchFeatureGroupFromFeatureGroupName(fakePath);
+        assert.strictEqual(result, 'featureGroupValue');
+        assert(
+          (client.pathTemplates.featureGroupPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('featureOnlineStore', async () => {
+      const fakePath = '/rendered/path/featureOnlineStore';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        feature_online_store: 'featureOnlineStoreValue',
+      };
+      const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      client.pathTemplates.featureOnlineStorePathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.featureOnlineStorePathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('featureOnlineStorePath', async () => {
+        const result = await client.featureOnlineStorePath(
+          'projectValue',
+          'locationValue',
+          'featureOnlineStoreValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates.featureOnlineStorePathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromFeatureOnlineStoreName', async () => {
+        const result =
+          await client.matchProjectFromFeatureOnlineStoreName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (
+            client.pathTemplates.featureOnlineStorePathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromFeatureOnlineStoreName', async () => {
+        const result =
+          await client.matchLocationFromFeatureOnlineStoreName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (
+            client.pathTemplates.featureOnlineStorePathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchFeatureOnlineStoreFromFeatureOnlineStoreName', async () => {
+        const result =
+          await client.matchFeatureOnlineStoreFromFeatureOnlineStoreName(
+            fakePath
+          );
+        assert.strictEqual(result, 'featureOnlineStoreValue');
+        assert(
+          (
+            client.pathTemplates.featureOnlineStorePathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('featureView', async () => {
+      const fakePath = '/rendered/path/featureView';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        feature_online_store: 'featureOnlineStoreValue',
+        feature_view: 'featureViewValue',
+      };
+      const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      client.pathTemplates.featureViewPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.featureViewPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('featureViewPath', async () => {
+        const result = await client.featureViewPath(
+          'projectValue',
+          'locationValue',
+          'featureOnlineStoreValue',
+          'featureViewValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.featureViewPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromFeatureViewName', async () => {
+        const result = await client.matchProjectFromFeatureViewName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.featureViewPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromFeatureViewName', async () => {
+        const result = await client.matchLocationFromFeatureViewName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.featureViewPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchFeatureOnlineStoreFromFeatureViewName', async () => {
+        const result =
+          await client.matchFeatureOnlineStoreFromFeatureViewName(fakePath);
+        assert.strictEqual(result, 'featureOnlineStoreValue');
+        assert(
+          (client.pathTemplates.featureViewPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchFeatureViewFromFeatureViewName', async () => {
+        const result =
+          await client.matchFeatureViewFromFeatureViewName(fakePath);
+        assert.strictEqual(result, 'featureViewValue');
+        assert(
+          (client.pathTemplates.featureViewPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('featureViewSync', async () => {
+      const fakePath = '/rendered/path/featureViewSync';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        feature_online_store: 'featureOnlineStoreValue',
+        feature_view: 'featureViewValue',
+      };
+      const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      client.pathTemplates.featureViewSyncPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.featureViewSyncPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('featureViewSyncPath', async () => {
+        const result = await client.featureViewSyncPath(
+          'projectValue',
+          'locationValue',
+          'featureOnlineStoreValue',
+          'featureViewValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.featureViewSyncPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromFeatureViewSyncName', async () => {
+        const result =
+          await client.matchProjectFromFeatureViewSyncName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.featureViewSyncPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromFeatureViewSyncName', async () => {
+        const result =
+          await client.matchLocationFromFeatureViewSyncName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.featureViewSyncPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchFeatureOnlineStoreFromFeatureViewSyncName', async () => {
+        const result =
+          await client.matchFeatureOnlineStoreFromFeatureViewSyncName(fakePath);
+        assert.strictEqual(result, 'featureOnlineStoreValue');
+        assert(
+          (client.pathTemplates.featureViewSyncPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchFeatureViewFromFeatureViewSyncName', async () => {
+        const result =
+          await client.matchFeatureViewFromFeatureViewSyncName(fakePath);
+        assert.strictEqual(result, 'featureViewValue');
+        assert(
+          (client.pathTemplates.featureViewSyncPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('featurestore', async () => {
+      const fakePath = '/rendered/path/featurestore';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        featurestore: 'featurestoreValue',
+      };
+      const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      client.pathTemplates.featurestorePathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.featurestorePathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('featurestorePath', async () => {
+        const result = await client.featurestorePath(
+          'projectValue',
+          'locationValue',
+          'featurestoreValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.featurestorePathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromFeaturestoreName', async () => {
+        const result = await client.matchProjectFromFeaturestoreName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.featurestorePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromFeaturestoreName', async () => {
+        const result = await client.matchLocationFromFeaturestoreName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.featurestorePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchFeaturestoreFromFeaturestoreName', async () => {
+        const result =
+          await client.matchFeaturestoreFromFeaturestoreName(fakePath);
+        assert.strictEqual(result, 'featurestoreValue');
+        assert(
+          (client.pathTemplates.featurestorePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('hyperparameterTuningJob', async () => {
+      const fakePath = '/rendered/path/hyperparameterTuningJob';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        hyperparameter_tuning_job: 'hyperparameterTuningJobValue',
+      };
+      const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      client.pathTemplates.hyperparameterTuningJobPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.hyperparameterTuningJobPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('hyperparameterTuningJobPath', async () => {
+        const result = await client.hyperparameterTuningJobPath(
+          'projectValue',
+          'locationValue',
+          'hyperparameterTuningJobValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates.hyperparameterTuningJobPathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromHyperparameterTuningJobName', async () => {
+        const result =
+          await client.matchProjectFromHyperparameterTuningJobName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (
+            client.pathTemplates.hyperparameterTuningJobPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromHyperparameterTuningJobName', async () => {
+        const result =
+          await client.matchLocationFromHyperparameterTuningJobName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (
+            client.pathTemplates.hyperparameterTuningJobPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchHyperparameterTuningJobFromHyperparameterTuningJobName', async () => {
+        const result =
+          await client.matchHyperparameterTuningJobFromHyperparameterTuningJobName(
+            fakePath
+          );
+        assert.strictEqual(result, 'hyperparameterTuningJobValue');
+        assert(
+          (
+            client.pathTemplates.hyperparameterTuningJobPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('index', async () => {
+      const fakePath = '/rendered/path/index';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        index: 'indexValue',
+      };
+      const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      client.pathTemplates.indexPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.indexPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('indexPath', async () => {
+        const result = await client.indexPath(
+          'projectValue',
+          'locationValue',
+          'indexValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.indexPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromIndexName', async () => {
+        const result = await client.matchProjectFromIndexName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.indexPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromIndexName', async () => {
+        const result = await client.matchLocationFromIndexName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.indexPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchIndexFromIndexName', async () => {
+        const result = await client.matchIndexFromIndexName(fakePath);
+        assert.strictEqual(result, 'indexValue');
+        assert(
+          (client.pathTemplates.indexPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('indexEndpoint', async () => {
+      const fakePath = '/rendered/path/indexEndpoint';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        index_endpoint: 'indexEndpointValue',
+      };
+      const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      client.pathTemplates.indexEndpointPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.indexEndpointPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('indexEndpointPath', async () => {
+        const result = await client.indexEndpointPath(
+          'projectValue',
+          'locationValue',
+          'indexEndpointValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.indexEndpointPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromIndexEndpointName', async () => {
+        const result = await client.matchProjectFromIndexEndpointName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.indexEndpointPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromIndexEndpointName', async () => {
+        const result =
+          await client.matchLocationFromIndexEndpointName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.indexEndpointPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchIndexEndpointFromIndexEndpointName', async () => {
+        const result =
+          await client.matchIndexEndpointFromIndexEndpointName(fakePath);
+        assert.strictEqual(result, 'indexEndpointValue');
+        assert(
+          (client.pathTemplates.indexEndpointPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('location', async () => {
+      const fakePath = '/rendered/path/location';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+      };
+      const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      client.pathTemplates.locationPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.locationPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('locationPath', async () => {
+        const result = await client.locationPath(
+          'projectValue',
+          'locationValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.locationPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromLocationName', async () => {
+        const result = await client.matchProjectFromLocationName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.locationPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromLocationName', async () => {
+        const result = await client.matchLocationFromLocationName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.locationPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('metadataSchema', async () => {
+      const fakePath = '/rendered/path/metadataSchema';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        metadata_store: 'metadataStoreValue',
+        metadata_schema: 'metadataSchemaValue',
+      };
+      const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      client.pathTemplates.metadataSchemaPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.metadataSchemaPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('metadataSchemaPath', async () => {
+        const result = await client.metadataSchemaPath(
+          'projectValue',
+          'locationValue',
+          'metadataStoreValue',
+          'metadataSchemaValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.metadataSchemaPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromMetadataSchemaName', async () => {
+        const result =
+          await client.matchProjectFromMetadataSchemaName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.metadataSchemaPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromMetadataSchemaName', async () => {
+        const result =
+          await client.matchLocationFromMetadataSchemaName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.metadataSchemaPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchMetadataStoreFromMetadataSchemaName', async () => {
+        const result =
+          await client.matchMetadataStoreFromMetadataSchemaName(fakePath);
+        assert.strictEqual(result, 'metadataStoreValue');
+        assert(
+          (client.pathTemplates.metadataSchemaPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchMetadataSchemaFromMetadataSchemaName', async () => {
+        const result =
+          await client.matchMetadataSchemaFromMetadataSchemaName(fakePath);
+        assert.strictEqual(result, 'metadataSchemaValue');
+        assert(
+          (client.pathTemplates.metadataSchemaPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('metadataStore', async () => {
+      const fakePath = '/rendered/path/metadataStore';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        metadata_store: 'metadataStoreValue',
+      };
+      const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      client.pathTemplates.metadataStorePathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.metadataStorePathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('metadataStorePath', async () => {
+        const result = await client.metadataStorePath(
+          'projectValue',
+          'locationValue',
+          'metadataStoreValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.metadataStorePathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromMetadataStoreName', async () => {
+        const result = await client.matchProjectFromMetadataStoreName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.metadataStorePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromMetadataStoreName', async () => {
+        const result =
+          await client.matchLocationFromMetadataStoreName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.metadataStorePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchMetadataStoreFromMetadataStoreName', async () => {
+        const result =
+          await client.matchMetadataStoreFromMetadataStoreName(fakePath);
+        assert.strictEqual(result, 'metadataStoreValue');
+        assert(
+          (client.pathTemplates.metadataStorePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('model', async () => {
+      const fakePath = '/rendered/path/model';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        model: 'modelValue',
+      };
+      const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      client.pathTemplates.modelPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.modelPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('modelPath', async () => {
+        const result = await client.modelPath(
+          'projectValue',
+          'locationValue',
+          'modelValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.modelPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromModelName', async () => {
+        const result = await client.matchProjectFromModelName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.modelPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromModelName', async () => {
+        const result = await client.matchLocationFromModelName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.modelPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchModelFromModelName', async () => {
+        const result = await client.matchModelFromModelName(fakePath);
+        assert.strictEqual(result, 'modelValue');
+        assert(
+          (client.pathTemplates.modelPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('modelDeploymentMonitoringJob', async () => {
+      const fakePath = '/rendered/path/modelDeploymentMonitoringJob';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        model_deployment_monitoring_job: 'modelDeploymentMonitoringJobValue',
+      };
+      const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      client.pathTemplates.modelDeploymentMonitoringJobPathTemplate.render =
+        sinon.stub().returns(fakePath);
+      client.pathTemplates.modelDeploymentMonitoringJobPathTemplate.match =
+        sinon.stub().returns(expectedParameters);
+
+      it('modelDeploymentMonitoringJobPath', async () => {
+        const result = await client.modelDeploymentMonitoringJobPath(
+          'projectValue',
+          'locationValue',
+          'modelDeploymentMonitoringJobValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates.modelDeploymentMonitoringJobPathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromModelDeploymentMonitoringJobName', async () => {
+        const result =
+          await client.matchProjectFromModelDeploymentMonitoringJobName(
+            fakePath
+          );
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (
+            client.pathTemplates.modelDeploymentMonitoringJobPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromModelDeploymentMonitoringJobName', async () => {
+        const result =
+          await client.matchLocationFromModelDeploymentMonitoringJobName(
+            fakePath
+          );
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (
+            client.pathTemplates.modelDeploymentMonitoringJobPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchModelDeploymentMonitoringJobFromModelDeploymentMonitoringJobName', async () => {
+        const result =
+          await client.matchModelDeploymentMonitoringJobFromModelDeploymentMonitoringJobName(
+            fakePath
+          );
+        assert.strictEqual(result, 'modelDeploymentMonitoringJobValue');
+        assert(
+          (
+            client.pathTemplates.modelDeploymentMonitoringJobPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('modelEvaluation', async () => {
+      const fakePath = '/rendered/path/modelEvaluation';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        model: 'modelValue',
+        evaluation: 'evaluationValue',
+      };
+      const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      client.pathTemplates.modelEvaluationPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.modelEvaluationPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('modelEvaluationPath', async () => {
+        const result = await client.modelEvaluationPath(
+          'projectValue',
+          'locationValue',
+          'modelValue',
+          'evaluationValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.modelEvaluationPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromModelEvaluationName', async () => {
+        const result =
+          await client.matchProjectFromModelEvaluationName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.modelEvaluationPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromModelEvaluationName', async () => {
+        const result =
+          await client.matchLocationFromModelEvaluationName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.modelEvaluationPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchModelFromModelEvaluationName', async () => {
+        const result = await client.matchModelFromModelEvaluationName(fakePath);
+        assert.strictEqual(result, 'modelValue');
+        assert(
+          (client.pathTemplates.modelEvaluationPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchEvaluationFromModelEvaluationName', async () => {
+        const result =
+          await client.matchEvaluationFromModelEvaluationName(fakePath);
+        assert.strictEqual(result, 'evaluationValue');
+        assert(
+          (client.pathTemplates.modelEvaluationPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('modelEvaluationSlice', async () => {
+      const fakePath = '/rendered/path/modelEvaluationSlice';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        model: 'modelValue',
+        evaluation: 'evaluationValue',
+        slice: 'sliceValue',
+      };
+      const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      client.pathTemplates.modelEvaluationSlicePathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.modelEvaluationSlicePathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('modelEvaluationSlicePath', async () => {
+        const result = await client.modelEvaluationSlicePath(
+          'projectValue',
+          'locationValue',
+          'modelValue',
+          'evaluationValue',
+          'sliceValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates.modelEvaluationSlicePathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromModelEvaluationSliceName', async () => {
+        const result =
+          await client.matchProjectFromModelEvaluationSliceName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (
+            client.pathTemplates.modelEvaluationSlicePathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromModelEvaluationSliceName', async () => {
+        const result =
+          await client.matchLocationFromModelEvaluationSliceName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (
+            client.pathTemplates.modelEvaluationSlicePathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchModelFromModelEvaluationSliceName', async () => {
+        const result =
+          await client.matchModelFromModelEvaluationSliceName(fakePath);
+        assert.strictEqual(result, 'modelValue');
+        assert(
+          (
+            client.pathTemplates.modelEvaluationSlicePathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchEvaluationFromModelEvaluationSliceName', async () => {
+        const result =
+          await client.matchEvaluationFromModelEvaluationSliceName(fakePath);
+        assert.strictEqual(result, 'evaluationValue');
+        assert(
+          (
+            client.pathTemplates.modelEvaluationSlicePathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchSliceFromModelEvaluationSliceName', async () => {
+        const result =
+          await client.matchSliceFromModelEvaluationSliceName(fakePath);
+        assert.strictEqual(result, 'sliceValue');
+        assert(
+          (
+            client.pathTemplates.modelEvaluationSlicePathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('nasJob', async () => {
+      const fakePath = '/rendered/path/nasJob';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        nas_job: 'nasJobValue',
+      };
+      const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      client.pathTemplates.nasJobPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.nasJobPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('nasJobPath', async () => {
+        const result = await client.nasJobPath(
+          'projectValue',
+          'locationValue',
+          'nasJobValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.nasJobPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromNasJobName', async () => {
+        const result = await client.matchProjectFromNasJobName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.nasJobPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromNasJobName', async () => {
+        const result = await client.matchLocationFromNasJobName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.nasJobPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchNasJobFromNasJobName', async () => {
+        const result = await client.matchNasJobFromNasJobName(fakePath);
+        assert.strictEqual(result, 'nasJobValue');
+        assert(
+          (client.pathTemplates.nasJobPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('nasTrialDetail', async () => {
+      const fakePath = '/rendered/path/nasTrialDetail';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        nas_job: 'nasJobValue',
+        nas_trial_detail: 'nasTrialDetailValue',
+      };
+      const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      client.pathTemplates.nasTrialDetailPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.nasTrialDetailPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('nasTrialDetailPath', async () => {
+        const result = await client.nasTrialDetailPath(
+          'projectValue',
+          'locationValue',
+          'nasJobValue',
+          'nasTrialDetailValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.nasTrialDetailPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromNasTrialDetailName', async () => {
+        const result =
+          await client.matchProjectFromNasTrialDetailName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.nasTrialDetailPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromNasTrialDetailName', async () => {
+        const result =
+          await client.matchLocationFromNasTrialDetailName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.nasTrialDetailPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchNasJobFromNasTrialDetailName', async () => {
+        const result = await client.matchNasJobFromNasTrialDetailName(fakePath);
+        assert.strictEqual(result, 'nasJobValue');
+        assert(
+          (client.pathTemplates.nasTrialDetailPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchNasTrialDetailFromNasTrialDetailName', async () => {
+        const result =
+          await client.matchNasTrialDetailFromNasTrialDetailName(fakePath);
+        assert.strictEqual(result, 'nasTrialDetailValue');
+        assert(
+          (client.pathTemplates.nasTrialDetailPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('notebookExecutionJob', async () => {
+      const fakePath = '/rendered/path/notebookExecutionJob';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        notebook_execution_job: 'notebookExecutionJobValue',
+      };
+      const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      client.pathTemplates.notebookExecutionJobPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.notebookExecutionJobPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('notebookExecutionJobPath', async () => {
+        const result = await client.notebookExecutionJobPath(
+          'projectValue',
+          'locationValue',
+          'notebookExecutionJobValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates.notebookExecutionJobPathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromNotebookExecutionJobName', async () => {
+        const result =
+          await client.matchProjectFromNotebookExecutionJobName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (
+            client.pathTemplates.notebookExecutionJobPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromNotebookExecutionJobName', async () => {
+        const result =
+          await client.matchLocationFromNotebookExecutionJobName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (
+            client.pathTemplates.notebookExecutionJobPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchNotebookExecutionJobFromNotebookExecutionJobName', async () => {
+        const result =
+          await client.matchNotebookExecutionJobFromNotebookExecutionJobName(
+            fakePath
+          );
+        assert.strictEqual(result, 'notebookExecutionJobValue');
+        assert(
+          (
+            client.pathTemplates.notebookExecutionJobPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('notebookRuntime', async () => {
+      const fakePath = '/rendered/path/notebookRuntime';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        notebook_runtime: 'notebookRuntimeValue',
+      };
+      const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      client.pathTemplates.notebookRuntimePathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.notebookRuntimePathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('notebookRuntimePath', async () => {
+        const result = await client.notebookRuntimePath(
+          'projectValue',
+          'locationValue',
+          'notebookRuntimeValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.notebookRuntimePathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromNotebookRuntimeName', async () => {
+        const result =
+          await client.matchProjectFromNotebookRuntimeName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.notebookRuntimePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromNotebookRuntimeName', async () => {
+        const result =
+          await client.matchLocationFromNotebookRuntimeName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.notebookRuntimePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchNotebookRuntimeFromNotebookRuntimeName', async () => {
+        const result =
+          await client.matchNotebookRuntimeFromNotebookRuntimeName(fakePath);
+        assert.strictEqual(result, 'notebookRuntimeValue');
+        assert(
+          (client.pathTemplates.notebookRuntimePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('notebookRuntimeTemplate', async () => {
+      const fakePath = '/rendered/path/notebookRuntimeTemplate';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        notebook_runtime_template: 'notebookRuntimeTemplateValue',
+      };
+      const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      client.pathTemplates.notebookRuntimeTemplatePathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.notebookRuntimeTemplatePathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('notebookRuntimeTemplatePath', async () => {
+        const result = await client.notebookRuntimeTemplatePath(
+          'projectValue',
+          'locationValue',
+          'notebookRuntimeTemplateValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates.notebookRuntimeTemplatePathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromNotebookRuntimeTemplateName', async () => {
+        const result =
+          await client.matchProjectFromNotebookRuntimeTemplateName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (
+            client.pathTemplates.notebookRuntimeTemplatePathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromNotebookRuntimeTemplateName', async () => {
+        const result =
+          await client.matchLocationFromNotebookRuntimeTemplateName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (
+            client.pathTemplates.notebookRuntimeTemplatePathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchNotebookRuntimeTemplateFromNotebookRuntimeTemplateName', async () => {
+        const result =
+          await client.matchNotebookRuntimeTemplateFromNotebookRuntimeTemplateName(
+            fakePath
+          );
+        assert.strictEqual(result, 'notebookRuntimeTemplateValue');
+        assert(
+          (
+            client.pathTemplates.notebookRuntimeTemplatePathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('persistentResource', async () => {
+      const fakePath = '/rendered/path/persistentResource';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        persistent_resource: 'persistentResourceValue',
+      };
+      const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      client.pathTemplates.persistentResourcePathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.persistentResourcePathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('persistentResourcePath', async () => {
+        const result = await client.persistentResourcePath(
+          'projectValue',
+          'locationValue',
+          'persistentResourceValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates.persistentResourcePathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromPersistentResourceName', async () => {
+        const result =
+          await client.matchProjectFromPersistentResourceName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (
+            client.pathTemplates.persistentResourcePathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromPersistentResourceName', async () => {
+        const result =
+          await client.matchLocationFromPersistentResourceName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (
+            client.pathTemplates.persistentResourcePathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchPersistentResourceFromPersistentResourceName', async () => {
+        const result =
+          await client.matchPersistentResourceFromPersistentResourceName(
+            fakePath
+          );
+        assert.strictEqual(result, 'persistentResourceValue');
+        assert(
+          (
+            client.pathTemplates.persistentResourcePathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('pipelineJob', async () => {
+      const fakePath = '/rendered/path/pipelineJob';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        pipeline_job: 'pipelineJobValue',
+      };
+      const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      client.pathTemplates.pipelineJobPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.pipelineJobPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('pipelineJobPath', async () => {
+        const result = await client.pipelineJobPath(
+          'projectValue',
+          'locationValue',
+          'pipelineJobValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.pipelineJobPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromPipelineJobName', async () => {
+        const result = await client.matchProjectFromPipelineJobName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.pipelineJobPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromPipelineJobName', async () => {
+        const result = await client.matchLocationFromPipelineJobName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.pipelineJobPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchPipelineJobFromPipelineJobName', async () => {
+        const result =
+          await client.matchPipelineJobFromPipelineJobName(fakePath);
+        assert.strictEqual(result, 'pipelineJobValue');
+        assert(
+          (client.pathTemplates.pipelineJobPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('project', async () => {
+      const fakePath = '/rendered/path/project';
+      const expectedParameters = {
+        project: 'projectValue',
+      };
+      const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      client.pathTemplates.projectPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.projectPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('projectPath', async () => {
+        const result = await client.projectPath('projectValue');
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.projectPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromProjectName', async () => {
+        const result = await client.matchProjectFromProjectName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.projectPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('projectLocationEndpoint', async () => {
+      const fakePath = '/rendered/path/projectLocationEndpoint';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        endpoint: 'endpointValue',
+      };
+      const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      client.pathTemplates.projectLocationEndpointPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.projectLocationEndpointPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('projectLocationEndpointPath', async () => {
+        const result = await client.projectLocationEndpointPath(
+          'projectValue',
+          'locationValue',
+          'endpointValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates.projectLocationEndpointPathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromProjectLocationEndpointName', async () => {
+        const result =
+          await client.matchProjectFromProjectLocationEndpointName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (
+            client.pathTemplates.projectLocationEndpointPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromProjectLocationEndpointName', async () => {
+        const result =
+          await client.matchLocationFromProjectLocationEndpointName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (
+            client.pathTemplates.projectLocationEndpointPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchEndpointFromProjectLocationEndpointName', async () => {
+        const result =
+          await client.matchEndpointFromProjectLocationEndpointName(fakePath);
+        assert.strictEqual(result, 'endpointValue');
+        assert(
+          (
+            client.pathTemplates.projectLocationEndpointPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('projectLocationFeatureGroupFeature', async () => {
+      const fakePath = '/rendered/path/projectLocationFeatureGroupFeature';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        feature_group: 'featureGroupValue',
+        feature: 'featureValue',
+      };
+      const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      client.pathTemplates.projectLocationFeatureGroupFeaturePathTemplate.render =
+        sinon.stub().returns(fakePath);
+      client.pathTemplates.projectLocationFeatureGroupFeaturePathTemplate.match =
+        sinon.stub().returns(expectedParameters);
+
+      it('projectLocationFeatureGroupFeaturePath', async () => {
+        const result = await client.projectLocationFeatureGroupFeaturePath(
+          'projectValue',
+          'locationValue',
+          'featureGroupValue',
+          'featureValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates.projectLocationFeatureGroupFeaturePathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromProjectLocationFeatureGroupFeatureName', async () => {
+        const result =
+          await client.matchProjectFromProjectLocationFeatureGroupFeatureName(
+            fakePath
+          );
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (
+            client.pathTemplates.projectLocationFeatureGroupFeaturePathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromProjectLocationFeatureGroupFeatureName', async () => {
+        const result =
+          await client.matchLocationFromProjectLocationFeatureGroupFeatureName(
+            fakePath
+          );
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (
+            client.pathTemplates.projectLocationFeatureGroupFeaturePathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchFeatureGroupFromProjectLocationFeatureGroupFeatureName', async () => {
+        const result =
+          await client.matchFeatureGroupFromProjectLocationFeatureGroupFeatureName(
+            fakePath
+          );
+        assert.strictEqual(result, 'featureGroupValue');
+        assert(
+          (
+            client.pathTemplates.projectLocationFeatureGroupFeaturePathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchFeatureFromProjectLocationFeatureGroupFeatureName', async () => {
+        const result =
+          await client.matchFeatureFromProjectLocationFeatureGroupFeatureName(
+            fakePath
+          );
+        assert.strictEqual(result, 'featureValue');
+        assert(
+          (
+            client.pathTemplates.projectLocationFeatureGroupFeaturePathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('projectLocationFeaturestoreEntityTypeFeature', async () => {
+      const fakePath =
+        '/rendered/path/projectLocationFeaturestoreEntityTypeFeature';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        featurestore: 'featurestoreValue',
+        entity_type: 'entityTypeValue',
+        feature: 'featureValue',
+      };
+      const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      client.pathTemplates.projectLocationFeaturestoreEntityTypeFeaturePathTemplate.render =
+        sinon.stub().returns(fakePath);
+      client.pathTemplates.projectLocationFeaturestoreEntityTypeFeaturePathTemplate.match =
+        sinon.stub().returns(expectedParameters);
+
+      it('projectLocationFeaturestoreEntityTypeFeaturePath', async () => {
+        const result =
+          await client.projectLocationFeaturestoreEntityTypeFeaturePath(
+            'projectValue',
+            'locationValue',
+            'featurestoreValue',
+            'entityTypeValue',
+            'featureValue'
+          );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates
+              .projectLocationFeaturestoreEntityTypeFeaturePathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromProjectLocationFeaturestoreEntityTypeFeatureName', async () => {
+        const result =
+          await client.matchProjectFromProjectLocationFeaturestoreEntityTypeFeatureName(
+            fakePath
+          );
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (
+            client.pathTemplates
+              .projectLocationFeaturestoreEntityTypeFeaturePathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromProjectLocationFeaturestoreEntityTypeFeatureName', async () => {
+        const result =
+          await client.matchLocationFromProjectLocationFeaturestoreEntityTypeFeatureName(
+            fakePath
+          );
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (
+            client.pathTemplates
+              .projectLocationFeaturestoreEntityTypeFeaturePathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchFeaturestoreFromProjectLocationFeaturestoreEntityTypeFeatureName', async () => {
+        const result =
+          await client.matchFeaturestoreFromProjectLocationFeaturestoreEntityTypeFeatureName(
+            fakePath
+          );
+        assert.strictEqual(result, 'featurestoreValue');
+        assert(
+          (
+            client.pathTemplates
+              .projectLocationFeaturestoreEntityTypeFeaturePathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchEntityTypeFromProjectLocationFeaturestoreEntityTypeFeatureName', async () => {
+        const result =
+          await client.matchEntityTypeFromProjectLocationFeaturestoreEntityTypeFeatureName(
+            fakePath
+          );
+        assert.strictEqual(result, 'entityTypeValue');
+        assert(
+          (
+            client.pathTemplates
+              .projectLocationFeaturestoreEntityTypeFeaturePathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchFeatureFromProjectLocationFeaturestoreEntityTypeFeatureName', async () => {
+        const result =
+          await client.matchFeatureFromProjectLocationFeaturestoreEntityTypeFeatureName(
+            fakePath
+          );
+        assert.strictEqual(result, 'featureValue');
+        assert(
+          (
+            client.pathTemplates
+              .projectLocationFeaturestoreEntityTypeFeaturePathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('projectLocationPublisherModel', async () => {
+      const fakePath = '/rendered/path/projectLocationPublisherModel';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        publisher: 'publisherValue',
+        model: 'modelValue',
+      };
+      const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      client.pathTemplates.projectLocationPublisherModelPathTemplate.render =
+        sinon.stub().returns(fakePath);
+      client.pathTemplates.projectLocationPublisherModelPathTemplate.match =
+        sinon.stub().returns(expectedParameters);
+
+      it('projectLocationPublisherModelPath', async () => {
+        const result = await client.projectLocationPublisherModelPath(
+          'projectValue',
+          'locationValue',
+          'publisherValue',
+          'modelValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates.projectLocationPublisherModelPathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromProjectLocationPublisherModelName', async () => {
+        const result =
+          await client.matchProjectFromProjectLocationPublisherModelName(
+            fakePath
+          );
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (
+            client.pathTemplates.projectLocationPublisherModelPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromProjectLocationPublisherModelName', async () => {
+        const result =
+          await client.matchLocationFromProjectLocationPublisherModelName(
+            fakePath
+          );
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (
+            client.pathTemplates.projectLocationPublisherModelPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchPublisherFromProjectLocationPublisherModelName', async () => {
+        const result =
+          await client.matchPublisherFromProjectLocationPublisherModelName(
+            fakePath
+          );
+        assert.strictEqual(result, 'publisherValue');
+        assert(
+          (
+            client.pathTemplates.projectLocationPublisherModelPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchModelFromProjectLocationPublisherModelName', async () => {
+        const result =
+          await client.matchModelFromProjectLocationPublisherModelName(
+            fakePath
+          );
+        assert.strictEqual(result, 'modelValue');
+        assert(
+          (
+            client.pathTemplates.projectLocationPublisherModelPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('publisherModel', async () => {
+      const fakePath = '/rendered/path/publisherModel';
+      const expectedParameters = {
+        publisher: 'publisherValue',
+        model: 'modelValue',
+      };
+      const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      client.pathTemplates.publisherModelPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.publisherModelPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('publisherModelPath', async () => {
+        const result = await client.publisherModelPath(
+          'publisherValue',
+          'modelValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.publisherModelPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchPublisherFromPublisherModelName', async () => {
+        const result =
+          await client.matchPublisherFromPublisherModelName(fakePath);
+        assert.strictEqual(result, 'publisherValue');
+        assert(
+          (client.pathTemplates.publisherModelPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchModelFromPublisherModelName', async () => {
+        const result = await client.matchModelFromPublisherModelName(fakePath);
+        assert.strictEqual(result, 'modelValue');
+        assert(
+          (client.pathTemplates.publisherModelPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('ragCorpus', async () => {
+      const fakePath = '/rendered/path/ragCorpus';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        rag_corpus: 'ragCorpusValue',
+      };
+      const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      client.pathTemplates.ragCorpusPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.ragCorpusPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('ragCorpusPath', async () => {
+        const result = await client.ragCorpusPath(
+          'projectValue',
+          'locationValue',
+          'ragCorpusValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.ragCorpusPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromRagCorpusName', async () => {
+        const result = await client.matchProjectFromRagCorpusName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.ragCorpusPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromRagCorpusName', async () => {
+        const result = await client.matchLocationFromRagCorpusName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.ragCorpusPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchRagCorpusFromRagCorpusName', async () => {
+        const result = await client.matchRagCorpusFromRagCorpusName(fakePath);
+        assert.strictEqual(result, 'ragCorpusValue');
+        assert(
+          (client.pathTemplates.ragCorpusPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('ragFile', async () => {
+      const fakePath = '/rendered/path/ragFile';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        rag_corpus: 'ragCorpusValue',
+        rag_file: 'ragFileValue',
+      };
+      const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      client.pathTemplates.ragFilePathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.ragFilePathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('ragFilePath', async () => {
+        const result = await client.ragFilePath(
+          'projectValue',
+          'locationValue',
+          'ragCorpusValue',
+          'ragFileValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.ragFilePathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromRagFileName', async () => {
+        const result = await client.matchProjectFromRagFileName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.ragFilePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromRagFileName', async () => {
+        const result = await client.matchLocationFromRagFileName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.ragFilePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchRagCorpusFromRagFileName', async () => {
+        const result = await client.matchRagCorpusFromRagFileName(fakePath);
+        assert.strictEqual(result, 'ragCorpusValue');
+        assert(
+          (client.pathTemplates.ragFilePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchRagFileFromRagFileName', async () => {
+        const result = await client.matchRagFileFromRagFileName(fakePath);
+        assert.strictEqual(result, 'ragFileValue');
+        assert(
+          (client.pathTemplates.ragFilePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('reasoningEngine', async () => {
+      const fakePath = '/rendered/path/reasoningEngine';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        reasoning_engine: 'reasoningEngineValue',
+      };
+      const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      client.pathTemplates.reasoningEnginePathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.reasoningEnginePathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('reasoningEnginePath', async () => {
+        const result = await client.reasoningEnginePath(
+          'projectValue',
+          'locationValue',
+          'reasoningEngineValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.reasoningEnginePathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromReasoningEngineName', async () => {
+        const result =
+          await client.matchProjectFromReasoningEngineName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.reasoningEnginePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromReasoningEngineName', async () => {
+        const result =
+          await client.matchLocationFromReasoningEngineName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.reasoningEnginePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchReasoningEngineFromReasoningEngineName', async () => {
+        const result =
+          await client.matchReasoningEngineFromReasoningEngineName(fakePath);
+        assert.strictEqual(result, 'reasoningEngineValue');
+        assert(
+          (client.pathTemplates.reasoningEnginePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('savedQuery', async () => {
+      const fakePath = '/rendered/path/savedQuery';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        dataset: 'datasetValue',
+        saved_query: 'savedQueryValue',
+      };
+      const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      client.pathTemplates.savedQueryPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.savedQueryPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('savedQueryPath', async () => {
+        const result = await client.savedQueryPath(
+          'projectValue',
+          'locationValue',
+          'datasetValue',
+          'savedQueryValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.savedQueryPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromSavedQueryName', async () => {
+        const result = await client.matchProjectFromSavedQueryName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.savedQueryPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromSavedQueryName', async () => {
+        const result = await client.matchLocationFromSavedQueryName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.savedQueryPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchDatasetFromSavedQueryName', async () => {
+        const result = await client.matchDatasetFromSavedQueryName(fakePath);
+        assert.strictEqual(result, 'datasetValue');
+        assert(
+          (client.pathTemplates.savedQueryPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchSavedQueryFromSavedQueryName', async () => {
+        const result = await client.matchSavedQueryFromSavedQueryName(fakePath);
+        assert.strictEqual(result, 'savedQueryValue');
+        assert(
+          (client.pathTemplates.savedQueryPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('schedule', async () => {
+      const fakePath = '/rendered/path/schedule';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        schedule: 'scheduleValue',
+      };
+      const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      client.pathTemplates.schedulePathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.schedulePathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('schedulePath', async () => {
+        const result = await client.schedulePath(
+          'projectValue',
+          'locationValue',
+          'scheduleValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.schedulePathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromScheduleName', async () => {
+        const result = await client.matchProjectFromScheduleName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.schedulePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromScheduleName', async () => {
+        const result = await client.matchLocationFromScheduleName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.schedulePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchScheduleFromScheduleName', async () => {
+        const result = await client.matchScheduleFromScheduleName(fakePath);
+        assert.strictEqual(result, 'scheduleValue');
+        assert(
+          (client.pathTemplates.schedulePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('specialistPool', async () => {
+      const fakePath = '/rendered/path/specialistPool';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        specialist_pool: 'specialistPoolValue',
+      };
+      const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      client.pathTemplates.specialistPoolPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.specialistPoolPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('specialistPoolPath', async () => {
+        const result = await client.specialistPoolPath(
+          'projectValue',
+          'locationValue',
+          'specialistPoolValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.specialistPoolPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromSpecialistPoolName', async () => {
+        const result =
+          await client.matchProjectFromSpecialistPoolName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.specialistPoolPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromSpecialistPoolName', async () => {
+        const result =
+          await client.matchLocationFromSpecialistPoolName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.specialistPoolPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchSpecialistPoolFromSpecialistPoolName', async () => {
+        const result =
+          await client.matchSpecialistPoolFromSpecialistPoolName(fakePath);
+        assert.strictEqual(result, 'specialistPoolValue');
+        assert(
+          (client.pathTemplates.specialistPoolPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('study', async () => {
+      const fakePath = '/rendered/path/study';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        study: 'studyValue',
+      };
+      const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      client.pathTemplates.studyPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.studyPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('studyPath', async () => {
+        const result = await client.studyPath(
+          'projectValue',
+          'locationValue',
+          'studyValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.studyPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromStudyName', async () => {
+        const result = await client.matchProjectFromStudyName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.studyPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromStudyName', async () => {
+        const result = await client.matchLocationFromStudyName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.studyPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchStudyFromStudyName', async () => {
+        const result = await client.matchStudyFromStudyName(fakePath);
+        assert.strictEqual(result, 'studyValue');
+        assert(
+          (client.pathTemplates.studyPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('tensorboard', async () => {
+      const fakePath = '/rendered/path/tensorboard';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        tensorboard: 'tensorboardValue',
+      };
+      const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      client.pathTemplates.tensorboardPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.tensorboardPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('tensorboardPath', async () => {
+        const result = await client.tensorboardPath(
+          'projectValue',
+          'locationValue',
+          'tensorboardValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.tensorboardPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromTensorboardName', async () => {
+        const result = await client.matchProjectFromTensorboardName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.tensorboardPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromTensorboardName', async () => {
+        const result = await client.matchLocationFromTensorboardName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.tensorboardPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchTensorboardFromTensorboardName', async () => {
+        const result =
+          await client.matchTensorboardFromTensorboardName(fakePath);
+        assert.strictEqual(result, 'tensorboardValue');
+        assert(
+          (client.pathTemplates.tensorboardPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('tensorboardExperiment', async () => {
+      const fakePath = '/rendered/path/tensorboardExperiment';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        tensorboard: 'tensorboardValue',
+        experiment: 'experimentValue',
+      };
+      const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      client.pathTemplates.tensorboardExperimentPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.tensorboardExperimentPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('tensorboardExperimentPath', async () => {
+        const result = await client.tensorboardExperimentPath(
+          'projectValue',
+          'locationValue',
+          'tensorboardValue',
+          'experimentValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates.tensorboardExperimentPathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromTensorboardExperimentName', async () => {
+        const result =
+          await client.matchProjectFromTensorboardExperimentName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (
+            client.pathTemplates.tensorboardExperimentPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromTensorboardExperimentName', async () => {
+        const result =
+          await client.matchLocationFromTensorboardExperimentName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (
+            client.pathTemplates.tensorboardExperimentPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchTensorboardFromTensorboardExperimentName', async () => {
+        const result =
+          await client.matchTensorboardFromTensorboardExperimentName(fakePath);
+        assert.strictEqual(result, 'tensorboardValue');
+        assert(
+          (
+            client.pathTemplates.tensorboardExperimentPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchExperimentFromTensorboardExperimentName', async () => {
+        const result =
+          await client.matchExperimentFromTensorboardExperimentName(fakePath);
+        assert.strictEqual(result, 'experimentValue');
+        assert(
+          (
+            client.pathTemplates.tensorboardExperimentPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('tensorboardRun', async () => {
+      const fakePath = '/rendered/path/tensorboardRun';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        tensorboard: 'tensorboardValue',
+        experiment: 'experimentValue',
+        run: 'runValue',
+      };
+      const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      client.pathTemplates.tensorboardRunPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.tensorboardRunPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('tensorboardRunPath', async () => {
+        const result = await client.tensorboardRunPath(
+          'projectValue',
+          'locationValue',
+          'tensorboardValue',
+          'experimentValue',
+          'runValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.tensorboardRunPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromTensorboardRunName', async () => {
+        const result =
+          await client.matchProjectFromTensorboardRunName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.tensorboardRunPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromTensorboardRunName', async () => {
+        const result =
+          await client.matchLocationFromTensorboardRunName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.tensorboardRunPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchTensorboardFromTensorboardRunName', async () => {
+        const result =
+          await client.matchTensorboardFromTensorboardRunName(fakePath);
+        assert.strictEqual(result, 'tensorboardValue');
+        assert(
+          (client.pathTemplates.tensorboardRunPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchExperimentFromTensorboardRunName', async () => {
+        const result =
+          await client.matchExperimentFromTensorboardRunName(fakePath);
+        assert.strictEqual(result, 'experimentValue');
+        assert(
+          (client.pathTemplates.tensorboardRunPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchRunFromTensorboardRunName', async () => {
+        const result = await client.matchRunFromTensorboardRunName(fakePath);
+        assert.strictEqual(result, 'runValue');
+        assert(
+          (client.pathTemplates.tensorboardRunPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('tensorboardTimeSeries', async () => {
+      const fakePath = '/rendered/path/tensorboardTimeSeries';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        tensorboard: 'tensorboardValue',
+        experiment: 'experimentValue',
+        run: 'runValue',
+        time_series: 'timeSeriesValue',
+      };
+      const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      client.pathTemplates.tensorboardTimeSeriesPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.tensorboardTimeSeriesPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('tensorboardTimeSeriesPath', async () => {
+        const result = await client.tensorboardTimeSeriesPath(
+          'projectValue',
+          'locationValue',
+          'tensorboardValue',
+          'experimentValue',
+          'runValue',
+          'timeSeriesValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates.tensorboardTimeSeriesPathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromTensorboardTimeSeriesName', async () => {
+        const result =
+          await client.matchProjectFromTensorboardTimeSeriesName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (
+            client.pathTemplates.tensorboardTimeSeriesPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromTensorboardTimeSeriesName', async () => {
+        const result =
+          await client.matchLocationFromTensorboardTimeSeriesName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (
+            client.pathTemplates.tensorboardTimeSeriesPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchTensorboardFromTensorboardTimeSeriesName', async () => {
+        const result =
+          await client.matchTensorboardFromTensorboardTimeSeriesName(fakePath);
+        assert.strictEqual(result, 'tensorboardValue');
+        assert(
+          (
+            client.pathTemplates.tensorboardTimeSeriesPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchExperimentFromTensorboardTimeSeriesName', async () => {
+        const result =
+          await client.matchExperimentFromTensorboardTimeSeriesName(fakePath);
+        assert.strictEqual(result, 'experimentValue');
+        assert(
+          (
+            client.pathTemplates.tensorboardTimeSeriesPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchRunFromTensorboardTimeSeriesName', async () => {
+        const result =
+          await client.matchRunFromTensorboardTimeSeriesName(fakePath);
+        assert.strictEqual(result, 'runValue');
+        assert(
+          (
+            client.pathTemplates.tensorboardTimeSeriesPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchTimeSeriesFromTensorboardTimeSeriesName', async () => {
+        const result =
+          await client.matchTimeSeriesFromTensorboardTimeSeriesName(fakePath);
+        assert.strictEqual(result, 'timeSeriesValue');
+        assert(
+          (
+            client.pathTemplates.tensorboardTimeSeriesPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('trainingPipeline', async () => {
+      const fakePath = '/rendered/path/trainingPipeline';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        training_pipeline: 'trainingPipelineValue',
+      };
+      const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      client.pathTemplates.trainingPipelinePathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.trainingPipelinePathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('trainingPipelinePath', async () => {
+        const result = await client.trainingPipelinePath(
+          'projectValue',
+          'locationValue',
+          'trainingPipelineValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates.trainingPipelinePathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromTrainingPipelineName', async () => {
+        const result =
+          await client.matchProjectFromTrainingPipelineName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.trainingPipelinePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromTrainingPipelineName', async () => {
+        const result =
+          await client.matchLocationFromTrainingPipelineName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.trainingPipelinePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchTrainingPipelineFromTrainingPipelineName', async () => {
+        const result =
+          await client.matchTrainingPipelineFromTrainingPipelineName(fakePath);
+        assert.strictEqual(result, 'trainingPipelineValue');
+        assert(
+          (client.pathTemplates.trainingPipelinePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('trial', async () => {
+      const fakePath = '/rendered/path/trial';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        study: 'studyValue',
+        trial: 'trialValue',
+      };
+      const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      client.pathTemplates.trialPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.trialPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('trialPath', async () => {
+        const result = await client.trialPath(
+          'projectValue',
+          'locationValue',
+          'studyValue',
+          'trialValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.trialPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromTrialName', async () => {
+        const result = await client.matchProjectFromTrialName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.trialPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromTrialName', async () => {
+        const result = await client.matchLocationFromTrialName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.trialPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchStudyFromTrialName', async () => {
+        const result = await client.matchStudyFromTrialName(fakePath);
+        assert.strictEqual(result, 'studyValue');
+        assert(
+          (client.pathTemplates.trialPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchTrialFromTrialName', async () => {
+        const result = await client.matchTrialFromTrialName(fakePath);
+        assert.strictEqual(result, 'trialValue');
+        assert(
+          (client.pathTemplates.trialPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('tuningJob', async () => {
+      const fakePath = '/rendered/path/tuningJob';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        tuning_job: 'tuningJobValue',
+      };
+      const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      client.pathTemplates.tuningJobPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.tuningJobPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('tuningJobPath', async () => {
+        const result = await client.tuningJobPath(
+          'projectValue',
+          'locationValue',
+          'tuningJobValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.tuningJobPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromTuningJobName', async () => {
+        const result = await client.matchProjectFromTuningJobName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.tuningJobPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromTuningJobName', async () => {
+        const result = await client.matchLocationFromTuningJobName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.tuningJobPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchTuningJobFromTuningJobName', async () => {
+        const result = await client.matchTuningJobFromTuningJobName(fakePath);
+        assert.strictEqual(result, 'tuningJobValue');
+        assert(
+          (client.pathTemplates.tuningJobPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+  });
 });
