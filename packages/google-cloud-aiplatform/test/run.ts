@@ -26,11 +26,13 @@ function spawnp(command: string, parameters: string[]) {
     const proc = spawn(command, parameters, {
       stdio: ['inherit', 'inherit', 'inherit'],
     });
-    proc.on('exit', code => {
+    proc.on('exit', (code, signal) => {
       if (code === 0) {
         resolve();
       }
-      reject();
+      const errorMsg = `Subprocess exited with code ${code}${signal ? ` due to signal ${signal}` : ''}`;
+      console.error(errorMsg);
+      reject(new Error(errorMsg));
     });
   });
 }
