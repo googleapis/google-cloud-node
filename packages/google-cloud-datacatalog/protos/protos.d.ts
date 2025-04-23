@@ -9249,6 +9249,9 @@ export namespace google {
 
                     /** MigrationConfig catalogUiExperience */
                     catalogUiExperience?: (google.cloud.datacatalog.v1.CatalogUIExperience|keyof typeof google.cloud.datacatalog.v1.CatalogUIExperience|null);
+
+                    /** MigrationConfig templateMigrationEnabledTime */
+                    templateMigrationEnabledTime?: (google.protobuf.ITimestamp|null);
                 }
 
                 /** Represents a MigrationConfig. */
@@ -9265,6 +9268,9 @@ export namespace google {
 
                     /** MigrationConfig catalogUiExperience. */
                     public catalogUiExperience: (google.cloud.datacatalog.v1.CatalogUIExperience|keyof typeof google.cloud.datacatalog.v1.CatalogUIExperience);
+
+                    /** MigrationConfig templateMigrationEnabledTime. */
+                    public templateMigrationEnabledTime?: (google.protobuf.ITimestamp|null);
 
                     /**
                      * Creates a new MigrationConfig instance using the specified properties.
