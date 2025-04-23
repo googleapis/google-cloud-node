@@ -2106,6 +2106,14 @@
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
+                        },
+                        "checkpoints": {
+                          "rule": "repeated",
+                          "type": "Checkpoint",
+                          "id": 57,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       },
                       "nested": {
@@ -2532,6 +2540,22 @@
                               "id": 2
                             }
                           }
+                        }
+                      }
+                    },
+                    "Checkpoint": {
+                      "fields": {
+                        "checkpointId": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "epoch": {
+                          "type": "int64",
+                          "id": 2
+                        },
+                        "step": {
+                          "type": "int64",
+                          "id": 3
                         }
                       }
                     },
