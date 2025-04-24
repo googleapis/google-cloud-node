@@ -256,6 +256,9 @@ export namespace google {
                         /** OrderTrackingSignal deliveryRegionCode. */
                         public deliveryRegionCode: string;
 
+                        /** OrderTrackingSignal _customerShippingFee. */
+                        public _customerShippingFee?: "customerShippingFee";
+
                         /**
                          * Creates a new OrderTrackingSignal instance using the specified properties.
                          * @param [properties] Properties to set
@@ -558,6 +561,12 @@ export namespace google {
                             /** LineItemDetails quantity. */
                             public quantity: (number|Long|string);
 
+                            /** LineItemDetails _productTitle. */
+                            public _productTitle?: "productTitle";
+
+                            /** LineItemDetails _brand. */
+                            public _brand?: "brand";
+
                             /**
                              * Creates a new LineItemDetails instance using the specified properties.
                              * @param [properties] Properties to set
@@ -777,6 +786,9 @@ export namespace google {
                 /** Weight unit. */
                 public unit: (google.shopping.type.Weight.WeightUnit|keyof typeof google.shopping.type.Weight.WeightUnit);
 
+                /** Weight _amountMicros. */
+                public _amountMicros?: "amountMicros";
+
                 /**
                  * Creates a new Weight instance using the specified properties.
                  * @param [properties] Properties to set
@@ -890,6 +902,12 @@ export namespace google {
                 /** Price currencyCode. */
                 public currencyCode?: (string|null);
 
+                /** Price _amountMicros. */
+                public _amountMicros?: "amountMicros";
+
+                /** Price _currencyCode. */
+                public _currencyCode?: "currencyCode";
+
                 /**
                  * Creates a new Price instance using the specified properties.
                  * @param [properties] Properties to set
@@ -998,6 +1016,12 @@ export namespace google {
 
                 /** CustomAttribute groupValues. */
                 public groupValues: google.shopping.type.ICustomAttribute[];
+
+                /** CustomAttribute _name. */
+                public _name?: "name";
+
+                /** CustomAttribute _value. */
+                public _value?: "value";
 
                 /**
                  * Creates a new CustomAttribute instance using the specified properties.
@@ -2053,9 +2077,6 @@ export namespace google {
 
             /** Publishing protoReferenceDocumentationUri */
             protoReferenceDocumentationUri?: (string|null);
-
-            /** Publishing restReferenceDocumentationUri */
-            restReferenceDocumentationUri?: (string|null);
         }
 
         /** Represents a Publishing. */
@@ -2096,9 +2117,6 @@ export namespace google {
 
             /** Publishing protoReferenceDocumentationUri. */
             public protoReferenceDocumentationUri: string;
-
-            /** Publishing restReferenceDocumentationUri. */
-            public restReferenceDocumentationUri: string;
 
             /**
              * Creates a new Publishing instance using the specified properties.
@@ -6317,9 +6335,6 @@ export namespace google {
 
             /** ServiceOptions .google.api.oauthScopes */
             ".google.api.oauthScopes"?: (string|null);
-
-            /** ServiceOptions .google.api.apiVersion */
-            ".google.api.apiVersion"?: (string|null);
         }
 
         /** Represents a ServiceOptions. */
